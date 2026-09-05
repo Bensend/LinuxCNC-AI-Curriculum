@@ -19,7 +19,7 @@ permissions:
 jobs:
   run-lab-job:
     runs-on: ubuntu-latest
-    timeout-minutes: 60
+    timeout-minutes: 75
 
     steps:
       - name: Check out curriculum repository
@@ -56,6 +56,9 @@ jobs:
         run: |
           set +e
           mkdir -p lab-results
+          # Never let a cancelled run publish LATEST files inherited from checkout.
+          rm -f lab-results/LATEST.md lab-results/LATEST.stdout.log lab-results/LATEST.stderr.log \
+                lab-results/LATEST.metadata.txt lab-results/LATEST.exit_code.txt
           JOB_FILE="${{ steps.select.outputs.job_file }}"
           JOB_NAME="${{ steps.select.outputs.job_name }}"
           RUN_DIR="lab-results/run-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}"
@@ -130,7 +133,7 @@ jobs:
             lab-results/LATEST.stderr.log
             lab-results/LATEST.metadata.txt
             lab-results/LATEST.exit_code.txt
-          if-no-files-found: error
+          if-no-files-found: warn
           retention-days: 30
 
       - name: Write GitHub job summary
@@ -140,7 +143,7 @@ jobs:
           if [[ -f lab-results/LATEST.md ]]; then
             cat lab-results/LATEST.md >> "$GITHUB_STEP_SUMMARY"
           else
-            echo "Lab runner failed before producing a result." >> "$GITHUB_STEP_SUMMARY"
+            echo "Lab runner ended before producing a fresh LATEST result; checked-out LATEST files were removed before execution." >> "$GITHUB_STEP_SUMMARY"
           fi
 
       - name: Commit readable results back to repository

@@ -11,10 +11,10 @@ date -u '+UTC start: %Y-%m-%dT%H:%M:%SZ'
 printf 'Pinned upstream commit: %s\n' "$LINUXCNC_COMMIT"
 printf 'Prediction: a headless upstream linuxcncrsh simulation will expose linuxcncsvr and milltask as userspace processes, iocontrol.0 as a HAL component owned by Task rather than a standalone iocontrol process, and motmod/trivkins as loaded realtime HAL components.\n'
 printf 'Evidence boundary: this observes process/component topology only. The GitHub runner is not realtime qualification.\n'
-printf 'Observation hardening: every halcmd probe is individually timeout-bounded and progress-marked; controller-process readiness is checked independently of HAL attachment.\n'
+printf 'Observation hardening: controller-process readiness is independent of HAL attachment; every HAL probe is wall-clock bounded; a stalled probe is backtraced before forced termination so startup/registration can be distinguished from list-query locking.\n'
 
 sudo apt-get update
-sudo apt-get install -y build-essential git devscripts equivs
+sudo apt-get install -y build-essential git devscripts equivs gdb
 rm -rf "$WORK"
 git clone --filter=blob:none "$UPSTREAM" "$WORK"
 cd "$WORK"
@@ -61,12 +61,68 @@ if [[ "$PROC_READY" != 1 ]]; then
     exit 1
 fi
 
+capture_halcmd_backtrace() {
+    local pid="$1"
+    local label="$2"
+    local trace="/tmp/a01-${label}-gdb.txt"
+    printf '%s: stalled pid=%s; capturing process state and gdb backtrace\n' "$label" "$pid" >&2
+    ps -o pid,ppid,stat,wchan:32,etime,comm,args -p "$pid" >&2 || true
+    cat "/proc/$pid/status" >&2 2>/dev/null || true
+    timeout --signal=TERM --kill-after=1s 6s gdb -q -nx -batch \
+        -ex 'set pagination off' \
+        -ex 'thread apply all bt' \
+        -p "$pid" > "$trace" 2>&1 || true
+    printf '%s: gdb backtrace follows\n' "$label" >&2
+    cat "$trace" >&2 || true
+}
+
+# Execute one whole halcmd process under an explicit monitor.  Unlike GNU
+# timeout alone, this preserves the still-running PID long enough to obtain a
+# symbol-level backtrace before TERM/KILL cleanup.  Return 124 on wall timeout.
+bounded_halcmd_capture() {
+    local label="$1"
+    local stdout_file="$2"
+    local stderr_file="$3"
+    shift 3
+    printf '%s: before\n' "$label" >&2
+    halcmd "$@" > "$stdout_file" 2> "$stderr_file" &
+    local pid=$!
+    local ticks=$(( HAL_TIMEOUT * 20 ))
+    local i
+    for i in $(seq 1 "$ticks"); do
+        if ! kill -0 "$pid" 2>/dev/null; then
+            set +e
+            wait "$pid"
+            local rc=$?
+            set -e
+            printf '%s: after rc=%s\n' "$label" "$rc" >&2
+            return "$rc"
+        fi
+        sleep 0.05
+    done
+
+    capture_halcmd_backtrace "$pid" "$label"
+    kill -TERM "$pid" 2>/dev/null || true
+    for i in $(seq 1 20); do
+        if ! kill -0 "$pid" 2>/dev/null; then
+            break
+        fi
+        sleep 0.05
+    done
+    kill -KILL "$pid" 2>/dev/null || true
+    set +e
+    wait "$pid" 2>/dev/null
+    set -e
+    printf '%s: after rc=124 (monitor timeout)\n' "$label" >&2
+    return 124
+}
+
 printf '\n== HAL readiness ==\n'
 HAL_READY=0
 for i in $(seq 1 80); do
     printf 'hal-readiness: before probe %s\n' "$i"
     set +e
-    timeout --signal=TERM --kill-after=1s "${HAL_TIMEOUT}s" halcmd list comp > /tmp/a01-components.txt 2> /tmp/a01-halcmd.stderr
+    bounded_halcmd_capture "hal-readiness-${i}" /tmp/a01-components.txt /tmp/a01-halcmd.stderr list comp
     HAL_RC=$?
     set -e
     printf 'hal-readiness: after probe %s rc=%s\n' "$i" "$HAL_RC"
@@ -74,7 +130,7 @@ for i in $(seq 1 80); do
         HAL_READY=1
         break
     fi
-    if [[ "$HAL_RC" == 124 || "$HAL_RC" == 137 ]]; then
+    if [[ "$HAL_RC" == 124 ]]; then
         echo "halcmd list comp timed out at readiness probe $i" >&2
         cat /tmp/a01-halcmd.stderr >&2 || true
         printf '\n== Timeout process snapshot ==\n' >&2
@@ -96,13 +152,19 @@ fi
 
 bounded_halcmd() {
     local label="$1"
-    shift
-    printf '%s: before\n' "$label" >&2
+    local stdout_file="$2"
+    shift 2
+    local stderr_file="/tmp/a01-${label}.stderr"
     set +e
-    timeout --signal=TERM --kill-after=1s "${HAL_TIMEOUT}s" halcmd "$@"
+    bounded_halcmd_capture "$label" "$stdout_file" "$stderr_file" "$@"
     local rc=$?
     set -e
-    printf '%s: after rc=%s\n' "$label" "$rc" >&2
+    if [[ -s "$stdout_file" ]]; then
+        cat "$stdout_file"
+    fi
+    if [[ -s "$stderr_file" ]]; then
+        cat "$stderr_file" >&2
+    fi
     return "$rc"
 }
 
@@ -110,13 +172,20 @@ printf '\n== Process snapshot ==\n'
 ps -eo pid,ppid,stat,comm,args --forest | grep -E 'linuxcnc|milltask|rtapi|hal|motmod|trivkins' | grep -v grep || true
 
 printf '\n== HAL components ==\n'
-bounded_halcmd 'hal-list-comp' list comp
+bounded_halcmd 'hal-list-comp' /tmp/a01-list-comp.txt list comp
 
 printf '\n== HAL functions ==\n'
-bounded_halcmd 'hal-list-funct' list funct
+bounded_halcmd 'hal-list-funct' /tmp/a01-list-funct.txt list funct
 
 printf '\n== Key component assertions ==\n'
-bounded_halcmd 'assert-iocontrol-components' list comp > /tmp/a01-components-final.txt
+set +e
+bounded_halcmd_capture 'assert-iocontrol-components' /tmp/a01-components-final.txt /tmp/a01-assert.stderr list comp
+ASSERT_RC=$?
+set -e
+cat /tmp/a01-assert.stderr >&2 || true
+if [[ "$ASSERT_RC" != 0 ]]; then
+    exit "$ASSERT_RC"
+fi
 grep -q 'iocontrol.0' /tmp/a01-components-final.txt
 grep -q 'motmod' /tmp/a01-components-final.txt
 grep -q 'trivkins' /tmp/a01-components-final.txt

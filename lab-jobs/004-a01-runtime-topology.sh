@@ -97,10 +97,12 @@ fi
 bounded_halcmd() {
     local label="$1"
     shift
-    printf '%s: before\n' "$label"
+    printf '%s: before\n' "$label" >&2
+    set +e
     timeout --signal=TERM --kill-after=1s "${HAL_TIMEOUT}s" halcmd "$@"
     local rc=$?
-    printf '%s: after rc=%s\n' "$label" "$rc"
+    set -e
+    printf '%s: after rc=%s\n' "$label" "$rc" >&2
     return "$rc"
 }
 

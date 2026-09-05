@@ -1,0 +1,168 @@
+name: LinuxCNC Lab Runner
+
+on:
+  workflow_dispatch:
+    inputs:
+      job_file:
+        description: "Path to lab job script"
+        required: true
+        default: "lab-jobs/000-smoke.sh"
+  push:
+    branches: [main]
+    paths:
+      - "lab-jobs/**"
+
+permissions:
+  contents: write
+
+jobs:
+  run-lab-job:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+
+    steps:
+      - name: Check out curriculum repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Select lab job
+        id: select
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [[ "${{ github.event_name }}" == "workflow_dispatch" ]]; then
+            JOB_FILE="${{ inputs.job_file }}"
+          else
+            JOB_FILE="$(git diff-tree --no-commit-id --name-only -r "${GITHUB_SHA}" -- 'lab-jobs/*.sh' | head -n 1)"
+          fi
+          if [[ -z "${JOB_FILE:-}" || ! -f "$JOB_FILE" ]]; then
+            echo "No runnable lab job script was found." >&2
+            exit 2
+          fi
+          case "$JOB_FILE" in
+            lab-jobs/*.sh) ;;
+            *) echo "Refusing to run file outside lab-jobs/: $JOB_FILE" >&2; exit 3 ;;
+          esac
+          echo "job_file=$JOB_FILE" >> "$GITHUB_OUTPUT"
+          echo "job_name=$(basename "$JOB_FILE" .sh)" >> "$GITHUB_OUTPUT"
+
+      - name: Run lab job and capture complete output
+        id: runjob
+        shell: bash
+        run: |
+          set +e
+          mkdir -p lab-results
+          JOB_FILE="${{ steps.select.outputs.job_file }}"
+          JOB_NAME="${{ steps.select.outputs.job_name }}"
+          RUN_DIR="lab-results/run-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}"
+          mkdir -p "$RUN_DIR"
+
+          {
+            echo "LinuxCNC AI Curriculum Lab"
+            echo "UTC start: $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+            echo "Repository commit: $GITHUB_SHA"
+            echo "Workflow run: $GITHUB_RUN_ID attempt $GITHUB_RUN_ATTEMPT"
+            echo "Job file: $JOB_FILE"
+            echo "Runner: $(uname -a)"
+            echo
+          } > "$RUN_DIR/metadata.txt"
+
+          bash "$JOB_FILE" > "$RUN_DIR/stdout.log" 2> "$RUN_DIR/stderr.log"
+          STATUS=$?
+          echo "$STATUS" > "$RUN_DIR/exit_code.txt"
+          echo "UTC finish: $(date -u +%Y-%m-%dT%H:%M:%SZ)" >> "$RUN_DIR/metadata.txt"
+
+          cat "$RUN_DIR/stdout.log"
+          if [[ -s "$RUN_DIR/stderr.log" ]]; then
+            echo "--- STDERR ---" >&2
+            cat "$RUN_DIR/stderr.log" >&2
+          fi
+
+          {
+            echo "# Latest LinuxCNC Lab Result"
+            echo
+            echo "- Job: \`$JOB_NAME\`"
+            echo "- Job file: \`$JOB_FILE\`"
+            echo "- Workflow run ID: \`$GITHUB_RUN_ID\`"
+            echo "- Attempt: \`$GITHUB_RUN_ATTEMPT\`"
+            echo "- Source commit: \`$GITHUB_SHA\`"
+            echo "- Exit code: \`$STATUS\`"
+            echo "- Finished UTC: \`$(date -u +%Y-%m-%dT%H:%M:%SZ)\`"
+            echo
+            echo "## Metadata"
+            echo '```text'
+            cat "$RUN_DIR/metadata.txt"
+            echo '```'
+            echo
+            echo "## Standard output"
+            echo '```text'
+            cat "$RUN_DIR/stdout.log"
+            echo '```'
+            echo
+            echo "## Standard error"
+            echo '```text'
+            cat "$RUN_DIR/stderr.log"
+            echo '```'
+          } > lab-results/LATEST.md
+
+          cp "$RUN_DIR/stdout.log" lab-results/LATEST.stdout.log
+          cp "$RUN_DIR/stderr.log" lab-results/LATEST.stderr.log
+          cp "$RUN_DIR/metadata.txt" lab-results/LATEST.metadata.txt
+          cp "$RUN_DIR/exit_code.txt" lab-results/LATEST.exit_code.txt
+
+          echo "run_dir=$RUN_DIR" >> "$GITHUB_OUTPUT"
+          echo "exit_code=$STATUS" >> "$GITHUB_OUTPUT"
+          exit 0
+
+      - name: Publish result as workflow artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: linuxcnc-lab-${{ steps.select.outputs.job_name }}-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            ${{ steps.runjob.outputs.run_dir }}
+            lab-results/LATEST.md
+            lab-results/LATEST.stdout.log
+            lab-results/LATEST.stderr.log
+            lab-results/LATEST.metadata.txt
+            lab-results/LATEST.exit_code.txt
+          if-no-files-found: error
+          retention-days: 30
+
+      - name: Write GitHub job summary
+        if: always()
+        shell: bash
+        run: |
+          if [[ -f lab-results/LATEST.md ]]; then
+            cat lab-results/LATEST.md >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo "Lab runner failed before producing a result." >> "$GITHUB_STEP_SUMMARY"
+          fi
+
+      - name: Commit readable results back to repository
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [[ ! -f lab-results/LATEST.md ]]; then
+            exit 0
+          fi
+          git config user.name "linuxcnc-lab-bot"
+          git config user.email "linuxcnc-lab-bot@users.noreply.github.com"
+          git add lab-results/
+          if git diff --cached --quiet; then
+            exit 0
+          fi
+          git commit -m "lab: record ${{ steps.select.outputs.job_name }} result [skip ci]"
+          git push origin HEAD:main
+
+      - name: Fail workflow if lab job failed
+        if: always()
+        shell: bash
+        run: |
+          STATUS="$(cat lab-results/LATEST.exit_code.txt 2>/dev/null || echo 99)"
+          if [[ "$STATUS" != "0" ]]; then
+            echo "Lab job failed with exit code $STATUS" >&2
+            exit "$STATUS"
+          fi

@@ -9,7 +9,7 @@ HAL_TIMEOUT="${HAL_TIMEOUT:-3}"
 printf '== LinuxCNC A01 runtime topology lab ==\n'
 date -u '+UTC start: %Y-%m-%dT%H:%M:%SZ'
 printf 'Pinned upstream commit: %s\n' "$LINUXCNC_COMMIT"
-printf 'Prediction: the upstream linuxcncrsh simulation will expose linuxcncsvr, milltask, and linuxcncrsh as userspace processes, iocontrol.0 as a HAL component owned by Task rather than a standalone iocontrol process, and motmod/trivkins as loaded realtime HAL components.\n'
+printf 'Prediction: the upstream linuxcncrsh simulation will expose linuxcncsvr, milltask, and linuxcncrsh as userspace processes, iocontrol.0 as a userspace HAL component whose recorded PID equals the live milltask PID rather than a standalone iocontrol process, and motmod/trivkins as loaded realtime HAL components.\n'
 printf 'Evidence boundary: this observes process/component topology only. The GitHub runner is not realtime qualification.\n'
 printf 'Observation hardening: no external HAL query is issued until linuxcncsvr, milltask, and linuxcncrsh are all visible; every HAL probe is wall-clock bounded; a stalled probe is backtraced before forced termination so startup/registration can be distinguished from list-query locking.\n'
 
@@ -149,6 +149,30 @@ if [[ "$ASSERT_RC" != 0 ]]; then exit "$ASSERT_RC"; fi
 grep -q 'iocontrol.0' /tmp/a01-components-final.txt
 grep -q 'motmod' /tmp/a01-components-final.txt
 grep -q 'trivkins' /tmp/a01-components-final.txt
+
+mapfile -t TASK_PIDS < <(pgrep -x milltask)
+if [[ "${#TASK_PIDS[@]}" -ne 1 ]]; then
+    echo "Expected exactly one milltask process, observed ${#TASK_PIDS[@]}." >&2
+    pgrep -a -x milltask >&2 || true
+    exit 5
+fi
+TASK_PID="${TASK_PIDS[0]}"
+if bounded_halcmd_capture 'assert-iocontrol-owner' /tmp/a01-iocontrol-show.txt /tmp/a01-iocontrol-show.stderr show comp iocontrol.0; then OWNER_RC=0; else OWNER_RC=$?; fi
+cat /tmp/a01-iocontrol-show.txt
+cat /tmp/a01-iocontrol-show.stderr >&2 || true
+if [[ "$OWNER_RC" != 0 ]]; then exit "$OWNER_RC"; fi
+mapfile -t IOC_ROWS < <(awk '$2 == "User" && $3 == "iocontrol.0" {print $4}' /tmp/a01-iocontrol-show.txt)
+if [[ "${#IOC_ROWS[@]}" -ne 1 || ! "${IOC_ROWS[0]}" =~ ^[0-9]+$ ]]; then
+    echo 'Could not identify exactly one userspace iocontrol.0 component PID from halcmd show comp.' >&2
+    exit 6
+fi
+IOC_PID="${IOC_ROWS[0]}"
+printf 'ownership-assertion: iocontrol.0 HAL PID=%s milltask PID=%s\n' "$IOC_PID" "$TASK_PID"
+if [[ "$IOC_PID" != "$TASK_PID" ]]; then
+    echo 'iocontrol.0 HAL component PID does not match milltask PID.' >&2
+    exit 7
+fi
+
 if pgrep -x iocontrol >/dev/null 2>&1; then echo 'Unexpected standalone iocontrol process observed.' >&2; pgrep -a -x iocontrol >&2 || true; exit 2; fi
 pgrep -a -x milltask
 pgrep -a -x linuxcncsvr

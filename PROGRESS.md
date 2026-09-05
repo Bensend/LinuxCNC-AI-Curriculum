@@ -8,7 +8,7 @@ Status values: `PLANNED`, `RESEARCH`, `SOURCE`, `EXPERIMENT`, `EXAM`, `CORRECTIO
 | L01 Version pinning | GRADUATED | `guides/L01-version-baseline.md`; exact stable tag dereference; stable/development experiments | development `8bf4605ae81042248add031e94c77300406e0413` and stable `86cdca76fa2a36274c432caa21952b23c267989a` both built/tested | covered by Phase-0 exam and handoff | Stable `v2.9.10` experimentally confirmed; native harness differences preserved |
 | L02 Repository/build/test map | GRADUATED | `guides/L02-build-test-map.md`; representative-test guide; pinned `src/Makefile` and `scripts/runtests.in` | development `002` and stable `003` each ran native upstream `tests/realtime-math` 1/1 | Phase-0 adversarial exam + corrections complete | Development/stable summary and shmem-hygiene differences are version-scoped; no realtime overclaim |
 | L03 Evidence/claims workflow | GRADUATED | `SOURCE_POLICY.md`; `guides/L03-evidence-claims-workflow.md`; `guides/Phase0-graduation-handoff.md` | exercised on build failure, stable/development comparison, and realtime-evidence boundary | Phase-0 adversarial/handoff pass complete | Evidence classes/conflict handling demonstrated on real contradictions/traps |
-| A01 Process/component architecture | EXPERIMENT | `guides/A01-process-component-architecture.md`; pinned launcher, `Submakefile`, `emctaskmain.cc`, `taskintf.cc`, `usrmotintf.cc`, `taskclass.cc` | `004-a01-runtime-topology` launched as run `33957356410`; result pending at checkpoint | pending | Source trace now distinguishes UI↔Task NML from Task↔motion RTAPI shared memory; `iocontrol.0` is Task-owned HAL component inside milltask at dev pin |
+| A01 Process/component architecture | EXPERIMENT | `guides/A01-process-component-architecture.md`; `call-flows/A01-task-to-motion-command-ack.md`; pinned launcher/task/motion source | `004-a01-runtime-topology` first run timed out during build; corrected headless rerun `33960179986` in progress | `exams/A01-process-component-architecture-adversarial.md` created | Command/ack endpoint now closed to realtime `emcmotCommandHandler`; runtime topology still needs successful observation before correction/handoff/graduation |
 | R01 Realtime model | PLANNED | — | — | — | Critical path; blocked on A01 graduation |
 | H01 HAL architecture | PLANNED | — | — | — | Critical path |
 | H04 HAL execution ordering | PLANNED | — | — | — | Critical path |
@@ -21,47 +21,52 @@ Status values: `PLANNED`, `RESEARCH`, `SOURCE`, `EXPERIMENT`, `EXAM`, `CORRECTIO
 
 ## Phase 0 graduation result
 
-Stable experiment `003`, Actions run `33952061943`, completed successfully against exact LinuxCNC `v2.9.10` commit `86cdca76fa2a36274c432caa21952b23c267989a`. The stable checkout's own build system, RIP environment, `scripts/runtests`, and `tests/realtime-math` produced `1 tests run, 1 successful, 0 failed + 0 expected, 0 skipped`, with `runtests` exit `0`. `halcompile` built/installed `rtmath.so`, `halrun dotest.hal` succeeded, and the runner reported POSIX non-realtime operation.
+Stable experiment `003`, Actions run `33952061943`, completed successfully against exact LinuxCNC `v2.9.10` commit `86cdca76fa2a36274c432caa21952b23c267989a`. The stable checkout's own build system, RIP environment, `scripts/runtests`, and `tests/realtime-math` produced `1 tests run, 1 successful, 0 failed + 0 expected, 0 skipped`, with `runtests` exit `0`. The runner reported POSIX non-realtime operation. Development run `33949095338` additionally reports explicit shmem hygiene/accounting. L00-L03 are graduated without claiming realtime scheduling, hardware suitability, functional safety, full-suite compatibility, or later subsystem behavior.
 
-This confirmed the predicted stable-vs-development harness difference rather than contradicting it. Development run `33949095338` reports the additional `0 shmem errors` field and its pinned source contains explicit recognized-key shared-memory pre/post hygiene; the inspected stable harness does not contain that same explicit path. Wrapper-level `ipcs -m` snapshots were clean in both bounded experiments, which is an observation and not evidence that the stable harness implements development's cleanup mechanism.
+## A01 source-level architecture result
 
-`guides/Phase0-graduation-handoff.md` records the adversarial correction pass, failure-diagnosis workflow, bounded cross-version modification rules, remaining unknowns, and the fresh-AI operating contract. L00-L03 are therefore graduated without claiming realtime scheduling, hardware suitability, functional safety, full-suite compatibility, or later subsystem behavior.
-
-## A01 source-level architecture result so far
-
-`guides/A01-process-component-architecture.md` now reconstructs the runtime architecture at development commit `8bf4605ae81042248add031e94c77300406e0413` rather than relying on the earlier coarse diagram.
+Primary development revision: `8bf4605ae81042248add031e94c77300406e0413`.
 
 Source-confirmed findings:
 
-- `scripts/linuxcnc.in` starts `linuxcncsvr` first because it creates/owns NML buffers, then starts the realtime/RTAPI/HAL backend, loads trajectory/homing modules, starts configured Task, loads optional userspace HAL interfaces, executes HAL files/commands, calls `halcmd start`, then launches applications/display;
-- ordinary machine HAL files load kinematics and `motmod` after Task has already been started, explaining why Task retries motion initialization during startup;
-- `src/emc/task/Submakefile` links `emctaskmain.cc`, `taskintf.cc`, `usrmotintf.cc`, `taskclass.cc`, and related sources into the concrete `milltask` executable;
-- `emctask_startup()` attaches `emcCommand`, `emcStatus`, and `emcError` NML channels, then initializes I/O before retrying motion connection and initializing interpreter/Task;
-- Task→motion is **not an RCS NML channel**: `taskintf.cc` builds `emcmot_command_t`; `usrmotWriteEmcmotCommand()` copies it through an RTAPI shared `emcmot_struct_t` command area under a mutex and polls shared motion status for a matching `commandNumEcho` or timeout;
-- `Task::Task()` calls `hal_init("iocontrol.0")`, and `Task::iocontrol_hal_init()` exports the tool/coolant/enable handshake pins. Because `taskclass.cc` is linked into `milltask`, `iocontrol.0` is an integrated userspace HAL component owned by Task at this revision, not a separate launcher-started `iocontrol` process.
+- `scripts/linuxcnc.in` starts `linuxcncsvr` first because it creates/owns NML buffers, starts realtime/RTAPI/HAL infrastructure, then starts configured Task before normal HAL files load kinematics/motmod; Task therefore retries motion initialization during startup.
+- `src/emc/task/Submakefile` links `emctaskmain.cc`, `taskintf.cc`, `usrmotintf.cc`, `taskclass.cc`, and related sources into `milltask`.
+- UI/external-control ↔ Task uses NML channels (`emcCommand`, `emcStatus`, `emcError`).
+- Task ↔ realtime motion does **not** use another RCS/NML channel. `taskintf.cc` constructs `emcmot_command_t`; `usrmotWriteEmcmotCommand()` copies it under `emcmotStruct->command_mutex` into RTAPI shared `emcmot_struct_t.command` and polls shared status for a matching `commandNumEcho`.
+- `src/emc/motion/motion.c` exports `emcmotCommandHandler` as HAL function `motion-command-handler`. `src/emc/motion/command.c::emcmotCommandHandler()` is the realtime receiving endpoint: it try-locks the command mutex, skips the cycle if Task is updating, detects a new `commandNum`, writes `commandEcho` and `commandNumEcho`, defaults `commandStatus`, then dispatches the command switch.
+- A matching command-number echo is acknowledgement/observation, not proof of success; userspace separately evaluates `commandStatus` and distinguishes timeout from acknowledged command rejection.
+- `Task::Task()` calls `hal_init("iocontrol.0")`, and `taskclass.cc` is linked directly into `milltask`; at this revision `iocontrol.0` is therefore an integrated userspace HAL component owned by Task, not evidence of a standalone `iocontrol` OS process.
 
-These distinctions are architecturally important for later realtime/HAL/HostMot2 work: NML/RCS UI↔Task communication, RTAPI Task↔motion shared memory, and HAL component/pin communication are separate interfaces and must not be conflated.
+Community cross-checks retain an important version/history warning: older forum explanations sometimes describe `task`/`iocontrol` as separate conceptual modules. They are useful investigation leads but do not override pinned build/source/runtime evidence for this revision.
 
-## A01 experiment state
+## A01 experiment correction
 
-`lab-jobs/004-a01-runtime-topology.sh` was committed at curriculum commit `55dd6f9956a65c4c4b18b3d1a344c87fb0e70d97`, triggering Actions run `33957356410`.
+Initial workflow run `33957356410` was **cancelled at the workflow's 60-minute timeout** while the full LinuxCNC build was still running. It never reached the topology assertions. Because cancellation occurred inside the shell step before the new result files were generated, the always-run artifact/commit steps uploaded and recommitted stale `lab-results/LATEST.*` content from the prior stable `003` checkout. Therefore neither that artifact nor the misleading bot commit is A01 topology evidence.
 
-The experiment builds exact development commit `8bf4605...`, launches the upstream headless `tests/linuxcncrsh/linuxcncrsh-test.ini` simulation, captures a process snapshot plus `halcmd list comp` and `halcmd list funct`, and checks the pre-registered prediction that:
+The lab was corrected in commit `26cf7fd3266741db2943211fe538ca145a3a0743` to configure the same pinned LinuxCNC revision with `--disable-gui --disable-manpages --disable-build-documentation`. LinuxCNC's own documentation explicitly provides `--disable-build-documentation`, and upstream CI uses these headless switches for RIP builds. Corrected workflow run `33960179986` was in progress at this checkpoint.
 
-- `linuxcncsvr` and `milltask` are OS processes;
-- `iocontrol.0`, `motmod`, and `trivkins` are visible HAL components;
-- no separate executable named `iocontrol` is running.
+## A01 adversarial state
 
-The experiment is explicitly topology-only and cannot qualify realtime scheduling, latency, hardware timing or safety. At this checkpoint workflow run `33957356410` is still pending/in progress; its result must be inspected before any prediction is promoted to `TEST-CONFIRMED`.
+`exams/A01-process-component-architecture-adversarial.md` now attacks these false premises and failure cases:
+
+- all LinuxCNC IPC is NML;
+- `iocontrol.0` must be a standalone process;
+- Task cannot start before motion is fully running;
+- mutex contention should block realtime motion;
+- `commandNumEcho` alone means command success;
+- cancelled workflow artifacts can be trusted without checking metadata/version;
+- old community diagrams can be generalized to the pinned revision.
+
+The exam also includes a bounded diagnostic-counter modification task and a runtime process-vs-HAL observation design.
 
 ## Current checkpoint / exact resume point
 
 Continue A01; R01 remains blocked.
 
-1. Inspect Actions run `33957356410` and the resulting `lab-results/LATEST.md`. Reconcile each 004 prediction with actual process/HAL output; if it fails, diagnose and preserve the exact failed architecture/startup assumption before modifying the test.
-2. If 004 passes, update A01 claims with `TEST-CONFIRMED` runtime-topology evidence.
-3. Trace the realtime receiving endpoint for the shared `emcmot_struct_t.command` just far enough to identify where `commandNumEcho` is produced and close the command/ack call flow. Leave full servo-period internals to M03.
-4. Create the A01 adversarial exam. It must attack the false premises "all LinuxCNC IPC is NML", "iocontrol.0 must be a process", and "launcher startup order means Task waits until motion is fully running before it starts"; include one failure-path trace and a bounded architecture/source modification task.
-5. Incorporate corrections and perform the fresh-AI handoff. Only after that may A01 graduate and unblock R01.
+1. Inspect corrected Actions run `33960179986` and its generated metadata/output. Verify it actually names job `004-a01-runtime-topology`, source commit `26cf7fd...`, and pinned LinuxCNC commit `8bf4605...`; reject stale result files even if the workflow reports success.
+2. Reconcile each prediction with `ps`/`pgrep`, `halcmd list comp`, and `halcmd list funct`: `linuxcncsvr` and `milltask` processes; `iocontrol.0`, `motmod`, and `trivkins` HAL components; no standalone `iocontrol` process.
+3. If the rerun passes, promote only those topology claims to `TEST-CONFIRMED`. If it fails, preserve the exact runtime/configuration discrepancy before patching.
+4. Perform the A01 correction pass against `exams/A01-process-component-architecture-adversarial.md`, then write a fresh-AI handoff artifact. Graduate A01 only after experiment reconciliation + corrections/handoff pass.
+5. Once A01 graduates, begin R01 Realtime Model from official realtime documentation, current community failure reports, and pinned RTAPI/source boundaries.
 
 The complete module graph remains in `CURRICULUM.md`.

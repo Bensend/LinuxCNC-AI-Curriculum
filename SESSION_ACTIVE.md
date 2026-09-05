@@ -1,8 +1,8 @@
 # Active Curriculum Session
 
-- Start UTC: `2026-09-05T20:10:09Z`
+- Start UTC: `2026-09-05T22:11:11Z`
 - Module: `A01 Process/component architecture`
 - State: `IN PROGRESS`
-- Resume checkpoint: continue the non-compute A01 harness audit on September 5; do not launch another LinuxCNC lab run; preserve a precise corrected-004 checkpoint for the next lab-budget window.
+- Resume checkpoint: audit the reconciled bounded-observation branch against current main without launching another September 5 lab run; preserve corrections and a precise next-budget-window checkpoint.
 
 This file is a crash/concurrency marker. Closed sessions remain here until the next session overwrites the marker with its own start state.

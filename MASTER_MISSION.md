@@ -17,6 +17,7 @@ At the beginning of every work session:
 3. Recover the current LinuxCNC revision(s), unfinished work, spawned prerequisites, and next unblocked module from repository state.
 4. Continue existing work rather than restarting it.
 5. Treat GitHub as durable memory. Do not rely on conversation memory for facts that belong in the course.
+6. Record the lesson/session start timestamp in UTC before substantive work begins.
 
 ## Required Module Workflow
 
@@ -127,6 +128,31 @@ Ask the owner only when account/UI interaction is genuinely required, required p
 
 Ordinary uncertainty, failed experiments, build failures, conflicting documentation, and incorrect hypotheses are curriculum work. Investigate, document, correct, and continue.
 
+## Lesson Timing and Overlap Log
+
+Every curriculum work session must record its timing in `LESSON_LOG.md` so the owner can verify whether hourly sessions are overlapping.
+
+At session start, capture an ISO-8601 UTC start timestamp before substantive work begins.
+
+Immediately before the session ends — after substantive work and repository updates, but before the final response/quit — capture the end timestamp, calculate elapsed wall-clock time, and append one row to `LESSON_LOG.md` containing at minimum:
+
+- session date
+- lesson/module identifier and short title
+- start timestamp UTC
+- end timestamp UTC
+- elapsed minutes
+- status (`complete`, `checkpoint`, `blocked`, or `failed`)
+- next lesson/checkpoint
+- notes about any detected overlap or concurrency
+
+The elapsed value must be based on actual start/end timestamps, not an estimate of how long the lesson felt.
+
+If the previous lesson's end timestamp is later than the current lesson's start timestamp, explicitly mark `OVERLAP DETECTED` in the notes. If concurrency is otherwise visible from GitHub runs, repository state, or conflicting active checkpoints, record that as well.
+
+Do not omit the timing row when a lesson fails or is blocked; those sessions are important for diagnosing scheduler behavior.
+
+The timing row is part of the required durable session checkpoint and must be committed before quitting the lesson whenever repository write access is available.
+
 ## Perpetual Lesson Scheduling
 
 This curriculum is a continuing autonomous engineering course, not a one-session assignment.
@@ -136,12 +162,13 @@ At the end of every productive lesson/work session:
 1. Commit all useful work and update `PROGRESS.md`.
 2. Determine the next appropriate lesson from the dependency graph, including any newly discovered prerequisite.
 3. Persist an unambiguous next-work checkpoint in the repository.
-4. Ensure another curriculum work session is scheduled automatically.
-5. The next session must begin by reading repository state and then execute substantive work rather than merely summarize status or propose a plan.
+4. Immediately before quitting, update and commit `LESSON_LOG.md` with actual lesson start/end/duration and overlap status.
+5. Ensure another curriculum work session is scheduled automatically.
+6. The next session must begin by reading repository state and then execute substantive work rather than merely summarize status or propose a plan.
 
 Maintain the cycle:
 
-**lesson -> persist results -> determine next lesson -> schedule continuation -> next lesson**
+**lesson -> persist results -> determine next lesson -> log actual lesson time -> schedule continuation -> next lesson**
 
 Do not create overlapping curriculum schedules. Prefer one recurring curriculum-work automation whose every invocation discovers the next lesson from GitHub state. The scheduler is the heartbeat; GitHub is the course state.
 
@@ -162,7 +189,7 @@ If the execution environment cannot itself create or verify the recurring automa
 
 A recurring curriculum session should execute an instruction equivalent to:
 
-> Continue executing the LinuxCNC AI Curriculum in `Bensend/LinuxCNC-AI-Curriculum`. Read `START_HERE.md` and follow it. Inspect current progress, latest lab results, open questions, checkpoints, and existing artifacts. Resume the highest-priority unblocked module or unfinished lesson according to the dependency graph. Perform substantive documentation research, community research, source analysis, function/call-flow documentation, laboratory experiments, verification, adversarial testing, and corrections appropriate to the lesson. Commit durable results and update course state. Preserve a precise next-work checkpoint before finishing. Do not merely report status or propose a plan.
+> Continue executing the LinuxCNC AI Curriculum in `Bensend/LinuxCNC-AI-Curriculum`. Read `START_HERE.md` and follow it. Inspect current progress, latest lab results, open questions, checkpoints, existing artifacts, and `LESSON_LOG.md`. Record the session start timestamp in UTC. Resume the highest-priority unblocked module or unfinished lesson according to the dependency graph. Perform substantive documentation research, community research, source analysis, function/call-flow documentation, laboratory experiments, verification, adversarial testing, and corrections appropriate to the lesson. Commit durable results and update course state. Preserve a precise next-work checkpoint. Immediately before ending the session, record the UTC end timestamp, calculate actual elapsed minutes, append and commit the timing row to `LESSON_LOG.md`, and flag any overlap with the previous lesson. Do not merely report status or propose a plan.
 
 ## Work-Pacing Rule
 
@@ -172,4 +199,4 @@ A lesson is a bounded engineering unit that can be researched, source-traced, ex
 
 Validate the curriculum and laboratory infrastructure. Execute the initial laboratory/build/version-pinning work and then proceed into the architecture -> realtime -> HAL critical path defined by `CURRICULUM.md`.
 
-Do not merely tell the owner what you intend to do. Use the repository, perform the research, run experiments, inspect results, write durable artifacts, update progress, preserve the next checkpoint, and continue until owner intervention is genuinely required.
+Do not merely tell the owner what you intend to do. Use the repository, perform the research, run experiments, inspect results, write durable artifacts, update progress, preserve the next checkpoint, log actual lesson timing immediately before quitting, and continue until owner intervention is genuinely required.

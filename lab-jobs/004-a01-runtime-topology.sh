@@ -35,7 +35,26 @@ rm -f /tmp/linuxcnc.lock
 linuxcnc -r linuxcncrsh-test.ini > topology-linuxcnc.stdout 2> topology-linuxcnc.stderr &
 LAUNCHER_PID=$!
 cleanup() {
-    kill -TERM "$LAUNCHER_PID" 2>/dev/null || true
+    # Pinned linuxcnc.in handles TERM by entering its own Cleanup(), which calls
+    # halcmd stop/unload/list-comp. Those operations can block on the same HAL
+    # shared-data mutex being diagnosed here, so waiting forever for graceful
+    # launcher teardown can consume the runner publication window. Bound it.
+    trap - EXIT
+    if kill -0 "$LAUNCHER_PID" 2>/dev/null; then
+        kill -TERM "$LAUNCHER_PID" 2>/dev/null || true
+        local i
+        for i in $(seq 1 40); do
+            if ! kill -0 "$LAUNCHER_PID" 2>/dev/null; then
+                break
+            fi
+            sleep 0.1
+        done
+        if kill -0 "$LAUNCHER_PID" 2>/dev/null; then
+            echo 'linuxcnc launcher did not exit after TERM; capturing teardown snapshot and forcing launcher exit.' >&2
+            ps -eo pid,ppid,stat,wchan:32,etime,comm,args --forest | grep -E 'linuxcnc|milltask|rtapi|hal|motmod|trivkins' | grep -v grep >&2 || true
+            kill -KILL "$LAUNCHER_PID" 2>/dev/null || true
+        fi
+    fi
     wait "$LAUNCHER_PID" 2>/dev/null || true
 }
 trap cleanup EXIT

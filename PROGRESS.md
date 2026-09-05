@@ -4,9 +4,9 @@ Status values: `PLANNED`, `RESEARCH`, `SOURCE`, `EXPERIMENT`, `EXAM`, `CORRECTIO
 
 | Module | Status | Primary evidence | Experiment | Exam | Notes |
 |---|---|---|---|---|---|
-| L00 Codespaces laboratory | EXPERIMENT | GitHub Actions smoke result + official build docs + captured build logs | `000-smoke` passed; first `001-build-linuxcnc` reached a completed build then failed while sourcing RIP environment | — | Lab runner correctly preserves stdout/stderr and exit code; rerun patched job |
-| L01 Version pinning | EXPERIMENT | Upstream commit recorded by smoke/build lab | `001-build-linuxcnc` pins `8bf4605ae81042248add031e94c77300406e0413` | — | Exact revision checked out successfully; establish stable baseline later |
-| L02 Repository/build/test map | RESEARCH | Official build documentation and upstream source/build output | Build lab begins source/build-system mapping | — | Spawned naturally from L00/L01 |
+| L00 Codespaces laboratory | EXPERIMENT | GitHub Actions smoke result + official build docs + captured build logs | `000-smoke` passed; `001-build-linuxcnc` passed in run `33943964198` | — | Lab runner preserves stdout/stderr/exit code and can build pinned LinuxCNC master |
+| L01 Version pinning | EXPERIMENT | Upstream commit recorded by smoke/build lab | `001-build-linuxcnc` pins and builds `8bf4605ae81042248add031e94c77300406e0413` | — | Development baseline is now experimentally reproducible; stable-release baseline still to establish |
+| L02 Repository/build/test map | SOURCE | `guides/L02-build-test-map.md`; `src/Makefile`; `scripts/runtests.in`; build artifact | Build lab passed; representative upstream test still required | — | Initial source-grounded build/test map created |
 | A01 Process/component architecture | PLANNED | — | — | — | Critical path |
 | R01 Realtime model | PLANNED | — | — | — | Critical path |
 | H01 HAL architecture | PLANNED | — | — | — | Critical path |
@@ -20,8 +20,10 @@ Status values: `PLANNED`, `RESEARCH`, `SOURCE`, `EXPERIMENT`, `EXAM`, `CORRECTIO
 
 ## Current checkpoint
 
-L00/L01 remain active. Actions run `33941257688` checked out the pinned LinuxCNC master revision `8bf4605ae81042248add031e94c77300406e0413`, generated Debian uspace metadata, installed build dependencies, configured, and compiled far enough to reach the RIP-environment verification stage. The actual failure was not a LinuxCNC compile failure: the curriculum lab globally enabled Bash `set -u`, while upstream `scripts/rip-environment` references optional `GLADE_ICON_THEME_PATH` without a nounset guard. This produced `../scripts/rip-environment: line 74: GLADE_ICON_THEME_PATH: unbound variable` after the build dependency scans completed.
+Actions run `33943964198`, triggered by commit `62777cc14a831157987c8c01497f6d6bebf6163e`, completed successfully. It checked out LinuxCNC revision `8bf4605ae81042248add031e94c77300406e0413`, configured Debian metadata for `uspace-Ubuntu-24.04`, completed `src/configure`, compiled the run-in-place userspace tree, sourced the RIP environment, resolved `scripts/linuxcnc`, `bin/halcmd`, and `scripts/runtests`, and exited `0`. Preserved lab timestamps were 04:13:16Z–04:17:22Z (~4m06s). The earlier nounset/RIP-environment failure is therefore resolved.
 
-`lab-jobs/001-build-linuxcnc.sh` is patched to temporarily disable nounset only while sourcing upstream `rip-environment`, then immediately restore it. This preserves strict-mode checking for the curriculum script without imposing a shell contract on an upstream environment script that does not claim nounset compatibility. Next lesson: inspect the Actions run triggered by commit `62777cc14a831157987c8c01497f6d6bebf6163e`; if it passes, record exact configure/build/test evidence and begin a concise L02 build/test map. If it fails, diagnose the next concrete failure from the preserved lab logs before broadening scope.
+L02 has begun at source level in `guides/L02-build-test-map.md`. `src/Makefile` establishes the build-oriented subsystem map and `scripts/runtests.in` establishes test discovery/execution behavior. The build lab only verified that `runtests` exists and printed its usage; it did not execute a representative upstream test.
+
+Next lesson: create/run a bounded `002` laboratory job that rebuilds the pinned revision and executes a small representative upstream HAL/RTAPI test through `scripts/runtests` without physical hardware. Record the predicted behavior before execution, exact selected test path, command, exit status, result/stderr, and cleanup/shared-memory observations. Then use that evidence to refine L02 and decide whether L00 can enter its exam/graduation stage. L01 additionally still needs a stable-release reference baseline before graduation.
 
 The complete module graph is maintained in `CURRICULUM.md`. Add rows here as modules enter active work rather than using this file as a duplicate syllabus.

@@ -158,6 +158,8 @@ jobs:
             exit 0
           fi
           git commit -m "lab: record ${{ steps.select.outputs.job_name }} result [skip ci]"
+          git fetch origin main
+          git rebase origin/main
           git push origin HEAD:main
 
       - name: Fail workflow if lab job failed

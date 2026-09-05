@@ -2,28 +2,28 @@
 
 - Job: `000-smoke`
 - Job file: `lab-jobs/000-smoke.sh`
-- Workflow run ID: `33940369528`
+- Workflow run ID: `33940395132`
 - Attempt: `1`
-- Source commit: `35b296f443c3468d02e8d184d3792dc40f12e2cf`
+- Source commit: `2721eb59a5fafa9d205b52e78b4f8c5b4a5cc701`
 - Exit code: `0`
-- Finished UTC: `2026-09-05T02:54:15Z`
+- Finished UTC: `2026-09-05T02:54:48Z`
 
 ## Metadata
 ```text
 LinuxCNC AI Curriculum Lab
-UTC start: 2026-09-05T02:54:06Z
-Repository commit: 35b296f443c3468d02e8d184d3792dc40f12e2cf
-Workflow run: 33940369528 attempt 1
+UTC start: 2026-09-05T02:54:40Z
+Repository commit: 2721eb59a5fafa9d205b52e78b4f8c5b4a5cc701
+Workflow run: 33940395132 attempt 1
 Job file: lab-jobs/000-smoke.sh
 Runner: Linux runnervmejwal 6.17.0-1022-azure #22-Ubuntu SMP Mon Jul 27 17:24:03 UTC 2026 x86_64 x86_64 x86_64 GNU/Linux
 
-UTC finish: 2026-09-05T02:54:15Z
+UTC finish: 2026-09-05T02:54:48Z
 ```
 
 ## Standard output
 ```text
 == LinuxCNC lab smoke test ==
-UTC: 2026-09-05T02:54:06Z
+UTC: 2026-09-05T02:54:40Z
 
 == Runner environment ==
 Linux runnervmejwal 6.17.0-1022-azure #22-Ubuntu SMP Mon Jul 27 17:24:03 UTC 2026 x86_64 x86_64 x86_64 GNU/Linux
@@ -33,7 +33,7 @@ Python: Python 3.12.3
 CPU count: 4
 Memory:
                total        used        free      shared  buff/cache   available
-Mem:            15Gi       964Mi        12Gi        39Mi       2.4Gi        14Gi
+Mem:            15Gi       969Mi        12Gi        40Mi       2.4Gi        14Gi
 Swap:          3.0Gi          0B       3.0Gi
 Disk:
 Filesystem      Size  Used Avail Use% Mounted on
@@ -58,6 +58,5 @@ Smoke test completed successfully.
 
 ## Standard error
 ```text
-Cloning into '/tmp/tmp.aGddw9Wky0/linuxcnc'...
-Updating files:  78% (7462/9526)Updating files:  79% (7526/9526)Updating files:  80% (7621/9526)Updating files:  81% (7717/9526)Updating files:  82% (7812/9526)Updating files:  83% (7907/9526)Updating files:  84% (8002/9526)Updating files:  85% (8098/9526)Updating files:  86% (8193/9526)Updating files:  87% (8288/9526)Updating files:  88% (8383/9526)Updating files:  89% (8479/9526)Updating files:  90% (8574/9526)Updating files:  91% (8669/9526)Updating files:  92% (8764/9526)Updating files:  93% (8860/9526)Updating files:  94% (8955/9526)Updating files:  95% (9050/9526)Updating files:  96% (9145/9526)Updating files:  97% (9241/9526)Updating files:  98% (9336/9526)Updating files:  99% (9431/9526)Updating files: 100% (9526/9526)Updating files: 100% (9526/9526), done.
+Cloning into '/tmp/tmp.8lfuxj1iXf/linuxcnc'...
 ```

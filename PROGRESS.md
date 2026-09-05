@@ -4,12 +4,12 @@ Status values: `PLANNED`, `RESEARCH`, `SOURCE`, `EXPERIMENT`, `EXAM`, `CORRECTIO
 
 | Module | Status | Primary evidence | Experiment | Exam | Notes |
 |---|---|---|---|---|---|
-| L00 Codespaces laboratory | EXAM | GitHub Actions smoke/build/test results + official build docs + captured logs | `000-smoke` passed; `001-build-linuxcnc` passed; `002-upstream-realtime-math-test` passed in run `33949095338` | `exams/Phase0-L00-L02-adversarial.md` created with verified answer key | Lab runner preserves stdout/stderr/exit code, builds pinned LinuxCNC, and executes bounded upstream tests; current Actions runner falls back to POSIX non-realtime |
-| L01 Version pinning | EXPERIMENT | `guides/L01-version-baseline.md`; official current-release docs; annotated `v2.9.10` tag dereference | development `8bf4605ae81042248add031e94c77300406e0413` built; stable `003` run `33952061943` in progress | covered by Phase-0 exam | Stable reference is `v2.9.10` commit `86cdca76fa2a36274c432caa21952b23c267989a`; tag object dereference and exact-version discipline documented |
-| L02 Repository/build/test map | EXAM | `guides/L02-build-test-map.md`; `guides/L02-representative-test.md`; `src/Makefile`; stable/development `scripts/runtests.in` | `002` ran upstream `tests/realtime-math`: 1/1 successful, exit 0, zero shmem errors on development | `exams/Phase0-L00-L02-adversarial.md` | Representative harness path verified; development has explicit shmem hygiene absent from inspected 2.9.10 harness; realtime scheduling not tested by Actions fallback |
-| L03 Evidence/claims workflow | EXAM | `SOURCE_POLICY.md`; `guides/L03-evidence-claims-workflow.md`; worked stable-vs-development conflict | Phase-0 experiments exercise prediction/observation and evidence narrowing | Phase-0 exam includes evidence-boundary attacks | Formal claim record, conflict protocol, version comparison rule, and fresh-AI evidence checklist committed |
-| A01 Process/component architecture | PLANNED | — | — | — | Critical path; blocked until Phase 0 corrections/handoff |
-| R01 Realtime model | PLANNED | — | — | — | Critical path |
+| L00 Codespaces laboratory | GRADUATED | GitHub Actions smoke/build/test results + official build docs + `guides/Phase0-graduation-handoff.md` | `000-smoke` passed; `001-build-linuxcnc` passed; `002` development representative test passed; stable `003` also passed | Phase-0 adversarial exam + correction/handoff complete | Reproducible software lab established; Actions runner is explicitly not realtime qualification |
+| L01 Version pinning | GRADUATED | `guides/L01-version-baseline.md`; exact stable tag dereference; stable/development experiments | development `8bf4605ae81042248add031e94c77300406e0413` and stable `86cdca76fa2a36274c432caa21952b23c267989a` both built/tested | covered by Phase-0 exam and handoff | Stable `v2.9.10` experimentally confirmed; native harness differences preserved |
+| L02 Repository/build/test map | GRADUATED | `guides/L02-build-test-map.md`; representative-test guide; pinned `src/Makefile` and `scripts/runtests.in` | development `002` and stable `003` each ran native upstream `tests/realtime-math` 1/1 | Phase-0 adversarial exam + corrections complete | Development/stable summary and shmem-hygiene differences are version-scoped; no realtime overclaim |
+| L03 Evidence/claims workflow | GRADUATED | `SOURCE_POLICY.md`; `guides/L03-evidence-claims-workflow.md`; `guides/Phase0-graduation-handoff.md` | exercised on build failure, stable/development comparison, and realtime-evidence boundary | Phase-0 adversarial/handoff pass complete | Evidence classes/conflict handling demonstrated on real contradictions/traps |
+| A01 Process/component architecture | RESEARCH | `guides/A01-process-component-architecture.md`; current Code Notes; pinned `scripts/linuxcnc.in` and `emctaskmain.cc` | process-observation lab not yet created | pending | Initial runtime map distinguishes launcher, non-realtime Task, realtime motion and HAL; exact startup/transport trace next |
+| R01 Realtime model | PLANNED | — | — | — | Critical path; blocked on A01 graduation |
 | H01 HAL architecture | PLANNED | — | — | — | Critical path |
 | H04 HAL execution ordering | PLANNED | — | — | — | Critical path |
 | M03 One servo-period trace | PLANNED | — | — | — | Critical path |
@@ -19,33 +19,34 @@ Status values: `PLANNED`, `RESEARCH`, `SOURCE`, `EXPERIMENT`, `EXAM`, `CORRECTIO
 | IO01 Encoder path | PLANNED | — | — | — | Critical path |
 | IO04 PWM/PDM path | PLANNED | — | — | — | Critical path |
 
-## Current checkpoint
+## Phase 0 graduation result
 
-This session launched `lab-jobs/003-stable-v2.9.10-baseline.sh` at curriculum commit `42f5a295c8364d529102dd18793707a6f0cf9f57`; GitHub Actions run `33952061943` is still executing the lab job at the current checkpoint. The job checks out exact stable commit `86cdca76fa2a36274c432caa21952b23c267989a`, verifies the `v2.9.10` tag, builds that checkout as a uspace RIP tree on the same runner class used for development, and runs the stable checkout's own `tests/realtime-math` through the stable checkout's own `scripts/runtests`. Development harness behavior is deliberately not transplanted into stable.
+Stable experiment `003`, Actions run `33952061943`, completed successfully against exact LinuxCNC `v2.9.10` commit `86cdca76fa2a36274c432caa21952b23c267989a`. The stable checkout's own build system, RIP environment, `scripts/runtests`, and `tests/realtime-math` produced `1 tests run, 1 successful, 0 failed + 0 expected, 0 skipped`, with `runtests` exit `0`. `halcompile` built/installed `rtmath.so`, `halrun dotest.hal` succeeded, and the runner reported POSIX non-realtime operation.
 
-Version evidence was strengthened in `guides/L01-version-baseline.md`: GitHub's annotated tag `v2.9.10` points through tag object `4e7abeab3e764a42ef9def932333a1d4004e547b` to commit `86cdca76fa2a36274c432caa21952b23c267989a`. Official LinuxCNC material identifies 2.9.10 as the current release; the release announcement also records that 2.9.9 was withdrawn after a bug-fix compatibility regression, reinforcing the need for exact version discipline.
+This confirmed the predicted stable-vs-development harness difference rather than contradicting it. Development run `33949095338` reports the additional `0 shmem errors` field and its pinned source contains explicit recognized-key shared-memory pre/post hygiene; the inspected stable harness does not contain that same explicit path. Wrapper-level `ipcs -m` snapshots were clean in both bounded experiments, which is an observation and not evidence that the stable harness implements development's cleanup mechanism.
 
-The first Phase-0 adversarial exam is committed as `exams/Phase0-L00-L02-adversarial.md`. It attacks the misleading premise that a passing test named `realtime-math` proves realtime scheduling, requires an end-to-end harness trace, tests stable-vs-development output differences and shared-memory hygiene, and includes bounded lab-modification and failure-diagnosis tasks. Its answer key is checked against the pinned source and experiment `002`; it explicitly requires correction if `003` reveals contradictory evidence.
+`guides/Phase0-graduation-handoff.md` records the adversarial correction pass, failure-diagnosis workflow, bounded cross-version modification rules, remaining unknowns, and the fresh-AI operating contract. L00-L03 are therefore graduated without claiming realtime scheduling, hardware suitability, functional safety, full-suite compatibility, or later subsystem behavior.
 
-L03 is now represented by `guides/L03-evidence-claims-workflow.md`, which formalizes falsifiable claim records, evidence classes, conflict handling, prediction-before-test, experimental boundaries, negative-source-evidence limits, version comparison rules, and a fresh-AI handoff checklist. The worked example preserves the version-sensitive `scripts/runtests.in` shared-memory behavior rather than smoothing it into a universal claim.
+## A01 work started
 
-### Preserved development experiment evidence
+`guides/A01-process-component-architecture.md` begins the runtime architecture map at development commit `8bf4605ae81042248add031e94c77300406e0413`.
 
-Actions run `33949095338`, triggered by curriculum commit `c2eb8e5a01a9360586281ac8352e8a5e94de3226`, completed successfully against LinuxCNC development revision `8bf4605ae81042248add031e94c77300406e0413`:
+Initial evidence establishes:
 
-- `Runtest: 1 tests run, 1 successful, 0 failed + 0 expected, 0 skipped, 0 shmem errors`.
-- `runtests exit status: 0`.
-- `halcompile` compiled `rtmath.c`, linked `rtmath.so`, and copied it into the RIP `rtlib` directory.
-- `halrun` loaded the component through the upstream test.
-- pre-test and post-test `ipcs -m` snapshots listed no System V shared-memory segments.
-- the Actions environment lacks realtime scheduling capabilities; LinuxCNC reported failed `SCHED_FIFO` setup and fell back to POSIX non-realtime execution. This is software-lab evidence and must not be reused as R01/R02 realtime evidence.
+- current official Code Notes describe Task/interpreter coordinating motion and discrete I/O, with motion on the realtime side and non-realtime Task/GUI code communicating across the boundary through shared-memory messaging and HAL;
+- `scripts/linuxcnc.in` is a userspace launcher/orchestration entry point, not the motion controller itself;
+- `src/emc/task/emctaskmain.cc` documents and implements cyclic Task planning/execution, machine state/mode gating, interpreter-list sequencing, and command/status/error NML channel objects;
+- community discussions are preserved as investigation leads showing that a defined NML message is not automatically executable in every Task mode/state and that public status does not necessarily preserve authored G-code identity.
 
-## Next lesson / exact resume point
+## Current checkpoint / exact resume point
 
-1. Inspect Actions run `33952061943` and the committed `lab-results/LATEST*` files once the stable `003` job completes.
-2. If `003` fails, diagnose the exact stable build/test incompatibility from preserved stdout/stderr and patch only the curriculum wrapper when justified; do not alter stable LinuxCNC merely to force a pass.
-3. If `003` passes, update `guides/L01-version-baseline.md` and `guides/L02-build-test-map.md` with stable observed behavior, including the stable harness summary and any scheduling fallback differences.
-4. Run the Phase-0 adversarial exam as a correction/handoff pass: identify any answer that overclaims evidence, patch guides/claims, and record explicit graduation evidence for L00-L03.
-5. Only after Phase 0 survives that corrections/handoff pass should A01 process/component architecture enter `RESEARCH`.
+Continue A01, not Phase 0.
 
-The complete module graph is maintained in `CURRICULUM.md`. Add rows here as modules enter active work rather than using this file as a duplicate syllabus.
+1. Trace the remaining startup section of `scripts/linuxcnc.in` at development commit `8bf4605ae81042248add031e94c77300406e0413` and record exact startup order for realtime backend, HAL, kinematics/motion modules, Task, UI and auxiliary processes.
+2. Locate the concrete `milltask` executable/main build entry and trace initialization of Task command/status/error NML channels.
+3. Trace the first concrete Task→motion userspace interface calls and identify the actual command/status transport boundary rather than labeling all communication generically as NML.
+4. Resolve the runtime role of `iocontrol`/discrete I/O from source.
+5. Add a bounded A01 lab job that launches a minimal simulation configuration and preserves a process tree plus HAL component/function inventory; use it only for runtime topology, not realtime timing claims.
+6. Then build the A01 function/call-flow guide, adversarial exam and fresh-AI handoff before unblocking R01.
+
+The complete module graph remains in `CURRICULUM.md`.

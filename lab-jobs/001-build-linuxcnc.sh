@@ -38,7 +38,13 @@ printf '\n== Build ==\n'
 make -j"$(nproc)"
 
 printf '\n== Load RIP environment and verify tools ==\n'
+# rip-environment is an upstream environment setup script, not a strict-mode
+# library. At this pinned revision it references optional environment variables
+# (observed: GLADE_ICON_THEME_PATH) without ${var:-} guards. Temporarily disable
+# nounset while sourcing it, then restore the lab's strict shell discipline.
+set +u
 source ../scripts/rip-environment
+set -u
 command -v linuxcnc
 command -v halcmd
 command -v runtests

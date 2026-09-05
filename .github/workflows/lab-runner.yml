@@ -11,6 +11,7 @@ on:
     branches: [main]
     paths:
       - "lab-jobs/**"
+      - ".github/workflows/lab-runner.yml"
 
 permissions:
   contents: write
@@ -33,8 +34,10 @@ jobs:
           set -euo pipefail
           if [[ "${{ github.event_name }}" == "workflow_dispatch" ]]; then
             JOB_FILE="${{ inputs.job_file }}"
-          else
+          elif git diff-tree --no-commit-id --name-only -r "${GITHUB_SHA}" -- 'lab-jobs/*.sh' | grep -q .; then
             JOB_FILE="$(git diff-tree --no-commit-id --name-only -r "${GITHUB_SHA}" -- 'lab-jobs/*.sh' | head -n 1)"
+          else
+            JOB_FILE="lab-jobs/000-smoke.sh"
           fi
           if [[ -z "${JOB_FILE:-}" || ! -f "$JOB_FILE" ]]; then
             echo "No runnable lab job script was found." >&2

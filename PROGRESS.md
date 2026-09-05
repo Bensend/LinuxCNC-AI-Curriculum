@@ -8,7 +8,7 @@ Status values: `PLANNED`, `RESEARCH`, `SOURCE`, `EXPERIMENT`, `EXAM`, `CORRECTIO
 | L01 Version pinning | GRADUATED | `guides/L01-version-baseline.md`; exact stable tag dereference; stable/development experiments | development `8bf4605ae81042248add031e94c77300406e0413` and stable `86cdca76fa2a36274c432caa21952b23c267989a` both built/tested | covered by Phase-0 exam and handoff | Stable `v2.9.10` experimentally confirmed; native harness differences preserved |
 | L02 Repository/build/test map | GRADUATED | `guides/L02-build-test-map.md`; representative-test guide; pinned `src/Makefile` and `scripts/runtests.in` | development `002` and stable `003` each ran native upstream `tests/realtime-math` 1/1 | Phase-0 adversarial exam + corrections complete | Development/stable summary and shmem-hygiene differences are version-scoped; no realtime overclaim |
 | L03 Evidence/claims workflow | GRADUATED | `SOURCE_POLICY.md`; `guides/L03-evidence-claims-workflow.md`; `guides/Phase0-graduation-handoff.md` | exercised on build failure, stable/development comparison, and realtime-evidence boundary | Phase-0 adversarial/handoff pass complete | Evidence classes/conflict handling demonstrated on real contradictions/traps |
-| A01 Process/component architecture | EXPERIMENT | `guides/A01-process-component-architecture.md`; `call-flows/A01-task-to-motion-command-ack.md`; pinned launcher/task/motion source | `004-a01-runtime-topology` first run timed out during build; corrected headless rerun `33960179986` in progress | `exams/A01-process-component-architecture-adversarial.md` created | Command/ack endpoint now closed to realtime `emcmotCommandHandler`; runtime topology still needs successful observation before correction/handoff/graduation |
+| A01 Process/component architecture | EXPERIMENT | `guides/A01-process-component-architecture.md`; `call-flows/A01-task-to-motion-command-ack.md`; pinned launcher/task/motion source | `004` timed out twice during build at former 60-minute ceiling; hardened 75-minute rerun `33965517203` queued | adversarial exam + corrections complete | Runtime topology still needs successful fresh observation before handoff/graduation |
 | R01 Realtime model | PLANNED | — | — | — | Critical path; blocked on A01 graduation |
 | H01 HAL architecture | PLANNED | — | — | — | Critical path |
 | H04 HAL execution ordering | PLANNED | — | — | — | Critical path |
@@ -41,32 +41,21 @@ Community cross-checks retain an important version/history warning: older forum 
 
 ## A01 experiment correction
 
-Initial workflow run `33957356410` was **cancelled at the workflow's 60-minute timeout** while the full LinuxCNC build was still running. It never reached the topology assertions. Because cancellation occurred inside the shell step before the new result files were generated, the always-run artifact/commit steps uploaded and recommitted stale `lab-results/LATEST.*` content from the prior stable `003` checkout. Therefore neither that artifact nor the misleading bot commit is A01 topology evidence.
+Runs `33957356410` and `33960179986` both exhausted the former 60-minute workflow ceiling while building LinuxCNC and never reached the runtime topology assertions. Neither is topology evidence. The first cancellation also exposed a laboratory integrity bug: because `LATEST.*` files from repository checkout remained present, `if: always()` publication could upload/recommit stale prior results after cancellation.
 
-The lab was corrected in commit `26cf7fd3266741db2943211fe538ca145a3a0743` to configure the same pinned LinuxCNC revision with `--disable-gui --disable-manpages --disable-build-documentation`. LinuxCNC's own documentation explicitly provides `--disable-build-documentation`, and upstream CI uses these headless switches for RIP builds. Corrected workflow run `33960179986` was in progress at this checkpoint.
+The lab runner was hardened in commit `360a06030319ad3eaa4a83b211aa52386ca51b9c`: it now deletes checked-out `LATEST.*` files before executing a job, uses `if-no-files-found: warn` for cancellation-safe artifact handling, and permits 75 minutes so this already-near-complete source build has a bounded additional window. The 004 script was retriggered by commit `06c7bf7f0602fa577d20a00f92cef82527c61df2`; Actions run `33965517203` is the current candidate. A successful workflow is insufficient by itself: its metadata must identify `004-a01-runtime-topology`, source commit `06c7bf7...`, and pinned LinuxCNC commit `8bf4605...`, and its actual assertions must have executed.
 
 ## A01 adversarial state
 
-`exams/A01-process-component-architecture-adversarial.md` now attacks these false premises and failure cases:
-
-- all LinuxCNC IPC is NML;
-- `iocontrol.0` must be a standalone process;
-- Task cannot start before motion is fully running;
-- mutex contention should block realtime motion;
-- `commandNumEcho` alone means command success;
-- cancelled workflow artifacts can be trusted without checking metadata/version;
-- old community diagrams can be generalized to the pinned revision.
-
-The exam also includes a bounded diagnostic-counter modification task and a runtime process-vs-HAL observation design.
+`exams/A01-process-component-architecture-adversarial.md` and `guides/A01-adversarial-corrections.md` cover the false premises and failure cases: all IPC is NML; `iocontrol.0` must be standalone; Task cannot precede motion; realtime should block on mutex contention; command echo means success; cancelled artifacts can be trusted; and old diagrams can be generalized to the pinned revision.
 
 ## Current checkpoint / exact resume point
 
 Continue A01; R01 remains blocked.
 
-1. Inspect corrected Actions run `33960179986` and its generated metadata/output. Verify it actually names job `004-a01-runtime-topology`, source commit `26cf7fd...`, and pinned LinuxCNC commit `8bf4605...`; reject stale result files even if the workflow reports success.
-2. Reconcile each prediction with `ps`/`pgrep`, `halcmd list comp`, and `halcmd list funct`: `linuxcncsvr` and `milltask` processes; `iocontrol.0`, `motmod`, and `trivkins` HAL components; no standalone `iocontrol` process.
-3. If the rerun passes, promote only those topology claims to `TEST-CONFIRMED`. If it fails, preserve the exact runtime/configuration discrepancy before patching.
-4. Perform the A01 correction pass against `exams/A01-process-component-architecture-adversarial.md`, then write a fresh-AI handoff artifact. Graduate A01 only after experiment reconciliation + corrections/handoff pass.
-5. Once A01 graduates, begin R01 Realtime Model from official realtime documentation, current community failure reports, and pinned RTAPI/source boundaries.
+1. Inspect Actions run `33965517203`. Reject it unless fresh metadata identifies job `004-a01-runtime-topology`, curriculum source commit `06c7bf7f0602fa577d20a00f92cef82527c61df2`, and the script output names pinned LinuxCNC commit `8bf4605ae81042248add031e94c77300406e0413`.
+2. If assertions ran, reconcile `ps`/`pgrep`, `halcmd list comp`, and `halcmd list funct`: `linuxcncsvr` and `milltask` processes; `iocontrol.0`, `motmod`, and `trivkins` HAL components; no standalone `iocontrol` process. Promote only observed claims to `TEST-CONFIRMED`.
+3. If the 75-minute run still cannot reach assertions, stop spending repeated full builds: redesign 004 around a reusable build artifact/cache or a narrower supported build target and document the cost/validity tradeoff.
+4. After successful experiment reconciliation, write the A01 fresh-AI handoff and graduate A01. Then begin R01 Realtime Model.
 
 The complete module graph remains in `CURRICULUM.md`.

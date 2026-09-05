@@ -68,7 +68,10 @@ capture_halcmd_backtrace() {
     printf '%s: stalled pid=%s; capturing process state and gdb backtrace\n' "$label" "$pid" >&2
     ps -o pid,ppid,stat,wchan:32,etime,comm,args -p "$pid" >&2 || true
     cat "/proc/$pid/status" >&2 2>/dev/null || true
-    timeout --signal=TERM --kill-after=1s 6s gdb -q -nx -batch \
+    # GitHub-hosted Ubuntu commonly enables Yama ptrace restrictions.  Use sudo
+    # for this diagnostic attach so sibling-process ancestry does not erase the
+    # very stack evidence this probe exists to preserve.
+    sudo timeout --signal=TERM --kill-after=1s 6s gdb -q -nx -batch \
         -ex 'set pagination off' \
         -ex 'thread apply all bt' \
         -p "$pid" > "$trace" 2>&1 || true

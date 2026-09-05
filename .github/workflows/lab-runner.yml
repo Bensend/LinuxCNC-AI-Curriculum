@@ -34,10 +34,27 @@ jobs:
           set -euo pipefail
           if [[ "${{ github.event_name }}" == "workflow_dispatch" ]]; then
             JOB_FILE="${{ inputs.job_file }}"
-          elif git diff-tree --no-commit-id --name-only -r "${GITHUB_SHA}" -- 'lab-jobs/*.sh' | grep -q .; then
-            JOB_FILE="$(git diff-tree --no-commit-id --name-only -r "${GITHUB_SHA}" -- 'lab-jobs/*.sh' | head -n 1)"
           else
-            JOB_FILE="lab-jobs/000-smoke.sh"
+            BEFORE="${{ github.event.before }}"
+            ZERO_SHA="0000000000000000000000000000000000000000"
+            if [[ -n "$BEFORE" && "$BEFORE" != "$ZERO_SHA" ]]; then
+              mapfile -t JOB_FILES < <(git diff --name-only "$BEFORE" "$GITHUB_SHA" -- 'lab-jobs/*.sh')
+            else
+              mapfile -t JOB_FILES < <(git diff-tree --root --no-commit-id --name-only -r "$GITHUB_SHA" -- 'lab-jobs/*.sh')
+            fi
+            case "${#JOB_FILES[@]}" in
+              0)
+                JOB_FILE="lab-jobs/000-smoke.sh"
+                ;;
+              1)
+                JOB_FILE="${JOB_FILES[0]}"
+                ;;
+              *)
+                echo "Multiple lab jobs changed in one push; refusing ambiguous auto-selection:" >&2
+                printf '  %s\n' "${JOB_FILES[@]}" >&2
+                exit 4
+                ;;
+            esac
           fi
           if [[ -z "${JOB_FILE:-}" || ! -f "$JOB_FILE" ]]; then
             echo "No runnable lab job script was found." >&2
@@ -71,10 +88,13 @@ jobs:
             echo "Workflow run: $GITHUB_RUN_ID attempt $GITHUB_RUN_ATTEMPT"
             echo "Job file: $JOB_FILE"
             echo "Runner: $(uname -a)"
+            echo "Inner lab timeout: 70 minutes (job ceiling: 75 minutes)"
             echo
           } > "$RUN_DIR/metadata.txt"
 
-          bash "$JOB_FILE" > "$RUN_DIR/stdout.log" 2> "$RUN_DIR/stderr.log"
+          # Keep the experiment itself below the job-level ceiling so result
+          # publication and failure reporting retain a bounded cleanup window.
+          timeout --signal=TERM --kill-after=15s 70m bash "$JOB_FILE" > "$RUN_DIR/stdout.log" 2> "$RUN_DIR/stderr.log"
           STATUS=$?
           echo "$STATUS" > "$RUN_DIR/exit_code.txt"
           echo "UTC finish: $(date -u +%Y-%m-%dT%H:%M:%SZ)" >> "$RUN_DIR/metadata.txt"
@@ -127,7 +147,7 @@ jobs:
         with:
           name: linuxcnc-lab-${{ steps.select.outputs.job_name }}-${{ github.run_id }}-${{ github.run_attempt }}
           path: |
-            ${{ steps.runjob.outputs.run_dir }}
+            lab-results/run-${{ github.run_id }}-${{ github.run_attempt }}
             lab-results/LATEST.md
             lab-results/LATEST.stdout.log
             lab-results/LATEST.stderr.log

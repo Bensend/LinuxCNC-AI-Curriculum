@@ -10,7 +10,7 @@ date -u '+UTC start: %Y-%m-%dT%H:%M:%SZ'
 printf 'Pinned upstream commit: %s\n' "$LINUXCNC_COMMIT"
 printf 'Prediction: a headless upstream linuxcncrsh simulation will expose linuxcncsvr and milltask as userspace processes, iocontrol.0 as a HAL component owned by Task rather than a standalone iocontrol process, and motmod/trivkins as loaded realtime HAL components.\n'
 printf 'Evidence boundary: this observes process/component topology only. The GitHub runner is not realtime qualification.\n'
-printf 'Build correction: docs/manpages/GUI are disabled because run 33957356410 hit the 60-minute workflow ceiling while compiling documentation before the topology test began. Upstream documents --disable-build-documentation for this purpose and uses the same headless switches in CI.\n'
+printf 'Build correction: docs/manpages/GUI are disabled. Two 60-minute runs exhausted the former workflow ceiling before topology assertions; the runner now permits 75 minutes while stale LATEST files are deleted before execution so cancellation cannot masquerade as a fresh result.\n'
 
 sudo apt-get update
 sudo apt-get install -y build-essential git devscripts equivs

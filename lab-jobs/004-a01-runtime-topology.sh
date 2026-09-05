@@ -68,7 +68,7 @@ capture_halcmd_backtrace() {
     printf '%s: stalled pid=%s; capturing process state and gdb backtrace\n' "$label" "$pid" >&2
     ps -o pid,ppid,stat,wchan:32,etime,comm,args -p "$pid" >&2 || true
     cat "/proc/$pid/status" >&2 2>/dev/null || true
-    # GitHub-hosted Ubuntu commonly enables Yama ptrace restrictions.  Use sudo
+    # GitHub-hosted Ubuntu commonly enables Yama ptrace restrictions. Use sudo
     # for this diagnostic attach so sibling-process ancestry does not erase the
     # very stack evidence this probe exists to preserve.
     sudo timeout --signal=TERM --kill-after=1s 6s gdb -q -nx -batch \
@@ -79,9 +79,13 @@ capture_halcmd_backtrace() {
     cat "$trace" >&2 || true
 }
 
-# Execute one whole halcmd process under an explicit monitor.  Unlike GNU
+# Execute one whole halcmd process under an explicit monitor. Unlike GNU
 # timeout alone, this preserves the still-running PID long enough to obtain a
-# symbol-level backtrace before TERM/KILL cleanup.  Return 124 on wall timeout.
+# symbol-level backtrace before TERM/KILL cleanup. Return 124 on wall timeout.
+#
+# IMPORTANT: do not toggle global errexit inside this helper. Expected child
+# failures are captured with conditional commands so a nonzero return can be
+# propagated to a caller that deliberately handles it.
 bounded_halcmd_capture() {
     local label="$1"
     local stdout_file="$2"
@@ -94,10 +98,12 @@ bounded_halcmd_capture() {
     local i
     for i in $(seq 1 "$ticks"); do
         if ! kill -0 "$pid" 2>/dev/null; then
-            set +e
-            wait "$pid"
-            local rc=$?
-            set -e
+            local rc
+            if wait "$pid"; then
+                rc=0
+            else
+                rc=$?
+            fi
             printf '%s: after rc=%s\n' "$label" "$rc" >&2
             return "$rc"
         fi
@@ -113,9 +119,7 @@ bounded_halcmd_capture() {
         sleep 0.05
     done
     kill -KILL "$pid" 2>/dev/null || true
-    set +e
-    wait "$pid" 2>/dev/null
-    set -e
+    wait "$pid" 2>/dev/null || true
     printf '%s: after rc=124 (monitor timeout)\n' "$label" >&2
     return 124
 }
@@ -124,10 +128,11 @@ printf '\n== HAL readiness ==\n'
 HAL_READY=0
 for i in $(seq 1 80); do
     printf 'hal-readiness: before probe %s\n' "$i"
-    set +e
-    bounded_halcmd_capture "hal-readiness-${i}" /tmp/a01-components.txt /tmp/a01-halcmd.stderr list comp
-    HAL_RC=$?
-    set -e
+    if bounded_halcmd_capture "hal-readiness-${i}" /tmp/a01-components.txt /tmp/a01-halcmd.stderr list comp; then
+        HAL_RC=0
+    else
+        HAL_RC=$?
+    fi
     printf 'hal-readiness: after probe %s rc=%s\n' "$i" "$HAL_RC"
     if [[ "$HAL_RC" == 0 ]] && grep -q 'iocontrol.0' /tmp/a01-components.txt; then
         HAL_READY=1
@@ -142,6 +147,9 @@ for i in $(seq 1 80); do
         cat topology-linuxcnc.stdout >&2 || true
         printf '\n== linuxcnc stderr ==\n' >&2
         cat topology-linuxcnc.stderr >&2 || true
+        # A killed HAL-lock participant can strand shared lock accounting.
+        # Treat this as a terminal diagnostic branch; do not issue further HAL
+        # queries against this instance or promote post-kill topology evidence.
         exit 3
     fi
     sleep 0.25
@@ -158,10 +166,12 @@ bounded_halcmd() {
     local stdout_file="$2"
     shift 2
     local stderr_file="/tmp/a01-${label}.stderr"
-    set +e
-    bounded_halcmd_capture "$label" "$stdout_file" "$stderr_file" "$@"
-    local rc=$?
-    set -e
+    local rc
+    if bounded_halcmd_capture "$label" "$stdout_file" "$stderr_file" "$@"; then
+        rc=0
+    else
+        rc=$?
+    fi
     if [[ -s "$stdout_file" ]]; then
         cat "$stdout_file"
     fi
@@ -181,10 +191,11 @@ printf '\n== HAL functions ==\n'
 bounded_halcmd 'hal-list-funct' /tmp/a01-list-funct.txt list funct
 
 printf '\n== Key component assertions ==\n'
-set +e
-bounded_halcmd_capture 'assert-iocontrol-components' /tmp/a01-components-final.txt /tmp/a01-assert.stderr list comp
-ASSERT_RC=$?
-set -e
+if bounded_halcmd_capture 'assert-iocontrol-components' /tmp/a01-components-final.txt /tmp/a01-assert.stderr list comp; then
+    ASSERT_RC=0
+else
+    ASSERT_RC=$?
+fi
 cat /tmp/a01-assert.stderr >&2 || true
 if [[ "$ASSERT_RC" != 0 ]]; then
     exit "$ASSERT_RC"

@@ -66,13 +66,37 @@ At the two pinned revisions, `scripts/runtests.in` is version-sensitive:
 
 This is `SOURCE-CONFIRMED` at the exact revisions above. It must not be generalized to every historical 2.9 or future 2.10 revision without checking.
 
-## Stable experiment `003`
+The stable source also confirms that its `run_tests()` summary ends after the skipped count and that test discovery/dispatch still recognizes `test.hal`, `test.sh`, and `test`, with shell tests run through `bash -x` and `.hal` tests using the overrun-specific retry path. This makes the summary-format difference a harness-version issue rather than evidence that the stable test failed.
 
-`lab-jobs/003-stable-v2.9.10-baseline.sh` is the bounded reproducibility test. It deliberately checks out the exact stable commit and uses the stable checkout's own Debian metadata, build system, RIP environment, `runtests` harness, and `tests/realtime-math` definition. It does not transplant development harness behavior into stable.
+## Stable experiment `003` — TEST-CONFIRMED
 
-The selected upstream stable test is directly comparable to experiment `002`: stable `tests/realtime-math/test.sh` also executes `${SUDO} halcompile --install rtmath.comp` followed by `halrun dotest.hal`.
+`lab-jobs/003-stable-v2.9.10-baseline.sh` checked out exact commit `86cdca76fa2a36274c432caa21952b23c267989a` and used the stable checkout's own Debian metadata, build system, RIP environment, `runtests` harness, and `tests/realtime-math` definition. It did not transplant development harness behavior into stable.
 
-Result status: pending at creation of this guide; update only from preserved laboratory evidence.
+GitHub Actions run `33952061943` completed successfully. Preserved observations:
+
+- workflow conclusion: success; curriculum lab exit code: `0`;
+- exact checkout reported `HEAD is now at 86cdca76f 2.9.10 Release`;
+- `tests/realtime-math` executed through the stable upstream harness;
+- stable summary: `Runtest: 1 tests run, 1 successful, 0 failed + 0 expected, 0 skipped`;
+- `runtests exit status: 0`;
+- `halcompile --install rtmath.comp` compiled/linked `rtmath.so` and installed it into the stable RIP `rtlib`;
+- `halrun dotest.hal` succeeded;
+- the runner reported `Note: Using POSIX non-realtime`, so this remains a software/reproducibility test rather than realtime scheduling evidence;
+- the wrapper's post-test `ipcs -m` observation showed no System V shared-memory segments, but this does not convert stable's harness into development-style automatic shared-memory hygiene.
+
+Prediction and observation matched. The experiment experimentally confirms the stable side of the reproducibility baseline while preserving the source-confirmed harness difference.
+
+## Stable-vs-development comparison
+
+| Property | Stable `v2.9.10` | Development `8bf4605...` | Evidence |
+|---|---|---|---|
+| Exact representative test passes | yes, 1/1 | yes, 1/1 | TEST-CONFIRMED |
+| Runner scheduling mode in Actions | POSIX non-realtime | POSIX non-realtime fallback | TEST-CONFIRMED |
+| Harness summary includes shmem-error count | no | yes (`0 shmem errors` in observed run) | SOURCE + TEST-CONFIRMED |
+| Explicit harness pre/post recognized-shmem cleanup path | absent in inspected harness | present | SOURCE-CONFIRMED |
+| Post-test wrapper `ipcs -m` observed clean state | yes | yes | TEST-CONFIRMED, observation only |
+
+Important distinction: a clean `ipcs -m` snapshot after a stable test does not prove the stable harness performs the development harness's explicit cleanup. It only proves no System V shared-memory segment remained in this bounded run.
 
 ## Evidence ledger
 
@@ -84,8 +108,13 @@ Result status: pending at creation of this guide; update only from preserved lab
 | development `8bf460...` builds in curriculum Actions lab | TEST-CONFIRMED | Ubuntu 24.04 uspace software lab |
 | development representative realtime-math test passes in POSIX non-realtime fallback | TEST-CONFIRMED | experiment `002` |
 | stable and development harnesses differ in explicit shared-memory hygiene path | SOURCE-CONFIRMED | exact two pinned revisions |
-| stable `v2.9.10` builds/passes equivalent test in current runner | UNKNOWN pending `003` | do not infer until lab result is captured |
+| stable `v2.9.10` builds and passes the equivalent representative test | TEST-CONFIRMED | experiment `003`, run `33952061943` |
+| stable representative test demonstrated realtime scheduling | FALSE / contradicted by observation | runner explicitly used POSIX non-realtime |
+
+## Phase-0 correction result
+
+No contradiction was found between the pre-experiment source analysis and experiment `003`. The experiment strengthened one adversarial lesson: human-readable harness summaries are version-sensitive interfaces and must not be parsed as if development output were universal. Realtime-sounding test names also remain an evidence trap; both pinned baselines passed while running non-realtime in Actions.
 
 ## Next checkpoint
 
-Inspect experiment `003` result. If it passes, convert the stable build/test row to `TEST-CONFIRMED`, document observed stable summary/fallback behavior, and use the Phase-0 adversarial exam to drive corrections. If it fails, preserve the exact failure and diagnose it as a reproducibility/compatibility lesson rather than modifying the stable source until the cause is understood.
+L01 is ready for Phase-0 graduation once the cross-module adversarial/fresh-AI handoff record is committed. Future modules must continue to carry both exact revisions where version comparison matters and must never reuse these cloud tests as evidence for realtime scheduling or physical-machine suitability.

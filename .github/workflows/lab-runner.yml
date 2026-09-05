@@ -56,7 +56,6 @@ jobs:
         run: |
           set +e
           mkdir -p lab-results
-          # Never let a cancelled run publish LATEST files inherited from checkout.
           rm -f lab-results/LATEST.md lab-results/LATEST.stdout.log lab-results/LATEST.stderr.log \
                 lab-results/LATEST.metadata.txt lab-results/LATEST.exit_code.txt
           JOB_FILE="${{ steps.select.outputs.job_file }}"
@@ -71,10 +70,13 @@ jobs:
             echo "Workflow run: $GITHUB_RUN_ID attempt $GITHUB_RUN_ATTEMPT"
             echo "Job file: $JOB_FILE"
             echo "Runner: $(uname -a)"
+            echo "Inner lab timeout: 70 minutes (job ceiling: 75 minutes)"
             echo
           } > "$RUN_DIR/metadata.txt"
 
-          bash "$JOB_FILE" > "$RUN_DIR/stdout.log" 2> "$RUN_DIR/stderr.log"
+          # Keep the experiment itself below the job-level ceiling so publication steps
+          # still get a bounded cleanup window even when a lab hangs.
+          timeout --signal=TERM --kill-after=15s 70m bash "$JOB_FILE" > "$RUN_DIR/stdout.log" 2> "$RUN_DIR/stderr.log"
           STATUS=$?
           echo "$STATUS" > "$RUN_DIR/exit_code.txt"
           echo "UTC finish: $(date -u +%Y-%m-%dT%H:%M:%SZ)" >> "$RUN_DIR/metadata.txt"
@@ -127,7 +129,7 @@ jobs:
         with:
           name: linuxcnc-lab-${{ steps.select.outputs.job_name }}-${{ github.run_id }}-${{ github.run_attempt }}
           path: |
-            ${{ steps.runjob.outputs.run_dir }}
+            lab-results/run-${{ github.run_id }}-${{ github.run_attempt }}
             lab-results/LATEST.md
             lab-results/LATEST.stdout.log
             lab-results/LATEST.stderr.log

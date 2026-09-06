@@ -42,17 +42,20 @@ getcap "$(command -v rtapi_app)" || true
 ls -l "$(command -v rtapi_app)"
 
 printf '\n== Realtime capability classification ==\n'
+# The public wrapper verb is `verify`; at this pinned revision it dispatches
+# to `rtapi_app check_rt`. A nonzero result means the type is No realtime,
+# not that the wrapper itself failed. Capture the expected status explicitly.
 set +e
-realtime check > /tmp/r01-realtime-check.out 2> /tmp/r01-realtime-check.err
+realtime verify > /tmp/r01-realtime-check.out 2> /tmp/r01-realtime-check.err
 CHECK_RC=$?
 set -e
-printf 'realtime-check-rc=%s\n' "$CHECK_RC"
+printf 'realtime-verify-rc=%s\n' "$CHECK_RC"
 cat /tmp/r01-realtime-check.out
 cat /tmp/r01-realtime-check.err >&2 || true
 
 # An ordinary Actions environment is expected to fail the realtime-capability
-# check. Fail closed if the environment unexpectedly has realtime capability;
-# a different observation needs separate interpretation, not silent acceptance.
+# verification. Fail closed if the environment unexpectedly has realtime
+# capability; a different observation needs separate interpretation.
 if [[ "$CHECK_RC" -eq 0 ]]; then
     echo 'Unexpected: host reported realtime capability. Refusing to reuse the non-realtime prediction.' >&2
     exit 10

@@ -10,12 +10,12 @@ Status values: `PLANNED`, `RESEARCH`, `SOURCE`, `EXPERIMENT`, `EXAM`, `CORRECTIO
 | L03 Evidence/claims workflow | GRADUATED | `SOURCE_POLICY.md`; `guides/L03-evidence-claims-workflow.md` | exercised | Phase-0 | evidence/conflict workflow demonstrated |
 | A01 Process/component architecture | GRADUATED | A01 architecture/call-flow/handoff guides | corrected `004` run `34000879408` | passed | topology/ownership TEST-CONFIRMED for pinned simulation |
 | R01 Realtime model | GRADUATED | R01 model/call-flow/boundary/handoff guides | corrected `005` run `34011177375` | passed | fallback scheduler/period behavior confirmed; no physical latency claim |
-| H01 HAL architecture | GRADUATED | H01 lifecycle/call-flow/community/handoff guides | corrected `006` run `34018699909`, job `101447160463`, SHA `43fae7ea...` passed all gates | passed | object/connectivity semantics TEST-CONFIRMED for pinned host |
-| H04 HAL execution ordering | GRADUATED | H04 guide/call-flow/community/handoff + accepted result | `007` run `34024102367`, job `101461896527`, SHA `f15451ee...` passed all gates | passed | within-thread order/dataflow TEST-CONFIRMED; cross-thread/live mutation not promoted |
-| M03 One servo-period trace | GRADUATED | M03 source/call-flow/accepted-result/handoff guides | `008` run `34029848545`, job `101477262140`, SHA `10f187e8...` passed all gates | passed | canonical loopback phase relationship TEST-CONFIRMED; not universal latency |
-| HM01 HostMot2 architecture | GRADUATED | `guides/HM01-graduation-handoff.md`; call flow + accepted result | corrected `009` run `34038328272`, job `101500386969`, SHA `b3cdebcd...` passed all gates | passed | fake-LLIO malformed-registration rejection TEST-CONFIRMED; no physical transport/safety claim |
-| E01 hm2_eth architecture | RESEARCH | initial work pending this session | — | — | active critical path after HM01 |
-| HM08 HostMot2 watchdog | PLANNED | — | — | — | critical path |
+| H01 HAL architecture | GRADUATED | H01 lifecycle/call-flow/community/handoff guides | corrected `006` run `34018699909` | passed | object/connectivity semantics TEST-CONFIRMED for pinned host |
+| H04 HAL execution ordering | GRADUATED | H04 guide/call-flow/community/handoff + accepted result | `007` run `34024102367` | passed | within-thread order/dataflow TEST-CONFIRMED; cross-thread/live mutation not promoted |
+| M03 One servo-period trace | GRADUATED | M03 source/call-flow/accepted-result/handoff guides | `008` run `34029848545` | passed | canonical loopback phase relationship TEST-CONFIRMED; not universal latency |
+| HM01 HostMot2 architecture | GRADUATED | `guides/HM01-graduation-handoff.md`; call flow + accepted result | corrected `009` run `34038328272` | passed | fake-LLIO malformed-registration rejection TEST-CONFIRMED; no physical transport/safety claim |
+| E01 hm2_eth architecture | GRADUATED | `guides/E01-graduation-handoff.md`; `call-flows/E01-hm2-eth-transport.md` | production-path no-hardware transport experiment promoted | passed | architecture/discovery/LLIO ownership SOURCE-CONFIRMED; no physical network claim |
+| HM08 HostMot2 watchdog | RESEARCH | `guides/HM08-watchdog-initial.md` | — | — | active critical path |
 | IO01 Encoder path | PLANNED | — | — | — | critical path |
 | IO04 PWM/PDM path | PLANNED | — | — | — | critical path |
 
@@ -23,29 +23,13 @@ Status values: `PLANNED`, `RESEARCH`, `SOURCE`, `EXPERIMENT`, `EXAM`, `CORRECTIO
 
 Primary development revision: `8bf4605ae81042248add031e94c77300406e0413`. Stable reference: `86cdca76fa2a36274c432caa21952b23c267989a` where applicable.
 
-## Graduated evidence summary
+## Current critical-path result
 
-A01 accepted run `34000879408` confirmed the required process/HAL topology for its pinned simulation. R01 corrected run `34011177375` confirmed explicit non-realtime fallback, expected HAL periods, and TS scheduling for periodic pthreads. H01 corrected run `34018699909` confirmed dummy/signal linkage semantics, second-writer rejection and cyclic function execution. H04 run `34024102367` confirmed same-thread configured function order drives same-cycle dataflow, while cross-thread ordering/live mutation remained outside the promoted claim. M03 run `34029848545` confirmed the canonical direct motor-command→feedback loopback phase relationship while explicitly rejecting a universal latency claim. HM01 corrected run `34038328272` confirmed the exercised fake-LLIO malformed HostMot2 registration paths reject the 15 upstream matrix cases and an independent bad-cookie case. None of these cloud results is physical-machine realtime or safety qualification.
+E01 is **GRADUATED** at its 1000-level architecture/discovery scope. Pinned source establishes that hm2_eth owns Ethernet LLIO transport mechanics, constructs `hm2_lowlevel_io_t`, and hands a probed/configured board to generic HostMot2 through `hm2_register()`. Direct initialization reads and cyclic queued I/O are distinct paths. Deeper packet-loss/recovery/timing mechanics remain assigned to E03-E07.
 
-## HM01 graduation result
+No suitable upstream no-hardware fixture was found that executes the production static hm2_eth receive state machine. Copying those functions into a model would not justify TEST-CONFIRMED production behavior; physical discovery also requires hardware. This experiment is therefore promoted rather than faked, and E01 graduates on documentation/community/source/call-flow/adversarial/fresh-AI evidence appropriate to its architecture objective.
 
-HM01 is **GRADUATED** at 1000-level foundation depth.
-
-Durable artifacts:
-
-- `guides/HM01-hostmot2-registration-initial.md`
-- `call-flows/HM01-lowlevel-registration-lifecycle.md`
-- `lab-jobs/009-hm01-registration-validation.sh`
-- `lab-results/HM01-009-accepted-34038328272.md`
-- `exams/HM01-adversarial-exam.md`
-- `exams/HM01-adversarial-answer-key.md`
-- `guides/HM01-graduation-handoff.md`
-
-Accepted runtime evidence is corrected run `34038328272` / job `101500386969` at curriculum SHA `b3cdebcd51653aaf415d2c9032cc045518a966d0`. The downloaded artifact matched the intended job, built pinned LinuxCNC `8bf4605...`, reported `expected-patterns=15 observed-pattern-lines=15`, rejected the independent bad-cookie load with rc=1 and explicit diagnostics, reached the completion marker, and exited 0. The earlier run `34035539216` remains HARNESS INVALID and contributes no semantic evidence.
-
-Current source-grounded conclusions at `8bf4605...` remain: generic HostMot2 and low-level drivers are separate layers; `hm2_lowlevel_io_t` is their register-I/O/capability boundary; `hm2_eth` fills that interface before calling `hm2_register()`; generic registration validates cookie/IDROM/descriptors and builds module/TRAM/HAL state; unknown GTAGs are warned/ignored rather than automatically fatal; significant post-initialization failures require `hm2_cleanup()`; and unregister watchdog activity is not itself a safety-rated conclusion.
-
-A passing 009 promotes only fake-LLIO registration validation/rejection behavior for the pinned userspace build. Successful physical-board registration, Ethernet timing, realtime deadlines, TRAM ordering, watchdog effectiveness and functional safety remain outside HM01.
+HM08 is now active. Initial pinned source establishes HAL `watchdog.has_bit`, RW `watchdog.timeout_ns` (5 ms default), TRAM status/reset regions, first-write enable behavior, timeout conversion, recovery gating on `io_error`/`has_bit`, and `needs_reset` propagation after observed watchdog status. These are mechanism claims only, not safety qualification.
 
 ## Promotion / uncertainty queue
 
@@ -56,16 +40,18 @@ A passing 009 promotes only fake-LLIO registration validation/rejection behavior
 - H04 live `addf`/`delf` mutation semantics while realtime dispatch is active: **2000 / HIGH**.
 - H04 cross-thread signal visibility/cross-CPU ordering: **2000 / HIGH**.
 - Development-only one-shot `initf` versus stable: **2000 / MEDIUM**.
-- M03 Task-side command-mutex hold duration and command-to-echo latency distribution: **2000 / HIGH** unless needed earlier.
+- M03 Task-side command-mutex hold duration and command-to-echo latency distribution: **2000 / HIGH**.
 - M03 full planner/kinematics branch trace: **M08/M01/M02 then 2000 / HIGH**.
-- M03 cross-thread/base-thread exchange timing: **2000 / HIGH** unless required earlier.
 - HM01 exact IDROM/module descriptor semantics: **HM02 then 2000 / HIGH**.
 - HM01 TRAM/register-cycle ordering: **HM03/HM09 / HIGH**.
 - HM01 successful fake-board registration fixture extension: **HM02 or 2000 / MEDIUM**.
-- HM01 hotplug/re-registration/partial-failure lifetime edges: **2000 / MEDIUM-HIGH**.
+- E01 production-path stale/duplicate/wrong-size/lost-packet fault injection: **E03/E06 or 2000 / HIGH**.
+- E01 exact socket/interface/routing/firewall setup: **E02 / MEDIUM**.
+- E01 servo-period Ethernet timing and recovery: **E05/E07 / HIGH**.
+- EVL/current-master versus pinned hm2_eth behavior: **2000 / HIGH**.
 - Physical-machine latency/jitter qualification: **advanced commissioning / CRITICAL**, representative hardware/human involvement required.
 - Functional-safety architecture/hazard analysis: **advanced safety / CRITICAL**; LinuxCNC behavior is not safety certification.
 
 ## Current checkpoint / exact resume point
 
-Begin **E01 — hm2_eth architecture and board discovery/registration ownership**. Start at the pinned `hm2_eth` LLIO boundary already established by HM01, then source-trace board discovery/selection, socket/interface setup, concrete `read`/`write` transaction paths, queued/split-I/O handling, timeout/error/reset behavior and how low-level failures propagate through `hm2_lowlevel_io_t` to generic HostMot2. Use official documentation and community configurations to identify field assumptions, but keep transport timing, physical watchdog and safety claims unpromoted until separately tested.
+Continue **HM08 — HostMot2 watchdog**. Trace callers/order of `hm2_watchdog_prepare_tram_write()`, `hm2_watchdog_process_tram_read()`, `hm2_watchdog_write()`, and `hm2_watchdog_force_write()` through generic HostMot2 read/write cycles at pinned `8bf4605...`. Reconcile `needs_reset`, `needs_soft_reset`, LLIO `io_error`, `hm2_force_write()`, HAL `has_bit`, timeout updates and pet/reset writes. Then add official documentation/community findings and inspect fake-LLIO/upstream tests for a production-function no-hardware experiment. Preserve the safety boundary: register/watchdog mechanism is not proof of a safe physical state.

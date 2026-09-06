@@ -22,7 +22,9 @@ printf '\n== Confirm pinned source/test vehicle ==\n'
 printf 'git-head=%s\n' "$(git rev-parse HEAD)"
 grep -F 'This is a test of the hm2_register() function' tests/hm2-idrom/README
 grep -F 'does not talk to any hardware' src/hal/drivers/mesa-hostmot2/hm2_test.c
-grep -F 'r = hm2_register(this, config[0]);' src/hal/drivers/mesa-hostmot2/hm2_test.c
+# Do not couple the harness to whitespace/local-variable spelling: prove the
+# pinned fake LLIO driver contains an actual generic registration call.
+grep -E 'hm2_register\([^;]+\);' src/hal/drivers/mesa-hostmot2/hm2_test.c
 
 ./debian/configure uspace
 sudo apt-get build-dep -y .
@@ -40,9 +42,6 @@ cd tests/hm2-idrom
 rm -f halrun-stdout halrun-stderr /tmp/hm01-upstream.out
 ./test.sh | tee /tmp/hm01-upstream.out
 
-# test.sh itself fails if any expected diagnostic is absent. Add independent
-# curriculum gates so a future upstream harness change cannot silently turn
-# this run into a meaningless green result.
 EXPECTED_PATTERNS=15
 OBSERVED_PATTERNS="$(grep -c '^hm2/hm2_test\\.0:' /tmp/hm01-upstream.out || true)"
 printf 'expected-patterns=%s observed-pattern-lines=%s\n' "$EXPECTED_PATTERNS" "$OBSERVED_PATTERNS"
@@ -63,8 +62,6 @@ halrun -f broken-load-test.hal >/tmp/hm01-p0.stdout 2>/tmp/hm01-p0.stderr
 P0_RC=$?
 set -e
 printf 'pattern0-halrun-rc=%s\n' "$P0_RC"
-# halrun may itself exit zero after a loadrt failure depending on command-file
-# handling, so the semantic gate is the explicit registration-failure text.
 grep -F 'loading HostMot2 test driver with test pattern 0' /tmp/hm01-p0.stderr
 grep -F 'invalid cookie' /tmp/hm01-p0.stderr
 grep -F 'hm2_test fails HM2 registration' /tmp/hm01-p0.stderr

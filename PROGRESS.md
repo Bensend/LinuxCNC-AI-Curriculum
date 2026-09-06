@@ -12,7 +12,7 @@ Status values: `PLANNED`, `RESEARCH`, `SOURCE`, `EXPERIMENT`, `EXAM`, `CORRECTIO
 | R01 Realtime model | GRADUATED | R01 model/call-flow/boundary/handoff guides | corrected `005` run `34011177375` | passed | fallback scheduler/period behavior confirmed; no physical latency claim |
 | H01 HAL architecture | GRADUATED | H01 lifecycle/call-flow/community/handoff guides | corrected `006` run `34018699909`, job `101447160463`, SHA `43fae7ea...` passed all gates | passed | object/connectivity semantics TEST-CONFIRMED for pinned host |
 | H04 HAL execution ordering | GRADUATED | H04 guide/call-flow/community/handoff + accepted result | `007` run `34024102367`, job `101461896527`, SHA `f15451ee...` passed all gates | `exams/H04-adversarial-exam.md` + passing key | within-thread order/dataflow TEST-CONFIRMED; cross-thread/live mutation not promoted |
-| M03 One servo-period trace | RESEARCH | `guides/M03-servo-period-trace-initial.md` | pending | pending | critical path active; docs/community/source entry pass complete |
+| M03 One servo-period trace | EXPERIMENT | `guides/M03-servo-period-trace-initial.md`; `call-flows/M03-one-servo-period.md` | `008` run `34029848545`, job `101477262140`, SHA `10f187e8...` in progress | pending | exact feedback sampling/output publication traced; one-cycle canonical loopback hypothesis under test |
 | HM01 HostMot2 architecture | PLANNED | — | — | — | critical path |
 | E01 hm2_eth architecture | PLANNED | — | — | — | critical path |
 | HM08 HostMot2 watchdog | PLANNED | — | — | — | critical path |
@@ -46,16 +46,19 @@ The central H04 conclusion is therefore source-confirmed and test-confirmed at f
 
 ## M03 current result
 
-M03 is now the active critical-path module. Initial documentation/community/source work is in `guides/M03-servo-period-trace-initial.md`.
+M03 is now the active critical-path module. Initial documentation/community/source work is in `guides/M03-servo-period-trace-initial.md`; the first complete foundation call flow is in `call-flows/M03-one-servo-period.md`.
 
-Current source-grounded entry conclusions at `8bf4605...`:
+Current source-grounded conclusions at `8bf4605...`:
 
 - `motmod` `init_threads()` creates the floating-point `servo-thread` and exports `motion-controller` / `motion-command-handler`; it does not itself schedule those functions with `addf`.
-- Actual servo-period behavior is therefore an ordered HAL-thread composition controlled by HAL configuration, not one monolithic C routine.
-- Official documentation identifies `motion-command-handler` then `motion-controller` as the normal motion-function order.
-- Community/Mesa/EtherCAT configurations provide a strong investigation pattern of `hardware read -> motion command -> motion controller -> PID/control -> hardware write`, but examples remain configuration evidence rather than a universal guarantee.
-- The command-handler path is a realtime/shared-command boundary with a nonblocking command-mutex attempt; command processing can be deferred rather than block on Task.
-- `emcmotController()` is the main servo-rate motion loop and later publishes joint command/feedback/status values to HAL, but its exact top-level per-cycle call sequence remains to be reconstructed.
+- `emcmotCommandHandler()` uses a nonblocking command-mutex attempt. If Task owns the command mutex, that servo invocation does not block waiting for Task; command processing is deferred. New commands are recognized by `emcmotCommand->commandNum != emcmotStatus->commandNumEcho`; accepted processing echoes command/code and command number into status.
+- `emcmotController()` has an explicit top-level sequence: homing inputs -> kinematics-switch handling -> `process_inputs()` -> forward kinematics -> probe input -> fault/mode/jog/homing work -> planner/setpoint generation -> screw compensation/external offset -> `output_to_hal()` -> homing outputs -> status publication -> heartbeat/tail completion.
+- `process_inputs()` samples `joint.N.motor-pos-fb` from HAL near the beginning of the controller invocation. In the ordinary non-index-search path, joint feedback is motor feedback minus backlash/motor offset; homing index search has a deliberate exception.
+- `output_to_hal()` later forms normal `joint.N.motor_pos_cmd = pos_cmd + backlash_filt + motor_offset` and publishes `joint.N.motor-pos-cmd`, `joint.N.pos-cmd`, and `joint.N.pos-fb`.
+- Therefore a feedback producer scheduled before `motion-controller` can affect that controller invocation, while a producer scheduled after motion cannot be observed by motion until a later invocation.
+- The pinned `tests/linuxcncrsh/lcncrsh_sim.hal` loopback connects `joint.0.motor-pos-cmd` directly to `joint.0.motor-pos-fb`. Source ordering predicts that a sampler scheduled after motion will see `joint.0.pos-fb[n] ~= motor-pos-cmd[n-1]` during zero-compensation motion, while `joint.0.pos-cmd[n] ~= motor-pos-cmd[n]`.
+
+Bounded experiment `lab-jobs/008-m03-servo-cycle-loopback.sh` was committed at SHA `10f187e8a33b741f9af5c12975150ddbb497af1a` and automatically launched as Actions run `34029848545`, job `101477262140`. It instruments the canonical linuxcncrsh simulation with `sampler`, schedules the sampler after `motion-controller`, commands a slow MDI X move, and compares lagged versus same-sample relationships. No TEST-CONFIRMED M03 runtime claim is promoted until that exact artifact is reconciled.
 
 ## Promotion / uncertainty queue
 
@@ -66,6 +69,8 @@ Current source-grounded entry conclusions at `8bf4605...`:
 - H04 live `addf`/`delf` mutation race/support semantics while realtime dispatch is active: **2000 / HIGH**.
 - H04 cross-thread signal memory visibility and cross-CPU ordering: **2000 / HIGH**.
 - Development-only one-shot `initf` behavior versus stable 2.9.x: **2000 / MEDIUM**.
+- M03 Task-side command mutex hold duration and command-to-echo latency distribution: **2000 / HIGH** unless needed by R05/T02 sooner.
+- M03 full coordinated/free/teleop planner and kinematics branch trace: **M08/M01/M02 then 2000 / HIGH**; not required for foundation phase ordering.
 - M03 cross-thread/base-thread exchange timing: **2000 / HIGH** unless required to make the one-servo-thread trace correct.
 - Physical-machine latency/jitter qualification: **advanced commissioning / CRITICAL** and requires representative hardware/human involvement.
 - Functional-safety architecture/hazard analysis: **advanced safety / CRITICAL**; LinuxCNC functional behavior is not safety certification.
@@ -74,9 +79,8 @@ Current source-grounded entry conclusions at `8bf4605...`:
 
 Continue **M03 — one servo-period source-level trace**.
 
-1. Reconstruct the top-level call order inside pinned `emcmotController()` from entry through HAL input sampling, motion/state/trajectory/kinematics work, output publication, and status update.
-2. Trace pinned `emcmotCommandHandler()` wrapper/try-lock plus command number/echo/acknowledgment behavior; document exactly what happens when Task owns the command mutex for a servo invocation.
-3. Find the exact HAL-input function that consumes `joint.N.motor-pos-fb` and the output function that publishes `joint.N.motor-pos-cmd`, then place both in the controller call sequence.
-4. Inventory kinematics calls and mode-dependent branches only to the depth needed for a reliable one-period foundation trace.
-5. Record actual `servo-thread` `addf` ordering from one canonical simulation and one HostMot2-style configuration; keep configuration-specific ordering distinct from motmod-internal guarantees.
-6. Only after the trace exposes a discriminating runtime question, design one bounded M03 experiment. Do not launch a lab merely to reconfirm `show thread` ordering already established by H04.
+1. Inspect exactly Actions run `34029848545`, job `101477262140`, source SHA `10f187e8a33b741f9af5c12975150ddbb497af1a`; do not launch a duplicate while it is active.
+2. Require fresh metadata, configured `motion-command-handler < motion-controller < sampler.0` order, zero sampler overruns, at least 100 moving samples, lag error within the declared bound, materially worse same-sample feedback error, same-sample joint-command/motor-command agreement, and the completion marker.
+3. If the harness fails before semantic observation, classify HARNESS INVALID and make only log-proven corrections before one materially corrected rerun. If the measured relationship contradicts the source prediction, preserve the artifact and investigate rather than weakening the assertion.
+4. If valid, promote only the canonical-loopback phase relationship to TEST-CONFIRMED, write the M03 accepted result, then create/grade the M03 adversarial exam, corrections, fresh-AI handoff, and graduation sufficiency decision.
+5. After M03 graduation, resume the critical path at **HM01 — HostMot2 architecture and registration lifecycle**.

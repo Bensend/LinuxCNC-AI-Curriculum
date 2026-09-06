@@ -9,7 +9,7 @@ Status values: `PLANNED`, `RESEARCH`, `SOURCE`, `EXPERIMENT`, `EXAM`, `CORRECTIO
 | L02 Repository/build/test map | GRADUATED | `guides/L02-build-test-map.md` | development `002` and stable `003` ran upstream `tests/realtime-math` | Phase-0 exam/corrections complete | Results are POSIX non-realtime evidence only |
 | L03 Evidence/claims workflow | GRADUATED | `SOURCE_POLICY.md`; `guides/L03-evidence-claims-workflow.md` | exercised on build failures, version comparison, and evidence boundaries | Phase-0 exam/handoff complete | Evidence/conflict workflow demonstrated |
 | A01 Process/component architecture | GRADUATED | `guides/A01-process-component-architecture.md`; `call-flows/A01-task-to-motion-command-ack.md`; `guides/A01-graduation-handoff.md` | corrected bounded `004` run `34000879408` passed all predeclared topology/ownership gates | adversarial exam + corrections + fresh-AI handoff audit complete | Runtime topology is TEST-CONFIRMED for pinned uspace simulation; no realtime-performance claim |
-| R01 Realtime model | RESEARCH | `guides/R01-realtime-model.md` | not yet designed | — | A01 graduated; initial docs/community/source inventory begun |
+| R01 Realtime model | EXPERIMENT | `guides/R01-realtime-model.md`; `call-flows/R01-uspace-periodic-task.md`; `guides/R01-period-memory-capability-boundaries.md` | bounded `005` run `34008620114` launched once; result pending; harness audit found `realtime check` should be `realtime verify` | — | Source model now separates realtime-type selection, scheduler policy, memory hardening, HAL period quantization, and measured latency |
 | H01 HAL architecture | PLANNED | — | — | — | blocked on R01 graduation; critical path |
 | H04 HAL execution ordering | PLANNED | — | — | — | critical path |
 | M03 One servo-period trace | PLANNED | — | — | — | critical path |
@@ -71,29 +71,49 @@ Full graduation evidence and fresh-AI audit: `guides/A01-graduation-handoff.md`.
 - Direct `iocontrol.0` ownership verification was added because component presence plus absence of a standalone process was weaker than comparing HAL's recorded userspace PID to the live `milltask` PID.
 - PR #1 merged only the audited workflow and `004` executable delta to `main` as `5a8fa43fcb162a0cbc1a8a1a0472e5e6d5458445`; the resulting run `34000879408` supplied the accepted evidence.
 
-## R01 initial result
+## R01 current result
 
-R01 became the highest-priority unblocked module after A01 graduation. Initial research is committed in `guides/R01-realtime-model.md`.
+Primary development revision: `8bf4605ae81042248add031e94c77300406e0413`.
+
+R01 became the highest-priority unblocked module after A01 graduation. The current durable source artifacts are `guides/R01-realtime-model.md`, `call-flows/R01-uspace-periodic-task.md`, and `guides/R01-period-memory-capability-boundaries.md`.
 
 Current documentation/source findings:
 
-- `hal_create_thread()` creates periodic HAL realtime threads; documented period rounding and creation-order priority behavior must be verified against pinned source.
-- uspace is not synonymous with realtime-qualified execution. Current LinuxCNC documentation distinguishes realtime-capable uspace from simulated/non-realtime uspace behavior and states that `rtapi_app` privileges/capabilities and the running kernel affect realtime capability reporting.
-- Current `halcmd` documentation explicitly allows `rtapi_app` to create a simulated realtime environment on systems without userspace realtime support.
-- Pinned `src/rtapi/rtapi.h` declares the backend-independent task API; pinned `src/rtapi/uspace_rtapi_main.cc` implements `rtapi_task_new()` as a wrapper into `App().task_new(...)`, while `src/rtapi/rtai_rtapi.c` has a separate backend implementation.
-- Community latency reports are preserved only as investigation leads; PREEMPT_RT naming or successful LinuxCNC startup is not accepted as a universal latency guarantee.
+- uspace is not synonymous with realtime-qualified execution. Current LinuxCNC documentation distinguishes realtime-capable uspace from simulated/non-realtime uspace behavior.
+- Pinned `rtapi_get_realtime_type()` attempts an actual `sched_setscheduler(..., SCHED_FIFO, ...)` transition before selecting a realtime-capable path; failure selects `REALTIME_TYPE_NONE` unless the explicit testing override is used.
+- `makeApp()` maps `REALTIME_TYPE_NONE` directly to the POSIX backend with `SCHED_OTHER`. Realtime-capable paths invoke `harden_rt()` first and use an appropriate SCHED_FIFO/backend implementation.
+- `rtapi_task_new()` delegates to `App().task_new(...)`; task allocation/validation is separate from pthread creation. `rtapi_task_start()` delegates to backend start logic that explicitly sets pthread scheduling policy/priority and optional CPU affinity.
+- The POSIX periodic wait uses absolute `CLOCK_MONOTONIC` deadlines with `TIMER_ABSTIME`; absolute scheduling avoids simple relative-sleep drift but does not guarantee timely wakeup.
+- In POSIX non-realtime fallback, the backend runs under `SCHED_OTHER` and additionally uses its thread-lock serialization path rather than pretending FIFO scheduling exists.
+- For the first HAL thread, `hal_create_thread()` establishes/queries the RTAPI base period. In the pinned uspace POSIX backend, first nonzero `RtapiApp::clock_set_period()` stores the requested nanoseconds exactly; other RTOS backends may quantize and remain version/backend-specific.
+- HAL rounds each requested thread period to the nearest integer multiple of `hal_data->base_period` with `(requested + base/2) / base`, rejects a rounded period shorter than the previously created thread, and assigns each later thread `rtapi_prio_next_lower()`.
+- Scheduler privilege and memory hardening are separate. `CAP_SYS_NICE`/scheduler policy controls FIFO acquisition; the realtime-capable hardening path separately attempts MEMLOCK/`CAP_IPC_LOCK`, `mlockall`, page pre-touch, RTPRIO/CORE adjustments, I/O privilege, and CPU DMA latency controls. Failure of `mlockall()` warns but is not the fallback selector; moreover the `REALTIME_TYPE_NONE` branch skips `harden_rt()` entirely.
+- LinuxCNC issue #2821 is retained as `COMMUNITY-REPORTED` evidence that cgroup RT-runtime policy can cause actual `sched_setscheduler(SCHED_FIFO)` to fail with `EPERM` despite an expected realtime setup. It is a diagnostic lead, not a universal current-distro recipe.
+- Runtime-reported realtime type, actual pthread policy/priority, memory-lock state, and measured latency/jitter remain separate evidence classes. GitHub Actions cannot qualify a physical machine for realtime performance.
+
+### R01 experiment 005
+
+`lab-jobs/005-r01-realtime-boundaries.sh` was committed at curriculum SHA `118d9ceda4377e39b667921cd729268ffc3b3984`, triggering exactly one Actions run `34008620114` / job `101420312096`. The experiment predeclares POSIX non-realtime/SCHED_OTHER behavior on the ordinary Actions host and records HAL thread periods plus scheduler state without making a latency qualification claim.
+
+A post-launch source audit found a harness defect before the result was interpreted: pinned `scripts/realtime.in` accepts the subcommand `verify`, whose `Verify()` calls `rtapi_app check_rt`; the launched script currently invokes invalid `realtime check`. While run `34008620114` remains active, no second run will be triggered. If it fails at that command, the attempt is classified **HARNESS INVALID** and supplies no realtime-behavior evidence. The exact correction/resume rule is preserved in `checkpoints/R01-2026-09-06T0314Z-lab-harness-audit.md`.
+
+## R01 higher-level promotion / uncertainty queue
+
+- Exact timer/base-period behavior across RTAI/Xenomai/uspace backends: promote to 2000, MEDIUM; does not block 1000-level R01 if backend scope stays explicit.
+- Modern cgroup/systemd RT-runtime interactions across supported distributions: promote to 2000, HIGH; current R01 teaches actual scheduler acquisition rather than metadata inference.
+- Quantitative impact of failed memory locking on deadline misses: promote to 2000, HIGH; requires controlled target experiments.
+- Physical-machine latency qualification under realistic load: promote to advanced/commissioning work, CRITICAL safety/reliability consequence; cloud results are explicitly non-qualifying and therefore do not block the conceptual 1000-level model.
 
 ## Laboratory compute-budget checkpoint
 
-Target laboratory compute is at most approximately four GitHub Actions hours per calendar day. September 6 has consumed one short accepted A01 run (`34000879408`, roughly 3.6 minutes of experiment wall time). No additional lab is currently justified until R01 source analysis identifies a bounded discriminating observation.
+`CURRICULUM.md` now permits up to approximately eight GitHub Actions laboratory hours per calendar day during the first-draft sprint, within the overall project budget. September 6 has consumed one short accepted A01 run (`34000879408`, roughly 3.6 minutes of experiment wall time) plus the single currently active R01 `005` run `34008620114`. Do not launch a duplicate while it is running.
 
 ## Current checkpoint / exact resume point
 
 Continue **R01 — Realtime model**; A01 is graduated.
 
-1. At pinned commit `8bf4605ae81042248add031e94c77300406e0413`, trace `rtapi_task_new()` and `rtapi_task_start()` through the uspace backend (`App().task_new` and related task/start/wait implementation).
-2. Record the exact scheduling-policy and priority setup, periodic wait mechanism, privilege/capability and memory-locking requirements, failure behavior, and representation of non-realtime fallback.
-3. Trace `hal_create_thread()` into RTAPI task creation far enough to reconcile the documented period rounding and fastest-to-slowest/rate-monotonic priority rule with pinned source.
-4. Maintain separate evidence classes for: source path; runtime-reported realtime type/capability; observed scheduler policy/priority; and measured latency/jitter under load.
-5. Only after the source trace, design a small bounded R01 experiment that distinguishes simulated uspace from realtime-capable uspace without treating the GitHub host as realtime-qualified.
-6. Preserve any version-sensitive RTAI/uspace differences rather than forcing one backend's implementation model onto the other.
+1. Inspect Actions run `34008620114` / job `101420312096` to completion and require fresh `005` metadata/source SHA before using any observation.
+2. If the run fails at `realtime check`, classify it HARNESS INVALID, correct only to the pinned public command `realtime verify` plus any other log-proven harness defects, and permit one materially corrected rerun rather than weakening the prediction.
+3. If it reaches runtime observations, reconcile selected realtime type, HAL-reported thread periods, and actual periodic pthread scheduler class separately before promoting `TEST-CONFIRMED` claims.
+4. Then write the R01 adversarial exam around misleading “PREEMPT_RT means deterministic”, scheduler-vs-memory-lock failure boundaries, period rounding/order, and a configuration/debugging scenario.
+5. Apply exam/experiment corrections, perform fresh-AI handoff, and graduate R01 when remaining advanced uncertainties are explicitly promoted and no core conceptual/safety conclusion remains unsupported.

@@ -10,9 +10,9 @@ Status values: `PLANNED`, `RESEARCH`, `SOURCE`, `EXPERIMENT`, `EXAM`, `CORRECTIO
 | L03 Evidence/claims workflow | GRADUATED | `SOURCE_POLICY.md`; `guides/L03-evidence-claims-workflow.md` | exercised | Phase-0 | evidence/conflict workflow demonstrated |
 | A01 Process/component architecture | GRADUATED | A01 architecture/call-flow/handoff guides | corrected `004` run `34000879408` | passed | topology/ownership TEST-CONFIRMED for pinned simulation |
 | R01 Realtime model | GRADUATED | R01 model/call-flow/boundary/handoff guides | corrected `005` run `34011177375` | passed | fallback scheduler/period behavior confirmed; no physical latency claim |
-| H01 HAL architecture | GRADUATED | H01 lifecycle/call-flow/community/handoff guides | corrected `006` run `34018699909`, job `101447160463`, SHA `43fae7ea...` passed all gates | `exams/H01-adversarial-exam.md` + passing answer key | object/connectivity semantics TEST-CONFIRMED for pinned host; no realtime/physical/safety claim |
-| H04 HAL execution ordering | EXPERIMENT | `guides/H04-hal-execution-ordering.md`; `call-flows/H04-addf-to-thread-dispatch.md`; community notes | `007` run `34024102367`, job `101461896527`, SHA `f15451ee...` launched | pending | within-thread list semantics source-traced; live list mutation promoted, not assumed safe |
-| M03 One servo-period trace | PLANNED | — | — | — | critical path |
+| H01 HAL architecture | GRADUATED | H01 lifecycle/call-flow/community/handoff guides | corrected `006` run `34018699909`, job `101447160463`, SHA `43fae7ea...` passed all gates | passed | object/connectivity semantics TEST-CONFIRMED for pinned host |
+| H04 HAL execution ordering | GRADUATED | H04 guide/call-flow/community/handoff + accepted result | `007` run `34024102367`, job `101461896527`, SHA `f15451ee...` passed all gates | `exams/H04-adversarial-exam.md` + passing key | within-thread order/dataflow TEST-CONFIRMED; cross-thread/live mutation not promoted |
+| M03 One servo-period trace | RESEARCH | `guides/M03-servo-period-trace-initial.md` | pending | pending | critical path active; docs/community/source entry pass complete |
 | HM01 HostMot2 architecture | PLANNED | — | — | — | critical path |
 | E01 hm2_eth architecture | PLANNED | — | — | — | critical path |
 | HM08 HostMot2 watchdog | PLANNED | — | — | — | critical path |
@@ -25,39 +25,37 @@ Primary development revision remains `8bf4605ae81042248add031e94c77300406e0413`;
 
 A01 accepted run `34000879408` observed the required process readiness, bounded HAL topology, `motmod`, `trivkins`, `iocontrol.0`, exactly one live `milltask`, and `iocontrol.0` HAL PID equal to the `milltask` PID. R01 accepted corrected run `34011177375` observed explicit non-realtime fallback, expected HAL periods, and actual TS scheduling for periodic pthreads. Neither result is a physical-machine realtime or safety qualification.
 
-## H01 graduated result
+H01 accepted corrected run `34018699909` confirmed dummy→signal value preservation, linked propagation, unlink snapshot/separation, second-writer rejection, cyclic function scheduling, and positive thread execution on the pinned host. H01 graduated with its adversarial exam and fresh-AI handoff.
+
+## H04 graduated result
 
 Durable artifacts:
-
-- `guides/H01-hal-object-lifecycle-initial.md`
-- `call-flows/H01-registration-connectivity-and-function-scheduling.md`
-- `forum-findings/H01-connectivity-ready-state-field-notes.md`
-- `lab-jobs/006-h01-hal-object-connectivity.sh`
-- `exams/H01-adversarial-exam.md`
-- `exams/H01-adversarial-answer-key.md`
-- `guides/H01-graduation-handoff.md`
-- `checkpoints/H01-2026-09-06T0810Z-graduation.md`
-
-Core source conclusions: HAL is a shared-memory object graph rooted at `hal_data_t`; component readiness is reversible lifecycle state rather than a global freeze; unlinked pins use component dummy storage; linking redirects pin data pointers to signal-owned shared storage; unlinking restores dummy storage with the scalar snapshot studied; writer conflicts are enforced object-model invariants; function export is distinct from `addf` scheduling and periodic dispatcher execution.
-
-Corrected bounded experiment `006`, Actions run `34018699909`, job `101447160463`, curriculum SHA `43fae7ea1835058e9f6e85b9c5adcb7360f35195`, exited 0 with fresh metadata. Accepted observations: 1.25 dummy→signal preservation; linked propagation to 2.5; unlink snapshot retained pin 2.5 while signal later became 3.5; second OUT writer rejected with rc=1 and explicit diagnostic; `siggen.0.update` scheduled under a 1,000,000 ns thread; positive threadbeat 254; completion marker reached. These are TEST-CONFIRMED only for the pinned software/host.
-
-The H01 adversarial exam and fresh-AI handoff pass. H01 therefore graduates at the 1000 level.
-
-## H04 current result
-
-Durable artifacts created this lesson:
 
 - `guides/H04-hal-execution-ordering.md`
 - `forum-findings/H04-execution-ordering-field-notes.md`
 - `call-flows/H04-addf-to-thread-dispatch.md`
 - `lab-jobs/007-h04-execution-ordering.sh`
+- `lab-results/H04-007-execution-ordering-accepted.md`
+- `exams/H04-adversarial-exam.md`
+- `exams/H04-adversarial-answer-key.md`
+- `guides/H04-graduation-handoff.md`
 
-Core source conclusions at `8bf4605...`: `hal_add_funct_to_thread()` constructs an explicit ordered `thread->funct_list`; `thread_task()` calls entries sequentially in next-link order; `hal_start_threads()` / `hal_stop_threads()` set/clear the shared dispatch gate rather than creating/deleting each RTAPI task; each HAL thread is its own RTAPI task; non-reentrant duplicate scheduling is rejected via `funct->users`; deletion routes through `free_funct_entry_struct()` which decrements `users` and permits later re-add.
+Accepted `007` artifact metadata: curriculum SHA `f15451ee92f7f5d82310f6f182b20cdf10b51418`, Actions run `34024102367`, job `101461896527`, lab UTC `2026-09-06T09:14:59Z`–`09:19:17Z`, exit 0. Phase 1 displayed `sum2.0` before `sum2.1` and observed A=37, B=38, `B-A=1`. Duplicate non-reentrant add failed intentionally with rc=1 and the expected diagnostic. While stopped, threadbeat remained 19→19. After stopped delete/re-add at position +1, phase 2 displayed `sum2.1` before `sum2.0` and observed A=77, B=76, `A-B=1`, threadbeat=39. Completion marker was present.
 
-Important boundary: add/delete configuration takes the HAL mutex but `thread_task()` traverses the function list without that mutex, and no explicit `threads_running == 0` guard was found in add/delete. Live mutation semantics are therefore not assumed safe in H04. The bounded `007` experiment mutates ordering only while dispatch is stopped.
+The central H04 conclusion is therefore source-confirmed and test-confirmed at foundation depth: within one HAL thread pass, scheduled function entries execute sequentially in list order strongly enough for ordinary later-function dataflow to observe earlier-function updates. This does not create a total order across separate HAL threads and does not establish realtime deadlines, physical timing, safety, or safe live list mutation.
 
-`007` was launched once from curriculum SHA `f15451ee92f7f5d82310f6f182b20cdf10b51418`: Actions run `34024102367`, job `101461896527`. Predeclared gates distinguish configured list order from actual same-cycle dataflow using two cross-coupled `sum2` functions, exercise duplicate non-reentrant rejection, verify stopped `threadbeat` stability, then stop/delete/re-add/restart with reversed order.
+## M03 current result
+
+M03 is now the active critical-path module. Initial documentation/community/source work is in `guides/M03-servo-period-trace-initial.md`.
+
+Current source-grounded entry conclusions at `8bf4605...`:
+
+- `motmod` `init_threads()` creates the floating-point `servo-thread` and exports `motion-controller` / `motion-command-handler`; it does not itself schedule those functions with `addf`.
+- Actual servo-period behavior is therefore an ordered HAL-thread composition controlled by HAL configuration, not one monolithic C routine.
+- Official documentation identifies `motion-command-handler` then `motion-controller` as the normal motion-function order.
+- Community/Mesa/EtherCAT configurations provide a strong investigation pattern of `hardware read -> motion command -> motion controller -> PID/control -> hardware write`, but examples remain configuration evidence rather than a universal guarantee.
+- The command-handler path is a realtime/shared-command boundary with a nonblocking command-mutex attempt; command processing can be deferred rather than block on Task.
+- `emcmotController()` is the main servo-rate motion loop and later publishes joint command/feedback/status values to HAL, but its exact top-level per-cycle call sequence remains to be reconstructed.
 
 ## Promotion / uncertainty queue
 
@@ -68,16 +66,17 @@ Important boundary: add/delete configuration takes the HAL mutex but `thread_tas
 - H04 live `addf`/`delf` mutation race/support semantics while realtime dispatch is active: **2000 / HIGH**.
 - H04 cross-thread signal memory visibility and cross-CPU ordering: **2000 / HIGH**.
 - Development-only one-shot `initf` behavior versus stable 2.9.x: **2000 / MEDIUM**.
+- M03 cross-thread/base-thread exchange timing: **2000 / HIGH** unless required to make the one-servo-thread trace correct.
 - Physical-machine latency/jitter qualification: **advanced commissioning / CRITICAL** and requires representative hardware/human involvement.
 - Functional-safety architecture/hazard analysis: **advanced safety / CRITICAL**; LinuxCNC functional behavior is not safety certification.
 
 ## Current checkpoint / exact resume point
 
-Continue **H04 — HAL execution ordering**.
+Continue **M03 — one servo-period source-level trace**.
 
-1. Inspect exactly Actions run `34024102367` / job `101461896527`; do not launch a duplicate while it is active.
-2. Require fresh metadata for SHA `f15451ee92f7f5d82310f6f182b20cdf10b51418` and job `007-h04-execution-ordering.sh`.
-3. Reconcile every predeclared gate: phase-1 `show thread` A-before-B, duplicate non-reentrant add failure, phase-1 `B-A ~= 1`, stable stopped `threadbeat`, stopped `delf` + successful re-add at `+1`, phase-2 `show thread` B-before-A, phase-2 `A-B ~= 1`, increasing beat after restart, completion marker.
-4. If the run is harness-invalid, correct only log-proven harness errors before one materially corrected rerun; do not promote semantic claims from a harness-invalid run.
-5. If valid, promote the observed subset to `TEST-CONFIRMED`, create/grade the H04 adversarial exam, incorporate corrections, run the fresh-AI handoff, and decide 1000-level graduation.
-6. Preserve live-list mutation, cross-thread memory ordering, and version-depth questions in the 2000-series queue rather than expanding H04 indefinitely.
+1. Reconstruct the top-level call order inside pinned `emcmotController()` from entry through HAL input sampling, motion/state/trajectory/kinematics work, output publication, and status update.
+2. Trace pinned `emcmotCommandHandler()` wrapper/try-lock plus command number/echo/acknowledgment behavior; document exactly what happens when Task owns the command mutex for a servo invocation.
+3. Find the exact HAL-input function that consumes `joint.N.motor-pos-fb` and the output function that publishes `joint.N.motor-pos-cmd`, then place both in the controller call sequence.
+4. Inventory kinematics calls and mode-dependent branches only to the depth needed for a reliable one-period foundation trace.
+5. Record actual `servo-thread` `addf` ordering from one canonical simulation and one HostMot2-style configuration; keep configuration-specific ordering distinct from motmod-internal guarantees.
+6. Only after the trace exposes a discriminating runtime question, design one bounded M03 experiment. Do not launch a lab merely to reconfirm `show thread` ordering already established by H04.

@@ -10,7 +10,7 @@ Status values: `PLANNED`, `RESEARCH`, `SOURCE`, `EXPERIMENT`, `EXAM`, `CORRECTIO
 | L03 Evidence/claims workflow | GRADUATED | `SOURCE_POLICY.md`; `guides/L03-evidence-claims-workflow.md` | exercised on build failures, version comparison, and evidence boundaries | Phase-0 exam/handoff complete | Evidence/conflict workflow demonstrated |
 | A01 Process/component architecture | GRADUATED | `guides/A01-process-component-architecture.md`; `call-flows/A01-task-to-motion-command-ack.md`; `guides/A01-graduation-handoff.md` | corrected bounded `004` run `34000879408` passed topology/ownership gates | adversarial exam + corrections + fresh-AI handoff complete | Runtime topology TEST-CONFIRMED for pinned uspace simulation; no realtime-performance claim |
 | R01 Realtime model | GRADUATED | `guides/R01-realtime-model.md`; `call-flows/R01-uspace-periodic-task.md`; `guides/R01-period-memory-capability-boundaries.md`; `guides/R01-graduation-handoff.md` | corrected bounded `005` run `34011177375` passed capability/scheduler/period gates | `exams/R01-adversarial-exam.md` + passing `exams/R01-adversarial-answer-key.md` | Fallback scheduler/period behavior TEST-CONFIRMED for pinned Actions host; physical latency/safety explicitly excluded |
-| H01 HAL architecture | RESEARCH | `guides/H01-hal-object-lifecycle-initial.md` | — | — | Current docs + pinned `hal_lib.c` shared-memory/component lifecycle started; highest-priority module |
+| H01 HAL architecture | EXPERIMENT | `guides/H01-hal-object-lifecycle-initial.md`; `call-flows/H01-registration-connectivity-and-function-scheduling.md`; `forum-findings/H01-connectivity-ready-state-field-notes.md` | `006` run `34016051740` / job `101439886671` launched from `62b2892f...`, in progress | — | Shared object graph, ready/unready, pin dummy/signal redirect, writer invariants, cleanup and export→addf boundary SOURCE-CONFIRMED; runtime promotion awaits fresh `006` result |
 | H04 HAL execution ordering | PLANNED | — | — | — | critical path; depends on HAL architecture/object model |
 | M03 One servo-period trace | PLANNED | — | — | — | critical path |
 | HM01 HostMot2 architecture | PLANNED | — | — | — | critical path |
@@ -88,30 +88,53 @@ The adversarial exam is passed and reconciled with the accepted runtime result. 
 
 ## H01 current result
 
-H01 began immediately after R01 graduation. Initial durable artifact: `guides/H01-hal-object-lifecycle-initial.md`.
+Primary development revision: `8bf4605ae81042248add031e94c77300406e0413`.
 
-Current findings:
+Durable artifacts now include:
 
-- Current HAL documentation treats components as circuit-like objects exposing pins connected through signals; a signal owns the shared data value while linked pins point to that value.
-- The current HAL query documentation warns that callbacks execute while the HAL mutex is held; blocking/abnormal observer behavior is therefore a system-wide configuration/query reliability boundary.
-- Pinned `src/hal/hal_lib.c` uses RTAPI shared memory (`HAL_KEY`, `HAL_SIZE`) with `hal_shmem_base` and `hal_data` as the mapped root.
-- `hal_lib_init()` initializes RTAPI identity, opens/maps shared memory, and initializes global HAL data when needed.
-- The allocator deliberately groups realtime-accessed data separately from larger initialization/configuration structures.
-- Pinned `hal_init()` ensures the mapping exists, creates RTAPI identity, takes the recursive HAL mutex, rejects duplicate names, allocates/links `hal_comp_t`, records userspace PID ownership, and starts the component with `ready = 0`.
-- Component/mapping lifetime and shared HAL mutex behavior are now explicit H01 investigation boundaries.
+- `guides/H01-hal-object-lifecycle-initial.md`
+- `call-flows/H01-registration-connectivity-and-function-scheduling.md`
+- `forum-findings/H01-connectivity-ready-state-field-notes.md`
+- `lab-jobs/006-h01-hal-object-connectivity.sh`
+- `checkpoints/H01-2026-09-06T0611Z-object-connectivity-lab-launched.md`
+
+Current source conclusions:
+
+- HAL is a shared-memory object graph rooted at `hal_data_t`, with offset-based references because mappings can differ across processes;
+- component, pin, signal, parameter, function and thread metadata have global list/free-list roots; per-thread function scheduling uses `hal_funct_entry_t` circular lists;
+- `hal_ready()` sets a reversible component lifecycle flag used for availability synchronization; it is not a global HAL configuration freeze;
+- component-owned registration APIs such as `hal_pin_new()` and `hal_export_funct()` reject creation while the owner is ready;
+- an unlinked pin's component-visible pointer targets its own `dummysig`; `hal_link()` redirects that pointer to signal-owned shared value storage and updates reader/writer/bidir counts;
+- first suitable link to an undriven scalar signal copies the pin dummy/default value into the signal;
+- `hal_unlink()` redirects the pointer back to dummy storage and snapshots the signal's current scalar value into that dummy before clearing connectivity;
+- writer conflicts are object-model invariants enforced by `hal_link()`, not merely halcmd parser behavior;
+- function export only registers callable work; `hal_add_funct_to_thread()` creates the scheduling link, and periodic `thread_task()` later executes the linked entries.
+
+### Active H01 experiment `006`
+
+Actions run `34016051740`, job `101439886671`, was launched exactly once from curriculum SHA `62b2892f4f1e769cef5fc6a075b3d7f0f18d15be`. At the current checkpoint it is still in progress, so no H01 runtime claim has yet been promoted.
+
+Acceptance requires fresh `006` evidence for dummy→signal initialization, linked value propagation, unlink snapshot/pointer separation, rejection of a second `HAL_OUT` writer, exported-function visibility, successful `addf` into `h01-thread`, positive threadbeat after `start`, and the final explicit completion marker. A command/output-assumption failure is HARNESS INVALID rather than LinuxCNC evidence.
+
+## H01 higher-level promotion / uncertainty queue
+
+- Long-lived allocator fragmentation/reuse under dynamic HAL reconfiguration: **2000 / MEDIUM**; does not block the 1000-level object model.
+- Cross-process mapping/address behavior under unusual userspace component layouts: **2000 / MEDIUM**; current offset/pointer rules are source-clear.
+- Robust recovery after process/thread death while HAL recursive mutex accounting is inconsistent: **2000 / HIGH**; important reliability topic, but current H01 explicitly teaches fail-closed observation and no automatic recovery assumption.
+- Deep cyclic `thread_task()` ordering/timing and dynamic mutation interactions: **H04 now / 2000 deeper follow-up**; H01 only establishes the function-entry object relationship.
 
 ## Laboratory compute-budget checkpoint
 
-September 6 laboratory use includes the short accepted A01 `004` run `34000879408`, invalid R01 attempt `34008620114`, and corrected accepted R01 `005` run `34011177375`. No further R01 run is justified; H01 has not yet reached lab design.
+September 6 laboratory use includes the short accepted A01 `004` run `34000879408`, invalid R01 attempt `34008620114`, corrected accepted R01 `005` run `34011177375`, and active H01 `006` run `34016051740`. Do not launch a duplicate H01 run while `006` is active.
 
 ## Current checkpoint / exact resume point
 
-Continue **H01 — HAL architecture and object model**.
+Continue **H01 — HAL architecture and object model** by inspecting active run `34016051740` / job `101439886671` to completion.
 
-1. Locate and source-trace `hal_ready()` at the pinned revision, including what the ready transition permits or forbids.
-2. Inventory `hal_data_t`, `hal_comp_t`, `hal_pin_t`, `hal_sig_t`, `hal_param_t`, `hal_funct_t`, and `hal_thread_t` plus their list/free-list relationships.
-3. Trace one pin creation API into shared allocation and component ownership.
-4. Trace signal creation plus pin link/unlink to prove the documented pointer-to-signal-value model from source.
-5. Trace function export and `addf`/thread-list insertion separately from runtime `thread_task()` execution.
-6. Perform the targeted developer/community pass for stale/dangling components, writer conflicts, ready-state semantics, and shared-memory/mutex failure modes.
-7. Build the H01 function/symbol and call-flow guides before designing a bounded H01 experiment.
+1. Require fresh metadata naming `006-h01-hal-object-connectivity.sh` and source SHA `62b2892f4f1e769cef5fc6a075b3d7f0f18d15be`.
+2. Reconcile every predeclared scalar link/unlink/writer/addf/threadbeat assertion against the readable output; do not infer success from workflow status alone.
+3. If the harness is invalid, correct only evidence-proven command/output assumptions and permit one materially corrected rerun; do not promote semantic claims from an invalid run.
+4. If valid, promote exactly the observed behaviors to `TEST-CONFIRMED` for the pinned uspace simulation.
+5. Create and grade the H01 adversarial exam covering shared-offset object structure, ready/unready semantics, pin dummy versus signal storage, one-pin/one-signal and writer invariants, cleanup behavior, export versus scheduling, and HAL mutex failure boundaries.
+6. Incorporate corrections, write the fresh-AI H01 handoff, decide graduation sufficiency and preserve promotions.
+7. Only after H01 graduation select the highest-priority unblocked next HAL/realtime prerequisite from the dependency graph; do not skip directly to motion while HAL foundations remain incomplete.

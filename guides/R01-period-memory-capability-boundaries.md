@@ -45,20 +45,24 @@ Classification: **SOURCE-CONFIRMED**.
 
 Source: `src/rtapi/uspace_rtapi_main.cc`.
 
-### Scheduler capability probe
+### Scheduler capability probe and backend selection
 
 `can_set_sched_fifo()` performs an actual `sched_setscheduler(..., SCHED_FIFO, ...)` transition on the calling process/thread and restores the old policy. `rtapi_get_realtime_type()` returns `REALTIME_TYPE_NONE` when that test fails (unless the explicit testing override is active), so POSIX non-realtime fallback selection is tied to demonstrated SCHED_FIFO acquisition, not merely to a kernel name.
 
 The diagnostic path reports effective `CAP_SYS_NICE` and `CAP_IPC_LOCK`, but only the scheduler acquisition result is the gate used here for choosing `REALTIME_TYPE_NONE` versus a realtime type.
 
-### Memory hardening
+`makeApp()` makes the distinction operationally important: when the realtime type is `REALTIME_TYPE_NONE`, it directly loads `liblinuxcnc-uspace-posix.so.0` with `SCHED_OTHER`. It calls `harden_rt()` only on the realtime-capable branch. Therefore the ordinary POSIX non-realtime fallback **does not call `configure_memory()` at all** in this pinned revision.
 
-`configure_memory()` separately:
+This corrects an easy misreading: failure of memory locking is not what selects the non-realtime fallback, and an unprivileged fallback run should not be expected to emit an `mlockall()` warning because that hardening path is skipped.
+
+### Memory hardening on a realtime-capable branch
+
+When `makeApp()` has selected a realtime-capable path, `harden_rt()` calls `configure_memory()`. That function:
 
 1. inspects effective `CAP_IPC_LOCK`;
 2. attempts to raise the soft `RLIMIT_MEMLOCK` to its hard limit;
 3. calls `mlockall(MCL_CURRENT | MCL_FUTURE)`;
-4. warns, but does not abort or select non-realtime fallback, if `mlockall()` fails;
+4. warns, but does not abort, if `mlockall()` fails;
 5. disables malloc trimming and mmap-backed allocation where supported; and
 6. allocates 32 MiB, touches one byte per page, then frees it so pages are faulted/touched while memory locking is active and the heap space remains reusable.
 
@@ -66,7 +70,15 @@ The diagnostic path reports effective `CAP_SYS_NICE` and `CAP_IPC_LOCK`, but onl
 
 Classification: **SOURCE-CONFIRMED**.
 
-## 4. Why the evidence classes must remain separate
+## 4. Capability/lifecycle boundary visible in `rtapi_app`
+
+The process startup path manipulates identities separately from backend selection. `main()` initializes `WithRoot` from real/effective UIDs and swaps UID state before opening its command socket. On Linux it also attempts to raise `CAP_NET_ADMIN` into the ambient set so child tools used by drivers such as `hm2_eth` can inherit it across `execve()` when that capability is present. This networking capability handling is separate from `CAP_SYS_NICE` (scheduler acquisition) and `CAP_IPC_LOCK` (memory locking).
+
+The important R01 lesson is not to teach “rtapi_app needs root” as a monolithic rule. Different privileged operations have different capability/rlimit/resource-control requirements, and the source actively tests some of those capabilities rather than inferring them from UID alone.
+
+Classification: **SOURCE-CONFIRMED** for the pinned revision.
+
+## 5. Why the evidence classes must remain separate
 
 A fresh engineer must not collapse the following into one boolean:
 
@@ -74,13 +86,14 @@ A fresh engineer must not collapse the following into one boolean:
 |---|---|---|
 | Can this process acquire FIFO scheduling? | `sched_setscheduler` probe / actual thread policy | scheduler privilege/availability at that instant |
 | What realtime type did LinuxCNC select? | `realtime check` / `rtapi_get_realtime_type()` | LinuxCNC backend classification |
+| Was realtime hardening attempted? | source path + startup diagnostics | whether `harden_rt()`/`configure_memory()` executed |
 | Is memory locked/pre-faulted? | `mlockall`, MEMLOCK/capability state, process diagnostics | resistance to paging/page-fault latency, not scheduler policy |
 | What priority/policy does a HAL task actually have? | `/proc`, `ps`, scheduler introspection | runtime scheduling state for that thread |
 | Does the machine meet its deadline under realistic load? | bounded latency/jitter measurement on the target machine | workload/hardware-specific timing behavior |
 
-None of the first four, alone, is a machine realtime-qualification result.
+None of the first five, alone, is a machine realtime-qualification result.
 
-## 5. Community failure case: cgroup RT throttling can invalidate naive assumptions
+## 6. Community failure case: cgroup RT throttling can invalidate naive assumptions
 
 LinuxCNC issue #2821 (2024) reported a PREEMPT_RT system where realtime thread creation failed under `CONFIG_RT_GROUP_SCHED=y` because the process cgroup lacked RT runtime. The reporter's `strace` showed `sched_setscheduler(..., SCHED_FIFO, ...) = -1 EPERM` even after the historical setuid setup, and the symptom was a latency test returning zeros instead of useful measurements.
 
@@ -88,21 +101,21 @@ Classification: **COMMUNITY-REPORTED** for the historical configuration. The val
 
 Do not generalize the 2024 cgroup recipe to every current distro/kernel; treat it as a diagnostic lead when actual scheduler acquisition disagrees with expected privileges.
 
-## 6. R01 laboratory implications
+## 7. R01 laboratory implications
 
-The first R01 lab should be observational, bounded, and non-qualifying. It should record, in one artifact:
+The first R01 lab is observational, bounded, and non-qualifying. It records, in one artifact:
 
 - pinned LinuxCNC revision and curriculum SHA;
 - `realtime check` / selected realtime type;
 - kernel/version metadata;
 - effective capabilities and MEMLOCK/RTPRIO limits;
-- whether `mlockall` warnings appeared during `rtapi_app` startup;
-- actual scheduler policy/priority and CPU affinity of one or more HAL periodic pthreads; and
+- whether the run is on the hardening or fallback path;
+- actual scheduler policy/priority and CPU affinity of HAL periodic pthreads; and
 - HAL thread requested versus reported periods.
 
 The lab must **not** label GitHub Actions latency as suitable or unsuitable for a physical machine. Its purpose is to verify the source-model distinctions and fallback behavior.
 
-A useful adversarial condition is to run the ordinary unprivileged Actions environment and predict POSIX non-realtime/SCHED_OTHER behavior before observation. A later target-machine qualification lesson can measure latency separately.
+The predeclared Actions prediction is POSIX non-realtime/SCHED_OTHER with no expectation of an `mlockall()` diagnostic, because `makeApp()` skips realtime hardening on `REALTIME_TYPE_NONE`. A later target-machine qualification lesson can measure latency separately.
 
 ## Higher-level promotion / uncertainty queue
 
@@ -115,4 +128,4 @@ A useful adversarial condition is to run the ordinary unprivileged Actions envir
 
 ## Next checkpoint
 
-Design and commit a bounded R01 Actions experiment that verifies the source distinctions without measuring machine suitability. Before running it, inspect existing lab-runner conventions and ensure the test cannot accidentally claim realtime qualification. Expected prediction for the ordinary Actions host should be recorded before launch.
+Inspect bounded Actions run `34008620114` for `lab-jobs/005-r01-realtime-boundaries.sh`. Accept only observations that match its recorded source SHA/job metadata. Reconcile selected realtime type, HAL-reported periods, and actual pthread scheduler class. If the job fails because the prediction is wrong, treat the mismatch as research evidence and correct the model/harness before any rerun rather than weakening the assertion.

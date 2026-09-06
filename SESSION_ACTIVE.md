@@ -1,8 +1,8 @@
 # Active Curriculum Session
 
-- Start UTC: `2026-09-06T00:14:59Z`
-- Module: `A01 Process/component architecture`
+- Start UTC: `2026-09-06T04:13:55Z`
+- Module: `R01 Realtime model`
 - State: `IN PROGRESS`
-- Resume checkpoint: laboratory budget has reset; inspect current main, prepared A01 branch delta, latest runs/artifacts, and execute the highest-priority valid bounded A01 topology experiment if the harness remains sound.
+- Resume checkpoint: inspect Actions run `34008620114` / job `101420312096`; classify any `realtime check` failure as harness invalid, correct only evidence-backed harness defects, and continue R01 scheduler/period verification without duplicate lab execution.
 
 This file is a crash/concurrency marker. Closed sessions remain here until the next session overwrites the marker with its own start state.

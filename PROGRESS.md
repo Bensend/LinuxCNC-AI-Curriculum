@@ -17,7 +17,8 @@ Status values: `PLANNED`, `RESEARCH`, `SOURCE`, `EXPERIMENT`, `EXAM`, `CORRECTIO
 | E01 hm2_eth architecture | GRADUATED | `guides/E01-graduation-handoff.md`; `call-flows/E01-hm2-eth-transport.md` | production-path no-hardware transport experiment promoted | passed | architecture/discovery/LLIO ownership SOURCE-CONFIRMED; no physical network claim |
 | HM08 HostMot2 watchdog | GRADUATED | `guides/HM08-graduation-handoff.md`; `call-flows/HM08-watchdog-cycle-and-recovery.md` | fake-LLIO mutable watchdog model promoted to 2000 | passed | host cycle/recovery SOURCE-CONFIRMED; physical bite/electrical behavior not test-confirmed |
 | IO01 Encoder path | GRADUATED | `guides/IO01-graduation-handoff.md`; `call-flows/IO01-encoder-register-to-hal.md` | stock `hm2_test` judged structurally unable to produce changing encoder samples; mutable fixture promoted | passed | host register-to-HAL path SOURCE-CONFIRMED; physical/FPGA behavior not test-confirmed |
-| IO04 PWM/PDM path | RESEARCH | pending | pending | — | current critical path |
+| IO04 PWM/PDM path | GRADUATED | `guides/IO04-graduation-handoff.md`; `call-flows/IO04-pwm-command-to-register.md` | write-capturing valid-PWM fake board promoted to 2000 | passed | cyclic TRAM value path and slow mode/enable/rate path SOURCE-CONFIRMED; physical analog output explicitly outside evidence |
+| IO05 Analog-servo interface patterns | RESEARCH | initial docs/community pass | pending | — | highest-priority unblocked follow-on after PWM command path |
 
 ## Version baseline
 
@@ -25,11 +26,13 @@ Primary development revision: `8bf4605ae81042248add031e94c77300406e0413`. Stable
 
 ## Current critical-path result
 
-IO01 is **GRADUATED** at 1000 level. Generic `hm2_read()` completes the LLIO/TRAM transaction and applies `-EAGAIN` / `io_error` gates before calling `hm2_encoder_process_tram_read()`. The encoder host path extends the FPGA-facing 16-bit count into internal 64-bit state, applies reset/index through host zero-offset state, publishes scaled position, and uses event timestamps plus a STOPPED/MOVING state machine for low-speed velocity.
+IO04 is **GRADUATED** at 1000 level. Generic `hm2_write()` prepares PWMGen cyclic command values with `hm2_pwmgen_prepare_tram_write()` before the combined `hm2_tram_write()`. It then runs `hm2_pwmgen_write()`, which only emits mode/enable/PWM-rate/PDM-rate LLIO writes when cached configuration changed. This prevents the command value and configuration/enable path from being falsely modeled as a single atomic register operation.
 
-The stock upstream `hm2_test` fixture reads from an unchanging compiled-in register array and discards writes, so a changing-sample production-path encoder experiment requires adding a mutable fake-FPGA model. That experiment is promoted to IO03/2000 rather than being mislabeled as hardware evidence.
+Pinned source confirms finite `value/scale` clipping, normal/PDM/offset encoding, board-clock-dependent PWM resolution, change-detected configuration writes and explicit invalid-mode repair. A key debugging/safety correction is now durable: `enable=false`, zero command, zero PWM duty and zero physical analog voltage are not synonymous. In offset mode, disabled host command zero maps to 50% centered duty; physical behavior depends on the specific interface hardware.
 
-IO04 — PWM/PDM command path — is now the highest-priority unblocked critical-path module.
+The stock upstream `hm2_test` write callback discards address/data and its stock patterns do not provide a useful PWM command oracle. A valid fake PWM descriptor plus write capture is therefore promoted to 2000/HIGH as synthetic host-path verification, not hardware evidence.
+
+IO05 — analog-servo interface patterns — is now the highest-priority unblocked follow-on. Initial documentation/community research already establishes that HostMot2 PWM semantics alone do not define physical analog voltage; some Mesa interfaces use centered PWM conversion while 7I77 smart-serial analog outputs expose board-specific limits/scaling.
 
 ## Promotion / uncertainty queue
 
@@ -56,10 +59,14 @@ IO04 — PWM/PDM command path — is now the highest-priority unblocked critical
 - IO01 FPGA quadrature/filter/timestamp capture implementation and physical maximum reliable edge rate: **HM05/IO03/2000 / HIGH**.
 - IO01 quadrature-error causality under injected illegal A/B sequences: **IO03/2000 / HIGH**.
 - IO01 precise index-arm/event/read cycle latency: **IO02/2000 / MEDIUM**.
+- IO04 valid fake-PWM descriptor + production LLIO/TRAM write capture experiment: **2000 / HIGH**; synthetic host register evidence only.
+- IO04 scale=0 / NaN / Inf behavior: **2000 / HIGH**; no explicit pinned source guard, do not rely on pathological inputs.
+- IO04 exact FPGA PWMGen mode/value/sign/dither interpretation and waveform timing: **HM06/2000 / HIGH**.
+- IO04/IO05 physical PWM-to-analog transfer, polarity and limits: **IO05/commissioning / CRITICAL**; board-specific evidence required.
 - EVL/current-master versus pinned hm2_eth behavior: **2000 / HIGH**.
 - Physical-machine latency/jitter qualification: **advanced commissioning / CRITICAL**, representative hardware/human involvement required.
 - Functional-safety architecture/hazard analysis: **advanced safety / CRITICAL**; LinuxCNC behavior is not safety certification.
 
 ## Current checkpoint / exact resume point
 
-Continue **IO04 — PWM/PDM command path**. Establish intended HostMot2 PWMGen behavior from current official documentation and useful community failure reports, then inspect pinned `src/hal/drivers/mesa-hostmot2/pwmgen.c` and generic `hm2_write()`. Trace HAL `value`/`scale`/`enable` and output-type/frequency configuration through `hm2_pwmgen_prepare_tram_write()` and `hm2_pwmgen_write()` to the TRAM/register/LLIO boundary. Keep ordinary PWM, PDM/UDM modes, enable behavior, physical analog-interface electronics, watchdog interaction, and safety claims explicitly separated. Then design the least-invasive production-path no-hardware experiment or promote the hardware-specific portion if the stock fake LLIO cannot observe writes.
+Continue **IO05 — analog-servo interface patterns**. Establish a taxonomy of LinuxCNC/Mesa analog-command paths rather than assuming every ±10 V interface is generic PWMGen. Start with current HostMot2/sserial documentation and representative Mesa board manuals: distinguish direct HostMot2 PWM/PDM + external converter patterns from smart-serial analog outputs such as 7I77, and centered PWM analog interfaces such as 7I97/7I97T. Trace which HAL object owns scaling/limits/enable for each pattern, where the generic HostMot2 path ends, and where board-specific smart-serial/firmware/electronics behavior begins. Preserve physical enable/fault and functional-safety questions as separate commissioning/safety evidence. Then select one representative source-level path for a complete command-to-analog-interface call flow and decide what can be tested without hardware.

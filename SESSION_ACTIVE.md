@@ -1,9 +1,9 @@
 # Active Curriculum Session
 
 - Start UTC: `2026-09-06T05:09:02Z`
-- Module: `R01 Realtime model`
-- State: `ACTIVE`
-- Resume checkpoint: inspect corrected Actions run `34011177375` / job `101427172728` at head `ac479678abec2e4933447b1d5d03eb51c7569fc6`; require explicit `realtime-verify-rc` plus `No realtime` classification, then independently reconcile HAL-reported periods and actual `rtapi_app:T#...` scheduler rows. Do not launch another `005` while this run is active.
-- Durable checkpoint: `checkpoints/R01-2026-09-06T0413Z-verify-correction.md`
+- Module: `H01 HAL architecture and object model`
+- State: `CHECKPOINT`
+- Resume checkpoint: continue pinned H01 source work from `guides/H01-hal-object-lifecycle-initial.md`: trace `hal_ready()`, inventory `hal_data_t` and component/pin/signal/parameter/function/thread structures, then trace pin creation, signal linking/unlinking, and function export/addf before designing a lab.
+- Durable checkpoint: `checkpoints/R01-2026-09-06T0509Z-graduation.md` plus `guides/H01-hal-object-lifecycle-initial.md`
 
 This file is a crash/concurrency marker. Closed sessions remain here until the next session overwrites the marker with its own start state.

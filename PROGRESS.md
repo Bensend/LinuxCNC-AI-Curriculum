@@ -10,7 +10,7 @@ Status values: `PLANNED`, `RESEARCH`, `SOURCE`, `EXPERIMENT`, `EXAM`, `CORRECTIO
 | L03 Evidence/claims workflow | GRADUATED | `SOURCE_POLICY.md`; `guides/L03-evidence-claims-workflow.md` | exercised on build failures, version comparison, and evidence boundaries | Phase-0 exam/handoff complete | Evidence/conflict workflow demonstrated |
 | A01 Process/component architecture | GRADUATED | `guides/A01-process-component-architecture.md`; `call-flows/A01-task-to-motion-command-ack.md`; `guides/A01-graduation-handoff.md` | corrected bounded `004` run `34000879408` passed topology/ownership gates | adversarial exam + corrections + fresh-AI handoff complete | Runtime topology TEST-CONFIRMED for pinned uspace simulation; no realtime-performance claim |
 | R01 Realtime model | GRADUATED | `guides/R01-realtime-model.md`; `call-flows/R01-uspace-periodic-task.md`; `guides/R01-period-memory-capability-boundaries.md`; `guides/R01-graduation-handoff.md` | corrected bounded `005` run `34011177375` passed capability/scheduler/period gates | `exams/R01-adversarial-exam.md` + passing `exams/R01-adversarial-answer-key.md` | Fallback scheduler/period behavior TEST-CONFIRMED for pinned Actions host; physical latency/safety explicitly excluded |
-| H01 HAL architecture | PLANNED | — | — | — | **highest-priority unblocked module**; critical path |
+| H01 HAL architecture | RESEARCH | `guides/H01-hal-object-lifecycle-initial.md` | — | — | Current docs + pinned `hal_lib.c` shared-memory/component lifecycle started; highest-priority module |
 | H04 HAL execution ordering | PLANNED | — | — | — | critical path; depends on HAL architecture/object model |
 | M03 One servo-period trace | PLANNED | — | — | — | critical path |
 | HM01 HostMot2 architecture | PLANNED | — | — | — | critical path |
@@ -86,16 +86,32 @@ The adversarial exam is passed and reconciled with the accepted runtime result. 
 - Physical-machine latency/jitter qualification under representative worst-case load: **advanced commissioning / CRITICAL**; cloud results are explicitly non-qualifying.
 - Functional-safety architecture and machine hazard analysis: **advanced safety / CRITICAL**; LinuxCNC functional behavior is not safety certification.
 
+## H01 current result
+
+H01 began immediately after R01 graduation. Initial durable artifact: `guides/H01-hal-object-lifecycle-initial.md`.
+
+Current findings:
+
+- Current HAL documentation treats components as circuit-like objects exposing pins connected through signals; a signal owns the shared data value while linked pins point to that value.
+- The current HAL query documentation warns that callbacks execute while the HAL mutex is held; blocking/abnormal observer behavior is therefore a system-wide configuration/query reliability boundary.
+- Pinned `src/hal/hal_lib.c` uses RTAPI shared memory (`HAL_KEY`, `HAL_SIZE`) with `hal_shmem_base` and `hal_data` as the mapped root.
+- `hal_lib_init()` initializes RTAPI identity, opens/maps shared memory, and initializes global HAL data when needed.
+- The allocator deliberately groups realtime-accessed data separately from larger initialization/configuration structures.
+- Pinned `hal_init()` ensures the mapping exists, creates RTAPI identity, takes the recursive HAL mutex, rejects duplicate names, allocates/links `hal_comp_t`, records userspace PID ownership, and starts the component with `ready = 0`.
+- Component/mapping lifetime and shared HAL mutex behavior are now explicit H01 investigation boundaries.
+
 ## Laboratory compute-budget checkpoint
 
-September 6 laboratory use includes the short accepted A01 `004` run `34000879408`, invalid R01 attempt `34008620114`, and corrected accepted R01 `005` run `34011177375`. No further R01 run is justified; the accepted result resolved the 1000-level runtime question.
+September 6 laboratory use includes the short accepted A01 `004` run `34000879408`, invalid R01 attempt `34008620114`, and corrected accepted R01 `005` run `34011177375`. No further R01 run is justified; H01 has not yet reached lab design.
 
 ## Current checkpoint / exact resume point
 
-R01 is **GRADUATED**. Continue **H01 — HAL architecture and object model**.
+Continue **H01 — HAL architecture and object model**.
 
-1. Establish intended HAL object/lifecycle behavior from current official documentation.
-2. Search relevant LinuxCNC developer/community material for object/shared-memory/locking pitfalls and historical model changes.
-3. At pinned development revision `8bf4605ae81042248add031e94c77300406e0413`, inventory the shared HAL structures and APIs for components, pins, signals, parameters, and functions.
-4. Trace one complete lifecycle from `hal_init()` through object registration and `hal_ready()` into `halcmd` observation, identifying process, shared-memory and mutex boundaries.
-5. Build the H01 function/symbol and call-flow guides before designing the next bounded experiment.
+1. Locate and source-trace `hal_ready()` at the pinned revision, including what the ready transition permits or forbids.
+2. Inventory `hal_data_t`, `hal_comp_t`, `hal_pin_t`, `hal_sig_t`, `hal_param_t`, `hal_funct_t`, and `hal_thread_t` plus their list/free-list relationships.
+3. Trace one pin creation API into shared allocation and component ownership.
+4. Trace signal creation plus pin link/unlink to prove the documented pointer-to-signal-value model from source.
+5. Trace function export and `addf`/thread-list insertion separately from runtime `thread_task()` execution.
+6. Perform the targeted developer/community pass for stale/dangling components, writer conflicts, ready-state semantics, and shared-memory/mutex failure modes.
+7. Build the H01 function/symbol and call-flow guides before designing a bounded H01 experiment.

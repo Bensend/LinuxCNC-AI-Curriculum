@@ -11,7 +11,7 @@ Status values: `PLANNED`, `RESEARCH`, `SOURCE`, `EXPERIMENT`, `EXAM`, `CORRECTIO
 | A01 Process/component architecture | GRADUATED | A01 architecture/call-flow/handoff guides | corrected `004` run `34000879408` | passed | topology/ownership TEST-CONFIRMED for pinned simulation |
 | R01 Realtime model | GRADUATED | R01 model/call-flow/boundary/handoff guides | corrected `005` run `34011177375` | passed | fallback scheduler/period behavior confirmed; no physical latency claim |
 | H01 HAL architecture | GRADUATED | H01 lifecycle/call-flow/community/handoff guides | corrected `006` run `34018699909`, job `101447160463`, SHA `43fae7ea...` passed all gates | `exams/H01-adversarial-exam.md` + passing answer key | object/connectivity semantics TEST-CONFIRMED for pinned host; no realtime/physical/safety claim |
-| H04 HAL execution ordering | PLANNED | — | — | — | **next critical path**, unblocked by H01 graduation |
+| H04 HAL execution ordering | EXPERIMENT | `guides/H04-hal-execution-ordering.md`; `call-flows/H04-addf-to-thread-dispatch.md`; community notes | `007` run `34024102367`, job `101461896527`, SHA `f15451ee...` launched | pending | within-thread list semantics source-traced; live list mutation promoted, not assumed safe |
 | M03 One servo-period trace | PLANNED | — | — | — | critical path |
 | HM01 HostMot2 architecture | PLANNED | — | — | — | critical path |
 | E01 hm2_eth architecture | PLANNED | — | — | — | critical path |
@@ -44,22 +44,40 @@ Corrected bounded experiment `006`, Actions run `34018699909`, job `101447160463
 
 The H01 adversarial exam and fresh-AI handoff pass. H01 therefore graduates at the 1000 level.
 
+## H04 current result
+
+Durable artifacts created this lesson:
+
+- `guides/H04-hal-execution-ordering.md`
+- `forum-findings/H04-execution-ordering-field-notes.md`
+- `call-flows/H04-addf-to-thread-dispatch.md`
+- `lab-jobs/007-h04-execution-ordering.sh`
+
+Core source conclusions at `8bf4605...`: `hal_add_funct_to_thread()` constructs an explicit ordered `thread->funct_list`; `thread_task()` calls entries sequentially in next-link order; `hal_start_threads()` / `hal_stop_threads()` set/clear the shared dispatch gate rather than creating/deleting each RTAPI task; each HAL thread is its own RTAPI task; non-reentrant duplicate scheduling is rejected via `funct->users`; deletion routes through `free_funct_entry_struct()` which decrements `users` and permits later re-add.
+
+Important boundary: add/delete configuration takes the HAL mutex but `thread_task()` traverses the function list without that mutex, and no explicit `threads_running == 0` guard was found in add/delete. Live mutation semantics are therefore not assumed safe in H04. The bounded `007` experiment mutates ordering only while dispatch is stopped.
+
+`007` was launched once from curriculum SHA `f15451ee92f7f5d82310f6f182b20cdf10b51418`: Actions run `34024102367`, job `101461896527`. Predeclared gates distinguish configured list order from actual same-cycle dataflow using two cross-coupled `sum2` functions, exercise duplicate non-reentrant rejection, verify stopped `threadbeat` stability, then stop/delete/re-add/restart with reversed order.
+
 ## Promotion / uncertainty queue
 
 - HAL allocator fragmentation/reuse and cross-process unusual mapping behavior: **2000 / MEDIUM**.
 - Robust recovery after process/thread death with inconsistent HAL recursive-mutex accounting: **2000 / HIGH**.
 - Shared pin/signal atomicity and memory-ordering assumptions across supported architectures: **2000 / HIGH**.
 - Stable-vs-development comparison of ready/unready and object lifetime semantics: **2000 / MEDIUM**.
+- H04 live `addf`/`delf` mutation race/support semantics while realtime dispatch is active: **2000 / HIGH**.
+- H04 cross-thread signal memory visibility and cross-CPU ordering: **2000 / HIGH**.
+- Development-only one-shot `initf` behavior versus stable 2.9.x: **2000 / MEDIUM**.
 - Physical-machine latency/jitter qualification: **advanced commissioning / CRITICAL** and requires representative hardware/human involvement.
 - Functional-safety architecture/hazard analysis: **advanced safety / CRITICAL**; LinuxCNC functional behavior is not safety certification.
 
 ## Current checkpoint / exact resume point
 
-Begin **H04 — HAL execution ordering**, now unblocked by H01 graduation.
+Continue **H04 — HAL execution ordering**.
 
-1. Establish documented semantics for HAL threads, `addf` position/order, start/stop, and function constraints.
-2. Search community/developer history for ordering mistakes, multi-thread function restrictions, overruns, mutation/reconfiguration traps, and debugging practice.
-3. At pinned development SHA, source-trace `hal_add_funct_to_thread()`, function-user accounting and insertion semantics, `thread_task()` traversal/execution, thread start/stop, and relevant failure branches.
-4. Build a symbol/call-flow guide that distinguishes within-thread deterministic list order from cross-thread scheduler timing; do not infer realtime determinism from list order.
-5. Predeclare and run one bounded software experiment only after source analysis identifies discriminating observations.
-6. Preserve any deeper concurrency/timing uncertainty in the 2000-series queue rather than expanding H04 without bound.
+1. Inspect exactly Actions run `34024102367` / job `101461896527`; do not launch a duplicate while it is active.
+2. Require fresh metadata for SHA `f15451ee92f7f5d82310f6f182b20cdf10b51418` and job `007-h04-execution-ordering.sh`.
+3. Reconcile every predeclared gate: phase-1 `show thread` A-before-B, duplicate non-reentrant add failure, phase-1 `B-A ~= 1`, stable stopped `threadbeat`, stopped `delf` + successful re-add at `+1`, phase-2 `show thread` B-before-A, phase-2 `A-B ~= 1`, increasing beat after restart, completion marker.
+4. If the run is harness-invalid, correct only log-proven harness errors before one materially corrected rerun; do not promote semantic claims from a harness-invalid run.
+5. If valid, promote the observed subset to `TEST-CONFIRMED`, create/grade the H04 adversarial exam, incorporate corrections, run the fresh-AI handoff, and decide 1000-level graduation.
+6. Preserve live-list mutation, cross-thread memory ordering, and version-depth questions in the 2000-series queue rather than expanding H04 indefinitely.

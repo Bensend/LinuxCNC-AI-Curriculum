@@ -1,9 +1,8 @@
 # Active Curriculum Session
 
-- Start UTC: `2026-09-06T06:11:00Z`
+- Start UTC: `2026-09-06T08:10:52Z`
 - Module: `H01 HAL architecture and object model`
 - State: `ACTIVE`
-- Resume checkpoint: continue pinned H01 source work from `guides/H01-hal-object-lifecycle-initial.md`: trace `hal_ready()`, inventory `hal_data_t` and component/pin/signal/parameter/function/thread structures, then trace pin creation, signal linking/unlinking, and function export/addf before designing a lab.
-- Durable checkpoint: `checkpoints/R01-2026-09-06T0509Z-graduation.md` plus `guides/H01-hal-object-lifecycle-initial.md`
+- Objective: reconcile corrected `006` runtime evidence, complete adversarial/fresh-AI graduation work if sound, then preserve H04 checkpoint.
 
 This file is a crash/concurrency marker. Closed sessions remain here until the next session overwrites the marker with its own start state.

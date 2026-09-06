@@ -8,7 +8,7 @@ Status values: `PLANNED`, `RESEARCH`, `SOURCE`, `EXPERIMENT`, `EXAM`, `CORRECTIO
 | L01 Version pinning | GRADUATED | `guides/L01-version-baseline.md` | development `8bf4605ae81042248add031e94c77300406e0413`; stable `86cdca76fa2a36274c432caa21952b23c267989a` | covered by Phase-0 exam/handoff | Stable `v2.9.10` experimentally confirmed |
 | L02 Repository/build/test map | GRADUATED | `guides/L02-build-test-map.md` | development `002` and stable `003` ran upstream `tests/realtime-math` | Phase-0 exam/corrections complete | Results are POSIX non-realtime evidence only |
 | L03 Evidence/claims workflow | GRADUATED | `SOURCE_POLICY.md`; `guides/L03-evidence-claims-workflow.md` | exercised on build failures, version comparison, and evidence boundaries | Phase-0 exam/handoff complete | Evidence/conflict workflow demonstrated |
-| A01 Process/component architecture | EXPERIMENT | `guides/A01-process-component-architecture.md`; `call-flows/A01-task-to-motion-command-ack.md`; A01 observation/lock/cleanup/ownership guides | `004` timed out twice at 60 min and once at 75 min; corrected bounded observation is prepared off-main | adversarial exam + corrections complete | Source architecture is strong; runtime topology awaits one valid bounded observation before fresh-AI handoff/graduation |
+| A01 Process/component architecture | EXPERIMENT | `guides/A01-process-component-architecture.md`; `call-flows/A01-task-to-motion-command-ack.md`; A01 observation/lock/cleanup/ownership guides | corrected bounded `004` run `34000879408` in progress from merge `5a8fa43f...`; three earlier long attempts invalid for topology confirmation | adversarial exam + corrections complete | Source architecture is strong; runtime topology awaits this one bounded observation before fresh-AI handoff/graduation |
 | R01 Realtime model | PLANNED | — | — | — | blocked on A01 graduation |
 | H01 HAL architecture | PLANNED | — | — | — | critical path |
 | H04 HAL execution ordering | PLANNED | — | — | — | critical path |
@@ -45,6 +45,7 @@ Older community explanations that describe task/iocontrol as separate conceptual
 - Run `33957356410` reached the former 60-minute workflow ceiling before valid topology assertions. It exposed a stale-artifact bug: inherited `LATEST.*` could be uploaded after cancellation. The runner was hardened to delete inherited `LATEST.*` before execution.
 - Run `33960179986` also reached 60 minutes before valid assertions.
 - Run `33965517203` (job `101304830830`, curriculum head `06c7bf7f0602fa577d20a00f92cef82527c61df2`) reached the 75-minute ceiling. Cleanup logs found live `linuxcnc`, `linuxcncsvr`, `rtapi_app`, `milltask`, and `linuxcncrsh`, proving the build had reached runtime. No fresh `004` assertions were produced, so topology remains not `TEST-CONFIRMED`.
+- On 2026-09-06 UTC, PR #1 merged only the audited workflow and `004` executable delta to `main` as merge commit `5a8fa43fcb162a0cbc1a8a1a0472e5e6d5458445`. Push-triggered run `34000879408` (job `101399404407`) started at `2026-09-06T00:17:06Z`; the selector step completed successfully and the bounded lab step is in progress. This is the sole September 6 A01 lab launch so far.
 
 ## A01 observation-harness corrections
 
@@ -62,11 +63,9 @@ Pinned-source and adversarial analysis established:
 - Runtime process readiness requires `linuxcncsvr`, `milltask`, and `linuxcncrsh` before the first external HAL query.
 - A valid ownership assertion must compare `halcmd show comp iocontrol.0`'s userspace PID with the sole live `milltask` PID; existence plus standalone-process absence is weaker evidence.
 
-## Prepared next-budget experiment
+## Executed next-budget experiment
 
-The canonical prepared branch is `a01-ready-next-budget-20260905T2211Z`. It was recreated from then-current `main` rather than depending on the older divergent `a01-bounded-observation` history.
-
-Important prepared changes:
+The prepared branch `a01-ready-next-budget-20260905T2211Z` was integrated through PR #1 after a final diff audit showed exactly two changed files: `.github/workflows/lab-runner.yml` and `lab-jobs/004-a01-runtime-topology.sh`. Current `main` now contains:
 
 - bounded process readiness and HAL probes;
 - original stalled PID process state + bounded GDB backtrace before forced termination;
@@ -74,25 +73,22 @@ Important prepared changes:
 - bounded LinuxCNC launcher teardown;
 - 70-minute inner experiment ceiling inside the 75-minute Actions job ceiling;
 - merge-safe push-range job selection with ambiguous multi-job pushes rejected;
-- direct `iocontrol.0` ownership verification using HAL's recorded userspace PID, added in branch commit `6be2abbf9ec5566168784cab92510a4ed88bb8de`.
+- direct `iocontrol.0` ownership verification using HAL's recorded userspace PID.
 
-The branch is intentionally off `main`; its workflow only auto-runs lab paths on pushes to `main`.
+Run `34000879408` is the resulting single corrected `004` execution. Do not dispatch a duplicate while it is active.
 
 ## Laboratory compute-budget checkpoint
 
-Target laboratory compute is at most approximately four GitHub Actions hours per calendar day. September 5 consumed the planned budget through three long A01 attempts. No additional LinuxCNC lab run should be launched on September 5. Research, source reading, documentation, adversarial review, and off-main preparation may continue.
+Target laboratory compute is at most approximately four GitHub Actions hours per calendar day. September 5 consumed the planned budget through three long A01 attempts. The September 6 UTC budget window has begun, and exactly one corrected A01 run (`34000879408`) has been launched. Additional LinuxCNC lab runs are prohibited while this run is active; inspect and diagnose this run first.
 
 ## Current checkpoint / exact resume point
 
 Continue A01; R01 remains blocked.
 
-1. Do **not** launch another LinuxCNC lab run on September 5.
-2. At the next laboratory-budget window, compare `a01-ready-next-budget-20260905T2211Z` with then-current `main`. Preserve its lab/workflow changes, including ownership-test commit `6be2abbf...`, while retaining later main-side guides/checkpoints/logs.
-3. Re-audit only the executable delta once more for shell/YAML blocking/error paths; do not spend another paid run on an unchanged harness defect.
-4. Advance `main` exactly once with the corrected lab/workflow files and allow exactly one push-triggered corrected `004`; do not dispatch a duplicate.
-5. Require fresh metadata identifying job `004`, the new curriculum source SHA, and all three process-readiness markers before accepting runtime evidence.
-6. If any HAL probe stalls, classify only from the captured original-PID stack: startup/`hal_init`, `hal_list_*`, or `UNKNOWN`. A failed GDB attach proves neither stage. After a force-killed probe, issue/accept no further HAL assertions from that instance.
-7. For a passing topology run, require execution of `Key component assertions`, `iocontrol.0`, `motmod`, and `trivkins` presence, exactly one `milltask`, no standalone `iocontrol`, and `iocontrol.0`'s HAL userspace PID equal to the live `milltask` PID.
-8. If those criteria pass, reconcile the output against the source guide, promote only directly observed facts to `TEST-CONFIRMED`, write the A01 fresh-AI handoff, and perform graduation review. If A01 graduates, R01 becomes the highest-priority unblocked module.
-9. If the 70-minute inner timeout fires, diagnose from the last preserved progress marker/artifact rather than inferring phase from total runtime.
-10. Do not modify upstream LinuxCNC behavior merely to make observation pass; diagnostic instrumentation may observe the pinned binary, but behavioral changes require separate defect evidence.
+1. Inspect Actions run `34000879408`, job `101399404407`; do not launch a duplicate.
+2. Require metadata identifying `lab-jobs/004-a01-runtime-topology.sh`, source commit `5a8fa43fcb162a0cbc1a8a1a0472e5e6d5458445`, and all three process-readiness markers before accepting runtime evidence.
+3. If any HAL probe stalls, classify only from the captured original-PID stack: startup/`hal_init`, `hal_list_*`, or `UNKNOWN`. A failed GDB attach proves neither stage. After a force-killed probe, issue/accept no further HAL assertions from that instance.
+4. For a passing topology run, require execution of `Key component assertions`, `iocontrol.0`, `motmod`, and `trivkins` presence, exactly one `milltask`, no standalone `iocontrol`, and `iocontrol.0`'s HAL userspace PID equal to the live `milltask` PID.
+5. If those criteria pass, reconcile output against the source guide, promote only directly observed facts to `TEST-CONFIRMED`, write the A01 fresh-AI handoff, and perform graduation review. If A01 graduates, R01 becomes the highest-priority unblocked module.
+6. If the 70-minute inner timeout fires, diagnose from the last preserved progress marker/artifact rather than inferring phase from total runtime.
+7. Do not modify upstream LinuxCNC behavior merely to make observation pass; diagnostic instrumentation may observe the pinned binary, but behavioral changes require separate defect evidence.

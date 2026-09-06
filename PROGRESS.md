@@ -15,7 +15,7 @@ Status values: `PLANNED`, `RESEARCH`, `SOURCE`, `EXPERIMENT`, `EXAM`, `CORRECTIO
 | M03 One servo-period trace | GRADUATED | M03 source/call-flow/accepted-result/handoff guides | `008` run `34029848545` | passed | canonical loopback phase relationship TEST-CONFIRMED; not universal latency |
 | HM01 HostMot2 architecture | GRADUATED | `guides/HM01-graduation-handoff.md`; call flow + accepted result | corrected `009` run `34038328272` | passed | fake-LLIO malformed-registration rejection TEST-CONFIRMED; no physical transport/safety claim |
 | E01 hm2_eth architecture | GRADUATED | `guides/E01-graduation-handoff.md`; `call-flows/E01-hm2-eth-transport.md` | production-path no-hardware transport experiment promoted | passed | architecture/discovery/LLIO ownership SOURCE-CONFIRMED; no physical network claim |
-| HM08 HostMot2 watchdog | RESEARCH | `guides/HM08-watchdog-initial.md` | — | — | active critical path |
+| HM08 HostMot2 watchdog | SOURCE | `guides/HM08-watchdog-initial.md`; `call-flows/HM08-watchdog-cycle-and-recovery.md` | fixture feasibility under review | — | active critical path; read/write/recovery ordering SOURCE-CONFIRMED |
 | IO01 Encoder path | PLANNED | — | — | — | critical path |
 | IO04 PWM/PDM path | PLANNED | — | — | — | critical path |
 
@@ -25,11 +25,13 @@ Primary development revision: `8bf4605ae81042248add031e94c77300406e0413`. Stable
 
 ## Current critical-path result
 
-E01 is **GRADUATED** at its 1000-level architecture/discovery scope. Pinned source establishes that hm2_eth owns Ethernet LLIO transport mechanics, constructs `hm2_lowlevel_io_t`, and hands a probed/configured board to generic HostMot2 through `hm2_register()`. Direct initialization reads and cyclic queued I/O are distinct paths. Deeper packet-loss/recovery/timing mechanics remain assigned to E03-E07.
+E01 is **GRADUATED** at its 1000-level architecture/discovery scope.
 
-No suitable upstream no-hardware fixture was found that executes the production static hm2_eth receive state machine. Copying those functions into a model would not justify TEST-CONFIRMED production behavior; physical discovery also requires hardware. This experiment is therefore promoted rather than faked, and E01 graduates on documentation/community/source/call-flow/adversarial/fresh-AI evidence appropriate to its architecture objective.
+HM08 is active at **SOURCE**. Pinned source now establishes the complete generic HostMot2 watchdog cycle: successful `hm2_read()` completion precedes watchdog status interpretation; a bite sets HAL `has_bit` and internal `needs_reset`; ordinary `hm2_write()` prepares the `0x5a000000` watchdog reset/pet TRAM value before the combined TRAM write; `hm2_watchdog_write()` separately handles enable/timeout changes and recovery. Recovery is intentionally user-gated by clearing `has_bit`, then uses generic `hm2_force_write()` and clears `needs_reset`/`needs_soft_reset` only if `io_error` remains clear. Generic read/write/watchdog paths return early while `io_error` is asserted, so transport-specific communication recovery is outside HM08.
 
-HM08 is now active. Initial pinned source establishes HAL `watchdog.has_bit`, RW `watchdog.timeout_ns` (5 ms default), TRAM status/reset regions, first-write enable behavior, timeout conversion, recovery gating on `io_error`/`has_bit`, and `needs_reset` propagation after observed watchdog status. These are mechanism claims only, not safety qualification.
+Official HostMot2 documentation agrees on the 5 ms default, write-function petting, `has_bit` user reset and described high-impedance I/O behavior after a bite. The latter remains DOC-CONFIRMED, not cloud-lab TEST-CONFIRMED. Historical docs used a separate `pet_watchdog()` interface and must not be projected onto the pinned revision.
+
+Upstream `hm2_test` is a real no-hardware LLIO fixture, but its write callback is a success stub and the inspected fixture does not emulate watchdog timer progression/bites. A bounded production-function software-state experiment may be possible by minimally extending the fake register pattern; physical bite timing/electrical behavior must not be simulated and mislabeled as hardware evidence.
 
 ## Promotion / uncertainty queue
 
@@ -48,10 +50,13 @@ HM08 is now active. Initial pinned source establishes HAL `watchdog.has_bit`, RW
 - E01 production-path stale/duplicate/wrong-size/lost-packet fault injection: **E03/E06 or 2000 / HIGH**.
 - E01 exact socket/interface/routing/firewall setup: **E02 / MEDIUM**.
 - E01 servo-period Ethernet timing and recovery: **E05/E07 / HIGH**.
+- HM08 physical watchdog reaction time, actual board pin electrical state, and output-module behavior after bite: **advanced hardware/commissioning / CRITICAL**; requires representative hardware/firmware and safety analysis.
+- HM08 transport-specific path that clears/re-establishes communication after `io_error`: **E03/E06/E07 or 2000 / HIGH**.
+- HM08 fake-LLIO production-function state-transition test if fixture extension becomes invasive: **2000 / MEDIUM**.
 - EVL/current-master versus pinned hm2_eth behavior: **2000 / HIGH**.
 - Physical-machine latency/jitter qualification: **advanced commissioning / CRITICAL**, representative hardware/human involvement required.
 - Functional-safety architecture/hazard analysis: **advanced safety / CRITICAL**; LinuxCNC behavior is not safety certification.
 
 ## Current checkpoint / exact resume point
 
-Continue **HM08 — HostMot2 watchdog**. Trace callers/order of `hm2_watchdog_prepare_tram_write()`, `hm2_watchdog_process_tram_read()`, `hm2_watchdog_write()`, and `hm2_watchdog_force_write()` through generic HostMot2 read/write cycles at pinned `8bf4605...`. Reconcile `needs_reset`, `needs_soft_reset`, LLIO `io_error`, `hm2_force_write()`, HAL `has_bit`, timeout updates and pet/reset writes. Then add official documentation/community findings and inspect fake-LLIO/upstream tests for a production-function no-hardware experiment. Preserve the safety boundary: register/watchdog mechanism is not proof of a safe physical state.
+Continue **HM08 — HostMot2 watchdog**. Inspect the remainder of pinned `hm2_test` patterns/descriptors and upstream HostMot2 tests to determine whether a valid watchdog descriptor already exists. If a minimal fixture extension can execute production `hm2_watchdog_process_tram_read()` and `hm2_watchdog_write()` without copying production logic, design one bounded no-hardware experiment with predeclared gates for exported 5 ms timeout, synthetic status-bit detection -> `has_bit`/`needs_reset`, user clear -> force-write recovery, and timeout programming. If the fixture extension would require building a fake watchdog timer/physical behavior model, PROMOTE that experiment rather than faking evidence. Then create HM08 adversarial exam/corrections and fresh-AI handoff if the 1000-level evidence is sufficient. Preserve the distinction between software/register recovery and physical/safety behavior.

@@ -14,14 +14,15 @@ No later module may paper over an ungraduated prerequisite.
 
 The autonomous curriculum may continue hourly, but paid/limited laboratory compute must be treated as a separate resource budget.
 
-- Target laboratory compute budget: **maximum 4 hours per calendar day**, sized to remain near a **120-hour/month** allowance over a 30-day month.
+- First-draft laboratory compute budget: **maximum 120 hours total**, using the available monthly Codespaces allowance as a project budget rather than spreading it artificially across a 30-day month.
+- Working laboratory pace: **up to approximately 8 hours per calendar day** while the first draft is expected to complete in roughly 14–15 days. This is a ceiling, not a requirement to consume unused lab time.
 - Research, source reading, documentation, reasoning, exams, corrections, and handoff work should continue outside the lab budget whenever they do not require the laboratory environment.
 - A laboratory experiment may span multiple hourly curriculum lessons. Launch it once, record its run/job identifier and checkpoint, and let later lessons inspect and continue the same experiment rather than starting duplicates.
 - An hourly lesson arriving while a lab is still running must not by itself trigger another copy of that lab.
 - Individual workflow/job execution limits are independent of the daily compute budget. If the execution platform terminates an individual job at approximately 60 minutes, checkpoint or split the experiment into bounded stages and continue it in a later lesson/run.
-- Once approximately 4 hours of laboratory compute have been consumed for the day, subsequent lessons should preferentially perform non-lab work and queue additional experiments for the next available daily budget.
+- Once approximately 8 hours of laboratory compute have been consumed for the day, subsequent lessons should preferentially perform non-lab work unless remaining project budget and schedule clearly justify additional lab use.
 - Lab time and lesson-agent wall-clock time are distinct. A background lab may legitimately overlap later lessons; duplicate lab execution should be avoided.
-- Where practical, record laboratory start/end/runtime data so daily and monthly usage can be audited and the budget adjusted if actual platform accounting differs from wall-clock estimates.
+- Where practical, record laboratory start/end/runtime data so daily and cumulative first-draft usage can be audited and the pace adjusted before approaching the 120-hour ceiling.
 
 ## Phase 0 — Laboratory and Research Method
 

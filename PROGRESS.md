@@ -16,8 +16,8 @@ Status values: `PLANNED`, `RESEARCH`, `SOURCE`, `EXPERIMENT`, `EXAM`, `CORRECTIO
 | HM01 HostMot2 architecture | GRADUATED | `guides/HM01-graduation-handoff.md`; call flow + accepted result | corrected `009` run `34038328272` | passed | fake-LLIO malformed-registration rejection TEST-CONFIRMED; no physical transport/safety claim |
 | E01 hm2_eth architecture | GRADUATED | `guides/E01-graduation-handoff.md`; `call-flows/E01-hm2-eth-transport.md` | production-path no-hardware transport experiment promoted | passed | architecture/discovery/LLIO ownership SOURCE-CONFIRMED; no physical network claim |
 | HM08 HostMot2 watchdog | GRADUATED | `guides/HM08-graduation-handoff.md`; `call-flows/HM08-watchdog-cycle-and-recovery.md` | fake-LLIO mutable watchdog model promoted to 2000 | passed | host cycle/recovery SOURCE-CONFIRMED; physical bite/electrical behavior not test-confirmed |
-| IO01 Encoder path | SOURCE | `guides/IO01-encoder-register-to-hal-source.md` | pending fixture feasibility | — | descriptor/TRAM ordering, 16→64-bit count extension, reset/index, scale and velocity state machine traced |
-| IO04 PWM/PDM path | PLANNED | — | — | — | critical path |
+| IO01 Encoder path | GRADUATED | `guides/IO01-graduation-handoff.md`; `call-flows/IO01-encoder-register-to-hal.md` | stock `hm2_test` judged structurally unable to produce changing encoder samples; mutable fixture promoted | passed | host register-to-HAL path SOURCE-CONFIRMED; physical/FPGA behavior not test-confirmed |
+| IO04 PWM/PDM path | RESEARCH | pending | pending | — | current critical path |
 
 ## Version baseline
 
@@ -25,11 +25,11 @@ Primary development revision: `8bf4605ae81042248add031e94c77300406e0413`. Stable
 
 ## Current critical-path result
 
-HM08 is **GRADUATED** at 1000 level. IO01 is now the highest-priority unblocked critical-path module and has advanced to **SOURCE**.
+IO01 is **GRADUATED** at 1000 level. Generic `hm2_read()` completes the LLIO/TRAM transaction and applies `-EAGAIN` / `io_error` gates before calling `hm2_encoder_process_tram_read()`. The encoder host path extends the FPGA-facing 16-bit count into internal 64-bit state, applies reset/index through host zero-offset state, publishes scaled position, and uses event timestamps plus a STOPPED/MOVING state machine for low-speed velocity.
 
-Pinned `encoder.c` establishes the normal host reconstruction path: encoder timestamp-count TRAM is registered before counter/latch TRAM; the 16-bit FPGA counter is extended into an internal 64-bit raw-count accumulator; reset and index act by changing host zero/latch state rather than resetting the raw FPGA counter; scaled position uses the internal 64-bit logical count; and velocity uses a STOPPED/MOVING timestamp state machine whose no-new-edge path decays the velocity bound until `vel-timeout` rather than immediately publishing zero.
+The stock upstream `hm2_test` fixture reads from an unchanging compiled-in register array and discards writes, so a changing-sample production-path encoder experiment requires adding a mutable fake-FPGA model. That experiment is promoted to IO03/2000 rather than being mislabeled as hardware evidence.
 
-Current documentation independently supports the public rawcounts/count/position/velocity/reset/index/scale/vel-timeout model. Physical quadrature capture, electrical integrity, exact count-extension ambiguity bounds, and safety/redundancy remain separate evidence questions.
+IO04 — PWM/PDM command path — is now the highest-priority unblocked critical-path module.
 
 ## Promotion / uncertainty queue
 
@@ -52,6 +52,7 @@ Current documentation independently supports the public rawcounts/count/position
 - HM08 physical watchdog reaction time, actual board pin electrical state, and output-module behavior after bite: **advanced hardware/commissioning / CRITICAL**; requires representative hardware/firmware and safety analysis.
 - HM08 transport-specific path that clears/re-establishes communication after `io_error`: **E03/E06/E07 or 2000 / HIGH**.
 - IO01 exact `hal_extend_counter()` ambiguity bound for large inter-sample count jumps: **IO03/2000 / HIGH**.
+- IO01 mutable fake-LLIO production encoder experiment: **IO03/2000 / HIGH**; synthetic register producer only, never FPGA/electrical evidence.
 - IO01 FPGA quadrature/filter/timestamp capture implementation and physical maximum reliable edge rate: **HM05/IO03/2000 / HIGH**.
 - IO01 quadrature-error causality under injected illegal A/B sequences: **IO03/2000 / HIGH**.
 - IO01 precise index-arm/event/read cycle latency: **IO02/2000 / MEDIUM**.
@@ -61,4 +62,4 @@ Current documentation independently supports the public rawcounts/count/position
 
 ## Current checkpoint / exact resume point
 
-Continue **IO01 — Encoder path** from `guides/IO01-encoder-register-to-hal-source.md`. First write `call-flows/IO01-encoder-register-to-hal.md` around the generic `hm2_read()` → successful TRAM completion → `hm2_encoder_process_tram_read()`/control-register publication boundary. Then inspect upstream fake-LLIO fixtures to determine whether production encoder processing can be exercised by mutating only the TRAM image. A valid no-hardware experiment should discriminate 16-bit wrap extension, reset-as-zero-offset, scale publication, and the low-speed `vel-timeout` transition while explicitly not claiming FPGA electrical/quadrature capture. If fixture extension would require inventing substantial FPGA behavior, promote that part and test only host reconstruction semantics.
+Continue **IO04 — PWM/PDM command path**. Establish intended HostMot2 PWMGen behavior from current official documentation and useful community failure reports, then inspect pinned `src/hal/drivers/mesa-hostmot2/pwmgen.c` and generic `hm2_write()`. Trace HAL `value`/`scale`/`enable` and output-type/frequency configuration through `hm2_pwmgen_prepare_tram_write()` and `hm2_pwmgen_write()` to the TRAM/register/LLIO boundary. Keep ordinary PWM, PDM/UDM modes, enable behavior, physical analog-interface electronics, watchdog interaction, and safety claims explicitly separated. Then design the least-invasive production-path no-hardware experiment or promote the hardware-specific portion if the stock fake LLIO cannot observe writes.

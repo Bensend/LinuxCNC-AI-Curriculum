@@ -1,8 +1,8 @@
 # Active Curriculum Session
 
-- Start UTC: `2026-09-06T08:10:52Z`
-- Module: `H01 HAL architecture and object model`
+- Start UTC: `2026-09-06T09:10:03Z`
+- Module: `H04 HAL execution ordering`
 - State: `ACTIVE`
-- Objective: reconcile corrected `006` runtime evidence, complete adversarial/fresh-AI graduation work if sound, then preserve H04 checkpoint.
+- Objective: resume the highest-priority unblocked H04 lesson; inspect course state and prior evidence, trace execution-order semantics through pinned source, perform documentation/community analysis, design or execute bounded verification as justified, and preserve an exact next checkpoint.
 
 This file is a crash/concurrency marker. Closed sessions remain here until the next session overwrites the marker with its own start state.

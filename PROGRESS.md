@@ -11,92 +11,78 @@ Status values: `PLANNED`, `RESEARCH`, `SOURCE`, `EXPERIMENT`, `EXAM`, `CORRECTIO
 | A01 Process/component architecture | GRADUATED | A01 architecture/call-flow/handoff guides | corrected `004` run `34000879408` | passed | topology/ownership TEST-CONFIRMED for pinned simulation |
 | R01 Realtime model | GRADUATED | R01 model/call-flow/boundary/handoff guides | corrected `005` run `34011177375` | passed | fallback scheduler/period behavior confirmed; no physical latency claim |
 | H01 HAL architecture | GRADUATED | H01 lifecycle/call-flow/community/handoff guides | corrected `006` run `34018699909`, job `101447160463`, SHA `43fae7ea...` passed all gates | passed | object/connectivity semantics TEST-CONFIRMED for pinned host |
-| H04 HAL execution ordering | GRADUATED | H04 guide/call-flow/community/handoff + accepted result | `007` run `34024102367`, job `101461896527`, SHA `f15451ee...` passed all gates | `exams/H04-adversarial-exam.md` + passing key | within-thread order/dataflow TEST-CONFIRMED; cross-thread/live mutation not promoted |
-| M03 One servo-period trace | GRADUATED | M03 source/call-flow/accepted-result/handoff guides | `008` run `34029848545`, job `101477262140`, SHA `10f187e8...` passed all gates | passed | canonical loopback one-invocation phase relationship TEST-CONFIRMED; not universal latency |
-| HM01 HostMot2 architecture | RESEARCH | `guides/HM01-hostmot2-registration-initial.md` | pending | pending | generic-core/LLIO registration boundary and major `hm2_register()` stages source-traced |
-| E01 hm2_eth architecture | PLANNED | — | — | — | critical path |
+| H04 HAL execution ordering | GRADUATED | H04 guide/call-flow/community/handoff + accepted result | `007` run `34024102367`, job `101461896527`, SHA `f15451ee...` passed all gates | passed | within-thread order/dataflow TEST-CONFIRMED; cross-thread/live mutation not promoted |
+| M03 One servo-period trace | GRADUATED | M03 source/call-flow/accepted-result/handoff guides | `008` run `34029848545`, job `101477262140`, SHA `10f187e8...` passed all gates | passed | canonical loopback phase relationship TEST-CONFIRMED; not universal latency |
+| HM01 HostMot2 architecture | EXPERIMENT | `guides/HM01-hostmot2-registration-initial.md`; `call-flows/HM01-lowlevel-registration-lifecycle.md` | `009` run `34035539216`, job `101492796989`, SHA `84a65ff9...` in progress | pending | LLIO contract, concrete hm2_eth handoff, GTAG dispatch, rollback and upstream fake-LLIO test path source-traced |
+| E01 hm2_eth architecture | PLANNED | — | — | — | critical path after HM01 |
 | HM08 HostMot2 watchdog | PLANNED | — | — | — | critical path |
 | IO01 Encoder path | PLANNED | — | — | — | critical path |
 | IO04 PWM/PDM path | PLANNED | — | — | — | critical path |
 
+## Version baseline
+
+Primary development revision: `8bf4605ae81042248add031e94c77300406e0413`. Stable reference: `86cdca76fa2a36274c432caa21952b23c267989a` where applicable.
+
 ## Graduated evidence summary
 
-Primary development revision remains `8bf4605ae81042248add031e94c77300406e0413`; stable reference remains `86cdca76fa2a36274c432caa21952b23c267989a` where applicable.
-
-A01 accepted run `34000879408` observed the required process readiness, bounded HAL topology, `motmod`, `trivkins`, `iocontrol.0`, exactly one live `milltask`, and `iocontrol.0` HAL PID equal to the `milltask` PID. R01 accepted corrected run `34011177375` observed explicit non-realtime fallback, expected HAL periods, and actual TS scheduling for periodic pthreads. Neither result is a physical-machine realtime or safety qualification.
-
-H01 accepted corrected run `34018699909` confirmed dummy→signal value preservation, linked propagation, unlink snapshot/separation, second-writer rejection, cyclic function scheduling, and positive thread execution on the pinned host. H01 graduated with its adversarial exam and fresh-AI handoff.
-
-## H04 graduated result
-
-Durable artifacts:
-
-- `guides/H04-hal-execution-ordering.md`
-- `forum-findings/H04-execution-ordering-field-notes.md`
-- `call-flows/H04-addf-to-thread-dispatch.md`
-- `lab-jobs/007-h04-execution-ordering.sh`
-- `lab-results/H04-007-execution-ordering-accepted.md`
-- `exams/H04-adversarial-exam.md`
-- `exams/H04-adversarial-answer-key.md`
-- `guides/H04-graduation-handoff.md`
-
-Accepted `007` artifact metadata: curriculum SHA `f15451ee92f7f5d82310f6f182b20cdf10b51418`, Actions run `34024102367`, job `101461896527`, lab UTC `2026-09-06T09:14:59Z`–`09:19:17Z`, exit 0. Phase 1 displayed `sum2.0` before `sum2.1` and observed A=37, B=38, `B-A=1`. Duplicate non-reentrant add failed intentionally with rc=1 and the expected diagnostic. While stopped, threadbeat remained 19→19. After stopped delete/re-add at position +1, phase 2 displayed `sum2.1` before `sum2.0` and observed A=77, B=76, `A-B=1`, threadbeat=39. Completion marker was present.
-
-The central H04 conclusion is therefore source-confirmed and test-confirmed at foundation depth: within one HAL thread pass, scheduled function entries execute sequentially in list order strongly enough for ordinary later-function dataflow to observe earlier-function updates. This does not create a total order across separate HAL threads and does not establish realtime deadlines, physical timing, safety, or safe live list mutation.
-
-## M03 graduated result
-
-Durable artifacts:
-
-- `guides/M03-servo-period-trace-initial.md`
-- `call-flows/M03-one-servo-period.md`
-- `lab-jobs/008-m03-servo-cycle-loopback.sh`
-- `lab-results/M03-008-servo-cycle-loopback-accepted.md`
-- `exams/M03-adversarial-exam.md`
-- `exams/M03-adversarial-answer-key.md`
-- `guides/M03-graduation-handoff.md`
-
-Accepted `008` metadata: curriculum SHA `10f187e8a33b741f9af5c12975150ddbb497af1a`, Actions run `34029848545`, job `101477262140`, lab UTC `2026-09-06T11:18:18Z`–`11:21:43Z`, exit 0. HAL order was command-handler < controller < sampler.0; sampler overruns were zero; 2175 moving samples were analyzed; `lag_avg=0`, `lag_max=0`, `same_avg=4.16551724138e-06`, `cmd_avg=0`, `cmd_max=0`; completion marker present.
-
-The source-derived canonical loopback relationship is therefore TEST-CONFIRMED: with motor command directly looped to motor feedback and sampling after motion, published joint feedback in sample n reflects the prior motor-command signal value while the newly published joint command matches the current motor-command signal. This is configuration-specific and is not a universal one-servo-period LinuxCNC latency claim.
+A01 accepted run `34000879408` confirmed the required process/HAL topology for its pinned simulation. R01 corrected run `34011177375` confirmed explicit non-realtime fallback, expected HAL periods, and TS scheduling for periodic pthreads. H01 corrected run `34018699909` confirmed dummy/signal linkage semantics, second-writer rejection and cyclic function execution. H04 run `34024102367` confirmed same-thread configured function order drives same-cycle dataflow, while cross-thread ordering/live mutation remained outside the promoted claim. M03 run `34029848545` confirmed the canonical direct motor-command→feedback loopback phase relationship while explicitly rejecting a universal latency claim. None of these cloud results is physical-machine realtime or safety qualification.
 
 ## HM01 current result
 
-HM01 is now the active critical-path module. Initial documentation/community/source work is in `guides/HM01-hostmot2-registration-initial.md`.
+HM01 is the active critical-path module and has advanced to `EXPERIMENT`.
+
+Durable source artifacts:
+
+- `guides/HM01-hostmot2-registration-initial.md`
+- `call-flows/HM01-lowlevel-registration-lifecycle.md`
+- `lab-jobs/009-hm01-registration-validation.sh`
+- `checkpoints/HM01-2026-09-06T1315Z-registration-validation-launched.md`
 
 Current source-grounded conclusions at `8bf4605...`:
 
-- generic `hostmot2` and low-level board/transport drivers are separate architectural layers;
-- a low-level driver populates `hm2_lowlevel_io_t` and calls exported `hm2_register()`;
-- `hm2_register()` validates the LLIO contract, allocates a per-board `hostmot2_t`, parses config, optionally programs firmware, validates firmware identity/IDROM/descriptors through LLIO reads, initializes module/TRAM/HAL state, performs first read/write initialization, then exports per-board read/write HAL functions;
-- missing queued-I/O callbacks fall back to synchronous wrappers around required `read`/`write` callbacks;
-- registration failure removes the tentative board and cleans module state; `hm2_unregister()` attempts an immediate watchdog-safe action when a watchdog exists before cleanup, but no safety-rated conclusion is inferred;
-- generic HostMot2 runtime orchestration calls through board-specific LLIO transport operations, which is the key boundary for later `hm2_eth` analysis.
+- generic `hostmot2` and low-level board/transport drivers are distinct layers;
+- `hm2_lowlevel_io_t` contains required `read`/`write` callbacks, optional firmware/reset hooks, optional queued/split-I/O hooks, connector/board metadata, capability flags, I/O-error/reset bookkeeping, and a private low-level-driver instance pointer;
+- missing supported queued callbacks are replaced by synchronous wrappers around required read/write callbacks, preserving the generic orchestration path;
+- pinned `hm2_eth` populates its LLIO read/write, queued-I/O and reset callbacks and then calls `hm2_register(&board->llio, config[boards_count])`; Ethernet packet mechanics remain E01+ scope;
+- `hm2_register()` validates LLIO, allocates/tentatively lists a per-board `hostmot2_t`, parses configuration, optionally programs firmware, validates firmware identity/IDROM/descriptors, initializes module/TRAM/HAL state, synchronizes initial state, then exports board-cycle HAL functions;
+- `hm2_parse_module_descriptors()` handles IOPort first, then dispatches recognized GTAGs to module parsers; negative parser return or LLIO `io_error` aborts registration; unknown GTAGs are warned/ignored rather than automatically fatal;
+- failures after module initialization converge through `hm2_cleanup()` before list removal/free, while earlier failures may go directly to list removal/free;
+- `hm2_unregister()` performs generic teardown and includes the already-noted watchdog action when a watchdog instance exists, but HM01 makes no safety-rated claim from it;
+- pinned upstream `tests/hm2-idrom` explicitly tests `hm2_register()` using `hm2_test`, a fake no-hardware AnyIO register file, making it the preferred foundation experiment.
+
+### HM01 experiment state
+
+Exactly one `009` experiment was launched by commit `84a65ff98d495001a487b8df33853791d1ee3387`:
+
+- run `34035539216`
+- job `101492796989`
+- state at latest inspection: `in_progress`, executing the bounded lab step.
+
+Do not start a duplicate run merely because another lesson starts. The acceptance gates are preserved in `checkpoints/HM01-2026-09-06T1315Z-registration-validation-launched.md`.
+
+A passing `009` can promote fake-LLIO registration validation/rejection behavior to `TEST-CONFIRMED`; it cannot establish successful physical-board registration, Ethernet timing, realtime deadlines, TRAM ordering, watchdog safety or functional safety.
 
 ## Promotion / uncertainty queue
 
-- HAL allocator fragmentation/reuse and cross-process unusual mapping behavior: **2000 / MEDIUM**.
-- Robust recovery after process/thread death with inconsistent HAL recursive-mutex accounting: **2000 / HIGH**.
-- Shared pin/signal atomicity and memory-ordering assumptions across supported architectures: **2000 / HIGH**.
-- Stable-vs-development comparison of ready/unready and object lifetime semantics: **2000 / MEDIUM**.
-- H04 live `addf`/`delf` mutation race/support semantics while realtime dispatch is active: **2000 / HIGH**.
-- H04 cross-thread signal memory visibility and cross-CPU ordering: **2000 / HIGH**.
-- Development-only one-shot `initf` behavior versus stable 2.9.x: **2000 / MEDIUM**.
-- M03 Task-side command mutex hold duration and command-to-echo latency distribution: **2000 / HIGH** unless needed by R05/T02 sooner.
-- M03 full coordinated/free/teleop planner and kinematics branch trace: **M08/M01/M02 then 2000 / HIGH**; not required for foundation phase ordering.
-- M03 cross-thread/base-thread exchange timing: **2000 / HIGH** unless required to make the one-servo-thread trace correct.
+- HAL allocator fragmentation/reuse and unusual cross-process mappings: **2000 / MEDIUM**.
+- Recovery after process/thread death with inconsistent HAL recursive-mutex accounting: **2000 / HIGH**.
+- Shared pin/signal atomicity and memory-ordering assumptions: **2000 / HIGH**.
+- Stable/development ready/unready and object-lifetime comparison: **2000 / MEDIUM**.
+- H04 live `addf`/`delf` mutation semantics while realtime dispatch is active: **2000 / HIGH**.
+- H04 cross-thread signal visibility/cross-CPU ordering: **2000 / HIGH**.
+- Development-only one-shot `initf` versus stable: **2000 / MEDIUM**.
+- M03 Task-side command-mutex hold duration and command-to-echo latency distribution: **2000 / HIGH** unless needed earlier.
+- M03 full planner/kinematics branch trace: **M08/M01/M02 then 2000 / HIGH**.
+- M03 cross-thread/base-thread exchange timing: **2000 / HIGH** unless required earlier.
 - HM01 exact IDROM/module descriptor semantics: **HM02 then 2000 / HIGH**.
 - HM01 TRAM/register-cycle ordering: **HM03/HM09 / HIGH**.
-- HM01 hotplug/re-registration/partial-failure lifetime edge cases: **2000 / MEDIUM-HIGH**.
-- Physical-machine latency/jitter qualification: **advanced commissioning / CRITICAL** and requires representative hardware/human involvement.
-- Functional-safety architecture/hazard analysis: **advanced safety / CRITICAL**; LinuxCNC functional behavior is not safety certification.
+- HM01 successful fake-board registration fixture extension: **HM02 or 2000 / MEDIUM**; not required because HM01 successful architecture is source-confirmed and the upstream fixture is rejection-oriented.
+- HM01 hotplug/re-registration/partial-failure lifetime edges: **2000 / MEDIUM-HIGH**.
+- Physical-machine latency/jitter qualification: **advanced commissioning / CRITICAL**, representative hardware/human involvement required.
+- Functional-safety architecture/hazard analysis: **advanced safety / CRITICAL**; LinuxCNC behavior is not safety certification.
 
 ## Current checkpoint / exact resume point
 
-Continue **HM01 — HostMot2 architecture and registration lifecycle**.
+Continue **HM01 — HostMot2 architecture and registration lifecycle** by inspecting Actions run `34035539216`, job `101492796989`, before launching anything else.
 
-1. Inventory pinned `hostmot2-lowlevel.h` / `hm2_lowlevel_io_t`: required callbacks, queued/split-read hooks, capability flags, board metadata, and error state.
-2. Trace one concrete pinned low-level caller into `hm2_register()`—prefer `hm2_eth` only far enough to establish discovery/LLIO population/registration ownership, deferring Ethernet transaction mechanics to E01.
-3. Trace `hm2_cleanup()` and module-descriptor dispatch sufficiently to document rollback/object lifetime and GTAG parser failure behavior.
-4. Produce the HM01 function/call-flow guide joining low-level driver registration -> generic HostMot2 initialization -> HAL function export -> unregister.
-5. Search for a simulation/test LLIO suitable for a bounded no-hardware registration experiment; design the experiment only after the source claims are explicit.
+If the run passes, require all gates in `checkpoints/HM01-2026-09-06T1315Z-registration-validation-launched.md`, write an accepted result, reconcile any discrepancy, create/grade the HM01 adversarial exam, and perform the fresh-AI handoff/graduation decision. If it is harness-invalid, correct only log-proven harness defects and launch at most one materially corrected retry. After HM01 graduation, advance to **E01 — hm2_eth architecture and board discovery/registration ownership**.

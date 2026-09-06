@@ -1,8 +1,8 @@
 # Active Curriculum Session
 
-- Start UTC: `2026-09-05T22:11:11Z`
+- Start UTC: `2026-09-06T00:14:59Z`
 - Module: `A01 Process/component architecture`
 - State: `IN PROGRESS`
-- Resume checkpoint: audit the reconciled bounded-observation branch against current main without launching another September 5 lab run; preserve corrections and a precise next-budget-window checkpoint.
+- Resume checkpoint: laboratory budget has reset; inspect current main, prepared A01 branch delta, latest runs/artifacts, and execute the highest-priority valid bounded A01 topology experiment if the harness remains sound.
 
 This file is a crash/concurrency marker. Closed sessions remain here until the next session overwrites the marker with its own start state.

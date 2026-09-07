@@ -2,23 +2,23 @@
 
 - Job: `013-s03-hostmot2-stale-state`
 - Job file: `lab-jobs/013-s03-hostmot2-stale-state.sh`
-- Workflow run ID: `34101471226`
+- Workflow run ID: `34102334339`
 - Attempt: `1`
-- Source commit: `4b847c8d5ef1e70fe6c9f32b09cf12ffa98541da`
-- Exit code: `1`
-- Finished UTC: `2026-09-07T08:39:18Z`
+- Source commit: `baf93443d1e8793640c58f81050cdb9a53be0979`
+- Exit code: `0`
+- Finished UTC: `2026-09-07T08:49:19Z`
 
 ## Metadata
 ```text
 LinuxCNC AI Curriculum Lab
-UTC start: 2026-09-07T08:36:24Z
-Repository commit: 4b847c8d5ef1e70fe6c9f32b09cf12ffa98541da
-Workflow run: 34101471226 attempt 1
+UTC start: 2026-09-07T08:45:58Z
+Repository commit: baf93443d1e8793640c58f81050cdb9a53be0979
+Workflow run: 34102334339 attempt 1
 Job file: lab-jobs/013-s03-hostmot2-stale-state.sh
 Runner: Linux runnervmejwal 6.17.0-1022-azure #22-Ubuntu SMP Mon Jul 27 17:24:03 UTC 2026 x86_64 x86_64 x86_64 GNU/Linux
 Inner lab timeout: 70 minutes (job ceiling: 75 minutes)
 
-UTC finish: 2026-09-07T08:39:18Z
+UTC finish: 2026-09-07T08:49:19Z
 ```
 
 ## Standard output
@@ -29,22 +29,22 @@ Prediction: after a fresh IOPort publication, persistent llio.io_error leaves th
 Boundary: production HostMot2 host path with test-only mutable LLIO; not Ethernet/FPGA/drive/physical-safety evidence.
 Get:1 file:/etc/apt/apt-mirrors.txt Mirrorlist [144 B]
 Hit:2 http://azure.archive.ubuntu.com/ubuntu noble InRelease
-Get:6 https://packages.microsoft.com/ubuntu/24.04/prod noble InRelease [3600 B]
 Get:3 http://azure.archive.ubuntu.com/ubuntu noble-updates InRelease [126 kB]
+Get:6 https://packages.microsoft.com/ubuntu/24.04/prod noble InRelease [3600 B]
 Get:4 http://azure.archive.ubuntu.com/ubuntu noble-backports InRelease [126 kB]
 Get:5 http://azure.archive.ubuntu.com/ubuntu noble-security InRelease [126 kB]
 Get:7 https://dl.google.com/linux/chrome-stable/deb stable InRelease [2548 B]
-Get:8 https://packages.microsoft.com/ubuntu/24.04/prod noble/main arm64 Packages [394 kB]
-Get:9 https://packages.microsoft.com/ubuntu/24.04/prod noble/main amd64 Packages [441 kB]
-Get:10 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 Packages [1260 kB]
-Get:11 http://azure.archive.ubuntu.com/ubuntu noble-updates/main Translation-en [292 kB]
-Get:12 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 Components [180 kB]
-Get:13 http://azure.archive.ubuntu.com/ubuntu noble-updates/universe amd64 Packages [1690 kB]
-Get:14 http://azure.archive.ubuntu.com/ubuntu noble-updates/universe Translation-en [339 kB]
-Get:15 http://azure.archive.ubuntu.com/ubuntu noble-updates/universe amd64 Components [388 kB]
-Get:16 http://azure.archive.ubuntu.com/ubuntu noble-updates/restricted amd64 Packages [1536 kB]
-Get:17 http://azure.archive.ubuntu.com/ubuntu noble-updates/restricted Translation-en [352 kB]
-Get:18 http://azure.archive.ubuntu.com/ubuntu noble-updates/multiverse amd64 Components [940 B]
+Get:8 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 Packages [1260 kB]
+Get:9 http://azure.archive.ubuntu.com/ubuntu noble-updates/main Translation-en [292 kB]
+Get:10 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 Components [180 kB]
+Get:11 http://azure.archive.ubuntu.com/ubuntu noble-updates/universe amd64 Packages [1690 kB]
+Get:12 http://azure.archive.ubuntu.com/ubuntu noble-updates/universe Translation-en [339 kB]
+Get:13 http://azure.archive.ubuntu.com/ubuntu noble-updates/universe amd64 Components [388 kB]
+Get:14 http://azure.archive.ubuntu.com/ubuntu noble-updates/restricted amd64 Packages [1536 kB]
+Get:15 http://azure.archive.ubuntu.com/ubuntu noble-updates/restricted Translation-en [352 kB]
+Get:16 http://azure.archive.ubuntu.com/ubuntu noble-updates/multiverse amd64 Components [940 B]
+Get:17 https://packages.microsoft.com/ubuntu/24.04/prod noble/main amd64 Packages [441 kB]
+Get:18 https://packages.microsoft.com/ubuntu/24.04/prod noble/main arm64 Packages [394 kB]
 Get:19 http://azure.archive.ubuntu.com/ubuntu noble-backports/main amd64 Components [5764 B]
 Get:20 http://azure.archive.ubuntu.com/ubuntu noble-backports/universe amd64 Components [12.6 kB]
 Get:21 http://azure.archive.ubuntu.com/ubuntu noble-security/main amd64 Packages [1002 kB]
@@ -56,7 +56,7 @@ Get:26 http://azure.archive.ubuntu.com/ubuntu noble-security/universe amd64 Comp
 Get:27 http://azure.archive.ubuntu.com/ubuntu noble-security/restricted amd64 Packages [1437 kB]
 Get:28 http://azure.archive.ubuntu.com/ubuntu noble-security/restricted Translation-en [334 kB]
 Get:29 https://dl.google.com/linux/chrome-stable/deb stable/main amd64 Packages [1401 B]
-Fetched 11.8 MB in 1s (8263 kB/s)
+Fetched 11.8 MB in 1s (8960 kB/s)
 Reading package lists...
 Reading package lists...
 Building dependency tree...
@@ -354,7 +354,7 @@ Get:166 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 python3-
 Get:167 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 python3-unidiff all 0.7.3-1 [11.0 kB]
 Get:168 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 equivs all 2.3.1 [19.0 kB]
 Get:169 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 libauthen-sasl-perl all 2.1700-1 [42.9 kB]
-Fetched 11.0 MB in 1s (11.7 MB/s)
+Fetched 11.0 MB in 8s (1353 kB/s)
 Selecting previously unselected package autopoint.
 (Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 201676 files and directories currently installed.)
 Preparing to unpack .../000-autopoint_0.21-14ubuntu2_all.deb ...
@@ -1038,7 +1038,8 @@ Not building database; man-db/auto-update is not 'true'.
 Processing triggers for install-info (7.1-3build2) ...
 Processing triggers for libc-bin (2.39-0ubuntu8.8) ...
         case 15: {
-        if (hal_pin_u32_newf(HAL_IN, &s03_input_word, comp_id, "%s.s03-input-word", me->llio.name) < 0) return -EIO;
+        if (hal_pin_u32_newf(HAL_IN, &s03_hal->input_word, comp_id, "%s.s03-input-word", me->llio.name) < 0) return -EIO;
+        s03_hal = hal_malloc(sizeof(*s03_hal));
 D: Found operating system 'linux-gnu'.
 I: Argument uspace is accepted for compatibility, but ignored
 I: Successfully configured for 'uspace-Ubuntu-24.04'.
@@ -1465,7 +1466,7 @@ Get:327 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 libmodbus-de
 Get:328 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 libtirpc-dev amd64 1.3.4+ds-1.1build1 [193 kB]
 Get:329 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 python3-xlib all 0.33-2 [120 kB]
 Preconfiguring packages ...
-Fetched 270 MB in 6s (42.1 MB/s)
+Fetched 270 MB in 21s (13.0 MB/s)
 Selecting previously unselected package libdebuginfod-common.
 (Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 208197 files and directories currently installed.)
 Preparing to unpack .../000-libdebuginfod-common_0.190-1.1ubuntu0.1_all.deb ...
@@ -3041,18 +3042,18 @@ Creating scaled_s32_sums.mak
 Creating scale.mak
 Creating sample_hold.mak
 Creating safety_latch.mak
-Creating raster.mak
 Creating reset.mak
-Creating radiobutton.mak
+Creating raster.mak
 Creating pushmsg.mak
+Creating radiobutton.mak
 Creating plasmac.mak
 Creating output_buffer.mak
 Creating orient.mak
 Creating or2.mak
 Creating oneshot.mak
 Creating ohmic.mak
-Creating not.mak
 Creating offset.mak
+Creating not.mak
 Creating near.mak
 Creating mux8.mak
 Creating mux4.mak
@@ -3109,8 +3110,8 @@ Creating deadzone.mak
 Creating ddt.mak
 Creating dbounce.mak
 Creating corexy_by_hal.mak
-converting conv for conv_u64_u32.comp
 converting conv for conv_u64_s64.comp
+converting conv for conv_u64_u32.comp
 converting conv for conv_u64_s32.comp
 converting conv for conv_u64_float.comp
 converting conv for conv_u64_bit.comp
@@ -3119,8 +3120,8 @@ converting conv for conv_u32_s64.comp
 converting conv for conv_u32_s32.comp
 converting conv for conv_u32_float.comp
 converting conv for conv_u32_bit.comp
-converting conv for conv_s64_u64.comp
 converting conv for conv_s64_u32.comp
+converting conv for conv_s64_u64.comp
 converting conv for conv_s64_s32.comp
 converting conv for conv_s64_float.comp
 converting conv for conv_s64_bit.comp
@@ -3162,8 +3163,8 @@ Creating conv_u64_s64.mak
 Creating conv_u64_s32.mak
 Creating conv_u64_float.mak
 Creating conv_u64_bit.mak
-Creating conv_u32_u64.mak
 Creating conv_u32_s64.mak
+Creating conv_u32_u64.mak
 Creating conv_u32_s32.mak
 Creating conv_u32_float.mak
 Creating conv_u32_bit.mak
@@ -3174,24 +3175,24 @@ Creating conv_s64_float.mak
 Creating conv_s64_bit.mak
 Creating conv_s32_u64.mak
 Creating conv_s32_u32.mak
-Creating conv_s32_s64.mak
 Creating conv_s32_float.mak
+Creating conv_s32_s64.mak
 Creating conv_s32_bit.mak
 Creating conv_float_u64.mak
 Creating conv_float_u32.mak
 Creating conv_float_s64.mak
 Creating conv_float_s32.mak
 Creating conv_bit_u64.mak
-Creating conv_bit_s64.mak
 Creating conv_bit_u32.mak
+Creating conv_bit_s64.mak
 Creating conv_bit_s32.mak
 Creating conv_bit_float.mak
 Exporting hal.h
 Exporting hostmot2-serial.h
 Exporting linuxcnc.h
 Exporting kinematics.h
-Exporting emcmotcfg.h
 Exporting inifile.hh
+Exporting emcmotcfg.h
 Exporting inifile.h
 Exporting emcpos.h
 Exporting motion_types.h
@@ -3225,13 +3226,13 @@ Exporting rtapi_string.h
 Exporting rtapi_vsnprintf.h
 Copying test input hal/components/lincurve.comp
 Copying test input hal/components/logic.comp
-Copying test input hal/components/bitslice.comp
 sed hal/drivers/mesa_uart.comp -e "1 s/mesa_uart/mesa_uart_test/" > ../tests/halcompile/serial-out-of-tree/mesa_uart_test.comp
+Copying test input hal/components/bitslice.comp
 sed ../tests/halcompile/userspace/rand.comp -e "1 s/rand/rand_test/" > ../tests/halcompile/userspace/rand_test.comp
 cp ../scripts/rtapi.conf ../tests/uspace/spawnv-root/rtapi.conf
 Compiling libposemath/_posemath.c
-Compiling libposemath/gomath.c
 Compiling libposemath/posemath.cc
+Compiling libposemath/gomath.c
 Compiling libposemath/emcpose.c
 Compiling libnml/rcs/rcs_print.cc
 Compiling libnml/rcs/rcs_exit.cc
@@ -3496,13 +3497,13 @@ Syntax checking python script hal_input
 Syntax checking python script scorbot-er-3
 Syntax checking python script mitsub_vfd
 Syntax checking python script pmx485
-Copying python script hal_input
 Copying python script scorbot-er-3
+Copying python script hal_input
 Syntax checking python script sim-torch
 Syntax checking python script z_level_compensation
 Copying python script mitsub_vfd
-Copying python script pmx485
 Syntax checking python script mqtt-publisher
+Copying python script pmx485
 Syntax checking python script hal_bridge
 Copying python script sim-torch
 Copying python script z_level_compensation
@@ -3539,8 +3540,8 @@ Syntax checking python script xyzab-tdr-gui
 Copying python script millturngui
 Copying python script xyzac-trt-gui
 Compiling hal/halmodule.cc
-Compiling hal/halquery.cc
 Copying python script xyzbc-trt-gui
+Compiling hal/halquery.cc
 Compiling emc/usr_intf/axis/extensions/emcmodule.cc
 Copying python script xyzab-tdr-gui
 Syntax checking python script linuxcnctop
@@ -3716,13 +3717,22 @@ Linking liblinuxcnc-uspace-posix.so.0
 Creating shared library liblinuxcnchal.so.0
 Creating shared library liblinuxcncini.so.1
 Syntax checking python script halcompile
+ln -sf liblinuxcnchal.so.0 ../lib/liblinuxcnchal.so
+Linking hy_vfd
+Linking xhc-whb04b-6
 Linking liblinuxcnc.a
 Copying python script halcompile
 tooldata: depends: objects/emc/tooldata/tooldata_mmap.o objects/emc/tooldata/tooldata_common.o objects/emc/tooldata/tooldata_db.o
 tooldata: Linking: libtooldata.so.0
+ln -sf liblinuxcncini.so.1 ../lib/liblinuxcncini.so
+Linking libpyplugin.so.0
+Linking inivalue
+c++ -std=gnu++20 -g -L/home/runner/work/_temp/linuxcnc-s03-013/lib -Wl,-rpath,/home/runner/work/_temp/linuxcnc-s03-013/lib -ltirpc  -lgpiod  -Xlinker -export-dynamic -Wl,-O1 -Wl,-Bsymbolic-functions -Wl,-soname,libpyplugin.so.0 -shared -o ../lib/libpyplugin.so.0 objects/emc/pythonplugin/python_plugin.o ../lib/liblinuxcncini.so.1 -lstdc++ -lboost_python312 -L/usr/lib/x86_64-linux-gnu -lpython3.12 -ldl -lm
 Linking motion-logger
+ln -sf libtooldata.so.0 ../lib/libtooldata.so
 Linking linuxcnc_module_helper
 gcc -Wl,-z,relro -o ../bin/linuxcnc_module_helper objects/module_helper/module_helper.o
+Linking python module _hal.so
 Linking python module lineardeltakins.so
 c++ -std=gnu++20 -L/home/runner/work/_temp/linuxcnc-s03-013/lib -Wl,-rpath,/home/runner/work/_temp/linuxcnc-s03-013/lib -ltirpc  -lgpiod  -shared -o ../lib/python/lineardeltakins.so objects/emc/kinematics/lineardeltakins.o -lboost_python312
 Linking python module rotarydeltakins.so
@@ -3919,8 +3929,8 @@ Compiling realtime objects/hal/components/conv_s32_u64.c
 Compiling realtime objects/hal/components/conv_s64_bit.c
 Compiling realtime objects/hal/components/conv_s64_float.c
 Compiling realtime objects/hal/components/conv_s64_s32.c
-Compiling realtime objects/hal/components/conv_s64_u32.c
 Compiling realtime objects/hal/components/conv_s64_u64.c
+Compiling realtime objects/hal/components/conv_s64_u32.c
 Compiling realtime objects/hal/components/conv_u32_bit.c
 Compiling realtime objects/hal/components/conv_u32_float.c
 Compiling realtime objects/hal/components/conv_u32_s32.c
@@ -3939,8 +3949,8 @@ Compiling realtime objects/hal/components/demux.c
 Compiling realtime objects/hal/components/differential.c
 Compiling realtime objects/hal/components/div2.c
 Compiling realtime objects/hal/components/edge.c
-Compiling realtime objects/hal/components/eoffset_per_angle.c
 Compiling realtime objects/hal/components/estop_latch.c
+Compiling realtime objects/hal/components/eoffset_per_angle.c
 Compiling realtime objects/hal/components/feedcomp.c
 Compiling realtime objects/hal/components/filter_kalman.c
 Compiling realtime objects/hal/components/flipflop.c
@@ -4057,16 +4067,16 @@ Linking ../rtlib/threads.so
 Linking ../rtlib/supply.so
 Linking ../rtlib/sim_encoder.so
 Linking ../rtlib/weighted_sum.so
-Linking ../rtlib/modmath.so
 Linking ../rtlib/watchdog.so
+Linking ../rtlib/modmath.so
 Linking ../rtlib/streamer.so
 Linking ../rtlib/sampler.so
 Linking ../rtlib/hal_parport.so
 Linking ../rtlib/hal_speaker.so
 Linking ../rtlib/hal_gm.so
 Linking ../rtlib/hal_ppmc.so
-Linking ../rtlib/hal_pi_gpio.so
 Linking ../rtlib/hal_bb_gpio.so
+Linking ../rtlib/hal_pi_gpio.so
 Linking ../rtlib/hal_gpio.so
 Linking ../rtlib/hostmot2.so
 Linking ../rtlib/hm2_test.so
@@ -4083,8 +4093,8 @@ Linking ../rtlib/classicladder_rt.so
 Linking ../rtlib/scope_rt.so
 Linking ../rtlib/hal_lib.so
 Linking ../rtlib/trivkins.so
-Linking ../rtlib/maxkins.so
 Linking ../rtlib/rotatekins.so
+Linking ../rtlib/maxkins.so
 Linking ../rtlib/tripodkins.so
 Linking ../rtlib/corexykins.so
 Linking ../rtlib/lineardeltakins.so
@@ -4102,8 +4112,8 @@ Linking ../rtlib/three21kins.so
 Linking ../rtlib/5axiskins.so
 Linking ../rtlib/motmod.so
 Linking ../rtlib/homemod.so
-Linking ../rtlib/tpmod.so
 ln -sf libposemath.so.0 ../lib/libposemath.so
+Linking ../rtlib/tpmod.so
 ln -sf libnml.so.0 ../lib/libnml.so
 ln -sf liblinuxcnc-uspace-posix.so.0 ../lib/liblinuxcnc-uspace-posix.so
 Linking halstreamer
@@ -4116,7 +4126,6 @@ Linking svd-ps_vfd
 Linking shuttle
 Linking xhc-hb04
 Linking sendkeys
-ln -sf liblinuxcnchal.so.0 ../lib/liblinuxcnchal.so
 Preprocessing thermistor.comp
 Linking vfs11_vfd
 Linking halcmd
@@ -4124,20 +4133,13 @@ Linking halrmt
 Linking vfdb_vfd
 Preprocessing wj200_vfd.comp
 Preprocessing pi500_vfd.comp
-Linking hy_vfd
-Linking xhc-whb04b-6
 Linking linuxcncrsh
 Linking schedrmt
 Linking linuxcnclcd
 Linking halui
 Linking linuxcncsvr
-ln -sf liblinuxcncini.so.1 ../lib/liblinuxcncini.so
-Linking libpyplugin.so.0
+ln -sf libpyplugin.so.0 ../lib/libpyplugin.so
 emc/Submakefile:Linking genserkins
-c++ -std=gnu++20 -g -L/home/runner/work/_temp/linuxcnc-s03-013/lib -Wl,-rpath,/home/runner/work/_temp/linuxcnc-s03-013/lib -ltirpc  -lgpiod  -Xlinker -export-dynamic -Wl,-O1 -Wl,-Bsymbolic-functions -Wl,-soname,libpyplugin.so.0 -shared -o ../lib/libpyplugin.so.0 objects/emc/pythonplugin/python_plugin.o ../lib/liblinuxcncini.so.1 -lstdc++ -lboost_python312 -L/usr/lib/x86_64-linux-gnu -lpython3.12 -ldl -lm
-Linking inivalue
-ln -sf libtooldata.so.0 ../lib/libtooldata.so
-Linking python module _hal.so
 Linking python module linuxcnc.so
 Linking ../rtlib/abs.so
 Linking ../rtlib/abs_s32.so
@@ -4180,8 +4182,8 @@ Linking ../rtlib/conv_s64_u64.so
 Linking ../rtlib/conv_u32_bit.so
 Linking ../rtlib/conv_u32_float.so
 Linking ../rtlib/conv_u32_s32.so
-Linking ../rtlib/conv_u32_s64.so
 Linking ../rtlib/conv_u32_u64.so
+Linking ../rtlib/conv_u32_s64.so
 Linking ../rtlib/conv_u64_bit.so
 Linking ../rtlib/conv_u64_float.so
 Linking ../rtlib/conv_u64_s32.so
@@ -4195,8 +4197,8 @@ Linking ../rtlib/demux.so
 Linking ../rtlib/differential.so
 Linking ../rtlib/div2.so
 Linking ../rtlib/edge.so
-Linking ../rtlib/eoffset_per_angle.so
 Linking ../rtlib/estop_latch.so
+Linking ../rtlib/eoffset_per_angle.so
 Linking ../rtlib/feedcomp.so
 Linking ../rtlib/filter_kalman.so
 Linking ../rtlib/flipflop.so
@@ -4248,8 +4250,8 @@ Linking ../rtlib/offset.so
 Linking ../rtlib/ohmic.so
 Linking ../rtlib/oneshot.so
 Linking ../rtlib/or2.so
-Linking ../rtlib/orient.so
 Linking ../rtlib/output_buffer.so
+Linking ../rtlib/orient.so
 Linking ../rtlib/plasmac.so
 Linking ../rtlib/pushmsg.so
 Linking ../rtlib/radiobutton.so
@@ -4298,7 +4300,6 @@ Linking ../rtlib/mesa_uart.so
 Compiling objects/hal/user_comps/thermistor.c
 Compiling hal/user_comps/wj200_vfd/wj200_vfd.c
 Compiling hal/user_comps/pi500_vfd/pi500_vfd.c
-ln -sf libpyplugin.so.0 ../lib/libpyplugin.so
 Linking librs274.so.0
 c++ -std=gnu++20 -g -L/home/runner/work/_temp/linuxcnc-s03-013/lib -Wl,-rpath,/home/runner/work/_temp/linuxcnc-s03-013/lib -ltirpc  -lgpiod  -Xlinker -export-dynamic -Wl,-O1 -Wl,-Bsymbolic-functions -Wl,-soname,librs274.so.0 -shared -o ../lib/librs274.so.0 objects/emc/rs274ngc/interp_arc.o objects/emc/rs274ngc/interp_array.o objects/emc/rs274ngc/interp_base.o objects/emc/rs274ngc/interp_check.o objects/emc/rs274ngc/interp_convert.o objects/emc/rs274ngc/interp_queue.o objects/emc/rs274ngc/interp_cycles.o objects/emc/rs274ngc/interp_execute.o objects/emc/rs274ngc/interp_find.o objects/emc/rs274ngc/interp_internal.o objects/emc/rs274ngc/interp_inverse.o objects/emc/rs274ngc/interp_read.o objects/emc/rs274ngc/interp_write.o objects/emc/rs274ngc/interp_o_word.o objects/emc/rs274ngc/interp_g7x.o objects/emc/rs274ngc/nurbs_additional_functions.o objects/emc/rs274ngc/interp_namedparams.o objects/emc/rs274ngc/interp_python.o objects/emc/rs274ngc/interp_remap.o objects/emc/rs274ngc/interp_setup.o objects/emc/rs274ngc/canonmodule.o objects/emc/rs274ngc/pyparamclass.o objects/emc/rs274ngc/pyemctypes.o objects/emc/rs274ngc/pyinterp1.o objects/emc/rs274ngc/pyblock.o objects/emc/rs274ngc/pyarrays.o objects/emc/rs274ngc/interpmodule.o objects/emc/rs274ngc/rs274ngc_pre.o objects/emc/rs274ngc/interp_inspection.o objects/emc/nml_intf/modal_state.o ../lib/liblinuxcncini.so ../lib/libpyplugin.so ../lib/liblinuxcnchal.so.0 ../lib/libtooldata.so.0 -lstdc++ -lboost_python312 -L/usr/lib/x86_64-linux-gnu -lpython3.12 -ldl -lm
 Linking thermistor
@@ -4306,8 +4307,8 @@ Linking pi500_vfd
 Linking wj200_vfd
 ln -sf librs274.so.0 ../lib/librs274.so
 Linking milltask
-c++ -std=gnu++20 -o ../bin/milltask objects/emc/motion/emcmotglb.o objects/emc/task/emctask.o objects/emc/task/emccanon.o objects/emc/task/emctaskmain.o objects/emc/motion/usrmotintf.o objects/emc/motion/emcmotutil.o objects/emc/task/taskintf.o objects/emc/motion/dbuf.o objects/emc/motion/stashf.o objects/emc/task/taskclass.o objects/emc/task/backtrace.o objects/emc/usr_intf/mapini.o ../lib/librs274.so.0 ../lib/liblinuxcnc.a ../lib/libnml.so.0 ../lib/liblinuxcncini.so.1 ../lib/libposemath.so.0 ../lib/liblinuxcnchal.so.0 ../lib/libpyplugin.so.0 ../lib/libtooldata.so.0 -L/home/runner/work/_temp/linuxcnc-s03-013/lib -Wl,-rpath,/home/runner/work/_temp/linuxcnc-s03-013/lib -ltirpc  -lgpiod  -Xlinker -export-dynamic -Wl,-O1 -Wl,-Bsymbolic-functions -lboost_python312 -L/usr/lib/x86_64-linux-gnu -lpython3.12 -ldl -lm -lfmt
 Linking rs274
+c++ -std=gnu++20 -o ../bin/milltask objects/emc/motion/emcmotglb.o objects/emc/task/emctask.o objects/emc/task/emccanon.o objects/emc/task/emctaskmain.o objects/emc/motion/usrmotintf.o objects/emc/motion/emcmotutil.o objects/emc/task/taskintf.o objects/emc/motion/dbuf.o objects/emc/motion/stashf.o objects/emc/task/taskclass.o objects/emc/task/backtrace.o objects/emc/usr_intf/mapini.o ../lib/librs274.so.0 ../lib/liblinuxcnc.a ../lib/libnml.so.0 ../lib/liblinuxcncini.so.1 ../lib/libposemath.so.0 ../lib/liblinuxcnchal.so.0 ../lib/libpyplugin.so.0 ../lib/libtooldata.so.0 -L/home/runner/work/_temp/linuxcnc-s03-013/lib -Wl,-rpath,/home/runner/work/_temp/linuxcnc-s03-013/lib -ltirpc  -lgpiod  -Xlinker -export-dynamic -Wl,-O1 -Wl,-Bsymbolic-functions -lboost_python312 -L/usr/lib/x86_64-linux-gnu -lpython3.12 -ldl -lm -lfmt
 Linking python module gcode.so
 c++ -std=gnu++20 -L/home/runner/work/_temp/linuxcnc-s03-013/lib -Wl,-rpath,/home/runner/work/_temp/linuxcnc-s03-013/lib -ltirpc  -lgpiod  -shared -o ../lib/python/gcode.so objects/emc/rs274ngc/gcodemodule.o ../lib/librs274.so.0 -lstdc++
 Linking canterp.so
@@ -4317,6 +4318,18 @@ make: Entering directory '/home/runner/work/_temp/linuxcnc-s03-013/src'
 chmod u-s ../bin/rtapi_app
 setcap cap_ipc_lock,cap_net_admin,cap_sys_rawio,cap_sys_nice+ep ../bin/rtapi_app
 make: Leaving directory '/home/runner/work/_temp/linuxcnc-s03-013/src'
+     9  bit   OUT                 FALSE  hm2_test.0.gpio.000.in
+     9  bit   OUT                  TRUE  hm2_test.0.gpio.000.in_not
+Component Pins:
+Owner   Type  Dir                 Value  Name
+     9  u32   IN             0x00000000  hm2_test.0.s03-input-word
+     9  u32   OUT            0x000003B5  hm2_test.0.s03-write-count
+
+gateA input=TRUE writes=1067
+gateBC stale-input=TRUE writes-before=1069 writes-after=1069
+gateD recovered-input=FALSE writes-after-recovery=1126
+S03-013 PASS: production HostMot2 host path preserved stale HAL publication and suppressed LLIO writes under persistent io_error, then resumed after clear.
+No claim is made about Ethernet packet behavior, FPGA watchdog timing, hardware resynchronization, actuator response, or functional safety.
 ```
 
 ## Standard error
@@ -4332,7 +4345,7 @@ No user sessions are running outdated binaries.
 
 No VM guests are running outdated hypervisor (qemu) binaries on this host.
 Cloning into '/home/runner/work/_temp/linuxcnc-s03-013'...
-Updating files:   0% (1/9526)Updating files:   1% (96/9526)Updating files:   2% (191/9526)Updating files:   3% (286/9526)Updating files:   4% (382/9526)Updating files:   5% (477/9526)Updating files:   6% (572/9526)Updating files:   7% (667/9526)Updating files:   8% (763/9526)Updating files:   9% (858/9526)Updating files:  10% (953/9526)Updating files:  11% (1048/9526)Updating files:  12% (1144/9526)Updating files:  13% (1239/9526)Updating files:  14% (1334/9526)Updating files:  15% (1429/9526)Updating files:  16% (1525/9526)Updating files:  17% (1620/9526)Updating files:  18% (1715/9526)Updating files:  19% (1810/9526)Updating files:  20% (1906/9526)Updating files:  21% (2001/9526)Updating files:  22% (2096/9526)Updating files:  23% (2191/9526)Updating files:  24% (2287/9526)Updating files:  25% (2382/9526)Updating files:  25% (2426/9526)Updating files:  26% (2477/9526)Updating files:  27% (2573/9526)Updating files:  28% (2668/9526)Updating files:  29% (2763/9526)Updating files:  30% (2858/9526)Updating files:  31% (2954/9526)Updating files:  32% (3049/9526)Updating files:  33% (3144/9526)Updating files:  34% (3239/9526)Updating files:  35% (3335/9526)Updating files:  36% (3430/9526)Updating files:  37% (3525/9526)Updating files:  38% (3620/9526)Updating files:  39% (3716/9526)Updating files:  40% (3811/9526)Updating files:  41% (3906/9526)Updating files:  42% (4001/9526)Updating files:  43% (4097/9526)Updating files:  44% (4192/9526)Updating files:  45% (4287/9526)Updating files:  46% (4382/9526)Updating files:  47% (4478/9526)Updating files:  48% (4573/9526)Updating files:  49% (4668/9526)Updating files:  50% (4763/9526)Updating files:  51% (4859/9526)Updating files:  52% (4954/9526)Updating files:  53% (5049/9526)Updating files:  54% (5145/9526)Updating files:  55% (5240/9526)Updating files:  56% (5335/9526)Updating files:  57% (5430/9526)Updating files:  58% (5526/9526)Updating files:  59% (5621/9526)Updating files:  60% (5716/9526)Updating files:  61% (5811/9526)Updating files:  62% (5907/9526)Updating files:  63% (6002/9526)Updating files:  64% (6097/9526)Updating files:  65% (6192/9526)Updating files:  66% (6288/9526)Updating files:  67% (6383/9526)Updating files:  68% (6478/9526)Updating files:  69% (6573/9526)Updating files:  70% (6669/9526)Updating files:  71% (6764/9526)Updating files:  72% (6859/9526)Updating files:  73% (6954/9526)Updating files:  74% (7050/9526)Updating files:  75% (7145/9526)Updating files:  76% (7240/9526)Updating files:  77% (7336/9526)Updating files:  78% (7431/9526)Updating files:  79% (7526/9526)Updating files:  80% (7621/9526)Updating files:  81% (7717/9526)Updating files:  82% (7812/9526)Updating files:  83% (7907/9526)Updating files:  84% (8002/9526)Updating files:  85% (8098/9526)Updating files:  86% (8193/9526)Updating files:  87% (8288/9526)Updating files:  88% (8383/9526)Updating files:  89% (8479/9526)Updating files:  90% (8574/9526)Updating files:  91% (8669/9526)Updating files:  92% (8764/9526)Updating files:  93% (8860/9526)Updating files:  94% (8955/9526)Updating files:  95% (9050/9526)Updating files:  96% (9145/9526)Updating files:  97% (9241/9526)Updating files:  98% (9336/9526)Updating files:  99% (9431/9526)Updating files: 100% (9526/9526)Updating files: 100% (9526/9526), done.
+Updating files:   0% (1/9526)Updating files:   1% (96/9526)Updating files:   2% (191/9526)Updating files:   3% (286/9526)Updating files:   4% (382/9526)Updating files:   5% (477/9526)Updating files:   6% (572/9526)Updating files:   7% (667/9526)Updating files:   8% (763/9526)Updating files:   9% (858/9526)Updating files:  10% (953/9526)Updating files:  11% (1048/9526)Updating files:  12% (1144/9526)Updating files:  13% (1239/9526)Updating files:  13% (1282/9526)Updating files:  14% (1334/9526)Updating files:  15% (1429/9526)Updating files:  16% (1525/9526)Updating files:  17% (1620/9526)Updating files:  18% (1715/9526)Updating files:  19% (1810/9526)Updating files:  20% (1906/9526)Updating files:  21% (2001/9526)Updating files:  22% (2096/9526)Updating files:  23% (2191/9526)Updating files:  24% (2287/9526)Updating files:  25% (2382/9526)Updating files:  26% (2477/9526)Updating files:  27% (2573/9526)Updating files:  28% (2668/9526)Updating files:  29% (2763/9526)Updating files:  30% (2858/9526)Updating files:  31% (2954/9526)Updating files:  32% (3049/9526)Updating files:  33% (3144/9526)Updating files:  34% (3239/9526)Updating files:  35% (3335/9526)Updating files:  36% (3430/9526)Updating files:  37% (3525/9526)Updating files:  38% (3620/9526)Updating files:  39% (3716/9526)Updating files:  40% (3811/9526)Updating files:  41% (3906/9526)Updating files:  42% (4001/9526)Updating files:  43% (4097/9526)Updating files:  44% (4192/9526)Updating files:  45% (4287/9526)Updating files:  46% (4382/9526)Updating files:  47% (4478/9526)Updating files:  48% (4573/9526)Updating files:  49% (4668/9526)Updating files:  50% (4763/9526)Updating files:  51% (4859/9526)Updating files:  52% (4954/9526)Updating files:  53% (5049/9526)Updating files:  54% (5145/9526)Updating files:  55% (5240/9526)Updating files:  56% (5335/9526)Updating files:  57% (5430/9526)Updating files:  58% (5526/9526)Updating files:  59% (5621/9526)Updating files:  60% (5716/9526)Updating files:  61% (5811/9526)Updating files:  62% (5907/9526)Updating files:  63% (6002/9526)Updating files:  64% (6097/9526)Updating files:  65% (6192/9526)Updating files:  66% (6288/9526)Updating files:  67% (6383/9526)Updating files:  68% (6478/9526)Updating files:  69% (6573/9526)Updating files:  70% (6669/9526)Updating files:  71% (6764/9526)Updating files:  72% (6859/9526)Updating files:  73% (6954/9526)Updating files:  74% (7050/9526)Updating files:  75% (7145/9526)Updating files:  76% (7240/9526)Updating files:  77% (7336/9526)Updating files:  78% (7431/9526)Updating files:  79% (7526/9526)Updating files:  80% (7621/9526)Updating files:  81% (7717/9526)Updating files:  82% (7812/9526)Updating files:  83% (7907/9526)Updating files:  84% (8002/9526)Updating files:  85% (8098/9526)Updating files:  86% (8193/9526)Updating files:  87% (8288/9526)Updating files:  88% (8383/9526)Updating files:  89% (8479/9526)Updating files:  90% (8574/9526)Updating files:  91% (8669/9526)Updating files:  92% (8764/9526)Updating files:  92% (8831/9526)Updating files:  93% (8860/9526)Updating files:  94% (8955/9526)Updating files:  95% (9050/9526)Updating files:  96% (9145/9526)Updating files:  97% (9241/9526)Updating files:  98% (9336/9526)Updating files:  99% (9431/9526)Updating files: 100% (9526/9526)Updating files: 100% (9526/9526), done.
 HEAD is now at 8bf4605ae Merge pull request #4501 from grandixximo/gmoccapy-quit-4500
 
 Running kernel seems to be up-to-date.
@@ -4352,58 +4365,42 @@ Reading 0/189 dependency files
 Done reading dependencies
 Reading 0/303 realtime dependency files
 Done reading realtime dependencies
-hal/drivers/mesa-hostmot2/hm2_test.c:56:1: warning: ‘hal_u32_t’ is deprecated: Use getter/setter API [-Wdeprecated-declarations]
-   56 | static hal_u32_t *s03_input_word;
-      | ^~~~~~
-hal/drivers/mesa-hostmot2/hm2_test.c:57:1: warning: ‘hal_u32_t’ is deprecated: Use getter/setter API [-Wdeprecated-declarations]
-   57 | static hal_u32_t *s03_write_count;
-      | ^~~~~~
-hal/drivers/mesa-hostmot2/hm2_test.c:58:1: warning: ‘hal_u32_t’ is deprecated: Use getter/setter API [-Wdeprecated-declarations]
-   58 | static hal_u32_t *s03_last_write_addr;
-      | ^~~~~~
-hal/drivers/mesa-hostmot2/hm2_test.c:59:1: warning: ‘hal_u32_t’ is deprecated: Use getter/setter API [-Wdeprecated-declarations]
-   59 | static hal_u32_t *s03_last_write_word;
-      | ^~~~~~
+hal/drivers/mesa-hostmot2/hm2_test.c:57:5: warning: ‘hal_u32_t’ is deprecated: Use getter/setter API [-Wdeprecated-declarations]
+   57 |     hal_u32_t *input_word;
+      |     ^~~~~~~~~
+hal/drivers/mesa-hostmot2/hm2_test.c:58:5: warning: ‘hal_u32_t’ is deprecated: Use getter/setter API [-Wdeprecated-declarations]
+   58 |     hal_u32_t *write_count;
+      |     ^~~~~~~~~
+hal/drivers/mesa-hostmot2/hm2_test.c:59:5: warning: ‘hal_u32_t’ is deprecated: Use getter/setter API [-Wdeprecated-declarations]
+   59 |     hal_u32_t *last_write_addr;
+      |     ^~~~~~~~~
+hal/drivers/mesa-hostmot2/hm2_test.c:60:5: warning: ‘hal_u32_t’ is deprecated: Use getter/setter API [-Wdeprecated-declarations]
+   60 |     hal_u32_t *last_write_word;
+      |     ^~~~~~~~~
 hal/drivers/mesa-hostmot2/hm2_test.c: In function ‘rtapi_app_main’:
-hal/drivers/mesa-hostmot2/hm2_test.c:620:9: warning: ‘hal_pin_u32_newf’ is deprecated: Use hal_pin_new_ui32() [-Wdeprecated-declarations]
-  620 |         if (hal_pin_u32_newf(HAL_IN, &s03_input_word, comp_id, "%s.s03-input-word", me->llio.name) < 0) return -EIO;
+hal/drivers/mesa-hostmot2/hm2_test.c:629:9: warning: ‘hal_pin_u32_newf’ is deprecated: Use hal_pin_new_ui32() [-Wdeprecated-declarations]
+  629 |         if (hal_pin_u32_newf(HAL_IN, &s03_hal->input_word, comp_id, "%s.s03-input-word", me->llio.name) < 0) return -EIO;
       |         ^~
 In file included from hal/drivers/mesa-hostmot2/hm2_test.c:33:
 /home/runner/work/_temp/linuxcnc-s03-013/src/../include/hal.h:696:12: note: declared here
   696 | extern int hal_pin_u32_newf(hal_pin_dir_t dir,
       |            ^~~~~~~~~~~~~~~~
-hal/drivers/mesa-hostmot2/hm2_test.c:621:9: warning: ‘hal_pin_u32_newf’ is deprecated: Use hal_pin_new_ui32() [-Wdeprecated-declarations]
-  621 |         if (hal_pin_u32_newf(HAL_OUT, &s03_write_count, comp_id, "%s.s03-write-count", me->llio.name) < 0) return -EIO;
+hal/drivers/mesa-hostmot2/hm2_test.c:630:9: warning: ‘hal_pin_u32_newf’ is deprecated: Use hal_pin_new_ui32() [-Wdeprecated-declarations]
+  630 |         if (hal_pin_u32_newf(HAL_OUT, &s03_hal->write_count, comp_id, "%s.s03-write-count", me->llio.name) < 0) return -EIO;
       |         ^~
 /home/runner/work/_temp/linuxcnc-s03-013/src/../include/hal.h:696:12: note: declared here
   696 | extern int hal_pin_u32_newf(hal_pin_dir_t dir,
       |            ^~~~~~~~~~~~~~~~
-hal/drivers/mesa-hostmot2/hm2_test.c:622:9: warning: ‘hal_pin_u32_newf’ is deprecated: Use hal_pin_new_ui32() [-Wdeprecated-declarations]
-  622 |         if (hal_pin_u32_newf(HAL_OUT, &s03_last_write_addr, comp_id, "%s.s03-last-write-addr", me->llio.name) < 0) return -EIO;
+hal/drivers/mesa-hostmot2/hm2_test.c:631:9: warning: ‘hal_pin_u32_newf’ is deprecated: Use hal_pin_new_ui32() [-Wdeprecated-declarations]
+  631 |         if (hal_pin_u32_newf(HAL_OUT, &s03_hal->last_write_addr, comp_id, "%s.s03-last-write-addr", me->llio.name) < 0) return -EIO;
       |         ^~
 /home/runner/work/_temp/linuxcnc-s03-013/src/../include/hal.h:696:12: note: declared here
   696 | extern int hal_pin_u32_newf(hal_pin_dir_t dir,
       |            ^~~~~~~~~~~~~~~~
-hal/drivers/mesa-hostmot2/hm2_test.c:623:9: warning: ‘hal_pin_u32_newf’ is deprecated: Use hal_pin_new_ui32() [-Wdeprecated-declarations]
-  623 |         if (hal_pin_u32_newf(HAL_OUT, &s03_last_write_word, comp_id, "%s.s03-last-write-word", me->llio.name) < 0) return -EIO;
+hal/drivers/mesa-hostmot2/hm2_test.c:632:9: warning: ‘hal_pin_u32_newf’ is deprecated: Use hal_pin_new_ui32() [-Wdeprecated-declarations]
+  632 |         if (hal_pin_u32_newf(HAL_OUT, &s03_hal->last_write_word, comp_id, "%s.s03-last-write-word", me->llio.name) < 0) return -EIO;
       |         ^~
 /home/runner/work/_temp/linuxcnc-s03-013/src/../include/hal.h:696:12: note: declared here
   696 | extern int hal_pin_u32_newf(hal_pin_dir_t dir,
       |            ^~~~~~~~~~~~~~~~
---- halrun stdout ---
---- halrun stderr ---
-rtapi_get_realtime_type: Realtime type unknown but SCHED_FIFO available
-Note: SCHED_FIFO available but kernel is not PREEMPT_RT.  Latency may be unbounded; install a PREEMPT_RT kernel for hard realtime guarantees.
-Note: Using POSIX realtime
-hm2_test: loading HostMot2 test driver with test pattern 15
-HAL: ERROR: data_ptr_addr not in shared memory
-hm2_test: rtapi_app_main: Input/output error (-5)
-<stdin>:2: waitpid failed /home/runner/work/_temp/linuxcnc-s03-013/bin/rtapi_app hm2_test
-<stdin>:2: /home/runner/work/_temp/linuxcnc-s03-013/bin/rtapi_app exited without becoming ready
-<stdin>:2: insmod for hm2_test failed, returned -1
-No isolated CPU's found, expect some latency or set RTAPI_CPU_NUMBER to select CPU
-HAL: ERROR: function 'hm2_test.0.read' not found
-<stdin>:4: addf failed
-HAL: ERROR: function 'hm2_test.0.write' not found
-<stdin>:5: addf failed
 ```

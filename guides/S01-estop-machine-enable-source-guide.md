@@ -26,9 +26,10 @@ Every arrow below must be classified as **command**, **status**, **diagnostic**,
 |---|---|---|---|
 | `src/emc/task/taskclass.cc::Task::iocontrol_hal_init()` | milltask/userspace, non-realtime | exports iocontrol HAL boundary | SOURCE-CONFIRMED |
 | `Task::run()` | periodic Task cycle | samples external E-stop HAL input into I/O status | SOURCE-CONFIRMED |
-| `Task::emcAuxEstopOn/Off()` | Task command handling | drives controller E-stop/enable intent toward HAL | SOURCE-CONFIRMED |
+| `Task::emcAuxEstopOn/Off()` | Task command handling | drives controller-originated E-stop/enable intent toward HAL | SOURCE-CONFIRMED |
 | `src/emc/task/emctask.cc::emcTaskSetState()` | Task/userspace | implements requested Task state transitions | SOURCE-CONFIRMED |
 | `determineState()` | Task/userspace | synthesizes Task state from I/O E-stop and motion enabled status | SOURCE-CONFIRMED |
+| `src/emc/task/emctaskmain.cc` subordinate-state synchronization | Task/userspace | reacts to externally reported E-stop by disabling motion/activity | SOURCE-CONFIRMED |
 | `src/emc/task/taskintf.cc::emcTrajEnable/Disable()` | Task/userspace | sends `EMCMOT_ENABLE`/disable command through the Task-motion interface | SOURCE-CONFIRMED |
 | `src/emc/motion/command.c` `EMCMOT_ENABLE`/disable handling | realtime motion command path | requests realtime enable-state transition | SOURCE-CONFIRMED |
 | `src/emc/motion/motion.c` HAL export | realtime motion component | exports `motion.motion-enabled` | SOURCE-CONFIRMED |
@@ -69,9 +70,15 @@ The pinned implementation agrees with that behavior:
 
 This is a **software status synthesis**, not a measurement of torque, contactor state, STO channel state, stopping distance, or safety integrity.
 
+### Important correction: external E-stop is not the same call path as an internal ESTOP command
+
+The pinned main Task loop performs subordinate-state synchronization after updating motion status. If `emcStatus->io.aux.estop` is true while trajectory is enabled, it calls `emcTrajDisable()`, aborts Task/I/O work, stops spindles/coolant, performs cleanup, and resynchronizes. **That external-input reaction does not call `emcAuxEstopOn()`.**
+
+Therefore `iocontrol.0.user-enable-out` is not a reliable mirror of an externally asserted `emc-enable-in`. `user-enable-out` is specifically changed by the controller-originated `emcAuxEstopOn/Off()` path. A fresh AI must not infer `user-enable-out=0` merely because Task state is ESTOP due to the external input.
+
 ## Task state command -> motion path
 
-`emcTaskSetState()` implements the control actions:
+`emcTaskSetState()` implements explicit controller state commands:
 
 - `ESTOP`: abort motion/spindles, call `emcAuxEstopOn()`, disable trajectory, turn coolant off, abort Task/I/O work, and perform cleanup/unhome actions;
 - `ESTOP_RESET`: call `emcAuxEstopOff()` and reset/abort subordinate activity, but it does not by itself command trajectory enabled;
@@ -86,16 +93,19 @@ Therefore:
 
 It does not mean: `Task ON` -> certified physical energization.
 
-## Representative failure path
+## Representative externally reported failure path
 
 External E-stop input falls false while motion is enabled:
 
 1. `Task::run()` observes `emc-enable-in = 0` and sets `io.aux.estop`;
-2. Task state becomes ESTOP and subordinate-state synchronization disables trajectory / aborts activity;
-3. realtime motion processes disable state and ultimately publishes `motion.motion-enabled = 0`;
-4. downstream HAL logic may command amp/drive enable false.
+2. `determineState()` reports ESTOP;
+3. main-loop subordinate synchronization sees the I/O E-stop and, when trajectory is enabled, issues trajectory disable plus Task/I/O/spindle abort/cleanup operations;
+4. realtime motion processes disable state and ultimately publishes `motion.motion-enabled = 0`;
+5. downstream HAL logic may command amp/drive enable false.
 
-What is proven by source: LinuxCNC requests/records a disabled controller state.
+Crucially, step 3 does **not** imply `user-enable-out` is forced false; that output belongs to the explicit `emcAuxEstopOn()` command path.
+
+What is proven by source: LinuxCNC records externally reported E-stop status and requests a disabled controller state.
 
 What remains unproven: that the external circuit opened, STO channels transitioned, torque disappeared, hydraulic energy was removed, motion stopped within any time, or a required PL/SIL/category was achieved.
 
@@ -112,7 +122,9 @@ Experienced LinuxCNC community guidance commonly uses an external safety circuit
 | Claim | Class | Scope |
 |---|---|---|
 | `emc-enable-in=0` becomes I/O E-stop status | SOURCE-CONFIRMED + DOC-CONFIRMED | pinned implementation/current docs |
-| `user-enable-out=0` is LinuxCNC internal E-stop/disable intent | SOURCE-CONFIRMED + DOC-CONFIRMED | pinned implementation/current docs |
+| externally reported I/O E-stop disables trajectory when it had been enabled | SOURCE-CONFIRMED | pinned main Task loop |
+| `user-enable-out=0` is LinuxCNC's explicit internal/controller E-stop output intent | SOURCE-CONFIRMED + DOC-CONFIRMED | `emcAuxEstopOn()` path |
+| external `emc-enable-in=0` necessarily forces `user-enable-out=0` | **REJECTED** | pinned external-input synchronization path does not call `emcAuxEstopOn()` |
 | `user-request-enable` is a reset request pulse | SOURCE-CONFIRMED + DOC-CONFIRMED | pinned implementation/current docs |
 | `motion.motion-enabled` mirrors realtime motion enable flag | SOURCE-CONFIRMED | pinned revision |
 | LinuxCNC software state alone proves physical torque removal | **REJECTED** | no evidence |
@@ -121,9 +133,9 @@ Experienced LinuxCNC community guidance commonly uses an external safety circuit
 
 ## Experiment decision
 
-A bounded simulation is useful **only** to independently verify the software-state transition. It should inject an external-style `emc-enable-in` false condition from an enabled baseline and observe Task/motion/iocontrol state. It must explicitly state that it proves no physical emergency-stop performance.
+A bounded simulation is useful **only** to independently verify the software-state transition. It should inject an external-style `emc-enable-in` false condition from an enabled baseline and observe Task state plus motion disable. `user-enable-out` should be captured as a diagnostic contrast, not used as a required mirror of the external condition. The experiment must explicitly state that it proves no physical emergency-stop performance.
 
-Predeclared prediction: from an enabled software baseline, forcing the external E-stop input false will cause LinuxCNC to enter software ESTOP/disable behavior and `motion.motion-enabled` to fall false; clearing the input alone will not be treated as proof of a safe physical reset or machine-specific restart authorization.
+Predeclared prediction: from an enabled software baseline, forcing the external E-stop input false will cause LinuxCNC to enter software ESTOP behavior and `motion.motion-enabled` to fall false; `user-enable-out` is not predicted to mirror that external assertion. Clearing the input alone will not be treated as proof of a safe physical reset or machine-specific restart authorization.
 
 ## Higher-level promotion
 

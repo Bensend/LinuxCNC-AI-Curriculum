@@ -18,6 +18,24 @@ When the study process itself produces a useful lesson about autonomous learning
 
 The durable output must be useful to a fresh AI engineer, not just to the conversation that produced it.
 
+## Blind External Feedback and Learning Measurement
+
+Self-consistency and self-grading are not sufficient evidence that the curriculum is teaching effectively. Use the independent evaluation protocol in `evaluation/BLIND_FEEDBACK_PROTOCOL.md` and record results in `evaluation/FEEDBACK_SCORE_LOG.md`.
+
+The required feedback loop is:
+
+**blind challenge -> precommitted prediction/diagnosis -> external execution or answer reveal -> independent scoring -> error classification -> minimal curriculum correction -> novel transfer retest -> delayed retention retest**
+
+Maintain information separation between the learner and evaluator. The learner must not inspect a hidden expected result, later forum resolution, grading key, or equivalent answer before committing its prediction/diagnosis. If that separation fails, mark the challenge non-blind and exclude it from blind competency metrics.
+
+Prefer external challenge oracles such as upstream LinuxCNC executable tests, official examples with objectively checkable behavior, pinned-source questions verified only after learner commitment, resolved LinuxCNC troubleshooting cases with the resolution withheld, and deliberately constructed executable faults. A community resolution is useful external feedback but is not automatically source-level truth; reconcile important conclusions with source, documentation, or execution after scoring.
+
+Keep a frequently used development challenge bank and a smaller sealed benchmark bank. Do not contaminate the sealed bank by incorporating its answers into learner-readable course material before evaluation.
+
+Measure correctness, mechanism understanding, diagnostic efficiency, uncertainty/safety handling, confidence calibration, solution time, transfer to a different surface problem, delayed retention, study time, and compute cost. Treat **blind competency gained per unit of substantive study time** as an important study-efficiency metric, but never optimize speed at the expense of correctness, transferability, retention, evidence integrity, or safety.
+
+A blind miss that exposes a central claimed competency must trigger correction before that competency is treated as securely transferable. Correct the underlying mechanism/retrieval/reasoning weakness rather than memorizing the challenge answer. Do not infer a process improvement from one test; look for repeated performance across comparable challenges.
+
 ## Progressive Course Architecture
 
 Treat the curriculum as a prerequisite-based college sequence, not as repeated drafts of the same course.
@@ -113,7 +131,7 @@ A materially redesigned experiment may begin a new attempt cycle, but the decisi
 At the beginning of every work session:
 
 1. Read `README.md`, this file, `CURRICULUM.md`, `SOURCE_POLICY.md`, `MODULE_TEMPLATE.md`, and `PROGRESS.md`.
-2. Inspect existing developer guides, call flows, claims, forum findings, experiments, exams, unknowns, promotion/uncertainty queues, and the latest laboratory results.
+2. Inspect existing developer guides, call flows, claims, forum findings, experiments, exams, unknowns, promotion/uncertainty queues, latest laboratory results, and external-feedback score trends when present.
 3. Recover the current course level, LinuxCNC revision(s), unfinished work, spawned prerequisites, and next unblocked module from repository state.
 4. Continue existing work rather than restarting it.
 5. Treat GitHub as durable memory. Do not rely on conversation memory for facts that belong in the course.
@@ -125,7 +143,7 @@ For every module, follow this evidence chain:
 
 **Documentation -> community knowledge -> source code -> function/symbol guide -> call-flow guide -> experiment -> verification -> adversarial exam -> corrections -> fresh-AI handoff -> graduation/promotion**
 
-A convincing document alone is never graduation evidence.
+A convincing document alone is never graduation evidence. At appropriate cluster/milestone boundaries, add blind external evaluation according to `evaluation/BLIND_FEEDBACK_PROTOCOL.md` without contaminating the challenge bank.
 
 ### 1. Establish Intended Behavior
 
@@ -175,7 +193,7 @@ The curriculum is a dependency graph, not a rigid table of contents. If source r
 
 ## Durable Artifact Rule
 
-Commit useful work to GitHub, including developer guides, source maps, function inventories, call-flow guides, claims/evidence ledgers, forum findings, experiments, laboratory scripts/results, exams, corrections, unresolved questions, promotion queues, version comparisons, curriculum changes, progress checkpoints, and lessons learned about the autonomous study method itself.
+Commit useful work to GitHub, including developer guides, source maps, function inventories, call-flow guides, claims/evidence ledgers, forum findings, experiments, laboratory scripts/results, exams, corrections, unresolved questions, promotion queues, version comparisons, curriculum changes, progress checkpoints, blind-evaluation records/metrics that do not leak sealed answers, and lessons learned about the autonomous study method itself.
 
 If work cannot finish in one session, persist a precise checkpoint that allows a fresh session to resume without reconstructing the work from chat history.
 
@@ -203,7 +221,7 @@ Proceed autonomously through the curriculum. Do not stop after each subsection t
 
 Ask the owner only when account/UI interaction is genuinely required, required private information is unavailable, an important owner-level engineering choice has materially different consequences, physical hardware must be operated, or safety requires human involvement.
 
-Ordinary uncertainty, failed experiments, build failures, conflicting documentation, and incorrect hypotheses are curriculum work. Investigate, document, correct, promote when appropriate, and continue.
+Ordinary uncertainty, failed experiments, build failures, conflicting documentation, incorrect hypotheses, and failed blind evaluations are curriculum work. Investigate, document, correct, promote when appropriate, and continue.
 
 ## Lesson Timing and Overlap Log
 
@@ -222,23 +240,23 @@ This curriculum is a continuing autonomous engineering course, not a one-session
 At the end of every productive lesson/work session:
 
 1. Commit all useful work and update `PROGRESS.md`.
-2. Determine the next appropriate lesson from the dependency graph, including current-level prerequisites and higher-level promotion items.
+2. Determine the next appropriate lesson from the dependency graph, including current-level prerequisites, higher-level promotion items, and any due blind development/retention evaluation.
 3. Persist an unambiguous next-work checkpoint.
 4. Immediately before quitting, update and commit `LESSON_LOG.md` with actual lesson start/end/duration and overlap status.
 5. Ensure another curriculum work session is scheduled automatically.
 6. The next session must begin by reading repository state and execute substantive work rather than merely summarize status.
 
-Maintain: **lesson -> persist results -> determine next lesson -> log actual lesson time -> schedule continuation -> next lesson**.
+Maintain: **lesson -> persist results -> determine next lesson/evaluation -> log actual lesson time -> schedule continuation -> next lesson**.
 
 Do not create overlapping curriculum schedules. Prefer one recurring curriculum-work automation whose invocation discovers the next lesson from GitHub state. The scheduler is the heartbeat; GitHub is the course state.
 
-Completion of the 1000 series does not end the perpetual chain. On 1000 graduation, synthesize its promotion queue into a 2000-series curriculum and continue. On 2000 graduation, evaluate whether evidence justifies a 3000 series. Continue into 3000 only when justified. Stop only when the active course sequence has genuinely graduated with no justified next level, the owner explicitly stops/pauses it, or human/safety/account intervention is required.
+Completion of the 1000 series does not end the perpetual chain. On 1000 graduation, synthesize its promotion queue and blind-evaluation weaknesses into a 2000-series curriculum and continue. On 2000 graduation, evaluate whether evidence justifies a 3000 series. Continue into 3000 only when justified. Stop only when the active course sequence has genuinely graduated with no justified next level, the owner explicitly stops/pauses it, or human/safety/account intervention is required.
 
 ### Scheduled Continuation Instruction
 
 A recurring curriculum session should execute an instruction equivalent to:
 
-> Continue executing the LinuxCNC AI Curriculum in `Bensend/LinuxCNC-AI-Curriculum`. Read `START_HERE.md` and follow it. Inspect current course level, progress, latest lab results, open questions, promotion/uncertainty queues, checkpoints, artifacts, and `LESSON_LOG.md`. Resume the highest-priority unblocked module according to the dependency graph. Perform substantive research, source analysis, experiments, verification, adversarial testing, corrections, and promotion decisions appropriate to the current course level. Also treat the study process itself as an experiment: preserve useful observations about pacing, memory/checkpointing, experiment design, transferability, evidence sufficiency, and autonomous learning efficiency when they can improve future curricula. Target about 15–20 minutes of useful curriculum work in this invocation when useful unblocked work remains; completing one small lesson early is not by itself a reason to stop. Do not pad work or broaden scope merely to consume time. Checkpoint early if context density, branching evidence, or repository state becomes difficult for a fresh agent to reconstruct reliably. Commit durable results and update course state. Immediately before ending, record actual UTC timing and overlap status. Do not merely report status or propose a plan.
+> Continue executing the LinuxCNC AI Curriculum in `Bensend/LinuxCNC-AI-Curriculum`. Read `START_HERE.md` and follow it. Inspect current course level, progress, latest lab results, open questions, promotion/uncertainty queues, checkpoints, artifacts, `LESSON_LOG.md`, and external-feedback state. Resume the highest-priority unblocked module or due blind evaluation according to the dependency graph and evaluation protocol. Perform substantive research, source analysis, experiments, verification, adversarial testing, corrections, promotion decisions, and blind evaluation appropriate to the current course level. Protect evaluator/learner information separation and never inspect a hidden answer before learner precommitment. Also treat the study process itself as an experiment: preserve useful observations about pacing, memory/checkpointing, experiment design, transferability, evidence sufficiency, and autonomous learning efficiency when they can improve future curricula. Target about 15–20 minutes of useful curriculum work in this invocation when useful unblocked work remains; completing one small lesson early is not by itself a reason to stop. Do not pad work or broaden scope merely to consume time. Checkpoint early if context density, branching evidence, or repository state becomes difficult for a fresh agent to reconstruct reliably. Commit durable results and update course state. Immediately before ending, record actual UTC timing and overlap status. Do not merely report status or propose a plan.
 
 ## Work-Pacing Rule
 
@@ -246,23 +264,23 @@ A lesson is a bounded engineering unit. Long modules should be decomposed into l
 
 For hourly scheduled curriculum sessions, target approximately **15–20 minutes of substantive useful work** when unblocked work remains. Finishing one small lesson unit before 15 minutes have elapsed is not, by itself, a reason to end the session; continue into the next logical subtask or lesson while the context remains coherent.
 
-**Do not treat any of the following as an automatic stopping condition before about 15 minutes of substantive work:** launching an experiment, reaching a checkpoint, completing a subtask, graduating a module, or waiting for an external result. If the current thread becomes blocked but another useful unblocked task exists, immediately switch to that task instead of ending the session.
+**Do not treat any of the following as an automatic stopping condition before about 15 minutes of substantive work:** launching an experiment, reaching a checkpoint, completing a subtask, graduating a module, completing a blind challenge, or waiting for an external result. If the current thread becomes blocked but another useful unblocked task exists, immediately switch to that task instead of ending the session.
 
-Suitable continuation work includes source tracing on the next dependency, preparing the next module, running or grading an adversarial/fresh-AI test, reconciling claims/evidence, tightening a call flow, reviewing promotion items, documenting failure boundaries, or preparing the next bounded experiment. Prefer work that advances the critical path or strengthens current-level evidence.
+Suitable continuation work includes source tracing on the next dependency, preparing the next module, running or grading an adversarial/fresh-AI test, performing a due blind development/retention challenge without answer leakage, reconciling claims/evidence, tightening a call flow, reviewing promotion items, documenting failure boundaries, or preparing the next bounded experiment. Prefer work that advances the critical path or strengthens current-level evidence.
 
 Ending before 15 minutes is justified only when no useful unblocked work remains, human/safety/account intervention is required, context density makes continued work unreliable, or continuing would meaningfully risk overlap with the next scheduled invocation.
 
-The time target is a pacing target, not a quota. Do not manufacture work, repeat research, lower evidence standards, delay a valid graduation, or expand a 1000-level investigation into higher-level depth merely to consume time. Quality, evidence sufficiency, safety, and coherent repository state override the time target.
+The time target is a pacing target, not a quota. Do not manufacture work, repeat research, lower evidence standards, delay a valid graduation, contaminate evaluation material, or expand a 1000-level investigation into higher-level depth merely to consume time. Quality, evidence sufficiency, safety, evaluation integrity, and coherent repository state override the time target.
 
-Around 20 minutes, prefer to finish the current coherent unit, persist results, and exit. A session may run somewhat longer when needed to leave an experiment, repository, or evidence trail in a safe and coherent state, but it must continue to avoid overlap with the next hourly invocation.
+Around 20 minutes, prefer to finish the current coherent unit, persist results, and exit. A session may run somewhat longer when needed to leave an experiment, repository, evaluation, or evidence trail in a safe and coherent state, but it must continue to avoid overlap with the next hourly invocation.
 
 ### Context and Memory Safeguard
 
 Elapsed time alone is not a reason to fear context loss; uncheckpointed information density is. Treat GitHub as durable memory throughout the session rather than waiting until the end.
 
-Checkpoint useful findings whenever the session accumulates enough new source traces, experimental evidence, corrections, or branching questions that a fresh agent might otherwise have difficulty reconstructing the exact state from the repository. If context becomes dense or ambiguous, persist a precise checkpoint and end the session early rather than continuing merely to reach the time target.
+Checkpoint useful findings whenever the session accumulates enough new source traces, experimental evidence, corrections, evaluation results, or branching questions that a fresh agent might otherwise have difficulty reconstructing the exact state from the repository. If context becomes dense or ambiguous, persist a precise checkpoint and end the session early rather than continuing merely to reach the time target.
 
-A fresh next session must be able to recover the current module, evidence status, unresolved questions, promotion decisions, and exact next step from repository state alone.
+A fresh next session must be able to recover the current module, evidence status, unresolved questions, promotion decisions, evaluation status, and exact next step from repository state alone without exposing sealed answers.
 
 Laboratory/cloud compute runtime remains a separate budget from conversational research time. Do not treat a 20-minute research session as 20 minutes of lab usage unless the lab itself actually consumed that compute.
 

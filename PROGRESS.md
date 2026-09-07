@@ -4,7 +4,7 @@ Status values: `PLANNED`, `RESEARCH`, `SOURCE`, `EXPERIMENT`, `EXAM`, `CORRECTIO
 
 ## Current critical-path state
 
-All modules through **S05 — disagreement/redundancy monitoring patterns** are **GRADUATED** at 1000 level. **S06 — fault injection framework** is now active in **RESEARCH / SOURCE** at pinned LinuxCNC revision `8bf4605ae81042248add031e94c77300406e0413`.
+All modules through **S06 — fault injection framework** are **GRADUATED** at 1000 level. **S07 — restart/recovery/state integrity** is now the highest-priority unblocked module and is activated in **RESEARCH** at pinned LinuxCNC revision `8bf4605ae81042248add031e94c77300406e0413`.
 
 ### S04 graduation evidence
 
@@ -54,23 +54,44 @@ Durable S05 artifacts:
 - `exams/S05-adversarial-exam-and-answer-key.md`
 - `guides/S05-graduation-audit-and-fresh-ai-handoff.md`
 
-### S06 research / source state
+### S06 graduation evidence
 
-S06 has started with `guides/S06-fault-injection-framework-research.md`.
+S06 is **GRADUATED** at 1000 level.
 
-Initial framework findings:
+Authoritative experiment S06-016, workflow run `34146966388`, fixture source commit `c116c997e39506bb82bbae6cce777bde19015fde`, completed with lab exit code `0`. The job-produced `linuxcnc-ai-fi-v1` result classified the experiment `PASS`.
 
-- choose and name the injection layer before implementation: HAL value, publication/freshness, realtime ordering, motion feedback interface, HostMot2 LLIO, transport, or lifecycle/state;
-- preserve the production mechanism under test and inject at an explicit boundary;
-- predeclare a healthy control, injected fault, independent oracle, harness-invalid criteria, recovery criterion, non-claims, and attempt family;
-- `mux2` is a transparent live-versus-fault selector at the pinned source revision;
-- `sample_hold` freezes its prior `s32` output while `hold` is true;
-- documented `streamer`/`halstreamer` can feed deterministic realtime HAL sequences through a FIFO;
-- documented `sampler`/`halsampler` can capture same-cycle realtime evidence for non-realtime analysis;
-- S03 provides the below-HAL test-double pattern, S04 the value-path freeze/adversarial-control pattern, and S05 the predeclared threshold/persistence/order pattern;
-- an experiment must distinguish evidence that the **fault was injected** from evidence that the **subsystem responded**. A circular oracle is not acceptable.
+All frozen Gates A–J passed without post-hoc weakening:
 
-No strong community source for a canonical LinuxCNC fault-injection framework was found in the initial targeted pass, so S06 is deliberately grounded in official HAL/test primitives, pinned source, and accepted curriculum experiments rather than claiming an upstream framework that is not evidenced.
+- actual realtime function order was verified before accepting behavior;
+- realtime sampler captured all 170 required rows with zero overruns;
+- healthy publication remained current and both stock detectors stayed clear;
+- a scheduled freeze independently showed healthy sequence advancing while published sequence stayed at 49 through cycle 79, with age growing to 30 cycles; age detection asserted and value mismatch eventually asserted;
+- recovery at cycle 80 restored current publication and cleared both detectors;
+- cycle 100 produced exactly one +5.0 value jump with current sequence: value detector asserted, age detector stayed clear, and cycle 101 recovered;
+- cycles 130–139 published exactly one-cycle-old ramp values/sequence: numeric mismatch remained 0.01 below the 0.05 detector threshold while age mismatch was exactly 1 cycle above the 0.5 threshold, so only the age detector asserted;
+- the machine-readable result explicitly rejected the circular proposition that the fixture's own fault-mode bit proves both injection and subsystem response.
+
+Source work established the reusable evidence boundary for `streamer`, `sampler`, HAL stream FIFO semantics, stock comparator behavior, and the curriculum lab runner. A current-documentation versus pinned-source conflict on exported `sampler.N.sample-num` is preserved rather than silently reconciled; S06-016 does not depend on that field.
+
+The adversarial exam passed. A post-result correction records that rounded six-decimal trace text is not a bit-exact floating threshold oracle. The fresh-AI novel scenario established a stronger transfer rule: **freshness metadata has provenance**. A sequence number generated downstream of a frozen source proves downstream publication cadence, not source-measurement freshness.
+
+The counterfactual promotion test passed. S06 explicitly makes no physical sensor, HostMot2/FPGA, transport, diagnostic-coverage, PL/SIL/category, safe-stop, or physical-machine timing claim.
+
+Durable S06 artifacts:
+
+- `guides/S06-fault-injection-framework-research.md`
+- `guides/S06-fault-injection-framework-developer-guide.md`
+- `source-analysis/S06-streamer-sampler-and-lab-runner.md`
+- `forum-findings/S06-documentation-community-reconciliation.md`
+- `call-flows/S06-fault-injection-evidence-flow.md`
+- `experiments/S06-result-schema-v1.md`
+- `experiments/S06-016-framework-fixture-plan.md`
+- `experiments/S06-016-accepted-result.md`
+- `lab-jobs/016-s06-fault-injection-framework.sh`
+- `lab-results/S06-016.result.json`
+- `lab-results/S06-016.trace.txt`
+- `exams/S06-adversarial-exam-and-answer-key.md`
+- `guides/S06-graduation-audit-and-fresh-ai-handoff.md`
 
 ## Promotion / uncertainty queue — active additions
 
@@ -79,17 +100,19 @@ No strong community source for a canonical LinuxCNC fault-injection framework wa
 - S05 physical independence/common-cause diagnostic coverage: **later safety engineering / CRITICAL** — ordinary HAL experiments cannot validate physical independence or safety integrity; the 1000-level module explicitly makes no such claim.
 - S05 timing skew between individually valid channels: **2000 / HIGH** for hardware-specific bounds — the generic mechanism is graduated; actual device/bus skew needs architecture-specific evidence.
 - `timedelay.elapsed` observability/version behavior: **2000 / LOW** — pinned source can retain a previously published nonzero elapsed value after the internal timer resets. This does not affect S05's boolean persistence conclusion because `timedelay.out` is the state oracle.
-- S06 deterministic sequence/freshness source choice (`streamer` versus tiny realtime sequence component): **current / MEDIUM** — resolve before freezing S06-016 because the first framework experiment should not accidentally make userspace scheduler timing the mechanism under test.
-- S06 machine-readable laboratory result schema: **current / HIGH** — should be defined before S06 graduation because reusable fault-injection evidence is a central learning objective.
+- S06 exported `sampler.N.sample-num` documentation/source conflict: **2000 / LOW** — current docs say it auto-increments while the pinned realtime body does not update the exported field; accepted S06 evidence uses an explicit sampled cycle instead.
+- S06 source-origin freshness metadata semantics: **2000 / HIGH** — real timestamp/sequence/heartbeat provenance is device/protocol-specific; S06 teaches the provenance rule and makes no physical freshness claim.
+- S06 automatic lab-runner ingestion/indexing of `linuxcnc-ai-fi-v1`: **2000/tooling / MEDIUM** — the schema is proven at job level; automatic runner support is useful but not required for the graduated evidence chain.
+- S06 physical fault representativeness and diagnostic coverage: **later safety engineering / CRITICAL** — software injection cannot validate physical fault coverage or safety integrity, and S06 explicitly says so.
 
 All previously recorded promotion items remain active; consult graduated handoffs and prior history for their full rationale.
 
 ## Current checkpoint / exact resume point
 
-Continue **S06 — fault injection framework** from RESEARCH / SOURCE.
+Begin **S07 — restart/recovery/state integrity** in RESEARCH at pinned revision `8bf4605ae81042248add031e94c77300406e0413`.
 
-1. Finish pinned source inventory for `streamer` / `sampler` and inspect the repository lab runner/artifact schema.
-2. Define the reusable experiment-result schema: injected-fault evidence, subsystem-response oracle, healthy/adversarial controls, realtime ordering, recovery, harness-invalid classification, raw trace, exit code, and non-claims.
-3. Decide whether S06-016 should use only stock HAL primitives or a tiny realtime sequence+counter component. Prefer stock components unless they make timing/freshness evidence circular or userspace-scheduler-dependent.
-4. Freeze S06-016 acceptance gates **before** implementation. Include at least healthy baseline, stuck/frozen value, single-cycle jump, deterministic age/skew case, fault removal/recovery, and an explicit adversarial example of an invalid circular oracle.
-5. Only then implement/run the laboratory experiment. Preserve the three-attempt safeguard and do not relabel a HAL-level injection as physical hardware/transport evidence.
+1. Establish intended restart/recovery behavior from current official docs and examples: machine enable/disable, estop/reset boundaries, HAL component lifecycle, LinuxCNC process restart, and configuration reload where documented.
+2. Search community reports specifically for stale retained state, restart-after-fault traps, homing/state assumptions, HAL teardown/restart issues, and what operators/integrators expect after communication or realtime failures. Treat reports as leads only.
+3. Source-inventory `linuxcnc.in` cleanup/startup, `hal_lib.c` component/shared-memory lifecycle, `rtapi_app` teardown/re-init, motion/task state reset/initialization, and any explicit persistent state mechanisms. Trace at least one complete restart path.
+4. Define which states are expected to reset, which may intentionally persist outside a process (files/config/device state), and which require re-homing/revalidation rather than assuming software restart restores machine truth.
+5. Before any S07 experiment, use the S06 framework: name the lifecycle injection boundary, independently prove old-runtime teardown/new-runtime identity, predeclare retained/reset-state expectations, include a healthy restart control, define HARNESS_INVALID separately from behavioral failure, and never equate process restart with physical-machine recovery.

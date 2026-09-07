@@ -20,7 +20,7 @@ Status values: `PLANNED`, `RESEARCH`, `SOURCE`, `EXPERIMENT`, `EXAM`, `CORRECTIO
 | IO04 PWM/PDM path | GRADUATED | `guides/IO04-graduation-handoff.md`; `call-flows/IO04-pwm-command-to-register.md` | write-capturing valid-PWM fake board promoted to 2000 | passed | cyclic TRAM value path and slow mode/enable/rate path SOURCE-CONFIRMED; physical analog output outside evidence |
 | IO05 Analog-servo interface patterns | GRADUATED | `guides/IO05-graduation-handoff.md`; `guides/IO05-smart-serial-analog-source-guide.md`; call flow | mutable fake Smart Serial remote promoted to 2000/HIGH | passed | 7I77-style descriptor-driven scale/limit/pack path SOURCE-CONFIRMED; physical +/-10 V and safety outside cloud evidence |
 | IO06 GPIO input/output path | GRADUATED | `guides/IO06-graduation-handoff.md`; `guides/IO06-gpio-source-guide.md`; `call-flows/IO06-gpio-hal-register-path.md` | mutable IOPort fake + write capture promoted to 2000/HIGH | passed | host TRAM/config/ownership path SOURCE-CONFIRMED; electrical/safety behavior outside cloud evidence |
-| IO07 Hardware enable and fault patterns | RESEARCH | pending | pending | — | highest-priority unblocked follow-on |
+| IO07 Hardware enable and fault patterns | SOURCE | `guides/IO07-enable-fault-source-guide.md`; `call-flows/IO07-amp-fault-to-disable.md` | bounded motion amp-fault simulation designed | — | ordinary motion/amp enable/fault path separated from watchdog/io_error and external safety |
 
 ## Version baseline
 
@@ -28,13 +28,11 @@ Primary development revision: `8bf4605ae81042248add031e94c77300406e0413`. Stable
 
 ## Current critical-path result
 
-IO06 is **GRADUATED** at 1000 level. The pinned HostMot2 GPIO path is now source-traced end to end. IOPort Data participates in both TRAM read and write; full-GPIO `out` is packed before the aggregate write, while direction/open-drain/inversion are separate change-detected configuration writes afterward. DDR is deliberately written last among IOPort configuration writes. Module-owned pins retain physical GPIO input visibility and may expose aliases for open-drain/inversion, but their logical output data comes from the owning HostMot2 module rather than `gpio.NNN.out`.
+IO07 is now **SOURCE**. At the pinned revision, `emcmotController()` processes a clean joint amplifier fault in a single controller invocation: `process_inputs()` samples `joint.N.amp-fault-in`, `check_for_faults()` marks the joint error and clears the desired enabling state, `set_operating_mode()` disables active joints/current motion state, and `output_to_hal()` publishes `joint.N.amp-enable-out = FALSE` plus disabled/error/fault status. This is an ordinary LinuxCNC machine-control path, not a safety-rated STO function.
 
-The adversarial pass corrected two important traps: open-drain `out=1` is release/high impedance, not active high drive; and an unchanged `gpio.NNN.in` is not proof of a fresh physical sample because failed/temporary reads can skip HAL publication. Current documentation also leaves normal push-pull output `in/in_not` undefined even though generic source publishes the sampled Data-register bit.
+The source guide now separates five failure/control layers that must not be conflated: motion/joint enable intent, downstream output-module enable, drive fault reporting, HostMot2 watchdog/`io_error`, and independent external safety hardware. A HostMot2 communication error is not automatically a `joint.N.amp-fault-in`, and a false amp-enable HAL bit does not prove physical torque removal.
 
-Pinned stock `hm2_test` has immutable reads and discards writes. A mutable IOPort fake board with write capture is promoted to 2000/HIGH rather than being fabricated as TEST-CONFIRMED evidence. Physical voltage, pull-up, drive current, startup transients, FPGA pad behavior and safety remain board/hardware evidence.
-
-IO07 — hardware enable and fault patterns — is now active. The next lesson should inventory representative enable/fault paths across HostMot2 outputs, motion/amp enable, watchdog/io_error, Smart Serial/servo-drive fault reporting, and establish which state is command intent, diagnostic fault handling, or genuinely external safety hardware.
+A bounded production-motion simulation is practical and is the next required evidence: inject `joint.0.amp-fault-in` in a headless simulation that is demonstrably enabled, then require the joint fault/error bits to assert and `motion.motion-enabled`/`joint.0.amp-enable-out` to deassert. This can TEST-CONFIRM software state transitions only; physical drive/STO behavior remains outside the cloud laboratory.
 
 ## Promotion / uncertainty queue
 
@@ -73,10 +71,13 @@ IO07 — hardware enable and fault patterns — is now active. The next lesson s
 - IO06 mutable valid IOPort fake-LLIO with mutable read state and write capture: **2000 / HIGH**.
 - IO06 exact FPGA IOPort/readback semantics and same-cycle Data/direction transition behavior: **HM04/2000 / HIGH**.
 - IO06 board-specific pull-ups, voltage, drive current, output transients and fail-state behavior: **commissioning/safety / CRITICAL**.
+- IO07 exact command-to-physical-torque disable reaction time across HAL/HostMot2/network/drive: **2000 + commissioning / CRITICAL**.
+- IO07 combined injected amp fault + HostMot2 `io_error`/watchdog/stale-feedback behavior: **S03/S06/2000 / HIGH**.
+- IO07 drive-specific fault reset, STO semantics and certified external safety architecture: **safety/commissioning / CRITICAL**.
 - EVL/current-master versus pinned hm2_eth behavior: **2000 / HIGH**.
 - Physical-machine latency/jitter qualification: **advanced commissioning / CRITICAL**.
 - Functional-safety architecture/hazard analysis: **advanced safety / CRITICAL**.
 
 ## Current checkpoint / exact resume point
 
-Begin **IO07 — hardware enable and fault patterns** at pinned revision `8bf4605ae81042248add031e94c77300406e0413`. First establish a taxonomy from current official docs and pinned source: motion/joint/amp enable intent, HostMot2 output-module enable pins, watchdog `has_bit`/reset behavior, LLIO `io_error`, Smart Serial remote fault/status behavior, and representative external drive enable/fault/STO interfaces. Trace at least one ordinary command-enable path and one fault-disable path end to end, explicitly distinguishing LinuxCNC machine-control state from safety-rated external functions. Reuse IO04/IO05/HM08 artifacts as prerequisites; do not infer that a HAL enable or software watchdog is a safety function. Then decide what bounded simulation/fault-injection experiment is practical at 1000 level.
+Continue **IO07 — hardware enable and fault patterns** at pinned revision `8bf4605ae81042248add031e94c77300406e0413`. Implement the bounded simulation in `experiments/IO07-motion-amp-fault-simulation-plan.md` using the hardened headless lab pattern. Before launching, inspect current workflow selectors/latest artifacts so the result cannot be stale or duplicate. Require an enabled baseline, prove the injected source is connected to `joint.0.amp-fault-in`, then verify fault/error assertion plus `motion.motion-enabled` and `joint.0.amp-enable-out` deassertion and capture the amplifier-fault diagnostic. Reconcile the result against the source call flow, then run IO07 adversarial exam/corrections/fresh-AI handoff. Do not treat the simulation as HostMot2, drive, STO, or functional-safety evidence.

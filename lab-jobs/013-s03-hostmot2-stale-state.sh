@@ -19,10 +19,13 @@ from pathlib import Path
 p=Path('src/hal/drivers/mesa-hostmot2/hm2_test.c')
 s=p.read_text()
 s=s.replace('static hm2_test_t board[1];', '''static hm2_test_t board[1];
-static hal_u32_t *s03_input_word;
-static hal_u32_t *s03_write_count;
-static hal_u32_t *s03_last_write_addr;
-static hal_u32_t *s03_last_write_word;''')
+typedef struct {
+    hal_u32_t *input_word;
+    hal_u32_t *write_count;
+    hal_u32_t *last_write_addr;
+    hal_u32_t *last_write_word;
+} s03_hal_t;
+static s03_hal_t *s03_hal;''')
 s=s.replace('''static int hm2_test_read(hm2_lowlevel_io_t *this, rtapi_u32 addr, void *buffer, int size) {
     hm2_test_t *me = this->private;
     memcpy(buffer, &me->test_pattern.tp8[addr], size);
@@ -30,7 +33,7 @@ s=s.replace('''static int hm2_test_read(hm2_lowlevel_io_t *this, rtapi_u32 addr,
 }''','''static int hm2_test_read(hm2_lowlevel_io_t *this, rtapi_u32 addr, void *buffer, int size) {
     hm2_test_t *me = this->private;
     if (test_pattern == 15 && addr == 0x1000 && size == 4) {
-        rtapi_u32 v = *s03_input_word;
+        rtapi_u32 v = *s03_hal->input_word;
         memcpy(buffer, &v, 4);
     } else {
         memcpy(buffer, &me->test_pattern.tp8[addr], size);
@@ -46,12 +49,12 @@ s=s.replace('''static int hm2_test_write(hm2_lowlevel_io_t *this, rtapi_u32 addr
 }''','''static int hm2_test_write(hm2_lowlevel_io_t *this, rtapi_u32 addr, const void *buffer, int size) {
     (void)this;
     if (test_pattern == 15) {
-        (*s03_write_count)++;
-        *s03_last_write_addr = addr;
+        (*s03_hal->write_count)++;
+        *s03_hal->last_write_addr = addr;
         if (size >= 4) {
             rtapi_u32 v;
             memcpy(&v, buffer, 4);
-            *s03_last_write_word = v;
+            *s03_hal->last_write_word = v;
         }
     }
     return 1;
@@ -60,8 +63,12 @@ needle='''        case 14: {'''
 idx=s.index(needle)
 case15='''        // S03 test-only valid one-IOPort mutable board\n        case 15: {\n            int pd_index;\n            set32(me, HM2_ADDR_IOCOOKIE, HM2_IOCOOKIE);\n            set8(me, HM2_ADDR_CONFIGNAME+0, 'H'); set8(me, HM2_ADDR_CONFIGNAME+1, 'O');\n            set8(me, HM2_ADDR_CONFIGNAME+2, 'S'); set8(me, HM2_ADDR_CONFIGNAME+3, 'T');\n            set8(me, HM2_ADDR_CONFIGNAME+4, 'M'); set8(me, HM2_ADDR_CONFIGNAME+5, 'O');\n            set8(me, HM2_ADDR_CONFIGNAME+6, 'T'); set8(me, HM2_ADDR_CONFIGNAME+7, '2');\n            set32(me, HM2_ADDR_IDROM_OFFSET, 0x400);\n            set32(me, 0x400, 2); set32(me, 0x404, 64); set32(me, 0x408, 0x200);\n            set32(me, 0x41c, 1); set32(me, 0x420, 24); set32(me, 0x424, 24);\n            set32(me, 0x428, 2000000); set32(me, 0x42c, 20000000);\n            set32(me, 0x430, 4); set32(me, 0x434, 4);\n            set32(me, 0x438, 0x100); set32(me, 0x43c, 0x100);\n            set32(me, 0x440, 0x01010003); set32(me, 0x444, 0x00051000); set32(me, 0x448, 0x0000001f);\n            for (pd_index=0; pd_index<24; pd_index++) {\n                set8(me, 0x600 + pd_index*4 + 0, 0); set8(me, 0x600 + pd_index*4 + 1, 0);\n                set8(me, 0x600 + pd_index*4 + 2, 0); set8(me, 0x600 + pd_index*4 + 3, HM2_GTAG_IOPORT);\n            }\n            break;\n        }\n\n'''
 s=s[:idx]+case15+s[idx:]
+needle='''    comp_id = hal_init(HM2_LLIO_NAME);\n    if (comp_id < 0) return comp_id;\n\n    me = &board[0];'''
+repl='''    comp_id = hal_init(HM2_LLIO_NAME);\n    if (comp_id < 0) return comp_id;\n\n    if (test_pattern == 15) {\n        s03_hal = hal_malloc(sizeof(*s03_hal));\n        if (s03_hal == NULL) return -ENOMEM;\n        memset(s03_hal, 0, sizeof(*s03_hal));\n    }\n\n    me = &board[0];'''
+if needle not in s: raise SystemExit('shared-hook allocation insertion point missing')
+s=s.replace(needle,repl)
 needle='''    me->llio.read = hm2_test_read;\n    me->llio.write = hm2_test_write;\n\n    r = hm2_register(&board->llio, config[0]);'''
-repl='''    me->llio.read = hm2_test_read;\n    me->llio.write = hm2_test_write;\n\n    if (test_pattern == 15) {\n        if (hal_pin_u32_newf(HAL_IN, &s03_input_word, comp_id, "%s.s03-input-word", me->llio.name) < 0) return -EIO;\n        if (hal_pin_u32_newf(HAL_OUT, &s03_write_count, comp_id, "%s.s03-write-count", me->llio.name) < 0) return -EIO;\n        if (hal_pin_u32_newf(HAL_OUT, &s03_last_write_addr, comp_id, "%s.s03-last-write-addr", me->llio.name) < 0) return -EIO;\n        if (hal_pin_u32_newf(HAL_OUT, &s03_last_write_word, comp_id, "%s.s03-last-write-word", me->llio.name) < 0) return -EIO;\n        *s03_input_word = 0; *s03_write_count = 0; *s03_last_write_addr = 0; *s03_last_write_word = 0;\n    }\n\n    r = hm2_register(&board->llio, config[0]);'''
+repl='''    me->llio.read = hm2_test_read;\n    me->llio.write = hm2_test_write;\n\n    if (test_pattern == 15) {\n        if (hal_pin_u32_newf(HAL_IN, &s03_hal->input_word, comp_id, "%s.s03-input-word", me->llio.name) < 0) return -EIO;\n        if (hal_pin_u32_newf(HAL_OUT, &s03_hal->write_count, comp_id, "%s.s03-write-count", me->llio.name) < 0) return -EIO;\n        if (hal_pin_u32_newf(HAL_OUT, &s03_hal->last_write_addr, comp_id, "%s.s03-last-write-addr", me->llio.name) < 0) return -EIO;\n        if (hal_pin_u32_newf(HAL_OUT, &s03_hal->last_write_word, comp_id, "%s.s03-last-write-word", me->llio.name) < 0) return -EIO;\n        *s03_hal->input_word = 0;\n        *s03_hal->write_count = 0;\n        *s03_hal->last_write_addr = 0;\n        *s03_hal->last_write_word = 0;\n    }\n\n    r = hm2_register(&board->llio, config[0]);'''
 if needle not in s: raise SystemExit('pre-registration insertion point missing')
 s=s.replace(needle,repl)
 p.write_text(s)
@@ -69,6 +76,7 @@ PY
 
 grep -F 'case 15' src/hal/drivers/mesa-hostmot2/hm2_test.c
 grep -F 's03-input-word' src/hal/drivers/mesa-hostmot2/hm2_test.c
+grep -F 's03_hal = hal_malloc' src/hal/drivers/mesa-hostmot2/hm2_test.c
 ./debian/configure uspace
 sudo apt-get build-dep -y .
 cd src

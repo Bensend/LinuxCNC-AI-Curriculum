@@ -16,12 +16,14 @@ Status values: `PLANNED`, `RESEARCH`, `SOURCE`, `EXPERIMENT`, `EXAM`, `CORRECTIO
 | HM01 HostMot2 architecture | GRADUATED | `guides/HM01-graduation-handoff.md`; call flow + accepted result | corrected `009` run `34038328272` | passed | fake-LLIO malformed-registration rejection TEST-CONFIRMED; no physical transport/safety claim |
 | E01 hm2_eth architecture | GRADUATED | `guides/E01-graduation-handoff.md`; `call-flows/E01-hm2-eth-transport.md` | production-path no-hardware transport experiment promoted | passed | architecture/discovery/LLIO ownership SOURCE-CONFIRMED; no physical network claim |
 | HM08 HostMot2 watchdog | GRADUATED | `guides/HM08-graduation-handoff.md`; `call-flows/HM08-watchdog-cycle-and-recovery.md` | fake-LLIO mutable watchdog model promoted to 2000 | passed | host cycle/recovery SOURCE-CONFIRMED; physical bite/electrical behavior not test-confirmed |
-| IO01 Encoder path | GRADUATED | `guides/IO01-graduation-handoff.md`; `call-flows/IO01-encoder-register-to-hal.md` | stock `hm2_test` structurally unable to produce changing encoder samples; mutable fixture promoted | passed | host register-to-HAL path SOURCE-CONFIRMED; physical/FPGA behavior not test-confirmed |
-| IO04 PWM/PDM path | GRADUATED | `guides/IO04-graduation-handoff.md`; `call-flows/IO04-pwm-command-to-register.md` | write-capturing valid-PWM fake board promoted to 2000 | passed | cyclic TRAM value path and slow mode/enable/rate path SOURCE-CONFIRMED; physical analog output outside evidence |
-| IO05 Analog-servo interface patterns | GRADUATED | `guides/IO05-graduation-handoff.md`; `guides/IO05-smart-serial-analog-source-guide.md`; call flow | mutable fake Smart Serial remote promoted to 2000/HIGH | passed | 7I77-style descriptor-driven scale/limit/pack path SOURCE-CONFIRMED; physical +/-10 V and safety outside cloud evidence |
-| IO06 GPIO input/output path | GRADUATED | `guides/IO06-graduation-handoff.md`; `guides/IO06-gpio-source-guide.md`; `call-flows/IO06-gpio-hal-register-path.md` | mutable IOPort fake + write capture promoted to 2000/HIGH | passed | host TRAM/config/ownership path SOURCE-CONFIRMED; electrical/safety behavior outside cloud evidence |
-| IO07 Hardware enable and fault patterns | GRADUATED | `guides/IO07-graduation-handoff.md`; `guides/IO07-enable-fault-source-guide.md`; `call-flows/IO07-amp-fault-to-disable.md`; accepted result | corrected run `34076164338` passed lab assertions | passed | software/HAL amp-fault-to-disable TEST-CONFIRMED; drive/STO/torque/safety not inferred |
-| S01 Machine control versus functional safety | EXPERIMENT | `guides/S01-estop-machine-enable-source-guide.md`; `call-flows/S01-estop-machine-enable-boundary.md`; `guides/S01-adversarial-claims-matrix.md` | `011` run `34079407413` in progress | — | corrected external-input path SOURCE-CONFIRMED; physical risk reduction and PL/SIL/category explicitly outside software evidence |
+| IO01 Encoder path | GRADUATED | `guides/IO01-graduation-handoff.md`; `call-flows/IO01-encoder-register-to-hal.md` | mutable encoder fixture promoted | passed | host register-to-HAL path SOURCE-CONFIRMED; physical/FPGA behavior not test-confirmed |
+| IO04 PWM/PDM path | GRADUATED | `guides/IO04-graduation-handoff.md`; `call-flows/IO04-pwm-command-to-register.md` | write-capturing fake board promoted | passed | cyclic/slow-path source behavior confirmed; physical analog outside evidence |
+| IO05 Analog-servo interface patterns | GRADUATED | IO05 source/handoff/call-flow guides | mutable fake Smart Serial remote promoted | passed | descriptor-driven command path SOURCE-CONFIRMED; physical +/-10 V and safety outside evidence |
+| IO06 GPIO input/output path | GRADUATED | IO06 source/handoff/call-flow guides | mutable IOPort fake promoted | passed | host TRAM/config/ownership path SOURCE-CONFIRMED; electrical/safety outside evidence |
+| IO07 Hardware enable and fault patterns | GRADUATED | IO07 source/handoff/call-flow + accepted result | corrected run `34076164338` | passed | software/HAL amp-fault disable TEST-CONFIRMED; drive/STO/torque/safety not inferred |
+| S01 Machine control versus functional safety | GRADUATED | S01 source/call-flow/claims matrix/handoff | run `34079407413` passed | passed | external E-stop software boundary TEST-CONFIRMED; no physical functional-safety inference |
+| S02 Watchdog design patterns | GRADUATED | `guides/S02-watchdog-source-and-design-guide.md`; `guides/S02-graduation-handoff.md`; accepted result | run `34091326973` passed after three HARNESS INVALID attempts | passed | generic HAL heartbeat bite/re-arm TEST-CONFIRMED; testing-only FORCE_REALTIME; no latency/physical-safety claim |
+| S03 Communication-loss behavior | RESEARCH | `guides/S03-communication-loss-initial-research.md`; pinned `hostmot2.c`/`hm2_eth.c` analysis started | not yet selected | — | trace transport error -> `io_error` -> stale host publication/write suppression; keep watchdog and physical-state claims separate |
 
 ## Version baseline
 
@@ -29,63 +31,52 @@ Primary development revision: `8bf4605ae81042248add031e94c77300406e0413`. Stable
 
 ## Current critical-path result
 
-IO07 remains **GRADUATED** at the intended 1000-level scope. The corrected bounded simulation at workflow run `34076164338` returned lab exit code 0 and TEST-CONFIRMED the LinuxCNC software/HAL amplifier-fault disable transition for the pinned simulation; it did not establish HostMot2 command delivery, drive response, STO, torque-removal time, or functional-safety performance.
+S01 and S02 are **GRADUATED** at the intended 1000-level scope.
 
-S01 is now **EXPERIMENT**. At pinned revision `8bf4605ae81042248add031e94c77300406e0413`, the E-stop/machine-enable software boundary is traced through `iocontrol`, Task state handling and subordinate-state synchronization, the Task→motion enable/disable command boundary, realtime motion state, and `motion.motion-enabled`.
+S02 lab `012` required three explicitly rejected harness attempts before a valid execution. The accepted raw artifact is workflow `34091326973`, source `888a06f985e02101f866a8c07ab866c2520316a3`, lab exit code 0. It established a live HAL topology and passed every original gate: disabled startup, explicit arm, healthy transition supervision, frozen-heartbeat bite, no recovery from heartbeat resumption alone, and explicit enable-cycle re-arm. The hosted kernel required LinuxCNC's testing-only `LINUXCNC_FORCE_REALTIME=1`; therefore no production realtime latency, HostMot2 hardware, physical output, STO, stopping-time, or functional-safety claim is promoted.
 
-A deeper pinned `emctaskmain.cc` pass corrected an initially over-broad call-flow assumption before laboratory execution: an external `iocontrol.0.emc-enable-in=FALSE` becomes `io.aux.estop`, and main-loop subordinate-state synchronization disables trajectory/aborts activity when necessary, but that external-input path does **not** call `emcAuxEstopOn()`. Therefore `iocontrol.0.user-enable-out` must not be treated as a mirror of external E-stop assertion. `user-enable-out` is driven by the explicit controller-originated `emcAuxEstopOn/Off()` path. The source guide, call flow, experiment plan and oracle were corrected accordingly.
-
-The adversarial claims matrix explicitly rejects conversions from controller states (`ESTOP`, `user-enable-out=0`, `motion.motion-enabled=0`, watchdog bites, software limits) into claims of zero torque, STO, stopping time, or PL/SIL/category. Current official iocontrol documentation independently confirms active-low `emc-enable-in`, internal-E-stop semantics for `user-enable-out`, and non-realtime iocontrol behavior.
-
-Bounded lab `011-s01-external-estop-boundary.sh` was launched from commit `95b81dc06bd70638849529b891597affe3452055` as workflow run `34079407413`. Its predeclared gates require a verified enabled baseline, a sole controlled writer feeding `emc-enable-in`, observed TRUE→FALSE external assertion, Task ESTOP response, `motion.motion-enabled=FALSE`, and release without automatic motion re-enable. `user-enable-out` is diagnostic-only. A passing run remains software/controller-state evidence only.
+S03 is now **RESEARCH**. Pinned `hostmot2.c` shows that `hm2_read_request()`, `hm2_read()`, `hm2_write()`, GPIO read/write paths return early when LLIO `io_error` is asserted. Because per-module TRAM processors are skipped, previously published HAL feedback can remain visible without being fresh. Pinned `hm2_eth.c` escalates communication errors through its error counter/limit to LLIO `io_error`, while current documentation exposes packet-error level/limit/read-timeout policy. The exact transport-error escalation and recovery call flow remains the active source checkpoint.
 
 ## Promotion / uncertainty queue
 
 - HAL allocator fragmentation/reuse and unusual cross-process mappings: **2000 / MEDIUM**.
 - Recovery after process/thread death with inconsistent HAL recursive-mutex accounting: **2000 / HIGH**.
 - Shared pin/signal atomicity and memory-ordering assumptions: **2000 / HIGH**.
-- Stable/development ready/unready and object-lifetime comparison: **2000 / MEDIUM**.
 - H04 live `addf`/`delf` mutation semantics while realtime dispatch is active: **2000 / HIGH**.
 - H04 cross-thread signal visibility/cross-CPU ordering: **2000 / HIGH**.
-- Development-only one-shot `initf` versus stable: **2000 / MEDIUM**.
 - M03 Task-side command-mutex hold duration and command-to-echo latency distribution: **2000 / HIGH**.
 - M03 full planner/kinematics branch trace: **M08/M01/M02 then 2000 / HIGH**.
 - HM01 exact IDROM/module descriptor semantics: **HM02 then 2000 / HIGH**.
 - HM01 TRAM/register-cycle ordering: **HM03/HM09 / HIGH**.
-- HM01 successful fake-board registration fixture extension: **HM02 or 2000 / MEDIUM**.
 - E01 production-path stale/duplicate/wrong-size/lost-packet fault injection: **E03/E06 or 2000 / HIGH**.
 - E01 exact socket/interface/routing/firewall setup: **E02 / MEDIUM**.
 - E01 servo-period Ethernet timing and recovery: **E05/E07 / HIGH**.
-- HM08 mutable fake-LLIO production host-state watchdog experiment: **2000 / MEDIUM**; synthetic status/write capture only, never physical evidence.
+- HM08 mutable fake-LLIO production host-state watchdog experiment: **2000 / MEDIUM**.
 - HM08 physical watchdog reaction time, actual board pin electrical state, and output-module behavior after bite: **advanced hardware/commissioning / CRITICAL**.
-- HM08 transport-specific path that clears/re-establishes communication after `io_error`: **E03/E06/E07 or 2000 / HIGH**.
-- IO01 exact `hal_extend_counter()` ambiguity bound for large inter-sample count jumps: **IO03/2000 / HIGH**.
-- IO01 mutable fake-LLIO production encoder experiment: **IO03/2000 / HIGH**.
-- IO01 FPGA quadrature/filter/timestamp capture implementation and physical maximum reliable edge rate: **HM05/IO03/2000 / HIGH**.
-- IO01 quadrature-error causality under injected illegal A/B sequences: **IO03/2000 / HIGH**.
-- IO01 precise index-arm/event/read cycle latency: **IO02/2000 / MEDIUM**.
-- IO04 valid fake-PWM descriptor + production LLIO/TRAM write capture experiment: **2000 / HIGH**.
-- IO04 scale=0 / NaN / Inf behavior: **2000 / HIGH**.
-- IO04 exact FPGA PWMGen mode/value/sign/dither interpretation and waveform timing: **HM06/2000 / HIGH**.
-- IO04/IO05 physical PWM-to-analog transfer, polarity and limits: **commissioning / CRITICAL**.
-- IO05 mutable production-path fake Smart Serial remote with descriptor discovery and write capture: **2000 / HIGH**.
-- IO05 exact 7I77 descriptor field ordering/bit widths across firmware versions: **2000 / MEDIUM**.
-- IO05 zero/NaN/Inf Smart Serial `scalemax` behavior: **2000 / HIGH**; normal guidance requires finite nonzero scale.
-- IO05 Smart Serial remote watchdog interaction with HostMot2/machine fault handling: **S02/S03/2000 / HIGH**.
-- IO05 physical analog disabled state, transfer tolerance, polarity and drive-enable/STO safety: **commissioning/safety / CRITICAL**.
-- IO06 mutable valid IOPort fake-LLIO with mutable read state and write capture: **2000 / HIGH**.
-- IO06 exact FPGA IOPort/readback semantics and same-cycle Data/direction transition behavior: **HM04/2000 / HIGH**.
-- IO06 board-specific pull-ups, voltage, drive current, output transients and fail-state behavior: **commissioning/safety / CRITICAL**.
-- IO07 exact command-to-physical-torque disable reaction time across HAL/HostMot2/network/drive: **2000 + commissioning / CRITICAL**.
-- IO07 combined injected amp fault + HostMot2 `io_error`/watchdog/stale-feedback behavior: **S03/S06/2000 / HIGH**.
-- IO07 drive-specific fault reset, STO semantics and certified external safety architecture: **safety/commissioning / CRITICAL**.
-- S01 exact applicability of machine-safety laws/standards and required PL/SIL/category: **machine-specific safety engineering / CRITICAL**; do not generalize from community posts.
-- S01 Task-cycle-to-motion-disable latency distribution: **2000 / HIGH**; useful controller-performance evidence but cannot establish physical stop time.
+- IO01 exact `hal_extend_counter()` ambiguity bound and mutable encoder fixture: **IO03/2000 / HIGH**.
+- IO01 FPGA quadrature/filter/timestamp capture and physical maximum edge rate: **HM05/IO03/2000 / HIGH**.
+- IO04 valid fake-PWM descriptor + production LLIO/TRAM write capture: **2000 / HIGH**.
+- IO04 exact FPGA waveform/mode timing: **HM06/2000 / HIGH**.
+- IO04/IO05 physical PWM/analog transfer, polarity and limits: **commissioning / CRITICAL**.
+- IO05 mutable production-path fake Smart Serial remote: **2000 / HIGH**.
+- IO05 Smart Serial remote watchdog interaction with HostMot2/machine fault handling: **S03/S06/2000 / HIGH**.
+- IO05 physical analog disabled state and drive-enable/STO safety: **commissioning/safety / CRITICAL**.
+- IO06 mutable valid IOPort fake-LLIO: **2000 / HIGH**.
+- IO06 exact FPGA IOPort/readback and same-cycle Data/direction behavior: **HM04/2000 / HIGH**.
+- IO06 board-specific electrical fail-state behavior: **commissioning/safety / CRITICAL**.
+- IO07 exact command-to-physical-torque disable reaction time: **2000 + commissioning / CRITICAL**.
+- IO07 combined amp fault + HostMot2 `io_error`/watchdog/stale-feedback behavior: **S03/S06/2000 / HIGH**.
+- IO07 drive-specific fault reset/STO/certified external safety architecture: **safety/commissioning / CRITICAL**.
 - S01 physical E-stop/STO/brake/contactor reaction and stopping time: **commissioning/safety / CRITICAL**.
+- S02 exact worst-case watchdog detection latency under scheduler jitter/overrun: **2000 / HIGH**.
+- S02 common-cause quantitative diagnostic coverage: **2000/safety engineering / HIGH**.
+- S02 external charge-pump/STO/relay fail-state and PL/SIL/category: **commissioning/safety / CRITICAL**.
+- S03 production-path transport-loss fault injection and stale-feedback verification: **current / HIGH**.
+- S03 combined Smart Serial remote watchdog + HostMot2 watchdog + `io_error` recovery ordering: **S03/S06/2000 / HIGH**.
 - EVL/current-master versus pinned hm2_eth behavior: **2000 / HIGH**.
 - Physical-machine latency/jitter qualification: **advanced commissioning / CRITICAL**.
 - Functional-safety architecture/hazard analysis: **advanced safety / CRITICAL**.
 
 ## Current checkpoint / exact resume point
 
-Continue **S01 — LinuxCNC machine control versus functional safety** by inspecting workflow run `34079407413` for job `011-s01-external-estop-boundary.sh`, source commit `95b81dc06bd70638849529b891597affe3452055`. Check the lab's own exit code and raw artifact rather than trusting the workflow badge, and verify fresh source SHA/wiring evidence. If PASS, commit an accepted-result artifact, advance to EXAM, run the adversarial exam plus fresh-AI novel scenario, and graduate only if the software-controller versus physical functional-safety boundary is retained. If the lab fails, classify HARNESS INVALID versus PREDICTION FAILURE before any materially corrected rerun. `user-enable-out` remaining TRUE during external assertion is not by itself a failure; the required path is external `emc-enable-in` -> Task ESTOP -> motion disabled, followed by external release with no automatic Machine ON.
+Continue **S03 — communication-loss behavior** at pinned revision `8bf4605ae81042248add031e94c77300406e0413`. Trace `hm2_eth.c` from queued-read completion/timeout and response validation through packet-error increment/decrement, `packet-error-limit`, LLIO `io_error`, and manual-clear recovery. Join that transport trace to `hostmot2.c` `hm2_read_request()` / `hm2_read()` / `hm2_write()` early returns and identify which encoder/GPIO/Smart-Serial/stepgen HAL values can remain stale when TRAM processing is skipped. Then decide whether a mutable fake-LLIO production-path experiment can prove stale-publication/write-suppression semantics without pretending to test Ethernet hardware, FPGA watchdog timing, drive response, or physical safety.

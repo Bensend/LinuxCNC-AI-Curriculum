@@ -19,7 +19,8 @@ Status values: `PLANNED`, `RESEARCH`, `SOURCE`, `EXPERIMENT`, `EXAM`, `CORRECTIO
 | IO01 Encoder path | GRADUATED | `guides/IO01-graduation-handoff.md`; `call-flows/IO01-encoder-register-to-hal.md` | stock `hm2_test` structurally unable to produce changing encoder samples; mutable fixture promoted | passed | host register-to-HAL path SOURCE-CONFIRMED; physical/FPGA behavior not test-confirmed |
 | IO04 PWM/PDM path | GRADUATED | `guides/IO04-graduation-handoff.md`; `call-flows/IO04-pwm-command-to-register.md` | write-capturing valid-PWM fake board promoted to 2000 | passed | cyclic TRAM value path and slow mode/enable/rate path SOURCE-CONFIRMED; physical analog output outside evidence |
 | IO05 Analog-servo interface patterns | GRADUATED | `guides/IO05-graduation-handoff.md`; `guides/IO05-smart-serial-analog-source-guide.md`; call flow | mutable fake Smart Serial remote promoted to 2000/HIGH | passed | 7I77-style descriptor-driven scale/limit/pack path SOURCE-CONFIRMED; physical +/-10 V and safety outside cloud evidence |
-| IO06 GPIO input/output path | RESEARCH | `guides/IO06-gpio-initial-research.md` | pending | — | highest-priority unblocked follow-on |
+| IO06 GPIO input/output path | GRADUATED | `guides/IO06-graduation-handoff.md`; `guides/IO06-gpio-source-guide.md`; `call-flows/IO06-gpio-hal-register-path.md` | mutable IOPort fake + write capture promoted to 2000/HIGH | passed | host TRAM/config/ownership path SOURCE-CONFIRMED; electrical/safety behavior outside cloud evidence |
+| IO07 Hardware enable and fault patterns | RESEARCH | pending | pending | — | highest-priority unblocked follow-on |
 
 ## Version baseline
 
@@ -27,13 +28,13 @@ Primary development revision: `8bf4605ae81042248add031e94c77300406e0413`. Stable
 
 ## Current critical-path result
 
-IO05 is **GRADUATED** at 1000 level. Mesa analog command paths must not be collapsed into one PWM model. Generic HostMot2 PWM/PDM plus external/board analog conversion remains the IO04 pattern; the representative 7I77 servo analog path is descriptor-driven Smart Serial.
+IO06 is **GRADUATED** at 1000 level. The pinned HostMot2 GPIO path is now source-traced end to end. IOPort Data participates in both TRAM read and write; full-GPIO `out` is packed before the aggregate write, while direction/open-drain/inversion are separate change-detected configuration writes afterward. DDR is deliberately written last among IOPort configuration writes. Module-owned pins retain physical GPIO input visibility and may expose aliases for open-drain/inversion, but their logical output data comes from the owning HostMot2 module rather than `gpio.NNN.out`.
 
-Pinned `sserial.c` creates signed/unsigned numeric HAL fields from remote descriptors, initializes `scalemax` and command min/max from descriptor limits, and in `hm2_sserial_write_pins()` clamps the HAL value, normalizes it by `scalemax`, converts it to the descriptor bit width, and packs fields in descriptor order into `chan->write[]`. Writable booleans share that descriptor walk. The Smart Serial state machine can suppress fresh packing when the previous Do-It has not cleared and can stop a persistently faulting port; therefore a visible HAL command is not proof of a fresh remote command.
+The adversarial pass corrected two important traps: open-drain `out=1` is release/high impedance, not active high drive; and an unchanged `gpio.NNN.in` is not proof of a fresh physical sample because failed/temporary reads can skip HAL publication. Current documentation also leaves normal push-pull output `in/in_not` undefined even though generic source publishes the sampled Data-register bit.
 
-Stock `hm2_test` has static reads and discards writes, and no upstream Smart Serial-specific test fixture was found. A mutable fake remote with descriptor discovery, mutable protocol state, and write capture is promoted to 2000/HIGH rather than simulated outside production code.
+Pinned stock `hm2_test` has immutable reads and discards writes. A mutable IOPort fake board with write capture is promoted to 2000/HIGH rather than being fabricated as TEST-CONFIRMED evidence. Physical voltage, pull-up, drive current, startup transients, FPGA pad behavior and safety remain board/hardware evidence.
 
-IO06 — GPIO input/output path — is now active. Current HostMot2 docs establish the input/output/open-drain HAL model; the next source lesson will trace `ioport.c` read/write/register ownership and module-pin alias behavior.
+IO07 — hardware enable and fault patterns — is now active. The next lesson should inventory representative enable/fault paths across HostMot2 outputs, motion/amp enable, watchdog/io_error, Smart Serial/servo-drive fault reporting, and establish which state is command intent, diagnostic fault handling, or genuinely external safety hardware.
 
 ## Promotion / uncertainty queue
 
@@ -69,10 +70,13 @@ IO06 — GPIO input/output path — is now active. Current HostMot2 docs establi
 - IO05 zero/NaN/Inf Smart Serial `scalemax` behavior: **2000 / HIGH**; normal guidance requires finite nonzero scale.
 - IO05 Smart Serial remote watchdog interaction with HostMot2/machine fault handling: **S02/S03/2000 / HIGH**.
 - IO05 physical analog disabled state, transfer tolerance, polarity and drive-enable/STO safety: **commissioning/safety / CRITICAL**.
+- IO06 mutable valid IOPort fake-LLIO with mutable read state and write capture: **2000 / HIGH**.
+- IO06 exact FPGA IOPort/readback semantics and same-cycle Data/direction transition behavior: **HM04/2000 / HIGH**.
+- IO06 board-specific pull-ups, voltage, drive current, output transients and fail-state behavior: **commissioning/safety / CRITICAL**.
 - EVL/current-master versus pinned hm2_eth behavior: **2000 / HIGH**.
 - Physical-machine latency/jitter qualification: **advanced commissioning / CRITICAL**.
 - Functional-safety architecture/hazard analysis: **advanced safety / CRITICAL**.
 
 ## Current checkpoint / exact resume point
 
-Continue **IO06 — GPIO input/output path** at pinned revision `8bf4605ae81042248add031e94c77300406e0413`. Trace `src/hal/drivers/mesa-hostmot2/ioport.c`: `hm2_ioport_gpio_export_hal()`, `hm2_ioport_gpio_process_tram_read()`, `hm2_ioport_gpio_prepare_tram_write()`, force/change-detected direction/open-drain/inversion/alternate-source writers, and alias behavior for active module pins. Establish exact HostMot2 `hm2_read()` / `hm2_write()` ordering around those functions, then write a complete GPIO input/output -> IOPort register -> TRAM/LLIO call flow. After that inspect stock `hm2_test` patterns for a useful GPIO read fixture and decide whether output verification requires a write-capturing extension. Preserve open-drain high-impedance versus driven-high and all physical voltage/safety claims as separate board-level evidence.
+Begin **IO07 — hardware enable and fault patterns** at pinned revision `8bf4605ae81042248add031e94c77300406e0413`. First establish a taxonomy from current official docs and pinned source: motion/joint/amp enable intent, HostMot2 output-module enable pins, watchdog `has_bit`/reset behavior, LLIO `io_error`, Smart Serial remote fault/status behavior, and representative external drive enable/fault/STO interfaces. Trace at least one ordinary command-enable path and one fault-disable path end to end, explicitly distinguishing LinuxCNC machine-control state from safety-rated external functions. Reuse IO04/IO05/HM08 artifacts as prerequisites; do not infer that a HAL enable or software watchdog is a safety function. Then decide what bounded simulation/fault-injection experiment is practical at 1000 level.

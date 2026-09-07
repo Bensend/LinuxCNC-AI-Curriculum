@@ -19,14 +19,13 @@ emcioStatus.aux.estop = 1    [software status]
   v
 EMC_TASK_STATE::ESTOP        [synthesized software status]
   |
-  | subordinate synchronization / emcTaskSetState actions
-  +--> emcMotionAbort()      [software command]
-  +--> emcTrajDisable()      [software command toward realtime motion]
-  +--> emcAuxEstopOn()
-         |
-         +--> iocontrol.0.user-enable-out = 0      [external-interface command intent]
-         +--> iocontrol.0.user-request-enable = 0  [external-interface reset request state]
-
+  | main-loop subordinate-state synchronization
+  +--> if trajectory had been enabled: emcTrajDisable()
+  +--> emcTaskAbort()/emcIoAbort(AUX_ESTOP)
+  +--> spindle stop, cleanup, volatile unhome, plan resync
+  |
+  | IMPORTANT: this external-input path does NOT call emcAuxEstopOn()
+  v
 realtime motion receives disable
   |
   v
@@ -36,6 +35,8 @@ motion internal enable flag = false [realtime controller state]
   v
 motion.motion-enabled = FALSE        [HAL status output]
 ```
+
+`iocontrol.0.user-enable-out` is **not required to become FALSE on this external-input path**. It belongs to the explicit controller-originated `emcAuxEstopOn/Off()` path. Treating it as a mirror of `emc-enable-in` would be a source-trace error.
 
 The final HAL state is not a measurement of physical torque, STO, contactors, brakes, hydraulic energy, or stopping distance.
 
@@ -56,7 +57,8 @@ emcTaskSetState(ESTOP)
   +--> motion abort
   +--> spindle abort
   +--> emcAuxEstopOn()
-  |      `--> user-enable-out = 0
+  |      +--> user-enable-out = 0
+  |      `--> user-request-enable = 0
   +--> emcTrajDisable()
   +--> coolant/task/I/O abort & cleanup
   `--> motion disable path -> motion.motion-enabled = 0
@@ -99,9 +101,9 @@ Important distinction: **resetting the LinuxCNC E-stop state and commanding Mach
 | Edge / object | Classification | What it means | What it does not mean |
 |---|---|---|---|
 | NML `EMC_TASK_SET_STATE` | command | requested Task state | physical safe state |
-| `iocontrol.0.emc-enable-in` | external-interface state/status input | external source reports permissive/E-stop condition to LinuxCNC | certified external circuit actually performed required risk reduction |
+| `iocontrol.0.emc-enable-in` | external-interface status input | external source reports permissive/E-stop condition to LinuxCNC | certified external circuit actually performed required risk reduction |
 | `emcioStatus.aux.estop` | status | Task's sampled I/O E-stop state | STO/contactor/brake feedback unless separately wired and validated |
-| `iocontrol.0.user-enable-out` | external-interface command intent | LinuxCNC requests enable/not-estop condition | physical actuator state |
+| `iocontrol.0.user-enable-out` | external-interface command intent | controller-originated E-stop/enable output state | mirror of external input; physical actuator state |
 | `iocontrol.0.user-request-enable` | command/request pulse | reset request from controller | permission to automatically restart machinery |
 | `EMCMOT_ENABLE` / disable | command | Task asks realtime motion to enable/disable | field output delivery or torque state |
 | realtime motion enable flag | controller state | motion subsystem enable state | machine safety integrity |
@@ -116,6 +118,7 @@ When a machine appears not to leave E-stop, locate the first boundary that disag
 3. Was `ESTOP_RESET` requested and did the request pulse occur?
 4. Was `ON` separately requested?
 5. Did realtime motion accept/reflect enable (`motion.motion-enabled`)?
-6. Only after the controller path is understood, inspect the **separate physical safety/drive circuit** under its own engineering evidence.
+6. Is `user-enable-out` being interpreted according to its controller-originated path rather than incorrectly assumed to mirror the external input?
+7. Only after the controller path is understood, inspect the **separate physical safety/drive circuit** under its own engineering evidence.
 
 If LinuxCNC says disabled but the machine remains energized, that is not evidence LinuxCNC's state is wrong; it can indicate a broken downstream control or safety boundary and must be treated accordingly.

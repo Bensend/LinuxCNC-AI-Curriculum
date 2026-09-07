@@ -36,7 +36,7 @@ is_false() { [[ "$1" == FALSE || "$1" == 0 ]]; }
 wait_ready() {
   local label=$1
   for i in $(seq 1 120); do
-    if nc -z localhost 5007 >/dev/null 2>&1 && timeout 3s halcmd show pin joint.0.homed >/tmp/s07-${label}-homed-pin.txt 2>/dev/null; then
+    if nc -z localhost 5007 >/dev/null 2>&1 && timeout 3s halcmd getp joint.0.homed >/tmp/s07-${label}-homed-value.txt 2>/dev/null; then
       printf '%s-ready-probe=%s\n' "$label" "$i"
       return 0
     fi
@@ -109,7 +109,7 @@ wait "$A_PID" 2>/dev/null || true
 PORT_GONE=0; HAL_GONE=0
 for _ in $(seq 1 120); do
   if ! nc -z localhost 5007 >/dev/null 2>&1; then PORT_GONE=1; fi
-  if ! timeout 2s halcmd show pin joint.0.homed >/tmp/s07-afterA-pin.txt 2>/tmp/s07-afterA-hal.err; then HAL_GONE=1; fi
+  if ! timeout 2s halcmd getp joint.0.homed >/tmp/s07-afterA-value.txt 2>/tmp/s07-afterA-hal.err; then HAL_GONE=1; fi
   if [[ "$PORT_GONE" == 1 && "$HAL_GONE" == 1 ]]; then break; fi
   sleep 0.1
 done

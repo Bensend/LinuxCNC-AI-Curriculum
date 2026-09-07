@@ -30,6 +30,12 @@ s=s.replace('printf("moving-analysis frozen=%d max_travel=%.9g crossed=%d ferror
 # rounding ambiguity this redesign exists to eliminate. Other fault/disable gates
 # remain unchanged.
 s=s.replace("    if (crossed < 1) exit 22\n", "", 1)
+# The prior fresh-runtime attempt became 'ready' on probe 1, then its motion pins
+# disappeared before Gate D sampled them. That is consistent with observing the
+# previous runtime while LinuxCNC/HAL teardown was still completing. Require both
+# the linuxcncrsh port and a representative motion pin to disappear before starting
+# the stationary runtime; this changes lifecycle hygiene only, not S04 acceptance.
+s=s.replace("cleanup_runtime\nsleep 0.2\nrm -f /tmp/s04-stationary.samples", "cleanup_runtime\nold_gone=0\nfor _ in $(seq 1 120); do\n    if ! nc -z localhost 5007 >/dev/null 2>&1 && ! timeout 1s halcmd show pin joint.0.motor-pos-cmd >/dev/null 2>&1; then\n        old_gone=1\n        break\n    fi\n    sleep 0.05\ndone\n[[ \"$old_gone\" == 1 ]] || { echo 'HARNESS INVALID: prior LinuxCNC/HAL runtime did not fully disappear before Gate D restart.' >&2; exit 29; }\nprintf 'prior-runtime-teardown=PASS\\n'\nrm -f /tmp/s04-stationary.samples",1)
 # Ensure stationary-control AWK tolerates the extra sampled bit; its existing columns remain unchanged.
 p.write_text(s)
 PY

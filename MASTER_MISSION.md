@@ -236,6 +236,12 @@ A lesson is a bounded engineering unit. Long modules should be decomposed into l
 
 For hourly scheduled curriculum sessions, target approximately **15–20 minutes of substantive useful work** when unblocked work remains. Finishing one small lesson unit before 15 minutes have elapsed is not, by itself, a reason to end the session; continue into the next logical subtask or lesson while the context remains coherent.
 
+**Do not treat any of the following as an automatic stopping condition before about 15 minutes of substantive work:** launching an experiment, reaching a checkpoint, completing a subtask, graduating a module, or waiting for an external result. If the current thread becomes blocked but another useful unblocked task exists, immediately switch to that task instead of ending the session.
+
+Suitable continuation work includes source tracing on the next dependency, preparing the next module, running or grading an adversarial/fresh-AI test, reconciling claims/evidence, tightening a call flow, reviewing promotion items, documenting failure boundaries, or preparing the next bounded experiment. Prefer work that advances the critical path or strengthens current-level evidence.
+
+Ending before 15 minutes is justified only when no useful unblocked work remains, human/safety/account intervention is required, context density makes continued work unreliable, or continuing would meaningfully risk overlap with the next scheduled invocation.
+
 The time target is a pacing target, not a quota. Do not manufacture work, repeat research, lower evidence standards, delay a valid graduation, or expand a 1000-level investigation into higher-level depth merely to consume time. Quality, evidence sufficiency, safety, and coherent repository state override the time target.
 
 Around 20 minutes, prefer to finish the current coherent unit, persist results, and exit. A session may run somewhat longer when needed to leave an experiment, repository, or evidence trail in a safe and coherent state, but it must continue to avoid overlap with the next hourly invocation.

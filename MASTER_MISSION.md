@@ -60,10 +60,40 @@ Prefer sufficient, defensible graduation over exhaustive investigation at the wr
 
 A module may graduate with promoted uncertainty when its required learning objective is supported well enough for its course level and the remaining uncertainty does not materially threaten the module's core conclusions, downstream prerequisites, evidence validity, or important safety/reliability conclusions.
 
+### Minimum Graduation Evidence Floor
+
+Promotion to a higher course level can never substitute for the minimum evidence required to prove the current course-level learning objective. Before a 1000-level module may graduate, it must satisfy all of the following:
+
+1. **Core mechanism understood from source** — identify the real implementation and trace at least one behaviorally significant execution path. Documentation alone is insufficient.
+2. **Independent verification exists** — obtain at least one meaningful evidence source independent of simply rereading the implementation. This may be a bounded experiment, an existing upstream test, a reproducible runtime observation, validated test fixture, or other independently checkable evidence appropriate to the claim.
+3. **Representative failure behavior understood** — explain at least one realistic failure/invalid-input path, how it is detected or propagated, and what externally visible effect follows.
+4. **Prediction checked against evidence** — record at least one predeclared prediction about subsystem behavior and compare it against independent evidence. A post-hoc explanation is not equivalent.
+5. **Fresh-AI competency demonstrated** — the handoff material must let a fresh AI reason through at least one novel but course-level scenario, not merely repeat text from the guide.
+6. **No critical uncertainty is promoted** — any unresolved item that could overturn a central teaching, invalidate a downstream prerequisite, invalidate the module's evidence, or materially alter an important safety/reliability boundary must be resolved at the current level.
+7. **Every promotion is justified** — each promoted item must explicitly state why its absence does not prevent the current learning objective from being demonstrated.
+
+Where physical hardware is unavailable, distinguish **independent verification required** from **physical verification required**. Lack of hardware does not waive the evidence floor. Verify everything that can reasonably be established in software/source/test infrastructure, and promote only the genuinely hardware-dependent remainder.
+
+### Counterfactual Promotion Test
+
+Before graduating a module with promoted uncertainty, ask:
+
+> If every promoted item turned out differently from our current expectation, would any central claim taught by this module become wrong, would a downstream prerequisite become unreliable, would the evidence chain become invalid, or would an important safety/reliability boundary materially change?
+
+If **yes**, the item is not promotable and blocks graduation. If **no**, promotion may be legitimate if the minimum evidence floor is otherwise satisfied.
+
+### Re-Promotion Safeguard
+
+A 2000-level module may not simply re-promote an unresolved 1000-level item to 3000 because it remains difficult or inconvenient. Re-promotion requires new evidence showing that the question is genuinely specialized/expert-level, depends on additional advanced prerequisites, requires physical/specialized infrastructure unavailable to the lower level, or has otherwise been mis-scoped. The rationale and new evidence must be recorded. Difficulty alone is not a valid reason.
+
+The governing principle is:
+
+**Do not over-investigate to graduate. Do not promote to avoid investigating.**
+
 When the same essential experiment fails or stalls repeatedly, do not blindly rerun it. After no more than three materially similar failed attempts, explicitly classify the experiment as one of:
 
 1. **ESSENTIAL NOW** — redesign the experiment/harness before another attempt because graduation would otherwise be unsound;
-2. **PROMOTE** — preserve the uncertainty and evidence trail for the 2000/3000 queue and continue the current course level; or
+2. **PROMOTE** — preserve the uncertainty and evidence trail for the 2000/3000 queue and continue the current course level, but only if the minimum evidence floor and counterfactual promotion test are satisfied; or
 3. **DROP** — document why the experiment no longer provides useful information.
 
 A materially redesigned experiment may begin a new attempt cycle, but the decision and rationale must be recorded. Compute expenditure alone is not evidence of progress.

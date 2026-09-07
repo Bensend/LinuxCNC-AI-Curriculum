@@ -23,15 +23,19 @@ cd src
 ./autogen.sh
 ./configure --with-realtime=uspace --disable-gui --disable-manpages --disable-build-documentation
 make -j"$(nproc)"
-# A run-in-place uspace build needs rtapi_app capabilities before HAL can
-# create and schedule realtime threads.  The first S02 run omitted this and
-# failed before the watchdog topology existed, so that result was HARNESS
-# INVALID rather than a watchdog prediction failure.
+# Normal run-in-place capability setup.  Keep this even though the hosted
+# runner used by this software-semantics lab still refuses SCHED_FIFO after
+# setcap; it documents and tests the normal setup before the bounded override.
 sudo make setcap
 cd ..
 set +u
 source scripts/rip-environment
 set -u
+# This hosted runner still rejects realtime scheduling after the normal setcap
+# target. LinuxCNC explicitly labels this override as testing-only.  S02 uses
+# it solely to instantiate production HAL functions and exercise state-machine
+# semantics; no realtime latency/deadline or physical-machine claim is allowed.
+export LINUXCNC_FORCE_REALTIME=1
 
 cat >/tmp/s02-watchdog.hal <<'EOF'
 loadrt threads name1=fast period1=1000000 fp1=0 name2=servo period2=10000000 fp2=1
@@ -179,5 +183,5 @@ timeout 3s halcmd show sig s02-heartbeat-gated
 timeout 3s halcmd show pin watchdog
 printf 'S02 generic watchdog heartbeat lab completed successfully.\n'
 printf '%s\n' 'TEST scope if PASS: generic HAL watchdog transition-timeout and explicit re-arm behavior at pinned revision in userspace software laboratory.'
-printf '%s\n' 'Explicit non-claim: no production realtime latency, HostMot2 firmware bite, physical output state, STO or functional-safety validation occurred.'
+printf '%s\n' 'Explicit non-claim: this hosted run used LinuxCNC testing-only FORCE_REALTIME; no production realtime latency, HostMot2 firmware bite, physical output state, STO or functional-safety validation occurred.'
 date -u '+UTC finish: %Y-%m-%dT%H:%M:%SZ'

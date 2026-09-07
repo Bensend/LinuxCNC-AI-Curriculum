@@ -1,8 +1,9 @@
-# S03 — Communication-Loss Behavior: Initial Research
+# S03 — Communication-Loss Behavior: Source and Field Guide
 
-Status: **RESEARCH**
+Status: **SOURCE / EXPERIMENT**
 Course level: 1000
 Pinned LinuxCNC revision: `8bf4605ae81042248add031e94c77300406e0413`
+Last research refresh: 2026-09-07
 
 ## Objective
 
@@ -43,32 +44,41 @@ It does **not** by itself establish what the FPGA outputs, drive enables, mechan
 
 ## Pinned hm2_eth error escalation
 
-Pinned `src/hal/drivers/mesa-hostmot2/hm2_eth.c` maintains a communication-error counter and exports a packet/error level. When the accumulated error level reaches the configured packet-error limit, the driver sets the LLIO `io_error` true and marks the packet-error-exceeded state.
+Pinned `src/hal/drivers/mesa-hostmot2/hm2_eth.c` maintains a communication-error counter. A representative failed queued-read receive path records a soft error; successful cycles reduce the soft-error level. When the configured error level reaches the packet-error limit, the low-level driver asserts persistent `llio.io_error`. Generic HostMot2 then observes that state and stops entering its normal LLIO read/write paths.
 
-The receive path also contains explicit recovery bookkeeping: if the error counter was at the limit but the user has cleared `io_error`, the counter can be reset so communication can be attempted again. Exact read-timeout/error-increment/decrement behavior still needs a complete pinned call-flow trace before S03 advances to SOURCE.
+The receive path also contains explicit recovery bookkeeping: if the error counter was at its limit but the user has cleared `io_error`, the counter can be reset so communication can be attempted again. That means **manual clear is permission to retry, not proof of resynchronization**.
 
-## Current documentation reconciliation
+## Current official documentation reconciliation
 
-Current `hm2_eth(9)` documentation exposes:
+Current English `hm2_eth(9)` documentation (checked 2026-09-07):
 
-- `packet-error`, the most recent cycle's read/write error indication;
-- `packet-error-level`, accumulated recent error level;
-- `packet-error-exceeded`, limit reached;
-- `packet-error-total`, cumulative packet errors;
-- `packet-error-limit`, the level at which an error becomes permanent and `io-error` becomes TRUE;
-- `packet-read-timeout`, which may be expressed as a percentage of the realtime thread period or an absolute time, with documentation warning that too-low values can create spurious errors while too-high values can create realtime delay errors.
+- describes packet-loss detection through expected packet-count checking;
+- states that a detected loss asserts `packet-error` for that cycle and raises `packet-error-level`;
+- states that reaching `packet-error-limit` produces a permanent low-level I/O error and sets the board `io-error` state until manually reset;
+- explicitly discusses **stale position feedback** during transient packet loss;
+- warns that some HostMot2 special functions do not recover perfectly from lost packets, naming encoder index handling as an example;
+- documents `packet-read-timeout` and warns that too-low settings can produce spurious read errors while too-high settings can create realtime delay errors.
 
-This provides a useful teaching distinction between **a transient packet error** and **the persistent LLIO `io_error` boundary** that causes HostMot2 host functions to return early.
+Official reference: https://www.linuxcnc.org/docs/html/man/man9/hm2_eth.9.html
 
-## Community evidence — field guidance, not authority
+This documentation independently supports the course's terminology and the stale-feedback hazard. It does not substitute for the pinned source trace because documentation may describe a different build/revision and does not prove the exact host execution path.
 
-Historical LinuxCNC field reports provide useful failure-mode leads:
+## Community evidence — field guidance, not current-version authority
 
-- poor Ethernet latency can produce read timeouts; community guidance describes consecutive errors escalating until communication is disabled and recommends observing `io_error` and read timing;
-- earlier hm2_eth versions handled dropped packets differently, demonstrating why version-pinning is essential when reasoning from forum posts;
-- users report real machines where pulling Ethernet causes board/output/watchdog effects, but those observations are board/configuration-specific and cannot substitute for source trace or physical validation of a different machine.
+Historical LinuxCNC forum thread "Random read errors on Mesa 7i92" (2016):
 
-Community evidence is therefore retained as a debugging lead, not as proof of current pinned semantics or safe physical behavior.
+https://www.forum.linuxcnc.org/27-driver-boards/30750-random-read-errors-on-mesa-7i92
+
+Developer Jeff Epler reported that the then-current 2.7/master hm2_eth code did not recover well from a missing read request/response and could wait long enough to miss realtime deadlines and possibly cause a 7i92 watchdog bite. Peter Wallace added that dropped packets were unusual on clean short links and emphasized graceful recovery as a design goal.
+
+**Evidence classification:** `COMMUNITY-REPORTED`, historical/version-specific.
+
+The report is valuable because it demonstrates two traps:
+
+1. transport failure behavior has changed over LinuxCNC history, so a forum timing claim must not be projected onto the pinned 2026 source; and
+2. a communication problem can interact with realtime deadline behavior and the firmware watchdog, but `io_error`, a missed deadline, and a watchdog bite are distinct states/events.
+
+No precise 2016 timing behavior is taught as current pinned behavior.
 
 ## Failure-domain taxonomy
 
@@ -90,16 +100,25 @@ Community evidence is therefore retained as a debugging lead, not as proof of cu
 5. **Recovery trap:** clearing `io_error` may permit host communication attempts again, but does not prove downstream state is synchronized or safe until fresh state is observed and recovery policy is verified.
 6. **Version trap:** historical forum behavior must not be silently promoted to the pinned 2026 source revision.
 
-## Experiment direction
+## Independent-verification experiment
 
-A useful no-hardware S03 experiment must exercise production error-state boundaries rather than merely toggle an unrelated HAL pin. Candidate paths:
+S03-013 uses a test-only mutable LLIO derivative while preserving production `hostmot2.c`. It must establish a valid baseline before fault injection, mutate a fake IOPort register, assert the production HostMot2-owned `io_error`, verify stale HAL publication plus LLIO write suppression, clear the error, and verify host publication/write activity resumes.
 
-- a mutable/fault-injecting LLIO fixture that first supplies known fresh TRAM state, then sets `io_error`, proving module publication stops and previous HAL state remains visible;
-- a write-capturing fixture that proves no new normal HostMot2 write reaches LLIO while `io_error` is asserted;
-- if hm2_eth-specific packet policy can be exercised without a real Mesa Ethernet target, inject bounded transport-return conditions and verify packet-error escalation/recovery.
+Earlier attempts that failed before baseline are classified HARNESS INVALID. `experiments/S03-013-harness-attempts-and-redesign.md` records the three-attempt safeguard and materially redesigned `hal_malloc()`-backed hook storage required by the pinned HAL API.
 
-The first two may fit a HostMot2 fake-LLIO extension already promoted in earlier modules. The third may require a network-aware fixture and should not be faked if the stock test infrastructure cannot provide the relevant transport semantics.
+## Evidence boundaries
 
-## Exact next checkpoint
+Even a passing S03-013 proves only generic HostMot2 **host-side** stale-publication/write-suppression behavior at the pinned revision. It cannot prove:
 
-Advance S03 from RESEARCH toward SOURCE by tracing pinned `hm2_eth.c` from queued-read completion through timeout/response validation, packet-error increment/decrement, limit crossing, `llio.io_error`, and manual-clear recovery. Then join that transport trace to pinned `hostmot2.c` `hm2_read_request()` / `hm2_read()` / `hm2_write()` early-return paths and document exactly which HAL values can become stale. Only after the call flow is complete should a production-path fault-injection experiment be selected.
+- physical Ethernet loss probability or exact packet timing;
+- FPGA watchdog timing/state;
+- connector voltage/current/high-impedance consequences;
+- Smart Serial remote state;
+- servo-drive enable/STO/torque/brake response;
+- machine stopping time;
+- safe synchronization/restart after real communication recovery;
+- functional-safety performance.
+
+## Exact current checkpoint
+
+Inspect the materially redesigned S03-013 workflow launched from `baf93443d1e8793640c58f81050cdb9a53be0979`. Require Gate A registration/fresh input/write capture before interpreting Gates B-D. If it passes, preserve the accepted result and grade `exams/S03-communication-loss-adversarial.md`; if it fails before Gate A, diagnose it as a new-cycle harness attempt rather than evidence against S03.

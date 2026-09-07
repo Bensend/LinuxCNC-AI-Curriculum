@@ -1,0 +1,11 @@
+# Checkpoint — S02 source trace + lab 012 launch
+
+S01 is GRADUATED at 1000 level per `checkpoints/2026-09-07T041018Z-S01-graduation-S02-start.md`, accepted result `experiments/S01-011-accepted-result.md`, and `exams/S01-adversarial-exam-and-handoff.md`. `PROGRESS.md` on main is stale and still shows the earlier S01 EXPERIMENT state; do not regress to it.
+
+S02 — watchdog design patterns — has advanced through SOURCE and into EXPERIMENT. Durable source guide: `guides/S02-watchdog-source-and-design-guide.md`. Predeclared experiment: `experiments/S02-012-watchdog-heartbeat-plan.md`. Production lab job: `lab-jobs/012-s02-watchdog-heartbeat.sh` at commit `04f212fbb75a3a13009b3938ecf0085df5fbdbc8`.
+
+Pinned source findings at LinuxCNC `8bf4605ae81042248add031e94c77300406e0413`: generic `watchdog(9)` detects transitions, decrements countdowns from the scheduled `process()` period, latches `ok-out` false after timeout, and requires an `enable-in` false→true edge observed by `set-timeouts()` to re-arm. `estop_latch(9)` is a separate software fault latch: healthy inputs plus reset rising edge enter OK; a fault drops `ok_out`, asserts `fault_out`, and stops its generated heartbeat. HostMot2 firmware watchdog remains a third layer; external hardware supervision is a fourth. None alone proves physical safe state or functional-safety performance.
+
+Lab workflow run `34086302076` was launched automatically from the lab-job commit and was `in_progress` when this checkpoint was written. Its acceptance gates are: disabled initial state; explicit arming edge; healthy heartbeat remains OK; gated heartbeat freeze causes bite; resuming heartbeat alone does not re-arm; explicit enable FALSE→TRUE re-arms. Thread periods/order are captured. PASS is software-only evidence.
+
+Exact next work: inspect workflow `34086302076` and its artifact/own exit code, not just the workflow badge. If valid PASS, write accepted result, run an adversarial exam including common-cause and misleading "two watchdogs means twice the safety" scenarios, correct any weaknesses, perform fresh-AI novel scenario, then graduate S02 if the watchdog-layer/safety boundaries remain intact. If the lab fails, classify HARNESS INVALID versus PREDICTION FAILURE before any rerun. Then update canonical `PROGRESS.md`, which is currently stale relative to checkpoint state.

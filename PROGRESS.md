@@ -4,19 +4,24 @@ Status values: `PLANNED`, `RESEARCH`, `SOURCE`, `EXPERIMENT`, `EXAM`, `CORRECTIO
 
 ## Current critical-path state
 
-All modules through **S06 — fault injection framework** are **GRADUATED** at 1000 level. **S07 — restart/recovery/state integrity** is the highest-priority unblocked module and is now in **SOURCE** at pinned LinuxCNC revision `8bf4605ae81042248add031e94c77300406e0413`.
+All modules through **S06 — fault injection framework** are **GRADUATED** at 1000 level. **S07 — restart/recovery/state integrity** is the highest-priority unblocked module and is now in **EXPERIMENT** at pinned LinuxCNC revision `8bf4605ae81042248add031e94c77300406e0413`.
 
-## S07 source checkpoint
+## S07 source + experiment checkpoint
 
 Durable artifacts now include:
 
 - `guides/S07-restart-recovery-state-integrity-research.md`
 - `source-analysis/S07-lifecycle-homing-state-ownership.md`
+- `source-analysis/S07-launcher-cleanup-startup-boundary.md`
 - `call-flows/S07-restart-to-position-revalidation.md`
+- `experiments/S07-017-restart-homing-state-plan.md`
+- `lab-jobs/017-s07-restart-homing-state.sh`
 
-Pinned source establishes two important lifecycle boundaries. First, `hal_lib_init()` gives a userspace process a process-specific RTAPI identity and maps the shared HAL key, while global HAL data is initialized only when needed; a new client PID therefore does not itself prove that the HAL namespace is fresh. `hal_lib_exit()` is separately reference-counted and diagnoses final library exit while component references remain. Second, `src/emc/motion/homing.c` owns per-joint `homed` state in module-local `H[]`, publishes it through `joint.N.homed`, and `set_all_unhomed()` explicitly clears it. `VOLATILE_HOME` is an additional OFF-transition invalidation rule, not a persistence facility.
+Pinned source establishes three lifecycle boundaries. First, `hal_lib_init()` gives a userspace process a process-specific RTAPI identity and maps the shared HAL key, while global HAL data is initialized only when needed; a new client PID therefore does not itself prove that the HAL namespace is fresh. Second, `src/emc/motion/homing.c` owns per-joint `homed` state in module-local `H[]`; fresh `base_homing_init()` creates the pins, sets the homing state machine idle/default parameters, and does not restore a previous runtime's homed bit. `HOME_FINISHED` sets `H[j].homed=1`, and the value is published through `joint.N.homed`. Third, `scripts/linuxcnc.in::Cleanup()` tears down userspace controller processes, stops/unloads HAL, stops realtime, removes NML shared memory, and removes the lock file. Service-port disappearance alone is therefore weaker than completed controller teardown.
 
-Current documentation reconciles with this model: homing establishes G53 machine origin; `VOLATILE_HOME` unhomes a joint on machine OFF when position may not be maintained; `HOME_ABSOLUTE_ENCODER` changes the configured homing/re-establishment procedure but does not make host process restart itself proof of position truth.
+S07-017 was frozen before implementation. It uses the stock ordinary-homing `tests/linuxcncrsh/linuxcncrsh-test.ini`: runtime A must start unhomed, establish `joint.0.homed=TRUE`, then shut down. Before B starts, the harness independently requires A PID absence, TCP 5007 absence, and disappearance of `joint.0.homed` from HAL. Runtime B must have a distinct launcher identity, expose `joint.0.homed=FALSE` before any new home request, then re-establish TRUE after `set home 0`. The INI SHA-256 must remain unchanged across both runtimes. Ambiguous teardown/identity or forced-homed semantics are HARNESS_INVALID rather than persistence evidence.
+
+The first S07-017 lab launch is triggered by commit `49ba7011e6df1b70b5f5b9be5baeb444a144578d`; no TEST-CONFIRMED claim exists until its own result and exit code are inspected.
 
 ### S07 promotion/uncertainty additions
 
@@ -29,11 +34,10 @@ Previously recorded S04–S06 promotion items remain active in their graduated h
 
 ## Current checkpoint / exact resume point
 
-Continue **S07** from SOURCE toward EXPERIMENT.
+Continue **S07-017** from EXPERIMENT.
 
-1. Finish targeted pinned source inspection of launcher `Cleanup()` ordering and the representative motion startup initialization that makes the selected ordinary-homing fixture initially unhomed. Do not over-investigate backend-specific crash cleanup unless it threatens the representative conclusion.
-2. Preserve targeted community findings only where they add a concrete restart/rehome trap; treat them as leads, not proof.
-3. Freeze **S07-017** before implementation. Required experiment structure: runtime A healthy control -> establish ordinary `joint.0.homed=TRUE` -> record runtime/service/HAL identity -> orderly shutdown -> independently require old service endpoint and representative HAL namespace to disappear -> runtime B from same INI -> prove distinct fresh identity -> observe initial `joint.0.homed` before any homing request -> home again and prove state can be re-established.
-4. Include a persistent configuration/file value only as a contrast if its ownership is unambiguous. Do not use a simulation homemod that forces homed state.
-5. Predeclare HARNESS_INVALID separately: ambiguous teardown, ambiguous new-runtime identity, forced-homed simulation semantics, or inability to observe the selected pin invalidates lifecycle attribution.
-6. Central prediction to freeze: reuse of the same INI does not inherit the representative ordinary motion homing state into a genuinely fresh runtime; successful process restart is not physical-machine recovery.
+1. Inspect the workflow triggered by `49ba7011e6df1b70b5f5b9be5baeb444a144578d` and read its own `LATEST.exit_code.txt`, stdout, stderr, and metadata. Do not infer PASS from workflow status alone.
+2. Apply the frozen gates in `experiments/S07-017-restart-homing-state-plan.md` without weakening them after seeing results. In particular, require the independent A teardown barrier before accepting B as a fresh-runtime observation.
+3. If PASS, commit accepted-result reconciliation, compare the observation against the source prediction, then proceed to S07 adversarial exam, corrections, fresh-AI handoff, counterfactual promotion audit, and graduation.
+4. If failure is harness-related, classify it explicitly and correct the harness without changing the central prediction. Respect the three-materially-similar-attempt safeguard.
+5. Preserve the central teaching regardless of fixture mechanics: successful host/process restart is not evidence that physical machine truth has been recovered; position revalidation semantics are architecture-specific.

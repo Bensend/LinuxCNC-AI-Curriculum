@@ -23,6 +23,11 @@ cd src
 ./autogen.sh
 ./configure --with-realtime=uspace --disable-gui --disable-manpages --disable-build-documentation
 make -j"$(nproc)"
+# A run-in-place uspace build needs rtapi_app capabilities before HAL can
+# create and schedule realtime threads.  The first S02 run omitted this and
+# failed before the watchdog topology existed, so that result was HARNESS
+# INVALID rather than a watchdog prediction failure.
+sudo make setcap
 cd ..
 set +u
 source scripts/rip-environment

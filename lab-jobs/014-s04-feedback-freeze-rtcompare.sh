@@ -25,6 +25,11 @@ s=s.replace("printf 'thread-order-%s: motion-controller=%s mux2=%s sampler=%s\\n
 # Track displayed limit and realtime comparator bit. Columns: 1 idx, 2-5 float, 6-10 bits.
 s=s.replace("if (travel>max_travel) max_travel=travel\n        if (abs(fe)>lim) crossed++", "if (travel>max_travel) max_travel=travel\n        if (lim>max_lim) max_lim=lim\n        if (abs(fe)>lim) crossed++\n        if (b($10)) rt_crossed++",1)
 s=s.replace('printf("moving-analysis frozen=%d max_travel=%.9g crossed=%d ferrored=%d exact_fault=%d disable=%d\\n", frozen,max_travel,crossed,ferrored,exact_fault,disable)\n    if (frozen < 1) exit 20\n    if (max_travel < 0.20) exit 21', 'printf("moving-analysis frozen=%d max_travel=%.9g max_runtime_limit=%.9g text_crossed=%d rt_crossed=%d ferrored=%d exact_fault=%d disable=%d\\n", frozen,max_travel,max_lim,crossed,rt_crossed,ferrored,exact_fault,disable)\n    if (frozen < 1) exit 20\n    if (rt_crossed < 1) exit 21',1)
+# The realtime comparator is the authoritative strict-crossing oracle. Remove the
+# legacy decimal-text crossing gate; retaining it would reintroduce the exact
+# rounding ambiguity this redesign exists to eliminate. Other fault/disable gates
+# remain unchanged.
+s=s.replace("    if (crossed < 1) exit 22\n", "", 1)
 # Ensure stationary-control AWK tolerates the extra sampled bit; its existing columns remain unchanged.
 p.write_text(s)
 PY

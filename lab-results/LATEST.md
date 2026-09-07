@@ -2,42 +2,42 @@
 
 - Job: `014-s04-feedback-freeze-rtcompare`
 - Job file: `lab-jobs/014-s04-feedback-freeze-rtcompare.sh`
-- Workflow run ID: `34122070072`
+- Workflow run ID: `34123752488`
 - Attempt: `1`
-- Source commit: `df51c09cfc7f3265d595380ef3ec6140e716d1e1`
-- Exit code: `1`
-- Finished UTC: `2026-09-07T12:32:10Z`
+- Source commit: `e3d6adafc0e46917d896f89a941c911053f8cd06`
+- Exit code: `29`
+- Finished UTC: `2026-09-07T12:50:36Z`
 
 ## Metadata
 ```text
 LinuxCNC AI Curriculum Lab
-UTC start: 2026-09-07T12:28:44Z
-Repository commit: df51c09cfc7f3265d595380ef3ec6140e716d1e1
-Workflow run: 34122070072 attempt 1
+UTC start: 2026-09-07T12:47:06Z
+Repository commit: e3d6adafc0e46917d896f89a941c911053f8cd06
+Workflow run: 34123752488 attempt 1
 Job file: lab-jobs/014-s04-feedback-freeze-rtcompare.sh
 Runner: Linux runnervmejwal 6.17.0-1022-azure #22-Ubuntu SMP Mon Jul 27 17:24:03 UTC 2026 x86_64 x86_64 x86_64 GNU/Linux
 Inner lab timeout: 70 minutes (job ceiling: 75 minutes)
 
-UTC finish: 2026-09-07T12:32:10Z
+UTC finish: 2026-09-07T12:50:36Z
 ```
 
 ## Standard output
 ```text
 == LinuxCNC S04 frozen-feedback / following-error lab ==
-UTC start: 2026-09-07T12:28:44Z
+UTC start: 2026-09-07T12:47:06Z
 Pinned upstream commit: 8bf4605ae81042248add031e94c77300406e0413
 Predeclared prediction A: while command moves, holding motor-pos-fb fixed until |f-error| exceeds runtime f-error-lim causes following-error fault and motion/amp-enable deassertion.
 Predeclared prediction B: holding already-equal stationary feedback for >=250 servo cycles does not by itself produce following error.
 Evidence boundary: LinuxCNC software/simulation behavior only; no physical encoder, stopping time, drive/STO, diagnostic coverage, or functional-safety evidence.
 Get:1 file:/etc/apt/apt-mirrors.txt Mirrorlist [144 B]
-Hit:2 http://azure.archive.ubuntu.com/ubuntu noble InRelease
 Get:6 https://packages.microsoft.com/ubuntu/24.04/prod noble InRelease [3600 B]
+Hit:2 http://azure.archive.ubuntu.com/ubuntu noble InRelease
 Get:3 http://azure.archive.ubuntu.com/ubuntu noble-updates InRelease [126 kB]
 Get:4 http://azure.archive.ubuntu.com/ubuntu noble-backports InRelease [126 kB]
 Get:5 http://azure.archive.ubuntu.com/ubuntu noble-security InRelease [126 kB]
 Get:7 https://dl.google.com/linux/chrome-stable/deb stable InRelease [2548 B]
-Get:8 https://packages.microsoft.com/ubuntu/24.04/prod noble/main amd64 Packages [441 kB]
-Get:9 https://packages.microsoft.com/ubuntu/24.04/prod noble/main arm64 Packages [394 kB]
+Get:8 https://packages.microsoft.com/ubuntu/24.04/prod noble/main arm64 Packages [394 kB]
+Get:9 https://packages.microsoft.com/ubuntu/24.04/prod noble/main amd64 Packages [441 kB]
 Get:10 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 Packages [1260 kB]
 Get:11 http://azure.archive.ubuntu.com/ubuntu noble-updates/main Translation-en [292 kB]
 Get:12 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 Components [180 kB]
@@ -58,7 +58,7 @@ Get:26 http://azure.archive.ubuntu.com/ubuntu noble-security/universe amd64 Comp
 Get:27 http://azure.archive.ubuntu.com/ubuntu noble-security/restricted amd64 Packages [1437 kB]
 Get:28 http://azure.archive.ubuntu.com/ubuntu noble-security/restricted Translation-en [334 kB]
 Get:29 https://dl.google.com/linux/chrome-stable/deb stable/main amd64 Packages [1401 B]
-Fetched 11.8 MB in 1s (8799 kB/s)
+Fetched 11.8 MB in 1s (8661 kB/s)
 Reading package lists...
 Reading package lists...
 Building dependency tree...
@@ -358,7 +358,7 @@ Get:166 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 python3-
 Get:167 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 python3-unidiff all 0.7.3-1 [11.0 kB]
 Get:168 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 equivs all 2.3.1 [19.0 kB]
 Get:169 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 libauthen-sasl-perl all 2.1700-1 [42.9 kB]
-Fetched 11.0 MB in 2s (5419 kB/s)
+Fetched 11.0 MB in 2s (5436 kB/s)
 Selecting previously unselected package autopoint.
 (Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 201676 files and directories currently installed.)
 Preparing to unpack .../000-autopoint_0.21-14ubuntu2_all.deb ...
@@ -1467,7 +1467,7 @@ Get:327 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 libmodbus-de
 Get:328 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 libtirpc-dev amd64 1.3.4+ds-1.1build1 [193 kB]
 Get:329 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 python3-xlib all 0.33-2 [120 kB]
 Preconfiguring packages ...
-Fetched 270 MB in 12s (22.5 MB/s)
+Fetched 270 MB in 7s (38.6 MB/s)
 Selecting previously unselected package libdebuginfod-common.
 (Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 208197 files and directories currently installed.)
 Preparing to unpack .../000-libdebuginfod-common_0.190-1.1ubuntu0.1_all.deb ...
@@ -3027,8 +3027,8 @@ Creating time.mak
 Creating threadtest.mak
 Creating thcud.mak
 Creating thc.mak
-Creating sum2.mak
 Creating steptest.mak
+Creating sum2.mak
 Creating spindle_monitor.mak
 Creating spindle.mak
 Creating sphereprobe.mak
@@ -3096,8 +3096,8 @@ Creating homecomp.mak
 Creating histobinstream.mak
 Creating histobins.mak
 Creating gray2bin.mak
-Creating gantry.mak
 Creating gearchange.mak
+Creating gantry.mak
 Creating flipflop.mak
 Creating filter_kalman.mak
 Creating feedcomp.mak
@@ -3118,15 +3118,15 @@ converting conv for conv_u64_float.comp
 converting conv for conv_u64_bit.comp
 converting conv for conv_u32_u64.comp
 converting conv for conv_u32_s64.comp
-converting conv for conv_u32_s32.comp
 converting conv for conv_u32_float.comp
+converting conv for conv_u32_s32.comp
 converting conv for conv_u32_bit.comp
 converting conv for conv_s64_u64.comp
 converting conv for conv_s64_u32.comp
 converting conv for conv_s64_s32.comp
 converting conv for conv_s64_float.comp
-converting conv for conv_s64_bit.comp
 converting conv for conv_s32_u64.comp
+converting conv for conv_s64_bit.comp
 converting conv for conv_s32_u32.comp
 converting conv for conv_s32_s64.comp
 converting conv for conv_s32_float.comp
@@ -3192,8 +3192,8 @@ Exporting hal.h
 Exporting hostmot2-serial.h
 Exporting linuxcnc.h
 Exporting kinematics.h
-Exporting emcmotcfg.h
 Exporting inifile.hh
+Exporting emcmotcfg.h
 Exporting inifile.h
 Exporting emcpos.h
 Exporting motion_types.h
@@ -3501,8 +3501,8 @@ Syntax checking python script pmx485
 Copying python script hal_input
 Copying python script scorbot-er-3
 Syntax checking python script sim-torch
-Copying python script mitsub_vfd
 Syntax checking python script z_level_compensation
+Copying python script mitsub_vfd
 Copying python script pmx485
 Syntax checking python script mqtt-publisher
 Syntax checking python script hal_bridge
@@ -3514,37 +3514,37 @@ Copying python script mqtt-publisher
 Copying python script hal_bridge
 Syntax checking python script puma560gui
 Syntax checking python script lineardelta
-Copying python script mtconnect-agent
 Copying python script pumagui
+Copying python script mtconnect-agent
 Syntax checking python script scaragui
 Syntax checking python script hexagui
 Copying python script puma560gui
-Syntax checking python script 5axisgui
 Copying python script lineardelta
+Syntax checking python script 5axisgui
 Syntax checking python script max5gui
 Copying python script scaragui
 Copying python script hexagui
 Syntax checking python script maho600gui
-Copying python script 5axisgui
 Syntax checking python script hbmgui
-Syntax checking python script rotarydelta
+Copying python script 5axisgui
 Copying python script max5gui
+Syntax checking python script rotarydelta
 Syntax checking python script melfagui
 Copying python script maho600gui
 Copying python script hbmgui
 Syntax checking python script millturngui
-Copying python script rotarydelta
 Syntax checking python script xyzac-trt-gui
-Syntax checking python script xyzbc-trt-gui
+Copying python script rotarydelta
 Copying python script melfagui
+Syntax checking python script xyzbc-trt-gui
 Syntax checking python script xyzab-tdr-gui
 Copying python script millturngui
 Copying python script xyzac-trt-gui
-Copying python script xyzbc-trt-gui
 Compiling hal/halmodule.cc
 Compiling hal/halquery.cc
-Compiling emc/usr_intf/axis/extensions/emcmodule.cc
+Copying python script xyzbc-trt-gui
 Copying python script xyzab-tdr-gui
+Compiling emc/usr_intf/axis/extensions/emcmodule.cc
 Syntax checking python script linuxcnctop
 Copying python script linuxcnctop
 Syntax checking python script mdi
@@ -3718,10 +3718,13 @@ Linking liblinuxcnc-uspace-posix.so.0
 Creating shared library liblinuxcnchal.so.0
 Creating shared library liblinuxcncini.so.1
 Syntax checking python script halcompile
+ln -sf liblinuxcnchal.so.0 ../lib/liblinuxcnchal.so
+Linking hy_vfd
+Linking xhc-whb04b-6
 Linking liblinuxcnc.a
+Copying python script halcompile
 tooldata: depends: objects/emc/tooldata/tooldata_mmap.o objects/emc/tooldata/tooldata_common.o objects/emc/tooldata/tooldata_db.o
 tooldata: Linking: libtooldata.so.0
-Copying python script halcompile
 ln -sf liblinuxcncini.so.1 ../lib/liblinuxcncini.so
 Linking libpyplugin.so.0
 c++ -std=gnu++20 -g -L/home/runner/work/_temp/linuxcnc-s04-freeze/lib -Wl,-rpath,/home/runner/work/_temp/linuxcnc-s04-freeze/lib -ltirpc  -lgpiod  -Xlinker -export-dynamic -Wl,-O1 -Wl,-Bsymbolic-functions -Wl,-soname,libpyplugin.so.0 -shared -o ../lib/libpyplugin.so.0 objects/emc/pythonplugin/python_plugin.o ../lib/liblinuxcncini.so.1 -lstdc++ -lboost_python312 -L/usr/lib/x86_64-linux-gnu -lpython3.12 -ldl -lm
@@ -3730,6 +3733,7 @@ Linking motion-logger
 ln -sf libtooldata.so.0 ../lib/libtooldata.so
 Linking linuxcnc_module_helper
 gcc -Wl,-z,relro -o ../bin/linuxcnc_module_helper objects/module_helper/module_helper.o
+Linking python module _hal.so
 Linking python module lineardeltakins.so
 c++ -std=gnu++20 -L/home/runner/work/_temp/linuxcnc-s04-freeze/lib -Wl,-rpath,/home/runner/work/_temp/linuxcnc-s04-freeze/lib -ltirpc  -lgpiod  -shared -o ../lib/python/lineardeltakins.so objects/emc/kinematics/lineardeltakins.o -lboost_python312
 Linking python module rotarydeltakins.so
@@ -3779,8 +3783,8 @@ Preprocessing conv_u32_s64.comp
 Preprocessing conv_u32_u64.comp
 Preprocessing conv_u64_bit.comp
 Preprocessing conv_u64_float.comp
-Preprocessing conv_u64_s64.comp
 Preprocessing conv_u64_s32.comp
+Preprocessing conv_u64_s64.comp
 Preprocessing conv_u64_u32.comp
 Preprocessing corexy_by_hal.comp
 Preprocessing dbounce.comp
@@ -3822,8 +3826,8 @@ Preprocessing lowpass.comp
 Preprocessing lut5.comp
 Preprocessing maj3.comp
 Preprocessing match8.comp
-Preprocessing matrixkins.comp
 Preprocessing max31855.comp
+Preprocessing matrixkins.comp
 Preprocessing mesa_pktgyro_test.comp
 Preprocessing message.comp
 Preprocessing millturn.comp
@@ -4012,8 +4016,8 @@ Compiling realtime objects/hal/components/scale.c
 Compiling realtime objects/hal/components/scaled_s32_sums.c
 Compiling realtime objects/hal/components/select8.c
 Compiling realtime objects/hal/components/sim_axis_hardware.c
-Compiling realtime objects/hal/components/sim_home_switch.c
 Compiling realtime objects/hal/components/sim_matrix_kb.c
+Compiling realtime objects/hal/components/sim_home_switch.c
 Compiling realtime objects/hal/components/sim_parport.c
 Compiling realtime objects/hal/components/sim_spindle.c
 Compiling realtime objects/hal/components/simple_tp.c
@@ -4052,8 +4056,8 @@ Linking ../rtlib/demux_generic.so
 Linking ../rtlib/encoder.so
 Linking ../rtlib/enum.so
 Linking ../rtlib/counter.so
-Linking ../rtlib/encoder_ratio.so
 Linking ../rtlib/stepgen.so
+Linking ../rtlib/encoder_ratio.so
 Linking ../rtlib/lcd.so
 Linking ../rtlib/matrix_kb.so
 Linking ../rtlib/mux_generic.so
@@ -4063,8 +4067,8 @@ Linking ../rtlib/pid.so
 Linking ../rtlib/threads.so
 Linking ../rtlib/supply.so
 Linking ../rtlib/sim_encoder.so
-Linking ../rtlib/weighted_sum.so
 Linking ../rtlib/watchdog.so
+Linking ../rtlib/weighted_sum.so
 Linking ../rtlib/modmath.so
 Linking ../rtlib/streamer.so
 Linking ../rtlib/sampler.so
@@ -4108,8 +4112,8 @@ Linking ../rtlib/pumakins.so
 Linking ../rtlib/three21kins.so
 Linking ../rtlib/5axiskins.so
 Linking ../rtlib/motmod.so
-ln -sf libposemath.so.0 ../lib/libposemath.so
 Linking ../rtlib/homemod.so
+ln -sf libposemath.so.0 ../lib/libposemath.so
 Linking ../rtlib/tpmod.so
 ln -sf libnml.so.0 ../lib/libnml.so
 ln -sf liblinuxcnc-uspace-posix.so.0 ../lib/liblinuxcnc-uspace-posix.so
@@ -4124,23 +4128,19 @@ Linking shuttle
 Linking xhc-hb04
 Linking sendkeys
 Preprocessing thermistor.comp
-ln -sf liblinuxcnchal.so.0 ../lib/liblinuxcnchal.so
 Linking vfs11_vfd
 Linking halcmd
 Linking halrmt
 Linking vfdb_vfd
 Preprocessing wj200_vfd.comp
 Preprocessing pi500_vfd.comp
-Linking hy_vfd
-Linking xhc-whb04b-6
 Linking linuxcncrsh
 Linking schedrmt
 Linking linuxcnclcd
 Linking halui
-Linking linuxcncsvr
 ln -sf libpyplugin.so.0 ../lib/libpyplugin.so
+Linking linuxcncsvr
 emc/Submakefile:Linking genserkins
-Linking python module _hal.so
 Linking python module linuxcnc.so
 Linking ../rtlib/abs.so
 Linking ../rtlib/abs_s32.so
@@ -4263,8 +4263,8 @@ Linking ../rtlib/sample_hold.so
 Linking ../rtlib/scale.so
 Linking ../rtlib/scaled_s32_sums.so
 Linking ../rtlib/select8.so
-Linking ../rtlib/sim_axis_hardware.so
 Linking ../rtlib/sim_home_switch.so
+Linking ../rtlib/sim_axis_hardware.so
 Linking ../rtlib/sim_matrix_kb.so
 Linking ../rtlib/sim_parport.so
 Linking ../rtlib/sim_spindle.so
@@ -4335,18 +4335,15 @@ HOME_SEQUENCE =    0
 runtime-moving-ready probe=4
 thread-order-moving: motion-controller=5 mux2=6 comp=16 sampler=17
 enabled-moving motion=TRUE amp=TRUE f-errored=FALSE error=FALSE
-gate-A cmd=0.03975 fb=0.04175 ferror=0 limit=0.05 f-errored=FALSE error=FALSE motion=TRUE amp=TRUE
+gate-A cmd=0.03825 fb=0.04075 ferror=0 limit=0.05 f-errored=FALSE error=FALSE motion=TRUE amp=TRUE
 gate-A-healthy-baseline=PASS
-freeze-asserted hold=0.05825 cmd-at-freeze=0.06425
+freeze-asserted hold=0.05575 cmd-at-freeze=0.06175
 moving-sampler-overruns=0
-moving-analysis frozen=6336 max_travel=0.05 max_runtime_limit=0.05 text_crossed=0 rt_crossed=1 ferrored=1 exact_fault=1 disable=1
+moving-analysis frozen=6341 max_travel=0.05 max_runtime_limit=0.05 text_crossed=0 rt_crossed=1 ferrored=1 exact_fault=1 disable=1
 gate-B-moving-freeze-threshold=PASS
 gate-C-following-error-disable=PASS
 
 == Gate D: fresh stationary-frozen control ==
-runtime-stationary-ready probe=1
-thread-order-stationary: motion-controller=5 mux2=6 comp=16 sampler=17
-enabled-stationary motion=TRUE amp=TRUE f-errored=FALSE error=FALSE
 ```
 
 ## Standard error
@@ -4362,7 +4359,7 @@ No user sessions are running outdated binaries.
 
 No VM guests are running outdated hypervisor (qemu) binaries on this host.
 Cloning into '/home/runner/work/_temp/linuxcnc-s04-freeze'...
-Updating files:   0% (1/9526)Updating files:   1% (96/9526)Updating files:   2% (191/9526)Updating files:   3% (286/9526)Updating files:   4% (382/9526)Updating files:   5% (477/9526)Updating files:   6% (572/9526)Updating files:   7% (667/9526)Updating files:   8% (763/9526)Updating files:   9% (858/9526)Updating files:  10% (953/9526)Updating files:  11% (1048/9526)Updating files:  12% (1144/9526)Updating files:  13% (1239/9526)Updating files:  13% (1282/9526)Updating files:  14% (1334/9526)Updating files:  15% (1429/9526)Updating files:  16% (1525/9526)Updating files:  17% (1620/9526)Updating files:  18% (1715/9526)Updating files:  19% (1810/9526)Updating files:  20% (1906/9526)Updating files:  21% (2001/9526)Updating files:  22% (2096/9526)Updating files:  23% (2191/9526)Updating files:  24% (2287/9526)Updating files:  25% (2382/9526)Updating files:  26% (2477/9526)Updating files:  27% (2573/9526)Updating files:  28% (2668/9526)Updating files:  29% (2763/9526)Updating files:  30% (2858/9526)Updating files:  31% (2954/9526)Updating files:  32% (3049/9526)Updating files:  33% (3144/9526)Updating files:  34% (3239/9526)Updating files:  35% (3335/9526)Updating files:  36% (3430/9526)Updating files:  37% (3525/9526)Updating files:  38% (3620/9526)Updating files:  39% (3716/9526)Updating files:  40% (3811/9526)Updating files:  41% (3906/9526)Updating files:  42% (4001/9526)Updating files:  43% (4097/9526)Updating files:  44% (4192/9526)Updating files:  45% (4287/9526)Updating files:  46% (4382/9526)Updating files:  47% (4478/9526)Updating files:  48% (4573/9526)Updating files:  49% (4668/9526)Updating files:  50% (4763/9526)Updating files:  51% (4859/9526)Updating files:  52% (4954/9526)Updating files:  53% (5049/9526)Updating files:  54% (5145/9526)Updating files:  55% (5240/9526)Updating files:  56% (5335/9526)Updating files:  57% (5430/9526)Updating files:  58% (5526/9526)Updating files:  59% (5621/9526)Updating files:  60% (5716/9526)Updating files:  61% (5811/9526)Updating files:  62% (5907/9526)Updating files:  63% (6002/9526)Updating files:  64% (6097/9526)Updating files:  65% (6192/9526)Updating files:  66% (6288/9526)Updating files:  67% (6383/9526)Updating files:  68% (6478/9526)Updating files:  69% (6573/9526)Updating files:  70% (6669/9526)Updating files:  71% (6764/9526)Updating files:  72% (6859/9526)Updating files:  73% (6954/9526)Updating files:  74% (7050/9526)Updating files:  75% (7145/9526)Updating files:  76% (7240/9526)Updating files:  77% (7336/9526)Updating files:  78% (7431/9526)Updating files:  79% (7526/9526)Updating files:  80% (7621/9526)Updating files:  81% (7717/9526)Updating files:  82% (7812/9526)Updating files:  83% (7907/9526)Updating files:  84% (8002/9526)Updating files:  85% (8098/9526)Updating files:  86% (8193/9526)Updating files:  87% (8288/9526)Updating files:  88% (8383/9526)Updating files:  88% (8428/9526)Updating files:  89% (8479/9526)Updating files:  90% (8574/9526)Updating files:  91% (8669/9526)Updating files:  92% (8764/9526)Updating files:  93% (8860/9526)Updating files:  94% (8955/9526)Updating files:  95% (9050/9526)Updating files:  96% (9145/9526)Updating files:  97% (9241/9526)Updating files:  98% (9336/9526)Updating files:  99% (9431/9526)Updating files: 100% (9526/9526)Updating files: 100% (9526/9526), done.
+Updating files:   0% (1/9526)Updating files:   1% (96/9526)Updating files:   2% (191/9526)Updating files:   3% (286/9526)Updating files:   4% (382/9526)Updating files:   5% (477/9526)Updating files:   6% (572/9526)Updating files:   7% (667/9526)Updating files:   8% (763/9526)Updating files:   9% (858/9526)Updating files:  10% (953/9526)Updating files:  11% (1048/9526)Updating files:  11% (1106/9526)Updating files:  12% (1144/9526)Updating files:  13% (1239/9526)Updating files:  14% (1334/9526)Updating files:  15% (1429/9526)Updating files:  16% (1525/9526)Updating files:  17% (1620/9526)Updating files:  18% (1715/9526)Updating files:  19% (1810/9526)Updating files:  20% (1906/9526)Updating files:  21% (2001/9526)Updating files:  22% (2096/9526)Updating files:  23% (2191/9526)Updating files:  24% (2287/9526)Updating files:  25% (2382/9526)Updating files:  26% (2477/9526)Updating files:  27% (2573/9526)Updating files:  28% (2668/9526)Updating files:  29% (2763/9526)Updating files:  30% (2858/9526)Updating files:  31% (2954/9526)Updating files:  32% (3049/9526)Updating files:  33% (3144/9526)Updating files:  34% (3239/9526)Updating files:  35% (3335/9526)Updating files:  36% (3430/9526)Updating files:  37% (3525/9526)Updating files:  38% (3620/9526)Updating files:  39% (3716/9526)Updating files:  40% (3811/9526)Updating files:  41% (3906/9526)Updating files:  42% (4001/9526)Updating files:  43% (4097/9526)Updating files:  44% (4192/9526)Updating files:  45% (4287/9526)Updating files:  46% (4382/9526)Updating files:  47% (4478/9526)Updating files:  48% (4573/9526)Updating files:  49% (4668/9526)Updating files:  50% (4763/9526)Updating files:  51% (4859/9526)Updating files:  52% (4954/9526)Updating files:  53% (5049/9526)Updating files:  54% (5145/9526)Updating files:  55% (5240/9526)Updating files:  56% (5335/9526)Updating files:  57% (5430/9526)Updating files:  58% (5526/9526)Updating files:  59% (5621/9526)Updating files:  60% (5716/9526)Updating files:  61% (5811/9526)Updating files:  62% (5907/9526)Updating files:  63% (6002/9526)Updating files:  64% (6097/9526)Updating files:  65% (6192/9526)Updating files:  66% (6288/9526)Updating files:  67% (6383/9526)Updating files:  68% (6478/9526)Updating files:  69% (6573/9526)Updating files:  70% (6669/9526)Updating files:  71% (6764/9526)Updating files:  72% (6859/9526)Updating files:  73% (6954/9526)Updating files:  74% (7050/9526)Updating files:  75% (7145/9526)Updating files:  76% (7240/9526)Updating files:  77% (7336/9526)Updating files:  78% (7431/9526)Updating files:  79% (7526/9526)Updating files:  80% (7621/9526)Updating files:  81% (7717/9526)Updating files:  82% (7812/9526)Updating files:  83% (7907/9526)Updating files:  83% (7961/9526)Updating files:  84% (8002/9526)Updating files:  85% (8098/9526)Updating files:  86% (8193/9526)Updating files:  87% (8288/9526)Updating files:  88% (8383/9526)Updating files:  89% (8479/9526)Updating files:  90% (8574/9526)Updating files:  91% (8669/9526)Updating files:  92% (8764/9526)Updating files:  93% (8860/9526)Updating files:  94% (8955/9526)Updating files:  95% (9050/9526)Updating files:  96% (9145/9526)Updating files:  97% (9241/9526)Updating files:  98% (9336/9526)Updating files:  99% (9431/9526)Updating files: 100% (9526/9526)Updating files: 100% (9526/9526), done.
 HEAD is now at 8bf4605ae Merge pull request #4501 from grandixximo/gmoccapy-quit-4500
 
 Running kernel seems to be up-to-date.
@@ -4382,5 +4379,5 @@ Reading 0/189 dependency files
 Done reading dependencies
 Reading 0/303 realtime dependency files
 Done reading realtime dependencies
-<commandline>:0: parameter or pin 'joint.0.motor-pos-cmd': not found
+HARNESS INVALID: prior LinuxCNC/HAL runtime did not fully disappear before Gate D restart.
 ```

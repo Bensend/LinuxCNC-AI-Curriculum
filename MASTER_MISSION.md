@@ -228,11 +228,27 @@ Completion of the 1000 series does not end the perpetual chain. On 1000 graduati
 
 A recurring curriculum session should execute an instruction equivalent to:
 
-> Continue executing the LinuxCNC AI Curriculum in `Bensend/LinuxCNC-AI-Curriculum`. Read `START_HERE.md` and follow it. Inspect current course level, progress, latest lab results, open questions, promotion/uncertainty queues, checkpoints, artifacts, and `LESSON_LOG.md`. Resume the highest-priority unblocked module according to the dependency graph. Perform substantive research, source analysis, experiments, verification, adversarial testing, corrections, and promotion decisions appropriate to the current course level. Commit durable results and update course state. Immediately before ending, record actual UTC timing and overlap status. Do not merely report status or propose a plan.
+> Continue executing the LinuxCNC AI Curriculum in `Bensend/LinuxCNC-AI-Curriculum`. Read `START_HERE.md` and follow it. Inspect current course level, progress, latest lab results, open questions, promotion/uncertainty queues, checkpoints, artifacts, and `LESSON_LOG.md`. Resume the highest-priority unblocked module according to the dependency graph. Perform substantive research, source analysis, experiments, verification, adversarial testing, corrections, and promotion decisions appropriate to the current course level. Target about 15–20 minutes of useful curriculum work in this invocation when useful unblocked work remains; completing one small lesson early is not by itself a reason to stop. Do not pad work or broaden scope merely to consume time. Checkpoint early if context density, branching evidence, or repository state becomes difficult for a fresh agent to reconstruct reliably. Commit durable results and update course state. Immediately before ending, record actual UTC timing and overlap status. Do not merely report status or propose a plan.
 
 ## Work-Pacing Rule
 
 A lesson is a bounded engineering unit. Long modules should be decomposed into lessons while remaining part of the same module. Prefer depth and evidence appropriate to the current course level over chapter count, but do not confuse exhaustive investigation with required mastery. Preserve valuable excess depth through promotion.
+
+For hourly scheduled curriculum sessions, target approximately **15–20 minutes of substantive useful work** when unblocked work remains. Finishing one small lesson unit before 15 minutes have elapsed is not, by itself, a reason to end the session; continue into the next logical subtask or lesson while the context remains coherent.
+
+The time target is a pacing target, not a quota. Do not manufacture work, repeat research, lower evidence standards, delay a valid graduation, or expand a 1000-level investigation into higher-level depth merely to consume time. Quality, evidence sufficiency, safety, and coherent repository state override the time target.
+
+Around 20 minutes, prefer to finish the current coherent unit, persist results, and exit. A session may run somewhat longer when needed to leave an experiment, repository, or evidence trail in a safe and coherent state, but it must continue to avoid overlap with the next hourly invocation.
+
+### Context and Memory Safeguard
+
+Elapsed time alone is not a reason to fear context loss; uncheckpointed information density is. Treat GitHub as durable memory throughout the session rather than waiting until the end.
+
+Checkpoint useful findings whenever the session accumulates enough new source traces, experimental evidence, corrections, or branching questions that a fresh agent might otherwise have difficulty reconstructing the exact state from the repository. If context becomes dense or ambiguous, persist a precise checkpoint and end the session early rather than continuing merely to reach the time target.
+
+A fresh next session must be able to recover the current module, evidence status, unresolved questions, promotion decisions, and exact next step from repository state alone.
+
+Laboratory/cloud compute runtime remains a separate budget from conversational research time. Do not treat a 20-minute research session as 20 minutes of lab usage unless the lab itself actually consumed that compute.
 
 ## First Assignment for a New Course
 

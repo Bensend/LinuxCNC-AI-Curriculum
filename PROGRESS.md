@@ -4,7 +4,7 @@ Status values: `PLANNED`, `RESEARCH`, `SOURCE`, `EXPERIMENT`, `EXAM`, `CORRECTIO
 
 ## Current critical-path state
 
-All modules through **S04 — stale/frozen feedback** are **GRADUATED** at 1000 level. **S05 — disagreement/redundancy monitoring patterns** is now active in **EXPERIMENT** at pinned LinuxCNC revision `8bf4605ae81042248add031e94c77300406e0413`.
+All modules through **S05 — disagreement/redundancy monitoring patterns** are **GRADUATED** at 1000 level. **S06 — fault injection framework** is now active in **RESEARCH / SOURCE** at pinned LinuxCNC revision `8bf4605ae81042248add031e94c77300406e0413`.
 
 ### S04 graduation evidence
 
@@ -25,54 +25,71 @@ Durable S04 artifacts:
 - `exams/S04-adversarial-exam-and-answer-key.md`
 - `guides/S04-graduation-audit-and-fresh-ai-handoff.md`
 
-The fresh-AI novel scenario passed: device-owned advancing sample metadata can strengthen ordinary freshness evidence for one channel while numerical agreement alone still cannot establish another channel's freshness. The counterfactual promotion test passed. S04 makes no claim about physical STO, stopping performance, PL/SIL/category, or safety-rated sensor diagnostic coverage.
+### S05 graduation evidence
 
-### S05 source and experiment state
+Authoritative experiment `34137614386`, source commit `084c227657dc09dc2962105236a455dc6d674b87`, completed with lab exit code `0`. Artifact digest: `sha256:c97840e998d47702ef8672f9209a76b6f05fa276f03513c2f4eae48bf02ccb2a`.
 
-The required documentation/community/source chain is now represented by:
+All predeclared S05-015 Gates A–J passed without post-hoc gate changes:
+
+- equal and sub-threshold values remained healthy;
+- exact `A-B=-0.125` asserted the selected `wcomp` boundary fault;
+- short fault persistence was rejected and sustained fault accepted;
+- short healthy recovery did not clear and sustained recovery did;
+- `maj3` masked one dissenting leg in the voted result while raw inputs preserved the dissent;
+- synthetic `A=B=42` remained numerically healthy, TEST-CONFIRMING that agreement is not correctness;
+- HAL thread order showed `sum2 -> wcomp -> or2 -> timedelay -> maj3`;
+- deterministic one-cycle skew arithmetic gave `0.200` apparent disagreement at 20 units/s and 10 ms period, above the 0.125 threshold.
+
+The adversarial exam passed. The bounded modification task strengthened one design rule: retain raw channels and dissent diagnostics in parallel with a functional majority vote; do not retain only the vote. The fresh-AI novel scenario combined S04 freshness and S05 common-cause reasoning: two physically separate sensors passing through one stalled publication bridge can agree perfectly while both published values are stale.
+
+The counterfactual promotion test passed. S05 makes no claim about physical channel independence, diagnostic coverage, PL/SIL/category, STO, stopping performance, or validation of a complete safety function.
+
+Durable S05 artifacts:
 
 - `guides/S05-disagreement-redundancy-monitoring-research.md`
 - `call-flows/S05-disagreement-voting-persistence.md`
 - `source-analysis/S05-component-semantics-and-boundaries.md`
 - `experiments/S05-015-disagreement-voter-persistence-plan.md`
+- `experiments/S05-015-accepted-result.md`
+- `exams/S05-adversarial-exam-and-answer-key.md`
+- `guides/S05-graduation-audit-and-fresh-ai-handoff.md`
 
-Pinned stock HAL semantics now traced:
+### S06 research / source state
 
-- `sum2.comp`: with gains `+1/-1`, produces signed disagreement `A-B`.
-- `wcomp.comp`: `under=(in<=min)`, `over=(in>=max)`, `out=!(under||over)`; exact thresholds are outside the healthy strict interior.
-- `maj3.comp`: normal output is true for at least two true inputs; voter output does not expose dissent identity, freshness, quality, or provenance.
-- `timedelay.comp`: while input differs from output, an internal timer accumulates realtime `fperiod`; on/off delays qualify assertion and recovery. Its `elapsed` output is not explicitly cleared when input already equals output, so S05 does not use `elapsed==0` as a state oracle.
+S06 has started with `guides/S06-fault-injection-framework-research.md`.
 
-The chosen two-channel numeric monitor is:
+Initial framework findings:
 
-`sensor A/B publication` → `sum2(A-B)` → `wcomp(-T,+T)` → `or2(under,over)` raw disagreement → `timedelay` persistence → diagnostic/status.
+- choose and name the injection layer before implementation: HAL value, publication/freshness, realtime ordering, motion feedback interface, HostMot2 LLIO, transport, or lifecycle/state;
+- preserve the production mechanism under test and inject at an explicit boundary;
+- predeclare a healthy control, injected fault, independent oracle, harness-invalid criteria, recovery criterion, non-claims, and attempt family;
+- `mux2` is a transparent live-versus-fault selector at the pinned source revision;
+- `sample_hold` freezes its prior `s32` output while `hold` is true;
+- documented `streamer`/`halstreamer` can feed deterministic realtime HAL sequences through a FIFO;
+- documented `sampler`/`halsampler` can capture same-cycle realtime evidence for non-realtime analysis;
+- S03 provides the below-HAL test-double pattern, S04 the value-path freeze/adversarial-control pattern, and S05 the predeclared threshold/persistence/order pattern;
+- an experiment must distinguish evidence that the **fault was injected** from evidence that the **subsystem responded**. A circular oracle is not acceptable.
 
-Function ordering remains part of the architecture. Acquisition must precede comparison for same-cycle intent; comparison precedes persistence; observers/responses must be placed deliberately. A one-cycle sample-age difference during motion can create apparent disagreement even if each sample is individually correct at its own acquisition instant.
-
-Experiment S05-015 was frozen **before implementation** with binary-exact threshold `T=0.125`, `on-delay=0.050 s`, `off-delay=0.030 s`, and explicit gates for equal values, sub-threshold disagreement, exact-threshold behavior, short versus sustained fault persistence, short versus sustained recovery, one dissenting `maj3` leg, common-mode equal wrong values, and function ordering. A deterministic timing-skew adversarial case uses `Ts=0.010 s`, `v=20 units/s`, giving `0.200 units` apparent one-cycle disagreement > `T`.
-
-Production lab job: `lab-jobs/015-s05-disagreement-voter-persistence.sh`
-
-Authoritative first attempt: workflow **`34137614386`**, source commit **`084c227657dc09dc2962105236a455dc6d674b87`**. It was **in progress** at the latest checkpoint; do not infer PASS from workflow status. Inspect the lab's own `LATEST.exit_code.txt` and artifact/output.
+No strong community source for a canonical LinuxCNC fault-injection framework was found in the initial targeted pass, so S06 is deliberately grounded in official HAL/test primitives, pinned source, and accepted curriculum experiments rather than claiming an upstream framework that is not evidenced.
 
 ## Promotion / uncertainty queue — active additions
 
 - S04 device-specific heartbeat/timestamp/sequence semantics: **2000 / HIGH** — stronger freshness evidence is hardware/protocol-specific and does not alter the graduated mismatch-vs-freshness result.
-- S04/S05 false-positive/false-negative tradeoffs at zero and very low velocity: **S05/S06/2000 / HIGH** — thresholds require a chosen sensor/process/noise model; no universal threshold is taught.
-- S05 independence/common-cause assumptions for redundant sensors: **current / CRITICAL** — S05 must make these assumptions explicit before graduation because numerical agreement/voting can hide common-mode failure.
-- S05 diagnostic comparison versus safety-rated diagnostic coverage: **later safety engineering / CRITICAL** — no PL/SIL/category claim is made; ordinary HAL experiments cannot validate physical independence or safety integrity.
-- S05 timing skew between individually valid channels: **current / HIGH** — source/call-flow and the predeclared adversarial arithmetic now establish the mechanism; preserve it in the exam/handoff and do not overclaim any hardware-specific skew.
+- S04/S05 false-positive/false-negative tradeoffs at zero and very low velocity: **2000 / HIGH** — thresholds require a chosen sensor/process/noise model; no universal threshold is taught.
+- S05 physical independence/common-cause diagnostic coverage: **later safety engineering / CRITICAL** — ordinary HAL experiments cannot validate physical independence or safety integrity; the 1000-level module explicitly makes no such claim.
+- S05 timing skew between individually valid channels: **2000 / HIGH** for hardware-specific bounds — the generic mechanism is graduated; actual device/bus skew needs architecture-specific evidence.
 - `timedelay.elapsed` observability/version behavior: **2000 / LOW** — pinned source can retain a previously published nonzero elapsed value after the internal timer resets. This does not affect S05's boolean persistence conclusion because `timedelay.out` is the state oracle.
+- S06 deterministic sequence/freshness source choice (`streamer` versus tiny realtime sequence component): **current / MEDIUM** — resolve before freezing S06-016 because the first framework experiment should not accidentally make userspace scheduler timing the mechanism under test.
+- S06 machine-readable laboratory result schema: **current / HIGH** — should be defined before S06 graduation because reusable fault-injection evidence is a central learning objective.
 
 All previously recorded promotion items remain active; consult graduated handoffs and prior history for their full rationale.
 
 ## Current checkpoint / exact resume point
 
-Continue **S05** from EXPERIMENT.
+Continue **S06 — fault injection framework** from RESEARCH / SOURCE.
 
-1. Inspect workflow `34137614386` and the lab's own exit code/output. Require Gates A–J from `experiments/S05-015-disagreement-voter-persistence-plan.md`; do not weaken acceptance criteria after observing results.
-2. If PASS, create an accepted-result artifact that reconciles every gate and explicitly preserves the limits: agreement is not correctness/freshness; majority is not dissent diagnosis; ordinary HAL logic does not establish independence or safety integrity.
-3. If HARNESS INVALID or a gate fails, diagnose before rerunning and count materially similar attempts under the three-attempt safeguard.
-4. After accepted independent evidence, move to S05 adversarial exam. Include a misleading "two sensors agree so state is safe/correct" premise, a one-cycle skew scenario, a two-bad-leg majority case, threshold-boundary reasoning, and a bounded HAL modification task that preserves raw channels alongside a vote.
-5. Perform corrections, fresh-AI novel-scenario handoff, counterfactual promotion test, and graduate S05 only if independence/common-cause and timing-skew boundaries remain explicit.
-6. Then activate S06 — fault injection framework according to the dependency graph.
+1. Finish pinned source inventory for `streamer` / `sampler` and inspect the repository lab runner/artifact schema.
+2. Define the reusable experiment-result schema: injected-fault evidence, subsystem-response oracle, healthy/adversarial controls, realtime ordering, recovery, harness-invalid classification, raw trace, exit code, and non-claims.
+3. Decide whether S06-016 should use only stock HAL primitives or a tiny realtime sequence+counter component. Prefer stock components unless they make timing/freshness evidence circular or userspace-scheduler-dependent.
+4. Freeze S06-016 acceptance gates **before** implementation. Include at least healthy baseline, stuck/frozen value, single-cycle jump, deterministic age/skew case, fault removal/recovery, and an explicit adversarial example of an invalid circular oracle.
+5. Only then implement/run the laboratory experiment. Preserve the three-attempt safeguard and do not relabel a HAL-level injection as physical hardware/transport evidence.

@@ -56,6 +56,17 @@ rsh_control() {
     sleep 0.2
   } | timeout 8s nc localhost 5007
 }
+rsh_shutdown() {
+  local tag=$1
+  {
+    printf '%s\n' 'set timestamp off'
+    printf '%s\n' "hello EMC $tag"
+    printf '%s\n' 'set echo off'
+    printf '%s\n' 'set enable EMCTOO'
+    printf '%s\n' 'shutdown'
+    sleep 0.2
+  } | timeout 8s nc localhost 5007
+}
 wait_homed() {
   local want=$1
   for _ in $(seq 1 120); do
@@ -81,13 +92,19 @@ wait_homed true || { echo 'Runtime A failed to establish homed state' >&2; cat s
 printf 'A-established-homed=%s\n' "$(read_pin joint.0.homed)"
 printf 'gate-AB=PASS\n'
 
-printf '\n== Gate C: orderly teardown and independent disappearance barrier ==\n'
-kill -TERM "$A_PID"
+printf '\n== Gate C: documented DISPLAY shutdown and independent disappearance barrier ==\n'
+rsh_shutdown s07A-shutdown >/tmp/s07-A-shutdown.txt 2>/tmp/s07-A-shutdown.err || {
+  echo 'HARNESS_INVALID: linuxcncrsh shutdown command did not complete' >&2
+  cat /tmp/s07-A-shutdown.txt >&2 || true
+  cat /tmp/s07-A-shutdown.err >&2 || true
+  exit 21
+}
+cat /tmp/s07-A-shutdown.txt || true
 for _ in $(seq 1 150); do
   if ! kill -0 "$A_PID" 2>/dev/null; then break; fi
   sleep 0.1
 done
-if kill -0 "$A_PID" 2>/dev/null; then echo 'HARNESS_INVALID: A launcher survived orderly wait' >&2; exit 21; fi
+if kill -0 "$A_PID" 2>/dev/null; then echo 'HARNESS_INVALID: A launcher survived documented linuxcncrsh shutdown' >&2; exit 21; fi
 wait "$A_PID" 2>/dev/null || true
 PORT_GONE=0; HAL_GONE=0
 for _ in $(seq 1 120); do
@@ -103,7 +120,17 @@ printf 'gate-C=PASS\n'
 printf '\n== Gate D/E/F: fresh runtime B starts unhomed then rehomes ==\n'
 linuxcnc -r "$INI" >s07-B.stdout 2>s07-B.stderr &
 B_PID=$!
-trap 'kill -TERM "$B_PID" 2>/dev/null || true; wait "$B_PID" 2>/dev/null || true' EXIT
+cleanup_B() {
+  if kill -0 "$B_PID" 2>/dev/null; then
+    rsh_shutdown s07B-cleanup >/tmp/s07-B-shutdown.txt 2>/tmp/s07-B-shutdown.err || kill -TERM "$B_PID" 2>/dev/null || true
+    for _ in $(seq 1 50); do
+      if ! kill -0 "$B_PID" 2>/dev/null; then break; fi
+      sleep 0.1
+    done
+  fi
+  wait "$B_PID" 2>/dev/null || true
+}
+trap cleanup_B EXIT
 [[ "$B_PID" != "$A_PID" ]] || { echo 'HARNESS_INVALID: launcher PID reused immediately' >&2; exit 23; }
 wait_ready B || { cat s07-B.stderr >&2 || true; exit 4; }
 B_INITIAL="$(read_pin joint.0.homed)"

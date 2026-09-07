@@ -4,7 +4,19 @@ Status values: `PLANNED`, `RESEARCH`, `SOURCE`, `EXPERIMENT`, `EXAM`, `CORRECTIO
 
 ## Current critical-path state
 
-All modules through **S07 — restart/recovery/state integrity** are **GRADUATED** at 1000 level. Phase 8 is complete. **T01 — G-code interpreter architecture** is now the highest-priority unblocked module and is **RESEARCH** at pinned LinuxCNC revision `8bf4605ae81042248add031e94c77300406e0413`.
+All modules through **S07 — restart/recovery/state integrity** are **GRADUATED** at 1000 level. Phase 8 is complete. **T01 — G-code interpreter architecture** is now the highest-priority unblocked module and has advanced to **EXPERIMENT** at pinned LinuxCNC revision `8bf4605ae81042248add031e94c77300406e0413`.
+
+## T01 current evidence
+
+The documentation/community baseline and first source/call-flow pass are durable:
+
+- `guides/T01-interpreter-source-guide.md`
+- `call-flows/T01-task-to-canonical-rapid.md`
+- frozen experiment `experiments/T01-018-interpreter-canonical-and-error-plan.md`
+
+Source-confirmed architecture at the pinned revision: Task reaches the pluggable interpreter through `emcTaskPlanRead()` / `emcTaskPlanExecute()`; `Interp::read()` and execution are distinct phases; `execute_block()` dispatches parsed semantics in defined execution order; representative motion conversion reaches canonical calls such as `STRAIGHT_TRAVERSE()`; the Task-side canonical implementation creates trajectory messages and appends them to `interp_list` through `tag_and_send()`. Therefore interpreter progress and machine execution progress are distinct evidence domains.
+
+Current documentation independently describes interpreter-generated canonical operations as queued Task work and explicitly documents read-ahead. Community reports about remap/Python side effects occurring during read-ahead agree with that architecture but remain community evidence until a bounded Task-level test is run.
 
 ## S07 graduation checkpoint
 
@@ -23,10 +35,12 @@ Previously recorded S04–S06 promotion items remain active in their graduated h
 
 ## Current checkpoint / exact resume point
 
-Begin **T01 — G-code interpreter architecture** from RESEARCH, continuing the required evidence chain rather than restarting prior architecture work.
+Resume **T01-018** without changing its frozen prediction or Gates A-E.
 
-1. Establish current documented interpreter responsibilities and interfaces, including RS274/NGC parsing/execution, canonical machining functions, modal state, remap/Python boundaries, and the Task/interpreter boundary.
-2. Search community/developer material for interpreter architecture traps, especially read-ahead, execution versus parsing state, remap interactions, and error propagation; treat community statements as leads.
-3. At pinned revision `8bf4605ae81042248add031e94c77300406e0413`, inventory `src/emc/rs274ngc/` entry points and trace at least one behaviorally significant path from Task invoking the interpreter through parsing/execution to canonical output. Reuse A01/A03 artifacts where valid but verify T01-specific claims.
-4. Create the T01 function/symbol guide and end-to-end call-flow guide before freezing an experiment. The first experiment should independently verify a representative interpreter behavior and a representative failure/error path, with prediction recorded before execution.
-5. Maintain the safety boundary: interpreter correctness is machine-control behavior, not evidence of a safety-rated function.
+1. Implement the lab harness against the pinned build of `rs274`; prove executable/SHA provenance and keep valid and invalid fixtures in separate invocations.
+2. Select a minimal valid `G0` fixture and an invalid fixture that the pinned executable itself proves illegal. Capture fixture hashes/text, command lines, stdout/stderr, and process exit codes.
+3. Gate B requires successful canonical `STRAIGHT_TRAVERSE` output for the valid rapid move. Gate C requires a real interpreter failure for the invalid fixture and no false successful canonical motion corresponding to the invalid command. Wrong revision, distro interpreter, ambiguous output capture, or accidentally legal invalid fixture is HARNESS_INVALID.
+4. Reconcile T01-018 against the frozen prediction. If it passes, decide whether a second Task/remap experiment is necessary to independently verify the read-ahead / `INTERP_EXECUTE_FINISH` boundary; do not infer Task timing from the standalone interpreter test.
+5. Then complete the T01 adversarial exam, fresh-AI novel-scenario handoff, corrections, promotion queue, and counterfactual graduation audit.
+
+Safety boundary remains unchanged: interpreter and Task synchronization behavior is ordinary machine-control behavior, not evidence of a safety-rated function.

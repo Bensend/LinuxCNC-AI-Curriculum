@@ -1,0 +1,52 @@
+name: Append Lesson Log
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "TIMING_APPEND_REQUEST.txt"
+
+permissions:
+  contents: write
+
+jobs:
+  append:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Check out curriculum repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Validate and append requested row
+        shell: bash
+        run: |
+          set -euo pipefail
+          ROW="$(cat TIMING_APPEND_REQUEST.txt)"
+          if [[ "$ROW" != '| '* ]]; then
+            echo "Request must contain exactly one Markdown table row." >&2
+            exit 2
+          fi
+          if [[ "$(wc -l < TIMING_APPEND_REQUEST.txt)" -gt 1 ]]; then
+            echo "Request must contain one row only." >&2
+            exit 3
+          fi
+          if grep -Fqx -- "$ROW" LESSON_LOG.md; then
+            echo "Timing row already present; no append needed."
+            exit 0
+          fi
+          printf '%s\n' "$ROW" >> LESSON_LOG.md
+
+      - name: Commit timing row
+        shell: bash
+        run: |
+          set -euo pipefail
+          if git diff --quiet -- LESSON_LOG.md; then
+            exit 0
+          fi
+          git config user.name "linuxcnc-curriculum-log-bot"
+          git config user.email "linuxcnc-curriculum-log-bot@users.noreply.github.com"
+          git add LESSON_LOG.md
+          git commit -m "log: append curriculum session timing [skip ci]"
+          git push

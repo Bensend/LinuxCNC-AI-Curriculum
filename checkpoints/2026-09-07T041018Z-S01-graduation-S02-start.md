@@ -1,0 +1,9 @@
+# Checkpoint — S01 graduation / S02 start
+
+S01 is GRADUATED at 1000 level. Workflow `34079407413` artifact exit code was 0 and all predeclared software-boundary gates passed. Accepted result: `experiments/S01-011-accepted-result.md`. Adversarial exam, correction key, fresh-AI novel scenario and graduation rationale: `exams/S01-adversarial-exam-and-handoff.md`.
+
+S02 is now the highest-priority unblocked module and is RESEARCH. Initial durable research: `guides/S02-watchdog-design-patterns-initial-research.md`.
+
+Exact next work: inspect pinned `src/hal/components/watchdog.comp` and `src/hal/components/estop_latch.comp`; document process/thread context, timeout arithmetic, transition/re-arm behavior and failure paths; connect these to the already-graduated HM08 HostMot2 watchdog without conflating layers. Then build a comparison matrix for HostMot2 watchdog, generic HAL heartbeat watchdog, software E-stop latch, and external hardware supervision. Search representative configs for real wiring and community reports for common-cause/failure-mode leads. Preserve S01's rule that controller/HAL watchdog states are not physical functional-safety proof.
+
+Timing note: session start `2026-09-07T04:09:01.024386Z`; substantive checkpoint captured at `2026-09-07T04:10:18.664577Z`, elapsed 1.3 min. No overlap with the previous known lesson, which ended `2026-09-07T03:23:25Z` (~45m36s before this start). Canonical LESSON_LOG append remains required; connector response truncation prevented a safe whole-file replacement during this short run, so this exact row is preserved for reconciliation rather than risking destruction of prior timing history.

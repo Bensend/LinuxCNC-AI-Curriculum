@@ -6,7 +6,17 @@ This document is the standing mission contract for AI agents working in `Bensend
 
 The objective is source-level mastery of LinuxCNC sufficient to architect, implement, test, debug, and maintain LinuxCNC-based machine-control systems, with eventual application to the separate OpenPressBrake project.
 
-This is an engineering research and reverse-engineering program. Its durable output must be useful to a fresh AI engineer, not just to the conversation that produced it.
+This is also an experiment in autonomous AI learning. The curriculum has three simultaneous purposes:
+
+1. **Subject mastery** — build durable, source-level LinuxCNC understanding that is accurate enough for engineering use.
+2. **Transferable curriculum** — make that understanding easy for another AI learner to reproduce, audit, extend, and apply without depending on this conversation or hidden context.
+3. **Learning-method research** — use the curriculum itself to discover how to make an AI study effectively: how to choose lesson size, pace work, checkpoint memory, verify claims, design experiments, avoid rabbit holes, decide when evidence is sufficient, transfer knowledge to a fresh learner, and improve autonomous study efficiency without sacrificing rigor.
+
+Treat all three as first-class success criteria. A faster curriculum is not better if mastery or transferability weakens. A deeper curriculum is not better if it becomes inefficient, non-transferable, or trapped in unnecessary investigation. Process changes should be judged by whether they improve the combination of **learning quality, reproducibility/transferability, and useful progress per unit of time/compute**.
+
+When the study process itself produces a useful lesson about autonomous learning — for example a pacing failure, memory/checkpoint problem, experiment-design mistake, evidence-quality improvement, graduation-rule correction, or better scheduling pattern — preserve that lesson in durable repository artifacts rather than leaving it only in conversation history. The LinuxCNC course should therefore become both a body of LinuxCNC knowledge and a reusable reference implementation for effective AI self-study.
+
+The durable output must be useful to a fresh AI engineer, not just to the conversation that produced it.
 
 ## Progressive Course Architecture
 
@@ -165,7 +175,7 @@ The curriculum is a dependency graph, not a rigid table of contents. If source r
 
 ## Durable Artifact Rule
 
-Commit useful work to GitHub, including developer guides, source maps, function inventories, call-flow guides, claims/evidence ledgers, forum findings, experiments, laboratory scripts/results, exams, corrections, unresolved questions, promotion queues, version comparisons, curriculum changes, and progress checkpoints.
+Commit useful work to GitHub, including developer guides, source maps, function inventories, call-flow guides, claims/evidence ledgers, forum findings, experiments, laboratory scripts/results, exams, corrections, unresolved questions, promotion queues, version comparisons, curriculum changes, progress checkpoints, and lessons learned about the autonomous study method itself.
 
 If work cannot finish in one session, persist a precise checkpoint that allows a fresh session to resume without reconstructing the work from chat history.
 
@@ -228,7 +238,7 @@ Completion of the 1000 series does not end the perpetual chain. On 1000 graduati
 
 A recurring curriculum session should execute an instruction equivalent to:
 
-> Continue executing the LinuxCNC AI Curriculum in `Bensend/LinuxCNC-AI-Curriculum`. Read `START_HERE.md` and follow it. Inspect current course level, progress, latest lab results, open questions, promotion/uncertainty queues, checkpoints, artifacts, and `LESSON_LOG.md`. Resume the highest-priority unblocked module according to the dependency graph. Perform substantive research, source analysis, experiments, verification, adversarial testing, corrections, and promotion decisions appropriate to the current course level. Target about 15–20 minutes of useful curriculum work in this invocation when useful unblocked work remains; completing one small lesson early is not by itself a reason to stop. Do not pad work or broaden scope merely to consume time. Checkpoint early if context density, branching evidence, or repository state becomes difficult for a fresh agent to reconstruct reliably. Commit durable results and update course state. Immediately before ending, record actual UTC timing and overlap status. Do not merely report status or propose a plan.
+> Continue executing the LinuxCNC AI Curriculum in `Bensend/LinuxCNC-AI-Curriculum`. Read `START_HERE.md` and follow it. Inspect current course level, progress, latest lab results, open questions, promotion/uncertainty queues, checkpoints, artifacts, and `LESSON_LOG.md`. Resume the highest-priority unblocked module according to the dependency graph. Perform substantive research, source analysis, experiments, verification, adversarial testing, corrections, and promotion decisions appropriate to the current course level. Also treat the study process itself as an experiment: preserve useful observations about pacing, memory/checkpointing, experiment design, transferability, evidence sufficiency, and autonomous learning efficiency when they can improve future curricula. Target about 15–20 minutes of useful curriculum work in this invocation when useful unblocked work remains; completing one small lesson early is not by itself a reason to stop. Do not pad work or broaden scope merely to consume time. Checkpoint early if context density, branching evidence, or repository state becomes difficult for a fresh agent to reconstruct reliably. Commit durable results and update course state. Immediately before ending, record actual UTC timing and overlap status. Do not merely report status or propose a plan.
 
 ## Work-Pacing Rule
 

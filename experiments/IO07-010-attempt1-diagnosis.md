@@ -25,17 +25,23 @@ The job failed because attempt 1 incorrectly required `joint.0.error` to remain 
 
 ## Source reconciliation
 
-Pinned `control.c` is unambiguous about the controller invocation that samples an active+enabled amplifier fault: `check_for_faults()` reports `joint %d amplifier fault`, executes `SET_JOINT_ERROR_FLAG(joint, 1)`, and clears `emcmotInternal->enabling`. `set_operating_mode()` then disables the joint and motion and explicitly does **not** clear the joint error during the disable transition. `output_to_hal()` publishes both the error and fault flags later in that same `emcmotController()` invocation.
+Pinned `control.c` is unambiguous about the controller invocation that samples an active+enabled amplifier fault: `check_for_faults()` reports `joint %d amplifier fault`, executes `SET_JOINT_ERROR_FLAG(joint, 1)`, and clears `emcmotInternal->enabling`. `set_operating_mode()` then disables the joint and motion and explicitly does **not** clear the joint error during that disable transition. `output_to_hal()` publishes both the error and fault flags later in the same `emcmotController()` invocation.
 
-However, `set_operating_mode()` also clears outstanding JOINT_ERROR flags when transitioning from disabled to enabled. Pinned `command.c` shows that an `EMCMOT_ENABLE` command sets `emcmotInternal->enabling=1`, deferring the actual enable transition to the controller cycle. Therefore an asynchronous userspace observation taken after the fault-triggered controller invocation is not a valid oracle for whether `joint.0.error` was TRUE during the exact fault-processing cycle. Attempt 1 proved the core disable/fault result but did not sample finely enough to prove the transient error publication.
+The later asynchronous `faulted=TRUE, error=FALSE` snapshot is also source-explainable, but through the Task/abort path rather than an immediate re-enable:
 
-The exact later command/task sequence that can request re-enable while the external fault remains asserted is deeper than needed to redesign this experiment; the corrected experiment will observe servo-cycle values directly instead of inferring them from delayed userspace polls.
+1. After motion disables, pinned Task `determineState()` returns `ESTOP_RESET` when I/O is out of estop but `emcStatus->motion.traj.enabled` is false.
+2. `emcTaskUpdate()` compares the previous Task state with that derived state. On `ON -> not ON`, it calls `emcTaskAbort()`.
+3. `emcTaskAbort()` calls the motion abort interface, producing an `EMCMOT_ABORT` command.
+4. Pinned `command.c` handles `EMCMOT_ABORT` by clearing JOINT_ERROR and JOINT_FAULT flags for all joints as part of abort cleanup.
+5. Because the physical/synthetic amplifier-fault HAL input is still TRUE, the next `process_inputs()` samples it and sets JOINT_FAULT again. But the joint is now disabled, and `check_for_faults()` only evaluates active **and enabled** joints, so it does not immediately set JOINT_ERROR again.
+
+That sequence yields exactly the delayed state seen by attempt 1: fault input TRUE, `faulted=TRUE`, `error=FALSE`, motion disabled, amp-enable FALSE. This is a source-confirmed cross-boundary lifecycle effect, not evidence that `check_for_faults()` failed to set JOINT_ERROR in the original fault-processing cycle.
 
 ## Classification
 
-**HARNESS OBSERVATION DEFECT — materially redesign before rerun.**
+**HARNESS OBSERVATION DEFECT — materially redesigned before rerun.**
 
-This is not accepted as a contradiction of the pinned source. Nor is the missing asynchronous `joint.0.error=TRUE` silently ignored. The corrected run must capture the values from a realtime `sampler` function scheduled after motion so it can distinguish the fault-processing cycle from later controller/task state changes.
+This is not accepted as a contradiction of the pinned source. Nor is the missing asynchronous `joint.0.error=TRUE` silently ignored. The corrected run must capture values from a realtime `sampler` function scheduled after motion so it can distinguish the original fault-processing cycle from the later Task-driven abort cleanup state.
 
 ## Corrected experiment requirements
 
@@ -45,8 +51,9 @@ Attempt 2 will:
 2. sample the fault signal, `joint.0.faulted`, `joint.0.error`, `motion.motion-enabled`, and `joint.0.amp-enable-out` every servo period;
 3. prove at least one enabled baseline sample;
 4. prove at least one post-injection sample with fault/faulted/error TRUE and motion/amp-enable FALSE;
-5. retain asynchronous final-state capture only as diagnostic context, not as the oracle for a transient source-state claim;
-6. query LinuxCNC's error channel (`linuxcncrsh get error`) so the amplifier-fault diagnostic is captured through the intended userspace interface rather than relying only on launcher stderr.
+5. preserve later `faulted=TRUE, error=FALSE` samples as expected Task/abort cleanup evidence if they occur;
+6. retain asynchronous final-state capture only as diagnostic context, not as the oracle for a transient source-state claim;
+7. query LinuxCNC's error channel (`linuxcncrsh get error`) so the amplifier-fault diagnostic is captured through the intended userspace interface rather than relying only on launcher stderr.
 
 ## Evidence boundary
 

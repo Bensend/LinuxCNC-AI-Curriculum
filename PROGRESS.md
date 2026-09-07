@@ -23,7 +23,8 @@ Status values: `PLANNED`, `RESEARCH`, `SOURCE`, `EXPERIMENT`, `EXAM`, `CORRECTIO
 | IO07 Hardware enable and fault patterns | GRADUATED | IO07 source/handoff/call-flow + accepted result | corrected run `34076164338` | passed | software/HAL amp-fault disable TEST-CONFIRMED; drive/STO/torque/safety not inferred |
 | S01 Machine control versus functional safety | GRADUATED | S01 source/call-flow/claims matrix/handoff | run `34079407413` passed | passed | external E-stop software boundary TEST-CONFIRMED; no physical functional-safety inference |
 | S02 Watchdog design patterns | GRADUATED | `guides/S02-watchdog-source-and-design-guide.md`; `guides/S02-graduation-handoff.md`; accepted result | run `34091326973` passed after three HARNESS INVALID attempts | passed | generic HAL heartbeat bite/re-arm TEST-CONFIRMED; testing-only FORCE_REALTIME; no latency/physical-safety claim |
-| S03 Communication-loss behavior | SOURCE | `guides/S03-communication-loss-initial-research.md`; `call-flows/S03-hm2-eth-loss-to-host-stale-state.md`; `experiments/S03-013-mutable-llio-feasibility-and-design.md` | stock `hm2_test` rejected as invalid oracle; mutable valid IOPort LLIO derivative specified | — | central stale-publication/write-suppression prediction still requires independent production-path verification |
+| S03 Communication-loss behavior | GRADUATED | `guides/S03-communication-loss-initial-research.md`; `call-flows/S03-hm2-eth-loss-to-host-stale-state.md`; `guides/S03-graduation-handoff.md`; accepted result | `013` run `34102334339` passed after materially redesigned mutable LLIO harness | passed | stale HAL publication + write suppression under persistent `io_error` TEST-CONFIRMED at generic HostMot2 host boundary; no physical/network/safety inference |
+| S04 Stale/frozen feedback | RESEARCH | pending | pending | pending | starts from S03 last-published-versus-fresh distinction; must cover freshness detection beyond transport-specific faults |
 
 ## Version baseline
 
@@ -31,11 +32,13 @@ Primary development revision: `8bf4605ae81042248add031e94c77300406e0413`. Stable
 
 ## Current critical-path result
 
-S01 and S02 are **GRADUATED** at the intended 1000-level scope.
+S01, S02, and S03 are **GRADUATED** at the intended 1000-level scope.
 
-S03 remains **SOURCE**. The hm2_eth transport escalation and generic HostMot2 early-return call flow is source-confirmed. This session audited pinned `hm2_test.c` and rejected the stock fixture as an independent stale-state/write-suppression oracle: its reads come from an unchanging compiled-in register image and its write callback discards address/data/payload while returning success. An unchanged HAL value from that stock fixture would therefore be circular evidence, and the fixture has no observable write-delivery state.
+S03's central prediction is now independently verified. The materially redesigned `013` test used a valid `hal_malloc()`-backed mutable LLIO while leaving production `hostmot2.c` unchanged. Gate A established live registration, input publication, and LLIO writes. With persistent `io_error`, fake input backing changed from 1 to 0 while the published GPIO input remained TRUE, and the LLIO write count remained exactly `1069` across an output-command change. After clearing `io_error`, the published input became FALSE and LLIO writes resumed to `1126`. Lab exit code was 0. This confirms stale last-published HAL state and normal write suppression only at the generic HostMot2 host boundary; it does not validate Ethernet timing, FPGA/drive state, machine resynchronization, or functional safety.
 
-The durable S03-013 design now requires a smallest-valid mutable IOPort LLIO derivative that leaves `hostmot2.c` unchanged, provides runtime-mutable backing register state, test-only `llio.io_error` control, and LLIO write capture. Baseline registration/fresh read/write is a mandatory harness-validity gate before injecting `io_error`. The existing predeclared prediction remains unchanged and graduation-blocking until independently checked.
+`exams/S03-communication-loss-adversarial.md` and `guides/S03-graduation-handoff.md` preserve the key diagnostic rules: visible does not mean fresh, commanded does not mean delivered, and cleared error does not mean resynchronized. The counterfactual promotion test passes because deeper transport/physical recovery behavior can differ without overturning those verified host-side claims.
+
+S04 is now the highest-priority unblocked module. Its focus is broader than S03: identify stale/frozen feedback even when no transport-specific fault is available, distinguish genuinely stationary process state from a frozen measurement path, document validity/freshness patterns and disagreement/timing diagnostics, and preserve the boundary between diagnostic confidence and safety-rated fault detection.
 
 ## Promotion / uncertainty queue
 
@@ -59,24 +62,27 @@ The durable S03-013 design now requires a smallest-valid mutable IOPort LLIO der
 - IO04 exact FPGA waveform/mode timing: **HM06/2000 / HIGH**.
 - IO04/IO05 physical PWM/analog transfer, polarity and limits: **commissioning / CRITICAL**.
 - IO05 mutable production-path fake Smart Serial remote: **2000 / HIGH**.
-- IO05 Smart Serial remote watchdog interaction with HostMot2/machine fault handling: **S03/S06/2000 / HIGH**.
+- IO05 Smart Serial remote watchdog interaction with HostMot2/machine fault handling: **S06/2000 / HIGH**.
 - IO05 physical analog disabled state and drive-enable/STO safety: **commissioning/safety / CRITICAL**.
 - IO06 mutable valid IOPort fake-LLIO: **2000 / HIGH**.
 - IO06 exact FPGA IOPort/readback and same-cycle Data/direction behavior: **HM04/2000 / HIGH**.
 - IO06 board-specific electrical fail-state behavior: **commissioning/safety / CRITICAL**.
 - IO07 exact command-to-physical-torque disable reaction time: **2000 + commissioning / CRITICAL**.
-- IO07 combined amp fault + HostMot2 `io_error`/watchdog/stale-feedback behavior: **S03/S06/2000 / HIGH**.
+- IO07 combined amp fault + HostMot2 `io_error`/watchdog/stale-feedback behavior: **S06/2000 / HIGH**.
 - IO07 drive-specific fault reset/STO/certified external safety architecture: **safety/commissioning / CRITICAL**.
 - S01 physical E-stop/STO/brake/contactor reaction and stopping time: **commissioning/safety / CRITICAL**.
 - S02 exact worst-case watchdog detection latency under scheduler jitter/overrun: **2000 / HIGH**.
 - S02 common-cause quantitative diagnostic coverage: **2000/safety engineering / HIGH**.
 - S02 external charge-pump/STO/relay fail-state and PL/SIL/category: **commissioning/safety / CRITICAL**.
-- S03 production-path transport-loss fault injection and stale-feedback verification: **current / HIGH**.
-- S03 combined Smart Serial remote watchdog + HostMot2 watchdog + `io_error` recovery ordering: **S03/S06/2000 / HIGH**.
+- S03 real hm2_eth packet loss/duplication/wrong-size transport fault injection: **E03/E06 or 2000 / HIGH**.
+- S03 combined Smart Serial remote watchdog + HostMot2 watchdog + `io_error` recovery ordering: **S06/2000 / HIGH**.
+- S03 real board/drive synchronization and enable policy after communication recovery: **commissioning/2000 / CRITICAL**.
+- S04 generic frozen-sensor detection thresholds and false-positive tradeoffs under true zero velocity: **current / HIGH**.
+- S04 diagnostic freshness/disagreement patterns versus safety-rated diagnostic coverage: **S05/S06 + safety engineering / CRITICAL**.
 - EVL/current-master versus pinned hm2_eth behavior: **2000 / HIGH**.
 - Physical-machine latency/jitter qualification: **advanced commissioning / CRITICAL**.
 - Functional-safety architecture/hazard analysis: **advanced safety / CRITICAL**.
 
 ## Current checkpoint / exact resume point
 
-Continue **S03 — communication-loss behavior** at pinned revision `8bf4605ae81042248add031e94c77300406e0413`. Use `experiments/S03-013-mutable-llio-feasibility-and-design.md` as the experiment contract. Inspect the final pinned `hm2_test.c` IDROM patterns and the IOPort module-descriptor/register format in `hostmot2.h` and `ioport.c`; construct the smallest valid fake board with one IOPort instance. Add only LLIO-level test hooks: mutable register backing, an `io_error` control, and write capture. Do not modify HostMot2 read/write behavior to manufacture the result. Implement `lab-jobs/013-s03-hostmot2-stale-state.sh` and require a successful registration plus fresh baseline read/write before fault injection; any registration/baseline failure is HARNESS INVALID, not evidence against S03. Then test the predeclared stale-publication/write-suppression/recovery prediction. Do not claim UDP hardware behavior, FPGA watchdog timing, drive response, resynchronization safety, or physical functional safety from the fixture.
+Continue **S04 — stale/frozen feedback** at pinned revision `8bf4605ae81042248add031e94c77300406e0413`. Begin with a source/documentation inventory of what LinuxCNC already exposes that can establish data freshness or detect implausibly frozen feedback: transport fault pins, encoder update semantics, motion following-error behavior, generic HAL timing/watchdog components, and any existing mismatch/limit-monitor components. Build a taxonomy separating (a) explicit communication-invalid state, (b) unchanged measurement while command/process state implies movement, (c) two-sensor disagreement, and (d) genuinely stationary input. Then trace one representative frozen-feedback detection path and predeclare a simulation/fault-injection experiment before implementation. Do not equate a diagnostic stale-data detector with a safety-rated encoder plausibility function.

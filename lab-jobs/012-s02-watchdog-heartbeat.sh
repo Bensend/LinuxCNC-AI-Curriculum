@@ -23,18 +23,13 @@ cd src
 ./autogen.sh
 ./configure --with-realtime=uspace --disable-gui --disable-manpages --disable-build-documentation
 make -j"$(nproc)"
-# Normal run-in-place capability setup.  Keep this even though the hosted
-# runner used by this software-semantics lab still refuses SCHED_FIFO after
-# setcap; it documents and tests the normal setup before the bounded override.
 sudo make setcap
 cd ..
 set +u
 source scripts/rip-environment
 set -u
-# This hosted runner still rejects realtime scheduling after the normal setcap
-# target. LinuxCNC explicitly labels this override as testing-only.  S02 uses
-# it solely to instantiate production HAL functions and exercise state-machine
-# semantics; no realtime latency/deadline or physical-machine claim is allowed.
+# Hosted-runner semantic test only. LinuxCNC labels this override testing-only;
+# no production realtime latency/deadline or physical-machine claim is allowed.
 export LINUXCNC_FORCE_REALTIME=1
 
 cat >/tmp/s02-watchdog.hal <<'EOF'
@@ -59,11 +54,16 @@ net s02-heartbeat-gated and2.0.out => watchdog.input-0
 start
 EOF
 
-rm -f /tmp/s02-hal.stdout /tmp/s02-hal.stderr
-halrun -I -f /tmp/s02-watchdog.hal >/tmp/s02-hal.stdout 2>/tmp/s02-hal.stderr &
+rm -f /tmp/s02-hal.stdout /tmp/s02-hal.stderr /tmp/s02-hal.stdin
+mkfifo /tmp/s02-hal.stdin
+# Hold a read/write descriptor open so halrun -I cannot see CI stdin EOF and
+# tear the realtime environment down before the external halcmd probes attach.
+exec 9<>/tmp/s02-hal.stdin
+halrun -I -f /tmp/s02-watchdog.hal <&9 >/tmp/s02-hal.stdout 2>/tmp/s02-hal.stderr &
 HALRUN_PID=$!
 cleanup() {
     trap - EXIT
+    exec 9>&- || true
     kill -TERM "$HALRUN_PID" 2>/dev/null || true
     for _ in $(seq 1 30); do
         if ! kill -0 "$HALRUN_PID" 2>/dev/null; then break; fi
@@ -71,6 +71,7 @@ cleanup() {
     done
     kill -KILL "$HALRUN_PID" 2>/dev/null || true
     wait "$HALRUN_PID" 2>/dev/null || true
+    rm -f /tmp/s02-hal.stdin
 }
 trap cleanup EXIT
 
@@ -137,7 +138,6 @@ C="$(read_pin watchdog.input-0)"
 O="$(read_pin watchdog.ok-out)"
 printf 'heartbeat samples=%s,%s,%s ok-out=%s\n' "$A" "$B" "$C" "$O"
 is_true_value "$O"
-# Phase can make first/third samples equal; require at least one observed transition.
 [[ "$A" != "$B" || "$B" != "$C" ]]
 printf 'healthy-heartbeat=PASS\n'
 

@@ -43,7 +43,7 @@ gate_abc = "printf '\\n== Gate A/B/C: healthy motion, freeze feedback, threshold
 pos = s.find(gate_abc)
 if pos < 0:
     raise SystemExit('HARNESS INVALID: could not locate Gate A/B/C insertion point')
-stationary = r'''printf '\n== Gate D first: stationary-frozen control in shared runtime ==\n'
+stationary = r"""printf '\n== Gate D first: stationary-frozen control in shared runtime ==\n'
 rm -f /tmp/s04-stationary.samples /tmp/s04-stationary-errors.txt
 start_runtime combined
 enable_machine combined
@@ -117,7 +117,7 @@ is_true_value "$M0" && is_true_value "$A0" && is_false_value "$F0" && is_false_v
     exit 43
 }
 
-'''
+"""
 s = s[:pos] + stationary + s[pos:]
 
 # Gate A/B/C must reuse the already-proven shared runtime, not launch another one.

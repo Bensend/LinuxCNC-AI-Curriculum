@@ -1,0 +1,99 @@
+{
+  "attempt_family": "s06-016-deterministic-rt-source-v1",
+  "capture_health": {
+    "sampler_overruns": 0,
+    "trace_complete_for_required_windows": true,
+    "trace_rows": 170
+  },
+  "cases": [
+    {
+      "id": "healthy-baseline",
+      "injection_evidence": {
+        "pass": true
+      },
+      "observations": [
+        "cycles 10-39 publication matches reference and detectors clear"
+      ],
+      "recovery_evidence": {
+        "pass": true
+      },
+      "response_evidence": {
+        "pass": true
+      }
+    },
+    {
+      "id": "freeze",
+      "injection_evidence": {
+        "pass": true
+      },
+      "observations": [
+        "published_seq_50=49.0",
+        "published_seq_79=49.0",
+        "age_abs_79=30.0"
+      ],
+      "recovery_evidence": {
+        "pass": true
+      },
+      "response_evidence": {
+        "pass": true
+      }
+    },
+    {
+      "id": "single-cycle-jump",
+      "injection_evidence": {
+        "pass": true
+      },
+      "observations": [
+        "cycle100_delta=5.0",
+        "cycle100_age=0.0"
+      ],
+      "recovery_evidence": {
+        "pass": true
+      },
+      "response_evidence": {
+        "pass": true
+      }
+    },
+    {
+      "id": "one-cycle-age-skew",
+      "injection_evidence": {
+        "pass": true
+      },
+      "observations": [
+        "cycle130_value_abs=0.01",
+        "cycle130_age_abs=1.0"
+      ],
+      "recovery_evidence": {
+        "pass": true
+      },
+      "response_evidence": {
+        "pass": true
+      }
+    }
+  ],
+  "exit_code": 0,
+  "experiment": "S06-016",
+  "invalid_oracle_example": {
+    "proposition": "fixture mode indicates fault, therefore injection and downstream response are proven",
+    "reason": "mode is fixture self-report; accepted evidence uses raw healthy/published values+sequence and independent stock observer outputs",
+    "valid": false
+  },
+  "linuxcnc_commit": "8bf4605ae81042248add031e94c77300406e0413",
+  "module": "S06",
+  "non_claims": [
+    "physical sensor fault coverage",
+    "HostMot2/FPGA fault coverage",
+    "Ethernet/packet-loss behavior",
+    "physical-machine timing",
+    "PL/SIL/category/diagnostic-coverage/safe-stop validation"
+  ],
+  "overall": "PASS",
+  "reason": "all frozen Gates A-J passed",
+  "recovery": {
+    "freeze": true,
+    "jump": true,
+    "skew": true
+  },
+  "schema_version": "linuxcnc-ai-fi-v1",
+  "thread_order_verified": true
+}

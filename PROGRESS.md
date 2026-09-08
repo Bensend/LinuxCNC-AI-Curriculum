@@ -4,77 +4,97 @@ Status values: `PLANNED`, `RESEARCH`, `SOURCE`, `EXPERIMENT`, `EXAM`, `CORRECTIO
 
 ## Current critical-path state
 
-All modules through **T03 — NML architecture and messages** are **GRADUATED at 1000 level**. **T04 — GUI integration boundaries** is now the highest-priority unblocked module and is active in **RESEARCH** at pinned LinuxCNC revision `8bf4605ae81042248add031e94c77300406e0413`.
+All modules through **T03 — NML architecture and messages** are **GRADUATED at 1000 level**. **T04 — GUI integration boundaries** is the highest-priority unblocked module and is active in **EXPERIMENT** at pinned LinuxCNC revision `8bf4605ae81042248add031e94c77300406e0413`.
 
 Repository artifacts, not chat history, remain authoritative.
 
-## T03 graduation evidence
+## T03 graduation evidence retained
 
-T03-020 workflow `34182846956`, authoritative job `101925247534`, final lab exit `0`, passed frozen Gates A-G without gate weakening.
+T03-020 workflow `34182846956`, authoritative job `101925247534`, exit `0`, passed frozen Gates A-G. In the decisive negative case, ESTOP was independently established before `AUTO_STEP`: serial 3 was echoed as 3 while matching aggregate status and `wait_complete()` were `RCS_ERROR`; the independent error channel reported the machine-state prerequisite failure before any later serial was issued.
 
-The decisive negative case was independently confirmed in ESTOP before `AUTO_STEP` was sent. The saved command advanced from serial 2 to serial 3, status echoed serial 3, matching aggregate status was `RCS_ERROR`, `wait_complete()` returned `RCS_ERROR`, and the independent error channel reported that `EMC_TASK_PLAN_STEP` could not execute until the machine was out of E-stop and turned on. No recovery serial was issued until this negative evidence had been preserved.
+Durable artifacts:
 
-Durable accepted result: `experiments/T03-020-accepted-result.md`.
+- `experiments/T03-020-accepted-result.md`
+- `exams/T03-adversarial-exam.md` — 10/10 PASS
+- `guides/T03-fresh-ai-handoff.md`
 
-### T03 teaching retained
+T03's retained rule is: **command acknowledgement/order, controller semantic result, operator diagnostics, physical-machine truth and safety truth are separate evidence domains.** Echoed/completed must not be interpreted as succeeded.
 
-Ordinary userspace command/order acknowledgement, controller semantic result, operator-error reporting, physical-machine truth and safety truth are separate evidence domains.
+T03 promotion queue remains remote reconnect/stale-status behavior (2000 HIGH), queue saturation/drop and confirm-write corner cases (2000 HIGH), multiple command producers/serial ownership races (2000 HIGH), multiple error consumers (2000 MEDIUM), and version drift (2000 MEDIUM).
 
-Pinned `emctaskmain.cc` publishes the current command serial into Task/top-level `echo_serial_number` before independently deriving aggregate DONE/EXEC/ERROR status. Pinned `emcmodule.cc` similarly separates command send/serial-echo handling from `wait_complete()` result handling. Therefore **an echoed serial is not proof of command success**.
+## T04 durable evidence
 
-The pinned stock NML configuration also gives distinct roles to `emcCommand`, `emcStatus` and `emcError`; status must not be treated as a replayable per-command journal and an empty error poll is not a success oracle.
+Current artifacts:
 
-Current official Python-interface documentation describes `echo_serial_number` as the serial of the last "completed" command. T03's source plus accepted negative experiment constrain that wording: completed/echoed must not be interpreted as succeeded, because an echoed command can complete with `RCS_ERROR`.
+- `guides/T04-gui-integration-research.md`
+- `call-flows/T04-axis-and-qtvcp-gui-boundaries.md`
+- frozen plan `experiments/T04-021-gui-status-freshness-plan.md`
+- implementation `lab-jobs/021-t04-gui-status-freshness.sh`
 
-T03 adversarial exam passed 10/10: `exams/T03-adversarial-exam.md`.
+### Source-grounded GUI model
 
-Fresh-AI transfer/counterfactual audit: `guides/T03-fresh-ai-handoff.md`.
+Current official AXIS documentation identifies AXIS as a graphical front-end with a configurable userspace `CYCLE_TIME`. Current QtVCP documentation identifies its `Status` layer as an event/signal wrapper around LinuxCNC state. The public Python interface remains the lower UI boundary: commands go through NML to Task, status is polled, and errors are consumed separately.
 
-**Decision: T03 GRADUATED at 1000 level.**
+Pinned QtVCP source establishes:
 
-### T03 promotion queue
+```text
+GLib timer -> GStat.update() -> stat.poll() -> merge cache -> diff -> GUI-facing signals
+```
 
-- remote NML/TCP disconnect, reconnect and stale-status behavior — 2000 HIGH;
-- command/error queue saturation, overwrite/drop and `confirm_write` corner cases — 2000 HIGH;
-- multiple independent command producers and serial-result ownership races — 2000 HIGH;
-- multiple error-channel consumers and consumption timing — 2000 MEDIUM;
-- version drift beyond pinned SHA — 2000 MEDIUM.
+If `stat.poll()` raises, `GStat.update()` sets `_status_active=False`, emits only generic `periodic`, skips `merge()`/state-change signals and reschedules. Cached presentation state can therefore survive a failed observation cycle.
 
-These items cannot reverse the bounded pinned conclusion that acknowledgement and semantic success are distinct; they refine transport/concurrency behavior.
+Pinned QtVCP `qt_action.py` constructs `linuxcnc.command()` and wraps controller requests with local GUI policy/guards. Those guards are userspace decisions based on observed status; they are not guarantees that Task will later accept the command.
 
-## T04 activation — GUI integration boundaries
+Pinned AXIS source independently shows the same architectural boundary with a different framework. `LivePlotter.update()` periodically polls its own `linuxcnc.stat()`, projects the snapshot into Tk variables/redraw caches, and returns on poll error. Helpers such as `manual_ok()`, `ensure_mode()` and `set_motion_teleop()` poll status, apply local policy, issue `linuxcnc.command()` requests and optionally wait/poll again. AXIS also owns substantial local preview, notification, preference and redraw state.
 
-T04 is now RESEARCH. Its 1000-level task is to identify what a LinuxCNC GUI may legitimately infer from public controller interfaces and where GUI presentation/control state diverges from Task, motion, HAL, physical-device and safety truth.
+The cross-GUI rule is therefore: **rendered GUI state is a periodically refreshed projection plus local policy, not an independent source of controller, physical or safety truth.**
 
-Do not assume AXIS, QtVCP, Gmoccapy or another GUI owns machine truth merely because it displays it. Trace representative GUI actions down to their public command/status/HAL interfaces and trace displayed state back to its actual source.
+### T04-021 frozen experiment
 
-### Exact next-work checkpoint
+T04-021 was frozen before implementation with Gates A-H. It uses a live pinned LinuxCNC simulation plus:
 
-1. Establish the current official GUI/UI-programming documentation baseline and community failure modes for stale GUI state, multiple command producers and custom GUI integrations.
-2. Inventory the pinned AXIS/Python integration entry points and one QtVCP or equivalent modern GUI path without attempting to document every widget.
-3. Trace one representative operator action from GUI callback -> `linuxcnc.command()`/HAL/NML -> Task and one representative displayed status value from controller status -> GUI refresh/render path.
-4. Build an explicit GUI-state ownership matrix distinguishing local widget state, controller status snapshot, HAL values, physical feedback and safety state.
-5. Identify one behaviorally meaningful failure path (for example stale/unpolled status, command rejected after a GUI enables a control, or competing command producer) and freeze the first T04 experiment before implementation.
-6. Preserve T03's serial/result distinction as an inherited prerequisite; do not retest it merely under a GUI skin unless the GUI introduces a new failure mechanism.
+1. an independent plain `linuxcnc.stat()` observer;
+2. a separate command producer;
+3. pinned `common.hal_glib.GStat` around its own status object via a test-only proxy that can deliberately fail only the GUI adapter's `poll()`;
+4. a presentation listener that updates only from GUI state signals.
+
+Frozen prediction: after baseline agreement in `STATE_ESTOP`, block only the GUI adapter poll, independently transition the controller to `STATE_ESTOP_RESET`, then invoke the failed GUI update. At that decisive point require:
+
+```text
+independent controller state == STATE_ESTOP_RESET
+GStat _status_active == False
+GStat cached/presented state == prior STATE_ESTOP
+no state-reset/on/off signal from failed update
+```
+
+After removing only the injected observation failure, the next successful GUI update must catch the cache/presentation up to `STATE_ESTOP_RESET` and mark `_status_active=True`.
+
+Implementation commit `8b7ad745f9bf286981620b42ea3f9166711e68ed` automatically launched LinuxCNC Lab Runner workflow **`34186879941`**. At this checkpoint it was queued/running; do not launch a duplicate.
+
+## Exact next-work checkpoint
+
+1. Inspect workflow **`34186879941`** and its authoritative job when complete. Preserve stdout/stderr/raw trace and exact result provenance.
+2. Reconcile frozen T04-021 Gates A-H unchanged. Workflow success alone is not behavioral evidence.
+3. If GStat cannot be instantiated headlessly because unrelated GI/ZMQ/HAL setup blocks the test, classify **HARNESS_INVALID** and isolate the same pinned `GStat.update()` branch without weakening independent-controller versus retained-presentation Gates D-G.
+4. If the failed poll unexpectedly updates GUI cached/presented state to the new controller state, classify **SUBSTANTIVE MISMATCH** and inspect hidden refresh paths before any rerun.
+5. If accepted, document the runtime freshness rule, perform a T04 adversarial transfer test, and decide whether a second GUI command-rejection/stale-guard experiment is necessary for 1000-level graduation.
+6. Do not duplicate T03 by treating serial/result semantics as the T04 experiment result; the new claim is GUI observation freshness.
+7. Keep error-consumer races, remote GUI/NML transport and broad widget taxonomy promoted unless required to validate the bounded T04 model.
 
 ## Blind-feedback process checkpoint
 
-The development-bank blind baseline required by `evaluation/BLIND_FEEDBACK_PROTOCOL.md` remains due after T03 graduation and before entering a later major module cluster. A genuinely blind evaluation must preserve answer sealing and learner precommitment; do not manufacture a "blind" score in the same context after exposing the answer. T04 remains in the same Phase-9 module cluster, so its source/research work can proceed without falsifying that control.
+The development-bank blind baseline required by `evaluation/BLIND_FEEDBACK_PROTOCOL.md` remains due after T03 graduation and before entering a later major module cluster. Do not manufacture a "blind" score in the same context after exposing the answer. T04 remains within the same Phase-9 module cluster, so source/experiment progress may continue without falsifying the blind-control requirement.
 
 ## Laboratory compute checkpoint
 
-T03-020 repository metadata preserves inner lab timestamps `2026-09-08T03:14:59Z` to `03:18:25Z`, but `LAB_COMPUTE_LOG.md` requires authoritative Actions **job** start/end timestamps rather than script envelope time. Exact job timestamps were not exposed by the available job-list response, so the ledger remains deliberately unbackfilled rather than substituting the 206-second script interval.
+T03-020 repository metadata preserves inner script timestamps `2026-09-08T03:14:59Z` to `03:18:25Z`, but the ledger requires authoritative Actions **job** start/end timestamps. The available job-list response did not expose those exact fields, so `LAB_COMPUTE_LOG.md` remains deliberately unbackfilled rather than substituting script envelope time. Apply the same rule to T04-021.
 
 ## Study-process rules retained
 
-- Short-session continuation: completing a single subtask is not by itself a reason to end a materially short lesson; continue useful unblocked work when available.
-- Lab compute accounting: record every material authoritative Actions job from exact job timestamps; never invent compute time.
-- Evidence discipline: process/UI/controller/physical/safety state remain separate unless a traced interface and appropriate independent evidence justify linking them.
+- Completing one short subtask is not a reason to end a materially short lesson when useful unblocked work remains.
+- Record material lab compute only from authoritative job timestamps; never invent it.
+- UI/controller/HAL/physical/safety state remain distinct unless a traced interface and appropriate independent evidence justify linking them.
 
 ## Session-recovery / overlap note retained
 
 A prior marker beginning `2026-09-08T02:11:10.538872Z` was left OPEN despite durable activity through `02:35:41Z`; later sessions explicitly recorded that uncertainty rather than fabricating an end time. Canonical timing rows live in `LESSON_LOG.md`.
-
-## Prior promotion queue retained
-
-S04-S07 and T01-T02 promotion items remain active in their graduated handoff artifacts, including device-specific stale-feedback semantics, transport/LLIO fault behavior, absolute-encoder restart provenance, abnormal-process/HAL-lifetime corner cases, dynamic queue-buster timing, nested MDI behavior and Task abort/pause races.

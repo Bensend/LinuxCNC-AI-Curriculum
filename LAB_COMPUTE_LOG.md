@@ -16,19 +16,20 @@ If a run is cancelled, times out, is harness-invalid, or fails substantively, st
 | 2026-09-08 | T03-020 NML ack vs semantic result | `34182846956` | `101925247534` | 2026-09-08T03:14:56Z | 2026-09-08T03:18:31Z | 3.6 | PASS | Accepted TEST-CONFIRMED T03 evidence after gate reconciliation; authoritative job timestamps. |
 | 2026-09-08 | T04-021 GUI status freshness | `34186879941` | `101936899842` | 2026-09-08T04:24:31Z | 2026-09-08T04:27:41Z | 3.2 | PASS | Accepted TEST-CONFIRMED T04 evidence; authoritative job timestamps. |
 | 2026-09-08 | T05-022 startup freshness gating attempt 1 | `34189716347` | `101945103662` | 2026-09-08T05:12:01Z | 2026-09-08T05:15:45Z | 3.7 | HARNESS INVALID | Exit 24. `GStat.__init__()` and tested `update()` were both blocked; implementation also drifted from frozen fixed-unavailable policy premise. No behavioral verdict. |
+| 2026-09-08 | T05-022 startup freshness gating attempt 2 | `34193926426` | `101957458393` | 2026-09-08T06:16:10Z | 2026-09-08T06:20:17Z | 4.1 | PASS | Accepted TEST-CONFIRMED T05 evidence; frozen Gates A-H passed after source-grounded harness correction. |
 
 ## Running totals
 
 Keep these totals current whenever new rows are added:
 
-- **Exactly backfilled lab compute:** 14.0 min (0.23 h)
-- **Total lab compute used:** 0.23 h + unbackfilled historical usage
+- **Exactly backfilled lab compute:** 18.1 min (0.30 h)
+- **Total lab compute used:** 0.30 h + unbackfilled historical usage
 - **Remaining from 120 h first-draft allowance:** unknown until historical backfill
-- **Current-day exactly backfilled lab compute (2026-09-08):** 14.0 min (0.23 h) + unbackfilled same-day historical usage
+- **Current-day exactly backfilled lab compute (2026-09-08):** 18.1 min (0.30 h) + unbackfilled same-day historical usage
 
 ## Immediate backfill queue
 
-No known T02-T05 authoritative jobs remain in the immediate queue as of the T05-022 attempt-1 reconciliation. Add T05-022 attempt 2 after its authoritative Actions job start/end timestamps become available.
+No known T02-T05 authoritative jobs remain in the immediate queue after T05-022 attempt 2 reconciliation.
 
 Do not use workflow `created_at`/`updated_at` envelope duration as billable job compute when exact job timestamps can be obtained later.
 

@@ -6,7 +6,7 @@ Status values: `PLANNED`, `RESEARCH`, `SOURCE`, `EXPERIMENT`, `EXAM`, `CORRECTIO
 
 All modules through **T05 — custom operator interface patterns** are **GRADUATED at 1000 level**. Phase 9 is complete.
 
-The required blind development baseline has now been completed validly, so Phase 10 is active. **C01 — simulated dual-actuator machine** is now **EXPERIMENT** at the frozen C01-023 checkpoint.
+The required blind development baseline has now been completed validly, so Phase 10 is active. **C01 — simulated dual-actuator machine** is now **EXPERIMENT** with frozen C01-023 executing in the authoritative lab runner.
 
 Repository artifacts, not chat history, remain authoritative.
 
@@ -59,17 +59,27 @@ Important retained boundary: forward mapping uses the principal/first duplicated
 
 - `guides/C01-simulated-dual-actuator-research.md`;
 - `call-flows/C01-world-coordinate-to-duplicate-joints.md`;
-- frozen `experiments/C01-023-dual-joint-command-fanout-plan.md`.
+- frozen `experiments/C01-023-dual-joint-command-fanout-plan.md`;
+- `lab-jobs/023-c01-dual-joint-command-fanout.sh` in commit `266d5d556861467497ebcf1d06a74c3ab219571a`.
 
-Current official documentation confirms that duplicate coordinate letters may assign multiple joints to one axis coordinate and recommends `KINEMATICS_BOTH` where independent joint/world operation is needed. The legacy `gantry` component is documented as superseded by `trivkins`. Community gantry reports were used as investigation leads and reconciled against source/upstream examples.
+Current official documentation confirms that duplicate coordinate letters may assign multiple joints to one axis coordinate and recommends `KINEMATICS_BOTH` where independent joint/world operation is needed. The legacy `gantry` component is documented as superseded by `trivkins`. Community gantry reports were used as investigation leads and reconciled against source/upstream examples. Community warnings about individually moving one side of an unhomed gantry are retained for the later adversarial exam; they do not alter C01-023's frozen runtime gates.
 
 ### Frozen C01-023 prediction
 
 A meaningful coordinated Y move in a running pinned `trivkins coordinates=XYZY kinstype=BOTH` fixture will cause both `joint.1.motor-pos-cmd` and `joint.3.motor-pos-cmd` to change and remain equal within `1e-9` machine units, while the joint endpoints remain separately observable.
 
-The upstream simulation's per-joint command-to-feedback loopback is explicitly treated as an ideal fixture property. It cannot prove physical actuator synchronization, independent-loop behavior, fault tolerance, or functional safety.
+The upstream-style simulation's per-joint command-to-feedback loopback is explicitly treated as an ideal fixture property. It cannot prove physical actuator synchronization, independent-loop behavior, fault tolerance, or functional safety.
 
-**Exact next-work checkpoint:** implement `lab-jobs/023-c01-dual-joint-command-fanout.sh` exactly against frozen C01-023 Gates A-H, auto-launch it once, preserve the authoritative workflow/job/artifact and raw command/feedback trace, then reconcile the unchanged gates. If valid, continue C01 adversarial exam/fresh-AI handoff/graduation; if the runtime cannot establish world motion or provenance, classify HARNESS INVALID rather than weakening the gates.
+### Authoritative C01-023 run
+
+- workflow: `34199237041`;
+- job: `101973964122`;
+- triggering commit: `266d5d556861467497ebcf1d06a74c3ab219571a`;
+- state at checkpoint: **in progress**, step `Run lab job and capture complete output`;
+- duplicate runs launched: **none**;
+- TEST-CONFIRMED claim: **none yet**.
+
+**Exact next-work checkpoint:** inspect workflow `34199237041` / job `101973964122` to final completion; preserve its final exit code, artifact ID, stdout/stderr and full raw C01-023 trace; reconcile the unchanged frozen Gates A-H. If all gates pass, commit the accepted result and proceed through C01 adversarial exam, fresh-AI handoff, counterfactual promotion audit and graduation. If startup/world motion/provenance/observation is invalid, classify the attempt HARNESS INVALID and correct only the harness without weakening Gates A-H. Do not launch a duplicate while this run remains live.
 
 ## T03 retained boundary
 
@@ -105,7 +115,7 @@ T05 higher-level promotions remain:
 
 ## Laboratory compute checkpoint
 
-`LAB_COMPUTE_LOG.md` exactly backfills T02-019 through T05-022 attempt 2: **18.1 minutes (0.30 h)** of authoritative job time, plus unbackfilled historical usage. No C01 lab compute has yet been consumed at this checkpoint.
+`LAB_COMPUTE_LOG.md` exactly backfills T02-019 through T05-022 attempt 2: **18.1 minutes (0.30 h)** of authoritative job time, plus unbackfilled historical usage. C01-023 workflow `34199237041` is currently executing, so its compute duration is not yet final and has not been added.
 
 ## Session-recovery / overlap note retained
 

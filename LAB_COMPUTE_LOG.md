@@ -23,21 +23,30 @@ If a run is cancelled, times out, is harness-invalid, or fails substantively, st
 | 2026-09-08 | C02-024 independent-feedback disturbance attempt 1 | `34219392130` | `102038671214` | 2026-09-08T11:11:44Z | 2026-09-08T11:15:20Z | 3.6 | HARNESS INVALID | Useful B-only divergence evidence, but Gate H mixed userspace enable observation with realtime output and the complete raw trace was not durably retained; no LinuxCNC behavioral FAIL claim. |
 | 2026-09-08 | C02-024 same-cycle enable correction | `34224780695` | `102056118960` | 2026-09-08T12:12:29Z | 2026-09-08T12:15:58Z | 3.5 | PASS / PUBLICATION INCOMPLETE | Frozen behavioral Gates A-H passed, including 1,011 same-cycle A-enabled/B-disabled rows with B output zero, but complete raw trace was copied outside the workflow artifact path, so this was not the final accepted artifact. |
 | 2026-09-08 | C02-024 retained-evidence final | `34225190610` | `102057466102` | 2026-09-08T12:16:54Z | 2026-09-08T12:20:47Z | 3.9 | PASS | Accepted TEST-CONFIRMED C02 evidence; full 8,335-row realtime trace and process logs retained under `lab-results/c02-024-evidence/`, artifact `10055529544`. |
+| 2026-09-08 | C05-028 feedback-freeze attempt 1 | `34246869855` | `102131002815` | 2026-09-08T15:46:12Z | 2026-09-08T15:49:40Z | 3.5 | HARNESS INVALID | Selector pin was linked to a signal, then userspace attempted to write the linked pin directly; no decisive behavioral phase. |
+| 2026-09-08 | C05-028 feedback-freeze attempt 2 | `34247942092` | `102134660105` | 2026-09-08T15:56:19Z | 2026-09-08T16:03:00Z | 6.7 | PASS | Accepted TEST-CONFIRMED C05-028 evidence; frozen feedback remained constant while independently sampled toy true-B moved. |
+| 2026-09-08 | C05-029 scale/jump attempt 1 | `34250135965` | `102142142268` | 2026-09-08T16:17:27Z | 2026-09-08T16:21:38Z | 4.2 | HARNESS INVALID | Single sampler configuration exceeded LinuxCNC's supported per-sample item count; no behavioral verdict. |
+| 2026-09-08 | C05-029 scale/jump attempt 2 | `34251568612` | `102147037252` | 2026-09-08T16:31:44Z | 2026-09-08T16:31:51Z | 0.1 | HARNESS INVALID | Wrapper/generator quoting failure before LinuxCNC behavior under test. |
+| 2026-09-08 | C05-029 scale/jump attempt 3 | `34251704209` | `102147446647` | 2026-09-08T16:32:47Z | 2026-09-08T16:36:17Z | 3.5 | HARNESS INVALID | Deferred FIFO-1 userspace drain produced an empty secondary trace; triggered ESSENTIAL NOW redesign classification. |
+| 2026-09-08 | C05-029 redesigned attempt 4 staging preflight | `34252503889` | `102150101026` | 2026-09-08T16:40:36Z | 2026-09-08T16:40:44Z | 0.1 | HARNESS INVALID | Isolated generator root omitted inherited `028-c05-feedback-freeze.sh`; LinuxCNC behavior did not run. |
+| 2026-09-08 | C05-029 redesigned attempt 5 concurrent samplers | `34252609192` | `102150452717` | 2026-09-08T16:41:38Z | 2026-09-08T16:46:35Z | 5.0 | HARNESS INVALID | Both concurrent readers ran; exact join rejected one terminal sample present only in FIFO A (`onlyA=[6564]`), traced to independent userspace sampler-stop writes. |
 
 ## Running totals
 
 Keep these totals current whenever new rows are added:
 
-- **Exactly backfilled lab compute:** 38.3 min (0.64 h)
-- **Total lab compute used:** 0.64 h + unbackfilled historical usage
+- **Exactly backfilled lab compute:** 61.4 min (1.02 h)
+- **Total lab compute used:** 1.02 h + unbackfilled historical usage
 - **Remaining from 120 h first-draft allowance:** unknown until historical backfill
-- **Current-day exactly backfilled lab compute (2026-09-08):** 38.3 min (0.64 h) + unbackfilled same-day historical usage
+- **Current-day exactly backfilled lab compute (2026-09-08):** 61.4 min (1.02 h) + unbackfilled same-day historical usage
 
 ## Immediate backfill queue
 
-C03-025 workflow `34226127383` is active as this ledger revision is written. Add its authoritative job start/end/runtime after completion, including failed or harness-invalid compute.
+Backfill C03-025 and C04-026 authoritative jobs from GitHub Actions metadata when convenient; they remain uncounted in the exact total above.
 
-No known T02-T05, C01, or C02 authoritative jobs remain in the immediate backfill queue.
+C05-029 attempt 6 workflow `34256027036` is active at this ledger revision. Add its authoritative job start/end/runtime after completion, including failed or harness-invalid compute.
+
+No known T02-T05, C01, C02, or C05 jobs through C05-029 attempt 5 remain in the immediate backfill queue.
 
 Do not use workflow `created_at`/`updated_at` envelope duration as billable job compute when exact job timestamps can be obtained later.
 

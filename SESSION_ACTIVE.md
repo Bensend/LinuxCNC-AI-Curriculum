@@ -1,12 +1,12 @@
 # Active Curriculum Session
 
-- Start UTC: `2026-09-08T16:38:59Z`
-- End UTC: `2026-09-08T16:41:35.964055Z`
-- Elapsed: `2.6 minutes`
+- Start UTC: `2026-09-08T17:09:49.147350107Z`
+- End UTC: `OPEN`
+- Elapsed: `OPEN`
 - Module: `C05 feedback sensor failure modes`
 - State: `CORRECTIONS / EXPERIMENT`
-- Outcome: `Reconciled C05-029 attempt 3 as HARNESS INVALID, invoked the three-attempt rule as ESSENTIAL NOW, materially redesigned observation transport for concurrent sampler readers, observed an immediate isolated-root staging defect in redesigned attempt 4, and committed a staging-only repair as attempt 5 without changing frozen behavior.`
-- Durable results: `results/C05-029-attempt-3-reconciliation.md; lab-jobs/033-c05-scale-jump-concurrent-samplers.sh; lab-jobs/034-c05-scale-jump-concurrent-samplers-staged.sh; PROGRESS.md`
-- Next checkpoint: `Inspect the workflow launched from commit c411b8e2622521c5124ec217159a88cea7a084be. Reconcile redesigned concurrent-sampler transport and unchanged C05-029 Gates A-H; do not duplicate while active.`
-- Overlap: `NO — previous canonical lesson ended 2026-09-08T16:33:50Z; this session began 5m09s later.`
-- Status: `CLOSED`
+- Outcome: `IN PROGRESS`
+- Durable results: `IN PROGRESS`
+- Next checkpoint: `Inspect the authoritative workflow launched from c411b8e2622521c5124ec217159a88cea7a084be and reconcile redesigned concurrent-sampler C05-029 against frozen Gates A-H.`
+- Overlap: `NO — previous canonical lesson ended 2026-09-08T16:41:35.964055Z; this session began about 28m13.2s later.`
+- Status: `ACTIVE`

@@ -8,19 +8,46 @@ Repository artifacts, not chat history, are authoritative.
 
 All modules through **T05 — custom operator interface patterns**, **C01 — simulated dual-actuator machine**, **C02 — independent feedback loops**, **C03 — explicit cross-coupling**, and **C04 — asymmetric actuator response** are **GRADUATED at 1000 level**.
 
-Phase 10 remains active. The highest-priority unblocked module is **C05 — feedback sensor failure modes**, state **RESEARCH**.
+Phase 10 remains active. The highest-priority unblocked module is **C05 — feedback sensor failure modes**, state **CORRECTIONS / EXPERIMENT**.
 
-## Blind development baseline — BL-DEV-001
+C05 now has documentation/community/source analysis, a pinned function-order model, a frozen first experiment, a retained invalid first attempt, a harness-only correction, and a frozen adversarial exam. It is **not graduated** and has no TEST-CONFIRMED C05-028 behavioral result yet.
 
-The learner response was immutably committed in `evaluation/development/BL-DEV-001-precommit.md` before oracle inspection.
+## Blind external-feedback state
 
-Result: **VALID, 10/10, 92% confidence**. Detailed evaluation is in `evaluation/development/BL-DEV-001-evaluation.md`; the score ledger is `evaluation/FEEDBACK_SCORE_LOG.md`.
+### BL-DEV-001
 
-A novel retention/development challenge should sample a different mechanism after roughly 10 subsequent lessons or about 24 hours, preserving the actual delay.
+Valid blind development baseline: **10/10, 92% confidence**. See:
+
+- `evaluation/development/BL-DEV-001-precommit.md`
+- `evaluation/development/BL-DEV-001-evaluation.md`
+
+### BL-DEV-002
+
+A second development challenge was immutably precommitted before inspecting the pinned oracle during the current C05 session.
+
+Result: **VALID, 9/10, 88% confidence, 0.8 min**.
+
+The behavioral prediction was correct, but the learner recalled LinuxCNC's following-error threshold as endpoint interpolation between `MIN_FERROR` and `FERROR`. Pinned `src/emc/motion/control.c` instead computes the inspected path as:
+
+```text
+ferror_limit = FERROR * abs(vel_cmd) / joint_vel_limit
+ferror_limit = max(ferror_limit, MIN_FERROR)
+trip when abs_ferror > ferror_limit
+```
+
+For the challenge values the exact limit is `0.5 in`, not `0.505 in`, and a `0.30 in` error does not trip.
+
+Durable records:
+
+- `evaluation/development/BL-DEV-002-precommit.md`
+- `evaluation/development/BL-DEV-002-evaluation.md`
+- `evaluation/FEEDBACK_SCORE_LOG.md`
+
+Because this was a mechanism-precision miss, schedule a novel same-mechanism transfer challenge after roughly 3–8 subsequent lessons rather than immediately repeating the same surface problem.
 
 ## C01 — simulated dual-actuator machine — GRADUATED 1000
 
-Accepted C01-023: workflow `34209185893`, job `102005842122`, artifact `10049218375`, inner exit `0`, Gates A-H PASS. Realtime sampling observed 5 inches of movement on both duplicated Y commands with `max-abs-j1-j3-command-diff=0` and zero sampler overruns.
+Accepted C01-023 proved same-cycle duplicated Y command equality in the deterministic fixture after correcting a sequential-userspace observation defect.
 
 Retained boundary:
 
@@ -50,9 +77,7 @@ shared command
 
 ## C03 — explicit cross-coupling — GRADUATED 1000
 
-Accepted C03-025: workflow `34228231147`, job `102067547546`, artifact `10056799485`, source commit `99f7c35ce3cfd23aa96c11f0168c798ff8607c7c`, inner exit `0`, Gates A-H PASS after two retained HARNESS INVALID phase-publication attempts.
-
-The explicit `Kc=0.5` relative-feedback coupler reduced sustained deterministic simulated disagreement from `0.703374228 in` to `0.377045040 in` (about 46.4%); removing it raised disagreement to `0.738476396 in` (about 1.96x the coupled value).
+Accepted C03-025 showed that an explicit `Kc=0.5` relative-feedback coupler reduced deterministic simulated disagreement, after preserving two HARNESS INVALID phase-publication attempts.
 
 Retained boundary:
 
@@ -66,45 +91,9 @@ reduced simulated disagreement
 
 ## C04 — asymmetric actuator response — GRADUATED 1000
 
-Pinned revision: `8bf4605ae81042248add031e94c77300406e0413`.
+C04 preserved a legitimate source-semantic falsification: directly changing PID `maxoutput` from a binding nonzero limit to zero can leave stale saturation telemetry at the pinned revision because the `limit_state` clear/update is inside the nonzero-`maxoutput` branch.
 
-Primary guides/results:
-
-- `guides/C04-asymmetric-actuator-response-research.md`
-- `guides/C04-pid-saturation-transition-semantics.md`
-- `results/C04-026-attempt-1-reconciliation.md`
-- `results/C04-026-attempt-2-behavioral-reconciliation.md`
-- `experiments/C04-027-source-corrected-recovery-plan.md`
-- `results/C04-027-accepted.md`
-- `evaluation/C04-adversarial-exam-result.md`
-- `evaluation/C04-fresh-ai-handoff.md`
-- `evaluation/C04-promotion-audit.md`
-
-### C04-026 preserved falsification
-
-C04-026 attempt 1 was HARNESS INVALID because Gate F paired PID-B saturation with the wrong output tuple field and the workflow artifact omitted the raw realtime trace. Two subsequent correction-wrapper jobs failed before LinuxCNC started; they provide no machine-behavior evidence. After the three-attempt investigation-control boundary, the harness was materially redesigned rather than patched again.
-
-The valid C04-026 rerun was workflow `34243768815`, job `102120345513`, artifact `10063237523`, source `5f42434b2a67d79d8ea2ccaa9f17e902df8423e5`. It produced 14,262 realtime rows and passed Gates A-F/H, but **legitimately failed frozen Gate G**. Phase 3 sustained B-only saturation for 3,011 rows, yet after phase 4 changed B `maxoutput` directly from `1.0` to `0`, `pidB.saturated` remained true and `saturated-count` continued increasing even after A/B feedback converged.
-
-Pinned `pid.c::calc_pid()` explains the result: an enabled PID updates/clears `limit_state` only inside the `if (maxoutput != 0.0)` output-limit block. A direct transition to zero skips that block, so a previously nonzero `limit_state` can persist and drive stale `saturated`/duration telemetry. This source structure is also present in current LinuxCNC master as inspected 2026-09-08. Current PID documentation describes zero as 'no limit' and `saturated` as current saturation, so the dynamic transition exposes a documentation/telemetry-semantic mismatch that must be taught explicitly.
-
-### Accepted C04-027 source-corrected recovery
-
-C04-027 was frozen before implementation after the C04-026 falsification. It retained phases 1-3 and every phase-3 authority value/threshold, changing only phase-4 recovery to a deliberately huge finite `maxoutput=1000.0` sentinel so pinned `calc_pid()` would execute the explicit `limit_state=0` branch. Gate G additionally required proof that the sentinel never bound.
-
-Authoritative workflow `34244865738`, job `102124147558`, artifact `10063683101`, source commit `4a9412e0d83dedfcd32bd6543cd0cf00231d40bf`, inner exit `0`, Gates A-H PASS.
-
-Key results:
-
-- 14,268 realtime rows;
-- `S1=0`, `S2=0.230824132`, `S3=1.477344334`, `S4=0`;
-- 3,018 consecutive phase-3 rows with B saturated at `+1.0` while A remained unsaturated;
-- phase-4 final-500 B unsaturated fraction `1.0`;
-- phase-4 final-500 B saturated-count-zero fraction `1.0`;
-- phase-4 sentinel nonbinding fraction `1.0`;
-- raw trace SHA-256 `2e4a924e10766a2cc8b4c5834cb89a94c5c423968a2965f1104889e597edec73`.
-
-The frozen C04 adversarial exam scored **10/10** and the fresh-AI combined sensor-scale + PID-saturation handoff passed. Promotion/counterfactual audit therefore graduates C04 at 1000 level.
+Source-corrected C04-027 used a deliberately huge finite nonbinding recovery sentinel so the explicit clear branch executed; authoritative workflow `34244865738`, job `102124147558`, artifact `10063683101`, source `4a9412e0d83dedfcd32bd6543cd0cf00231d40bf`, inner exit 0, Gates A-H PASS. The adversarial exam scored 10/10 and fresh-AI/promotion audits passed.
 
 Retained boundaries:
 
@@ -130,18 +119,95 @@ PID software saturation
 != safety-rated fault decision
 ```
 
-## C05 — feedback sensor failure modes — RESEARCH
+Primary durable C04 records remain in `guides/`, `experiments/`, `results/`, and `evaluation/` under the C04 names.
 
-Highest-priority unblocked next module. C05 inherits the C04 distinction between measured disagreement and plant truth and must deliberately exercise at least freeze, scale and jump/offset feedback faults with independent observation evidence.
+## C05 — feedback sensor failure modes — CORRECTIONS / EXPERIMENT
 
-### Exact next-work checkpoint
+Pinned revision: `8bf4605ae81042248add031e94c77300406e0413`.
 
-1. Read current LinuxCNC encoder/feedback documentation and pinned source for the minimum deterministic simulated sensor path suitable for injecting freeze, scale and jump/offset faults without conflating them with plant response.
-2. Trace `true toy plant state -> sensor transformation -> PID/cross-coupler measured feedback -> resulting control effort` at function/thread order level.
-3. Research community reports where encoder scale, frozen counts, wiring/noise or discontinuity produced misleading servo/gantry symptoms; classify them COMMUNITY-REPORTED, not source truth.
-4. Define what independent evidence can distinguish 'measured disagreement' from 'known physical disagreement'. Do not let C05 prematurely choose final stop/fault behavior.
-5. Freeze the first C05 experiment before implementation. It should preserve raw same-cycle true-plant-state and transformed-feedback evidence so a sensor fault cannot masquerade as a plant-authority result.
+### Research/source model
+
+Current documentation and pinned source establish the observation model:
+
+- encoder position is a scaled measurement product; raw counts remain separately observable;
+- pinned `integ.comp` advances an independent deterministic toy plant as `out += gain * in * fperiod` when its function executes;
+- pinned `mux4.comp` selects one float input and adds no plausibility diagnosis;
+- pinned `scale.comp` computes `out = in * gain + offset` and adds no diagnosis.
+
+C05 therefore explicitly separates **fixture/toy plant truth** from **measured feedback**.
+
+Durable records:
+
+- `guides/C05-feedback-sensor-failure-research.md`
+- `call-flows/C05-true-state-to-faulted-feedback.md`
+- `experiments/C05-028-feedback-freeze-plan.md`
+- `evaluation/C05-adversarial-exam.md`
+
+Frozen C05 local realtime order:
+
+```text
+motion command/controller
+-> plant A/B update using prior-cycle PID effort
+-> B sensor transformation / mux
+-> measured disagreement + cross-correction
+-> local PID A/B
+-> realtime residual helpers
+-> sampler
+```
+
+The resulting row can bind current toy plant state, selected measurement, controller arithmetic and newly calculated control output; that new output affects the next toy-plant update.
+
+Retained boundary:
+
+```text
+fixture true state != physical metrology truth
+frozen measured feedback != proven frozen actuator
+controller reaction to bad measurement != proof plant needed correction
+ordinary HAL/PID logic != safety-rated sensor fault handling
+```
+
+### C05-028 attempt 1 — HARNESS INVALID
+
+Authoritative workflow `34246869855`, job `102131002815`, source commit `5f4f0a765f577921e4c338953e016213a3b59f25`, recorded interval `2026-09-08T15:46:15Z`–`15:49:34Z`, result commit `6081e494074c8b808d7882e36833b4de57f940bb`.
+
+It failed before decisive behavioral phases with:
+
+```text
+pin 'c05-sensor-b.sel0': not writable
+```
+
+Root cause: `sel0` was intentionally connected to signal `c05-sensor-freeze` so selector state could be sampled in realtime, but the shell later tried to `setp` the linked pin. This is a harness configuration error, not sensor-behavior evidence.
+
+Reconciliation: `results/C05-028-attempt-1-reconciliation.md`.
+
+No frozen gate, numerical threshold, PID/plant gain, phase duration, or `Kc=0.5` value was changed.
+
+### C05-028 attempt 2 — running authoritative correction
+
+Harness-only correction commit: `347b282edd70c02a171e3144204231eb2ffd3814`.
+
+Correction:
+
+- drive the existing sampled selector **signal** with `halcmd sets c05-sensor-freeze`, rather than writing the linked mux pin;
+- parse and validate the phase-0 userspace freeze capture as one finite scalar float;
+- preserve frozen Gates A-H unchanged.
+
+Authoritative workflow: **`34247942092`**.
+
+Job: **`102134660105`**.
+
+At the latest checkpoint the job is still executing its single selected lab job. **Do not launch a duplicate and do not make a TEST-CONFIRMED claim.**
+
+## Exact next-work checkpoint
+
+1. Inspect only workflow `34247942092`, job `102134660105` until it reaches a terminal state.
+2. Reconcile the inner exit, raw realtime trace, stdout/stderr, selector/config rows and each unchanged C05-028 Gate A-H. Preserve evidence even if analysis fails.
+3. If attempt 2 is HARNESS VALID and passes, commit an accepted C05-028 result and freeze the next scale/jump experiment before implementation using the same verified true-state/measurement observation model.
+4. If attempt 2 is HARNESS VALID but fails a behavioral gate, preserve the failure as behavioral evidence; do not retune the frozen thresholds/gains after seeing it.
+5. If attempt 2 exposes another genuine harness defect, document it explicitly before deciding whether another run is permitted under the retry/investigation rules.
+6. C05 still requires deterministic **scale** and **jump/offset** fault evidence, the already-frozen adversarial exam, fresh-AI transfer, and promotion/counterfactual audit before graduation.
+7. Backfill authoritative C03-C05 laboratory compute in `LAB_COMPUTE_LOG.md`, including invalid runs rather than hiding them.
 
 ## Laboratory compute / timing notes
 
-`LAB_COMPUTE_LOG.md` contains authoritative compute accounting. Invalid runs are retained rather than hidden. C03 and C04 authoritative jobs still require a complete compute backfill if not already present; include pre-LinuxCNC harness failures rather than hiding their cost.
+`LAB_COMPUTE_LOG.md` is the authoritative compute ledger. C03 and later authoritative jobs still require complete backfill where missing. Invalid harness attempts count toward compute cost.

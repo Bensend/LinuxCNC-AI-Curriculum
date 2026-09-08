@@ -1,1 +1,4 @@
-CLOSED 2026-09-08T17:30:50.948805Z
+START 2026-09-08T18:13:06Z
+MODULE C05 feedback sensor failure modes
+CHECKPOINT C05-029 single atomic realtime observation redesign
+STATUS ACTIVE

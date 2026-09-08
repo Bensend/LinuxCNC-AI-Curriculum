@@ -14,13 +14,13 @@ TMP="${RUNNER_TEMP:-/tmp}/036-c05-scale-jump-concurrent-samplers-quiescent-drain
 python3 - "$BASE" "$TMP" <<'PY'
 from pathlib import Path
 import sys
-p=Path(sys.argv[1]); s=p.read_text()
+s=Path(sys.argv[1]).read_text()
 old="'halcmd stop\\\\nOVERRUNS=',"
 new="'halcmd stop\\\\nsleep 0.250\\\\nOVERRUNS=',"
 if s.count(old) != 1:
     raise SystemExit(f'HARNESS_INVALID: 036 drain patch count={s.count(old)}')
 s=s.replace(old,new,1)
-p.write_text(s)
+Path(sys.argv[2]).write_text(s)
 PY
 
 chmod +x "$TMP"

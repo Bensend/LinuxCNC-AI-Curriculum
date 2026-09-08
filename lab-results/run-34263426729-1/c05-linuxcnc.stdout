@@ -1,0 +1,9 @@
+Machine configuration file is 'c05-029.ini'
+Starting LinuxCNC...
+linuxcnc TPMOD=tpmod HOMEMOD=homemod EMCMOT=motmod
+Found file(REL): ./c05-029.hal
+task: main loop took 0.020000 seconds
+task: main loop took 0.019446 seconds
+linuxcncrsh: New connection from ::1:58558
+linuxcncrsh: Read close 'Default-4' (4)
+linuxcncrsh: Connection terminated 'Default-4' (4)

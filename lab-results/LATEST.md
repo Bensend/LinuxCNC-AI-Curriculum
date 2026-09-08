@@ -1,38 +1,37 @@
 # Latest LinuxCNC Lab Result
 
-- Job: `019-t02-task-motion-gated-delay`
-- Job file: `lab-jobs/019-t02-task-motion-gated-delay.sh`
-- Workflow run ID: `34179865160`
+- Job: `020-t03-nml-ack-vs-semantic-result`
+- Job file: `lab-jobs/020-t03-nml-ack-vs-semantic-result.sh`
+- Workflow run ID: `34182846956`
 - Attempt: `1`
-- Source commit: `e5db5e66c5c8be3a44cd47b9b6066fae51677b24`
+- Source commit: `0877652c3fe82722d99d81616c07a864ac3ae418`
 - Exit code: `0`
-- Finished UTC: `2026-09-08T02:26:32Z`
+- Finished UTC: `2026-09-08T03:18:25Z`
 
 ## Metadata
 ```text
 LinuxCNC AI Curriculum Lab
-UTC start: 2026-09-08T02:23:09Z
-Repository commit: e5db5e66c5c8be3a44cd47b9b6066fae51677b24
-Workflow run: 34179865160 attempt 1
-Job file: lab-jobs/019-t02-task-motion-gated-delay.sh
+UTC start: 2026-09-08T03:14:59Z
+Repository commit: 0877652c3fe82722d99d81616c07a864ac3ae418
+Workflow run: 34182846956 attempt 1
+Job file: lab-jobs/020-t03-nml-ack-vs-semantic-result.sh
 Runner: Linux runnervmejwal 6.17.0-1022-azure #22-Ubuntu SMP Mon Jul 27 17:24:03 UTC 2026 x86_64 x86_64 x86_64 GNU/Linux
 Inner lab timeout: 70 minutes (job ceiling: 75 minutes)
 
-UTC finish: 2026-09-08T02:26:32Z
+UTC finish: 2026-09-08T03:18:25Z
 ```
 
 ## Standard output
 ```text
-== T02-019 Task motion-gated dwell experiment ==
-UTC start: 2026-09-08T02:23:09Z
+== T03-020 NML acknowledgement versus semantic result ==
+UTC start: 2026-09-08T03:14:59Z
 Pinned upstream commit: 8bf4605ae81042248add031e94c77300406e0413
-Frozen prediction: a queued G4 dwell remains behind WAITING_FOR_MOTION_AND_IO until prior motion/I/O are complete, then Task enters WAITING_FOR_DELAY for the dwell interval.
-Anti-circular boundary: program/read-line progress is logged but is never accepted as the motion-completion oracle.
-Simulation boundary: this verifies Task/motion state-machine behavior in the stock loopback simulator; it does not prove physical actuator, transport, feedback-device, or safety behavior.
+Frozen negative prediction: AUTO_STEP while independently confirmed ESTOP is assigned/echoed a serial but has matching aggregate ERROR and independent operator-error evidence.
+Boundary: command echo is transport/order evidence, not semantic, physical, or safety success.
 Get:1 file:/etc/apt/apt-mirrors.txt Mirrorlist [144 B]
 Hit:2 http://azure.archive.ubuntu.com/ubuntu noble InRelease
-Get:3 http://azure.archive.ubuntu.com/ubuntu noble-updates InRelease [126 kB]
 Get:6 https://packages.microsoft.com/ubuntu/24.04/prod noble InRelease [3600 B]
+Get:3 http://azure.archive.ubuntu.com/ubuntu noble-updates InRelease [126 kB]
 Get:4 http://azure.archive.ubuntu.com/ubuntu noble-backports InRelease [126 kB]
 Get:5 http://azure.archive.ubuntu.com/ubuntu noble-security InRelease [126 kB]
 Get:7 https://dl.google.com/linux/chrome-stable/deb stable InRelease [2548 B]
@@ -58,7 +57,7 @@ Get:26 http://azure.archive.ubuntu.com/ubuntu noble-security/universe amd64 Comp
 Get:27 http://azure.archive.ubuntu.com/ubuntu noble-security/restricted amd64 Packages [1437 kB]
 Get:28 http://azure.archive.ubuntu.com/ubuntu noble-security/restricted Translation-en [334 kB]
 Get:29 https://dl.google.com/linux/chrome-stable/deb stable/main amd64 Packages [1403 B]
-Fetched 11.8 MB in 1s (8893 kB/s)
+Fetched 11.8 MB in 1s (8437 kB/s)
 Reading package lists...
 Reading package lists...
 Building dependency tree...
@@ -359,7 +358,7 @@ Get:166 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 python3-
 Get:167 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 python3-unidiff all 0.7.3-1 [11.0 kB]
 Get:168 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 equivs all 2.3.1 [19.0 kB]
 Get:169 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 libauthen-sasl-perl all 2.1700-1 [42.9 kB]
-Fetched 11.0 MB in 5s (2358 kB/s)
+Fetched 11.0 MB in 12s (945 kB/s)
 Selecting previously unselected package autopoint.
 (Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 201676 files and directories currently installed.)
 Preparing to unpack .../000-autopoint_0.21-14ubuntu2_all.deb ...
@@ -1469,7 +1468,7 @@ Get:327 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 libmodbus-de
 Get:328 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 libtirpc-dev amd64 1.3.4+ds-1.1build1 [193 kB]
 Get:329 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 python3-xlib all 0.33-2 [120 kB]
 Preconfiguring packages ...
-Fetched 270 MB in 12s (22.7 MB/s)
+Fetched 270 MB in 21s (13.0 MB/s)
 Selecting previously unselected package libdebuginfod-common.
 (Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 208197 files and directories currently installed.)
 Preparing to unpack .../000-libdebuginfod-common_0.190-1.1ubuntu0.1_all.deb ...
@@ -2834,7 +2833,7 @@ checking for c++ option to enable C++11 features... none needed
 checking for a BSD-compatible install... /usr/bin/install -c
 checking whether c++ supports C++20 features by default... no
 checking whether c++ supports C++20 features with -std=gnu++20... yes
-checking build toplevel... /home/runner/work/_temp/linuxcnc-t02-task
+checking build toplevel... /home/runner/work/_temp/linuxcnc-t03-nml
 checking installation prefix... run in place
 checking for grep... /usr/bin/grep
 checking for pkg-config... /usr/bin/pkg-config
@@ -2873,7 +2872,7 @@ checking for libusb-1.0... yes
 checking for libgpiod < 3.0.0... yes
 configure: libgpiod version 1.6.3 found
 checking for module installation directory... configuring for run-in-place
-/home/runner/work/_temp/linuxcnc-t02-task/rtlib
+/home/runner/work/_temp/linuxcnc-t03-nml/rtlib
 checking for glib... yes - 2.80.0
 checking whether make sets $(MAKE)... yes
 checking for ranlib... ranlib
@@ -2910,8 +2909,8 @@ checking for a version of Python >= '2.1.0'... yes
 checking for the sysconfig Python package... yes
 checking for Python include path... -I/usr/include/python3.12
 checking for Python library path... -L/usr/lib/x86_64-linux-gnu -lpython3.12
-checking for Python site-packages path... /home/runner/work/_temp/linuxcnc-t02-task/lib/python3.12/site-packages
-checking for Python platform specific site-packages path... /home/runner/work/_temp/linuxcnc-t02-task/lib/python3.12/site-packages
+checking for Python site-packages path... /home/runner/work/_temp/linuxcnc-t03-nml/lib/python3.12/site-packages
+checking for Python platform specific site-packages path... /home/runner/work/_temp/linuxcnc-t03-nml/lib/python3.12/site-packages
 checking python extra libraries... -ldl -lm
 checking python extra linking flags... -Xlinker -export-dynamic -Wl,-O1 -Wl,-Bsymbolic-functions
 checking consistency of all components of python development environment... yes
@@ -3004,7 +3003,7 @@ config.status: creating config.h
 ######################################################################
 
 
-make: Entering directory '/home/runner/work/_temp/linuxcnc-t02-task/src'
+make: Entering directory '/home/runner/work/_temp/linuxcnc-t03-nml/src'
 Creating mesa_uart.mak
 Creating mesa_7i65.mak
 Creating serport.mak
@@ -3018,8 +3017,8 @@ Creating userkins.mak
 Creating updown.mak
 Creating tristate_float.mak
 Creating tristate_bit.mak
-Creating ton.mak
 Creating tp.mak
+Creating ton.mak
 Creating toggle2nist.mak
 Creating toggle.mak
 Creating tof.mak
@@ -3046,8 +3045,8 @@ Creating scale.mak
 Creating sample_hold.mak
 Creating safety_latch.mak
 Creating reset.mak
-Creating radiobutton.mak
 Creating raster.mak
+Creating radiobutton.mak
 Creating pushmsg.mak
 Creating plasmac.mak
 Creating output_buffer.mak
@@ -3062,8 +3061,8 @@ Creating mux8.mak
 Creating mux4.mak
 Creating mux2.mak
 Creating mux16.mak
-Creating multiclick.mak
 Creating multiswitch.mak
+Creating multiclick.mak
 Creating mult2.mak
 Creating moveoff.mak
 Creating momentary2nist.mak
@@ -3097,8 +3096,8 @@ Creating hypot.mak
 Creating homecomp.mak
 Creating histobinstream.mak
 Creating histobins.mak
-Creating gray2bin.mak
 Creating gearchange.mak
+Creating gray2bin.mak
 Creating gantry.mak
 Creating flipflop.mak
 Creating filter_kalman.mak
@@ -3119,8 +3118,8 @@ converting conv for conv_u64_s32.comp
 converting conv for conv_u64_float.comp
 converting conv for conv_u64_bit.comp
 converting conv for conv_u32_u64.comp
-converting conv for conv_u32_s32.comp
 converting conv for conv_u32_s64.comp
+converting conv for conv_u32_s32.comp
 converting conv for conv_u32_float.comp
 converting conv for conv_u32_bit.comp
 converting conv for conv_s64_u64.comp
@@ -3159,8 +3158,8 @@ Creating axistest.mak
 Creating anglejog.mak
 Creating and2.mak
 Creating abs_s64.mak
-Creating abs_s32.mak
 Creating abs.mak
+Creating abs_s32.mak
 Creating conv_u64_u32.mak
 Creating conv_u64_s64.mak
 Creating conv_u64_s32.mak
@@ -3169,17 +3168,17 @@ Creating conv_u64_bit.mak
 Creating conv_u32_u64.mak
 Creating conv_u32_s64.mak
 Creating conv_u32_s32.mak
-Creating conv_u32_float.mak
 Creating conv_u32_bit.mak
+Creating conv_u32_float.mak
 Creating conv_s64_u64.mak
 Creating conv_s64_u32.mak
 Creating conv_s64_s32.mak
 Creating conv_s64_float.mak
 Creating conv_s64_bit.mak
 Creating conv_s32_u64.mak
-Creating conv_s32_u32.mak
 Creating conv_s32_s64.mak
 Creating conv_s32_float.mak
+Creating conv_s32_u32.mak
 Creating conv_s32_bit.mak
 Creating conv_float_u64.mak
 Creating conv_float_u32.mak
@@ -3199,35 +3198,35 @@ Exporting inifile.hh
 Exporting inifile.h
 Exporting emcpos.h
 Exporting motion_types.h
-Exporting posemath.h
 Exporting emcpose.h
+Exporting posemath.h
 Exporting posemath.hh
 Exporting posemath_types.h
 Exporting rtapi.h
 Exporting rtapi_app.h
 Exporting rtapi_atomic.h
 Exporting rtapi_bitops.h
-Exporting rtapi_bool.h
 Exporting rtapi_byteorder.h
+Exporting rtapi_bool.h
 Exporting rtapi_ctype.h
 Exporting rtapi_device.h
 Exporting rtapi_errno.h
 Exporting rtapi_firmware.h
 Exporting rtapi_gfp.h
-Exporting rtapi_io.h
 Exporting rtapi_limits.h
 Exporting rtapi_list.h
+Exporting rtapi_io.h
 Exporting rtapi_math.h
-Exporting rtapi_math64.h
 Exporting rtapi_math_i386.h
+Exporting rtapi_math64.h
 Exporting rtapi_mutex.h
 Exporting rtapi_parport.h
 Exporting rtapi_pci.h
 Exporting rtapi_slab.h
 Exporting rtapi_stdint.h
 Exporting rtapi_string.h
-Copying test input hal/components/lincurve.comp
 Exporting rtapi_vsnprintf.h
+Copying test input hal/components/lincurve.comp
 Copying test input hal/components/logic.comp
 Copying test input hal/components/bitslice.comp
 sed hal/drivers/mesa_uart.comp -e "1 s/mesa_uart/mesa_uart_test/" > ../tests/halcompile/serial-out-of-tree/mesa_uart_test.comp
@@ -3500,53 +3499,53 @@ Syntax checking python script hal_input
 Syntax checking python script scorbot-er-3
 Syntax checking python script mitsub_vfd
 Syntax checking python script pmx485
-Copying python script scorbot-er-3
 Copying python script hal_input
+Copying python script scorbot-er-3
+Copying python script mitsub_vfd
 Syntax checking python script sim-torch
 Syntax checking python script z_level_compensation
-Copying python script mitsub_vfd
 Syntax checking python script mqtt-publisher
 Copying python script pmx485
 Syntax checking python script hal_bridge
 Copying python script sim-torch
 Copying python script z_level_compensation
+Copying python script mqtt-publisher
 Syntax checking python script mtconnect-agent
 Syntax checking python script pumagui
-Copying python script mqtt-publisher
 Syntax checking python script puma560gui
 Copying python script hal_bridge
 Syntax checking python script lineardelta
-Copying python script mtconnect-agent
 Copying python script pumagui
+Copying python script mtconnect-agent
+Copying python script puma560gui
 Syntax checking python script scaragui
 Syntax checking python script hexagui
-Copying python script puma560gui
 Syntax checking python script 5axisgui
 Copying python script lineardelta
 Syntax checking python script max5gui
 Copying python script scaragui
 Copying python script hexagui
+Copying python script 5axisgui
 Syntax checking python script maho600gui
 Syntax checking python script hbmgui
-Copying python script 5axisgui
-Copying python script max5gui
 Syntax checking python script rotarydelta
+Copying python script max5gui
 Syntax checking python script melfagui
 Copying python script maho600gui
+Copying python script rotarydelta
 Copying python script hbmgui
 Syntax checking python script millturngui
 Syntax checking python script xyzac-trt-gui
-Copying python script rotarydelta
-Copying python script melfagui
 Syntax checking python script xyzbc-trt-gui
+Copying python script melfagui
 Syntax checking python script xyzab-tdr-gui
 Copying python script millturngui
+Copying python script xyzbc-trt-gui
 Copying python script xyzac-trt-gui
 Compiling hal/halmodule.cc
 Compiling hal/halquery.cc
-Copying python script xyzbc-trt-gui
-Copying python script xyzab-tdr-gui
 Compiling emc/usr_intf/axis/extensions/emcmodule.cc
+Copying python script xyzab-tdr-gui
 Syntax checking python script linuxcnctop
 Copying python script linuxcnctop
 Syntax checking python script mdi
@@ -3720,26 +3719,22 @@ Linking liblinuxcnc-uspace-posix.so.0
 Creating shared library liblinuxcnchal.so.0
 Creating shared library liblinuxcncini.so.1
 Syntax checking python script halcompile
-ln -sf liblinuxcnchal.so.0 ../lib/liblinuxcnchal.so
-Linking hy_vfd
-Linking xhc-whb04b-6
 Linking liblinuxcnc.a
 Copying python script halcompile
+ln -sf liblinuxcncini.so.1 ../lib/liblinuxcncini.so
 tooldata: depends: objects/emc/tooldata/tooldata_mmap.o objects/emc/tooldata/tooldata_common.o objects/emc/tooldata/tooldata_db.o
 tooldata: Linking: libtooldata.so.0
-ln -sf liblinuxcncini.so.1 ../lib/liblinuxcncini.so
 Linking libpyplugin.so.0
+c++ -std=gnu++20 -g -L/home/runner/work/_temp/linuxcnc-t03-nml/lib -Wl,-rpath,/home/runner/work/_temp/linuxcnc-t03-nml/lib -ltirpc  -lgpiod  -Xlinker -export-dynamic -Wl,-O1 -Wl,-Bsymbolic-functions -Wl,-soname,libpyplugin.so.0 -shared -o ../lib/libpyplugin.so.0 objects/emc/pythonplugin/python_plugin.o ../lib/liblinuxcncini.so.1 -lstdc++ -lboost_python312 -L/usr/lib/x86_64-linux-gnu -lpython3.12 -ldl -lm
 Linking inivalue
-c++ -std=gnu++20 -g -L/home/runner/work/_temp/linuxcnc-t02-task/lib -Wl,-rpath,/home/runner/work/_temp/linuxcnc-t02-task/lib -ltirpc  -lgpiod  -Xlinker -export-dynamic -Wl,-O1 -Wl,-Bsymbolic-functions -Wl,-soname,libpyplugin.so.0 -shared -o ../lib/libpyplugin.so.0 objects/emc/pythonplugin/python_plugin.o ../lib/liblinuxcncini.so.1 -lstdc++ -lboost_python312 -L/usr/lib/x86_64-linux-gnu -lpython3.12 -ldl -lm
 Linking motion-logger
 ln -sf libtooldata.so.0 ../lib/libtooldata.so
 Linking linuxcnc_module_helper
 gcc -Wl,-z,relro -o ../bin/linuxcnc_module_helper objects/module_helper/module_helper.o
-Linking python module _hal.so
 Linking python module lineardeltakins.so
-c++ -std=gnu++20 -L/home/runner/work/_temp/linuxcnc-t02-task/lib -Wl,-rpath,/home/runner/work/_temp/linuxcnc-t02-task/lib -ltirpc  -lgpiod  -shared -o ../lib/python/lineardeltakins.so objects/emc/kinematics/lineardeltakins.o -lboost_python312
+c++ -std=gnu++20 -L/home/runner/work/_temp/linuxcnc-t03-nml/lib -Wl,-rpath,/home/runner/work/_temp/linuxcnc-t03-nml/lib -ltirpc  -lgpiod  -shared -o ../lib/python/lineardeltakins.so objects/emc/kinematics/lineardeltakins.o -lboost_python312
 Linking python module rotarydeltakins.so
-c++ -std=gnu++20 -L/home/runner/work/_temp/linuxcnc-t02-task/lib -Wl,-rpath,/home/runner/work/_temp/linuxcnc-t02-task/lib -ltirpc  -lgpiod  -shared -o ../lib/python/rotarydeltakins.so objects/emc/kinematics/rotarydeltakins.o -lboost_python312
+c++ -std=gnu++20 -L/home/runner/work/_temp/linuxcnc-t03-nml/lib -Wl,-rpath,/home/runner/work/_temp/linuxcnc-t03-nml/lib -ltirpc  -lgpiod  -shared -o ../lib/python/rotarydeltakins.so objects/emc/kinematics/rotarydeltakins.o -lboost_python312
 Preprocessing abs.comp
 Preprocessing abs_s32.comp
 Preprocessing abs_s64.comp
@@ -3821,8 +3816,8 @@ Preprocessing led_dim.comp
 Preprocessing limit1.comp
 Preprocessing limit2.comp
 Preprocessing limit3.comp
-Preprocessing limit_axis.comp
 Preprocessing lincurve.comp
+Preprocessing limit_axis.comp
 Preprocessing logic.comp
 Preprocessing lowpass.comp
 Preprocessing lut5.comp
@@ -3932,8 +3927,8 @@ Compiling realtime objects/hal/components/conv_s32_u64.c
 Compiling realtime objects/hal/components/conv_s64_bit.c
 Compiling realtime objects/hal/components/conv_s64_float.c
 Compiling realtime objects/hal/components/conv_s64_s32.c
-Compiling realtime objects/hal/components/conv_s64_u32.c
 Compiling realtime objects/hal/components/conv_s64_u64.c
+Compiling realtime objects/hal/components/conv_s64_u32.c
 Compiling realtime objects/hal/components/conv_u32_bit.c
 Compiling realtime objects/hal/components/conv_u32_float.c
 Compiling realtime objects/hal/components/conv_u32_s32.c
@@ -4130,12 +4125,15 @@ Linking shuttle
 Linking xhc-hb04
 Linking sendkeys
 Preprocessing thermistor.comp
+ln -sf liblinuxcnchal.so.0 ../lib/liblinuxcnchal.so
 Linking vfs11_vfd
 Linking halcmd
 Linking halrmt
 Linking vfdb_vfd
 Preprocessing wj200_vfd.comp
 Preprocessing pi500_vfd.comp
+Linking hy_vfd
+Linking xhc-whb04b-6
 Linking linuxcncrsh
 Linking schedrmt
 Linking linuxcnclcd
@@ -4143,6 +4141,7 @@ Linking halui
 Linking linuxcncsvr
 ln -sf libpyplugin.so.0 ../lib/libpyplugin.so
 emc/Submakefile:Linking genserkins
+Linking python module _hal.so
 Linking python module linuxcnc.so
 Linking ../rtlib/abs.so
 Linking ../rtlib/abs_s32.so
@@ -4304,2220 +4303,262 @@ Compiling objects/hal/user_comps/thermistor.c
 Compiling hal/user_comps/wj200_vfd/wj200_vfd.c
 Compiling hal/user_comps/pi500_vfd/pi500_vfd.c
 Linking librs274.so.0
-c++ -std=gnu++20 -g -L/home/runner/work/_temp/linuxcnc-t02-task/lib -Wl,-rpath,/home/runner/work/_temp/linuxcnc-t02-task/lib -ltirpc  -lgpiod  -Xlinker -export-dynamic -Wl,-O1 -Wl,-Bsymbolic-functions -Wl,-soname,librs274.so.0 -shared -o ../lib/librs274.so.0 objects/emc/rs274ngc/interp_arc.o objects/emc/rs274ngc/interp_array.o objects/emc/rs274ngc/interp_base.o objects/emc/rs274ngc/interp_check.o objects/emc/rs274ngc/interp_convert.o objects/emc/rs274ngc/interp_queue.o objects/emc/rs274ngc/interp_cycles.o objects/emc/rs274ngc/interp_execute.o objects/emc/rs274ngc/interp_find.o objects/emc/rs274ngc/interp_internal.o objects/emc/rs274ngc/interp_inverse.o objects/emc/rs274ngc/interp_read.o objects/emc/rs274ngc/interp_write.o objects/emc/rs274ngc/interp_o_word.o objects/emc/rs274ngc/interp_g7x.o objects/emc/rs274ngc/nurbs_additional_functions.o objects/emc/rs274ngc/interp_namedparams.o objects/emc/rs274ngc/interp_python.o objects/emc/rs274ngc/interp_remap.o objects/emc/rs274ngc/interp_setup.o objects/emc/rs274ngc/canonmodule.o objects/emc/rs274ngc/pyparamclass.o objects/emc/rs274ngc/pyemctypes.o objects/emc/rs274ngc/pyinterp1.o objects/emc/rs274ngc/pyblock.o objects/emc/rs274ngc/pyarrays.o objects/emc/rs274ngc/interpmodule.o objects/emc/rs274ngc/rs274ngc_pre.o objects/emc/rs274ngc/interp_inspection.o objects/emc/nml_intf/modal_state.o ../lib/liblinuxcncini.so ../lib/libpyplugin.so ../lib/liblinuxcnchal.so.0 ../lib/libtooldata.so.0 -lstdc++ -lboost_python312 -L/usr/lib/x86_64-linux-gnu -lpython3.12 -ldl -lm
+c++ -std=gnu++20 -g -L/home/runner/work/_temp/linuxcnc-t03-nml/lib -Wl,-rpath,/home/runner/work/_temp/linuxcnc-t03-nml/lib -ltirpc  -lgpiod  -Xlinker -export-dynamic -Wl,-O1 -Wl,-Bsymbolic-functions -Wl,-soname,librs274.so.0 -shared -o ../lib/librs274.so.0 objects/emc/rs274ngc/interp_arc.o objects/emc/rs274ngc/interp_array.o objects/emc/rs274ngc/interp_base.o objects/emc/rs274ngc/interp_check.o objects/emc/rs274ngc/interp_convert.o objects/emc/rs274ngc/interp_queue.o objects/emc/rs274ngc/interp_cycles.o objects/emc/rs274ngc/interp_execute.o objects/emc/rs274ngc/interp_find.o objects/emc/rs274ngc/interp_internal.o objects/emc/rs274ngc/interp_inverse.o objects/emc/rs274ngc/interp_read.o objects/emc/rs274ngc/interp_write.o objects/emc/rs274ngc/interp_o_word.o objects/emc/rs274ngc/interp_g7x.o objects/emc/rs274ngc/nurbs_additional_functions.o objects/emc/rs274ngc/interp_namedparams.o objects/emc/rs274ngc/interp_python.o objects/emc/rs274ngc/interp_remap.o objects/emc/rs274ngc/interp_setup.o objects/emc/rs274ngc/canonmodule.o objects/emc/rs274ngc/pyparamclass.o objects/emc/rs274ngc/pyemctypes.o objects/emc/rs274ngc/pyinterp1.o objects/emc/rs274ngc/pyblock.o objects/emc/rs274ngc/pyarrays.o objects/emc/rs274ngc/interpmodule.o objects/emc/rs274ngc/rs274ngc_pre.o objects/emc/rs274ngc/interp_inspection.o objects/emc/nml_intf/modal_state.o ../lib/liblinuxcncini.so ../lib/libpyplugin.so ../lib/liblinuxcnchal.so.0 ../lib/libtooldata.so.0 -lstdc++ -lboost_python312 -L/usr/lib/x86_64-linux-gnu -lpython3.12 -ldl -lm
 Linking thermistor
 Linking pi500_vfd
 Linking wj200_vfd
 ln -sf librs274.so.0 ../lib/librs274.so
 Linking milltask
-c++ -std=gnu++20 -o ../bin/milltask objects/emc/motion/emcmotglb.o objects/emc/task/emctask.o objects/emc/task/emccanon.o objects/emc/task/emctaskmain.o objects/emc/motion/usrmotintf.o objects/emc/motion/emcmotutil.o objects/emc/task/taskintf.o objects/emc/motion/dbuf.o objects/emc/motion/stashf.o objects/emc/task/taskclass.o objects/emc/task/backtrace.o objects/emc/usr_intf/mapini.o ../lib/librs274.so.0 ../lib/liblinuxcnc.a ../lib/libnml.so.0 ../lib/liblinuxcncini.so.1 ../lib/libposemath.so.0 ../lib/liblinuxcnchal.so.0 ../lib/libpyplugin.so.0 ../lib/libtooldata.so.0 -L/home/runner/work/_temp/linuxcnc-t02-task/lib -Wl,-rpath,/home/runner/work/_temp/linuxcnc-t02-task/lib -ltirpc  -lgpiod  -Xlinker -export-dynamic -Wl,-O1 -Wl,-Bsymbolic-functions -lboost_python312 -L/usr/lib/x86_64-linux-gnu -lpython3.12 -ldl -lm -lfmt
+c++ -std=gnu++20 -o ../bin/milltask objects/emc/motion/emcmotglb.o objects/emc/task/emctask.o objects/emc/task/emccanon.o objects/emc/task/emctaskmain.o objects/emc/motion/usrmotintf.o objects/emc/motion/emcmotutil.o objects/emc/task/taskintf.o objects/emc/motion/dbuf.o objects/emc/motion/stashf.o objects/emc/task/taskclass.o objects/emc/task/backtrace.o objects/emc/usr_intf/mapini.o ../lib/librs274.so.0 ../lib/liblinuxcnc.a ../lib/libnml.so.0 ../lib/liblinuxcncini.so.1 ../lib/libposemath.so.0 ../lib/liblinuxcnchal.so.0 ../lib/libpyplugin.so.0 ../lib/libtooldata.so.0 -L/home/runner/work/_temp/linuxcnc-t03-nml/lib -Wl,-rpath,/home/runner/work/_temp/linuxcnc-t03-nml/lib -ltirpc  -lgpiod  -Xlinker -export-dynamic -Wl,-O1 -Wl,-Bsymbolic-functions -lboost_python312 -L/usr/lib/x86_64-linux-gnu -lpython3.12 -ldl -lm -lfmt
 Linking rs274
 Linking python module gcode.so
-c++ -std=gnu++20 -L/home/runner/work/_temp/linuxcnc-t02-task/lib -Wl,-rpath,/home/runner/work/_temp/linuxcnc-t02-task/lib -ltirpc  -lgpiod  -shared -o ../lib/python/gcode.so objects/emc/rs274ngc/gcodemodule.o ../lib/librs274.so.0 -lstdc++
+c++ -std=gnu++20 -L/home/runner/work/_temp/linuxcnc-t03-nml/lib -Wl,-rpath,/home/runner/work/_temp/linuxcnc-t03-nml/lib -ltirpc  -lgpiod  -shared -o ../lib/python/gcode.so objects/emc/rs274ngc/gcodemodule.o ../lib/librs274.so.0 -lstdc++
 Linking canterp.so
 You now need to run 'sudo make setuid' or 'sudo make setcap' in order to run in place with access to hardware.
-make: Leaving directory '/home/runner/work/_temp/linuxcnc-t02-task/src'
-linuxcnc-bin=/home/runner/work/_temp/linuxcnc-t02-task/scripts/linuxcnc
-linuxcnc-python-module=/home/runner/work/_temp/linuxcnc-t02-task/lib/python/linuxcnc.so
+make: Leaving directory '/home/runner/work/_temp/linuxcnc-t03-nml/src'
+linuxcnc-bin=/home/runner/work/_temp/linuxcnc-t03-nml/scripts/linuxcnc
+linuxcnc-python-module=/home/runner/work/_temp/linuxcnc-t03-nml/lib/python/linuxcnc.so
 gate-A=PASS
-program-sha256=40da6cf40bbae2c342cf0307e8bb43a7c962519a2d28ee88b8ecf25f323387f6
-Program: metric absolute; 20 mm feed move at 120 mm/min (~10 s nominal) followed by G4 P0.75.
-runtime-ready-probe=3
-constant-EXEC_DONE=2
-constant-EXEC_WAITING_FOR_MOTION_AND_IO=7
-constant-EXEC_WAITING_FOR_DELAY=8
-constant-INTERP_IDLE=1
-constant-MODE_MANUAL=1
-constant-MODE_AUTO=2
+runtime-ready-probe=4
+constant-STATE_ESTOP=1
 constant-STATE_ESTOP_RESET=2
-constant-STATE_ON=4
-constant-AUTO_RUN=0
-estop-reset-wait-complete=1
-machine-on-wait-complete=1
-manual-mode-wait-complete=1
-active-joint-count=3
-joint-0-homed=PASS
-joint-1-homed=PASS
-joint-2-homed=PASS
-all-active-joints-homed=PASS
-pre-run-inpos=PASS
-auto-mode-wait-complete=1
-program-open-wait-complete=1
-loaded-file=/home/runner/work/_temp/linuxcnc-t02-task/tests/linuxcncrsh/t02-019.ngc
+constant-AUTO_STEP=3
+constant-RCS_DONE=1
+constant-RCS_ERROR=3
+case1-base-serial=0 case1-serial=1 case1-echo-after-send=1
+case1-wait-complete=1
 gate-B=PASS
-start-x-actual=0.000000000 start-x-commanded=0.000000000
-trace-samples=2110
-saw-independent-motion=1
-saw-WAITING_FOR_MOTION_AND_IO-while-incomplete=1
-WAITING_FOR_DELAY-while-incomplete=0
-line-at-or-past-dwell-while-motion-incomplete=1
-error-count=0
-program-finished=1
 gate-C=PASS
+case2-pre-serial=2 case2-serial=3 case2-echo-after-send=3
 gate-D=PASS
+case2-wait-complete=3 matching-status=3 matching-echo=3
 gate-E=PASS
-waiting-for-delay-observed-span=0.748012
+case2-error=(11, 'command (EMC_TASK_PLAN_STEP) cannot be executed until the machine is out of E-stop and turned on')
 gate-F=PASS
-final-x-actual=0.787401575 final-x-commanded=0.787401575
+case2-echoed=true
+case2-semantic_success=false
 gate-G=PASS
-anti-circular-line-ahead-observed=YES
-T02-019 overall=PASS
+trace-rows=213 error-events=1
+T03-020 overall=PASS
+=== BEGIN T03-020 FULL RAW TRACE CSV ===
+t,case,phase,client_serial,echo_serial,status,task_state,task_mode,exec_state,interp_state,wait_return,error_type,error_text
+0.000034,baseline,initial,0,0,1,1,1,2,1,,,
+0.000050,case1,pre-send,0,0,1,1,1,2,1,,,
+0.030266,case1,send-return,1,1,1,2,1,2,1,,,
+0.040344,case1,wait-complete,1,1,1,2,1,2,1,1,,
+0.040363,case1,state-wait,1,1,1,2,1,2,1,,,
+0.110862,restore,wait-complete,2,2,1,1,1,2,1,1,,
+0.110884,restore,state-wait,2,2,1,1,1,2,1,,,
+0.110895,case2,pre-send,2,2,1,1,1,2,1,,,
+0.131051,case2,send-return,3,3,3,1,1,2,1,,,
+0.141141,case2,wait-complete,3,3,3,1,1,2,1,3,,
+0.141167,case2,error-channel,3,3,3,1,1,2,1,,11,command (EMC_TASK_PLAN_STEP) cannot be executed until the machine is out of E-stop and turned on
+0.141198,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+0.151268,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+0.161349,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+0.171423,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+0.181497,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+0.191573,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+0.201646,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+0.211732,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+0.221807,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+0.231881,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+0.241959,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+0.252033,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+0.262105,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+0.272179,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+0.282252,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+0.292323,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+0.302398,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+0.312473,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+0.322546,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+0.332619,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+0.342704,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+0.352778,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+0.362851,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+0.372922,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+0.382997,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+0.393074,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+0.403146,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+0.413218,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+0.423291,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+0.433495,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+0.443584,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+0.453661,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+0.463733,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+0.473808,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+0.483882,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+0.493955,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+0.504026,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+0.514097,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+0.524172,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+0.534253,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+0.544337,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+0.554414,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+0.564489,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+0.574561,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+0.584633,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+0.594709,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+0.604782,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+0.614854,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+0.624925,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+0.634997,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+0.645083,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+0.655156,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+0.665235,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+0.675307,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+0.685380,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+0.695453,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+0.705523,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+0.715595,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+0.725667,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+0.735740,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+0.745843,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+0.755916,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+0.765987,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+0.776058,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+0.786129,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+0.796208,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+0.806268,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+0.816349,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+0.826421,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+0.836495,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+0.846583,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+0.856656,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+0.866736,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+0.876807,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+0.886881,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+0.896956,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+0.907027,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+0.917102,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+0.927176,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+0.937248,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+0.947331,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+0.957402,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+0.967478,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+0.977552,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+0.987625,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+0.997697,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+1.007768,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+1.017840,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+1.027913,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+1.037948,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+1.048039,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+1.058122,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+1.068207,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+1.078257,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+1.088332,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+1.098405,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+1.108479,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+1.118551,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+1.128626,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+1.138698,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+1.148782,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+1.158855,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+1.168925,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+1.179000,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+1.189083,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+1.199160,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+1.209230,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+1.219302,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+1.229375,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+1.239448,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+1.249530,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+1.259601,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+1.269672,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+1.279745,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+1.289835,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+1.299905,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+1.309976,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+1.320049,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+1.330124,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+1.340198,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+1.350280,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+1.360352,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+1.370424,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+1.380495,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+1.390567,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+1.400640,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+1.410712,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+1.420784,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+1.430856,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+1.440931,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+1.451018,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+1.461089,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+1.471161,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+1.481234,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+1.491286,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+1.501368,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+1.511453,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+1.521526,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+1.531603,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+1.541674,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+1.551755,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+1.561832,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+1.571909,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+1.581982,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+1.592056,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+1.602130,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+1.612203,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+1.622278,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+1.632354,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+1.642434,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+1.652521,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+1.662594,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+1.672667,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+1.682740,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+1.692832,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+1.702909,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+1.712982,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+1.723057,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+1.733134,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+1.743207,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+1.753291,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+1.763364,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+1.773436,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+1.783511,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+1.793582,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+1.803656,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+1.813733,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+1.823808,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+1.833914,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+1.843988,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+1.854071,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+1.864146,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+1.874219,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+1.884293,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+1.894368,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+1.904442,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+1.914514,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+1.924587,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+1.934660,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+1.944734,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+1.954841,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+1.964917,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+1.974991,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+1.985066,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+1.995139,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+2.005215,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+2.015287,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+2.025362,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+2.035439,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+2.045512,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+2.055602,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+2.065678,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+2.075754,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+2.085827,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+2.095901,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+2.105977,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+2.116051,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+2.126125,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+2.136200,case2,error-poll-empty,3,3,3,1,1,2,1,,,
+2.146310,case2,pre-recovery,3,3,3,1,1,2,1,,,
+2.186629,recovery,wait-complete,4,4,1,2,1,2,1,1,,
+2.186647,recovery,state-wait,4,4,1,2,1,2,1,,,
+=== END T03-020 FULL RAW TRACE CSV ===
 
-== Trace evidence slices ==
--- first 12 samples --
-t,exec_state,interp_state,state,current_line,read_line,motion_line,inpos,actual_x,commanded_x,dtg,queue,active_queue
-0.020233,7,4,2,3,5,3,0,0.001141732,0.001377953,0.786023622,1,1
-0.025328,7,4,2,3,5,3,0,0.001535433,0.001771654,0.785629921,1,1
-0.030425,7,4,2,3,5,3,0,0.002007874,0.002244094,0.785157480,1,1
-0.035513,7,4,2,3,5,3,0,0.002401575,0.002637795,0.784763780,1,1
-0.040603,7,4,2,3,5,3,0,0.002716535,0.002952756,0.784448819,1,1
-0.045693,7,4,2,3,5,3,0,0.003110236,0.003346457,0.784055118,1,1
-0.050781,7,4,2,3,5,3,0,0.003582677,0.003818898,0.783582677,1,1
-0.055868,7,4,2,3,5,3,0,0.003976378,0.004212598,0.783188976,1,1
-0.060953,7,4,2,3,5,3,0,0.004370079,0.004606299,0.782795276,1,1
-0.066043,7,4,2,3,5,3,0,0.004763780,0.005000000,0.782401575,1,1
-0.071132,7,4,2,3,5,3,0,0.005157480,0.005393701,0.782007874,1,1
-0.076219,7,4,2,3,5,3,0,0.005551181,0.005787402,0.781614173,1,1
--- samples containing exec_state transitions --
-transition-index=0 exec_state=7
-0.020233,7,4,2,3,5,3,0,0.001141732,0.001377953,0.786023622,1,1
-0.025328,7,4,2,3,5,3,0,0.001535433,0.001771654,0.785629921,1,1
-transition-index=1961 exec_state=8
-10.000425,7,4,2,3,5,3,0,0.786968504,0.787204724,0.000196850,1,1
-10.005517,8,4,2,3,5,3,1,0.787395013,0.787401575,0.000000000,0,0
-10.010606,8,4,2,3,5,3,1,0.787401575,0.787401575,0.000000000,0,0
-transition-index=2109 exec_state=2
-10.753529,8,4,2,3,5,3,1,0.787401575,0.787401575,0.000000000,0,0
-10.758618,2,1,1,3,0,3,1,0.787401575,0.787401575,0.000000000,0,0
--- final 12 samples --
-10.702645,8,4,2,3,5,3,1,0.787401575,0.787401575,0.000000000,0,0
-10.707731,8,4,2,3,5,3,1,0.787401575,0.787401575,0.000000000,0,0
-10.712821,8,4,2,3,5,3,1,0.787401575,0.787401575,0.000000000,0,0
-10.717910,8,4,2,3,5,3,1,0.787401575,0.787401575,0.000000000,0,0
-10.723001,8,4,2,3,5,3,1,0.787401575,0.787401575,0.000000000,0,0
-10.728086,8,4,2,3,5,3,1,0.787401575,0.787401575,0.000000000,0,0
-10.733172,8,4,2,3,5,3,1,0.787401575,0.787401575,0.000000000,0,0
-10.738256,8,4,2,3,5,3,1,0.787401575,0.787401575,0.000000000,0,0
-10.743343,8,4,2,3,5,3,1,0.787401575,0.787401575,0.000000000,0,0
-10.748440,8,4,2,3,5,3,1,0.787401575,0.787401575,0.000000000,0,0
-10.753529,8,4,2,3,5,3,1,0.787401575,0.787401575,0.000000000,0,0
-10.758618,2,1,1,3,0,3,1,0.787401575,0.787401575,0.000000000,0,0
-=== BEGIN T02-019 FULL RAW TRACE CSV ===
-t,exec_state,interp_state,state,current_line,read_line,motion_line,inpos,actual_x,commanded_x,dtg,queue,active_queue
-0.020233,7,4,2,3,5,3,0,0.001141732,0.001377953,0.786023622,1,1
-0.025328,7,4,2,3,5,3,0,0.001535433,0.001771654,0.785629921,1,1
-0.030425,7,4,2,3,5,3,0,0.002007874,0.002244094,0.785157480,1,1
-0.035513,7,4,2,3,5,3,0,0.002401575,0.002637795,0.784763780,1,1
-0.040603,7,4,2,3,5,3,0,0.002716535,0.002952756,0.784448819,1,1
-0.045693,7,4,2,3,5,3,0,0.003110236,0.003346457,0.784055118,1,1
-0.050781,7,4,2,3,5,3,0,0.003582677,0.003818898,0.783582677,1,1
-0.055868,7,4,2,3,5,3,0,0.003976378,0.004212598,0.783188976,1,1
-0.060953,7,4,2,3,5,3,0,0.004370079,0.004606299,0.782795276,1,1
-0.066043,7,4,2,3,5,3,0,0.004763780,0.005000000,0.782401575,1,1
-0.071132,7,4,2,3,5,3,0,0.005157480,0.005393701,0.782007874,1,1
-0.076219,7,4,2,3,5,3,0,0.005551181,0.005787402,0.781614173,1,1
-0.081305,7,4,2,3,5,3,0,0.006023622,0.006259843,0.781141732,1,1
-0.086392,7,4,2,3,5,3,0,0.006338583,0.006574803,0.780826772,1,1
-0.091482,7,4,2,3,5,3,0,0.006732283,0.006968504,0.780433071,1,1
-0.096568,7,4,2,3,5,3,0,0.007204724,0.007440945,0.779960630,1,1
-0.101654,7,4,2,3,5,3,0,0.007598425,0.007834646,0.779566929,1,1
-0.106749,7,4,2,3,5,3,0,0.007913386,0.008149606,0.779251969,1,1
-0.111845,7,4,2,3,5,3,0,0.008385827,0.008622047,0.778779528,1,1
-0.116932,7,4,2,3,5,3,0,0.008779528,0.009015748,0.778385827,1,1
-0.122024,7,4,2,3,5,3,0,0.009173228,0.009409449,0.777992126,1,1
-0.127115,7,4,2,3,5,3,0,0.009645669,0.009881890,0.777519685,1,1
-0.132212,7,4,2,3,5,3,0,0.009960630,0.010196850,0.777204724,1,1
-0.137302,7,4,2,3,5,3,0,0.010354331,0.010590551,0.776811024,1,1
-0.142390,7,4,2,3,5,3,0,0.010826772,0.011062992,0.776338583,1,1
-0.147475,7,4,2,3,5,3,0,0.011220472,0.011456693,0.775944882,1,1
-0.152564,7,4,2,3,5,3,0,0.011535433,0.011771654,0.775629921,1,1
-0.157653,7,4,2,3,5,3,0,0.012007874,0.012244094,0.775157480,1,1
-0.162740,7,4,2,3,5,3,0,0.012401575,0.012637795,0.774763780,1,1
-0.167824,7,4,2,3,5,3,0,0.012795276,0.013031496,0.774370079,1,1
-0.172916,7,4,2,3,5,3,0,0.013110236,0.013346457,0.774055118,1,1
-0.177999,7,4,2,3,5,3,0,0.013582677,0.013818898,0.773582677,1,1
-0.183085,7,4,2,3,5,3,0,0.013976378,0.014212598,0.773188976,1,1
-0.188179,7,4,2,3,5,3,0,0.014370079,0.014606299,0.772795276,1,1
-0.193344,7,4,2,3,5,3,0,0.014842520,0.015078740,0.772322835,1,1
-0.198434,7,4,2,3,5,3,0,0.015157480,0.015393701,0.772007874,1,1
-0.203528,7,4,2,3,5,3,0,0.015551181,0.015787402,0.771614173,1,1
-0.208618,7,4,2,3,5,3,0,0.016023622,0.016259843,0.771141732,1,1
-0.213705,7,4,2,3,5,3,0,0.016417323,0.016653543,0.770748031,1,1
-0.218793,7,4,2,3,5,3,0,0.016732283,0.016968504,0.770433071,1,1
-0.223884,7,4,2,3,5,3,0,0.017204724,0.017440945,0.769960630,1,1
-0.228972,7,4,2,3,5,3,0,0.017598425,0.017834646,0.769566929,1,1
-0.234059,7,4,2,3,5,3,0,0.017992126,0.018228346,0.769173228,1,1
-0.239146,7,4,2,3,5,3,0,0.018385827,0.018622047,0.768779528,1,1
-0.244232,7,4,2,3,5,3,0,0.018779528,0.019015748,0.768385827,1,1
-0.249320,7,4,2,3,5,3,0,0.019173228,0.019409449,0.767992126,1,1
-0.254405,7,4,2,3,5,3,0,0.019645669,0.019881890,0.767519685,1,1
-0.259491,7,4,2,3,5,3,0,0.019960630,0.020196850,0.767204724,1,1
-0.264584,7,4,2,3,5,3,0,0.020354331,0.020590551,0.766811024,1,1
-0.269678,7,4,2,3,5,3,0,0.020826772,0.021062992,0.766338583,1,1
-0.274769,7,4,2,3,5,3,0,0.021220472,0.021456693,0.765944882,1,1
-0.279862,7,4,2,3,5,3,0,0.021614173,0.021850394,0.765551181,1,1
-0.284955,7,4,2,3,5,3,0,0.022007874,0.022244094,0.765157480,1,1
-0.290044,7,4,2,3,5,3,0,0.022401575,0.022637795,0.764763780,1,1
-0.295130,7,4,2,3,5,3,0,0.022795276,0.023031496,0.764370079,1,1
-0.300217,7,4,2,3,5,3,0,0.023267717,0.023503937,0.763897638,1,1
-0.305305,7,4,2,3,5,3,0,0.023582677,0.023818898,0.763582677,1,1
-0.310393,7,4,2,3,5,3,0,0.023976378,0.024212598,0.763188976,1,1
-0.315481,7,4,2,3,5,3,0,0.024448819,0.024685039,0.762716535,1,1
-0.320569,7,4,2,3,5,3,0,0.024842520,0.025078740,0.762322835,1,1
-0.325664,7,4,2,3,5,3,0,0.025157480,0.025393701,0.762007874,1,1
-0.330755,7,4,2,3,5,3,0,0.025629921,0.025866142,0.761535433,1,1
-0.335843,7,4,2,3,5,3,0,0.026023622,0.026259843,0.761141732,1,1
-0.340931,7,4,2,3,5,3,0,0.026417323,0.026653543,0.760748031,1,1
-0.346020,7,4,2,3,5,3,0,0.026811024,0.027047244,0.760354331,1,1
-0.351107,7,4,2,3,5,3,0,0.027204724,0.027440945,0.759960630,1,1
-0.356194,7,4,2,3,5,3,0,0.027598425,0.027834646,0.759566929,1,1
-0.361281,7,4,2,3,5,3,0,0.028070866,0.028307087,0.759094488,1,1
-0.366370,7,4,2,3,5,3,0,0.028385827,0.028622047,0.758779528,1,1
-0.371458,7,4,2,3,5,3,0,0.028779528,0.029015748,0.758385827,1,1
-0.376548,7,4,2,3,5,3,0,0.029251969,0.029488189,0.757913386,1,1
-0.381634,7,4,2,3,5,3,0,0.029645669,0.029881890,0.757519685,1,1
-0.386720,7,4,2,3,5,3,0,0.029960630,0.030196850,0.757204724,1,1
-0.391811,7,4,2,3,5,3,0,0.030433071,0.030669291,0.756732283,1,1
-0.396905,7,4,2,3,5,3,0,0.030826772,0.031062992,0.756338583,1,1
-0.401991,7,4,2,3,5,3,0,0.031220472,0.031456693,0.755944882,1,1
-0.407085,7,4,2,3,5,3,0,0.031692913,0.031929134,0.755472441,1,1
-0.412172,7,4,2,3,5,3,0,0.032007874,0.032244094,0.755157480,1,1
-0.417258,7,4,2,3,5,3,0,0.032401575,0.032637795,0.754763780,1,1
-0.422342,7,4,2,3,5,3,0,0.032874016,0.033110236,0.754291339,1,1
-0.427431,7,4,2,3,5,3,0,0.033267717,0.033503937,0.753897638,1,1
-0.432519,7,4,2,3,5,3,0,0.033582677,0.033818898,0.753582677,1,1
-0.437611,7,4,2,3,5,3,0,0.033976378,0.034212598,0.753188976,1,1
-0.442698,7,4,2,3,5,3,0,0.034448819,0.034685039,0.752716535,1,1
-0.447784,7,4,2,3,5,3,0,0.034842520,0.035078740,0.752322835,1,1
-0.452876,7,4,2,3,5,3,0,0.035157480,0.035393701,0.752007874,1,1
-0.457962,7,4,2,3,5,3,0,0.035629921,0.035866142,0.751535433,1,1
-0.463051,7,4,2,3,5,3,0,0.036023622,0.036259843,0.751141732,1,1
-0.468137,7,4,2,3,5,3,0,0.036417323,0.036653543,0.750748031,1,1
-0.473227,7,4,2,3,5,3,0,0.036811024,0.037047244,0.750354331,1,1
-0.478322,7,4,2,3,5,3,0,0.037204724,0.037440945,0.749960630,1,1
-0.483407,7,4,2,3,5,3,0,0.037598425,0.037834646,0.749566929,1,1
-0.488493,7,4,2,3,5,3,0,0.038070866,0.038307087,0.749094488,1,1
-0.493579,7,4,2,3,5,3,0,0.038385827,0.038622047,0.748779528,1,1
-0.498677,7,4,2,3,5,3,0,0.038779528,0.039015748,0.748385827,1,1
-0.503763,7,4,2,3,5,3,0,0.039251969,0.039488189,0.747913386,1,1
-0.508850,7,4,2,3,5,3,0,0.039645669,0.039881890,0.747519685,1,1
-0.513940,7,4,2,3,5,3,0,0.040039370,0.040275591,0.747125984,1,1
-0.519026,7,4,2,3,5,3,0,0.040433071,0.040669291,0.746732283,1,1
-0.524116,7,4,2,3,5,3,0,0.040826772,0.041062992,0.746338583,1,1
-0.529206,7,4,2,3,5,3,0,0.041220472,0.041456693,0.745944882,1,1
-0.534293,7,4,2,3,5,3,0,0.041692913,0.041929134,0.745472441,1,1
-0.539379,7,4,2,3,5,3,0,0.042007874,0.042244094,0.745157480,1,1
-0.544467,7,4,2,3,5,3,0,0.042401575,0.042637795,0.744763780,1,1
-0.549549,7,4,2,3,5,3,0,0.042874016,0.043110236,0.744291339,1,1
-0.554632,7,4,2,3,5,3,0,0.043267717,0.043503937,0.743897638,1,1
-0.559717,7,4,2,3,5,3,0,0.043582677,0.043818898,0.743582677,1,1
-0.564799,7,4,2,3,5,3,0,0.044055118,0.044291339,0.743110236,1,1
-0.569882,7,4,2,3,5,3,0,0.044448819,0.044685039,0.742716535,1,1
-0.574973,7,4,2,3,5,3,0,0.044842520,0.045078740,0.742322835,1,1
-0.580068,7,4,2,3,5,3,0,0.045314961,0.045551181,0.741850394,1,1
-0.585157,7,4,2,3,5,3,0,0.045629921,0.045866142,0.741535433,1,1
-0.590248,7,4,2,3,5,3,0,0.046023622,0.046259843,0.741141732,1,1
-0.595338,7,4,2,3,5,3,0,0.046496063,0.046732283,0.740669291,1,1
-0.600425,7,4,2,3,5,3,0,0.046889764,0.047125984,0.740275591,1,1
-0.605516,7,4,2,3,5,3,0,0.047204724,0.047440945,0.739960630,1,1
-0.610602,7,4,2,3,5,3,0,0.047598425,0.047834646,0.739566929,1,1
-0.615692,7,4,2,3,5,3,0,0.048070866,0.048307087,0.739094488,1,1
-0.620780,7,4,2,3,5,3,0,0.048464567,0.048700787,0.738700787,1,1
-0.625870,7,4,2,3,5,3,0,0.048779528,0.049015748,0.738385827,1,1
-0.630964,7,4,2,3,5,3,0,0.049251969,0.049488189,0.737913386,1,1
-0.636058,7,4,2,3,5,3,0,0.049645669,0.049881890,0.737519685,1,1
-0.641164,7,4,2,3,5,3,0,0.050039370,0.050275591,0.737125984,1,1
-0.646259,7,4,2,3,5,3,0,0.050511811,0.050748031,0.736653543,1,1
-0.651386,7,4,2,3,5,3,0,0.050826772,0.051062992,0.736338583,1,1
-0.656531,7,4,2,3,5,3,0,0.051220472,0.051456693,0.735944882,1,1
-0.661667,7,4,2,3,5,3,0,0.051692913,0.051929134,0.735472441,1,1
-0.666853,7,4,2,3,5,3,0,0.052086614,0.052322835,0.735078740,1,1
-0.671995,7,4,2,3,5,3,0,0.052480315,0.052716535,0.734685039,1,1
-0.677138,7,4,2,3,5,3,0,0.052874016,0.053110236,0.734291339,1,1
-0.682275,7,4,2,3,5,3,0,0.053267717,0.053503937,0.733897638,1,1
-0.687401,7,4,2,3,5,3,0,0.053661417,0.053897638,0.733503937,1,1
-0.692506,7,4,2,3,5,3,0,0.054133858,0.054370079,0.733031496,1,1
-0.697607,7,4,2,3,5,3,0,0.054448819,0.054685039,0.732716535,1,1
-0.702706,7,4,2,3,5,3,0,0.054921260,0.055157480,0.732244094,1,1
-0.707796,7,4,2,3,5,3,0,0.055314961,0.055551181,0.731850394,1,1
-0.712884,7,4,2,3,5,3,0,0.055708661,0.055944882,0.731456693,1,1
-0.717972,7,4,2,3,5,3,0,0.056102362,0.056338583,0.731062992,1,1
-0.723065,7,4,2,3,5,3,0,0.056496063,0.056732283,0.730669291,1,1
-0.728153,7,4,2,3,5,3,0,0.056889764,0.057125984,0.730275591,1,1
-0.733241,7,4,2,3,5,3,0,0.057362205,0.057598425,0.729803150,1,1
-0.738333,7,4,2,3,5,3,0,0.057677165,0.057913386,0.729488189,1,1
-0.743479,7,4,2,3,5,3,0,0.058070866,0.058307087,0.729094488,1,1
-0.748572,7,4,2,3,5,3,0,0.058543307,0.058779528,0.728622047,1,1
-0.753658,7,4,2,3,5,3,0,0.058937008,0.059173228,0.728228346,1,1
-0.758749,7,4,2,3,5,3,0,0.059251969,0.059488189,0.727913386,1,1
-0.763845,7,4,2,3,5,3,0,0.059724409,0.059960630,0.727440945,1,1
-0.768931,7,4,2,3,5,3,0,0.060118110,0.060354331,0.727047244,1,1
-0.774019,7,4,2,3,5,3,0,0.060511811,0.060748031,0.726653543,1,1
-0.779106,7,4,2,3,5,3,0,0.060984252,0.061220472,0.726181102,1,1
-0.784198,7,4,2,3,5,3,0,0.061299213,0.061535433,0.725866142,1,1
-0.789288,7,4,2,3,5,3,0,0.061692913,0.061929134,0.725472441,1,1
-0.794375,7,4,2,3,5,3,0,0.062165354,0.062401575,0.725000000,1,1
-0.799461,7,4,2,3,5,3,0,0.062559055,0.062795276,0.724606299,1,1
-0.804549,7,4,2,3,5,3,0,0.062874016,0.063110236,0.724291339,1,1
-0.809638,7,4,2,3,5,3,0,0.063346457,0.063582677,0.723818898,1,1
-0.814725,7,4,2,3,5,3,0,0.063740157,0.063976378,0.723425197,1,1
-0.819809,7,4,2,3,5,3,0,0.064133858,0.064370079,0.723031496,1,1
-0.824900,7,4,2,3,5,3,0,0.064448819,0.064685039,0.722716535,1,1
-0.829995,7,4,2,3,5,3,0,0.064921260,0.065157480,0.722244094,1,1
-0.835082,7,4,2,3,5,3,0,0.065314961,0.065551181,0.721850394,1,1
-0.840169,7,4,2,3,5,3,0,0.065708661,0.065944882,0.721456693,1,1
-0.845258,7,4,2,3,5,3,0,0.066181102,0.066417323,0.720984252,1,1
-0.850350,7,4,2,3,5,3,0,0.066496063,0.066732283,0.720669291,1,1
-0.855438,7,4,2,3,5,3,0,0.066889764,0.067125984,0.720275591,1,1
-0.860525,7,4,2,3,5,3,0,0.067362205,0.067598425,0.719803150,1,1
-0.865611,7,4,2,3,5,3,0,0.067755906,0.067992126,0.719409449,1,1
-0.870698,7,4,2,3,5,3,0,0.068070866,0.068307087,0.719094488,1,1
-0.875784,7,4,2,3,5,3,0,0.068543307,0.068779528,0.718622047,1,1
-0.880869,7,4,2,3,5,3,0,0.068937008,0.069173228,0.718228346,1,1
-0.885953,7,4,2,3,5,3,0,0.069330709,0.069566929,0.717834646,1,1
-0.891038,7,4,2,3,5,3,0,0.069724409,0.069960630,0.717440945,1,1
-0.896123,7,4,2,3,5,3,0,0.070118110,0.070354331,0.717047244,1,1
-0.901208,7,4,2,3,5,3,0,0.070511811,0.070748031,0.716653543,1,1
-0.906293,7,4,2,3,5,3,0,0.070984252,0.071220472,0.716181102,1,1
-0.911379,7,4,2,3,5,3,0,0.071299213,0.071535433,0.715866142,1,1
-0.916470,7,4,2,3,5,3,0,0.071692913,0.071929134,0.715472441,1,1
-0.921559,7,4,2,3,5,3,0,0.072165354,0.072401575,0.715000000,1,1
-0.926651,7,4,2,3,5,3,0,0.072559055,0.072795276,0.714606299,1,1
-0.931751,7,4,2,3,5,3,0,0.072874016,0.073110236,0.714291339,1,1
-0.936857,7,4,2,3,5,3,0,0.073346457,0.073582677,0.713818898,1,1
-0.941944,7,4,2,3,5,3,0,0.073740157,0.073976378,0.713425197,1,1
-0.947032,7,4,2,3,5,3,0,0.074133858,0.074370079,0.713031496,1,1
-0.952116,7,4,2,3,5,3,0,0.074606299,0.074842520,0.712559055,1,1
-0.957204,7,4,2,3,5,3,0,0.074921260,0.075157480,0.712244094,1,1
-0.962291,7,4,2,3,5,3,0,0.075314961,0.075551181,0.711850394,1,1
-0.967363,7,4,2,3,5,3,0,0.075787402,0.076023622,0.711377953,1,1
-0.972449,7,4,2,3,5,3,0,0.076181102,0.076417323,0.710984252,1,1
-0.977534,7,4,2,3,5,3,0,0.076496063,0.076732283,0.710669291,1,1
-0.982624,7,4,2,3,5,3,0,0.076889764,0.077125984,0.710275591,1,1
-0.987713,7,4,2,3,5,3,0,0.077362205,0.077598425,0.709803150,1,1
-0.992799,7,4,2,3,5,3,0,0.077755906,0.077992126,0.709409449,1,1
-0.997884,7,4,2,3,5,3,0,0.078070866,0.078307087,0.709094488,1,1
-1.002970,7,4,2,3,5,3,0,0.078543307,0.078779528,0.708622047,1,1
-1.008055,7,4,2,3,5,3,0,0.078937008,0.079173228,0.708228346,1,1
-1.013141,7,4,2,3,5,3,0,0.079330709,0.079566929,0.707834646,1,1
-1.018232,7,4,2,3,5,3,0,0.079724409,0.079960630,0.707440945,1,1
-1.023319,7,4,2,3,5,3,0,0.080118110,0.080354331,0.707047244,1,1
-1.028411,7,4,2,3,5,3,0,0.080511811,0.080748031,0.706653543,1,1
-1.033499,7,4,2,3,5,3,0,0.080984252,0.081220472,0.706181102,1,1
-1.038599,7,4,2,3,5,3,0,0.081299213,0.081535433,0.705866142,1,1
-1.043698,7,4,2,3,5,3,0,0.081692913,0.081929134,0.705472441,1,1
-1.048785,7,4,2,3,5,3,0,0.082165354,0.082401575,0.705000000,1,1
-1.053872,7,4,2,3,5,3,0,0.082559055,0.082795276,0.704606299,1,1
-1.058959,7,4,2,3,5,3,0,0.082952756,0.083188976,0.704212598,1,1
-1.064044,7,4,2,3,5,3,0,0.083346457,0.083582677,0.703818898,1,1
-1.069130,7,4,2,3,5,3,0,0.083740157,0.083976378,0.703425197,1,1
-1.074215,7,4,2,3,5,3,0,0.084133858,0.084370079,0.703031496,1,1
-1.079304,7,4,2,3,5,3,0,0.084606299,0.084842520,0.702559055,1,1
-1.084392,7,4,2,3,5,3,0,0.084921260,0.085157480,0.702244094,1,1
-1.089485,7,4,2,3,5,3,0,0.085314961,0.085551181,0.701850394,1,1
-1.094572,7,4,2,3,5,3,0,0.085787402,0.086023622,0.701377953,1,1
-1.099666,7,4,2,3,5,3,0,0.086181102,0.086417323,0.700984252,1,1
-1.104758,7,4,2,3,5,3,0,0.086496063,0.086732283,0.700669291,1,1
-1.109862,7,4,2,3,5,3,0,0.086968504,0.087204724,0.700196850,1,1
-1.114949,7,4,2,3,5,3,0,0.087362205,0.087598425,0.699803150,1,1
-1.120034,7,4,2,3,5,3,0,0.087755906,0.087992126,0.699409449,1,1
-1.125122,7,4,2,3,5,3,0,0.088228346,0.088464567,0.698937008,1,1
-1.130212,7,4,2,3,5,3,0,0.088543307,0.088779528,0.698622047,1,1
-1.135298,7,4,2,3,5,3,0,0.088937008,0.089173228,0.698228346,1,1
-1.140390,7,4,2,3,5,3,0,0.089409449,0.089645669,0.697755906,1,1
-1.145477,7,4,2,3,5,3,0,0.089803150,0.090039370,0.697362205,1,1
-1.150562,7,4,2,3,5,3,0,0.090118110,0.090354331,0.697047244,1,1
-1.155648,7,4,2,3,5,3,0,0.090590551,0.090826772,0.696574803,1,1
-1.160733,7,4,2,3,5,3,0,0.090984252,0.091220472,0.696181102,1,1
-1.165818,7,4,2,3,5,3,0,0.091377953,0.091614173,0.695787402,1,1
-1.170905,7,4,2,3,5,3,0,0.091771654,0.092007874,0.695393701,1,1
-1.176008,7,4,2,3,5,3,0,0.092165354,0.092401575,0.695000000,1,1
-1.181141,7,4,2,3,5,3,0,0.092559055,0.092795276,0.694606299,1,1
-1.186273,7,4,2,3,5,3,0,0.093031496,0.093267717,0.694133858,1,1
-1.191411,7,4,2,3,5,3,0,0.093425197,0.093661417,0.693740157,1,1
-1.196542,7,4,2,3,5,3,0,0.093740157,0.093976378,0.693425197,1,1
-1.201676,7,4,2,3,5,3,0,0.094133858,0.094370079,0.693031496,1,1
-1.206811,7,4,2,3,5,3,0,0.094606299,0.094842520,0.692559055,1,1
-1.211952,7,4,2,3,5,3,0,0.095000000,0.095236220,0.692165354,1,1
-1.217103,7,4,2,3,5,3,0,0.095472441,0.095708661,0.691692913,1,1
-1.222243,7,4,2,3,5,3,0,0.095787402,0.096023622,0.691377953,1,1
-1.227383,7,4,2,3,5,3,0,0.096181102,0.096417323,0.690984252,1,1
-1.232528,7,4,2,3,5,3,0,0.096574803,0.096811024,0.690590551,1,1
-1.237669,7,4,2,3,5,3,0,0.097047244,0.097283465,0.690118110,1,1
-1.242817,7,4,2,3,5,3,0,0.097440945,0.097677165,0.689724409,1,1
-1.247949,7,4,2,3,5,3,0,0.097755906,0.097992126,0.689409449,1,1
-1.253081,7,4,2,3,5,3,0,0.098228346,0.098464567,0.688937008,1,1
-1.258221,7,4,2,3,5,3,0,0.098622047,0.098858268,0.688543307,1,1
-1.263361,7,4,2,3,5,3,0,0.099015748,0.099251969,0.688149606,1,1
-1.268500,7,4,2,3,5,3,0,0.099488189,0.099724409,0.687677165,1,1
-1.273640,7,4,2,3,5,3,0,0.099881890,0.100118110,0.687283465,1,1
-1.278783,7,4,2,3,5,3,0,0.100196850,0.100433071,0.686968504,1,1
-1.283926,7,4,2,3,5,3,0,0.100669291,0.100905512,0.686496063,1,1
-1.289062,7,4,2,3,5,3,0,0.101062992,0.101299213,0.686102362,1,1
-1.294200,7,4,2,3,5,3,0,0.101456693,0.101692913,0.685708661,1,1
-1.299339,7,4,2,3,5,3,0,0.101929134,0.102165354,0.685236220,1,1
-1.304486,7,4,2,3,5,3,0,0.102244094,0.102480315,0.684921260,1,1
-1.309630,7,4,2,3,5,3,0,0.102637795,0.102874016,0.684527559,1,1
-1.314775,7,4,2,3,5,3,0,0.103110236,0.103346457,0.684055118,1,1
-1.319940,7,4,2,3,5,3,0,0.103503937,0.103740157,0.683661417,1,1
-1.325079,7,4,2,3,5,3,0,0.103897638,0.104133858,0.683267717,1,1
-1.330219,7,4,2,3,5,3,0,0.104370079,0.104606299,0.682795276,1,1
-1.335360,7,4,2,3,5,3,0,0.104685039,0.104921260,0.682480315,1,1
-1.340499,7,4,2,3,5,3,0,0.105078740,0.105314961,0.682086614,1,1
-1.345640,7,4,2,3,5,3,0,0.105551181,0.105787402,0.681614173,1,1
-1.350780,7,4,2,3,5,3,0,0.105944882,0.106181102,0.681220472,1,1
-1.355919,7,4,2,3,5,3,0,0.106338583,0.106574803,0.680826772,1,1
-1.361061,7,4,2,3,5,3,0,0.106732283,0.106968504,0.680433071,1,1
-1.366194,7,4,2,3,5,3,0,0.107125984,0.107362205,0.680039370,1,1
-1.371339,7,4,2,3,5,3,0,0.107519685,0.107755906,0.679645669,1,1
-1.376475,7,4,2,3,5,3,0,0.107992126,0.108228346,0.679173228,1,1
-1.381618,7,4,2,3,5,3,0,0.108385827,0.108622047,0.678779528,1,1
-1.386758,7,4,2,3,5,3,0,0.108700787,0.108937008,0.678464567,1,1
-1.391906,7,4,2,3,5,3,0,0.109173228,0.109409449,0.677992126,1,1
-1.397042,7,4,2,3,5,3,0,0.109566929,0.109803150,0.677598425,1,1
-1.402196,7,4,2,3,5,3,0,0.109960630,0.110196850,0.677204724,1,1
-1.407258,7,4,2,3,5,3,0,0.110433071,0.110669291,0.676732283,1,1
-1.412350,7,4,2,3,5,3,0,0.110748031,0.110984252,0.676417323,1,1
-1.417435,7,4,2,3,5,3,0,0.111141732,0.111377953,0.676023622,1,1
-1.422521,7,4,2,3,5,3,0,0.111614173,0.111850394,0.675551181,1,1
-1.427606,7,4,2,3,5,3,0,0.112007874,0.112244094,0.675157480,1,1
-1.432691,7,4,2,3,5,3,0,0.112322835,0.112559055,0.674842520,1,1
-1.437783,7,4,2,3,5,3,0,0.112795276,0.113031496,0.674370079,1,1
-1.442867,7,4,2,3,5,3,0,0.113188976,0.113425197,0.673976378,1,1
-1.447960,7,4,2,3,5,3,0,0.113582677,0.113818898,0.673582677,1,1
-1.453055,7,4,2,3,5,3,0,0.113897638,0.114133858,0.673267717,1,1
-1.458150,7,4,2,3,5,3,0,0.114370079,0.114606299,0.672795276,1,1
-1.463238,7,4,2,3,5,3,0,0.114763780,0.115000000,0.672401575,1,1
-1.468325,7,4,2,3,5,3,0,0.115236220,0.115472441,0.671929134,1,1
-1.473412,7,4,2,3,5,3,0,0.115629921,0.115866142,0.671535433,1,1
-1.478502,7,4,2,3,5,3,0,0.115944882,0.116181102,0.671220472,1,1
-1.483589,7,4,2,3,5,3,0,0.116338583,0.116574803,0.670826772,1,1
-1.488674,7,4,2,3,5,3,0,0.116811024,0.117047244,0.670354331,1,1
-1.493760,7,4,2,3,5,3,0,0.117204724,0.117440945,0.669960630,1,1
-1.498846,7,4,2,3,5,3,0,0.117519685,0.117755906,0.669645669,1,1
-1.503939,7,4,2,3,5,3,0,0.117992126,0.118228346,0.669173228,1,1
-1.509026,7,4,2,3,5,3,0,0.118385827,0.118622047,0.668779528,1,1
-1.514113,7,4,2,3,5,3,0,0.118779528,0.119015748,0.668385827,1,1
-1.519200,7,4,2,3,5,3,0,0.119173228,0.119409449,0.667992126,1,1
-1.524286,7,4,2,3,5,3,0,0.119566929,0.119803150,0.667598425,1,1
-1.529373,7,4,2,3,5,3,0,0.119960630,0.120196850,0.667204724,1,1
-1.534462,7,4,2,3,5,3,0,0.120433071,0.120669291,0.666732283,1,1
-1.539549,7,4,2,3,5,3,0,0.120748031,0.120984252,0.666417323,1,1
-1.544638,7,4,2,3,5,3,0,0.121141732,0.121377953,0.666023622,1,1
-1.549731,7,4,2,3,5,3,0,0.121614173,0.121850394,0.665551181,1,1
-1.554817,7,4,2,3,5,3,0,0.122007874,0.122244094,0.665157480,1,1
-1.559915,7,4,2,3,5,3,0,0.122401575,0.122637795,0.664763780,1,1
-1.565009,7,4,2,3,5,3,0,0.122795276,0.123031496,0.664370079,1,1
-1.570100,7,4,2,3,5,3,0,0.123188976,0.123425197,0.663976378,1,1
-1.575187,7,4,2,3,5,3,0,0.123582677,0.123818898,0.663582677,1,1
-1.580272,7,4,2,3,5,3,0,0.124055118,0.124291339,0.663110236,1,1
-1.585360,7,4,2,3,5,3,0,0.124370079,0.124606299,0.662795276,1,1
-1.590448,7,4,2,3,5,3,0,0.124763780,0.125000000,0.662401575,1,1
-1.595533,7,4,2,3,5,3,0,0.125236220,0.125472441,0.661929134,1,1
-1.600626,7,4,2,3,5,3,0,0.125629921,0.125866142,0.661535433,1,1
-1.605714,7,4,2,3,5,3,0,0.125944882,0.126181102,0.661220472,1,1
-1.610804,7,4,2,3,5,3,0,0.126417323,0.126653543,0.660748031,1,1
-1.615891,7,4,2,3,5,3,0,0.126811024,0.127047244,0.660354331,1,1
-1.620979,7,4,2,3,5,3,0,0.127204724,0.127440945,0.659960630,1,1
-1.626066,7,4,2,3,5,3,0,0.127598425,0.127834646,0.659566929,1,1
-1.631155,7,4,2,3,5,3,0,0.127992126,0.128228346,0.659173228,1,1
-1.636245,7,4,2,3,5,3,0,0.128385827,0.128622047,0.658779528,1,1
-1.641336,7,4,2,3,5,3,0,0.128858268,0.129094488,0.658307087,1,1
-1.646423,7,4,2,3,5,3,0,0.129173228,0.129409449,0.657992126,1,1
-1.651517,7,4,2,3,5,3,0,0.129566929,0.129803150,0.657598425,1,1
-1.656605,7,4,2,3,5,3,0,0.130039370,0.130275591,0.657125984,1,1
-1.661694,7,4,2,3,5,3,0,0.130433071,0.130669291,0.656732283,1,1
-1.666788,7,4,2,3,5,3,0,0.130826772,0.131062992,0.656338583,1,1
-1.671879,7,4,2,3,5,3,0,0.131220472,0.131456693,0.655944882,1,1
-1.676965,7,4,2,3,5,3,0,0.131614173,0.131850394,0.655551181,1,1
-1.682051,7,4,2,3,5,3,0,0.132007874,0.132244094,0.655157480,1,1
-1.687138,7,4,2,3,5,3,0,0.132480315,0.132716535,0.654685039,1,1
-1.692224,7,4,2,3,5,3,0,0.132795276,0.133031496,0.654370079,1,1
-1.697315,7,4,2,3,5,3,0,0.133188976,0.133425197,0.653976378,1,1
-1.702406,7,4,2,3,5,3,0,0.133661417,0.133897638,0.653503937,1,1
-1.707492,7,4,2,3,5,3,0,0.134055118,0.134291339,0.653110236,1,1
-1.712578,7,4,2,3,5,3,0,0.134370079,0.134606299,0.652795276,1,1
-1.717663,7,4,2,3,5,3,0,0.134842520,0.135078740,0.652322835,1,1
-1.722749,7,4,2,3,5,3,0,0.135236220,0.135472441,0.651929134,1,1
-1.727836,7,4,2,3,5,3,0,0.135629921,0.135866142,0.651535433,1,1
-1.732925,7,4,2,3,5,3,0,0.135944882,0.136181102,0.651220472,1,1
-1.738009,7,4,2,3,5,3,0,0.136417323,0.136653543,0.650748031,1,1
-1.743094,7,4,2,3,5,3,0,0.136811024,0.137047244,0.650354331,1,1
-1.748181,7,4,2,3,5,3,0,0.137204724,0.137440945,0.649960630,1,1
-1.753274,7,4,2,3,5,3,0,0.137598425,0.137834646,0.649566929,1,1
-1.758364,7,4,2,3,5,3,0,0.137992126,0.138228346,0.649173228,1,1
-1.763460,7,4,2,3,5,3,0,0.138385827,0.138622047,0.648779528,1,1
-1.768547,7,4,2,3,5,3,0,0.138858268,0.139094488,0.648307087,1,1
-1.773641,7,4,2,3,5,3,0,0.139251969,0.139488189,0.647913386,1,1
-1.778728,7,4,2,3,5,3,0,0.139566929,0.139803150,0.647598425,1,1
-1.783812,7,4,2,3,5,3,0,0.140039370,0.140275591,0.647125984,1,1
-1.788902,7,4,2,3,5,3,0,0.140433071,0.140669291,0.646732283,1,1
-1.794001,7,4,2,3,5,3,0,0.140826772,0.141062992,0.646338583,1,1
-1.799089,7,4,2,3,5,3,0,0.141220472,0.141456693,0.645944882,1,1
-1.804178,7,4,2,3,5,3,0,0.141614173,0.141850394,0.645551181,1,1
-1.809264,7,4,2,3,5,3,0,0.142007874,0.142244094,0.645157480,1,1
-1.814349,7,4,2,3,5,3,0,0.142480315,0.142716535,0.644685039,1,1
-1.819434,7,4,2,3,5,3,0,0.142795276,0.143031496,0.644370079,1,1
-1.824524,7,4,2,3,5,3,0,0.143188976,0.143425197,0.643976378,1,1
-1.829611,7,4,2,3,5,3,0,0.143661417,0.143897638,0.643503937,1,1
-1.834697,7,4,2,3,5,3,0,0.144055118,0.144291339,0.643110236,1,1
-1.839782,7,4,2,3,5,3,0,0.144370079,0.144606299,0.642795276,1,1
-1.844867,7,4,2,3,5,3,0,0.144842520,0.145078740,0.642322835,1,1
-1.849961,7,4,2,3,5,3,0,0.145236220,0.145472441,0.641929134,1,1
-1.855058,7,4,2,3,5,3,0,0.145629921,0.145866142,0.641535433,1,1
-1.860154,7,4,2,3,5,3,0,0.146023622,0.146259843,0.641141732,1,1
-1.865241,7,4,2,3,5,3,0,0.146417323,0.146653543,0.640748031,1,1
-1.870332,7,4,2,3,5,3,0,0.146811024,0.147047244,0.640354331,1,1
-1.875424,7,4,2,3,5,3,0,0.147283465,0.147519685,0.639881890,1,1
-1.880517,7,4,2,3,5,3,0,0.147598425,0.147834646,0.639566929,1,1
-1.885613,7,4,2,3,5,3,0,0.147992126,0.148228346,0.639173228,1,1
-1.890705,7,4,2,3,5,3,0,0.148464567,0.148700787,0.638700787,1,1
-1.895792,7,4,2,3,5,3,0,0.148858268,0.149094488,0.638307087,1,1
-1.900878,7,4,2,3,5,3,0,0.149251969,0.149488189,0.637913386,1,1
-1.905968,7,4,2,3,5,3,0,0.149645669,0.149881890,0.637519685,1,1
-1.911056,7,4,2,3,5,3,0,0.150039370,0.150275591,0.637125984,1,1
-1.916143,7,4,2,3,5,3,0,0.150433071,0.150669291,0.636732283,1,1
-1.921229,7,4,2,3,5,3,0,0.150905512,0.151141732,0.636259843,1,1
-1.926314,7,4,2,3,5,3,0,0.151220472,0.151456693,0.635944882,1,1
-1.931400,7,4,2,3,5,3,0,0.151614173,0.151850394,0.635551181,1,1
-1.936488,7,4,2,3,5,3,0,0.152086614,0.152322835,0.635078740,1,1
-1.941578,7,4,2,3,5,3,0,0.152480315,0.152716535,0.634685039,1,1
-1.946664,7,4,2,3,5,3,0,0.152795276,0.153031496,0.634370079,1,1
-1.951748,7,4,2,3,5,3,0,0.153267717,0.153503937,0.633897638,1,1
-1.956839,7,4,2,3,5,3,0,0.153661417,0.153897638,0.633503937,1,1
-1.961924,7,4,2,3,5,3,0,0.154055118,0.154291339,0.633110236,1,1
-1.967008,7,4,2,3,5,3,0,0.154448819,0.154685039,0.632716535,1,1
-1.972115,7,4,2,3,5,3,0,0.154842520,0.155078740,0.632322835,1,1
-1.977202,7,4,2,3,5,3,0,0.155236220,0.155472441,0.631929134,1,1
-1.982287,7,4,2,3,5,3,0,0.155708661,0.155944882,0.631456693,1,1
-1.987382,7,4,2,3,5,3,0,0.156102362,0.156338583,0.631062992,1,1
-1.992473,7,4,2,3,5,3,0,0.156417323,0.156653543,0.630748031,1,1
-1.997560,7,4,2,3,5,3,0,0.156889764,0.157125984,0.630275591,1,1
-2.002648,7,4,2,3,5,3,0,0.157283465,0.157519685,0.629881890,1,1
-2.007739,7,4,2,3,5,3,0,0.157677165,0.157913386,0.629488189,1,1
-2.012825,7,4,2,3,5,3,0,0.157992126,0.158228346,0.629173228,1,1
-2.017915,7,4,2,3,5,3,0,0.158464567,0.158700787,0.628700787,1,1
-2.022999,7,4,2,3,5,3,0,0.158858268,0.159094488,0.628307087,1,1
-2.028084,7,4,2,3,5,3,0,0.159251969,0.159488189,0.627913386,1,1
-2.033173,7,4,2,3,5,3,0,0.159645669,0.159881890,0.627519685,1,1
-2.038257,7,4,2,3,5,3,0,0.160039370,0.160275591,0.627125984,1,1
-2.043341,7,4,2,3,5,3,0,0.160433071,0.160669291,0.626732283,1,1
-2.048425,7,4,2,3,5,3,0,0.160905512,0.161141732,0.626259843,1,1
-2.053510,7,4,2,3,5,3,0,0.161220472,0.161456693,0.625944882,1,1
-2.058613,7,4,2,3,5,3,0,0.161614173,0.161850394,0.625551181,1,1
-2.063699,7,4,2,3,5,3,0,0.162086614,0.162322835,0.625078740,1,1
-2.068784,7,4,2,3,5,3,0,0.162480315,0.162716535,0.624685039,1,1
-2.073868,7,4,2,3,5,3,0,0.162874016,0.163110236,0.624291339,1,1
-2.078954,7,4,2,3,5,3,0,0.163267717,0.163503937,0.623897638,1,1
-2.084043,7,4,2,3,5,3,0,0.163661417,0.163897638,0.623503937,1,1
-2.089128,7,4,2,3,5,3,0,0.164055118,0.164291339,0.623110236,1,1
-2.094212,7,4,2,3,5,3,0,0.164527559,0.164763780,0.622637795,1,1
-2.099297,7,4,2,3,5,3,0,0.164842520,0.165078740,0.622322835,1,1
-2.104383,7,4,2,3,5,3,0,0.165236220,0.165472441,0.621929134,1,1
-2.109474,7,4,2,3,5,3,0,0.165708661,0.165944882,0.621456693,1,1
-2.114560,7,4,2,3,5,3,0,0.166102362,0.166338583,0.621062992,1,1
-2.119646,7,4,2,3,5,3,0,0.166417323,0.166653543,0.620748031,1,1
-2.124731,7,4,2,3,5,3,0,0.166889764,0.167125984,0.620275591,1,1
-2.129818,7,4,2,3,5,3,0,0.167283465,0.167519685,0.619881890,1,1
-2.134903,7,4,2,3,5,3,0,0.167677165,0.167913386,0.619488189,1,1
-2.139992,7,4,2,3,5,3,0,0.167992126,0.168228346,0.619173228,1,1
-2.145087,7,4,2,3,5,3,0,0.168464567,0.168700787,0.618700787,1,1
-2.150177,7,4,2,3,5,3,0,0.168858268,0.169094488,0.618307087,1,1
-2.155261,7,4,2,3,5,3,0,0.169251969,0.169488189,0.617913386,1,1
-2.160351,7,4,2,3,5,3,0,0.169724409,0.169960630,0.617440945,1,1
-2.165436,7,4,2,3,5,3,0,0.170039370,0.170275591,0.617125984,1,1
-2.170521,7,4,2,3,5,3,0,0.170433071,0.170669291,0.616732283,1,1
-2.175605,7,4,2,3,5,3,0,0.170905512,0.171141732,0.616259843,1,1
-2.180689,7,4,2,3,5,3,0,0.171299213,0.171535433,0.615866142,1,1
-2.185774,7,4,2,3,5,3,0,0.171614173,0.171850394,0.615551181,1,1
-2.190860,7,4,2,3,5,3,0,0.172086614,0.172322835,0.615078740,1,1
-2.195946,7,4,2,3,5,3,0,0.172480315,0.172716535,0.614685039,1,1
-2.201032,7,4,2,3,5,3,0,0.172874016,0.173110236,0.614291339,1,1
-2.206118,7,4,2,3,5,3,0,0.173267717,0.173503937,0.613897638,1,1
-2.211210,7,4,2,3,5,3,0,0.173661417,0.173897638,0.613503937,1,1
-2.216303,7,4,2,3,5,3,0,0.174055118,0.174291339,0.613110236,1,1
-2.221388,7,4,2,3,5,3,0,0.174527559,0.174763780,0.612637795,1,1
-2.226473,7,4,2,3,5,3,0,0.174842520,0.175078740,0.612322835,1,1
-2.231556,7,4,2,3,5,3,0,0.175236220,0.175472441,0.611929134,1,1
-2.236641,7,4,2,3,5,3,0,0.175708661,0.175944882,0.611456693,1,1
-2.241725,7,4,2,3,5,3,0,0.176102362,0.176338583,0.611062992,1,1
-2.246810,7,4,2,3,5,3,0,0.176417323,0.176653543,0.610748031,1,1
-2.251907,7,4,2,3,5,3,0,0.176889764,0.177125984,0.610275591,1,1
-2.256994,7,4,2,3,5,3,0,0.177283465,0.177519685,0.609881890,1,1
-2.262084,7,4,2,3,5,3,0,0.177677165,0.177913386,0.609488189,1,1
-2.267173,7,4,2,3,5,3,0,0.178149606,0.178385827,0.609015748,1,1
-2.272259,7,4,2,3,5,3,0,0.178464567,0.178700787,0.608700787,1,1
-2.277343,7,4,2,3,5,3,0,0.178858268,0.179094488,0.608307087,1,1
-2.282433,7,4,2,3,5,3,0,0.179330709,0.179566929,0.607834646,1,1
-2.287518,7,4,2,3,5,3,0,0.179724409,0.179960630,0.607440945,1,1
-2.292603,7,4,2,3,5,3,0,0.180039370,0.180275591,0.607125984,1,1
-2.297688,7,4,2,3,5,3,0,0.180511811,0.180748031,0.606653543,1,1
-2.302773,7,4,2,3,5,3,0,0.180905512,0.181141732,0.606259843,1,1
-2.307859,7,4,2,3,5,3,0,0.181299213,0.181535433,0.605866142,1,1
-2.312959,7,4,2,3,5,3,0,0.181692913,0.181929134,0.605472441,1,1
-2.318045,7,4,2,3,5,3,0,0.182086614,0.182322835,0.605078740,1,1
-2.323136,7,4,2,3,5,3,0,0.182480315,0.182716535,0.604685039,1,1
-2.328230,7,4,2,3,5,3,0,0.182952756,0.183188976,0.604212598,1,1
-2.333320,7,4,2,3,5,3,0,0.183267717,0.183503937,0.603897638,1,1
-2.338408,7,4,2,3,5,3,0,0.183661417,0.183897638,0.603503937,1,1
-2.343502,7,4,2,3,5,3,0,0.184133858,0.184370079,0.603031496,1,1
-2.348617,7,4,2,3,5,3,0,0.184527559,0.184763780,0.602637795,1,1
-2.353738,7,4,2,3,5,3,0,0.184921260,0.185157480,0.602244094,1,1
-2.358875,7,4,2,3,5,3,0,0.185314961,0.185551181,0.601850394,1,1
-2.364017,7,4,2,3,5,3,0,0.185708661,0.185944882,0.601456693,1,1
-2.369156,7,4,2,3,5,3,0,0.186102362,0.186338583,0.601062992,1,1
-2.374236,7,4,2,3,5,3,0,0.186574803,0.186811024,0.600590551,1,1
-2.379338,7,4,2,3,5,3,0,0.186889764,0.187125984,0.600275591,1,1
-2.384427,7,4,2,3,5,3,0,0.187283465,0.187519685,0.599881890,1,1
-2.389518,7,4,2,3,5,3,0,0.187755906,0.187992126,0.599409449,1,1
-2.394606,7,4,2,3,5,3,0,0.188070866,0.188307087,0.599094488,1,1
-2.399695,7,4,2,3,5,3,0,0.188464567,0.188700787,0.598700787,1,1
-2.404782,7,4,2,3,5,3,0,0.188937008,0.189173228,0.598228346,1,1
-2.409875,7,4,2,3,5,3,0,0.189330709,0.189566929,0.597834646,1,1
-2.414979,7,4,2,3,5,3,0,0.189724409,0.189960630,0.597440945,1,1
-2.420076,7,4,2,3,5,3,0,0.190118110,0.190354331,0.597047244,1,1
-2.425163,7,4,2,3,5,3,0,0.190511811,0.190748031,0.596653543,1,1
-2.430251,7,4,2,3,5,3,0,0.190905512,0.191141732,0.596259843,1,1
-2.435338,7,4,2,3,5,3,0,0.191377953,0.191614173,0.595787402,1,1
-2.440428,7,4,2,3,5,3,0,0.191692913,0.191929134,0.595472441,1,1
-2.445514,7,4,2,3,5,3,0,0.192086614,0.192322835,0.595078740,1,1
-2.450599,7,4,2,3,5,3,0,0.192559055,0.192795276,0.594606299,1,1
-2.455684,7,4,2,3,5,3,0,0.192952756,0.193188976,0.594212598,1,1
-2.460769,7,4,2,3,5,3,0,0.193267717,0.193503937,0.593897638,1,1
-2.465859,7,4,2,3,5,3,0,0.193740157,0.193976378,0.593425197,1,1
-2.470947,7,4,2,3,5,3,0,0.194133858,0.194370079,0.593031496,1,1
-2.476052,7,4,2,3,5,3,0,0.194527559,0.194763780,0.592637795,1,1
-2.481140,7,4,2,3,5,3,0,0.195000000,0.195236220,0.592165354,1,1
-2.486229,7,4,2,3,5,3,0,0.195314961,0.195551181,0.591850394,1,1
-2.491314,7,4,2,3,5,3,0,0.195708661,0.195944882,0.591456693,1,1
-2.496399,7,4,2,3,5,3,0,0.196102362,0.196338583,0.591062992,1,1
-2.501484,7,4,2,3,5,3,0,0.196574803,0.196811024,0.590590551,1,1
-2.506593,7,4,2,3,5,3,0,0.196889764,0.197125984,0.590275591,1,1
-2.511705,7,4,2,3,5,3,0,0.197283465,0.197519685,0.589881890,1,1
-2.516810,7,4,2,3,5,3,0,0.197755906,0.197992126,0.589409449,1,1
-2.521906,7,4,2,3,5,3,0,0.198149606,0.198385827,0.589015748,1,1
-2.527000,7,4,2,3,5,3,0,0.198543307,0.198779528,0.588622047,1,1
-2.532091,7,4,2,3,5,3,0,0.198937008,0.199173228,0.588228346,1,1
-2.537213,7,4,2,3,5,3,0,0.199330709,0.199566929,0.587834646,1,1
-2.542359,7,4,2,3,5,3,0,0.199724409,0.199960630,0.587440945,1,1
-2.547508,7,4,2,3,5,3,0,0.200196850,0.200433071,0.586968504,1,1
-2.552650,7,4,2,3,5,3,0,0.200590551,0.200826772,0.586574803,1,1
-2.557782,7,4,2,3,5,3,0,0.200905512,0.201141732,0.586259843,1,1
-2.562916,7,4,2,3,5,3,0,0.201377953,0.201614173,0.585787402,1,1
-2.568062,7,4,2,3,5,3,0,0.201771654,0.202007874,0.585393701,1,1
-2.573202,7,4,2,3,5,3,0,0.202165354,0.202401575,0.585000000,1,1
-2.578343,7,4,2,3,5,3,0,0.202637795,0.202874016,0.584527559,1,1
-2.583483,7,4,2,3,5,3,0,0.203031496,0.203267717,0.584133858,1,1
-2.588624,7,4,2,3,5,3,0,0.203346457,0.203582677,0.583818898,1,1
-2.593765,7,4,2,3,5,3,0,0.203818898,0.204055118,0.583346457,1,1
-2.598906,7,4,2,3,5,3,0,0.204212598,0.204448819,0.582952756,1,1
-2.604057,7,4,2,3,5,3,0,0.204606299,0.204842520,0.582559055,1,1
-2.609197,7,4,2,3,5,3,0,0.205078740,0.205314961,0.582086614,1,1
-2.614339,7,4,2,3,5,3,0,0.205393701,0.205629921,0.581771654,1,1
-2.619458,7,4,2,3,5,3,0,0.205787402,0.206023622,0.581377953,1,1
-2.624579,7,4,2,3,5,3,0,0.206259843,0.206496063,0.580905512,1,1
-2.629673,7,4,2,3,5,3,0,0.206653543,0.206889764,0.580511811,1,1
-2.634771,7,4,2,3,5,3,0,0.207047244,0.207283465,0.580118110,1,1
-2.639877,7,4,2,3,5,3,0,0.207362205,0.207598425,0.579803150,1,1
-2.644984,7,4,2,3,5,3,0,0.207834646,0.208070866,0.579330709,1,1
-2.650080,7,4,2,3,5,3,0,0.208228346,0.208464567,0.578937008,1,1
-2.655168,7,4,2,3,5,3,0,0.208622047,0.208858268,0.578543307,1,1
-2.660256,7,4,2,3,5,3,0,0.209094488,0.209330709,0.578070866,1,1
-2.665344,7,4,2,3,5,3,0,0.209409449,0.209645669,0.577755906,1,1
-2.670440,7,4,2,3,5,3,0,0.209803150,0.210039370,0.577362205,1,1
-2.675529,7,4,2,3,5,3,0,0.210275591,0.210511811,0.576889764,1,1
-2.680614,7,4,2,3,5,3,0,0.210669291,0.210905512,0.576496063,1,1
-2.685703,7,4,2,3,5,3,0,0.210984252,0.211220472,0.576181102,1,1
-2.690791,7,4,2,3,5,3,0,0.211456693,0.211692913,0.575708661,1,1
-2.695879,7,4,2,3,5,3,0,0.211850394,0.212086614,0.575314961,1,1
-2.700970,7,4,2,3,5,3,0,0.212244094,0.212480315,0.574921260,1,1
-2.706068,7,4,2,3,5,3,0,0.212637795,0.212874016,0.574527559,1,1
-2.711155,7,4,2,3,5,3,0,0.213031496,0.213267717,0.574133858,1,1
-2.716242,7,4,2,3,5,3,0,0.213425197,0.213661417,0.573740157,1,1
-2.721332,7,4,2,3,5,3,0,0.213897638,0.214133858,0.573267717,1,1
-2.726423,7,4,2,3,5,3,0,0.214212598,0.214448819,0.572952756,1,1
-2.731516,7,4,2,3,5,3,0,0.214606299,0.214842520,0.572559055,1,1
-2.736608,7,4,2,3,5,3,0,0.215078740,0.215314961,0.572086614,1,1
-2.741695,7,4,2,3,5,3,0,0.215472441,0.215708661,0.571692913,1,1
-2.746783,7,4,2,3,5,3,0,0.215787402,0.216023622,0.571377953,1,1
-2.751874,7,4,2,3,5,3,0,0.216259843,0.216496063,0.570905512,1,1
-2.756963,7,4,2,3,5,3,0,0.216653543,0.216889764,0.570511811,1,1
-2.762063,7,4,2,3,5,3,0,0.217047244,0.217283465,0.570118110,1,1
-2.767150,7,4,2,3,5,3,0,0.217519685,0.217755906,0.569645669,1,1
-2.772242,7,4,2,3,5,3,0,0.217834646,0.218070866,0.569330709,1,1
-2.777329,7,4,2,3,5,3,0,0.218228346,0.218464567,0.568937008,1,1
-2.782418,7,4,2,3,5,3,0,0.218700787,0.218937008,0.568464567,1,1
-2.787510,7,4,2,3,5,3,0,0.219094488,0.219330709,0.568070866,1,1
-2.792600,7,4,2,3,5,3,0,0.219409449,0.219645669,0.567755906,1,1
-2.797688,7,4,2,3,5,3,0,0.219803150,0.220039370,0.567362205,1,1
-2.802785,7,4,2,3,5,3,0,0.220275591,0.220511811,0.566889764,1,1
-2.807870,7,4,2,3,5,3,0,0.220669291,0.220905512,0.566496063,1,1
-2.812959,7,4,2,3,5,3,0,0.220984252,0.221220472,0.566181102,1,1
-2.818061,7,4,2,3,5,3,0,0.221456693,0.221692913,0.565708661,1,1
-2.823154,7,4,2,3,5,3,0,0.221850394,0.222086614,0.565314961,1,1
-2.828238,7,4,2,3,5,3,0,0.222244094,0.222480315,0.564921260,1,1
-2.833326,7,4,2,3,5,3,0,0.222716535,0.222952756,0.564448819,1,1
-2.838411,7,4,2,3,5,3,0,0.223031496,0.223267717,0.564133858,1,1
-2.843496,7,4,2,3,5,3,0,0.223425197,0.223661417,0.563740157,1,1
-2.848582,7,4,2,3,5,3,0,0.223897638,0.224133858,0.563267717,1,1
-2.853667,7,4,2,3,5,3,0,0.224291339,0.224527559,0.562874016,1,1
-2.858752,7,4,2,3,5,3,0,0.224606299,0.224842520,0.562559055,1,1
-2.863845,7,4,2,3,5,3,0,0.225078740,0.225314961,0.562086614,1,1
-2.868936,7,4,2,3,5,3,0,0.225472441,0.225708661,0.561692913,1,1
-2.874024,7,4,2,3,5,3,0,0.225866142,0.226102362,0.561299213,1,1
-2.879110,7,4,2,3,5,3,0,0.226259843,0.226496063,0.560905512,1,1
-2.884196,7,4,2,3,5,3,0,0.226653543,0.226889764,0.560511811,1,1
-2.889281,7,4,2,3,5,3,0,0.227047244,0.227283465,0.560118110,1,1
-2.894366,7,4,2,3,5,3,0,0.227519685,0.227755906,0.559645669,1,1
-2.899452,7,4,2,3,5,3,0,0.227834646,0.228070866,0.559330709,1,1
-2.904536,7,4,2,3,5,3,0,0.228228346,0.228464567,0.558937008,1,1
-2.909624,7,4,2,3,5,3,0,0.228700787,0.228937008,0.558464567,1,1
-2.914713,7,4,2,3,5,3,0,0.229094488,0.229330709,0.558070866,1,1
-2.919801,7,4,2,3,5,3,0,0.229488189,0.229724409,0.557677165,1,1
-2.924893,7,4,2,3,5,3,0,0.229881890,0.230118110,0.557283465,1,1
-2.929989,7,4,2,3,5,3,0,0.230275591,0.230511811,0.556889764,1,1
-2.935080,7,4,2,3,5,3,0,0.230669291,0.230905512,0.556496063,1,1
-2.940167,7,4,2,3,5,3,0,0.231141732,0.231377953,0.556023622,1,1
-2.945252,7,4,2,3,5,3,0,0.231456693,0.231692913,0.555708661,1,1
-2.950338,7,4,2,3,5,3,0,0.231850394,0.232086614,0.555314961,1,1
-2.955427,7,4,2,3,5,3,0,0.232322835,0.232559055,0.554842520,1,1
-2.960519,7,4,2,3,5,3,0,0.232716535,0.232952756,0.554448819,1,1
-2.965605,7,4,2,3,5,3,0,0.233031496,0.233267717,0.554133858,1,1
-2.970691,7,4,2,3,5,3,0,0.233503937,0.233740157,0.553661417,1,1
-2.975787,7,4,2,3,5,3,0,0.233897638,0.234133858,0.553267717,1,1
-2.980875,7,4,2,3,5,3,0,0.234291339,0.234527559,0.552874016,1,1
-2.985963,7,4,2,3,5,3,0,0.234606299,0.234842520,0.552559055,1,1
-2.991063,7,4,2,3,5,3,0,0.235078740,0.235314961,0.552086614,1,1
-2.996154,7,4,2,3,5,3,0,0.235472441,0.235708661,0.551692913,1,1
-3.001242,7,4,2,3,5,3,0,0.235866142,0.236102362,0.551299213,1,1
-3.006330,7,4,2,3,5,3,0,0.236338583,0.236574803,0.550826772,1,1
-3.011424,7,4,2,3,5,3,0,0.236653543,0.236889764,0.550511811,1,1
-3.016518,7,4,2,3,5,3,0,0.237047244,0.237283465,0.550118110,1,1
-3.021607,7,4,2,3,5,3,0,0.237519685,0.237755906,0.549645669,1,1
-3.026705,7,4,2,3,5,3,0,0.237913386,0.238149606,0.549251969,1,1
-3.031798,7,4,2,3,5,3,0,0.238228346,0.238464567,0.548937008,1,1
-3.036892,7,4,2,3,5,3,0,0.238700787,0.238937008,0.548464567,1,1
-3.041988,7,4,2,3,5,3,0,0.239094488,0.239330709,0.548070866,1,1
-3.047085,7,4,2,3,5,3,0,0.239488189,0.239724409,0.547677165,1,1
-3.052177,7,4,2,3,5,3,0,0.239881890,0.240118110,0.547283465,1,1
-3.057266,7,4,2,3,5,3,0,0.240275591,0.240511811,0.546889764,1,1
-3.062359,7,4,2,3,5,3,0,0.240669291,0.240905512,0.546496063,1,1
-3.067445,7,4,2,3,5,3,0,0.241141732,0.241377953,0.546023622,1,1
-3.072532,7,4,2,3,5,3,0,0.241535433,0.241771654,0.545629921,1,1
-3.077623,7,4,2,3,5,3,0,0.241850394,0.242086614,0.545314961,1,1
-3.082709,7,4,2,3,5,3,0,0.242322835,0.242559055,0.544842520,1,1
-3.087794,7,4,2,3,5,3,0,0.242716535,0.242952756,0.544448819,1,1
-3.092889,7,4,2,3,5,3,0,0.243110236,0.243346457,0.544055118,1,1
-3.097995,7,4,2,3,5,3,0,0.243425197,0.243661417,0.543740157,1,1
-3.103087,7,4,2,3,5,3,0,0.243897638,0.244133858,0.543267717,1,1
-3.108173,7,4,2,3,5,3,0,0.244291339,0.244527559,0.542874016,1,1
-3.113262,7,4,2,3,5,3,0,0.244685039,0.244921260,0.542480315,1,1
-3.118350,7,4,2,3,5,3,0,0.245157480,0.245393701,0.542007874,1,1
-3.123443,7,4,2,3,5,3,0,0.245472441,0.245708661,0.541692913,1,1
-3.128530,7,4,2,3,5,3,0,0.245866142,0.246102362,0.541299213,1,1
-3.133615,7,4,2,3,5,3,0,0.246338583,0.246574803,0.540826772,1,1
-3.138701,7,4,2,3,5,3,0,0.246732283,0.246968504,0.540433071,1,1
-3.143786,7,4,2,3,5,3,0,0.247047244,0.247283465,0.540118110,1,1
-3.148874,7,4,2,3,5,3,0,0.247519685,0.247755906,0.539645669,1,1
-3.153963,7,4,2,3,5,3,0,0.247913386,0.248149606,0.539251969,1,1
-3.159062,7,4,2,3,5,3,0,0.248307087,0.248543307,0.538858268,1,1
-3.164146,7,4,2,3,5,3,0,0.248779528,0.249015748,0.538385827,1,1
-3.169232,7,4,2,3,5,3,0,0.249094488,0.249330709,0.538070866,1,1
-3.174316,7,4,2,3,5,3,0,0.249488189,0.249724409,0.537677165,1,1
-3.179407,7,4,2,3,5,3,0,0.249960630,0.250196850,0.537204724,1,1
-3.184492,7,4,2,3,5,3,0,0.250354331,0.250590551,0.536811024,1,1
-3.189580,7,4,2,3,5,3,0,0.250669291,0.250905512,0.536496063,1,1
-3.194666,7,4,2,3,5,3,0,0.251141732,0.251377953,0.536023622,1,1
-3.199751,7,4,2,3,5,3,0,0.251535433,0.251771654,0.535629921,1,1
-3.204835,7,4,2,3,5,3,0,0.251929134,0.252165354,0.535236220,1,1
-3.209921,7,4,2,3,5,3,0,0.252322835,0.252559055,0.534842520,1,1
-3.215005,7,4,2,3,5,3,0,0.252716535,0.252952756,0.534448819,1,1
-3.220095,7,4,2,3,5,3,0,0.253110236,0.253346457,0.534055118,1,1
-3.225181,7,4,2,3,5,3,0,0.253582677,0.253818898,0.533582677,1,1
-3.230272,7,4,2,3,5,3,0,0.253897638,0.254133858,0.533267717,1,1
-3.235358,7,4,2,3,5,3,0,0.254291339,0.254527559,0.532874016,1,1
-3.240445,7,4,2,3,5,3,0,0.254685039,0.254921260,0.532480315,1,1
-3.245532,7,4,2,3,5,3,0,0.255157480,0.255393701,0.532007874,1,1
-3.250618,7,4,2,3,5,3,0,0.255472441,0.255708661,0.531692913,1,1
-3.255707,7,4,2,3,5,3,0,0.255866142,0.256102362,0.531299213,1,1
-3.260793,7,4,2,3,5,3,0,0.256338583,0.256574803,0.530826772,1,1
-3.265877,7,4,2,3,5,3,0,0.256732283,0.256968504,0.530433071,1,1
-3.270961,7,4,2,3,5,3,0,0.257125984,0.257362205,0.530039370,1,1
-3.276085,7,4,2,3,5,3,0,0.257519685,0.257755906,0.529645669,1,1
-3.281176,7,4,2,3,5,3,0,0.257913386,0.258149606,0.529251969,1,1
-3.286261,7,4,2,3,5,3,0,0.258307087,0.258543307,0.528858268,1,1
-3.291351,7,4,2,3,5,3,0,0.258779528,0.259015748,0.528385827,1,1
-3.296439,7,4,2,3,5,3,0,0.259094488,0.259330709,0.528070866,1,1
-3.301526,7,4,2,3,5,3,0,0.259488189,0.259724409,0.527677165,1,1
-3.306613,7,4,2,3,5,3,0,0.259960630,0.260196850,0.527204724,1,1
-3.311700,7,4,2,3,5,3,0,0.260354331,0.260590551,0.526811024,1,1
-3.316792,7,4,2,3,5,3,0,0.260669291,0.260905512,0.526496063,1,1
-3.321878,7,4,2,3,5,3,0,0.261141732,0.261377953,0.526023622,1,1
-3.326974,7,4,2,3,5,3,0,0.261535433,0.261771654,0.525629921,1,1
-3.332073,7,4,2,3,5,3,0,0.261929134,0.262165354,0.525236220,1,1
-3.337160,7,4,2,3,5,3,0,0.262401575,0.262637795,0.524763780,1,1
-3.342245,7,4,2,3,5,3,0,0.262716535,0.262952756,0.524448819,1,1
-3.347330,7,4,2,3,5,3,0,0.263110236,0.263346457,0.524055118,1,1
-3.352416,7,4,2,3,5,3,0,0.263582677,0.263818898,0.523582677,1,1
-3.357503,7,4,2,3,5,3,0,0.263976378,0.264212598,0.523188976,1,1
-3.362589,7,4,2,3,5,3,0,0.264291339,0.264527559,0.522874016,1,1
-3.367677,7,4,2,3,5,3,0,0.264763780,0.265000000,0.522401575,1,1
-3.372763,7,4,2,3,5,3,0,0.265157480,0.265393701,0.522007874,1,1
-3.377848,7,4,2,3,5,3,0,0.265551181,0.265787402,0.521614173,1,1
-3.382940,7,4,2,3,5,3,0,0.265866142,0.266102362,0.521299213,1,1
-3.388027,7,4,2,3,5,3,0,0.266338583,0.266574803,0.520826772,1,1
-3.393113,7,4,2,3,5,3,0,0.266732283,0.266968504,0.520433071,1,1
-3.398197,7,4,2,3,5,3,0,0.267125984,0.267362205,0.520039370,1,1
-3.403282,7,4,2,3,5,3,0,0.267519685,0.267755906,0.519645669,1,1
-3.408367,7,4,2,3,5,3,0,0.267913386,0.268149606,0.519251969,1,1
-3.413452,7,4,2,3,5,3,0,0.268307087,0.268543307,0.518858268,1,1
-3.418537,7,4,2,3,5,3,0,0.268779528,0.269015748,0.518385827,1,1
-3.423622,7,4,2,3,5,3,0,0.269173228,0.269409449,0.517992126,1,1
-3.428708,7,4,2,3,5,3,0,0.269488189,0.269724409,0.517677165,1,1
-3.433797,7,4,2,3,5,3,0,0.269960630,0.270196850,0.517204724,1,1
-3.438887,7,4,2,3,5,3,0,0.270354331,0.270590551,0.516811024,1,1
-3.443984,7,4,2,3,5,3,0,0.270748031,0.270984252,0.516417323,1,1
-3.449080,7,4,2,3,5,3,0,0.271141732,0.271377953,0.516023622,1,1
-3.454168,7,4,2,3,5,3,0,0.271535433,0.271771654,0.515629921,1,1
-3.459255,7,4,2,3,5,3,0,0.271929134,0.272165354,0.515236220,1,1
-3.464345,7,4,2,3,5,3,0,0.272401575,0.272637795,0.514763780,1,1
-3.469434,7,4,2,3,5,3,0,0.272716535,0.272952756,0.514448819,1,1
-3.474521,7,4,2,3,5,3,0,0.273110236,0.273346457,0.514055118,1,1
-3.479609,7,4,2,3,5,3,0,0.273582677,0.273818898,0.513582677,1,1
-3.484700,7,4,2,3,5,3,0,0.273976378,0.274212598,0.513188976,1,1
-3.489789,7,4,2,3,5,3,0,0.274291339,0.274527559,0.512874016,1,1
-3.494876,7,4,2,3,5,3,0,0.274763780,0.275000000,0.512401575,1,1
-3.499982,7,4,2,3,5,3,0,0.275157480,0.275393701,0.512007874,1,1
-3.505078,7,4,2,3,5,3,0,0.275551181,0.275787402,0.511614173,1,1
-3.510167,7,4,2,3,5,3,0,0.276023622,0.276259843,0.511141732,1,1
-3.515256,7,4,2,3,5,3,0,0.276338583,0.276574803,0.510826772,1,1
-3.520344,7,4,2,3,5,3,0,0.276732283,0.276968504,0.510433071,1,1
-3.525429,7,4,2,3,5,3,0,0.277204724,0.277440945,0.509960630,1,1
-3.530514,7,4,2,3,5,3,0,0.277598425,0.277834646,0.509566929,1,1
-3.535603,7,4,2,3,5,3,0,0.277913386,0.278149606,0.509251969,1,1
-3.540690,7,4,2,3,5,3,0,0.278385827,0.278622047,0.508779528,1,1
-3.545787,7,4,2,3,5,3,0,0.278779528,0.279015748,0.508385827,1,1
-3.550890,7,4,2,3,5,3,0,0.279173228,0.279409449,0.507992126,1,1
-3.555994,7,4,2,3,5,3,0,0.279566929,0.279803150,0.507598425,1,1
-3.561094,7,4,2,3,5,3,0,0.279960630,0.280196850,0.507204724,1,1
-3.566180,7,4,2,3,5,3,0,0.280354331,0.280590551,0.506811024,1,1
-3.571267,7,4,2,3,5,3,0,0.280748031,0.280984252,0.506417323,1,1
-3.576354,7,4,2,3,5,3,0,0.281220472,0.281456693,0.505944882,1,1
-3.581446,7,4,2,3,5,3,0,0.281535433,0.281771654,0.505629921,1,1
-3.586536,7,4,2,3,5,3,0,0.281929134,0.282165354,0.505236220,1,1
-3.591622,7,4,2,3,5,3,0,0.282401575,0.282637795,0.504763780,1,1
-3.596707,7,4,2,3,5,3,0,0.282795276,0.283031496,0.504370079,1,1
-3.601792,7,4,2,3,5,3,0,0.283110236,0.283346457,0.504055118,1,1
-3.606879,7,4,2,3,5,3,0,0.283582677,0.283818898,0.503582677,1,1
-3.611971,7,4,2,3,5,3,0,0.283976378,0.284212598,0.503188976,1,1
-3.617068,7,4,2,3,5,3,0,0.284370079,0.284606299,0.502795276,1,1
-3.622156,7,4,2,3,5,3,0,0.284763780,0.285000000,0.502401575,1,1
-3.627241,7,4,2,3,5,3,0,0.285157480,0.285393701,0.502007874,1,1
-3.632331,7,4,2,3,5,3,0,0.285551181,0.285787402,0.501614173,1,1
-3.637433,7,4,2,3,5,3,0,0.286023622,0.286259843,0.501141732,1,1
-3.642527,7,4,2,3,5,3,0,0.286417323,0.286653543,0.500748031,1,1
-3.647620,7,4,2,3,5,3,0,0.286732283,0.286968504,0.500433071,1,1
-3.652712,7,4,2,3,5,3,0,0.287204724,0.287440945,0.499960630,1,1
-3.657798,7,4,2,3,5,3,0,0.287598425,0.287834646,0.499566929,1,1
-3.662885,7,4,2,3,5,3,0,0.287992126,0.288228346,0.499173228,1,1
-3.667973,7,4,2,3,5,3,0,0.288385827,0.288622047,0.498779528,1,1
-3.673058,7,4,2,3,5,3,0,0.288779528,0.289015748,0.498385827,1,1
-3.678143,7,4,2,3,5,3,0,0.289173228,0.289409449,0.497992126,1,1
-3.683229,7,4,2,3,5,3,0,0.289645669,0.289881890,0.497519685,1,1
-3.688321,7,4,2,3,5,3,0,0.289960630,0.290196850,0.497204724,1,1
-3.693414,7,4,2,3,5,3,0,0.290354331,0.290590551,0.496811024,1,1
-3.698499,7,4,2,3,5,3,0,0.290826772,0.291062992,0.496338583,1,1
-3.703583,7,4,2,3,5,3,0,0.291220472,0.291456693,0.495944882,1,1
-3.708680,7,4,2,3,5,3,0,0.291614173,0.291850394,0.495551181,1,1
-3.713773,7,4,2,3,5,3,0,0.291929134,0.292165354,0.495236220,1,1
-3.718859,7,4,2,3,5,3,0,0.292401575,0.292637795,0.494763780,1,1
-3.723949,7,4,2,3,5,3,0,0.292795276,0.293031496,0.494370079,1,1
-3.729052,7,4,2,3,5,3,0,0.293110236,0.293346457,0.494055118,1,1
-3.734148,7,4,2,3,5,3,0,0.293582677,0.293818898,0.493582677,1,1
-3.740132,7,4,2,3,5,3,0,0.294055118,0.294291339,0.493110236,1,1
-3.745222,7,4,2,3,5,3,0,0.294448819,0.294685039,0.492716535,1,1
-3.750310,7,4,2,3,5,3,0,0.294921260,0.295157480,0.492244094,1,1
-3.755396,7,4,2,3,5,3,0,0.295236220,0.295472441,0.491929134,1,1
-3.760482,7,4,2,3,5,3,0,0.295629921,0.295866142,0.491535433,1,1
-3.765567,7,4,2,3,5,3,0,0.296102362,0.296338583,0.491062992,1,1
-3.770652,7,4,2,3,5,3,0,0.296496063,0.296732283,0.490669291,1,1
-3.775743,7,4,2,3,5,3,0,0.296811024,0.297047244,0.490354331,1,1
-3.780827,7,4,2,3,5,3,0,0.297283465,0.297519685,0.489881890,1,1
-3.785909,7,4,2,3,5,3,0,0.297677165,0.297913386,0.489488189,1,1
-3.791004,7,4,2,3,5,3,0,0.298070866,0.298307087,0.489094488,1,1
-3.796095,7,4,2,3,5,3,0,0.298464567,0.298700787,0.488700787,1,1
-3.801183,7,4,2,3,5,3,0,0.298858268,0.299094488,0.488307087,1,1
-3.806271,7,4,2,3,5,3,0,0.299251969,0.299488189,0.487913386,1,1
-3.811358,7,4,2,3,5,3,0,0.299724409,0.299960630,0.487440945,1,1
-3.816445,7,4,2,3,5,3,0,0.300039370,0.300275591,0.487125984,1,1
-3.821532,7,4,2,3,5,3,0,0.300433071,0.300669291,0.486732283,1,1
-3.826620,7,4,2,3,5,3,0,0.300905512,0.301141732,0.486259843,1,1
-3.831706,7,4,2,3,5,3,0,0.301299213,0.301535433,0.485866142,1,1
-3.836795,7,4,2,3,5,3,0,0.301614173,0.301850394,0.485551181,1,1
-3.841889,7,4,2,3,5,3,0,0.302086614,0.302322835,0.485078740,1,1
-3.846984,7,4,2,3,5,3,0,0.302480315,0.302716535,0.484685039,1,1
-3.852078,7,4,2,3,5,3,0,0.302874016,0.303110236,0.484291339,1,1
-3.857163,7,4,2,3,5,3,0,0.303346457,0.303582677,0.483818898,1,1
-3.862248,7,4,2,3,5,3,0,0.303661417,0.303897638,0.483503937,1,1
-3.867334,7,4,2,3,5,3,0,0.304055118,0.304291339,0.483110236,1,1
-3.872424,7,4,2,3,5,3,0,0.304527559,0.304763780,0.482637795,1,1
-3.877513,7,4,2,3,5,3,0,0.304921260,0.305157480,0.482244094,1,1
-3.882601,7,4,2,3,5,3,0,0.305236220,0.305472441,0.481929134,1,1
-3.887690,7,4,2,3,5,3,0,0.305708661,0.305944882,0.481456693,1,1
-3.892783,7,4,2,3,5,3,0,0.306102362,0.306338583,0.481062992,1,1
-3.897868,7,4,2,3,5,3,0,0.306496063,0.306732283,0.480669291,1,1
-3.902960,7,4,2,3,5,3,0,0.306811024,0.307047244,0.480354331,1,1
-3.908059,7,4,2,3,5,3,0,0.307283465,0.307519685,0.479881890,1,1
-3.913148,7,4,2,3,5,3,0,0.307677165,0.307913386,0.479488189,1,1
-3.918234,7,4,2,3,5,3,0,0.308149606,0.308385827,0.479015748,1,1
-3.923319,7,4,2,3,5,3,0,0.308464567,0.308700787,0.478700787,1,1
-3.928463,7,4,2,3,5,3,0,0.308858268,0.309094488,0.478307087,1,1
-3.933554,7,4,2,3,5,3,0,0.309251969,0.309488189,0.477913386,1,1
-3.938643,7,4,2,3,5,3,0,0.309724409,0.309960630,0.477440945,1,1
-3.943736,7,4,2,3,5,3,0,0.310118110,0.310354331,0.477047244,1,1
-3.948828,7,4,2,3,5,3,0,0.310433071,0.310669291,0.476732283,1,1
-3.953915,7,4,2,3,5,3,0,0.310905512,0.311141732,0.476259843,1,1
-3.959006,7,4,2,3,5,3,0,0.311299213,0.311535433,0.475866142,1,1
-3.964094,7,4,2,3,5,3,0,0.311692913,0.311929134,0.475472441,1,1
-3.969186,7,4,2,3,5,3,0,0.312086614,0.312322835,0.475078740,1,1
-3.974274,7,4,2,3,5,3,0,0.312480315,0.312716535,0.474685039,1,1
-3.979361,7,4,2,3,5,3,0,0.312874016,0.313110236,0.474291339,1,1
-3.984448,7,4,2,3,5,3,0,0.313346457,0.313582677,0.473818898,1,1
-3.989535,7,4,2,3,5,3,0,0.313661417,0.313897638,0.473503937,1,1
-3.994626,7,4,2,3,5,3,0,0.314055118,0.314291339,0.473110236,1,1
-3.999719,7,4,2,3,5,3,0,0.314527559,0.314763780,0.472637795,1,1
-4.004807,7,4,2,3,5,3,0,0.314921260,0.315157480,0.472244094,1,1
-4.009894,7,4,2,3,5,3,0,0.315314961,0.315551181,0.471850394,1,1
-4.014992,7,4,2,3,5,3,0,0.315708661,0.315944882,0.471456693,1,1
-4.020084,7,4,2,3,5,3,0,0.316102362,0.316338583,0.471062992,1,1
-4.025172,7,4,2,3,5,3,0,0.316496063,0.316732283,0.470669291,1,1
-4.030259,7,4,2,3,5,3,0,0.316968504,0.317204724,0.470196850,1,1
-4.035351,7,4,2,3,5,3,0,0.317283465,0.317519685,0.469881890,1,1
-4.040438,7,4,2,3,5,3,0,0.317677165,0.317913386,0.469488189,1,1
-4.045527,7,4,2,3,5,3,0,0.318149606,0.318385827,0.469015748,1,1
-4.050617,7,4,2,3,5,3,0,0.318543307,0.318779528,0.468622047,1,1
-4.055706,7,4,2,3,5,3,0,0.318858268,0.319094488,0.468307087,1,1
-4.060794,7,4,2,3,5,3,0,0.319330709,0.319566929,0.467834646,1,1
-4.065884,7,4,2,3,5,3,0,0.319724409,0.319960630,0.467440945,1,1
-4.070984,7,4,2,3,5,3,0,0.320118110,0.320354331,0.467047244,1,1
-4.076077,7,4,2,3,5,3,0,0.320590551,0.320826772,0.466574803,1,1
-4.081163,7,4,2,3,5,3,0,0.320905512,0.321141732,0.466259843,1,1
-4.086248,7,4,2,3,5,3,0,0.321299213,0.321535433,0.465866142,1,1
-4.091333,7,4,2,3,5,3,0,0.321771654,0.322007874,0.465393701,1,1
-4.096418,7,4,2,3,5,3,0,0.322165354,0.322401575,0.465000000,1,1
-4.101508,7,4,2,3,5,3,0,0.322480315,0.322716535,0.464685039,1,1
-4.106595,7,4,2,3,5,3,0,0.322874016,0.323110236,0.464291339,1,1
-4.111683,7,4,2,3,5,3,0,0.323346457,0.323582677,0.463818898,1,1
-4.116768,7,4,2,3,5,3,0,0.323740157,0.323976378,0.463425197,1,1
-4.121856,7,4,2,3,5,3,0,0.324055118,0.324291339,0.463110236,1,1
-4.126942,7,4,2,3,5,3,0,0.324527559,0.324763780,0.462637795,1,1
-4.132032,7,4,2,3,5,3,0,0.324921260,0.325157480,0.462244094,1,1
-4.137120,7,4,2,3,5,3,0,0.325314961,0.325551181,0.461850394,1,1
-4.142207,7,4,2,3,5,3,0,0.325708661,0.325944882,0.461456693,1,1
-4.147294,7,4,2,3,5,3,0,0.326102362,0.326338583,0.461062992,1,1
-4.152381,7,4,2,3,5,3,0,0.326496063,0.326732283,0.460669291,1,1
-4.157469,7,4,2,3,5,3,0,0.326968504,0.327204724,0.460196850,1,1
-4.162559,7,4,2,3,5,3,0,0.327283465,0.327519685,0.459881890,1,1
-4.167645,7,4,2,3,5,3,0,0.327677165,0.327913386,0.459488189,1,1
-4.172730,7,4,2,3,5,3,0,0.328149606,0.328385827,0.459015748,1,1
-4.177819,7,4,2,3,5,3,0,0.328543307,0.328779528,0.458622047,1,1
-4.182905,7,4,2,3,5,3,0,0.328937008,0.329173228,0.458228346,1,1
-4.187996,7,4,2,3,5,3,0,0.329330709,0.329566929,0.457834646,1,1
-4.193083,7,4,2,3,5,3,0,0.329724409,0.329960630,0.457440945,1,1
-4.198173,7,4,2,3,5,3,0,0.330118110,0.330354331,0.457047244,1,1
-4.203263,7,4,2,3,5,3,0,0.330590551,0.330826772,0.456574803,1,1
-4.208352,7,4,2,3,5,3,0,0.330905512,0.331141732,0.456259843,1,1
-4.213439,7,4,2,3,5,3,0,0.331299213,0.331535433,0.455866142,1,1
-4.218524,7,4,2,3,5,3,0,0.331771654,0.332007874,0.455393701,1,1
-4.223612,7,4,2,3,5,3,0,0.332165354,0.332401575,0.455000000,1,1
-4.228705,7,4,2,3,5,3,0,0.332480315,0.332716535,0.454685039,1,1
-4.233793,7,4,2,3,5,3,0,0.332952756,0.333188976,0.454212598,1,1
-4.238879,7,4,2,3,5,3,0,0.333346457,0.333582677,0.453818898,1,1
-4.243970,7,4,2,3,5,3,0,0.333740157,0.333976378,0.453425197,1,1
-4.249072,7,4,2,3,5,3,0,0.334133858,0.334370079,0.453031496,1,1
-4.254159,7,4,2,3,5,3,0,0.334527559,0.334763780,0.452637795,1,1
-4.259246,7,4,2,3,5,3,0,0.334921260,0.335157480,0.452244094,1,1
-4.264333,7,4,2,3,5,3,0,0.335393701,0.335629921,0.451771654,1,1
-4.269419,7,4,2,3,5,3,0,0.335787402,0.336023622,0.451377953,1,1
-4.274506,7,4,2,3,5,3,0,0.336102362,0.336338583,0.451062992,1,1
-4.279598,7,4,2,3,5,3,0,0.336574803,0.336811024,0.450590551,1,1
-4.284695,7,4,2,3,5,3,0,0.336968504,0.337204724,0.450196850,1,1
-4.289786,7,4,2,3,5,3,0,0.337362205,0.337598425,0.449803150,1,1
-4.294880,7,4,2,3,5,3,0,0.337677165,0.337913386,0.449488189,1,1
-4.299971,7,4,2,3,5,3,0,0.338149606,0.338385827,0.449015748,1,1
-4.305059,7,4,2,3,5,3,0,0.338543307,0.338779528,0.448622047,1,1
-4.310144,7,4,2,3,5,3,0,0.339015748,0.339251969,0.448149606,1,1
-4.315230,7,4,2,3,5,3,0,0.339330709,0.339566929,0.447834646,1,1
-4.320317,7,4,2,3,5,3,0,0.339724409,0.339960630,0.447440945,1,1
-4.325403,7,4,2,3,5,3,0,0.340118110,0.340354331,0.447047244,1,1
-4.330490,7,4,2,3,5,3,0,0.340590551,0.340826772,0.446574803,1,1
-4.335577,7,4,2,3,5,3,0,0.340905512,0.341141732,0.446259843,1,1
-4.340666,7,4,2,3,5,3,0,0.341299213,0.341535433,0.445866142,1,1
-4.345752,7,4,2,3,5,3,0,0.341771654,0.342007874,0.445393701,1,1
-4.350849,7,4,2,3,5,3,0,0.342165354,0.342401575,0.445000000,1,1
-4.355947,7,4,2,3,5,3,0,0.342480315,0.342716535,0.444685039,1,1
-4.361049,7,4,2,3,5,3,0,0.342952756,0.343188976,0.444212598,1,1
-4.366138,7,4,2,3,5,3,0,0.343346457,0.343582677,0.443818898,1,1
-4.371226,7,4,2,3,5,3,0,0.343740157,0.343976378,0.443425197,1,1
-4.376312,7,4,2,3,5,3,0,0.344212598,0.344448819,0.442952756,1,1
-4.381397,7,4,2,3,5,3,0,0.344527559,0.344763780,0.442637795,1,1
-4.386482,7,4,2,3,5,3,0,0.344921260,0.345157480,0.442244094,1,1
-4.391567,7,4,2,3,5,3,0,0.345393701,0.345629921,0.441771654,1,1
-4.396653,7,4,2,3,5,3,0,0.345787402,0.346023622,0.441377953,1,1
-4.401749,7,4,2,3,5,3,0,0.346102362,0.346338583,0.441062992,1,1
-4.406837,7,4,2,3,5,3,0,0.346574803,0.346811024,0.440590551,1,1
-4.411921,7,4,2,3,5,3,0,0.346968504,0.347204724,0.440196850,1,1
-4.417009,7,4,2,3,5,3,0,0.347362205,0.347598425,0.439803150,1,1
-4.422097,7,4,2,3,5,3,0,0.347755906,0.347992126,0.439409449,1,1
-4.427182,7,4,2,3,5,3,0,0.348149606,0.348385827,0.439015748,1,1
-4.432266,7,4,2,3,5,3,0,0.348543307,0.348779528,0.438622047,1,1
-4.437351,7,4,2,3,5,3,0,0.349015748,0.349251969,0.438149606,1,1
-4.442440,7,4,2,3,5,3,0,0.349330709,0.349566929,0.437834646,1,1
-4.447526,7,4,2,3,5,3,0,0.349724409,0.349960630,0.437440945,1,1
-4.452616,7,4,2,3,5,3,0,0.350196850,0.350433071,0.436968504,1,1
-4.457701,7,4,2,3,5,3,0,0.350590551,0.350826772,0.436574803,1,1
-4.462799,7,4,2,3,5,3,0,0.350905512,0.351141732,0.436259843,1,1
-4.467899,7,4,2,3,5,3,0,0.351377953,0.351614173,0.435787402,1,1
-4.472985,7,4,2,3,5,3,0,0.351771654,0.352007874,0.435393701,1,1
-4.478072,7,4,2,3,5,3,0,0.352165354,0.352401575,0.435000000,1,1
-4.483159,7,4,2,3,5,3,0,0.352637795,0.352874016,0.434527559,1,1
-4.488249,7,4,2,3,5,3,0,0.352952756,0.353188976,0.434212598,1,1
-4.493335,7,4,2,3,5,3,0,0.353346457,0.353582677,0.433818898,1,1
-4.498418,7,4,2,3,5,3,0,0.353818898,0.354055118,0.433346457,1,1
-4.503507,7,4,2,3,5,3,0,0.354212598,0.354448819,0.432952756,1,1
-4.508590,7,4,2,3,5,3,0,0.354527559,0.354763780,0.432637795,1,1
-4.513676,7,4,2,3,5,3,0,0.354921260,0.355157480,0.432244094,1,1
-4.518760,7,4,2,3,5,3,0,0.355393701,0.355629921,0.431771654,1,1
-4.523844,7,4,2,3,5,3,0,0.355787402,0.356023622,0.431377953,1,1
-4.528946,7,4,2,3,5,3,0,0.356102362,0.356338583,0.431062992,1,1
-4.534041,7,4,2,3,5,3,0,0.356574803,0.356811024,0.430590551,1,1
-4.539125,7,4,2,3,5,3,0,0.356968504,0.357204724,0.430196850,1,1
-4.544211,7,4,2,3,5,3,0,0.357362205,0.357598425,0.429803150,1,1
-4.549299,7,4,2,3,5,3,0,0.357834646,0.358070866,0.429330709,1,1
-4.554390,7,4,2,3,5,3,0,0.358149606,0.358385827,0.429015748,1,1
-4.559475,7,4,2,3,5,3,0,0.358543307,0.358779528,0.428622047,1,1
-4.564559,7,4,2,3,5,3,0,0.359015748,0.359251969,0.428149606,1,1
-4.569643,7,4,2,3,5,3,0,0.359409449,0.359645669,0.427755906,1,1
-4.574727,7,4,2,3,5,3,0,0.359724409,0.359960630,0.427440945,1,1
-4.579833,7,4,2,3,5,3,0,0.360196850,0.360433071,0.426968504,1,1
-4.584928,7,4,2,3,5,3,0,0.360590551,0.360826772,0.426574803,1,1
-4.590015,7,4,2,3,5,3,0,0.360984252,0.361220472,0.426181102,1,1
-4.595107,7,4,2,3,5,3,0,0.361377953,0.361614173,0.425787402,1,1
-4.600192,7,4,2,3,5,3,0,0.361771654,0.362007874,0.425393701,1,1
-4.605279,7,4,2,3,5,3,0,0.362165354,0.362401575,0.425000000,1,1
-4.610364,7,4,2,3,5,3,0,0.362637795,0.362874016,0.424527559,1,1
-4.615454,7,4,2,3,5,3,0,0.362952756,0.363188976,0.424212598,1,1
-4.620541,7,4,2,3,5,3,0,0.363346457,0.363582677,0.423818898,1,1
-4.625630,7,4,2,3,5,3,0,0.363818898,0.364055118,0.423346457,1,1
-4.630712,7,4,2,3,5,3,0,0.364212598,0.364448819,0.422952756,1,1
-4.635810,7,4,2,3,5,3,0,0.364527559,0.364763780,0.422637795,1,1
-4.640910,7,4,2,3,5,3,0,0.365000000,0.365236220,0.422165354,1,1
-4.646002,7,4,2,3,5,3,0,0.365393701,0.365629921,0.421771654,1,1
-4.651094,7,4,2,3,5,3,0,0.365787402,0.366023622,0.421377953,1,1
-4.656182,7,4,2,3,5,3,0,0.366259843,0.366496063,0.420905512,1,1
-4.661269,7,4,2,3,5,3,0,0.366574803,0.366811024,0.420590551,1,1
-4.666354,7,4,2,3,5,3,0,0.366968504,0.367204724,0.420196850,1,1
-4.671442,7,4,2,3,5,3,0,0.367440945,0.367677165,0.419724409,1,1
-4.676527,7,4,2,3,5,3,0,0.367834646,0.368070866,0.419330709,1,1
-4.681616,7,4,2,3,5,3,0,0.368149606,0.368385827,0.419015748,1,1
-4.686705,7,4,2,3,5,3,0,0.368622047,0.368858268,0.418543307,1,1
-4.691794,7,4,2,3,5,3,0,0.369015748,0.369251969,0.418149606,1,1
-4.696881,7,4,2,3,5,3,0,0.369409449,0.369645669,0.417755906,1,1
-4.701973,7,4,2,3,5,3,0,0.369803150,0.370039370,0.417362205,1,1
-4.707061,7,4,2,3,5,3,0,0.370196850,0.370433071,0.416968504,1,1
-4.712148,7,4,2,3,5,3,0,0.370590551,0.370826772,0.416574803,1,1
-4.717234,7,4,2,3,5,3,0,0.371062992,0.371299213,0.416102362,1,1
-4.722321,7,4,2,3,5,3,0,0.371377953,0.371614173,0.415787402,1,1
-4.727370,7,4,2,3,5,3,0,0.371771654,0.372007874,0.415393701,1,1
-4.732460,7,4,2,3,5,3,0,0.372244094,0.372480315,0.414921260,1,1
-4.737548,7,4,2,3,5,3,0,0.372637795,0.372874016,0.414527559,1,1
-4.742637,7,4,2,3,5,3,0,0.372952756,0.373188976,0.414212598,1,1
-4.747738,7,4,2,3,5,3,0,0.373346457,0.373582677,0.413818898,1,1
-4.752826,7,4,2,3,5,3,0,0.373818898,0.374055118,0.413346457,1,1
-4.757915,7,4,2,3,5,3,0,0.374212598,0.374448819,0.412952756,1,1
-4.763004,7,4,2,3,5,3,0,0.374685039,0.374921260,0.412480315,1,1
-4.768089,7,4,2,3,5,3,0,0.375000000,0.375236220,0.412165354,1,1
-4.773173,7,4,2,3,5,3,0,0.375393701,0.375629921,0.411771654,1,1
-4.778258,7,4,2,3,5,3,0,0.375787402,0.376023622,0.411377953,1,1
-4.783349,7,4,2,3,5,3,0,0.376259843,0.376496063,0.410905512,1,1
-4.788446,7,4,2,3,5,3,0,0.376574803,0.376811024,0.410590551,1,1
-4.793537,7,4,2,3,5,3,0,0.376968504,0.377204724,0.410196850,1,1
-4.798624,7,4,2,3,5,3,0,0.377440945,0.377677165,0.409724409,1,1
-4.803709,7,4,2,3,5,3,0,0.377834646,0.378070866,0.409330709,1,1
-4.808799,7,4,2,3,5,3,0,0.378149606,0.378385827,0.409015748,1,1
-4.813888,7,4,2,3,5,3,0,0.378622047,0.378858268,0.408543307,1,1
-4.818972,7,4,2,3,5,3,0,0.379015748,0.379251969,0.408149606,1,1
-4.824056,7,4,2,3,5,3,0,0.379409449,0.379645669,0.407755906,1,1
-4.829148,7,4,2,3,5,3,0,0.379803150,0.380039370,0.407362205,1,1
-4.834250,7,4,2,3,5,3,0,0.380196850,0.380433071,0.406968504,1,1
-4.839345,7,4,2,3,5,3,0,0.380590551,0.380826772,0.406574803,1,1
-4.844440,7,4,2,3,5,3,0,0.381062992,0.381299213,0.406102362,1,1
-4.849527,7,4,2,3,5,3,0,0.381456693,0.381692913,0.405708661,1,1
-4.854613,7,4,2,3,5,3,0,0.381771654,0.382007874,0.405393701,1,1
-4.859705,7,4,2,3,5,3,0,0.382244094,0.382480315,0.404921260,1,1
-4.864792,7,4,2,3,5,3,0,0.382637795,0.382874016,0.404527559,1,1
-4.869879,7,4,2,3,5,3,0,0.383031496,0.383267717,0.404133858,1,1
-4.874966,7,4,2,3,5,3,0,0.383425197,0.383661417,0.403740157,1,1
-4.880057,7,4,2,3,5,3,0,0.383818898,0.384055118,0.403346457,1,1
-4.885144,7,4,2,3,5,3,0,0.384212598,0.384448819,0.402952756,1,1
-4.890229,7,4,2,3,5,3,0,0.384685039,0.384921260,0.402480315,1,1
-4.895318,7,4,2,3,5,3,0,0.385000000,0.385236220,0.402165354,1,1
-4.900402,7,4,2,3,5,3,0,0.385393701,0.385629921,0.401771654,1,1
-4.905488,7,4,2,3,5,3,0,0.385866142,0.386102362,0.401299213,1,1
-4.910582,7,4,2,3,5,3,0,0.386259843,0.386496063,0.400905512,1,1
-4.915668,7,4,2,3,5,3,0,0.386574803,0.386811024,0.400590551,1,1
-4.920753,7,4,2,3,5,3,0,0.387047244,0.387283465,0.400118110,1,1
-4.925838,7,4,2,3,5,3,0,0.387440945,0.387677165,0.399724409,1,1
-4.930930,7,4,2,3,5,3,0,0.387834646,0.388070866,0.399330709,1,1
-4.936069,7,4,2,3,5,3,0,0.388307087,0.388543307,0.398858268,1,1
-4.941194,7,4,2,3,5,3,0,0.388622047,0.388858268,0.398543307,1,1
-4.946325,7,4,2,3,5,3,0,0.389015748,0.389251969,0.398149606,1,1
-4.951420,7,4,2,3,5,3,0,0.389488189,0.389724409,0.397677165,1,1
-4.956511,7,4,2,3,5,3,0,0.389881890,0.390118110,0.397283465,1,1
-4.961603,7,4,2,3,5,3,0,0.390196850,0.390433071,0.396968504,1,1
-4.966690,7,4,2,3,5,3,0,0.390590551,0.390826772,0.396574803,1,1
-4.971777,7,4,2,3,5,3,0,0.391062992,0.391299213,0.396102362,1,1
-4.976863,7,4,2,3,5,3,0,0.391456693,0.391692913,0.395708661,1,1
-4.981947,7,4,2,3,5,3,0,0.391771654,0.392007874,0.395393701,1,1
-4.987037,7,4,2,3,5,3,0,0.392244094,0.392480315,0.394921260,1,1
-4.992120,7,4,2,3,5,3,0,0.392637795,0.392874016,0.394527559,1,1
-4.997205,7,4,2,3,5,3,0,0.393031496,0.393267717,0.394133858,1,1
-5.002297,7,4,2,3,5,3,0,0.393503937,0.393740157,0.393661417,1,1
-5.007391,7,4,2,3,5,3,0,0.393818898,0.394055118,0.393346457,1,1
-5.012485,7,4,2,3,5,3,0,0.394212598,0.394448819,0.392952756,1,1
-5.017573,7,4,2,3,5,3,0,0.394685039,0.394921260,0.392480315,1,1
-5.022661,7,4,2,3,5,3,0,0.395078740,0.395314961,0.392086614,1,1
-5.027749,7,4,2,3,5,3,0,0.395393701,0.395629921,0.391771654,1,1
-5.032836,7,4,2,3,5,3,0,0.395866142,0.396102362,0.391299213,1,1
-5.037922,7,4,2,3,5,3,0,0.396259843,0.396496063,0.390905512,1,1
-5.043009,7,4,2,3,5,3,0,0.396653543,0.396889764,0.390511811,1,1
-5.048095,7,4,2,3,5,3,0,0.397047244,0.397283465,0.390118110,1,1
-5.053184,7,4,2,3,5,3,0,0.397440945,0.397677165,0.389724409,1,1
-5.058270,7,4,2,3,5,3,0,0.397834646,0.398070866,0.389330709,1,1
-5.063360,7,4,2,3,5,3,0,0.398307087,0.398543307,0.388858268,1,1
-5.068444,7,4,2,3,5,3,0,0.398700787,0.398937008,0.388464567,1,1
-5.073534,7,4,2,3,5,3,0,0.399015748,0.399251969,0.388149606,1,1
-5.078619,7,4,2,3,5,3,0,0.399488189,0.399724409,0.387677165,1,1
-5.083703,7,4,2,3,5,3,0,0.399881890,0.400118110,0.387283465,1,1
-5.088788,7,4,2,3,5,3,0,0.400275591,0.400511811,0.386889764,1,1
-5.093874,7,4,2,3,5,3,0,0.400669291,0.400905512,0.386496063,1,1
-5.098960,7,4,2,3,5,3,0,0.401062992,0.401299213,0.386102362,1,1
-5.104058,7,4,2,3,5,3,0,0.401456693,0.401692913,0.385708661,1,1
-5.109145,7,4,2,3,5,3,0,0.401929134,0.402165354,0.385236220,1,1
-5.114250,7,4,2,3,5,3,0,0.402244094,0.402480315,0.384921260,1,1
-5.119339,7,4,2,3,5,3,0,0.402637795,0.402874016,0.384527559,1,1
-5.124423,7,4,2,3,5,3,0,0.403031496,0.403267717,0.384133858,1,1
-5.129511,7,4,2,3,5,3,0,0.403503937,0.403740157,0.383661417,1,1
-5.134603,7,4,2,3,5,3,0,0.403818898,0.404055118,0.383346457,1,1
-5.139696,7,4,2,3,5,3,0,0.404212598,0.404448819,0.382952756,1,1
-5.144784,7,4,2,3,5,3,0,0.404685039,0.404921260,0.382480315,1,1
-5.149871,7,4,2,3,5,3,0,0.405078740,0.405314961,0.382086614,1,1
-5.154958,7,4,2,3,5,3,0,0.405472441,0.405708661,0.381692913,1,1
-5.160055,7,4,2,3,5,3,0,0.405866142,0.406102362,0.381299213,1,1
-5.165146,7,4,2,3,5,3,0,0.406259843,0.406496063,0.380905512,1,1
-5.170233,7,4,2,3,5,3,0,0.406653543,0.406889764,0.380511811,1,1
-5.175320,7,4,2,3,5,3,0,0.407125984,0.407362205,0.380039370,1,1
-5.180409,7,4,2,3,5,3,0,0.407440945,0.407677165,0.379724409,1,1
-5.185500,7,4,2,3,5,3,0,0.407834646,0.408070866,0.379330709,1,1
-5.190586,7,4,2,3,5,3,0,0.408307087,0.408543307,0.378858268,1,1
-5.195671,7,4,2,3,5,3,0,0.408700787,0.408937008,0.378464567,1,1
-5.200765,7,4,2,3,5,3,0,0.409015748,0.409251969,0.378149606,1,1
-5.205851,7,4,2,3,5,3,0,0.409488189,0.409724409,0.377677165,1,1
-5.210935,7,4,2,3,5,3,0,0.409881890,0.410118110,0.377283465,1,1
-5.216027,7,4,2,3,5,3,0,0.410275591,0.410511811,0.376889764,1,1
-5.221113,7,4,2,3,5,3,0,0.410669291,0.410905512,0.376496063,1,1
-5.226197,7,4,2,3,5,3,0,0.411062992,0.411299213,0.376102362,1,1
-5.231306,7,4,2,3,5,3,0,0.411456693,0.411692913,0.375708661,1,1
-5.236394,7,4,2,3,5,3,0,0.411929134,0.412165354,0.375236220,1,1
-5.241479,7,4,2,3,5,3,0,0.412322835,0.412559055,0.374842520,1,1
-5.246564,7,4,2,3,5,3,0,0.412637795,0.412874016,0.374527559,1,1
-5.251650,7,4,2,3,5,3,0,0.413110236,0.413346457,0.374055118,1,1
-5.256735,7,4,2,3,5,3,0,0.413503937,0.413740157,0.373661417,1,1
-5.261819,7,4,2,3,5,3,0,0.413897638,0.414133858,0.373267717,1,1
-5.266911,7,4,2,3,5,3,0,0.414291339,0.414527559,0.372874016,1,1
-5.272003,7,4,2,3,5,3,0,0.414685039,0.414921260,0.372480315,1,1
-5.277088,7,4,2,3,5,3,0,0.415078740,0.415314961,0.372086614,1,1
-5.282173,7,4,2,3,5,3,0,0.415551181,0.415787402,0.371614173,1,1
-5.287263,7,4,2,3,5,3,0,0.415866142,0.416102362,0.371299213,1,1
-5.292351,7,4,2,3,5,3,0,0.416259843,0.416496063,0.370905512,1,1
-5.297438,7,4,2,3,5,3,0,0.416653543,0.416889764,0.370511811,1,1
-5.302525,7,4,2,3,5,3,0,0.417125984,0.417362205,0.370039370,1,1
-5.307613,7,4,2,3,5,3,0,0.417440945,0.417677165,0.369724409,1,1
-5.312700,7,4,2,3,5,3,0,0.417834646,0.418070866,0.369330709,1,1
-5.317792,7,4,2,3,5,3,0,0.418307087,0.418543307,0.368858268,1,1
-5.322881,7,4,2,3,5,3,0,0.418700787,0.418937008,0.368464567,1,1
-5.327983,7,4,2,3,5,3,0,0.419094488,0.419330709,0.368070866,1,1
-5.333082,7,4,2,3,5,3,0,0.419488189,0.419724409,0.367677165,1,1
-5.338169,7,4,2,3,5,3,0,0.419881890,0.420118110,0.367283465,1,1
-5.343257,7,4,2,3,5,3,0,0.420275591,0.420511811,0.366889764,1,1
-5.348342,7,4,2,3,5,3,0,0.420748031,0.420984252,0.366417323,1,1
-5.353430,7,4,2,3,5,3,0,0.421062992,0.421299213,0.366102362,1,1
-5.358517,7,4,2,3,5,3,0,0.421456693,0.421692913,0.365708661,1,1
-5.363602,7,4,2,3,5,3,0,0.421929134,0.422165354,0.365236220,1,1
-5.368692,7,4,2,3,5,3,0,0.422322835,0.422559055,0.364842520,1,1
-5.373780,7,4,2,3,5,3,0,0.422637795,0.422874016,0.364527559,1,1
-5.378865,7,4,2,3,5,3,0,0.423110236,0.423346457,0.364055118,1,1
-5.383954,7,4,2,3,5,3,0,0.423503937,0.423740157,0.363661417,1,1
-5.389051,7,4,2,3,5,3,0,0.423897638,0.424133858,0.363267717,1,1
-5.394142,7,4,2,3,5,3,0,0.424370079,0.424606299,0.362795276,1,1
-5.399234,7,4,2,3,5,3,0,0.424685039,0.424921260,0.362480315,1,1
-5.404320,7,4,2,3,5,3,0,0.425078740,0.425314961,0.362086614,1,1
-5.409405,7,4,2,3,5,3,0,0.425551181,0.425787402,0.361614173,1,1
-5.414490,7,4,2,3,5,3,0,0.425944882,0.426181102,0.361220472,1,1
-5.419579,7,4,2,3,5,3,0,0.426259843,0.426496063,0.360905512,1,1
-5.424664,7,4,2,3,5,3,0,0.426732283,0.426968504,0.360433071,1,1
-5.429753,7,4,2,3,5,3,0,0.427125984,0.427362205,0.360039370,1,1
-5.434839,7,4,2,3,5,3,0,0.427519685,0.427755906,0.359645669,1,1
-5.439929,7,4,2,3,5,3,0,0.427913386,0.428149606,0.359251969,1,1
-5.445017,7,4,2,3,5,3,0,0.428307087,0.428543307,0.358858268,1,1
-5.450104,7,4,2,3,5,3,0,0.428700787,0.428937008,0.358464567,1,1
-5.455191,7,4,2,3,5,3,0,0.429173228,0.429409449,0.357992126,1,1
-5.460282,7,4,2,3,5,3,0,0.429488189,0.429724409,0.357677165,1,1
-5.465371,7,4,2,3,5,3,0,0.429881890,0.430118110,0.357283465,1,1
-5.470462,7,4,2,3,5,3,0,0.430275591,0.430511811,0.356889764,1,1
-5.475549,7,4,2,3,5,3,0,0.430748031,0.430984252,0.356417323,1,1
-5.480636,7,4,2,3,5,3,0,0.431141732,0.431377953,0.356023622,1,1
-5.485723,7,4,2,3,5,3,0,0.431456693,0.431692913,0.355708661,1,1
-5.490810,7,4,2,3,5,3,0,0.431929134,0.432165354,0.355236220,1,1
-5.495896,7,4,2,3,5,3,0,0.432322835,0.432559055,0.354842520,1,1
-5.500992,7,4,2,3,5,3,0,0.432716535,0.432952756,0.354448819,1,1
-5.506083,7,4,2,3,5,3,0,0.433110236,0.433346457,0.354055118,1,1
-5.511170,7,4,2,3,5,3,0,0.433503937,0.433740157,0.353661417,1,1
-5.516256,7,4,2,3,5,3,0,0.433897638,0.434133858,0.353267717,1,1
-5.521348,7,4,2,3,5,3,0,0.434370079,0.434606299,0.352795276,1,1
-5.526440,7,4,2,3,5,3,0,0.434685039,0.434921260,0.352480315,1,1
-5.531527,7,4,2,3,5,3,0,0.435078740,0.435314961,0.352086614,1,1
-5.536617,7,4,2,3,5,3,0,0.435551181,0.435787402,0.351614173,1,1
-5.541702,7,4,2,3,5,3,0,0.435944882,0.436181102,0.351220472,1,1
-5.546791,7,4,2,3,5,3,0,0.436259843,0.436496063,0.350905512,1,1
-5.551877,7,4,2,3,5,3,0,0.436732283,0.436968504,0.350433071,1,1
-5.556963,7,4,2,3,5,3,0,0.437125984,0.437362205,0.350039370,1,1
-5.562062,7,4,2,3,5,3,0,0.437519685,0.437755906,0.349645669,1,1
-5.567146,7,4,2,3,5,3,0,0.437992126,0.438228346,0.349173228,1,1
-5.572236,7,4,2,3,5,3,0,0.438307087,0.438543307,0.348858268,1,1
-5.577321,7,4,2,3,5,3,0,0.438700787,0.438937008,0.348464567,1,1
-5.582407,7,4,2,3,5,3,0,0.439173228,0.439409449,0.347992126,1,1
-5.587491,7,4,2,3,5,3,0,0.439566929,0.439803150,0.347598425,1,1
-5.592582,7,4,2,3,5,3,0,0.439881890,0.440118110,0.347283465,1,1
-5.597669,7,4,2,3,5,3,0,0.440275591,0.440511811,0.346889764,1,1
-5.602755,7,4,2,3,5,3,0,0.440748031,0.440984252,0.346417323,1,1
-5.607839,7,4,2,3,5,3,0,0.441141732,0.441377953,0.346023622,1,1
-5.612927,7,4,2,3,5,3,0,0.441456693,0.441692913,0.345708661,1,1
-5.618014,7,4,2,3,5,3,0,0.441929134,0.442165354,0.345236220,1,1
-5.623108,7,4,2,3,5,3,0,0.442322835,0.442559055,0.344842520,1,1
-5.628193,7,4,2,3,5,3,0,0.442716535,0.442952756,0.344448819,1,1
-5.633280,7,4,2,3,5,3,0,0.443188976,0.443425197,0.343976378,1,1
-5.638373,7,4,2,3,5,3,0,0.443503937,0.443740157,0.343661417,1,1
-5.643463,7,4,2,3,5,3,0,0.443897638,0.444133858,0.343267717,1,1
-5.648558,7,4,2,3,5,3,0,0.444370079,0.444606299,0.342795276,1,1
-5.653666,7,4,2,3,5,3,0,0.444763780,0.445000000,0.342401575,1,1
-5.658779,7,4,2,3,5,3,0,0.445078740,0.445314961,0.342086614,1,1
-5.663868,7,4,2,3,5,3,0,0.445551181,0.445787402,0.341614173,1,1
-5.668955,7,4,2,3,5,3,0,0.445944882,0.446181102,0.341220472,1,1
-5.674052,7,4,2,3,5,3,0,0.446338583,0.446574803,0.340826772,1,1
-5.679138,7,4,2,3,5,3,0,0.446732283,0.446968504,0.340433071,1,1
-5.684222,7,4,2,3,5,3,0,0.447125984,0.447362205,0.340039370,1,1
-5.689307,7,4,2,3,5,3,0,0.447519685,0.447755906,0.339645669,1,1
-5.694389,7,4,2,3,5,3,0,0.447992126,0.448228346,0.339173228,1,1
-5.699477,7,4,2,3,5,3,0,0.448307087,0.448543307,0.338858268,1,1
-5.704571,7,4,2,3,5,3,0,0.448700787,0.448937008,0.338464567,1,1
-5.709655,7,4,2,3,5,3,0,0.449173228,0.449409449,0.337992126,1,1
-5.714737,7,4,2,3,5,3,0,0.449566929,0.449803150,0.337598425,1,1
-5.719822,7,4,2,3,5,3,0,0.449960630,0.450196850,0.337204724,1,1
-5.724908,7,4,2,3,5,3,0,0.450354331,0.450590551,0.336811024,1,1
-5.729987,7,4,2,3,5,3,0,0.450748031,0.450984252,0.336417323,1,1
-5.735083,7,4,2,3,5,3,0,0.451141732,0.451377953,0.336023622,1,1
-5.740171,7,4,2,3,5,3,0,0.451614173,0.451850394,0.335551181,1,1
-5.745262,7,4,2,3,5,3,0,0.451929134,0.452165354,0.335236220,1,1
-5.750351,7,4,2,3,5,3,0,0.452322835,0.452559055,0.334842520,1,1
-5.755436,7,4,2,3,5,3,0,0.452795276,0.453031496,0.334370079,1,1
-5.760524,7,4,2,3,5,3,0,0.453188976,0.453425197,0.333976378,1,1
-5.765609,7,4,2,3,5,3,0,0.453503937,0.453740157,0.333661417,1,1
-5.770695,7,4,2,3,5,3,0,0.453976378,0.454212598,0.333188976,1,1
-5.775785,7,4,2,3,5,3,0,0.454370079,0.454606299,0.332795276,1,1
-5.780870,7,4,2,3,5,3,0,0.454763780,0.455000000,0.332401575,1,1
-5.785960,7,4,2,3,5,3,0,0.455078740,0.455314961,0.332086614,1,1
-5.791050,7,4,2,3,5,3,0,0.455551181,0.455787402,0.331614173,1,1
-5.796138,7,4,2,3,5,3,0,0.455944882,0.456181102,0.331220472,1,1
-5.801224,7,4,2,3,5,3,0,0.456338583,0.456574803,0.330826772,1,1
-5.806321,7,4,2,3,5,3,0,0.456811024,0.457047244,0.330354331,1,1
-5.811413,7,4,2,3,5,3,0,0.457125984,0.457362205,0.330039370,1,1
-5.816500,7,4,2,3,5,3,0,0.457519685,0.457755906,0.329645669,1,1
-5.821588,7,4,2,3,5,3,0,0.457992126,0.458228346,0.329173228,1,1
-5.826679,7,4,2,3,5,3,0,0.458385827,0.458622047,0.328779528,1,1
-5.831765,7,4,2,3,5,3,0,0.458700787,0.458937008,0.328464567,1,1
-5.836853,7,4,2,3,5,3,0,0.459173228,0.459409449,0.327992126,1,1
-5.841939,7,4,2,3,5,3,0,0.459566929,0.459803150,0.327598425,1,1
-5.847026,7,4,2,3,5,3,0,0.459960630,0.460196850,0.327204724,1,1
-5.852116,7,4,2,3,5,3,0,0.460354331,0.460590551,0.326811024,1,1
-5.857204,7,4,2,3,5,3,0,0.460748031,0.460984252,0.326417323,1,1
-5.862290,7,4,2,3,5,3,0,0.461141732,0.461377953,0.326023622,1,1
-5.867377,7,4,2,3,5,3,0,0.461614173,0.461850394,0.325551181,1,1
-5.872467,7,4,2,3,5,3,0,0.461929134,0.462165354,0.325236220,1,1
-5.877560,7,4,2,3,5,3,0,0.462322835,0.462559055,0.324842520,1,1
-5.882668,7,4,2,3,5,3,0,0.462795276,0.463031496,0.324370079,1,1
-5.887756,7,4,2,3,5,3,0,0.463188976,0.463425197,0.323976378,1,1
-5.892842,7,4,2,3,5,3,0,0.463582677,0.463818898,0.323582677,1,1
-5.897928,7,4,2,3,5,3,0,0.463976378,0.464212598,0.323188976,1,1
-5.903012,7,4,2,3,5,3,0,0.464370079,0.464606299,0.322795276,1,1
-5.908097,7,4,2,3,5,3,0,0.464763780,0.465000000,0.322401575,1,1
-5.913190,7,4,2,3,5,3,0,0.465236220,0.465472441,0.321929134,1,1
-5.918277,7,4,2,3,5,3,0,0.465551181,0.465787402,0.321614173,1,1
-5.923363,7,4,2,3,5,3,0,0.465944882,0.466181102,0.321220472,1,1
-5.928453,7,4,2,3,5,3,0,0.466417323,0.466653543,0.320748031,1,1
-5.933538,7,4,2,3,5,3,0,0.466811024,0.467047244,0.320354331,1,1
-5.938624,7,4,2,3,5,3,0,0.467125984,0.467362205,0.320039370,1,1
-5.943715,7,4,2,3,5,3,0,0.467598425,0.467834646,0.319566929,1,1
-5.948806,7,4,2,3,5,3,0,0.467992126,0.468228346,0.319173228,1,1
-5.953892,7,4,2,3,5,3,0,0.468385827,0.468622047,0.318779528,1,1
-5.958984,7,4,2,3,5,3,0,0.468700787,0.468937008,0.318464567,1,1
-5.964077,7,4,2,3,5,3,0,0.469173228,0.469409449,0.317992126,1,1
-5.969162,7,4,2,3,5,3,0,0.469566929,0.469803150,0.317598425,1,1
-5.974246,7,4,2,3,5,3,0,0.469960630,0.470196850,0.317204724,1,1
-5.979341,7,4,2,3,5,3,0,0.470433071,0.470669291,0.316732283,1,1
-5.984427,7,4,2,3,5,3,0,0.470748031,0.470984252,0.316417323,1,1
-5.989513,7,4,2,3,5,3,0,0.471141732,0.471377953,0.316023622,1,1
-5.994597,7,4,2,3,5,3,0,0.471614173,0.471850394,0.315551181,1,1
-5.999682,7,4,2,3,5,3,0,0.472007874,0.472244094,0.315157480,1,1
-6.004768,7,4,2,3,5,3,0,0.472322835,0.472559055,0.314842520,1,1
-6.009853,7,4,2,3,5,3,0,0.472795276,0.473031496,0.314370079,1,1
-6.014937,7,4,2,3,5,3,0,0.473188976,0.473425197,0.313976378,1,1
-6.020023,7,4,2,3,5,3,0,0.473582677,0.473818898,0.313582677,1,1
-6.025107,7,4,2,3,5,3,0,0.473976378,0.474212598,0.313188976,1,1
-6.030196,7,4,2,3,5,3,0,0.474370079,0.474606299,0.312795276,1,1
-6.035281,7,4,2,3,5,3,0,0.474763780,0.475000000,0.312401575,1,1
-6.040366,7,4,2,3,5,3,0,0.475236220,0.475472441,0.311929134,1,1
-6.045456,7,4,2,3,5,3,0,0.475551181,0.475787402,0.311614173,1,1
-6.050541,7,4,2,3,5,3,0,0.475944882,0.476181102,0.311220472,1,1
-6.055626,7,4,2,3,5,3,0,0.476417323,0.476653543,0.310748031,1,1
-6.060710,7,4,2,3,5,3,0,0.476811024,0.477047244,0.310354331,1,1
-6.065795,7,4,2,3,5,3,0,0.477204724,0.477440945,0.309960630,1,1
-6.070881,7,4,2,3,5,3,0,0.477598425,0.477834646,0.309566929,1,1
-6.075969,7,4,2,3,5,3,0,0.477992126,0.478228346,0.309173228,1,1
-6.081070,7,4,2,3,5,3,0,0.478385827,0.478622047,0.308779528,1,1
-6.086155,7,4,2,3,5,3,0,0.478858268,0.479094488,0.308307087,1,1
-6.091240,7,4,2,3,5,3,0,0.479173228,0.479409449,0.307992126,1,1
-6.096324,7,4,2,3,5,3,0,0.479566929,0.479803150,0.307598425,1,1
-6.101409,7,4,2,3,5,3,0,0.480039370,0.480275591,0.307125984,1,1
-6.106494,7,4,2,3,5,3,0,0.480433071,0.480669291,0.306732283,1,1
-6.111586,7,4,2,3,5,3,0,0.480748031,0.480984252,0.306417323,1,1
-6.116672,7,4,2,3,5,3,0,0.481220472,0.481456693,0.305944882,1,1
-6.121759,7,4,2,3,5,3,0,0.481614173,0.481850394,0.305551181,1,1
-6.126844,7,4,2,3,5,3,0,0.482007874,0.482244094,0.305157480,1,1
-6.131939,7,4,2,3,5,3,0,0.482322835,0.482559055,0.304842520,1,1
-6.137028,7,4,2,3,5,3,0,0.482795276,0.483031496,0.304370079,1,1
-6.142116,7,4,2,3,5,3,0,0.483188976,0.483425197,0.303976378,1,1
-6.147203,7,4,2,3,5,3,0,0.483582677,0.483818898,0.303582677,1,1
-6.152290,7,4,2,3,5,3,0,0.484055118,0.484291339,0.303110236,1,1
-6.157377,7,4,2,3,5,3,0,0.484370079,0.484606299,0.302795276,1,1
-6.162464,7,4,2,3,5,3,0,0.484763780,0.485000000,0.302401575,1,1
-6.167551,7,4,2,3,5,3,0,0.485236220,0.485472441,0.301929134,1,1
-6.172638,7,4,2,3,5,3,0,0.485629921,0.485866142,0.301535433,1,1
-6.177731,7,4,2,3,5,3,0,0.485944882,0.486181102,0.301220472,1,1
-6.182823,7,4,2,3,5,3,0,0.486417323,0.486653543,0.300748031,1,1
-6.187910,7,4,2,3,5,3,0,0.486811024,0.487047244,0.300354331,1,1
-6.193003,7,4,2,3,5,3,0,0.487204724,0.487440945,0.299960630,1,1
-6.198090,7,4,2,3,5,3,0,0.487598425,0.487834646,0.299566929,1,1
-6.203176,7,4,2,3,5,3,0,0.487992126,0.488228346,0.299173228,1,1
-6.208263,7,4,2,3,5,3,0,0.488385827,0.488622047,0.298779528,1,1
-6.213349,7,4,2,3,5,3,0,0.488858268,0.489094488,0.298307087,1,1
-6.218434,7,4,2,3,5,3,0,0.489173228,0.489409449,0.297992126,1,1
-6.223519,7,4,2,3,5,3,0,0.489566929,0.489803150,0.297598425,1,1
-6.228604,7,4,2,3,5,3,0,0.490039370,0.490275591,0.297125984,1,1
-6.233693,7,4,2,3,5,3,0,0.490433071,0.490669291,0.296732283,1,1
-6.238781,7,4,2,3,5,3,0,0.490826772,0.491062992,0.296338583,1,1
-6.243866,7,4,2,3,5,3,0,0.491220472,0.491456693,0.295944882,1,1
-6.248951,7,4,2,3,5,3,0,0.491614173,0.491850394,0.295551181,1,1
-6.254044,7,4,2,3,5,3,0,0.492007874,0.492244094,0.295157480,1,1
-6.259129,7,4,2,3,5,3,0,0.492480315,0.492716535,0.294685039,1,1
-6.264214,7,4,2,3,5,3,0,0.492795276,0.493031496,0.294370079,1,1
-6.269299,7,4,2,3,5,3,0,0.493188976,0.493425197,0.293976378,1,1
-6.274384,7,4,2,3,5,3,0,0.493661417,0.493897638,0.293503937,1,1
-6.279469,7,4,2,3,5,3,0,0.494055118,0.494291339,0.293110236,1,1
-6.284558,7,4,2,3,5,3,0,0.494370079,0.494606299,0.292795276,1,1
-6.289648,7,4,2,3,5,3,0,0.494763780,0.495000000,0.292401575,1,1
-6.294736,7,4,2,3,5,3,0,0.495236220,0.495472441,0.291929134,1,1
-6.299823,7,4,2,3,5,3,0,0.495629921,0.495866142,0.291535433,1,1
-6.304915,7,4,2,3,5,3,0,0.495944882,0.496181102,0.291220472,1,1
-6.310005,7,4,2,3,5,3,0,0.496417323,0.496653543,0.290748031,1,1
-6.315093,7,4,2,3,5,3,0,0.496811024,0.497047244,0.290354331,1,1
-6.320179,7,4,2,3,5,3,0,0.497204724,0.497440945,0.289960630,1,1
-6.325266,7,4,2,3,5,3,0,0.497677165,0.497913386,0.289488189,1,1
-6.330353,7,4,2,3,5,3,0,0.497992126,0.498228346,0.289173228,1,1
-6.335445,7,4,2,3,5,3,0,0.498385827,0.498622047,0.288779528,1,1
-6.340532,7,4,2,3,5,3,0,0.498858268,0.499094488,0.288307087,1,1
-6.345619,7,4,2,3,5,3,0,0.499251969,0.499488189,0.287913386,1,1
-6.350706,7,4,2,3,5,3,0,0.499566929,0.499803150,0.287598425,1,1
-6.355795,7,4,2,3,5,3,0,0.500039370,0.500275591,0.287125984,1,1
-6.360886,7,4,2,3,5,3,0,0.500433071,0.500669291,0.286732283,1,1
-6.365987,7,4,2,3,5,3,0,0.500826772,0.501062992,0.286338583,1,1
-6.371089,7,4,2,3,5,3,0,0.501220472,0.501456693,0.285944882,1,1
-6.376177,7,4,2,3,5,3,0,0.501614173,0.501850394,0.285551181,1,1
-6.381264,7,4,2,3,5,3,0,0.502007874,0.502244094,0.285157480,1,1
-6.386355,7,4,2,3,5,3,0,0.502480315,0.502716535,0.284685039,1,1
-6.391469,7,4,2,3,5,3,0,0.502874016,0.503110236,0.284291339,1,1
-6.396557,7,4,2,3,5,3,0,0.503188976,0.503425197,0.283976378,1,1
-6.401641,7,4,2,3,5,3,0,0.503582677,0.503818898,0.283582677,1,1
-6.406728,7,4,2,3,5,3,0,0.504055118,0.504291339,0.283110236,1,1
-6.411819,7,4,2,3,5,3,0,0.504448819,0.504685039,0.282716535,1,1
-6.416913,7,4,2,3,5,3,0,0.504842520,0.505078740,0.282322835,1,1
-6.422002,7,4,2,3,5,3,0,0.505236220,0.505472441,0.281929134,1,1
-6.427092,7,4,2,3,5,3,0,0.505629921,0.505866142,0.281535433,1,1
-6.432178,7,4,2,3,5,3,0,0.506023622,0.506259843,0.281141732,1,1
-6.437271,7,4,2,3,5,3,0,0.506496063,0.506732283,0.280669291,1,1
-6.442362,7,4,2,3,5,3,0,0.506811024,0.507047244,0.280354331,1,1
-6.447452,7,4,2,3,5,3,0,0.507204724,0.507440945,0.279960630,1,1
-6.452539,7,4,2,3,5,3,0,0.507677165,0.507913386,0.279488189,1,1
-6.457625,7,4,2,3,5,3,0,0.508070866,0.508307087,0.279094488,1,1
-6.462711,7,4,2,3,5,3,0,0.508385827,0.508622047,0.278779528,1,1
-6.467798,7,4,2,3,5,3,0,0.508858268,0.509094488,0.278307087,1,1
-6.472883,7,4,2,3,5,3,0,0.509251969,0.509488189,0.277913386,1,1
-6.477968,7,4,2,3,5,3,0,0.509645669,0.509881890,0.277519685,1,1
-6.483051,7,4,2,3,5,3,0,0.510039370,0.510275591,0.277125984,1,1
-6.488141,7,4,2,3,5,3,0,0.510433071,0.510669291,0.276732283,1,1
-6.493225,7,4,2,3,5,3,0,0.510826772,0.511062992,0.276338583,1,1
-6.498314,7,4,2,3,5,3,0,0.511299213,0.511535433,0.275866142,1,1
-6.503401,7,4,2,3,5,3,0,0.511614173,0.511850394,0.275551181,1,1
-6.508486,7,4,2,3,5,3,0,0.512007874,0.512244094,0.275157480,1,1
-6.513572,7,4,2,3,5,3,0,0.512480315,0.512716535,0.274685039,1,1
-6.518660,7,4,2,3,5,3,0,0.512874016,0.513110236,0.274291339,1,1
-6.523746,7,4,2,3,5,3,0,0.513188976,0.513425197,0.273976378,1,1
-6.528845,7,4,2,3,5,3,0,0.513661417,0.513897638,0.273503937,1,1
-6.533953,7,4,2,3,5,3,0,0.514055118,0.514291339,0.273110236,1,1
-6.539044,7,4,2,3,5,3,0,0.514448819,0.514685039,0.272716535,1,1
-6.544129,7,4,2,3,5,3,0,0.514921260,0.515157480,0.272244094,1,1
-6.549214,7,4,2,3,5,3,0,0.515236220,0.515472441,0.271929134,1,1
-6.554298,7,4,2,3,5,3,0,0.515629921,0.515866142,0.271535433,1,1
-6.559384,7,4,2,3,5,3,0,0.516102362,0.516338583,0.271062992,1,1
-6.564475,7,4,2,3,5,3,0,0.516496063,0.516732283,0.270669291,1,1
-6.569562,7,4,2,3,5,3,0,0.516811024,0.517047244,0.270354331,1,1
-6.574652,7,4,2,3,5,3,0,0.517283465,0.517519685,0.269881890,1,1
-6.579739,7,4,2,3,5,3,0,0.517677165,0.517913386,0.269488189,1,1
-6.584824,7,4,2,3,5,3,0,0.518070866,0.518307087,0.269094488,1,1
-6.589917,7,4,2,3,5,3,0,0.518385827,0.518622047,0.268779528,1,1
-6.595002,7,4,2,3,5,3,0,0.518858268,0.519094488,0.268307087,1,1
-6.600088,7,4,2,3,5,3,0,0.519251969,0.519488189,0.267913386,1,1
-6.605170,7,4,2,3,5,3,0,0.519724409,0.519960630,0.267440945,1,1
-6.610256,7,4,2,3,5,3,0,0.520039370,0.520275591,0.267125984,1,1
-6.615342,7,4,2,3,5,3,0,0.520433071,0.520669291,0.266732283,1,1
-6.620430,7,4,2,3,5,3,0,0.520826772,0.521062992,0.266338583,1,1
-6.625520,7,4,2,3,5,3,0,0.521299213,0.521535433,0.265866142,1,1
-6.630610,7,4,2,3,5,3,0,0.521692913,0.521929134,0.265472441,1,1
-6.635697,7,4,2,3,5,3,0,0.522007874,0.522244094,0.265157480,1,1
-6.640791,7,4,2,3,5,3,0,0.522480315,0.522716535,0.264685039,1,1
-6.645880,7,4,2,3,5,3,0,0.522874016,0.523110236,0.264291339,1,1
-6.650972,7,4,2,3,5,3,0,0.523267717,0.523503937,0.263897638,1,1
-6.656072,7,4,2,3,5,3,0,0.523661417,0.523897638,0.263503937,1,1
-6.661158,7,4,2,3,5,3,0,0.524055118,0.524291339,0.263110236,1,1
-6.666243,7,4,2,3,5,3,0,0.524448819,0.524685039,0.262716535,1,1
-6.671328,7,4,2,3,5,3,0,0.524921260,0.525157480,0.262244094,1,1
-6.676414,7,4,2,3,5,3,0,0.525236220,0.525472441,0.261929134,1,1
-6.681500,7,4,2,3,5,3,0,0.525629921,0.525866142,0.261535433,1,1
-6.686584,7,4,2,3,5,3,0,0.526102362,0.526338583,0.261062992,1,1
-6.691674,7,4,2,3,5,3,0,0.526496063,0.526732283,0.260669291,1,1
-6.696763,7,4,2,3,5,3,0,0.526811024,0.527047244,0.260354331,1,1
-6.701849,7,4,2,3,5,3,0,0.527283465,0.527519685,0.259881890,1,1
-6.706937,7,4,2,3,5,3,0,0.527677165,0.527913386,0.259488189,1,1
-6.712024,7,4,2,3,5,3,0,0.528070866,0.528307087,0.259094488,1,1
-6.717111,7,4,2,3,5,3,0,0.528543307,0.528779528,0.258622047,1,1
-6.722196,7,4,2,3,5,3,0,0.528858268,0.529094488,0.258307087,1,1
-6.727281,7,4,2,3,5,3,0,0.529251969,0.529488189,0.257913386,1,1
-6.732367,7,4,2,3,5,3,0,0.529724409,0.529960630,0.257440945,1,1
-6.737453,7,4,2,3,5,3,0,0.530118110,0.530354331,0.257047244,1,1
-6.742544,7,4,2,3,5,3,0,0.530433071,0.530669291,0.256732283,1,1
-6.747630,7,4,2,3,5,3,0,0.530826772,0.531062992,0.256338583,1,1
-6.752716,7,4,2,3,5,3,0,0.531299213,0.531535433,0.255866142,1,1
-6.757809,7,4,2,3,5,3,0,0.531692913,0.531929134,0.255472441,1,1
-6.762894,7,4,2,3,5,3,0,0.532007874,0.532244094,0.255157480,1,1
-6.767985,7,4,2,3,5,3,0,0.532480315,0.532716535,0.254685039,1,1
-6.773078,7,4,2,3,5,3,0,0.532874016,0.533110236,0.254291339,1,1
-6.778164,7,4,2,3,5,3,0,0.533267717,0.533503937,0.253897638,1,1
-6.783297,7,4,2,3,5,3,0,0.533740157,0.533976378,0.253425197,1,1
-6.788387,7,4,2,3,5,3,0,0.534055118,0.534291339,0.253110236,1,1
-6.793480,7,4,2,3,5,3,0,0.534448819,0.534685039,0.252716535,1,1
-6.798567,7,4,2,3,5,3,0,0.534921260,0.535157480,0.252244094,1,1
-6.803655,7,4,2,3,5,3,0,0.535314961,0.535551181,0.251850394,1,1
-6.808740,7,4,2,3,5,3,0,0.535629921,0.535866142,0.251535433,1,1
-6.813826,7,4,2,3,5,3,0,0.536102362,0.536338583,0.251062992,1,1
-6.818911,7,4,2,3,5,3,0,0.536496063,0.536732283,0.250669291,1,1
-6.824001,7,4,2,3,5,3,0,0.536889764,0.537125984,0.250275591,1,1
-6.829085,7,4,2,3,5,3,0,0.537283465,0.537519685,0.249881890,1,1
-6.834170,7,4,2,3,5,3,0,0.537677165,0.537913386,0.249488189,1,1
-6.839255,7,4,2,3,5,3,0,0.538070866,0.538307087,0.249094488,1,1
-6.844353,7,4,2,3,5,3,0,0.538543307,0.538779528,0.248622047,1,1
-6.849439,7,4,2,3,5,3,0,0.538858268,0.539094488,0.248307087,1,1
-6.854522,7,4,2,3,5,3,0,0.539251969,0.539488189,0.247913386,1,1
-6.859608,7,4,2,3,5,3,0,0.539724409,0.539960630,0.247440945,1,1
-6.864693,7,4,2,3,5,3,0,0.540118110,0.540354331,0.247047244,1,1
-6.869778,7,4,2,3,5,3,0,0.540511811,0.540748031,0.246653543,1,1
-6.874864,7,4,2,3,5,3,0,0.540905512,0.541141732,0.246259843,1,1
-6.879951,7,4,2,3,5,3,0,0.541299213,0.541535433,0.245866142,1,1
-6.885051,7,4,2,3,5,3,0,0.541692913,0.541929134,0.245472441,1,1
-6.890142,7,4,2,3,5,3,0,0.542165354,0.542401575,0.245000000,1,1
-6.895231,7,4,2,3,5,3,0,0.542480315,0.542716535,0.244685039,1,1
-6.900320,7,4,2,3,5,3,0,0.542874016,0.543110236,0.244291339,1,1
-6.905403,7,4,2,3,5,3,0,0.543346457,0.543582677,0.243818898,1,1
-6.910490,7,4,2,3,5,3,0,0.543740157,0.543976378,0.243425197,1,1
-6.915580,7,4,2,3,5,3,0,0.544055118,0.544291339,0.243110236,1,1
-6.920665,7,4,2,3,5,3,0,0.544448819,0.544685039,0.242716535,1,1
-6.925753,7,4,2,3,5,3,0,0.544921260,0.545157480,0.242244094,1,1
-6.930838,7,4,2,3,5,3,0,0.545314961,0.545551181,0.241850394,1,1
-6.935922,7,4,2,3,5,3,0,0.545629921,0.545866142,0.241535433,1,1
-6.941010,7,4,2,3,5,3,0,0.546102362,0.546338583,0.241062992,1,1
-6.946100,7,4,2,3,5,3,0,0.546496063,0.546732283,0.240669291,1,1
-6.951186,7,4,2,3,5,3,0,0.546889764,0.547125984,0.240275591,1,1
-6.956276,7,4,2,3,5,3,0,0.547362205,0.547598425,0.239803150,1,1
-6.961366,7,4,2,3,5,3,0,0.547677165,0.547913386,0.239488189,1,1
-6.966453,7,4,2,3,5,3,0,0.548070866,0.548307087,0.239094488,1,1
-6.971540,7,4,2,3,5,3,0,0.548543307,0.548779528,0.238622047,1,1
-6.976628,7,4,2,3,5,3,0,0.548937008,0.549173228,0.238228346,1,1
-6.981716,7,4,2,3,5,3,0,0.549251969,0.549488189,0.237913386,1,1
-6.986802,7,4,2,3,5,3,0,0.549724409,0.549960630,0.237440945,1,1
-6.991893,7,4,2,3,5,3,0,0.550118110,0.550354331,0.237047244,1,1
-6.996990,7,4,2,3,5,3,0,0.550511811,0.550748031,0.236653543,1,1
-7.002079,7,4,2,3,5,3,0,0.550905512,0.551141732,0.236259843,1,1
-7.007164,7,4,2,3,5,3,0,0.551299213,0.551535433,0.235866142,1,1
-7.012249,7,4,2,3,5,3,0,0.551692913,0.551929134,0.235472441,1,1
-7.017338,7,4,2,3,5,3,0,0.552165354,0.552401575,0.235000000,1,1
-7.022426,7,4,2,3,5,3,0,0.552480315,0.552716535,0.234685039,1,1
-7.027510,7,4,2,3,5,3,0,0.552874016,0.553110236,0.234291339,1,1
-7.032595,7,4,2,3,5,3,0,0.553346457,0.553582677,0.233818898,1,1
-7.037680,7,4,2,3,5,3,0,0.553740157,0.553976378,0.233425197,1,1
-7.042764,7,4,2,3,5,3,0,0.554133858,0.554370079,0.233031496,1,1
-7.047854,7,4,2,3,5,3,0,0.554527559,0.554763780,0.232637795,1,1
-7.052940,7,4,2,3,5,3,0,0.554921260,0.555157480,0.232244094,1,1
-7.058027,7,4,2,3,5,3,0,0.555314961,0.555551181,0.231850394,1,1
-7.063112,7,4,2,3,5,3,0,0.555787402,0.556023622,0.231377953,1,1
-7.068197,7,4,2,3,5,3,0,0.556102362,0.556338583,0.231062992,1,1
-7.073281,7,4,2,3,5,3,0,0.556496063,0.556732283,0.230669291,1,1
-7.078366,7,4,2,3,5,3,0,0.556968504,0.557204724,0.230196850,1,1
-7.083457,7,4,2,3,5,3,0,0.557362205,0.557598425,0.229803150,1,1
-7.088545,7,4,2,3,5,3,0,0.557677165,0.557913386,0.229488189,1,1
-7.093630,7,4,2,3,5,3,0,0.558070866,0.558307087,0.229094488,1,1
-7.098720,7,4,2,3,5,3,0,0.558543307,0.558779528,0.228622047,1,1
-7.103805,7,4,2,3,5,3,0,0.558937008,0.559173228,0.228228346,1,1
-7.108892,7,4,2,3,5,3,0,0.559251969,0.559488189,0.227913386,1,1
-7.113984,7,4,2,3,5,3,0,0.559724409,0.559960630,0.227440945,1,1
-7.119076,7,4,2,3,5,3,0,0.560118110,0.560354331,0.227047244,1,1
-7.124164,7,4,2,3,5,3,0,0.560511811,0.560748031,0.226653543,1,1
-7.129251,7,4,2,3,5,3,0,0.560984252,0.561220472,0.226181102,1,1
-7.134339,7,4,2,3,5,3,0,0.561299213,0.561535433,0.225866142,1,1
-7.139421,7,4,2,3,5,3,0,0.561692913,0.561929134,0.225472441,1,1
-7.144511,7,4,2,3,5,3,0,0.562165354,0.562401575,0.225000000,1,1
-7.149607,7,4,2,3,5,3,0,0.562559055,0.562795276,0.224606299,1,1
-7.154696,7,4,2,3,5,3,0,0.562874016,0.563110236,0.224291339,1,1
-7.159784,7,4,2,3,5,3,0,0.563346457,0.563582677,0.223818898,1,1
-7.164871,7,4,2,3,5,3,0,0.563740157,0.563976378,0.223425197,1,1
-7.169958,7,4,2,3,5,3,0,0.564133858,0.564370079,0.223031496,1,1
-7.175057,7,4,2,3,5,3,0,0.564527559,0.564763780,0.222637795,1,1
-7.180144,7,4,2,3,5,3,0,0.564921260,0.565157480,0.222244094,1,1
-7.185252,7,4,2,3,5,3,0,0.565314961,0.565551181,0.221850394,1,1
-7.190341,7,4,2,3,5,3,0,0.565787402,0.566023622,0.221377953,1,1
-7.195429,7,4,2,3,5,3,0,0.566102362,0.566338583,0.221062992,1,1
-7.200523,7,4,2,3,5,3,0,0.566496063,0.566732283,0.220669291,1,1
-7.205610,7,4,2,3,5,3,0,0.566968504,0.567204724,0.220196850,1,1
-7.210699,7,4,2,3,5,3,0,0.567362205,0.567598425,0.219803150,1,1
-7.215785,7,4,2,3,5,3,0,0.567755906,0.567992126,0.219409449,1,1
-7.220870,7,4,2,3,5,3,0,0.568070866,0.568307087,0.219094488,1,1
-7.225955,7,4,2,3,5,3,0,0.568543307,0.568779528,0.218622047,1,1
-7.231051,7,4,2,3,5,3,0,0.568937008,0.569173228,0.218228346,1,1
-7.236136,7,4,2,3,5,3,0,0.569330709,0.569566929,0.217834646,1,1
-7.241221,7,4,2,3,5,3,0,0.569724409,0.569960630,0.217440945,1,1
-7.246305,7,4,2,3,5,3,0,0.570118110,0.570354331,0.217047244,1,1
-7.251392,7,4,2,3,5,3,0,0.570511811,0.570748031,0.216653543,1,1
-7.256483,7,4,2,3,5,3,0,0.570984252,0.571220472,0.216181102,1,1
-7.261569,7,4,2,3,5,3,0,0.571377953,0.571614173,0.215787402,1,1
-7.266654,7,4,2,3,5,3,0,0.571692913,0.571929134,0.215472441,1,1
-7.271739,7,4,2,3,5,3,0,0.572165354,0.572401575,0.215000000,1,1
-7.276829,7,4,2,3,5,3,0,0.572559055,0.572795276,0.214606299,1,1
-7.281917,7,4,2,3,5,3,0,0.572952756,0.573188976,0.214212598,1,1
-7.287017,7,4,2,3,5,3,0,0.573346457,0.573582677,0.213818898,1,1
-7.292107,7,4,2,3,5,3,0,0.573740157,0.573976378,0.213425197,1,1
-7.297195,7,4,2,3,5,3,0,0.574133858,0.574370079,0.213031496,1,1
-7.302283,7,4,2,3,5,3,0,0.574606299,0.574842520,0.212559055,1,1
-7.307370,7,4,2,3,5,3,0,0.575000000,0.575236220,0.212165354,1,1
-7.312458,7,4,2,3,5,3,0,0.575314961,0.575551181,0.211850394,1,1
-7.317545,7,4,2,3,5,3,0,0.575708661,0.575944882,0.211456693,1,1
-7.322631,7,4,2,3,5,3,0,0.576181102,0.576417323,0.210984252,1,1
-7.327718,7,4,2,3,5,3,0,0.576574803,0.576811024,0.210590551,1,1
-7.332805,7,4,2,3,5,3,0,0.576889764,0.577125984,0.210275591,1,1
-7.337894,7,4,2,3,5,3,0,0.577362205,0.577598425,0.209803150,1,1
-7.342997,7,4,2,3,5,3,0,0.577755906,0.577992126,0.209409449,1,1
-7.348086,7,4,2,3,5,3,0,0.578149606,0.578385827,0.209015748,1,1
-7.353175,7,4,2,3,5,3,0,0.578543307,0.578779528,0.208622047,1,1
-7.358264,7,4,2,3,5,3,0,0.578937008,0.579173228,0.208228346,1,1
-7.363350,7,4,2,3,5,3,0,0.579330709,0.579566929,0.207834646,1,1
-7.368438,7,4,2,3,5,3,0,0.579803150,0.580039370,0.207362205,1,1
-7.373525,7,4,2,3,5,3,0,0.580196850,0.580433071,0.206968504,1,1
-7.378611,7,4,2,3,5,3,0,0.580511811,0.580748031,0.206653543,1,1
-7.383701,7,4,2,3,5,3,0,0.580984252,0.581220472,0.206181102,1,1
-7.388786,7,4,2,3,5,3,0,0.581377953,0.581614173,0.205787402,1,1
-7.393873,7,4,2,3,5,3,0,0.581771654,0.582007874,0.205393701,1,1
-7.398960,7,4,2,3,5,3,0,0.582165354,0.582401575,0.205000000,1,1
-7.404060,7,4,2,3,5,3,0,0.582559055,0.582795276,0.204606299,1,1
-7.409157,7,4,2,3,5,3,0,0.582952756,0.583188976,0.204212598,1,1
-7.414244,7,4,2,3,5,3,0,0.583425197,0.583661417,0.203740157,1,1
-7.419329,7,4,2,3,5,3,0,0.583740157,0.583976378,0.203425197,1,1
-7.424415,7,4,2,3,5,3,0,0.584133858,0.584370079,0.203031496,1,1
-7.429500,7,4,2,3,5,3,0,0.584606299,0.584842520,0.202559055,1,1
-7.434587,7,4,2,3,5,3,0,0.585000000,0.585236220,0.202165354,1,1
-7.439675,7,4,2,3,5,3,0,0.585314961,0.585551181,0.201850394,1,1
-7.444767,7,4,2,3,5,3,0,0.585708661,0.585944882,0.201456693,1,1
-7.449856,7,4,2,3,5,3,0,0.586181102,0.586417323,0.200984252,1,1
-7.454948,7,4,2,3,5,3,0,0.586574803,0.586811024,0.200590551,1,1
-7.460040,7,4,2,3,5,3,0,0.586968504,0.587204724,0.200196850,1,1
-7.465127,7,4,2,3,5,3,0,0.587362205,0.587598425,0.199803150,1,1
-7.470213,7,4,2,3,5,3,0,0.587755906,0.587992126,0.199409449,1,1
-7.475304,7,4,2,3,5,3,0,0.588149606,0.588385827,0.199015748,1,1
-7.480389,7,4,2,3,5,3,0,0.588622047,0.588858268,0.198543307,1,1
-7.485477,7,4,2,3,5,3,0,0.588937008,0.589173228,0.198228346,1,1
-7.490562,7,4,2,3,5,3,0,0.589330709,0.589566929,0.197834646,1,1
-7.495648,7,4,2,3,5,3,0,0.589803150,0.590039370,0.197362205,1,1
-7.500734,7,4,2,3,5,3,0,0.590196850,0.590433071,0.196968504,1,1
-7.505825,7,4,2,3,5,3,0,0.590511811,0.590748031,0.196653543,1,1
-7.510910,7,4,2,3,5,3,0,0.590984252,0.591220472,0.196181102,1,1
-7.515998,7,4,2,3,5,3,0,0.591377953,0.591614173,0.195787402,1,1
-7.521083,7,4,2,3,5,3,0,0.591771654,0.592007874,0.195393701,1,1
-7.526168,7,4,2,3,5,3,0,0.592244094,0.592480315,0.194921260,1,1
-7.531265,7,4,2,3,5,3,0,0.592559055,0.592795276,0.194606299,1,1
-7.536355,7,4,2,3,5,3,0,0.592952756,0.593188976,0.194212598,1,1
-7.541440,7,4,2,3,5,3,0,0.593425197,0.593661417,0.193740157,1,1
-7.546528,7,4,2,3,5,3,0,0.593818898,0.594055118,0.193346457,1,1
-7.551622,7,4,2,3,5,3,0,0.594133858,0.594370079,0.193031496,1,1
-7.556719,7,4,2,3,5,3,0,0.594606299,0.594842520,0.192559055,1,1
-7.561807,7,4,2,3,5,3,0,0.595000000,0.595236220,0.192165354,1,1
-7.566896,7,4,2,3,5,3,0,0.595393701,0.595629921,0.191771654,1,1
-7.571988,7,4,2,3,5,3,0,0.595787402,0.596023622,0.191377953,1,1
-7.577082,7,4,2,3,5,3,0,0.596181102,0.596417323,0.190984252,1,1
-7.582168,7,4,2,3,5,3,0,0.596574803,0.596811024,0.190590551,1,1
-7.587253,7,4,2,3,5,3,0,0.597047244,0.597283465,0.190118110,1,1
-7.592338,7,4,2,3,5,3,0,0.597362205,0.597598425,0.189803150,1,1
-7.597424,7,4,2,3,5,3,0,0.597755906,0.597992126,0.189409449,1,1
-7.602514,7,4,2,3,5,3,0,0.598149606,0.598385827,0.189015748,1,1
-7.607607,7,4,2,3,5,3,0,0.598622047,0.598858268,0.188543307,1,1
-7.612697,7,4,2,3,5,3,0,0.599015748,0.599251969,0.188149606,1,1
-7.617792,7,4,2,3,5,3,0,0.599330709,0.599566929,0.187834646,1,1
-7.622882,7,4,2,3,5,3,0,0.599803150,0.600039370,0.187362205,1,1
-7.627981,7,4,2,3,5,3,0,0.600196850,0.600433071,0.186968504,1,1
-7.633081,7,4,2,3,5,3,0,0.600590551,0.600826772,0.186574803,1,1
-7.638169,7,4,2,3,5,3,0,0.600984252,0.601220472,0.186181102,1,1
-7.643259,7,4,2,3,5,3,0,0.601377953,0.601614173,0.185787402,1,1
-7.648347,7,4,2,3,5,3,0,0.601771654,0.602007874,0.185393701,1,1
-7.653435,7,4,2,3,5,3,0,0.602244094,0.602480315,0.184921260,1,1
-7.658535,7,4,2,3,5,3,0,0.602559055,0.602795276,0.184606299,1,1
-7.663630,7,4,2,3,5,3,0,0.602952756,0.603188976,0.184212598,1,1
-7.668722,7,4,2,3,5,3,0,0.603425197,0.603661417,0.183740157,1,1
-7.673808,7,4,2,3,5,3,0,0.603818898,0.604055118,0.183346457,1,1
-7.678895,7,4,2,3,5,3,0,0.604212598,0.604448819,0.182952756,1,1
-7.683982,7,4,2,3,5,3,0,0.604606299,0.604842520,0.182559055,1,1
-7.689069,7,4,2,3,5,3,0,0.605000000,0.605236220,0.182165354,1,1
-7.694156,7,4,2,3,5,3,0,0.605393701,0.605629921,0.181771654,1,1
-7.699242,7,4,2,3,5,3,0,0.605866142,0.606102362,0.181299213,1,1
-7.704329,7,4,2,3,5,3,0,0.606181102,0.606417323,0.180984252,1,1
-7.709421,7,4,2,3,5,3,0,0.606574803,0.606811024,0.180590551,1,1
-7.714508,7,4,2,3,5,3,0,0.607047244,0.607283465,0.180118110,1,1
-7.719595,7,4,2,3,5,3,0,0.607440945,0.607677165,0.179724409,1,1
-7.724683,7,4,2,3,5,3,0,0.607755906,0.607992126,0.179409449,1,1
-7.729770,7,4,2,3,5,3,0,0.608228346,0.608464567,0.178937008,1,1
-7.734861,7,4,2,3,5,3,0,0.608622047,0.608858268,0.178543307,1,1
-7.739949,7,4,2,3,5,3,0,0.609015748,0.609251969,0.178149606,1,1
-7.745042,7,4,2,3,5,3,0,0.609409449,0.609645669,0.177755906,1,1
-7.750130,7,4,2,3,5,3,0,0.609803150,0.610039370,0.177362205,1,1
-7.755216,7,4,2,3,5,3,0,0.610196850,0.610433071,0.176968504,1,1
-7.760306,7,4,2,3,5,3,0,0.610669291,0.610905512,0.176496063,1,1
-7.765391,7,4,2,3,5,3,0,0.611062992,0.611299213,0.176102362,1,1
-7.770477,7,4,2,3,5,3,0,0.611377953,0.611614173,0.175787402,1,1
-7.775562,7,4,2,3,5,3,0,0.611771654,0.612007874,0.175393701,1,1
-7.780647,7,4,2,3,5,3,0,0.612244094,0.612480315,0.174921260,1,1
-7.785733,7,4,2,3,5,3,0,0.612637795,0.612874016,0.174527559,1,1
-7.790824,7,4,2,3,5,3,0,0.612952756,0.613188976,0.174212598,1,1
-7.795917,7,4,2,3,5,3,0,0.613425197,0.613661417,0.173740157,1,1
-7.801004,7,4,2,3,5,3,0,0.613818898,0.614055118,0.173346457,1,1
-7.806095,7,4,2,3,5,3,0,0.614212598,0.614448819,0.172952756,1,1
-7.811187,7,4,2,3,5,3,0,0.614606299,0.614842520,0.172559055,1,1
-7.816276,7,4,2,3,5,3,0,0.615000000,0.615236220,0.172165354,1,1
-7.821368,7,4,2,3,5,3,0,0.615393701,0.615629921,0.171771654,1,1
-7.826457,7,4,2,3,5,3,0,0.615866142,0.616102362,0.171299213,1,1
-7.831545,7,4,2,3,5,3,0,0.616181102,0.616417323,0.170984252,1,1
-7.836655,7,4,2,3,5,3,0,0.616574803,0.616811024,0.170590551,1,1
-7.841742,7,4,2,3,5,3,0,0.617047244,0.617283465,0.170118110,1,1
-7.846831,7,4,2,3,5,3,0,0.617440945,0.617677165,0.169724409,1,1
-7.851918,7,4,2,3,5,3,0,0.617834646,0.618070866,0.169330709,1,1
-7.857006,7,4,2,3,5,3,0,0.618228346,0.618464567,0.168937008,1,1
-7.862098,7,4,2,3,5,3,0,0.618622047,0.618858268,0.168543307,1,1
-7.867188,7,4,2,3,5,3,0,0.619015748,0.619251969,0.168149606,1,1
-7.872276,7,4,2,3,5,3,0,0.619488189,0.619724409,0.167677165,1,1
-7.877363,7,4,2,3,5,3,0,0.619803150,0.620039370,0.167362205,1,1
-7.882452,7,4,2,3,5,3,0,0.620196850,0.620433071,0.166968504,1,1
-7.887538,7,4,2,3,5,3,0,0.620669291,0.620905512,0.166496063,1,1
-7.892623,7,4,2,3,5,3,0,0.621062992,0.621299213,0.166102362,1,1
-7.897709,7,4,2,3,5,3,0,0.621377953,0.621614173,0.165787402,1,1
-7.902795,7,4,2,3,5,3,0,0.621850394,0.622086614,0.165314961,1,1
-7.907886,7,4,2,3,5,3,0,0.622244094,0.622480315,0.164921260,1,1
-7.912981,7,4,2,3,5,3,0,0.622637795,0.622874016,0.164527559,1,1
-7.918074,7,4,2,3,5,3,0,0.623110236,0.623346457,0.164055118,1,1
-7.923165,7,4,2,3,5,3,0,0.623425197,0.623661417,0.163740157,1,1
-7.928255,7,4,2,3,5,3,0,0.623818898,0.624055118,0.163346457,1,1
-7.933341,7,4,2,3,5,3,0,0.624291339,0.624527559,0.162874016,1,1
-7.938426,7,4,2,3,5,3,0,0.624685039,0.624921260,0.162480315,1,1
-7.943515,7,4,2,3,5,3,0,0.625000000,0.625236220,0.162165354,1,1
-7.948604,7,4,2,3,5,3,0,0.625393701,0.625629921,0.161771654,1,1
-7.953690,7,4,2,3,5,3,0,0.625866142,0.626102362,0.161299213,1,1
-7.958775,7,4,2,3,5,3,0,0.626259843,0.626496063,0.160905512,1,1
-7.963865,7,4,2,3,5,3,0,0.626574803,0.626811024,0.160590551,1,1
-7.968952,7,4,2,3,5,3,0,0.627047244,0.627283465,0.160118110,1,1
-7.974047,7,4,2,3,5,3,0,0.627440945,0.627677165,0.159724409,1,1
-7.979134,7,4,2,3,5,3,0,0.627834646,0.628070866,0.159330709,1,1
-7.984221,7,4,2,3,5,3,0,0.628228346,0.628464567,0.158937008,1,1
-7.989308,7,4,2,3,5,3,0,0.628622047,0.628858268,0.158543307,1,1
-7.994399,7,4,2,3,5,3,0,0.629015748,0.629251969,0.158149606,1,1
-7.999486,7,4,2,3,5,3,0,0.629488189,0.629724409,0.157677165,1,1
-8.004573,7,4,2,3,5,3,0,0.629881890,0.630118110,0.157283465,1,1
-8.009661,7,4,2,3,5,3,0,0.630196850,0.630433071,0.156968504,1,1
-8.014748,7,4,2,3,5,3,0,0.630669291,0.630905512,0.156496063,1,1
-8.019836,7,4,2,3,5,3,0,0.631062992,0.631299213,0.156102362,1,1
-8.024923,7,4,2,3,5,3,0,0.631456693,0.631692913,0.155708661,1,1
-8.030015,7,4,2,3,5,3,0,0.631850394,0.632086614,0.155314961,1,1
-8.035102,7,4,2,3,5,3,0,0.632244094,0.632480315,0.154921260,1,1
-8.040190,7,4,2,3,5,3,0,0.632637795,0.632874016,0.154527559,1,1
-8.045277,7,4,2,3,5,3,0,0.633110236,0.633346457,0.154055118,1,1
-8.050363,7,4,2,3,5,3,0,0.633425197,0.633661417,0.153740157,1,1
-8.055455,7,4,2,3,5,3,0,0.633818898,0.634055118,0.153346457,1,1
-8.060541,7,4,2,3,5,3,0,0.634291339,0.634527559,0.152874016,1,1
-8.065630,7,4,2,3,5,3,0,0.634685039,0.634921260,0.152480315,1,1
-8.070717,7,4,2,3,5,3,0,0.635000000,0.635236220,0.152165354,1,1
-8.075803,7,4,2,3,5,3,0,0.635472441,0.635708661,0.151692913,1,1
-8.080889,7,4,2,3,5,3,0,0.635866142,0.636102362,0.151299213,1,1
-8.085982,7,4,2,3,5,3,0,0.636259843,0.636496063,0.150905512,1,1
-8.091075,7,4,2,3,5,3,0,0.636732283,0.636968504,0.150433071,1,1
-8.096160,7,4,2,3,5,3,0,0.637047244,0.637283465,0.150118110,1,1
-8.101245,7,4,2,3,5,3,0,0.637440945,0.637677165,0.149724409,1,1
-8.106331,7,4,2,3,5,3,0,0.637834646,0.638070866,0.149330709,1,1
-8.111418,7,4,2,3,5,3,0,0.638307087,0.638543307,0.148858268,1,1
-8.116508,7,4,2,3,5,3,0,0.638622047,0.638858268,0.148543307,1,1
-8.121598,7,4,2,3,5,3,0,0.639015748,0.639251969,0.148149606,1,1
-8.126687,7,4,2,3,5,3,0,0.639488189,0.639724409,0.147677165,1,1
-8.131777,7,4,2,3,5,3,0,0.639881890,0.640118110,0.147283465,1,1
-8.136869,7,4,2,3,5,3,0,0.640275591,0.640511811,0.146889764,1,1
-8.141957,7,4,2,3,5,3,0,0.640669291,0.640905512,0.146496063,1,1
-8.147055,7,4,2,3,5,3,0,0.641062992,0.641299213,0.146102362,1,1
-8.152141,7,4,2,3,5,3,0,0.641456693,0.641692913,0.145708661,1,1
-8.157228,7,4,2,3,5,3,0,0.641929134,0.642165354,0.145236220,1,1
-8.162316,7,4,2,3,5,3,0,0.642244094,0.642480315,0.144921260,1,1
-8.167409,7,4,2,3,5,3,0,0.642637795,0.642874016,0.144527559,1,1
-8.172496,7,4,2,3,5,3,0,0.643110236,0.643346457,0.144055118,1,1
-8.177583,7,4,2,3,5,3,0,0.643503937,0.643740157,0.143661417,1,1
-8.182671,7,4,2,3,5,3,0,0.643818898,0.644055118,0.143346457,1,1
-8.187763,7,4,2,3,5,3,0,0.644291339,0.644527559,0.142874016,1,1
-8.192850,7,4,2,3,5,3,0,0.644685039,0.644921260,0.142480315,1,1
-8.197937,7,4,2,3,5,3,0,0.645078740,0.645314961,0.142086614,1,1
-8.203024,7,4,2,3,5,3,0,0.645472441,0.645708661,0.141692913,1,1
-8.208112,7,4,2,3,5,3,0,0.645866142,0.646102362,0.141299213,1,1
-8.213200,7,4,2,3,5,3,0,0.646259843,0.646496063,0.140905512,1,1
-8.218291,7,4,2,3,5,3,0,0.646732283,0.646968504,0.140433071,1,1
-8.223378,7,4,2,3,5,3,0,0.647125984,0.647362205,0.140039370,1,1
-8.228467,7,4,2,3,5,3,0,0.647440945,0.647677165,0.139724409,1,1
-8.233554,7,4,2,3,5,3,0,0.647834646,0.648070866,0.139330709,1,1
-8.238645,7,4,2,3,5,3,0,0.648307087,0.648543307,0.138858268,1,1
-8.243733,7,4,2,3,5,3,0,0.648700787,0.648937008,0.138464567,1,1
-8.248821,7,4,2,3,5,3,0,0.649015748,0.649251969,0.138149606,1,1
-8.253922,7,4,2,3,5,3,0,0.649488189,0.649724409,0.137677165,1,1
-8.259008,7,4,2,3,5,3,0,0.649881890,0.650118110,0.137283465,1,1
-8.264096,7,4,2,3,5,3,0,0.650275591,0.650511811,0.136889764,1,1
-8.269188,7,4,2,3,5,3,0,0.650669291,0.650905512,0.136496063,1,1
-8.274274,7,4,2,3,5,3,0,0.651062992,0.651299213,0.136102362,1,1
-8.279359,7,4,2,3,5,3,0,0.651456693,0.651692913,0.135708661,1,1
-8.284445,7,4,2,3,5,3,0,0.651929134,0.652165354,0.135236220,1,1
-8.289530,7,4,2,3,5,3,0,0.652322835,0.652559055,0.134842520,1,1
-8.294618,7,4,2,3,5,3,0,0.652637795,0.652874016,0.134527559,1,1
-8.299710,7,4,2,3,5,3,0,0.653110236,0.653346457,0.134055118,1,1
-8.304798,7,4,2,3,5,3,0,0.653503937,0.653740157,0.133661417,1,1
-8.309886,7,4,2,3,5,3,0,0.653897638,0.654133858,0.133267717,1,1
-8.314988,7,4,2,3,5,3,0,0.654291339,0.654527559,0.132874016,1,1
-8.320085,7,4,2,3,5,3,0,0.654685039,0.654921260,0.132480315,1,1
-8.325173,7,4,2,3,5,3,0,0.655078740,0.655314961,0.132086614,1,1
-8.330259,7,4,2,3,5,3,0,0.655472441,0.655708661,0.131692913,1,1
-8.335346,7,4,2,3,5,3,0,0.655944882,0.656181102,0.131220472,1,1
-8.340433,7,4,2,3,5,3,0,0.656259843,0.656496063,0.130905512,1,1
-8.345521,7,4,2,3,5,3,0,0.656653543,0.656889764,0.130511811,1,1
-8.350609,7,4,2,3,5,3,0,0.657125984,0.657362205,0.130039370,1,1
-8.355696,7,4,2,3,5,3,0,0.657519685,0.657755906,0.129645669,1,1
-8.360784,7,4,2,3,5,3,0,0.657834646,0.658070866,0.129330709,1,1
-8.365874,7,4,2,3,5,3,0,0.658307087,0.658543307,0.128858268,1,1
-8.370970,7,4,2,3,5,3,0,0.658700787,0.658937008,0.128464567,1,1
-8.376070,7,4,2,3,5,3,0,0.659094488,0.659330709,0.128070866,1,1
-8.381162,7,4,2,3,5,3,0,0.659488189,0.659724409,0.127677165,1,1
-8.386248,7,4,2,3,5,3,0,0.659881890,0.660118110,0.127283465,1,1
-8.391335,7,4,2,3,5,3,0,0.660275591,0.660511811,0.126889764,1,1
-8.396421,7,4,2,3,5,3,0,0.660748031,0.660984252,0.126417323,1,1
-8.401506,7,4,2,3,5,3,0,0.661141732,0.661377953,0.126023622,1,1
-8.406592,7,4,2,3,5,3,0,0.661456693,0.661692913,0.125708661,1,1
-8.411677,7,4,2,3,5,3,0,0.661929134,0.662165354,0.125236220,1,1
-8.416762,7,4,2,3,5,3,0,0.662322835,0.662559055,0.124842520,1,1
-8.421851,7,4,2,3,5,3,0,0.662716535,0.662952756,0.124448819,1,1
-8.426937,7,4,2,3,5,3,0,0.663110236,0.663346457,0.124055118,1,1
-8.432021,7,4,2,3,5,3,0,0.663503937,0.663740157,0.123661417,1,1
-8.437106,7,4,2,3,5,3,0,0.663897638,0.664133858,0.123267717,1,1
-8.442196,7,4,2,3,5,3,0,0.664370079,0.664606299,0.122795276,1,1
-8.447292,7,4,2,3,5,3,0,0.664685039,0.664921260,0.122480315,1,1
-8.452381,7,4,2,3,5,3,0,0.665078740,0.665314961,0.122086614,1,1
-8.457473,7,4,2,3,5,3,0,0.665551181,0.665787402,0.121614173,1,1
-8.462562,7,4,2,3,5,3,0,0.665944882,0.666181102,0.121220472,1,1
-8.467650,7,4,2,3,5,3,0,0.666259843,0.666496063,0.120905512,1,1
-8.472741,7,4,2,3,5,3,0,0.666653543,0.666889764,0.120511811,1,1
-8.477829,7,4,2,3,5,3,0,0.667125984,0.667362205,0.120039370,1,1
-8.482916,7,4,2,3,5,3,0,0.667519685,0.667755906,0.119645669,1,1
-8.488030,7,4,2,3,5,3,0,0.667913386,0.668149606,0.119251969,1,1
-8.493118,7,4,2,3,5,3,0,0.668307087,0.668543307,0.118858268,1,1
-8.498206,7,4,2,3,5,3,0,0.668700787,0.668937008,0.118464567,1,1
-8.503294,7,4,2,3,5,3,0,0.669094488,0.669330709,0.118070866,1,1
-8.508384,7,4,2,3,5,3,0,0.669566929,0.669803150,0.117598425,1,1
-8.513472,7,4,2,3,5,3,0,0.669881890,0.670118110,0.117283465,1,1
-8.518558,7,4,2,3,5,3,0,0.670275591,0.670511811,0.116889764,1,1
-8.523648,7,4,2,3,5,3,0,0.670748031,0.670984252,0.116417323,1,1
-8.528733,7,4,2,3,5,3,0,0.671141732,0.671377953,0.116023622,1,1
-8.533819,7,4,2,3,5,3,0,0.671456693,0.671692913,0.115708661,1,1
-8.538905,7,4,2,3,5,3,0,0.671929134,0.672165354,0.115236220,1,1
-8.543996,7,4,2,3,5,3,0,0.672322835,0.672559055,0.114842520,1,1
-8.549085,7,4,2,3,5,3,0,0.672716535,0.672952756,0.114448819,1,1
-8.554179,7,4,2,3,5,3,0,0.673188976,0.673425197,0.113976378,1,1
-8.559268,7,4,2,3,5,3,0,0.673503937,0.673740157,0.113661417,1,1
-8.564357,7,4,2,3,5,3,0,0.673897638,0.674133858,0.113267717,1,1
-8.569479,7,4,2,3,5,3,0,0.674370079,0.674606299,0.112795276,1,1
-8.574627,7,4,2,3,5,3,0,0.674763780,0.675000000,0.112401575,1,1
-8.579766,7,4,2,3,5,3,0,0.675157480,0.675393701,0.112007874,1,1
-8.584907,7,4,2,3,5,3,0,0.675472441,0.675708661,0.111692913,1,1
-8.590047,7,4,2,3,5,3,0,0.675944882,0.676181102,0.111220472,1,1
-8.595187,7,4,2,3,5,3,0,0.676338583,0.676574803,0.110826772,1,1
-8.600327,7,4,2,3,5,3,0,0.676732283,0.676968504,0.110433071,1,1
-8.605463,7,4,2,3,5,3,0,0.677204724,0.677440945,0.109960630,1,1
-8.610629,7,4,2,3,5,3,0,0.677598425,0.677834646,0.109566929,1,1
-8.615770,7,4,2,3,5,3,0,0.677913386,0.678149606,0.109251969,1,1
-8.620912,7,4,2,3,5,3,0,0.678385827,0.678622047,0.108779528,1,1
-8.626057,7,4,2,3,5,3,0,0.678779528,0.679015748,0.108385827,1,1
-8.631191,7,4,2,3,5,3,0,0.679173228,0.679409449,0.107992126,1,1
-8.636291,7,4,2,3,5,3,0,0.679645669,0.679881890,0.107519685,1,1
-8.641395,7,4,2,3,5,3,0,0.679960630,0.680196850,0.107204724,1,1
-8.646489,7,4,2,3,5,3,0,0.680354331,0.680590551,0.106811024,1,1
-8.651581,7,4,2,3,5,3,0,0.680826772,0.681062992,0.106338583,1,1
-8.656674,7,4,2,3,5,3,0,0.681220472,0.681456693,0.105944882,1,1
-8.661765,7,4,2,3,5,3,0,0.681535433,0.681771654,0.105629921,1,1
-8.666854,7,4,2,3,5,3,0,0.682007874,0.682244094,0.105157480,1,1
-8.671942,7,4,2,3,5,3,0,0.682401575,0.682637795,0.104763780,1,1
-8.677035,7,4,2,3,5,3,0,0.682795276,0.683031496,0.104370079,1,1
-8.682123,7,4,2,3,5,3,0,0.683188976,0.683425197,0.103976378,1,1
-8.687210,7,4,2,3,5,3,0,0.683582677,0.683818898,0.103582677,1,1
-8.692297,7,4,2,3,5,3,0,0.683976378,0.684212598,0.103188976,1,1
-8.697385,7,4,2,3,5,3,0,0.684448819,0.684685039,0.102716535,1,1
-8.702473,7,4,2,3,5,3,0,0.684763780,0.685000000,0.102401575,1,1
-8.707576,7,4,2,3,5,3,0,0.685157480,0.685393701,0.102007874,1,1
-8.712664,7,4,2,3,5,3,0,0.685629921,0.685866142,0.101535433,1,1
-8.717752,7,4,2,3,5,3,0,0.686023622,0.686259843,0.101141732,1,1
-8.722839,7,4,2,3,5,3,0,0.686417323,0.686653543,0.100748031,1,1
-8.727931,7,4,2,3,5,3,0,0.686811024,0.687047244,0.100354331,1,1
-8.733018,7,4,2,3,5,3,0,0.687204724,0.687440945,0.099960630,1,1
-8.738105,7,4,2,3,5,3,0,0.687598425,0.687834646,0.099566929,1,1
-8.743191,7,4,2,3,5,3,0,0.688070866,0.688307087,0.099094488,1,1
-8.748278,7,4,2,3,5,3,0,0.688385827,0.688622047,0.098779528,1,1
-8.753365,7,4,2,3,5,3,0,0.688779528,0.689015748,0.098385827,1,1
-8.758453,7,4,2,3,5,3,0,0.689251969,0.689488189,0.097913386,1,1
-8.763535,7,4,2,3,5,3,0,0.689645669,0.689881890,0.097519685,1,1
-8.768619,7,4,2,3,5,3,0,0.689960630,0.690196850,0.097204724,1,1
-8.773713,7,4,2,3,5,3,0,0.690433071,0.690669291,0.096732283,1,1
-8.778806,7,4,2,3,5,3,0,0.690826772,0.691062992,0.096338583,1,1
-8.783893,7,4,2,3,5,3,0,0.691220472,0.691456693,0.095944882,1,1
-8.788982,7,4,2,3,5,3,0,0.691614173,0.691850394,0.095551181,1,1
-8.794084,7,4,2,3,5,3,0,0.692007874,0.692244094,0.095157480,1,1
-8.799171,7,4,2,3,5,3,0,0.692401575,0.692637795,0.094763780,1,1
-8.804259,7,4,2,3,5,3,0,0.692795276,0.693031496,0.094370079,1,1
-8.809346,7,4,2,3,5,3,0,0.693267717,0.693503937,0.093897638,1,1
-8.814434,7,4,2,3,5,3,0,0.693582677,0.693818898,0.093582677,1,1
-8.819522,7,4,2,3,5,3,0,0.693976378,0.694212598,0.093188976,1,1
-8.824608,7,4,2,3,5,3,0,0.694448819,0.694685039,0.092716535,1,1
-8.829701,7,4,2,3,5,3,0,0.694842520,0.695078740,0.092322835,1,1
-8.834794,7,4,2,3,5,3,0,0.695157480,0.695393701,0.092007874,1,1
-8.839881,7,4,2,3,5,3,0,0.695629921,0.695866142,0.091535433,1,1
-8.844968,7,4,2,3,5,3,0,0.696023622,0.696259843,0.091141732,1,1
-8.850055,7,4,2,3,5,3,0,0.696417323,0.696653543,0.090748031,1,1
-8.855142,7,4,2,3,5,3,0,0.696811024,0.697047244,0.090354331,1,1
-8.860228,7,4,2,3,5,3,0,0.697204724,0.697440945,0.089960630,1,1
-8.865322,7,4,2,3,5,3,0,0.697598425,0.697834646,0.089566929,1,1
-8.870410,7,4,2,3,5,3,0,0.698070866,0.698307087,0.089094488,1,1
-8.875498,7,4,2,3,5,3,0,0.698385827,0.698622047,0.088779528,1,1
-8.880597,7,4,2,3,5,3,0,0.698779528,0.699015748,0.088385827,1,1
-8.885684,7,4,2,3,5,3,0,0.699251969,0.699488189,0.087913386,1,1
-8.890769,7,4,2,3,5,3,0,0.699645669,0.699881890,0.087519685,1,1
-8.895860,7,4,2,3,5,3,0,0.700039370,0.700275591,0.087125984,1,1
-8.900960,7,4,2,3,5,3,0,0.700433071,0.700669291,0.086732283,1,1
-8.906039,7,4,2,3,5,3,0,0.700826772,0.701062992,0.086338583,1,1
-8.911135,7,4,2,3,5,3,0,0.701220472,0.701456693,0.085944882,1,1
-8.916224,7,4,2,3,5,3,0,0.701692913,0.701929134,0.085472441,1,1
-8.921310,7,4,2,3,5,3,0,0.702007874,0.702244094,0.085157480,1,1
-8.926394,7,4,2,3,5,3,0,0.702401575,0.702637795,0.084763780,1,1
-8.931481,7,4,2,3,5,3,0,0.702874016,0.703110236,0.084291339,1,1
-8.936564,7,4,2,3,5,3,0,0.703267717,0.703503937,0.083897638,1,1
-8.941650,7,4,2,3,5,3,0,0.703582677,0.703818898,0.083582677,1,1
-8.946734,7,4,2,3,5,3,0,0.704055118,0.704291339,0.083110236,1,1
-8.951815,7,4,2,3,5,3,0,0.704448819,0.704685039,0.082716535,1,1
-8.956897,7,4,2,3,5,3,0,0.704842520,0.705078740,0.082322835,1,1
-8.961984,7,4,2,3,5,3,0,0.705236220,0.705472441,0.081929134,1,1
-8.967078,7,4,2,3,5,3,0,0.705629921,0.705866142,0.081535433,1,1
-8.972164,7,4,2,3,5,3,0,0.706023622,0.706259843,0.081141732,1,1
-8.977249,7,4,2,3,5,3,0,0.706496063,0.706732283,0.080669291,1,1
-8.982338,7,4,2,3,5,3,0,0.706811024,0.707047244,0.080354331,1,1
-8.987428,7,4,2,3,5,3,0,0.707204724,0.707440945,0.079960630,1,1
-8.992514,7,4,2,3,5,3,0,0.707677165,0.707913386,0.079488189,1,1
-8.997600,7,4,2,3,5,3,0,0.708070866,0.708307087,0.079094488,1,1
-9.002689,7,4,2,3,5,3,0,0.708385827,0.708622047,0.078779528,1,1
-9.007790,7,4,2,3,5,3,0,0.708779528,0.709015748,0.078385827,1,1
-9.012875,7,4,2,3,5,3,0,0.709251969,0.709488189,0.077913386,1,1
-9.017961,7,4,2,3,5,3,0,0.709645669,0.709881890,0.077519685,1,1
-9.023047,7,4,2,3,5,3,0,0.710118110,0.710354331,0.077047244,1,1
-9.028132,7,4,2,3,5,3,0,0.710433071,0.710669291,0.076732283,1,1
-9.033227,7,4,2,3,5,3,0,0.710826772,0.711062992,0.076338583,1,1
-9.038312,7,4,2,3,5,3,0,0.711220472,0.711456693,0.075944882,1,1
-9.043398,7,4,2,3,5,3,0,0.711692913,0.711929134,0.075472441,1,1
-9.048484,7,4,2,3,5,3,0,0.712007874,0.712244094,0.075157480,1,1
-9.053569,7,4,2,3,5,3,0,0.712401575,0.712637795,0.074763780,1,1
-9.058653,7,4,2,3,5,3,0,0.712874016,0.713110236,0.074291339,1,1
-9.063740,7,4,2,3,5,3,0,0.713267717,0.713503937,0.073897638,1,1
-9.068831,7,4,2,3,5,3,0,0.713582677,0.713818898,0.073582677,1,1
-9.073916,7,4,2,3,5,3,0,0.714055118,0.714291339,0.073110236,1,1
-9.079001,7,4,2,3,5,3,0,0.714448819,0.714685039,0.072716535,1,1
-9.084091,7,4,2,3,5,3,0,0.714842520,0.715078740,0.072322835,1,1
-9.089177,7,4,2,3,5,3,0,0.715236220,0.715472441,0.071929134,1,1
-9.094277,7,4,2,3,5,3,0,0.715629921,0.715866142,0.071535433,1,1
-9.099365,7,4,2,3,5,3,0,0.716023622,0.716259843,0.071141732,1,1
-9.104451,7,4,2,3,5,3,0,0.716496063,0.716732283,0.070669291,1,1
-9.109542,7,4,2,3,5,3,0,0.716889764,0.717125984,0.070275591,1,1
-9.114633,7,4,2,3,5,3,0,0.717204724,0.717440945,0.069960630,1,1
-9.119717,7,4,2,3,5,3,0,0.717677165,0.717913386,0.069488189,1,1
-9.124801,7,4,2,3,5,3,0,0.718070866,0.718307087,0.069094488,1,1
-9.129886,7,4,2,3,5,3,0,0.718464567,0.718700787,0.068700787,1,1
-9.134978,7,4,2,3,5,3,0,0.718858268,0.719094488,0.068307087,1,1
-9.140091,7,4,2,3,5,3,0,0.719251969,0.719488189,0.067913386,1,1
-9.145180,7,4,2,3,5,3,0,0.719645669,0.719881890,0.067519685,1,1
-9.150268,7,4,2,3,5,3,0,0.720118110,0.720354331,0.067047244,1,1
-9.155354,7,4,2,3,5,3,0,0.720433071,0.720669291,0.066732283,1,1
-9.160450,7,4,2,3,5,3,0,0.720826772,0.721062992,0.066338583,1,1
-9.165538,7,4,2,3,5,3,0,0.721299213,0.721535433,0.065866142,1,1
-9.170626,7,4,2,3,5,3,0,0.721692913,0.721929134,0.065472441,1,1
-9.175713,7,4,2,3,5,3,0,0.722007874,0.722244094,0.065157480,1,1
-9.180799,7,4,2,3,5,3,0,0.722480315,0.722716535,0.064685039,1,1
-9.185890,7,4,2,3,5,3,0,0.722874016,0.723110236,0.064291339,1,1
-9.190981,7,4,2,3,5,3,0,0.723267717,0.723503937,0.063897638,1,1
-9.196081,7,4,2,3,5,3,0,0.723740157,0.723976378,0.063425197,1,1
-9.201172,7,4,2,3,5,3,0,0.724055118,0.724291339,0.063110236,1,1
-9.206263,7,4,2,3,5,3,0,0.724448819,0.724685039,0.062716535,1,1
-9.211354,7,4,2,3,5,3,0,0.724921260,0.725157480,0.062244094,1,1
-9.216444,7,4,2,3,5,3,0,0.725314961,0.725551181,0.061850394,1,1
-9.221532,7,4,2,3,5,3,0,0.725629921,0.725866142,0.061535433,1,1
-9.226624,7,4,2,3,5,3,0,0.726102362,0.726338583,0.061062992,1,1
-9.231712,7,4,2,3,5,3,0,0.726496063,0.726732283,0.060669291,1,1
-9.236802,7,4,2,3,5,3,0,0.726889764,0.727125984,0.060275591,1,1
-9.241891,7,4,2,3,5,3,0,0.727204724,0.727440945,0.059960630,1,1
-9.246987,7,4,2,3,5,3,0,0.727677165,0.727913386,0.059488189,1,1
-9.252083,7,4,2,3,5,3,0,0.728070866,0.728307087,0.059094488,1,1
-9.257171,7,4,2,3,5,3,0,0.728464567,0.728700787,0.058700787,1,1
-9.262258,7,4,2,3,5,3,0,0.728858268,0.729094488,0.058307087,1,1
-9.267344,7,4,2,3,5,3,0,0.729251969,0.729488189,0.057913386,1,1
-9.272432,7,4,2,3,5,3,0,0.729645669,0.729881890,0.057519685,1,1
-9.277523,7,4,2,3,5,3,0,0.730118110,0.730354331,0.057047244,1,1
-9.282609,7,4,2,3,5,3,0,0.730511811,0.730748031,0.056653543,1,1
-9.287700,7,4,2,3,5,3,0,0.730826772,0.731062992,0.056338583,1,1
-9.292792,7,4,2,3,5,3,0,0.731299213,0.731535433,0.055866142,1,1
-9.297879,7,4,2,3,5,3,0,0.731692913,0.731929134,0.055472441,1,1
-9.302968,7,4,2,3,5,3,0,0.732086614,0.732322835,0.055078740,1,1
-9.308065,7,4,2,3,5,3,0,0.732480315,0.732716535,0.054685039,1,1
-9.313150,7,4,2,3,5,3,0,0.732874016,0.733110236,0.054291339,1,1
-9.318235,7,4,2,3,5,3,0,0.733267717,0.733503937,0.053897638,1,1
-9.323320,7,4,2,3,5,3,0,0.733740157,0.733976378,0.053425197,1,1
-9.328404,7,4,2,3,5,3,0,0.734133858,0.734370079,0.053031496,1,1
-9.333489,7,4,2,3,5,3,0,0.734448819,0.734685039,0.052716535,1,1
-9.338578,7,4,2,3,5,3,0,0.734842520,0.735078740,0.052322835,1,1
-9.343664,7,4,2,3,5,3,0,0.735314961,0.735551181,0.051850394,1,1
-9.348749,7,4,2,3,5,3,0,0.735708661,0.735944882,0.051456693,1,1
-9.353844,7,4,2,3,5,3,0,0.736023622,0.736259843,0.051141732,1,1
-9.358932,7,4,2,3,5,3,0,0.736496063,0.736732283,0.050669291,1,1
-9.364035,7,4,2,3,5,3,0,0.736889764,0.737125984,0.050275591,1,1
-9.369122,7,4,2,3,5,3,0,0.737283465,0.737519685,0.049881890,1,1
-9.374212,7,4,2,3,5,3,0,0.737677165,0.737913386,0.049488189,1,1
-9.379297,7,4,2,3,5,3,0,0.738070866,0.738307087,0.049094488,1,1
-9.384384,7,4,2,3,5,3,0,0.738464567,0.738700787,0.048700787,1,1
-9.389473,7,4,2,3,5,3,0,0.738937008,0.739173228,0.048228346,1,1
-9.394558,7,4,2,3,5,3,0,0.739330709,0.739566929,0.047834646,1,1
-9.399643,7,4,2,3,5,3,0,0.739645669,0.739881890,0.047519685,1,1
-9.404728,7,4,2,3,5,3,0,0.740118110,0.740354331,0.047047244,1,1
-9.409812,7,4,2,3,5,3,0,0.740511811,0.740748031,0.046653543,1,1
-9.414896,7,4,2,3,5,3,0,0.740905512,0.741141732,0.046259843,1,1
-9.419991,7,4,2,3,5,3,0,0.741299213,0.741535433,0.045866142,1,1
-9.425079,7,4,2,3,5,3,0,0.741692913,0.741929134,0.045472441,1,1
-9.430164,7,4,2,3,5,3,0,0.742086614,0.742322835,0.045078740,1,1
-9.435246,7,4,2,3,5,3,0,0.742559055,0.742795276,0.044606299,1,1
-9.440334,7,4,2,3,5,3,0,0.742874016,0.743110236,0.044291339,1,1
-9.445424,7,4,2,3,5,3,0,0.743267717,0.743503937,0.043897638,1,1
-9.450512,7,4,2,3,5,3,0,0.743740157,0.743976378,0.043425197,1,1
-9.455599,7,4,2,3,5,3,0,0.744133858,0.744370079,0.043031496,1,1
-9.460687,7,4,2,3,5,3,0,0.744448819,0.744685039,0.042716535,1,1
-9.465774,7,4,2,3,5,3,0,0.744921260,0.745157480,0.042244094,1,1
-9.470861,7,4,2,3,5,3,0,0.745314961,0.745551181,0.041850394,1,1
-9.475948,7,4,2,3,5,3,0,0.745708661,0.745944882,0.041456693,1,1
-9.481040,7,4,2,3,5,3,0,0.746181102,0.746417323,0.040984252,1,1
-9.486136,7,4,2,3,5,3,0,0.746496063,0.746732283,0.040669291,1,1
-9.491227,7,4,2,3,5,3,0,0.746889764,0.747125984,0.040275591,1,1
-9.496314,7,4,2,3,5,3,0,0.747283465,0.747519685,0.039881890,1,1
-9.501401,7,4,2,3,5,3,0,0.747755906,0.747992126,0.039409449,1,1
-9.506489,7,4,2,3,5,3,0,0.748070866,0.748307087,0.039094488,1,1
-9.511576,7,4,2,3,5,3,0,0.748464567,0.748700787,0.038700787,1,1
-9.516662,7,4,2,3,5,3,0,0.748937008,0.749173228,0.038228346,1,1
-9.521748,7,4,2,3,5,3,0,0.749330709,0.749566929,0.037834646,1,1
-9.526836,7,4,2,3,5,3,0,0.749645669,0.749881890,0.037519685,1,1
-9.531924,7,4,2,3,5,3,0,0.750118110,0.750354331,0.037047244,1,1
-9.537024,7,4,2,3,5,3,0,0.750511811,0.750748031,0.036653543,1,1
-9.542115,7,4,2,3,5,3,0,0.750905512,0.751141732,0.036259843,1,1
-9.547202,7,4,2,3,5,3,0,0.751299213,0.751535433,0.035866142,1,1
-9.552293,7,4,2,3,5,3,0,0.751692913,0.751929134,0.035472441,1,1
-9.557379,7,4,2,3,5,3,0,0.752086614,0.752322835,0.035078740,1,1
-9.562467,7,4,2,3,5,3,0,0.752559055,0.752795276,0.034606299,1,1
-9.567553,7,4,2,3,5,3,0,0.752952756,0.753188976,0.034212598,1,1
-9.572640,7,4,2,3,5,3,0,0.753267717,0.753503937,0.033897638,1,1
-9.577727,7,4,2,3,5,3,0,0.753740157,0.753976378,0.033425197,1,1
-9.582814,7,4,2,3,5,3,0,0.754133858,0.754370079,0.033031496,1,1
-9.587900,7,4,2,3,5,3,0,0.754527559,0.754763780,0.032637795,1,1
-9.592990,7,4,2,3,5,3,0,0.754921260,0.755157480,0.032244094,1,1
-9.598081,7,4,2,3,5,3,0,0.755314961,0.755551181,0.031850394,1,1
-9.603168,7,4,2,3,5,3,0,0.755708661,0.755944882,0.031456693,1,1
-9.608253,7,4,2,3,5,3,0,0.756181102,0.756417323,0.030984252,1,1
-9.613345,7,4,2,3,5,3,0,0.756496063,0.756732283,0.030669291,1,1
-9.618429,7,4,2,3,5,3,0,0.756889764,0.757125984,0.030275591,1,1
-9.623514,7,4,2,3,5,3,0,0.757362205,0.757598425,0.029803150,1,1
-9.628601,7,4,2,3,5,3,0,0.757755906,0.757992126,0.029409449,1,1
-9.633688,7,4,2,3,5,3,0,0.758070866,0.758307087,0.029094488,1,1
-9.638773,7,4,2,3,5,3,0,0.758464567,0.758700787,0.028700787,1,1
-9.643868,7,4,2,3,5,3,0,0.758937008,0.759173228,0.028228346,1,1
-9.648956,7,4,2,3,5,3,0,0.759330709,0.759566929,0.027834646,1,1
-9.654052,7,4,2,3,5,3,0,0.759803150,0.760039370,0.027362205,1,1
-9.659138,7,4,2,3,5,3,0,0.760118110,0.760354331,0.027047244,1,1
-9.664225,7,4,2,3,5,3,0,0.760511811,0.760748031,0.026653543,1,1
-9.669313,7,4,2,3,5,3,0,0.760905512,0.761141732,0.026259843,1,1
-9.674399,7,4,2,3,5,3,0,0.761377953,0.761614173,0.025787402,1,1
-9.679491,7,4,2,3,5,3,0,0.761692913,0.761929134,0.025472441,1,1
-9.684578,7,4,2,3,5,3,0,0.762086614,0.762322835,0.025078740,1,1
-9.689664,7,4,2,3,5,3,0,0.762559055,0.762795276,0.024606299,1,1
-9.694759,7,4,2,3,5,3,0,0.762952756,0.763188976,0.024212598,1,1
-9.699846,7,4,2,3,5,3,0,0.763267717,0.763503937,0.023897638,1,1
-9.704931,7,4,2,3,5,3,0,0.763740157,0.763976378,0.023425197,1,1
-9.710015,7,4,2,3,5,3,0,0.764133858,0.764370079,0.023031496,1,1
-9.715100,7,4,2,3,5,3,0,0.764527559,0.764763780,0.022637795,1,1
-9.720184,7,4,2,3,5,3,0,0.764921260,0.765157480,0.022244094,1,1
-9.725269,7,4,2,3,5,3,0,0.765314961,0.765551181,0.021850394,1,1
-9.730373,7,4,2,3,5,3,0,0.765708661,0.765944882,0.021456693,1,1
-9.735495,7,4,2,3,5,3,0,0.766181102,0.766417323,0.020984252,1,1
-9.740617,7,4,2,3,5,3,0,0.766574803,0.766811024,0.020590551,1,1
-9.745742,7,4,2,3,5,3,0,0.766889764,0.767125984,0.020275591,1,1
-9.750840,7,4,2,3,5,3,0,0.767362205,0.767598425,0.019803150,1,1
-9.755937,7,4,2,3,5,3,0,0.767755906,0.767992126,0.019409449,1,1
-9.761033,7,4,2,3,5,3,0,0.768149606,0.768385827,0.019015748,1,1
-9.766126,7,4,2,3,5,3,0,0.768622047,0.768858268,0.018543307,1,1
-9.771243,7,4,2,3,5,3,0,0.768937008,0.769173228,0.018228346,1,1
-9.776379,7,4,2,3,5,3,0,0.769330709,0.769566929,0.017834646,1,1
-9.781522,7,4,2,3,5,3,0,0.769803150,0.770039370,0.017362205,1,1
-9.786632,7,4,2,3,5,3,0,0.770196850,0.770433071,0.016968504,1,1
-9.791766,7,4,2,3,5,3,0,0.770590551,0.770826772,0.016574803,1,1
-9.796861,7,4,2,3,5,3,0,0.770984252,0.771220472,0.016181102,1,1
-9.801948,7,4,2,3,5,3,0,0.771377953,0.771614173,0.015787402,1,1
-9.807059,7,4,2,3,5,3,0,0.771771654,0.772007874,0.015393701,1,1
-9.812146,7,4,2,3,5,3,0,0.772244094,0.772480315,0.014921260,1,1
-9.817232,7,4,2,3,5,3,0,0.772559055,0.772795276,0.014606299,1,1
-9.822317,7,4,2,3,5,3,0,0.772952756,0.773188976,0.014212598,1,1
-9.827407,7,4,2,3,5,3,0,0.773425197,0.773661417,0.013740157,1,1
-9.832503,7,4,2,3,5,3,0,0.773818898,0.774055118,0.013346457,1,1
-9.837586,7,4,2,3,5,3,0,0.774133858,0.774370079,0.013031496,1,1
-9.842673,7,4,2,3,5,3,0,0.774527559,0.774763780,0.012637795,1,1
-9.847765,7,4,2,3,5,3,0,0.775000000,0.775236220,0.012165354,1,1
-9.852853,7,4,2,3,5,3,0,0.775393701,0.775629921,0.011771654,1,1
-9.857940,7,4,2,3,5,3,0,0.775708661,0.775944882,0.011456693,1,1
-9.863027,7,4,2,3,5,3,0,0.776181102,0.776417323,0.010984252,1,1
-9.868113,7,4,2,3,5,3,0,0.776574803,0.776811024,0.010590551,1,1
-9.873204,7,4,2,3,5,3,0,0.776968504,0.777204724,0.010196850,1,1
-9.878294,7,4,2,3,5,3,0,0.777440945,0.777677165,0.009724409,1,1
-9.883382,7,4,2,3,5,3,0,0.777755906,0.777992126,0.009409449,1,1
-9.888471,7,4,2,3,5,3,0,0.778149606,0.778385827,0.009015748,1,1
-9.893559,7,4,2,3,5,3,0,0.778622047,0.778858268,0.008543307,1,1
-9.898649,7,4,2,3,5,3,0,0.779015748,0.779251969,0.008149606,1,1
-9.903741,7,4,2,3,5,3,0,0.779330709,0.779566929,0.007834646,1,1
-9.908828,7,4,2,3,5,3,0,0.779803150,0.780039370,0.007362205,1,1
-9.913917,7,4,2,3,5,3,0,0.780196850,0.780433071,0.006968504,1,1
-9.919002,7,4,2,3,5,3,0,0.780590551,0.780826772,0.006574803,1,1
-9.924088,7,4,2,3,5,3,0,0.780984252,0.781220472,0.006181102,1,1
-9.929173,7,4,2,3,5,3,0,0.781377953,0.781614173,0.005787402,1,1
-9.934257,7,4,2,3,5,3,0,0.781771654,0.782007874,0.005393701,1,1
-9.939348,7,4,2,3,5,3,0,0.782244094,0.782480315,0.004921260,1,1
-9.944435,7,4,2,3,5,3,0,0.782559055,0.782795276,0.004606299,1,1
-9.949531,7,4,2,3,5,3,0,0.782952756,0.783188976,0.004212598,1,1
-9.954619,7,4,2,3,5,3,0,0.783425197,0.783661417,0.003740157,1,1
-9.959707,7,4,2,3,5,3,0,0.783818898,0.784055118,0.003346457,1,1
-9.964794,7,4,2,3,5,3,0,0.784212598,0.784448819,0.002952756,1,1
-9.969881,7,4,2,3,5,3,0,0.784606299,0.784842520,0.002559055,1,1
-9.974974,7,4,2,3,5,3,0,0.785000000,0.785236220,0.002165354,1,1
-9.980072,7,4,2,3,5,3,0,0.785393701,0.785629921,0.001771654,1,1
-9.985159,7,4,2,3,5,3,0,0.785866142,0.786102362,0.001299213,1,1
-9.990246,7,4,2,3,5,3,0,0.786181102,0.786417323,0.000984252,1,1
-9.995333,7,4,2,3,5,3,0,0.786574803,0.786811024,0.000590551,1,1
-10.000425,7,4,2,3,5,3,0,0.786968504,0.787204724,0.000196850,1,1
-10.005517,8,4,2,3,5,3,1,0.787395013,0.787401575,0.000000000,0,0
-10.010606,8,4,2,3,5,3,1,0.787401575,0.787401575,0.000000000,0,0
-10.015694,8,4,2,3,5,3,1,0.787401575,0.787401575,0.000000000,0,0
-10.020781,8,4,2,3,5,3,1,0.787401575,0.787401575,0.000000000,0,0
-10.025868,8,4,2,3,5,3,1,0.787401575,0.787401575,0.000000000,0,0
-10.030955,8,4,2,3,5,3,1,0.787401575,0.787401575,0.000000000,0,0
-10.036052,8,4,2,3,5,3,1,0.787401575,0.787401575,0.000000000,0,0
-10.041139,8,4,2,3,5,3,1,0.787401575,0.787401575,0.000000000,0,0
-10.046225,8,4,2,3,5,3,1,0.787401575,0.787401575,0.000000000,0,0
-10.051313,8,4,2,3,5,3,1,0.787401575,0.787401575,0.000000000,0,0
-10.056401,8,4,2,3,5,3,1,0.787401575,0.787401575,0.000000000,0,0
-10.061485,8,4,2,3,5,3,1,0.787401575,0.787401575,0.000000000,0,0
-10.066569,8,4,2,3,5,3,1,0.787401575,0.787401575,0.000000000,0,0
-10.071655,8,4,2,3,5,3,1,0.787401575,0.787401575,0.000000000,0,0
-10.076741,8,4,2,3,5,3,1,0.787401575,0.787401575,0.000000000,0,0
-10.081828,8,4,2,3,5,3,1,0.787401575,0.787401575,0.000000000,0,0
-10.086914,8,4,2,3,5,3,1,0.787401575,0.787401575,0.000000000,0,0
-10.092003,8,4,2,3,5,3,1,0.787401575,0.787401575,0.000000000,0,0
-10.097090,8,4,2,3,5,3,1,0.787401575,0.787401575,0.000000000,0,0
-10.102181,8,4,2,3,5,3,1,0.787401575,0.787401575,0.000000000,0,0
-10.107267,8,4,2,3,5,3,1,0.787401575,0.787401575,0.000000000,0,0
-10.112357,8,4,2,3,5,3,1,0.787401575,0.787401575,0.000000000,0,0
-10.117442,8,4,2,3,5,3,1,0.787401575,0.787401575,0.000000000,0,0
-10.122528,8,4,2,3,5,3,1,0.787401575,0.787401575,0.000000000,0,0
-10.127616,8,4,2,3,5,3,1,0.787401575,0.787401575,0.000000000,0,0
-10.132709,8,4,2,3,5,3,1,0.787401575,0.787401575,0.000000000,0,0
-10.137796,8,4,2,3,5,3,1,0.787401575,0.787401575,0.000000000,0,0
-10.142884,8,4,2,3,5,3,1,0.787401575,0.787401575,0.000000000,0,0
-10.147978,8,4,2,3,5,3,1,0.787401575,0.787401575,0.000000000,0,0
-10.153078,8,4,2,3,5,3,1,0.787401575,0.787401575,0.000000000,0,0
-10.158167,8,4,2,3,5,3,1,0.787401575,0.787401575,0.000000000,0,0
-10.163253,8,4,2,3,5,3,1,0.787401575,0.787401575,0.000000000,0,0
-10.168339,8,4,2,3,5,3,1,0.787401575,0.787401575,0.000000000,0,0
-10.173426,8,4,2,3,5,3,1,0.787401575,0.787401575,0.000000000,0,0
-10.178511,8,4,2,3,5,3,1,0.787401575,0.787401575,0.000000000,0,0
-10.183599,8,4,2,3,5,3,1,0.787401575,0.787401575,0.000000000,0,0
-10.188686,8,4,2,3,5,3,1,0.787401575,0.787401575,0.000000000,0,0
-10.193773,8,4,2,3,5,3,1,0.787401575,0.787401575,0.000000000,0,0
-10.198863,8,4,2,3,5,3,1,0.787401575,0.787401575,0.000000000,0,0
-10.203953,8,4,2,3,5,3,1,0.787401575,0.787401575,0.000000000,0,0
-10.209047,8,4,2,3,5,3,1,0.787401575,0.787401575,0.000000000,0,0
-10.214133,8,4,2,3,5,3,1,0.787401575,0.787401575,0.000000000,0,0
-10.219219,8,4,2,3,5,3,1,0.787401575,0.787401575,0.000000000,0,0
-10.224305,8,4,2,3,5,3,1,0.787401575,0.787401575,0.000000000,0,0
-10.229391,8,4,2,3,5,3,1,0.787401575,0.787401575,0.000000000,0,0
-10.234477,8,4,2,3,5,3,1,0.787401575,0.787401575,0.000000000,0,0
-10.239563,8,4,2,3,5,3,1,0.787401575,0.787401575,0.000000000,0,0
-10.244649,8,4,2,3,5,3,1,0.787401575,0.787401575,0.000000000,0,0
-10.249737,8,4,2,3,5,3,1,0.787401575,0.787401575,0.000000000,0,0
-10.254829,8,4,2,3,5,3,1,0.787401575,0.787401575,0.000000000,0,0
-10.259914,8,4,2,3,5,3,1,0.787401575,0.787401575,0.000000000,0,0
-10.265005,8,4,2,3,5,3,1,0.787401575,0.787401575,0.000000000,0,0
-10.270089,8,4,2,3,5,3,1,0.787401575,0.787401575,0.000000000,0,0
-10.275174,8,4,2,3,5,3,1,0.787401575,0.787401575,0.000000000,0,0
-10.280258,8,4,2,3,5,3,1,0.787401575,0.787401575,0.000000000,0,0
-10.285343,8,4,2,3,5,3,1,0.787401575,0.787401575,0.000000000,0,0
-10.290427,8,4,2,3,5,3,1,0.787401575,0.787401575,0.000000000,0,0
-10.295518,8,4,2,3,5,3,1,0.787401575,0.787401575,0.000000000,0,0
-10.300605,8,4,2,3,5,3,1,0.787401575,0.787401575,0.000000000,0,0
-10.305697,8,4,2,3,5,3,1,0.787401575,0.787401575,0.000000000,0,0
-10.310783,8,4,2,3,5,3,1,0.787401575,0.787401575,0.000000000,0,0
-10.315869,8,4,2,3,5,3,1,0.787401575,0.787401575,0.000000000,0,0
-10.320960,8,4,2,3,5,3,1,0.787401575,0.787401575,0.000000000,0,0
-10.326059,8,4,2,3,5,3,1,0.787401575,0.787401575,0.000000000,0,0
-10.331148,8,4,2,3,5,3,1,0.787401575,0.787401575,0.000000000,0,0
-10.336236,8,4,2,3,5,3,1,0.787401575,0.787401575,0.000000000,0,0
-10.341322,8,4,2,3,5,3,1,0.787401575,0.787401575,0.000000000,0,0
-10.346410,8,4,2,3,5,3,1,0.787401575,0.787401575,0.000000000,0,0
-10.351497,8,4,2,3,5,3,1,0.787401575,0.787401575,0.000000000,0,0
-10.356589,8,4,2,3,5,3,1,0.787401575,0.787401575,0.000000000,0,0
-10.361676,8,4,2,3,5,3,1,0.787401575,0.787401575,0.000000000,0,0
-10.366763,8,4,2,3,5,3,1,0.787401575,0.787401575,0.000000000,0,0
-10.371850,8,4,2,3,5,3,1,0.787401575,0.787401575,0.000000000,0,0
-10.376945,8,4,2,3,5,3,1,0.787401575,0.787401575,0.000000000,0,0
-10.382034,8,4,2,3,5,3,1,0.787401575,0.787401575,0.000000000,0,0
-10.387120,8,4,2,3,5,3,1,0.787401575,0.787401575,0.000000000,0,0
-10.392212,8,4,2,3,5,3,1,0.787401575,0.787401575,0.000000000,0,0
-10.397298,8,4,2,3,5,3,1,0.787401575,0.787401575,0.000000000,0,0
-10.402384,8,4,2,3,5,3,1,0.787401575,0.787401575,0.000000000,0,0
-10.407473,8,4,2,3,5,3,1,0.787401575,0.787401575,0.000000000,0,0
-10.412566,8,4,2,3,5,3,1,0.787401575,0.787401575,0.000000000,0,0
-10.417656,8,4,2,3,5,3,1,0.787401575,0.787401575,0.000000000,0,0
-10.422745,8,4,2,3,5,3,1,0.787401575,0.787401575,0.000000000,0,0
-10.427833,8,4,2,3,5,3,1,0.787401575,0.787401575,0.000000000,0,0
-10.432923,8,4,2,3,5,3,1,0.787401575,0.787401575,0.000000000,0,0
-10.438029,8,4,2,3,5,3,1,0.787401575,0.787401575,0.000000000,0,0
-10.443118,8,4,2,3,5,3,1,0.787401575,0.787401575,0.000000000,0,0
-10.448204,8,4,2,3,5,3,1,0.787401575,0.787401575,0.000000000,0,0
-10.453289,8,4,2,3,5,3,1,0.787401575,0.787401575,0.000000000,0,0
-10.458379,8,4,2,3,5,3,1,0.787401575,0.787401575,0.000000000,0,0
-10.463465,8,4,2,3,5,3,1,0.787401575,0.787401575,0.000000000,0,0
-10.468548,8,4,2,3,5,3,1,0.787401575,0.787401575,0.000000000,0,0
-10.473632,8,4,2,3,5,3,1,0.787401575,0.787401575,0.000000000,0,0
-10.478716,8,4,2,3,5,3,1,0.787401575,0.787401575,0.000000000,0,0
-10.483801,8,4,2,3,5,3,1,0.787401575,0.787401575,0.000000000,0,0
-10.488886,8,4,2,3,5,3,1,0.787401575,0.787401575,0.000000000,0,0
-10.493983,8,4,2,3,5,3,1,0.787401575,0.787401575,0.000000000,0,0
-10.499068,8,4,2,3,5,3,1,0.787401575,0.787401575,0.000000000,0,0
-10.504152,8,4,2,3,5,3,1,0.787401575,0.787401575,0.000000000,0,0
-10.509251,8,4,2,3,5,3,1,0.787401575,0.787401575,0.000000000,0,0
-10.514342,8,4,2,3,5,3,1,0.787401575,0.787401575,0.000000000,0,0
-10.519472,8,4,2,3,5,3,1,0.787401575,0.787401575,0.000000000,0,0
-10.524568,8,4,2,3,5,3,1,0.787401575,0.787401575,0.000000000,0,0
-10.529666,8,4,2,3,5,3,1,0.787401575,0.787401575,0.000000000,0,0
-10.534754,8,4,2,3,5,3,1,0.787401575,0.787401575,0.000000000,0,0
-10.539840,8,4,2,3,5,3,1,0.787401575,0.787401575,0.000000000,0,0
-10.544931,8,4,2,3,5,3,1,0.787401575,0.787401575,0.000000000,0,0
-10.550024,8,4,2,3,5,3,1,0.787401575,0.787401575,0.000000000,0,0
-10.555111,8,4,2,3,5,3,1,0.787401575,0.787401575,0.000000000,0,0
-10.560209,8,4,2,3,5,3,1,0.787401575,0.787401575,0.000000000,0,0
-10.565295,8,4,2,3,5,3,1,0.787401575,0.787401575,0.000000000,0,0
-10.570381,8,4,2,3,5,3,1,0.787401575,0.787401575,0.000000000,0,0
-10.575476,8,4,2,3,5,3,1,0.787401575,0.787401575,0.000000000,0,0
-10.580567,8,4,2,3,5,3,1,0.787401575,0.787401575,0.000000000,0,0
-10.585654,8,4,2,3,5,3,1,0.787401575,0.787401575,0.000000000,0,0
-10.590746,8,4,2,3,5,3,1,0.787401575,0.787401575,0.000000000,0,0
-10.595830,8,4,2,3,5,3,1,0.787401575,0.787401575,0.000000000,0,0
-10.600916,8,4,2,3,5,3,1,0.787401575,0.787401575,0.000000000,0,0
-10.605992,8,4,2,3,5,3,1,0.787401575,0.787401575,0.000000000,0,0
-10.611093,8,4,2,3,5,3,1,0.787401575,0.787401575,0.000000000,0,0
-10.616179,8,4,2,3,5,3,1,0.787401575,0.787401575,0.000000000,0,0
-10.621265,8,4,2,3,5,3,1,0.787401575,0.787401575,0.000000000,0,0
-10.626348,8,4,2,3,5,3,1,0.787401575,0.787401575,0.000000000,0,0
-10.631430,8,4,2,3,5,3,1,0.787401575,0.787401575,0.000000000,0,0
-10.636513,8,4,2,3,5,3,1,0.787401575,0.787401575,0.000000000,0,0
-10.641598,8,4,2,3,5,3,1,0.787401575,0.787401575,0.000000000,0,0
-10.646688,8,4,2,3,5,3,1,0.787401575,0.787401575,0.000000000,0,0
-10.651776,8,4,2,3,5,3,1,0.787401575,0.787401575,0.000000000,0,0
-10.656858,8,4,2,3,5,3,1,0.787401575,0.787401575,0.000000000,0,0
-10.661959,8,4,2,3,5,3,1,0.787401575,0.787401575,0.000000000,0,0
-10.667053,8,4,2,3,5,3,1,0.787401575,0.787401575,0.000000000,0,0
-10.672137,8,4,2,3,5,3,1,0.787401575,0.787401575,0.000000000,0,0
-10.677222,8,4,2,3,5,3,1,0.787401575,0.787401575,0.000000000,0,0
-10.682306,8,4,2,3,5,3,1,0.787401575,0.787401575,0.000000000,0,0
-10.687392,8,4,2,3,5,3,1,0.787401575,0.787401575,0.000000000,0,0
-10.692477,8,4,2,3,5,3,1,0.787401575,0.787401575,0.000000000,0,0
-10.697562,8,4,2,3,5,3,1,0.787401575,0.787401575,0.000000000,0,0
-10.702645,8,4,2,3,5,3,1,0.787401575,0.787401575,0.000000000,0,0
-10.707731,8,4,2,3,5,3,1,0.787401575,0.787401575,0.000000000,0,0
-10.712821,8,4,2,3,5,3,1,0.787401575,0.787401575,0.000000000,0,0
-10.717910,8,4,2,3,5,3,1,0.787401575,0.787401575,0.000000000,0,0
-10.723001,8,4,2,3,5,3,1,0.787401575,0.787401575,0.000000000,0,0
-10.728086,8,4,2,3,5,3,1,0.787401575,0.787401575,0.000000000,0,0
-10.733172,8,4,2,3,5,3,1,0.787401575,0.787401575,0.000000000,0,0
-10.738256,8,4,2,3,5,3,1,0.787401575,0.787401575,0.000000000,0,0
-10.743343,8,4,2,3,5,3,1,0.787401575,0.787401575,0.000000000,0,0
-10.748440,8,4,2,3,5,3,1,0.787401575,0.787401575,0.000000000,0,0
-10.753529,8,4,2,3,5,3,1,0.787401575,0.787401575,0.000000000,0,0
-10.758618,2,1,1,3,0,3,1,0.787401575,0.787401575,0.000000000,0,0
-=== END T02-019 FULL RAW TRACE CSV ===
-
-T02-019 shell-harness=PASS
-UTC finish: 2026-09-08T02:26:29Z
+T03-020 shell-harness=PASS
+UTC finish: 2026-09-08T03:18:22Z
 ```
 
 ## Standard error
@@ -6532,8 +4573,8 @@ No containers need to be restarted.
 No user sessions are running outdated binaries.
 
 No VM guests are running outdated hypervisor (qemu) binaries on this host.
-Cloning into '/home/runner/work/_temp/linuxcnc-t02-task'...
-Updating files:   0% (1/9526)Updating files:   1% (96/9526)Updating files:   2% (191/9526)Updating files:   3% (286/9526)Updating files:   4% (382/9526)Updating files:   5% (477/9526)Updating files:   6% (572/9526)Updating files:   7% (667/9526)Updating files:   8% (763/9526)Updating files:   9% (858/9526)Updating files:  10% (953/9526)Updating files:  11% (1048/9526)Updating files:  12% (1144/9526)Updating files:  13% (1239/9526)Updating files:  14% (1334/9526)Updating files:  15% (1429/9526)Updating files:  16% (1525/9526)Updating files:  17% (1620/9526)Updating files:  18% (1715/9526)Updating files:  19% (1810/9526)Updating files:  20% (1906/9526)Updating files:  21% (2001/9526)Updating files:  22% (2096/9526)Updating files:  23% (2191/9526)Updating files:  23% (2215/9526)Updating files:  24% (2287/9526)Updating files:  25% (2382/9526)Updating files:  26% (2477/9526)Updating files:  27% (2573/9526)Updating files:  28% (2668/9526)Updating files:  29% (2763/9526)Updating files:  30% (2858/9526)Updating files:  31% (2954/9526)Updating files:  32% (3049/9526)Updating files:  33% (3144/9526)Updating files:  34% (3239/9526)Updating files:  35% (3335/9526)Updating files:  36% (3430/9526)Updating files:  37% (3525/9526)Updating files:  38% (3620/9526)Updating files:  39% (3716/9526)Updating files:  40% (3811/9526)Updating files:  41% (3906/9526)Updating files:  42% (4001/9526)Updating files:  43% (4097/9526)Updating files:  44% (4192/9526)Updating files:  45% (4287/9526)Updating files:  46% (4382/9526)Updating files:  47% (4478/9526)Updating files:  48% (4573/9526)Updating files:  49% (4668/9526)Updating files:  50% (4763/9526)Updating files:  51% (4859/9526)Updating files:  52% (4954/9526)Updating files:  53% (5049/9526)Updating files:  54% (5145/9526)Updating files:  55% (5240/9526)Updating files:  56% (5335/9526)Updating files:  57% (5430/9526)Updating files:  58% (5526/9526)Updating files:  59% (5621/9526)Updating files:  60% (5716/9526)Updating files:  61% (5811/9526)Updating files:  62% (5907/9526)Updating files:  63% (6002/9526)Updating files:  64% (6097/9526)Updating files:  65% (6192/9526)Updating files:  66% (6288/9526)Updating files:  67% (6383/9526)Updating files:  68% (6478/9526)Updating files:  69% (6573/9526)Updating files:  70% (6669/9526)Updating files:  71% (6764/9526)Updating files:  72% (6859/9526)Updating files:  73% (6954/9526)Updating files:  74% (7050/9526)Updating files:  75% (7145/9526)Updating files:  76% (7240/9526)Updating files:  77% (7336/9526)Updating files:  78% (7431/9526)Updating files:  79% (7526/9526)Updating files:  80% (7621/9526)Updating files:  81% (7717/9526)Updating files:  82% (7812/9526)Updating files:  83% (7907/9526)Updating files:  84% (8002/9526)Updating files:  85% (8098/9526)Updating files:  86% (8193/9526)Updating files:  87% (8288/9526)Updating files:  88% (8383/9526)Updating files:  89% (8479/9526)Updating files:  90% (8574/9526)Updating files:  91% (8669/9526)Updating files:  92% (8764/9526)Updating files:  93% (8860/9526)Updating files:  94% (8955/9526)Updating files:  95% (9050/9526)Updating files:  96% (9145/9526)Updating files:  97% (9241/9526)Updating files:  98% (9336/9526)Updating files:  99% (9431/9526)Updating files: 100% (9526/9526)Updating files: 100% (9526/9526), done.
+Cloning into '/home/runner/work/_temp/linuxcnc-t03-nml'...
+Updating files:   0% (1/9526)Updating files:   1% (96/9526)Updating files:   2% (191/9526)Updating files:   3% (286/9526)Updating files:   4% (382/9526)Updating files:   5% (477/9526)Updating files:   6% (572/9526)Updating files:   7% (667/9526)Updating files:   8% (763/9526)Updating files:   9% (858/9526)Updating files:  10% (953/9526)Updating files:  11% (1048/9526)Updating files:  12% (1144/9526)Updating files:  13% (1239/9526)Updating files:  14% (1334/9526)Updating files:  15% (1429/9526)Updating files:  16% (1525/9526)Updating files:  17% (1620/9526)Updating files:  18% (1715/9526)Updating files:  19% (1810/9526)Updating files:  20% (1906/9526)Updating files:  21% (2001/9526)Updating files:  22% (2096/9526)Updating files:  23% (2191/9526)Updating files:  23% (2234/9526)Updating files:  24% (2287/9526)Updating files:  25% (2382/9526)Updating files:  26% (2477/9526)Updating files:  27% (2573/9526)Updating files:  28% (2668/9526)Updating files:  29% (2763/9526)Updating files:  30% (2858/9526)Updating files:  31% (2954/9526)Updating files:  32% (3049/9526)Updating files:  33% (3144/9526)Updating files:  34% (3239/9526)Updating files:  35% (3335/9526)Updating files:  36% (3430/9526)Updating files:  37% (3525/9526)Updating files:  38% (3620/9526)Updating files:  39% (3716/9526)Updating files:  40% (3811/9526)Updating files:  41% (3906/9526)Updating files:  42% (4001/9526)Updating files:  43% (4097/9526)Updating files:  44% (4192/9526)Updating files:  45% (4287/9526)Updating files:  46% (4382/9526)Updating files:  47% (4478/9526)Updating files:  48% (4573/9526)Updating files:  49% (4668/9526)Updating files:  50% (4763/9526)Updating files:  51% (4859/9526)Updating files:  52% (4954/9526)Updating files:  53% (5049/9526)Updating files:  54% (5145/9526)Updating files:  55% (5240/9526)Updating files:  56% (5335/9526)Updating files:  57% (5430/9526)Updating files:  58% (5526/9526)Updating files:  59% (5621/9526)Updating files:  60% (5716/9526)Updating files:  61% (5811/9526)Updating files:  62% (5907/9526)Updating files:  63% (6002/9526)Updating files:  64% (6097/9526)Updating files:  65% (6192/9526)Updating files:  66% (6288/9526)Updating files:  67% (6383/9526)Updating files:  68% (6478/9526)Updating files:  69% (6573/9526)Updating files:  70% (6669/9526)Updating files:  71% (6764/9526)Updating files:  72% (6859/9526)Updating files:  73% (6954/9526)Updating files:  74% (7050/9526)Updating files:  75% (7145/9526)Updating files:  76% (7240/9526)Updating files:  77% (7336/9526)Updating files:  78% (7431/9526)Updating files:  79% (7526/9526)Updating files:  80% (7621/9526)Updating files:  81% (7717/9526)Updating files:  82% (7812/9526)Updating files:  83% (7907/9526)Updating files:  84% (8002/9526)Updating files:  85% (8098/9526)Updating files:  86% (8193/9526)Updating files:  87% (8288/9526)Updating files:  88% (8383/9526)Updating files:  89% (8479/9526)Updating files:  90% (8574/9526)Updating files:  91% (8669/9526)Updating files:  92% (8764/9526)Updating files:  93% (8860/9526)Updating files:  94% (8955/9526)Updating files:  95% (9050/9526)Updating files:  96% (9145/9526)Updating files:  97% (9241/9526)Updating files:  98% (9336/9526)Updating files:  99% (9431/9526)Updating files: 100% (9526/9526)Updating files: 100% (9526/9526), done.
 HEAD is now at 8bf4605ae Merge pull request #4501 from grandixximo/gmoccapy-quit-4500
 
 Running kernel seems to be up-to-date.

@@ -12,21 +12,23 @@ If a run is cancelled, times out, is harness-invalid, or fails substantively, st
 
 | Date | Module / Lab | Workflow run | Job ID | Job start UTC | Job end UTC | Compute min | Outcome | Evidence classification / notes |
 |---|---|---:|---:|---|---|---:|---|---|
+| 2026-09-08 | T02-019 Task execution-state/precondition | `34179865160` | `101916590952` | 2026-09-08T02:23:07Z | 2026-09-08T02:26:37Z | 3.5 | PASS | Accepted TEST-CONFIRMED T02 evidence; authoritative job timestamps. |
+| 2026-09-08 | T03-020 NML ack vs semantic result | `34182846956` | `101925247534` | 2026-09-08T03:14:56Z | 2026-09-08T03:18:31Z | 3.6 | PASS | Accepted TEST-CONFIRMED T03 evidence after gate reconciliation; authoritative job timestamps. |
+| 2026-09-08 | T04-021 GUI status freshness | `34186879941` | `101936899842` | 2026-09-08T04:24:31Z | 2026-09-08T04:27:41Z | 3.2 | PASS | Accepted TEST-CONFIRMED T04 evidence; authoritative job timestamps. |
+| 2026-09-08 | T05-022 startup freshness gating attempt 1 | `34189716347` | `101945103662` | 2026-09-08T05:12:01Z | 2026-09-08T05:15:45Z | 3.7 | HARNESS INVALID | Exit 24. `GStat.__init__()` and tested `update()` were both blocked; implementation also drifted from frozen fixed-unavailable policy premise. No behavioral verdict. |
 
 ## Running totals
 
 Keep these totals current whenever new rows are added:
 
-- **Total lab compute used:** 0.0 h + unbackfilled historical usage
+- **Exactly backfilled lab compute:** 14.0 min (0.23 h)
+- **Total lab compute used:** 0.23 h + unbackfilled historical usage
 - **Remaining from 120 h first-draft allowance:** unknown until historical backfill
-- **Current-day lab compute:** 0.0 h + unbackfilled historical usage
+- **Current-day exactly backfilled lab compute (2026-09-08):** 14.0 min (0.23 h) + unbackfilled same-day historical usage
 
 ## Immediate backfill queue
 
-The following recent authoritative jobs are known and should be the first exact-runtime backfill entries once job start/end timestamps are available:
-
-- T02-019 — workflow `34179865160`, job `101916590952`, successful, accepted test evidence.
-- T03-020 — workflow `34182846956`, job `101925247534`, successful workflow and repository exit code `0`; behavioral gates still require reconciliation before TEST-CONFIRMED status.
+No known T02-T05 authoritative jobs remain in the immediate queue as of the T05-022 attempt-1 reconciliation. Add T05-022 attempt 2 after its authoritative Actions job start/end timestamps become available.
 
 Do not use workflow `created_at`/`updated_at` envelope duration as billable job compute when exact job timestamps can be obtained later.
 

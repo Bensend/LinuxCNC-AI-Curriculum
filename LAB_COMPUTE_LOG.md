@@ -20,19 +20,24 @@ If a run is cancelled, times out, is harness-invalid, or fails substantively, st
 | 2026-09-08 | C01-023 duplicated-joint fanout attempt 1 | `34199237041` | `101973964122` | 2026-09-08T07:25:17Z | 2026-09-08T07:28:45Z | 3.5 | HARNESS INVALID | Sequential userspace reads tore the simultaneous-state observation by one servo tick; no behavioral FAIL claim. |
 | 2026-09-08 | C01-023 realtime-correction preflight | `34209095831` | `102005554568` | 2026-09-08T09:16:38Z | 2026-09-08T09:17:38Z | 1.0 | HARNESS INVALID | Shell-variable typo terminated before LinuxCNC behavior under test; preserved as implementation-preflight cost. |
 | 2026-09-08 | C01-023 realtime same-cycle attempt 2 | `34209185893` | `102005842122` | 2026-09-08T09:17:36Z | 2026-09-08T09:22:19Z | 4.7 | PASS | Accepted TEST-CONFIRMED C01 evidence from published artifact `10049218375`; inner lab exit 0 and Gates A-H pass. Workflow envelope later failed during result-commit race with concurrent curriculum commits. |
+| 2026-09-08 | C02-024 independent-feedback disturbance attempt 1 | `34219392130` | `102038671214` | 2026-09-08T11:11:44Z | 2026-09-08T11:15:20Z | 3.6 | HARNESS INVALID | Useful B-only divergence evidence, but Gate H mixed userspace enable observation with realtime output and the complete raw trace was not durably retained; no LinuxCNC behavioral FAIL claim. |
+| 2026-09-08 | C02-024 same-cycle enable correction | `34224780695` | `102056118960` | 2026-09-08T12:12:29Z | 2026-09-08T12:15:58Z | 3.5 | PASS / PUBLICATION INCOMPLETE | Frozen behavioral Gates A-H passed, including 1,011 same-cycle A-enabled/B-disabled rows with B output zero, but complete raw trace was copied outside the workflow artifact path, so this was not the final accepted artifact. |
+| 2026-09-08 | C02-024 retained-evidence final | `34225190610` | `102057466102` | 2026-09-08T12:16:54Z | 2026-09-08T12:20:47Z | 3.9 | PASS | Accepted TEST-CONFIRMED C02 evidence; full 8,335-row realtime trace and process logs retained under `lab-results/c02-024-evidence/`, artifact `10055529544`. |
 
 ## Running totals
 
 Keep these totals current whenever new rows are added:
 
-- **Exactly backfilled lab compute:** 27.3 min (0.46 h)
-- **Total lab compute used:** 0.46 h + unbackfilled historical usage
+- **Exactly backfilled lab compute:** 38.3 min (0.64 h)
+- **Total lab compute used:** 0.64 h + unbackfilled historical usage
 - **Remaining from 120 h first-draft allowance:** unknown until historical backfill
-- **Current-day exactly backfilled lab compute (2026-09-08):** 27.3 min (0.46 h) + unbackfilled same-day historical usage
+- **Current-day exactly backfilled lab compute (2026-09-08):** 38.3 min (0.64 h) + unbackfilled same-day historical usage
 
 ## Immediate backfill queue
 
-No known T02-T05 or C01 authoritative jobs remain in the immediate queue after C01-023 attempt 2 reconciliation.
+C03-025 workflow `34226127383` is active as this ledger revision is written. Add its authoritative job start/end/runtime after completion, including failed or harness-invalid compute.
+
+No known T02-T05, C01, or C02 authoritative jobs remain in the immediate backfill queue.
 
 Do not use workflow `created_at`/`updated_at` envelope duration as billable job compute when exact job timestamps can be obtained later.
 

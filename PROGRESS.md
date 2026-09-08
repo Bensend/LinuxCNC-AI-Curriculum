@@ -6,7 +6,7 @@ Repository artifacts, not chat history, are authoritative.
 
 ## Current critical-path state
 
-All modules through **T05**, **C01**, **C02**, **C03**, **C04**, and **C05** are **GRADUATED at 1000 level**. Phase 10 remains active. Highest-priority unblocked work is **C06 — communication/watchdog fault handling**, state **RESEARCH / SOURCE**.
+All modules through **T05**, **C01**, **C02**, **C03**, **C04**, and **C05** are **GRADUATED at 1000 level**. Phase 10 remains active. Highest-priority unblocked work is **C06 — communication/watchdog fault handling**, state **EXPERIMENT DESIGN**.
 
 C05 graduation is supported by accepted TEST-CONFIRMED C05-028 frozen-feedback evidence, accepted TEST-CONFIRMED C05-029 wrong-scale/jump evidence, the already-recorded **10/10** adversarial exam, and the novel-scenario handoff plus promotion/counterfactual audit in `handoffs/C05-novel-feedback-truth-transfer.md`.
 
@@ -38,33 +38,42 @@ Attempts 1–10 retain their original harness-invalid classifications; none are 
 
 Fresh transfer and counterfactual audit: `handoffs/C05-novel-feedback-truth-transfer.md` — PASS. Promoted physical sensor signatures, fault discrimination, and safety-rated redundancy details cannot overturn the demonstrated 1000-level measurement-versus-plant-truth distinction, and the safety boundary remains explicit.
 
-## C06 — communication/watchdog fault handling — RESEARCH / SOURCE
+## C06 — communication/watchdog fault handling — EXPERIMENT DESIGN
 
-Primary new artifact: `guides/C06-communication-watchdog-fault-research.md`.
+Pinned LinuxCNC revision: `8bf4605ae81042248add031e94c77300406e0413`.
 
-Pinned-source findings so far:
+Primary artifacts:
+- `guides/C06-communication-watchdog-fault-research.md`
+- `call-flows/C06-hostmot2-transport-watchdog-order.md`
+- `experiments/C06-030-transport-watchdog-fault-plan.md` — Gates A–H frozen before implementation/output inspection.
 
-- `hm2_eth.c` treats packet/read communication health separately from the HostMot2 FPGA watchdog. Its queued receive path derives `packet-read-timeout`, performs receive, records soft communication errors, and escalates the communication error counter until `io_error` is asserted at `packet-error-limit`.
-- Pinned defaults observed: `packet-read-timeout=80` (percentage-of-thread semantics) and `packet-error-limit=10`.
-- `watchdog.c` exports the watchdog's independent `has_bit`/`timeout_ns` state. Default timeout is 5 ms. Watchdog processing and write/recovery return while low-level `io_error` is active; a watchdog status bite sets `has_bit` and `needs_reset`.
-- `hm2_watchdog_write()` enables/maintains the watchdog during normal service and uses `hm2_force_write()` when reset state is pending; it warns when watchdog timeout is dangerously short relative to the service period.
+Pinned-source findings now established:
+
+- `hostmot2.c:hm2_read_request()` queues TRAM reads, then optional low-level queued send; `hm2_read()` finishes the low-level receive before any module TRAM processor is called. A temporary `-EAGAIN` receive skips module processing for that cycle; `io_error` causes early return.
+- On a successful read, watchdog TRAM status is processed first by `hm2_watchdog_process_tram_read()` before GPIO/encoder/stepgen and other module processors.
+- `hostmot2.c:hm2_write()` returns immediately on `io_error`, prepares watchdog TRAM first, queues the entire write TRAM, then calls module-specific writes including `hm2_watchdog_write()`, then finishes queued writes.
+- `hm2_watchdog_prepare_tram_write()` writes `0x5a000000` into the watchdog reset/pet TRAM register every serviced write cycle. Thus ordinary petting is carried by the normal write TRAM; `hm2_watchdog_write()` handles enable/timeout and reset/reconfiguration state.
+- `watchdog.c` sets `watchdog.has_bit=true` and `llio->needs_reset=1` only after a successful received TRAM image exposes status bit 0. It deliberately does not process watchdog status while `io_error` is asserted.
+- `hostmot2-lowlevel.h` defines `io_error` as low-level-driver-owned failure state that HostMot2 honors by stopping llio calls until the user clears it; `needs_reset`/`needs_soft_reset` carry later reinitialization requirements.
+- A deterministic hardware-free seam exists in pinned `hm2_test.c`: it is explicitly a pretend HostMot2 llio with in-memory register data and no special hardware requirement. C06 will use an auditable lab-only extension of this fixture rather than host-network timing disruption.
 
 Retained C06 boundary:
 
 ```text
-packet error != permanent io-error
-io-error != necessarily watchdog bite
+packet/read error != watchdog bite
+io-error != necessarily watchdog.has_bit
 host receive timeout != proof FPGA watchdog status
 watchdog bite != proof complete physical safe state
+transport recovery != watchdog recovery
 fault reset != proof plant is safe to resume
 ordinary HostMot2/HAL fault handling != functional-safety certification
 ```
 
 ## Exact next-work checkpoint
 
-1. Continue pinned-source tracing from HostMot2 generic `read`/`write` through low-level hm2_eth queued read/write operations and place watchdog prepare/process calls in exact TRAM/servo-cycle order.
-2. Trace every relevant state transition among `packet-error`, `packet-error-level`, `packet-error-exceeded`, `io_error`, `needs_reset`, `needs_soft_reset`, and `watchdog.has_bit`, including user-reset/recovery branches.
-3. Inventory existing LinuxCNC tests or mock low-level interfaces that can inject deterministic communication failures without physical Ethernet hardware. Prefer an existing seam over timing-dependent host-network disruption.
-4. Perform one prediction check before viewing its independent confirming evidence.
-5. Freeze C06's first behavioral experiment before implementation. It must distinguish at minimum a transient packet/read error, escalated communication `io_error`, watchdog-bite state, and recovery; do not weaken thresholds after observing results.
+1. Implement frozen `C06-030` without changing Gates A–H or its phase semantics. Modify only the hardware-free `hm2_test` fixture/instrumentation needed to inject deterministic read failure and watchdog status; generic pinned `hostmot2.c`, `tram.c`, and `watchdog.c` must remain byte-identical.
+2. Before the authoritative run, verify that the chosen `hm2_test` pattern exposes a valid watchdog Module Descriptor. If it does not, add only the minimum retained fixture register/descriptor image needed to instantiate one watchdog and document that construction as harness code.
+3. Preserve the complete patch and raw observation trace before any analyzer can exit. Sample enough state to prove P0 baseline, P1 transient read failure, P2 escalated `io_error`, P3 transport recovery, P4/P5 independent watchdog bite/hold, and P6 watchdog recovery.
+4. Reconcile exactly one authoritative run against unchanged Gates A–H. A valid behavioral failure is evidence; do not retune thresholds or phase definitions after observing output.
+5. If C06-030 is accepted, perform the already-required adversarial exam, fresh-AI handoff, and counterfactual promotion audit before graduation.
 6. Backfill C05-029 attempts 8–11 lab compute and queued C03/C04 historical compute when it does not interrupt the critical path.

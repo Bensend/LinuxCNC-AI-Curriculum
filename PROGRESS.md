@@ -4,7 +4,7 @@ Status values: `PLANNED`, `RESEARCH`, `SOURCE`, `EXPERIMENT`, `EXAM`, `CORRECTIO
 
 ## Current critical-path state
 
-All modules through **T01 — G-code interpreter architecture** are **GRADUATED at 1000 level**. **T02 — task layer** is now the highest-priority unblocked module and is active in **RESEARCH** at pinned LinuxCNC revision `8bf4605ae81042248add031e94c77300406e0413`.
+All modules through **T01 — G-code interpreter architecture** are **GRADUATED at 1000 level**. **T02 — task layer** is now the highest-priority unblocked module and is active in **EXPERIMENT** at pinned LinuxCNC revision `8bf4605ae81042248add031e94c77300406e0413`.
 
 ## T01 graduation evidence
 
@@ -26,8 +26,6 @@ T01-018 workflow `34172719263` completed with final committed lab exit `0`. The 
 
 Central graduated teaching: interpreter read/execute state, canonical/Task queue state, realtime execution, and physical machine state are distinct evidence domains. Canonical output or interpreter predicted position does not prove physical motion has started or completed.
 
-Official LinuxCNC documentation independently describes queued canonical operations, interpreter read-ahead, and queue-buster synchronization through `INTERP_EXECUTE_FINISH`. T01-018 intentionally stopped at the standalone interpreter/canonical boundary rather than pretending to dynamically verify Task timing.
-
 ### T01 promotion queue
 
 - Dynamic Task/remap queue timing and direct `INTERP_EXECUTE_FINISH` drain/synch observation — **T02 / 2000, HIGH**. Non-blocking for T01 because the dynamic Task timing claim was explicitly not made.
@@ -38,29 +36,44 @@ Counterfactual audit: none of these promoted uncertainties can invalidate the bo
 
 ## T02 current evidence
 
-Initial research artifact: `guides/T02-task-layer-research.md`.
+Durable artifacts:
 
-Documentation baseline: EMCTASK coordinates motion and discrete I/O; Task/interpreter is non-realtime relative to the realtime motion controller. Remap documentation identifies Task as consumer/coordinator of queued interpreter canonical work and describes queue-buster synchronization.
+- `guides/T02-task-layer-research.md`
+- `guides/T02-task-execution-state-matrix.md`
+- `call-flows/T02-interp-list-to-motion-gated-delay.md`
+- frozen plan `experiments/T02-019-task-motion-gated-delay-plan.md`
 
-Pinned `src/emc/task/emctaskmain.cc` inspection has already separated:
+Documentation baseline: EMCTASK coordinates motion and discrete I/O; `[TASK] CYCLE_TIME` is the non-realtime Task polling cadence. The Python status interface exposes Task `exec_state`, giving T02 a direct NML/status oracle rather than requiring inference from GUI activity.
 
-1. immediate message dispatch through `emcTaskIssueCommand()`;
-2. queued interpreter commands on `interp_list`, whose preconditions are classified by `emcTaskCheckPreconditions()`;
-3. execution wait/state handling in `emcTaskExecute()` using `EMC_TASK_EXEC` states such as waiting for motion.
+Pinned source now establishes the main plan/execute relationship and the representative queue path:
 
-Representative pinned abort dispatch also shows Task explicitly sequencing Task abort, motion abort, interpreter-state restore, I/O/spindle/MDI abort, and cleanup. This is ordinary controller behavior, not independent functional safety.
+1. the main Task loop calls `emcTaskPlan()` then `emcTaskExecute()` cyclically;
+2. AUTO planning can continue interpreter read-ahead while `interp_list` remains below its configured bound;
+3. executor `DONE` removes the next `interp_list` item, records its line/motion id, and evaluates `emcTaskCheckPreconditions()`;
+4. once preconditions become `DONE`, `emcTaskIssueCommand()` issues the retained command and `emcTaskCheckPostconditions()` selects the next executor state;
+5. issue failure becomes Task `ERROR`.
+
+Representative source-confirmed distinction:
+
+- queued `EMC_TRAJ_LINEAR_MOVE` has precondition `WAITING_FOR_IO` and postcondition `DONE`, so Task may keep feeding trajectory moves without waiting for each move's physical completion;
+- queued `EMC_TRAJ_DELAY` has precondition `WAITING_FOR_MOTION_AND_IO`; only after both subordinate statuses are DONE is the delay issued, after which its postcondition is `WAITING_FOR_DELAY`.
+
+This yields a strong experiment surface: a slow linear move followed by dwell should expose a Task motion/I/O barrier before the dwell timer begins. The source also proves that `currentLine`, interpreter read-ahead, Task executor state, and motion completion are separate progress domains.
+
+Failure behavior is source-grounded: motion/I/O `RCS_STATUS::ERROR` in the relevant wait states drives Task to `ERROR`; the Task error branch aborts subordinate work, clears pending/interpreter queues, resets planning/interpreter state, and queues synchronization. This remains ordinary controller error handling, not an independent safety function.
 
 ## Current checkpoint / exact resume point
 
-Resume **T02 — task layer** without repeating T01's interpreter lab.
+Resume **T02 — task layer** at frozen experiment **T02-019**. Do not alter Gates A-G after observing runtime results.
 
-1. Trace pinned Task main-loop planning into `emcTaskExecute()` and document the exact plan/execute relationship.
-2. Trace `emcTaskCheckPreconditions()` and one representative queued trajectory command from `interp_list` through a waiting-for-motion transition to completion.
-3. Build a Task execution-state/precondition matrix covering immediate versus queued commands, relevant `EMC_TASK_EXEC` wait states, completion/error conditions, and observable status/NML evidence.
-4. Only after the state/oracle definitions are source-grounded, freeze T02's first experiment before implementation. Candidate behavior: a deterministic queued motion followed by a command whose issue is gated on motion completion, with independent Task-state and motion-state evidence.
-5. Preserve the T01 promotion item for dynamic read-ahead/`INTERP_EXECUTE_FINISH` timing and incorporate it only if the T02 experiment can test it without conflating interpreter progress with physical execution.
+1. Implement a reproducible pinned-build lab harness for `experiments/T02-019-task-motion-gated-delay-plan.md` using a stock simulation configuration.
+2. The sampler must record raw monotonic timestamps plus direct `linuxcnc.stat().exec_state`, interpreter/Task line fields, `inpos`, and position/motion evidence. Reject line number as a motion-completion oracle.
+3. Execute once and preserve workflow/job ID, exit code, stdout/stderr and raw trace. Do not launch a duplicate while the first run is active.
+4. Reconcile frozen Gates A-G. In particular require `EXEC_WAITING_FOR_MOTION_AND_IO` before dwell issue and prohibit `EXEC_WAITING_FOR_DELAY` while independent motion evidence says the preceding move is incomplete.
+5. Only after accepted independent verification proceed to T02 adversarial exam, corrections, fresh-AI handoff, promotion counterfactual audit and graduation decision.
+6. Dynamic direct observation of `INTERP_EXECUTE_FINISH`/remap read-ahead remains a T01 promotion item; incorporate it only if it adds distinct information without expanding T02-019 after freeze.
 
-Safety boundary remains unchanged: Task state transitions and abort sequencing are ordinary LinuxCNC machine-control behavior, not evidence of a safety-rated function.
+Safety boundary remains unchanged: Task state transitions, waits, queueing and abort sequencing are ordinary LinuxCNC machine-control behavior, not evidence of a safety-rated function.
 
 ## Prior promotion queue retained
 

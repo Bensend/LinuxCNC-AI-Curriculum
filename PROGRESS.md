@@ -10,44 +10,16 @@ All modules through **T05 — custom operator interface patterns**, **C01 — si
 
 Phase 10 remains active. The highest-priority unblocked module is **C05 — feedback sensor failure modes**, state **CORRECTIONS / EXPERIMENT**.
 
-C05 now has documentation/community/source analysis, a pinned function-order model, a frozen first experiment, a retained invalid first attempt, a harness-only correction, and a frozen adversarial exam. It is **not graduated** and has no TEST-CONFIRMED C05-028 behavioral result yet.
+C05 now has accepted TEST-CONFIRMED frozen-feedback evidence, a **10/10** scored adversarial exam, a source-grounded scale/jump plan frozen before implementation, and retained invalid scale/jump harness attempts. C05 is **not yet graduated** because C05-029 still requires one valid scale/jump result plus fresh-AI transfer and promotion/counterfactual review.
 
 ## Blind external-feedback state
 
-### BL-DEV-001
+- **BL-DEV-001:** VALID, **10/10, 92% confidence**.
+- **BL-DEV-002:** VALID, **9/10, 88% confidence**. The learner correctly predicted no following-error trip but imprecisely recalled threshold construction. Pinned `control.c` uses velocity-scaled `FERROR` followed by a `MIN_FERROR` floor. Schedule a novel same-mechanism transfer challenge after roughly 3–8 subsequent lessons rather than repeating the same surface problem immediately.
 
-Valid blind development baseline: **10/10, 92% confidence**. See:
-
-- `evaluation/development/BL-DEV-001-precommit.md`
-- `evaluation/development/BL-DEV-001-evaluation.md`
-
-### BL-DEV-002
-
-A second development challenge was immutably precommitted before inspecting the pinned oracle during the current C05 session.
-
-Result: **VALID, 9/10, 88% confidence, 0.8 min**.
-
-The behavioral prediction was correct, but the learner recalled LinuxCNC's following-error threshold as endpoint interpolation between `MIN_FERROR` and `FERROR`. Pinned `src/emc/motion/control.c` instead computes the inspected path as:
-
-```text
-ferror_limit = FERROR * abs(vel_cmd) / joint_vel_limit
-ferror_limit = max(ferror_limit, MIN_FERROR)
-trip when abs_ferror > ferror_limit
-```
-
-For the challenge values the exact limit is `0.5 in`, not `0.505 in`, and a `0.30 in` error does not trip.
-
-Durable records:
-
-- `evaluation/development/BL-DEV-002-precommit.md`
-- `evaluation/development/BL-DEV-002-evaluation.md`
-- `evaluation/FEEDBACK_SCORE_LOG.md`
-
-Because this was a mechanism-precision miss, schedule a novel same-mechanism transfer challenge after roughly 3–8 subsequent lessons rather than immediately repeating the same surface problem.
+Durable records are under `evaluation/development/` and `evaluation/FEEDBACK_SCORE_LOG.md`.
 
 ## C01 — simulated dual-actuator machine — GRADUATED 1000
-
-Accepted C01-023 proved same-cycle duplicated Y command equality in the deterministic fixture after correcting a sequential-userspace observation defect.
 
 Retained boundary:
 
@@ -62,8 +34,6 @@ same coordinated command
 
 ## C02 — independent feedback loops — GRADUATED 1000
 
-C02 established that two PID instances receiving a common command retain separate command/feedback/error/output state and can diverge under an asymmetric plant disturbance.
-
 Retained boundary:
 
 ```text
@@ -77,9 +47,7 @@ shared command
 
 ## C03 — explicit cross-coupling — GRADUATED 1000
 
-Accepted C03-025 showed that an explicit `Kc=0.5` relative-feedback coupler reduced deterministic simulated disagreement, after preserving two HARNESS INVALID phase-publication attempts.
-
-Retained boundary:
+Accepted C03-025 established reduced disagreement in its deterministic simulation with explicit `Kc=0.5` cross-coupling while preserving invalid phase-publication attempts.
 
 ```text
 reduced simulated disagreement
@@ -91,24 +59,7 @@ reduced simulated disagreement
 
 ## C04 — asymmetric actuator response — GRADUATED 1000
 
-C04 preserved a legitimate source-semantic falsification: directly changing PID `maxoutput` from a binding nonzero limit to zero can leave stale saturation telemetry at the pinned revision because the `limit_state` clear/update is inside the nonzero-`maxoutput` branch.
-
-Source-corrected C04-027 used a deliberately huge finite nonbinding recovery sentinel so the explicit clear branch executed; authoritative workflow `34244865738`, job `102124147558`, artifact `10063683101`, source `4a9412e0d83dedfcd32bd6543cd0cf00231d40bf`, inner exit 0, Gates A-H PASS. The adversarial exam scored 10/10 and fresh-AI/promotion audits passed.
-
-Retained boundaries:
-
-```text
-corrected command separation
-!= available local actuator authority
-!= achieved plant response
-!= feedback convergence
-```
-
-```text
-pid.saturated telemetry
-must be interpreted with current maxoutput + enable + transition history + pinned source
-!= self-authenticating proof of present physical saturation
-```
+C04 preserved the pinned PID `maxoutput`/saturation-telemetry transition nuance and accepted the source-corrected experiment, adversarial exam, fresh-AI transfer, and promotion audit.
 
 ```text
 PID software saturation
@@ -119,95 +70,125 @@ PID software saturation
 != safety-rated fault decision
 ```
 
-Primary durable C04 records remain in `guides/`, `experiments/`, `results/`, and `evaluation/` under the C04 names.
-
 ## C05 — feedback sensor failure modes — CORRECTIONS / EXPERIMENT
 
 Pinned revision: `8bf4605ae81042248add031e94c77300406e0413`.
 
-### Research/source model
+### Source / call-flow model
 
-Current documentation and pinned source establish the observation model:
+Pinned components establish:
 
-- encoder position is a scaled measurement product; raw counts remain separately observable;
-- pinned `integ.comp` advances an independent deterministic toy plant as `out += gain * in * fperiod` when its function executes;
-- pinned `mux4.comp` selects one float input and adds no plausibility diagnosis;
-- pinned `scale.comp` computes `out = in * gain + offset` and adds no diagnosis.
+- `integ.comp`: independent toy state advances as `out += gain * in * fperiod`;
+- `scale.comp`: `out = in * gain + offset` with no plausibility diagnosis;
+- `mux4.comp`: selects an input and provides no sensor-health semantics;
+- local controller arithmetic therefore consumes the value wired as feedback, not hidden plant truth.
 
-C05 therefore explicitly separates **fixture/toy plant truth** from **measured feedback**.
-
-Durable records:
-
-- `guides/C05-feedback-sensor-failure-research.md`
-- `call-flows/C05-true-state-to-faulted-feedback.md`
-- `experiments/C05-028-feedback-freeze-plan.md`
-- `evaluation/C05-adversarial-exam.md`
-
-Frozen C05 local realtime order:
+Frozen local order:
 
 ```text
 motion command/controller
--> plant A/B update using prior-cycle PID effort
--> B sensor transformation / mux
+-> toy plant A/B update using prior-cycle PID effort
+-> sensor transforms / mux
 -> measured disagreement + cross-correction
--> local PID A/B
--> realtime residual helpers
--> sampler
+-> PID A/B
+-> residual helpers
+-> realtime sampler
 ```
-
-The resulting row can bind current toy plant state, selected measurement, controller arithmetic and newly calculated control output; that new output affects the next toy-plant update.
 
 Retained boundary:
 
 ```text
 fixture true state != physical metrology truth
 frozen measured feedback != proven frozen actuator
-controller reaction to bad measurement != proof plant needed correction
-ordinary HAL/PID logic != safety-rated sensor fault handling
+wrong measured scale != proven physical scale change
+measurement jump != proven physical position jump
+controller reaction to corrupted measurement != proof plant needed correction
+ordinary HAL/PID logic != safety-rated sensor-fault handling
 ```
 
-### C05-028 attempt 1 — HARNESS INVALID
+Primary research records:
 
-Authoritative workflow `34246869855`, job `102131002815`, source commit `5f4f0a765f577921e4c338953e016213a3b59f25`, recorded interval `2026-09-08T15:46:15Z`–`15:49:34Z`, result commit `6081e494074c8b808d7882e36833b4de57f940bb`.
+- `guides/C05-feedback-sensor-failure-research.md`
+- `call-flows/C05-true-state-to-faulted-feedback.md`
+- `experiments/C05-028-feedback-freeze-plan.md`
+- `experiments/C05-029-scale-jump-plan.md`
 
-It failed before decisive behavioral phases with:
+### C05-028 feedback freeze — TEST-CONFIRMED
+
+Attempt 1, workflow `34246869855`, job `102131002815`, is retained **HARNESS INVALID** because the shell attempted `setp` on an intentionally linked mux selector pin.
+
+Corrected attempt 2:
+
+- workflow **`34247942092`**;
+- job **`102134660105`**;
+- harness correction commit `347b282edd70c02a171e3144204231eb2ffd3814`;
+- accepted-result commit `30507fa659648906c2ead0f26f9f488189baa678`;
+- inner exit `0`;
+- `5194` realtime samples, zero overruns;
+- frozen measured-B span `0`;
+- toy true-B span during freeze `13.881798 in`;
+- max toy true/measured separation `13.994518 in`;
+- disagreement and correction residuals `0`;
+- PID-B error residual `4.44e-16`;
+- recovery restored exact fixture identity;
+- frozen Gates A–H **PASS**.
+
+Verdict: **HARNESS VALID — ACCEPTED — TEST-CONFIRMED**.
+
+Durable result: `results/C05-028-attempt-2-accepted.md`.
+
+### C05 adversarial exam
+
+The exam was frozen before valid experiment-result review and is now scored **10/10 PASS** in `evaluation/C05-adversarial-exam-scored.md` (commit `4c4997cd15d1ad2543fbe685aad0c916cc4ac071`).
+
+### C05-029 wrong-scale + jump/offset — frozen experiment
+
+Plan frozen before implementation: `experiments/C05-029-scale-jump-plan.md`, commit `1be32147f7240ea2075ad5f0b967de2866d35765`.
+
+Frozen transformations:
 
 ```text
-pin 'c05-sensor-b.sel0': not writable
+normal_B = true_B
+scaled_B = 1.20 * true_B
+jumped_B = true_B + 0.50 in
 ```
 
-Root cause: `sel0` was intentionally connected to signal `c05-sensor-freeze` so selector state could be sampled in realtime, but the shell later tried to `setp` the linked pin. This is a harness configuration error, not sensor-behavior evidence.
+Frozen Gates A–H require retained realtime evidence, exact transform relationships, true-B movement under scale fault, an actual consecutive-sample realtime selector-edge proof for the `+0.50 in` jump, controller arithmetic tied to measured B, normal recovery, and the interpretation boundary above. No gain, threshold, phase duration, transform, or behavioral gate may be retuned after seeing a result.
 
-Reconciliation: `results/C05-028-attempt-1-reconciliation.md`.
+#### C05-029 attempt 1 — HARNESS INVALID
 
-No frozen gate, numerical threshold, PID/plant gain, phase duration, or `Kc=0.5` value was changed.
+Workflow **`34250135965`**, job **`102142142268`**, implementation commit `90a15ac75fc92d602b474b1e27965fe023183c5c`.
 
-### C05-028 attempt 2 — running authoritative correction
+Runtime failed before behavioral phases because one sampler stream requested 23 values. LinuxCNC rejected it with `stream: ERROR: more than 21 items`. Current stream documentation limits one sample to twenty values. Reconciliation: `results/C05-029-attempt-1-reconciliation.md`, commit `7b6d485b7726fd082b42285039d4d62c6a5f9d8a`.
 
-Harness-only correction commit: `347b282edd70c02a171e3144204231eb2ffd3814`.
+Correction strategy: preserve every frozen field by splitting them across two sampler FIFOs in the same servo thread, require zero overruns on both, retain both raw traces, and exact-join only identical tagged sample numbers.
 
-Correction:
+#### C05-029 attempt 2 — HARNESS INVALID
 
-- drive the existing sampled selector **signal** with `halcmd sets c05-sensor-freeze`, rather than writing the linked mux pin;
-- parse and validate the phase-0 userspace freeze capture as one finite scalar float;
-- preserve frozen Gates A-H unchanged.
+Workflow **`34251568612`**, job **`102147037252`**, split-sampler commit `6a151ae686c034de7bb64b276c0d2fde452dec46`.
 
-Authoritative workflow: **`34247942092`**.
+It failed immediately in the wrapper generator with a Python `SyntaxError`: an outer triple-single-quoted injected string accidentally contained inner triple-single-quoted strings. LinuxCNC and the behavioral experiment never ran. No behavioral conclusion is permitted.
 
-Job: **`102134660105`**.
+#### C05-029 attempt 3 — authoritative quoting-only repair RUNNING
 
-At the latest checkpoint the job is still executing its single selected lab job. **Do not launch a duplicate and do not make a TEST-CONFIRMED claim.**
+Commit: **`7fb5624bfcd271e1103d31bde16571be872c9ec9`**.
+
+Workflow: **`34251704209`**.
+
+Job: **`102147446647`**.
+
+The only new change repairs the generator's outer quoting so the already-defined split-FIFO observation harness can execute. Frozen Gates A–H and all behavioral values remain unchanged. At this checkpoint the job is executing its single selected lab script. **Do not launch a duplicate and do not make a TEST-CONFIRMED claim until this exact run is terminal and reconciled.**
 
 ## Exact next-work checkpoint
 
-1. Inspect only workflow `34247942092`, job `102134660105` until it reaches a terminal state.
-2. Reconcile the inner exit, raw realtime trace, stdout/stderr, selector/config rows and each unchanged C05-028 Gate A-H. Preserve evidence even if analysis fails.
-3. If attempt 2 is HARNESS VALID and passes, commit an accepted C05-028 result and freeze the next scale/jump experiment before implementation using the same verified true-state/measurement observation model.
-4. If attempt 2 is HARNESS VALID but fails a behavioral gate, preserve the failure as behavioral evidence; do not retune the frozen thresholds/gains after seeing it.
-5. If attempt 2 exposes another genuine harness defect, document it explicitly before deciding whether another run is permitted under the retry/investigation rules.
-6. C05 still requires deterministic **scale** and **jump/offset** fault evidence, the already-frozen adversarial exam, fresh-AI transfer, and promotion/counterfactual audit before graduation.
-7. Backfill authoritative C03-C05 laboratory compute in `LAB_COMPUTE_LOG.md`, including invalid runs rather than hiding them.
+1. Inspect only workflow `34251704209`, job `102147446647` until terminal.
+2. Reconcile inner exit, both raw sampler traces, exact sample-number join, both FIFO overrun counters, selector/config evidence, stdout/stderr, and unchanged C05-029 Gates A–H.
+3. If HARNESS VALID and passing, commit the accepted C05-029 result; then perform the required fresh-AI novel-scenario handoff and promotion/counterfactual audit. Graduate C05 only if those checks pass without weakening the safety/causal boundaries.
+4. If HARNESS VALID but a behavioral gate fails, retain the falsification; do not retune the frozen gains, offsets, thresholds, phase durations, or gates after observation.
+5. If another genuine harness defect occurs, retain and reconcile it before any further retry.
+6. After C05 graduation, advance to **C06 — communication/watchdog fault handling** according to the Phase-10 dependency graph.
+7. Backfill authoritative C03–C05 laboratory compute in `LAB_COMPUTE_LOG.md`; invalid harness runs count.
 
 ## Laboratory compute / timing notes
 
-`LAB_COMPUTE_LOG.md` is the authoritative compute ledger. C03 and later authoritative jobs still require complete backfill where missing. Invalid harness attempts count toward compute cost.
+`LAB_COMPUTE_LOG.md` remains the authoritative ledger. Invalid attempts count toward compute cost rather than disappearing from the budget.

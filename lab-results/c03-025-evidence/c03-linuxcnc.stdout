@@ -2,8 +2,8 @@ Machine configuration file is 'c03-025.ini'
 Starting LinuxCNC...
 linuxcnc TPMOD=tpmod HOMEMOD=homemod EMCMOT=motmod
 Found file(REL): ./c03-025.hal
-task: main loop took 0.019653 seconds
-task: main loop took 0.019844 seconds
-linuxcncrsh: New connection from ::1:38394
+task: main loop took 0.019553 seconds
+task: main loop took 0.019417 seconds
+linuxcncrsh: New connection from ::1:58590
 linuxcncrsh: Read close 'Default-4' (4)
 linuxcncrsh: Connection terminated 'Default-4' (4)

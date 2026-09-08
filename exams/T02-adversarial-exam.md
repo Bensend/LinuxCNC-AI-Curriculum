@@ -1,6 +1,6 @@
 # T02 adversarial exam — Task layer and execution-state evidence
 
-Status: **DRAFTED DURING EXPERIMENT; grade only after T02-019 reconciliation**  
+Status: **PASSED — 10/10 after T02-019 reconciliation**  
 Pinned source basis: LinuxCNC `8bf4605ae81042248add031e94c77300406e0413`
 
 ## Purpose
@@ -116,3 +116,11 @@ Pass requires all of the following:
 6. Solve Q9/Q10 without merely repeating memorized state names.
 
 Any answer that equates Task `DONE`, interpreter progress, or `current_line` with physical endpoint completion is a fail at 1000 level.
+
+## Post-experiment grading
+
+**Score: 10/10 — PASS.**
+
+The accepted T02-019 trace independently supplied the most adversarial condition in the exam rather than merely matching a friendly happy path: `current_line` and `read_line` reached the dwell while `inpos=0`, while Task remained in `WAITING_FOR_MOTION_AND_IO`. Only after `inpos=1` did Task enter `WAITING_FOR_DELAY`; the observed delay-state span was `0.748012 s` for `G4 P0.75`.
+
+The exam's answers correctly preserve five separate evidence domains: interpreter/read-ahead, Task queue selection/preconditions, subordinate motion status, physical-device truth, and safety state. Q9 and Q10 transfer the model to novel synchronization/integration cases rather than merely recalling T02-019 state names. No conceptual correction was required after the accepted experiment.

@@ -1,6 +1,6 @@
 # T05 call flow — custom operator-interface boundaries
 
-Status: **SOURCE-CONFIRMED baseline**  
+Status: **SOURCE-CONFIRMED baseline, corrected after T05-022 attempt 1**  
 Pinned LinuxCNC revision: `8bf4605ae81042248add031e94c77300406e0413`
 
 ## 1. HALUI: physical/HAL intent -> NML command
@@ -48,11 +48,11 @@ Startup is deliberately ordered: HAL component/pins are created, safe pin defaul
 
 ## 3. QtVCP startup lifecycle
 
-Pinned `qtvcp.py` orders startup approximately as:
+Pinned `qtvcp.py` orders the screen-level startup approximately as:
 
 ```text
 create HAL component
- -> construct VCPWindow
+ -> construct VCPWindow / shared Status object already exists or is obtained
  -> load handler extension
  -> build widgets
  -> handler.pre_hal_init__() [optional]
@@ -70,9 +70,31 @@ create HAL component
  -> Qt event loop
 ```
 
-The critical T05 finding is that **handler `initialized__()` runs before QtVCP's forced controller-status update**. A custom handler that enables an operator action in `initialized__()` based only on widget defaults, constructor-time cache, or an assumption that status has already been validated can expose a startup window before the framework's explicit synchronization point.
+The critical screen-lifecycle fact remains: **handler `initialized__()` runs before QtVCP's explicit `STATUS.forced_update()` synchronization point.**
 
-T04 already established that a failed `GStat` poll sets status invalid and suppresses state merging/signals. T05 therefore treats `initialized__()` as construction-time logic, not proof of fresh controller state.
+### Important correction from T05-022 attempt 1
+
+Pinned `lib/python/common/hal_glib.py`, `_GStat.__init__()`, itself performs a best-effort:
+
+```text
+stat.poll() -> merge()
+```
+
+inside a `try/except` during GStat construction. It does **not** set `_status_active = True` there. The later `update()` path is the one that sets `_status_active` false on poll failure or true after a successful poll and then performs signal comparisons/merging.
+
+Therefore these three concepts must not be collapsed:
+
+```text
+GStat object constructed / constructor cache exists
+!= status explicitly validated by the post-handler update path
+!= controller state still fresh enough for an operator decision
+```
+
+The earlier version of this guide loosely described `initialized__()` as preceding the "first valid status poll." That was too strong. The source-supported statement is narrower and more useful: **`initialized__()` precedes QtVCP's explicit forced-update synchronization point, while a GStat constructor may already contain a best-effort cached snapshot whose validity/freshness must not be inferred from mere object construction.**
+
+A custom handler that enables an operator action in `initialized__()` based only on widget defaults, constructor-time cache, or an assumption that explicit synchronization has already succeeded can therefore expose an advisory startup-state error.
+
+T04 established that a failed `GStat.update()` poll sets status invalid and suppresses that update's state merge/signals. T05 therefore treats `_status_active`/equivalent freshness evidence as part of the presentation contract rather than treating retained cache as self-authenticating.
 
 `Status` is a singleton wrapper around `GStat`. It also owns one `linuxcnc.error_channel()` instance for QtVCP and explicitly blocks/unblocks polling when another operation must become the sole consumer. This is source evidence that diagnostic ownership is a design concern rather than a broadcast guarantee.
 
@@ -114,15 +136,21 @@ A custom operator interface should be designed as a set of explicit ownership bo
 
 Do not collapse these into one green button.
 
+A startup-specific refinement is:
+
+**construction cache is not a freshness certificate.** Define the synchronization/freshness event your UI accepts before permitting controller-dependent advisory actions.
+
 ## Evidence ledger
 
 - HALUI edge detection and NML dispatch: **SOURCE-CONFIRMED**.
 - HALUI status projection from `emcStatus`: **SOURCE-CONFIRMED**.
-- QtVCP `initialized__()` precedes `STATUS.forced_update()`: **SOURCE-CONFIRMED**.
+- QtVCP `initialized__()` precedes explicit `STATUS.forced_update()`: **SOURCE-CONFIRMED**.
+- `_GStat.__init__()` performs best-effort `stat.poll()+merge()` without setting `_status_active` true: **SOURCE-CONFIRMED**.
+- failed `GStat.update()` sets `_status_active` false and does not merge that failed observation: **SOURCE-CONFIRMED / previously TEST-CONFIRMED in T04**.
 - QtVCP has a singleton error channel with explicit polling arbitration: **SOURCE-CONFIRMED**.
 - Cross-producer completion/race concerns: **COMMUNITY-REPORTED**, consistent with T03 source semantics.
 - GUI gating is advisory, not safety-rated enforcement: **SOURCE/DESIGN INFERENCE bounded by curriculum safety policy**.
 
-## Next experiment target
+## Current experiment target
 
-Freeze a startup experiment around the lifecycle fact above. Compare a deliberately default-enabled custom action with a freshness-gated action while the first status poll is forced to fail. The decisive claim is not that QtVCP itself is unsafe; it is that custom handler code can expose operator actions before a valid observation unless the handler defines a freshness contract.
+T05-022 now deliberately allows the constructor's best-effort poll, records its retained cache and invalid `_status_active`, initializes the custom presentation policy, then injects exactly one failure into the tested/forced update. The fixed modeled action requires `STATE_ON`, while the independent fixture baseline must be not-ON; the harness refuses to adapt that policy after observing state.

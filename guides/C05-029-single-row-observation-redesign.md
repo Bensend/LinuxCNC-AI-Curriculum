@@ -14,6 +14,18 @@ Pinned `src/hal/hal.h` defines `HAL_STREAM_MAX_PINS` as **21**. `halsampler -t` 
 
 Current master HAL Python-stream documentation states that each stream sample may contain up to **20 values**, while the pinned source revision exposes the internal `HAL_STREAM_MAX_PINS` value as **21**. Treat this as a version/interface boundary rather than silently choosing one source as universally authoritative. C05-029 deliberately uses **20 configured data pins**, so the evidence transport satisfies both the current documented public bound and the pinned implementation bound. The experiment therefore does not depend on the disputed twenty-first slot.
 
+### Userspace text-serialization precision boundary
+
+Pinned `src/hal/components/sampler_usr.c` reads the realtime FIFO with `hal_stream_read()` and serializes `HAL_REAL` values using:
+
+```c
+printf ( "%f ", buf[n].f);
+```
+
+That C format emits six fractional decimal places. Attempt 8 retained the first usable single-FIFO trace and exposed the consequence directly: analytically same-row transform/controller residuals can acquire about `1e-6` of text-rounding error even though frozen Gate G requires `<=1e-9`. The man page promises ordered samples but does not promise a round-trip float representation.
+
+Therefore a `1e-9` evidence contract cannot be scored from stock `%f` text without either weakening the gate or improving observation serialization. The gate is frozen, so C05-029 uses an **observer-only** pinned-tree build patch changing only that userspace format to `%.17g`. Seventeen significant decimal digits are sufficient to round-trip an IEEE-754 binary64 value; the realtime sampler, HAL stream payload, controller, plant, fault transforms, and scheduling order remain unchanged. The lab must print the observer-only diff/hash so this deviation from a clean pinned worktree is explicit rather than hidden.
+
 ## Frozen-gate field inventory
 
 The C05-029 behavioral gates need the following primitive or directly observed quantities in the same servo-cycle row. The three arithmetic residuals do not require separate realtime pins because each is a deterministic function of primitives already present in that exact row.
@@ -71,7 +83,7 @@ For the decisive observation path:
                           one hal_stream_write() FIFO record
                                                         |
                                                         v
-                              one concurrent halsampler reader
+                   one concurrent high-precision userspace reader
 ```
 
 This removes the previous cross-FIFO equality requirement entirely. There is no second realtime FIFO, no second userspace reader, no exact cross-stream join, and no terminal-set synchronization problem.
@@ -87,3 +99,4 @@ This redesign improves measurement integrity only. It does not make the toy plan
 - Preserve the complete single raw trace before analyzer failure can terminate the wrapper.
 - Require zero sampler overruns and strictly increasing sample numbers.
 - Do not interpolate, delete rows, or perform nearest-neighbor matching.
+- Treat any observer-source patch as evidence plumbing only: print/hash the exact diff and do not alter realtime components or control/fault behavior.

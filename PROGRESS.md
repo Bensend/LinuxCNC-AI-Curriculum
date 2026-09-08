@@ -8,7 +8,7 @@ Repository artifacts, not chat history, are authoritative.
 
 All modules through **T05 — custom operator interface patterns**, **C01 — simulated dual-actuator machine**, **C02 — independent feedback loops**, and **C03 — explicit cross-coupling** are **GRADUATED at 1000 level**.
 
-Phase 10 remains active. The highest-priority unblocked module is **C04 — asymmetric actuator response**, state **EXPERIMENT**.
+Phase 10 remains active. The highest-priority unblocked module is **C04 — asymmetric actuator response**, state **CORRECTIONS**.
 
 C03 graduation evidence is committed in `evaluation/C03-1000-graduation-evaluation.md`: the pre-frozen adversarial exam scored 10/10, the novel saturation+sensor/plant-asymmetry handoff passed, the promotion/counterfactual audit passed, and the accepted C03-025 result remains bounded to the pinned deterministic fixture.
 
@@ -72,13 +72,17 @@ reduced simulated disagreement
 != safety-rated anti-racking protection
 ```
 
-## C04 — asymmetric actuator response — EXPERIMENT
+## C04 — asymmetric actuator response — CORRECTIONS
 
 Pinned revision remains `8bf4605ae81042248add031e94c77300406e0413`.
 
-Research/source guide: `guides/C04-asymmetric-actuator-response-research.md`.
+Research/source guide: `guides/C04-asymmetric-actuator-response-research.md`. Frozen experiment: `experiments/C04-026-asymmetric-authority-plan.md`. Frozen adversarial exam: `evaluation/C04-adversarial-exam-draft.md`.
 
-Pinned `pid.c` shows `maxoutput` clamps each PID instance's final software output, records direction in `limit_state`, asserts `saturated`, accumulates saturation duration/count, and holds same-direction integral accumulation while limited. Pinned `integ.comp` remains the deterministic per-instance toy plant.
+C04-026 attempt 1 authoritative workflow `34231940180`, job `102079994732`, artifact `10058317466`, source commit `5068dea32243f209e4873cc1117a1b2d5ed51dc2` is classified **HARNESS INVALID**, not behavioral FAIL. Detailed reconciliation: `results/C04-026-attempt-1-reconciliation.md`.
+
+Attempt 1 produced 10,111 realtime samples with zero reported overruns and diagnostically showed S1=0, S2=0.377086302, S3=0.687180144, S4=0.0103899042 with exact sampled coupling arithmetic residuals. These values are not accepted gate evidence because two audit defects invalidate the decisive observation: the Gate-F analyzer checked PID-B saturation together with tuple index 8 (PID-A output) instead of tuple index 9 (PID-B output), and the raw realtime trace was not retained because the inherited evidence-copy block ran only after the failing analyzer under `set -e`.
+
+Pinned `pid.c` reconciliation is now explicit: nonzero `maxoutput` clips only when pre-limit output exceeds the bound, sets `limit_state` on clipping, and drives `saturated` plus saturation duration/count from `limit_state`. Therefore equality of final output with the configured limit is not by itself sufficient source evidence that clipping occurred; same-cycle saturation telemetry remains required.
 
 Retained evidence boundary under test:
 
@@ -100,22 +104,15 @@ PID software saturation
 != safety-rated fault decision
 ```
 
-Frozen experiment: `experiments/C04-026-asymmetric-authority-plan.md`. Its unchanged four phases retain `Kc=0.5`, impose truthful plant-B gain asymmetry (`1.0 -> 0.35 -> 0.35 -> 1.0`), impose a B-only `pid.maxoutput=1.0` only in phase 3, record saturation in the same realtime sampler rows, and require recovery after restoring authority/symmetry. The adversarial exam was separately frozen in `evaluation/C04-adversarial-exam-draft.md` before result review.
-
-Executable implementation commit: `5068dea32243f209e4873cc1117a1b2d5ed51dc2`.
-
-Authoritative workflow: `34231940180`, job `102079994732`. At this checkpoint the lab is still executing; no TEST-CONFIRMED claim is permitted until its retained trace and inner result are reconciled against Gates A-H.
-
 ### Exact next-work checkpoint
 
-1. Inspect authoritative workflow `34231940180` only; do not launch a duplicate while it is active.
-2. Preserve/review its raw C04-026 realtime sampler trace, stdout/stderr, artifact and inner exit status.
-3. Reconcile unchanged Gates A-H. A valid failure to saturate at the frozen limit is behavioral evidence, not permission to retune; phase/configuration contamination or missing same-cycle/raw evidence is HARNESS INVALID.
-4. If C04-026 passes, score the already-frozen C04 adversarial exam, perform a novel fresh-AI handoff and promotion/counterfactual audit, and graduate only if all 1000-level floors pass.
-5. C05 owns frozen/scaled/jumping feedback; C04 must not infer sensor-fault cause from ordinary saturation/disagreement evidence.
+1. Correct only the C04-026 observation harness; keep frozen Gates A-H, Kc=0.5, PID gains, plant gains, maxoutput=1.0, phase durations, and thresholds unchanged.
+2. Fix Gate-F PID-B output indexing from tuple `r[8]` to `r[9]`.
+3. Preserve/copy `c04-026-realtime.txt`, stdout/stderr, metadata and exit evidence before any analyzer can terminate the script; verify the next workflow artifact actually contains the raw trace.
+4. Run one authoritative C04-026 attempt 2. Inspect raw phase-3 `satB`, `satCountB`, `outB`, and `maxOutB` rows directly before trusting the summary.
+5. If valid attempt 2 does not produce >=500 consecutive frozen Gate-F saturation rows, classify that as behavioral FAIL rather than retuning. If it passes, score the already-frozen exam, perform fresh-AI handoff and promotion/counterfactual audit, then graduate only if all 1000-level floors pass.
+6. C05 owns frozen/scaled/jumping feedback; C04 must not infer sensor-fault cause from ordinary saturation/disagreement evidence.
 
 ## Laboratory compute / timing notes
 
 `LAB_COMPUTE_LOG.md` contains authoritative compute accounting. Invalid runs are retained rather than hidden. C03 attempts 1-3 and C04-026 should be backfilled from authoritative job timing at the next accounting pass.
-
-Canonical session timing rows live in `LESSON_LOG.md`. Earlier unclosed-session uncertainty must remain explicit rather than being repaired with invented timestamps.

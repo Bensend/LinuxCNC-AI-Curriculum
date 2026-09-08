@@ -6,16 +6,20 @@ Repository artifacts, not chat history, are authoritative.
 
 ## Current critical-path state
 
-All modules through **T05**, **C01**, **C02**, **C03**, and **C04** are **GRADUATED at 1000 level**. Phase 10 remains active. Highest-priority unblocked work is **C05 — feedback sensor failure modes**, state **CORRECTIONS / EXPERIMENT**.
+All modules through **T05**, **C01**, **C02**, **C03**, **C04**, and **C05** are **GRADUATED at 1000 level**. Phase 10 remains active. Highest-priority unblocked work is **C06 — communication/watchdog fault handling**, state **RESEARCH / SOURCE**.
 
-C05 has accepted TEST-CONFIRMED C05-028 frozen-feedback evidence and a **10/10** adversarial exam. It is not graduated because frozen C05-029 scale/jump verification still needs one harness-valid result, followed by fresh-AI transfer and promotion/counterfactual review.
+C05 graduation is supported by accepted TEST-CONFIRMED C05-028 frozen-feedback evidence, accepted TEST-CONFIRMED C05-029 wrong-scale/jump evidence, the already-recorded **10/10** adversarial exam, and the novel-scenario handoff plus promotion/counterfactual audit in `handoffs/C05-novel-feedback-truth-transfer.md`.
 
 ## Blind external-feedback state
 
 - **BL-DEV-001:** VALID, 10/10, 92% confidence.
 - **BL-DEV-002:** VALID, 9/10, 88% confidence. Schedule a novel same-mechanism transfer challenge after roughly 3–8 subsequent lessons.
 
-## C05 retained causal/safety boundary
+## C05 — GRADUATED at 1000 level
+
+Pinned LinuxCNC revision: `8bf4605ae81042248add031e94c77300406e0413`.
+
+Retained boundary:
 
 ```text
 fixture true state != physical metrology truth
@@ -26,34 +30,41 @@ controller reaction to corrupted measurement != proof plant needed correction
 ordinary HAL/PID logic != safety-rated sensor-fault handling
 ```
 
-Pinned LinuxCNC revision: `8bf4605ae81042248add031e94c77300406e0413`.
+C05-028 accepted attempt 2: workflow `34247942092`, job `102134660105`, 5194 realtime samples, zero overruns, frozen measured-B span 0 while toy true-B moved 13.881798 in, max true/measured separation 13.994518 in, frozen Gates A–H PASS.
 
-Primary artifacts: `guides/C05-feedback-sensor-failure-research.md`, `call-flows/C05-true-state-to-faulted-feedback.md`, `experiments/C05-028-feedback-freeze-plan.md`, `experiments/C05-029-scale-jump-plan.md`, `guides/C05-029-single-row-observation-redesign.md`.
+C05-029 accepted attempt 11: workflow `34263426729`, job `102186773618`, artifact `10070970999`, result `results/C05-029-attempt-11-accepted.md`. The single-FIFO atomic observer retained 6,568 strictly ordered 20-field realtime samples with zero overruns. The exact pinned checkout was used; the sole observer-only precision patch changed `HAL_REAL` text serialization from `%f` to `%.17g`. Frozen gates/behavioral parameters were unchanged. Scale transform residual was exactly 0; jump residual was approximately `4.44e-16`, below the frozen `1e-9` threshold. Gates A–H PASS.
 
-### C05-028 — TEST-CONFIRMED
+Attempts 1–10 retain their original harness-invalid classifications; none are converted retroactively into behavioral evidence.
 
-Accepted attempt 2 workflow `34247942092`, job `102134660105`, result `results/C05-028-attempt-2-accepted.md`: 5194 realtime samples, zero overruns, frozen measured-B span 0 while toy true-B moved 13.881798 in, max true/measured separation 13.994518 in, arithmetic residuals at floating-point zero, recovery exact. Frozen Gates A–H PASS.
+Fresh transfer and counterfactual audit: `handoffs/C05-novel-feedback-truth-transfer.md` — PASS. Promoted physical sensor signatures, fault discrimination, and safety-rated redundancy details cannot overturn the demonstrated 1000-level measurement-versus-plant-truth distinction, and the safety boundary remains explicit.
 
-### C05-029 — frozen wrong-scale + jump/offset experiment
+## C06 — communication/watchdog fault handling — RESEARCH / SOURCE
 
-Frozen before implementation: `normal_B=true_B`, `scaled_B=1.20*true_B`, `jumped_B=true_B+0.50 in`. Gates A–H, gains, thresholds, phase durations and transforms may not be retuned after observation.
+Primary new artifact: `guides/C06-communication-watchdog-fault-research.md`.
 
-Attempts 1–7 were harness-invalid. The split-FIFO exact-join family is permanently retired under the repeated-attempt investigation-control rule.
+Pinned-source findings so far:
 
-Attempt 8 workflow `34261998718`, job `102181993196`, artifact `10070374620`, source `6406794f52f7e299705595de8c1d859235bb2d09` successfully exercised the redesigned **single 20-field realtime FIFO**: provenance/topology passed, the fixture homed and entered MDI, zero sampler overruns were reported, and 6,571 raw rows were retained. It is still **HARNESS INVALID** because the inherited analyzer generator deleted its closing `PY` here-document delimiter, so frozen analysis and cleanup never executed. Reconciliation: `results/C05-029-attempt-8-reconciliation.md`.
+- `hm2_eth.c` treats packet/read communication health separately from the HostMot2 FPGA watchdog. Its queued receive path derives `packet-read-timeout`, performs receive, records soft communication errors, and escalates the communication error counter until `io_error` is asserted at `packet-error-limit`.
+- Pinned defaults observed: `packet-read-timeout=80` (percentage-of-thread semantics) and `packet-error-limit=10`.
+- `watchdog.c` exports the watchdog's independent `has_bit`/`timeout_ns` state. Default timeout is 5 ms. Watchdog processing and write/recovery return while low-level `io_error` is active; a watchdog status bite sets `has_bit` and `needs_reset`.
+- `hm2_watchdog_write()` enables/maintains the watchdog during normal service and uses `hm2_force_write()` when reset state is pending; it warns when watchdog timeout is dangerously short relative to the service period.
 
-Attempt-8 raw evidence plus pinned source exposed a second observation boundary: pinned `src/hal/components/sampler_usr.c` serializes `HAL_REAL` with `%f`, limiting text to six fractional decimals and introducing roughly `1e-6` quantization into equations whose frozen residual threshold is `1e-9`. The threshold was not weakened. Source guide `guides/C05-029-single-row-observation-redesign.md` now requires an explicit observer-only `%f` -> `%.17g` build patch, with diff/hash evidence, while leaving realtime LinuxCNC/controller/fault behavior unchanged.
+Retained C06 boundary:
 
-Attempt 9 workflow `34262965164`, job `102185236542`, artifact `10070659035` was **HARNESS INVALID** before configure because a nested generated Python observer block leaked Python syntax into shell. Attempt 10 workflow `34263179781`, job `102185951531`, artifact `10070739669` was **HARNESS INVALID** before configure because the observer shell was emitted as a Python raw string, leaving literal `\n` characters instead of shell line breaks. Reconciliations: `results/C05-029-attempt-9-reconciliation.md` and `results/C05-029-attempt-10-reconciliation.md`.
-
-Attempt 11 is launched from `lab-jobs/040-c05-scale-jump-atomic-precision-final.sh`, source commit `374e4c159a18e340a70b014a375f8e1fe7edb04d`, authoritative workflow **`34263426729`**, job **`102186773618`**. It changes only the reproduced generator defect (`obs_shell` raw-string -> normal-string semantics); the one-FIFO field map, high-precision observer design, analyzer delimiter correction, frozen Gates A-H and all behavioral parameters are unchanged. At this checkpoint the job is still executing, so no C05-029 behavioral verdict is recorded and no duplicate should be launched.
+```text
+packet error != permanent io-error
+io-error != necessarily watchdog bite
+host receive timeout != proof FPGA watchdog status
+watchdog bite != proof complete physical safe state
+fault reset != proof plant is safe to resume
+ordinary HostMot2/HAL fault handling != functional-safety certification
+```
 
 ## Exact next-work checkpoint
 
-1. Inspect only workflow `34263426729`, job `102186773618` after completion; do not launch a duplicate while it is running.
-2. Require the artifact to prove the exact pinned checkout plus an explicit observer-only `sampler_usr.c` diff/hash changing only `printf("%f")` to `printf("%.17g")` for `HAL_REAL` serialization.
-3. Require one raw 20-field realtime FIFO trace, strictly increasing sample numbers, zero overruns, all phase/transition rows retained, and frozen Gates A–H unchanged.
-4. If the run is harness-valid, reconcile the result against the already-frozen scale/jump equations and `1e-9` residual thresholds without retuning. A genuine behavioral failure remains falsifying evidence.
-5. If harness-valid/pass, commit the accepted C05-029 result, execute fresh-AI transfer and promotion/counterfactual audit, and graduate C05 only if those pass.
-6. After C05 graduation advance to **C06 — communication/watchdog fault handling**.
-7. Backfill C05-029 attempts 8 onward compute from authoritative job timestamps; C03/C04 historical backfill remains queued and non-blocking.
+1. Continue pinned-source tracing from HostMot2 generic `read`/`write` through low-level hm2_eth queued read/write operations and place watchdog prepare/process calls in exact TRAM/servo-cycle order.
+2. Trace every relevant state transition among `packet-error`, `packet-error-level`, `packet-error-exceeded`, `io_error`, `needs_reset`, `needs_soft_reset`, and `watchdog.has_bit`, including user-reset/recovery branches.
+3. Inventory existing LinuxCNC tests or mock low-level interfaces that can inject deterministic communication failures without physical Ethernet hardware. Prefer an existing seam over timing-dependent host-network disruption.
+4. Perform one prediction check before viewing its independent confirming evidence.
+5. Freeze C06's first behavioral experiment before implementation. It must distinguish at minimum a transient packet/read error, escalated communication `io_error`, watchdog-bite state, and recovery; do not weaken thresholds after observing results.
+6. Backfill C05-029 attempts 8–11 lab compute and queued C03/C04 historical compute when it does not interrupt the critical path.

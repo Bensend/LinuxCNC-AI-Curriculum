@@ -6,9 +6,70 @@ Status values: `PLANNED`, `RESEARCH`, `SOURCE`, `EXPERIMENT`, `EXAM`, `CORRECTIO
 
 All modules through **T05 — custom operator interface patterns** are **GRADUATED at 1000 level**. Phase 9 is complete.
 
-The next curriculum module is **C01 — simulated dual-actuator machine**, but Phase 10 activation is currently gated by the required **blind development-bank baseline** specified in `evaluation/BLIND_FEEDBACK_PROTOCOL.md`. That baseline has not been fabricated because genuine evaluator/learner information separation is required.
+The required blind development baseline has now been completed validly, so Phase 10 is active. **C01 — simulated dual-actuator machine** is now **EXPERIMENT** at the frozen C01-023 checkpoint.
 
 Repository artifacts, not chat history, remain authoritative.
+
+## Blind development baseline — BL-DEV-001
+
+The learner response was immutably committed in `evaluation/development/BL-DEV-001-precommit.md` at commit `2117ac7103f929a0d90b59551785500d2b59b874` before pinned implementation/documentation oracle inspection.
+
+Challenge competency: HAL same-thread ordering and one-cycle stale-data propagation through a deliberately inverted producer/consumer schedule.
+
+Result:
+
+- blind validity: **VALID**;
+- score: **10/10**;
+- confidence: **92%**;
+- solve time to immutable commit: **0.48 min**;
+- error class: none;
+- detailed evaluation: `evaluation/development/BL-DEV-001-evaluation.md`;
+- score ledger updated in `evaluation/FEEDBACK_SCORE_LOG.md`.
+
+No immediate corrective transfer retest is required because there was no miss/partial miss. A novel retention/development challenge should sample a different mechanism after roughly 10 subsequent lessons or about 24 hours, preserving the actual delay. One baseline score is not evidence of a study-method trend.
+
+## C01 — simulated dual-actuator machine
+
+Pinned revision: `8bf4605ae81042248add031e94c77300406e0413`.
+
+### Current source result
+
+C01 uses LinuxCNC's generalized duplicated-coordinate `trivkins` mechanism rather than the deprecated legacy `gantry` HAL component.
+
+Pinned source establishes:
+
+```text
+trivkins rtapi_app_main()
+  -> allow_duplicates = 1
+  -> identityKinematicsSetup()
+      -> map_coordinates_to_jnumbers()
+
+world pose
+  -> trivkins::kinematicsInverse()
+  -> identityKinematicsInverse()
+  -> position_to_mapped_joints()
+  -> duplicated coordinate copied into every mapped joint
+```
+
+For the pinned upstream `XYZY` gantry fixture, Y maps to joint 1 and joint 3. `lib/hallib/gantrysim.hal` preserves distinct `joint.1.*` and `joint.3.*` command/feedback/enable/fault interfaces.
+
+Important retained boundary: forward mapping uses the principal/first duplicated joint for the world coordinate; duplicated `trivkins` is therefore command fan-out, **not** an automatic two-joint disagreement detector or synchronization controller.
+
+### Durable C01 artifacts
+
+- `guides/C01-simulated-dual-actuator-research.md`;
+- `call-flows/C01-world-coordinate-to-duplicate-joints.md`;
+- frozen `experiments/C01-023-dual-joint-command-fanout-plan.md`.
+
+Current official documentation confirms that duplicate coordinate letters may assign multiple joints to one axis coordinate and recommends `KINEMATICS_BOTH` where independent joint/world operation is needed. The legacy `gantry` component is documented as superseded by `trivkins`. Community gantry reports were used as investigation leads and reconciled against source/upstream examples.
+
+### Frozen C01-023 prediction
+
+A meaningful coordinated Y move in a running pinned `trivkins coordinates=XYZY kinstype=BOTH` fixture will cause both `joint.1.motor-pos-cmd` and `joint.3.motor-pos-cmd` to change and remain equal within `1e-9` machine units, while the joint endpoints remain separately observable.
+
+The upstream simulation's per-joint command-to-feedback loopback is explicitly treated as an ideal fixture property. It cannot prove physical actuator synchronization, independent-loop behavior, fault tolerance, or functional safety.
+
+**Exact next-work checkpoint:** implement `lab-jobs/023-c01-dual-joint-command-fanout.sh` exactly against frozen C01-023 Gates A-H, auto-launch it once, preserve the authoritative workflow/job/artifact and raw command/feedback trace, then reconcile the unchanged gates. If valid, continue C01 adversarial exam/fresh-AI handoff/graduation; if the runtime cannot establish world motion or provenance, classify HARNESS INVALID rather than weakening the gates.
 
 ## T03 retained boundary
 
@@ -22,36 +83,9 @@ T04-021 workflow `34186879941`, job `101936899842`, artifact `10040862703`, exit
 
 Retained rule: **a rendered GUI value is a presentation claim. Identify its source and freshness before treating it as current controller state; controller/HAL/physical/safety evidence remain separate.**
 
-## T05 graduated evidence
+## T05 retained boundary / promotion queue
 
-Pinned revision: `8bf4605ae81042248add031e94c77300406e0413`.
-
-Durable artifacts include:
-
-- `guides/T05-custom-operator-interface-research.md`;
-- `call-flows/T05-custom-operator-interface-boundaries.md`;
-- frozen `experiments/T05-022-startup-freshness-gating-plan.md`;
-- rejected-run analysis `experiments/T05-022-attempt1-harness-diagnosis.md`;
-- corrected `lab-jobs/022-t05-startup-freshness-gating.sh`;
-- accepted result `experiments/T05-022-accepted-result.md`;
-- `exams/T05-custom-operator-interface-adversarial.md`;
-- `checkpoints/T05-fresh-ai-handoff.md`;
-- `checkpoints/T05-graduation-decision.md`.
-
-### Source/call-flow result
-
-Representative HALUI paths:
-
-```text
-HAL input transition -> check_hal_changes() -> send*() -> emcCommandSend() -> Task
-NML status -> updateStatus() -> modify_hal_pins() -> halui.* status output
-```
-
-HALUI input pins represent operator intent; HALUI status pins are userspace projections of received controller status, not direct realtime/physical/safety truth.
-
-Pinned QtVCP screen startup proves handler `initialized__()` precedes the explicit `STATUS.forced_update()` synchronization point. T05-022 attempt 1 then exposed an important nuance: `_GStat.__init__()` itself can make a best-effort `stat.poll()+merge()` while `_status_active` remains false. The guide was corrected accordingly.
-
-Retained startup rule:
+Pinned QtVCP/HALUI work established:
 
 ```text
 GStat construction / retained cache
@@ -61,42 +95,7 @@ GStat construction / retained cache
 != safety authority
 ```
 
-### T05-022 attempt history
-
-Attempt 1 — workflow `34189716347`, job `101945103662`, artifact `10041831379`, exit `24`: **HARNESS INVALID**. The proxy was blocked before GStat construction, so constructor and tested update both failed; the implementation also adapted the policy to the observed baseline. No behavioral verdict was taken.
-
-Attempt 2 — workflow `34193926426`, job `101957458393`, artifact `10043263546`, source commit `593f30df11611c76b7707d90b2a4a94b7b796104`, exit `0`: **TEST-CONFIRMED**. Frozen Gates A-H passed unchanged.
-
-Decisive evidence included:
-
-```text
-independent-controller-state=0 policy-required-state-on=4
-gstat-construction attempts=1 failures=0 cached-state=0 valid=0
-first-tested-observation valid=0 attempt-delta=1 failure-delta=1 events=['periodic']
-gate-D=PASS
-gate-E=PASS
-gate-F=PASS
-recovery valid=1 cached-state=0 independent-state=0 gated-enabled=0 expected-enabled=0
-gate-G=PASS
-gate-H=PASS
-T05-022 overall=PASS
-```
-
-The experiment supports the 1000-level policy: **start controller-dependent UI actions fail-defined and require explicit successful/current observation evidence for advisory enablement. Construction cache and GUI responsiveness are not freshness certificates.**
-
-### T05 graduation checks
-
-- source mechanism and representative call flows: PASS;
-- official documentation and community pass: PASS;
-- predeclared experiment with independent runtime evidence: PASS;
-- failure/harness correction: PASS;
-- adversarial exam: 10/10 PASS;
-- fresh-AI novel scenario: PASS;
-- higher-level promotion queue: populated;
-- counterfactual promotion test: PASS;
-- minimum 1000-level evidence floor: PASS.
-
-## T05 promotion queue
+T05 higher-level promotions remain:
 
 - multi-command-producer correlation/races — 2000 HIGH;
 - error-channel fan-out/multiple consumers — 2000 HIGH;
@@ -104,19 +103,9 @@ The experiment supports the 1000-level policy: **start controller-dependent UI a
 - physical pendant/HALUI latency and failure behavior — 2000 MEDIUM;
 - safety-HMI architecture/certification — specialized higher level.
 
-None can overturn the central 1000-level separation between presentation, freshness, semantic result, physical truth and safety authority.
-
-## Blind-feedback checkpoint — current blocker before Phase 10
-
-The development-bank blind baseline required after T03 remains unscored. `evaluation/FEEDBACK_SCORE_LOG.md` is intentionally empty rather than contaminated.
-
-**Exact next-work checkpoint:** establish a genuinely blind challenge with evaluator/learner information separation; expose only the challenge packet and allowed resources; commit the learner's prediction/diagnosis/mechanism/observable result/diagnostic path/falsifier/confidence/time/resources **before** revealing the hidden oracle; then obtain the external result, score all five dimensions, record error class/correction/transfer plan, append `evaluation/FEEDBACK_SCORE_LOG.md`, and only then activate **C01 — simulated dual-actuator machine**.
-
-If the runtime cannot provide an information-separated evaluator/oracle, do not fake a baseline or inspect a hidden answer in the learner role.
-
 ## Laboratory compute checkpoint
 
-`LAB_COMPUTE_LOG.md` now exactly backfills T02-019 through T05-022 attempt 2: **18.1 minutes (0.30 h)** of authoritative job time, plus unbackfilled historical usage. T05 attempt 1 is counted despite being harness-invalid.
+`LAB_COMPUTE_LOG.md` exactly backfills T02-019 through T05-022 attempt 2: **18.1 minutes (0.30 h)** of authoritative job time, plus unbackfilled historical usage. No C01 lab compute has yet been consumed at this checkpoint.
 
 ## Session-recovery / overlap note retained
 

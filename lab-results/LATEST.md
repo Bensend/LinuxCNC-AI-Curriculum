@@ -1,63 +1,63 @@
 # Latest LinuxCNC Lab Result
 
-- Job: `020-t03-nml-ack-vs-semantic-result`
-- Job file: `lab-jobs/020-t03-nml-ack-vs-semantic-result.sh`
-- Workflow run ID: `34182846956`
+- Job: `021-t04-gui-status-freshness`
+- Job file: `lab-jobs/021-t04-gui-status-freshness.sh`
+- Workflow run ID: `34186879941`
 - Attempt: `1`
-- Source commit: `0877652c3fe82722d99d81616c07a864ac3ae418`
+- Source commit: `8b7ad745f9bf286981620b42ea3f9166711e68ed`
 - Exit code: `0`
-- Finished UTC: `2026-09-08T03:18:25Z`
+- Finished UTC: `2026-09-08T04:27:36Z`
 
 ## Metadata
 ```text
 LinuxCNC AI Curriculum Lab
-UTC start: 2026-09-08T03:14:59Z
-Repository commit: 0877652c3fe82722d99d81616c07a864ac3ae418
-Workflow run: 34182846956 attempt 1
-Job file: lab-jobs/020-t03-nml-ack-vs-semantic-result.sh
+UTC start: 2026-09-08T04:24:34Z
+Repository commit: 8b7ad745f9bf286981620b42ea3f9166711e68ed
+Workflow run: 34186879941 attempt 1
+Job file: lab-jobs/021-t04-gui-status-freshness.sh
 Runner: Linux runnervmejwal 6.17.0-1022-azure #22-Ubuntu SMP Mon Jul 27 17:24:03 UTC 2026 x86_64 x86_64 x86_64 GNU/Linux
 Inner lab timeout: 70 minutes (job ceiling: 75 minutes)
 
-UTC finish: 2026-09-08T03:18:25Z
+UTC finish: 2026-09-08T04:27:36Z
 ```
 
 ## Standard output
 ```text
-== T03-020 NML acknowledgement versus semantic result ==
-UTC start: 2026-09-08T03:14:59Z
+== T04-021 GUI status freshness versus retained presentation ==
+UTC start: 2026-09-08T04:24:34Z
 Pinned upstream commit: 8bf4605ae81042248add031e94c77300406e0413
-Frozen negative prediction: AUTO_STEP while independently confirmed ESTOP is assigned/echoed a serial but has matching aggregate ERROR and independent operator-error evidence.
-Boundary: command echo is transport/order evidence, not semantic, physical, or safety success.
+Frozen prediction: after a deliberate GUI-adapter poll failure, independent controller state can advance while GStat cached/presented state remains at its prior value; the next successful poll catches up.
+Boundary: this is GUI/status-adapter freshness evidence, not remote packet-loss, physical E-stop, or safety validation.
 Get:1 file:/etc/apt/apt-mirrors.txt Mirrorlist [144 B]
 Hit:2 http://azure.archive.ubuntu.com/ubuntu noble InRelease
-Get:6 https://packages.microsoft.com/ubuntu/24.04/prod noble InRelease [3600 B]
 Get:3 http://azure.archive.ubuntu.com/ubuntu noble-updates InRelease [126 kB]
 Get:4 http://azure.archive.ubuntu.com/ubuntu noble-backports InRelease [126 kB]
 Get:5 http://azure.archive.ubuntu.com/ubuntu noble-security InRelease [126 kB]
-Get:7 https://dl.google.com/linux/chrome-stable/deb stable InRelease [2548 B]
-Get:8 https://packages.microsoft.com/ubuntu/24.04/prod noble/main arm64 Packages [394 kB]
-Get:9 https://packages.microsoft.com/ubuntu/24.04/prod noble/main amd64 Packages [441 kB]
-Get:10 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 Packages [1260 kB]
-Get:11 http://azure.archive.ubuntu.com/ubuntu noble-updates/main Translation-en [292 kB]
-Get:12 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 Components [180 kB]
-Get:13 http://azure.archive.ubuntu.com/ubuntu noble-updates/universe amd64 Packages [1691 kB]
-Get:14 http://azure.archive.ubuntu.com/ubuntu noble-updates/universe Translation-en [339 kB]
-Get:15 http://azure.archive.ubuntu.com/ubuntu noble-updates/universe amd64 Components [388 kB]
-Get:16 http://azure.archive.ubuntu.com/ubuntu noble-updates/restricted amd64 Packages [1536 kB]
-Get:17 http://azure.archive.ubuntu.com/ubuntu noble-updates/restricted Translation-en [352 kB]
-Get:18 http://azure.archive.ubuntu.com/ubuntu noble-updates/multiverse amd64 Components [940 B]
-Get:19 http://azure.archive.ubuntu.com/ubuntu noble-backports/main amd64 Components [5760 B]
-Get:20 http://azure.archive.ubuntu.com/ubuntu noble-backports/universe amd64 Components [12.6 kB]
-Get:21 http://azure.archive.ubuntu.com/ubuntu noble-security/main amd64 Packages [1002 kB]
-Get:22 http://azure.archive.ubuntu.com/ubuntu noble-security/main Translation-en [212 kB]
-Get:23 http://azure.archive.ubuntu.com/ubuntu noble-security/main amd64 Components [46.3 kB]
-Get:24 http://azure.archive.ubuntu.com/ubuntu noble-security/universe amd64 Packages [1206 kB]
-Get:25 http://azure.archive.ubuntu.com/ubuntu noble-security/universe Translation-en [241 kB]
-Get:26 http://azure.archive.ubuntu.com/ubuntu noble-security/universe amd64 Components [76.2 kB]
-Get:27 http://azure.archive.ubuntu.com/ubuntu noble-security/restricted amd64 Packages [1437 kB]
-Get:28 http://azure.archive.ubuntu.com/ubuntu noble-security/restricted Translation-en [334 kB]
+Get:6 https://packages.microsoft.com/ubuntu/24.04/prod noble InRelease [3600 B]
+Get:7 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 Packages [1260 kB]
+Get:8 http://azure.archive.ubuntu.com/ubuntu noble-updates/main Translation-en [292 kB]
+Get:9 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 Components [180 kB]
+Get:10 http://azure.archive.ubuntu.com/ubuntu noble-updates/universe amd64 Packages [1691 kB]
+Get:11 http://azure.archive.ubuntu.com/ubuntu noble-updates/universe Translation-en [339 kB]
+Get:12 http://azure.archive.ubuntu.com/ubuntu noble-updates/universe amd64 Components [388 kB]
+Get:13 http://azure.archive.ubuntu.com/ubuntu noble-updates/restricted amd64 Packages [1536 kB]
+Get:14 http://azure.archive.ubuntu.com/ubuntu noble-updates/restricted Translation-en [352 kB]
+Get:15 http://azure.archive.ubuntu.com/ubuntu noble-updates/multiverse amd64 Components [940 B]
+Get:16 http://azure.archive.ubuntu.com/ubuntu noble-backports/main amd64 Components [5760 B]
+Get:18 https://dl.google.com/linux/chrome-stable/deb stable InRelease [2548 B]
+Get:17 http://azure.archive.ubuntu.com/ubuntu noble-backports/universe amd64 Components [12.6 kB]
+Get:19 http://azure.archive.ubuntu.com/ubuntu noble-security/main amd64 Packages [1002 kB]
+Get:20 http://azure.archive.ubuntu.com/ubuntu noble-security/main Translation-en [212 kB]
+Get:21 http://azure.archive.ubuntu.com/ubuntu noble-security/main amd64 Components [46.3 kB]
+Get:22 http://azure.archive.ubuntu.com/ubuntu noble-security/universe amd64 Packages [1206 kB]
+Get:23 http://azure.archive.ubuntu.com/ubuntu noble-security/universe Translation-en [241 kB]
+Get:24 http://azure.archive.ubuntu.com/ubuntu noble-security/universe amd64 Components [76.2 kB]
+Get:25 http://azure.archive.ubuntu.com/ubuntu noble-security/restricted amd64 Packages [1437 kB]
+Get:26 http://azure.archive.ubuntu.com/ubuntu noble-security/restricted Translation-en [334 kB]
+Get:27 https://packages.microsoft.com/ubuntu/24.04/prod noble/main arm64 Packages [394 kB]
+Get:28 https://packages.microsoft.com/ubuntu/24.04/prod noble/main amd64 Packages [441 kB]
 Get:29 https://dl.google.com/linux/chrome-stable/deb stable/main amd64 Packages [1403 B]
-Fetched 11.8 MB in 1s (8437 kB/s)
+Fetched 11.8 MB in 1s (9697 kB/s)
 Reading package lists...
 Reading package lists...
 Building dependency tree...
@@ -69,6 +69,8 @@ netcat-openbsd set to manually installed.
 procps is already the newest version (2:4.0.4-4ubuntu3.3).
 procps set to manually installed.
 python3 is already the newest version (3.12.3-0ubuntu2.1).
+python3-gi is already the newest version (3.48.2-1).
+python3-gi set to manually installed.
 The following additional packages will be installed:
   autopoint dctrl-tools debhelper dh-autoreconf dh-strip-nondeterminism
   diffstat dput dwz gettext intltool-debian libaliased-perl libapt-pkg-perl
@@ -119,8 +121,8 @@ The following additional packages will be installed:
   libwww-mechanize-perl libwww-perl libwww-robotrules-perl
   libxs-parse-keyword-perl libxs-parse-sublike-perl libyaml-libyaml-perl
   licensecheck lintian lzip lzop patchutils perl-openssl-defaults po-debconf
-  python3-gpg python3-nacl python3-paramiko python3-unidiff python3-xdg
-  t1utils wdiff
+  python3-gpg python3-nacl python3-paramiko python3-py python3-unidiff
+  python3-xdg t1utils wdiff
 Suggested packages:
   debtags dh-make adequate at autopkgtest bls-standalone bsd-mailx | mailx
   check-all-the-things cvs-buildpackage diffoscope disorderfs dose-extra duck
@@ -132,8 +134,8 @@ Suggested packages:
   libdigest-hmac-perl libgssapi-perl libxml-parser-perl libcrypt-ssleay-perl
   libscalar-number-perl libbareword-filehandles-perl libmultidimensional-perl
   libxstring-perl libauthen-ntlm-perl binutils-multiarch libtext-template-perl
-  libmail-box-perl python-nacl-doc python3-gssapi python3-invoke
-  python-pyxdg-doc wdiff-doc
+  libmail-box-perl python-nacl-doc python3-gssapi python3-invoke subversion
+  python3-pytest python-pyxdg-doc wdiff-doc
 The following NEW packages will be installed:
   autopoint build-essential dctrl-tools debhelper devscripts dh-autoreconf
   dh-strip-nondeterminism diffstat dput dwz equivs gettext intltool-debian
@@ -184,11 +186,11 @@ The following NEW packages will be installed:
   libwww-mechanize-perl libwww-perl libwww-robotrules-perl
   libxs-parse-keyword-perl libxs-parse-sublike-perl libyaml-libyaml-perl
   licensecheck lintian lzip lzop patchutils perl-openssl-defaults po-debconf
-  python3-gpg python3-nacl python3-paramiko python3-unidiff python3-xdg
-  t1utils wdiff
-0 upgraded, 168 newly installed, 0 to remove and 44 not upgraded.
-Need to get 11.0 MB of archives.
-After this operation, 36.7 MB of additional disk space will be used.
+  python3-gpg python3-nacl python3-paramiko python3-py python3-unidiff
+  python3-xdg python3-zmq t1utils wdiff
+0 upgraded, 170 newly installed, 0 to remove and 44 not upgraded.
+Need to get 11.3 MB of archives.
+After this operation, 38.5 MB of additional disk space will be used.
 Get:1 file:/etc/apt/apt-mirrors.txt Mirrorlist [144 B]
 Get:2 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 autopoint all 0.21-14ubuntu2 [422 kB]
 Get:3 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 build-essential amd64 12.10ubuntu1 [4928 B]
@@ -355,10 +357,12 @@ Get:163 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 t1utils amd64 1.
 Get:164 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 lintian all 2.117.0ubuntu1.5 [1063 kB]
 Get:165 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 python3-nacl amd64 1.5.0-4build1 [57.9 kB]
 Get:166 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 python3-paramiko all 2.12.0-2ubuntu4.1 [137 kB]
-Get:167 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 python3-unidiff all 0.7.3-1 [11.0 kB]
-Get:168 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 equivs all 2.3.1 [19.0 kB]
-Get:169 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 libauthen-sasl-perl all 2.1700-1 [42.9 kB]
-Fetched 11.0 MB in 12s (945 kB/s)
+Get:167 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 python3-py all 1.11.0-2 [72.7 kB]
+Get:168 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 python3-unidiff all 0.7.3-1 [11.0 kB]
+Get:169 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 python3-zmq amd64 24.0.1-5build1 [286 kB]
+Get:170 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 equivs all 2.3.1 [19.0 kB]
+Get:171 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 libauthen-sasl-perl all 2.1700-1 [42.9 kB]
+Fetched 11.3 MB in 6s (1766 kB/s)
 Selecting previously unselected package autopoint.
 (Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 201676 files and directories currently installed.)
 Preparing to unpack .../000-autopoint_0.21-14ubuntu2_all.deb ...
@@ -857,14 +861,20 @@ Unpacking python3-nacl (1.5.0-4build1) ...
 Selecting previously unselected package python3-paramiko.
 Preparing to unpack .../164-python3-paramiko_2.12.0-2ubuntu4.1_all.deb ...
 Unpacking python3-paramiko (2.12.0-2ubuntu4.1) ...
+Selecting previously unselected package python3-py.
+Preparing to unpack .../165-python3-py_1.11.0-2_all.deb ...
+Unpacking python3-py (1.11.0-2) ...
 Selecting previously unselected package python3-unidiff.
-Preparing to unpack .../165-python3-unidiff_0.7.3-1_all.deb ...
+Preparing to unpack .../166-python3-unidiff_0.7.3-1_all.deb ...
 Unpacking python3-unidiff (0.7.3-1) ...
+Selecting previously unselected package python3-zmq.
+Preparing to unpack .../167-python3-zmq_24.0.1-5build1_amd64.deb ...
+Unpacking python3-zmq (24.0.1-5build1) ...
 Selecting previously unselected package equivs.
-Preparing to unpack .../166-equivs_2.3.1_all.deb ...
+Preparing to unpack .../168-equivs_2.3.1_all.deb ...
 Unpacking equivs (2.3.1) ...
 Selecting previously unselected package libauthen-sasl-perl.
-Preparing to unpack .../167-libauthen-sasl-perl_2.1700-1_all.deb ...
+Preparing to unpack .../169-libauthen-sasl-perl_2.1700-1_all.deb ...
 Unpacking libauthen-sasl-perl (2.1700-1) ...
 Setting up libapt-pkg-perl (0.1.40build7) ...
 Setting up libstring-escape-perl (2010.002-3) ...
@@ -880,6 +890,7 @@ Setting up libfile-listing-perl (6.16-1) ...
 Setting up libregexp-pattern-perl (0.2.14-2) ...
 Setting up libdata-messagepack-perl (1.02-1build4) ...
 Setting up libfont-afm-perl (1.20-4) ...
+Setting up python3-py (1.11.0-2) ...
 Setting up libdynaloader-functions-perl (0.003-3) ...
 Setting up libtext-glob-perl (0.11-3) ...
 Setting up libclass-method-modifiers-perl (2.15-1) ...
@@ -931,6 +942,7 @@ Setting up libipc-system-simple-perl (1.30-2) ...
 Setting up libnet-domain-tld-perl (1.75-3) ...
 Setting up libperlio-utf8-strict-perl (0.010-1build3) ...
 Setting up libsocket6-perl (0.29-3build3) ...
+Setting up python3-zmq (24.0.1-5build1) ...
 Setting up lzip (1.24.1-1build1) ...
 update-alternatives: using /usr/bin/lzip.lzip to provide /usr/bin/lzip (lzip) in auto mode
 update-alternatives: using /usr/bin/lzip.lzip to provide /usr/bin/lzip-compressor (lzip-compressor) in auto mode
@@ -1052,7 +1064,7 @@ I: You can now start the build of LinuxCNC Debian packages.
    To avoid documentation: DEB_BUILD_OPTIONS=nodocs fakeroot debian/rules binary
    The DEB_BUILD_OPTIONS environment variable also works with dpkg-buildpackage.
 W: To successfully build all of LinuxCNC, install the following build dependencies are mising:
-     dh-python libudev-dev imagemagick asciidoctor libunicode-linebreak-perl bwidget (>= 1.7) desktop-file-utils intltool libboost-python-dev libepoxy-dev libgl-dev | libgl1-mesa-dev libglu1-mesa-dev libgtk-3-dev libcap-dev libmodbus-dev (>= 3.0) libgpiod-dev libeditreadline-dev libtirpc-dev libusb-1.0-0-dev libxmu-dev netpbm po4a python3-pybind11 python3-tk python3-xlib tcl8.6-dev tclx tk8.6-dev x11-xserver-utils x11-utils gdb python3-opengl python3-pyqt5 python3-pyqt5.qsci python3-pyqt5.qtsvg python3-pyqt5.qtopengl python3-pyqt5.qtwebengine pyqt5-dev-tools python3-dbus.mainloop.pyqt5 python3-qtpy python3-zmq python3-cairo python3-gi-cairo gir1.2-gtk-3.0 gir1.2-gtksource-4 python3-numpy libfmt-dev yapps2 asciidoctor-pdf | ruby-asciidoctor-pdf fonts-noto-cjk ghostscript graphviz librsvg2-bin python3-fonttools ruby-rouge w3c-linkchecker
+     dh-python libudev-dev imagemagick asciidoctor libunicode-linebreak-perl bwidget (>= 1.7) desktop-file-utils intltool libboost-python-dev libepoxy-dev libgl-dev | libgl1-mesa-dev libglu1-mesa-dev libgtk-3-dev libcap-dev libmodbus-dev (>= 3.0) libgpiod-dev libeditreadline-dev libtirpc-dev libusb-1.0-0-dev libxmu-dev netpbm po4a python3-pybind11 python3-tk python3-xlib tcl8.6-dev tclx tk8.6-dev x11-xserver-utils x11-utils gdb python3-opengl python3-pyqt5 python3-pyqt5.qsci python3-pyqt5.qtsvg python3-pyqt5.qtopengl python3-pyqt5.qtwebengine pyqt5-dev-tools python3-dbus.mainloop.pyqt5 python3-qtpy python3-cairo python3-gi-cairo gir1.2-gtk-3.0 gir1.2-gtksource-4 python3-numpy libfmt-dev yapps2 asciidoctor-pdf | ruby-asciidoctor-pdf fonts-noto-cjk ghostscript graphviz librsvg2-bin python3-fonttools ruby-rouge w3c-linkchecker
    The missing packages are auto-installed by
      sudo apt build-dep .
 Note, using directory '.' to get the build dependencies
@@ -1115,29 +1127,28 @@ The following NEW packages will be installed:
   poppler-data pybind11-dev pyqt5-dev-tools python3-appdirs python3-brotli
   python3-cairo python3-dbus.mainloop.pyqt5 python3-decorator
   python3-fonttools python3-fs python3-gi-cairo python3-lxml python3-lz4
-  python3-mpmath python3-numpy python3-opengl python3-py python3-pybind11
-  python3-pyqt5 python3-pyqt5.qsci python3-pyqt5.qtchart
-  python3-pyqt5.qtmultimedia python3-pyqt5.qtopengl
-  python3-pyqt5.qtpositioning python3-pyqt5.qtquick
+  python3-mpmath python3-numpy python3-opengl python3-pybind11 python3-pyqt5
+  python3-pyqt5.qsci python3-pyqt5.qtchart python3-pyqt5.qtmultimedia
+  python3-pyqt5.qtopengl python3-pyqt5.qtpositioning python3-pyqt5.qtquick
   python3-pyqt5.qtremoteobjects python3-pyqt5.qtsensors
   python3-pyqt5.qtserialport python3-pyqt5.qtsql python3-pyqt5.qtsvg
   python3-pyqt5.qttexttospeech python3-pyqt5.qtwebchannel
   python3-pyqt5.qtwebengine python3-pyqt5.qtwebkit python3-pyqt5.qtwebsockets
   python3-pyqt5.qtxmlpatterns python3-pyqt5.sip python3-qtpy python3-scipy
   python3-sympy python3-tk python3-ufolib2 python3-unicodedata2 python3-xlib
-  python3-yapps python3-zmq ruby-addressable ruby-afm ruby-ascii85
-  ruby-asciidoctor ruby-asciidoctor-pdf ruby-concurrent ruby-css-parser
-  ruby-hashery ruby-pdf-core ruby-pdf-reader ruby-polyglot ruby-prawn
-  ruby-prawn-icon ruby-prawn-svg ruby-prawn-table ruby-prawn-templates
-  ruby-public-suffix ruby-rc4 ruby-rouge ruby-treetop ruby-ttfunk tcl8.6-dev
-  tclx8.4 tk8.6-blt2.5 tk8.6-dev unicode-data uuid-dev w3c-linkchecker
-  wayland-protocols x11-utils x11-xserver-utils x11proto-dev xfonts-encodings
-  xfonts-utils xorg-sgml-doctools xtrans-dev yapps2
+  python3-yapps ruby-addressable ruby-afm ruby-ascii85 ruby-asciidoctor
+  ruby-asciidoctor-pdf ruby-concurrent ruby-css-parser ruby-hashery
+  ruby-pdf-core ruby-pdf-reader ruby-polyglot ruby-prawn ruby-prawn-icon
+  ruby-prawn-svg ruby-prawn-table ruby-prawn-templates ruby-public-suffix
+  ruby-rc4 ruby-rouge ruby-treetop ruby-ttfunk tcl8.6-dev tclx8.4 tk8.6-blt2.5
+  tk8.6-dev unicode-data uuid-dev w3c-linkchecker wayland-protocols x11-utils
+  x11-xserver-utils x11proto-dev xfonts-encodings xfonts-utils
+  xorg-sgml-doctools xtrans-dev yapps2
 The following packages will be upgraded:
   libevent-core-2.1-7t64 libevent-pthreads-2.1-7t64
-2 upgraded, 326 newly installed, 0 to remove and 42 not upgraded.
+2 upgraded, 324 newly installed, 0 to remove and 42 not upgraded.
 Need to get 270 MB of archives.
-After this operation, 1015 MB of additional disk space will be used.
+After this operation, 1014 MB of additional disk space will be used.
 Get:1 file:/etc/apt/apt-mirrors.txt Mirrorlist [144 B]
 Get:2 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 libdebuginfod-common all 0.190-1.1ubuntu0.1 [14.6 kB]
 Get:3 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 liborc-0.4-0t64 amd64 1:0.4.38-1ubuntu0.1 [207 kB]
@@ -1412,65 +1423,63 @@ Get:271 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 unicode-data
 Get:272 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 python3-fonttools amd64 4.46.0-1build2 [1436 kB]
 Get:273 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 python3-gi-cairo amd64 3.48.2-1 [8132 B]
 Get:274 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 python3-opengl all 3.1.7+dfsg-1 [612 kB]
-Get:275 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 python3-py all 1.11.0-2 [72.7 kB]
-Get:276 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 python3-pybind11 all 2.11.1-2 [167 kB]
-Get:277 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 python3-pyqt5.qsci amd64 2.14.1+dfsg-1build3 [272 kB]
-Get:278 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 python3-pyqt5.qtchart amd64 5.15.6+dfsg-1build2 [148 kB]
-Get:279 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 python3-pyqt5.qtmultimedia amd64 5.15.10+dfsg-1build6 [231 kB]
-Get:280 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 python3-pyqt5.qtopengl amd64 5.15.10+dfsg-1build6 [128 kB]
-Get:281 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 python3-pyqt5.qtpositioning amd64 5.15.10+dfsg-1build6 [154 kB]
-Get:282 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 python3-pyqt5.qtquick amd64 5.15.10+dfsg-1build6 [398 kB]
-Get:283 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 python3-pyqt5.qtremoteobjects amd64 5.15.10+dfsg-1build6 [32.6 kB]
-Get:284 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 python3-pyqt5.qtsensors amd64 5.15.10+dfsg-1build6 [56.4 kB]
-Get:285 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 python3-pyqt5.qtserialport amd64 5.15.10+dfsg-1build6 [28.4 kB]
-Get:286 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 python3-pyqt5.qtsql amd64 5.15.10+dfsg-1build6 [90.1 kB]
-Get:287 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 python3-pyqt5.qtsvg amd64 5.15.10+dfsg-1build6 [30.1 kB]
-Get:288 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 python3-pyqt5.qttexttospeech amd64 5.15.10+dfsg-1build6 [17.8 kB]
-Get:289 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 python3-pyqt5.qtwebchannel amd64 5.15.10+dfsg-1build6 [15.1 kB]
-Get:290 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 python3-pyqt5.qtwebengine amd64 5.15.6-1build2 [119 kB]
-Get:291 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 python3-pyqt5.qtwebkit amd64 5.15.10+dfsg-1build6 [111 kB]
-Get:292 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 python3-pyqt5.qtwebsockets amd64 5.15.10+dfsg-1build6 [27.2 kB]
-Get:293 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 python3-pyqt5.qtxmlpatterns amd64 5.15.10+dfsg-1build6 [44.8 kB]
-Get:294 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 python3-qtpy all 2.4.1-2 [51.4 kB]
-Get:295 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 python3-tk amd64 3.12.3-0ubuntu1 [102 kB]
-Get:296 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 python3-yapps all 2.2.1-3.2 [16.2 kB]
-Get:297 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 python3-zmq amd64 24.0.1-5build1 [286 kB]
-Get:298 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 ruby-public-suffix all 4.0.6+ds-2 [14.1 kB]
-Get:299 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 ruby-addressable all 2.8.5-1 [55.3 kB]
-Get:300 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 ruby-afm all 0.2.2-3 [5954 B]
-Get:301 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 ruby-ascii85 all 1.0.3-1 [9208 B]
-Get:302 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 ruby-concurrent all 1.2.3-2build1 [282 kB]
-Get:303 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 ruby-pdf-core all 0.9.0-1 [19.6 kB]
-Get:304 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 ruby-ttfunk all 1.7.0-1 [44.9 kB]
-Get:305 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 ruby-prawn all 2.4.0+dfsg-1~ [1026 kB]
-Get:306 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 ruby-rc4 all 0.1.5-3.1 [4240 B]
-Get:307 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 ruby-hashery all 2.1.2-1.1 [30.7 kB]
-Get:308 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 ruby-pdf-reader all 2.11.0-1 [149 kB]
-Get:309 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 ruby-prawn-templates all 0.1.2-3 [8588 B]
-Get:310 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 ruby-prawn-icon all 3.1.0-1 [1136 kB]
-Get:311 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 ruby-css-parser all 1.16.0-1 [20.2 kB]
-Get:312 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 ruby-prawn-svg all 0.32.0-1 [37.8 kB]
-Get:313 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 ruby-prawn-table all 0.2.2-1.1 [94.2 kB]
-Get:314 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 ruby-polyglot all 0.3.4-1.1 [5380 B]
-Get:315 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 ruby-treetop all 1.6.12-1 [69.1 kB]
-Get:316 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 ruby-asciidoctor-pdf all 2.3.4-3 [1631 kB]
-Get:317 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 ruby-rouge all 4.2.0-1 [558 kB]
-Get:318 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 tcl8.6-dev amd64 8.6.14+dfsg-1build1 [1000 kB]
-Get:319 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 tclx8.4 amd64 8.4.1-4 [82.6 kB]
-Get:320 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 tk8.6-dev amd64 8.6.14-1build1 [788 kB]
-Get:321 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 w3c-linkchecker all 5.0.0-2 [58.5 kB]
-Get:322 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 x11-utils amd64 7.7+6build2 [189 kB]
-Get:323 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 x11-xserver-utils amd64 7.7+10build2 [169 kB]
-Get:324 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 yapps2 all 2.2.1-3.2 [41.4 kB]
-Get:325 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 libfmt-dev amd64 9.1.0+ds1-2 [122 kB]
-Get:326 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 libmodbus5 amd64 3.1.10-1ubuntu1 [34.4 kB]
-Get:327 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 libmodbus-dev amd64 3.1.10-1ubuntu1 [18.6 kB]
-Get:328 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 libtirpc-dev amd64 1.3.4+ds-1.1build1 [193 kB]
-Get:329 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 python3-xlib all 0.33-2 [120 kB]
+Get:275 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 python3-pybind11 all 2.11.1-2 [167 kB]
+Get:276 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 python3-pyqt5.qsci amd64 2.14.1+dfsg-1build3 [272 kB]
+Get:277 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 python3-pyqt5.qtchart amd64 5.15.6+dfsg-1build2 [148 kB]
+Get:278 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 python3-pyqt5.qtmultimedia amd64 5.15.10+dfsg-1build6 [231 kB]
+Get:279 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 python3-pyqt5.qtopengl amd64 5.15.10+dfsg-1build6 [128 kB]
+Get:280 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 python3-pyqt5.qtpositioning amd64 5.15.10+dfsg-1build6 [154 kB]
+Get:281 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 python3-pyqt5.qtquick amd64 5.15.10+dfsg-1build6 [398 kB]
+Get:282 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 python3-pyqt5.qtremoteobjects amd64 5.15.10+dfsg-1build6 [32.6 kB]
+Get:283 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 python3-pyqt5.qtsensors amd64 5.15.10+dfsg-1build6 [56.4 kB]
+Get:284 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 python3-pyqt5.qtserialport amd64 5.15.10+dfsg-1build6 [28.4 kB]
+Get:285 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 python3-pyqt5.qtsql amd64 5.15.10+dfsg-1build6 [90.1 kB]
+Get:286 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 python3-pyqt5.qtsvg amd64 5.15.10+dfsg-1build6 [30.1 kB]
+Get:287 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 python3-pyqt5.qttexttospeech amd64 5.15.10+dfsg-1build6 [17.8 kB]
+Get:288 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 python3-pyqt5.qtwebchannel amd64 5.15.10+dfsg-1build6 [15.1 kB]
+Get:289 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 python3-pyqt5.qtwebengine amd64 5.15.6-1build2 [119 kB]
+Get:290 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 python3-pyqt5.qtwebkit amd64 5.15.10+dfsg-1build6 [111 kB]
+Get:291 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 python3-pyqt5.qtwebsockets amd64 5.15.10+dfsg-1build6 [27.2 kB]
+Get:292 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 python3-pyqt5.qtxmlpatterns amd64 5.15.10+dfsg-1build6 [44.8 kB]
+Get:293 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 python3-qtpy all 2.4.1-2 [51.4 kB]
+Get:294 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 python3-tk amd64 3.12.3-0ubuntu1 [102 kB]
+Get:295 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 python3-yapps all 2.2.1-3.2 [16.2 kB]
+Get:296 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 ruby-public-suffix all 4.0.6+ds-2 [14.1 kB]
+Get:297 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 ruby-addressable all 2.8.5-1 [55.3 kB]
+Get:298 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 ruby-afm all 0.2.2-3 [5954 B]
+Get:299 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 ruby-ascii85 all 1.0.3-1 [9208 B]
+Get:300 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 ruby-concurrent all 1.2.3-2build1 [282 kB]
+Get:301 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 ruby-pdf-core all 0.9.0-1 [19.6 kB]
+Get:302 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 ruby-ttfunk all 1.7.0-1 [44.9 kB]
+Get:303 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 ruby-prawn all 2.4.0+dfsg-1~ [1026 kB]
+Get:304 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 ruby-rc4 all 0.1.5-3.1 [4240 B]
+Get:305 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 ruby-hashery all 2.1.2-1.1 [30.7 kB]
+Get:306 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 ruby-pdf-reader all 2.11.0-1 [149 kB]
+Get:307 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 ruby-prawn-templates all 0.1.2-3 [8588 B]
+Get:308 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 ruby-prawn-icon all 3.1.0-1 [1136 kB]
+Get:309 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 ruby-css-parser all 1.16.0-1 [20.2 kB]
+Get:310 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 ruby-prawn-svg all 0.32.0-1 [37.8 kB]
+Get:311 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 ruby-prawn-table all 0.2.2-1.1 [94.2 kB]
+Get:312 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 ruby-polyglot all 0.3.4-1.1 [5380 B]
+Get:313 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 ruby-treetop all 1.6.12-1 [69.1 kB]
+Get:314 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 ruby-asciidoctor-pdf all 2.3.4-3 [1631 kB]
+Get:315 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 ruby-rouge all 4.2.0-1 [558 kB]
+Get:316 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 tcl8.6-dev amd64 8.6.14+dfsg-1build1 [1000 kB]
+Get:317 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 tclx8.4 amd64 8.4.1-4 [82.6 kB]
+Get:318 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 tk8.6-dev amd64 8.6.14-1build1 [788 kB]
+Get:319 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 w3c-linkchecker all 5.0.0-2 [58.5 kB]
+Get:320 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 x11-utils amd64 7.7+6build2 [189 kB]
+Get:321 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 x11-xserver-utils amd64 7.7+10build2 [169 kB]
+Get:322 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 yapps2 all 2.2.1-3.2 [41.4 kB]
+Get:323 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 libfmt-dev amd64 9.1.0+ds1-2 [122 kB]
+Get:324 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 libmodbus5 amd64 3.1.10-1ubuntu1 [34.4 kB]
+Get:325 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 libmodbus-dev amd64 3.1.10-1ubuntu1 [18.6 kB]
+Get:326 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 libtirpc-dev amd64 1.3.4+ds-1.1build1 [193 kB]
+Get:327 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 python3-xlib all 0.33-2 [120 kB]
 Preconfiguring packages ...
-Fetched 270 MB in 21s (13.0 MB/s)
+Fetched 270 MB in 16s (17.4 MB/s)
 Selecting previously unselected package libdebuginfod-common.
-(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 208197 files and directories currently installed.)
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 208434 files and directories currently installed.)
 Preparing to unpack .../000-libdebuginfod-common_0.190-1.1ubuntu0.1_all.deb ...
 Unpacking libdebuginfod-common (0.190-1.1ubuntu0.1) ...
 Selecting previously unselected package liborc-0.4-0t64:amd64.
@@ -2287,170 +2296,164 @@ Unpacking python3-gi-cairo (3.48.2-1) ...
 Selecting previously unselected package python3-opengl.
 Preparing to unpack .../272-python3-opengl_3.1.7+dfsg-1_all.deb ...
 Unpacking python3-opengl (3.1.7+dfsg-1) ...
-Selecting previously unselected package python3-py.
-Preparing to unpack .../273-python3-py_1.11.0-2_all.deb ...
-Unpacking python3-py (1.11.0-2) ...
 Selecting previously unselected package python3-pybind11.
-Preparing to unpack .../274-python3-pybind11_2.11.1-2_all.deb ...
+Preparing to unpack .../273-python3-pybind11_2.11.1-2_all.deb ...
 Unpacking python3-pybind11 (2.11.1-2) ...
 Selecting previously unselected package python3-pyqt5.qsci.
-Preparing to unpack .../275-python3-pyqt5.qsci_2.14.1+dfsg-1build3_amd64.deb ...
+Preparing to unpack .../274-python3-pyqt5.qsci_2.14.1+dfsg-1build3_amd64.deb ...
 Unpacking python3-pyqt5.qsci (2.14.1+dfsg-1build3) ...
 Selecting previously unselected package python3-pyqt5.qtchart.
-Preparing to unpack .../276-python3-pyqt5.qtchart_5.15.6+dfsg-1build2_amd64.deb ...
+Preparing to unpack .../275-python3-pyqt5.qtchart_5.15.6+dfsg-1build2_amd64.deb ...
 Unpacking python3-pyqt5.qtchart (5.15.6+dfsg-1build2) ...
 Selecting previously unselected package python3-pyqt5.qtmultimedia.
-Preparing to unpack .../277-python3-pyqt5.qtmultimedia_5.15.10+dfsg-1build6_amd64.deb ...
+Preparing to unpack .../276-python3-pyqt5.qtmultimedia_5.15.10+dfsg-1build6_amd64.deb ...
 Unpacking python3-pyqt5.qtmultimedia (5.15.10+dfsg-1build6) ...
 Selecting previously unselected package python3-pyqt5.qtopengl.
-Preparing to unpack .../278-python3-pyqt5.qtopengl_5.15.10+dfsg-1build6_amd64.deb ...
+Preparing to unpack .../277-python3-pyqt5.qtopengl_5.15.10+dfsg-1build6_amd64.deb ...
 Unpacking python3-pyqt5.qtopengl (5.15.10+dfsg-1build6) ...
 Selecting previously unselected package python3-pyqt5.qtpositioning.
-Preparing to unpack .../279-python3-pyqt5.qtpositioning_5.15.10+dfsg-1build6_amd64.deb ...
+Preparing to unpack .../278-python3-pyqt5.qtpositioning_5.15.10+dfsg-1build6_amd64.deb ...
 Unpacking python3-pyqt5.qtpositioning (5.15.10+dfsg-1build6) ...
 Selecting previously unselected package python3-pyqt5.qtquick.
-Preparing to unpack .../280-python3-pyqt5.qtquick_5.15.10+dfsg-1build6_amd64.deb ...
+Preparing to unpack .../279-python3-pyqt5.qtquick_5.15.10+dfsg-1build6_amd64.deb ...
 Unpacking python3-pyqt5.qtquick (5.15.10+dfsg-1build6) ...
 Selecting previously unselected package python3-pyqt5.qtremoteobjects.
-Preparing to unpack .../281-python3-pyqt5.qtremoteobjects_5.15.10+dfsg-1build6_amd64.deb ...
+Preparing to unpack .../280-python3-pyqt5.qtremoteobjects_5.15.10+dfsg-1build6_amd64.deb ...
 Unpacking python3-pyqt5.qtremoteobjects (5.15.10+dfsg-1build6) ...
 Selecting previously unselected package python3-pyqt5.qtsensors.
-Preparing to unpack .../282-python3-pyqt5.qtsensors_5.15.10+dfsg-1build6_amd64.deb ...
+Preparing to unpack .../281-python3-pyqt5.qtsensors_5.15.10+dfsg-1build6_amd64.deb ...
 Unpacking python3-pyqt5.qtsensors (5.15.10+dfsg-1build6) ...
 Selecting previously unselected package python3-pyqt5.qtserialport.
-Preparing to unpack .../283-python3-pyqt5.qtserialport_5.15.10+dfsg-1build6_amd64.deb ...
+Preparing to unpack .../282-python3-pyqt5.qtserialport_5.15.10+dfsg-1build6_amd64.deb ...
 Unpacking python3-pyqt5.qtserialport (5.15.10+dfsg-1build6) ...
 Selecting previously unselected package python3-pyqt5.qtsql.
-Preparing to unpack .../284-python3-pyqt5.qtsql_5.15.10+dfsg-1build6_amd64.deb ...
+Preparing to unpack .../283-python3-pyqt5.qtsql_5.15.10+dfsg-1build6_amd64.deb ...
 Unpacking python3-pyqt5.qtsql (5.15.10+dfsg-1build6) ...
 Selecting previously unselected package python3-pyqt5.qtsvg.
-Preparing to unpack .../285-python3-pyqt5.qtsvg_5.15.10+dfsg-1build6_amd64.deb ...
+Preparing to unpack .../284-python3-pyqt5.qtsvg_5.15.10+dfsg-1build6_amd64.deb ...
 Unpacking python3-pyqt5.qtsvg (5.15.10+dfsg-1build6) ...
 Selecting previously unselected package python3-pyqt5.qttexttospeech.
-Preparing to unpack .../286-python3-pyqt5.qttexttospeech_5.15.10+dfsg-1build6_amd64.deb ...
+Preparing to unpack .../285-python3-pyqt5.qttexttospeech_5.15.10+dfsg-1build6_amd64.deb ...
 Unpacking python3-pyqt5.qttexttospeech (5.15.10+dfsg-1build6) ...
 Selecting previously unselected package python3-pyqt5.qtwebchannel.
-Preparing to unpack .../287-python3-pyqt5.qtwebchannel_5.15.10+dfsg-1build6_amd64.deb ...
+Preparing to unpack .../286-python3-pyqt5.qtwebchannel_5.15.10+dfsg-1build6_amd64.deb ...
 Unpacking python3-pyqt5.qtwebchannel (5.15.10+dfsg-1build6) ...
 Selecting previously unselected package python3-pyqt5.qtwebengine.
-Preparing to unpack .../288-python3-pyqt5.qtwebengine_5.15.6-1build2_amd64.deb ...
+Preparing to unpack .../287-python3-pyqt5.qtwebengine_5.15.6-1build2_amd64.deb ...
 Unpacking python3-pyqt5.qtwebengine (5.15.6-1build2) ...
 Selecting previously unselected package python3-pyqt5.qtwebkit.
-Preparing to unpack .../289-python3-pyqt5.qtwebkit_5.15.10+dfsg-1build6_amd64.deb ...
+Preparing to unpack .../288-python3-pyqt5.qtwebkit_5.15.10+dfsg-1build6_amd64.deb ...
 Unpacking python3-pyqt5.qtwebkit (5.15.10+dfsg-1build6) ...
 Selecting previously unselected package python3-pyqt5.qtwebsockets.
-Preparing to unpack .../290-python3-pyqt5.qtwebsockets_5.15.10+dfsg-1build6_amd64.deb ...
+Preparing to unpack .../289-python3-pyqt5.qtwebsockets_5.15.10+dfsg-1build6_amd64.deb ...
 Unpacking python3-pyqt5.qtwebsockets (5.15.10+dfsg-1build6) ...
 Selecting previously unselected package python3-pyqt5.qtxmlpatterns.
-Preparing to unpack .../291-python3-pyqt5.qtxmlpatterns_5.15.10+dfsg-1build6_amd64.deb ...
+Preparing to unpack .../290-python3-pyqt5.qtxmlpatterns_5.15.10+dfsg-1build6_amd64.deb ...
 Unpacking python3-pyqt5.qtxmlpatterns (5.15.10+dfsg-1build6) ...
 Selecting previously unselected package python3-qtpy.
-Preparing to unpack .../292-python3-qtpy_2.4.1-2_all.deb ...
+Preparing to unpack .../291-python3-qtpy_2.4.1-2_all.deb ...
 Unpacking python3-qtpy (2.4.1-2) ...
 Selecting previously unselected package python3-tk:amd64.
-Preparing to unpack .../293-python3-tk_3.12.3-0ubuntu1_amd64.deb ...
+Preparing to unpack .../292-python3-tk_3.12.3-0ubuntu1_amd64.deb ...
 Unpacking python3-tk:amd64 (3.12.3-0ubuntu1) ...
 Selecting previously unselected package python3-yapps.
-Preparing to unpack .../294-python3-yapps_2.2.1-3.2_all.deb ...
+Preparing to unpack .../293-python3-yapps_2.2.1-3.2_all.deb ...
 Unpacking python3-yapps (2.2.1-3.2) ...
-Selecting previously unselected package python3-zmq.
-Preparing to unpack .../295-python3-zmq_24.0.1-5build1_amd64.deb ...
-Unpacking python3-zmq (24.0.1-5build1) ...
 Selecting previously unselected package ruby-public-suffix.
-Preparing to unpack .../296-ruby-public-suffix_4.0.6+ds-2_all.deb ...
+Preparing to unpack .../294-ruby-public-suffix_4.0.6+ds-2_all.deb ...
 Unpacking ruby-public-suffix (4.0.6+ds-2) ...
 Selecting previously unselected package ruby-addressable.
-Preparing to unpack .../297-ruby-addressable_2.8.5-1_all.deb ...
+Preparing to unpack .../295-ruby-addressable_2.8.5-1_all.deb ...
 Unpacking ruby-addressable (2.8.5-1) ...
 Selecting previously unselected package ruby-afm.
-Preparing to unpack .../298-ruby-afm_0.2.2-3_all.deb ...
+Preparing to unpack .../296-ruby-afm_0.2.2-3_all.deb ...
 Unpacking ruby-afm (0.2.2-3) ...
 Selecting previously unselected package ruby-ascii85.
-Preparing to unpack .../299-ruby-ascii85_1.0.3-1_all.deb ...
+Preparing to unpack .../297-ruby-ascii85_1.0.3-1_all.deb ...
 Unpacking ruby-ascii85 (1.0.3-1) ...
 Selecting previously unselected package ruby-concurrent.
-Preparing to unpack .../300-ruby-concurrent_1.2.3-2build1_all.deb ...
+Preparing to unpack .../298-ruby-concurrent_1.2.3-2build1_all.deb ...
 Unpacking ruby-concurrent (1.2.3-2build1) ...
 Selecting previously unselected package ruby-pdf-core.
-Preparing to unpack .../301-ruby-pdf-core_0.9.0-1_all.deb ...
+Preparing to unpack .../299-ruby-pdf-core_0.9.0-1_all.deb ...
 Unpacking ruby-pdf-core (0.9.0-1) ...
 Selecting previously unselected package ruby-ttfunk.
-Preparing to unpack .../302-ruby-ttfunk_1.7.0-1_all.deb ...
+Preparing to unpack .../300-ruby-ttfunk_1.7.0-1_all.deb ...
 Unpacking ruby-ttfunk (1.7.0-1) ...
 Selecting previously unselected package ruby-prawn.
-Preparing to unpack .../303-ruby-prawn_2.4.0+dfsg-1~_all.deb ...
+Preparing to unpack .../301-ruby-prawn_2.4.0+dfsg-1~_all.deb ...
 Unpacking ruby-prawn (2.4.0+dfsg-1~) ...
 Selecting previously unselected package ruby-rc4.
-Preparing to unpack .../304-ruby-rc4_0.1.5-3.1_all.deb ...
+Preparing to unpack .../302-ruby-rc4_0.1.5-3.1_all.deb ...
 Unpacking ruby-rc4 (0.1.5-3.1) ...
 Selecting previously unselected package ruby-hashery.
-Preparing to unpack .../305-ruby-hashery_2.1.2-1.1_all.deb ...
+Preparing to unpack .../303-ruby-hashery_2.1.2-1.1_all.deb ...
 Unpacking ruby-hashery (2.1.2-1.1) ...
 Selecting previously unselected package ruby-pdf-reader.
-Preparing to unpack .../306-ruby-pdf-reader_2.11.0-1_all.deb ...
+Preparing to unpack .../304-ruby-pdf-reader_2.11.0-1_all.deb ...
 Unpacking ruby-pdf-reader (2.11.0-1) ...
 Selecting previously unselected package ruby-prawn-templates.
-Preparing to unpack .../307-ruby-prawn-templates_0.1.2-3_all.deb ...
+Preparing to unpack .../305-ruby-prawn-templates_0.1.2-3_all.deb ...
 Unpacking ruby-prawn-templates (0.1.2-3) ...
 Selecting previously unselected package ruby-prawn-icon.
-Preparing to unpack .../308-ruby-prawn-icon_3.1.0-1_all.deb ...
+Preparing to unpack .../306-ruby-prawn-icon_3.1.0-1_all.deb ...
 Unpacking ruby-prawn-icon (3.1.0-1) ...
 Selecting previously unselected package ruby-css-parser.
-Preparing to unpack .../309-ruby-css-parser_1.16.0-1_all.deb ...
+Preparing to unpack .../307-ruby-css-parser_1.16.0-1_all.deb ...
 Unpacking ruby-css-parser (1.16.0-1) ...
 Selecting previously unselected package ruby-prawn-svg.
-Preparing to unpack .../310-ruby-prawn-svg_0.32.0-1_all.deb ...
+Preparing to unpack .../308-ruby-prawn-svg_0.32.0-1_all.deb ...
 Unpacking ruby-prawn-svg (0.32.0-1) ...
 Selecting previously unselected package ruby-prawn-table.
-Preparing to unpack .../311-ruby-prawn-table_0.2.2-1.1_all.deb ...
+Preparing to unpack .../309-ruby-prawn-table_0.2.2-1.1_all.deb ...
 Unpacking ruby-prawn-table (0.2.2-1.1) ...
 Selecting previously unselected package ruby-polyglot.
-Preparing to unpack .../312-ruby-polyglot_0.3.4-1.1_all.deb ...
+Preparing to unpack .../310-ruby-polyglot_0.3.4-1.1_all.deb ...
 Unpacking ruby-polyglot (0.3.4-1.1) ...
 Selecting previously unselected package ruby-treetop.
-Preparing to unpack .../313-ruby-treetop_1.6.12-1_all.deb ...
+Preparing to unpack .../311-ruby-treetop_1.6.12-1_all.deb ...
 Unpacking ruby-treetop (1.6.12-1) ...
 Selecting previously unselected package ruby-asciidoctor-pdf.
-Preparing to unpack .../314-ruby-asciidoctor-pdf_2.3.4-3_all.deb ...
+Preparing to unpack .../312-ruby-asciidoctor-pdf_2.3.4-3_all.deb ...
 Unpacking ruby-asciidoctor-pdf (2.3.4-3) ...
 Selecting previously unselected package ruby-rouge.
-Preparing to unpack .../315-ruby-rouge_4.2.0-1_all.deb ...
+Preparing to unpack .../313-ruby-rouge_4.2.0-1_all.deb ...
 Unpacking ruby-rouge (4.2.0-1) ...
 Selecting previously unselected package tcl8.6-dev:amd64.
-Preparing to unpack .../316-tcl8.6-dev_8.6.14+dfsg-1build1_amd64.deb ...
+Preparing to unpack .../314-tcl8.6-dev_8.6.14+dfsg-1build1_amd64.deb ...
 Unpacking tcl8.6-dev:amd64 (8.6.14+dfsg-1build1) ...
 Selecting previously unselected package tclx8.4.
-Preparing to unpack .../317-tclx8.4_8.4.1-4_amd64.deb ...
+Preparing to unpack .../315-tclx8.4_8.4.1-4_amd64.deb ...
 Unpacking tclx8.4 (8.4.1-4) ...
 Selecting previously unselected package tk8.6-dev:amd64.
-Preparing to unpack .../318-tk8.6-dev_8.6.14-1build1_amd64.deb ...
+Preparing to unpack .../316-tk8.6-dev_8.6.14-1build1_amd64.deb ...
 Unpacking tk8.6-dev:amd64 (8.6.14-1build1) ...
 Selecting previously unselected package w3c-linkchecker.
-Preparing to unpack .../319-w3c-linkchecker_5.0.0-2_all.deb ...
+Preparing to unpack .../317-w3c-linkchecker_5.0.0-2_all.deb ...
 Unpacking w3c-linkchecker (5.0.0-2) ...
 Selecting previously unselected package x11-utils.
-Preparing to unpack .../320-x11-utils_7.7+6build2_amd64.deb ...
+Preparing to unpack .../318-x11-utils_7.7+6build2_amd64.deb ...
 Unpacking x11-utils (7.7+6build2) ...
 Selecting previously unselected package x11-xserver-utils.
-Preparing to unpack .../321-x11-xserver-utils_7.7+10build2_amd64.deb ...
+Preparing to unpack .../319-x11-xserver-utils_7.7+10build2_amd64.deb ...
 Unpacking x11-xserver-utils (7.7+10build2) ...
 Selecting previously unselected package yapps2.
-Preparing to unpack .../322-yapps2_2.2.1-3.2_all.deb ...
+Preparing to unpack .../320-yapps2_2.2.1-3.2_all.deb ...
 Unpacking yapps2 (2.2.1-3.2) ...
 Selecting previously unselected package libfmt-dev:amd64.
-Preparing to unpack .../323-libfmt-dev_9.1.0+ds1-2_amd64.deb ...
+Preparing to unpack .../321-libfmt-dev_9.1.0+ds1-2_amd64.deb ...
 Unpacking libfmt-dev:amd64 (9.1.0+ds1-2) ...
 Selecting previously unselected package libmodbus5:amd64.
-Preparing to unpack .../324-libmodbus5_3.1.10-1ubuntu1_amd64.deb ...
+Preparing to unpack .../322-libmodbus5_3.1.10-1ubuntu1_amd64.deb ...
 Unpacking libmodbus5:amd64 (3.1.10-1ubuntu1) ...
 Selecting previously unselected package libmodbus-dev:amd64.
-Preparing to unpack .../325-libmodbus-dev_3.1.10-1ubuntu1_amd64.deb ...
+Preparing to unpack .../323-libmodbus-dev_3.1.10-1ubuntu1_amd64.deb ...
 Unpacking libmodbus-dev:amd64 (3.1.10-1ubuntu1) ...
 Selecting previously unselected package libtirpc-dev:amd64.
-Preparing to unpack .../326-libtirpc-dev_1.3.4+ds-1.1build1_amd64.deb ...
+Preparing to unpack .../324-libtirpc-dev_1.3.4+ds-1.1build1_amd64.deb ...
 Unpacking libtirpc-dev:amd64 (1.3.4+ds-1.1build1) ...
 Selecting previously unselected package python3-xlib.
-Preparing to unpack .../327-python3-xlib_0.33-2_all.deb ...
+Preparing to unpack .../325-python3-xlib_0.33-2_all.deb ...
 Unpacking python3-xlib (0.33-2) ...
 Setting up dh-python (6.20240401) ...
 Setting up python3-xlib (0.33-2) ...
@@ -2480,7 +2483,6 @@ Setting up libglvnd-core-dev:amd64 (1.7.0-1build1) ...
 Setting up libqt5webengine-data (5.15.16+dfsg-3) ...
 Setting up libxcb-xinput0:amd64 (1.15-1ubuntu2) ...
 Setting up libwoff1:amd64 (1.0.2-2build1) ...
-Setting up python3-py (1.11.0-2) ...
 Setting up gir1.2-gdkpixbuf-2.0:amd64 (2.42.10+dfsg-3ubuntu3.3) ...
 Setting up libhyphen0:amd64 (2.8.8-7build3) ...
 Setting up libdebuginfod-common (0.190-1.1ubuntu0.1) ...
@@ -2552,7 +2554,6 @@ Setting up libdbus-1-dev:amd64 (1.14.10-4ubuntu4.1) ...
 Setting up libjbig2dec0:amd64 (0.20-1ubuntu0.24.04.1) ...
 Setting up uuid-dev:amd64 (2.39.3-9ubuntu6.6) ...
 Setting up libpathplan4:amd64 (2.42.2-9ubuntu0.1) ...
-Setting up python3-zmq (24.0.1-5build1) ...
 Setting up python3-brotli (1.1.0-2build2) ...
 Setting up libann0 (1.1.2+doc-9build1) ...
 Setting up libgles1:amd64 (1.7.0-1build1) ...
@@ -2833,7 +2834,7 @@ checking for c++ option to enable C++11 features... none needed
 checking for a BSD-compatible install... /usr/bin/install -c
 checking whether c++ supports C++20 features by default... no
 checking whether c++ supports C++20 features with -std=gnu++20... yes
-checking build toplevel... /home/runner/work/_temp/linuxcnc-t03-nml
+checking build toplevel... /home/runner/work/_temp/linuxcnc-t04-gui
 checking installation prefix... run in place
 checking for grep... /usr/bin/grep
 checking for pkg-config... /usr/bin/pkg-config
@@ -2872,8 +2873,9 @@ checking for libusb-1.0... yes
 checking for libgpiod < 3.0.0... yes
 configure: libgpiod version 1.6.3 found
 checking for module installation directory... configuring for run-in-place
-/home/runner/work/_temp/linuxcnc-t03-nml/rtlib
+/home/runner/work/_temp/linuxcnc-t04-gui/rtlib
 checking for glib... yes - 2.80.0
+checking for GTK 3.22.4 or above... yes - 3.24.41
 checking whether make sets $(MAKE)... yes
 checking for ranlib... ranlib
 checking for ar... /usr/bin/ar
@@ -2909,8 +2911,8 @@ checking for a version of Python >= '2.1.0'... yes
 checking for the sysconfig Python package... yes
 checking for Python include path... -I/usr/include/python3.12
 checking for Python library path... -L/usr/lib/x86_64-linux-gnu -lpython3.12
-checking for Python site-packages path... /home/runner/work/_temp/linuxcnc-t03-nml/lib/python3.12/site-packages
-checking for Python platform specific site-packages path... /home/runner/work/_temp/linuxcnc-t03-nml/lib/python3.12/site-packages
+checking for Python site-packages path... /home/runner/work/_temp/linuxcnc-t04-gui/lib/python3.12/site-packages
+checking for Python platform specific site-packages path... /home/runner/work/_temp/linuxcnc-t04-gui/lib/python3.12/site-packages
 checking python extra libraries... -ldl -lm
 checking python extra linking flags... -Xlinker -export-dynamic -Wl,-O1 -Wl,-Bsymbolic-functions
 checking consistency of all components of python development environment... yes
@@ -2926,6 +2928,13 @@ checking for semtimedop... yes
 checking for optreset... no
 checking for library containing dlopen... none required
 checking for library containing clock_nanosleep... none required
+checking for tcl... /usr/lib/tcl8.6/tclConfig.sh found
+checking for tk... /usr/lib/tk8.6/tkConfig.sh found
+checking whether to check for runtime dependencies... yes
+checking for BWidget using /usr/bin/tclsh8.6... found
+checking for BLT using /usr/bin/tclsh8.6... found
+checking for tclX using /usr/bin/tclsh8.6... found
+checking for python pango module... found
 checking for X... libraries , headers 
 checking for gethostbyname... yes
 checking for connect... yes
@@ -2947,7 +2956,10 @@ checking for gettext in -lintl... no
 checking for xgettext... /usr/bin/xgettext
 checking for msgfmt... /usr/bin/msgfmt
 checking python version... OK
+checking match between tk and Tkinter versions... 8.6
 checking for site-package location... /usr/lib/python3/dist-packages
+checking for working GLU quadrics... yes
+checking for Xmu headers... checking for X11/Xmu/Xmu.h... yes
 configure: creating ./config.status
 config.status: creating ../scripts/rtapi.conf
 config.status: creating ../scripts/linuxcnc
@@ -3003,7 +3015,7 @@ config.status: creating config.h
 ######################################################################
 
 
-make: Entering directory '/home/runner/work/_temp/linuxcnc-t03-nml/src'
+make: Entering directory '/home/runner/work/_temp/linuxcnc-t04-gui/src'
 Creating mesa_uart.mak
 Creating mesa_7i65.mak
 Creating serport.mak
@@ -3044,8 +3056,8 @@ Creating scaled_s32_sums.mak
 Creating scale.mak
 Creating sample_hold.mak
 Creating safety_latch.mak
-Creating reset.mak
 Creating raster.mak
+Creating reset.mak
 Creating radiobutton.mak
 Creating pushmsg.mak
 Creating plasmac.mak
@@ -3096,8 +3108,8 @@ Creating hypot.mak
 Creating homecomp.mak
 Creating histobinstream.mak
 Creating histobins.mak
-Creating gearchange.mak
 Creating gray2bin.mak
+Creating gearchange.mak
 Creating gantry.mak
 Creating flipflop.mak
 Creating filter_kalman.mak
@@ -3158,27 +3170,27 @@ Creating axistest.mak
 Creating anglejog.mak
 Creating and2.mak
 Creating abs_s64.mak
-Creating abs.mak
 Creating abs_s32.mak
+Creating abs.mak
 Creating conv_u64_u32.mak
 Creating conv_u64_s64.mak
 Creating conv_u64_s32.mak
 Creating conv_u64_float.mak
 Creating conv_u64_bit.mak
 Creating conv_u32_u64.mak
-Creating conv_u32_s64.mak
 Creating conv_u32_s32.mak
-Creating conv_u32_bit.mak
+Creating conv_u32_s64.mak
 Creating conv_u32_float.mak
 Creating conv_s64_u64.mak
+Creating conv_u32_bit.mak
 Creating conv_s64_u32.mak
 Creating conv_s64_s32.mak
 Creating conv_s64_float.mak
 Creating conv_s64_bit.mak
 Creating conv_s32_u64.mak
+Creating conv_s32_u32.mak
 Creating conv_s32_s64.mak
 Creating conv_s32_float.mak
-Creating conv_s32_u32.mak
 Creating conv_s32_bit.mak
 Creating conv_float_u64.mak
 Creating conv_float_u32.mak
@@ -3206,16 +3218,16 @@ Exporting rtapi.h
 Exporting rtapi_app.h
 Exporting rtapi_atomic.h
 Exporting rtapi_bitops.h
-Exporting rtapi_byteorder.h
 Exporting rtapi_bool.h
+Exporting rtapi_byteorder.h
 Exporting rtapi_ctype.h
 Exporting rtapi_device.h
 Exporting rtapi_errno.h
 Exporting rtapi_firmware.h
 Exporting rtapi_gfp.h
+Exporting rtapi_io.h
 Exporting rtapi_limits.h
 Exporting rtapi_list.h
-Exporting rtapi_io.h
 Exporting rtapi_math.h
 Exporting rtapi_math_i386.h
 Exporting rtapi_math64.h
@@ -3234,8 +3246,8 @@ sed ../tests/halcompile/userspace/rand.comp -e "1 s/rand/rand_test/" > ../tests/
 cp ../scripts/rtapi.conf ../tests/uspace/spawnv-root/rtapi.conf
 Compiling libposemath/_posemath.c
 Compiling libposemath/posemath.cc
-Compiling libposemath/gomath.c
 Compiling libposemath/emcpose.c
+Compiling libposemath/gomath.c
 Compiling libnml/rcs/rcs_print.cc
 Compiling libnml/rcs/rcs_exit.cc
 Compiling libnml/os_intf/_sem.c
@@ -3297,12 +3309,53 @@ Compiling hal/user_comps/shuttle.c
 Compiling hal/user_comps/xhc-hb04.cc
 Compiling hal/user_comps/sendkeys.c
 Compiling hal/user_comps/vfs11_vfd/vfs11_vfd.c
+Compiling hal/classicladder/arithm_eval.c
+Compiling hal/classicladder/arrays.c
+Compiling hal/classicladder/calc.c
+Compiling hal/classicladder/calc_sequential.c
+Compiling hal/classicladder/classicladder.c
+Compiling hal/classicladder/classicladder_gtk.c
+Compiling hal/classicladder/config_gtk.c
+Compiling hal/classicladder/drawing.c
+Compiling hal/classicladder/drawing_sequential.c
+Compiling hal/classicladder/edit.c
+Compiling hal/classicladder/edit_copy.c
+Compiling hal/classicladder/edit_gtk.c
+Compiling hal/classicladder/edit_sequential.c
+Compiling hal/classicladder/editproperties_gtk.c
+Compiling hal/classicladder/emc_mods.c
+Compiling hal/classicladder/files.c
+Compiling hal/classicladder/files_project.c
+Compiling hal/classicladder/files_sequential.c
+Compiling hal/classicladder/manager.c
+Compiling hal/classicladder/manager_gtk.c
+Compiling hal/classicladder/menu_and_toolbar_gtk.c
+Compiling hal/classicladder/print_gtk.c
+Compiling hal/classicladder/protocol_modbus_master.c
+Compiling hal/classicladder/protocol_modbus_slave.c
+Compiling hal/classicladder/serial_linux.c
+Compiling hal/classicladder/socket_modbus_master.c
+Compiling hal/classicladder/socket_server.c
+Compiling hal/classicladder/spy_vars_gtk.c
+Compiling hal/classicladder/symbols.c
+Compiling hal/classicladder/symbols_gtk.c
+Compiling hal/classicladder/vars_names.c
+Compiling hal/classicladder/vars_access.c
 Compiling hal/utils/halcmd.c
 Compiling hal/utils/halcmd_commands.cc
-Compiling hal/utils/halcmd_main.c
+Compiling hal/utils/halsh.c
 Compiling hal/setps_util.c
+Compiling hal/utils/halcmd_main.c
 Compiling hal/utils/halcmd_completion.c
 Compiling hal/utils/halrmt.cc
+Compiling hal/utils/meter.c
+Compiling hal/utils/miscgtk.c
+Compiling hal/utils/scope.c
+Compiling hal/utils/scope_horiz.c
+Compiling hal/utils/scope_vert.c
+Compiling hal/utils/scope_trig.c
+Compiling hal/utils/scope_disp.c
+Compiling hal/utils/scope_files.c
 Syntax checking python script elbpcom
 Copying python script elbpcom
 Syntax checking python script modcompile
@@ -3319,7 +3372,7 @@ Compiling hal/user_comps/xhc-whb04b-6/pendant-types.cc
 Compiling hal/user_comps/xhc-whb04b-6/pendant.cc
 Compiling hal/user_comps/xhc-whb04b-6/xhc-whb04b6.cc
 Compiling hal/user_comps/xhc-whb04b-6/main.cc
-Compiling emc/usr_intf/emcrsh.cc
+Compiling emc/usr_intf/emcsh.cc
 Compiling emc/usr_intf/mapini.cc
 Compiling emc/usr_intf/shcom.cc
 Compiling emc/nml_intf/emcglb.c
@@ -3334,6 +3387,7 @@ Compiling emc/ini/inispindle.cc
 Compiling emc/ini/initraj.cc
 Compiling emc/ini/inihal.cc
 Compiling emc/nml_intf/interpl.cc
+Compiling emc/usr_intf/emcrsh.cc
 Compiling emc/usr_intf/schedrmt.cc
 Compiling emc/usr_intf/emcsched.cc
 Compiling emc/usr_intf/emclcd.cc
@@ -3499,63 +3553,225 @@ Syntax checking python script hal_input
 Syntax checking python script scorbot-er-3
 Syntax checking python script mitsub_vfd
 Syntax checking python script pmx485
-Copying python script hal_input
 Copying python script scorbot-er-3
-Copying python script mitsub_vfd
+Copying python script hal_input
 Syntax checking python script sim-torch
 Syntax checking python script z_level_compensation
+Copying python script mitsub_vfd
 Syntax checking python script mqtt-publisher
 Copying python script pmx485
 Syntax checking python script hal_bridge
 Copying python script sim-torch
 Copying python script z_level_compensation
-Copying python script mqtt-publisher
 Syntax checking python script mtconnect-agent
-Syntax checking python script pumagui
-Syntax checking python script puma560gui
+Syntax checking python script pyvcp
+Copying python script mqtt-publisher
+Syntax checking python script gladevcp
 Copying python script hal_bridge
-Syntax checking python script lineardelta
-Copying python script pumagui
+Syntax checking python script pumagui
+Copying python script pyvcp
 Copying python script mtconnect-agent
-Copying python script puma560gui
+Syntax checking python script puma560gui
+Syntax checking python script lineardelta
+Copying python script gladevcp
 Syntax checking python script scaragui
+Copying python script pumagui
 Syntax checking python script hexagui
-Syntax checking python script 5axisgui
+Copying python script puma560gui
 Copying python script lineardelta
+Syntax checking python script 5axisgui
 Syntax checking python script max5gui
 Copying python script scaragui
-Copying python script hexagui
-Copying python script 5axisgui
 Syntax checking python script maho600gui
+Copying python script hexagui
 Syntax checking python script hbmgui
-Syntax checking python script rotarydelta
+Copying python script 5axisgui
 Copying python script max5gui
-Syntax checking python script melfagui
 Copying python script maho600gui
-Copying python script rotarydelta
-Copying python script hbmgui
+Syntax checking python script rotarydelta
+Syntax checking python script melfagui
 Syntax checking python script millturngui
+Copying python script hbmgui
 Syntax checking python script xyzac-trt-gui
-Syntax checking python script xyzbc-trt-gui
 Copying python script melfagui
-Syntax checking python script xyzab-tdr-gui
+Copying python script rotarydelta
 Copying python script millturngui
-Copying python script xyzbc-trt-gui
-Copying python script xyzac-trt-gui
+Syntax checking python script xyzbc-trt-gui
+Syntax checking python script xyzab-tdr-gui
 Compiling hal/halmodule.cc
+Copying python script xyzac-trt-gui
 Compiling hal/halquery.cc
-Compiling emc/usr_intf/axis/extensions/emcmodule.cc
+Copying python script xyzbc-trt-gui
 Copying python script xyzab-tdr-gui
+Syntax checking python script touchy
+Syntax checking python script mdi.py
+Copying python script mdi.py
+Syntax checking python script emc_interface.py
+Copying python script touchy
+Syntax checking python script hal_interface.py
+Copying python script emc_interface.py
+Copying python script hal_interface.py
+Syntax checking python script filechooser.py
+Syntax checking python script listing.py
+Copying python script listing.py
+Copying python script filechooser.py
+Syntax checking python script preferences.py
+Copying glade file touchy.glade
+Syntax checking python script stepconf
+Copying python script preferences.py
+building python init __init__.py
+Copying linuxcnc-wizard.gif
+Syntax checking python script pages.py
+Copying python script stepconf
+Syntax checking python script build_INI.py
+Copying python script pages.py
+Syntax checking python script build_HAL.py
+Copying python script build_INI.py
+Syntax checking python script import_mach.py
+Copying python script build_HAL.py
+Copying python script import_mach.py
+Copying glade file main_page.glade
+Copying glade file base.glade
+Copying glade file start.glade
+Copying glade file pport1.glade
+Copying glade file pport2.glade
+Copying glade file spindle.glade
+Copying glade file options.glade
+Copying glade file halui_page.glade
+Copying glade file ubuttons.glade
+Copying glade file thcad.glade
+Copying glade file axisx.glade
+Copying glade file axisy.glade
+Copying glade file axisz.glade
+Copying glade file axisu.glade
+Copying glade file axisv.glade
+Copying glade file axisa.glade
+Copying glade file finished.glade
+Syntax checking python script pncconf
+building python init __init__.py
+Syntax checking python script pages.py
+Copying python script pages.py
+Syntax checking python script build_INI.py
+Copying python script pncconf
+Syntax checking python script build_HAL.py
+Copying python script build_INI.py
+Syntax checking python script private_data.py
+Copying python script build_HAL.py
+Syntax checking python script tests.py
+Copying python script private_data.py
+Syntax checking python script data.py
+Copying python script tests.py
+Copying glade file main_page.glade
+Copying glade file help.glade
+Copying glade file mesa0.glade
+Copying glade file mesa1.glade
+Copying python script data.py
+Copying glade file start.glade
+Copying glade file external.glade
+Copying glade file base.glade
+Copying glade file screen.glade
+Copying glade file vcp.glade
+Copying glade file ubuttons.glade
+Copying glade file thcad.glade
+Copying glade file x_axis.glade
+Copying glade file x_motor.glade
+Copying glade file y_axis.glade
+Copying glade file y_motor.glade
+Copying glade file z_axis.glade
+Copying glade file z_motor.glade
+Copying glade file a_axis.glade
+Copying glade file a_motor.glade
+Copying glade file s_motor.glade
+Copying glade file options.glade
+Copying glade file realtime.glade
+Copying glade file pport1.glade
+Copying glade file pport2.glade
+Copying glade file dialogs.glade
+Copying glade file finished.glade
+Syntax checking python script gremlin
+Syntax checking python script gremlin.py
+Copying python script gremlin
+Syntax checking python script qt5_graphics.py
+Copying python script gremlin.py
+Syntax checking python script gscreen
+Copying python script qt5_graphics.py
+Syntax checking python script mdi.py
+Copying python script gscreen
+Syntax checking python script emc_interface.py
+Copying python script mdi.py
+Syntax checking python script preferences.py
+Copying python script emc_interface.py
+Syntax checking python script keybindings.py
+Copying python script preferences.py
+Copying glade file gscreen.glade
+Copying glade file gscreen2.glade
+Syntax checking python script pyui
+Copying python script keybindings.py
+Syntax checking python script master.py
+Copying python script pyui
+Syntax checking python script widgets.py
+Copying python script master.py
+Syntax checking python script __init__.py
+Copying python script widgets.py
+Syntax checking python script commands.py
+Copying python script __init__.py
+Syntax checking python script panelui_validate.py
+Copying python script commands.py
+Copying INI script panelui_spec.ini
+cp emc/usr_intf/pyui/panelui_spec.ini ../lib/python/pyui/panelui_spec.ini
+Copying INI script _panelui.ini
+cp emc/usr_intf/pyui/_panelui.ini ../lib/python/pyui/_panelui.ini
+Syntax checking python script qtvcp
+Copying python script panelui_validate.py
+Syntax checking python script gmoccapy
+Copying python script qtvcp
+Syntax checking python script dialogs.py
+Copying python script dialogs.py
+Syntax checking python script getiniinfo.py
+Copying python script gmoccapy
+Syntax checking python script notification.py
+Copying python script getiniinfo.py
+Syntax checking python script player.py
+Copying python script notification.py
+Syntax checking python script preferences.py
+Copying python script player.py
+Syntax checking python script widgets.py
+Copying python script preferences.py
+Syntax checking python script icon_theme_helper.py
+Copying python script widgets.py
+Copying glade file gmoccapy.glade
+Syntax checking python script qtplasmac-materials
+Copying python script icon_theme_helper.py
+Syntax checking python script qtplasmac_gcode
+Copying python script qtplasmac-materials
+Syntax checking python script pmx485-test
+Copying python script qtplasmac_gcode
+Syntax checking python script mdro
+Copying python script pmx485-test
+Compiling emc/usr_intf/axis/extensions/emcmodule.cc
+Copying python script mdro
+Compiling emc/usr_intf/axis/extensions/_toglmodule.c
+Compiling emc/usr_intf/axis/extensions/tkdarmodule.c
 Syntax checking python script linuxcnctop
-Copying python script linuxcnctop
 Syntax checking python script mdi
-Copying python script mdi
+Copying python script linuxcnctop
 Syntax checking python script lintini
-Copying python script lintini
+Copying python script mdi
 Syntax checking python script debuglevel
-Copying python script debuglevel
+Copying python script lintini
 Syntax checking python script tracking-test
+Copying python script debuglevel
+Syntax checking python script axis
 Copying python script tracking-test
+Syntax checking python script axis-remote
+Copying python script axis-remote
+Syntax checking python script hal_manualtoolchange
+Copying python script axis
+Syntax checking python script image-to-gcode
+Copying python script hal_manualtoolchange
+Syntax checking python script teach-in
+Copying python script image-to-gcode
+Copying python script teach-in
 Compiling emc/kinematics/lineardeltakins.cc
 Compiling emc/kinematics/rotarydeltakins.cc
 Syntax checking python script update_ini
@@ -3719,22 +3935,34 @@ Linking liblinuxcnc-uspace-posix.so.0
 Creating shared library liblinuxcnchal.so.0
 Creating shared library liblinuxcncini.so.1
 Syntax checking python script halcompile
-Linking liblinuxcnc.a
+ln -sf liblinuxcnchal.so.0 ../lib/liblinuxcnchal.so
+Linking classicladder
 Copying python script halcompile
-ln -sf liblinuxcncini.so.1 ../lib/liblinuxcncini.so
+Linking halmeter
+Linking halscope
+Linking vfdb_vfd
+Preprocessing wj200_vfd.comp
+Preprocessing pi500_vfd.comp
+Linking hy_vfd
+Linking xhc-whb04b-6
+Linking liblinuxcnc.a
 tooldata: depends: objects/emc/tooldata/tooldata_mmap.o objects/emc/tooldata/tooldata_common.o objects/emc/tooldata/tooldata_db.o
 tooldata: Linking: libtooldata.so.0
+ln -sf liblinuxcncini.so.1 ../lib/liblinuxcncini.so
 Linking libpyplugin.so.0
-c++ -std=gnu++20 -g -L/home/runner/work/_temp/linuxcnc-t03-nml/lib -Wl,-rpath,/home/runner/work/_temp/linuxcnc-t03-nml/lib -ltirpc  -lgpiod  -Xlinker -export-dynamic -Wl,-O1 -Wl,-Bsymbolic-functions -Wl,-soname,libpyplugin.so.0 -shared -o ../lib/libpyplugin.so.0 objects/emc/pythonplugin/python_plugin.o ../lib/liblinuxcncini.so.1 -lstdc++ -lboost_python312 -L/usr/lib/x86_64-linux-gnu -lpython3.12 -ldl -lm
 Linking inivalue
+c++ -std=gnu++20 -g -L/home/runner/work/_temp/linuxcnc-t04-gui/lib -Wl,-rpath,/home/runner/work/_temp/linuxcnc-t04-gui/lib -ltirpc  -lgpiod  -Xlinker -export-dynamic -Wl,-O1 -Wl,-Bsymbolic-functions -Wl,-soname,libpyplugin.so.0 -shared -o ../lib/libpyplugin.so.0 objects/emc/pythonplugin/python_plugin.o ../lib/liblinuxcncini.so.1 -lstdc++ -lboost_python312 -L/usr/lib/x86_64-linux-gnu -lpython3.12 -ldl -lm
 Linking motion-logger
 ln -sf libtooldata.so.0 ../lib/libtooldata.so
 Linking linuxcnc_module_helper
 gcc -Wl,-z,relro -o ../bin/linuxcnc_module_helper objects/module_helper/module_helper.o
+Linking python module _hal.so
+Linking python module _togl.so
+Linking python module tkdar.so
 Linking python module lineardeltakins.so
-c++ -std=gnu++20 -L/home/runner/work/_temp/linuxcnc-t03-nml/lib -Wl,-rpath,/home/runner/work/_temp/linuxcnc-t03-nml/lib -ltirpc  -lgpiod  -shared -o ../lib/python/lineardeltakins.so objects/emc/kinematics/lineardeltakins.o -lboost_python312
+c++ -std=gnu++20 -L/home/runner/work/_temp/linuxcnc-t04-gui/lib -Wl,-rpath,/home/runner/work/_temp/linuxcnc-t04-gui/lib -ltirpc  -lgpiod  -shared -o ../lib/python/lineardeltakins.so objects/emc/kinematics/lineardeltakins.o -lboost_python312
 Linking python module rotarydeltakins.so
-c++ -std=gnu++20 -L/home/runner/work/_temp/linuxcnc-t03-nml/lib -Wl,-rpath,/home/runner/work/_temp/linuxcnc-t03-nml/lib -ltirpc  -lgpiod  -shared -o ../lib/python/rotarydeltakins.so objects/emc/kinematics/rotarydeltakins.o -lboost_python312
+c++ -std=gnu++20 -L/home/runner/work/_temp/linuxcnc-t04-gui/lib -Wl,-rpath,/home/runner/work/_temp/linuxcnc-t04-gui/lib -ltirpc  -lgpiod  -shared -o ../lib/python/rotarydeltakins.so objects/emc/kinematics/rotarydeltakins.o -lboost_python312
 Preprocessing abs.comp
 Preprocessing abs_s32.comp
 Preprocessing abs_s64.comp
@@ -3816,8 +4044,8 @@ Preprocessing led_dim.comp
 Preprocessing limit1.comp
 Preprocessing limit2.comp
 Preprocessing limit3.comp
-Preprocessing lincurve.comp
 Preprocessing limit_axis.comp
+Preprocessing lincurve.comp
 Preprocessing logic.comp
 Preprocessing lowpass.comp
 Preprocessing lut5.comp
@@ -3910,8 +4138,8 @@ Compiling realtime objects/hal/components/clarke2.c
 Compiling realtime objects/hal/components/clarke3.c
 Compiling realtime objects/hal/components/clarkeinv.c
 Compiling realtime objects/hal/components/comp.c
-Compiling realtime objects/hal/components/conv_bit_float.c
 Compiling realtime objects/hal/components/conv_bit_s32.c
+Compiling realtime objects/hal/components/conv_bit_float.c
 Compiling realtime objects/hal/components/conv_bit_s64.c
 Compiling realtime objects/hal/components/conv_bit_u32.c
 Compiling realtime objects/hal/components/conv_bit_u64.c
@@ -3927,8 +4155,8 @@ Compiling realtime objects/hal/components/conv_s32_u64.c
 Compiling realtime objects/hal/components/conv_s64_bit.c
 Compiling realtime objects/hal/components/conv_s64_float.c
 Compiling realtime objects/hal/components/conv_s64_s32.c
-Compiling realtime objects/hal/components/conv_s64_u64.c
 Compiling realtime objects/hal/components/conv_s64_u32.c
+Compiling realtime objects/hal/components/conv_s64_u64.c
 Compiling realtime objects/hal/components/conv_u32_bit.c
 Compiling realtime objects/hal/components/conv_u32_float.c
 Compiling realtime objects/hal/components/conv_u32_s32.c
@@ -4125,15 +4353,13 @@ Linking shuttle
 Linking xhc-hb04
 Linking sendkeys
 Preprocessing thermistor.comp
-ln -sf liblinuxcnchal.so.0 ../lib/liblinuxcnchal.so
 Linking vfs11_vfd
+Linking hal.so
 Linking halcmd
 Linking halrmt
-Linking vfdb_vfd
-Preprocessing wj200_vfd.comp
-Preprocessing pi500_vfd.comp
-Linking hy_vfd
-Linking xhc-whb04b-6
+Compiling hal/user_comps/wj200_vfd/wj200_vfd.c
+Compiling hal/user_comps/pi500_vfd/pi500_vfd.c
+Linking linuxcnc.so
 Linking linuxcncrsh
 Linking schedrmt
 Linking linuxcnclcd
@@ -4141,7 +4367,6 @@ Linking halui
 Linking linuxcncsvr
 ln -sf libpyplugin.so.0 ../lib/libpyplugin.so
 emc/Submakefile:Linking genserkins
-Linking python module _hal.so
 Linking python module linuxcnc.so
 Linking ../rtlib/abs.so
 Linking ../rtlib/abs_s32.so
@@ -4300,265 +4525,63 @@ Linking ../rtlib/serport.so
 Linking ../rtlib/mesa_7i65.so
 Linking ../rtlib/mesa_uart.so
 Compiling objects/hal/user_comps/thermistor.c
-Compiling hal/user_comps/wj200_vfd/wj200_vfd.c
-Compiling hal/user_comps/pi500_vfd/pi500_vfd.c
-Linking librs274.so.0
-c++ -std=gnu++20 -g -L/home/runner/work/_temp/linuxcnc-t03-nml/lib -Wl,-rpath,/home/runner/work/_temp/linuxcnc-t03-nml/lib -ltirpc  -lgpiod  -Xlinker -export-dynamic -Wl,-O1 -Wl,-Bsymbolic-functions -Wl,-soname,librs274.so.0 -shared -o ../lib/librs274.so.0 objects/emc/rs274ngc/interp_arc.o objects/emc/rs274ngc/interp_array.o objects/emc/rs274ngc/interp_base.o objects/emc/rs274ngc/interp_check.o objects/emc/rs274ngc/interp_convert.o objects/emc/rs274ngc/interp_queue.o objects/emc/rs274ngc/interp_cycles.o objects/emc/rs274ngc/interp_execute.o objects/emc/rs274ngc/interp_find.o objects/emc/rs274ngc/interp_internal.o objects/emc/rs274ngc/interp_inverse.o objects/emc/rs274ngc/interp_read.o objects/emc/rs274ngc/interp_write.o objects/emc/rs274ngc/interp_o_word.o objects/emc/rs274ngc/interp_g7x.o objects/emc/rs274ngc/nurbs_additional_functions.o objects/emc/rs274ngc/interp_namedparams.o objects/emc/rs274ngc/interp_python.o objects/emc/rs274ngc/interp_remap.o objects/emc/rs274ngc/interp_setup.o objects/emc/rs274ngc/canonmodule.o objects/emc/rs274ngc/pyparamclass.o objects/emc/rs274ngc/pyemctypes.o objects/emc/rs274ngc/pyinterp1.o objects/emc/rs274ngc/pyblock.o objects/emc/rs274ngc/pyarrays.o objects/emc/rs274ngc/interpmodule.o objects/emc/rs274ngc/rs274ngc_pre.o objects/emc/rs274ngc/interp_inspection.o objects/emc/nml_intf/modal_state.o ../lib/liblinuxcncini.so ../lib/libpyplugin.so ../lib/liblinuxcnchal.so.0 ../lib/libtooldata.so.0 -lstdc++ -lboost_python312 -L/usr/lib/x86_64-linux-gnu -lpython3.12 -ldl -lm
-Linking thermistor
-Linking pi500_vfd
 Linking wj200_vfd
+Linking pi500_vfd
+Linking librs274.so.0
+c++ -std=gnu++20 -g -L/home/runner/work/_temp/linuxcnc-t04-gui/lib -Wl,-rpath,/home/runner/work/_temp/linuxcnc-t04-gui/lib -ltirpc  -lgpiod  -Xlinker -export-dynamic -Wl,-O1 -Wl,-Bsymbolic-functions -Wl,-soname,librs274.so.0 -shared -o ../lib/librs274.so.0 objects/emc/rs274ngc/interp_arc.o objects/emc/rs274ngc/interp_array.o objects/emc/rs274ngc/interp_base.o objects/emc/rs274ngc/interp_check.o objects/emc/rs274ngc/interp_convert.o objects/emc/rs274ngc/interp_queue.o objects/emc/rs274ngc/interp_cycles.o objects/emc/rs274ngc/interp_execute.o objects/emc/rs274ngc/interp_find.o objects/emc/rs274ngc/interp_internal.o objects/emc/rs274ngc/interp_inverse.o objects/emc/rs274ngc/interp_read.o objects/emc/rs274ngc/interp_write.o objects/emc/rs274ngc/interp_o_word.o objects/emc/rs274ngc/interp_g7x.o objects/emc/rs274ngc/nurbs_additional_functions.o objects/emc/rs274ngc/interp_namedparams.o objects/emc/rs274ngc/interp_python.o objects/emc/rs274ngc/interp_remap.o objects/emc/rs274ngc/interp_setup.o objects/emc/rs274ngc/canonmodule.o objects/emc/rs274ngc/pyparamclass.o objects/emc/rs274ngc/pyemctypes.o objects/emc/rs274ngc/pyinterp1.o objects/emc/rs274ngc/pyblock.o objects/emc/rs274ngc/pyarrays.o objects/emc/rs274ngc/interpmodule.o objects/emc/rs274ngc/rs274ngc_pre.o objects/emc/rs274ngc/interp_inspection.o objects/emc/nml_intf/modal_state.o ../lib/liblinuxcncini.so ../lib/libpyplugin.so ../lib/liblinuxcnchal.so.0 ../lib/libtooldata.so.0 -lstdc++ -lboost_python312 -L/usr/lib/x86_64-linux-gnu -lpython3.12 -ldl -lm
+Linking thermistor
 ln -sf librs274.so.0 ../lib/librs274.so
 Linking milltask
-c++ -std=gnu++20 -o ../bin/milltask objects/emc/motion/emcmotglb.o objects/emc/task/emctask.o objects/emc/task/emccanon.o objects/emc/task/emctaskmain.o objects/emc/motion/usrmotintf.o objects/emc/motion/emcmotutil.o objects/emc/task/taskintf.o objects/emc/motion/dbuf.o objects/emc/motion/stashf.o objects/emc/task/taskclass.o objects/emc/task/backtrace.o objects/emc/usr_intf/mapini.o ../lib/librs274.so.0 ../lib/liblinuxcnc.a ../lib/libnml.so.0 ../lib/liblinuxcncini.so.1 ../lib/libposemath.so.0 ../lib/liblinuxcnchal.so.0 ../lib/libpyplugin.so.0 ../lib/libtooldata.so.0 -L/home/runner/work/_temp/linuxcnc-t03-nml/lib -Wl,-rpath,/home/runner/work/_temp/linuxcnc-t03-nml/lib -ltirpc  -lgpiod  -Xlinker -export-dynamic -Wl,-O1 -Wl,-Bsymbolic-functions -lboost_python312 -L/usr/lib/x86_64-linux-gnu -lpython3.12 -ldl -lm -lfmt
+c++ -std=gnu++20 -o ../bin/milltask objects/emc/motion/emcmotglb.o objects/emc/task/emctask.o objects/emc/task/emccanon.o objects/emc/task/emctaskmain.o objects/emc/motion/usrmotintf.o objects/emc/motion/emcmotutil.o objects/emc/task/taskintf.o objects/emc/motion/dbuf.o objects/emc/motion/stashf.o objects/emc/task/taskclass.o objects/emc/task/backtrace.o objects/emc/usr_intf/mapini.o ../lib/librs274.so.0 ../lib/liblinuxcnc.a ../lib/libnml.so.0 ../lib/liblinuxcncini.so.1 ../lib/libposemath.so.0 ../lib/liblinuxcnchal.so.0 ../lib/libpyplugin.so.0 ../lib/libtooldata.so.0 -L/home/runner/work/_temp/linuxcnc-t04-gui/lib -Wl,-rpath,/home/runner/work/_temp/linuxcnc-t04-gui/lib -ltirpc  -lgpiod  -Xlinker -export-dynamic -Wl,-O1 -Wl,-Bsymbolic-functions -lboost_python312 -L/usr/lib/x86_64-linux-gnu -lpython3.12 -ldl -lm -lfmt
 Linking rs274
 Linking python module gcode.so
-c++ -std=gnu++20 -L/home/runner/work/_temp/linuxcnc-t03-nml/lib -Wl,-rpath,/home/runner/work/_temp/linuxcnc-t03-nml/lib -ltirpc  -lgpiod  -shared -o ../lib/python/gcode.so objects/emc/rs274ngc/gcodemodule.o ../lib/librs274.so.0 -lstdc++
+c++ -std=gnu++20 -L/home/runner/work/_temp/linuxcnc-t04-gui/lib -Wl,-rpath,/home/runner/work/_temp/linuxcnc-t04-gui/lib -ltirpc  -lgpiod  -shared -o ../lib/python/gcode.so objects/emc/rs274ngc/gcodemodule.o ../lib/librs274.so.0 -lstdc++
 Linking canterp.so
 You now need to run 'sudo make setuid' or 'sudo make setcap' in order to run in place with access to hardware.
-make: Leaving directory '/home/runner/work/_temp/linuxcnc-t03-nml/src'
-linuxcnc-bin=/home/runner/work/_temp/linuxcnc-t03-nml/scripts/linuxcnc
-linuxcnc-python-module=/home/runner/work/_temp/linuxcnc-t03-nml/lib/python/linuxcnc.so
+make: Leaving directory '/home/runner/work/_temp/linuxcnc-t04-gui/src'
+linuxcnc-bin=/home/runner/work/_temp/linuxcnc-t04-gui/scripts/linuxcnc
+linuxcnc-python-module=/home/runner/work/_temp/linuxcnc-t04-gui/lib/python/linuxcnc.so
+gstat-module=/home/runner/work/_temp/linuxcnc-t04-gui/lib/python/common/hal_glib.py
 gate-A=PASS
-runtime-ready-probe=4
+runtime-ready-probe=3
 constant-STATE_ESTOP=1
 constant-STATE_ESTOP_RESET=2
-constant-AUTO_STEP=3
 constant-RCS_DONE=1
 constant-RCS_ERROR=3
-case1-base-serial=0 case1-serial=1 case1-echo-after-send=1
-case1-wait-complete=1
+baseline-estop-serial=1 wait-complete=1 observer=1
+TRACE {'t': '0.111361', 'phase': 'baseline-after-successful-gui-update', 'producer_serial': 1, 'semantic_result': 1, 'observer_state': 1, 'proxy_blocked': 0, 'proxy_attempts': 2, 'proxy_failures': 0, 'gstat_active': 1, 'gstat_cached_state': 1, 'presentation_state': 1, 'event': 'periodic'}
 gate-B=PASS
+controller-reset-while-gui-blocked-serial=2 wait-complete=1 observer=2
+TRACE {'t': '0.151647', 'phase': 'controller-reset-proven-before-failed-gui-update', 'producer_serial': 2, 'semantic_result': 1, 'observer_state': 2, 'proxy_blocked': 1, 'proxy_attempts': 2, 'proxy_failures': 0, 'gstat_active': 1, 'gstat_cached_state': 1, 'presentation_state': 1, 'event': 'periodic'}
 gate-C=PASS
-case2-pre-serial=2 case2-serial=3 case2-echo-after-send=3
+TRACE {'t': '0.151678', 'phase': 'decisive-failed-gui-update', 'producer_serial': 2, 'semantic_result': 1, 'observer_state': 2, 'proxy_blocked': 1, 'proxy_attempts': 3, 'proxy_failures': 1, 'gstat_active': 0, 'gstat_cached_state': 1, 'presentation_state': 1, 'event': 'periodic'}
 gate-D=PASS
-case2-wait-complete=3 matching-status=3 matching-echo=3
 gate-E=PASS
-case2-error=(11, 'command (EMC_TASK_PLAN_STEP) cannot be executed until the machine is out of E-stop and turned on')
 gate-F=PASS
-case2-echoed=true
-case2-semantic_success=false
+TRACE {'t': '0.152230', 'phase': 'recovered-gui-update', 'producer_serial': 2, 'semantic_result': 1, 'observer_state': 2, 'proxy_blocked': 0, 'proxy_attempts': 4, 'proxy_failures': 1, 'gstat_active': 1, 'gstat_cached_state': 2, 'presentation_state': 2, 'event': 'periodic'}
+TRACE {'t': '0.152241', 'phase': 'recovery-presentation-confirmed', 'producer_serial': 2, 'semantic_result': 1, 'observer_state': 2, 'proxy_blocked': 0, 'proxy_attempts': 4, 'proxy_failures': 1, 'gstat_active': 1, 'gstat_cached_state': 2, 'presentation_state': 2, 'event': 'periodic'}
 gate-G=PASS
-trace-rows=213 error-events=1
-T03-020 overall=PASS
-=== BEGIN T03-020 FULL RAW TRACE CSV ===
-t,case,phase,client_serial,echo_serial,status,task_state,task_mode,exec_state,interp_state,wait_return,error_type,error_text
-0.000034,baseline,initial,0,0,1,1,1,2,1,,,
-0.000050,case1,pre-send,0,0,1,1,1,2,1,,,
-0.030266,case1,send-return,1,1,1,2,1,2,1,,,
-0.040344,case1,wait-complete,1,1,1,2,1,2,1,1,,
-0.040363,case1,state-wait,1,1,1,2,1,2,1,,,
-0.110862,restore,wait-complete,2,2,1,1,1,2,1,1,,
-0.110884,restore,state-wait,2,2,1,1,1,2,1,,,
-0.110895,case2,pre-send,2,2,1,1,1,2,1,,,
-0.131051,case2,send-return,3,3,3,1,1,2,1,,,
-0.141141,case2,wait-complete,3,3,3,1,1,2,1,3,,
-0.141167,case2,error-channel,3,3,3,1,1,2,1,,11,command (EMC_TASK_PLAN_STEP) cannot be executed until the machine is out of E-stop and turned on
-0.141198,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-0.151268,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-0.161349,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-0.171423,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-0.181497,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-0.191573,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-0.201646,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-0.211732,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-0.221807,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-0.231881,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-0.241959,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-0.252033,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-0.262105,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-0.272179,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-0.282252,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-0.292323,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-0.302398,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-0.312473,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-0.322546,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-0.332619,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-0.342704,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-0.352778,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-0.362851,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-0.372922,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-0.382997,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-0.393074,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-0.403146,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-0.413218,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-0.423291,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-0.433495,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-0.443584,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-0.453661,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-0.463733,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-0.473808,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-0.483882,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-0.493955,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-0.504026,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-0.514097,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-0.524172,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-0.534253,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-0.544337,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-0.554414,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-0.564489,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-0.574561,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-0.584633,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-0.594709,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-0.604782,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-0.614854,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-0.624925,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-0.634997,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-0.645083,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-0.655156,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-0.665235,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-0.675307,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-0.685380,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-0.695453,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-0.705523,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-0.715595,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-0.725667,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-0.735740,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-0.745843,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-0.755916,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-0.765987,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-0.776058,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-0.786129,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-0.796208,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-0.806268,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-0.816349,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-0.826421,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-0.836495,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-0.846583,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-0.856656,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-0.866736,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-0.876807,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-0.886881,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-0.896956,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-0.907027,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-0.917102,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-0.927176,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-0.937248,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-0.947331,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-0.957402,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-0.967478,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-0.977552,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-0.987625,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-0.997697,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-1.007768,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-1.017840,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-1.027913,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-1.037948,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-1.048039,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-1.058122,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-1.068207,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-1.078257,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-1.088332,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-1.098405,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-1.108479,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-1.118551,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-1.128626,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-1.138698,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-1.148782,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-1.158855,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-1.168925,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-1.179000,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-1.189083,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-1.199160,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-1.209230,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-1.219302,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-1.229375,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-1.239448,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-1.249530,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-1.259601,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-1.269672,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-1.279745,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-1.289835,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-1.299905,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-1.309976,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-1.320049,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-1.330124,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-1.340198,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-1.350280,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-1.360352,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-1.370424,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-1.380495,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-1.390567,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-1.400640,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-1.410712,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-1.420784,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-1.430856,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-1.440931,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-1.451018,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-1.461089,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-1.471161,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-1.481234,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-1.491286,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-1.501368,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-1.511453,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-1.521526,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-1.531603,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-1.541674,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-1.551755,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-1.561832,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-1.571909,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-1.581982,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-1.592056,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-1.602130,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-1.612203,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-1.622278,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-1.632354,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-1.642434,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-1.652521,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-1.662594,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-1.672667,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-1.682740,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-1.692832,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-1.702909,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-1.712982,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-1.723057,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-1.733134,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-1.743207,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-1.753291,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-1.763364,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-1.773436,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-1.783511,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-1.793582,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-1.803656,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-1.813733,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-1.823808,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-1.833914,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-1.843988,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-1.854071,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-1.864146,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-1.874219,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-1.884293,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-1.894368,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-1.904442,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-1.914514,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-1.924587,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-1.934660,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-1.944734,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-1.954841,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-1.964917,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-1.974991,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-1.985066,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-1.995139,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-2.005215,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-2.015287,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-2.025362,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-2.035439,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-2.045512,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-2.055602,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-2.065678,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-2.075754,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-2.085827,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-2.095901,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-2.105977,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-2.116051,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-2.126125,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-2.136200,case2,error-poll-empty,3,3,3,1,1,2,1,,,
-2.146310,case2,pre-recovery,3,3,3,1,1,2,1,,,
-2.186629,recovery,wait-complete,4,4,1,2,1,2,1,1,,
-2.186647,recovery,state-wait,4,4,1,2,1,2,1,,,
-=== END T03-020 FULL RAW TRACE CSV ===
+gate-H=PASS
+poll-attempts=4 deliberate-poll-failures=1 events=5 rows=5
+T04-021 overall=PASS
+=== BEGIN T04-021 FULL RAW TRACE CSV ===
+t,phase,producer_serial,semantic_result,observer_state,proxy_blocked,proxy_attempts,proxy_failures,gstat_active,gstat_cached_state,presentation_state,event
+0.111361,baseline-after-successful-gui-update,1,1,1,0,2,0,1,1,1,periodic
+0.151647,controller-reset-proven-before-failed-gui-update,2,1,2,1,2,0,1,1,1,periodic
+0.151678,decisive-failed-gui-update,2,1,2,1,3,1,0,1,1,periodic
+0.152230,recovered-gui-update,2,1,2,0,4,1,1,2,2,periodic
+0.152241,recovery-presentation-confirmed,2,1,2,0,4,1,1,2,2,periodic
+=== END T04-021 FULL RAW TRACE CSV ===
+=== BEGIN T04-021 EVENT TRACE ===
+0.111249,state-estop,1
+0.111353,periodic,1
+0.151673,periodic,1
+0.152189,state-estop-reset,2
+0.152224,periodic,2
+=== END T04-021 EVENT TRACE ===
 
-T03-020 shell-harness=PASS
-UTC finish: 2026-09-08T03:18:22Z
+T04-021 shell-harness=PASS
+UTC finish: 2026-09-08T04:27:33Z
 ```
 
 ## Standard error
@@ -4573,8 +4596,8 @@ No containers need to be restarted.
 No user sessions are running outdated binaries.
 
 No VM guests are running outdated hypervisor (qemu) binaries on this host.
-Cloning into '/home/runner/work/_temp/linuxcnc-t03-nml'...
-Updating files:   0% (1/9526)Updating files:   1% (96/9526)Updating files:   2% (191/9526)Updating files:   3% (286/9526)Updating files:   4% (382/9526)Updating files:   5% (477/9526)Updating files:   6% (572/9526)Updating files:   7% (667/9526)Updating files:   8% (763/9526)Updating files:   9% (858/9526)Updating files:  10% (953/9526)Updating files:  11% (1048/9526)Updating files:  12% (1144/9526)Updating files:  13% (1239/9526)Updating files:  14% (1334/9526)Updating files:  15% (1429/9526)Updating files:  16% (1525/9526)Updating files:  17% (1620/9526)Updating files:  18% (1715/9526)Updating files:  19% (1810/9526)Updating files:  20% (1906/9526)Updating files:  21% (2001/9526)Updating files:  22% (2096/9526)Updating files:  23% (2191/9526)Updating files:  23% (2234/9526)Updating files:  24% (2287/9526)Updating files:  25% (2382/9526)Updating files:  26% (2477/9526)Updating files:  27% (2573/9526)Updating files:  28% (2668/9526)Updating files:  29% (2763/9526)Updating files:  30% (2858/9526)Updating files:  31% (2954/9526)Updating files:  32% (3049/9526)Updating files:  33% (3144/9526)Updating files:  34% (3239/9526)Updating files:  35% (3335/9526)Updating files:  36% (3430/9526)Updating files:  37% (3525/9526)Updating files:  38% (3620/9526)Updating files:  39% (3716/9526)Updating files:  40% (3811/9526)Updating files:  41% (3906/9526)Updating files:  42% (4001/9526)Updating files:  43% (4097/9526)Updating files:  44% (4192/9526)Updating files:  45% (4287/9526)Updating files:  46% (4382/9526)Updating files:  47% (4478/9526)Updating files:  48% (4573/9526)Updating files:  49% (4668/9526)Updating files:  50% (4763/9526)Updating files:  51% (4859/9526)Updating files:  52% (4954/9526)Updating files:  53% (5049/9526)Updating files:  54% (5145/9526)Updating files:  55% (5240/9526)Updating files:  56% (5335/9526)Updating files:  57% (5430/9526)Updating files:  58% (5526/9526)Updating files:  59% (5621/9526)Updating files:  60% (5716/9526)Updating files:  61% (5811/9526)Updating files:  62% (5907/9526)Updating files:  63% (6002/9526)Updating files:  64% (6097/9526)Updating files:  65% (6192/9526)Updating files:  66% (6288/9526)Updating files:  67% (6383/9526)Updating files:  68% (6478/9526)Updating files:  69% (6573/9526)Updating files:  70% (6669/9526)Updating files:  71% (6764/9526)Updating files:  72% (6859/9526)Updating files:  73% (6954/9526)Updating files:  74% (7050/9526)Updating files:  75% (7145/9526)Updating files:  76% (7240/9526)Updating files:  77% (7336/9526)Updating files:  78% (7431/9526)Updating files:  79% (7526/9526)Updating files:  80% (7621/9526)Updating files:  81% (7717/9526)Updating files:  82% (7812/9526)Updating files:  83% (7907/9526)Updating files:  84% (8002/9526)Updating files:  85% (8098/9526)Updating files:  86% (8193/9526)Updating files:  87% (8288/9526)Updating files:  88% (8383/9526)Updating files:  89% (8479/9526)Updating files:  90% (8574/9526)Updating files:  91% (8669/9526)Updating files:  92% (8764/9526)Updating files:  93% (8860/9526)Updating files:  94% (8955/9526)Updating files:  95% (9050/9526)Updating files:  96% (9145/9526)Updating files:  97% (9241/9526)Updating files:  98% (9336/9526)Updating files:  99% (9431/9526)Updating files: 100% (9526/9526)Updating files: 100% (9526/9526), done.
+Cloning into '/home/runner/work/_temp/linuxcnc-t04-gui'...
+Updating files:   0% (1/9526)Updating files:   1% (96/9526)Updating files:   2% (191/9526)Updating files:   3% (286/9526)Updating files:   4% (382/9526)Updating files:   5% (477/9526)Updating files:   6% (572/9526)Updating files:   7% (667/9526)Updating files:   8% (763/9526)Updating files:   9% (858/9526)Updating files:  10% (953/9526)Updating files:  11% (1048/9526)Updating files:  12% (1144/9526)Updating files:  13% (1239/9526)Updating files:  14% (1334/9526)Updating files:  15% (1429/9526)Updating files:  16% (1525/9526)Updating files:  17% (1620/9526)Updating files:  18% (1715/9526)Updating files:  19% (1810/9526)Updating files:  20% (1906/9526)Updating files:  21% (2001/9526)Updating files:  22% (2096/9526)Updating files:  23% (2191/9526)Updating files:  24% (2287/9526)Updating files:  25% (2382/9526)Updating files:  26% (2477/9526)Updating files:  27% (2573/9526)Updating files:  28% (2668/9526)Updating files:  29% (2763/9526)Updating files:  30% (2858/9526)Updating files:  31% (2954/9526)Updating files:  32% (3049/9526)Updating files:  33% (3144/9526)Updating files:  34% (3239/9526)Updating files:  35% (3335/9526)Updating files:  36% (3430/9526)Updating files:  37% (3525/9526)Updating files:  38% (3620/9526)Updating files:  39% (3716/9526)Updating files:  40% (3811/9526)Updating files:  40% (3840/9526)Updating files:  41% (3906/9526)Updating files:  42% (4001/9526)Updating files:  43% (4097/9526)Updating files:  44% (4192/9526)Updating files:  45% (4287/9526)Updating files:  46% (4382/9526)Updating files:  47% (4478/9526)Updating files:  48% (4573/9526)Updating files:  49% (4668/9526)Updating files:  50% (4763/9526)Updating files:  51% (4859/9526)Updating files:  52% (4954/9526)Updating files:  53% (5049/9526)Updating files:  54% (5145/9526)Updating files:  55% (5240/9526)Updating files:  56% (5335/9526)Updating files:  57% (5430/9526)Updating files:  58% (5526/9526)Updating files:  59% (5621/9526)Updating files:  60% (5716/9526)Updating files:  61% (5811/9526)Updating files:  62% (5907/9526)Updating files:  63% (6002/9526)Updating files:  64% (6097/9526)Updating files:  65% (6192/9526)Updating files:  66% (6288/9526)Updating files:  67% (6383/9526)Updating files:  68% (6478/9526)Updating files:  69% (6573/9526)Updating files:  70% (6669/9526)Updating files:  71% (6764/9526)Updating files:  72% (6859/9526)Updating files:  73% (6954/9526)Updating files:  74% (7050/9526)Updating files:  75% (7145/9526)Updating files:  76% (7240/9526)Updating files:  77% (7336/9526)Updating files:  78% (7431/9526)Updating files:  79% (7526/9526)Updating files:  80% (7621/9526)Updating files:  81% (7717/9526)Updating files:  82% (7812/9526)Updating files:  83% (7907/9526)Updating files:  84% (8002/9526)Updating files:  85% (8098/9526)Updating files:  86% (8193/9526)Updating files:  87% (8288/9526)Updating files:  88% (8383/9526)Updating files:  89% (8479/9526)Updating files:  90% (8574/9526)Updating files:  91% (8669/9526)Updating files:  92% (8764/9526)Updating files:  93% (8860/9526)Updating files:  94% (8955/9526)Updating files:  95% (9050/9526)Updating files:  96% (9145/9526)Updating files:  97% (9241/9526)Updating files:  98% (9336/9526)Updating files:  99% (9431/9526)Updating files: 100% (9526/9526)Updating files: 100% (9526/9526), done.
 HEAD is now at 8bf4605ae Merge pull request #4501 from grandixximo/gmoccapy-quit-4500
 
 Running kernel seems to be up-to-date.
@@ -4586,12 +4609,14 @@ No containers need to be restarted.
 No user sessions are running outdated binaries.
 
 No VM guests are running outdated hypervisor (qemu) binaries on this host.
-Reading 0/189 dependency files
+Reading 0/230 dependency files
 Done reading dependencies
 Reading 0/147 realtime dependency files
 Done reading realtime dependencies
-Reading 0/189 dependency files
+Reading 0/230 dependency files
 Done reading dependencies
 Reading 0/303 realtime dependency files
 Done reading realtime dependencies
+[DEFAULT.COMMON.HAL_GLIB][[34mDEBUG[0m]  hal_glib write socket available: tcp://127.0.0.1:5690 (hal_glib.py:363)
+[DEFAULT.COMMON.HAL_GLIB][[34mDEBUG[0m]  hal_glib read socket available: tcp://127.0.0.1:5691 (hal_glib.py:394)
 ```

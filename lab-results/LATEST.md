@@ -1,93 +1,93 @@
 # Latest LinuxCNC Lab Result
 
-- Job: `025-c03-explicit-cross-coupling-attempt3`
-- Job file: `lab-jobs/025-c03-explicit-cross-coupling-attempt3.sh`
-- Workflow run ID: `34228231147`
+- Job: `026-c04-asymmetric-authority`
+- Job file: `lab-jobs/026-c04-asymmetric-authority.sh`
+- Workflow run ID: `34231940180`
 - Attempt: `1`
-- Source commit: `99f7c35ce3cfd23aa96c11f0168c798ff8607c7c`
-- Exit code: `0`
-- Finished UTC: `2026-09-08T12:53:21Z`
+- Source commit: `5068dea32243f209e4873cc1117a1b2d5ed51dc2`
+- Exit code: `41`
+- Finished UTC: `2026-09-08T13:30:21Z`
 
 ## Metadata
 ```text
 LinuxCNC AI Curriculum Lab
-UTC start: 2026-09-08T12:49:06Z
-Repository commit: 99f7c35ce3cfd23aa96c11f0168c798ff8607c7c
-Workflow run: 34228231147 attempt 1
-Job file: lab-jobs/025-c03-explicit-cross-coupling-attempt3.sh
+UTC start: 2026-09-08T13:26:14Z
+Repository commit: 5068dea32243f209e4873cc1117a1b2d5ed51dc2
+Workflow run: 34231940180 attempt 1
+Job file: lab-jobs/026-c04-asymmetric-authority.sh
 Runner: Linux runnervmejwal 6.17.0-1022-azure #22-Ubuntu SMP Mon Jul 27 17:24:03 UTC 2026 x86_64 x86_64 x86_64 GNU/Linux
 Inner lab timeout: 70 minutes (job ceiling: 75 minutes)
 
-UTC finish: 2026-09-08T12:53:21Z
+UTC finish: 2026-09-08T13:30:21Z
 ```
 
 ## Standard output
 ```text
-== C03-025 attempt-3 correction preflight ==
+== C04-026 implementation preflight ==
 frozen-gates=A-H unchanged
-changed-only=phase0 transition isolation plus 20ms pre/post configuration settle
-312-# Withdraw the old phase before mutating configuration. Phase 0 is unscored transition instrumentation.
-313-halcmd sets c03-phase 0
-314-sleep 0.020
-315-halcmd sets c03-plant-b-gain 0.25
-316-sleep 0.020
-317:halcmd sets c03-phase 2
-318-printf 'phase-2-kc=%s plant-a=%s plant-b=%s\n' "$(halcmd gets c03-kc)" "$(halcmd gets c03-plant-a-gain)" "$(halcmd gets c03-plant-b-gain)"
-319-sleep 3.0
-320-
-321-halcmd sets c03-phase 0
-322-sleep 0.020
-323-halcmd sets c03-kc 0.5
-324-sleep 0.020
-325:halcmd sets c03-phase 3
-326-printf 'phase-3-kc=%s plant-a=%s plant-b=%s\n' "$(halcmd gets c03-kc)" "$(halcmd gets c03-plant-a-gain)" "$(halcmd gets c03-plant-b-gain)"
-327-sleep 3.0
-328-
-329-halcmd sets c03-phase 0
-330-sleep 0.020
-331-halcmd sets c03-kc 0
-332-sleep 0.020
-333:halcmd sets c03-phase 4
-334-printf 'phase-4-kc=%s plant-a=%s plant-b=%s\n' "$(halcmd gets c03-kc)" "$(halcmd gets c03-plant-a-gain)" "$(halcmd gets c03-plant-b-gain)"
-335-sleep 3.0
-336-
-337-OVERRUNS="$(halcmd getp sampler.0.overruns)"
-attempt3-inner-sha256=3da0d3fc2bc30babea9dca134c3b889b3e7b1eead45d766c8eba6d6ba8aad3ca
-== C03-025 explicit relative-feedback cross-coupling ==
-UTC start: 2026-09-08T12:49:06Z
+derived-from=C03-025 accepted topology; C04 adds mixed-type realtime saturation telemetry and frozen four-phase authority test
+13:printf '%s\n' 'Frozen prediction: truthful B response asymmetry plus a B-only maxoutput bound yields same-cycle local saturation and persistent disagreement, reversible after restoring authority and plant symmetry.'
+154:loadrt sampler depth=40000 cfg=ffffffffffffffffbbsf
+220:net c04-saturated-a c04-pid-a.saturated => sampler.0.pin.16
+221:net c04-saturated-b c04-pid-b.saturated => sampler.0.pin.17
+222:net c04-saturated-count-b c04-pid-b.saturated-count => sampler.0.pin.18
+223:newsig c04-b-maxoutput float
+224:net c04-b-maxoutput => c04-pid-b.maxoutput sampler.0.pin.19
+239:sets c04-b-maxoutput 0
+319:halcmd sets c04-b-maxoutput 0
+321:halcmd sets c04-phase 1
+322:printf 'phase-1-kc=%s plant-a=%s plant-b=%s b-maxoutput=%s\n' "$(halcmd gets c04-kc)" "$(halcmd gets c04-plant-a-gain)" "$(halcmd gets c04-plant-b-gain)" "$(halcmd gets c04-b-maxoutput)"
+327:halcmd sets c04-plant-b-gain 0.35
+328:halcmd sets c04-b-maxoutput 0
+330:halcmd sets c04-phase 2
+331:printf 'phase-2-kc=%s plant-a=%s plant-b=%s b-maxoutput=%s\n' "$(halcmd gets c04-kc)" "$(halcmd gets c04-plant-a-gain)" "$(halcmd gets c04-plant-b-gain)" "$(halcmd gets c04-b-maxoutput)"
+336:halcmd sets c04-b-maxoutput 1.0
+338:halcmd sets c04-phase 3
+339:printf 'phase-3-kc=%s plant-a=%s plant-b=%s b-maxoutput=%s\n' "$(halcmd gets c04-kc)" "$(halcmd gets c04-plant-a-gain)" "$(halcmd gets c04-plant-b-gain)" "$(halcmd gets c04-b-maxoutput)"
+345:halcmd sets c04-b-maxoutput 0
+347:halcmd sets c04-phase 4
+348:printf 'phase-4-kc=%s plant-a=%s plant-b=%s b-maxoutput=%s\n' "$(halcmd gets c04-kc)" "$(halcmd gets c04-plant-a-gain)" "$(halcmd gets c04-plant-b-gain)" "$(halcmd gets c04-b-maxoutput)"
+411:print(f'phase-3-longest-b-saturated-at-limit={b_interval}')
+412:print(f'phase-3-a-unsaturated-fraction-during-b-limit={a_unsat:.12g}')
+413:print(f'phase-3-b-saturated-count-span={satcount_span}')
+414:print(f'phase-4-b-unsaturated-fraction-last500={p4_unsat:.12g}')
+424:print('source-reconciliation=maxoutput clamps local PID output and drives limit_state/saturated telemetry; same-direction integral update is held while limited; integ gain scales only the toy plant derivative')
+c04-inner-sha256=a3560a44b931b33ebd06569a82ced940c1976766a33e6c56b2c8c8ab9e8278f1
+== C04-026 explicit relative-feedback cross-coupling ==
+UTC start: 2026-09-08T13:26:15Z
 Pinned upstream commit: 8bf4605ae81042248add031e94c77300406e0413
-Frozen prediction: with the B-only plant slowdown unchanged, Kc=0.5 symmetric relative-feedback command correction materially reduces sustained A/B disagreement versus Kc=0.
-Safety boundary: reduced simulated disagreement is not proof of physical alignment, validated plant stability, or safety-rated anti-racking.
+Frozen prediction: truthful B response asymmetry plus a B-only maxoutput bound yields same-cycle local saturation and persistent disagreement, reversible after restoring authority and plant symmetry.
+Safety boundary: PID software saturation is not physical stall, drive/current/pressure limit proof, sensor diagnosis, or safety-rated fault authority.
 Get:1 file:/etc/apt/apt-mirrors.txt Mirrorlist [144 B]
+Get:6 https://packages.microsoft.com/ubuntu/24.04/prod noble InRelease [3600 B]
 Hit:2 http://azure.archive.ubuntu.com/ubuntu noble InRelease
 Get:3 http://azure.archive.ubuntu.com/ubuntu noble-updates InRelease [126 kB]
 Get:4 http://azure.archive.ubuntu.com/ubuntu noble-backports InRelease [126 kB]
 Get:5 http://azure.archive.ubuntu.com/ubuntu noble-security InRelease [126 kB]
-Get:6 https://dl.google.com/linux/chrome-stable/deb stable InRelease [2548 B]
-Get:7 https://packages.microsoft.com/ubuntu/24.04/prod noble InRelease [3600 B]
-Get:8 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 Packages [1260 kB]
-Get:9 http://azure.archive.ubuntu.com/ubuntu noble-updates/main Translation-en [292 kB]
-Get:10 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 Components [180 kB]
-Get:11 http://azure.archive.ubuntu.com/ubuntu noble-updates/universe amd64 Packages [1691 kB]
-Get:12 http://azure.archive.ubuntu.com/ubuntu noble-updates/universe Translation-en [339 kB]
-Get:13 http://azure.archive.ubuntu.com/ubuntu noble-updates/universe amd64 Components [388 kB]
-Get:14 http://azure.archive.ubuntu.com/ubuntu noble-updates/restricted amd64 Packages [1536 kB]
-Get:15 http://azure.archive.ubuntu.com/ubuntu noble-updates/restricted Translation-en [352 kB]
-Get:16 http://azure.archive.ubuntu.com/ubuntu noble-updates/multiverse amd64 Components [940 B]
-Get:17 http://azure.archive.ubuntu.com/ubuntu noble-backports/main amd64 Components [5760 B]
-Get:18 http://azure.archive.ubuntu.com/ubuntu noble-backports/universe amd64 Components [12.6 kB]
-Get:19 http://azure.archive.ubuntu.com/ubuntu noble-security/main amd64 Packages [1002 kB]
-Get:20 http://azure.archive.ubuntu.com/ubuntu noble-security/main Translation-en [212 kB]
-Get:21 http://azure.archive.ubuntu.com/ubuntu noble-security/main amd64 Components [46.3 kB]
-Get:22 http://azure.archive.ubuntu.com/ubuntu noble-security/universe amd64 Packages [1206 kB]
-Get:23 http://azure.archive.ubuntu.com/ubuntu noble-security/universe Translation-en [241 kB]
-Get:24 http://azure.archive.ubuntu.com/ubuntu noble-security/universe amd64 Components [76.2 kB]
-Get:25 http://azure.archive.ubuntu.com/ubuntu noble-security/restricted amd64 Packages [1437 kB]
-Get:26 http://azure.archive.ubuntu.com/ubuntu noble-security/restricted Translation-en [334 kB]
-Get:27 https://dl.google.com/linux/chrome-stable/deb stable/main amd64 Packages [1401 B]
-Get:28 https://packages.microsoft.com/ubuntu/24.04/prod noble/main arm64 Packages [394 kB]
-Get:29 https://packages.microsoft.com/ubuntu/24.04/prod noble/main amd64 Packages [441 kB]
-Fetched 11.8 MB in 1s (8945 kB/s)
+Get:7 https://packages.microsoft.com/ubuntu/24.04/prod noble/main arm64 Packages [394 kB]
+Get:8 https://packages.microsoft.com/ubuntu/24.04/prod noble/main amd64 Packages [441 kB]
+Get:9 https://dl.google.com/linux/chrome-stable/deb stable InRelease [2548 B]
+Get:10 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 Packages [1260 kB]
+Get:11 http://azure.archive.ubuntu.com/ubuntu noble-updates/main Translation-en [292 kB]
+Get:12 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 Components [180 kB]
+Get:13 http://azure.archive.ubuntu.com/ubuntu noble-updates/universe amd64 Packages [1691 kB]
+Get:14 http://azure.archive.ubuntu.com/ubuntu noble-updates/universe Translation-en [339 kB]
+Get:15 http://azure.archive.ubuntu.com/ubuntu noble-updates/universe amd64 Components [388 kB]
+Get:16 http://azure.archive.ubuntu.com/ubuntu noble-updates/restricted amd64 Packages [1536 kB]
+Get:17 http://azure.archive.ubuntu.com/ubuntu noble-updates/restricted Translation-en [352 kB]
+Get:18 http://azure.archive.ubuntu.com/ubuntu noble-updates/multiverse amd64 Components [940 B]
+Get:19 http://azure.archive.ubuntu.com/ubuntu noble-backports/main amd64 Components [5760 B]
+Get:20 http://azure.archive.ubuntu.com/ubuntu noble-backports/universe amd64 Components [12.6 kB]
+Get:21 http://azure.archive.ubuntu.com/ubuntu noble-security/main amd64 Packages [1002 kB]
+Get:22 http://azure.archive.ubuntu.com/ubuntu noble-security/main Translation-en [212 kB]
+Get:23 http://azure.archive.ubuntu.com/ubuntu noble-security/main amd64 Components [46.3 kB]
+Get:24 http://azure.archive.ubuntu.com/ubuntu noble-security/universe amd64 Packages [1206 kB]
+Get:25 http://azure.archive.ubuntu.com/ubuntu noble-security/universe Translation-en [241 kB]
+Get:26 http://azure.archive.ubuntu.com/ubuntu noble-security/universe amd64 Components [76.2 kB]
+Get:27 http://azure.archive.ubuntu.com/ubuntu noble-security/restricted amd64 Packages [1437 kB]
+Get:28 http://azure.archive.ubuntu.com/ubuntu noble-security/restricted Translation-en [334 kB]
+Get:29 https://dl.google.com/linux/chrome-stable/deb stable/main amd64 Packages [1401 B]
+Fetched 11.8 MB in 1s (9870 kB/s)
 Reading package lists...
 Reading package lists...
 Building dependency tree...
@@ -388,7 +388,7 @@ Get:166 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 python3-
 Get:167 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 python3-unidiff all 0.7.3-1 [11.0 kB]
 Get:168 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 equivs all 2.3.1 [19.0 kB]
 Get:169 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 libauthen-sasl-perl all 2.1700-1 [42.9 kB]
-Fetched 11.0 MB in 20s (560 kB/s)
+Fetched 11.0 MB in 8s (1394 kB/s)
 Selecting previously unselected package autopoint.
 (Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 201676 files and directories currently installed.)
 Preparing to unpack .../000-autopoint_0.21-14ubuntu2_all.deb ...
@@ -1498,7 +1498,7 @@ Get:327 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 libmodbus-de
 Get:328 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 libtirpc-dev amd64 1.3.4+ds-1.1build1 [193 kB]
 Get:329 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 python3-xlib all 0.33-2 [120 kB]
 Preconfiguring packages ...
-Fetched 270 MB in 49s (5474 kB/s)
+Fetched 270 MB in 20s (13.4 MB/s)
 Selecting previously unselected package libdebuginfod-common.
 (Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 208197 files and directories currently installed.)
 Preparing to unpack .../000-libdebuginfod-common_0.190-1.1ubuntu0.1_all.deb ...
@@ -2863,7 +2863,7 @@ checking for c++ option to enable C++11 features... none needed
 checking for a BSD-compatible install... /usr/bin/install -c
 checking whether c++ supports C++20 features by default... no
 checking whether c++ supports C++20 features with -std=gnu++20... yes
-checking build toplevel... /home/runner/work/_temp/linuxcnc-c03-cross-coupling
+checking build toplevel... /home/runner/work/_temp/linuxcnc-c04-cross-coupling
 checking installation prefix... run in place
 checking for grep... /usr/bin/grep
 checking for pkg-config... /usr/bin/pkg-config
@@ -2902,7 +2902,7 @@ checking for libusb-1.0... yes
 checking for libgpiod < 3.0.0... yes
 configure: libgpiod version 1.6.3 found
 checking for module installation directory... configuring for run-in-place
-/home/runner/work/_temp/linuxcnc-c03-cross-coupling/rtlib
+/home/runner/work/_temp/linuxcnc-c04-cross-coupling/rtlib
 checking for glib... yes - 2.80.0
 checking whether make sets $(MAKE)... yes
 checking for ranlib... ranlib
@@ -2939,8 +2939,8 @@ checking for a version of Python >= '2.1.0'... yes
 checking for the sysconfig Python package... yes
 checking for Python include path... -I/usr/include/python3.12
 checking for Python library path... -L/usr/lib/x86_64-linux-gnu -lpython3.12
-checking for Python site-packages path... /home/runner/work/_temp/linuxcnc-c03-cross-coupling/lib/python3.12/site-packages
-checking for Python platform specific site-packages path... /home/runner/work/_temp/linuxcnc-c03-cross-coupling/lib/python3.12/site-packages
+checking for Python site-packages path... /home/runner/work/_temp/linuxcnc-c04-cross-coupling/lib/python3.12/site-packages
+checking for Python platform specific site-packages path... /home/runner/work/_temp/linuxcnc-c04-cross-coupling/lib/python3.12/site-packages
 checking python extra libraries... -ldl -lm
 checking python extra linking flags... -Xlinker -export-dynamic -Wl,-O1 -Wl,-Bsymbolic-functions
 checking consistency of all components of python development environment... yes
@@ -3033,7 +3033,7 @@ config.status: creating config.h
 ######################################################################
 
 
-make: Entering directory '/home/runner/work/_temp/linuxcnc-c03-cross-coupling/src'
+make: Entering directory '/home/runner/work/_temp/linuxcnc-c04-cross-coupling/src'
 Creating mesa_uart.mak
 Creating mesa_7i65.mak
 Creating serport.mak
@@ -3059,9 +3059,9 @@ Creating threadtest.mak
 Creating thcud.mak
 Creating thc.mak
 Creating sum2.mak
-Creating spindle_monitor.mak
 Creating steptest.mak
 Creating spindle.mak
+Creating spindle_monitor.mak
 Creating sphereprobe.mak
 Creating simple_tp.mak
 Creating sim_spindle.mak
@@ -3165,8 +3165,8 @@ converting conv for conv_s32_bit.comp
 converting conv for conv_float_u64.comp
 converting conv for conv_float_u32.comp
 converting conv for conv_float_s64.comp
-converting conv for conv_float_s32.comp
 converting conv for conv_bit_u64.comp
+converting conv for conv_float_s32.comp
 converting conv for conv_bit_u32.comp
 converting conv for conv_bit_s64.comp
 converting conv for conv_bit_s32.comp
@@ -3223,12 +3223,12 @@ Exporting hal.h
 Exporting hostmot2-serial.h
 Exporting linuxcnc.h
 Exporting kinematics.h
-Exporting emcmotcfg.h
 Exporting inifile.hh
 Exporting inifile.h
+Exporting emcmotcfg.h
 Exporting emcpos.h
-Exporting emcpose.h
 Exporting motion_types.h
+Exporting emcpose.h
 Exporting posemath.h
 Exporting posemath.hh
 Exporting posemath_types.h
@@ -3252,14 +3252,14 @@ Exporting rtapi_math64.h
 Exporting rtapi_mutex.h
 Exporting rtapi_parport.h
 Exporting rtapi_pci.h
-Exporting rtapi_slab.h
 Exporting rtapi_stdint.h
+Exporting rtapi_slab.h
 Exporting rtapi_string.h
 Exporting rtapi_vsnprintf.h
 Copying test input hal/components/lincurve.comp
 Copying test input hal/components/logic.comp
-sed hal/drivers/mesa_uart.comp -e "1 s/mesa_uart/mesa_uart_test/" > ../tests/halcompile/serial-out-of-tree/mesa_uart_test.comp
 Copying test input hal/components/bitslice.comp
+sed hal/drivers/mesa_uart.comp -e "1 s/mesa_uart/mesa_uart_test/" > ../tests/halcompile/serial-out-of-tree/mesa_uart_test.comp
 sed ../tests/halcompile/userspace/rand.comp -e "1 s/rand/rand_test/" > ../tests/halcompile/userspace/rand_test.comp
 cp ../scripts/rtapi.conf ../tests/uspace/spawnv-root/rtapi.conf
 Compiling libposemath/_posemath.c
@@ -3278,8 +3278,8 @@ Compiling libnml/buffer/locmem.cc
 Compiling libnml/buffer/memsem.cc
 Compiling libnml/buffer/phantom.cc
 Compiling libnml/buffer/physmem.cc
-Compiling libnml/buffer/sendn.c
 Compiling libnml/buffer/recvn.c
+Compiling libnml/buffer/sendn.c
 Compiling libnml/buffer/shmem.cc
 Compiling libnml/buffer/tcpmem.cc
 Compiling libnml/cms/cms.cc
@@ -3419,8 +3419,8 @@ Compiling emc/kinematics/genserfuncs.c
 Compiling emc/canterp/canterp.cc
 Compiling emc/ini/inivalue.cc
 Copy inivar
-Compiling emc/sai/saicanon.cc
 Compiling emc/sai/driver.cc
+Compiling emc/sai/saicanon.cc
 Compiling emc/sai/dummyemcstat.cc
 Compiling emc/motion-logger/motion-logger.c
 Compiling emc/motion/axis.c
@@ -3529,8 +3529,8 @@ Syntax checking python script hal_input
 Syntax checking python script scorbot-er-3
 Syntax checking python script mitsub_vfd
 Syntax checking python script pmx485
-Copying python script hal_input
 Copying python script scorbot-er-3
+Copying python script hal_input
 Syntax checking python script sim-torch
 Copying python script mitsub_vfd
 Syntax checking python script z_level_compensation
@@ -3539,33 +3539,33 @@ Copying python script pmx485
 Syntax checking python script hal_bridge
 Copying python script sim-torch
 Copying python script z_level_compensation
-Syntax checking python script pumagui
 Syntax checking python script mtconnect-agent
 Copying python script mqtt-publisher
+Syntax checking python script pumagui
 Syntax checking python script puma560gui
 Copying python script hal_bridge
 Syntax checking python script lineardelta
 Copying python script mtconnect-agent
 Copying python script pumagui
 Syntax checking python script scaragui
-Syntax checking python script hexagui
 Copying python script puma560gui
+Syntax checking python script hexagui
 Syntax checking python script 5axisgui
 Copying python script lineardelta
 Syntax checking python script max5gui
 Copying python script scaragui
 Copying python script hexagui
+Copying python script 5axisgui
 Syntax checking python script maho600gui
 Syntax checking python script hbmgui
-Copying python script 5axisgui
 Syntax checking python script rotarydelta
 Copying python script max5gui
 Syntax checking python script melfagui
 Copying python script maho600gui
 Copying python script hbmgui
+Copying python script rotarydelta
 Syntax checking python script millturngui
 Syntax checking python script xyzac-trt-gui
-Copying python script rotarydelta
 Syntax checking python script xyzbc-trt-gui
 Copying python script melfagui
 Syntax checking python script xyzab-tdr-gui
@@ -3748,23 +3748,38 @@ Linking rtapi_app
 Linking liblinuxcnc-uspace-posix.so.0
 Creating shared library liblinuxcnchal.so.0
 Creating shared library liblinuxcncini.so.1
+Linking gs2_vfd
+Linking hy_gt_vfd
+Linking svd-ps_vfd
+Linking shuttle
+Linking sendkeys
 Syntax checking python script halcompile
-Linking liblinuxcnc.a
+ln -sf liblinuxcnchal.so.0 ../lib/liblinuxcnchal.so
+Linking vfs11_vfd
+Linking halcmd
+Linking halrmt
 Copying python script halcompile
+Linking vfdb_vfd
+Preprocessing wj200_vfd.comp
+Preprocessing pi500_vfd.comp
+Linking hy_vfd
+Linking xhc-whb04b-6
+Linking liblinuxcnc.a
 tooldata: depends: objects/emc/tooldata/tooldata_mmap.o objects/emc/tooldata/tooldata_common.o objects/emc/tooldata/tooldata_db.o
 tooldata: Linking: libtooldata.so.0
 ln -sf liblinuxcncini.so.1 ../lib/liblinuxcncini.so
 Linking libpyplugin.so.0
-c++ -std=gnu++20 -g -L/home/runner/work/_temp/linuxcnc-c03-cross-coupling/lib -Wl,-rpath,/home/runner/work/_temp/linuxcnc-c03-cross-coupling/lib -ltirpc  -lgpiod  -Xlinker -export-dynamic -Wl,-O1 -Wl,-Bsymbolic-functions -Wl,-soname,libpyplugin.so.0 -shared -o ../lib/libpyplugin.so.0 objects/emc/pythonplugin/python_plugin.o ../lib/liblinuxcncini.so.1 -lstdc++ -lboost_python312 -L/usr/lib/x86_64-linux-gnu -lpython3.12 -ldl -lm
+c++ -std=gnu++20 -g -L/home/runner/work/_temp/linuxcnc-c04-cross-coupling/lib -Wl,-rpath,/home/runner/work/_temp/linuxcnc-c04-cross-coupling/lib -ltirpc  -lgpiod  -Xlinker -export-dynamic -Wl,-O1 -Wl,-Bsymbolic-functions -Wl,-soname,libpyplugin.so.0 -shared -o ../lib/libpyplugin.so.0 objects/emc/pythonplugin/python_plugin.o ../lib/liblinuxcncini.so.1 -lstdc++ -lboost_python312 -L/usr/lib/x86_64-linux-gnu -lpython3.12 -ldl -lm
 Linking inivalue
 Linking motion-logger
 ln -sf libtooldata.so.0 ../lib/libtooldata.so
 Linking linuxcnc_module_helper
 gcc -Wl,-z,relro -o ../bin/linuxcnc_module_helper objects/module_helper/module_helper.o
+Linking python module _hal.so
 Linking python module lineardeltakins.so
-c++ -std=gnu++20 -L/home/runner/work/_temp/linuxcnc-c03-cross-coupling/lib -Wl,-rpath,/home/runner/work/_temp/linuxcnc-c03-cross-coupling/lib -ltirpc  -lgpiod  -shared -o ../lib/python/lineardeltakins.so objects/emc/kinematics/lineardeltakins.o -lboost_python312
+c++ -std=gnu++20 -L/home/runner/work/_temp/linuxcnc-c04-cross-coupling/lib -Wl,-rpath,/home/runner/work/_temp/linuxcnc-c04-cross-coupling/lib -ltirpc  -lgpiod  -shared -o ../lib/python/lineardeltakins.so objects/emc/kinematics/lineardeltakins.o -lboost_python312
 Linking python module rotarydeltakins.so
-c++ -std=gnu++20 -L/home/runner/work/_temp/linuxcnc-c03-cross-coupling/lib -Wl,-rpath,/home/runner/work/_temp/linuxcnc-c03-cross-coupling/lib -ltirpc  -lgpiod  -shared -o ../lib/python/rotarydeltakins.so objects/emc/kinematics/rotarydeltakins.o -lboost_python312
+c++ -std=gnu++20 -L/home/runner/work/_temp/linuxcnc-c04-cross-coupling/lib -Wl,-rpath,/home/runner/work/_temp/linuxcnc-c04-cross-coupling/lib -ltirpc  -lgpiod  -shared -o ../lib/python/rotarydeltakins.so objects/emc/kinematics/rotarydeltakins.o -lboost_python312
 Preprocessing abs.comp
 Preprocessing abs_s32.comp
 Preprocessing abs_s64.comp
@@ -3822,8 +3837,8 @@ Preprocessing differential.comp
 Preprocessing div2.comp
 Preprocessing edge.comp
 Preprocessing eoffset_per_angle.comp
-Preprocessing feedcomp.comp
 Preprocessing estop_latch.comp
+Preprocessing feedcomp.comp
 Preprocessing filter_kalman.comp
 Preprocessing flipflop.comp
 Preprocessing gantry.comp
@@ -4140,30 +4155,18 @@ Linking ../rtlib/three21kins.so
 Linking ../rtlib/5axiskins.so
 Linking ../rtlib/motmod.so
 Linking ../rtlib/homemod.so
-ln -sf libposemath.so.0 ../lib/libposemath.so
 Linking ../rtlib/tpmod.so
+ln -sf libposemath.so.0 ../lib/libposemath.so
 ln -sf libnml.so.0 ../lib/libnml.so
 ln -sf liblinuxcnc-uspace-posix.so.0 ../lib/liblinuxcnc-uspace-posix.so
 Linking halstreamer
 Linking halsampler
 Linking panelui
 Linking mb2hal
-Linking gs2_vfd
-Linking hy_gt_vfd
-Linking svd-ps_vfd
-Linking shuttle
 Linking xhc-hb04
-Linking sendkeys
 Preprocessing thermistor.comp
-ln -sf liblinuxcnchal.so.0 ../lib/liblinuxcnchal.so
-Linking vfs11_vfd
-Linking halcmd
-Linking halrmt
-Linking vfdb_vfd
-Preprocessing wj200_vfd.comp
-Preprocessing pi500_vfd.comp
-Linking hy_vfd
-Linking xhc-whb04b-6
+Compiling hal/user_comps/wj200_vfd/wj200_vfd.c
+Compiling hal/user_comps/pi500_vfd/pi500_vfd.c
 Linking linuxcncrsh
 Linking schedrmt
 Linking linuxcnclcd
@@ -4171,7 +4174,6 @@ Linking halui
 Linking linuxcncsvr
 ln -sf libpyplugin.so.0 ../lib/libpyplugin.so
 emc/Submakefile:Linking genserkins
-Linking python module _hal.so
 Linking python module linuxcnc.so
 Linking ../rtlib/abs.so
 Linking ../rtlib/abs_s32.so
@@ -4184,8 +4186,8 @@ Linking ../rtlib/biquad.so
 Linking ../rtlib/bitmerge.so
 Linking ../rtlib/bitslice.so
 Linking ../rtlib/bitwise.so
-Linking ../rtlib/blend.so
 Linking ../rtlib/bldc.so
+Linking ../rtlib/blend.so
 Linking ../rtlib/carousel.so
 Linking ../rtlib/charge_pump.so
 Linking ../rtlib/clarke2.so
@@ -4330,75 +4332,73 @@ Linking ../rtlib/serport.so
 Linking ../rtlib/mesa_7i65.so
 Linking ../rtlib/mesa_uart.so
 Compiling objects/hal/user_comps/thermistor.c
-Compiling hal/user_comps/wj200_vfd/wj200_vfd.c
-Compiling hal/user_comps/pi500_vfd/pi500_vfd.c
-Linking librs274.so.0
-c++ -std=gnu++20 -g -L/home/runner/work/_temp/linuxcnc-c03-cross-coupling/lib -Wl,-rpath,/home/runner/work/_temp/linuxcnc-c03-cross-coupling/lib -ltirpc  -lgpiod  -Xlinker -export-dynamic -Wl,-O1 -Wl,-Bsymbolic-functions -Wl,-soname,librs274.so.0 -shared -o ../lib/librs274.so.0 objects/emc/rs274ngc/interp_arc.o objects/emc/rs274ngc/interp_array.o objects/emc/rs274ngc/interp_base.o objects/emc/rs274ngc/interp_check.o objects/emc/rs274ngc/interp_convert.o objects/emc/rs274ngc/interp_queue.o objects/emc/rs274ngc/interp_cycles.o objects/emc/rs274ngc/interp_execute.o objects/emc/rs274ngc/interp_find.o objects/emc/rs274ngc/interp_internal.o objects/emc/rs274ngc/interp_inverse.o objects/emc/rs274ngc/interp_read.o objects/emc/rs274ngc/interp_write.o objects/emc/rs274ngc/interp_o_word.o objects/emc/rs274ngc/interp_g7x.o objects/emc/rs274ngc/nurbs_additional_functions.o objects/emc/rs274ngc/interp_namedparams.o objects/emc/rs274ngc/interp_python.o objects/emc/rs274ngc/interp_remap.o objects/emc/rs274ngc/interp_setup.o objects/emc/rs274ngc/canonmodule.o objects/emc/rs274ngc/pyparamclass.o objects/emc/rs274ngc/pyemctypes.o objects/emc/rs274ngc/pyinterp1.o objects/emc/rs274ngc/pyblock.o objects/emc/rs274ngc/pyarrays.o objects/emc/rs274ngc/interpmodule.o objects/emc/rs274ngc/rs274ngc_pre.o objects/emc/rs274ngc/interp_inspection.o objects/emc/nml_intf/modal_state.o ../lib/liblinuxcncini.so ../lib/libpyplugin.so ../lib/liblinuxcnchal.so.0 ../lib/libtooldata.so.0 -lstdc++ -lboost_python312 -L/usr/lib/x86_64-linux-gnu -lpython3.12 -ldl -lm
-Linking thermistor
-Linking pi500_vfd
 Linking wj200_vfd
+Linking pi500_vfd
+Linking librs274.so.0
+c++ -std=gnu++20 -g -L/home/runner/work/_temp/linuxcnc-c04-cross-coupling/lib -Wl,-rpath,/home/runner/work/_temp/linuxcnc-c04-cross-coupling/lib -ltirpc  -lgpiod  -Xlinker -export-dynamic -Wl,-O1 -Wl,-Bsymbolic-functions -Wl,-soname,librs274.so.0 -shared -o ../lib/librs274.so.0 objects/emc/rs274ngc/interp_arc.o objects/emc/rs274ngc/interp_array.o objects/emc/rs274ngc/interp_base.o objects/emc/rs274ngc/interp_check.o objects/emc/rs274ngc/interp_convert.o objects/emc/rs274ngc/interp_queue.o objects/emc/rs274ngc/interp_cycles.o objects/emc/rs274ngc/interp_execute.o objects/emc/rs274ngc/interp_find.o objects/emc/rs274ngc/interp_internal.o objects/emc/rs274ngc/interp_inverse.o objects/emc/rs274ngc/interp_read.o objects/emc/rs274ngc/interp_write.o objects/emc/rs274ngc/interp_o_word.o objects/emc/rs274ngc/interp_g7x.o objects/emc/rs274ngc/nurbs_additional_functions.o objects/emc/rs274ngc/interp_namedparams.o objects/emc/rs274ngc/interp_python.o objects/emc/rs274ngc/interp_remap.o objects/emc/rs274ngc/interp_setup.o objects/emc/rs274ngc/canonmodule.o objects/emc/rs274ngc/pyparamclass.o objects/emc/rs274ngc/pyemctypes.o objects/emc/rs274ngc/pyinterp1.o objects/emc/rs274ngc/pyblock.o objects/emc/rs274ngc/pyarrays.o objects/emc/rs274ngc/interpmodule.o objects/emc/rs274ngc/rs274ngc_pre.o objects/emc/rs274ngc/interp_inspection.o objects/emc/nml_intf/modal_state.o ../lib/liblinuxcncini.so ../lib/libpyplugin.so ../lib/liblinuxcnchal.so.0 ../lib/libtooldata.so.0 -lstdc++ -lboost_python312 -L/usr/lib/x86_64-linux-gnu -lpython3.12 -ldl -lm
+Linking thermistor
 ln -sf librs274.so.0 ../lib/librs274.so
 Linking milltask
-c++ -std=gnu++20 -o ../bin/milltask objects/emc/motion/emcmotglb.o objects/emc/task/emctask.o objects/emc/task/emccanon.o objects/emc/task/emctaskmain.o objects/emc/motion/usrmotintf.o objects/emc/motion/emcmotutil.o objects/emc/task/taskintf.o objects/emc/motion/dbuf.o objects/emc/motion/stashf.o objects/emc/task/taskclass.o objects/emc/task/backtrace.o objects/emc/usr_intf/mapini.o ../lib/librs274.so.0 ../lib/liblinuxcnc.a ../lib/libnml.so.0 ../lib/liblinuxcncini.so.1 ../lib/libposemath.so.0 ../lib/liblinuxcnchal.so.0 ../lib/libpyplugin.so.0 ../lib/libtooldata.so.0 -L/home/runner/work/_temp/linuxcnc-c03-cross-coupling/lib -Wl,-rpath,/home/runner/work/_temp/linuxcnc-c03-cross-coupling/lib -ltirpc  -lgpiod  -Xlinker -export-dynamic -Wl,-O1 -Wl,-Bsymbolic-functions -lboost_python312 -L/usr/lib/x86_64-linux-gnu -lpython3.12 -ldl -lm -lfmt
+c++ -std=gnu++20 -o ../bin/milltask objects/emc/motion/emcmotglb.o objects/emc/task/emctask.o objects/emc/task/emccanon.o objects/emc/task/emctaskmain.o objects/emc/motion/usrmotintf.o objects/emc/motion/emcmotutil.o objects/emc/task/taskintf.o objects/emc/motion/dbuf.o objects/emc/motion/stashf.o objects/emc/task/taskclass.o objects/emc/task/backtrace.o objects/emc/usr_intf/mapini.o ../lib/librs274.so.0 ../lib/liblinuxcnc.a ../lib/libnml.so.0 ../lib/liblinuxcncini.so.1 ../lib/libposemath.so.0 ../lib/liblinuxcnchal.so.0 ../lib/libpyplugin.so.0 ../lib/libtooldata.so.0 -L/home/runner/work/_temp/linuxcnc-c04-cross-coupling/lib -Wl,-rpath,/home/runner/work/_temp/linuxcnc-c04-cross-coupling/lib -ltirpc  -lgpiod  -Xlinker -export-dynamic -Wl,-O1 -Wl,-Bsymbolic-functions -lboost_python312 -L/usr/lib/x86_64-linux-gnu -lpython3.12 -ldl -lm -lfmt
 Linking rs274
 Linking python module gcode.so
-c++ -std=gnu++20 -L/home/runner/work/_temp/linuxcnc-c03-cross-coupling/lib -Wl,-rpath,/home/runner/work/_temp/linuxcnc-c03-cross-coupling/lib -ltirpc  -lgpiod  -shared -o ../lib/python/gcode.so objects/emc/rs274ngc/gcodemodule.o ../lib/librs274.so.0 -lstdc++
+c++ -std=gnu++20 -L/home/runner/work/_temp/linuxcnc-c04-cross-coupling/lib -Wl,-rpath,/home/runner/work/_temp/linuxcnc-c04-cross-coupling/lib -ltirpc  -lgpiod  -shared -o ../lib/python/gcode.so objects/emc/rs274ngc/gcodemodule.o ../lib/librs274.so.0 -lstdc++
 Linking canterp.so
 You now need to run 'sudo make setuid' or 'sudo make setcap' in order to run in place with access to hardware.
-make: Leaving directory '/home/runner/work/_temp/linuxcnc-c03-cross-coupling/src'
-linuxcnc-bin=/home/runner/work/_temp/linuxcnc-c03-cross-coupling/scripts/linuxcnc
-halsampler-bin=/home/runner/work/_temp/linuxcnc-c03-cross-coupling/bin/halsampler
+make: Leaving directory '/home/runner/work/_temp/linuxcnc-c04-cross-coupling/src'
+linuxcnc-bin=/home/runner/work/_temp/linuxcnc-c04-cross-coupling/scripts/linuxcnc
+halsampler-bin=/home/runner/work/_temp/linuxcnc-c04-cross-coupling/bin/halsampler
 gate-A-provenance=PASS
-fixture-ini-sha256=dfe6c50ccff66d606c82d0beab0d856a2953c4f4f8f62bc17b50e157259f957f
-fixture-hal-sha256=510db88d6b70425c4482bd6f6e1a48faed1125cf070b7d4aa311403ba081b78f
+fixture-ini-sha256=7eabd7b46534c637030399ba4cdf454f0860e58546597fcf1bd0b5691a450947
+fixture-hal-sha256=7a071a8e4cc000e34c9dd8d23f66e6c922ddb734e105055b873874c893919b15
 -- realtime function order --
 addf motion-command-handler servo-thread
 addf motion-controller servo-thread
-addf c03-cross-diff servo-thread
-addf c03-cross-scale servo-thread
-addf c03-cmd-a servo-thread
-addf c03-cmd-b servo-thread
-addf c03-resid-c servo-thread
-addf c03-delta-a servo-thread
-addf c03-resid-a servo-thread
-addf c03-delta-b servo-thread
-addf c03-resid-b servo-thread
-addf c03-pid-a.do-pid-calcs servo-thread
-addf c03-pid-b.do-pid-calcs servo-thread
-addf c03-plant-a servo-thread
-addf c03-plant-b servo-thread
+addf c04-cross-diff servo-thread
+addf c04-cross-scale servo-thread
+addf c04-cmd-a servo-thread
+addf c04-cmd-b servo-thread
+addf c04-resid-c servo-thread
+addf c04-delta-a servo-thread
+addf c04-resid-a servo-thread
+addf c04-delta-b servo-thread
+addf c04-resid-b servo-thread
+addf c04-pid-a.do-pid-calcs servo-thread
+addf c04-pid-b.do-pid-calcs servo-thread
+addf c04-plant-a servo-thread
+addf c04-plant-b servo-thread
 addf sampler.0 servo-thread
 -- cross-coupling topology --
-net c03-y-base joint.1.motor-pos-cmd => joint.1.motor-pos-fb
-net c03-feedback-a c03-plant-a.out => c03-pid-a.feedback c03-cross-diff.in0 sampler.0.pin.1
-net c03-feedback-b c03-plant-b.out => c03-pid-b.feedback c03-cross-diff.in1 sampler.0.pin.2
-setp c03-cross-diff.gain0 -1
-setp c03-cross-diff.gain1 1
-net c03-disagreement c03-cross-diff.out => c03-cross-scale.in c03-resid-c.in1 sampler.0.pin.3
-net c03-kc => c03-cross-scale.gain sampler.0.pin.9
-setp c03-cross-scale.offset 0
-net c03-correction c03-cross-scale.out => c03-cmd-a.in1 c03-cmd-b.in1 c03-resid-c.in0 c03-resid-a.in1 c03-resid-b.in1 sampler.0.pin.4
-net c03-y-base => c03-cmd-a.in0 c03-cmd-b.in0 c03-delta-a.in1 c03-delta-b.in1 sampler.0.pin.0
-setp c03-cmd-a.gain0 1
-setp c03-cmd-a.gain1 1
-setp c03-cmd-b.gain0 1
-setp c03-cmd-b.gain1 -1
-net c03-command-a c03-cmd-a.out => c03-pid-a.command c03-delta-a.in0 sampler.0.pin.5
-net c03-command-b c03-cmd-b.out => c03-pid-b.command c03-delta-b.in0 sampler.0.pin.6
-net c03-output-a c03-pid-a.output => c03-plant-a.in sampler.0.pin.7
-net c03-output-b c03-pid-b.output => c03-plant-b.in sampler.0.pin.8
-net c03-plant-a-gain => c03-plant-a.gain sampler.0.pin.14
-net c03-plant-b-gain => c03-plant-b.gain sampler.0.pin.15
-setp c03-pid-a.Pgain 4
-setp c03-pid-b.Pgain 4
-setp c03-pid-a.Igain 0
-setp c03-pid-b.Igain 0
-setp c03-pid-a.Dgain 0
-setp c03-pid-b.Dgain 0
-setp c03-pid-a.error-previous-target false
-setp c03-pid-b.error-previous-target false
-setp c03-pid-a.enable true
-setp c03-pid-b.enable true
+net c04-y-base joint.1.motor-pos-cmd => joint.1.motor-pos-fb
+net c04-feedback-a c04-plant-a.out => c04-pid-a.feedback c04-cross-diff.in0 sampler.0.pin.1
+net c04-feedback-b c04-plant-b.out => c04-pid-b.feedback c04-cross-diff.in1 sampler.0.pin.2
+setp c04-cross-diff.gain0 -1
+setp c04-cross-diff.gain1 1
+net c04-disagreement c04-cross-diff.out => c04-cross-scale.in c04-resid-c.in1 sampler.0.pin.3
+net c04-kc => c04-cross-scale.gain sampler.0.pin.9
+setp c04-cross-scale.offset 0
+net c04-correction c04-cross-scale.out => c04-cmd-a.in1 c04-cmd-b.in1 c04-resid-c.in0 c04-resid-a.in1 c04-resid-b.in1 sampler.0.pin.4
+net c04-y-base => c04-cmd-a.in0 c04-cmd-b.in0 c04-delta-a.in1 c04-delta-b.in1 sampler.0.pin.0
+setp c04-cmd-a.gain0 1
+setp c04-cmd-a.gain1 1
+setp c04-cmd-b.gain0 1
+setp c04-cmd-b.gain1 -1
+net c04-command-a c04-cmd-a.out => c04-pid-a.command c04-delta-a.in0 sampler.0.pin.5
+net c04-command-b c04-cmd-b.out => c04-pid-b.command c04-delta-b.in0 sampler.0.pin.6
+net c04-output-a c04-pid-a.output => c04-plant-a.in sampler.0.pin.7
+net c04-output-b c04-pid-b.output => c04-plant-b.in sampler.0.pin.8
+net c04-plant-a-gain => c04-plant-a.gain sampler.0.pin.14
+net c04-plant-b-gain => c04-plant-b.gain sampler.0.pin.15
+setp c04-pid-a.Pgain 4
+setp c04-pid-b.Pgain 4
+setp c04-pid-a.Igain 0
+setp c04-pid-b.Igain 0
+setp c04-pid-a.Dgain 0
+setp c04-pid-b.Dgain 0
+setp c04-pid-a.error-previous-target false
+setp c04-pid-b.error-previous-target false
+setp c04-pid-a.enable true
+setp c04-pid-b.enable true
 runtime-ready-probe=4
 gate-A-topology=PASS
 estop-reset-wait-complete=1
@@ -4408,45 +4408,37 @@ all-homed=PASS
 inpos-before-move=PASS
 mdi-mode-wait-complete=1
 mdi-target-y=20.000000000
-phase-1-kc=0 plant-a=1 plant-b=1
-phase-2-kc=0 plant-a=1 plant-b=0.25
-phase-3-kc=0.5 plant-a=1 plant-b=0.25
-phase-4-kc=0 plant-a=1 plant-b=0.25
+phase-1-kc=0.5 plant-a=1 plant-b=1 b-maxoutput=0
+phase-2-kc=0.5 plant-a=1 plant-b=0.35 b-maxoutput=0
+phase-3-kc=0.5 plant-a=1 plant-b=0.35 b-maxoutput=1
+phase-4-kc=0.5 plant-a=1 plant-b=1 b-maxoutput=0
 sampler-overruns=0
-realtime-samples=11199
-realtime-sample-first=0 last=11198
-phase-1-samples=1013
-phase-2-samples=3013
-phase-3-samples=3013
-phase-4-samples=3012
-command-span=9.133
-phase-2-last500-mean-abs-feedback-separation-U=0.703374228
-phase-3-last500-mean-abs-feedback-separation-X=0.37704504
-phase-4-last500-mean-abs-feedback-separation-R=0.738476396
-coupled-to-uncoupled-ratio=0.536051827023
-rebound-to-coupled-ratio=1.95858933988
-phase-3-a-ahead-qualified-rows=3013 direction-correct-rows=3013
-phase-3-max-abs-realtime-residual-C-minus-halfD=0
-phase-3-max-abs-realtime-residual-cmdA-minus-base-minus-C=0
-phase-3-max-abs-realtime-residual-cmdB-minus-base-plus-C=0
-phase-4-max-abs-correction-last500=0
+realtime-samples=14262
+realtime-sample-first=0 last=14261
+phase-1-samples=1011
+phase-2-samples=3011
+phase-3-samples=3011
+phase-4-samples=6007
+phase-1-S1=0
+phase-2-S2=0.230802694
+phase-3-S3=1.473859666
+phase-4-S4=0
+qualified-direction-rows=5956 direction-correct=5956
+max-residual-c=0 max-residual-a=0 max-residual-b=0
+phase-3-longest-b-saturated-at-limit=0
+phase-3-a-unsaturated-fraction-during-b-limit=0
+phase-3-b-saturated-count-span=0
+phase-4-b-unsaturated-fraction-last500=0
 gate-B=PASS
 gate-C=PASS
 gate-D=PASS
 gate-E=PASS
-gate-F=PASS
-gate-G=PASS
+gate-F=FAIL
+gate-G=FAIL
 gate-H=PASS
-safety-boundary=reduced simulated disagreement is not proven physical alignment, general stability, a validated hydraulic/mechanical law, or safety-rated anti-racking
-C03-025 overall=PASS
-retained-evidence=lab-results/c03-025-evidence/c03-025-realtime.txt sha256=ed3f43ba6fb9803a9b491900aab836948e91477cf306070e1106f998fd68075d bytes=1695584
-retained-evidence=lab-results/c03-025-evidence/c03-linuxcnc.stdout sha256=86a3e09b88a88b163c74076c0360243d2aec443ba48107dd7da7154c56c5352c bytes=357
-retained-evidence=lab-results/c03-025-evidence/c03-linuxcnc.stderr sha256=2439983b5a6d7d42a7d8657b08ff053add5c7a5d1e44294aaecdc669c08fba94 bytes=437
-retained-evidence=lab-results/c03-025-evidence/c03-025-halsampler.stderr sha256=e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855 bytes=0
-retained-realtime-lines=11199
-gate-A=PASS
-gate-B-retention=PASS
-gate-H-source-reconciliation-required=PASS
+source-reconciliation=maxoutput clamps local PID output and drives limit_state/saturated telemetry; same-direction integral update is held while limited; integ gain scales only the toy plant derivative
+safety-boundary=PID software saturation is not physical stall, drive current limit, hydraulic pressure/flow limit, sensor-fault diagnosis, or a safety-rated fault decision
+C04-026 overall=FAIL
 ```
 
 ## Standard error
@@ -4461,8 +4453,8 @@ No containers need to be restarted.
 No user sessions are running outdated binaries.
 
 No VM guests are running outdated hypervisor (qemu) binaries on this host.
-Cloning into '/home/runner/work/_temp/linuxcnc-c03-cross-coupling'...
-Updating files:   0% (1/9526)Updating files:   1% (96/9526)Updating files:   2% (191/9526)Updating files:   3% (286/9526)Updating files:   4% (382/9526)Updating files:   5% (477/9526)Updating files:   6% (572/9526)Updating files:   7% (667/9526)Updating files:   8% (763/9526)Updating files:   9% (858/9526)Updating files:  10% (953/9526)Updating files:  11% (1048/9526)Updating files:  12% (1144/9526)Updating files:  13% (1239/9526)Updating files:  14% (1334/9526)Updating files:  15% (1429/9526)Updating files:  16% (1525/9526)Updating files:  17% (1620/9526)Updating files:  18% (1715/9526)Updating files:  19% (1810/9526)Updating files:  20% (1906/9526)Updating files:  21% (2001/9526)Updating files:  22% (2096/9526)Updating files:  23% (2191/9526)Updating files:  24% (2287/9526)Updating files:  25% (2382/9526)Updating files:  26% (2477/9526)Updating files:  27% (2573/9526)Updating files:  28% (2668/9526)Updating files:  29% (2763/9526)Updating files:  30% (2858/9526)Updating files:  31% (2954/9526)Updating files:  32% (3049/9526)Updating files:  33% (3144/9526)Updating files:  34% (3239/9526)Updating files:  35% (3335/9526)Updating files:  36% (3430/9526)Updating files:  37% (3525/9526)Updating files:  38% (3620/9526)Updating files:  39% (3716/9526)Updating files:  40% (3811/9526)Updating files:  41% (3906/9526)Updating files:  41% (3994/9526)Updating files:  42% (4001/9526)Updating files:  43% (4097/9526)Updating files:  44% (4192/9526)Updating files:  45% (4287/9526)Updating files:  46% (4382/9526)Updating files:  47% (4478/9526)Updating files:  48% (4573/9526)Updating files:  49% (4668/9526)Updating files:  50% (4763/9526)Updating files:  51% (4859/9526)Updating files:  52% (4954/9526)Updating files:  53% (5049/9526)Updating files:  54% (5145/9526)Updating files:  55% (5240/9526)Updating files:  56% (5335/9526)Updating files:  57% (5430/9526)Updating files:  58% (5526/9526)Updating files:  59% (5621/9526)Updating files:  60% (5716/9526)Updating files:  61% (5811/9526)Updating files:  62% (5907/9526)Updating files:  63% (6002/9526)Updating files:  64% (6097/9526)Updating files:  65% (6192/9526)Updating files:  66% (6288/9526)Updating files:  67% (6383/9526)Updating files:  68% (6478/9526)Updating files:  69% (6573/9526)Updating files:  70% (6669/9526)Updating files:  71% (6764/9526)Updating files:  72% (6859/9526)Updating files:  73% (6954/9526)Updating files:  74% (7050/9526)Updating files:  75% (7145/9526)Updating files:  76% (7240/9526)Updating files:  77% (7336/9526)Updating files:  78% (7431/9526)Updating files:  79% (7526/9526)Updating files:  80% (7621/9526)Updating files:  81% (7717/9526)Updating files:  82% (7812/9526)Updating files:  83% (7907/9526)Updating files:  84% (8002/9526)Updating files:  85% (8098/9526)Updating files:  86% (8193/9526)Updating files:  87% (8288/9526)Updating files:  88% (8383/9526)Updating files:  89% (8479/9526)Updating files:  90% (8574/9526)Updating files:  91% (8669/9526)Updating files:  92% (8764/9526)Updating files:  93% (8860/9526)Updating files:  94% (8955/9526)Updating files:  95% (9050/9526)Updating files:  96% (9145/9526)Updating files:  97% (9241/9526)Updating files:  98% (9336/9526)Updating files:  99% (9431/9526)Updating files: 100% (9526/9526)Updating files: 100% (9526/9526), done.
+Cloning into '/home/runner/work/_temp/linuxcnc-c04-cross-coupling'...
+Updating files:   0% (1/9526)Updating files:   1% (96/9526)Updating files:   2% (191/9526)Updating files:   3% (286/9526)Updating files:   4% (382/9526)Updating files:   5% (477/9526)Updating files:   6% (572/9526)Updating files:   7% (667/9526)Updating files:   8% (763/9526)Updating files:   9% (858/9526)Updating files:  10% (953/9526)Updating files:  11% (1048/9526)Updating files:  12% (1144/9526)Updating files:  13% (1239/9526)Updating files:  14% (1334/9526)Updating files:  15% (1429/9526)Updating files:  16% (1525/9526)Updating files:  17% (1620/9526)Updating files:  18% (1715/9526)Updating files:  19% (1810/9526)Updating files:  20% (1906/9526)Updating files:  21% (2001/9526)Updating files:  22% (2096/9526)Updating files:  23% (2191/9526)Updating files:  23% (2193/9526)Updating files:  24% (2287/9526)Updating files:  25% (2382/9526)Updating files:  26% (2477/9526)Updating files:  27% (2573/9526)Updating files:  28% (2668/9526)Updating files:  29% (2763/9526)Updating files:  30% (2858/9526)Updating files:  31% (2954/9526)Updating files:  32% (3049/9526)Updating files:  33% (3144/9526)Updating files:  34% (3239/9526)Updating files:  35% (3335/9526)Updating files:  36% (3430/9526)Updating files:  37% (3525/9526)Updating files:  38% (3620/9526)Updating files:  39% (3716/9526)Updating files:  40% (3811/9526)Updating files:  41% (3906/9526)Updating files:  42% (4001/9526)Updating files:  43% (4097/9526)Updating files:  44% (4192/9526)Updating files:  45% (4287/9526)Updating files:  46% (4382/9526)Updating files:  47% (4478/9526)Updating files:  48% (4573/9526)Updating files:  49% (4668/9526)Updating files:  50% (4763/9526)Updating files:  51% (4859/9526)Updating files:  52% (4954/9526)Updating files:  53% (5049/9526)Updating files:  54% (5145/9526)Updating files:  55% (5240/9526)Updating files:  56% (5335/9526)Updating files:  57% (5430/9526)Updating files:  58% (5526/9526)Updating files:  59% (5621/9526)Updating files:  60% (5716/9526)Updating files:  61% (5811/9526)Updating files:  62% (5907/9526)Updating files:  63% (6002/9526)Updating files:  64% (6097/9526)Updating files:  65% (6192/9526)Updating files:  66% (6288/9526)Updating files:  67% (6383/9526)Updating files:  68% (6478/9526)Updating files:  69% (6573/9526)Updating files:  70% (6669/9526)Updating files:  71% (6764/9526)Updating files:  72% (6859/9526)Updating files:  73% (6954/9526)Updating files:  74% (7050/9526)Updating files:  75% (7145/9526)Updating files:  76% (7240/9526)Updating files:  77% (7336/9526)Updating files:  78% (7431/9526)Updating files:  79% (7526/9526)Updating files:  80% (7621/9526)Updating files:  81% (7717/9526)Updating files:  82% (7812/9526)Updating files:  83% (7907/9526)Updating files:  84% (8002/9526)Updating files:  85% (8098/9526)Updating files:  86% (8193/9526)Updating files:  87% (8288/9526)Updating files:  88% (8383/9526)Updating files:  89% (8479/9526)Updating files:  90% (8574/9526)Updating files:  91% (8669/9526)Updating files:  92% (8764/9526)Updating files:  93% (8860/9526)Updating files:  94% (8955/9526)Updating files:  95% (9050/9526)Updating files:  96% (9145/9526)Updating files:  97% (9241/9526)Updating files:  98% (9336/9526)Updating files:  99% (9431/9526)Updating files: 100% (9526/9526)Updating files: 100% (9526/9526), done.
 HEAD is now at 8bf4605ae Merge pull request #4501 from grandixximo/gmoccapy-quit-4500
 
 Running kernel seems to be up-to-date.

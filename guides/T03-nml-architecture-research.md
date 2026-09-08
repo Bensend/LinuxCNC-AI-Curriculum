@@ -1,6 +1,6 @@
 # T03 — NML architecture and messages: research baseline
 
-Status: **RESEARCH / SOURCE**  
+Status: **SOURCE — first experiment frozen**  
 Pinned LinuxCNC revision: `8bf4605ae81042248add031e94c77300406e0413`
 
 ## Documentation baseline
@@ -63,11 +63,18 @@ Operator error/text/display helpers create the corresponding message and write i
 The Python `linuxcnc` module wraps the NML interfaces rather than bypassing them. Representative command flow:
 
 - a method such as `command.state(...)` constructs an `EMC_TASK_SET_STATE` message;
-- helper `emcSendCommand()` calls the wrapped command channel's `write(&cmd)` and records the command serial number;
+- helper `emcSendCommand()` calls the wrapped command channel's `write(&cmd)`, saves `cmd.serial_number`, and waits for status echo to reach that serial or later;
+- `command.wait_complete()` separately polls status for the saved serial and returns matching DONE/ERROR, or treats a later echo serial as DONE, with a default five-second timeout;
 - `stat.poll()` checks/peeks the status channel and copies the aggregate `EMC_STAT` when available;
 - `error_channel().poll()` calls NML `read()` on the error channel and decodes the operator/error message type.
 
-This is the first T03 source-grounded UI→NML→Task and Task→NML→UI boundary.
+This establishes a crucial boundary: command send/echo acknowledgement, aggregate command status, and operator/error reporting are distinct observations.
+
+### Task serial acknowledgement
+
+Pinned `emcTaskPlan()` treats command-buffer data as new only while `emcCommand->serial_number != emcStatus->echo_serial_number`. At the end of the cycle Task copies the current command serial into top-level and Task `echo_serial_number` fields, derives aggregate `RCS_STATUS` from planning/execution/subordinate state, and writes the aggregate status channel.
+
+Because Task publishes the command serial even when planning returned an error, **echoed serial is not proof of semantic success**. This is documented in `guides/T03-command-acknowledgement-boundary.md`.
 
 ### `emcsvr` remote-server boundary — `src/emc/task/emcsvr.cc`
 
@@ -79,16 +86,23 @@ The optional NML server process loads `[EMC] NML_FILE`, then creates:
 
 and runs the NML server infrastructure. This demonstrates that the named channel/buffer model is also the boundary used for remote NML access; it must not be confused with LinuxCNC realtime motion transport or HAL pins.
 
-## Community research disposition
+## Community reconciliation
 
-Community material about NML often mixes historical RCS/NML implementation details, UI API use, and remote-network access. For 1000-level T03, informal reports are useful for identifying compatibility and remote-access pain points, but exact channel names, type values and serialization behavior will be taken from the pinned source plus a reproducible pinned-build experiment.
+Community material is treated as field evidence, not authority over pinned source.
 
-A community-focused follow-up should specifically seek failure reports involving:
+Findings consulted 2026-09-08 UTC:
 
-- mismatched `linuxcnc.nml`/process names;
-- command serial/acknowledgement misunderstandings;
-- remote NML configuration and server behavior;
-- stale status versus new command assumptions.
+- A July 2023 forum explanation of Python `wait_complete()` describes it as tied to the caller's serialized command ID and notes that other command producers such as HALUI can complicate ordering. This is consistent with the pinned `serial_diff` implementation.
+- An April 2023 QtVCP discussion suggests comparing the Python command serial with status echo to implement non-blocking acknowledgement semantics.
+- A 2024 field report warns that `wait_complete()` has a default timeout and is not safely interpreted as generic physical-action proof. Pinned source confirms the five-second default and controller-status semantics.
+- A July 2026 custom-UI investigation reports `EMC_TASK_PLAN_STEP` can write/echo in an invalid MANUAL context and then produce an asynchronous error report. That provides a useful adversarial field example of the same transport/semantic split T03 will verify independently.
+
+Relevant forum threads:
+
+- https://forum.linuxcnc.org/38-general-linuxcnc-questions/49445-python-command-wait-complete-does-not-wait-for-c-halui-commands
+- https://forum.linuxcnc.org/qtvcp/48859-mdi-calls-from-qtvcp
+- https://forum.linuxcnc.org/9-installing-linuxcnc/53638-python-nc-routine-just-stops-executing
+- https://forum.linuxcnc.org/38-general-linuxcnc-questions/58953-is-there-a-public-nml-status-signal-for-completion-of-one-emc-task-plan-step
 
 ## Initial engineering model
 
@@ -107,26 +121,33 @@ Task/operator reporting
 
 Do not infer:
 
-- that successfully writing a command proves Task accepted it semantically;
+- that successfully writing or echoing a command proves Task accepted it semantically;
 - that a status sample is causally the response to the most recently sent command without serial/state evidence;
 - that an error-channel message is equivalent to Task status becoming ERROR;
+- that `wait_complete()` is a universal cross-producer transaction barrier;
 - that NML IPC is the realtime servo transport;
 - that command/status communication establishes physical or safety truth.
 
-## Highest-value source questions
+## Highest-value source questions and disposition
 
-1. How do RCS command serial numbers and status `echo_serial_number` establish command acknowledgement/order?
-2. What exactly do `RCS_CMD_CHANNEL::write()` and `RCS_STAT_CHANNEL` add over generic `NML`?
-3. What are the local/shared-memory vs remote NML transport boundaries selected by the configuration file?
-4. How does Task decide a newly read command is new versus a repeated buffer value?
-5. What does status polling guarantee about freshness, and what does it not guarantee?
-6. How are error-channel messages queued/overwritten, and can a client miss them if it polls slowly?
-7. Which failures are represented as channel validity/read/write failure versus semantic controller status/error messages?
+1. **How do serial and echo establish acknowledgement/order?** Source-traced; see `guides/T03-command-acknowledgement-boundary.md`.
+2. **What does `wait_complete()` actually wait for?** Source-traced exactly, including greater-serial behavior and timeout.
+3. **What exactly do RCS command/status channels add over generic NML?** Still open for deeper library-level source inventory; not required before the first behavioral experiment.
+4. **What are local/shared-memory vs remote NML transport boundaries?** Initial `emcsvr` boundary identified; transport internals remain open.
+5. **How does Task identify new versus repeated command-buffer contents?** Source-confirmed by serial-vs-echo comparison.
+6. **What does status polling guarantee about freshness?** Open for a later freshness/loss experiment; a poll yields a controller snapshot but physical freshness is explicitly not inferred.
+7. **How are error-channel messages queued/overwritten?** Still open; first experiment will characterize ordinary observed behavior without overgeneralizing queue-depth semantics.
 
-## Next checkpoint
+## Current experiment checkpoint
 
-Trace the command acknowledgement loop at pinned source:
+T03-020 is frozen in `experiments/T03-020-nml-ack-vs-semantic-result-plan.md` before implementation.
 
-`linuxcnc.command().state(...) -> EMC_TASK_SET_STATE -> emcSendCommand()/RCS_CMD_CHANNEL::write -> Task emcCommandBuffer->read -> command serial handling -> Task semantic dispatch -> emcStatus->echo_serial_number/status write -> linuxcnc.stat().poll/wait_complete`
+Next work:
 
-Then trace `error_channel().poll()` separately so T03 does not confuse error-report messages with command acknowledgement. Build a command/status/error evidence matrix and freeze a pinned experiment that sends one accepted command and one state-invalid/rejected command while sampling serial numbers, Task state, status channel and error channel independently.
+1. implement T03-020 without changing Gates A-G;
+2. run it once against the pinned build;
+3. preserve the exact workflow/job identity, raw serial/status/error trace and final exit code;
+4. require the negative ESTOP + `AUTO_STEP` case to prove `echoed=true` while semantic result is ERROR and the error channel independently reports the rejection;
+5. if observability fails, classify HARNESS_INVALID rather than weakening the acknowledgement-vs-success distinction.
+
+After accepted verification, continue the NML library/transport inventory, error-buffer semantics, adversarial exam, fresh-AI handoff and T03 graduation audit.

@@ -4,7 +4,9 @@ Status values: `PLANNED`, `RESEARCH`, `SOURCE`, `EXPERIMENT`, `EXAM`, `CORRECTIO
 
 ## Current critical-path state
 
-All modules through **T04 — GUI integration boundaries** are **GRADUATED at 1000 level**. **T05 — custom operator interface patterns** is the highest-priority unblocked module and is active in **EXPERIMENT** at pinned LinuxCNC revision `8bf4605ae81042248add031e94c77300406e0413`.
+All modules through **T05 — custom operator interface patterns** are **GRADUATED at 1000 level**. Phase 9 is complete.
+
+The next curriculum module is **C01 — simulated dual-actuator machine**, but Phase 10 activation is currently gated by the required **blind development-bank baseline** specified in `evaluation/BLIND_FEEDBACK_PROTOCOL.md`. That baseline has not been fabricated because genuine evaluator/learner information separation is required.
 
 Repository artifacts, not chat history, remain authoritative.
 
@@ -14,83 +16,107 @@ T03-020 workflow `34182846956`, job `101925247534`, passed frozen Gates A-G. An 
 
 Retained rule: **command acknowledgement/order, semantic result, diagnostics, physical truth and safety truth are distinct evidence domains.**
 
-## T04 graduated evidence
+## T04 retained boundary
 
-T04-021 workflow `34186879941`, authoritative job `101936899842`, artifact `10040862703`, exit `0`, passed frozen Gates A-H. Independent controller state advanced while a deliberately failed GUI status observation left GStat invalid and presentation stale; recovery caught up on the next successful observation.
+T04-021 workflow `34186879941`, job `101936899842`, artifact `10040862703`, exit `0`, passed frozen Gates A-H. Independent controller state advanced while a deliberately failed GUI status observation left GStat invalid and presentation stale; recovery caught up on the next successful observation.
 
-Retained T04 rule: **a rendered GUI value is a presentation claim. Identify its source and freshness before treating it as current controller state; controller/HAL/physical/safety evidence remain separate.**
+Retained rule: **a rendered GUI value is a presentation claim. Identify its source and freshness before treating it as current controller state; controller/HAL/physical/safety evidence remain separate.**
 
-## T05 source/call-flow state
+## T05 graduated evidence
 
-Durable artifacts now include:
+Pinned revision: `8bf4605ae81042248add031e94c77300406e0413`.
+
+Durable artifacts include:
 
 - `guides/T05-custom-operator-interface-research.md`;
 - `call-flows/T05-custom-operator-interface-boundaries.md`;
 - frozen `experiments/T05-022-startup-freshness-gating-plan.md`;
-- `lab-jobs/022-t05-startup-freshness-gating.sh`.
+- rejected-run analysis `experiments/T05-022-attempt1-harness-diagnosis.md`;
+- corrected `lab-jobs/022-t05-startup-freshness-gating.sh`;
+- accepted result `experiments/T05-022-accepted-result.md`;
+- `exams/T05-custom-operator-interface-adversarial.md`;
+- `checkpoints/T05-fresh-ai-handoff.md`;
+- `checkpoints/T05-graduation-decision.md`.
 
-Pinned HALUI source establishes the representative path:
+### Source/call-flow result
+
+Representative HALUI paths:
 
 ```text
 HAL input transition -> check_hal_changes() -> send*() -> emcCommandSend() -> Task
 NML status -> updateStatus() -> modify_hal_pins() -> halui.* status output
 ```
 
-HALUI command inputs are generally edge/momentary intent. Its output pins are userspace projections of the most recently received `emcStatus`, not realtime/safety-rated truth.
+HALUI input pins represent operator intent; HALUI status pins are userspace projections of received controller status, not direct realtime/physical/safety truth.
 
-Pinned QtVCP startup establishes the key T05 lifecycle boundary:
+Pinned QtVCP screen startup proves handler `initialized__()` precedes the explicit `STATUS.forced_update()` synchronization point. T05-022 attempt 1 then exposed an important nuance: `_GStat.__init__()` itself can make a best-effort `stat.poll()+merge()` while `_status_active` remains false. The guide was corrected accordingly.
 
-```text
-build widgets -> handler initialized__() -> STATUS.forced_update() -> status timer -> HAL ready -> show/event loop
-```
-
-Therefore custom handler `initialized__()` runs before QtVCP's explicit forced controller-status synchronization. Construction-time widget defaults are not evidence that a valid controller observation has occurred.
-
-QtVCP `Status` is a singleton around GStat and owns one error channel with explicit polling arbitration. Direct Python examples similarly instantiate command/status/error interfaces separately; cross-producer result correlation remains an explicit architecture responsibility.
-
-Community reports support two failure hypotheses: HALUI MDI mode/order surprises should be debugged against actual status rather than UI assumptions, and `wait_complete()` cannot serve as a completion oracle for commands issued by another producer. These remain community evidence where not already established by T03 source work.
-
-## T05-022 frozen experiment
-
-T05-022 was frozen before implementation. It compares two custom presentation policies during a deliberately failed **first** QtVCP/GStat status observation:
-
-- deliberately unsafe default: action begins enabled;
-- freshness-gated: action begins disabled and may enable only after a successful, policy-satisfying observation.
-
-Frozen Gates A-H require pinned provenance, independent controller baseline, proof that handler initialization precedes forced status observation, an isolated failed first observation with invalid status, unsafe-default exposure, gated hold, recovery after removing only the injected failure, and explicit preservation of these boundaries:
+Retained startup rule:
 
 ```text
-widget enabled != fresh controller observation
-fresh controller observation != command acceptance
-command acceptance != physical action
-GUI gating != safety-rated enforcement
+GStat construction / retained cache
+!= validated/current observation
+!= command acceptance
+!= physical action
+!= safety authority
 ```
 
-Implementation commit `33a210d3618ca2174eec8523ac2c52cfcee92075` triggered authoritative workflow **`34189716347`**. It was queued at the current checkpoint. Do not launch a duplicate while it is active.
+### T05-022 attempt history
 
-## Exact next-work checkpoint
+Attempt 1 — workflow `34189716347`, job `101945103662`, artifact `10041831379`, exit `24`: **HARNESS INVALID**. The proxy was blocked before GStat construction, so constructor and tested update both failed; the implementation also adapted the policy to the observed baseline. No behavioral verdict was taken.
 
-1. Inspect workflow `34189716347` final status, job identity, exit code, stdout/stderr, and preserved provenance/output.
-2. Reconcile **unchanged** T05-022 Gates A-H. A harness/provenance failure is not evidence for or against the prediction.
-3. If valid and passing, write the accepted result and update `LAB_COMPUTE_LOG.md` from authoritative Actions job start/end timestamps when available.
-4. Perform T05 adversarial exam including startup default-state, multi-producer command ownership, diagnostic-consumer ownership, HALUI status projection freshness, and the misleading premise that disabled GUI controls constitute a safety function.
-5. Produce a fresh-AI handoff and counterfactual promotion audit; graduate T05 only if the 1000-level evidence floor is satisfied.
+Attempt 2 — workflow `34193926426`, job `101957458393`, artifact `10043263546`, source commit `593f30df11611c76b7707d90b2a4a94b7b796104`, exit `0`: **TEST-CONFIRMED**. Frozen Gates A-H passed unchanged.
+
+Decisive evidence included:
+
+```text
+independent-controller-state=0 policy-required-state-on=4
+gstat-construction attempts=1 failures=0 cached-state=0 valid=0
+first-tested-observation valid=0 attempt-delta=1 failure-delta=1 events=['periodic']
+gate-D=PASS
+gate-E=PASS
+gate-F=PASS
+recovery valid=1 cached-state=0 independent-state=0 gated-enabled=0 expected-enabled=0
+gate-G=PASS
+gate-H=PASS
+T05-022 overall=PASS
+```
+
+The experiment supports the 1000-level policy: **start controller-dependent UI actions fail-defined and require explicit successful/current observation evidence for advisory enablement. Construction cache and GUI responsiveness are not freshness certificates.**
+
+### T05 graduation checks
+
+- source mechanism and representative call flows: PASS;
+- official documentation and community pass: PASS;
+- predeclared experiment with independent runtime evidence: PASS;
+- failure/harness correction: PASS;
+- adversarial exam: 10/10 PASS;
+- fresh-AI novel scenario: PASS;
+- higher-level promotion queue: populated;
+- counterfactual promotion test: PASS;
+- minimum 1000-level evidence floor: PASS.
 
 ## T05 promotion queue
 
-- multi-command-producer correlation/races — 2000 HIGH unless T05-022 exposes a current-level contradiction; does not block the startup/freshness ownership objective;
-- error-channel fan-out/multiple consumers — 2000 HIGH; source establishes ownership concern, but full arbitration design is beyond the 1000-level pattern objective;
+- multi-command-producer correlation/races — 2000 HIGH;
+- error-channel fan-out/multiple consumers — 2000 HIGH;
 - remote UI/NML reconnect and packet/timing failures — 2000 HIGH;
-- physical pendant/HALUI latency and failure behavior — 2000 MEDIUM, hardware-dependent aspects promoted;
-- safety-HMI architecture/certification — specialized higher-level study; 1000-level teaching explicitly forbids treating GUI/HALUI as safety-rated evidence.
+- physical pendant/HALUI latency and failure behavior — 2000 MEDIUM;
+- safety-HMI architecture/certification — specialized higher level.
 
-## Blind-feedback checkpoint
+None can overturn the central 1000-level separation between presentation, freshness, semantic result, physical truth and safety authority.
 
-The development-bank blind baseline required after T03 remains due before leaving the current Phase-9 module cluster for a later major cluster. Preserve genuine evaluator/learner information separation; do not manufacture a contaminated score.
+## Blind-feedback checkpoint — current blocker before Phase 10
+
+The development-bank blind baseline required after T03 remains unscored. `evaluation/FEEDBACK_SCORE_LOG.md` is intentionally empty rather than contaminated.
+
+**Exact next-work checkpoint:** establish a genuinely blind challenge with evaluator/learner information separation; expose only the challenge packet and allowed resources; commit the learner's prediction/diagnosis/mechanism/observable result/diagnostic path/falsifier/confidence/time/resources **before** revealing the hidden oracle; then obtain the external result, score all five dimensions, record error class/correction/transfer plan, append `evaluation/FEEDBACK_SCORE_LOG.md`, and only then activate **C01 — simulated dual-actuator machine**.
+
+If the runtime cannot provide an information-separated evaluator/oracle, do not fake a baseline or inspect a hidden answer in the learner role.
 
 ## Laboratory compute checkpoint
 
-T03-020 and T04-021 repository metadata contain inner script timestamps, but `LAB_COMPUTE_LOG.md` requires authoritative Actions job start/end timestamps. Record T05-022 authoritative job runtime after workflow completion if the job endpoint exposes it; do not substitute lesson time.
+`LAB_COMPUTE_LOG.md` now exactly backfills T02-019 through T05-022 attempt 2: **18.1 minutes (0.30 h)** of authoritative job time, plus unbackfilled historical usage. T05 attempt 1 is counted despite being harness-invalid.
 
 ## Session-recovery / overlap note retained
 

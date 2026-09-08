@@ -4,7 +4,7 @@ Status values: `PLANNED`, `RESEARCH`, `SOURCE`, `EXPERIMENT`, `EXAM`, `CORRECTIO
 
 ## Current critical-path state
 
-All modules through **T02 — task layer** are **GRADUATED at 1000 level**. **T03 — NML architecture and messages** is the highest-priority unblocked module and is active in **EXPERIMENT** at pinned LinuxCNC revision `8bf4605ae81042248add031e94c77300406e0413`.
+All modules through **T02 — task layer** are **GRADUATED at 1000 level**. **T03 — NML architecture and messages** is the highest-priority unblocked module and remains active in **EXPERIMENT** at pinned LinuxCNC revision `8bf4605ae81042248add031e94c77300406e0413` pending reconciliation of its completed laboratory result.
 
 Repository artifacts, not chat history, remain authoritative. Detailed graduation evidence for earlier modules is preserved in their guides, call flows, experiments, exams, handoffs, accepted-result records, and Git history.
 
@@ -56,7 +56,7 @@ Gates A-G remain frozen. The implementation records pinned executable/Python pro
 
 Implementation commit: `0877652c3fe82722d99d81616c07a864ac3ae418`.
 
-GitHub Actions workflow **`34182846956`** was automatically triggered from that exact implementation commit. At the latest observation in this lesson the run was still **in progress**; therefore no TEST-CONFIRMED claim is made and no duplicate run is launched.
+GitHub Actions workflow **`34182846956`**, authoritative job **`101925247534`**, completed successfully. Repository `lab-results/LATEST.exit_code.txt` is `0`. This is not yet a TEST-CONFIRMED claim: the next curriculum session must inspect stdout/stderr/raw CSV and apply frozen Gates A-G before accepting the result.
 
 ## Study-process changes now active
 
@@ -70,16 +70,16 @@ The purpose of these changes is to let later analysis compare blind competency, 
 
 ## Exact resume checkpoint
 
-Resume T03-020 from workflow **`34182846956`**; do not start a duplicate while its authoritative result exists or is still running.
+Resume T03-020 from completed workflow **`34182846956`** / job **`101925247534`**. Do not launch a duplicate merely because the result has not yet been reconciled.
 
-1. Inspect that run's final workflow conclusion, job identity, repository-recorded `lab-results/LATEST*`, lab exit code, stdout, stderr and raw CSV.
+1. Inspect repository-recorded `lab-results/LATEST*`, stdout, stderr and raw CSV from this exact run. Exit `0` and workflow success are necessary provenance, not sufficient behavioral evidence.
 2. Reconcile frozen Gates A-G unchanged. Decisive acceptance requires the negative case to show `echoed=true` together with matching semantic ERROR and independent operator-error evidence before any later serial.
-3. Record the authoritative job start/end/runtime for T03-020 in `LAB_COMPUTE_LOG.md` once available.
+3. Record authoritative T03-020 job runtime in `LAB_COMPUTE_LOG.md` when exact job timestamps are available; do not substitute lesson time or an invented estimate.
 4. If observability/timing fails, classify **HARNESS_INVALID** and improve observability without weakening the acknowledgement-versus-success boundary. If the echoed invalid command reports DONE/no rejection under the pinned fixture, classify **SUBSTANTIVE MISMATCH** and investigate source/runtime assumptions before rerun.
 5. After accepted behavioral verification, finish the minimum 1000-level T03 work: adversarial exam, corrections if needed, fresh-AI handoff and graduation/counterfactual promotion audit.
 6. **Immediately after defensible T03 graduation, perform the first blind development-bank baseline evaluation before entering the next major module cluster.** Do not let the studying learner inspect the hidden answer or later case resolution before committing its response.
 7. Promote rather than silently generalize deeper libnml queue saturation/drop behavior, reconnect/TCP-loss behavior, multi-client remote ordering and version drift unless new evidence shows one is required to validate the core T03 teaching.
-8. If the current thread is waiting/blocked and the lesson is still materially under the 15-minute target, continue another unblocked source/evaluation/reconciliation task rather than ending solely because the lab is running.
+8. If the current thread is waiting/blocked and the lesson is still materially under the 15-minute target, continue another unblocked source/evaluation/reconciliation task rather than ending solely because one task is complete or waiting.
 
 ## Session-recovery / overlap note retained
 

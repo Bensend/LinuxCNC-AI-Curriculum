@@ -58,15 +58,28 @@ Implementation commit: `0877652c3fe82722d99d81616c07a864ac3ae418`.
 
 GitHub Actions workflow **`34182846956`** was automatically triggered from that exact implementation commit. At the latest observation in this lesson the run was still **in progress**; therefore no TEST-CONFIRMED claim is made and no duplicate run is launched.
 
+## Study-process changes now active
+
+Three process changes are now operational rather than advisory:
+
+1. **Blind external-feedback baseline:** after T03 reaches defensible 1000-level graduation, run the first development-bank blind challenge before starting the next major module cluster. Record the immutable precommitment, external score, confidence, solve time, error class, and study/compute exposure in `evaluation/FEEDBACK_SCORE_LOG.md`. Follow the cadence in `evaluation/BLIND_FEEDBACK_PROTOCOL.md`; do not expose sealed answers to the learner.
+2. **Short-session continuation enforcement:** if a session has less than about 15 minutes of substantive work, a completed subtask, launched/waiting experiment, module graduation, or checkpoint is not sufficient reason to stop. Explicitly look for another useful unblocked task and continue unless the documented human/safety/context/overlap exceptions apply.
+3. **Laboratory compute accounting:** `LAB_COMPUTE_LOG.md` is now the cumulative ledger. Record actual authoritative Actions job runtime for every material curriculum lab, including failed, cancelled, timeout, duplicate and harness-invalid attempts. Historical runtime should be backfilled only from authoritative timestamps; never invent it.
+
+The purpose of these changes is to let later analysis compare blind competency, substantive lesson time, actual lab cost, transfer, retention and evidence quality rather than measuring repository activity alone.
+
 ## Exact resume checkpoint
 
 Resume T03-020 from workflow **`34182846956`**; do not start a duplicate while its authoritative result exists or is still running.
 
 1. Inspect that run's final workflow conclusion, job identity, repository-recorded `lab-results/LATEST*`, lab exit code, stdout, stderr and raw CSV.
 2. Reconcile frozen Gates A-G unchanged. Decisive acceptance requires the negative case to show `echoed=true` together with matching semantic ERROR and independent operator-error evidence before any later serial.
-3. If observability/timing fails, classify **HARNESS_INVALID** and improve observability without weakening the acknowledgement-versus-success boundary. If the echoed invalid command reports DONE/no rejection under the pinned fixture, classify **SUBSTANTIVE MISMATCH** and investigate source/runtime assumptions before rerun.
-4. After accepted behavioral verification, finish the minimum 1000-level T03 work: adversarial exam, corrections if needed, fresh-AI handoff and graduation/counterfactual promotion audit.
-5. Promote rather than silently generalize deeper libnml queue saturation/drop behavior, reconnect/TCP-loss behavior, multi-client remote ordering and version drift unless new evidence shows one is required to validate the core T03 teaching.
+3. Record the authoritative job start/end/runtime for T03-020 in `LAB_COMPUTE_LOG.md` once available.
+4. If observability/timing fails, classify **HARNESS_INVALID** and improve observability without weakening the acknowledgement-versus-success boundary. If the echoed invalid command reports DONE/no rejection under the pinned fixture, classify **SUBSTANTIVE MISMATCH** and investigate source/runtime assumptions before rerun.
+5. After accepted behavioral verification, finish the minimum 1000-level T03 work: adversarial exam, corrections if needed, fresh-AI handoff and graduation/counterfactual promotion audit.
+6. **Immediately after defensible T03 graduation, perform the first blind development-bank baseline evaluation before entering the next major module cluster.** Do not let the studying learner inspect the hidden answer or later case resolution before committing its response.
+7. Promote rather than silently generalize deeper libnml queue saturation/drop behavior, reconnect/TCP-loss behavior, multi-client remote ordering and version drift unless new evidence shows one is required to validate the core T03 teaching.
+8. If the current thread is waiting/blocked and the lesson is still materially under the 15-minute target, continue another unblocked source/evaluation/reconciliation task rather than ending solely because the lab is running.
 
 ## Session-recovery / overlap note retained
 

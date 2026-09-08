@@ -30,14 +30,14 @@ T02-019 workflow `34179865160` passed all frozen Gates A-G at lab exit `0`.
 The accepted 2,110-sample trace observed:
 
 - actual motion with `inpos=0`;
-- `EXEC_WAITING_FOR_MOTION_AND_IO` while motion was independently incomplete;
-- `current_line=4` and `read_line=4` already identifying the dwell during that incomplete-motion interval;
+- `EXEC_WAITING_FOR_MOTION_AND_IO` (`7`) while motion was independently incomplete;
+- while that move was incomplete, `current_line=3` and `motion_line=3` still referred to the feed move but `read_line=5` showed interpreter/read-ahead had already advanced beyond the line-4 dwell;
 - no `EXEC_WAITING_FOR_DELAY` while `inpos=0`;
-- `EXEC_WAITING_FOR_DELAY` only after `inpos=1`;
+- `EXEC_WAITING_FOR_DELAY` (`8`) only after `inpos=1`;
 - a `0.748012 s` observed delay-state span for frozen `G4 P0.75`;
 - clean completion with zero error-channel messages.
 
-This directly demonstrates why a line number cannot be used as a motion-completion oracle.
+This directly demonstrates why read-ahead or line-number progress cannot be used as a motion-completion oracle.
 
 ## Mode and lifecycle semantics
 
@@ -67,9 +67,9 @@ When an interpreter result depends on machine/world state that cannot safely be 
 
 ## Novel scenario test
 
-Scenario: a custom integration watches `linuxcnc.stat().current_line` and wants to trigger a camera after a slow `G1` reaches its endpoint. The next line is a dwell. During execution the integration sees the dwell line selected and triggers the camera, but the captured part is visibly still moving.
+Scenario: a custom integration watches interpreter/read-line progress and wants to trigger a camera after a slow `G1` reaches its endpoint. The next line is a dwell. During execution the integration sees read-ahead has advanced beyond the dwell and triggers the camera, but the captured part is visibly still moving.
 
-**Expected reasoning:** the integration used the wrong evidence domain. T02-019 experimentally demonstrated the exact possibility: Task/read-line state can already identify the dwell while the prior motion remains incomplete and Task is still in `WAITING_FOR_MOTION_AND_IO`. The integration must sequence the camera through a controller mechanism with defined execution ordering or independently verify the relevant motion/feedback completion state. If image timing is safety-critical, ordinary Task status is not a substitute for a suitable safety architecture.
+**Expected reasoning:** the integration used the wrong evidence domain. T02-019 experimentally demonstrated the exact possibility: `read_line` reached 5 while the prior line-3 feed move remained incomplete (`inpos=0`) and Task was still in `WAITING_FOR_MOTION_AND_IO`. The integration must sequence the camera through a controller mechanism with defined execution ordering or independently verify the relevant motion/feedback completion state. If image timing is safety-critical, ordinary Task status is not a substitute for a suitable safety architecture.
 
 A fresh AI passes T02 when it diagnoses this as an ordering/oracle defect rather than a mysterious camera or trajectory bug.
 
@@ -89,7 +89,7 @@ Counterfactual test: even if a later remap timing experiment, nested MDI case, p
 - Commands traced from Task into motion requests: PASS — `call-flows/T02-interp-list-to-motion-gated-delay.md` and the execution-state matrix trace selection, preconditions, issue, postconditions, subordinate waits, and error transitions.
 - AUTO/MDI/MANUAL semantics distinguished: PASS — `guides/T02-mode-pause-abort-semantics.md` maps the different planning/ingress paths.
 - Pause/resume/abort mapped: PASS — source-level pause precondition, issue, resume and abort/error cleanup are documented with explicit safety boundary.
-- Queue-busting/look-ahead boundary: PASS — inherited interpreter architecture plus official documentation and T02-019's line-ahead anti-circular observation establish why read-ahead and Task/motion state differ; deeper dynamic queue-buster timing is explicitly promoted.
+- Queue-busting/look-ahead boundary: PASS — inherited interpreter architecture plus official documentation and T02-019's read-ahead anti-circular observation establish why read-ahead and Task/motion state differ; deeper dynamic queue-buster timing is explicitly promoted.
 - Failure-relevant Task state transitions: PASS — `guides/T02-task-execution-state-matrix.md` covers motion/I/O error transitions and Task ERROR cleanup.
 - Independent verification: PASS — T02-019 workflow `34179865160`, final lab exit `0`, frozen Gates A-G all PASS.
 - Predeclared prediction checked: PASS — T02-019 was frozen before implementation; attempt 1 was rejected as HARNESS_INVALID without weakening criteria; corrected attempt 2 passed unchanged gates.

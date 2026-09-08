@@ -4,9 +4,9 @@ Status values: `PLANNED`, `RESEARCH`, `SOURCE`, `EXPERIMENT`, `EXAM`, `CORRECTIO
 
 ## Current critical-path state
 
-All modules through **T05 — custom operator interface patterns** are **GRADUATED at 1000 level**. Phase 9 is complete.
+All modules through **T05 — custom operator interface patterns** and **C01 — simulated dual-actuator machine** are **GRADUATED at 1000 level**.
 
-The required blind development baseline has now been completed validly, so Phase 10 is active. **C01 — simulated dual-actuator machine** is now **CORRECTIONS** after C01-023 attempt 1 exposed a temporally torn userspace observation harness. The original frozen behavioral Gates A-H remain unchanged.
+Phase 10 remains active. The highest-priority unblocked module is now **C02 — independent feedback loops**, state **RESEARCH**.
 
 Repository artifacts, not chat history, remain authoritative.
 
@@ -14,27 +14,17 @@ Repository artifacts, not chat history, remain authoritative.
 
 The learner response was immutably committed in `evaluation/development/BL-DEV-001-precommit.md` at commit `2117ac7103f929a0d90b59551785500d2b59b874` before pinned implementation/documentation oracle inspection.
 
-Challenge competency: HAL same-thread ordering and one-cycle stale-data propagation through a deliberately inverted producer/consumer schedule.
+Result: **VALID, 10/10, 92% confidence**. Detailed evaluation is in `evaluation/development/BL-DEV-001-evaluation.md`; the score ledger is `evaluation/FEEDBACK_SCORE_LOG.md`.
 
-Result:
+A novel retention/development challenge should sample a different mechanism after roughly 10 subsequent lessons or about 24 hours, preserving the actual delay. One baseline score is not evidence of a study-method trend.
 
-- blind validity: **VALID**;
-- score: **10/10**;
-- confidence: **92%**;
-- solve time to immutable commit: **0.48 min**;
-- error class: none;
-- detailed evaluation: `evaluation/development/BL-DEV-001-evaluation.md`;
-- score ledger updated in `evaluation/FEEDBACK_SCORE_LOG.md`.
-
-No immediate corrective transfer retest is required because there was no miss/partial miss. A novel retention/development challenge should sample a different mechanism after roughly 10 subsequent lessons or about 24 hours, preserving the actual delay. One baseline score is not evidence of a study-method trend.
-
-## C01 — simulated dual-actuator machine
+## C01 — simulated dual-actuator machine — GRADUATED 1000
 
 Pinned revision: `8bf4605ae81042248add031e94c77300406e0413`.
 
-### Current source result
+### Core source result
 
-C01 uses LinuxCNC's generalized duplicated-coordinate `trivkins` mechanism rather than the deprecated legacy `gantry` HAL component.
+C01 uses generalized duplicated-coordinate `trivkins` rather than the deprecated legacy `gantry` HAL component.
 
 Pinned source establishes:
 
@@ -51,70 +41,100 @@ world pose
   -> duplicated coordinate copied into every mapped joint
 ```
 
-For the pinned upstream `XYZY` gantry fixture, Y maps to joint 1 and joint 3. `lib/hallib/gantrysim.hal` preserves distinct `joint.1.*` and `joint.3.*` command/feedback/enable/fault interfaces.
+For `coordinates=XYZY`, Y maps to joint 1 and joint 3. Forward mapping uses the principal/first duplicated joint for the world coordinate, so duplicated `trivkins` is command fan-out, **not** an automatic two-joint disagreement detector or synchronization controller.
 
-Important retained boundary: forward mapping uses the principal/first duplicated joint for the world coordinate; duplicated `trivkins` is therefore command fan-out, **not** an automatic two-joint disagreement detector or synchronization controller.
+### C01-023 accepted experiment
 
-### Durable C01 artifacts
+Frozen prediction: a meaningful coordinated Y move in a pinned `trivkins coordinates=XYZY kinstype=BOTH` fixture causes both `joint.1.motor-pos-cmd` and `joint.3.motor-pos-cmd` to change and remain equal within `1e-9`, while both endpoints remain separately observable.
 
-- `guides/C01-simulated-dual-actuator-research.md`;
-- `call-flows/C01-world-coordinate-to-duplicate-joints.md`;
-- frozen `experiments/C01-023-dual-joint-command-fanout-plan.md`;
-- `lab-jobs/023-c01-dual-joint-command-fanout.sh` in commit `266d5d556861467497ebcf1d06a74c3ab219571a`;
-- `results/C01-023-attempt-1-reconciliation.md` in commit `ffa05b04d70f6065e9376cbf179f146113707b07`.
+Attempt 1 (`34199237041`, job `101973964122`, artifact `10045220748`) was **HARNESS INVALID**. Four sequential userspace HAL reads produced a 0.001-inch apparent divergence. At 60 in/min = 1 in/s with a 1 ms servo period, that is exactly one servo tick; the direct command-to-feedback loopbacks exhibited the same signature. The frozen plan already classified unreliable observation as harness-invalid, so Gate E was not weakened.
 
-Current official documentation confirms that duplicate coordinate letters may assign multiple joints to one axis coordinate and recommends `KINEMATICS_BOTH` where independent joint/world operation is needed. The legacy `gantry` component is documented as superseded by `trivkins`. Community gantry reports were used as investigation leads and reconciled against source/upstream examples. Community warnings about individually moving one side of an unhomed gantry are retained for the later adversarial exam; they do not alter C01-023's frozen runtime gates.
+The observation layer was corrected to realtime `sampler.0`, scheduled after `motion-controller` in the same servo thread. The corrected behavioral run is:
 
-### Frozen C01-023 prediction
+- workflow: `34209185893`;
+- job: `102005842122`;
+- artifact: `10049218375`;
+- source curriculum commit: `5b2309fb33e0a39b56f1cb7ea61b113cfacd95ae`;
+- pinned LinuxCNC: `8bf4605ae81042248add031e94c77300406e0413`;
+- inner lab exit: **0**;
+- result: **PASS / TEST-CONFIRMED, Gates A-H**.
 
-A meaningful coordinated Y move in a running pinned `trivkins coordinates=XYZY kinstype=BOTH` fixture will cause both `joint.1.motor-pos-cmd` and `joint.3.motor-pos-cmd` to change and remain equal within `1e-9` machine units, while the joint endpoints remain separately observable.
-
-The upstream-style simulation's per-joint command-to-feedback loopback is explicitly treated as an ideal fixture property. It cannot prove physical actuator synchronization, independent-loop behavior, fault tolerance, or functional safety.
-
-### C01-023 attempt 1 reconciliation
-
-Authoritative attempt 1:
-
-- workflow: `34199237041`;
-- job: `101973964122`;
-- artifact: `10045220748`;
-- artifact digest: `sha256:66fa2611eef9fcebf61c68cc0497a6348f79dfb50ee46eab00f167fb6f48c688`;
-- triggering commit: `266d5d556861467497ebcf1d06a74c3ab219571a`;
-- lab interval: `2026-09-08T07:25:20Z`–`2026-09-08T07:28:39Z`;
-- exit: `41`;
-- disposition: **HARNESS INVALID**.
-
-Attempt 1 established provenance, four-joint duplicated-Y topology, distinct joint endpoints, homed/coordinated motion, 982 samples, nontrivial motion and no error-channel events before Gate E. It then reported:
+Decisive evidence:
 
 ```text
-max-abs-j1-j3-command-diff=0.001
-max-abs-j1-command-feedback-loopback-diff=0.001
-max-abs-j3-command-feedback-loopback-diff=0.001
+runtime-joint-count=4
+homed-vector=1,1,1,1
+sampler-overruns=0
+realtime-samples=5798
+realtime-sample-first=0 last=5797
+realtime-j1-command-span=5
+realtime-j3-command-span=5
+max-abs-j1-j3-command-diff=0
+max-abs-j1-command-feedback-loopback-diff=0
+max-abs-j3-command-feedback-loopback-diff=0
+world-y-alone-used-as-joint3-proof=NO
+gate-H=PASS
+C01-023 overall=PASS
 ```
 
-The apparent discrepancy is not a valid same-cycle comparison. The harness read `joint.1` command, `joint.3` command and both feedback pins using four sequential userspace `hal.get_value()` calls. The fixture servo period is 1 ms and the commanded speed is 60 in/min = 1 in/s. One servo update between two userspace reads therefore creates exactly 0.001 in of apparent separation — exactly the observed maximum. The direct command-to-feedback nets showed the same 0.001 signature, strongly exposing the temporal tear.
+The GitHub workflow envelope is red only because its later readable-result commit raced with concurrent curriculum commits. The published artifact preserves the completed inner lab exit 0 and raw trace, so that post-lab publication race is not used as the behavioral oracle.
 
-Pinned `position_to_mapped_joints()` independently assigns the same `pos->tran.y` value to every joint in `Y_joints_bitmap` during one inverse-kinematics call. Because the frozen plan explicitly classifies unreliable pin observation as HARNESS INVALID, Gate E remains at `1e-9`; it is **not** weakened post-result.
+A separate first correction push (`34209095831`, job `102005554568`) contained a shell-variable typo and terminated before LinuxCNC behavior; it is preserved as **HARNESS INVALID preflight**, not hidden or counted as behavioral evidence.
 
-### Correction invariant
+### C01 durable artifacts
 
-C01-023 attempt 2 must replace the equality oracle with a realtime same-thread snapshot using LinuxCNC `sampler`/`halsampler` (or equivalently proven pinned realtime HAL stream capture), added after `motion-controller` in `servo-thread`. Direct userspace reads remain suitable for endpoint-existence Gate C but are forbidden as the simultaneous equality oracle.
+- `guides/C01-simulated-dual-actuator-research.md`
+- `call-flows/C01-world-coordinate-to-duplicate-joints.md`
+- `guides/C01-simultaneous-observation-boundary.md`
+- frozen `experiments/C01-023-dual-joint-command-fanout-plan.md`
+- `lab-jobs/023-c01-dual-joint-command-fanout.sh`
+- `results/C01-023-attempt-1-reconciliation.md`
+- `results/C01-023-realtime-correction-preflight.md`
+- `results/C01-023-accepted-result.md`
+- `evaluation/C01-1000-graduation-evaluation.md`
 
-The corrected harness must also preserve raw realtime samples and perform controlled shutdown/Gate H evidence before returning a behavioral failure code, so a failed Gate E cannot suppress its own decisive trace.
+### C01 graduation result
 
-**Exact next-work checkpoint:** correct only `lab-jobs/023-c01-dual-joint-command-fanout.sh` to use realtime same-servo-cycle sampling for joint 1/joint 3 command and loopback evidence, preserving frozen Gates A-H and the exact `1e-9` threshold. Commit the harness correction, run one authoritative attempt 2 against pinned `8bf4605ae81042248add031e94c77300406e0413`, preserve realtime samples plus cleanup evidence even if a behavioral gate fails, then reconcile the original Gates A-H. Do not graduate C01 from attempt 1.
+Adversarial exam: **10/10**. Fresh-AI handoff: **PASS** on a novel scenario with one independently simulated plant lagging 8 ms while duplicated commands remain equal. Counterfactual promotion audit: **PASS**.
+
+Retained boundary:
+
+```text
+same coordinated command
+!= same observation instant
+!= independent feedback agreement
+!= same physical position
+!= synchronized plant
+!= safety-rated protection
+```
+
+Physical feedback, following-error/disagreement handling, homing/squaring, hydraulic interaction, and safety-rated anti-racking are downstream work and are not used to justify C01 graduation.
+
+## C02 — independent feedback loops — RESEARCH
+
+Pinned revision remains `8bf4605ae81042248add031e94c77300406e0413`.
+
+First documentation/source pass is committed in `guides/C02-independent-feedback-loops-research.md`.
+
+Current source-grounded findings:
+
+- LinuxCNC `pid` can export multiple completely separate runtime instances.
+- Each `hal_pid_t` owns its own command, feedback, error, previous-state, gain, output and saturation state.
+- Each realtime `calc_pid(instance, period)` reads that instance's command and feedback once, computes its own error/output, and does not implicitly inspect a peer PID channel.
+- When an instance is disabled, pinned source resets its integrator and forces its output to zero.
+- Therefore sharing a command between two independent PID channels does **not** itself create cross-coupled synchronization or a disagreement trip.
+
+Official PID documentation corroborates the independent-channel model. The official Dual Feedback PID example is relevant evidence that LinuxCNC supports separate feedback signals and multiple loops, but it addresses two sensors on one axis with summed effort; it is not treated as a ready-made two-actuator synchronization architecture.
+
+**Exact next-work checkpoint:** continue C02 at SOURCE by inventorying a minimal pinned realtime simulated-plant component suitable for two deterministic independent channels. Trace its per-instance state and scheduling semantics and document the full `duplicated command -> pid A/B -> separate plant A/B -> separate feedback A/B` servo-thread order. Then freeze **C02-024** with same-cycle observation gates and an asymmetric one-feedback disturbance before writing the harness. Do not start C03 cross-coupling until C02 independently proves the two feedback/control paths remain separate.
 
 ## T03 retained boundary
 
-T03-020 workflow `34182846956`, job `101925247534`, passed frozen Gates A-G. An ESTOP-invalid `AUTO_STEP` was assigned/echoed serial 3 while matching aggregate status and `wait_complete()` were `RCS_ERROR`, with independent operator-error evidence preserved before any later serial.
-
-Retained rule: **command acknowledgement/order, semantic result, diagnostics, physical truth and safety truth are distinct evidence domains.**
+T03-020 passed frozen Gates A-G. Retained rule: **command acknowledgement/order, semantic result, diagnostics, physical truth and safety truth are distinct evidence domains.**
 
 ## T04 retained boundary
 
-T04-021 workflow `34186879941`, job `101936899842`, artifact `10040862703`, exit `0`, passed frozen Gates A-H. Independent controller state advanced while a deliberately failed GUI status observation left GStat invalid and presentation stale; recovery caught up on the next successful observation.
-
-Retained rule: **a rendered GUI value is a presentation claim. Identify its source and freshness before treating it as current controller state; controller/HAL/physical/safety evidence remain separate.**
+T04-021 passed frozen Gates A-H. Retained rule: **a rendered GUI value is a presentation claim. Identify its source and freshness before treating it as current controller state; controller/HAL/physical/safety evidence remain separate.**
 
 ## T05 retained boundary / promotion queue
 
@@ -128,17 +148,11 @@ GStat construction / retained cache
 != safety authority
 ```
 
-T05 higher-level promotions remain:
-
-- multi-command-producer correlation/races — 2000 HIGH;
-- error-channel fan-out/multiple consumers — 2000 HIGH;
-- remote UI/NML reconnect and packet/timing failures — 2000 HIGH;
-- physical pendant/HALUI latency and failure behavior — 2000 MEDIUM;
-- safety-HMI architecture/certification — specialized higher level.
+T05 higher-level promotions remain multi-command-producer correlation/races, error-channel fan-out/multiple consumers, remote UI/NML reconnect and packet/timing failures, physical pendant/HALUI latency/failure behavior, and specialized safety-HMI architecture/certification.
 
 ## Laboratory compute checkpoint
 
-`LAB_COMPUTE_LOG.md` exactly backfills T02-019 through T05-022 attempt 2: **18.1 minutes (0.30 h)** of authoritative job time, plus unbackfilled historical usage. C01-023 attempt 1 consumed 3m19s of inner-lab time (`07:25:20Z`–`07:28:39Z`); add it to the compute ledger during the next exact backfill rather than hiding the invalid attempt's cost.
+`LAB_COMPUTE_LOG.md` now exactly backfills T02-019 through C01-023 attempt 2: **27.3 minutes (0.46 h)** of authoritative job time, plus unbackfilled historical usage. Invalid C01 runs are included rather than hiding their cost.
 
 ## Session-recovery / overlap note retained
 

@@ -6,7 +6,7 @@ Status values: `PLANNED`, `RESEARCH`, `SOURCE`, `EXPERIMENT`, `EXAM`, `CORRECTIO
 
 All modules through **T05 — custom operator interface patterns** are **GRADUATED at 1000 level**. Phase 9 is complete.
 
-The required blind development baseline has now been completed validly, so Phase 10 is active. **C01 — simulated dual-actuator machine** is now **EXPERIMENT** with frozen C01-023 executing in the authoritative lab runner.
+The required blind development baseline has now been completed validly, so Phase 10 is active. **C01 — simulated dual-actuator machine** is now **CORRECTIONS** after C01-023 attempt 1 exposed a temporally torn userspace observation harness. The original frozen behavioral Gates A-H remain unchanged.
 
 Repository artifacts, not chat history, remain authoritative.
 
@@ -60,7 +60,8 @@ Important retained boundary: forward mapping uses the principal/first duplicated
 - `guides/C01-simulated-dual-actuator-research.md`;
 - `call-flows/C01-world-coordinate-to-duplicate-joints.md`;
 - frozen `experiments/C01-023-dual-joint-command-fanout-plan.md`;
-- `lab-jobs/023-c01-dual-joint-command-fanout.sh` in commit `266d5d556861467497ebcf1d06a74c3ab219571a`.
+- `lab-jobs/023-c01-dual-joint-command-fanout.sh` in commit `266d5d556861467497ebcf1d06a74c3ab219571a`;
+- `results/C01-023-attempt-1-reconciliation.md` in commit `ffa05b04d70f6065e9376cbf179f146113707b07`.
 
 Current official documentation confirms that duplicate coordinate letters may assign multiple joints to one axis coordinate and recommends `KINEMATICS_BOTH` where independent joint/world operation is needed. The legacy `gantry` component is documented as superseded by `trivkins`. Community gantry reports were used as investigation leads and reconciled against source/upstream examples. Community warnings about individually moving one side of an unhomed gantry are retained for the later adversarial exam; they do not alter C01-023's frozen runtime gates.
 
@@ -70,16 +71,38 @@ A meaningful coordinated Y move in a running pinned `trivkins coordinates=XYZY k
 
 The upstream-style simulation's per-joint command-to-feedback loopback is explicitly treated as an ideal fixture property. It cannot prove physical actuator synchronization, independent-loop behavior, fault tolerance, or functional safety.
 
-### Authoritative C01-023 run
+### C01-023 attempt 1 reconciliation
+
+Authoritative attempt 1:
 
 - workflow: `34199237041`;
 - job: `101973964122`;
+- artifact: `10045220748`;
+- artifact digest: `sha256:66fa2611eef9fcebf61c68cc0497a6348f79dfb50ee46eab00f167fb6f48c688`;
 - triggering commit: `266d5d556861467497ebcf1d06a74c3ab219571a`;
-- state at checkpoint: **in progress**, step `Run lab job and capture complete output`;
-- duplicate runs launched: **none**;
-- TEST-CONFIRMED claim: **none yet**.
+- lab interval: `2026-09-08T07:25:20Z`–`2026-09-08T07:28:39Z`;
+- exit: `41`;
+- disposition: **HARNESS INVALID**.
 
-**Exact next-work checkpoint:** inspect workflow `34199237041` / job `101973964122` to final completion; preserve its final exit code, artifact ID, stdout/stderr and full raw C01-023 trace; reconcile the unchanged frozen Gates A-H. If all gates pass, commit the accepted result and proceed through C01 adversarial exam, fresh-AI handoff, counterfactual promotion audit and graduation. If startup/world motion/provenance/observation is invalid, classify the attempt HARNESS INVALID and correct only the harness without weakening Gates A-H. Do not launch a duplicate while this run remains live.
+Attempt 1 established provenance, four-joint duplicated-Y topology, distinct joint endpoints, homed/coordinated motion, 982 samples, nontrivial motion and no error-channel events before Gate E. It then reported:
+
+```text
+max-abs-j1-j3-command-diff=0.001
+max-abs-j1-command-feedback-loopback-diff=0.001
+max-abs-j3-command-feedback-loopback-diff=0.001
+```
+
+The apparent discrepancy is not a valid same-cycle comparison. The harness read `joint.1` command, `joint.3` command and both feedback pins using four sequential userspace `hal.get_value()` calls. The fixture servo period is 1 ms and the commanded speed is 60 in/min = 1 in/s. One servo update between two userspace reads therefore creates exactly 0.001 in of apparent separation — exactly the observed maximum. The direct command-to-feedback nets showed the same 0.001 signature, strongly exposing the temporal tear.
+
+Pinned `position_to_mapped_joints()` independently assigns the same `pos->tran.y` value to every joint in `Y_joints_bitmap` during one inverse-kinematics call. Because the frozen plan explicitly classifies unreliable pin observation as HARNESS INVALID, Gate E remains at `1e-9`; it is **not** weakened post-result.
+
+### Correction invariant
+
+C01-023 attempt 2 must replace the equality oracle with a realtime same-thread snapshot using LinuxCNC `sampler`/`halsampler` (or equivalently proven pinned realtime HAL stream capture), added after `motion-controller` in `servo-thread`. Direct userspace reads remain suitable for endpoint-existence Gate C but are forbidden as the simultaneous equality oracle.
+
+The corrected harness must also preserve raw realtime samples and perform controlled shutdown/Gate H evidence before returning a behavioral failure code, so a failed Gate E cannot suppress its own decisive trace.
+
+**Exact next-work checkpoint:** correct only `lab-jobs/023-c01-dual-joint-command-fanout.sh` to use realtime same-servo-cycle sampling for joint 1/joint 3 command and loopback evidence, preserving frozen Gates A-H and the exact `1e-9` threshold. Commit the harness correction, run one authoritative attempt 2 against pinned `8bf4605ae81042248add031e94c77300406e0413`, preserve realtime samples plus cleanup evidence even if a behavioral gate fails, then reconcile the original Gates A-H. Do not graduate C01 from attempt 1.
 
 ## T03 retained boundary
 
@@ -115,7 +138,7 @@ T05 higher-level promotions remain:
 
 ## Laboratory compute checkpoint
 
-`LAB_COMPUTE_LOG.md` exactly backfills T02-019 through T05-022 attempt 2: **18.1 minutes (0.30 h)** of authoritative job time, plus unbackfilled historical usage. C01-023 workflow `34199237041` is currently executing, so its compute duration is not yet final and has not been added.
+`LAB_COMPUTE_LOG.md` exactly backfills T02-019 through T05-022 attempt 2: **18.1 minutes (0.30 h)** of authoritative job time, plus unbackfilled historical usage. C01-023 attempt 1 consumed 3m19s of inner-lab time (`07:25:20Z`–`07:28:39Z`); add it to the compute ledger during the next exact backfill rather than hiding the invalid attempt's cost.
 
 ## Session-recovery / overlap note retained
 

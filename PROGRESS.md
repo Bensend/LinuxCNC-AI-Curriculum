@@ -38,24 +38,17 @@ Accepted attempt 2 workflow `34247942092`, job `102134660105`, result `results/C
 
 Frozen before implementation: `normal_B=true_B`, `scaled_B=1.20*true_B`, `jumped_B=true_B+0.50 in`. Gates A–H, gains, thresholds, phase durations and transforms may not be retuned after observation.
 
-- **Attempt 1** workflow `34250135965`, job `102142142268`: HARNESS INVALID because one stream exceeded LinuxCNC's per-sample item limit.
-- **Attempt 2** workflow `34251568612`, job `102147037252`: HARNESS INVALID because wrapper-generation quoting failed before LinuxCNC ran.
-- **Attempt 3** workflow `34251704209`, job `102147446647`, commit `7fb5624bfcd271e1103d31bde16571be872c9ec9`: **HARNESS INVALID**. LinuxCNC reached phase 1, FIFO 0 had zero overruns, but FIFO 1 was empty because the split transport deferred its userspace `halsampler` reader until after acquisition. Reconciliation: `results/C05-029-attempt-3-reconciliation.md`.
+Attempts 1–3 were harness-invalid; after the three-attempt rule C05-029 was classified **ESSENTIAL NOW** and the observation transport was materially redesigned. Attempts 4–7 in the concurrent-reader family were also harness-invalid for staging or cross-FIFO termination/alignment reasons. Attempt 7 authoritative workflow `34256658628`, job `102164080412`, source `5fba233b8dee0dca10df8ef224e75af565f16e1a`, artifact `10068261174` reached the LinuxCNC fixture, passed provenance/topology, homed, entered MDI, published phase 1, and reported zero sampler overruns, but exited 1 before behavioral analysis. Reconciliation: `results/C05-029-attempt-7-reconciliation.md`.
 
-Three-attempt classification: **ESSENTIAL NOW**. Valid scale/jump evidence remains part of the 1000-level C05 evidence floor. Further work therefore uses a materially redesigned observation transport rather than another deferred-drain patch.
-
-### C05-029 materially redesigned concurrent-reader family
-
-- **Redesigned attempt 4** workflow `34252503889`, job `102150101026`, commit `5df6891c4c1b836d9813d58b6fb507ea6b8abaee`: **HARNESS INVALID before LinuxCNC behavior** because the isolated generator root omitted inherited `028-c05-feedback-freeze.sh`.
-- **Redesigned attempt 5** workflow `34252609192`, job `102150452717`, commit `c411b8e2622521c5124ec217159a88cea7a084be`, artifact `10066749535`: **HARNESS INVALID after LinuxCNC execution**. Both concurrent readers ran, but exact same-sample join rejected one terminal sample present only in FIFO A: `onlyA=[6564] onlyB=[]`. Root cause is the observation harness stopping `sampler.0` and `sampler.1` with two sequential userspace writes, allowing one servo cycle between writes. Reconciliation: `results/C05-029-attempt-5-reconciliation.md`.
-- **Redesigned attempt 6** commit `daea4944fff7d979b1e991481e5be7a1ca375dd0`, workflow **`34256027036`**: **RUNNING**. Harness-only correction retains both concurrent userspace readers and the unchanged exact sample-number join, but replaces the two sequential per-sampler disable writes with one post-acquisition `halcmd stop`. Pinned source shows `halcmd stop -> do_stop_cmd() -> hal_stop_threads()`, so both sampler functions in the same servo thread cease at the realtime-thread boundary rather than at two independently timed userspace writes. Gates A–H and every behavioral value remain frozen.
+The concurrent split-FIFO exact-join family is now **retired** under the repeated-attempt investigation-control rule. No more sleep/drain/reader-kill timing patches are justified. Zero FIFO overruns do not establish identical retained terminal sample sets across two independent userspace readers.
 
 ## Exact next-work checkpoint
 
-1. Inspect only workflow `34256027036` until terminal; do not launch a duplicate while active.
-2. Reconcile inner exit, both complete raw traces, both overrun counters, exact identical-sample-number join, selector/config evidence, stdout/stderr, and every unchanged C05-029 Gate A–H.
-3. If harness-valid/pass, commit accepted result, execute the already-required fresh-AI novel scenario and promotion/counterfactual audit, then graduate C05 only if those pass.
-4. If harness-valid/behavioral failure, retain falsification without retuning.
-5. If redesigned attempt 6 is harness-invalid, apply the repeated-attempt investigation-control rule to this redesigned family before any further laboratory run; do not silently patch-and-rerun.
-6. After C05 graduation advance to **C06 — communication/watchdog fault handling**.
-7. `LAB_COMPUTE_LOG.md` is backfilled through C05-029 attempt 5. Add attempt 6 from authoritative job timestamps after completion; C03/C04 historical backfill remains queued but does not block C05.
+1. Inventory only the quantities required to score frozen C05-029 Gates A–H and verify whether they fit one pinned LinuxCNC `sampler` channel.
+2. Document a single-row realtime field map. Prefer one sampler FIFO so all decisive fields are one atomic servo-cycle record and cross-FIFO alignment disappears from the evidence chain.
+3. If the fields cannot fit, design a realtime packing/reduction layer whose outputs are themselves atomically sampled; do not return to split-FIFO timing patches.
+4. Preserve frozen Gates A–H and every behavioral value unchanged; preserve the raw trace before analyzer exit and retain explicit overrun evidence.
+5. Only after the transport design is source-audited, implement and launch one authoritative run. No interpolation, nearest-neighbor matching, row deletion, or phase relabeling is allowed.
+6. If harness-valid/pass, commit accepted result, execute fresh-AI transfer and promotion/counterfactual audit, and graduate C05 only if those pass. If harness-valid/behavioral failure, retain falsification without retuning.
+7. After C05 graduation advance to **C06 — communication/watchdog fault handling**.
+8. Backfill C05-029 attempt 6/7 compute from authoritative job timestamps; C03/C04 historical backfill remains queued but does not block C05.

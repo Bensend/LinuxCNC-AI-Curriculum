@@ -44,16 +44,18 @@ Frozen before implementation: `normal_B=true_B`, `scaled_B=1.20*true_B`, `jumped
 
 Three-attempt classification: **ESSENTIAL NOW**. Valid scale/jump evidence remains part of the 1000-level C05 evidence floor. Further work therefore uses a materially redesigned observation transport rather than another deferred-drain patch.
 
-### C05-029 redesigned attempt 4 — RUNNING
+### C05-029 materially redesigned concurrent-reader family
 
-Commit `5df6891c4c1b836d9813d58b6fb507ea6b8abaee`, workflow **`34252503889`**. The redesign runs two `halsampler` readers concurrently, one per FIFO, then exact-joins identical realtime sample numbers. Both raw traces, both overrun counters, and unchanged frozen behavioral gates remain required. No behavioral value was changed.
+- **Redesigned attempt 4** workflow `34252503889`, job `102150101026`, commit `5df6891c4c1b836d9813d58b6fb507ea6b8abaee`: **HARNESS INVALID before LinuxCNC behavior** because the isolated generator root omitted inherited `028-c05-feedback-freeze.sh`.
+- **Redesigned attempt 5** workflow `34252609192`, job `102150452717`, commit `c411b8e2622521c5124ec217159a88cea7a084be`, artifact `10066749535`: **HARNESS INVALID after LinuxCNC execution**. Both concurrent readers ran, but exact same-sample join rejected one terminal sample present only in FIFO A: `onlyA=[6564] onlyB=[]`. Root cause is the observation harness stopping `sampler.0` and `sampler.1` with two sequential userspace writes, allowing one servo cycle between writes. Reconciliation: `results/C05-029-attempt-5-reconciliation.md`.
+- **Redesigned attempt 6** commit `daea4944fff7d979b1e991481e5be7a1ca375dd0`, workflow **`34256027036`**: **RUNNING**. Harness-only correction retains both concurrent userspace readers and the unchanged exact sample-number join, but replaces the two sequential per-sampler disable writes with one post-acquisition `halcmd stop`. Pinned source shows `halcmd stop -> do_stop_cmd() -> hal_stop_threads()`, so both sampler functions in the same servo thread cease at the realtime-thread boundary rather than at two independently timed userspace writes. Gates A–H and every behavioral value remain frozen.
 
 ## Exact next-work checkpoint
 
-1. Inspect only workflow `34252503889` until terminal; do not launch a duplicate while active.
-2. Reconcile inner exit, both raw traces, both overrun counters, exact same-sample join, selector/config evidence, stdout/stderr, and frozen C05-029 Gates A–H.
-3. If harness-valid/pass, commit accepted result, execute fresh-AI novel scenario and promotion/counterfactual audit, then graduate C05 only if those pass.
+1. Inspect only workflow `34256027036` until terminal; do not launch a duplicate while active.
+2. Reconcile inner exit, both complete raw traces, both overrun counters, exact identical-sample-number join, selector/config evidence, stdout/stderr, and every unchanged C05-029 Gate A–H.
+3. If harness-valid/pass, commit accepted result, execute the already-required fresh-AI novel scenario and promotion/counterfactual audit, then graduate C05 only if those pass.
 4. If harness-valid/behavioral failure, retain falsification without retuning.
-5. If the materially redesigned transport itself is invalid, reconcile before deciding whether a new experiment family is required under the investigation-control rule.
+5. If redesigned attempt 6 is harness-invalid, apply the repeated-attempt investigation-control rule to this redesigned family before any further laboratory run; do not silently patch-and-rerun.
 6. After C05 graduation advance to **C06 — communication/watchdog fault handling**.
-7. Backfill authoritative C03–C05 job runtimes in `LAB_COMPUTE_LOG.md`; invalid harness runs count.
+7. `LAB_COMPUTE_LOG.md` is backfilled through C05-029 attempt 5. Add attempt 6 from authoritative job timestamps after completion; C03/C04 historical backfill remains queued but does not block C05.

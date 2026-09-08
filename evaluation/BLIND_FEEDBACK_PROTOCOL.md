@@ -167,9 +167,18 @@ Normal module adversarial exams and fresh-AI handoffs remain required. Blind ext
 
 A module does not automatically fail because of an unrelated blind challenge. However, a blind miss that demonstrates a central claimed competency is not actually transferable or understood must trigger correction before that competency is treated as securely graduated.
 
-## Initial Cadence
+## Required 1000-Series Cadence
 
-During the 1000 series, aim for a small blind development challenge after a coherent cluster of related modules rather than after every lesson. Use sealed benchmark challenges at larger milestones. Keep evaluation overhead low enough that the curriculum remains primarily a learning program.
+Blind evaluation is now an operational requirement, not merely an optional future mechanism.
+
+1. **Baseline development challenge:** immediately after T03 reaches defensible 1000-level graduation, run one blind development-bank challenge before beginning the next major module cluster. The challenge should primarily exercise already-graduated architecture/realtime/HAL/HostMot2/safety/Task/NML knowledge rather than material not yet taught.
+2. **Recurring development challenges:** after the baseline, run approximately one new blind development challenge per 3–5 additional graduated 1000-level modules or after a coherent subsystem cluster, whichever gives the more meaningful comparison. Do not interrupt every lesson.
+3. **First transfer retest:** after any baseline miss or partial miss requiring correction, schedule a novel same-mechanism transfer challenge after roughly 3–8 subsequent lessons, rather than immediately repeating the surface problem.
+4. **Delayed retention:** where practical, run a different same-competency challenge after about 10 subsequent lessons or roughly 24 hours, recording the actual delay.
+5. **Sealed benchmark checkpoint:** reserve at least one sealed benchmark challenge for a later 1000-series milestone and at least one for end-of-1000 evaluation. Do not use sealed answers to shape the curriculum before those measurements.
+6. **Evaluation does not consume a whole hourly session by default:** once the learner response is committed and scored, continue ordinary unblocked curriculum work if substantive session time remains and doing so does not contaminate a planned challenge.
+
+The baseline must establish a measurable starting point in `evaluation/FEEDBACK_SCORE_LOG.md`, including score, confidence, solve time, error class if any, and the amount of study/lab compute accumulated before the test.
 
 ## Integrity Rule
 

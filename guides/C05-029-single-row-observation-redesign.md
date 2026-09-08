@@ -10,6 +10,10 @@ Pinned `src/hal/components/sampler.c` stores one `hal_refs_u pins[HAL_STREAM_MAX
 
 Pinned `src/hal/hal.h` defines `HAL_STREAM_MAX_PINS` as **21**. `halsampler -t` prints `sampler.N.sample-num` as an additional output column; the sample number is not one of the configured data pins. Current LinuxCNC sampler documentation independently describes one configured pin per `cfg` character and one FIFO/function per sampler.
 
+### Version-sensitive stream-size boundary
+
+Current master HAL Python-stream documentation states that each stream sample may contain up to **20 values**, while the pinned source revision exposes the internal `HAL_STREAM_MAX_PINS` value as **21**. Treat this as a version/interface boundary rather than silently choosing one source as universally authoritative. C05-029 deliberately uses **20 configured data pins**, so the evidence transport satisfies both the current documented public bound and the pinned implementation bound. The experiment therefore does not depend on the disputed twenty-first slot.
+
 ## Frozen-gate field inventory
 
 The C05-029 behavioral gates need the following primitive or directly observed quantities in the same servo-cycle row. The three arithmetic residuals do not require separate realtime pins because each is a deterministic function of primitives already present in that exact row.
@@ -37,7 +41,7 @@ The C05-029 behavioral gates need the following primitive or directly observed q
 | 18 | bit | mux sel0 | C/F actual selector edge |
 | 19 | bit | mux sel1 | C/F actual selector edge |
 
-This uses **20 configured pins**, leaving one pin of headroom under the pinned limit. Sample number is supplied by `halsampler -t`.
+This uses **20 configured pins**. Sample number is supplied by `halsampler -t`.
 
 ## Residual derivation from the atomic row
 

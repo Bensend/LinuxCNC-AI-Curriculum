@@ -7,7 +7,7 @@ WORK="${RUNNER_TEMP:-/tmp}/linuxcnc-t05-startup"
 echo '== T05-022 custom-OI startup freshness gating =='
 date -u '+UTC start: %Y-%m-%dT%H:%M:%SZ'
 echo "Pinned upstream commit: $LINUXCNC_COMMIT"
-echo 'Frozen prediction: a default-enabled custom action can remain exposed through a failed first status observation; a fail-defined freshness-gated action remains disabled until a valid policy-satisfying observation.'
+echo 'Frozen prediction: a default-enabled custom action can remain exposed through a failed first tested/forced status observation; a fail-defined freshness-gated action remains disabled until valid policy evidence exists.'
 
 sudo apt-get update
 sudo apt-get install -y build-essential git devscripts equivs netcat-openbsd procps python3 python3-gi python3-zmq
@@ -58,53 +58,82 @@ python3 - <<'PY'
 import linuxcnc, sys
 from common.hal_glib import GStat
 
-# Independent baseline oracle.
+# Independent baseline oracle, separate from the tested GStat object.
 observer=linuxcnc.stat(); observer.poll(); actual=int(observer.task_state)
-print(f'independent-controller-state={actual}')
+required_state=int(linuxcnc.STATE_ON)
+print(f'independent-controller-state={actual} policy-required-state-on={required_state}')
+if actual == required_state:
+    print('HARNESS_INVALID: fixture baseline unexpectedly already satisfies fixed unavailable-action policy',file=sys.stderr); sys.exit(25)
 print('gate-B=PASS')
 
 class PollProxy:
-    def __init__(self,real): self.real=real; self.blocked=True; self.attempts=0; self.failures=0
+    def __init__(self,real): self.real=real; self.blocked=False; self.attempts=0; self.failures=0
     def poll(self):
         self.attempts += 1
         if self.blocked:
             self.failures += 1
-            raise RuntimeError('T05-022 deliberate first-observation failure')
+            raise RuntimeError('T05-022 deliberate tested-observation failure')
         return self.real.poll()
     def __getattr__(self,n): return getattr(self.real,n)
     def __setattr__(self,n,v):
         if n in ('real','blocked','attempts','failures'): object.__setattr__(self,n,v)
         else: setattr(self.real,n,v)
 
+# GStat construction itself performs a best-effort stat.poll()+merge. Allow and record it.
+# The frozen lifecycle question is the post-handler explicit forced/tested observation.
 proxy=PollProxy(linuxcnc.stat()); g=GStat(stat=proxy)
+constructor_attempts=proxy.attempts; constructor_failures=proxy.failures
+constructor_cached=int(g.old.get('state',-999)); constructor_valid=bool(g._status_active)
+print(f'gstat-construction attempts={constructor_attempts} failures={constructor_failures} cached-state={constructor_cached} valid={int(constructor_valid)}')
+if constructor_attempts != 1 or constructor_failures != 0 or constructor_cached != actual or constructor_valid:
+    print('HARNESS_INVALID: unexpected pinned GStat construction behavior',file=sys.stderr); sys.exit(26)
+
 # Models represent custom handler presentation policy, not Task enforcement.
+# Fixed policy: this action is available only in STATE_ON. Baseline was independently proven not ON.
 unsafe_enabled=True
 gated_enabled=False
-required_state=actual  # policy deliberately accepts actual state once it is freshly observed
-print(f'construction unsafe-enabled={int(unsafe_enabled)} gated-enabled={int(gated_enabled)} required-state={required_state}')
+print(f'handler-initialization unsafe-enabled={int(unsafe_enabled)} gated-enabled={int(gated_enabled)} required-state={required_state}')
 
-# First forced observation fails.
+# First tested/forced observation fails exactly once. Existing constructor cache is deliberately
+# not accepted as fresh evidence because _status_active remains false.
+proxy.blocked=True
+before_attempts=proxy.attempts; before_failures=proxy.failures
+events=[]
+g.connect('periodic', lambda *_: events.append('periodic'))
+g.connect('state-estop', lambda *_: events.append('state-estop'))
+g.connect('state-estop-reset', lambda *_: events.append('state-estop-reset'))
+g.connect('state-on', lambda *_: events.append('state-on'))
+g.connect('state-off', lambda *_: events.append('state-off'))
 g.update()
 valid=bool(g._status_active)
-print(f'first-observation valid={int(valid)} attempts={proxy.attempts} failures={proxy.failures} unsafe-enabled={int(unsafe_enabled)} gated-enabled={int(gated_enabled)}')
-if proxy.attempts != 1 or proxy.failures != 1 or valid:
-    print('HARNESS_INVALID: decisive first poll failure not isolated',file=sys.stderr); sys.exit(24)
+attempt_delta=proxy.attempts-before_attempts
+failure_delta=proxy.failures-before_failures
+cached_after_failure=int(g.old.get('state',-999))
+print(f'first-tested-observation valid={int(valid)} attempt-delta={attempt_delta} failure-delta={failure_delta} cached-state={cached_after_failure} events={events} unsafe-enabled={int(unsafe_enabled)} gated-enabled={int(gated_enabled)}')
+if attempt_delta != 1 or failure_delta != 1 or valid:
+    print('HARNESS_INVALID: decisive tested poll failure not isolated',file=sys.stderr); sys.exit(24)
+if any(e.startswith('state-') for e in events):
+    print('HARNESS_INVALID: state-change event emitted despite failed tested observation',file=sys.stderr); sys.exit(27)
 print('gate-D=PASS')
 if not unsafe_enabled:
     print('PREDICTION_FALSIFIED: unsafe-default exposure absent',file=sys.stderr); sys.exit(41)
 print('gate-E=PASS')
-# Explicit freshness gate: invalid observation cannot enable action.
-gated_enabled = valid and int(g.old.get('state',-999)) == required_state
+# Explicit freshness gate: neither retained cache nor widget default can enable without validity.
+gated_enabled = valid and cached_after_failure == required_state
 if gated_enabled:
     print('PREDICTION_FALSIFIED: freshness gate enabled without valid status',file=sys.stderr); sys.exit(42)
 print('gate-F=PASS')
 
-# Remove only injected failure, update same controller state, then evaluate policy.
-proxy.blocked=False; g.update(); valid=bool(g._status_active); cached=int(g.old.get('state',-999))
+# Remove only the injected failure, observe the same controller state, then evaluate the fixed policy.
+proxy.blocked=False
+events.clear(); before_attempts=proxy.attempts; before_failures=proxy.failures
+g.update(); valid=bool(g._status_active); cached=int(g.old.get('state',-999))
+attempt_delta=proxy.attempts-before_attempts; failure_delta=proxy.failures-before_failures
 gated_enabled = valid and cached == required_state
-print(f'recovery valid={int(valid)} cached-state={cached} independent-state={actual} gated-enabled={int(gated_enabled)} attempts={proxy.attempts} failures={proxy.failures}')
-if not valid or cached != actual or not gated_enabled:
-    print('PREDICTION_FALSIFIED: recovery did not establish valid policy evidence',file=sys.stderr); sys.exit(43)
+expected_enabled = (actual == required_state)
+print(f'recovery valid={int(valid)} cached-state={cached} independent-state={actual} gated-enabled={int(gated_enabled)} expected-enabled={int(expected_enabled)} attempt-delta={attempt_delta} failure-delta={failure_delta} events={events}')
+if attempt_delta != 1 or failure_delta != 0 or not valid or cached != actual or gated_enabled != expected_enabled:
+    print('PREDICTION_FALSIFIED: recovery did not establish valid fixed-policy evidence',file=sys.stderr); sys.exit(43)
 print('gate-G=PASS')
 print('boundary: widget enabled != fresh controller observation')
 print('boundary: fresh controller observation != command acceptance')

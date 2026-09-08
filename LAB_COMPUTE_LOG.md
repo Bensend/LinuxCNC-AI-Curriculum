@@ -17,19 +17,22 @@ If a run is cancelled, times out, is harness-invalid, or fails substantively, st
 | 2026-09-08 | T04-021 GUI status freshness | `34186879941` | `101936899842` | 2026-09-08T04:24:31Z | 2026-09-08T04:27:41Z | 3.2 | PASS | Accepted TEST-CONFIRMED T04 evidence; authoritative job timestamps. |
 | 2026-09-08 | T05-022 startup freshness gating attempt 1 | `34189716347` | `101945103662` | 2026-09-08T05:12:01Z | 2026-09-08T05:15:45Z | 3.7 | HARNESS INVALID | Exit 24. `GStat.__init__()` and tested `update()` were both blocked; implementation also drifted from frozen fixed-unavailable policy premise. No behavioral verdict. |
 | 2026-09-08 | T05-022 startup freshness gating attempt 2 | `34193926426` | `101957458393` | 2026-09-08T06:16:10Z | 2026-09-08T06:20:17Z | 4.1 | PASS | Accepted TEST-CONFIRMED T05 evidence; frozen Gates A-H passed after source-grounded harness correction. |
+| 2026-09-08 | C01-023 duplicated-joint fanout attempt 1 | `34199237041` | `101973964122` | 2026-09-08T07:25:17Z | 2026-09-08T07:28:45Z | 3.5 | HARNESS INVALID | Sequential userspace reads tore the simultaneous-state observation by one servo tick; no behavioral FAIL claim. |
+| 2026-09-08 | C01-023 realtime-correction preflight | `34209095831` | `102005554568` | 2026-09-08T09:16:38Z | 2026-09-08T09:17:38Z | 1.0 | HARNESS INVALID | Shell-variable typo terminated before LinuxCNC behavior under test; preserved as implementation-preflight cost. |
+| 2026-09-08 | C01-023 realtime same-cycle attempt 2 | `34209185893` | `102005842122` | 2026-09-08T09:17:36Z | 2026-09-08T09:22:19Z | 4.7 | PASS | Accepted TEST-CONFIRMED C01 evidence from published artifact `10049218375`; inner lab exit 0 and Gates A-H pass. Workflow envelope later failed during result-commit race with concurrent curriculum commits. |
 
 ## Running totals
 
 Keep these totals current whenever new rows are added:
 
-- **Exactly backfilled lab compute:** 18.1 min (0.30 h)
-- **Total lab compute used:** 0.30 h + unbackfilled historical usage
+- **Exactly backfilled lab compute:** 27.3 min (0.46 h)
+- **Total lab compute used:** 0.46 h + unbackfilled historical usage
 - **Remaining from 120 h first-draft allowance:** unknown until historical backfill
-- **Current-day exactly backfilled lab compute (2026-09-08):** 18.1 min (0.30 h) + unbackfilled same-day historical usage
+- **Current-day exactly backfilled lab compute (2026-09-08):** 27.3 min (0.46 h) + unbackfilled same-day historical usage
 
 ## Immediate backfill queue
 
-No known T02-T05 authoritative jobs remain in the immediate queue after T05-022 attempt 2 reconciliation.
+No known T02-T05 or C01 authoritative jobs remain in the immediate queue after C01-023 attempt 2 reconciliation.
 
 Do not use workflow `created_at`/`updated_at` envelope duration as billable job compute when exact job timestamps can be obtained later.
 

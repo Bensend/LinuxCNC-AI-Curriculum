@@ -1,0 +1,12 @@
+Note: realtime scheduling unavailable (sched_setscheduler SCHED_FIFO: Operation not permitted).
+  Process capabilities: cap_sys_nice=no cap_ipc_lock=no.
+  Falling back to POSIX non-realtime.
+  Fix: 'sudo make setcap' (preferred) or 'sudo make setuid' on rtapi_app.
+  Override (testing only): set LINUXCNC_FORCE_REALTIME=1.
+Note: Using POSIX non-realtime
+No isolated CPU's found, expect some latency or set RTAPI_CPU_NUMBER to select CPU
+stream: ERROR: more than 21 items
+sampler: rtapi_app_main: Invalid argument (-22)
+./c05-029.hal:8: waitpid failed /home/runner/work/_temp/linuxcnc-c05-scale-jump/bin/rtapi_app sampler
+./c05-029.hal:8: /home/runner/work/_temp/linuxcnc-c05-scale-jump/bin/rtapi_app exited without becoming ready
+./c05-029.hal:8: insmod for sampler failed, returned -1

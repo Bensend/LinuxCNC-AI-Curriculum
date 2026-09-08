@@ -30,23 +30,25 @@ If a run is cancelled, times out, is harness-invalid, or fails substantively, st
 | 2026-09-08 | C05-029 scale/jump attempt 3 | `34251704209` | `102147446647` | 2026-09-08T16:32:47Z | 2026-09-08T16:36:17Z | 3.5 | HARNESS INVALID | Deferred FIFO-1 userspace drain produced an empty secondary trace; triggered ESSENTIAL NOW redesign classification. |
 | 2026-09-08 | C05-029 redesigned attempt 4 staging preflight | `34252503889` | `102150101026` | 2026-09-08T16:40:36Z | 2026-09-08T16:40:44Z | 0.1 | HARNESS INVALID | Isolated generator root omitted inherited `028-c05-feedback-freeze.sh`; LinuxCNC behavior did not run. |
 | 2026-09-08 | C05-029 redesigned attempt 5 concurrent samplers | `34252609192` | `102150452717` | 2026-09-08T16:41:38Z | 2026-09-08T16:46:35Z | 5.0 | HARNESS INVALID | Both concurrent readers ran; exact join rejected one terminal sample present only in FIFO A (`onlyA=[6564]`), traced to independent userspace sampler-stop writes. |
+| 2026-09-08 | C05-029 redesigned attempt 6 thread-stop | `34256027036` | `102161932242` | 2026-09-08T17:15:49Z | 2026-09-08T17:19:08Z | 3.3 | HARNESS INVALID | Single realtime-thread stop still left split-FIFO userspace retention/alignment unsuitable for the exact-join evidence contract; split transport remained non-authoritative. |
+| 2026-09-08 | C05-029 redesigned attempt 7 quiescent drain | `34256658628` | `102164080412` | 2026-09-08T17:22:08Z | 2026-09-08T17:25:33Z | 3.4 | HARNESS INVALID | Reached fixture and phase 1 with zero reported overruns, but exited before frozen behavioral analysis; repeated cross-FIFO termination/alignment family retired. |
 
 ## Running totals
 
 Keep these totals current whenever new rows are added:
 
-- **Exactly backfilled lab compute:** 61.4 min (1.02 h)
-- **Total lab compute used:** 1.02 h + unbackfilled historical usage
+- **Exactly backfilled lab compute:** 68.1 min (1.14 h)
+- **Total lab compute used:** 1.14 h + unbackfilled historical usage
 - **Remaining from 120 h first-draft allowance:** unknown until historical backfill
-- **Current-day exactly backfilled lab compute (2026-09-08):** 61.4 min (1.02 h) + unbackfilled same-day historical usage
+- **Current-day exactly backfilled lab compute (2026-09-08):** 68.1 min (1.14 h) + unbackfilled same-day historical usage
 
 ## Immediate backfill queue
 
 Backfill C03-025 and C04-026 authoritative jobs from GitHub Actions metadata when convenient; they remain uncounted in the exact total above.
 
-C05-029 attempt 6 workflow `34256027036` is active at this ledger revision. Add its authoritative job start/end/runtime after completion, including failed or harness-invalid compute.
+C05-029 attempts 1–7 are now exactly accounted. Add the single-atomic-sampler run from authoritative job timestamps after it completes.
 
-No known T02-T05, C01, C02, or C05 jobs through C05-029 attempt 5 remain in the immediate backfill queue.
+No known T02-T05, C01, C02, or earlier C05 jobs through C05-029 attempt 7 remain in the immediate backfill queue.
 
 Do not use workflow `created_at`/`updated_at` envelope duration as billable job compute when exact job timestamps can be obtained later.
 

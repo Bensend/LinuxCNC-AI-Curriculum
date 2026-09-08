@@ -1,0 +1,6 @@
+Machine configuration file is 'c05-028.ini'
+Starting LinuxCNC...
+linuxcnc TPMOD=tpmod HOMEMOD=homemod EMCMOT=motmod
+Found file(REL): ./c05-028.hal
+task: main loop took 0.020343 seconds
+task: main loop took 0.020302 seconds

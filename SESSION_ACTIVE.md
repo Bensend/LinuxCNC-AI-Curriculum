@@ -1,4 +1,5 @@
-START 2026-09-08T18:40:14Z
+START 2026-09-08T19:10:14Z
 MODULE C05 feedback sensor failure modes
-CHECKPOINT inspect authoritative C05-029 attempt 11 workflow 34263426729 job 102186773618; no duplicate while running
+CHECKPOINT recover accepted C05-029 attempt 11 evidence, complete fresh-AI transfer and promotion/counterfactual audit, then graduate C05 if justified and advance C06
 STATUS ACTIVE
+NOTE previous marker starting 2026-09-08T18:40:14Z was left ACTIVE without a canonical end; current session starts from repository state and will flag overlap uncertainty in LESSON_LOG.md

@@ -4,7 +4,7 @@ Status values: `PLANNED`, `RESEARCH`, `SOURCE`, `EXPERIMENT`, `EXAM`, `CORRECTIO
 
 ## Current critical-path state
 
-All modules through **T01 — G-code interpreter architecture** are **GRADUATED at 1000 level**. **T02 — task layer** is now the highest-priority unblocked module and is active in **EXPERIMENT** at pinned LinuxCNC revision `8bf4605ae81042248add031e94c77300406e0413`.
+All modules through **T01 — G-code interpreter architecture** are **GRADUATED at 1000 level**. **T02 — task layer** is the highest-priority unblocked module and remains active in **EXPERIMENT** at pinned LinuxCNC revision `8bf4605ae81042248add031e94c77300406e0413`.
 
 ## T01 graduation evidence
 
@@ -42,10 +42,13 @@ Durable artifacts:
 - `guides/T02-task-execution-state-matrix.md`
 - `call-flows/T02-interp-list-to-motion-gated-delay.md`
 - frozen plan `experiments/T02-019-task-motion-gated-delay-plan.md`
+- lab harness `lab-jobs/019-t02-task-motion-gated-delay.sh`
+- attempt-1 classification `experiments/T02-019-attempt-1-harness-invalid.md`
+- draft adversarial exam `exams/T02-adversarial-exam.md`
 
 Documentation baseline: EMCTASK coordinates motion and discrete I/O; `[TASK] CYCLE_TIME` is the non-realtime Task polling cadence. The Python status interface exposes Task `exec_state`, giving T02 a direct NML/status oracle rather than requiring inference from GUI activity.
 
-Pinned source now establishes the main plan/execute relationship and the representative queue path:
+Pinned source establishes the main plan/execute relationship and representative queue path:
 
 1. the main Task loop calls `emcTaskPlan()` then `emcTaskExecute()` cyclically;
 2. AUTO planning can continue interpreter read-ahead while `interp_list` remains below its configured bound;
@@ -58,20 +61,34 @@ Representative source-confirmed distinction:
 - queued `EMC_TRAJ_LINEAR_MOVE` has precondition `WAITING_FOR_IO` and postcondition `DONE`, so Task may keep feeding trajectory moves without waiting for each move's physical completion;
 - queued `EMC_TRAJ_DELAY` has precondition `WAITING_FOR_MOTION_AND_IO`; only after both subordinate statuses are DONE is the delay issued, after which its postcondition is `WAITING_FOR_DELAY`.
 
-This yields a strong experiment surface: a slow linear move followed by dwell should expose a Task motion/I/O barrier before the dwell timer begins. The source also proves that `currentLine`, interpreter read-ahead, Task executor state, and motion completion are separate progress domains.
+Failure behavior is source-grounded: motion/I/O `RCS_STATUS::ERROR` in the relevant wait states drives Task to `ERROR`; the Task error branch aborts subordinate work, clears pending/interpreter queues, resets planning/interpreter state, and queues synchronization. This is ordinary controller error handling, not an independent safety function.
 
-Failure behavior is source-grounded: motion/I/O `RCS_STATUS::ERROR` in the relevant wait states drives Task to `ERROR`; the Task error branch aborts subordinate work, clears pending/interpreter queues, resets planning/interpreter state, and queues synchronization. This remains ordinary controller error handling, not an independent safety function.
+### T02-019 attempt history
+
+**Attempt 1 — workflow `34179358988`, job `101915092758`, harness commit `7d310c87c2e9a678fcadd6e7c742e733c2c7417f`: HARNESS_INVALID.**
+
+- Gate A passed pinned executable/Python-module provenance.
+- Fixture became responsive and ESTOP reset / machine ON / MANUAL setup commands completed.
+- `command.home(-1)` did not produce the harness-required all-joints-homed predicate before timeout.
+- The T02 program was never loaded or run, so Gates C-G were not reached and there is no evidence for or against the Task-layer prediction.
+- The failure is documented in `experiments/T02-019-attempt-1-harness-invalid.md`.
+
+Correction: home each active fixture joint explicitly in configured sequence order and independently wait for its `homed` status. Also preserve the full sampled CSV in committed workflow stdout rather than only trace slices. The G-code stimulus, predictions, Gates A-G, dwell tolerance, and anti-circular rule remain unchanged.
+
+Attempt-family count: **1/3 materially similar attempts consumed**.
 
 ## Current checkpoint / exact resume point
 
-Resume **T02 — task layer** at frozen experiment **T02-019**. Do not alter Gates A-G after observing runtime results.
+Resume **T02-019 corrected attempt 2** from harness commit `e5db5e66c5c8be3a44cd47b9b6066fae51677b24`.
 
-1. Implement a reproducible pinned-build lab harness for `experiments/T02-019-task-motion-gated-delay-plan.md` using a stock simulation configuration.
-2. The sampler must record raw monotonic timestamps plus direct `linuxcnc.stat().exec_state`, interpreter/Task line fields, `inpos`, and position/motion evidence. Reject line number as a motion-completion oracle.
-3. Execute once and preserve workflow/job ID, exit code, stdout/stderr and raw trace. Do not launch a duplicate while the first run is active.
-4. Reconcile frozen Gates A-G. In particular require `EXEC_WAITING_FOR_MOTION_AND_IO` before dwell issue and prohibit `EXEC_WAITING_FOR_DELAY` while independent motion evidence says the preceding move is incomplete.
-5. Only after accepted independent verification proceed to T02 adversarial exam, corrections, fresh-AI handoff, promotion counterfactual audit and graduation decision.
-6. Dynamic direct observation of `INTERP_EXECUTE_FINISH`/remap read-ahead remains a T01 promotion item; incorporate it only if it adds distinct information without expanding T02-019 after freeze.
+1. Identify the single workflow triggered by the corrected harness commit; do not launch a duplicate while it is active.
+2. Inspect its own exit code, stdout/stderr and complete raw trace.
+3. Reconcile frozen Gates A-G unchanged. In particular require direct `EXEC_WAITING_FOR_MOTION_AND_IO` while independent motion evidence reports incomplete motion, prohibit `EXEC_WAITING_FOR_DELAY` during incomplete motion, and require the frozen `0.60..1.10 s` observed delay span.
+4. Preserve whether line/read-ahead reached the dwell while motion was incomplete as anti-circular evidence, not as a completion oracle.
+5. If attempt 2 is HARNESS_INVALID, permit at most one further materially similar attempt after a material correction; after attempt 3, classify ESSENTIAL NOW / PROMOTE / DROP before any fourth similar run.
+6. Only after accepted independent verification proceed through adversarial grading, fresh-AI handoff, complete T02 graduation-criteria audit (including AUTO/MDI/manual and pause/resume/abort semantics), promotion counterfactual audit, and graduation decision.
+
+Dynamic direct observation of `INTERP_EXECUTE_FINISH`/remap read-ahead remains a T01 promotion item; incorporate it only if it adds distinct information without changing frozen T02-019.
 
 Safety boundary remains unchanged: Task state transitions, waits, queueing and abort sequencing are ordinary LinuxCNC machine-control behavior, not evidence of a safety-rated function.
 

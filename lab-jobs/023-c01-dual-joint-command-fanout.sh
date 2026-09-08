@@ -20,7 +20,6 @@ cd "$WORK"
 git checkout --detach "$LINUXCNC_COMMIT"
 ACTUAL_COMMIT="$(git rev-parse HEAD)"
 printf 'checked-out-commit=%s\n' "$ACTUAL_COMMIT"
-[[ "$ACTUAL_COMMIT" == "$LINUXC_COMMIT" ]] 2>/dev/null && true
 [[ "$ACTUAL_COMMIT" == "$LINUXCNC_COMMIT" ]] || { echo 'HARNESS_INVALID: pinned checkout mismatch' >&2; exit 20; }
 
 ./debian/configure uspace

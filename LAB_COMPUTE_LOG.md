@@ -21,6 +21,15 @@ Keep these totals current whenever new rows are added:
 - **Remaining from 120 h first-draft allowance:** unknown until historical backfill
 - **Current-day lab compute:** 0.0 h + unbackfilled historical usage
 
+## Immediate backfill queue
+
+The following recent authoritative jobs are known and should be the first exact-runtime backfill entries once job start/end timestamps are available:
+
+- T02-019 — workflow `34179865160`, job `101916590952`, successful, accepted test evidence.
+- T03-020 — workflow `34182846956`, job `101925247534`, successful workflow and repository exit code `0`; behavioral gates still require reconciliation before TEST-CONFIRMED status.
+
+Do not use workflow `created_at`/`updated_at` envelope duration as billable job compute when exact job timestamps can be obtained later.
+
 ## Historical backfill rule
 
 The repository already contains laboratory activity predating this ledger. Do not invent historical runtime. Backfill prior runs only from authoritative GitHub Actions job timestamps or equivalent preserved metadata. Mark incomplete historical coverage explicitly until reconciled.

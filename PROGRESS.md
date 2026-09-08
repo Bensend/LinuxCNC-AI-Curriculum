@@ -4,93 +4,117 @@ Status values: `PLANNED`, `RESEARCH`, `SOURCE`, `EXPERIMENT`, `EXAM`, `CORRECTIO
 
 ## Current critical-path state
 
-All modules through **T01 — G-code interpreter architecture** are **GRADUATED at 1000 level**. **T02 — task layer** is the highest-priority unblocked module and remains active in **EXPERIMENT** at pinned LinuxCNC revision `8bf4605ae81042248add031e94c77300406e0413`.
+All modules through **T02 — task layer** are **GRADUATED at 1000 level**. **T03 — NML architecture and messages** is the highest-priority unblocked module and is active in **SOURCE**, with its first experiment frozen before implementation at pinned LinuxCNC revision `8bf4605ae81042248add031e94c77300406e0413`.
 
-## T01 graduation evidence
-
-Durable artifacts:
-
-- `guides/T01-interpreter-source-guide.md`
-- `call-flows/T01-task-to-canonical-rapid.md`
-- frozen plan `experiments/T01-018-interpreter-canonical-and-error-plan.md`
-- lab harness `lab-jobs/018-t01-interpreter-canonical-error.sh`
-- accepted result `experiments/T01-018-run-34172719263-accepted.md`
-- `exams/T01-adversarial-exam.md`
-- `guides/T01-fresh-ai-handoff.md`
-
-Pinned source-confirmed representative path:
-
-`Task emcTaskPlanRead()/emcTaskPlanExecute() -> Interp::read()/execute() -> execute_block() -> convert_motion() -> STRAIGHT_TRAVERSE() -> tag_and_send() -> interp_list`
-
-T01-018 workflow `34172719263` completed with final committed lab exit `0`. The valid `G0 X1 Y2` invocation exited `0` and emitted `STRAIGHT_TRAVERSE(1.0000, 2.0000, ...)`; the separate malformed `G0 X[1+]` invocation exited `1` with a number-format conversion diagnostic and no successful traversal corresponding to the malformed command. Frozen Gates A-E all passed.
-
-Central graduated teaching: interpreter read/execute state, canonical/Task queue state, realtime execution, and physical machine state are distinct evidence domains. Canonical output or interpreter predicted position does not prove physical motion has started or completed.
-
-### T01 promotion queue
-
-- Dynamic Task/remap queue timing and direct `INTERP_EXECUTE_FINISH` drain/synch observation — **T02 / 2000, HIGH**. Non-blocking for T01 because the dynamic Task timing claim was explicitly not made.
-- Detailed parser grammar/modal/error corner cases — **2000, MEDIUM**.
-- Version-drift audit beyond pinned SHA — **2000, MEDIUM**.
-
-Counterfactual audit: none of these promoted uncertainties can invalidate the bounded pinned T01 source path or accepted standalone experiment, and none weakens the explicit safety boundary.
-
-## T02 current evidence
+## T02 graduation evidence
 
 Durable artifacts:
 
 - `guides/T02-task-layer-research.md`
 - `guides/T02-task-execution-state-matrix.md`
+- `guides/T02-mode-pause-abort-semantics.md`
 - `call-flows/T02-interp-list-to-motion-gated-delay.md`
 - frozen plan `experiments/T02-019-task-motion-gated-delay-plan.md`
-- lab harness `lab-jobs/019-t02-task-motion-gated-delay.sh`
+- harness `lab-jobs/019-t02-task-motion-gated-delay.sh`
 - attempt-1 classification `experiments/T02-019-attempt-1-harness-invalid.md`
-- draft adversarial exam `exams/T02-adversarial-exam.md`
+- accepted result `experiments/T02-019-run-34179865160-accepted.md`
+- `exams/T02-adversarial-exam.md`
+- `guides/T02-fresh-ai-handoff.md`
 
-Documentation baseline: EMCTASK coordinates motion and discrete I/O; `[TASK] CYCLE_TIME` is the non-realtime Task polling cadence. The Python status interface exposes Task `exec_state`, giving T02 a direct NML/status oracle rather than requiring inference from GUI activity.
+T02-019 workflow `34179865160`, authoritative Actions job `101916590952`, final lab exit `0`, passed frozen Gates A-G on materially similar attempt 2/3. The accepted trace preserved 2,110 samples. It directly observed `EXEC_WAITING_FOR_MOTION_AND_IO` while motion was independently incomplete, observed no `WAITING_FOR_DELAY` while incomplete, then measured `0.748012 s` in `WAITING_FOR_DELAY` for frozen `G4 P0.75` before clean completion.
 
-Pinned source establishes the main plan/execute relationship and representative queue path:
+The adversarial result is especially important: interpreter/read-ahead reached beyond the dwell while the preceding move was still incomplete. Therefore line/read-ahead progress is experimentally disproven as a motion-completion oracle for the representative pinned path.
 
-1. the main Task loop calls `emcTaskPlan()` then `emcTaskExecute()` cyclically;
-2. AUTO planning can continue interpreter read-ahead while `interp_list` remains below its configured bound;
-3. executor `DONE` removes the next `interp_list` item, records its line/motion id, and evaluates `emcTaskCheckPreconditions()`;
-4. once preconditions become `DONE`, `emcTaskIssueCommand()` issues the retained command and `emcTaskCheckPostconditions()` selects the next executor state;
-5. issue failure becomes Task `ERROR`.
+The accepted-result draft contained one metadata typo in the job ID; it was corrected from `101916753555` to the authoritative workflow job `101916590952` without changing any technical evidence or conclusion.
 
-Representative source-confirmed distinction:
+### T02 graduated teaching
 
-- queued `EMC_TRAJ_LINEAR_MOVE` has precondition `WAITING_FOR_IO` and postcondition `DONE`, so Task may keep feeding trajectory moves without waiting for each move's physical completion;
-- queued `EMC_TRAJ_DELAY` has precondition `WAITING_FOR_MOTION_AND_IO`; only after both subordinate statuses are DONE is the delay issued, after which its postcondition is `WAITING_FOR_DELAY`.
+Task is a non-realtime execution coordinator. Interpreter/read-ahead progress, Task queue selection, Task command issue/postcondition, subordinate motion/I/O completion, physical device truth and safety state are distinct evidence domains.
 
-Failure behavior is source-grounded: motion/I/O `RCS_STATUS::ERROR` in the relevant wait states drives Task to `ERROR`; the Task error branch aborts subordinate work, clears pending/interpreter queues, resets planning/interpreter state, and queues synchronization. This is ordinary controller error handling, not an independent safety function.
+Representative pinned path:
 
-### T02-019 attempt history
+`Task main loop -> emcTaskPlan() -> AUTO interpreter/canonical work -> interp_list -> emcTaskExecute() -> precondition -> issue -> postcondition -> subordinate status -> next executor state`
 
-**Attempt 1 — workflow `34179358988`, job `101915092758`, harness commit `7d310c87c2e9a678fcadd6e7c742e733c2c7417f`: HARNESS_INVALID.**
+A queued linear move may leave Task free to process later queued commands, while a following queued delay is held behind `WAITING_FOR_MOTION_AND_IO` and enters `WAITING_FOR_DELAY` only after subordinate completion.
 
-- Gate A passed pinned executable/Python-module provenance.
-- Fixture became responsive and ESTOP reset / machine ON / MANUAL setup commands completed.
-- `command.home(-1)` did not produce the harness-required all-joints-homed predicate before timeout.
-- The T02 program was never loaded or run, so Gates C-G were not reached and there is no evidence for or against the Task-layer prediction.
-- The failure is documented in `experiments/T02-019-attempt-1-harness-invalid.md`.
+T02 adversarial exam: **10/10 PASS**. Fresh-AI handoff and counterfactual promotion audit: **PASS**. Decision: **T02 GRADUATED at 1000 level**.
 
-Correction: home each active fixture joint explicitly in configured sequence order and independently wait for its `homed` status. Also preserve the full sampled CSV in committed workflow stdout rather than only trace slices. The G-code stimulus, predictions, Gates A-G, dwell tolerance, and anti-circular rule remain unchanged.
+### T02 promotion queue
 
-Attempt-family count: **1/3 materially similar attempts consumed**.
+- Direct dynamic `INTERP_EXECUTE_FINISH` / remap queue-buster drain timing — **2000, HIGH**.
+- Nested MDI/subroutine execution-level behavior — **2000, MEDIUM**.
+- Feed-hold versus queued Task pause under blended motion — **2000, MEDIUM**.
+- Abort during toolchange/system-command/I/O wait races — **2000, HIGH** for recovery specialization.
+- Version-drift audit beyond pinned SHA — **2000, MEDIUM**.
+
+Counterfactual audit: none can invalidate the bounded pinned T02 source path, accepted motion→delay experiment or the requirement to separate interpreter, Task, subordinate, physical and safety evidence.
+
+## T03 current evidence
+
+Durable artifacts now include:
+
+- `guides/T03-nml-architecture-research.md`
+- `call-flows/T03-python-command-status-error-nml.md`
+- `guides/T03-command-acknowledgement-boundary.md`
+- frozen plan `experiments/T03-020-nml-ack-vs-semantic-result-plan.md`
+
+### Documentation/community baseline
+
+Official LinuxCNC documentation establishes the UI-facing command/status/error NML model, `linuxcnc.stat()` status surface and `[EMC] NML_FILE` configuration boundary. Community field reports about `wait_complete()`, serial/echo handling, concurrent HALUI/Python command producers and state-invalid `EMC_TASK_PLAN_STEP` behavior were reconciled as supporting field evidence rather than authority over pinned source.
+
+### Pinned source model
+
+T03 currently distinguishes three ordinary userspace evidence streams:
+
+```text
+Python/UI command -> RCS_CMD_CHANNEL "emcCommand" -> Task semantic planning/dispatch
+Task world/status  -> RCS_STAT_CHANNEL "emcStatus" -> stat.poll()/wait_complete()
+operator reporting -> NML "emcError" -> error_channel().poll()
+```
+
+`emcFormat()` provides message serialization/type dispatch, not Task machine-control semantics. Task and Python clients each open the named channels from the configured NML file; optional `emcsvr` exposes the same channel model for remote NML service rather than replacing it with a realtime motion protocol.
+
+### Serial acknowledgement boundary — source-confirmed
+
+Pinned `emcmodule.cc` shows:
+
+- `emcSendCommand()` writes the command, saves its `serial_number`, and waits until status echo reaches that serial or later;
+- `wait_complete()` polls for the saved serial, returning matching aggregate DONE/ERROR, treating a greater echo serial as DONE, and timing out to UNINITIALIZED after the requested/default interval;
+- default timeout is five seconds and nominal poll delay is 10 ms.
+
+Pinned `emctaskmain.cc` shows:
+
+- Task treats the command as new while command serial differs from status echo;
+- at cycle end Task copies the command serial into top-level/task echo fields;
+- aggregate status is independently derived from planning/execution/subordinate state;
+- therefore Task can echo a command whose semantic planner result is ERROR.
+
+Central T03 teaching already source-confirmed: **NML transport/echo acknowledgement is not semantic acceptance, controller completion, physical completion, or safety truth.**
+
+## T03-020 frozen experiment
+
+`experiments/T03-020-nml-ack-vs-semantic-result-plan.md` freezes two cases:
+
+1. valid `STATE_ESTOP_RESET`: require new client serial, echoed serial, `wait_complete()==RCS_DONE`, and independent Task-state observation;
+2. invalid while ESTOP `command.auto(AUTO_STEP)`: pinned Python maps this to `EMC_TASK_PLAN_STEP`; require a new serial and echoed acknowledgement **but** matching aggregate `RCS_ERROR`/`wait_complete()==RCS_ERROR` plus an independently captured operator error saying the command is prohibited by E-stop/machine state.
+
+Gates A-G and raw evidence requirements are frozen. No later command may be issued until the negative case's matching ERROR evidence is captured, preventing a later greater serial from masking the exact result.
 
 ## Current checkpoint / exact resume point
 
-Resume **T02-019 corrected attempt 2** from harness commit `e5db5e66c5c8be3a44cd47b9b6066fae51677b24`.
+Resume **T03-020 implementation** without changing the frozen plan.
 
-1. Identify the single workflow triggered by the corrected harness commit; do not launch a duplicate while it is active.
-2. Inspect its own exit code, stdout/stderr and complete raw trace.
-3. Reconcile frozen Gates A-G unchanged. In particular require direct `EXEC_WAITING_FOR_MOTION_AND_IO` while independent motion evidence reports incomplete motion, prohibit `EXEC_WAITING_FOR_DELAY` during incomplete motion, and require the frozen `0.60..1.10 s` observed delay span.
-4. Preserve whether line/read-ahead reached the dwell while motion was incomplete as anti-circular evidence, not as a completion oracle.
-5. If attempt 2 is HARNESS_INVALID, permit at most one further materially similar attempt after a material correction; after attempt 3, classify ESSENTIAL NOW / PROMOTE / DROP before any fourth similar run.
-6. Only after accepted independent verification proceed through adversarial grading, fresh-AI handoff, complete T02 graduation-criteria audit (including AUTO/MDI/manual and pause/resume/abort semantics), promotion counterfactual audit, and graduation decision.
+1. Build `lab-jobs/020-t03-nml-ack-vs-semantic-result.sh` against the pinned stock simulation/RIP build.
+2. Preserve exact executable/Python-module/source SHA provenance.
+3. Capture raw monotonic serial/echo/status/state/wait-complete/error-channel evidence for both cases.
+4. Run the harness once and preserve the workflow/job identity, lab exit code, stdout/stderr and raw trace.
+5. Reconcile Gates A-G unchanged. The decisive negative result must be `echoed=true` together with `semantic_success=false` and independent operator-error evidence.
+6. If the matching status/error transition is missed because of polling or error-drain timing, classify HARNESS_INVALID and materially improve observability; do not weaken the acknowledgement-vs-success boundary.
+7. After accepted behavioral verification, continue the NML library/transport inventory, error-buffer queue/overwrite semantics, remote failure boundaries, adversarial exam, fresh-AI handoff, promotion audit and T03 graduation review.
 
-Dynamic direct observation of `INTERP_EXECUTE_FINISH`/remap read-ahead remains a T01 promotion item; incorporate it only if it adds distinct information without changing frozen T02-019.
+## Session-recovery note
 
-Safety boundary remains unchanged: Task state transitions, waits, queueing and abort sequencing are ordinary LinuxCNC machine-control behavior, not evidence of a safety-rated function.
+A prior session marker beginning `2026-09-08T02:11:10.538872Z` remained `OPEN` even though durable commits through `2026-09-08T02:35:41Z` had already completed T02 graduation artifacts and begun T03. Those artifacts were recovered as authoritative repository state rather than duplicated. That prior session's exact end timestamp is unavailable, so no fabricated timing row is being added for it; the current session records the uncertainty explicitly in its own timing/overlap note.
 
 ## Prior promotion queue retained
 

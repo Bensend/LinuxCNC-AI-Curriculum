@@ -97,7 +97,7 @@ done
 [[ "$READY" == 1 ]] || { echo 'HARNESS_INVALID: LinuxCNC/NML fixture did not become ready' >&2; cat t02-linuxcnc.stderr >&2 || true; exit 23; }
 
 PROGRAM="$PROGRAM" TRACE="$TRACE" python3 - <<'PY'
-import csv, math, os, sys, time
+import csv, os, sys, time
 import linuxcnc
 
 program = os.environ['PROGRAM']
@@ -128,27 +128,42 @@ def wait_pred(label, predicate, timeout=15.0):
         poll()
         if predicate(s):
             print(f'{label}=PASS')
-            return
+            return True
         err = e.poll()
         if err:
             print(f'error-during-{label}={err}')
         time.sleep(0.01)
-    raise RuntimeError(f'timeout waiting for {label}')
+    print(f'HARNESS_INVALID: timeout waiting for {label}', file=sys.stderr)
+    return False
 
 def cmd_wait(label, timeout=5.0):
     rc = c.wait_complete(timeout)
     print(f'{label}-wait-complete={rc}')
     if rc not in (0, 1):
-        raise RuntimeError(f'{label} wait_complete returned {rc}')
+        print(f'HARNESS_INVALID: {label} wait_complete returned {rc}', file=sys.stderr)
+        sys.exit(26)
 
-# Healthy startup and ordinary homing before AUTO.
+# Healthy startup and ordinary homing before AUTO. Home active joints explicitly
+# in configured sequence order; attempt 1 showed home(-1) was not a valid
+# orchestration oracle for this stock headless fixture.
 poll()
 c.state(linuxcnc.STATE_ESTOP_RESET); cmd_wait('estop-reset')
 c.state(linuxcnc.STATE_ON); cmd_wait('machine-on')
 c.mode(linuxcnc.MODE_MANUAL); cmd_wait('manual-mode')
-c.home(-1)
-wait_pred('all-homed', lambda st: all(bool(x) for x in st.homed), 15.0)
-wait_pred('pre-run-inpos', lambda st: bool(st.inpos), 5.0)
+poll()
+joint_count = int(s.joints)
+print(f'active-joint-count={joint_count}')
+if joint_count <= 0:
+    print('HARNESS_INVALID: no active joints reported', file=sys.stderr)
+    sys.exit(27)
+for j in range(joint_count):
+    c.home(j)
+    if not wait_pred(f'joint-{j}-homed', lambda st, j=j: bool(st.homed[j]), 12.0):
+        sys.exit(28)
+if not wait_pred('all-active-joints-homed', lambda st: all(bool(st.homed[j]) for j in range(joint_count)), 5.0):
+    sys.exit(28)
+if not wait_pred('pre-run-inpos', lambda st: bool(st.inpos), 5.0):
+    sys.exit(29)
 
 c.mode(linuxcnc.MODE_AUTO); cmd_wait('auto-mode')
 c.program_open(program); cmd_wait('program-open')
@@ -288,6 +303,9 @@ for i,r in enumerate(rows):
 PY
 printf '%s\n' '-- final 12 samples --'
 tail -n 12 "$TRACE"
+printf '%s\n' '=== BEGIN T02-019 FULL RAW TRACE CSV ==='
+cat "$TRACE"
+printf '%s\n' '=== END T02-019 FULL RAW TRACE CSV ==='
 
 printf '\nT02-019 shell-harness=PASS\n'
 date -u '+UTC finish: %Y-%m-%dT%H:%M:%SZ'

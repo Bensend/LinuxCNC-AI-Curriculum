@@ -6,15 +6,13 @@ Repository artifacts, not chat history, are authoritative.
 
 ## Current critical-path state
 
-All modules through **T05 — custom operator interface patterns**, **C01 — simulated dual-actuator machine**, **C02 — independent feedback loops**, and **C03 — explicit cross-coupling** are **GRADUATED at 1000 level**.
+All modules through **T05 — custom operator interface patterns**, **C01 — simulated dual-actuator machine**, **C02 — independent feedback loops**, **C03 — explicit cross-coupling**, and **C04 — asymmetric actuator response** are **GRADUATED at 1000 level**.
 
-Phase 10 remains active. The highest-priority unblocked module is **C04 — asymmetric actuator response**, state **CORRECTIONS**.
-
-C03 graduation evidence is committed in `evaluation/C03-1000-graduation-evaluation.md`: the pre-frozen adversarial exam scored 10/10, the novel saturation+sensor/plant-asymmetry handoff passed, the promotion/counterfactual audit passed, and the accepted C03-025 result remains bounded to the pinned deterministic fixture.
+Phase 10 remains active. The highest-priority unblocked module is **C05 — feedback sensor failure modes**, state **RESEARCH**.
 
 ## Blind development baseline — BL-DEV-001
 
-The learner response was immutably committed in `evaluation/development/BL-DEV-001-precommit.md` at commit `2117ac7103f929a0d90b59551785500d2b59b874` before oracle inspection.
+The learner response was immutably committed in `evaluation/development/BL-DEV-001-precommit.md` before oracle inspection.
 
 Result: **VALID, 10/10, 92% confidence**. Detailed evaluation is in `evaluation/development/BL-DEV-001-evaluation.md`; the score ledger is `evaluation/FEEDBACK_SCORE_LOG.md`.
 
@@ -35,8 +33,6 @@ same coordinated command
 != safety-rated protection
 ```
 
-Graduation evidence: `evaluation/C01-1000-graduation-evaluation.md`.
-
 ## C02 — independent feedback loops — GRADUATED 1000
 
 C02 established that two PID instances receiving a common command retain separate command/feedback/error/output state and can diverge under an asymmetric plant disturbance.
@@ -54,13 +50,9 @@ shared command
 
 ## C03 — explicit cross-coupling — GRADUATED 1000
 
-Pinned revision: `8bf4605ae81042248add031e94c77300406e0413`.
-
 Accepted C03-025: workflow `34228231147`, job `102067547546`, artifact `10056799485`, source commit `99f7c35ce3cfd23aa96c11f0168c798ff8607c7c`, inner exit `0`, Gates A-H PASS after two retained HARNESS INVALID phase-publication attempts.
 
-The explicit `Kc=0.5` relative-feedback coupler reduced sustained deterministic simulated disagreement from `0.703374228 in` to `0.377045040 in` (about 46.4%); removing it raised disagreement to `0.738476396 in` (about 1.96x the coupled value). All 3013 qualified sign rows were directionally correct and sampled realtime arithmetic residuals were zero.
-
-Graduation evidence: `evaluation/C03-1000-graduation-evaluation.md`.
+The explicit `Kc=0.5` relative-feedback coupler reduced sustained deterministic simulated disagreement from `0.703374228 in` to `0.377045040 in` (about 46.4%); removing it raised disagreement to `0.738476396 in` (about 1.96x the coupled value).
 
 Retained boundary:
 
@@ -72,19 +64,49 @@ reduced simulated disagreement
 != safety-rated anti-racking protection
 ```
 
-## C04 — asymmetric actuator response — CORRECTIONS
+## C04 — asymmetric actuator response — GRADUATED 1000
 
-Pinned revision remains `8bf4605ae81042248add031e94c77300406e0413`.
+Pinned revision: `8bf4605ae81042248add031e94c77300406e0413`.
 
-Research/source guide: `guides/C04-asymmetric-actuator-response-research.md`. Frozen experiment: `experiments/C04-026-asymmetric-authority-plan.md`. Frozen adversarial exam: `evaluation/C04-adversarial-exam-draft.md`.
+Primary guides/results:
 
-C04-026 attempt 1 authoritative workflow `34231940180`, job `102079994732`, artifact `10058317466`, source commit `5068dea32243f209e4873cc1117a1b2d5ed51dc2` is classified **HARNESS INVALID**, not behavioral FAIL. Detailed reconciliation: `results/C04-026-attempt-1-reconciliation.md`.
+- `guides/C04-asymmetric-actuator-response-research.md`
+- `guides/C04-pid-saturation-transition-semantics.md`
+- `results/C04-026-attempt-1-reconciliation.md`
+- `results/C04-026-attempt-2-behavioral-reconciliation.md`
+- `experiments/C04-027-source-corrected-recovery-plan.md`
+- `results/C04-027-accepted.md`
+- `evaluation/C04-adversarial-exam-result.md`
+- `evaluation/C04-fresh-ai-handoff.md`
+- `evaluation/C04-promotion-audit.md`
 
-Attempt 1 produced 10,111 realtime samples with zero reported overruns and diagnostically showed S1=0, S2=0.377086302, S3=0.687180144, S4=0.0103899042 with exact sampled coupling arithmetic residuals. These values are not accepted gate evidence because two audit defects invalidate the decisive observation: the Gate-F analyzer checked PID-B saturation together with tuple index 8 (PID-A output) instead of tuple index 9 (PID-B output), and the raw realtime trace was not retained because the inherited evidence-copy block ran only after the failing analyzer under `set -e`.
+### C04-026 preserved falsification
 
-Pinned `pid.c` reconciliation is now explicit: nonzero `maxoutput` clips only when pre-limit output exceeds the bound, sets `limit_state` on clipping, and drives `saturated` plus saturation duration/count from `limit_state`. Therefore equality of final output with the configured limit is not by itself sufficient source evidence that clipping occurred; same-cycle saturation telemetry remains required.
+C04-026 attempt 1 was HARNESS INVALID because Gate F paired PID-B saturation with the wrong output tuple field and the workflow artifact omitted the raw realtime trace. Two subsequent correction-wrapper jobs failed before LinuxCNC started; they provide no machine-behavior evidence. After the three-attempt investigation-control boundary, the harness was materially redesigned rather than patched again.
 
-Retained evidence boundary under test:
+The valid C04-026 rerun was workflow `34243768815`, job `102120345513`, artifact `10063237523`, source `5f42434b2a67d79d8ea2ccaa9f17e902df8423e5`. It produced 14,262 realtime rows and passed Gates A-F/H, but **legitimately failed frozen Gate G**. Phase 3 sustained B-only saturation for 3,011 rows, yet after phase 4 changed B `maxoutput` directly from `1.0` to `0`, `pidB.saturated` remained true and `saturated-count` continued increasing even after A/B feedback converged.
+
+Pinned `pid.c::calc_pid()` explains the result: an enabled PID updates/clears `limit_state` only inside the `if (maxoutput != 0.0)` output-limit block. A direct transition to zero skips that block, so a previously nonzero `limit_state` can persist and drive stale `saturated`/duration telemetry. This source structure is also present in current LinuxCNC master as inspected 2026-09-08. Current PID documentation describes zero as 'no limit' and `saturated` as current saturation, so the dynamic transition exposes a documentation/telemetry-semantic mismatch that must be taught explicitly.
+
+### Accepted C04-027 source-corrected recovery
+
+C04-027 was frozen before implementation after the C04-026 falsification. It retained phases 1-3 and every phase-3 authority value/threshold, changing only phase-4 recovery to a deliberately huge finite `maxoutput=1000.0` sentinel so pinned `calc_pid()` would execute the explicit `limit_state=0` branch. Gate G additionally required proof that the sentinel never bound.
+
+Authoritative workflow `34244865738`, job `102124147558`, artifact `10063683101`, source commit `4a9412e0d83dedfcd32bd6543cd0cf00231d40bf`, inner exit `0`, Gates A-H PASS.
+
+Key results:
+
+- 14,268 realtime rows;
+- `S1=0`, `S2=0.230824132`, `S3=1.477344334`, `S4=0`;
+- 3,018 consecutive phase-3 rows with B saturated at `+1.0` while A remained unsaturated;
+- phase-4 final-500 B unsaturated fraction `1.0`;
+- phase-4 final-500 B saturated-count-zero fraction `1.0`;
+- phase-4 sentinel nonbinding fraction `1.0`;
+- raw trace SHA-256 `2e4a924e10766a2cc8b4c5834cb89a94c5c423968a2965f1104889e597edec73`.
+
+The frozen C04 adversarial exam scored **10/10** and the fresh-AI combined sensor-scale + PID-saturation handoff passed. Promotion/counterfactual audit therefore graduates C04 at 1000 level.
+
+Retained boundaries:
 
 ```text
 corrected command separation
@@ -93,7 +115,11 @@ corrected command separation
 != feedback convergence
 ```
 
-and:
+```text
+pid.saturated telemetry
+must be interpreted with current maxoutput + enable + transition history + pinned source
+!= self-authenticating proof of present physical saturation
+```
 
 ```text
 PID software saturation
@@ -104,15 +130,18 @@ PID software saturation
 != safety-rated fault decision
 ```
 
+## C05 — feedback sensor failure modes — RESEARCH
+
+Highest-priority unblocked next module. C05 inherits the C04 distinction between measured disagreement and plant truth and must deliberately exercise at least freeze, scale and jump/offset feedback faults with independent observation evidence.
+
 ### Exact next-work checkpoint
 
-1. Correct only the C04-026 observation harness; keep frozen Gates A-H, Kc=0.5, PID gains, plant gains, maxoutput=1.0, phase durations, and thresholds unchanged.
-2. Fix Gate-F PID-B output indexing from tuple `r[8]` to `r[9]`.
-3. Preserve/copy `c04-026-realtime.txt`, stdout/stderr, metadata and exit evidence before any analyzer can terminate the script; verify the next workflow artifact actually contains the raw trace.
-4. Run one authoritative C04-026 attempt 2. Inspect raw phase-3 `satB`, `satCountB`, `outB`, and `maxOutB` rows directly before trusting the summary.
-5. If valid attempt 2 does not produce >=500 consecutive frozen Gate-F saturation rows, classify that as behavioral FAIL rather than retuning. If it passes, score the already-frozen exam, perform fresh-AI handoff and promotion/counterfactual audit, then graduate only if all 1000-level floors pass.
-6. C05 owns frozen/scaled/jumping feedback; C04 must not infer sensor-fault cause from ordinary saturation/disagreement evidence.
+1. Read current LinuxCNC encoder/feedback documentation and pinned source for the minimum deterministic simulated sensor path suitable for injecting freeze, scale and jump/offset faults without conflating them with plant response.
+2. Trace `true toy plant state -> sensor transformation -> PID/cross-coupler measured feedback -> resulting control effort` at function/thread order level.
+3. Research community reports where encoder scale, frozen counts, wiring/noise or discontinuity produced misleading servo/gantry symptoms; classify them COMMUNITY-REPORTED, not source truth.
+4. Define what independent evidence can distinguish 'measured disagreement' from 'known physical disagreement'. Do not let C05 prematurely choose final stop/fault behavior.
+5. Freeze the first C05 experiment before implementation. It should preserve raw same-cycle true-plant-state and transformed-feedback evidence so a sensor fault cannot masquerade as a plant-authority result.
 
 ## Laboratory compute / timing notes
 
-`LAB_COMPUTE_LOG.md` contains authoritative compute accounting. Invalid runs are retained rather than hidden. C03 attempts 1-3 and C04-026 should be backfilled from authoritative job timing at the next accounting pass.
+`LAB_COMPUTE_LOG.md` contains authoritative compute accounting. Invalid runs are retained rather than hidden. C03 and C04 authoritative jobs still require a complete compute backfill if not already present; include pre-LinuxCNC harness failures rather than hiding their cost.

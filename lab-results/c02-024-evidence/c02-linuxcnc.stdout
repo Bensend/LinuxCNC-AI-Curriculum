@@ -1,0 +1,10 @@
+Machine configuration file is 'c02-024.ini'
+Starting LinuxCNC...
+linuxcnc TPMOD=tpmod HOMEMOD=homemod EMCMOT=motmod
+Found file(REL): ./c02-024.hal
+task: main loop took 0.019238 seconds
+task: main loop took 0.019474 seconds
+linuxcncrsh: New connection from ::1:46958
+linuxcncrsh: Read close 'Default-4' (4)
+linuxcncrsh: Connection terminated 'Default-4' (4)
+task: main loop took 0.302729 seconds

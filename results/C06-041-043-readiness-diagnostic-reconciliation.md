@@ -15,6 +15,8 @@ The staged diagnostic initially appeared to show:
 
 The retained before-attach snapshots invalidate the naive topology conclusion. The readiness loop used commands such as `halcmd show pin sampler.0.enable >/dev/null`; at this pinned runtime a successful `show` command does not prove that a matching object exists. The full-P0 snapshot was taken before sampler objects/FIFO shared memory existed. The fixture-only case merely completed setup before the userspace attach happened to execute.
 
+This is now **SOURCE-CONFIRMED** at the pinned revision: `src/hal/utils/halcmd_commands.cc::do_show_cmd()` dispatches `show pin` to `print_pin_info(...)` and returns `0` after the print function regardless of whether the requested pattern matched any pin. Only an unknown `show` type returns `-1`. Therefore command exit status is categorically the wrong existence predicate for this harness.
+
 Therefore C06-038/041 did **not** falsify the startup-race hypothesis. Their existence predicate was itself defective.
 
 ## C06-043 corrected preflight
@@ -32,6 +34,7 @@ This confirms that the earlier `hal_stream_attach: Invalid argument` failures we
 
 ## Evidence classification
 
+- `do_show_cmd()` returning success independently of pattern match count: **SOURCE-CONFIRMED** at pinned revision `8bf4605...`, path `src/hal/utils/halcmd_commands.cc`.
 - Correct sampler/fixture startup with actual object existence proof: **TEST-CONFIRMED** for the harness/preflight only.
 - Frozen C06-030 behavioral Gates A–H: still not scored by these diagnostics.
 - Prior claims that simple startup race was falsified by C06-038 are **RETRACTED/CORRECTED**.

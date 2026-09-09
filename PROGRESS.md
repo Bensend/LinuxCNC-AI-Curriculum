@@ -4,6 +4,12 @@ Status values: `PLANNED`, `RESEARCH`, `SOURCE`, `EXPERIMENT`, `EXAM`, `CORRECTIO
 
 Repository artifacts, not chat history, are authoritative.
 
+## Current session marker
+
+- Session start (UTC): `2026-09-09T11:39:19Z`
+- Session end: OPEN
+- Active work: D01 pinned-source update-order trace and runtime experiment freeze.
+
 ## Current critical-path state
 
 All modules through **T05** and **C01–C09** are **GRADUATED at 1000 level**.

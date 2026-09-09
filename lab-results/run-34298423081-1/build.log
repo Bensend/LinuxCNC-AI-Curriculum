@@ -1,0 +1,1399 @@
+Reading 0/189 dependency files
+Done reading dependencies
+Reading 0/147 realtime dependency files
+Done reading realtime dependencies
+make: Entering directory '/home/runner/work/_temp/linuxcnc-c06-030/src'
+Creating mesa_uart.mak
+Creating mesa_7i65.mak
+Creating serport.mak
+Creating xyzbca_trsrn.mak
+Creating xyzacb_trsrn.mak
+Creating xyzab_tdr_kins.mak
+Creating xor2.mak
+Creating xhc_hb04_util.mak
+Creating wcomp.mak
+Creating userkins.mak
+Creating updown.mak
+Creating tristate_float.mak
+Creating tristate_bit.mak
+Creating tp.mak
+Creating ton.mak
+Creating toggle2nist.mak
+Creating toggle.mak
+Creating tof.mak
+Creating timedelta.mak
+Creating timedelay.mak
+Creating time.mak
+Creating threadtest.mak
+Creating thcud.mak
+Creating thc.mak
+Creating sum2.mak
+Creating steptest.mak
+Creating spindle_monitor.mak
+Creating spindle.mak
+Creating sphereprobe.mak
+Creating simple_tp.mak
+Creating sim_spindle.mak
+Creating sim_parport.mak
+Creating sim_matrix_kb.mak
+Creating sim_home_switch.mak
+Creating sim_axis_hardware.mak
+Creating select8.mak
+Creating scaled_s32_sums.mak
+Creating scale.mak
+Creating sample_hold.mak
+Creating safety_latch.mak
+Creating reset.mak
+Creating raster.mak
+Creating radiobutton.mak
+Creating pushmsg.mak
+Creating plasmac.mak
+Creating output_buffer.mak
+Creating orient.mak
+Creating or2.mak
+Creating oneshot.mak
+Creating ohmic.mak
+Creating offset.mak
+Creating not.mak
+Creating near.mak
+Creating mux8.mak
+Creating mux4.mak
+Creating mux2.mak
+Creating mux16.mak
+Creating multiswitch.mak
+Creating multiclick.mak
+Creating mult2.mak
+Creating moveoff.mak
+Creating momentary2nist.mak
+Creating minmax.mak
+Creating millturn.mak
+Creating message.mak
+Creating mesa_pktgyro_test.mak
+Creating max31855.mak
+Creating matrixkins.mak
+Creating match8.mak
+Creating maj3.mak
+Creating lut5.mak
+Creating lowpass.mak
+Creating logic.mak
+Creating lincurve.mak
+Creating limit_axis.mak
+Creating limit3.mak
+Creating limit2.mak
+Creating limit1.mak
+Creating led_dim.mak
+Creating latencybinstream.mak
+Creating latencybins.mak
+Creating laserpower.mak
+Creating knob2float.mak
+Creating joyhandle.mak
+Creating joint_axis_mapper.mak
+Creating invert.mak
+Creating integ.mak
+Creating ilowpass.mak
+Creating hypot.mak
+Creating histobinstream.mak
+Creating homecomp.mak
+Creating histobins.mak
+Creating gray2bin.mak
+Creating gearchange.mak
+Creating gantry.mak
+Creating flipflop.mak
+Creating filter_kalman.mak
+Creating feedcomp.mak
+Creating estop_latch.mak
+Creating eoffset_per_angle.mak
+Creating edge.mak
+Creating div2.mak
+Creating differential.mak
+Creating demux.mak
+Creating deadzone.mak
+Creating ddt.mak
+Creating dbounce.mak
+Creating corexy_by_hal.mak
+converting conv for conv_u64_u32.comp
+converting conv for conv_u64_s64.comp
+converting conv for conv_u64_s32.comp
+converting conv for conv_u64_float.comp
+converting conv for conv_u64_bit.comp
+converting conv for conv_u32_u64.comp
+converting conv for conv_u32_s64.comp
+converting conv for conv_u32_s32.comp
+converting conv for conv_u32_float.comp
+converting conv for conv_u32_bit.comp
+converting conv for conv_s64_u64.comp
+converting conv for conv_s64_s32.comp
+converting conv for conv_s64_u32.comp
+converting conv for conv_s64_float.comp
+converting conv for conv_s64_bit.comp
+converting conv for conv_s32_u64.comp
+converting conv for conv_s32_u32.comp
+converting conv for conv_s32_s64.comp
+converting conv for conv_s32_float.comp
+converting conv for conv_s32_bit.comp
+converting conv for conv_float_u64.comp
+converting conv for conv_float_u32.comp
+converting conv for conv_float_s64.comp
+converting conv for conv_float_s32.comp
+converting conv for conv_bit_u64.comp
+converting conv for conv_bit_u32.comp
+converting conv for conv_bit_s64.comp
+converting conv for conv_bit_s32.comp
+converting conv for conv_bit_float.comp
+Creating comp.mak
+Creating clarkeinv.mak
+Creating clarke3.mak
+Creating clarke2.mak
+Creating charge_pump.mak
+Creating carousel.mak
+Creating blend.mak
+Creating bldc.mak
+Creating bitwise.mak
+Creating bitslice.mak
+Creating bitmerge.mak
+Creating biquad.mak
+Creating bin2gray.mak
+Creating axistest.mak
+Creating anglejog.mak
+Creating and2.mak
+Creating abs_s64.mak
+Creating abs_s32.mak
+Creating abs.mak
+Creating conv_u64_u32.mak
+Creating conv_u64_s64.mak
+Creating conv_u64_s32.mak
+Creating conv_u64_float.mak
+Creating conv_u64_bit.mak
+Creating conv_u32_u64.mak
+Creating conv_u32_s64.mak
+Creating conv_u32_s32.mak
+Creating conv_u32_float.mak
+Creating conv_u32_bit.mak
+Creating conv_s64_u64.mak
+Creating conv_s64_u32.mak
+Creating conv_s64_s32.mak
+Creating conv_s64_float.mak
+Creating conv_s64_bit.mak
+Creating conv_s32_u64.mak
+Creating conv_s32_u32.mak
+Creating conv_s32_s64.mak
+Creating conv_s32_float.mak
+Creating conv_s32_bit.mak
+Creating conv_float_u64.mak
+Creating conv_float_u32.mak
+Creating conv_float_s64.mak
+Creating conv_float_s32.mak
+Creating conv_bit_u32.mak
+Creating conv_bit_u64.mak
+Creating conv_bit_s64.mak
+Creating conv_bit_s32.mak
+Creating conv_bit_float.mak
+Reading 0/189 dependency files
+Done reading dependencies
+Reading 0/303 realtime dependency files
+Done reading realtime dependencies
+Exporting hal.h
+Exporting hostmot2-serial.h
+Exporting linuxcnc.h
+Exporting kinematics.h
+Exporting inifile.hh
+Exporting emcmotcfg.h
+Exporting inifile.h
+Exporting emcpos.h
+Exporting motion_types.h
+Exporting emcpose.h
+Exporting posemath.h
+Exporting posemath.hh
+Exporting posemath_types.h
+Exporting rtapi.h
+Exporting rtapi_app.h
+Exporting rtapi_atomic.h
+Exporting rtapi_bitops.h
+Exporting rtapi_bool.h
+Exporting rtapi_byteorder.h
+Exporting rtapi_ctype.h
+Exporting rtapi_device.h
+Exporting rtapi_errno.h
+Exporting rtapi_firmware.h
+Exporting rtapi_gfp.h
+Exporting rtapi_io.h
+Exporting rtapi_limits.h
+Exporting rtapi_list.h
+Exporting rtapi_math.h
+Exporting rtapi_math_i386.h
+Exporting rtapi_math64.h
+Exporting rtapi_mutex.h
+Exporting rtapi_parport.h
+Exporting rtapi_pci.h
+Exporting rtapi_slab.h
+Exporting rtapi_stdint.h
+Exporting rtapi_string.h
+Exporting rtapi_vsnprintf.h
+Copying test input hal/components/lincurve.comp
+sed hal/drivers/mesa_uart.comp -e "1 s/mesa_uart/mesa_uart_test/" > ../tests/halcompile/serial-out-of-tree/mesa_uart_test.comp
+Copying test input hal/components/logic.comp
+Copying test input hal/components/bitslice.comp
+sed ../tests/halcompile/userspace/rand.comp -e "1 s/rand/rand_test/" > ../tests/halcompile/userspace/rand_test.comp
+cp ../scripts/rtapi.conf ../tests/uspace/spawnv-root/rtapi.conf
+Compiling libposemath/_posemath.c
+Compiling libposemath/posemath.cc
+Compiling libposemath/gomath.c
+Compiling libposemath/emcpose.c
+Compiling libnml/rcs/rcs_print.cc
+Compiling libnml/rcs/rcs_exit.cc
+Compiling libnml/os_intf/_sem.c
+Compiling libnml/os_intf/_shm.c
+Compiling libnml/os_intf/_timer.c
+Compiling libnml/os_intf/sem.cc
+Compiling libnml/os_intf/shm.cc
+Compiling libnml/os_intf/timer.cc
+Compiling libnml/buffer/locmem.cc
+Compiling libnml/buffer/memsem.cc
+Compiling libnml/buffer/phantom.cc
+Compiling libnml/buffer/physmem.cc
+Compiling libnml/buffer/recvn.c
+Compiling libnml/buffer/sendn.c
+Compiling libnml/buffer/shmem.cc
+Compiling libnml/buffer/tcpmem.cc
+Compiling libnml/cms/cms.cc
+Compiling libnml/cms/cms_aup.cc
+Compiling libnml/cms/cms_cfg.cc
+Compiling libnml/cms/cms_in.cc
+Compiling libnml/cms/cms_dup.cc
+Compiling libnml/cms/cms_pm.cc
+Compiling libnml/cms/cms_srv.cc
+Compiling libnml/cms/cms_up.cc
+Compiling libnml/cms/cms_xup.cc
+Compiling libnml/cms/cmsdiag.cc
+Compiling libnml/cms/tcp_opts.cc
+Compiling libnml/cms/tcp_srv.cc
+Compiling libnml/nml/cmd_msg.cc
+Compiling libnml/nml/nml_oi.cc
+Compiling libnml/nml/nml_srv.cc
+Compiling libnml/nml/nml.cc
+Compiling libnml/nml/nmldiag.cc
+Compiling libnml/nml/nmlmsg.cc
+Compiling libnml/nml/stat_msg.cc
+Compiling libnml/linklist/linklist.cc
+Compiling rtapi/uspace_rtapi_main.cc
+Compiling rtapi/uspace_rtapi_app.cc
+Compiling rtapi/uspace_rtapi_parport.cc
+Compiling rtapi/uspace_rtapi_string.c
+Compiling rtapi/rtapi_pci.cc
+Compiling rtapi/uspace_posix.cc
+Compiling hal/components/streamer_usr.c
+Compiling hal/hal_lib.c
+Compiling hal/hal_lib_query.c
+Compiling hal/hal_lib_extra.c
+Compiling rtapi/uspace_ulapi.c
+Compiling hal/components/sampler_usr.c
+Compiling hal/components/panelui.c
+Compiling hal/user_comps/mb2hal/mb2hal.c
+Compiling hal/user_comps/mb2hal/mb2hal_init.c
+Compiling hal/user_comps/mb2hal/mb2hal_modbus.c
+Compiling hal/user_comps/mb2hal/mb2hal_hal.c
+Compiling emc/ini/inifile.cc
+Compiling hal/user_comps/gs2_vfd.c
+Compiling hal/user_comps/hy_gt_vfd.c
+Compiling hal/user_comps/svd-ps_vfd.c
+Compiling hal/user_comps/shuttle.c
+Compiling hal/user_comps/xhc-hb04.cc
+Compiling hal/user_comps/sendkeys.c
+Compiling hal/user_comps/vfs11_vfd/vfs11_vfd.c
+Compiling hal/utils/halcmd.c
+Compiling hal/utils/halcmd_commands.cc
+Compiling hal/utils/halcmd_main.c
+Compiling hal/setps_util.c
+Compiling hal/utils/halcmd_completion.c
+Compiling hal/utils/halrmt.cc
+Syntax checking python script elbpcom
+Copying python script elbpcom
+Syntax checking python script modcompile
+Copying python script modcompile
+Copying Modbus template mesa_modbus.c.tmpl
+Syntax checking python script mesambccc
+Copying python script mesambccc
+Compiling hal/user_comps/vfdb_vfd/vfdb_vfd.c
+Compiling hal/user_comps/huanyang-vfd/hy_vfd.c
+Compiling hal/user_comps/huanyang-vfd/hy_comm.c
+Compiling hal/user_comps/xhc-whb04b-6/hal.cc
+Compiling hal/user_comps/xhc-whb04b-6/usb.cc
+Compiling hal/user_comps/xhc-whb04b-6/pendant-types.cc
+Compiling hal/user_comps/xhc-whb04b-6/pendant.cc
+Compiling hal/user_comps/xhc-whb04b-6/xhc-whb04b6.cc
+Compiling hal/user_comps/xhc-whb04b-6/main.cc
+Compiling emc/usr_intf/emcrsh.cc
+Compiling emc/usr_intf/mapini.cc
+Compiling emc/usr_intf/shcom.cc
+Compiling emc/nml_intf/emcglb.c
+Compiling emc/nml_intf/modal_state.cc
+Compiling emc/nml_intf/emc.cc
+Compiling emc/nml_intf/emcargs.cc
+Compiling emc/nml_intf/emcops.cc
+Compiling emc/nml_intf/canon_position.cc
+Compiling emc/ini/iniaxis.cc
+Compiling emc/ini/inijoint.cc
+Compiling emc/ini/inispindle.cc
+Compiling emc/ini/initraj.cc
+Compiling emc/ini/inihal.cc
+Compiling emc/nml_intf/interpl.cc
+Compiling emc/usr_intf/schedrmt.cc
+Compiling emc/usr_intf/emcsched.cc
+Compiling emc/usr_intf/emclcd.cc
+Compiling emc/usr_intf/sockets.c
+Compiling emc/usr_intf/halui.cc
+Compiling emc/tooldata/tooldata_mmap.cc
+Compiling emc/tooldata/tooldata_common.cc
+Compiling emc/tooldata/tooldata_db.cc
+Compiling emc/task/emcsvr.cc
+Compiling emc/motion/emcmotglb.c
+Compiling emc/task/emctask.cc
+Compiling emc/task/emccanon.cc
+Compiling emc/task/emctaskmain.cc
+Compiling emc/motion/usrmotintf.cc
+Compiling emc/motion/emcmotutil.c
+Compiling emc/task/taskintf.cc
+Compiling emc/motion/dbuf.c
+Compiling emc/motion/stashf.c
+Compiling emc/task/taskclass.cc
+Compiling emc/task/backtrace.cc
+Compiling emc/rs274ngc/interp_arc.cc
+Compiling emc/rs274ngc/interp_array.cc
+Compiling emc/rs274ngc/interp_base.cc
+Compiling emc/rs274ngc/interp_check.cc
+Compiling emc/rs274ngc/interp_convert.cc
+Compiling emc/rs274ngc/interp_queue.cc
+Compiling emc/rs274ngc/interp_cycles.cc
+Compiling emc/rs274ngc/interp_execute.cc
+Compiling emc/rs274ngc/interp_find.cc
+Compiling emc/rs274ngc/interp_internal.cc
+Compiling emc/rs274ngc/interp_inverse.cc
+Compiling emc/rs274ngc/interp_read.cc
+Compiling emc/rs274ngc/interp_write.cc
+Compiling emc/rs274ngc/interp_o_word.cc
+Compiling emc/rs274ngc/interp_g7x.cc
+Compiling emc/rs274ngc/nurbs_additional_functions.cc
+Compiling emc/rs274ngc/interp_namedparams.cc
+Compiling emc/rs274ngc/interp_python.cc
+Compiling emc/rs274ngc/interp_remap.cc
+Compiling emc/rs274ngc/interp_setup.cc
+Compiling emc/rs274ngc/canonmodule.cc
+Compiling emc/rs274ngc/pyparamclass.cc
+Compiling emc/rs274ngc/pyemctypes.cc
+Compiling emc/rs274ngc/pyinterp1.cc
+Compiling emc/rs274ngc/pyblock.cc
+Compiling emc/rs274ngc/pyarrays.cc
+Compiling emc/rs274ngc/interpmodule.cc
+Compiling emc/rs274ngc/rs274ngc_pre.cc
+Compiling emc/rs274ngc/interp_inspection.cc
+Compiling emc/pythonplugin/python_plugin.cc
+Compiling emc/kinematics/ugenserkins.c
+Compiling emc/kinematics/genserfuncs.c
+Compiling emc/canterp/canterp.cc
+Compiling emc/ini/inivalue.cc
+Copy inivar
+Compiling emc/sai/saicanon.cc
+Compiling emc/sai/driver.cc
+Compiling emc/sai/dummyemcstat.cc
+Compiling emc/motion-logger/motion-logger.c
+Compiling emc/motion/axis.c
+Compiling emc/motion/simple_tp.c
+Compiling emc/tp/sp_scurve.c
+Compiling emc/tp/ruckig_wrapper.c
+Compiling emc/tp/cruckig/block.c
+Compiling emc/tp/cruckig/brake.c
+Compiling emc/tp/cruckig/calculator.c
+Compiling emc/tp/cruckig/cruckig.c
+Compiling emc/tp/cruckig/input_parameter.c
+Compiling emc/tp/cruckig/output_parameter.c
+Compiling emc/tp/cruckig/profile.c
+Compiling emc/tp/cruckig/roots.c
+Compiling emc/tp/cruckig/trajectory.c
+Compiling emc/tp/cruckig/position_first_step1.c
+Compiling emc/tp/cruckig/position_first_step2.c
+Compiling emc/tp/cruckig/position_second_step1.c
+Compiling emc/tp/cruckig/position_second_step2.c
+Compiling emc/tp/cruckig/position_third_step1.c
+Compiling emc/tp/cruckig/position_third_step2.c
+Compiling emc/tp/cruckig/velocity_second_step1.c
+Compiling emc/tp/cruckig/velocity_second_step2.c
+Compiling emc/tp/cruckig/velocity_third_step1.c
+Compiling emc/tp/cruckig/velocity_third_step2.c
+Compiling module_helper/module_helper.c
+Compiling localized message catalog ../share/locale/ar/LC_MESSAGES/linuxcnc.mo
+Compiling localized message catalog ../share/locale/bg/LC_MESSAGES/linuxcnc.mo
+Compiling localized message catalog ../share/locale/cs/LC_MESSAGES/linuxcnc.mo
+Compiling localized message catalog ../share/locale/da/LC_MESSAGES/linuxcnc.mo
+Compiling localized message catalog ../share/locale/de/LC_MESSAGES/linuxcnc.mo
+Compiling localized message catalog ../share/locale/es/LC_MESSAGES/linuxcnc.mo
+Compiling localized message catalog ../share/locale/fi/LC_MESSAGES/linuxcnc.mo
+Compiling localized message catalog ../share/locale/fr/LC_MESSAGES/linuxcnc.mo
+Compiling localized message catalog ../share/locale/hu/LC_MESSAGES/linuxcnc.mo
+Compiling localized message catalog ../share/locale/it/LC_MESSAGES/linuxcnc.mo
+Compiling localized message catalog ../share/locale/ja/LC_MESSAGES/linuxcnc.mo
+Compiling localized message catalog ../share/locale/ka/LC_MESSAGES/linuxcnc.mo
+Compiling localized message catalog ../share/locale/nb/LC_MESSAGES/linuxcnc.mo
+Compiling localized message catalog ../share/locale/pl/LC_MESSAGES/linuxcnc.mo
+Compiling localized message catalog ../share/locale/pt_BR/LC_MESSAGES/linuxcnc.mo
+Compiling localized message catalog ../share/locale/ro/LC_MESSAGES/linuxcnc.mo
+Compiling localized message catalog ../share/locale/ru/LC_MESSAGES/linuxcnc.mo
+Compiling localized message catalog ../share/locale/sk/LC_MESSAGES/linuxcnc.mo
+Compiling localized message catalog ../share/locale/sr/LC_MESSAGES/linuxcnc.mo
+Compiling localized message catalog ../share/locale/sv/LC_MESSAGES/linuxcnc.mo
+Compiling localized message catalog ../share/locale/tr/LC_MESSAGES/linuxcnc.mo
+Compiling localized message catalog ../share/locale/uk/LC_MESSAGES/linuxcnc.mo
+Compiling localized message catalog ../share/locale/vi/LC_MESSAGES/linuxcnc.mo
+Compiling localized message catalog ../share/locale/zh_CN/LC_MESSAGES/linuxcnc.mo
+Compiling localized message catalog ../share/locale/zh_HK/LC_MESSAGES/linuxcnc.mo
+Compiling localized message catalog ../share/locale/zh_TW/LC_MESSAGES/linuxcnc.mo
+Compiling localized gmoccapy message catalog ../share/locale/ar/LC_MESSAGES/gmoccapy.mo
+Compiling localized gmoccapy message catalog ../share/locale/bg/LC_MESSAGES/gmoccapy.mo
+Compiling localized gmoccapy message catalog ../share/locale/cs/LC_MESSAGES/gmoccapy.mo
+Compiling localized gmoccapy message catalog ../share/locale/da/LC_MESSAGES/gmoccapy.mo
+Compiling localized gmoccapy message catalog ../share/locale/de/LC_MESSAGES/gmoccapy.mo
+Compiling localized gmoccapy message catalog ../share/locale/es/LC_MESSAGES/gmoccapy.mo
+Compiling localized gmoccapy message catalog ../share/locale/fi/LC_MESSAGES/gmoccapy.mo
+Compiling localized gmoccapy message catalog ../share/locale/fr/LC_MESSAGES/gmoccapy.mo
+Compiling localized gmoccapy message catalog ../share/locale/hu/LC_MESSAGES/gmoccapy.mo
+Compiling localized gmoccapy message catalog ../share/locale/it/LC_MESSAGES/gmoccapy.mo
+Compiling localized gmoccapy message catalog ../share/locale/ja/LC_MESSAGES/gmoccapy.mo
+Compiling localized gmoccapy message catalog ../share/locale/ka/LC_MESSAGES/gmoccapy.mo
+Compiling localized gmoccapy message catalog ../share/locale/nb/LC_MESSAGES/gmoccapy.mo
+Compiling localized gmoccapy message catalog ../share/locale/pl/LC_MESSAGES/gmoccapy.mo
+Compiling localized gmoccapy message catalog ../share/locale/pt_BR/LC_MESSAGES/gmoccapy.mo
+Compiling localized gmoccapy message catalog ../share/locale/ro/LC_MESSAGES/gmoccapy.mo
+Compiling localized gmoccapy message catalog ../share/locale/ru/LC_MESSAGES/gmoccapy.mo
+Compiling localized gmoccapy message catalog ../share/locale/sk/LC_MESSAGES/gmoccapy.mo
+Compiling localized gmoccapy message catalog ../share/locale/sr/LC_MESSAGES/gmoccapy.mo
+Compiling localized gmoccapy message catalog ../share/locale/sv/LC_MESSAGES/gmoccapy.mo
+Compiling localized gmoccapy message catalog ../share/locale/tr/LC_MESSAGES/gmoccapy.mo
+Compiling localized gmoccapy message catalog ../share/locale/uk/LC_MESSAGES/gmoccapy.mo
+Compiling localized gmoccapy message catalog ../share/locale/vi/LC_MESSAGES/gmoccapy.mo
+Compiling localized gmoccapy message catalog ../share/locale/zh_CN/LC_MESSAGES/gmoccapy.mo
+Compiling localized gmoccapy message catalog ../share/locale/zh_HK/LC_MESSAGES/gmoccapy.mo
+Compiling localized gmoccapy message catalog ../share/locale/zh_TW/LC_MESSAGES/gmoccapy.mo
+Compiling localized message catalog objects/ar.msg
+Compiling localized message catalog objects/bg.msg
+Compiling localized message catalog objects/cs.msg
+Compiling localized message catalog objects/da.msg
+Compiling localized message catalog objects/de.msg
+Compiling localized message catalog objects/es.msg
+Compiling localized message catalog objects/fi.msg
+Compiling localized message catalog objects/fr.msg
+Compiling localized message catalog objects/hu.msg
+Compiling localized message catalog objects/it.msg
+Compiling localized message catalog objects/ja.msg
+Compiling localized message catalog objects/ka.msg
+Compiling localized message catalog objects/nb.msg
+Compiling localized message catalog objects/pl.msg
+Compiling localized message catalog objects/pt_BR.msg
+Compiling localized message catalog objects/ro.msg
+Compiling localized message catalog objects/ru.msg
+Compiling localized message catalog objects/sk.msg
+Compiling localized message catalog objects/sr.msg
+Compiling localized message catalog objects/sv.msg
+Compiling localized message catalog objects/tr.msg
+Compiling localized message catalog objects/uk.msg
+Compiling localized message catalog objects/vi.msg
+Compiling localized message catalog objects/zh_CN.msg
+Compiling localized message catalog objects/zh_HK.msg
+Compiling localized message catalog objects/zh_TW.msg
+Syntax checking python script hal_input
+Syntax checking python script scorbot-er-3
+Syntax checking python script mitsub_vfd
+Syntax checking python script pmx485
+Copying python script hal_input
+Copying python script scorbot-er-3
+Syntax checking python script sim-torch
+Copying python script mitsub_vfd
+Syntax checking python script z_level_compensation
+Copying python script pmx485
+Syntax checking python script mqtt-publisher
+Syntax checking python script hal_bridge
+Copying python script sim-torch
+Copying python script z_level_compensation
+Syntax checking python script mtconnect-agent
+Copying python script mqtt-publisher
+Syntax checking python script pumagui
+Copying python script hal_bridge
+Syntax checking python script puma560gui
+Syntax checking python script lineardelta
+Copying python script mtconnect-agent
+Copying python script pumagui
+Syntax checking python script scaragui
+Copying python script puma560gui
+Syntax checking python script hexagui
+Copying python script lineardelta
+Syntax checking python script 5axisgui
+Syntax checking python script max5gui
+Copying python script scaragui
+Copying python script hexagui
+Syntax checking python script maho600gui
+Copying python script 5axisgui
+Syntax checking python script hbmgui
+Copying python script max5gui
+Syntax checking python script rotarydelta
+Syntax checking python script melfagui
+Copying python script maho600gui
+Syntax checking python script millturngui
+Copying python script hbmgui
+Copying python script rotarydelta
+Copying python script melfagui
+Syntax checking python script xyzac-trt-gui
+Syntax checking python script xyzbc-trt-gui
+Syntax checking python script xyzab-tdr-gui
+Copying python script millturngui
+Copying python script xyzac-trt-gui
+Copying python script xyzbc-trt-gui
+Compiling hal/halmodule.cc
+Compiling hal/halquery.cc
+Compiling emc/usr_intf/axis/extensions/emcmodule.cc
+Copying python script xyzab-tdr-gui
+Syntax checking python script linuxcnctop
+Copying python script linuxcnctop
+Syntax checking python script mdi
+Copying python script mdi
+Syntax checking python script lintini
+Copying python script lintini
+Syntax checking python script debuglevel
+Copying python script debuglevel
+Syntax checking python script tracking-test
+Copying python script tracking-test
+Compiling emc/kinematics/lineardeltakins.cc
+Compiling emc/kinematics/rotarydeltakins.cc
+Syntax checking python script update_ini
+Copying python script update_ini
+Syntax checking python script linuxcnc_check_ini
+Copying python script linuxcnc_check_ini
+Compiling emc/rs274ngc/gcodemodule.cc
+Compiling realtime hal/components/boss_plc.c
+Compiling realtime hal/components/debounce.c
+Compiling realtime hal/components/demux_generic.c
+Compiling realtime hal/components/encoder.c
+Compiling realtime hal/components/enum.c
+Compiling realtime hal/components/counter.c
+Compiling realtime hal/components/encoder_ratio.c
+Compiling realtime hal/components/stepgen.c
+Compiling realtime hal/components/lcd.c
+Compiling realtime hal/components/matrix_kb.c
+Compiling realtime hal/components/mux_generic.c
+Compiling realtime hal/components/pwmgen.c
+Compiling realtime hal/components/siggen.c
+Compiling realtime hal/components/pid.c
+Compiling realtime hal/components/threads.c
+Compiling realtime hal/components/supply.c
+Compiling realtime hal/components/sim_encoder.c
+Compiling realtime hal/components/weighted_sum.c
+Compiling realtime hal/components/watchdog.c
+Compiling realtime hal/components/modmath.c
+Compiling realtime hal/components/streamer.c
+Compiling realtime hal/components/sampler.c
+Compiling realtime hal/drivers/hal_parport.c
+Compiling realtime hal/drivers/hal_speaker.c
+Compiling realtime hal/drivers/hal_gm.c
+Compiling realtime hal/drivers/hal_ppmc.c
+Compiling realtime hal/drivers/hal_bb_gpio.c
+Compiling realtime hal/drivers/hal_pi_gpio.c
+Compiling realtime hal/drivers/cpuinfo.c
+Compiling realtime hal/drivers/hal_gpio.c
+Compiling realtime hal/drivers/mesa-hostmot2/hostmot2.c
+Compiling realtime hal/drivers/mesa-hostmot2/abs_encoder.c
+Compiling realtime hal/drivers/mesa-hostmot2/bitfile.c
+Compiling realtime hal/drivers/mesa-hostmot2/bspi.c
+Compiling realtime hal/drivers/mesa-hostmot2/dpll.c
+Compiling realtime hal/drivers/mesa-hostmot2/encoder.c
+Compiling realtime hal/drivers/mesa-hostmot2/inm.c
+Compiling realtime hal/drivers/mesa-hostmot2/inmux.c
+Compiling realtime hal/drivers/mesa-hostmot2/ioport.c
+Compiling realtime hal/drivers/mesa-hostmot2/led.c
+Compiling realtime hal/drivers/mesa-hostmot2/pins.c
+Compiling realtime hal/drivers/mesa-hostmot2/pktuart.c
+Compiling realtime hal/drivers/mesa-hostmot2/pwmgen.c
+Compiling realtime hal/drivers/mesa-hostmot2/oneshot.c
+Compiling realtime hal/drivers/mesa-hostmot2/periodm.c
+Compiling realtime hal/drivers/mesa-hostmot2/raw.c
+Compiling realtime hal/drivers/mesa-hostmot2/rcpwmgen.c
+Compiling realtime hal/drivers/mesa-hostmot2/resolver.c
+Compiling realtime hal/drivers/mesa-hostmot2/sserial.c
+Compiling realtime hal/drivers/mesa-hostmot2/ssr.c
+Compiling realtime hal/drivers/mesa-hostmot2/outm.c
+Compiling realtime hal/drivers/mesa-hostmot2/stepgen.c
+Compiling realtime hal/drivers/mesa-hostmot2/tp_pwmgen.c
+Compiling realtime hal/drivers/mesa-hostmot2/tram.c
+Compiling realtime hal/drivers/mesa-hostmot2/uart.c
+Compiling realtime hal/drivers/mesa-hostmot2/watchdog.c
+Compiling realtime hal/drivers/mesa-hostmot2/xy2mod.c
+Compiling realtime hal/drivers/mesa-hostmot2/hm2_test.c
+Compiling realtime hal/drivers/mesa-hostmot2/hm2_pci.c
+hal/drivers/mesa-hostmot2/hm2_test.c:58:1: warning: ‘hal_u32_t’ is deprecated: Use getter/setter API [-Wdeprecated-declarations]
+   58 | static hal_u32_t *c06_fail_reads_remaining;
+      | ^~~~~~
+hal/drivers/mesa-hostmot2/hm2_test.c:59:1: warning: ‘hal_bit_t’ is deprecated: Use getter/setter API [-Wdeprecated-declarations]
+   59 | static hal_bit_t *c06_watchdog_status_command;
+      | ^~~~~~
+hal/drivers/mesa-hostmot2/hm2_test.c:60:1: warning: ‘hal_u32_t’ is deprecated: Use getter/setter API [-Wdeprecated-declarations]
+   60 | static hal_u32_t *c06_read_success_count;
+      | ^~~~~~
+hal/drivers/mesa-hostmot2/hm2_test.c:61:1: warning: ‘hal_u32_t’ is deprecated: Use getter/setter API [-Wdeprecated-declarations]
+   61 | static hal_u32_t *c06_read_fail_count;
+      | ^~~~~~
+hal/drivers/mesa-hostmot2/hm2_test.c:62:1: warning: ‘hal_u32_t’ is deprecated: Use getter/setter API [-Wdeprecated-declarations]
+   62 | static hal_u32_t *c06_write_success_count;
+      | ^~~~~~
+hal/drivers/mesa-hostmot2/hm2_test.c:63:1: warning: ‘hal_u32_t’ is deprecated: Use getter/setter API [-Wdeprecated-declarations]
+   63 | static hal_u32_t *c06_consecutive_failures;
+      | ^~~~~~
+hal/drivers/mesa-hostmot2/hm2_test.c:64:1: warning: ‘hal_bit_t’ is deprecated: Use getter/setter API [-Wdeprecated-declarations]
+   64 | static hal_bit_t *c06_io_error_mirror;
+      | ^~~~~~
+hal/drivers/mesa-hostmot2/hm2_test.c:65:1: warning: ‘hal_bit_t’ is deprecated: Use getter/setter API [-Wdeprecated-declarations]
+   65 | static hal_bit_t *c06_watchdog_status_mirror;
+      | ^~~~~~
+hal/drivers/mesa-hostmot2/hm2_test.c: In function ‘hm2_test_read’:
+hal/drivers/mesa-hostmot2/hm2_test.c:99:35: warning: assignment to ‘hal_bool_t’ {aka ‘struct __hal_stype_bool_t *’} from ‘int’ makes pointer from integer without a cast [-Wint-conversion]
+   99 |                 *(this->io_error) = 1;
+      |                                   ^
+hal/drivers/mesa-hostmot2/hm2_test.c: In function ‘rtapi_app_main’:
+hal/drivers/mesa-hostmot2/hm2_test.c:676:9: warning: ‘hal_pin_u32_newf’ is deprecated: Use hal_pin_new_ui32() [-Wdeprecated-declarations]
+  676 |         r = hal_pin_u32_newf(HAL_IO, &c06_fail_reads_remaining, comp_id, "hm2_test.0.c06.fail-reads-remaining");
+      |         ^
+In file included from hal/drivers/mesa-hostmot2/hm2_test.c:33:
+/home/runner/work/_temp/linuxcnc-c06-030/src/../include/hal.h:696:12: note: declared here
+  696 | extern int hal_pin_u32_newf(hal_pin_dir_t dir,
+      |            ^~~~~~~~~~~~~~~~
+hal/drivers/mesa-hostmot2/hm2_test.c:678:9: warning: ‘hal_pin_bit_newf’ is deprecated: Use hal_pin_new_bool() [-Wdeprecated-declarations]
+  678 |         r = hal_pin_bit_newf(HAL_IN, &c06_watchdog_status_command, comp_id, "hm2_test.0.c06.watchdog-status-command");
+      |         ^
+/home/runner/work/_temp/linuxcnc-c06-030/src/../include/hal.h:690:12: note: declared here
+  690 | extern int hal_pin_bit_newf(hal_pin_dir_t dir,
+      |            ^~~~~~~~~~~~~~~~
+hal/drivers/mesa-hostmot2/hm2_test.c:680:9: warning: ‘hal_pin_u32_newf’ is deprecated: Use hal_pin_new_ui32() [-Wdeprecated-declarations]
+  680 |         r = hal_pin_u32_newf(HAL_OUT, &c06_read_success_count, comp_id, "hm2_test.0.c06.read-success-count");
+      |         ^
+/home/runner/work/_temp/linuxcnc-c06-030/src/../include/hal.h:696:12: note: declared here
+  696 | extern int hal_pin_u32_newf(hal_pin_dir_t dir,
+      |            ^~~~~~~~~~~~~~~~
+hal/drivers/mesa-hostmot2/hm2_test.c:682:9: warning: ‘hal_pin_u32_newf’ is deprecated: Use hal_pin_new_ui32() [-Wdeprecated-declarations]
+  682 |         r = hal_pin_u32_newf(HAL_OUT, &c06_read_fail_count, comp_id, "hm2_test.0.c06.read-fail-count");
+      |         ^
+/home/runner/work/_temp/linuxcnc-c06-030/src/../include/hal.h:696:12: note: declared here
+  696 | extern int hal_pin_u32_newf(hal_pin_dir_t dir,
+      |            ^~~~~~~~~~~~~~~~
+hal/drivers/mesa-hostmot2/hm2_test.c:684:9: warning: ‘hal_pin_u32_newf’ is deprecated: Use hal_pin_new_ui32() [-Wdeprecated-declarations]
+  684 |         r = hal_pin_u32_newf(HAL_OUT, &c06_write_success_count, comp_id, "hm2_test.0.c06.write-success-count");
+      |         ^
+/home/runner/work/_temp/linuxcnc-c06-030/src/../include/hal.h:696:12: note: declared here
+  696 | extern int hal_pin_u32_newf(hal_pin_dir_t dir,
+      |            ^~~~~~~~~~~~~~~~
+hal/drivers/mesa-hostmot2/hm2_test.c:686:9: warning: ‘hal_pin_u32_newf’ is deprecated: Use hal_pin_new_ui32() [-Wdeprecated-declarations]
+  686 |         r = hal_pin_u32_newf(HAL_OUT, &c06_consecutive_failures, comp_id, "hm2_test.0.c06.consecutive-failures");
+      |         ^
+/home/runner/work/_temp/linuxcnc-c06-030/src/../include/hal.h:696:12: note: declared here
+  696 | extern int hal_pin_u32_newf(hal_pin_dir_t dir,
+      |            ^~~~~~~~~~~~~~~~
+hal/drivers/mesa-hostmot2/hm2_test.c:688:9: warning: ‘hal_pin_bit_newf’ is deprecated: Use hal_pin_new_bool() [-Wdeprecated-declarations]
+  688 |         r = hal_pin_bit_newf(HAL_OUT, &c06_io_error_mirror, comp_id, "hm2_test.0.c06.io-error-mirror");
+      |         ^
+/home/runner/work/_temp/linuxcnc-c06-030/src/../include/hal.h:690:12: note: declared here
+  690 | extern int hal_pin_bit_newf(hal_pin_dir_t dir,
+      |            ^~~~~~~~~~~~~~~~
+hal/drivers/mesa-hostmot2/hm2_test.c:690:9: warning: ‘hal_pin_bit_newf’ is deprecated: Use hal_pin_new_bool() [-Wdeprecated-declarations]
+  690 |         r = hal_pin_bit_newf(HAL_OUT, &c06_watchdog_status_mirror, comp_id, "hm2_test.0.c06.watchdog-status-mirror");
+      |         ^
+/home/runner/work/_temp/linuxcnc-c06-030/src/../include/hal.h:690:12: note: declared here
+  690 | extern int hal_pin_bit_newf(hal_pin_dir_t dir,
+      |            ^~~~~~~~~~~~~~~~
+Compiling realtime hal/drivers/mesa-hostmot2/hm2_7i43.c
+Compiling realtime hal/drivers/mesa-hostmot2/hm2_7i90.c
+Compiling realtime hal/drivers/mesa-hostmot2/setsserial.c
+Compiling realtime hal/drivers/mesa-hostmot2/hm2_modbus.c
+Compiling realtime hal/drivers/mesa-hostmot2/hm2_eth.c
+Compiling realtime hal/drivers/mesa-hostmot2/hm2_eth_net_posix.c
+Compiling realtime hal/drivers/mesa-hostmot2/hm2_spi.c
+Compiling realtime hal/drivers/mesa-hostmot2/llio_info.c
+Compiling realtime hal/drivers/mesa-hostmot2/hm2_rpspi.c
+Compiling realtime hal/drivers/mesa-hostmot2/kmod_check.c
+Compiling realtime hal/drivers/mesa-hostmot2/hm2_spix.c
+Compiling realtime hal/drivers/mesa-hostmot2/spix_rpi5.c
+Compiling realtime hal/drivers/mesa-hostmot2/spix_rpi3.c
+Compiling realtime hal/drivers/mesa-hostmot2/spix_spidev.c
+Compiling realtime hal/classicladder/module_hal.c
+Compiling realtime hal/classicladder/arithm_eval.c
+Compiling realtime hal/classicladder/arrays.c
+Compiling realtime hal/classicladder/calc.c
+Compiling realtime hal/classicladder/calc_sequential.c
+Compiling realtime hal/classicladder/manager.c
+Compiling realtime hal/classicladder/symbols.c
+Compiling realtime hal/classicladder/vars_access.c
+Compiling realtime hal/utils/scope_rt.c
+Compiling realtime hal/hal_lib.c
+Compiling realtime emc/kinematics/trivkins.c
+Compiling realtime emc/kinematics/kins_util.c
+Compiling realtime emc/kinematics/maxkins.c
+Compiling realtime emc/kinematics/rotatekins.c
+Compiling realtime emc/kinematics/tripodkins.c
+Compiling realtime emc/kinematics/corexykins.c
+Compiling realtime emc/kinematics/lineardeltakins.c
+Compiling realtime emc/kinematics/pentakins.c
+Compiling realtime libposemath/_posemath.c
+Compiling realtime emc/kinematics/rotarydeltakins.c
+Compiling realtime emc/kinematics/rosekins.c
+Compiling realtime emc/kinematics/scorbot-kins.c
+Compiling realtime emc/kinematics/genhexkins.c
+Compiling realtime emc/kinematics/switchkins.c
+Compiling realtime emc/kinematics/userkfuncs.c
+Compiling realtime emc/kinematics/genserkins.c
+Compiling realtime emc/kinematics/genserfuncs.c
+Compiling realtime libposemath/gomath.c
+Compiling realtime emc/kinematics/xyzac-trt-kins.c
+Compiling realtime emc/kinematics/trtfuncs.c
+Compiling realtime emc/kinematics/xyzbc-trt-kins.c
+Compiling realtime emc/kinematics/scarakins.c
+Compiling realtime emc/kinematics/pumakins.c
+Compiling realtime emc/kinematics/three21kins.c
+Compiling realtime emc/kinematics/5axiskins.c
+Compiling realtime emc/kinematics/cubic.c
+Compiling realtime emc/motion/axis.c
+Compiling realtime emc/motion/motion.c
+Compiling realtime emc/motion/command.c
+Compiling realtime emc/motion/control.c
+Compiling realtime emc/motion/simple_tp.c
+Compiling realtime emc/motion/emcmotutil.c
+Compiling realtime emc/motion/stashf.c
+Compiling realtime emc/motion/dbuf.c
+Compiling realtime emc/tp/sp_scurve.c
+Compiling realtime emc/tp/ruckig_wrapper.c
+Compiling realtime emc/tp/cruckig/block.c
+Compiling realtime emc/tp/cruckig/brake.c
+Compiling realtime emc/tp/cruckig/calculator.c
+Compiling realtime emc/tp/cruckig/cruckig.c
+Compiling realtime emc/tp/cruckig/input_parameter.c
+Compiling realtime emc/tp/cruckig/output_parameter.c
+Compiling realtime emc/tp/cruckig/profile.c
+Compiling realtime emc/tp/cruckig/roots.c
+Compiling realtime emc/tp/cruckig/trajectory.c
+Compiling realtime emc/tp/cruckig/position_first_step1.c
+Compiling realtime emc/tp/cruckig/position_first_step2.c
+Compiling realtime emc/tp/cruckig/position_second_step1.c
+Compiling realtime emc/tp/cruckig/position_second_step2.c
+Compiling realtime emc/tp/cruckig/position_third_step1.c
+Compiling realtime emc/tp/cruckig/position_third_step2.c
+Compiling realtime emc/tp/cruckig/velocity_second_step1.c
+Compiling realtime emc/tp/cruckig/velocity_second_step2.c
+Compiling realtime emc/tp/cruckig/velocity_third_step1.c
+Compiling realtime emc/tp/cruckig/velocity_third_step2.c
+Compiling realtime emc/motion/homemod.c
+Compiling realtime emc/motion/homing.c
+Compiling realtime emc/tp/tpmod.c
+Compiling realtime emc/tp/tc.c
+Compiling realtime emc/tp/tcq.c
+Compiling realtime emc/tp/tp.c
+Compiling realtime emc/tp/spherical_arc.c
+Compiling realtime emc/tp/blendmath.c
+Compiling realtime libposemath/emcpose.c
+config.status: creating ../scripts/setup_designer
+config.status: creating ../lib/python/lcnc_realtime.py
+Creating shared library libposemath.so.0
+Creating shared library libnml.so.0
+Linking rtapi_app
+Linking liblinuxcnc-uspace-posix.so.0
+Creating shared library liblinuxcnchal.so.0
+Creating shared library liblinuxcncini.so.1
+Syntax checking python script halcompile
+Linking liblinuxcnc.a
+tooldata: depends: objects/emc/tooldata/tooldata_mmap.o objects/emc/tooldata/tooldata_common.o objects/emc/tooldata/tooldata_db.o
+tooldata: Linking: libtooldata.so.0
+Copying python script halcompile
+ln -sf liblinuxcncini.so.1 ../lib/liblinuxcncini.so
+Linking libpyplugin.so.0
+c++ -std=gnu++20 -g -L/home/runner/work/_temp/linuxcnc-c06-030/lib -Wl,-rpath,/home/runner/work/_temp/linuxcnc-c06-030/lib -ltirpc  -lgpiod  -Xlinker -export-dynamic -Wl,-O1 -Wl,-Bsymbolic-functions -Wl,-soname,libpyplugin.so.0 -shared -o ../lib/libpyplugin.so.0 objects/emc/pythonplugin/python_plugin.o ../lib/liblinuxcncini.so.1 -lstdc++ -lboost_python312 -L/usr/lib/x86_64-linux-gnu -lpython3.12 -ldl -lm
+Linking inivalue
+Linking motion-logger
+ln -sf libtooldata.so.0 ../lib/libtooldata.so
+Linking linuxcnc_module_helper
+gcc -Wl,-z,relro -o ../bin/linuxcnc_module_helper objects/module_helper/module_helper.o
+Linking python module lineardeltakins.so
+c++ -std=gnu++20 -L/home/runner/work/_temp/linuxcnc-c06-030/lib -Wl,-rpath,/home/runner/work/_temp/linuxcnc-c06-030/lib -ltirpc  -lgpiod  -shared -o ../lib/python/lineardeltakins.so objects/emc/kinematics/lineardeltakins.o -lboost_python312
+Linking python module rotarydeltakins.so
+c++ -std=gnu++20 -L/home/runner/work/_temp/linuxcnc-c06-030/lib -Wl,-rpath,/home/runner/work/_temp/linuxcnc-c06-030/lib -ltirpc  -lgpiod  -shared -o ../lib/python/rotarydeltakins.so objects/emc/kinematics/rotarydeltakins.o -lboost_python312
+Preprocessing abs.comp
+Preprocessing abs_s32.comp
+Preprocessing abs_s64.comp
+Preprocessing and2.comp
+Preprocessing anglejog.comp
+Preprocessing axistest.comp
+Preprocessing bin2gray.comp
+Preprocessing biquad.comp
+Preprocessing bitmerge.comp
+Preprocessing bitslice.comp
+Preprocessing bitwise.comp
+Preprocessing bldc.comp
+Preprocessing blend.comp
+Preprocessing carousel.comp
+Preprocessing charge_pump.comp
+Preprocessing clarke2.comp
+Preprocessing clarke3.comp
+Preprocessing clarkeinv.comp
+Preprocessing comp.comp
+Preprocessing conv_bit_float.comp
+Preprocessing conv_bit_s32.comp
+Preprocessing conv_bit_s64.comp
+Preprocessing conv_bit_u32.comp
+Preprocessing conv_bit_u64.comp
+Preprocessing conv_float_s32.comp
+Preprocessing conv_float_s64.comp
+Preprocessing conv_float_u32.comp
+Preprocessing conv_float_u64.comp
+Preprocessing conv_s32_bit.comp
+Preprocessing conv_s32_float.comp
+Preprocessing conv_s32_s64.comp
+Preprocessing conv_s32_u32.comp
+Preprocessing conv_s64_bit.comp
+Preprocessing conv_s32_u64.comp
+Preprocessing conv_s64_float.comp
+Preprocessing conv_s64_s32.comp
+Preprocessing conv_s64_u32.comp
+Preprocessing conv_s64_u64.comp
+Preprocessing conv_u32_bit.comp
+Preprocessing conv_u32_float.comp
+Preprocessing conv_u32_s32.comp
+Preprocessing conv_u32_s64.comp
+Preprocessing conv_u32_u64.comp
+Preprocessing conv_u64_float.comp
+Preprocessing conv_u64_bit.comp
+Preprocessing conv_u64_s32.comp
+Preprocessing conv_u64_s64.comp
+Preprocessing conv_u64_u32.comp
+Preprocessing corexy_by_hal.comp
+Preprocessing dbounce.comp
+Preprocessing ddt.comp
+Preprocessing deadzone.comp
+Preprocessing demux.comp
+Preprocessing differential.comp
+Preprocessing div2.comp
+Preprocessing edge.comp
+Preprocessing eoffset_per_angle.comp
+Preprocessing estop_latch.comp
+Preprocessing feedcomp.comp
+Preprocessing filter_kalman.comp
+Preprocessing flipflop.comp
+Preprocessing gantry.comp
+Preprocessing gearchange.comp
+Preprocessing gray2bin.comp
+Preprocessing histobins.comp
+Preprocessing histobinstream.comp
+Preprocessing homecomp.comp
+Preprocessing hypot.comp
+Preprocessing ilowpass.comp
+Preprocessing integ.comp
+Preprocessing invert.comp
+Preprocessing joint_axis_mapper.comp
+Preprocessing joyhandle.comp
+Preprocessing knob2float.comp
+Preprocessing laserpower.comp
+Preprocessing latencybins.comp
+Preprocessing latencybinstream.comp
+Preprocessing led_dim.comp
+Preprocessing limit1.comp
+Preprocessing limit2.comp
+Preprocessing limit3.comp
+Preprocessing limit_axis.comp
+Preprocessing lincurve.comp
+Preprocessing logic.comp
+Preprocessing lowpass.comp
+Preprocessing lut5.comp
+Preprocessing maj3.comp
+Preprocessing match8.comp
+Preprocessing matrixkins.comp
+Preprocessing max31855.comp
+Preprocessing mesa_pktgyro_test.comp
+Preprocessing message.comp
+Preprocessing millturn.comp
+Preprocessing minmax.comp
+Preprocessing momentary2nist.comp
+Preprocessing moveoff.comp
+Preprocessing mult2.comp
+Preprocessing multiclick.comp
+Preprocessing multiswitch.comp
+Preprocessing mux16.comp
+Preprocessing mux2.comp
+Preprocessing mux4.comp
+Preprocessing mux8.comp
+Preprocessing near.comp
+Preprocessing not.comp
+Preprocessing offset.comp
+Preprocessing ohmic.comp
+Preprocessing oneshot.comp
+Preprocessing or2.comp
+Preprocessing orient.comp
+Preprocessing output_buffer.comp
+Preprocessing plasmac.comp
+Preprocessing pushmsg.comp
+Preprocessing radiobutton.comp
+Preprocessing raster.comp
+Preprocessing reset.comp
+Preprocessing safety_latch.comp
+Preprocessing sample_hold.comp
+Preprocessing scale.comp
+Preprocessing scaled_s32_sums.comp
+Preprocessing select8.comp
+Preprocessing sim_axis_hardware.comp
+Preprocessing sim_home_switch.comp
+Preprocessing sim_matrix_kb.comp
+Preprocessing sim_parport.comp
+Preprocessing sim_spindle.comp
+Preprocessing simple_tp.comp
+Preprocessing sphereprobe.comp
+Preprocessing spindle.comp
+Preprocessing spindle_monitor.comp
+Preprocessing steptest.comp
+Preprocessing sum2.comp
+Preprocessing thc.comp
+Preprocessing thcud.comp
+Preprocessing threadtest.comp
+Preprocessing time.comp
+Preprocessing timedelay.comp
+Preprocessing timedelta.comp
+Preprocessing tof.comp
+Preprocessing toggle.comp
+Preprocessing toggle2nist.comp
+Preprocessing ton.comp
+Preprocessing tp.comp
+Preprocessing tristate_bit.comp
+Preprocessing tristate_float.comp
+Preprocessing updown.comp
+Preprocessing userkins.comp
+Preprocessing wcomp.comp
+Preprocessing xhc_hb04_util.comp
+Preprocessing xor2.comp
+Preprocessing xyzab_tdr_kins.comp
+Preprocessing xyzacb_trsrn.comp
+Preprocessing xyzbca_trsrn.comp
+Preprocessing serport.comp
+Preprocessing mesa_7i65.comp
+Preprocessing mesa_uart.comp
+Compiling realtime objects/hal/components/abs.c
+Compiling realtime objects/hal/components/abs_s32.c
+Compiling realtime objects/hal/components/abs_s64.c
+Compiling realtime objects/hal/components/and2.c
+Compiling realtime objects/hal/components/anglejog.c
+Compiling realtime objects/hal/components/axistest.c
+Compiling realtime objects/hal/components/bin2gray.c
+Compiling realtime objects/hal/components/biquad.c
+Compiling realtime objects/hal/components/bitmerge.c
+Compiling realtime objects/hal/components/bitslice.c
+Compiling realtime objects/hal/components/bitwise.c
+Compiling realtime objects/hal/components/bldc.c
+Compiling realtime objects/hal/components/blend.c
+Compiling realtime objects/hal/components/carousel.c
+Compiling realtime objects/hal/components/charge_pump.c
+Compiling realtime objects/hal/components/clarke2.c
+Compiling realtime objects/hal/components/clarke3.c
+Compiling realtime objects/hal/components/clarkeinv.c
+Compiling realtime objects/hal/components/comp.c
+Compiling realtime objects/hal/components/conv_bit_float.c
+Compiling realtime objects/hal/components/conv_bit_s32.c
+Compiling realtime objects/hal/components/conv_bit_s64.c
+Compiling realtime objects/hal/components/conv_bit_u32.c
+Compiling realtime objects/hal/components/conv_bit_u64.c
+Compiling realtime objects/hal/components/conv_float_s32.c
+Compiling realtime objects/hal/components/conv_float_s64.c
+Compiling realtime objects/hal/components/conv_float_u32.c
+Compiling realtime objects/hal/components/conv_float_u64.c
+Compiling realtime objects/hal/components/conv_s32_bit.c
+Compiling realtime objects/hal/components/conv_s32_float.c
+Compiling realtime objects/hal/components/conv_s32_s64.c
+Compiling realtime objects/hal/components/conv_s32_u32.c
+Compiling realtime objects/hal/components/conv_s32_u64.c
+Compiling realtime objects/hal/components/conv_s64_bit.c
+Compiling realtime objects/hal/components/conv_s64_float.c
+Compiling realtime objects/hal/components/conv_s64_s32.c
+Compiling realtime objects/hal/components/conv_s64_u32.c
+Compiling realtime objects/hal/components/conv_s64_u64.c
+Compiling realtime objects/hal/components/conv_u32_bit.c
+Compiling realtime objects/hal/components/conv_u32_float.c
+Compiling realtime objects/hal/components/conv_u32_s32.c
+Compiling realtime objects/hal/components/conv_u32_s64.c
+Compiling realtime objects/hal/components/conv_u32_u64.c
+Compiling realtime objects/hal/components/conv_u64_bit.c
+Compiling realtime objects/hal/components/conv_u64_float.c
+Compiling realtime objects/hal/components/conv_u64_s32.c
+Compiling realtime objects/hal/components/conv_u64_s64.c
+Compiling realtime objects/hal/components/conv_u64_u32.c
+Compiling realtime objects/hal/components/corexy_by_hal.c
+Compiling realtime objects/hal/components/dbounce.c
+Compiling realtime objects/hal/components/ddt.c
+Compiling realtime objects/hal/components/deadzone.c
+Compiling realtime objects/hal/components/demux.c
+Compiling realtime objects/hal/components/differential.c
+Compiling realtime objects/hal/components/div2.c
+Compiling realtime objects/hal/components/edge.c
+Compiling realtime objects/hal/components/eoffset_per_angle.c
+Compiling realtime objects/hal/components/estop_latch.c
+Compiling realtime objects/hal/components/feedcomp.c
+Compiling realtime objects/hal/components/filter_kalman.c
+Compiling realtime objects/hal/components/flipflop.c
+Compiling realtime objects/hal/components/gantry.c
+Compiling realtime objects/hal/components/gearchange.c
+Compiling realtime objects/hal/components/gray2bin.c
+Compiling realtime objects/hal/components/histobins.c
+Compiling realtime objects/hal/components/histobinstream.c
+Compiling realtime objects/hal/components/homecomp.c
+Compiling realtime objects/hal/components/hypot.c
+Compiling realtime objects/hal/components/ilowpass.c
+Compiling realtime objects/hal/components/integ.c
+Compiling realtime objects/hal/components/invert.c
+Compiling realtime objects/hal/components/joint_axis_mapper.c
+Compiling realtime objects/hal/components/joyhandle.c
+Compiling realtime objects/hal/components/knob2float.c
+Compiling realtime objects/hal/components/laserpower.c
+Compiling realtime objects/hal/components/latencybins.c
+Compiling realtime objects/hal/components/latencybinstream.c
+Compiling realtime objects/hal/components/led_dim.c
+Compiling realtime objects/hal/components/limit1.c
+Compiling realtime objects/hal/components/limit2.c
+Compiling realtime objects/hal/components/limit3.c
+Compiling realtime objects/hal/components/limit_axis.c
+Compiling realtime objects/hal/components/lincurve.c
+Compiling realtime objects/hal/components/logic.c
+Compiling realtime objects/hal/components/lowpass.c
+Compiling realtime objects/hal/components/lut5.c
+Compiling realtime objects/hal/components/maj3.c
+Compiling realtime objects/hal/components/match8.c
+Compiling realtime objects/hal/components/matrixkins.c
+Compiling realtime objects/hal/components/max31855.c
+Compiling realtime objects/hal/components/mesa_pktgyro_test.c
+Compiling realtime objects/hal/components/message.c
+Compiling realtime objects/hal/components/millturn.c
+Compiling realtime objects/hal/components/minmax.c
+Compiling realtime objects/hal/components/momentary2nist.c
+Compiling realtime objects/hal/components/moveoff.c
+Compiling realtime objects/hal/components/mult2.c
+Compiling realtime objects/hal/components/multiclick.c
+Compiling realtime objects/hal/components/multiswitch.c
+Compiling realtime objects/hal/components/mux16.c
+Compiling realtime objects/hal/components/mux2.c
+Compiling realtime objects/hal/components/mux4.c
+Compiling realtime objects/hal/components/mux8.c
+Compiling realtime objects/hal/components/near.c
+Compiling realtime objects/hal/components/not.c
+Compiling realtime objects/hal/components/offset.c
+Compiling realtime objects/hal/components/ohmic.c
+Compiling realtime objects/hal/components/oneshot.c
+Compiling realtime objects/hal/components/or2.c
+Compiling realtime objects/hal/components/orient.c
+Compiling realtime objects/hal/components/output_buffer.c
+Compiling realtime objects/hal/components/plasmac.c
+Compiling realtime objects/hal/components/pushmsg.c
+Compiling realtime objects/hal/components/radiobutton.c
+Compiling realtime objects/hal/components/raster.c
+Compiling realtime objects/hal/components/reset.c
+Compiling realtime objects/hal/components/safety_latch.c
+Compiling realtime objects/hal/components/sample_hold.c
+Compiling realtime objects/hal/components/scale.c
+Compiling realtime objects/hal/components/scaled_s32_sums.c
+Compiling realtime objects/hal/components/select8.c
+Compiling realtime objects/hal/components/sim_axis_hardware.c
+Compiling realtime objects/hal/components/sim_home_switch.c
+Compiling realtime objects/hal/components/sim_matrix_kb.c
+Compiling realtime objects/hal/components/sim_parport.c
+Compiling realtime objects/hal/components/sim_spindle.c
+Compiling realtime objects/hal/components/simple_tp.c
+Compiling realtime objects/hal/components/sphereprobe.c
+Compiling realtime objects/hal/components/spindle.c
+Compiling realtime objects/hal/components/spindle_monitor.c
+Compiling realtime objects/hal/components/steptest.c
+Compiling realtime objects/hal/components/sum2.c
+Compiling realtime objects/hal/components/thc.c
+Compiling realtime objects/hal/components/thcud.c
+Compiling realtime objects/hal/components/threadtest.c
+Compiling realtime objects/hal/components/time.c
+Compiling realtime objects/hal/components/timedelay.c
+Compiling realtime objects/hal/components/timedelta.c
+Compiling realtime objects/hal/components/tof.c
+Compiling realtime objects/hal/components/toggle.c
+Compiling realtime objects/hal/components/toggle2nist.c
+Compiling realtime objects/hal/components/ton.c
+Compiling realtime objects/hal/components/tp.c
+Compiling realtime objects/hal/components/tristate_bit.c
+Compiling realtime objects/hal/components/tristate_float.c
+Compiling realtime objects/hal/components/updown.c
+Compiling realtime objects/hal/components/userkins.c
+Compiling realtime objects/hal/components/wcomp.c
+Compiling realtime objects/hal/components/xhc_hb04_util.c
+Compiling realtime objects/hal/components/xor2.c
+Compiling realtime objects/hal/components/xyzab_tdr_kins.c
+Compiling realtime objects/hal/components/xyzacb_trsrn.c
+Compiling realtime objects/hal/components/xyzbca_trsrn.c
+Compiling realtime objects/hal/drivers/serport.c
+Compiling realtime objects/hal/drivers/mesa_7i65.c
+Compiling realtime objects/hal/drivers/mesa_uart.c
+Linking ../rtlib/boss_plc.so
+Linking ../rtlib/debounce.so
+Linking ../rtlib/demux_generic.so
+Linking ../rtlib/encoder.so
+Linking ../rtlib/enum.so
+Linking ../rtlib/counter.so
+Linking ../rtlib/encoder_ratio.so
+Linking ../rtlib/stepgen.so
+Linking ../rtlib/lcd.so
+Linking ../rtlib/matrix_kb.so
+Linking ../rtlib/mux_generic.so
+Linking ../rtlib/pwmgen.so
+Linking ../rtlib/siggen.so
+Linking ../rtlib/pid.so
+Linking ../rtlib/threads.so
+Linking ../rtlib/supply.so
+Linking ../rtlib/sim_encoder.so
+Linking ../rtlib/weighted_sum.so
+Linking ../rtlib/modmath.so
+Linking ../rtlib/watchdog.so
+Linking ../rtlib/streamer.so
+Linking ../rtlib/sampler.so
+Linking ../rtlib/hal_parport.so
+Linking ../rtlib/hal_speaker.so
+Linking ../rtlib/hal_gm.so
+Linking ../rtlib/hal_ppmc.so
+Linking ../rtlib/hal_bb_gpio.so
+Linking ../rtlib/hal_pi_gpio.so
+Linking ../rtlib/hal_gpio.so
+Linking ../rtlib/hostmot2.so
+Linking ../rtlib/hm2_test.so
+Linking ../rtlib/hm2_pci.so
+Linking ../rtlib/hm2_7i43.so
+Linking ../rtlib/hm2_7i90.so
+Linking ../rtlib/setsserial.so
+Linking ../rtlib/hm2_modbus.so
+Linking ../rtlib/hm2_eth.so
+Linking ../rtlib/hm2_spi.so
+Linking ../rtlib/hm2_rpspi.so
+Linking ../rtlib/hm2_spix.so
+Linking ../rtlib/classicladder_rt.so
+Linking ../rtlib/scope_rt.so
+Linking ../rtlib/hal_lib.so
+Linking ../rtlib/trivkins.so
+Linking ../rtlib/maxkins.so
+Linking ../rtlib/rotatekins.so
+Linking ../rtlib/tripodkins.so
+Linking ../rtlib/corexykins.so
+Linking ../rtlib/lineardeltakins.so
+Linking ../rtlib/pentakins.so
+Linking ../rtlib/rotarydeltakins.so
+Linking ../rtlib/rosekins.so
+Linking ../rtlib/scorbot-kins.so
+Linking ../rtlib/genhexkins.so
+Linking ../rtlib/genserkins.so
+Linking ../rtlib/xyzac-trt-kins.so
+Linking ../rtlib/xyzbc-trt-kins.so
+Linking ../rtlib/scarakins.so
+Linking ../rtlib/pumakins.so
+Linking ../rtlib/three21kins.so
+Linking ../rtlib/5axiskins.so
+Linking ../rtlib/motmod.so
+Linking ../rtlib/homemod.so
+Linking ../rtlib/tpmod.so
+ln -sf libposemath.so.0 ../lib/libposemath.so
+ln -sf libnml.so.0 ../lib/libnml.so
+ln -sf liblinuxcnc-uspace-posix.so.0 ../lib/liblinuxcnc-uspace-posix.so
+Linking halstreamer
+Linking halsampler
+Linking panelui
+Linking mb2hal
+Linking gs2_vfd
+Linking hy_gt_vfd
+Linking svd-ps_vfd
+Linking shuttle
+Linking xhc-hb04
+Linking sendkeys
+ln -sf liblinuxcnchal.so.0 ../lib/liblinuxcnchal.so
+Preprocessing thermistor.comp
+Linking vfs11_vfd
+Linking halcmd
+Linking halrmt
+Linking vfdb_vfd
+Preprocessing wj200_vfd.comp
+Preprocessing pi500_vfd.comp
+Linking hy_vfd
+Linking xhc-whb04b-6
+Linking linuxcncrsh
+Linking schedrmt
+Linking linuxcnclcd
+Linking halui
+Linking linuxcncsvr
+ln -sf libpyplugin.so.0 ../lib/libpyplugin.so
+emc/Submakefile:Linking genserkins
+Linking python module _hal.so
+Linking python module linuxcnc.so
+Linking ../rtlib/abs.so
+Linking ../rtlib/abs_s32.so
+Linking ../rtlib/abs_s64.so
+Linking ../rtlib/and2.so
+Linking ../rtlib/anglejog.so
+Linking ../rtlib/axistest.so
+Linking ../rtlib/bin2gray.so
+Linking ../rtlib/biquad.so
+Linking ../rtlib/bitmerge.so
+Linking ../rtlib/bitslice.so
+Linking ../rtlib/bitwise.so
+Linking ../rtlib/bldc.so
+Linking ../rtlib/blend.so
+Linking ../rtlib/carousel.so
+Linking ../rtlib/charge_pump.so
+Linking ../rtlib/clarke2.so
+Linking ../rtlib/clarke3.so
+Linking ../rtlib/clarkeinv.so
+Linking ../rtlib/comp.so
+Linking ../rtlib/conv_bit_float.so
+Linking ../rtlib/conv_bit_s32.so
+Linking ../rtlib/conv_bit_s64.so
+Linking ../rtlib/conv_bit_u32.so
+Linking ../rtlib/conv_bit_u64.so
+Linking ../rtlib/conv_float_s32.so
+Linking ../rtlib/conv_float_s64.so
+Linking ../rtlib/conv_float_u32.so
+Linking ../rtlib/conv_float_u64.so
+Linking ../rtlib/conv_s32_bit.so
+Linking ../rtlib/conv_s32_float.so
+Linking ../rtlib/conv_s32_s64.so
+Linking ../rtlib/conv_s32_u32.so
+Linking ../rtlib/conv_s32_u64.so
+Linking ../rtlib/conv_s64_bit.so
+Linking ../rtlib/conv_s64_float.so
+Linking ../rtlib/conv_s64_s32.so
+Linking ../rtlib/conv_s64_u32.so
+Linking ../rtlib/conv_s64_u64.so
+Linking ../rtlib/conv_u32_bit.so
+Linking ../rtlib/conv_u32_float.so
+Linking ../rtlib/conv_u32_s32.so
+Linking ../rtlib/conv_u32_s64.so
+Linking ../rtlib/conv_u32_u64.so
+Linking ../rtlib/conv_u64_bit.so
+Linking ../rtlib/conv_u64_float.so
+Linking ../rtlib/conv_u64_s32.so
+Linking ../rtlib/conv_u64_s64.so
+Linking ../rtlib/conv_u64_u32.so
+Linking ../rtlib/corexy_by_hal.so
+Linking ../rtlib/dbounce.so
+Linking ../rtlib/ddt.so
+Linking ../rtlib/deadzone.so
+Linking ../rtlib/demux.so
+Linking ../rtlib/differential.so
+Linking ../rtlib/div2.so
+Linking ../rtlib/edge.so
+Linking ../rtlib/eoffset_per_angle.so
+Linking ../rtlib/estop_latch.so
+Linking ../rtlib/feedcomp.so
+Linking ../rtlib/filter_kalman.so
+Linking ../rtlib/flipflop.so
+Linking ../rtlib/gantry.so
+Linking ../rtlib/gearchange.so
+Linking ../rtlib/gray2bin.so
+Linking ../rtlib/histobins.so
+Linking ../rtlib/histobinstream.so
+Linking ../rtlib/homecomp.so
+Linking ../rtlib/hypot.so
+Linking ../rtlib/ilowpass.so
+Linking ../rtlib/integ.so
+Linking ../rtlib/invert.so
+Linking ../rtlib/joint_axis_mapper.so
+Linking ../rtlib/joyhandle.so
+Linking ../rtlib/knob2float.so
+Linking ../rtlib/laserpower.so
+Linking ../rtlib/latencybins.so
+Linking ../rtlib/latencybinstream.so
+Linking ../rtlib/led_dim.so
+Linking ../rtlib/limit1.so
+Linking ../rtlib/limit2.so
+Linking ../rtlib/limit3.so
+Linking ../rtlib/limit_axis.so
+Linking ../rtlib/lincurve.so
+Linking ../rtlib/logic.so
+Linking ../rtlib/lowpass.so
+Linking ../rtlib/lut5.so
+Linking ../rtlib/maj3.so
+Linking ../rtlib/match8.so
+Linking ../rtlib/matrixkins.so
+Linking ../rtlib/max31855.so
+Linking ../rtlib/mesa_pktgyro_test.so
+Linking ../rtlib/message.so
+Linking ../rtlib/millturn.so
+Linking ../rtlib/minmax.so
+Linking ../rtlib/momentary2nist.so
+Linking ../rtlib/moveoff.so
+Linking ../rtlib/mult2.so
+Linking ../rtlib/multiclick.so
+Linking ../rtlib/multiswitch.so
+Linking ../rtlib/mux16.so
+Linking ../rtlib/mux2.so
+Linking ../rtlib/mux4.so
+Linking ../rtlib/mux8.so
+Linking ../rtlib/near.so
+Linking ../rtlib/not.so
+Linking ../rtlib/offset.so
+Linking ../rtlib/ohmic.so
+Linking ../rtlib/oneshot.so
+Linking ../rtlib/or2.so
+Linking ../rtlib/orient.so
+Linking ../rtlib/output_buffer.so
+Linking ../rtlib/plasmac.so
+Linking ../rtlib/pushmsg.so
+Linking ../rtlib/radiobutton.so
+Linking ../rtlib/raster.so
+Linking ../rtlib/reset.so
+Linking ../rtlib/safety_latch.so
+Linking ../rtlib/sample_hold.so
+Linking ../rtlib/scale.so
+Linking ../rtlib/scaled_s32_sums.so
+Linking ../rtlib/select8.so
+Linking ../rtlib/sim_axis_hardware.so
+Linking ../rtlib/sim_home_switch.so
+Linking ../rtlib/sim_matrix_kb.so
+Linking ../rtlib/sim_parport.so
+Linking ../rtlib/sim_spindle.so
+Linking ../rtlib/simple_tp.so
+Linking ../rtlib/sphereprobe.so
+Linking ../rtlib/spindle.so
+Linking ../rtlib/spindle_monitor.so
+Linking ../rtlib/steptest.so
+Linking ../rtlib/sum2.so
+Linking ../rtlib/thc.so
+Linking ../rtlib/thcud.so
+Linking ../rtlib/threadtest.so
+Linking ../rtlib/time.so
+Linking ../rtlib/timedelay.so
+Linking ../rtlib/timedelta.so
+Linking ../rtlib/tof.so
+Linking ../rtlib/toggle.so
+Linking ../rtlib/toggle2nist.so
+Linking ../rtlib/ton.so
+Linking ../rtlib/tp.so
+Linking ../rtlib/tristate_bit.so
+Linking ../rtlib/tristate_float.so
+Linking ../rtlib/updown.so
+Linking ../rtlib/userkins.so
+Linking ../rtlib/wcomp.so
+Linking ../rtlib/xhc_hb04_util.so
+Linking ../rtlib/xor2.so
+Linking ../rtlib/xyzab_tdr_kins.so
+Linking ../rtlib/xyzacb_trsrn.so
+Linking ../rtlib/xyzbca_trsrn.so
+Linking ../rtlib/serport.so
+Linking ../rtlib/mesa_7i65.so
+Linking ../rtlib/mesa_uart.so
+Compiling objects/hal/user_comps/thermistor.c
+Compiling hal/user_comps/wj200_vfd/wj200_vfd.c
+Compiling hal/user_comps/pi500_vfd/pi500_vfd.c
+Linking librs274.so.0
+c++ -std=gnu++20 -g -L/home/runner/work/_temp/linuxcnc-c06-030/lib -Wl,-rpath,/home/runner/work/_temp/linuxcnc-c06-030/lib -ltirpc  -lgpiod  -Xlinker -export-dynamic -Wl,-O1 -Wl,-Bsymbolic-functions -Wl,-soname,librs274.so.0 -shared -o ../lib/librs274.so.0 objects/emc/rs274ngc/interp_arc.o objects/emc/rs274ngc/interp_array.o objects/emc/rs274ngc/interp_base.o objects/emc/rs274ngc/interp_check.o objects/emc/rs274ngc/interp_convert.o objects/emc/rs274ngc/interp_queue.o objects/emc/rs274ngc/interp_cycles.o objects/emc/rs274ngc/interp_execute.o objects/emc/rs274ngc/interp_find.o objects/emc/rs274ngc/interp_internal.o objects/emc/rs274ngc/interp_inverse.o objects/emc/rs274ngc/interp_read.o objects/emc/rs274ngc/interp_write.o objects/emc/rs274ngc/interp_o_word.o objects/emc/rs274ngc/interp_g7x.o objects/emc/rs274ngc/nurbs_additional_functions.o objects/emc/rs274ngc/interp_namedparams.o objects/emc/rs274ngc/interp_python.o objects/emc/rs274ngc/interp_remap.o objects/emc/rs274ngc/interp_setup.o objects/emc/rs274ngc/canonmodule.o objects/emc/rs274ngc/pyparamclass.o objects/emc/rs274ngc/pyemctypes.o objects/emc/rs274ngc/pyinterp1.o objects/emc/rs274ngc/pyblock.o objects/emc/rs274ngc/pyarrays.o objects/emc/rs274ngc/interpmodule.o objects/emc/rs274ngc/rs274ngc_pre.o objects/emc/rs274ngc/interp_inspection.o objects/emc/nml_intf/modal_state.o ../lib/liblinuxcncini.so ../lib/libpyplugin.so ../lib/liblinuxcnchal.so.0 ../lib/libtooldata.so.0 -lstdc++ -lboost_python312 -L/usr/lib/x86_64-linux-gnu -lpython3.12 -ldl -lm
+Linking thermistor
+Linking wj200_vfd
+Linking pi500_vfd
+ln -sf librs274.so.0 ../lib/librs274.so
+Linking milltask
+Linking rs274
+c++ -std=gnu++20 -o ../bin/milltask objects/emc/motion/emcmotglb.o objects/emc/task/emctask.o objects/emc/task/emccanon.o objects/emc/task/emctaskmain.o objects/emc/motion/usrmotintf.o objects/emc/motion/emcmotutil.o objects/emc/task/taskintf.o objects/emc/motion/dbuf.o objects/emc/motion/stashf.o objects/emc/task/taskclass.o objects/emc/task/backtrace.o objects/emc/usr_intf/mapini.o ../lib/librs274.so.0 ../lib/liblinuxcnc.a ../lib/libnml.so.0 ../lib/liblinuxcncini.so.1 ../lib/libposemath.so.0 ../lib/liblinuxcnchal.so.0 ../lib/libpyplugin.so.0 ../lib/libtooldata.so.0 -L/home/runner/work/_temp/linuxcnc-c06-030/lib -Wl,-rpath,/home/runner/work/_temp/linuxcnc-c06-030/lib -ltirpc  -lgpiod  -Xlinker -export-dynamic -Wl,-O1 -Wl,-Bsymbolic-functions -lboost_python312 -L/usr/lib/x86_64-linux-gnu -lpython3.12 -ldl -lm -lfmt
+Linking python module gcode.so
+c++ -std=gnu++20 -L/home/runner/work/_temp/linuxcnc-c06-030/lib -Wl,-rpath,/home/runner/work/_temp/linuxcnc-c06-030/lib -ltirpc  -lgpiod  -shared -o ../lib/python/gcode.so objects/emc/rs274ngc/gcodemodule.o ../lib/librs274.so.0 -lstdc++
+Linking canterp.so
+You now need to run 'sudo make setuid' or 'sudo make setcap' in order to run in place with access to hardware.
+make: Leaving directory '/home/runner/work/_temp/linuxcnc-c06-030/src'

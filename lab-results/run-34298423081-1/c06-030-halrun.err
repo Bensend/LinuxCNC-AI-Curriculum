@@ -1,0 +1,32 @@
+Note: realtime scheduling unavailable (sched_setscheduler SCHED_FIFO: Operation not permitted).
+  Process capabilities: cap_sys_nice=no cap_ipc_lock=no.
+  Falling back to POSIX non-realtime.
+  Fix: 'sudo make setcap' (preferred) or 'sudo make setuid' on rtapi_app.
+  Override (testing only): set LINUXCNC_FORCE_REALTIME=1.
+Note: Using POSIX non-realtime
+hm2_test: loading HostMot2 test driver with test pattern 15
+HAL: ERROR: data_ptr_addr not in shared memory
+hm2_test: rtapi_app_main: Invalid argument (-22)
+<stdin>:2: waitpid failed /home/runner/work/_temp/linuxcnc-c06-030/bin/rtapi_app hm2_test
+<stdin>:2: /home/runner/work/_temp/linuxcnc-c06-030/bin/rtapi_app exited without becoming ready
+<stdin>:2: insmod for hm2_test failed, returned -1
+No isolated CPU's found, expect some latency or set RTAPI_CPU_NUMBER to select CPU
+HAL: ERROR: function 'hm2_test.0.read' not found
+<stdin>:6: addf failed
+HAL: ERROR: function 'hm2_test.0.write' not found
+<stdin>:7: addf failed
+<stdin>:22: Pin 'hm2_test.0.c06.fail-reads-remaining' does not exist
+<stdin>:23: Pin 'hm2_test.0.c06.watchdog-status-command' does not exist
+<stdin>:24: Pin 'hm2_test.0.c06.io-error-mirror' does not exist
+<stdin>:25: Pin 'hm2_test.0.watchdog.has_bit' does not exist
+<stdin>:26: Pin 'hm2_test.0.c06.read-success-count' does not exist
+<stdin>:27: Pin 'hm2_test.0.c06.read-fail-count' does not exist
+<stdin>:28: Pin 'hm2_test.0.c06.write-success-count' does not exist
+<stdin>:29: Pin 'hm2_test.0.c06.consecutive-failures' does not exist
+<stdin>:30: Pin 'hm2_test.0.c06.watchdog-status-mirror' does not exist
+hm2_test: not loaded
+<stdin>:37: exit value: 255
+<stdin>:37: rmmod failed, returned -1
+hm2_test: not loaded
+<commandline>:0: exit value: 255
+<commandline>:0: rmmod failed, returned -1

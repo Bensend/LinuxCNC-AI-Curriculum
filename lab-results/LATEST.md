@@ -1,59 +1,59 @@
 # Latest LinuxCNC Lab Result
 
-- Job: `032-c06-watchdog-load-preflight`
-- Job file: `lab-jobs/032-c06-watchdog-load-preflight.sh`
-- Workflow run ID: `34289817535`
+- Job: `033-c06-transport-watchdog-authoritative`
+- Job file: `lab-jobs/033-c06-transport-watchdog-authoritative.sh`
+- Workflow run ID: `34298423081`
 - Attempt: `1`
-- Source commit: `3847152bb8f6dad0a0a4612f2276aec448f12bf3`
-- Exit code: `0`
-- Finished UTC: `2026-09-08T23:18:37Z`
+- Source commit: `77a274b1275cea22dd3f8df63c866b20ba4c4c40`
+- Exit code: `24`
+- Finished UTC: `2026-09-09T01:18:11Z`
 
 ## Metadata
 ```text
 LinuxCNC AI Curriculum Lab
-UTC start: 2026-09-08T23:15:42Z
-Repository commit: 3847152bb8f6dad0a0a4612f2276aec448f12bf3
-Workflow run: 34289817535 attempt 1
-Job file: lab-jobs/032-c06-watchdog-load-preflight.sh
+UTC start: 2026-09-09T01:15:08Z
+Repository commit: 77a274b1275cea22dd3f8df63c866b20ba4c4c40
+Workflow run: 34298423081 attempt 1
+Job file: lab-jobs/033-c06-transport-watchdog-authoritative.sh
 Runner: Linux runnervmlun5p 6.17.0-1022-azure #22-Ubuntu SMP Mon Jul 27 17:24:03 UTC 2026 x86_64 x86_64 x86_64 GNU/Linux
 Inner lab timeout: 70 minutes (job ceiling: 75 minutes)
 
-UTC finish: 2026-09-08T23:18:37Z
+UTC finish: 2026-09-09T01:18:11Z
 ```
 
 ## Standard output
 ```text
-== C06 watchdog-bearing hm2_test load preflight ==
-UTC start: 2026-09-08T23:15:42Z
+== C06-030 authoritative transport error vs watchdog bite ==
+UTC start: 2026-09-09T01:15:08Z
 Pinned upstream commit: 8bf4605ae81042248add031e94c77300406e0413
-Purpose: non-behavioral fixture proof only. Prove a new lab-only hm2_test pattern can register one IOPort plus one watchdog and export the real watchdog HAL objects.
-Prediction: patched test_pattern=15 will register successfully and export hm2_test.0.watchdog.has_bit plus hm2_test.0.watchdog.timeout_ns.
-Evidence boundary: no transport-failure, watchdog-bite, recovery, physical-I/O, timing, or safety claim is made by this preflight.
+Frozen plan=experiments/C06-030-transport-watchdog-fault-plan.md
+Frozen prediction=low-level communication escalation can assert real io_error without watchdog.has_bit; separately a healthy read of fake watchdog status bit 0 can assert the real watchdog.has_bit without io_error.
+Boundary=transport recovery != watchdog recovery != proof of physical safe state; ordinary HostMot2/HAL behavior is not functional-safety certification.
 Get:1 file:/etc/apt/apt-mirrors.txt Mirrorlist [144 B]
 Get:6 https://packages.microsoft.com/ubuntu/24.04/prod noble InRelease [3600 B]
+Get:7 https://dl.google.com/linux/chrome-stable/deb stable InRelease [2548 B]
+Get:8 https://packages.microsoft.com/ubuntu/24.04/prod noble/main amd64 Packages [453 kB]
+Get:9 https://packages.microsoft.com/ubuntu/24.04/prod noble/main arm64 Packages [404 kB]
 Hit:2 http://azure.archive.ubuntu.com/ubuntu noble InRelease
 Get:3 http://azure.archive.ubuntu.com/ubuntu noble-updates InRelease [126 kB]
 Get:4 http://azure.archive.ubuntu.com/ubuntu noble-backports InRelease [126 kB]
 Get:5 http://azure.archive.ubuntu.com/ubuntu noble-security InRelease [126 kB]
-Get:7 https://dl.google.com/linux/chrome-stable/deb stable InRelease [2548 B]
-Get:8 https://packages.microsoft.com/ubuntu/24.04/prod noble/main amd64 Packages [441 kB]
-Get:9 https://packages.microsoft.com/ubuntu/24.04/prod noble/main arm64 Packages [394 kB]
-Get:10 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 Packages [1260 kB]
-Get:11 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 Components [180 kB]
-Get:12 http://azure.archive.ubuntu.com/ubuntu noble-updates/universe amd64 Packages [1690 kB]
-Get:13 http://azure.archive.ubuntu.com/ubuntu noble-updates/universe amd64 Components [388 kB]
-Get:14 http://azure.archive.ubuntu.com/ubuntu noble-updates/restricted amd64 Packages [1536 kB]
-Get:15 http://azure.archive.ubuntu.com/ubuntu noble-updates/multiverse amd64 Components [940 B]
-Get:16 http://azure.archive.ubuntu.com/ubuntu noble-backports/main amd64 Components [5760 B]
-Get:17 http://azure.archive.ubuntu.com/ubuntu noble-backports/universe amd64 Components [12.6 kB]
-Get:18 http://azure.archive.ubuntu.com/ubuntu noble-security/main amd64 Packages [1005 kB]
-Get:19 http://azure.archive.ubuntu.com/ubuntu noble-security/main Translation-en [213 kB]
-Get:20 http://azure.archive.ubuntu.com/ubuntu noble-security/main amd64 Components [46.3 kB]
-Get:21 http://azure.archive.ubuntu.com/ubuntu noble-security/universe amd64 Components [76.2 kB]
-Get:22 http://azure.archive.ubuntu.com/ubuntu noble-security/restricted amd64 Packages [1441 kB]
-Get:23 http://azure.archive.ubuntu.com/ubuntu noble-security/restricted Translation-en [334 kB]
-Get:24 https://dl.google.com/linux/chrome-stable/deb stable/main amd64 Packages [1406 B]
-Fetched 9411 kB in 1s (8037 kB/s)
+Get:10 https://dl.google.com/linux/chrome-stable/deb stable/main amd64 Packages [1406 B]
+Get:11 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 Packages [1260 kB]
+Get:12 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 Components [180 kB]
+Get:13 http://azure.archive.ubuntu.com/ubuntu noble-updates/universe amd64 Packages [1690 kB]
+Get:14 http://azure.archive.ubuntu.com/ubuntu noble-updates/universe amd64 Components [388 kB]
+Get:15 http://azure.archive.ubuntu.com/ubuntu noble-updates/restricted amd64 Packages [1536 kB]
+Get:16 http://azure.archive.ubuntu.com/ubuntu noble-updates/multiverse amd64 Components [940 B]
+Get:17 http://azure.archive.ubuntu.com/ubuntu noble-backports/main amd64 Components [5760 B]
+Get:18 http://azure.archive.ubuntu.com/ubuntu noble-backports/universe amd64 Components [12.6 kB]
+Get:19 http://azure.archive.ubuntu.com/ubuntu noble-security/main amd64 Packages [1005 kB]
+Get:20 http://azure.archive.ubuntu.com/ubuntu noble-security/main Translation-en [213 kB]
+Get:21 http://azure.archive.ubuntu.com/ubuntu noble-security/main amd64 Components [46.3 kB]
+Get:22 http://azure.archive.ubuntu.com/ubuntu noble-security/universe amd64 Components [76.2 kB]
+Get:23 http://azure.archive.ubuntu.com/ubuntu noble-security/restricted amd64 Packages [1441 kB]
+Get:24 http://azure.archive.ubuntu.com/ubuntu noble-security/restricted Translation-en [334 kB]
+Fetched 9432 kB in 1s (7909 kB/s)
 Reading package lists...
 Reading package lists...
 Building dependency tree...
@@ -62,6 +62,7 @@ git is already the newest version (1:2.55.0-0ppa1~ubuntu24.04.2).
 git set to manually installed.
 procps is already the newest version (2:4.0.4-4ubuntu3.3).
 procps set to manually installed.
+python3 is already the newest version (3.12.3-0ubuntu2.1).
 The following additional packages will be installed:
   autopoint dctrl-tools debhelper dh-autoreconf dh-strip-nondeterminism
   diffstat dput dwz gettext intltool-debian libaliased-perl libapt-pkg-perl
@@ -179,7 +180,7 @@ The following NEW packages will be installed:
   licensecheck lintian lzip lzop patchutils perl-openssl-defaults po-debconf
   python3-gpg python3-nacl python3-paramiko python3-unidiff python3-xdg
   t1utils wdiff
-0 upgraded, 168 newly installed, 0 to remove and 2 not upgraded.
+0 upgraded, 168 newly installed, 0 to remove and 3 not upgraded.
 Need to get 11.0 MB of archives.
 After this operation, 36.7 MB of additional disk space will be used.
 Get:1 file:/etc/apt/apt-mirrors.txt Mirrorlist [144 B]
@@ -351,7 +352,7 @@ Get:166 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 python3-
 Get:167 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 python3-unidiff all 0.7.3-1 [11.0 kB]
 Get:168 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 equivs all 2.3.1 [19.0 kB]
 Get:169 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 libauthen-sasl-perl all 2.1700-1 [42.9 kB]
-Fetched 11.0 MB in 1s (13.4 MB/s)
+Fetched 11.0 MB in 1s (12.4 MB/s)
 Selecting previously unselected package autopoint.
 (Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 201818 files and directories currently installed.)
 Preparing to unpack .../000-autopoint_0.21-14ubuntu2_all.deb ...
@@ -1034,20 +1035,82 @@ Processing triggers for man-db (2.12.0-4build2) ...
 Not building database; man-db/auto-update is not 'true'.
 Processing triggers for install-info (7.1-3build2) ...
 Processing triggers for libc-bin (2.39-0ubuntu8.8) ...
-
-== Production-source hashes before lab-only fixture patch ==
 72da592f304fcdfb1261b441f4f906a9cc4c9a1cf8b5c9b9d54e255202911c0f  src/hal/drivers/mesa-hostmot2/hostmot2.c
 3d6c8bf13ab7374a87af0027bd8cf1d48ca77ffca95fdecd75eebb824bfb1115  src/hal/drivers/mesa-hostmot2/tram.c
 de17b6ec766831dd84391d9fcf1ec0765ed2dd47762562be027f5a2a709f9660  src/hal/drivers/mesa-hostmot2/watchdog.c
 fcdc6ce2a55d5d284cbba9a0ceb9a409583c8b584403f945d341dfce46f53660  src/hal/drivers/mesa-hostmot2/hostmot2-lowlevel.h
 86774806cc2228f74f6522a0ef72d366a916b0914799a8ecacd60d8977eddf5d  src/hal/drivers/mesa-hostmot2/hm2_test.c
-
-== Retained lab-only patch ==
 diff --git a/src/hal/drivers/mesa-hostmot2/hm2_test.c b/src/hal/drivers/mesa-hostmot2/hm2_test.c
-index 2142e9215..3faa0ab14 100644
+index 2142e9215..920cca7f8 100644
 --- a/src/hal/drivers/mesa-hostmot2/hm2_test.c
 +++ b/src/hal/drivers/mesa-hostmot2/hm2_test.c
-@@ -557,6 +557,63 @@ int rtapi_app_main(void) {
+@@ -54,6 +54,18 @@ static int comp_id;
+ 
+ static hm2_test_t board[1];
+ 
++// C06 lab-only deterministic fault controls and observation pins.
++static hal_u32_t *c06_fail_reads_remaining;
++static hal_bit_t *c06_watchdog_status_command;
++static hal_u32_t *c06_read_success_count;
++static hal_u32_t *c06_read_fail_count;
++static hal_u32_t *c06_write_success_count;
++static hal_u32_t *c06_consecutive_failures;
++static hal_bit_t *c06_io_error_mirror;
++static hal_bit_t *c06_watchdog_status_mirror;
++
++#define C06_IO_ERROR_THRESHOLD 3
++
+ 
+ 
+ 
+@@ -77,7 +89,35 @@ static void set32(hm2_test_t *me, uint16_t addr, uint32_t val) {
+ 
+ static int hm2_test_read(hm2_lowlevel_io_t *this, rtapi_u32 addr, void *buffer, int size) {
+     hm2_test_t *me = this->private;
++
++    if (test_pattern == 15 && c06_fail_reads_remaining != NULL) {
++        if (*c06_fail_reads_remaining > 0) {
++            (*c06_fail_reads_remaining)--;
++            (*c06_read_fail_count)++;
++            (*c06_consecutive_failures)++;
++            if (*c06_consecutive_failures >= C06_IO_ERROR_THRESHOLD && this->io_error != NULL) {
++                *(this->io_error) = 1;
++            }
++            if (this->io_error != NULL) *c06_io_error_mirror = *(this->io_error);
++            return 0;
++        }
++
++        *c06_consecutive_failures = 0;
++        // Watchdog bite injection enters only through the pretend board status image.
++        if (c06_watchdog_status_command != NULL && *c06_watchdog_status_command) {
++            me->test_pattern.tp32[0x2004 / 4] |= 1u;
++            *c06_watchdog_status_mirror = 1;
++        } else {
++            me->test_pattern.tp32[0x2004 / 4] &= ~1u;
++            *c06_watchdog_status_mirror = 0;
++        }
++    }
++
+     memcpy(buffer, &me->test_pattern.tp8[addr], size);
++    if (test_pattern == 15 && c06_read_success_count != NULL) {
++        (*c06_read_success_count)++;
++        if (this->io_error != NULL) *c06_io_error_mirror = *(this->io_error);
++    }
+     return 1;  // success
+ }
+ 
+@@ -87,6 +127,10 @@ static int hm2_test_write(hm2_lowlevel_io_t *this, rtapi_u32 addr, const void *b
+     (void)addr;
+     (void)buffer;
+     (void)size;
++    if (test_pattern == 15 && c06_write_success_count != NULL) {
++        (*c06_write_success_count)++;
++        if (this->io_error != NULL) *c06_io_error_mirror = *(this->io_error);
++    }
+     return 1;  // success
+ }
+ 
+@@ -557,6 +601,55 @@ int rtapi_app_main(void) {
              break;
          }
  
@@ -1066,39 +1129,31 @@ index 2142e9215..3faa0ab14 100644
 +            set8(me, HM2_ADDR_CONFIGNAME+5, 'O');
 +            set8(me, HM2_ADDR_CONFIGNAME+6, 'T');
 +            set8(me, HM2_ADDR_CONFIGNAME+7, '2');
-+
 +            set32(me, HM2_ADDR_IDROM_OFFSET, 0x400);
-+            set32(me, 0x400, 2);       // standard IDROM type
-+            set32(me, 0x404, 0x40);    // module descriptors at 0x440
-+            set32(me, 0x408, 0x200);   // pin descriptors at 0x600
-+            set32(me, 0x41c, 1);       // IOPorts
++            set32(me, 0x400, 2);
++            set32(me, 0x404, 0x40);
++            set32(me, 0x408, 0x200);
++            set32(me, 0x41c, 1);
 +            set32(me, 0x420, num_io_pins);
-+            set32(me, 0x424, 24);      // PortWidth
-+            set32(me, 0x428, 2000000); // ClockLow
-+            set32(me, 0x42c, 20000000);// ClockHigh
-+            set32(me, 0x430, 4);       // InstanceStride0
-+            set32(me, 0x434, 4);       // InstanceStride1
-+            set32(me, 0x438, 4);       // RegisterStride0
-+            set32(me, 0x43c, 4);       // RegisterStride1
++            set32(me, 0x424, 24);
++            set32(me, 0x428, 2000000);
++            set32(me, 0x42c, 20000000);
++            set32(me, 0x430, 4);
++            set32(me, 0x434, 4);
++            set32(me, 0x438, 4);
++            set32(me, 0x43c, 4);
 +
-+            // MD0 @ 0x440: IOPort gtag=3, v0, ClockLow, 1 instance.
++            // IOPort MD followed by watchdog MD, then terminator.
 +            set32(me, 0x440, 0x01010003);
-+            set32(me, 0x444, 0x00051000); // base 0x1000, 5 regs, stride selectors 0/0
++            set32(me, 0x444, 0x00051000);
 +            set32(me, 0x448, 0x0000001F);
-+
-+            // MD1 @ 0x44c: Watchdog gtag=2, v0, ClockLow, 1 instance.
 +            set32(me, 0x44c, 0x01010002);
-+            set32(me, 0x450, 0x00032000); // base 0x2000, 3 regs, stride selectors 0/0
++            set32(me, 0x450, 0x00032000);
 +            set32(me, 0x454, 0x00000000);
-+
-+            // MD2 terminator.
-+            set32(me, 0x458, 0x00000000);
-+            set32(me, 0x45c, 0x00000000);
-+            set32(me, 0x460, 0x00000000);
++            set32(me, 0x458, 0); set32(me, 0x45c, 0); set32(me, 0x460, 0);
 +
 +            me->llio.num_ioport_connectors = 1;
 +            me->llio.ioport_connector_name[0] = "P3";
-+
 +            for (pd_index = 0; pd_index < num_io_pins; pd_index ++) {
 +                set8(me, 0x600 + (pd_index * 4) + 0, 0);
 +                set8(me, 0x600 + (pd_index * 4) + 1, 0);
@@ -1111,8 +1166,40 @@ index 2142e9215..3faa0ab14 100644
          default: {
              LL_ERR("unknown test pattern %d", test_pattern); 
              return -ENODEV;
-
-== Production-source hashes after fixture patch; must match ==
+@@ -579,6 +672,33 @@ int rtapi_app_main(void) {
+     me->llio.read = hm2_test_read;
+     me->llio.write = hm2_test_write;
+ 
++    if (test_pattern == 15) {
++        r = hal_pin_u32_newf(HAL_IO, &c06_fail_reads_remaining, comp_id, "hm2_test.0.c06.fail-reads-remaining");
++        if (r) return r;
++        r = hal_pin_bit_newf(HAL_IN, &c06_watchdog_status_command, comp_id, "hm2_test.0.c06.watchdog-status-command");
++        if (r) return r;
++        r = hal_pin_u32_newf(HAL_OUT, &c06_read_success_count, comp_id, "hm2_test.0.c06.read-success-count");
++        if (r) return r;
++        r = hal_pin_u32_newf(HAL_OUT, &c06_read_fail_count, comp_id, "hm2_test.0.c06.read-fail-count");
++        if (r) return r;
++        r = hal_pin_u32_newf(HAL_OUT, &c06_write_success_count, comp_id, "hm2_test.0.c06.write-success-count");
++        if (r) return r;
++        r = hal_pin_u32_newf(HAL_OUT, &c06_consecutive_failures, comp_id, "hm2_test.0.c06.consecutive-failures");
++        if (r) return r;
++        r = hal_pin_bit_newf(HAL_OUT, &c06_io_error_mirror, comp_id, "hm2_test.0.c06.io-error-mirror");
++        if (r) return r;
++        r = hal_pin_bit_newf(HAL_OUT, &c06_watchdog_status_mirror, comp_id, "hm2_test.0.c06.watchdog-status-mirror");
++        if (r) return r;
++        *c06_fail_reads_remaining = 0;
++        *c06_watchdog_status_command = 0;
++        *c06_read_success_count = 0;
++        *c06_read_fail_count = 0;
++        *c06_write_success_count = 0;
++        *c06_consecutive_failures = 0;
++        *c06_io_error_mirror = 0;
++        *c06_watchdog_status_mirror = 0;
++    }
++
+     r = hm2_register(&board->llio, config[0]);
+     if (r != 0) {
+         THIS_ERR("hm2_test fails HM2 registration\n");
 72da592f304fcdfb1261b441f4f906a9cc4c9a1cf8b5c9b9d54e255202911c0f  src/hal/drivers/mesa-hostmot2/hostmot2.c
 3d6c8bf13ab7374a87af0027bd8cf1d48ca77ffca95fdecd75eebb824bfb1115  src/hal/drivers/mesa-hostmot2/tram.c
 de17b6ec766831dd84391d9fcf1ec0765ed2dd47762562be027f5a2a709f9660  src/hal/drivers/mesa-hostmot2/watchdog.c
@@ -1208,7 +1295,7 @@ The following NEW packages will be installed:
   tclx8.4 tk8.6-blt2.5 tk8.6-dev unicode-data uuid-dev w3c-linkchecker
   wayland-protocols x11-utils x11-xserver-utils x11proto-dev xfonts-encodings
   xfonts-utils xorg-sgml-doctools xtrans-dev yapps2
-0 upgraded, 326 newly installed, 0 to remove and 2 not upgraded.
+0 upgraded, 326 newly installed, 0 to remove and 3 not upgraded.
 Need to get 270 MB of archives.
 After this operation, 1015 MB of additional disk space will be used.
 Get:1 file:/etc/apt/apt-mirrors.txt Mirrorlist [144 B]
@@ -1539,7 +1626,7 @@ Get:325 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 libmodbus-de
 Get:326 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 libtirpc-dev amd64 1.3.4+ds-1.1build1 [193 kB]
 Get:327 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 python3-xlib all 0.33-2 [120 kB]
 Preconfiguring packages ...
-Fetched 270 MB in 5s (56.7 MB/s)
+Fetched 270 MB in 5s (57.5 MB/s)
 Selecting previously unselected package libdebuginfod-common.
 (Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 208339 files and directories currently installed.)
 Preparing to unpack .../000-libdebuginfod-common_0.190-1.1ubuntu0.1_all.deb ...
@@ -2898,7 +2985,7 @@ checking for c++ option to enable C++11 features... none needed
 checking for a BSD-compatible install... /usr/bin/install -c
 checking whether c++ supports C++20 features by default... no
 checking whether c++ supports C++20 features with -std=gnu++20... yes
-checking build toplevel... /home/runner/work/_temp/linuxcnc-c06-watchdog-load-preflight
+checking build toplevel... /home/runner/work/_temp/linuxcnc-c06-030
 checking installation prefix... run in place
 checking for grep... /usr/bin/grep
 checking for pkg-config... /usr/bin/pkg-config
@@ -2937,7 +3024,7 @@ checking for libusb-1.0... yes
 checking for libgpiod < 3.0.0... yes
 configure: libgpiod version 1.6.3 found
 checking for module installation directory... configuring for run-in-place
-/home/runner/work/_temp/linuxcnc-c06-watchdog-load-preflight/rtlib
+/home/runner/work/_temp/linuxcnc-c06-030/rtlib
 checking for glib... yes - 2.80.0
 checking whether make sets $(MAKE)... yes
 checking for ranlib... ranlib
@@ -2974,8 +3061,8 @@ checking for a version of Python >= '2.1.0'... yes
 checking for the sysconfig Python package... yes
 checking for Python include path... -I/usr/include/python3.12
 checking for Python library path... -L/usr/lib/x86_64-linux-gnu -lpython3.12
-checking for Python site-packages path... /home/runner/work/_temp/linuxcnc-c06-watchdog-load-preflight/lib/python3.12/site-packages
-checking for Python platform specific site-packages path... /home/runner/work/_temp/linuxcnc-c06-watchdog-load-preflight/lib/python3.12/site-packages
+checking for Python site-packages path... /home/runner/work/_temp/linuxcnc-c06-030/lib/python3.12/site-packages
+checking for Python platform specific site-packages path... /home/runner/work/_temp/linuxcnc-c06-030/lib/python3.12/site-packages
 checking python extra libraries... -ldl -lm
 checking python extra linking flags... -Xlinker -export-dynamic -Wl,-O1 -Wl,-Bsymbolic-functions
 checking consistency of all components of python development environment... yes
@@ -3068,7 +3155,11 @@ config.status: creating config.h
 ######################################################################
 
 
-make: Entering directory '/home/runner/work/_temp/linuxcnc-c06-watchdog-load-preflight/src'
+Reading 0/189 dependency files
+Done reading dependencies
+Reading 0/147 realtime dependency files
+Done reading realtime dependencies
+make: Entering directory '/home/runner/work/_temp/linuxcnc-c06-030/src'
 Creating mesa_uart.mak
 Creating mesa_7i65.mak
 Creating serport.mak
@@ -3146,8 +3237,8 @@ Creating lincurve.mak
 Creating limit_axis.mak
 Creating limit3.mak
 Creating limit2.mak
-Creating led_dim.mak
 Creating limit1.mak
+Creating led_dim.mak
 Creating latencybinstream.mak
 Creating latencybins.mak
 Creating laserpower.mak
@@ -3158,8 +3249,8 @@ Creating invert.mak
 Creating integ.mak
 Creating ilowpass.mak
 Creating hypot.mak
-Creating homecomp.mak
 Creating histobinstream.mak
+Creating homecomp.mak
 Creating histobins.mak
 Creating gray2bin.mak
 Creating gearchange.mak
@@ -3188,8 +3279,8 @@ converting conv for conv_u32_s32.comp
 converting conv for conv_u32_float.comp
 converting conv for conv_u32_bit.comp
 converting conv for conv_s64_u64.comp
-converting conv for conv_s64_u32.comp
 converting conv for conv_s64_s32.comp
+converting conv for conv_s64_u32.comp
 converting conv for conv_s64_float.comp
 converting conv for conv_s64_bit.comp
 converting conv for conv_s32_u64.comp
@@ -3249,25 +3340,29 @@ Creating conv_float_u64.mak
 Creating conv_float_u32.mak
 Creating conv_float_s64.mak
 Creating conv_float_s32.mak
-Creating conv_bit_u64.mak
 Creating conv_bit_u32.mak
+Creating conv_bit_u64.mak
 Creating conv_bit_s64.mak
 Creating conv_bit_s32.mak
 Creating conv_bit_float.mak
+Reading 0/189 dependency files
+Done reading dependencies
+Reading 0/303 realtime dependency files
+Done reading realtime dependencies
 Exporting hal.h
 Exporting hostmot2-serial.h
 Exporting linuxcnc.h
 Exporting kinematics.h
-Exporting emcmotcfg.h
 Exporting inifile.hh
+Exporting emcmotcfg.h
 Exporting inifile.h
 Exporting emcpos.h
 Exporting motion_types.h
 Exporting emcpose.h
 Exporting posemath.h
 Exporting posemath.hh
-Exporting rtapi.h
 Exporting posemath_types.h
+Exporting rtapi.h
 Exporting rtapi_app.h
 Exporting rtapi_atomic.h
 Exporting rtapi_bitops.h
@@ -3282,8 +3377,8 @@ Exporting rtapi_io.h
 Exporting rtapi_limits.h
 Exporting rtapi_list.h
 Exporting rtapi_math.h
-Exporting rtapi_math64.h
 Exporting rtapi_math_i386.h
+Exporting rtapi_math64.h
 Exporting rtapi_mutex.h
 Exporting rtapi_parport.h
 Exporting rtapi_pci.h
@@ -3292,13 +3387,13 @@ Exporting rtapi_stdint.h
 Exporting rtapi_string.h
 Exporting rtapi_vsnprintf.h
 Copying test input hal/components/lincurve.comp
-Copying test input hal/components/logic.comp
 sed hal/drivers/mesa_uart.comp -e "1 s/mesa_uart/mesa_uart_test/" > ../tests/halcompile/serial-out-of-tree/mesa_uart_test.comp
+Copying test input hal/components/logic.comp
 Copying test input hal/components/bitslice.comp
 sed ../tests/halcompile/userspace/rand.comp -e "1 s/rand/rand_test/" > ../tests/halcompile/userspace/rand_test.comp
 cp ../scripts/rtapi.conf ../tests/uspace/spawnv-root/rtapi.conf
-Compiling libposemath/posemath.cc
 Compiling libposemath/_posemath.c
+Compiling libposemath/posemath.cc
 Compiling libposemath/gomath.c
 Compiling libposemath/emcpose.c
 Compiling libnml/rcs/rcs_print.cc
@@ -3511,8 +3606,8 @@ Compiling localized message catalog ../share/locale/zh_TW/LC_MESSAGES/linuxcnc.m
 Compiling localized gmoccapy message catalog ../share/locale/ar/LC_MESSAGES/gmoccapy.mo
 Compiling localized gmoccapy message catalog ../share/locale/bg/LC_MESSAGES/gmoccapy.mo
 Compiling localized gmoccapy message catalog ../share/locale/cs/LC_MESSAGES/gmoccapy.mo
-Compiling localized gmoccapy message catalog ../share/locale/de/LC_MESSAGES/gmoccapy.mo
 Compiling localized gmoccapy message catalog ../share/locale/da/LC_MESSAGES/gmoccapy.mo
+Compiling localized gmoccapy message catalog ../share/locale/de/LC_MESSAGES/gmoccapy.mo
 Compiling localized gmoccapy message catalog ../share/locale/es/LC_MESSAGES/gmoccapy.mo
 Compiling localized gmoccapy message catalog ../share/locale/fi/LC_MESSAGES/gmoccapy.mo
 Compiling localized gmoccapy message catalog ../share/locale/fr/LC_MESSAGES/gmoccapy.mo
@@ -3567,50 +3662,50 @@ Syntax checking python script pmx485
 Copying python script hal_input
 Copying python script scorbot-er-3
 Syntax checking python script sim-torch
-Syntax checking python script z_level_compensation
 Copying python script mitsub_vfd
+Syntax checking python script z_level_compensation
 Copying python script pmx485
 Syntax checking python script mqtt-publisher
 Syntax checking python script hal_bridge
 Copying python script sim-torch
 Copying python script z_level_compensation
 Syntax checking python script mtconnect-agent
-Syntax checking python script pumagui
 Copying python script mqtt-publisher
+Syntax checking python script pumagui
 Copying python script hal_bridge
 Syntax checking python script puma560gui
 Syntax checking python script lineardelta
 Copying python script mtconnect-agent
 Copying python script pumagui
 Syntax checking python script scaragui
-Syntax checking python script hexagui
 Copying python script puma560gui
-Syntax checking python script 5axisgui
+Syntax checking python script hexagui
 Copying python script lineardelta
+Syntax checking python script 5axisgui
 Syntax checking python script max5gui
 Copying python script scaragui
 Copying python script hexagui
 Syntax checking python script maho600gui
-Syntax checking python script hbmgui
 Copying python script 5axisgui
-Syntax checking python script rotarydelta
+Syntax checking python script hbmgui
 Copying python script max5gui
+Syntax checking python script rotarydelta
 Syntax checking python script melfagui
 Copying python script maho600gui
-Copying python script hbmgui
 Syntax checking python script millturngui
-Syntax checking python script xyzac-trt-gui
+Copying python script hbmgui
 Copying python script rotarydelta
-Syntax checking python script xyzbc-trt-gui
 Copying python script melfagui
+Syntax checking python script xyzac-trt-gui
+Syntax checking python script xyzbc-trt-gui
 Syntax checking python script xyzab-tdr-gui
 Copying python script millturngui
 Copying python script xyzac-trt-gui
+Copying python script xyzbc-trt-gui
 Compiling hal/halmodule.cc
 Compiling hal/halquery.cc
-Copying python script xyzbc-trt-gui
-Copying python script xyzab-tdr-gui
 Compiling emc/usr_intf/axis/extensions/emcmodule.cc
+Copying python script xyzab-tdr-gui
 Syntax checking python script linuxcnctop
 Copying python script linuxcnctop
 Syntax checking python script mdi
@@ -3687,6 +3782,84 @@ Compiling realtime hal/drivers/mesa-hostmot2/watchdog.c
 Compiling realtime hal/drivers/mesa-hostmot2/xy2mod.c
 Compiling realtime hal/drivers/mesa-hostmot2/hm2_test.c
 Compiling realtime hal/drivers/mesa-hostmot2/hm2_pci.c
+hal/drivers/mesa-hostmot2/hm2_test.c:58:1: warning: ‘hal_u32_t’ is deprecated: Use getter/setter API [-Wdeprecated-declarations]
+   58 | static hal_u32_t *c06_fail_reads_remaining;
+      | ^~~~~~
+hal/drivers/mesa-hostmot2/hm2_test.c:59:1: warning: ‘hal_bit_t’ is deprecated: Use getter/setter API [-Wdeprecated-declarations]
+   59 | static hal_bit_t *c06_watchdog_status_command;
+      | ^~~~~~
+hal/drivers/mesa-hostmot2/hm2_test.c:60:1: warning: ‘hal_u32_t’ is deprecated: Use getter/setter API [-Wdeprecated-declarations]
+   60 | static hal_u32_t *c06_read_success_count;
+      | ^~~~~~
+hal/drivers/mesa-hostmot2/hm2_test.c:61:1: warning: ‘hal_u32_t’ is deprecated: Use getter/setter API [-Wdeprecated-declarations]
+   61 | static hal_u32_t *c06_read_fail_count;
+      | ^~~~~~
+hal/drivers/mesa-hostmot2/hm2_test.c:62:1: warning: ‘hal_u32_t’ is deprecated: Use getter/setter API [-Wdeprecated-declarations]
+   62 | static hal_u32_t *c06_write_success_count;
+      | ^~~~~~
+hal/drivers/mesa-hostmot2/hm2_test.c:63:1: warning: ‘hal_u32_t’ is deprecated: Use getter/setter API [-Wdeprecated-declarations]
+   63 | static hal_u32_t *c06_consecutive_failures;
+      | ^~~~~~
+hal/drivers/mesa-hostmot2/hm2_test.c:64:1: warning: ‘hal_bit_t’ is deprecated: Use getter/setter API [-Wdeprecated-declarations]
+   64 | static hal_bit_t *c06_io_error_mirror;
+      | ^~~~~~
+hal/drivers/mesa-hostmot2/hm2_test.c:65:1: warning: ‘hal_bit_t’ is deprecated: Use getter/setter API [-Wdeprecated-declarations]
+   65 | static hal_bit_t *c06_watchdog_status_mirror;
+      | ^~~~~~
+hal/drivers/mesa-hostmot2/hm2_test.c: In function ‘hm2_test_read’:
+hal/drivers/mesa-hostmot2/hm2_test.c:99:35: warning: assignment to ‘hal_bool_t’ {aka ‘struct __hal_stype_bool_t *’} from ‘int’ makes pointer from integer without a cast [-Wint-conversion]
+   99 |                 *(this->io_error) = 1;
+      |                                   ^
+hal/drivers/mesa-hostmot2/hm2_test.c: In function ‘rtapi_app_main’:
+hal/drivers/mesa-hostmot2/hm2_test.c:676:9: warning: ‘hal_pin_u32_newf’ is deprecated: Use hal_pin_new_ui32() [-Wdeprecated-declarations]
+  676 |         r = hal_pin_u32_newf(HAL_IO, &c06_fail_reads_remaining, comp_id, "hm2_test.0.c06.fail-reads-remaining");
+      |         ^
+In file included from hal/drivers/mesa-hostmot2/hm2_test.c:33:
+/home/runner/work/_temp/linuxcnc-c06-030/src/../include/hal.h:696:12: note: declared here
+  696 | extern int hal_pin_u32_newf(hal_pin_dir_t dir,
+      |            ^~~~~~~~~~~~~~~~
+hal/drivers/mesa-hostmot2/hm2_test.c:678:9: warning: ‘hal_pin_bit_newf’ is deprecated: Use hal_pin_new_bool() [-Wdeprecated-declarations]
+  678 |         r = hal_pin_bit_newf(HAL_IN, &c06_watchdog_status_command, comp_id, "hm2_test.0.c06.watchdog-status-command");
+      |         ^
+/home/runner/work/_temp/linuxcnc-c06-030/src/../include/hal.h:690:12: note: declared here
+  690 | extern int hal_pin_bit_newf(hal_pin_dir_t dir,
+      |            ^~~~~~~~~~~~~~~~
+hal/drivers/mesa-hostmot2/hm2_test.c:680:9: warning: ‘hal_pin_u32_newf’ is deprecated: Use hal_pin_new_ui32() [-Wdeprecated-declarations]
+  680 |         r = hal_pin_u32_newf(HAL_OUT, &c06_read_success_count, comp_id, "hm2_test.0.c06.read-success-count");
+      |         ^
+/home/runner/work/_temp/linuxcnc-c06-030/src/../include/hal.h:696:12: note: declared here
+  696 | extern int hal_pin_u32_newf(hal_pin_dir_t dir,
+      |            ^~~~~~~~~~~~~~~~
+hal/drivers/mesa-hostmot2/hm2_test.c:682:9: warning: ‘hal_pin_u32_newf’ is deprecated: Use hal_pin_new_ui32() [-Wdeprecated-declarations]
+  682 |         r = hal_pin_u32_newf(HAL_OUT, &c06_read_fail_count, comp_id, "hm2_test.0.c06.read-fail-count");
+      |         ^
+/home/runner/work/_temp/linuxcnc-c06-030/src/../include/hal.h:696:12: note: declared here
+  696 | extern int hal_pin_u32_newf(hal_pin_dir_t dir,
+      |            ^~~~~~~~~~~~~~~~
+hal/drivers/mesa-hostmot2/hm2_test.c:684:9: warning: ‘hal_pin_u32_newf’ is deprecated: Use hal_pin_new_ui32() [-Wdeprecated-declarations]
+  684 |         r = hal_pin_u32_newf(HAL_OUT, &c06_write_success_count, comp_id, "hm2_test.0.c06.write-success-count");
+      |         ^
+/home/runner/work/_temp/linuxcnc-c06-030/src/../include/hal.h:696:12: note: declared here
+  696 | extern int hal_pin_u32_newf(hal_pin_dir_t dir,
+      |            ^~~~~~~~~~~~~~~~
+hal/drivers/mesa-hostmot2/hm2_test.c:686:9: warning: ‘hal_pin_u32_newf’ is deprecated: Use hal_pin_new_ui32() [-Wdeprecated-declarations]
+  686 |         r = hal_pin_u32_newf(HAL_OUT, &c06_consecutive_failures, comp_id, "hm2_test.0.c06.consecutive-failures");
+      |         ^
+/home/runner/work/_temp/linuxcnc-c06-030/src/../include/hal.h:696:12: note: declared here
+  696 | extern int hal_pin_u32_newf(hal_pin_dir_t dir,
+      |            ^~~~~~~~~~~~~~~~
+hal/drivers/mesa-hostmot2/hm2_test.c:688:9: warning: ‘hal_pin_bit_newf’ is deprecated: Use hal_pin_new_bool() [-Wdeprecated-declarations]
+  688 |         r = hal_pin_bit_newf(HAL_OUT, &c06_io_error_mirror, comp_id, "hm2_test.0.c06.io-error-mirror");
+      |         ^
+/home/runner/work/_temp/linuxcnc-c06-030/src/../include/hal.h:690:12: note: declared here
+  690 | extern int hal_pin_bit_newf(hal_pin_dir_t dir,
+      |            ^~~~~~~~~~~~~~~~
+hal/drivers/mesa-hostmot2/hm2_test.c:690:9: warning: ‘hal_pin_bit_newf’ is deprecated: Use hal_pin_new_bool() [-Wdeprecated-declarations]
+  690 |         r = hal_pin_bit_newf(HAL_OUT, &c06_watchdog_status_mirror, comp_id, "hm2_test.0.c06.watchdog-status-mirror");
+      |         ^
+/home/runner/work/_temp/linuxcnc-c06-030/src/../include/hal.h:690:12: note: declared here
+  690 | extern int hal_pin_bit_newf(hal_pin_dir_t dir,
+      |            ^~~~~~~~~~~~~~~~
 Compiling realtime hal/drivers/mesa-hostmot2/hm2_7i43.c
 Compiling realtime hal/drivers/mesa-hostmot2/hm2_7i90.c
 Compiling realtime hal/drivers/mesa-hostmot2/setsserial.c
@@ -3785,21 +3958,21 @@ Creating shared library liblinuxcnchal.so.0
 Creating shared library liblinuxcncini.so.1
 Syntax checking python script halcompile
 Linking liblinuxcnc.a
-Copying python script halcompile
 tooldata: depends: objects/emc/tooldata/tooldata_mmap.o objects/emc/tooldata/tooldata_common.o objects/emc/tooldata/tooldata_db.o
 tooldata: Linking: libtooldata.so.0
+Copying python script halcompile
 ln -sf liblinuxcncini.so.1 ../lib/liblinuxcncini.so
 Linking libpyplugin.so.0
-c++ -std=gnu++20 -g -L/home/runner/work/_temp/linuxcnc-c06-watchdog-load-preflight/lib -Wl,-rpath,/home/runner/work/_temp/linuxcnc-c06-watchdog-load-preflight/lib -ltirpc  -lgpiod  -Xlinker -export-dynamic -Wl,-O1 -Wl,-Bsymbolic-functions -Wl,-soname,libpyplugin.so.0 -shared -o ../lib/libpyplugin.so.0 objects/emc/pythonplugin/python_plugin.o ../lib/liblinuxcncini.so.1 -lstdc++ -lboost_python312 -L/usr/lib/x86_64-linux-gnu -lpython3.12 -ldl -lm
+c++ -std=gnu++20 -g -L/home/runner/work/_temp/linuxcnc-c06-030/lib -Wl,-rpath,/home/runner/work/_temp/linuxcnc-c06-030/lib -ltirpc  -lgpiod  -Xlinker -export-dynamic -Wl,-O1 -Wl,-Bsymbolic-functions -Wl,-soname,libpyplugin.so.0 -shared -o ../lib/libpyplugin.so.0 objects/emc/pythonplugin/python_plugin.o ../lib/liblinuxcncini.so.1 -lstdc++ -lboost_python312 -L/usr/lib/x86_64-linux-gnu -lpython3.12 -ldl -lm
 Linking inivalue
 Linking motion-logger
 ln -sf libtooldata.so.0 ../lib/libtooldata.so
 Linking linuxcnc_module_helper
 gcc -Wl,-z,relro -o ../bin/linuxcnc_module_helper objects/module_helper/module_helper.o
 Linking python module lineardeltakins.so
-c++ -std=gnu++20 -L/home/runner/work/_temp/linuxcnc-c06-watchdog-load-preflight/lib -Wl,-rpath,/home/runner/work/_temp/linuxcnc-c06-watchdog-load-preflight/lib -ltirpc  -lgpiod  -shared -o ../lib/python/lineardeltakins.so objects/emc/kinematics/lineardeltakins.o -lboost_python312
+c++ -std=gnu++20 -L/home/runner/work/_temp/linuxcnc-c06-030/lib -Wl,-rpath,/home/runner/work/_temp/linuxcnc-c06-030/lib -ltirpc  -lgpiod  -shared -o ../lib/python/lineardeltakins.so objects/emc/kinematics/lineardeltakins.o -lboost_python312
 Linking python module rotarydeltakins.so
-c++ -std=gnu++20 -L/home/runner/work/_temp/linuxcnc-c06-watchdog-load-preflight/lib -Wl,-rpath,/home/runner/work/_temp/linuxcnc-c06-watchdog-load-preflight/lib -ltirpc  -lgpiod  -shared -o ../lib/python/rotarydeltakins.so objects/emc/kinematics/rotarydeltakins.o -lboost_python312
+c++ -std=gnu++20 -L/home/runner/work/_temp/linuxcnc-c06-030/lib -Wl,-rpath,/home/runner/work/_temp/linuxcnc-c06-030/lib -ltirpc  -lgpiod  -shared -o ../lib/python/rotarydeltakins.so objects/emc/kinematics/rotarydeltakins.o -lboost_python312
 Preprocessing abs.comp
 Preprocessing abs_s32.comp
 Preprocessing abs_s64.comp
@@ -3809,8 +3982,8 @@ Preprocessing axistest.comp
 Preprocessing bin2gray.comp
 Preprocessing biquad.comp
 Preprocessing bitmerge.comp
-Preprocessing bitwise.comp
 Preprocessing bitslice.comp
+Preprocessing bitwise.comp
 Preprocessing bldc.comp
 Preprocessing blend.comp
 Preprocessing carousel.comp
@@ -3832,8 +4005,8 @@ Preprocessing conv_s32_bit.comp
 Preprocessing conv_s32_float.comp
 Preprocessing conv_s32_s64.comp
 Preprocessing conv_s32_u32.comp
-Preprocessing conv_s32_u64.comp
 Preprocessing conv_s64_bit.comp
+Preprocessing conv_s32_u64.comp
 Preprocessing conv_s64_float.comp
 Preprocessing conv_s64_s32.comp
 Preprocessing conv_s64_u32.comp
@@ -3843,8 +4016,8 @@ Preprocessing conv_u32_float.comp
 Preprocessing conv_u32_s32.comp
 Preprocessing conv_u32_s64.comp
 Preprocessing conv_u32_u64.comp
-Preprocessing conv_u64_bit.comp
 Preprocessing conv_u64_float.comp
+Preprocessing conv_u64_bit.comp
 Preprocessing conv_u64_s32.comp
 Preprocessing conv_u64_s64.comp
 Preprocessing conv_u64_u32.comp
@@ -3941,8 +4114,8 @@ Preprocessing timedelta.comp
 Preprocessing tof.comp
 Preprocessing toggle.comp
 Preprocessing toggle2nist.comp
-Preprocessing tp.comp
 Preprocessing ton.comp
+Preprocessing tp.comp
 Preprocessing tristate_bit.comp
 Preprocessing tristate_float.comp
 Preprocessing updown.comp
@@ -4130,8 +4303,8 @@ Linking ../rtlib/threads.so
 Linking ../rtlib/supply.so
 Linking ../rtlib/sim_encoder.so
 Linking ../rtlib/weighted_sum.so
-Linking ../rtlib/watchdog.so
 Linking ../rtlib/modmath.so
+Linking ../rtlib/watchdog.so
 Linking ../rtlib/streamer.so
 Linking ../rtlib/sampler.so
 Linking ../rtlib/hal_parport.so
@@ -4198,8 +4371,8 @@ Linking vfdb_vfd
 Preprocessing wj200_vfd.comp
 Preprocessing pi500_vfd.comp
 Linking hy_vfd
-Linking linuxcncrsh
 Linking xhc-whb04b-6
+Linking linuxcncrsh
 Linking schedrmt
 Linking linuxcnclcd
 Linking halui
@@ -4368,88 +4541,19 @@ Compiling objects/hal/user_comps/thermistor.c
 Compiling hal/user_comps/wj200_vfd/wj200_vfd.c
 Compiling hal/user_comps/pi500_vfd/pi500_vfd.c
 Linking librs274.so.0
-c++ -std=gnu++20 -g -L/home/runner/work/_temp/linuxcnc-c06-watchdog-load-preflight/lib -Wl,-rpath,/home/runner/work/_temp/linuxcnc-c06-watchdog-load-preflight/lib -ltirpc  -lgpiod  -Xlinker -export-dynamic -Wl,-O1 -Wl,-Bsymbolic-functions -Wl,-soname,librs274.so.0 -shared -o ../lib/librs274.so.0 objects/emc/rs274ngc/interp_arc.o objects/emc/rs274ngc/interp_array.o objects/emc/rs274ngc/interp_base.o objects/emc/rs274ngc/interp_check.o objects/emc/rs274ngc/interp_convert.o objects/emc/rs274ngc/interp_queue.o objects/emc/rs274ngc/interp_cycles.o objects/emc/rs274ngc/interp_execute.o objects/emc/rs274ngc/interp_find.o objects/emc/rs274ngc/interp_internal.o objects/emc/rs274ngc/interp_inverse.o objects/emc/rs274ngc/interp_read.o objects/emc/rs274ngc/interp_write.o objects/emc/rs274ngc/interp_o_word.o objects/emc/rs274ngc/interp_g7x.o objects/emc/rs274ngc/nurbs_additional_functions.o objects/emc/rs274ngc/interp_namedparams.o objects/emc/rs274ngc/interp_python.o objects/emc/rs274ngc/interp_remap.o objects/emc/rs274ngc/interp_setup.o objects/emc/rs274ngc/canonmodule.o objects/emc/rs274ngc/pyparamclass.o objects/emc/rs274ngc/pyemctypes.o objects/emc/rs274ngc/pyinterp1.o objects/emc/rs274ngc/pyblock.o objects/emc/rs274ngc/pyarrays.o objects/emc/rs274ngc/interpmodule.o objects/emc/rs274ngc/rs274ngc_pre.o objects/emc/rs274ngc/interp_inspection.o objects/emc/nml_intf/modal_state.o ../lib/liblinuxcncini.so ../lib/libpyplugin.so ../lib/liblinuxcnchal.so.0 ../lib/libtooldata.so.0 -lstdc++ -lboost_python312 -L/usr/lib/x86_64-linux-gnu -lpython3.12 -ldl -lm
+c++ -std=gnu++20 -g -L/home/runner/work/_temp/linuxcnc-c06-030/lib -Wl,-rpath,/home/runner/work/_temp/linuxcnc-c06-030/lib -ltirpc  -lgpiod  -Xlinker -export-dynamic -Wl,-O1 -Wl,-Bsymbolic-functions -Wl,-soname,librs274.so.0 -shared -o ../lib/librs274.so.0 objects/emc/rs274ngc/interp_arc.o objects/emc/rs274ngc/interp_array.o objects/emc/rs274ngc/interp_base.o objects/emc/rs274ngc/interp_check.o objects/emc/rs274ngc/interp_convert.o objects/emc/rs274ngc/interp_queue.o objects/emc/rs274ngc/interp_cycles.o objects/emc/rs274ngc/interp_execute.o objects/emc/rs274ngc/interp_find.o objects/emc/rs274ngc/interp_internal.o objects/emc/rs274ngc/interp_inverse.o objects/emc/rs274ngc/interp_read.o objects/emc/rs274ngc/interp_write.o objects/emc/rs274ngc/interp_o_word.o objects/emc/rs274ngc/interp_g7x.o objects/emc/rs274ngc/nurbs_additional_functions.o objects/emc/rs274ngc/interp_namedparams.o objects/emc/rs274ngc/interp_python.o objects/emc/rs274ngc/interp_remap.o objects/emc/rs274ngc/interp_setup.o objects/emc/rs274ngc/canonmodule.o objects/emc/rs274ngc/pyparamclass.o objects/emc/rs274ngc/pyemctypes.o objects/emc/rs274ngc/pyinterp1.o objects/emc/rs274ngc/pyblock.o objects/emc/rs274ngc/pyarrays.o objects/emc/rs274ngc/interpmodule.o objects/emc/rs274ngc/rs274ngc_pre.o objects/emc/rs274ngc/interp_inspection.o objects/emc/nml_intf/modal_state.o ../lib/liblinuxcncini.so ../lib/libpyplugin.so ../lib/liblinuxcnchal.so.0 ../lib/libtooldata.so.0 -lstdc++ -lboost_python312 -L/usr/lib/x86_64-linux-gnu -lpython3.12 -ldl -lm
 Linking thermistor
-Linking pi500_vfd
 Linking wj200_vfd
+Linking pi500_vfd
 ln -sf librs274.so.0 ../lib/librs274.so
 Linking milltask
-c++ -std=gnu++20 -o ../bin/milltask objects/emc/motion/emcmotglb.o objects/emc/task/emctask.o objects/emc/task/emccanon.o objects/emc/task/emctaskmain.o objects/emc/motion/usrmotintf.o objects/emc/motion/emcmotutil.o objects/emc/task/taskintf.o objects/emc/motion/dbuf.o objects/emc/motion/stashf.o objects/emc/task/taskclass.o objects/emc/task/backtrace.o objects/emc/usr_intf/mapini.o ../lib/librs274.so.0 ../lib/liblinuxcnc.a ../lib/libnml.so.0 ../lib/liblinuxcncini.so.1 ../lib/libposemath.so.0 ../lib/liblinuxcnchal.so.0 ../lib/libpyplugin.so.0 ../lib/libtooldata.so.0 -L/home/runner/work/_temp/linuxcnc-c06-watchdog-load-preflight/lib -Wl,-rpath,/home/runner/work/_temp/linuxcnc-c06-watchdog-load-preflight/lib -ltirpc  -lgpiod  -Xlinker -export-dynamic -Wl,-O1 -Wl,-Bsymbolic-functions -lboost_python312 -L/usr/lib/x86_64-linux-gnu -lpython3.12 -ldl -lm -lfmt
 Linking rs274
+c++ -std=gnu++20 -o ../bin/milltask objects/emc/motion/emcmotglb.o objects/emc/task/emctask.o objects/emc/task/emccanon.o objects/emc/task/emctaskmain.o objects/emc/motion/usrmotintf.o objects/emc/motion/emcmotutil.o objects/emc/task/taskintf.o objects/emc/motion/dbuf.o objects/emc/motion/stashf.o objects/emc/task/taskclass.o objects/emc/task/backtrace.o objects/emc/usr_intf/mapini.o ../lib/librs274.so.0 ../lib/liblinuxcnc.a ../lib/libnml.so.0 ../lib/liblinuxcncini.so.1 ../lib/libposemath.so.0 ../lib/liblinuxcnchal.so.0 ../lib/libpyplugin.so.0 ../lib/libtooldata.so.0 -L/home/runner/work/_temp/linuxcnc-c06-030/lib -Wl,-rpath,/home/runner/work/_temp/linuxcnc-c06-030/lib -ltirpc  -lgpiod  -Xlinker -export-dynamic -Wl,-O1 -Wl,-Bsymbolic-functions -lboost_python312 -L/usr/lib/x86_64-linux-gnu -lpython3.12 -ldl -lm -lfmt
 Linking python module gcode.so
-c++ -std=gnu++20 -L/home/runner/work/_temp/linuxcnc-c06-watchdog-load-preflight/lib -Wl,-rpath,/home/runner/work/_temp/linuxcnc-c06-watchdog-load-preflight/lib -ltirpc  -lgpiod  -shared -o ../lib/python/gcode.so objects/emc/rs274ngc/gcodemodule.o ../lib/librs274.so.0 -lstdc++
+c++ -std=gnu++20 -L/home/runner/work/_temp/linuxcnc-c06-030/lib -Wl,-rpath,/home/runner/work/_temp/linuxcnc-c06-030/lib -ltirpc  -lgpiod  -shared -o ../lib/python/gcode.so objects/emc/rs274ngc/gcodemodule.o ../lib/librs274.so.0 -lstdc++
 Linking canterp.so
 You now need to run 'sudo make setuid' or 'sudo make setcap' in order to run in place with access to hardware.
-make: Leaving directory '/home/runner/work/_temp/linuxcnc-c06-watchdog-load-preflight/src'
-
-== Load-only HAL preflight ==
-Note: realtime scheduling unavailable (sched_setscheduler SCHED_FIFO: Operation not permitted).
-  Process capabilities: cap_sys_nice=no cap_ipc_lock=no.
-  Falling back to POSIX non-realtime.
-  Fix: 'sudo make setcap' (preferred) or 'sudo make setuid' on rtapi_app.
-  Override (testing only): set LINUXCNC_FORCE_REALTIME=1.
-Note: Using POSIX non-realtime
-hm2_test: loading HostMot2 test driver with test pattern 15
-Component Pins:
-Owner   Type  Dir                 Value  Name
-     9  bit   I/O                 FALSE  hm2_test.0.watchdog.has_bit
-
-Parameters:
-Owner   Type  Dir                 Value  Name
-     9  u32   RW             0x004C4B40  hm2_test.0.watchdog.timeout_ns
-
-Exported Functions:
-Owner   CodeAddr      Arg           FP   Users   Name
- 00009  7ff244ec9c70  55eb879a6680  YES      0   hm2_test.0.read
- 00009  7ff244ec98d0  55eb879a6680  YES      0   hm2_test.0.read_gpio
-
-Exported Functions:
-Owner   CodeAddr      Arg           FP   Users   Name
- 00009  7ff244ec9a50  55eb879a6680  YES      0   hm2_test.0.write
- 00009  7ff244ec9a00  55eb879a6680  YES      0   hm2_test.0.write_gpio
-
-hm2: loading Mesa HostMot2 driver version 0.15
-hm2: no firmware specified in config modparam!  the board had better have firmware configured already, or this won't work
-hm2/hm2_test.0: Low Level init 0.15
-hm2/hm2_test.0: 24 I/O Pins used:
-hm2/hm2_test.0:     IO Pin 000 (P3-01): IOPort
-hm2/hm2_test.0:     IO Pin 001 (P3-03): IOPort
-hm2/hm2_test.0:     IO Pin 002 (P3-05): IOPort
-hm2/hm2_test.0:     IO Pin 003 (P3-07): IOPort
-hm2/hm2_test.0:     IO Pin 004 (P3-09): IOPort
-hm2/hm2_test.0:     IO Pin 005 (P3-11): IOPort
-hm2/hm2_test.0:     IO Pin 006 (P3-13): IOPort
-hm2/hm2_test.0:     IO Pin 007 (P3-15): IOPort
-hm2/hm2_test.0:     IO Pin 008 (P3-17): IOPort
-hm2/hm2_test.0:     IO Pin 009 (P3-19): IOPort
-hm2/hm2_test.0:     IO Pin 010 (P3-21): IOPort
-hm2/hm2_test.0:     IO Pin 011 (P3-23): IOPort
-hm2/hm2_test.0:     IO Pin 012 (P3-25): IOPort
-hm2/hm2_test.0:     IO Pin 013 (P3-27): IOPort
-hm2/hm2_test.0:     IO Pin 014 (P3-29): IOPort
-hm2/hm2_test.0:     IO Pin 015 (P3-31): IOPort
-hm2/hm2_test.0:     IO Pin 016 (P3-33): IOPort
-hm2/hm2_test.0:     IO Pin 017 (P3-35): IOPort
-hm2/hm2_test.0:     IO Pin 018 (P3-37): IOPort
-hm2/hm2_test.0:     IO Pin 019 (P3-39): IOPort
-hm2/hm2_test.0:     IO Pin 020 (P3-41): IOPort
-hm2/hm2_test.0:     IO Pin 021 (P3-43): IOPort
-hm2/hm2_test.0:     IO Pin 022 (P3-45): IOPort
-hm2/hm2_test.0:     IO Pin 023 (P3-47): IOPort
-hm2/hm2_test.0: registered
-hm2_test.0: initialized hm2 test-pattern 15
-hm2/hm2_test.0: unregistered
-hm2_test: driver unloaded
-hm2: unloading
-     9  bit   I/O                 FALSE  hm2_test.0.watchdog.has_bit
-     9  u32   RW             0x004C4B40  hm2_test.0.watchdog.timeout_ns
- 00009  7ff244ec9c70  55eb879a6680  YES      0   hm2_test.0.read
- 00009  7ff244ec98d0  55eb879a6680  YES      0   hm2_test.0.read_gpio
- 00009  7ff244ec9a50  55eb879a6680  YES      0   hm2_test.0.write
- 00009  7ff244ec9a00  55eb879a6680  YES      0   hm2_test.0.write_gpio
-
-LOAD_PREFLIGHT_PASS: watchdog-bearing lab-only hm2_test pattern registered and exported real watchdog HAL objects.
-UTC finish: 2026-09-08T23:18:37Z
+make: Leaving directory '/home/runner/work/_temp/linuxcnc-c06-030/src'
 ```
 
 ## Standard error
@@ -4464,8 +4568,8 @@ No containers need to be restarted.
 No user sessions are running outdated binaries.
 
 No VM guests are running outdated hypervisor (qemu) binaries on this host.
-Cloning into '/home/runner/work/_temp/linuxcnc-c06-watchdog-load-preflight'...
-Updating files:   0% (1/9526)Updating files:   1% (96/9526)Updating files:   2% (191/9526)Updating files:   3% (286/9526)Updating files:   4% (382/9526)Updating files:   5% (477/9526)Updating files:   6% (572/9526)Updating files:   7% (667/9526)Updating files:   8% (763/9526)Updating files:   9% (858/9526)Updating files:  10% (953/9526)Updating files:  11% (1048/9526)Updating files:  12% (1144/9526)Updating files:  13% (1239/9526)Updating files:  14% (1334/9526)Updating files:  15% (1429/9526)Updating files:  16% (1525/9526)Updating files:  17% (1620/9526)Updating files:  18% (1715/9526)Updating files:  19% (1810/9526)Updating files:  20% (1906/9526)Updating files:  21% (2001/9526)Updating files:  22% (2096/9526)Updating files:  23% (2191/9526)Updating files:  23% (2205/9526)Updating files:  24% (2287/9526)Updating files:  25% (2382/9526)Updating files:  26% (2477/9526)Updating files:  27% (2573/9526)Updating files:  28% (2668/9526)Updating files:  29% (2763/9526)Updating files:  30% (2858/9526)Updating files:  31% (2954/9526)Updating files:  32% (3049/9526)Updating files:  33% (3144/9526)Updating files:  34% (3239/9526)Updating files:  35% (3335/9526)Updating files:  36% (3430/9526)Updating files:  37% (3525/9526)Updating files:  38% (3620/9526)Updating files:  39% (3716/9526)Updating files:  40% (3811/9526)Updating files:  41% (3906/9526)Updating files:  42% (4001/9526)Updating files:  43% (4097/9526)Updating files:  44% (4192/9526)Updating files:  45% (4287/9526)Updating files:  46% (4382/9526)Updating files:  47% (4478/9526)Updating files:  48% (4573/9526)Updating files:  49% (4668/9526)Updating files:  50% (4763/9526)Updating files:  51% (4859/9526)Updating files:  52% (4954/9526)Updating files:  53% (5049/9526)Updating files:  54% (5145/9526)Updating files:  55% (5240/9526)Updating files:  56% (5335/9526)Updating files:  57% (5430/9526)Updating files:  58% (5526/9526)Updating files:  59% (5621/9526)Updating files:  60% (5716/9526)Updating files:  61% (5811/9526)Updating files:  62% (5907/9526)Updating files:  63% (6002/9526)Updating files:  64% (6097/9526)Updating files:  65% (6192/9526)Updating files:  66% (6288/9526)Updating files:  67% (6383/9526)Updating files:  68% (6478/9526)Updating files:  69% (6573/9526)Updating files:  70% (6669/9526)Updating files:  71% (6764/9526)Updating files:  72% (6859/9526)Updating files:  73% (6954/9526)Updating files:  74% (7050/9526)Updating files:  75% (7145/9526)Updating files:  76% (7240/9526)Updating files:  77% (7336/9526)Updating files:  78% (7431/9526)Updating files:  79% (7526/9526)Updating files:  80% (7621/9526)Updating files:  81% (7717/9526)Updating files:  82% (7812/9526)Updating files:  83% (7907/9526)Updating files:  84% (8002/9526)Updating files:  85% (8098/9526)Updating files:  86% (8193/9526)Updating files:  87% (8288/9526)Updating files:  88% (8383/9526)Updating files:  89% (8479/9526)Updating files:  90% (8574/9526)Updating files:  91% (8669/9526)Updating files:  92% (8764/9526)Updating files:  93% (8860/9526)Updating files:  94% (8955/9526)Updating files:  95% (9050/9526)Updating files:  96% (9145/9526)Updating files:  97% (9241/9526)Updating files:  98% (9336/9526)Updating files:  99% (9431/9526)Updating files: 100% (9526/9526)Updating files: 100% (9526/9526), done.
+Cloning into '/home/runner/work/_temp/linuxcnc-c06-030'...
+Updating files:   0% (1/9526)Updating files:   1% (96/9526)Updating files:   2% (191/9526)Updating files:   3% (286/9526)Updating files:   4% (382/9526)Updating files:   5% (477/9526)Updating files:   6% (572/9526)Updating files:   7% (667/9526)Updating files:   8% (763/9526)Updating files:   9% (858/9526)Updating files:  10% (953/9526)Updating files:  11% (1048/9526)Updating files:  12% (1144/9526)Updating files:  13% (1239/9526)Updating files:  14% (1334/9526)Updating files:  15% (1429/9526)Updating files:  16% (1525/9526)Updating files:  17% (1620/9526)Updating files:  18% (1715/9526)Updating files:  19% (1810/9526)Updating files:  20% (1906/9526)Updating files:  21% (2001/9526)Updating files:  22% (2096/9526)Updating files:  23% (2191/9526)Updating files:  23% (2193/9526)Updating files:  24% (2287/9526)Updating files:  25% (2382/9526)Updating files:  26% (2477/9526)Updating files:  27% (2573/9526)Updating files:  28% (2668/9526)Updating files:  29% (2763/9526)Updating files:  30% (2858/9526)Updating files:  31% (2954/9526)Updating files:  32% (3049/9526)Updating files:  33% (3144/9526)Updating files:  34% (3239/9526)Updating files:  35% (3335/9526)Updating files:  36% (3430/9526)Updating files:  37% (3525/9526)Updating files:  38% (3620/9526)Updating files:  39% (3716/9526)Updating files:  40% (3811/9526)Updating files:  41% (3906/9526)Updating files:  42% (4001/9526)Updating files:  43% (4097/9526)Updating files:  44% (4192/9526)Updating files:  45% (4287/9526)Updating files:  46% (4382/9526)Updating files:  47% (4478/9526)Updating files:  48% (4573/9526)Updating files:  49% (4668/9526)Updating files:  50% (4763/9526)Updating files:  51% (4859/9526)Updating files:  52% (4954/9526)Updating files:  53% (5049/9526)Updating files:  54% (5145/9526)Updating files:  55% (5240/9526)Updating files:  56% (5335/9526)Updating files:  57% (5430/9526)Updating files:  58% (5526/9526)Updating files:  59% (5621/9526)Updating files:  60% (5716/9526)Updating files:  61% (5811/9526)Updating files:  62% (5907/9526)Updating files:  63% (6002/9526)Updating files:  64% (6097/9526)Updating files:  65% (6192/9526)Updating files:  66% (6288/9526)Updating files:  67% (6383/9526)Updating files:  68% (6478/9526)Updating files:  69% (6573/9526)Updating files:  70% (6669/9526)Updating files:  71% (6764/9526)Updating files:  72% (6859/9526)Updating files:  73% (6954/9526)Updating files:  74% (7050/9526)Updating files:  75% (7145/9526)Updating files:  76% (7240/9526)Updating files:  77% (7336/9526)Updating files:  78% (7431/9526)Updating files:  79% (7526/9526)Updating files:  80% (7621/9526)Updating files:  81% (7717/9526)Updating files:  82% (7812/9526)Updating files:  83% (7907/9526)Updating files:  84% (8002/9526)Updating files:  85% (8098/9526)Updating files:  86% (8193/9526)Updating files:  87% (8288/9526)Updating files:  88% (8383/9526)Updating files:  89% (8479/9526)Updating files:  90% (8574/9526)Updating files:  91% (8669/9526)Updating files:  92% (8764/9526)Updating files:  93% (8860/9526)Updating files:  94% (8955/9526)Updating files:  95% (9050/9526)Updating files:  96% (9145/9526)Updating files:  97% (9241/9526)Updating files:  98% (9336/9526)Updating files:  99% (9431/9526)Updating files: 100% (9526/9526)Updating files: 100% (9526/9526), done.
 HEAD is now at 8bf4605ae Merge pull request #4501 from grandixximo/gmoccapy-quit-4500
 
 Running kernel seems to be up-to-date.
@@ -4477,12 +4581,5 @@ No containers need to be restarted.
 No user sessions are running outdated binaries.
 
 No VM guests are running outdated hypervisor (qemu) binaries on this host.
-Reading 0/189 dependency files
-Done reading dependencies
-Reading 0/147 realtime dependency files
-Done reading realtime dependencies
-Reading 0/189 dependency files
-Done reading dependencies
-Reading 0/303 realtime dependency files
-Done reading realtime dependencies
+HARNESS_INVALID: HAL runtime not ready
 ```

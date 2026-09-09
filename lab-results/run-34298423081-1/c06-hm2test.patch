@@ -1,0 +1,160 @@
+diff --git a/src/hal/drivers/mesa-hostmot2/hm2_test.c b/src/hal/drivers/mesa-hostmot2/hm2_test.c
+index 2142e9215..920cca7f8 100644
+--- a/src/hal/drivers/mesa-hostmot2/hm2_test.c
++++ b/src/hal/drivers/mesa-hostmot2/hm2_test.c
+@@ -54,6 +54,18 @@ static int comp_id;
+ 
+ static hm2_test_t board[1];
+ 
++// C06 lab-only deterministic fault controls and observation pins.
++static hal_u32_t *c06_fail_reads_remaining;
++static hal_bit_t *c06_watchdog_status_command;
++static hal_u32_t *c06_read_success_count;
++static hal_u32_t *c06_read_fail_count;
++static hal_u32_t *c06_write_success_count;
++static hal_u32_t *c06_consecutive_failures;
++static hal_bit_t *c06_io_error_mirror;
++static hal_bit_t *c06_watchdog_status_mirror;
++
++#define C06_IO_ERROR_THRESHOLD 3
++
+ 
+ 
+ 
+@@ -77,7 +89,35 @@ static void set32(hm2_test_t *me, uint16_t addr, uint32_t val) {
+ 
+ static int hm2_test_read(hm2_lowlevel_io_t *this, rtapi_u32 addr, void *buffer, int size) {
+     hm2_test_t *me = this->private;
++
++    if (test_pattern == 15 && c06_fail_reads_remaining != NULL) {
++        if (*c06_fail_reads_remaining > 0) {
++            (*c06_fail_reads_remaining)--;
++            (*c06_read_fail_count)++;
++            (*c06_consecutive_failures)++;
++            if (*c06_consecutive_failures >= C06_IO_ERROR_THRESHOLD && this->io_error != NULL) {
++                *(this->io_error) = 1;
++            }
++            if (this->io_error != NULL) *c06_io_error_mirror = *(this->io_error);
++            return 0;
++        }
++
++        *c06_consecutive_failures = 0;
++        // Watchdog bite injection enters only through the pretend board status image.
++        if (c06_watchdog_status_command != NULL && *c06_watchdog_status_command) {
++            me->test_pattern.tp32[0x2004 / 4] |= 1u;
++            *c06_watchdog_status_mirror = 1;
++        } else {
++            me->test_pattern.tp32[0x2004 / 4] &= ~1u;
++            *c06_watchdog_status_mirror = 0;
++        }
++    }
++
+     memcpy(buffer, &me->test_pattern.tp8[addr], size);
++    if (test_pattern == 15 && c06_read_success_count != NULL) {
++        (*c06_read_success_count)++;
++        if (this->io_error != NULL) *c06_io_error_mirror = *(this->io_error);
++    }
+     return 1;  // success
+ }
+ 
+@@ -87,6 +127,10 @@ static int hm2_test_write(hm2_lowlevel_io_t *this, rtapi_u32 addr, const void *b
+     (void)addr;
+     (void)buffer;
+     (void)size;
++    if (test_pattern == 15 && c06_write_success_count != NULL) {
++        (*c06_write_success_count)++;
++        if (this->io_error != NULL) *c06_io_error_mirror = *(this->io_error);
++    }
+     return 1;  // success
+ }
+ 
+@@ -557,6 +601,55 @@ int rtapi_app_main(void) {
+             break;
+         }
+ 
++        // Lab-only C06 fixture: one valid IOPort plus one valid watchdog.
++        // Existing upstream patterns 0-14 remain byte-for-byte unchanged.
++        case 15: {
++            int num_io_pins = 24;
++            int pd_index;
++
++            set32(me, HM2_ADDR_IOCOOKIE, HM2_IOCOOKIE);
++            set8(me, HM2_ADDR_CONFIGNAME+0, 'H');
++            set8(me, HM2_ADDR_CONFIGNAME+1, 'O');
++            set8(me, HM2_ADDR_CONFIGNAME+2, 'S');
++            set8(me, HM2_ADDR_CONFIGNAME+3, 'T');
++            set8(me, HM2_ADDR_CONFIGNAME+4, 'M');
++            set8(me, HM2_ADDR_CONFIGNAME+5, 'O');
++            set8(me, HM2_ADDR_CONFIGNAME+6, 'T');
++            set8(me, HM2_ADDR_CONFIGNAME+7, '2');
++            set32(me, HM2_ADDR_IDROM_OFFSET, 0x400);
++            set32(me, 0x400, 2);
++            set32(me, 0x404, 0x40);
++            set32(me, 0x408, 0x200);
++            set32(me, 0x41c, 1);
++            set32(me, 0x420, num_io_pins);
++            set32(me, 0x424, 24);
++            set32(me, 0x428, 2000000);
++            set32(me, 0x42c, 20000000);
++            set32(me, 0x430, 4);
++            set32(me, 0x434, 4);
++            set32(me, 0x438, 4);
++            set32(me, 0x43c, 4);
++
++            // IOPort MD followed by watchdog MD, then terminator.
++            set32(me, 0x440, 0x01010003);
++            set32(me, 0x444, 0x00051000);
++            set32(me, 0x448, 0x0000001F);
++            set32(me, 0x44c, 0x01010002);
++            set32(me, 0x450, 0x00032000);
++            set32(me, 0x454, 0x00000000);
++            set32(me, 0x458, 0); set32(me, 0x45c, 0); set32(me, 0x460, 0);
++
++            me->llio.num_ioport_connectors = 1;
++            me->llio.ioport_connector_name[0] = "P3";
++            for (pd_index = 0; pd_index < num_io_pins; pd_index ++) {
++                set8(me, 0x600 + (pd_index * 4) + 0, 0);
++                set8(me, 0x600 + (pd_index * 4) + 1, 0);
++                set8(me, 0x600 + (pd_index * 4) + 2, 0);
++                set8(me, 0x600 + (pd_index * 4) + 3, HM2_GTAG_IOPORT);
++            }
++            break;
++        }
++
+         default: {
+             LL_ERR("unknown test pattern %d", test_pattern); 
+             return -ENODEV;
+@@ -579,6 +672,33 @@ int rtapi_app_main(void) {
+     me->llio.read = hm2_test_read;
+     me->llio.write = hm2_test_write;
+ 
++    if (test_pattern == 15) {
++        r = hal_pin_u32_newf(HAL_IO, &c06_fail_reads_remaining, comp_id, "hm2_test.0.c06.fail-reads-remaining");
++        if (r) return r;
++        r = hal_pin_bit_newf(HAL_IN, &c06_watchdog_status_command, comp_id, "hm2_test.0.c06.watchdog-status-command");
++        if (r) return r;
++        r = hal_pin_u32_newf(HAL_OUT, &c06_read_success_count, comp_id, "hm2_test.0.c06.read-success-count");
++        if (r) return r;
++        r = hal_pin_u32_newf(HAL_OUT, &c06_read_fail_count, comp_id, "hm2_test.0.c06.read-fail-count");
++        if (r) return r;
++        r = hal_pin_u32_newf(HAL_OUT, &c06_write_success_count, comp_id, "hm2_test.0.c06.write-success-count");
++        if (r) return r;
++        r = hal_pin_u32_newf(HAL_OUT, &c06_consecutive_failures, comp_id, "hm2_test.0.c06.consecutive-failures");
++        if (r) return r;
++        r = hal_pin_bit_newf(HAL_OUT, &c06_io_error_mirror, comp_id, "hm2_test.0.c06.io-error-mirror");
++        if (r) return r;
++        r = hal_pin_bit_newf(HAL_OUT, &c06_watchdog_status_mirror, comp_id, "hm2_test.0.c06.watchdog-status-mirror");
++        if (r) return r;
++        *c06_fail_reads_remaining = 0;
++        *c06_watchdog_status_command = 0;
++        *c06_read_success_count = 0;
++        *c06_read_fail_count = 0;
++        *c06_write_success_count = 0;
++        *c06_consecutive_failures = 0;
++        *c06_io_error_mirror = 0;
++        *c06_watchdog_status_mirror = 0;
++    }
++
+     r = hm2_register(&board->llio, config[0]);
+     if (r != 0) {
+         THIS_ERR("hm2_test fails HM2 registration\n");

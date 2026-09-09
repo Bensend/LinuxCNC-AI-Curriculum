@@ -35,21 +35,24 @@ If a run is cancelled, times out, is harness-invalid, or fails substantively, st
 | 2026-09-09 | C06-030 authoritative attempt 1 | `34298423081` | `102299966701` | 2026-09-09T01:15:05Z | 2026-09-09T01:18:16Z | 3.2 | HARNESS INVALID | Opaque-reference HAL API incompatibility prevented `hm2_test` readiness before P0; frozen Gates A-H unscored. |
 | 2026-09-09 | C06-030 authoritative attempt 2 | `34299295015` | `102302593867` | 2026-09-09T01:28:01Z | 2026-09-09T01:31:16Z | 3.3 | HARNESS INVALID | Opaque handle slots remained outside HAL shared memory; `data_ptr_addr not in shared memory`; no P0-P6 behavior. |
 | 2026-09-09 | C06-030 authoritative attempt 3 | `34302451216` | `102312063998` | 2026-09-09T02:15:00Z | 2026-09-09T02:15:09Z | 0.2 | HARNESS INVALID | Nested source-rewriter syntax failure before LinuxCNC execution; triggered ESSENTIAL NOW redesigned-fixture cycle. |
+| 2026-09-09 | C06-036 clean fixture preflight | `34306117465` | `102323048875` | 2026-09-09T03:11:06Z | 2026-09-09T03:15:02Z | 3.9 | PREFLIGHT PASS | Non-authoritative clean pattern-15 compile/load/object proof; exact fixture patch retained; frozen P0-P6 unscored. |
+| 2026-09-09 | C06-037 redesigned behavioral attempt 1 | `34306570963` | `102324397610` | 2026-09-09T03:17:52Z | 2026-09-09T03:21:20Z | 3.5 | HARNESS INVALID | `halsampler` failed `hal_stream_attach` before atomic observation; zero rows. Gate-A prerequisites reached; behavioral Gates B-H unscored. |
+| 2026-09-09 | C06-038 sampler-ready behavioral attempt 2 | `34306960420` | `102325539319` | 2026-09-09T03:23:55Z | 2026-09-09T03:27:30Z | 3.6 | HARNESS INVALID | Sampler-owned HAL objects existed, disproving the simple early-load race, but userspace `halsampler` still failed `hal_stream_attach` before P0. |
 
 ## Running totals
 
 Keep these totals current whenever new rows are added:
 
-- **Exactly backfilled lab compute:** 74.8 min (1.25 h)
-- **Total lab compute used:** 1.25 h + unbackfilled historical usage
+- **Exactly backfilled lab compute:** 85.8 min (1.43 h)
+- **Total lab compute used:** 1.43 h + unbackfilled historical usage
 - **Remaining from 120 h first-draft allowance:** unknown until historical backfill
-- **Current-day exactly backfilled lab compute (2026-09-09):** 6.7 min (0.11 h) + unbackfilled same-day historical usage
+- **Current-day exactly backfilled lab compute (2026-09-09):** 17.7 min (0.30 h) + unbackfilled same-day historical usage
 
 ## Immediate backfill queue
 
 Backfill C03-025 and C04-026 authoritative jobs from GitHub Actions metadata when convenient; they remain uncounted in the exact total above.
 
-C05-029 attempts 1–7 and C06-030 attempts 1–3 are now exactly accounted. Add the clean C06 redesigned preflight and subsequent authoritative behavioral run from exact job timestamps after completion.
+C05-029 attempts 1–7 and C06 work through C06-038 are now exactly accounted.
 
 No known T02-T05, C01, C02, or earlier C05 jobs through C05-029 attempt 7 remain in the immediate backfill queue.
 

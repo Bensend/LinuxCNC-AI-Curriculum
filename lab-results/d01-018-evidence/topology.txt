@@ -1,0 +1,15 @@
+Component Pins:
+Owner   Type  Dir                 Value  Name
+    33  float OUT                     0  joint.1.f-error ==> D01-y1-ferr
+    33  float OUT                  0.05  joint.1.f-error-lim ==> D01-y1-flim
+    33  bit   OUT                 FALSE  joint.1.f-errored ==> D01-y1-ferrored
+    33  float OUT                     0  joint.1.motor-pos-cmd ==> Ypos
+    33  float IN                      0  joint.1.motor-pos-fb <== Ypos
+    33  float OUT                     0  joint.2.f-error ==> D01-y2-ferr
+    33  float OUT                  0.01  joint.2.f-error-lim ==> D01-y2-flim
+    33  bit   OUT                 FALSE  joint.2.f-errored ==> D01-y2-ferrored
+    33  float OUT                     0  joint.2.motor-pos-cmd ==> D01-y2-cmd
+    33  float IN                      0  joint.2.motor-pos-fb <== D01-y2-fb
+    33  float OUT                     0  motion.d01-cart-y-observer ==> D01-cart-y
+    33  bit   OUT                 FALSE  motion.motion-enabled ==> D01-motion-enabled
+

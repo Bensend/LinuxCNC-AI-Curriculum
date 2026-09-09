@@ -1,0 +1,36 @@
+diff --git a/src/emc/motion/control.c b/src/emc/motion/control.c
+index 2ddf587b4..5f484c325 100644
+--- a/src/emc/motion/control.c
++++ b/src/emc/motion/control.c
+@@ -248,6 +248,7 @@ void emcmotController(void *arg, long period)
+     handle_kinematicsSwitch();
+     process_inputs();
+     do_forward_kins();
++    hal_set_real(emcmot_hal_data->d01_cart_y_observer, emcmotStatus->carte_pos_fb.tran.y);
+     process_probe_inputs();
+     check_for_faults();
+     set_operating_mode();
+diff --git a/src/emc/motion/mot_priv.h b/src/emc/motion/mot_priv.h
+index 64cbb5071..4cccba53c 100644
+--- a/src/emc/motion/mot_priv.h
++++ b/src/emc/motion/mot_priv.h
+@@ -147,6 +147,7 @@ typedef struct {
+     hal_real_t current_vel;	/* RPI: velocity magnitude in machine units */
+     hal_real_t requested_vel;   /* RPI: requested velocity magnitude in machine units */
+     hal_real_t distance_to_go;	/* RPI: distance to go in current move*/
++    hal_real_t d01_cart_y_observer; /* D01 test-only Cartesian-Y observer */
+ 
+     hal_bool_t debug_bit_0;	/* RPA: generic param, for debugging */
+     hal_bool_t debug_bit_1;	/* RPA: generic param, for debugging */
+diff --git a/src/emc/motion/motion.c b/src/emc/motion/motion.c
+index d2cb76159..a3476dbf0 100644
+--- a/src/emc/motion/motion.c
++++ b/src/emc/motion/motion.c
+@@ -602,6 +602,7 @@ static int init_hal_io(void)
+     CALL_CHECK(hal_pin_new_real(mot_comp_id, HAL_OUT, &(emcmot_hal_data->current_vel), 0.0, "motion.current-vel"));
+     CALL_CHECK(hal_pin_new_real(mot_comp_id, HAL_OUT, &(emcmot_hal_data->requested_vel), 0.0, "motion.requested-vel"));
+     CALL_CHECK(hal_pin_new_real(mot_comp_id, HAL_OUT, &(emcmot_hal_data->distance_to_go), 0.0, "motion.distance-to-go"));
++    CALL_CHECK(hal_pin_new_real(mot_comp_id, HAL_OUT, &(emcmot_hal_data->d01_cart_y_observer), 0.0, "motion.d01-cart-y-observer"));
+     CALL_CHECK(hal_pin_new_si32(mot_comp_id, HAL_OUT, &(emcmot_hal_data->program_line), 0, "motion.program-line"));
+     CALL_CHECK(hal_pin_new_bool(mot_comp_id, HAL_OUT, &(emcmot_hal_data->jog_is_active), 0, "motion.jog-is-active"));
+ 

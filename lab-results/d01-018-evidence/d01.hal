@@ -1,0 +1,66 @@
+# first load all the RT modules that will be needed
+# kinematics
+loadrt [KINS]KINEMATICS
+
+# motion controller, get name and thread periods from ini file
+loadrt [EMCMOT]EMCMOT servo_period_nsec=[EMCMOT]SERVO_PERIOD num_joints=[KINS]JOINTS
+
+# add motion controller functions to servo thread
+addf motion-command-handler servo-thread
+addf motion-controller servo-thread
+
+# estop loopback
+net estop-loop iocontrol.0.user-enable-out iocontrol.0.emc-enable-in
+
+# create signals for tool loading loopback
+net tool-prep-loop iocontrol.0.tool-prepare iocontrol.0.tool-prepared
+net tool-change-loop iocontrol.0.tool-change iocontrol.0.tool-changed
+
+# loop position commands back to motion module feedback
+net Xpos  joint.0.motor-pos-cmd => joint.0.motor-pos-fb
+net Ypos  joint.1.motor-pos-cmd => joint.1.motor-pos-fb
+net Zpos  joint.3.motor-pos-cmd => joint.3.motor-pos-fb
+
+# D01 redesigned test-only plant, phase marker and atomic recorder.
+loadrt mux16 count=1
+loadrt mux2 count=1
+loadrt sum2 count=1
+# phase,y1cmd,y2cmd,y1fb,y2fb,y1ferr,y2ferr,y2fault,y1lim,y2lim,offset,motion,cartY,y1fault
+loadrt sampler depth=5000 cfg=fffffffbfffbfb
+addf mux16.0 servo-thread
+addf mux2.0 servo-thread
+addf sum2.0 servo-thread
+addf sampler.0 servo-thread
+setp mux16.0.sel0 0
+setp mux16.0.sel1 0
+setp mux16.0.sel2 0
+setp mux16.0.sel3 0
+setp mux16.0.in00 0
+setp mux16.0.in01 1
+setp mux16.0.in02 2
+setp mux16.0.in03 3
+setp mux16.0.in04 4
+setp mux16.0.in05 5
+setp mux16.0.in06 6
+setp mux16.0.in07 7
+setp mux16.0.in08 8
+setp mux2.0.sel 0
+setp mux2.0.in0 0
+setp mux2.0.in1 0
+setp sum2.0.gain0 1
+setp sum2.0.gain1 1
+setp sampler.0.enable 0
+
+net D01-phase mux16.0.out-f => sampler.0.pin.0
+net Ypos => sampler.0.pin.1 sampler.0.pin.3
+net D01-y2-cmd joint.2.motor-pos-cmd => sum2.0.in0 sampler.0.pin.2
+net D01-offset mux2.0.out => sum2.0.in1 sampler.0.pin.10
+net D01-y2-fb sum2.0.out => joint.2.motor-pos-fb sampler.0.pin.4
+net D01-y1-ferr joint.1.f-error => sampler.0.pin.5
+net D01-y2-ferr joint.2.f-error => sampler.0.pin.6
+net D01-y2-ferrored joint.2.f-errored => sampler.0.pin.7
+net D01-y1-flim joint.1.f-error-lim => sampler.0.pin.8
+net D01-y2-flim joint.2.f-error-lim => sampler.0.pin.9
+net D01-motion-enabled motion.motion-enabled => sampler.0.pin.11
+net D01-cart-y motion.d01-cart-y-observer => sampler.0.pin.12
+net D01-y1-ferrored joint.1.f-errored => sampler.0.pin.13

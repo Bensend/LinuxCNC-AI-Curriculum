@@ -1,0 +1,1 @@
+high y1-ferror=0 y2-ferror=-0.2 y2lim=0.05 y1fault=FALSE y2fault=TRUE cartY=10 motion=FALSE

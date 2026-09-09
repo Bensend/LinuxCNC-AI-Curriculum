@@ -7,12 +7,12 @@ Repository artifacts, not chat history, are authoritative.
 ## Current session marker
 
 - Session start (UTC): `2026-09-09T15:13:58Z`
-- Session end: `ACTIVE`
-- Active work: D01 clean evidence-retention lineage attempt 2, workflow `34362010265`, has completed successfully. Reconciling retained artifacts before any authoritative D01 run. Frozen numeric fixture and D01-002 Gates A-J remain unchanged and UNSCORED.
+- Session end: `PENDING FINAL TIMING APPEND`
+- Active work: D01 clean evidence-retention lineage attempt 3, workflow `34369209171`, is running. Attempt 2 reproduced the validated runtime but its downloaded Actions artifact omitted the actual evidence directory; `results/D01-004-clean-retention-attempt-2-reconciliation.md` records the publication-path defect. Frozen numeric fixture and D01-002 Gates A-J remain unchanged and UNSCORED.
 
 ## Current critical-path state
 
-All modules through **T05** and **C01–C09** are **GRADUATED at 1000 level**. The 1000-series critical path is complete. Highest-priority unblocked 2000-series work remains **D01 — coupled-control stability and tandem-joint authority**, state **EXPERIMENT / CLEAN EVIDENCE-RETENTION PREFLIGHT ACTIVE**.
+All modules through **T05** and **C01–C09** are **GRADUATED at 1000 level**. The 1000-series critical path is complete. Highest-priority unblocked 2000-series work remains **D01 — coupled-control stability and tandem-joint authority**, state **EXPERIMENT / CLEAN EVIDENCE-RETENTION PREFLIGHT ATTEMPT 3 ACTIVE**.
 
 ## Blind external-feedback state
 
@@ -41,17 +41,20 @@ check_for_faults()
 
 `results/D01-002-frozen-runtime-experiment.md` froze P0-P8 and Gates A-J before implementation. The original three-attempt command-driver lineage was retired. The redesigned `015 -> 016 -> 017` lineage also reached its three-attempt boundary: attempt 3 (`34350408741` / `102462004744`) validated all planned runtime numerics—duplicated Y settled at 10; low duplicate offset `0.020` yielded ferror about `-0.02` below `0.050` with no duplicate fault, principal-looking Cartesian Y and motion enabled; high offset `0.200` yielded duplicate-only ferror about `-0.2`, principal clean, Cartesian Y still 10 and global motion disabled; 2,200 atomic samples and zero overruns—but failed only during final provenance export after leaving the source repository. Gates A-J therefore remain UNSCORED.
 
-### Clean evidence-retention redesign
+### Clean evidence-retention lineage
 
-The standalone retention lineage began with `018`, workflow `34355802800`. Attempt 1 failed before runtime because its Python rewrite inserted early provenance commands and then an over-broad regex deleted every line beginning `git diff`, `git rev-parse`, or `git status`, including the newly inserted commands. Consequently `/tmp/d01-observer.patch` was never created and `cp` failed. This is a pure harness rewrite defect; it does not challenge the validated runtime fixture and does not score D01-002 gates.
+Attempt 1 (`018`, workflow `34355802800`) failed before runtime because its Python rewrite deleted newly inserted provenance-producing git commands; `/tmp/d01-observer.patch` never existed. Pure harness defect.
 
-Attempt 2 is `lab-jobs/019-d01-clean-retention-preflight-fix1.sh`, commit `f0cd9efed7cf82f76b300f104decdccf3e4085c6`, workflow `34362010265`. It changes only the rewrite logic: preserve the early source-tree provenance-producing commands and remove only the inherited final provenance block that executes after leaving the source tree. Runtime values remain low/high offsets `0.020/0.200`, relevant ferror limit `0.050`; NML homing/MDI, mux interface, observer placement and phase semantics are unchanged.
+Attempt 2 (`019`, workflow `34362010265`, job `102501097837`, artifact `10109273124`) completed with exit 0 and reproduced the validated fixture without retuning: Y commands/feedback settled at 10; low offset `0.020` gave duplicate ferror `-0.02 < 0.05`, no duplicate fault, Cartesian Y 10, motion enabled; high offset `0.200` gave principal ferror 0, duplicate ferror `-0.2`, duplicate fault true, Cartesian Y 10, motion disabled; fresh re-enable was attempted only after clear; 2,200 atomic rows; zero producer overruns; empty local collector stderr; phase/order predicates passed. The runner locally inventoried patch/SHA/INI/HAL/topology/thread/logs/samples/recorder health and printed an evidence-retention PASS.
+
+However, independent inspection of the downloaded GitHub artifact proved the actual evidence directory was not published. `.github/workflows/lab-runner.yml` uploads only `lab-results/run-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}` plus `LATEST.*`, while 018/019 wrote the package to `lab-results/d01-018-evidence/`. Artifact `10109273124` therefore contained only wrapper outputs and not the trace/config/patch files required by Gate J. `results/D01-004-clean-retention-attempt-2-reconciliation.md` classifies this as **RUNTIME + LOCAL RETENTION CHECK PASS / PUBLISHED ARTIFACT RETENTION FAIL**. Gates A-J remain UNSCORED.
+
+Attempt 3 is `lab-jobs/020-d01-clean-retention-preflight-fix2.sh`, commit `2a838e587affe812940a4f473f408498221f5917`, workflow `34369209171`. It changes only publication placement by directing 019's evidence root beneath the workflow's already-uploaded `run-${id}-${attempt}` directory. Cwd, LinuxCNC source/fixture, offsets `0.020/0.200`, ferror limit `0.050`, NML command path, observer, phase ordering, sampler and frozen gates are unchanged. This is the third and final materially similar clean-retention attempt.
 
 ### Exact next-work checkpoint
 
-1. Inspect only workflow `34362010265` when complete; do not launch a duplicate while active.
-2. If it fails, classify only the retention-lineage harness/evidence defect. This is attempt 2 of the clean retention lineage; one materially similar correction remains before the three-attempt classification boundary. Do not retune runtime values or frozen gates.
-3. If it passes, reconcile the retained artifact contents and provenance as non-authoritative evidence-retention proof.
-4. Then create one separate independent authoritative D01 run using unchanged D01-002 P0-P8 and Gates A-J. Score gates from retained evidence, not live assertions.
-5. Authoritative evidence must retain one atomic realtime stream, zero producer overruns, monotonic sample indices, collector stderr state, phase-before-mutation witnesses, exact observer-source diff, config/HAL/test source, startup logs, topology/order and gate-analysis output.
-6. Keep F02 blocked until D01 has an accepted authority/fault-containment contract. Preserve sealed benchmark separation and delayed-retention obligation.
+1. Inspect only workflow `34369209171`; do not launch a duplicate while active.
+2. If PASS, download artifact and verify the *files themselves* beneath the run directory: full `atomic.samples`, nonempty `observer.patch`, pinned `linuxcnc-commit.txt`, INI/HAL, topology/thread order, startup stdout/stderr, `recorder-health.txt`, empty/nonfatal collector stderr, and inventory. Re-run offline checks over the retained atomic stream for monotonic indices, phase-before-mutation witnesses, low hidden-divergence window, high duplicate-only trip, and <=3-sample motion-disable consequence.
+3. Only after that artifact-level reconciliation passes may one separate independent authoritative D01 run be created using unchanged D01-002 P0-P8 and Gates A-J. Score gates from the retained authoritative artifact, not live assertions.
+4. If attempt 3 fails materially similarly, stop the clean retention lineage under the three-attempt rule and redesign the retention mechanism before any further D01 lab run. Do not create a fourth incremental publication-path patch.
+5. Keep F02 blocked until D01 has an accepted authority/fault-containment contract. Preserve sealed benchmark separation and delayed-retention obligation.

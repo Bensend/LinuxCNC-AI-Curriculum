@@ -10,7 +10,7 @@ All modules through **T05** and **C01–C09** are **GRADUATED at 1000 level**. *
 
 **S02 — feedback integrity, diversity and common-cause reasoning has completed its authoritative experiment, Gates A–J, frozen adversarial exam, and counterfactual/promotion test.** Its sole remaining graduation requirement is the deliberately information-separated **fresh-AI handoff**; the current learner instance must not self-certify as fresh. S02 therefore remains graduation-pending rather than falsely marked `GRADUATED`.
 
-The highest-priority currently executable dependency is **E20 — hm2_eth / HostMot2 watchdog recovery across versions**, now state `EXPERIMENT` after source/community/version-delta work, call-flow documentation, and experiment freeze.
+The highest-priority currently executable dependency is **E20 — hm2_eth / HostMot2 watchdog recovery across versions**, state `EXPERIMENT`. Source/community/version-delta work, call-flow documentation, experiment freeze, implementation, and the first non-authoritative preflight launch are complete.
 
 F02 remains blocked by completion/acceptance of S02, E20 and X02. X02 remains dependent on X01.
 
@@ -49,7 +49,8 @@ Durable artifacts:
 
 - `guides/E20-hm2-eth-watchdog-recovery-version-matrix.md`;
 - `call-flows/E20-hm2-eth-soft-error-watchdog-recovery.md`;
-- frozen `experiments/E20-001-transport-watchdog-recovery-boundaries.md`.
+- frozen `experiments/E20-001-transport-watchdog-recovery-boundaries.md`;
+- `lab-jobs/025-e20-transport-watchdog-preflight.sh`.
 
 ### Source/version findings
 
@@ -61,20 +62,29 @@ Current master preserves the high-level state model but has changed receive/back
 
 HostMot2 watchdog state remains a separate authority mechanism. A watchdog bite disconnects physical I/O pins while internal FPGA module state can continue, so changing internal encoder/step/PWM state cannot prove physical output-pin activity. Old 2.5/2.7 documentation's blanket wording that all board communication stops after a watchdog bite is retained only as a historical/version-sensitive claim, not a timeless current-version invariant.
 
-### E20-001 frozen experiment
+### E20-001 frozen experiment and first preflight
 
-The first deterministic no-hardware model is frozen before implementation. It targets v2.9.10/current-lineage state distinctions using source-backed defaults `limit=10`, `increment=2`, `decrement=1` and a 1 ms realtime sampler.
+The deterministic no-hardware model was frozen before implementation. It targets v2.9.10/current-lineage state distinctions using source-backed defaults `limit=10`, `increment=2`, `decrement=1` and a 1 ms realtime sampler.
 
 Frozen P0–P8 cover clean baseline; one soft packet error; a clean cycle that clears current error while accumulated history remains; five consecutive errors reaching `io_error`; explicit `io_error` clear/driver recovery; a separate watchdog bite; internal-generator continuation while physical I/O authority is absent; physical-I/O restoration without state revalidation; explicit revalidation/reauthorization; and immediate revocation on a fresh relapse.
 
 Frozen Gates A–J require one atomic realtime stream with producer recorder-health evidence and explicitly forbid automatic motion reauthorization from transport recovery, `io_error` clear, watchdog reset, or internal generator activity alone. Watchdog/physical-I/O/state-revalidation signals are laboratory-only witnesses; the experiment cannot establish physical stopping or functional-safety performance.
 
+`lab-jobs/025-e20-transport-watchdog-preflight.sh` implements the frozen model as a standalone realtime component placed before `sampler` in one 1 ms thread and retains component source, HAL/topology/thread order, atomic samples, analysis and producer overrun state.
+
+First non-authoritative preflight:
+
+- workflow **`34397554426`**;
+- job **`102620888697`**;
+- source commit **`fb99e81ad98fcace8c6af88c0751d8c3fa4cf136`**;
+- current state at this checkpoint: **RUNNING**;
+- frozen Gates A–J remain **UNSCORED**.
+
 ## Exact next-work checkpoint
 
-1. Implement `E20-001` as the smallest standalone realtime HAL component, placed before `sampler` in one **1 ms** thread.
-2. Preserve the frozen numeric contract (`limit=10`, `increment=2`, `decrement=1`), P0–P8 and Gates A–J exactly; do not tune them after seeing output.
-3. Retain model source, generated HAL/topology/thread order, atomic samples and producer-side sampler-overrun state.
-4. Run one **non-authoritative preflight**. Correct harness defects only; a model contradiction must be reconciled rather than hidden by retuning.
-5. Only after artifact-level preflight validity, run one separate authoritative E20 execution and score frozen Gates A–J from retained evidence.
-6. Then freeze/execute the E20 adversarial exam, correction loop if needed, fresh-AI handoff and counterfactual promotion test.
-7. Keep F02 blocked until S02's fresh handoff plus accepted E20 and X02 contracts are complete. Preserve delayed-retention/sealed-benchmark information separation.
+1. Inspect only workflow `34397554426`; do not launch a duplicate while it is running.
+2. If it fails, classify harness/retention/model-implementation defect versus a real contradiction of the frozen prediction. Correct only a harness defect; do not retune `limit=10`, increment=2, decrement=1, P0–P8 or Gates A–J.
+3. If it passes, download and independently inspect the workflow artifact instead of trusting workflow status. Verify atomic tag continuity, zero producer overruns and the exact P1/P2/P3/P4/P5/P6/P7/P8 discriminators from retained samples.
+4. Only after artifact-level preflight validity, create one separate independent authoritative E20 execution with the frozen behavioral contract unchanged.
+5. Score Gates A–J only from retained authoritative evidence; then freeze/execute the E20 adversarial exam, correction loop if needed, fresh-AI handoff and counterfactual promotion test.
+6. Keep F02 blocked until S02's fresh handoff plus accepted E20 and X02 contracts are complete. Preserve delayed-retention/sealed-benchmark information separation.

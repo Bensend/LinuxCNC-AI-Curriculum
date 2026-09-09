@@ -1,0 +1,4 @@
+72da592f304fcdfb1261b441f4f906a9cc4c9a1cf8b5c9b9d54e255202911c0f  src/hal/drivers/mesa-hostmot2/hostmot2.c
+3d6c8bf13ab7374a87af0027bd8cf1d48ca77ffca95fdecd75eebb824bfb1115  src/hal/drivers/mesa-hostmot2/tram.c
+de17b6ec766831dd84391d9fcf1ec0765ed2dd47762562be027f5a2a709f9660  src/hal/drivers/mesa-hostmot2/watchdog.c
+fcdc6ce2a55d5d284cbba9a0ceb9a409583c8b584403f945d341dfce46f53660  src/hal/drivers/mesa-hostmot2/hostmot2-lowlevel.h

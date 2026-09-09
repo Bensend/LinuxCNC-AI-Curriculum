@@ -1,0 +1,18 @@
+--- /home/runner/work/LinuxCNC-AI-Curriculum/LinuxCNC-AI-Curriculum/lab-results/run-34312552726-1/executed-phase-first-preflight.sh	2026-09-09 04:54:52.499197140 +0000
++++ /home/runner/work/_temp/c06-046-authoritative.sh	2026-09-09 04:54:52.647220509 +0000
+@@ -11,7 +11,7 @@
+ RUN_EVID="$ROOT/lab-results/run-${GITHUB_RUN_ID:-manual}-${GITHUB_RUN_ATTEMPT:-1}"
+ mkdir -p "$RUN_EVID"
+ 
+-echo '== C06 phase-publication redesign preflight (NON-AUTHORITATIVE) =='
++echo '== C06-030 authoritative phase-first run =='
+ date -u '+UTC start: %Y-%m-%dT%H:%M:%SZ'
+ echo "Pinned upstream commit: $PINNED"
+ echo 'Frozen gates: experiments/C06-030-transport-watchdog-fault-plan.md'
+@@ -280,5 +280,5 @@
+   exit 26
+ fi
+ 
+-echo 'NON-AUTHORITATIVE PREFLIGHT: internal analyzer reached PASS; frozen Gates remain unaccepted' | tee "$RUN_EVID/verdict.txt"
++echo 'AUTHORITATIVE C06-030: frozen Gates A-H PASS with preflight-proven phase publication' | tee "$RUN_EVID/verdict.txt"
+ date -u '+UTC finish: %Y-%m-%dT%H:%M:%SZ'

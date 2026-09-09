@@ -6,9 +6,9 @@ Repository artifacts, not chat history, are authoritative.
 
 ## Current session marker
 
-- Session start (UTC): `2026-09-09T14:11:06Z`
-- Session end: `2026-09-09T14:11:54Z`
-- Active work: D01 clean evidence-retention lineage attempt 2, `lab-jobs/019-d01-clean-retention-preflight-fix1.sh`, workflow `34362010265`, queued/running. Frozen numeric fixture and D01-002 Gates A-J remain unchanged and UNSCORED.
+- Session start (UTC): `2026-09-09T15:13:58Z`
+- Session end: `ACTIVE`
+- Active work: D01 clean evidence-retention lineage attempt 2, workflow `34362010265`, has completed successfully. Reconciling retained artifacts before any authoritative D01 run. Frozen numeric fixture and D01-002 Gates A-J remain unchanged and UNSCORED.
 
 ## Current critical-path state
 

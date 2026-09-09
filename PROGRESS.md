@@ -6,7 +6,7 @@ Repository artifacts, not chat history, are authoritative.
 
 ## Current critical-path state
 
-All modules through **T05**, **C01**, **C02**, **C03**, **C04**, and **C05** are **GRADUATED at 1000 level**. Phase 10 remains active. Highest-priority unblocked work is **C06 — communication/watchdog fault handling**, state **CORRECTIONS / AUTHORITATIVE ATTEMPT 2 RUNNING**.
+All modules through **T05**, **C01**, **C02**, **C03**, **C04**, and **C05** are **GRADUATED at 1000 level**. Phase 10 remains active. Highest-priority unblocked work is **C06 — communication/watchdog fault handling**, state **CORRECTIONS / ESSENTIAL-NOW HARNESS REDESIGN**.
 
 ## Blind external-feedback state
 
@@ -18,7 +18,7 @@ All modules through **T05**, **C01**, **C02**, **C03**, **C04**, and **C05** are
 
 Pinned LinuxCNC revision: `8bf4605ae81042248add031e94c77300406e0413`.
 
-Primary durable artifacts now include:
+Primary durable artifacts:
 
 - `guides/C06-communication-watchdog-fault-research.md`
 - `call-flows/C06-hostmot2-transport-watchdog-order.md`
@@ -27,8 +27,9 @@ Primary durable artifacts now include:
 - `experiments/C06-030-fixture-construction-notes.md`
 - `results/C06-032-watchdog-load-preflight-reconciliation.md`
 - `results/C06-033-attempt-1-reconciliation.md`
-- `lab-jobs/033-c06-transport-watchdog-authoritative.sh`
-- `lab-jobs/034-c06-transport-watchdog-authoritative-api-fix.sh`
+- `results/C06-034-attempt-2-reconciliation.md`
+- `results/C06-035-attempt-3-reconciliation-and-redesign-decision.md`
+- retired failed lineage: `lab-jobs/033-c06-transport-watchdog-authoritative.sh`, `034-c06-transport-watchdog-authoritative-api-fix.sh`, `035-c06-transport-watchdog-authoritative-shmem-ref-fix.sh`.
 
 Pinned-source findings remain unchanged:
 
@@ -36,9 +37,11 @@ Pinned-source findings remain unchanged:
 - Successfully returned watchdog status is processed separately from low-level transport state.
 - `watchdog.has_bit` is a real `HAL_IO` pin asserted from watchdog status and explicitly cleared by the user before generic recovery proceeds.
 - Normal watchdog recovery is separately blocked while either `io_error` or `watchdog.has_bit` remains asserted.
-- The C06 fixture uses `hm2_test` because it is hardware-free and provides the narrow low-level read/write injection seam.
-- Pattern 15's watchdog status input remains only fake register `0x2004` bit 0; generic `watchdog.c` remains byte-identical.
+- Pattern 15's intended watchdog status input is fake register `0x2004` bit 0; generic `watchdog.c` is not to be modified.
 - The three-consecutive-failed-read C06 threshold is a deterministic test analogue of transport escalation, not a claim about a particular hm2_eth installation's packet-error-limit.
+- At this pinned HAL revision, modern `hal_pin_new_*()` references are opaque handles, but the caller-provided handle-storage address must still reside in HAL shared memory. `hal_malloc()` is the supported allocator for pin/parameter storage.
+
+Official documentation continues to distinguish hm2_eth packet-error escalation from HostMot2 watchdog state: packet errors increase `packet-error-level` toward low-level `io-error`, while the firmware watchdog is serviced by normal HostMot2 write activity and changes board I/O connectivity when it bites. Historical developer discussion additionally warns that a communication delay may *cause* a watchdog bite by delaying service; causal linkage is not state identity.
 
 Retained C06 boundary:
 
@@ -52,27 +55,29 @@ fault reset != proof plant is safe to resume
 ordinary HostMot2/HAL fault handling != functional-safety certification
 ```
 
-## C06-030 attempt 1 reconciliation
+## C06-030 authoritative attempt history
 
-Workflow **`34298423081`**, job **`102299966701`**, artifact **`10084069925`**, head `77a274b1275cea22dd3f8df63c866b20ba4c4c40` is formally **HARNESS INVALID**.
+### Attempt 1 — HARNESS INVALID before P0
 
-The pinned tree built and retained its patch/logs, but `hm2_test` failed before P0 with `HAL: ERROR: data_ptr_addr not in shared memory`. The attempt-1 lab patch had incorrectly used deprecated `hal_bit_t *` / `hal_u32_t *` data-pointer exports and direct opaque `io_error` assignment against a revision whose current HAL API uses opaque `hal_bool_t` / `hal_uint_t` references and getter/setter functions. The compiler warnings independently exposed the same type mismatch. Since `hm2_test` never loaded, no sampler stream or behavioral phase existed and **Gates A–H remain UNSCORED**.
+Workflow `34298423081`, job `102299966701`, artifact `10084069925`. Legacy/direct HAL pointer export was incompatible with the pinned opaque-reference HAL API. No behavioral phase ran; Gates A–H UNSCORED.
 
-Actual attempt-1 job interval: `2026-09-09T01:15:05Z`–`01:18:16Z` (3.2 min). Add this HARNESS INVALID compute row to `LAB_COMPUTE_LOG.md` during the next ledger edit if not already present; do not omit failed compute from totals.
+### Attempt 2 — HARNESS INVALID before P0
 
-## C06-030 attempt 2
+Workflow `34299295015`, job `102302593867`, artifact `10084380381`, curriculum head `994f452da0a599d13e4d41ce560c977dabe216be`. The outer workflow completed its evidence-capture path, but retained inner evidence exited `24`: `HAL: ERROR: data_ptr_addr not in shared memory`. The API correction moved to opaque references/getters/setters but left the reference slots as file-scope C storage rather than HAL shared memory. No P0-P6 phase ran; Gates A–H UNSCORED.
 
-Source-grounded correction commit: **`994f452da0a599d13e4d41ce560c977dabe216be`**.
+### Attempt 3 — HARNESS INVALID before LinuxCNC execution
 
-Attempt 2 changes only lab fixture access mechanics: C06 controls are converted to `hal_bool_t` / `hal_uint_t`, exported with `hal_pin_new_bool()` / `hal_pin_new_ui32()`, and read/written through `hal_get_*()` / `hal_set_*()`; the real generic I/O error is asserted with `hal_set_bool(*this->io_error, 1)`. Frozen P0–P6 semantics, threshold, fake watchdog-status address, prediction, source-integrity checks, and Gates A–H are unchanged.
+Workflow `34302451216`, job `102312063998`, artifact `10085401335`, curriculum head `99f8890e466706fc182dfd7b79f2929ca9680b2f`. The wrapper intended to move the eight reference slots into a `hal_malloc()` structure, but nested Python triple-quoted source rewriting produced a `SyntaxError`; inner exit `1`. LinuxCNC did not run; Gates A–H remain UNSCORED.
 
-Authoritative attempt-2 workflow **`34299295015`**, job **`102302593867`**, was in progress when this checkpoint was committed. Do not launch a duplicate.
+### Three-attempt decision
+
+**ESSENTIAL NOW / REDESIGN.** The communication-vs-watchdog distinction is central to C06 and later failure-engineering work, so behavioral verification is not dropped or promoted. The `033 -> 034 -> 035` wrapper lineage is retired. Do not launch a fourth incremental patch of that family.
 
 ## Exact next-work checkpoint
 
-1. Inspect only workflow `34299295015`, job `102302593867`; retain final job times, artifact ID, complete patch, build/HAL logs, raw atomic sampler trace, controller log, and exit code.
-2. If `hm2_test` still fails before P0, classify the precise load/topology problem as HARNESS INVALID and correct only that problem. Do not modify frozen Gates A–H or the transport-vs-watchdog prediction.
-3. If the run reaches P0–P6, score the retained single realtime stream against the unchanged frozen gates. A valid gate violation is behavioral evidence and must not be retuned.
-4. Pay particular attention to P6 ordinary user clearing of the real `HAL_IO watchdog.has_bit` while it is connected for atomic observation. Pinned `watchdog.c` requires user clear before generic recovery; if HAL signal topology prevents that command, treat it as an observation/control harness topology defect, not LinuxCNC behavioral evidence.
-5. Once an attempt is accepted, update `LAB_COMPUTE_LOG.md` from actual job timestamps and then continue C06 adversarial exam, fresh-AI novel-scenario handoff, corrections, and promotion/counterfactual audit.
-6. Keep BL-DEV-002 delayed retention separate from the successful 10/10 transfer retest.
+1. Build a **clean standalone construction fixture** from the pinned `hm2_test` source/pattern-15 requirements; do not generate it by text-wrapping any of attempts 1–3.
+2. Put all lab-only opaque HAL reference slots in one `hal_malloc()`-allocated structure and keep value access through `hal_get_*()` / `hal_set_*()`.
+3. Run a **non-authoritative compile/load preflight only**. Prove the lab injection/observation pins, real generic `io_error`, and real watchdog `has_bit`/`timeout_ns` objects exist; retain patch/source hashes and production HostMot2 SHA checks. Do not score P0-P6 in this preflight.
+4. If and only if the clean preflight passes, freeze that exact fixture patch/source hash and execute one new authoritative C06-030 behavioral run against the already-frozen P0-P6 and Gates A–H. A valid gate violation is behavioral evidence and must not be retuned.
+5. Backfill C06 attempts 1–3 into `LAB_COMPUTE_LOG.md` from authoritative job timestamps; failed compute counts.
+6. After accepted behavioral evidence, continue the frozen C06 adversarial exam, fresh-AI novel-scenario handoff, corrections, and promotion/counterfactual audit.

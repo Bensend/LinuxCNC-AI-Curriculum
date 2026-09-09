@@ -12,6 +12,8 @@ All modules through **T05** and **C01–C09** are **GRADUATED at 1000 level**. *
 
 **E20 — hm2_eth / HostMot2 watchdog recovery across versions is now TECHNICALLY ACCEPTED at 2000 level and graduation-pending only its information-separated fresh-AI handoff.** Its independent authoritative retained-evidence experiment passed unchanged Gates A–J 10/10; its already-frozen adversarial exam passed 20/20; its counterfactual/promotion test found no present basis for 3000 promotion. The current learner must not self-certify the fresh handoff.
 
+**X01 — recorder perturbation and long-duration retention is now ACTIVE at 2000 level in RESEARCH/SOURCE with its first experiment frozen before execution.** `guides/X01-recorder-perturbation-and-long-duration-retention.md` establishes the realtime `sampler` -> shared HAL stream -> userspace `halsampler` call flow, producer/consumer recorder-health distinction, community failure cases, and the version-sensitive distinction between the exported `sampler.N.sample-num` pin and the implicit HAL-stream sequence actually consumed by `halsampler -t`. `experiments/X01-001-sampler-retention-perturbation.md` freezes P0–P5 and Gates A–J for baseline continuity, bounded stop/drain, forced FIFO loss, recorder/control distinction, execution-cost measurement and durable evidence publication.
+
 F02 remains blocked by completion/acceptance of S02, E20 and X02. X02 remains dependent on X01.
 
 ## Blind external-feedback state
@@ -70,10 +72,22 @@ Key retained discriminators include:
 
 `evaluation/E20-fresh-ai-handoff-packet.md` is **READY / NOT YET EVALUATED** and contains a novel scenario without a prepared solution. The current learner instance must not certify itself as fresh.
 
+## X01 activation / frozen first experiment
+
+Pinned source: LinuxCNC `8bf4605ae81042248add031e94c77300406e0413`.
+
+Source inspection confirms that `sampler.c::sample()` runs as a scheduled realtime HAL function, snapshots configured inputs, then attempts one `hal_stream_write()` for the record. FIFO-full write failure drops the recorder record and increments producer-side `sampler.N.overruns`. `sampler_usr.c::main()` runs in userspace, attaches to the shared HAL stream, reads an implicit stream sample number, reports discontinuity as `overrun`, and optionally prints that implicit sequence with `-t`.
+
+A version-sensitive documentation/source issue was preserved explicitly: the pinned `sampler.c` exports `sampler.N.sample-num`, but the inspected `sample()` path does not increment/use that pin; `halsampler -t` obtains its sequence from the HAL stream itself. X01 therefore treats implicit stream tags plus producer-side overrun evidence as the recorder-integrity oracle until further version-specific verification.
+
+Community research also found a useful userspace-lifecycle failure case: prematurely killing an indefinite `halsampler` reader can leave FIFO data undrained and make capture look unreliable even when the realtime producer behaved correctly. That field report is now a test target rather than accepted as source truth.
+
+`experiments/X01-001-sampler-retention-perturbation.md` is frozen before first execution. It tests normally drained continuity, stop-then-bounded-drain terminal retention, forced consumer starvation/FIFO saturation, recorder-loss versus producer-cycle distinction, narrow-vs-wide recorder execution cost, and durable publication of raw trace plus provenance/health evidence.
+
 ## Exact next-work checkpoint
 
 1. Preserve E20 and S02 as **graduation-pending fresh-AI handoff** rather than self-certifying either from the current learner instance.
-2. Run `evaluation/E20-fresh-ai-handoff-packet.md` through a genuinely fresh, information-separated AI evaluator. Record the evaluator identity/session, confirm it had no prepared answer, score the declared pass criteria, and incorporate any required corrections before marking E20 `GRADUATED`.
-3. Likewise complete S02's genuinely fresh-AI handoff before marking S02 `GRADUATED`.
-4. While those information-separated evaluations are unavailable, resume the highest-priority dependency that does not require falsely graduating S02/E20. X01 should be selected next if its declared prerequisites remain satisfied; X02 follows X01.
-5. Keep F02 blocked until S02's fresh handoff, E20's fresh handoff, and accepted X02 contracts are complete. Preserve delayed-retention/sealed-benchmark information separation.
+2. Execute X01-001 as a **non-authoritative implementation preflight** using the frozen P0–P5 / Gates A–J contract. Correct harness defects only; do not retune the behavioral gates to obtain a pass.
+3. The first preflight must retain exact source revision, topology/thread order, raw `halsampler -t` trace, phase-boundary `sampler.0.overruns/curr-depth/full`, process statuses, and quantitative narrow-vs-wide recorder timing evidence. Inspect the artifact itself rather than workflow status.
+4. If the preflight exercises the model successfully, launch a separate authoritative X01 run unchanged. If it fails, classify whether the failure is harness, source-model contradiction, or infrastructure before retrying; apply the three-attempt rule.
+5. X02 remains blocked until X01 produces an accepted recorder-integrity/perturbation contract. Keep F02 blocked until S02's fresh handoff, E20's fresh handoff, and accepted X02 contracts are complete. Preserve delayed-retention/sealed-benchmark information separation.

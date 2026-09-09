@@ -1,0 +1,9 @@
+E20-025 NON-AUTHORITATIVE PREFLIGHT
+Target source: LinuxCNC v2.9.10
+Servo period: 1000000 ns
+packet-error-limit: 10
+packet-error-increment: 2
+packet-error-decrement: 1
+Frozen phases: P0-P8 exactly as experiments/E20-001-transport-watchdog-recovery-boundaries.md
+Frozen Gates A-J remain UNSCORED in this preflight.
+Synthetic watchdog/physical-I/O/state-revalidation signals are laboratory-only witnesses.

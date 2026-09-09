@@ -1,0 +1,24 @@
+loadrt threads name1=servo-thread period1=1000000
+loadrt s02_model
+loadrt sampler depth=5000 cfg=fffffbbbbbbb
+addf s02_model.0 servo-thread
+addf sampler.0 servo-thread
+setp s02_model.0.phase-cycles 200
+setp s02_model.0.disagree-threshold 0.050
+setp s02_model.0.p1-offset 0.200
+setp s02_model.0.p2-step 0.002
+setp s02_model.0.stale-threshold 0.050
+setp sampler.0.enable 0
+net s02-phase s02_model.0.phase => sampler.0.pin.0
+net s02-physical-a s02_model.0.physical-a => sampler.0.pin.1
+net s02-physical-b s02_model.0.physical-b => sampler.0.pin.2
+net s02-reported-a s02_model.0.reported-a => sampler.0.pin.3
+net s02-reported-b s02_model.0.reported-b => sampler.0.pin.4
+net s02-transport s02_model.0.transport-healthy => sampler.0.pin.5
+net s02-quad-diag s02_model.0.quadrature-diag => sampler.0.pin.6
+net s02-pair-disagreement s02_model.0.pair-disagreement => sampler.0.pin.7
+net s02-oracle-stale-b s02_model.0.oracle-stale-b => sampler.0.pin.8
+net s02-freshness-unknown s02_model.0.freshness-unknown => sampler.0.pin.9
+net s02-restricted-detect s02_model.0.restricted-detect => sampler.0.pin.10
+net s02-oracle-common-mode s02_model.0.oracle-common-mode => sampler.0.pin.11
+start

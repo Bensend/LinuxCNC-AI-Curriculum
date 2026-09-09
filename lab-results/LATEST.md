@@ -1,42 +1,42 @@
 # Latest LinuxCNC Lab Result
 
-- Job: `014-d01-duplicated-feedback-preflight-final`
-- Job file: `lab-jobs/014-d01-duplicated-feedback-preflight-final.sh`
-- Workflow run ID: `34345951372`
+- Job: `015-d01-redesigned-observer-preflight`
+- Job file: `lab-jobs/015-d01-redesigned-observer-preflight.sh`
+- Workflow run ID: `34347323567`
 - Attempt: `1`
-- Source commit: `38cea65006ba226b8f6c8dc88e51ba98231c139b`
+- Source commit: `8afb5c9c17fcf7b5343e30ff018573be1cfbe6a5`
 - Exit code: `1`
-- Finished UTC: `2026-09-09T11:35:43Z`
+- Finished UTC: `2026-09-09T11:50:09Z`
 
 ## Metadata
 ```text
 LinuxCNC AI Curriculum Lab
-UTC start: 2026-09-09T11:30:55Z
-Repository commit: 38cea65006ba226b8f6c8dc88e51ba98231c139b
-Workflow run: 34345951372 attempt 1
-Job file: lab-jobs/014-d01-duplicated-feedback-preflight-final.sh
+UTC start: 2026-09-09T11:46:48Z
+Repository commit: 8afb5c9c17fcf7b5343e30ff018573be1cfbe6a5
+Workflow run: 34347323567 attempt 1
+Job file: lab-jobs/015-d01-redesigned-observer-preflight.sh
 Runner: Linux runnervmejwal 6.17.0-1022-azure #22-Ubuntu SMP Mon Jul 27 17:24:03 UTC 2026 x86_64 x86_64 x86_64 GNU/Linux
 Inner lab timeout: 70 minutes (job ceiling: 75 minutes)
 
-UTC finish: 2026-09-09T11:35:43Z
+UTC finish: 2026-09-09T11:50:09Z
 ```
 
 ## Standard output
 ```text
-== D01 non-authoritative duplicated-feedback preflight — attempt 3 ==
-UTC start: 2026-09-09T11:30:55Z
+== D01 redesigned non-authoritative observer preflight ==
+UTC start: 2026-09-09T11:46:48Z
 Pinned upstream commit: 8bf4605ae81042248add031e94c77300406e0413
-Corrections only: join the existing principal-Y signal instead of re-linking its pins; use a mux2 output as the writable offset signal; suppress GUI intro image; require Task/TCP+HAL readiness.
-This run DOES NOT score frozen D01-002 Gates A-J.
+Three-attempt classification: ESSENTIAL NOW / REDESIGN. Retired linuxcncrsh command-driver lineage.
+This run validates topology/order/numerics and the test-only atomic Cartesian observer. It DOES NOT score frozen D01-002 Gates A-J.
 Get:1 file:/etc/apt/apt-mirrors.txt Mirrorlist [144 B]
-Hit:2 http://azure.archive.ubuntu.com/ubuntu noble InRelease
 Get:6 https://packages.microsoft.com/ubuntu/24.04/prod noble InRelease [3600 B]
+Hit:2 http://azure.archive.ubuntu.com/ubuntu noble InRelease
 Get:3 http://azure.archive.ubuntu.com/ubuntu noble-updates InRelease [126 kB]
 Get:4 http://azure.archive.ubuntu.com/ubuntu noble-backports InRelease [126 kB]
 Get:5 http://azure.archive.ubuntu.com/ubuntu noble-security InRelease [126 kB]
 Get:7 https://dl.google.com/linux/chrome-stable/deb stable InRelease [2548 B]
-Get:8 https://packages.microsoft.com/ubuntu/24.04/prod noble/main arm64 Packages [406 kB]
-Get:9 https://packages.microsoft.com/ubuntu/24.04/prod noble/main amd64 Packages [454 kB]
+Get:8 https://packages.microsoft.com/ubuntu/24.04/prod noble/main amd64 Packages [454 kB]
+Get:9 https://packages.microsoft.com/ubuntu/24.04/prod noble/main arm64 Packages [406 kB]
 Get:10 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 Packages [1260 kB]
 Get:11 http://azure.archive.ubuntu.com/ubuntu noble-updates/main Translation-en [292 kB]
 Get:12 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 Components [181 kB]
@@ -57,15 +57,13 @@ Get:26 http://azure.archive.ubuntu.com/ubuntu noble-security/universe amd64 Comp
 Get:27 http://azure.archive.ubuntu.com/ubuntu noble-security/restricted amd64 Packages [1441 kB]
 Get:28 http://azure.archive.ubuntu.com/ubuntu noble-security/restricted Translation-en [334 kB]
 Get:29 https://dl.google.com/linux/chrome-stable/deb stable/main amd64 Packages [1405 B]
-Fetched 11.9 MB in 1s (8975 kB/s)
+Fetched 11.9 MB in 1s (8346 kB/s)
 Reading package lists...
 Reading package lists...
 Building dependency tree...
 Reading state information...
 git is already the newest version (1:2.55.0-0ppa1~ubuntu24.04.2).
 git set to manually installed.
-netcat-openbsd is already the newest version (1.226-1ubuntu2).
-netcat-openbsd set to manually installed.
 procps is already the newest version (2:4.0.4-4ubuntu3.3).
 procps set to manually installed.
 The following additional packages will be installed:
@@ -357,7 +355,7 @@ Get:166 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 python3-
 Get:167 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 python3-unidiff all 0.7.3-1 [11.0 kB]
 Get:168 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 equivs all 2.3.1 [19.0 kB]
 Get:169 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 libauthen-sasl-perl all 2.1700-1 [42.9 kB]
-Fetched 11.0 MB in 25s (435 kB/s)
+Fetched 11.0 MB in 2s (5797 kB/s)
 Selecting previously unselected package autopoint.
 (Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 201676 files and directories currently installed.)
 Preparing to unpack .../000-autopoint_0.21-14ubuntu2_all.deb ...
@@ -1040,6 +1038,42 @@ Processing triggers for man-db (2.12.0-4build2) ...
 Not building database; man-db/auto-update is not 'true'.
 Processing triggers for install-info (7.1-3build2) ...
 Processing triggers for libc-bin (2.39-0ubuntu8.8) ...
+diff --git a/src/emc/motion/control.c b/src/emc/motion/control.c
+index 2ddf587b4..5f484c325 100644
+--- a/src/emc/motion/control.c
++++ b/src/emc/motion/control.c
+@@ -248,6 +248,7 @@ void emcmotController(void *arg, long period)
+     handle_kinematicsSwitch();
+     process_inputs();
+     do_forward_kins();
++    hal_set_real(emcmot_hal_data->d01_cart_y_observer, emcmotStatus->carte_pos_fb.tran.y);
+     process_probe_inputs();
+     check_for_faults();
+     set_operating_mode();
+diff --git a/src/emc/motion/mot_priv.h b/src/emc/motion/mot_priv.h
+index 64cbb5071..4cccba53c 100644
+--- a/src/emc/motion/mot_priv.h
++++ b/src/emc/motion/mot_priv.h
+@@ -147,6 +147,7 @@ typedef struct {
+     hal_real_t current_vel;	/* RPI: velocity magnitude in machine units */
+     hal_real_t requested_vel;   /* RPI: requested velocity magnitude in machine units */
+     hal_real_t distance_to_go;	/* RPI: distance to go in current move*/
++    hal_real_t d01_cart_y_observer; /* D01 test-only Cartesian-Y observer */
+ 
+     hal_bool_t debug_bit_0;	/* RPA: generic param, for debugging */
+     hal_bool_t debug_bit_1;	/* RPA: generic param, for debugging */
+diff --git a/src/emc/motion/motion.c b/src/emc/motion/motion.c
+index d2cb76159..a3476dbf0 100644
+--- a/src/emc/motion/motion.c
++++ b/src/emc/motion/motion.c
+@@ -602,6 +602,7 @@ static int init_hal_io(void)
+     CALL_CHECK(hal_pin_new_real(mot_comp_id, HAL_OUT, &(emcmot_hal_data->current_vel), 0.0, "motion.current-vel"));
+     CALL_CHECK(hal_pin_new_real(mot_comp_id, HAL_OUT, &(emcmot_hal_data->requested_vel), 0.0, "motion.requested-vel"));
+     CALL_CHECK(hal_pin_new_real(mot_comp_id, HAL_OUT, &(emcmot_hal_data->distance_to_go), 0.0, "motion.distance-to-go"));
++    CALL_CHECK(hal_pin_new_real(mot_comp_id, HAL_OUT, &(emcmot_hal_data->d01_cart_y_observer), 0.0, "motion.d01-cart-y-observer"));
+     CALL_CHECK(hal_pin_new_si32(mot_comp_id, HAL_OUT, &(emcmot_hal_data->program_line), 0, "motion.program-line"));
+     CALL_CHECK(hal_pin_new_bool(mot_comp_id, HAL_OUT, &(emcmot_hal_data->jog_is_active), 0, "motion.jog-is-active"));
+ 
 D: Found operating system 'linux-gnu'.
 I: Argument uspace is accepted for compatibility, but ignored
 I: Successfully configured for 'uspace-Ubuntu-24.04'.
@@ -1466,7 +1500,7 @@ Get:327 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 libmodbus-de
 Get:328 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 libtirpc-dev amd64 1.3.4+ds-1.1build1 [193 kB]
 Get:329 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 python3-xlib all 0.33-2 [120 kB]
 Preconfiguring packages ...
-Fetched 270 MB in 1min 11s (3829 kB/s)
+Fetched 270 MB in 8s (33.6 MB/s)
 Selecting previously unselected package libdebuginfod-common.
 (Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 208197 files and directories currently installed.)
 Preparing to unpack .../000-libdebuginfod-common_0.190-1.1ubuntu0.1_all.deb ...
@@ -2831,7 +2865,7 @@ checking for c++ option to enable C++11 features... none needed
 checking for a BSD-compatible install... /usr/bin/install -c
 checking whether c++ supports C++20 features by default... no
 checking whether c++ supports C++20 features with -std=gnu++20... yes
-checking build toplevel... /home/runner/work/_temp/linuxcnc-d01-preflight-final
+checking build toplevel... /home/runner/work/_temp/linuxcnc-d01-redesign
 checking installation prefix... run in place
 checking for grep... /usr/bin/grep
 checking for pkg-config... /usr/bin/pkg-config
@@ -2870,7 +2904,7 @@ checking for libusb-1.0... yes
 checking for libgpiod < 3.0.0... yes
 configure: libgpiod version 1.6.3 found
 checking for module installation directory... configuring for run-in-place
-/home/runner/work/_temp/linuxcnc-d01-preflight-final/rtlib
+/home/runner/work/_temp/linuxcnc-d01-redesign/rtlib
 checking for glib... yes - 2.80.0
 checking whether make sets $(MAKE)... yes
 checking for ranlib... ranlib
@@ -2907,8 +2941,8 @@ checking for a version of Python >= '2.1.0'... yes
 checking for the sysconfig Python package... yes
 checking for Python include path... -I/usr/include/python3.12
 checking for Python library path... -L/usr/lib/x86_64-linux-gnu -lpython3.12
-checking for Python site-packages path... /home/runner/work/_temp/linuxcnc-d01-preflight-final/lib/python3.12/site-packages
-checking for Python platform specific site-packages path... /home/runner/work/_temp/linuxcnc-d01-preflight-final/lib/python3.12/site-packages
+checking for Python site-packages path... /home/runner/work/_temp/linuxcnc-d01-redesign/lib/python3.12/site-packages
+checking for Python platform specific site-packages path... /home/runner/work/_temp/linuxcnc-d01-redesign/lib/python3.12/site-packages
 checking python extra libraries... -ldl -lm
 checking python extra linking flags... -Xlinker -export-dynamic -Wl,-O1 -Wl,-Bsymbolic-functions
 checking consistency of all components of python development environment... yes
@@ -3001,7 +3035,7 @@ config.status: creating config.h
 ######################################################################
 
 
-make: Entering directory '/home/runner/work/_temp/linuxcnc-d01-preflight-final/src'
+make: Entering directory '/home/runner/work/_temp/linuxcnc-d01-redesign/src'
 Creating mesa_uart.mak
 Creating mesa_7i65.mak
 Creating serport.mak
@@ -3010,8 +3044,8 @@ Creating xyzacb_trsrn.mak
 Creating xyzab_tdr_kins.mak
 Creating xor2.mak
 Creating xhc_hb04_util.mak
-Creating wcomp.mak
 Creating userkins.mak
+Creating wcomp.mak
 Creating updown.mak
 Creating tristate_float.mak
 Creating tristate_bit.mak
@@ -3019,8 +3053,8 @@ Creating tp.mak
 Creating ton.mak
 Creating toggle2nist.mak
 Creating toggle.mak
-Creating tof.mak
 Creating timedelta.mak
+Creating tof.mak
 Creating timedelay.mak
 Creating time.mak
 Creating threadtest.mak
@@ -3040,8 +3074,8 @@ Creating sim_axis_hardware.mak
 Creating select8.mak
 Creating scaled_s32_sums.mak
 Creating scale.mak
-Creating safety_latch.mak
 Creating sample_hold.mak
+Creating safety_latch.mak
 Creating reset.mak
 Creating raster.mak
 Creating radiobutton.mak
@@ -3070,13 +3104,13 @@ Creating message.mak
 Creating mesa_pktgyro_test.mak
 Creating max31855.mak
 Creating matrixkins.mak
-Creating match8.mak
 Creating maj3.mak
+Creating match8.mak
 Creating lut5.mak
 Creating lowpass.mak
 Creating logic.mak
-Creating lincurve.mak
 Creating limit_axis.mak
+Creating lincurve.mak
 Creating limit3.mak
 Creating limit2.mak
 Creating limit1.mak
@@ -3103,8 +3137,8 @@ Creating feedcomp.mak
 Creating estop_latch.mak
 Creating eoffset_per_angle.mak
 Creating edge.mak
-Creating differential.mak
 Creating div2.mak
+Creating differential.mak
 Creating demux.mak
 Creating deadzone.mak
 Creating ddt.mak
@@ -3114,13 +3148,13 @@ converting conv for conv_u64_u32.comp
 converting conv for conv_u64_s64.comp
 converting conv for conv_u64_s32.comp
 converting conv for conv_u64_float.comp
-converting conv for conv_u64_bit.comp
 converting conv for conv_u32_u64.comp
 converting conv for conv_u32_s64.comp
+converting conv for conv_u64_bit.comp
 converting conv for conv_u32_s32.comp
-converting conv for conv_u32_float.comp
 converting conv for conv_u32_bit.comp
 converting conv for conv_s64_u64.comp
+converting conv for conv_u32_float.comp
 converting conv for conv_s64_u32.comp
 converting conv for conv_s64_s32.comp
 converting conv for conv_s64_float.comp
@@ -3129,8 +3163,8 @@ converting conv for conv_s32_u64.comp
 converting conv for conv_s32_u32.comp
 converting conv for conv_s32_s64.comp
 converting conv for conv_s32_float.comp
-converting conv for conv_s32_bit.comp
 converting conv for conv_float_u64.comp
+converting conv for conv_s32_bit.comp
 converting conv for conv_float_u32.comp
 converting conv for conv_float_s64.comp
 converting conv for conv_float_s32.comp
@@ -3139,20 +3173,20 @@ converting conv for conv_bit_u32.comp
 converting conv for conv_bit_s64.comp
 converting conv for conv_bit_s32.comp
 converting conv for conv_bit_float.comp
+Creating comp.mak
 Creating clarkeinv.mak
 Creating clarke3.mak
-Creating comp.mak
 Creating clarke2.mak
 Creating charge_pump.mak
-Creating blend.mak
 Creating carousel.mak
+Creating blend.mak
 Creating bldc.mak
 Creating bitwise.mak
 Creating bitslice.mak
-Creating biquad.mak
 Creating bitmerge.mak
-Creating axistest.mak
+Creating biquad.mak
 Creating bin2gray.mak
+Creating axistest.mak
 Creating anglejog.mak
 Creating and2.mak
 Creating abs_s64.mak
@@ -3164,23 +3198,23 @@ Creating conv_u64_s32.mak
 Creating conv_u64_float.mak
 Creating conv_u64_bit.mak
 Creating conv_u32_u64.mak
-Creating conv_u32_s32.mak
 Creating conv_u32_s64.mak
+Creating conv_u32_s32.mak
 Creating conv_u32_float.mak
-Creating conv_u32_bit.mak
 Creating conv_s64_u64.mak
+Creating conv_u32_bit.mak
 Creating conv_s64_u32.mak
 Creating conv_s64_s32.mak
 Creating conv_s64_float.mak
-Creating conv_s64_bit.mak
 Creating conv_s32_u64.mak
+Creating conv_s64_bit.mak
 Creating conv_s32_u32.mak
 Creating conv_s32_s64.mak
 Creating conv_s32_float.mak
 Creating conv_s32_bit.mak
 Creating conv_float_u64.mak
-Creating conv_float_u32.mak
 Creating conv_float_s64.mak
+Creating conv_float_u32.mak
 Creating conv_float_s32.mak
 Creating conv_bit_u64.mak
 Creating conv_bit_u32.mak
@@ -3226,8 +3260,8 @@ Exporting rtapi_string.h
 Exporting rtapi_vsnprintf.h
 Copying test input hal/components/lincurve.comp
 Copying test input hal/components/logic.comp
-Copying test input hal/components/bitslice.comp
 sed hal/drivers/mesa_uart.comp -e "1 s/mesa_uart/mesa_uart_test/" > ../tests/halcompile/serial-out-of-tree/mesa_uart_test.comp
+Copying test input hal/components/bitslice.comp
 sed ../tests/halcompile/userspace/rand.comp -e "1 s/rand/rand_test/" > ../tests/halcompile/userspace/rand_test.comp
 cp ../scripts/rtapi.conf ../tests/uspace/spawnv-root/rtapi.conf
 Compiling libposemath/_posemath.c
@@ -3502,48 +3536,48 @@ Copying python script scorbot-er-3
 Syntax checking python script sim-torch
 Syntax checking python script z_level_compensation
 Copying python script mitsub_vfd
-Syntax checking python script mqtt-publisher
 Copying python script pmx485
+Syntax checking python script mqtt-publisher
 Syntax checking python script hal_bridge
 Copying python script sim-torch
 Copying python script z_level_compensation
 Syntax checking python script mtconnect-agent
 Syntax checking python script pumagui
 Copying python script mqtt-publisher
-Syntax checking python script puma560gui
 Copying python script hal_bridge
+Syntax checking python script puma560gui
 Syntax checking python script lineardelta
 Copying python script mtconnect-agent
 Copying python script pumagui
 Syntax checking python script scaragui
 Syntax checking python script hexagui
 Copying python script puma560gui
-Syntax checking python script 5axisgui
 Copying python script lineardelta
+Syntax checking python script 5axisgui
 Syntax checking python script max5gui
 Copying python script scaragui
 Copying python script hexagui
 Syntax checking python script maho600gui
-Copying python script 5axisgui
 Syntax checking python script hbmgui
-Syntax checking python script rotarydelta
+Copying python script 5axisgui
 Copying python script max5gui
+Syntax checking python script rotarydelta
 Syntax checking python script melfagui
 Copying python script maho600gui
 Copying python script hbmgui
 Syntax checking python script millturngui
-Copying python script rotarydelta
 Syntax checking python script xyzac-trt-gui
-Syntax checking python script xyzbc-trt-gui
 Copying python script melfagui
+Copying python script rotarydelta
+Syntax checking python script xyzbc-trt-gui
 Syntax checking python script xyzab-tdr-gui
 Copying python script millturngui
 Copying python script xyzac-trt-gui
 Compiling hal/halmodule.cc
-Copying python script xyzbc-trt-gui
 Compiling hal/halquery.cc
-Compiling emc/usr_intf/axis/extensions/emcmodule.cc
+Copying python script xyzbc-trt-gui
 Copying python script xyzab-tdr-gui
+Compiling emc/usr_intf/axis/extensions/emcmodule.cc
 Syntax checking python script linuxcnctop
 Copying python script linuxcnctop
 Syntax checking python script mdi
@@ -3727,16 +3761,16 @@ tooldata: Linking: libtooldata.so.0
 ln -sf liblinuxcncini.so.1 ../lib/liblinuxcncini.so
 Linking libpyplugin.so.0
 Linking inivalue
-c++ -std=gnu++20 -g -L/home/runner/work/_temp/linuxcnc-d01-preflight-final/lib -Wl,-rpath,/home/runner/work/_temp/linuxcnc-d01-preflight-final/lib -ltirpc  -lgpiod  -Xlinker -export-dynamic -Wl,-O1 -Wl,-Bsymbolic-functions -Wl,-soname,libpyplugin.so.0 -shared -o ../lib/libpyplugin.so.0 objects/emc/pythonplugin/python_plugin.o ../lib/liblinuxcncini.so.1 -lstdc++ -lboost_python312 -L/usr/lib/x86_64-linux-gnu -lpython3.12 -ldl -lm
+c++ -std=gnu++20 -g -L/home/runner/work/_temp/linuxcnc-d01-redesign/lib -Wl,-rpath,/home/runner/work/_temp/linuxcnc-d01-redesign/lib -ltirpc  -lgpiod  -Xlinker -export-dynamic -Wl,-O1 -Wl,-Bsymbolic-functions -Wl,-soname,libpyplugin.so.0 -shared -o ../lib/libpyplugin.so.0 objects/emc/pythonplugin/python_plugin.o ../lib/liblinuxcncini.so.1 -lstdc++ -lboost_python312 -L/usr/lib/x86_64-linux-gnu -lpython3.12 -ldl -lm
 Linking motion-logger
 ln -sf libtooldata.so.0 ../lib/libtooldata.so
 Linking linuxcnc_module_helper
 gcc -Wl,-z,relro -o ../bin/linuxcnc_module_helper objects/module_helper/module_helper.o
 Linking python module _hal.so
 Linking python module lineardeltakins.so
-c++ -std=gnu++20 -L/home/runner/work/_temp/linuxcnc-d01-preflight-final/lib -Wl,-rpath,/home/runner/work/_temp/linuxcnc-d01-preflight-final/lib -ltirpc  -lgpiod  -shared -o ../lib/python/lineardeltakins.so objects/emc/kinematics/lineardeltakins.o -lboost_python312
+c++ -std=gnu++20 -L/home/runner/work/_temp/linuxcnc-d01-redesign/lib -Wl,-rpath,/home/runner/work/_temp/linuxcnc-d01-redesign/lib -ltirpc  -lgpiod  -shared -o ../lib/python/lineardeltakins.so objects/emc/kinematics/lineardeltakins.o -lboost_python312
 Linking python module rotarydeltakins.so
-c++ -std=gnu++20 -L/home/runner/work/_temp/linuxcnc-d01-preflight-final/lib -Wl,-rpath,/home/runner/work/_temp/linuxcnc-d01-preflight-final/lib -ltirpc  -lgpiod  -shared -o ../lib/python/rotarydeltakins.so objects/emc/kinematics/rotarydeltakins.o -lboost_python312
+c++ -std=gnu++20 -L/home/runner/work/_temp/linuxcnc-d01-redesign/lib -Wl,-rpath,/home/runner/work/_temp/linuxcnc-d01-redesign/lib -ltirpc  -lgpiod  -shared -o ../lib/python/rotarydeltakins.so objects/emc/kinematics/rotarydeltakins.o -lboost_python312
 Preprocessing abs.comp
 Preprocessing abs_s32.comp
 Preprocessing abs_s64.comp
@@ -3809,10 +3843,10 @@ Preprocessing ilowpass.comp
 Preprocessing integ.comp
 Preprocessing invert.comp
 Preprocessing joint_axis_mapper.comp
-Preprocessing knob2float.comp
 Preprocessing joyhandle.comp
-Preprocessing latencybins.comp
+Preprocessing knob2float.comp
 Preprocessing laserpower.comp
+Preprocessing latencybins.comp
 Preprocessing latencybinstream.comp
 Preprocessing led_dim.comp
 Preprocessing limit1.comp
@@ -4112,8 +4146,8 @@ Linking ../rtlib/three21kins.so
 Linking ../rtlib/5axiskins.so
 Linking ../rtlib/motmod.so
 Linking ../rtlib/homemod.so
-ln -sf libposemath.so.0 ../lib/libposemath.so
 Linking ../rtlib/tpmod.so
+ln -sf libposemath.so.0 ../lib/libposemath.so
 ln -sf libnml.so.0 ../lib/libnml.so
 ln -sf liblinuxcnc-uspace-posix.so.0 ../lib/liblinuxcnc-uspace-posix.so
 Linking halstreamer
@@ -4292,8 +4326,8 @@ Linking ../rtlib/wcomp.so
 Linking ../rtlib/xhc_hb04_util.so
 Linking ../rtlib/xor2.so
 Linking ../rtlib/xyzab_tdr_kins.so
-Linking ../rtlib/xyzbca_trsrn.so
 Linking ../rtlib/xyzacb_trsrn.so
+Linking ../rtlib/xyzbca_trsrn.so
 Linking ../rtlib/serport.so
 Linking ../rtlib/mesa_7i65.so
 Linking ../rtlib/mesa_uart.so
@@ -4301,51 +4335,47 @@ Compiling objects/hal/user_comps/thermistor.c
 Compiling hal/user_comps/wj200_vfd/wj200_vfd.c
 Compiling hal/user_comps/pi500_vfd/pi500_vfd.c
 Linking librs274.so.0
-c++ -std=gnu++20 -g -L/home/runner/work/_temp/linuxcnc-d01-preflight-final/lib -Wl,-rpath,/home/runner/work/_temp/linuxcnc-d01-preflight-final/lib -ltirpc  -lgpiod  -Xlinker -export-dynamic -Wl,-O1 -Wl,-Bsymbolic-functions -Wl,-soname,librs274.so.0 -shared -o ../lib/librs274.so.0 objects/emc/rs274ngc/interp_arc.o objects/emc/rs274ngc/interp_array.o objects/emc/rs274ngc/interp_base.o objects/emc/rs274ngc/interp_check.o objects/emc/rs274ngc/interp_convert.o objects/emc/rs274ngc/interp_queue.o objects/emc/rs274ngc/interp_cycles.o objects/emc/rs274ngc/interp_execute.o objects/emc/rs274ngc/interp_find.o objects/emc/rs274ngc/interp_internal.o objects/emc/rs274ngc/interp_inverse.o objects/emc/rs274ngc/interp_read.o objects/emc/rs274ngc/interp_write.o objects/emc/rs274ngc/interp_o_word.o objects/emc/rs274ngc/interp_g7x.o objects/emc/rs274ngc/nurbs_additional_functions.o objects/emc/rs274ngc/interp_namedparams.o objects/emc/rs274ngc/interp_python.o objects/emc/rs274ngc/interp_remap.o objects/emc/rs274ngc/interp_setup.o objects/emc/rs274ngc/canonmodule.o objects/emc/rs274ngc/pyparamclass.o objects/emc/rs274ngc/pyemctypes.o objects/emc/rs274ngc/pyinterp1.o objects/emc/rs274ngc/pyblock.o objects/emc/rs274ngc/pyarrays.o objects/emc/rs274ngc/interpmodule.o objects/emc/rs274ngc/rs274ngc_pre.o objects/emc/rs274ngc/interp_inspection.o objects/emc/nml_intf/modal_state.o ../lib/liblinuxcncini.so ../lib/libpyplugin.so ../lib/liblinuxcnchal.so.0 ../lib/libtooldata.so.0 -lstdc++ -lboost_python312 -L/usr/lib/x86_64-linux-gnu -lpython3.12 -ldl -lm
+c++ -std=gnu++20 -g -L/home/runner/work/_temp/linuxcnc-d01-redesign/lib -Wl,-rpath,/home/runner/work/_temp/linuxcnc-d01-redesign/lib -ltirpc  -lgpiod  -Xlinker -export-dynamic -Wl,-O1 -Wl,-Bsymbolic-functions -Wl,-soname,librs274.so.0 -shared -o ../lib/librs274.so.0 objects/emc/rs274ngc/interp_arc.o objects/emc/rs274ngc/interp_array.o objects/emc/rs274ngc/interp_base.o objects/emc/rs274ngc/interp_check.o objects/emc/rs274ngc/interp_convert.o objects/emc/rs274ngc/interp_queue.o objects/emc/rs274ngc/interp_cycles.o objects/emc/rs274ngc/interp_execute.o objects/emc/rs274ngc/interp_find.o objects/emc/rs274ngc/interp_internal.o objects/emc/rs274ngc/interp_inverse.o objects/emc/rs274ngc/interp_read.o objects/emc/rs274ngc/interp_write.o objects/emc/rs274ngc/interp_o_word.o objects/emc/rs274ngc/interp_g7x.o objects/emc/rs274ngc/nurbs_additional_functions.o objects/emc/rs274ngc/interp_namedparams.o objects/emc/rs274ngc/interp_python.o objects/emc/rs274ngc/interp_remap.o objects/emc/rs274ngc/interp_setup.o objects/emc/rs274ngc/canonmodule.o objects/emc/rs274ngc/pyparamclass.o objects/emc/rs274ngc/pyemctypes.o objects/emc/rs274ngc/pyinterp1.o objects/emc/rs274ngc/pyblock.o objects/emc/rs274ngc/pyarrays.o objects/emc/rs274ngc/interpmodule.o objects/emc/rs274ngc/rs274ngc_pre.o objects/emc/rs274ngc/interp_inspection.o objects/emc/nml_intf/modal_state.o ../lib/liblinuxcncini.so ../lib/libpyplugin.so ../lib/liblinuxcnchal.so.0 ../lib/libtooldata.so.0 -lstdc++ -lboost_python312 -L/usr/lib/x86_64-linux-gnu -lpython3.12 -ldl -lm
 Linking thermistor
 Linking pi500_vfd
 Linking wj200_vfd
 ln -sf librs274.so.0 ../lib/librs274.so
 Linking milltask
-c++ -std=gnu++20 -o ../bin/milltask objects/emc/motion/emcmotglb.o objects/emc/task/emctask.o objects/emc/task/emccanon.o objects/emc/task/emctaskmain.o objects/emc/motion/usrmotintf.o objects/emc/motion/emcmotutil.o objects/emc/task/taskintf.o objects/emc/motion/dbuf.o objects/emc/motion/stashf.o objects/emc/task/taskclass.o objects/emc/task/backtrace.o objects/emc/usr_intf/mapini.o ../lib/librs274.so.0 ../lib/liblinuxcnc.a ../lib/libnml.so.0 ../lib/liblinuxcncini.so.1 ../lib/libposemath.so.0 ../lib/liblinuxcnchal.so.0 ../lib/libpyplugin.so.0 ../lib/libtooldata.so.0 -L/home/runner/work/_temp/linuxcnc-d01-preflight-final/lib -Wl,-rpath,/home/runner/work/_temp/linuxcnc-d01-preflight-final/lib -ltirpc  -lgpiod  -Xlinker -export-dynamic -Wl,-O1 -Wl,-Bsymbolic-functions -lboost_python312 -L/usr/lib/x86_64-linux-gnu -lpython3.12 -ldl -lm -lfmt
+c++ -std=gnu++20 -o ../bin/milltask objects/emc/motion/emcmotglb.o objects/emc/task/emctask.o objects/emc/task/emccanon.o objects/emc/task/emctaskmain.o objects/emc/motion/usrmotintf.o objects/emc/motion/emcmotutil.o objects/emc/task/taskintf.o objects/emc/motion/dbuf.o objects/emc/motion/stashf.o objects/emc/task/taskclass.o objects/emc/task/backtrace.o objects/emc/usr_intf/mapini.o ../lib/librs274.so.0 ../lib/liblinuxcnc.a ../lib/libnml.so.0 ../lib/liblinuxcncini.so.1 ../lib/libposemath.so.0 ../lib/liblinuxcnchal.so.0 ../lib/libpyplugin.so.0 ../lib/libtooldata.so.0 -L/home/runner/work/_temp/linuxcnc-d01-redesign/lib -Wl,-rpath,/home/runner/work/_temp/linuxcnc-d01-redesign/lib -ltirpc  -lgpiod  -Xlinker -export-dynamic -Wl,-O1 -Wl,-Bsymbolic-functions -lboost_python312 -L/usr/lib/x86_64-linux-gnu -lpython3.12 -ldl -lm -lfmt
 Linking rs274
 Linking python module gcode.so
-c++ -std=gnu++20 -L/home/runner/work/_temp/linuxcnc-d01-preflight-final/lib -Wl,-rpath,/home/runner/work/_temp/linuxcnc-d01-preflight-final/lib -ltirpc  -lgpiod  -shared -o ../lib/python/gcode.so objects/emc/rs274ngc/gcodemodule.o ../lib/librs274.so.0 -lstdc++
+c++ -std=gnu++20 -L/home/runner/work/_temp/linuxcnc-d01-redesign/lib -Wl,-rpath,/home/runner/work/_temp/linuxcnc-d01-redesign/lib -ltirpc  -lgpiod  -shared -o ../lib/python/gcode.so objects/emc/rs274ngc/gcodemodule.o ../lib/librs274.so.0 -lstdc++
 Linking canterp.so
 You now need to run 'sudo make setuid' or 'sudo make setcap' in order to run in place with access to hardware.
-make: Leaving directory '/home/runner/work/_temp/linuxcnc-d01-preflight-final/src'
-readiness PASS at probe 4: launcher + linuxcncrsh:5007 + HAL + sampler
+make: Leaving directory '/home/runner/work/_temp/linuxcnc-d01-redesign/src'
+readiness PASS at probe 3
 
-== Topology ==
+== Retained topology/order ==
 Component Pins:
 Owner   Type  Dir                 Value  Name
-    33  float OUT                     0  joint.1.f-error ==> D01-y1-ferr
-    33  float OUT                  0.05  joint.1.f-error-lim ==> D01-y1-flim
+    33  float OUT                     0  joint.1.f-error
+    33  float OUT                     0  joint.1.f-error-lim
     33  bit   OUT                 FALSE  joint.1.f-errored
     33  float OUT                     0  joint.1.motor-pos-cmd ==> Ypos
     33  float IN                      0  joint.1.motor-pos-fb <== Ypos
-    33  float OUT                     0  joint.2.f-error ==> D01-y2-ferr
-    33  float OUT                  0.05  joint.2.f-error-lim ==> D01-y2-flim
-    33  bit   OUT                 FALSE  joint.2.f-errored ==> D01-y2-ferrored
-    33  float OUT                     0  joint.2.motor-pos-cmd ==> D01-y2-cmd
-    33  float IN                      0  joint.2.motor-pos-fb <== D01-y2-fb
-    33  bit   OUT                 FALSE  motion.motion-enabled ==> D01-motion-enabled
+    33  float OUT                     0  joint.2.f-error
+    33  float OUT                     0  joint.2.f-error-lim
+    33  bit   OUT                 FALSE  joint.2.f-errored
+    33  float OUT                     0  joint.2.motor-pos-cmd
+    33  float IN                      0  joint.2.motor-pos-fb
+    33  float OUT                     0  motion.d01-cart-y-observer
+    33  bit   OUT                 FALSE  motion.motion-enabled
 
 Realtime Threads:
      Period  FP     Name               (     Time, Max-Time )
-    1000000  YES          servo-thread (     4007,    19517 )
+    1000000  YES          servo-thread (        0,        0 )
                   1 motion-command-handler
                   2 motion-controller
-                  3 mux2.0
-                  4 sum2.0
-                  5 sampler.0
+                  3 mux16.0
+                  4 mux2.0
+                  5 sum2.0
+                  6 sampler.0
 
-
-== Enable and move through documented linuxcncrsh command path ==
-HELLO ACK D01Preflight 1.1
-set echo off
-SET MDI NAK
-settled y1cmd=0 y2cmd=0 y1fb=0 y2fb=0 motion=TRUE
 ```
 
 ## Standard error
@@ -4360,8 +4390,8 @@ No containers need to be restarted.
 No user sessions are running outdated binaries.
 
 No VM guests are running outdated hypervisor (qemu) binaries on this host.
-Cloning into '/home/runner/work/_temp/linuxcnc-d01-preflight-final'...
-Updating files:   0% (1/9526)Updating files:   1% (96/9526)Updating files:   2% (191/9526)Updating files:   3% (286/9526)Updating files:   4% (382/9526)Updating files:   5% (477/9526)Updating files:   6% (572/9526)Updating files:   7% (667/9526)Updating files:   8% (763/9526)Updating files:   9% (858/9526)Updating files:  10% (953/9526)Updating files:  11% (1048/9526)Updating files:  12% (1144/9526)Updating files:  13% (1239/9526)Updating files:  14% (1334/9526)Updating files:  15% (1429/9526)Updating files:  16% (1525/9526)Updating files:  17% (1620/9526)Updating files:  18% (1715/9526)Updating files:  19% (1810/9526)Updating files:  20% (1906/9526)Updating files:  21% (2001/9526)Updating files:  22% (2096/9526)Updating files:  23% (2191/9526)Updating files:  24% (2287/9526)Updating files:  25% (2382/9526)Updating files:  26% (2477/9526)Updating files:  27% (2573/9526)Updating files:  28% (2668/9526)Updating files:  29% (2763/9526)Updating files:  30% (2858/9526)Updating files:  31% (2954/9526)Updating files:  32% (3049/9526)Updating files:  33% (3144/9526)Updating files:  34% (3239/9526)Updating files:  35% (3335/9526)Updating files:  36% (3430/9526)Updating files:  37% (3525/9526)Updating files:  38% (3620/9526)Updating files:  39% (3716/9526)Updating files:  40% (3811/9526)Updating files:  41% (3906/9526)Updating files:  42% (4001/9526)Updating files:  43% (4097/9526)Updating files:  44% (4192/9526)Updating files:  45% (4287/9526)Updating files:  46% (4382/9526)Updating files:  47% (4478/9526)Updating files:  48% (4573/9526)Updating files:  49% (4668/9526)Updating files:  50% (4763/9526)Updating files:  51% (4859/9526)Updating files:  52% (4954/9526)Updating files:  53% (5049/9526)Updating files:  54% (5145/9526)Updating files:  55% (5240/9526)Updating files:  56% (5335/9526)Updating files:  57% (5430/9526)Updating files:  58% (5526/9526)Updating files:  59% (5621/9526)Updating files:  60% (5716/9526)Updating files:  61% (5811/9526)Updating files:  62% (5907/9526)Updating files:  62% (5937/9526)Updating files:  63% (6002/9526)Updating files:  64% (6097/9526)Updating files:  65% (6192/9526)Updating files:  66% (6288/9526)Updating files:  67% (6383/9526)Updating files:  68% (6478/9526)Updating files:  69% (6573/9526)Updating files:  70% (6669/9526)Updating files:  71% (6764/9526)Updating files:  72% (6859/9526)Updating files:  73% (6954/9526)Updating files:  74% (7050/9526)Updating files:  75% (7145/9526)Updating files:  76% (7240/9526)Updating files:  77% (7336/9526)Updating files:  78% (7431/9526)Updating files:  79% (7526/9526)Updating files:  80% (7621/9526)Updating files:  81% (7717/9526)Updating files:  82% (7812/9526)Updating files:  83% (7907/9526)Updating files:  84% (8002/9526)Updating files:  85% (8098/9526)Updating files:  86% (8193/9526)Updating files:  87% (8288/9526)Updating files:  88% (8383/9526)Updating files:  89% (8479/9526)Updating files:  90% (8574/9526)Updating files:  91% (8669/9526)Updating files:  92% (8764/9526)Updating files:  93% (8860/9526)Updating files:  94% (8955/9526)Updating files:  95% (9050/9526)Updating files:  96% (9145/9526)Updating files:  97% (9241/9526)Updating files:  98% (9336/9526)Updating files:  99% (9431/9526)Updating files: 100% (9526/9526)Updating files: 100% (9526/9526), done.
+Cloning into '/home/runner/work/_temp/linuxcnc-d01-redesign'...
+Updating files:   0% (1/9526)Updating files:   1% (96/9526)Updating files:   2% (191/9526)Updating files:   3% (286/9526)Updating files:   4% (382/9526)Updating files:   5% (477/9526)Updating files:   6% (572/9526)Updating files:   7% (667/9526)Updating files:   8% (763/9526)Updating files:   9% (858/9526)Updating files:  10% (953/9526)Updating files:  11% (1048/9526)Updating files:  12% (1144/9526)Updating files:  13% (1239/9526)Updating files:  13% (1282/9526)Updating files:  14% (1334/9526)Updating files:  15% (1429/9526)Updating files:  16% (1525/9526)Updating files:  17% (1620/9526)Updating files:  18% (1715/9526)Updating files:  19% (1810/9526)Updating files:  20% (1906/9526)Updating files:  21% (2001/9526)Updating files:  22% (2096/9526)Updating files:  23% (2191/9526)Updating files:  24% (2287/9526)Updating files:  25% (2382/9526)Updating files:  26% (2477/9526)Updating files:  27% (2573/9526)Updating files:  28% (2668/9526)Updating files:  29% (2763/9526)Updating files:  30% (2858/9526)Updating files:  31% (2954/9526)Updating files:  32% (3049/9526)Updating files:  33% (3144/9526)Updating files:  34% (3239/9526)Updating files:  35% (3335/9526)Updating files:  36% (3430/9526)Updating files:  37% (3525/9526)Updating files:  38% (3620/9526)Updating files:  39% (3716/9526)Updating files:  40% (3811/9526)Updating files:  41% (3906/9526)Updating files:  42% (4001/9526)Updating files:  43% (4097/9526)Updating files:  44% (4192/9526)Updating files:  45% (4287/9526)Updating files:  46% (4382/9526)Updating files:  47% (4478/9526)Updating files:  48% (4573/9526)Updating files:  49% (4668/9526)Updating files:  50% (4763/9526)Updating files:  51% (4859/9526)Updating files:  52% (4954/9526)Updating files:  53% (5049/9526)Updating files:  54% (5145/9526)Updating files:  55% (5240/9526)Updating files:  56% (5335/9526)Updating files:  57% (5430/9526)Updating files:  58% (5526/9526)Updating files:  59% (5621/9526)Updating files:  60% (5716/9526)Updating files:  61% (5811/9526)Updating files:  62% (5907/9526)Updating files:  63% (6002/9526)Updating files:  64% (6097/9526)Updating files:  65% (6192/9526)Updating files:  66% (6288/9526)Updating files:  67% (6383/9526)Updating files:  68% (6478/9526)Updating files:  69% (6573/9526)Updating files:  70% (6669/9526)Updating files:  71% (6764/9526)Updating files:  72% (6859/9526)Updating files:  73% (6954/9526)Updating files:  74% (7050/9526)Updating files:  75% (7145/9526)Updating files:  76% (7240/9526)Updating files:  77% (7336/9526)Updating files:  78% (7431/9526)Updating files:  79% (7526/9526)Updating files:  80% (7621/9526)Updating files:  81% (7717/9526)Updating files:  82% (7812/9526)Updating files:  83% (7907/9526)Updating files:  84% (8002/9526)Updating files:  85% (8098/9526)Updating files:  86% (8193/9526)Updating files:  87% (8288/9526)Updating files:  87% (8335/9526)Updating files:  88% (8383/9526)Updating files:  89% (8479/9526)Updating files:  90% (8574/9526)Updating files:  91% (8669/9526)Updating files:  92% (8764/9526)Updating files:  93% (8860/9526)Updating files:  94% (8955/9526)Updating files:  95% (9050/9526)Updating files:  96% (9145/9526)Updating files:  97% (9241/9526)Updating files:  98% (9336/9526)Updating files:  99% (9431/9526)Updating files: 100% (9526/9526)Updating files: 100% (9526/9526), done.
 HEAD is now at 8bf4605ae Merge pull request #4501 from grandixximo/gmoccapy-quit-4500
 
 Running kernel seems to be up-to-date.
@@ -4381,304 +4411,5 @@ Reading 0/189 dependency files
 Done reading dependencies
 Reading 0/303 realtime dependency files
 Done reading realtime dependencies
-Traceback (most recent call last):
-  File "<stdin>", line 3, in <module>
-AssertionError
-Traceback (most recent call last):
-  File "<stdin>", line 3, in <module>
-AssertionError
-Traceback (most recent call last):
-  File "<stdin>", line 3, in <module>
-AssertionError
-Traceback (most recent call last):
-  File "<stdin>", line 3, in <module>
-AssertionError
-Traceback (most recent call last):
-  File "<stdin>", line 3, in <module>
-AssertionError
-Traceback (most recent call last):
-  File "<stdin>", line 3, in <module>
-AssertionError
-Traceback (most recent call last):
-  File "<stdin>", line 3, in <module>
-AssertionError
-Traceback (most recent call last):
-  File "<stdin>", line 3, in <module>
-AssertionError
-Traceback (most recent call last):
-  File "<stdin>", line 3, in <module>
-AssertionError
-Traceback (most recent call last):
-  File "<stdin>", line 3, in <module>
-AssertionError
-Traceback (most recent call last):
-  File "<stdin>", line 3, in <module>
-AssertionError
-Traceback (most recent call last):
-  File "<stdin>", line 3, in <module>
-AssertionError
-Traceback (most recent call last):
-  File "<stdin>", line 3, in <module>
-AssertionError
-Traceback (most recent call last):
-  File "<stdin>", line 3, in <module>
-AssertionError
-Traceback (most recent call last):
-  File "<stdin>", line 3, in <module>
-AssertionError
-Traceback (most recent call last):
-  File "<stdin>", line 3, in <module>
-AssertionError
-Traceback (most recent call last):
-  File "<stdin>", line 3, in <module>
-AssertionError
-Traceback (most recent call last):
-  File "<stdin>", line 3, in <module>
-AssertionError
-Traceback (most recent call last):
-  File "<stdin>", line 3, in <module>
-AssertionError
-Traceback (most recent call last):
-  File "<stdin>", line 3, in <module>
-AssertionError
-Traceback (most recent call last):
-  File "<stdin>", line 3, in <module>
-AssertionError
-Traceback (most recent call last):
-  File "<stdin>", line 3, in <module>
-AssertionError
-Traceback (most recent call last):
-  File "<stdin>", line 3, in <module>
-AssertionError
-Traceback (most recent call last):
-  File "<stdin>", line 3, in <module>
-AssertionError
-Traceback (most recent call last):
-  File "<stdin>", line 3, in <module>
-AssertionError
-Traceback (most recent call last):
-  File "<stdin>", line 3, in <module>
-AssertionError
-Traceback (most recent call last):
-  File "<stdin>", line 3, in <module>
-AssertionError
-Traceback (most recent call last):
-  File "<stdin>", line 3, in <module>
-AssertionError
-Traceback (most recent call last):
-  File "<stdin>", line 3, in <module>
-AssertionError
-Traceback (most recent call last):
-  File "<stdin>", line 3, in <module>
-AssertionError
-Traceback (most recent call last):
-  File "<stdin>", line 3, in <module>
-AssertionError
-Traceback (most recent call last):
-  File "<stdin>", line 3, in <module>
-AssertionError
-Traceback (most recent call last):
-  File "<stdin>", line 3, in <module>
-AssertionError
-Traceback (most recent call last):
-  File "<stdin>", line 3, in <module>
-AssertionError
-Traceback (most recent call last):
-  File "<stdin>", line 3, in <module>
-AssertionError
-Traceback (most recent call last):
-  File "<stdin>", line 3, in <module>
-AssertionError
-Traceback (most recent call last):
-  File "<stdin>", line 3, in <module>
-AssertionError
-Traceback (most recent call last):
-  File "<stdin>", line 3, in <module>
-AssertionError
-Traceback (most recent call last):
-  File "<stdin>", line 3, in <module>
-AssertionError
-Traceback (most recent call last):
-  File "<stdin>", line 3, in <module>
-AssertionError
-Traceback (most recent call last):
-  File "<stdin>", line 3, in <module>
-AssertionError
-Traceback (most recent call last):
-  File "<stdin>", line 3, in <module>
-AssertionError
-Traceback (most recent call last):
-  File "<stdin>", line 3, in <module>
-AssertionError
-Traceback (most recent call last):
-  File "<stdin>", line 3, in <module>
-AssertionError
-Traceback (most recent call last):
-  File "<stdin>", line 3, in <module>
-AssertionError
-Traceback (most recent call last):
-  File "<stdin>", line 3, in <module>
-AssertionError
-Traceback (most recent call last):
-  File "<stdin>", line 3, in <module>
-AssertionError
-Traceback (most recent call last):
-  File "<stdin>", line 3, in <module>
-AssertionError
-Traceback (most recent call last):
-  File "<stdin>", line 3, in <module>
-AssertionError
-Traceback (most recent call last):
-  File "<stdin>", line 3, in <module>
-AssertionError
-Traceback (most recent call last):
-  File "<stdin>", line 3, in <module>
-AssertionError
-Traceback (most recent call last):
-  File "<stdin>", line 3, in <module>
-AssertionError
-Traceback (most recent call last):
-  File "<stdin>", line 3, in <module>
-AssertionError
-Traceback (most recent call last):
-  File "<stdin>", line 3, in <module>
-AssertionError
-Traceback (most recent call last):
-  File "<stdin>", line 3, in <module>
-AssertionError
-Traceback (most recent call last):
-  File "<stdin>", line 3, in <module>
-AssertionError
-Traceback (most recent call last):
-  File "<stdin>", line 3, in <module>
-AssertionError
-Traceback (most recent call last):
-  File "<stdin>", line 3, in <module>
-AssertionError
-Traceback (most recent call last):
-  File "<stdin>", line 3, in <module>
-AssertionError
-Traceback (most recent call last):
-  File "<stdin>", line 3, in <module>
-AssertionError
-Traceback (most recent call last):
-  File "<stdin>", line 3, in <module>
-AssertionError
-Traceback (most recent call last):
-  File "<stdin>", line 3, in <module>
-AssertionError
-Traceback (most recent call last):
-  File "<stdin>", line 3, in <module>
-AssertionError
-Traceback (most recent call last):
-  File "<stdin>", line 3, in <module>
-AssertionError
-Traceback (most recent call last):
-  File "<stdin>", line 3, in <module>
-AssertionError
-Traceback (most recent call last):
-  File "<stdin>", line 3, in <module>
-AssertionError
-Traceback (most recent call last):
-  File "<stdin>", line 3, in <module>
-AssertionError
-Traceback (most recent call last):
-  File "<stdin>", line 3, in <module>
-AssertionError
-Traceback (most recent call last):
-  File "<stdin>", line 3, in <module>
-AssertionError
-Traceback (most recent call last):
-  File "<stdin>", line 3, in <module>
-AssertionError
-Traceback (most recent call last):
-  File "<stdin>", line 3, in <module>
-AssertionError
-Traceback (most recent call last):
-  File "<stdin>", line 3, in <module>
-AssertionError
-Traceback (most recent call last):
-  File "<stdin>", line 3, in <module>
-AssertionError
-Traceback (most recent call last):
-  File "<stdin>", line 3, in <module>
-AssertionError
-Traceback (most recent call last):
-  File "<stdin>", line 3, in <module>
-AssertionError
-Traceback (most recent call last):
-  File "<stdin>", line 3, in <module>
-AssertionError
-Traceback (most recent call last):
-  File "<stdin>", line 3, in <module>
-AssertionError
-Traceback (most recent call last):
-  File "<stdin>", line 3, in <module>
-AssertionError
-Traceback (most recent call last):
-  File "<stdin>", line 3, in <module>
-AssertionError
-Traceback (most recent call last):
-  File "<stdin>", line 3, in <module>
-AssertionError
-Traceback (most recent call last):
-  File "<stdin>", line 3, in <module>
-AssertionError
-Traceback (most recent call last):
-  File "<stdin>", line 3, in <module>
-AssertionError
-Traceback (most recent call last):
-  File "<stdin>", line 3, in <module>
-AssertionError
-Traceback (most recent call last):
-  File "<stdin>", line 3, in <module>
-AssertionError
-Traceback (most recent call last):
-  File "<stdin>", line 3, in <module>
-AssertionError
-Traceback (most recent call last):
-  File "<stdin>", line 3, in <module>
-AssertionError
-Traceback (most recent call last):
-  File "<stdin>", line 3, in <module>
-AssertionError
-Traceback (most recent call last):
-  File "<stdin>", line 3, in <module>
-AssertionError
-Traceback (most recent call last):
-  File "<stdin>", line 3, in <module>
-AssertionError
-Traceback (most recent call last):
-  File "<stdin>", line 3, in <module>
-AssertionError
-Traceback (most recent call last):
-  File "<stdin>", line 3, in <module>
-AssertionError
-Traceback (most recent call last):
-  File "<stdin>", line 3, in <module>
-AssertionError
-Traceback (most recent call last):
-  File "<stdin>", line 3, in <module>
-AssertionError
-Traceback (most recent call last):
-  File "<stdin>", line 3, in <module>
-AssertionError
-Traceback (most recent call last):
-  File "<stdin>", line 3, in <module>
-AssertionError
-Traceback (most recent call last):
-  File "<stdin>", line 3, in <module>
-AssertionError
-Traceback (most recent call last):
-  File "<stdin>", line 3, in <module>
-AssertionError
-Traceback (most recent call last):
-  File "<stdin>", line 3, in <module>
-AssertionError
-Traceback (most recent call last):
-  File "<stdin>", line 3, in <module>
-AssertionError
-Traceback (most recent call last):
-  File "<stdin>", line 3, in <module>
-AssertionError
+<commandline>:0: parameter or pin 'mux16.0.sel': not found
 ```

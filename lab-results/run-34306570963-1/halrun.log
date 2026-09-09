@@ -1,0 +1,47 @@
+Note: realtime scheduling unavailable (sched_setscheduler SCHED_FIFO: Operation not permitted).
+  Process capabilities: cap_sys_nice=no cap_ipc_lock=no.
+  Falling back to POSIX non-realtime.
+  Fix: 'sudo make setcap' (preferred) or 'sudo make setuid' on rtapi_app.
+  Override (testing only): set LINUXCNC_FORCE_REALTIME=1.
+Note: Using POSIX non-realtime
+hm2_test: loading HostMot2 test driver with test pattern 15
+No isolated CPU's found, expect some latency or set RTAPI_CPU_NUMBER to select CPU
+hm2/hm2_test.0: TRAM read error! (addr=0x1000, size=4, iter=285)
+hm2/hm2_test.0: TRAM read error! (addr=0x1000, size=4, iter=686)
+hm2/hm2_test.0: TRAM read error! (addr=0x1000, size=4, iter=686)
+hm2/hm2_test.0: Watchdog has bit! (set the .has-bit pin to False to resume)
+hm2: loading Mesa HostMot2 driver version 0.15
+hm2: no firmware specified in config modparam!  the board had better have firmware configured already, or this won't work
+hm2/hm2_test.0: Low Level init 0.15
+hm2/hm2_test.0: 24 I/O Pins used:
+hm2/hm2_test.0:     IO Pin 000 (P3-01): IOPort
+hm2/hm2_test.0:     IO Pin 001 (P3-03): IOPort
+hm2/hm2_test.0:     IO Pin 002 (P3-05): IOPort
+hm2/hm2_test.0:     IO Pin 003 (P3-07): IOPort
+hm2/hm2_test.0:     IO Pin 004 (P3-09): IOPort
+hm2/hm2_test.0:     IO Pin 005 (P3-11): IOPort
+hm2/hm2_test.0:     IO Pin 006 (P3-13): IOPort
+hm2/hm2_test.0:     IO Pin 007 (P3-15): IOPort
+hm2/hm2_test.0:     IO Pin 008 (P3-17): IOPort
+hm2/hm2_test.0:     IO Pin 009 (P3-19): IOPort
+hm2/hm2_test.0:     IO Pin 010 (P3-21): IOPort
+hm2/hm2_test.0:     IO Pin 011 (P3-23): IOPort
+hm2/hm2_test.0:     IO Pin 012 (P3-25): IOPort
+hm2/hm2_test.0:     IO Pin 013 (P3-27): IOPort
+hm2/hm2_test.0:     IO Pin 014 (P3-29): IOPort
+hm2/hm2_test.0:     IO Pin 015 (P3-31): IOPort
+hm2/hm2_test.0:     IO Pin 016 (P3-33): IOPort
+hm2/hm2_test.0:     IO Pin 017 (P3-35): IOPort
+hm2/hm2_test.0:     IO Pin 018 (P3-37): IOPort
+hm2/hm2_test.0:     IO Pin 019 (P3-39): IOPort
+hm2/hm2_test.0:     IO Pin 020 (P3-41): IOPort
+hm2/hm2_test.0:     IO Pin 021 (P3-43): IOPort
+hm2/hm2_test.0:     IO Pin 022 (P3-45): IOPort
+hm2/hm2_test.0:     IO Pin 023 (P3-47): IOPort
+hm2/hm2_test.0: registered
+hm2_test.0: initialized hm2 test-pattern 15
+hm2/hm2_test.0: trying to recover from IO error or Watchdog bite
+hm2/hm2_test.0: error recover successful!
+hm2/hm2_test.0: unregistered
+hm2_test: driver unloaded
+hm2: unloading

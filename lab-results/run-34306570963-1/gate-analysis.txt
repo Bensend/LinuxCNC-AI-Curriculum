@@ -1,0 +1,17 @@
+Gate A: PASS — pinned SHA + retained preflight-tested patch + production source integrity + real HostMot2 watchdog topology
+Gate B: FAIL — only 0 parseable atomic rows
+PHASE 0 insufficient rows: 0
+PHASE 1 insufficient rows: 0
+PHASE 2 insufficient rows: 0
+PHASE 3 insufficient rows: 0
+PHASE 4 insufficient rows: 0
+PHASE 5 insufficient rows: 0
+PHASE 6 insufficient rows: 0
+Gate C: FAIL — P0 rows=0 io/has clear and read/write counters advance=False
+Gate D: FAIL — P1 transient fail observed, successful reads resume, watchdog stays clear=False
+Gate E: FAIL — P2 io_error asserts independently of watchdog and generic service freezes=False
+Gate F: FAIL — P3 explicit io_error clear restores service=False
+Gate G: FAIL — P4 valid watchdog status raises real has_bit under healthy transport=False; P5 holds=False
+Gate H: FAIL — P6 explicit watchdog clear permits service recovery=False; no physical-safe-state claim
+SAFETY BOUNDARY: clearing LinuxCNC/HostMot2 fault state is not evidence that an external machine is physically safe to resume.
+C06-030 BEHAVIORAL VERDICT: FAIL

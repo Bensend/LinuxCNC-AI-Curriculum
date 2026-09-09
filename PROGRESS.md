@@ -6,116 +6,120 @@ Repository artifacts, not chat history, are authoritative.
 
 ## Current critical-path state
 
-All modules through **T05**, **C01**, **C02**, **C03**, **C04**, **C05**, and **C06** are **GRADUATED at 1000 level**. Phase 10 remains active. Highest-priority unblocked work is **C07 — state-machine sequencing**, state **EXPERIMENT / AUTHORITATIVE HARNESS CONSTRUCTION**.
+All modules through **T05**, **C01**, **C02**, **C03**, **C04**, **C05**, **C06**, and now **C07** are **GRADUATED at 1000 level**.
+
+Phase 10 remains active. Highest-priority unblocked work is now **C08 — diagnostics and trace capture**, state **RESEARCH**.
 
 ## Blind external-feedback state
 
 - **BL-DEV-001:** VALID, 10/10, 92% confidence.
 - **BL-DEV-002:** VALID, 9/10, 88% confidence.
-- **BL-DEV-002-TRANSFER-01:** VALID, **10/10**, 95% confidence. Novel numeric same-mechanism retest correctly retrieved the pinned velocity-scaled-plus-`MIN_FERROR` floor and strict `>` comparison. This is transfer evidence, not delayed-retention evidence.
-- No new blind challenge is due merely because C07 has begun; delayed retention remains distinct and should be scheduled at a meaningful later checkpoint.
+- **BL-DEV-002-TRANSFER-01:** VALID, 10/10, 95% confidence.
+- Delayed retention remains separate; do not count the immediate transfer retest as delayed retention.
+- A new blind challenge is not required merely because C08 has activated; follow `evaluation/BLIND_FEEDBACK_PROTOCOL.md` cadence and preserve evaluator/learner information separation.
 
-## C06 — communication/watchdog fault handling — GRADUATED at 1000 level
+## C06 — communication/watchdog fault handling — GRADUATED
 
-Pinned LinuxCNC revision: `8bf4605ae81042248add031e94c77300406e0413`.
+Pinned revision: `8bf4605ae81042248add031e94c77300406e0413`.
 
-Primary durable artifacts:
-
-- `guides/C06-communication-watchdog-fault-research.md`
-- `call-flows/C06-hostmot2-transport-watchdog-order.md`
-- `guides/C06-function-symbol-guide.md`
-- `guides/C06-transport-watchdog-injection-source-audit.md`
-- `experiments/C06-030-transport-watchdog-fault-plan.md` — Gates A–H frozen before implementation/output inspection.
-- `results/C06-046-authoritative-phase-first-reconciliation.md` — accepted TEST-CONFIRMED evidence.
-- `exams/C06-adversarial-exam-and-corrections.md` — **10/10 PASS**.
-- `handoffs/C06-novel-transport-watchdog-transfer.md` — novel scenario PASS, promotion and counterfactual audit PASS.
-
-Accepted central teaching:
+Accepted central teaching remains:
 
 ```text
 packet/read error != watchdog bite
 io-error != necessarily watchdog.has_bit
-host receive timeout != proof FPGA watchdog status
-watchdog.has_bit=false during broken transport != proof the FPGA watchdog did not bite
-watchdog bite != proof a version-independent communication state
-watchdog bite != proof complete physical safe state
+watchdog.has_bit=false during broken transport != proof FPGA watchdog did not bite
 transport recovery != watchdog recovery
-fault reset != proof plant is safe to resume
+fault reset != proof plant is physically safe to resume
 ordinary HostMot2/HAL fault handling != functional-safety certification
 ```
 
-The asymmetric observability correction is explicit in the main guide. Current official HostMot2 documentation remains internally divergent about whether a watchdog bite stops all communication; that version/firmware question is promoted rather than silently generalized.
+Primary graduation evidence is in `results/C06-046-authoritative-phase-first-reconciliation.md`, `exams/C06-adversarial-exam-and-corrections.md`, and `handoffs/C06-novel-transport-watchdog-transfer.md`. Do not rerun C06-030 absent a newly discovered specific defect.
 
-C06-046 workflow `34312802937`, job `102342754452`, artifact `10089037385`, authoritative runtime **3.4 min**, retained 2,976 ordered samples and passed frozen Gates A–H. C06 satisfied the minimum graduation evidence floor, adversarial exam, novel handoff, promotion queue, and counterfactual audit.
-
-**Decision: C06 GRADUATED at 1000 level. Do not rerun C06-030 absent a newly discovered specific defect.**
-
-## C07 — state-machine sequencing
+## C07 — state-machine sequencing — GRADUATED at 1000 level
 
 Pinned LinuxCNC revision: `8bf4605ae81042248add031e94c77300406e0413`.
 
-Status: **EXPERIMENT / AUTHORITATIVE HARNESS CONSTRUCTION**.
+### Core source model
 
-Durable artifacts:
+- HALUI machine/estop/home request pins are rising-edge request surfaces at the pinned revision; holding a request high does not continuously resend it.
+- `halui.machine.on` rising edge -> `sendMachineOn()` -> NML `EMC_TASK_SET_STATE(ON)` -> Task `emcTaskSetState(ON)` -> `emcTrajEnable()` -> realtime `EMCMOT_ENABLE`.
+- Realtime Motion can reject that request when `motion.enable=false` and can later revoke enabling on several fault classes.
+- Returned achieved state is a separate path: realtime motion-enable flag -> Task trajectory status -> `determineState()` -> HALUI `halui.machine.is-on`.
+- `emcTaskAbort()` invalidates/resynchronizes execution state; stale pre-fault authorization is not a valid restart policy.
+- OFF/ESTOP unhoming is configuration-sensitive through the `volatile_home` path; returned homed state is controller state, not independent physical-position proof.
+
+### Durable C07 artifacts
+
 - `guides/C07-state-machine-sequencing-research.md`
 - `guides/C07-source-resolution-addendum.md`
-- `call-flows/C07-halui-task-state-request-status.md`
 - `guides/C07-function-symbol-guide.md`
-- `experiments/C07-047-request-achieved-state-sequencing-plan.md` — **Gates A–J frozen before implementation/output inspection**.
+- `guides/C07-current-master-edge-semantics-spotcheck.md`
+- `call-flows/C07-halui-task-state-request-status.md`
+- `experiments/C07-047-request-achieved-state-sequencing-plan.md` — P0–P8 / Gates A–J frozen before implementation/output inspection.
 - `experiments/C07-047-sequencer-construction-notes.md`
-- `lab-jobs/047-c07-blocked-on-preflight.sh`
-- `results/C07-047-blocked-on-preflight-reconciliation.md` — **NON-AUTHORITATIVE PREFLIGHT PASS**.
+- `results/C07-047-blocked-on-preflight-reconciliation.md` — topology preflight PASS.
+- `results/C07-048-full-sequencer-preflight-reconciliation.md` — full P0–P8 phase/ordering preflight PASS; Gates deliberately unscored.
+- `results/C07-049-authoritative-request-achieved-reconciliation.md` — **accepted TEST-CONFIRMED Gates A–J PASS**.
+- `exams/C07-adversarial-exam-questions.md` — questions frozen before authoritative output inspection.
+- `exams/C07-adversarial-exam-answers-and-score.md` — **16/16 = 10/10 PASS**.
+- `handoffs/C07-novel-state-sequencing-transfer.md` — amplifier-fault novel transfer PASS.
+- `results/C07-graduation-and-promotion-audit.md` — minimum-evidence floor, promotion queue and counterfactual audit PASS.
 
-Source-confirmed findings:
+### Accepted laboratory evidence
 
-- HALUI request pins such as `halui.machine.on`, `.off`, `estop.activate/reset`, home-all, and joint-home are rising-edge-triggered at the pinned revision: `check_bit_changed()` returns true only on a changed-to-true input. Holding a request high does not continuously resend it; the pin must return low before a later fresh request edge.
-- `halui.machine.on` rising edge -> `sendMachineOn()` -> NML `EMC_TASK_SET_STATE(ON)` -> Task dispatch -> `emcTaskSetState(ON)` -> `emcTrajEnable()` -> `EMCMOT_ENABLE`.
-- HALUI publishes achieved state on a separate return path: `halui.machine.is-on` is driven from received `emcStatus->task.state == ON`; homed pins likewise come from motion status rather than request history.
-- `emcTrajEnable()` only writes an `EMCMOT_ENABLE` command. Realtime `command.c` then checks the actual `motion.enable` HAL input. If false it reports `can't enable motion, enable input is false` and does not set `emcmotInternal->enabling`; if true it requests deferred enable for the controller cycle.
-- `motion.enable` is a real HAL_IN created by `motion.c`, default TRUE when disconnected. It is therefore a deterministic, production-source-grounded blocked-transition seam for a software-only test.
-- The servo controller can subsequently revoke enabling if `motion.enable` falls while active, or on joint/spindle/misc faults. Successful controller entry sets `EMCMOT_MOTION_ENABLE_BIT`; Task-side trajectory status sets `enabled` only from that returned flag, and `determineState()` derives Task ON from achieved trajectory enabled plus out-of-estop status.
-- `emcTaskAbort()` clears pending/interpreter execution state and resynchronizes the plan; a post-fault sequencer must not silently reuse stale pre-fault execution authorization.
-- OFF/ESTOP unhome only the `volatile_home` subset through `emcJointUnhome(-2)`. HALUI's homed outputs come from actual returned motion joint status, so homing must be observed, not inferred universally from state-command history.
+C07-048 full phase/ordering preflight:
+- workflow `34318296679`
+- job `102359108023`
+- artifact `10090952801`
+- exact job runtime **3.47 min**
+- 109 ordered rows; all phase-before-mutation and one-authorization/one-request prechecks passed.
 
-Frozen C07-047 prediction:
+C07-049 authoritative run:
+- workflow `34318656849`
+- job `102360226472`
+- artifact `10091082214`
+- artifact digest `sha256:25a569a8ef09e90560c1037e7b38b27e3ce017f437671bdaaed655a836a6c8cd`
+- exact job runtime **3.15 min**
+- complete raw authoritative evidence retained under `lab-results/c07-049-authoritative-evidence/`
+- frozen Gates **A–J all PASS**.
+
+The accepted runtime behavior is:
 
 ```text
 machine-on request while motion.enable=false -> no achieved ON
-motion.enable restored without a fresh HALUI rising edge -> still no achieved ON
-fresh request edge after prerequisite restoration -> achieved ON may follow; sequencer advances only after status
-loss of motion.enable while ON -> active achieved state revoked
-fault-input restoration alone -> no automatic pre-fault resume
-fresh authorization + fresh request + achieved-state confirmation -> guarded recovery permitted
+restore motion.enable without a fresh request -> still no achieved ON
+fresh authorization + fresh request -> wait for returned achieved ON before active permission
+loss of achieved ON -> revoke active permission / enter recovery
+fault-cause restoration alone -> no automatic restart
+fresh post-fault authorization + fresh request + achieved-status confirmation -> guarded logical recovery
 ```
 
-The authoritative plan explicitly requires a blocked-transition adversarial case, active-state interruption, no implicit retry, no automatic restart, ordered observation evidence, and a retained non-functional-safety boundary.
-
-### C07-047 topology preflight — accepted
-
-Workflow **`34314733007`**, job **`102348466843`**, artifact **`10089716849`**, digest `sha256:c458fde6dfa4a52b9ac51a568e4d2c6f57665b78d8a3c2bbfa52e3b53dba67a7`, wall runtime **3m26s (3.43 min)**.
-
-The preflight checked out the exact pinned source and retained production-file SHA-256 values. Actual HAL object readiness passed, not merely command-exit readiness. With an out-of-estop/machine-off baseline:
+Retrieval rules:
 
 ```text
-motion.enable=FALSE + one fresh halui.machine.on edge
-    -> halui.machine.is-on=FALSE
-    -> motion.motion-enabled=FALSE
-
-motion.enable restored TRUE, no new request edge
-    -> halui.machine.is-on=FALSE
-
-new fresh halui.machine.on edge
-    -> halui.machine.is-on=TRUE
-    -> motion.motion-enabled=TRUE
+request != achieved state
+prerequisite restored != request retried
+fault cleared != achieved state restored
+achieved state restored != stale start authorization valid
+Task/HAL logical recovery != physical safe restart
 ```
 
-This is **PREFLIGHT PASS ONLY**. Frozen C07-047 Gates A–J remain **UNSCORED**. It proves that the selected software-only topology can exercise the requested-vs-achieved-state discriminator and HALUI no-implicit-retry edge semantics without modifying production HALUI/Task/Motion source.
+Current-master HALUI spot-check on `64efb28cd77a16b45ade81e576c784cdc574f40e` still showed the same rising-edge helper pattern, but full cross-version Task/Motion equivalence is **not claimed**.
 
-## Exact next-work checkpoint
+**Decision: C07 GRADUATED at 1000 level. Do not rerun C07-047 absent a newly discovered concrete defect.**
 
-1. Do not rerun the accepted topology preflight unless the topology changes.
-2. Construct the test-only C07-047 sequencer on the passing topology using `experiments/C07-047-sequencer-construction-notes.md`: one fresh `start_authorize` -> one machine-on request edge -> wait for achieved `halui.machine.is-on`; no hidden retry; loss of achieved ON revokes cycle permission; post-fault recovery consumes all prior authorization and requires a fresh one.
-3. Add ordered observability for P0–P8: phase ID, sequencer state, `start_authorize`, machine-on request, `motion.enable`, `motion.motion-enabled`, `halui.machine.is-on`, and cycle permission. HALUI is userspace-mediated, so use a single monotonic userspace observer if it can read all objects consistently; otherwise prove cross-stream ordering with an explicit synchronization marker before scoring.
-4. Run one **non-authoritative full phase/ordering preflight** to prove phase publication occurs before each decisive mutation and the observer cannot hide transition ordering. Do not score Gates A–J from that run.
-5. If that full preflight passes, execute one authoritative C07-047 run against the **unchanged** P0–P8 semantics and Gates A–J, retain exact harness/config/source hashes/raw trace, and reconcile each gate.
-6. Preserve the boundary: ordinary Task/HAL sequencing is state-integrity logic, not functional-safety certification; physical state, external E-stop/energy removal and restart interlocks remain machine-specific higher-level work.
+## C08 — diagnostics and trace capture — ACTIVATED
+
+Status: **RESEARCH**.
+
+1000-level objective: build the generic diagnostic/trace model needed by the capstone so another AI engineer can select the right observation surface for a failure, preserve ordering/provenance, distinguish command/request from returned state and root-cause evidence, and avoid claiming atomicity or physical truth from an inappropriate trace.
+
+### Exact next-work checkpoint
+
+1. Read current official LinuxCNC debugging/diagnostics material for HAL (`halcmd`, `halscope`, `sampler/halsampler`), Motion/Task error/status surfaces, NML/logging, and relevant runtime debug options.
+2. Search community reports for realistic diagnostic failures: stale GUI status, realtime-vs-userspace timing confusion, sampler/HAL stream pitfalls, misleading single-pin evidence, and cases where logging changed or obscured timing.
+3. Inventory the pinned source behind at least these observation layers: HAL object inspection, realtime sampler/stream path, Task/NML error/status publication, and LinuxCNC process logging/error channel.
+4. Build a **diagnostic evidence matrix** with columns: observation question, preferred surface, execution context, ordering/timing guarantee, failure mode, retention method, and what the observation cannot prove.
+5. Trace one end-to-end diagnostic call flow from an actual realtime/Task fault to a user-observable retained artifact.
+6. Only after that source/matrix pass, freeze the highest-value C08 experiment. Prefer a test that deliberately creates two plausible fault interpretations and requires the retained traces to discriminate them; do not simply demonstrate that a logging command runs.
+7. Preserve the safety boundary: diagnostic visibility is evidence, not by itself a safety function or physical-state guarantee.

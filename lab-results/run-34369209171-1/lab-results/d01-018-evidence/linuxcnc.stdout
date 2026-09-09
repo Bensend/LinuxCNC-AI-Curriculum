@@ -1,0 +1,8 @@
+Machine configuration file is 'd01.ini'
+Starting LinuxCNC...
+linuxcnc TPMOD=tpmod HOMEMOD=homemod EMCMOT=motmod
+Found file(ABS): /tmp/d01/d01.hal
+task: main loop took 0.018747 seconds
+task: main loop took 0.018771 seconds
+emc/task/taskintf.cc 1006: Error on joint 2, command number 131
+task: main loop took 0.037408 seconds

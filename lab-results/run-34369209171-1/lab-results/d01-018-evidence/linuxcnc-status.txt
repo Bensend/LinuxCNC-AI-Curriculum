@@ -1,0 +1,3 @@
+ M src/emc/motion/control.c
+ M src/emc/motion/mot_priv.h
+ M src/emc/motion/motion.c

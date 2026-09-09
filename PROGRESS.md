@@ -6,7 +6,7 @@ Repository artifacts, not chat history, are authoritative.
 
 ## Current critical-path state
 
-All modules through **T05** and **C01–C09** are **GRADUATED at 1000 level**. **D01 — coupled-control stability and tandem-joint authority is GRADUATED at 2000 level.** Highest-priority unblocked work is now **S02 — feedback integrity, diversity and common-cause reasoning**, state `RESEARCH`.
+All modules through **T05** and **C01–C09** are **GRADUATED at 1000 level**. **D01 — coupled-control stability and tandem-joint authority is GRADUATED at 2000 level.** Highest-priority unblocked work is **S02 — feedback integrity, diversity and common-cause reasoning**, state `EXPERIMENT` after source/call-flow analysis and experiment freeze.
 
 ## Blind external-feedback state
 
@@ -25,15 +25,19 @@ Accepted D01 boundary: duplicated-coordinate command agreement and principal-loo
 
 D01 did **not** justify promotion of custom FPGA/driver/distributed-realtime work to 3000. H30 remains only a candidate.
 
-## S02 activation
+## S02 active evidence
 
-D01 directly exposes S02 as the next prerequisite: independently available software feedback channels can still share a common cause, become stale/frozen, or agree while physical truth is wrong. S02 must distinguish detectable differential disagreement from undetectable-with-current-evidence common-mode error and must define explicit validity/freshness semantics before F02 can use feedback state in compound-fault sequencing.
+Pinned source baseline: LinuxCNC `8bf4605ae81042248add031e94c77300406e0413`.
+
+`guides/S02-feedback-integrity-common-cause-research.md` and `call-flows/S02-feedback-transport-observability.md` now establish the key source boundary: hm2_eth transaction counters, response checks and packet-error surfaces can provide evidence about a current checked **board transport transaction**, but they do not prove per-encoder physical freshness, mechanical coupling, sensor independence or physical truth. HostMot2 watchdog state is a separate output/I/O authority mechanism and likewise is not a sensor-validity oracle.
+
+The S02 experiment is now frozen before implementation. P0–P5 cover baseline, ordinary differential disagreement, one stale/frozen channel during modeled motion, stationary freshness ambiguity, common-mode false agreement, and a limited modeled quadrature diagnostic. Gates A–J require atomic evidence and force `UNKNOWN` where value-only evidence cannot establish sensor freshness. The common-mode phase requires both reported channels and transport to look clean while an explicitly synthetic physical oracle shows the physical state is wrong; the analysis must state that this oracle is laboratory-only and cannot be assumed in production.
 
 ### Exact next-work checkpoint
 
-1. Inventory D01/C-series claims that currently treat feedback as evidence of achieved state.
-2. Research pinned LinuxCNC feedback validity/freshness surfaces plus encoder/HostMot2 failure semantics; separate generic controller facts from hardware/version-specific behavior.
-3. Add community/source analysis for encoder disconnect, stale/frozen counts, index/latch/error behavior and common-cause mechanical/sensor cases.
-4. Freeze the S02 adversarial model **before implementation**. It must include at least: (a) ordinary differential disagreement, (b) one stale/frozen channel, and (c) a common-cause case where both software feedback channels agree while physical geometry is wrong.
-5. Define which cases software-only evidence can detect and which require independent physical diversity or commissioning evidence. Do not claim functional-safety coverage.
+1. Implement the frozen S02 P0–P5/Gates A–J fixture without changing the model to fit results. Prefer a small deterministic realtime HAL component plus atomic sampler trace; synthetic physical truth must be explicit in signal names/artifacts.
+2. Predeclare numeric thresholds, phase lengths and detection latency bounds before the first run. Preserve producer-side recorder-health evidence.
+3. Run a non-authoritative preflight. Verify especially that P3 returns `UNKNOWN` for sensor freshness and P4 remains undetectable to the restricted detector using only reported A/B + transport health.
+4. If preflight is valid, run an independent authoritative execution and score frozen Gates A–J from retained evidence.
+5. Then freeze/execute the S02 adversarial exam, corrections if needed, fresh-AI handoff and counterfactual promotion test.
 6. Keep F02 blocked until S02, E20 and X02 establish accepted contracts. Preserve delayed-retention and sealed-benchmark obligations.

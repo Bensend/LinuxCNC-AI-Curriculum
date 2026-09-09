@@ -1,0 +1,31 @@
+== fixture-before-attach ==
+UTC 2026-09-09T04:22:13Z
+-- comps --
+Loaded HAL Components:
+ID      Type  Name                                                    PID   State
+     2  User  halcmd17418                                             17418 ready
+
+-- sampler --
+Component Pins:
+Owner   Type  Dir                 Value  Name
+
+-- hm2/watchdog --
+Component Pins:
+Owner   Type  Dir                 Value  Name
+
+Parameters:
+Owner   Type  Dir                 Value  Name
+
+-- ipcs --
+
+------ Shared Memory Segments --------
+key        shmid      owner      perms      bytes      nattch     status      
+0x48484c34 12         runner     600        16         2                       
+0x48414c32 13         runner     600        2097152    2                       
+0x48534130 14         runner     600        2640120    1                       
+
+-- /dev/shm --
+total 84
+drwxrwxrwt  2 root root    60 Sep  9 04:17 .
+drwxr-xr-x 19 root root  4000 Sep  9 04:17 ..
+-rw-------  1 root root 82488 Sep  9 04:17 libpod_lock

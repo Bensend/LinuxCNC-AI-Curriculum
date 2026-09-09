@@ -1,0 +1,199 @@
+== full-p0-after-attach ==
+UTC 2026-09-09T04:22:13Z
+-- comps --
+Loaded HAL Components:
+ID      Type  Name                                                    PID   State
+    14  User  halcmd17505                                             17505 ready
+    10  RT    hostmot2                                                      ready
+     9  User  halcmd17498                                             17498 ready
+
+-- sampler --
+Component Pins:
+Owner   Type  Dir                 Value  Name
+
+-- hm2/watchdog --
+Component Pins:
+Owner   Type  Dir                 Value  Name
+    19  u32   OUT            0x00000000  hm2_test.0.c06.consecutive-failures
+    19  u32   I/O            0x00000000  hm2_test.0.c06.fail-reads-remaining
+    19  bit   OUT                 FALSE  hm2_test.0.c06.io-error-mirror
+    19  u32   OUT            0x00000000  hm2_test.0.c06.read-fail-count
+    19  u32   OUT            0x00000022  hm2_test.0.c06.read-success-count
+    19  bit   IN                  FALSE  hm2_test.0.c06.watchdog-status-command
+    19  bit   OUT                 FALSE  hm2_test.0.c06.watchdog-status-mirror
+    19  u32   OUT            0x00000011  hm2_test.0.c06.write-success-count
+    19  bit   OUT                 FALSE  hm2_test.0.gpio.000.in
+    19  bit   OUT                  TRUE  hm2_test.0.gpio.000.in_not
+    19  bit   IN                  FALSE  hm2_test.0.gpio.000.out
+    19  bit   OUT                 FALSE  hm2_test.0.gpio.001.in
+    19  bit   OUT                  TRUE  hm2_test.0.gpio.001.in_not
+    19  bit   IN                  FALSE  hm2_test.0.gpio.001.out
+    19  bit   OUT                 FALSE  hm2_test.0.gpio.002.in
+    19  bit   OUT                  TRUE  hm2_test.0.gpio.002.in_not
+    19  bit   IN                  FALSE  hm2_test.0.gpio.002.out
+    19  bit   OUT                 FALSE  hm2_test.0.gpio.003.in
+    19  bit   OUT                  TRUE  hm2_test.0.gpio.003.in_not
+    19  bit   IN                  FALSE  hm2_test.0.gpio.003.out
+    19  bit   OUT                 FALSE  hm2_test.0.gpio.004.in
+    19  bit   OUT                  TRUE  hm2_test.0.gpio.004.in_not
+    19  bit   IN                  FALSE  hm2_test.0.gpio.004.out
+    19  bit   OUT                 FALSE  hm2_test.0.gpio.005.in
+    19  bit   OUT                  TRUE  hm2_test.0.gpio.005.in_not
+    19  bit   IN                  FALSE  hm2_test.0.gpio.005.out
+    19  bit   OUT                 FALSE  hm2_test.0.gpio.006.in
+    19  bit   OUT                  TRUE  hm2_test.0.gpio.006.in_not
+    19  bit   IN                  FALSE  hm2_test.0.gpio.006.out
+    19  bit   OUT                 FALSE  hm2_test.0.gpio.007.in
+    19  bit   OUT                  TRUE  hm2_test.0.gpio.007.in_not
+    19  bit   IN                  FALSE  hm2_test.0.gpio.007.out
+    19  bit   OUT                 FALSE  hm2_test.0.gpio.008.in
+    19  bit   OUT                  TRUE  hm2_test.0.gpio.008.in_not
+    19  bit   IN                  FALSE  hm2_test.0.gpio.008.out
+    19  bit   OUT                 FALSE  hm2_test.0.gpio.009.in
+    19  bit   OUT                  TRUE  hm2_test.0.gpio.009.in_not
+    19  bit   IN                  FALSE  hm2_test.0.gpio.009.out
+    19  bit   OUT                 FALSE  hm2_test.0.gpio.010.in
+    19  bit   OUT                  TRUE  hm2_test.0.gpio.010.in_not
+    19  bit   IN                  FALSE  hm2_test.0.gpio.010.out
+    19  bit   OUT                 FALSE  hm2_test.0.gpio.011.in
+    19  bit   OUT                  TRUE  hm2_test.0.gpio.011.in_not
+    19  bit   IN                  FALSE  hm2_test.0.gpio.011.out
+    19  bit   OUT                 FALSE  hm2_test.0.gpio.012.in
+    19  bit   OUT                  TRUE  hm2_test.0.gpio.012.in_not
+    19  bit   IN                  FALSE  hm2_test.0.gpio.012.out
+    19  bit   OUT                 FALSE  hm2_test.0.gpio.013.in
+    19  bit   OUT                  TRUE  hm2_test.0.gpio.013.in_not
+    19  bit   IN                  FALSE  hm2_test.0.gpio.013.out
+    19  bit   OUT                 FALSE  hm2_test.0.gpio.014.in
+    19  bit   OUT                  TRUE  hm2_test.0.gpio.014.in_not
+    19  bit   IN                  FALSE  hm2_test.0.gpio.014.out
+    19  bit   OUT                 FALSE  hm2_test.0.gpio.015.in
+    19  bit   OUT                  TRUE  hm2_test.0.gpio.015.in_not
+    19  bit   IN                  FALSE  hm2_test.0.gpio.015.out
+    19  bit   OUT                 FALSE  hm2_test.0.gpio.016.in
+    19  bit   OUT                  TRUE  hm2_test.0.gpio.016.in_not
+    19  bit   IN                  FALSE  hm2_test.0.gpio.016.out
+    19  bit   OUT                 FALSE  hm2_test.0.gpio.017.in
+    19  bit   OUT                  TRUE  hm2_test.0.gpio.017.in_not
+    19  bit   IN                  FALSE  hm2_test.0.gpio.017.out
+    19  bit   OUT                 FALSE  hm2_test.0.gpio.018.in
+    19  bit   OUT                  TRUE  hm2_test.0.gpio.018.in_not
+    19  bit   IN                  FALSE  hm2_test.0.gpio.018.out
+    19  bit   OUT                 FALSE  hm2_test.0.gpio.019.in
+    19  bit   OUT                  TRUE  hm2_test.0.gpio.019.in_not
+    19  bit   IN                  FALSE  hm2_test.0.gpio.019.out
+    19  bit   OUT                 FALSE  hm2_test.0.gpio.020.in
+    19  bit   OUT                  TRUE  hm2_test.0.gpio.020.in_not
+    19  bit   IN                  FALSE  hm2_test.0.gpio.020.out
+    19  bit   OUT                 FALSE  hm2_test.0.gpio.021.in
+    19  bit   OUT                  TRUE  hm2_test.0.gpio.021.in_not
+    19  bit   IN                  FALSE  hm2_test.0.gpio.021.out
+    19  bit   OUT                 FALSE  hm2_test.0.gpio.022.in
+    19  bit   OUT                  TRUE  hm2_test.0.gpio.022.in_not
+    19  bit   IN                  FALSE  hm2_test.0.gpio.022.out
+    19  bit   OUT                 FALSE  hm2_test.0.gpio.023.in
+    19  bit   OUT                  TRUE  hm2_test.0.gpio.023.in_not
+    19  bit   IN                  FALSE  hm2_test.0.gpio.023.out
+    19  s32   OUT                     0  hm2_test.0.read.time
+    19  s32   OUT                     0  hm2_test.0.read_gpio.time
+    19  bit   I/O                 FALSE  hm2_test.0.watchdog.has_bit
+    19  s32   OUT                     0  hm2_test.0.write.time
+    19  s32   OUT                     0  hm2_test.0.write_gpio.time
+
+Parameters:
+Owner   Type  Dir                 Value  Name
+    19  bit   RW                  FALSE  hm2_test.0.gpio.000.invert_output
+    19  bit   RW                  FALSE  hm2_test.0.gpio.000.is_opendrain
+    19  bit   RW                  FALSE  hm2_test.0.gpio.000.is_output
+    19  bit   RW                  FALSE  hm2_test.0.gpio.001.invert_output
+    19  bit   RW                  FALSE  hm2_test.0.gpio.001.is_opendrain
+    19  bit   RW                  FALSE  hm2_test.0.gpio.001.is_output
+    19  bit   RW                  FALSE  hm2_test.0.gpio.002.invert_output
+    19  bit   RW                  FALSE  hm2_test.0.gpio.002.is_opendrain
+    19  bit   RW                  FALSE  hm2_test.0.gpio.002.is_output
+    19  bit   RW                  FALSE  hm2_test.0.gpio.003.invert_output
+    19  bit   RW                  FALSE  hm2_test.0.gpio.003.is_opendrain
+    19  bit   RW                  FALSE  hm2_test.0.gpio.003.is_output
+    19  bit   RW                  FALSE  hm2_test.0.gpio.004.invert_output
+    19  bit   RW                  FALSE  hm2_test.0.gpio.004.is_opendrain
+    19  bit   RW                  FALSE  hm2_test.0.gpio.004.is_output
+    19  bit   RW                  FALSE  hm2_test.0.gpio.005.invert_output
+    19  bit   RW                  FALSE  hm2_test.0.gpio.005.is_opendrain
+    19  bit   RW                  FALSE  hm2_test.0.gpio.005.is_output
+    19  bit   RW                  FALSE  hm2_test.0.gpio.006.invert_output
+    19  bit   RW                  FALSE  hm2_test.0.gpio.006.is_opendrain
+    19  bit   RW                  FALSE  hm2_test.0.gpio.006.is_output
+    19  bit   RW                  FALSE  hm2_test.0.gpio.007.invert_output
+    19  bit   RW                  FALSE  hm2_test.0.gpio.007.is_opendrain
+    19  bit   RW                  FALSE  hm2_test.0.gpio.007.is_output
+    19  bit   RW                  FALSE  hm2_test.0.gpio.008.invert_output
+    19  bit   RW                  FALSE  hm2_test.0.gpio.008.is_opendrain
+    19  bit   RW                  FALSE  hm2_test.0.gpio.008.is_output
+    19  bit   RW                  FALSE  hm2_test.0.gpio.009.invert_output
+    19  bit   RW                  FALSE  hm2_test.0.gpio.009.is_opendrain
+    19  bit   RW                  FALSE  hm2_test.0.gpio.009.is_output
+    19  bit   RW                  FALSE  hm2_test.0.gpio.010.invert_output
+    19  bit   RW                  FALSE  hm2_test.0.gpio.010.is_opendrain
+    19  bit   RW                  FALSE  hm2_test.0.gpio.010.is_output
+    19  bit   RW                  FALSE  hm2_test.0.gpio.011.invert_output
+    19  bit   RW                  FALSE  hm2_test.0.gpio.011.is_opendrain
+    19  bit   RW                  FALSE  hm2_test.0.gpio.011.is_output
+    19  bit   RW                  FALSE  hm2_test.0.gpio.012.invert_output
+    19  bit   RW                  FALSE  hm2_test.0.gpio.012.is_opendrain
+    19  bit   RW                  FALSE  hm2_test.0.gpio.012.is_output
+    19  bit   RW                  FALSE  hm2_test.0.gpio.013.invert_output
+    19  bit   RW                  FALSE  hm2_test.0.gpio.013.is_opendrain
+    19  bit   RW                  FALSE  hm2_test.0.gpio.013.is_output
+    19  bit   RW                  FALSE  hm2_test.0.gpio.014.invert_output
+    19  bit   RW                  FALSE  hm2_test.0.gpio.014.is_opendrain
+    19  bit   RW                  FALSE  hm2_test.0.gpio.014.is_output
+    19  bit   RW                  FALSE  hm2_test.0.gpio.015.invert_output
+    19  bit   RW                  FALSE  hm2_test.0.gpio.015.is_opendrain
+    19  bit   RW                  FALSE  hm2_test.0.gpio.015.is_output
+    19  bit   RW                  FALSE  hm2_test.0.gpio.016.invert_output
+    19  bit   RW                  FALSE  hm2_test.0.gpio.016.is_opendrain
+    19  bit   RW                  FALSE  hm2_test.0.gpio.016.is_output
+    19  bit   RW                  FALSE  hm2_test.0.gpio.017.invert_output
+    19  bit   RW                  FALSE  hm2_test.0.gpio.017.is_opendrain
+    19  bit   RW                  FALSE  hm2_test.0.gpio.017.is_output
+    19  bit   RW                  FALSE  hm2_test.0.gpio.018.invert_output
+    19  bit   RW                  FALSE  hm2_test.0.gpio.018.is_opendrain
+    19  bit   RW                  FALSE  hm2_test.0.gpio.018.is_output
+    19  bit   RW                  FALSE  hm2_test.0.gpio.019.invert_output
+    19  bit   RW                  FALSE  hm2_test.0.gpio.019.is_opendrain
+    19  bit   RW                  FALSE  hm2_test.0.gpio.019.is_output
+    19  bit   RW                  FALSE  hm2_test.0.gpio.020.invert_output
+    19  bit   RW                  FALSE  hm2_test.0.gpio.020.is_opendrain
+    19  bit   RW                  FALSE  hm2_test.0.gpio.020.is_output
+    19  bit   RW                  FALSE  hm2_test.0.gpio.021.invert_output
+    19  bit   RW                  FALSE  hm2_test.0.gpio.021.is_opendrain
+    19  bit   RW                  FALSE  hm2_test.0.gpio.021.is_output
+    19  bit   RW                  FALSE  hm2_test.0.gpio.022.invert_output
+    19  bit   RW                  FALSE  hm2_test.0.gpio.022.is_opendrain
+    19  bit   RW                  FALSE  hm2_test.0.gpio.022.is_output
+    19  bit   RW                  FALSE  hm2_test.0.gpio.023.invert_output
+    19  bit   RW                  FALSE  hm2_test.0.gpio.023.is_opendrain
+    19  bit   RW                  FALSE  hm2_test.0.gpio.023.is_output
+    19  bit   RW                  FALSE  hm2_test.0.io_error
+    19  s32   RW                      0  hm2_test.0.read.tmax
+    19  bit   RO                  FALSE  hm2_test.0.read.tmax-increased
+    19  s32   RW                      0  hm2_test.0.read_gpio.tmax
+    19  bit   RO                  FALSE  hm2_test.0.read_gpio.tmax-increased
+    19  u32   RW             0x004C4B40  hm2_test.0.watchdog.timeout_ns
+    19  s32   RW                      0  hm2_test.0.write.tmax
+    19  bit   RO                  FALSE  hm2_test.0.write.tmax-increased
+    19  s32   RW                      0  hm2_test.0.write_gpio.tmax
+    19  bit   RO                  FALSE  hm2_test.0.write_gpio.tmax-increased
+
+-- ipcs --
+
+------ Shared Memory Segments --------
+key        shmid      owner      perms      bytes      nattch     status      
+0x48484c34 25         runner     600        16         2                       
+0x48414c32 26         runner     600        2097152    2                       
+
+-- /dev/shm --
+total 84
+drwxrwxrwt  2 root root    60 Sep  9 04:17 .
+drwxr-xr-x 19 root root  4000 Sep  9 04:17 ..
+-rw-------  1 root root 82488 Sep  9 04:17 libpod_lock

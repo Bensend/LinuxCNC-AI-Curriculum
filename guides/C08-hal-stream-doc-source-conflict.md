@@ -4,7 +4,7 @@ Pinned curriculum revision: `8bf4605ae81042248add031e94c77300406e0413`
 
 Current development source observed during this session: LinuxCNC `master` search result at commit `64efb28cd77a16b45ade81e576c784cdc574f40e`.
 
-Status: **CONFLICT RECORDED; source mechanism resolved, bounded experiment pending**
+Status: **CONFLICT RECORDED; SOURCE-CONFIRMED and bounded PREFLIGHT TEST-CONFIRMED at pinned revision**
 
 ## Conflict
 
@@ -46,9 +46,18 @@ Therefore consumer tag continuity alone is not sufficient evidence that every at
 
 This conflict is important because blindly trusting the manual's stated sample-number behavior could make a diagnostic harness falsely claim that consumer tags are a complete loss detector.
 
-## Independent verification requirement
+## Independent bounded verification
 
-C08-050 freezes a separate depth-4 FIFO subtest before implementation. It predicts that undrained producer writes will produce `sampler.0.overruns > 0`, while later draining the successfully queued records can still yield contiguous tags. Until that bounded test executes successfully, the claim is **SOURCE-CONFIRMED with conflicting DOC evidence**, not yet TEST-CONFIRMED.
+The experiment and discriminator were frozen before implementation in `experiments/C08-050-diagnostic-discrimination-trace-plan.md`.
+
+C08-051 then executed the required **non-authoritative** depth-4 FIFO preflight at the pinned revision:
+
+- workflow `34327928519`, job `102389431379`, artifact `10093374756`;
+- producer reached `full=TRUE`, `curr_depth=3` and accumulated **31 overruns** while no consumer was attached;
+- after production was disabled, the three successfully queued records drained with tags `[0, 1, 2]`;
+- those tags were contiguous despite 31 proven rejected producer writes.
+
+This independently confirms the pinned-source mechanism at smoke/preflight scale. Because C08-051 was explicitly non-authoritative for the full C08-050 experiment, this does **not** score the frozen C08 Gates A–J. A separate authoritative C08-052 execution is required for the full module claim.
 
 ## Version boundary
 

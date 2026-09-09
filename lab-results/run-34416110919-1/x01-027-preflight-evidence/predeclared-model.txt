@@ -1,0 +1,7 @@
+X01-027 NON-AUTHORITATIVE PREFLIGHT
+Pinned LinuxCNC commit: 8bf4605ae81042248add031e94c77300406e0413
+Servo period: 1000000 ns
+Baseline retained samples: 2000
+Forced-starvation FIFO depth: 64
+Frozen phases/gates: experiments/X01-001-sampler-retention-perturbation.md P0-P5 / Gates A-J
+This preflight validates harness behavior and recorder evidence only; gates remain UNSCORED.

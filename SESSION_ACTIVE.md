@@ -1,9 +1,9 @@
 START 2026-09-09T04:39:52Z
-END OPEN
-ELAPSED_MIN OPEN
+END 2026-09-09T05:00:06Z
+ELAPSED_MIN 20.2
 MODULE C06 communication/watchdog fault handling
-STATUS RESUMED / FIXTURE-SAMPLER INTERACTION DIAGNOSTIC
-RESULT Session start recorded before substantive work. Resuming exact PROGRESS.md checkpoint: reconcile non-authoritative workflow 34310509116 before any authoritative C06-030 retry.
-CHECKPOINT Inspect required mission/course/evaluation/lab state and reconcile workflow 34310509116 stages A/B; if both pass, diff retained C06-038 harness against passing Stage-B startup before any behavioral rerun.
-PREVIOUS_SESSION_END UNKNOWN: prior SESSION_ACTIVE marker began 2026-09-09T04:12:13Z and remained OPEN.
-OVERLAP POSSIBLE/UNRESOLVED at start because the prior 04:12:13Z marker was never canonically closed. Preserve this fact in the final timing row.
+STATUS EXAM / HANDOFF / PROMOTION AUDIT
+RESULT Reconciled C06 sampler-readiness root cause, source-confirmed halcmd show exit-status semantics, classified C06-044 phase-publication defect HARNESS INVALID, redesigned and passed C06-045 phase-first publication preflight, then accepted C06-046 authoritative workflow 34312802937 / job 102342754452 / artifact 10089037385 with 2,976 ordered atomic rows, empty sampler stderr, label-only preflight-to-authoritative diff, and frozen Gates A-H all PASS.
+CHECKPOINT Do not rerun C06-030. Construct/score the C06 adversarial exam, execute a fresh-AI novel-scenario handoff, incorporate corrections, populate the promotion queue, apply counterfactual/minimum-evidence audit, and graduate C06 at 1000 level if all remain sound.
+PREVIOUS_SESSION_END UNKNOWN: prior SESSION_ACTIVE marker began 2026-09-09T04:12:13Z and was never canonically closed.
+OVERLAP BOUNDARY/UNRESOLVED: prior-session authoritative C06-044 job completed at 2026-09-09T04:39:52Z, exactly the same second this session began. No later prior-session execution is evidenced, but exact non-overlap cannot be proven at sub-second resolution and the prior marker was left OPEN.

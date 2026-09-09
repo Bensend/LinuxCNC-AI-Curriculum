@@ -6,7 +6,7 @@ Repository artifacts, not chat history, are authoritative.
 
 ## Current critical-path state
 
-All modules through **T05**, **C01**, **C02**, **C03**, **C04**, **C05**, and **C06** are **GRADUATED at 1000 level**. Phase 10 remains active. Highest-priority unblocked work is **C07 — state-machine sequencing**, state **SOURCE / EXPERIMENT PREFLIGHT**.
+All modules through **T05**, **C01**, **C02**, **C03**, **C04**, **C05**, and **C06** are **GRADUATED at 1000 level**. Phase 10 remains active. Highest-priority unblocked work is **C07 — state-machine sequencing**, state **EXPERIMENT / AUTHORITATIVE HARNESS CONSTRUCTION**.
 
 ## Blind external-feedback state
 
@@ -54,14 +54,17 @@ C06-046 workflow `34312802937`, job `102342754452`, artifact `10089037385`, auth
 
 Pinned LinuxCNC revision: `8bf4605ae81042248add031e94c77300406e0413`.
 
-Status: **SOURCE / EXPERIMENT PREFLIGHT**.
+Status: **EXPERIMENT / AUTHORITATIVE HARNESS CONSTRUCTION**.
 
 Durable artifacts:
 - `guides/C07-state-machine-sequencing-research.md`
+- `guides/C07-source-resolution-addendum.md`
 - `call-flows/C07-halui-task-state-request-status.md`
 - `guides/C07-function-symbol-guide.md`
 - `experiments/C07-047-request-achieved-state-sequencing-plan.md` — **Gates A–J frozen before implementation/output inspection**.
-- `lab-jobs/047-c07-blocked-on-preflight.sh` — non-authoritative topology/blocked-transition preflight.
+- `experiments/C07-047-sequencer-construction-notes.md`
+- `lab-jobs/047-c07-blocked-on-preflight.sh`
+- `results/C07-047-blocked-on-preflight-reconciliation.md` — **NON-AUTHORITATIVE PREFLIGHT PASS**.
 
 Source-confirmed findings:
 
@@ -87,15 +90,32 @@ fresh authorization + fresh request + achieved-state confirmation -> guarded rec
 
 The authoritative plan explicitly requires a blocked-transition adversarial case, active-state interruption, no implicit retry, no automatic restart, ordered observation evidence, and a retained non-functional-safety boundary.
 
-### Current preflight
+### C07-047 topology preflight — accepted
 
-Commit `cc019f8c2d7daabb95dfd07d2844564e466dd790` added the single preflight job and automatically started LinuxCNC Lab Runner workflow **`34314733007`**, job **`102348466843`**. At the latest checkpoint its lab execution step was still in progress. It is predeclared **NON-AUTHORITATIVE** and may prove only topology/readiness and the source-grounded blocked-transition seam; frozen Gates A–J are not to be scored from it.
+Workflow **`34314733007`**, job **`102348466843`**, artifact **`10089716849`**, digest `sha256:c458fde6dfa4a52b9ac51a568e4d2c6f57665b78d8a3c2bbfa52e3b53dba67a7`, wall runtime **3m26s (3.43 min)**.
+
+The preflight checked out the exact pinned source and retained production-file SHA-256 values. Actual HAL object readiness passed, not merely command-exit readiness. With an out-of-estop/machine-off baseline:
+
+```text
+motion.enable=FALSE + one fresh halui.machine.on edge
+    -> halui.machine.is-on=FALSE
+    -> motion.motion-enabled=FALSE
+
+motion.enable restored TRUE, no new request edge
+    -> halui.machine.is-on=FALSE
+
+new fresh halui.machine.on edge
+    -> halui.machine.is-on=TRUE
+    -> motion.motion-enabled=TRUE
+```
+
+This is **PREFLIGHT PASS ONLY**. Frozen C07-047 Gates A–J remain **UNSCORED**. It proves that the selected software-only topology can exercise the requested-vs-achieved-state discriminator and HALUI no-implicit-retry edge semantics without modifying production HALUI/Task/Motion source.
 
 ## Exact next-work checkpoint
 
-1. Inspect only workflow `34314733007` / job `102348466843`; retain its complete artifact/logs and classify it as PREFLIGHT PASS or PREFLIGHT INVALID/FAIL without altering frozen C07-047 Gates A–J.
-2. If preflight passes, reconcile exact HALUI edge behavior, `motion.enable` single-writer topology, blocked machine-on, no-implicit-retry result, production source hashes, and compute runtime in a durable result artifact.
-3. Build the authoritative C07-047 harness from the passing topology. It must add a test-only sequencer and ordered observability for P0–P8, including fresh `start_authorize`, active fault interruption, P7 no-auto-restart, and P8 guarded recovery. Production HALUI/Task/Motion source must remain unchanged.
-4. Run a non-authoritative full phase/ordering preflight first if needed; only then execute one authoritative run against unchanged Gates A–J.
-5. Continue source work on homing/volatile-home status only to the depth needed to interpret the chosen sim policy; do not let physical-machine/safety-specific restart questions block the generic 1000-level state-integrity experiment.
-6. Preserve the boundary: ordinary Task/HAL sequencing is state-integrity logic, not functional-safety certification.
+1. Do not rerun the accepted topology preflight unless the topology changes.
+2. Construct the test-only C07-047 sequencer on the passing topology using `experiments/C07-047-sequencer-construction-notes.md`: one fresh `start_authorize` -> one machine-on request edge -> wait for achieved `halui.machine.is-on`; no hidden retry; loss of achieved ON revokes cycle permission; post-fault recovery consumes all prior authorization and requires a fresh one.
+3. Add ordered observability for P0–P8: phase ID, sequencer state, `start_authorize`, machine-on request, `motion.enable`, `motion.motion-enabled`, `halui.machine.is-on`, and cycle permission. HALUI is userspace-mediated, so use a single monotonic userspace observer if it can read all objects consistently; otherwise prove cross-stream ordering with an explicit synchronization marker before scoring.
+4. Run one **non-authoritative full phase/ordering preflight** to prove phase publication occurs before each decisive mutation and the observer cannot hide transition ordering. Do not score Gates A–J from that run.
+5. If that full preflight passes, execute one authoritative C07-047 run against the **unchanged** P0–P8 semantics and Gates A–J, retain exact harness/config/source hashes/raw trace, and reconcile each gate.
+6. Preserve the boundary: ordinary Task/HAL sequencing is state-integrity logic, not functional-safety certification; physical state, external E-stop/energy removal and restart interlocks remain machine-specific higher-level work.

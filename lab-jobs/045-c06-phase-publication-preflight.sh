@@ -8,9 +8,10 @@ set -euo pipefail
 # threshold=3, watchdog register 0x2004:0, production HostMot2 behavior, and
 # Gates A-H remain unchanged and are NOT accepted from this run.
 ROOT="${GITHUB_WORKSPACE:-$PWD}"
-BASE="$ROOT/lab-jobs/044-c06-authoritative-real-readiness.sh"
+# Use the exact expanded harness actually retained by C06-044, not its source wrapper.
+BASE="$ROOT/lab-results/run-34311582310-1/executed-authoritative-harness.sh"
 TMP="${RUNNER_TEMP:-/tmp}/c06-045-preflight.sh"
-[[ -s "$BASE" ]] || { echo 'PREFLIGHT_INVALID: C06-044 base missing' >&2; exit 20; }
+[[ -s "$BASE" ]] || { echo 'PREFLIGHT_INVALID: retained expanded C06-044 harness missing' >&2; exit 20; }
 cp "$BASE" "$TMP"
 python3 - "$TMP" <<'PY'
 from pathlib import Path

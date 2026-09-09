@@ -1,0 +1,68 @@
+--- /home/runner/work/LinuxCNC-AI-Curriculum/LinuxCNC-AI-Curriculum/lab-jobs/037-c06-transport-watchdog-authoritative-redesigned.sh	2026-09-09 04:36:29.770597316 +0000
++++ /home/runner/work/_temp/c06-044-authoritative.sh	2026-09-09 04:36:29.989584496 +0000
+@@ -11,7 +11,7 @@
+ RUN_EVID="$ROOT/lab-results/run-${GITHUB_RUN_ID:-manual}-${GITHUB_RUN_ATTEMPT:-1}"
+ mkdir -p "$RUN_EVID"
+ 
+-echo '== C06-030 authoritative redesigned run =='
++echo '== C06-030 authoritative redesigned run / real-readiness correction =='
+ date -u '+UTC start: %Y-%m-%dT%H:%M:%SZ'
+ echo "Pinned upstream commit: $PINNED"
+ echo 'Frozen gates: experiments/C06-030-transport-watchdog-fault-plan.md'
+@@ -111,17 +111,50 @@
+ exec 9>/tmp/c06-hal.in
+ cat /tmp/c06-037.hal >&9
+ 
+-# Wait for real fixture objects before starting authoritative sampling.
++# C06-043 correction: readiness must prove the requested HAL objects EXIST,
++# not merely that `halcmd show` returned exit status 0. Also prove halrun alive.
+ ready=0
+-for _ in $(seq 1 100); do
+-  if halcmd show pin hm2_test.0.watchdog.has_bit >/dev/null 2>&1 && halcmd show param hm2_test.0.io_error >/dev/null 2>&1; then ready=1; break; fi
+-  sleep .05
++for _ in $(seq 1 400); do
++  PINS="$(halcmd show pin 2>/dev/null || true)"
++  PARAMS="$(halcmd show param 2>/dev/null || true)"
++  FUNCTS="$(halcmd show funct 2>/dev/null || true)"
++  if grep -Fq 'hm2_test.0.watchdog.has_bit' <<<"$PINS" \
++     && grep -Fq 'hm2_test.0.c06.fail-reads-remaining' <<<"$PINS" \
++     && grep -Fq 'sampler.0.pin.9' <<<"$PINS" \
++     && grep -Fq 'sampler.0.enable' <<<"$PINS" \
++     && grep -Fq 'hm2_test.0.io_error' <<<"$PARAMS" \
++     && grep -Fq 'sampler.0' <<<"$FUNCTS" \
++     && kill -0 "$HALPID" 2>/dev/null; then ready=1; break; fi
++  sleep .025
+ done
+-[[ "$ready" == 1 ]] || { cat /tmp/c06-hal.out; echo 'HARNESS_INVALID: fixture did not become ready' >&2; kill "$HALPID" 2>/dev/null || true; exit 24; }
++{
++  echo "ready=$ready"
++  echo "halrun_alive=$(kill -0 "$HALPID" 2>/dev/null && echo yes || echo no)"
++  halcmd show comp || true
++  halcmd show pin 'sampler.*' || true
++  halcmd show pin 'hm2_test.0.*' || true
++  halcmd show param 'hm2_test.0.*' || true
++  ipcs -m || true
++} >"$RUN_EVID/readiness-proof.txt" 2>&1
++[[ "$ready" == 1 ]] || { cat /tmp/c06-hal.out; echo 'HARNESS_INVALID: actual fixture/sampler objects did not become ready' >&2; kill "$HALPID" 2>/dev/null || true; exit 24; }
+ 
+ halsampler -c 0 -t >"$RUN_EVID/c06-trace.txt" 2>"$RUN_EVID/halsampler.stderr" &
+ SAMPID=$!
+-sleep .35
++# Authoritative observation barrier: reader remains alive and at least 50 baseline
++# rows exist before any P1 mutation.
++observing=0
++for _ in $(seq 1 150); do
++  if ! kill -0 "$SAMPID" 2>/dev/null; then
++    cat "$RUN_EVID/halsampler.stderr" >&2 || true
++    echo 'HARNESS_INVALID: halsampler exited before P0 observation' >&2
++    kill "$HALPID" 2>/dev/null || true
++    exit 27
++  fi
++  if [[ -s "$RUN_EVID/c06-trace.txt" ]] && [[ $(wc -l <"$RUN_EVID/c06-trace.txt") -ge 50 ]]; then observing=1; break; fi
++  sleep .01
++done
++[[ "$observing" == 1 ]] || { cat "$RUN_EVID/halsampler.stderr" >&2 || true; echo 'HARNESS_INVALID: no initial atomic sampler rows' >&2; kill "$SAMPID" "$HALPID" 2>/dev/null || true; exit 28; }
++sleep .30
+ 
+ # P1: exactly one transient failed read; transport must recover without watchdog indication.
+ echo 'sets c06-fail-remaining 1' >&9

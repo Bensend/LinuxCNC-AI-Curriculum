@@ -2,33 +2,33 @@
 
 Status: **ACTIVE**
 
-This graph is the dependency-driven promotion pass after completion of T02–T05 and C01–C09 at 1000 level. Difficulty alone does not justify promotion; 3000 work requires new evidence that specialized prerequisites or infrastructure are actually necessary.
+This graph is the dependency-driven promotion pass after completion of T02–T05 and C01–C09 at 1000 level. Difficulty alone does not justify promotion; 3000 work requires evidence that specialized prerequisites or infrastructure are actually necessary.
 
 ## Priority heuristic
 
-Each candidate receives ordinal scores 1–5 for prerequisite value (P), unresolved uncertainty (U), consequence (C), expected information gain (IG), and infrastructure cost penalty (IC). Working priority score: `P + U + C + IG - IC`. This is a scheduling heuristic, not a scientific risk metric.
+Working priority score is `P + U + C + IG - IC` for prerequisite value, uncertainty, consequence, expected information gain, and infrastructure-cost penalty. It schedules work; it is not a risk metric.
 
 | ID | Advanced module | Score | State / dependency |
 |---|---|---:|---|
 | D01 | Coupled-control stability and tandem-joint authority | **17** | **GRADUATED 2000; 2026-09-09** |
 | F02 | Compound-fault state-machine sequencing | **16** | blocked by S02, E20 and X02 |
-| S02 | Feedback integrity, diversity and common-cause reasoning | **15** | **ACTIVE; highest-priority unblocked after D01** |
-| E20 | HostMot2/hm2_eth watchdog/recovery across versions | **14** | unblocked; source/version matrix before hardware |
+| S02 | Feedback integrity, diversity and common-cause reasoning | **15** | authoritative gates + exam + promotion complete; **fresh-AI handoff pending** |
+| E20 | HostMot2/hm2_eth watchdog/recovery across versions | **14** | **ACTIVE / highest-priority executable; experiment frozen** |
 | X02 | Synchronized multi-surface diagnostics | **13** | requires X01 recorder perturbation evidence |
 | X01 | Recorder perturbation and long-duration retention | **12** | unblocked |
 | T20 | UI/Task/NML freshness and ownership under stress | **11** | strengthened by X02 |
-| H30? | Custom HostMot2 FPGA/driver/distributed realtime extension | — | **3000 candidate only**; D01 did not justify promotion |
+| H30? | Custom HostMot2 FPGA/driver/distributed realtime extension | — | **3000 candidate only**; D01/S02 do not justify promotion |
 
 ## Dependency graph
 
 ```text
 1000-series graduated
         |
-        +--> D01 GRADUATED --> S02 feedback integrity/common-cause --+
-        |                                                            |
-        +--> X01 recorder perturbation --> X02 correlation ----------+--> F02 compound faults
-        |                                                            |
-        +--> E20 hm2_eth/watchdog version behavior ------------------+
+        +--> D01 GRADUATED --> S02 technical evidence complete --fresh handoff--+
+        |                                                                      |
+        +--> X01 recorder perturbation --> X02 correlation --------------------+--> F02 compound faults
+        |                                                                      |
+        +--> E20 hm2_eth/watchdog version behavior ACTIVE ---------------------+
         |
         +--> X02 --> T20 UI/Task/NML stress
 
@@ -37,18 +37,33 @@ E20 / X02 / later evidence --only if justified--> H30? 3000 candidate
 
 ## D01 closure
 
-Authoritative workflow `34375315740` passed unchanged frozen Gates A–J from retained artifact evidence. The already-frozen adversarial exam scored 20/20 without accepting any safety/conceptual trap. D01 established a version-pinned authority boundary: duplicated-coordinate command agreement and principal-looking Cartesian feedback do not prove duplicate-joint agreement or physical tandem geometry. Joint-level following-error authority can revoke ordinary global motion while Cartesian feedback remains principal-looking. D01 does not authenticate physical geometry, common-cause feedback integrity, stopping performance, or functional safety.
+Authoritative workflow `34375315740` passed unchanged frozen Gates A–J; frozen adversarial exam scored 20/20. D01 established that duplicated-coordinate command agreement and principal-looking Cartesian feedback do not prove duplicate-joint agreement or physical tandem geometry. It did not justify H30/3000.
 
-The D01 counterfactual/promotion test did not justify H30/3000 work. It did expose the next prerequisite directly: S02 must address feedback validity, diversity, freshness, and common-cause cases in which software channels can agree while physical truth is wrong.
+## S02 technical closure and remaining boundary
+
+Authoritative workflow `34395556653` passed frozen Gates A–J **10/10** from retained atomic evidence; its frozen adversarial exam scored **20/20** with all critical traps rejected. The counterfactual/promotion test did not justify H30.
+
+The only remaining S02 graduation requirement is a genuinely fresh-AI handoff. The same learner instance must not self-certify this information-separated test. This boundary does not justify idling other independent prerequisites, so E20 becomes the highest-priority executable work while S02 awaits valid external/fresh evaluation.
+
+## E20 activation
+
+Source/community/version work establishes a material recovery delta:
+
+- inspected 2015/2.7-era lineage used a fixed ~200 ms queued-read wait and lacked the later queued-read packet-error accumulator/decay/`io_error` threshold path;
+- v2.9.10 uses current-cycle packet-error plus accumulated level/limit, clean-cycle decay, `needs_soft_reset`, `io_error`, and an explicit saturated-counter recovery interaction after external `io_error` clear;
+- current master preserves the high-level state machine while changing backend/confirmation implementation;
+- HostMot2 watchdog/pin authority is distinct from hm2_eth transport/driver error state, and internal FPGA generator/encoder state can continue while physical pin authority is absent.
+
+`experiments/E20-001-transport-watchdog-recovery-boundaries.md` freezes P0–P8 and Gates A–J before implementation. It specifically forbids automatic motion reauthorization from a clean current packet, clearing `io_error`, watchdog reset, or changing internal generator state alone.
 
 ## Re-promotion safeguards
 
 1. Do not create a 3000 module merely because a 2000 experiment is difficult.
 2. Preserve version-specific conclusions as version-specific until a source/version matrix supports generalization.
-3. Keep physical sensor coupling, actuator authority, stopping performance, and functional-safety certification outside software-only proof.
-4. A successful simulated disagreement detector proves only the modeled measurement/control relationship.
-5. The end-of-1000 sealed benchmark remains information-separated; this graph does not reveal or infer its sealed oracle.
+3. Keep physical sensor coupling, actuator authority, stopping performance and functional-safety certification outside software-only proof.
+4. A successful synthetic fault/recovery state model proves only the modeled software distinctions.
+5. The end-of-1000 sealed benchmark and fresh-AI tests remain information-separated.
 
 ## Exact next dependency checkpoint
 
-Begin S02. First inventory D01/C-series claims that currently treat feedback as evidence, then research LinuxCNC feedback validity/freshness surfaces and relevant encoder/HostMot2 failure semantics. Freeze an adversarial model before implementation that includes at least one common-cause case where both software feedback channels agree but physical geometry is wrong, one stale/frozen-channel case, and one ordinary differential disagreement case. Explicitly separate what software can detect from what requires independent physical diversity. Do not advance F02 until S02, E20 and X02 establish their accepted contracts.
+Implement frozen E20-001 as a standalone realtime HAL component followed by `sampler` in one 1 ms thread. Preserve `packet-error-limit=10`, increment=2, decrement=1, P0–P8 and Gates A–J unchanged. Retain source/topology/thread order, atomic samples and producer overrun evidence. Run a non-authoritative preflight first; correct harness defects only. Do not advance F02 until S02's fresh handoff plus accepted E20 and X02 contracts are complete.

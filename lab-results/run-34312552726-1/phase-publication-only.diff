@@ -1,0 +1,75 @@
+--- /home/runner/work/LinuxCNC-AI-Curriculum/LinuxCNC-AI-Curriculum/lab-results/run-34311582310-1/executed-authoritative-harness.sh	2026-09-09 04:50:54.061592489 +0000
++++ /home/runner/work/_temp/c06-045-preflight.sh	2026-09-09 04:50:54.195069181 +0000
+@@ -11,7 +11,7 @@
+ RUN_EVID="$ROOT/lab-results/run-${GITHUB_RUN_ID:-manual}-${GITHUB_RUN_ATTEMPT:-1}"
+ mkdir -p "$RUN_EVID"
+ 
+-echo '== C06-030 authoritative redesigned run / real-readiness correction =='
++echo '== C06 phase-publication redesign preflight (NON-AUTHORITATIVE) =='
+ date -u '+UTC start: %Y-%m-%dT%H:%M:%SZ'
+ echo "Pinned upstream commit: $PINNED"
+ echo 'Frozen gates: experiments/C06-030-transport-watchdog-fault-plan.md'
+@@ -156,36 +156,41 @@
+ [[ "$observing" == 1 ]] || { cat "$RUN_EVID/halsampler.stderr" >&2 || true; echo 'HARNESS_INVALID: no initial atomic sampler rows' >&2; kill "$SAMPID" "$HALPID" 2>/dev/null || true; exit 28; }
+ sleep .30
+ 
+-# P1: exactly one transient failed read; transport must recover without watchdog indication.
+-echo 'sets c06-fail-remaining 1' >&9
++# P1 publication barrier: publish phase, let realtime observe it, then inject one failed read.
+ echo 'sets c06-phase 1' >&9
+-sleep .40
++sleep .05
++echo 'sets c06-fail-remaining 1' >&9
++sleep .35
+ 
+-# P2: deterministic test analogue escalates at the frozen threshold of three consecutive failures.
+-echo 'sets c06-fail-remaining 5' >&9
++# P2 publication barrier, then unchanged repeated-failure command.
+ echo 'sets c06-phase 2' >&9
+-sleep .40
++sleep .05
++echo 'sets c06-fail-remaining 5' >&9
++sleep .35
+ 
+-# P3: remove injected transport failure and explicitly clear real generic io_error.
++# P3 publication barrier, then unchanged transport recovery actions.
++echo 'sets c06-phase 3' >&9
++sleep .05
+ echo 'sets c06-fail-remaining 0' >&9
+ echo 'setp hm2_test.0.io_error false' >&9
+-echo 'sets c06-phase 3' >&9
+-sleep .40
++sleep .35
+ 
+-# P4: transport remains healthy; inject only fake watchdog status register 0x2004 bit 0.
+-echo 'sets c06-watchdog-command true' >&9
++# P4 publication barrier, then unchanged fake watchdog-status injection.
+ echo 'sets c06-phase 4' >&9
+-sleep .40
++sleep .05
++echo 'sets c06-watchdog-command true' >&9
++sleep .35
+ 
+ # P5: leave has_bit asserted and verify recovery remains held.
+ echo 'sets c06-phase 5' >&9
+ sleep .40
+ 
+-# P6: remove fake status and explicitly clear the real watchdog.has_bit HAL_IO signal.
++# P6 publication barrier, then unchanged watchdog recovery actions.
++echo 'sets c06-phase 6' >&9
++sleep .05
+ echo 'sets c06-watchdog-command false' >&9
+ echo 'sets c06-has-bit false' >&9
+-echo 'sets c06-phase 6' >&9
+-sleep .50
++sleep .45
+ 
+ echo 'stop' >&9
+ sleep .05
+@@ -275,5 +280,5 @@
+   exit 26
+ fi
+ 
+-echo 'AUTHORITATIVE C06-030: frozen Gates A-H PASS' | tee "$RUN_EVID/verdict.txt"
++echo 'NON-AUTHORITATIVE PREFLIGHT: internal analyzer reached PASS; frozen Gates remain unaccepted' | tee "$RUN_EVID/verdict.txt"
+ date -u '+UTC finish: %Y-%m-%dT%H:%M:%SZ'

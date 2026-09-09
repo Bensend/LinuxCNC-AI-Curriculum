@@ -1,0 +1,16 @@
+Component Pins:
+Owner   Type  Dir                 Value  Name
+    10  bit   OUT                 FALSE  s02-model.0.freshness-unknown ==> s02-freshness-unknown
+    10  bit   OUT                 FALSE  s02-model.0.oracle-common-mode ==> s02-oracle-common-mode
+    10  bit   OUT                 FALSE  s02-model.0.oracle-stale-b ==> s02-oracle-stale-b
+    10  bit   OUT                 FALSE  s02-model.0.pair-disagreement ==> s02-pair-disagreement
+    10  float OUT                     0  s02-model.0.phase ==> s02-phase
+    10  float OUT                     0  s02-model.0.physical-a ==> s02-physical-a
+    10  float OUT                     0  s02-model.0.physical-b ==> s02-physical-b
+    10  bit   OUT                 FALSE  s02-model.0.quadrature-diag ==> s02-quad-diag
+    10  float OUT                     0  s02-model.0.reported-a ==> s02-reported-a
+    10  float OUT                     0  s02-model.0.reported-b ==> s02-reported-b
+    10  bit   OUT                 FALSE  s02-model.0.restricted-detect ==> s02-restricted-detect
+    10  s32   OUT                   134  s02-model.0.time
+    10  bit   OUT                  TRUE  s02-model.0.transport-healthy ==> s02-transport
+

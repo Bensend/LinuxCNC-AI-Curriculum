@@ -1,0 +1,35 @@
+component c08diag "C08 lab-only deterministic diagnostic-cause fixture";
+pin in u32 phase_cmd = 0;
+pin in bit inject_a = 0;
+pin in bit inject_b = 0;
+pin out u32 phase = 0;
+pin out bit cause_a = 0;
+pin out bit cause_b = 0;
+pin out bit symptom = 0;
+variable int b_seen = 0;
+function _;
+license "GPL";
+;;
+FUNCTION(_) {
+    phase = phase_cmd;
+    if (inject_a) {
+        cause_a = 1;
+        cause_b = 0;
+        symptom = 1;
+        b_seen = 0;
+    } else if (inject_b) {
+        cause_a = 0;
+        cause_b = 1;
+        if (b_seen) {
+            symptom = 1;
+        } else {
+            symptom = 0;
+            b_seen = 1;
+        }
+    } else {
+        cause_a = 0;
+        cause_b = 0;
+        symptom = 0;
+        b_seen = 0;
+    }
+}

@@ -1,0 +1,32 @@
+Component Pins:
+Owner   Type  Dir                 Value  Name
+    12  u32   IN             0x00000000  c08diag.0.phase-cmd
+
+Component Pins:
+Owner   Type  Dir                 Value  Name
+    12  bit   IN                  FALSE  c08diag.0.inject-a
+
+Component Pins:
+Owner   Type  Dir                 Value  Name
+    12  bit   IN                  FALSE  c08diag.0.inject-b
+
+Component Pins:
+Owner   Type  Dir                 Value  Name
+    12  bit   OUT                 FALSE  c08diag.0.cause-a ==> c08-cause-a
+
+Component Pins:
+Owner   Type  Dir                 Value  Name
+    12  bit   OUT                 FALSE  c08diag.0.cause-b ==> c08-cause-b
+
+Component Pins:
+Owner   Type  Dir                 Value  Name
+    12  bit   OUT                 FALSE  c08diag.0.symptom ==> c08-symptom
+
+Component Pins:
+Owner   Type  Dir                 Value  Name
+    17  s32   I/O                     0  sampler.0.overruns
+
+Component Pins:
+Owner   Type  Dir                 Value  Name
+    17  s32   I/O                     0  sampler.1.overruns
+

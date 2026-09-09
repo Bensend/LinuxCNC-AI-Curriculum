@@ -1,0 +1,3 @@
+Compiling realtime c08diag.c
+Linking c08diag.so
+cp c08diag.so /home/runner/work/_temp/linuxcnc-c08-trace-authoritative/rtlib/

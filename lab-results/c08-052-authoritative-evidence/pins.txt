@@ -1,0 +1,30 @@
+Component Pins:
+Owner   Type  Dir                 Value  Name
+     7  s64   OUT                   417  c08-thread.threadbeat
+     7  s32   OUT                   200  c08-thread.time
+    12  bit   OUT                 FALSE  c08diag.0.cause-a ==> c08-cause-a
+    12  bit   OUT                 FALSE  c08diag.0.cause-b ==> c08-cause-b
+    12  bit   IN                  FALSE  c08diag.0.inject-a
+    12  bit   IN                  FALSE  c08diag.0.inject-b
+    12  u32   OUT            0x00000004  c08diag.0.phase ==> c08-phase
+    12  u32   IN             0x00000004  c08diag.0.phase-cmd
+    12  bit   OUT                 FALSE  c08diag.0.symptom ==> c08-symptom
+    12  s32   OUT                    70  c08diag.0.time
+    17  s32   OUT                     0  sampler.0.curr-depth
+    17  bit   IN                  FALSE  sampler.0.enable
+    17  bit   OUT                 FALSE  sampler.0.full
+    17  s32   I/O                    32  sampler.0.overruns
+    17  bit   IN                  FALSE  sampler.0.pin.0 <== c08-symptom
+    17  s32   I/O                     0  sampler.0.sample-num
+    17  s32   OUT                    60  sampler.0.time
+    17  s32   OUT                     0  sampler.1.curr-depth
+    17  bit   IN                  FALSE  sampler.1.enable
+    17  bit   OUT                 FALSE  sampler.1.full
+    17  s32   I/O                     0  sampler.1.overruns
+    17  u32   IN             0x00000004  sampler.1.pin.0 <== c08-phase
+    17  bit   IN                  FALSE  sampler.1.pin.1 <== c08-cause-a
+    17  bit   IN                  FALSE  sampler.1.pin.2 <== c08-cause-b
+    17  bit   IN                  FALSE  sampler.1.pin.3 <== c08-symptom
+    17  s32   I/O                     0  sampler.1.sample-num
+    17  s32   OUT                    70  sampler.1.time
+

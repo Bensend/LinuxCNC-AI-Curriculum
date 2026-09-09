@@ -1,0 +1,2 @@
+main_collector_pid=17412 attach_process_alive_before_sampling=1
+main_collector_exit=0

@@ -1,0 +1,11 @@
+Gate A: PASS — frozen provenance retained and pinned production tree unchanged
+Gate B: PASS — producer_line=3 main_sampler_line=5
+Gate C: PASS — rows=285 clean_stderr=True
+Gate D: PASS — producer=main overruns=0 full=FALSE curr_depth=0 tags_contiguous=True
+Gate E: PASS — baseline quiescence and sampled phase-before-mutation boundaries retained
+Gate F: PASS — P1 COARSE SYMPTOM=TRUE; P3 COARSE SYMPTOM=TRUE
+Gate G: PASS — P1 cause-a and symptom assert together at sampler boundary with no sampled cause-a lead
+Gate H: PASS — cause_b_only_index=14 cause_b_plus_symptom_index=15
+Gate I: PASS — producer_overruns=32 retained_tags=[0, 1, 2] contiguous=True
+Gate J: PASS — Sequential halcmd reads are point observations, not an atomic servo-cycle trace. A sampler row is coherent only at its sampler invocation/function-order boundary. Producer-side overrun evidence is required before claiming attempted samples were not dropped. HAL realtime traces, Task/NML status or error text, process logs, and physical observations do not share a universal atomic clock unless separately synchronized. Diagnostic evidence is not a safety-rated function and does not prove physical machine state.
+authoritative_result=PASS frozen_gates_failed=none

@@ -1,0 +1,2 @@
+PROBE 01 baseline-fixture             rc=1 rows=0 stderr=hal_stream_attach:\ Invalid\ argument\ 
+VERDICT baseline failed unexpectedly

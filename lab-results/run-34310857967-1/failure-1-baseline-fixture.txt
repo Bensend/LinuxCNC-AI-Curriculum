@@ -1,0 +1,21 @@
+== failure snapshot after baseline-fixture ==
+UTC 2026-09-09T04:28:02Z
+Loaded HAL Components:
+ID      Type  Name                                                    PID   State
+     3  User  halcmd17524                                             17524 ready
+
+Component Pins:
+Owner   Type  Dir                 Value  Name
+
+Component Pins:
+Owner   Type  Dir                 Value  Name
+
+Parameters:
+Owner   Type  Dir                 Value  Name
+
+
+------ Shared Memory Segments --------
+key        shmid      owner      perms      bytes      nattch     status      
+0x48484c34 9          runner     600        16         2                       
+0x48414c32 10         runner     600        2097152    2                       
+

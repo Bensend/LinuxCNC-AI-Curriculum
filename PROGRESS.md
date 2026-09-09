@@ -8,7 +8,7 @@ Repository artifacts, not chat history, are authoritative.
 
 All modules through **T05** and **C01–C09** are **GRADUATED at 1000 level**.
 
-The 1000-series critical path is complete. Highest-priority unblocked work is now **2000-series dependency-graph construction from the accumulated promotion/uncertainty queue**, state **RESEARCH / CURRICULUM DESIGN**. Do not mechanically repeat the 1000 series.
+The 1000-series critical path is complete. The initial 2000-series promotion inventory has now been deduplicated and scored in `guides/2000-dependency-graph.md`. Highest-priority unblocked work is **D01 — coupled-control stability and tandem-joint authority**, state **RESEARCH / SOURCE**.
 
 ## Blind external-feedback state
 
@@ -16,7 +16,7 @@ The 1000-series critical path is complete. Highest-priority unblocked work is no
 - **BL-DEV-002:** VALID, 9/10, 88% confidence.
 - **BL-DEV-002-TRANSFER-01:** VALID, 10/10, 95% confidence.
 - Delayed retention remains separate; do not count the immediate transfer retest as delayed retention.
-- End-of-1000 is now a meaningful sealed-benchmark checkpoint. Preserve information separation; do not expose a sealed answer to the learner merely to satisfy cadence.
+- End-of-1000 is a meaningful sealed-benchmark checkpoint. Preserve information separation; do not expose a sealed answer to the learner merely to satisfy cadence.
 
 ## C06 — communication/watchdog fault handling — GRADUATED
 
@@ -83,8 +83,6 @@ Durable artifacts:
 - `evaluation/C09-fresh-ai-handoff-answer.md`
 - `evaluation/C09-architecture-handoff-result.md` — **20/20 PASS**
 
-C09 integrated the already-graduated source/lab evidence into a generic public two-actuator architecture and rejected all frozen attractive errors: userspace servo control, sensor self-authentication, request=achieved, stale authorization reuse, transport/watchdog conflation, invalid atomicity/no-loss claims, software=physical truth, and ordinary LinuxCNC=safety authority.
-
 Accepted architecture retrieval contract:
 
 ```text
@@ -102,37 +100,53 @@ software diagnostics != physical truth != safety authority
 
 C09 is an integration/handoff capstone; it does not claim new physical-machine evidence. Hardware-specific loop stability, sensor diversity, physical stopping/actuator authority and safety certification remain later/hardware work.
 
-## 2000-series activation — RESEARCH / CURRICULUM DESIGN
+## 2000-series activation — ACTIVE
 
-### Initial high-value promotion clusters extracted at the 1000 boundary
+Durable scheduling artifacts:
 
-1. **Advanced coupled-control dynamics — HIGH**
-   - cross-coupling stability and authority with asymmetric plants, delay, saturation and realistic disturbances;
-   - quantify when synchronization logic improves measured disagreement versus destabilizes/obscures local loops.
+- `guides/2000-promotion-candidate-ledger-initial.md` — reconciled promotion inventory;
+- `guides/2000-dependency-graph.md` — scored initial dependency graph.
 
-2. **HostMot2/hm2_eth fault internals across versions — HIGH**
-   - compare packet-error escalation, watchdog observability/recovery and driver/firmware behavior across development/stable revisions;
-   - resolve documentation/source version conflicts rather than generalizing the pinned capstone behavior.
+Current priority order is D01 coupled-control authority, then evidence-dependent S02/E20/X01/X02 work, with F02 compound faults deliberately blocked until its prerequisite fault domains are understood. Custom HostMot2 FPGA/driver/distributed-realtime work remains a **3000 candidate only**.
 
-3. **Advanced diagnostic correlation — HIGH**
-   - explicitly synchronized realtime HAL + Task/NML + process-log correlation;
-   - recorder perturbation/jitter, long-duration capture, overflow recovery and bounded evidence design.
+## D01 — coupled-control stability and tandem-joint authority — RESEARCH / SOURCE
 
-4. **Feedback integrity / common-cause reasoning — HIGH**
-   - sensor diversity, common-mode faults, plausibility and independent evidence architectures;
-   - preserve the rule that two agreeing software measurements do not authenticate the physical plant by themselves.
+Pinned revision: `8bf4605ae81042248add031e94c77300406e0413`.
 
-5. **Custom FPGA/driver/distributed realtime engineering — 3000 candidate, not yet promoted to a 3000 module**
-   - only create 3000 work if 2000-level evidence shows the topic genuinely needs specialized prerequisites/infrastructure.
+Durable artifacts:
 
-6. **Physical safety/commissioning — CRITICAL consequence, separate evidence domain**
-   - external safety-system architecture/certification, stopping performance, sensor mechanical coupling, actuator/drive authority and energized commissioning require human/physical evidence;
-   - these do not become ordinary LinuxCNC software claims.
+- `guides/D01-coupled-control-stability-authority-research.md`;
+- `call-flows/D01-duplicated-coordinate-command-feedback.md`;
+- `results/D01-001-pinned-kinematics-source-probe.md` — non-authoritative source-algorithm verification.
+
+Source-grounded finding now requiring runtime verification:
+
+```text
+duplicated Cartesian coordinate command
+    -> inverse kinematics copies the coordinate to every mapped joint
+
+per-joint feedback
+    -> each joint retains independent tracking/ferror state
+    -> ordinary duplicated-coordinate trivkins forward mapping reports the principal/first mapped joint
+       rather than averaging or validating the duplicate pair
+```
+
+Thus command agreement is not measured-joint agreement, and plausible Cartesian feedback is not proof that the duplicate joint—or the physical coupled geometry—agrees. Negative `HOME_SEQUENCE` synchronization is reference-establishment behavior, not a continuous geometry-authentication mechanism.
+
+D01-001 transcribed the pinned mapping algorithm for `XYY`: world Y=10 produced both Y joint commands=10, while feedback `[principal Y=10, duplicate Y=9]` still produced Cartesian Y=10. This is a falsifiable source-level prediction only; it is not yet LinuxCNC runtime evidence.
 
 ### Exact next-work checkpoint
 
-1. Inventory all existing module promotion/uncertainty artifacts, not only C04/C08/C09, and build a deduplicated 2000-series candidate ledger with source module, evidence gap, consequence if wrong, prerequisite value, information gain and required infrastructure.
-2. Apply the counterfactual and re-promotion safeguards: no item moves to 3000 merely because it is difficult.
-3. Build the initial 2000 dependency graph and choose the first module by prerequisite value + uncertainty + consequence + expected information gain.
-4. Preserve the end-of-1000 sealed blind benchmark requirement with evaluator/learner information separation; execute it when a valid sealed oracle can be presented without contamination.
-5. Begin the selected 2000 module with the normal docs -> community -> source -> call-flow -> experiment -> evaluation evidence chain rather than rewriting 1000 prose.
+1. Finish the pinned-source update-order trace from joint feedback/following-error calculation through `check_for_faults()`, motion enable revocation and forward-kinematics feedback publication.
+2. Decide the smallest real-LinuxCNC duplicated-coordinate fixture that preserves independent asymmetric plant controls without fabricating an unavailable Cartesian measurement.
+3. **Freeze D01 runtime phases and gates before implementation.** At minimum the frozen experiment must discriminate:
+   - common Cartesian command fan-out;
+   - principal-joint Cartesian feedback;
+   - secondary-joint disagreement/following error;
+   - authority revocation after a sufficiently large modeled tracking failure;
+   - fault clear versus fresh restart authorization;
+   - software measurement agreement versus unobserved physical geometry.
+4. Require one atomic realtime evidence stream plus producer-side recorder-validity evidence. Sequential `halcmd` reads cannot score causal gates.
+5. Run a non-authoritative topology/ordering preflight before one independent authoritative run; do not tune gates from the authoritative result.
+6. Keep F02 blocked until D01 has an accepted authority/fault-containment contract.
+7. Preserve the end-of-1000 sealed blind benchmark information boundary; do not inspect a sealed oracle merely to satisfy cadence.

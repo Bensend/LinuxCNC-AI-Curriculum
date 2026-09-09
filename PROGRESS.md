@@ -6,13 +6,14 @@ Repository artifacts, not chat history, are authoritative.
 
 ## Current critical-path state
 
-All modules through **T05**, **C01**, **C02**, **C03**, **C04**, and **C05** are **GRADUATED at 1000 level**. Phase 10 remains active. Highest-priority unblocked work is **C06 — communication/watchdog fault handling**, state **CORRECTIONS / ESSENTIAL-NOW OBSERVATION-HARNESS DIAGNOSTIC**.
+All modules through **T05**, **C01**, **C02**, **C03**, **C04**, and **C05** are **GRADUATED at 1000 level**. Phase 10 remains active. Highest-priority unblocked work is **C06 — communication/watchdog fault handling**, state **CORRECTIONS / ESSENTIAL-NOW PHASE-PUBLICATION REDESIGN**.
 
 ## Blind external-feedback state
 
 - **BL-DEV-001:** VALID, 10/10, 92% confidence.
 - **BL-DEV-002:** VALID, 9/10, 88% confidence.
 - **BL-DEV-002-TRANSFER-01:** VALID, **10/10**, 95% confidence. Novel numeric same-mechanism retest correctly retrieved the pinned velocity-scaled-plus-`MIN_FERROR` floor and strict `>` comparison. This is transfer evidence, not delayed-retention evidence.
+- No new blind challenge is due merely because C06 remains in corrections; delayed retention remains distinct and should not contaminate the active C06 evidence repair.
 
 ## C06 — communication/watchdog fault handling
 
@@ -30,6 +31,8 @@ Primary durable artifacts:
 - `results/C06-037-redesigned-authoritative-attempt-1-reconciliation.md`
 - `results/C06-038-redesigned-authoritative-attempt-2-reconciliation.md`
 - `results/C06-039-sampler-stream-attach-diagnostic-reconciliation.md`
+- `results/C06-041-043-readiness-diagnostic-reconciliation.md`
+- `results/C06-044-phase-publication-reconciliation.md`
 - accepted clean fixture patch: `lab-results/run-34306117465-1/c06-clean-hm2test.patch`
 - retired original failed wrapper lineage: `lab-jobs/033-c06-transport-watchdog-authoritative.sh`, `034-c06-transport-watchdog-authoritative-api-fix.sh`, `035-c06-transport-watchdog-authoritative-shmem-ref-fix.sh`.
 
@@ -43,6 +46,7 @@ Pinned-source findings remain unchanged:
 - The three-consecutive-failed-read C06 threshold is a deterministic test analogue of transport escalation, not a claim about a particular hm2_eth installation's packet-error-limit.
 - At this pinned HAL revision, modern `hal_pin_new_*()` references are opaque handles and caller-provided handle storage must reside in HAL shared memory; the clean fixture uses one `hal_malloc()` structure.
 - Pinned realtime `sampler` creates the stream before declaring the component ready; pinned `halsampler` attaches to `SAMPLER_SHMEM_KEY + channel` with `typestring=NULL`. `hal_stream_attach()` validates stream magic and remaps the full size from the retained stream header; an explicit caller type-string mismatch is not possible in this `halsampler` path.
+- A successful filtered `halcmd show ...` command is not, by itself, proof that the requested HAL object exists; C06 readiness must match actual names in complete HAL listings and confirm the `halrun` process remains alive.
 
 Official documentation requires source reconciliation rather than literal merging: the current HostMot2 driver guide describes watchdog I/O-pin disconnection without saying all communication stops, while current `hostmot2(9)` man-page text still says all communication stops. The course therefore does not use `watchdog.has_bit` alone to infer a version-independent communication state. Historical/field discussion supports the causal possibility `transport/timing delay -> delayed watchdog service -> watchdog bite`, but causal linkage is not state identity.
 
@@ -63,31 +67,38 @@ ordinary HostMot2/HAL fault handling != functional-safety certification
 
 ### Original attempts 1–3 — HARNESS INVALID
 
-Workflows `34298423081`, `34299295015`, and `34302451216` never reached authoritative behavior. The three-attempt rule retired their wrapper/source-rewriter lineage. See `results/C06-033...`, `C06-034...`, and `C06-035...`.
+Workflows `34298423081`, `34299295015`, and `34302451216` never reached authoritative behavior. The three-attempt rule retired their wrapper/source-rewriter lineage.
 
 ### Clean fixture preflight C06-036 — PREFLIGHT PASS / NON-AUTHORITATIVE
 
-Workflow `34306117465`, job `102323048875`, artifact `10086772790`. The fresh pattern-15 fixture compiled and loaded, used `hal_malloc()`-backed reference storage, exposed all eight lab controls plus real generic `io_error`, `watchdog.has_bit`, and `timeout_ns`, and preserved production HostMot2 source hashes. No P0–P6 phase ran.
+Workflow `34306117465`, job `102323048875`, artifact `10086772790`. The fresh pattern-15 fixture compiled and loaded, used `hal_malloc()`-backed reference storage, exposed all eight lab controls plus real generic `io_error`, `watchdog.has_bit`, and `timeout_ns`, and preserved production HostMot2 source hashes.
 
-### Redesigned behavioral attempt 1, C06-037 — HARNESS INVALID before observation
+### Redesigned behavioral attempts C06-037 / C06-038 — HARNESS INVALID before observation
 
-Workflow `34306570963`, job `102324397610`, artifact `10086921222`. Provenance/topology reached Gate-A prerequisites, but userspace `halsampler` returned `hal_stream_attach: Invalid argument`; zero atomic rows were retained. Analyzer FAIL labels from the zero-row trace are not behavioral evidence.
+Workflows `34306570963` and `34306960420` produced zero authoritative sampler rows because the userspace reader attempted to attach before a valid stream was actually proven. C06-038's earlier statement that the simple race hypothesis was falsified is **retracted**: its readiness test used `halcmd show ...` exit status rather than proving a matching object existed.
 
-### Redesigned behavioral attempt 2, C06-038 — HARNESS INVALID; simple race hypothesis falsified
+### C06-039 — exact sampler configuration PASS / NON-AUTHORITATIVE
 
-Workflow `34306960420`, job `102325539319`, artifact `10087055819`. The harness waited until both HostMot2 objects and realtime sampler-owned `sampler.0.pin.9` / `.enable` existed, yet userspace `halsampler` still returned `hal_stream_attach: Invalid argument` and exited before P0 observation. Therefore C06-037 was not merely an early-attach race. Gates A–H remain **UNSCORED**.
+Workflow `34310141125`, job `102334943692`, artifact `10088152204`. Exact `depth=30000 cfg=uubbbuuuub` attached in isolation and retained all requested rows.
 
-### C06-039 minimal sampler/stream diagnostic — NON-AUTHORITATIVE PASS
+### C06-041 / C06-043 — readiness root cause confirmed
 
-Workflow `34310141125`, job `102334943692`, artifact `10088152204`. Against the same pinned build, the exact C06 observation stream `depth=30000 cfg=uubbbuuuub` attached successfully in isolation and `halsampler -c 0 -n 10 -t` retained all 10 requested rows. This falsifies the hypotheses that C06-037/038 failed because the depth/configuration itself is invalid or because generic sampler/userspace attachment is broken on the runner. The failure requires an interaction introduced by the HostMot2 fixture or fuller C06 harness. Frozen Gates A–H remain **UNSCORED**.
+C06-041 workflow `34310509116`, job `102336017000`, artifact `10088240415` reproduced an apparent full-P0 attach failure, but retained snapshots showed the readiness predicate could pass before sampler objects/FIFO existed. C06-043 workflow `34311305551`, job `102338355587`, artifact `10088513656` required actual object-name matches plus live `halrun`; it passed with `ready=1`, `halsampler_rc=0`, 20 rows, zero overruns. Startup/readiness plumbing is therefore resolved.
+
+### C06-044 — HARNESS INVALID after valid observation; phase-publication defect
+
+Workflow `34311582310`, job `102339170004`, artifact `10088629138` retained **2,967 strictly ordered single-stream rows**. Its analyzer printed A–C/E–H PASS and D FAIL, but raw-trace reconciliation shows the run is **HARNESS INVALID**, not a behavioral falsification. The controller wrote the P1 fault command before the P1 phase label; the one failed read occurred in the interval between those asynchronous commands, so the first P1 row already has `read_fail=1`. Similar early transitions are visible at P2, P4, and P6. The frozen experiment explicitly classifies phase-publication defects as HARNESS INVALID.
+
+The redesigned behavioral lineage has now had three nonaccepted attempts (037, 038, 044). Per the three-attempt rule the decision is **ESSENTIAL NOW / REDESIGN**, not blind retry.
+
+### C06-045 — phase-first publication preflight / NON-AUTHORITATIVE
+
+`lab-jobs/045-c06-phase-publication-preflight.sh` was committed before inspecting its output. It changes only observation protocol: publish each phase first, retain realtime rows in that phase, then apply the unchanged fault/recovery mutation. It directly verifies that P1/P2/P3/P4/P6 decisive mutations occur after their intended phase labels. Frozen threshold `3`, watchdog register `0x2004:0`, production HostMot2 logic, phase meanings, and Gates A–H are unchanged. Workflow `34312449313` is the only active C06-045 run at this checkpoint.
 
 ## Exact next-work checkpoint
 
-Do **not** launch another authoritative C06-030 run yet. Reconcile only non-authoritative workflow **`34310509116`**, which runs `lab-jobs/041-c06-fixture-sampler-interaction-diagnostic.sh` against pinned LinuxCNC and the exact accepted C06-036 fixture patch.
-
-1. Stage A adds `hostmot2` + pattern-15 `hm2_test` + exact `depth=30000 cfg=uubbbuuuub`, but no C06 signal topology. If attachment fails here, localize fixture/HAL shared-memory interaction.
-2. If Stage A passes, Stage B adds the complete static P0 signal/net/sampler topology and watchdog timeout but no P1–P6 fault phases. If attachment fails only here, localize net/pin/startup-state interaction.
-3. If both stages pass, diff the retained C06-038 executed harness against the passing Stage-B startup and identify the remaining exact runtime differential before any authoritative retry.
-4. Do not change frozen C06-030 threshold 3, fake watchdog status `0x2004:0`, production HostMot2 code, phase semantics, or Gates A–H.
-5. After a combined attach preflight passes and the precise prior failure mechanism is understood, execute at most one justified authoritative C06-030 run and reconcile the raw atomic trace before any exam claim.
-6. After accepted behavioral evidence, continue the frozen C06 adversarial exam, fresh-AI novel-scenario handoff, corrections, and promotion/counterfactual audit.
+1. Reconcile only C06-045 workflow **`34312449313`**. Retain its artifact, raw trace, publication proof, executed harness, and diff.
+2. C06-045 is **not authoritative behavioral evidence**, even if its embedded unchanged gate analyzer happens to pass. Accept it only if every direct publication check proves that the decisive mutation occurs after at least one realtime sample carrying the intended phase label.
+3. If C06-045 passes, construct one redesigned authoritative C06-030 run using that exact phase-first publication protocol and the already-proven C06-043 readiness barrier. Do not change threshold `3`, watchdog status `0x2004:0`, P0–P6 semantics, production HostMot2 code, or frozen Gates A–H.
+4. If C06-045 fails, inspect the raw transition rows and redesign the publication barrier; do not launch another authoritative run.
+5. After an accepted authoritative behavioral run, score the already-frozen C06 adversarial exam, fresh-AI novel-scenario handoff, corrections, and promotion/counterfactual audit before graduation.

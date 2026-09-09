@@ -6,41 +6,39 @@ Repository artifacts, not chat history, are authoritative.
 
 ## Current critical-path state
 
-All modules through **T05**, **C01**, **C02**, **C03**, **C04**, and **C05** are **GRADUATED at 1000 level**. Phase 10 remains active. Highest-priority unblocked work is **C06 — communication/watchdog fault handling**, state **EXPERIMENT / AUTHORITATIVE RUN IN PROGRESS**.
+All modules through **T05**, **C01**, **C02**, **C03**, **C04**, and **C05** are **GRADUATED at 1000 level**. Phase 10 remains active. Highest-priority unblocked work is **C06 — communication/watchdog fault handling**, state **CORRECTIONS / AUTHORITATIVE ATTEMPT 2 RUNNING**.
 
 ## Blind external-feedback state
 
 - **BL-DEV-001:** VALID, 10/10, 92% confidence.
 - **BL-DEV-002:** VALID, 9/10, 88% confidence.
-- **BL-DEV-002-TRANSFER-01:** VALID, 10/10, 95% confidence. Novel numeric same-mechanism retest correctly retrieved the pinned velocity-scaled-plus-`MIN_FERROR` floor and strict `>` comparison. Delayed retention remains separate.
+- **BL-DEV-002-TRANSFER-01:** VALID, **10/10**, 95% confidence. Novel numeric same-mechanism retest correctly retrieved the pinned velocity-scaled-plus-`MIN_FERROR` floor and strict `>` comparison. This is transfer evidence, not delayed-retention evidence.
 
-## C06 — communication/watchdog fault handling — EXPERIMENT / AUTHORITATIVE RUN IN PROGRESS
+## C06 — communication/watchdog fault handling
 
 Pinned LinuxCNC revision: `8bf4605ae81042248add031e94c77300406e0413`.
 
-Primary artifacts:
+Primary durable artifacts now include:
+
 - `guides/C06-communication-watchdog-fault-research.md`
 - `call-flows/C06-hostmot2-transport-watchdog-order.md`
 - `guides/C06-transport-watchdog-injection-source-audit.md`
 - `experiments/C06-030-transport-watchdog-fault-plan.md` — Gates A–H frozen before implementation/output inspection.
 - `experiments/C06-030-fixture-construction-notes.md`
 - `results/C06-032-watchdog-load-preflight-reconciliation.md`
-- `lab-jobs/030-c06-watchdog-fixture-preflight.sh`
-- `lab-jobs/031-c06-watchdog-layout-preflight.sh`
-- `lab-jobs/032-c06-watchdog-load-preflight.sh`
-- `lab-jobs/033-c06-transport-watchdog-authoritative.sh` — authoritative P0–P6 implementation committed as `77a274b1275cea22dd3f8df63c866b20ba4c4c40`.
+- `results/C06-033-attempt-1-reconciliation.md`
+- `lab-jobs/033-c06-transport-watchdog-authoritative.sh`
+- `lab-jobs/034-c06-transport-watchdog-authoritative-api-fix.sh`
 
-Pinned-source findings established:
+Pinned-source findings remain unchanged:
 
-- `hostmot2.c:hm2_read_request()` queues TRAM reads; `hm2_read()` completes low-level receive before module TRAM processors. `io_error` causes early return.
-- On successful read, watchdog TRAM status is processed before ordinary module processors.
-- `hm2_write()` returns immediately on `io_error`; normal watchdog petting is prepared into write TRAM before the rest of the write service.
-- `watchdog.c` asserts `watchdog.has_bit` only from a successfully received watchdog-status image; transport failure and watchdog bite are therefore distinct observations even though one can causally contribute to the other.
-- Pinned `hm2_test.c` is explicitly hardware-free and its low-level `read()`/`write()` functions are the narrow deterministic injection seam.
-- Accepted pattern 15 adds one IOPort plus one watchdog without changing existing upstream patterns. Watchdog base `0x2000` resolves timer `0x2000`, status `0x2004`, reset `0x2008`; the emulated bite input is status bit 0 at `0x2004`.
-- `hm2_watchdog_process_tram_read()` returns while `io_error` or `needs_reset` is asserted; only a valid processed status image can raise the real `watchdog.has_bit` and set `needs_reset`.
-- `hm2_watchdog_write()` separately withholds recovery while `io_error` or `has_bit` is asserted. Clearing `has_bit` with healthy transport permits force-write recovery and only then clears `needs_reset`.
-- hm2_eth's `packet-error-level` accumulator belongs to the transport driver: detected cycle errors increase it, clean cycles decrease it, and reaching `packet-error-limit` raises `io-error`. The C06 fixture's small consecutive-failure threshold is a deterministic laboratory analogue, not a claim that its numeric threshold reproduces a particular Ethernet installation.
+- HostMot2 completes low-level receive before processing returned module/TRAM state; `io_error` causes early return from normal service.
+- Successfully returned watchdog status is processed separately from low-level transport state.
+- `watchdog.has_bit` is a real `HAL_IO` pin asserted from watchdog status and explicitly cleared by the user before generic recovery proceeds.
+- Normal watchdog recovery is separately blocked while either `io_error` or `watchdog.has_bit` remains asserted.
+- The C06 fixture uses `hm2_test` because it is hardware-free and provides the narrow low-level read/write injection seam.
+- Pattern 15's watchdog status input remains only fake register `0x2004` bit 0; generic `watchdog.c` remains byte-identical.
+- The three-consecutive-failed-read C06 threshold is a deterministic test analogue of transport escalation, not a claim about a particular hm2_eth installation's packet-error-limit.
 
 Retained C06 boundary:
 
@@ -54,18 +52,27 @@ fault reset != proof plant is safe to resume
 ordinary HostMot2/HAL fault handling != functional-safety certification
 ```
 
-## Current lab checkpoint
+## C06-030 attempt 1 reconciliation
 
-Authoritative C06-030 workflow **`34298423081`**, job **`102299966701`**, was launched automatically from commit `77a274b1275cea22dd3f8df63c866b20ba4c4c40` and was still executing when this checkpoint was written. Do not launch a duplicate while it is running.
+Workflow **`34298423081`**, job **`102299966701`**, artifact **`10084069925`**, head `77a274b1275cea22dd3f8df63c866b20ba4c4c40` is formally **HARNESS INVALID**.
 
-The authoritative harness extends only lab-scoped `hm2_test.c` pattern-15 behavior. It SHA-checks generic `hostmot2.c`, `tram.c`, `watchdog.c`, and `hostmot2-lowlevel.h`; uses a deterministic three-consecutive-failed-read threshold before the low-level fixture asserts the real generic `io_error`; injects watchdog bite only through fake register `0x2004` bit 0; observes state in one atomic realtime sampler stream; and retains the complete patch/raw trace before gate analysis.
+The pinned tree built and retained its patch/logs, but `hm2_test` failed before P0 with `HAL: ERROR: data_ptr_addr not in shared memory`. The attempt-1 lab patch had incorrectly used deprecated `hal_bit_t *` / `hal_u32_t *` data-pointer exports and direct opaque `io_error` assignment against a revision whose current HAL API uses opaque `hal_bool_t` / `hal_uint_t` references and getter/setter functions. The compiler warnings independently exposed the same type mismatch. Since `hm2_test` never loaded, no sampler stream or behavioral phase existed and **Gates A–H remain UNSCORED**.
 
-Frozen C06-030 Gates A–H and P0–P6 semantics remain unchanged.
+Actual attempt-1 job interval: `2026-09-09T01:15:05Z`–`01:18:16Z` (3.2 min). Add this HARNESS INVALID compute row to `LAB_COMPUTE_LOG.md` during the next ledger edit if not already present; do not omit failed compute from totals.
+
+## C06-030 attempt 2
+
+Source-grounded correction commit: **`994f452da0a599d13e4d41ce560c977dabe216be`**.
+
+Attempt 2 changes only lab fixture access mechanics: C06 controls are converted to `hal_bool_t` / `hal_uint_t`, exported with `hal_pin_new_bool()` / `hal_pin_new_ui32()`, and read/written through `hal_get_*()` / `hal_set_*()`; the real generic I/O error is asserted with `hal_set_bool(*this->io_error, 1)`. Frozen P0–P6 semantics, threshold, fake watchdog-status address, prediction, source-integrity checks, and Gates A–H are unchanged.
+
+Authoritative attempt-2 workflow **`34299295015`**, job **`102302593867`**, was in progress when this checkpoint was committed. Do not launch a duplicate.
 
 ## Exact next-work checkpoint
 
-1. Inspect only authoritative workflow `34298423081`, job `102299966701`; preserve final job runtime, artifact ID, readable result, raw trace, controller log, full fixture patch, build log, and final exit code.
-2. Reconcile the raw single-stream evidence against **unchanged** C06-030 Gates A–H. Any build, HAL topology, sampler, retention, or phase-publication defect is HARNESS INVALID; a valid frozen-gate violation is behavioral evidence and must not be retuned post hoc.
-3. If the run is accepted, update `LAB_COMPUTE_LOG.md` from actual job timestamps, then perform the required C06 adversarial exam, fresh-AI novel-scenario handoff, correction pass, and promotion/counterfactual audit before graduation.
-4. If the run is harness-invalid, diagnose only the actual harness defect and preserve the frozen behavior. Do not weaken gates or change the prediction to fit output.
-5. Keep BL-DEV-002 delayed retention separate from the successful transfer retest; do not repeat the transfer surface as retention evidence.
+1. Inspect only workflow `34299295015`, job `102302593867`; retain final job times, artifact ID, complete patch, build/HAL logs, raw atomic sampler trace, controller log, and exit code.
+2. If `hm2_test` still fails before P0, classify the precise load/topology problem as HARNESS INVALID and correct only that problem. Do not modify frozen Gates A–H or the transport-vs-watchdog prediction.
+3. If the run reaches P0–P6, score the retained single realtime stream against the unchanged frozen gates. A valid gate violation is behavioral evidence and must not be retuned.
+4. Pay particular attention to P6 ordinary user clearing of the real `HAL_IO watchdog.has_bit` while it is connected for atomic observation. Pinned `watchdog.c` requires user clear before generic recovery; if HAL signal topology prevents that command, treat it as an observation/control harness topology defect, not LinuxCNC behavioral evidence.
+5. Once an attempt is accepted, update `LAB_COMPUTE_LOG.md` from actual job timestamps and then continue C06 adversarial exam, fresh-AI novel-scenario handoff, corrections, and promotion/counterfactual audit.
+6. Keep BL-DEV-002 delayed retention separate from the successful 10/10 transfer retest.

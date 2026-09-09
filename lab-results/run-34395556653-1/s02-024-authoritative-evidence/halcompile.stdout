@@ -1,0 +1,3 @@
+Compiling realtime s02_model.c
+Linking s02_model.so
+cp s02_model.so /home/runner/work/_temp/linuxcnc-s02-preflight/rtlib/

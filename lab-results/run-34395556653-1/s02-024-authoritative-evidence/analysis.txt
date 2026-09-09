@@ -1,0 +1,10 @@
+S02-024 AUTHORITATIVE RUNTIME PREDICATES PASS
+samples=1400
+phase_counts={0: 181, 1: 200, 2: 200, 3: 200, 4: 200, 5: 419}
+P1 first pair-disagreement sample-in-phase=0 bound<=1
+P2 first oracle-stale sample-in-phase=26 bound<=30
+P3 value-only freshness classification=UNKNOWN
+P4 restricted detector=false despite common-mode physical mismatch
+P5 quadrature diagnostic asserted without pair disagreement
+NOTE: synthetic physical_a/physical_b and oracle_* outputs are laboratory-only truth signals, not LinuxCNC production validity signals.
+NOTE: authoritative runtime evidence retained; Gates A-J must be scored independently from the artifact.

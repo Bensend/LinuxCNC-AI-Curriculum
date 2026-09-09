@@ -1,0 +1,224 @@
+ready=1
+halrun_pid=17375 alive=yes
+-- comps --
+Loaded HAL Components:
+ID      Type  Name                                                    PID   State
+    30  User  halcmd17427                                             17427 ready
+    22  RT    sampler                                                       ready
+    21  User  halcmd17400                                             17400 ready
+    19  RT    __c06-thread                                                  ready
+    18  RT    threads                                                       ready
+     9  RT    hm2_test                                                      ready
+     6  RT    hostmot2                                                      ready
+
+-- sampler pins --
+Component Pins:
+Owner   Type  Dir                 Value  Name
+    22  s32   OUT                    32  sampler.0.curr-depth
+    22  bit   IN                   TRUE  sampler.0.enable
+    22  bit   OUT                 FALSE  sampler.0.full
+    22  s32   I/O                     0  sampler.0.overruns
+    22  u32   IN             0x00000000  sampler.0.pin.0 <== c06-phase
+    22  u32   IN             0x00000000  sampler.0.pin.1 <== c06-fail-remaining
+    22  bit   IN                  FALSE  sampler.0.pin.2 <== c06-watchdog-command
+    22  bit   IN                  FALSE  sampler.0.pin.3 <== c06-io-error-mirror
+    22  bit   IN                  FALSE  sampler.0.pin.4 <== c06-has-bit
+    22  u32   IN             0x00000082  sampler.0.pin.5 <== c06-read-success
+    22  u32   IN             0x00000000  sampler.0.pin.6 <== c06-read-fail
+    22  u32   IN             0x00000053  sampler.0.pin.7 <== c06-write-success
+    22  u32   IN             0x00000000  sampler.0.pin.8 <== c06-consecutive
+    22  bit   IN                  FALSE  sampler.0.pin.9 <== c06-watchdog-status-mirror
+    22  s32   I/O                     0  sampler.0.sample-num
+    22  s32   OUT                   190  sampler.0.time
+
+-- hm2 pins --
+Component Pins:
+Owner   Type  Dir                 Value  Name
+     9  u32   OUT            0x00000000  hm2_test.0.c06.consecutive-failures ==> c06-consecutive
+     9  u32   I/O            0x00000000  hm2_test.0.c06.fail-reads-remaining <=> c06-fail-remaining
+     9  bit   OUT                 FALSE  hm2_test.0.c06.io-error-mirror ==> c06-io-error-mirror
+     9  u32   OUT            0x00000000  hm2_test.0.c06.read-fail-count ==> c06-read-fail
+     9  u32   OUT            0x0000008B  hm2_test.0.c06.read-success-count ==> c06-read-success
+     9  bit   IN                  FALSE  hm2_test.0.c06.watchdog-status-command <== c06-watchdog-command
+     9  bit   OUT                 FALSE  hm2_test.0.c06.watchdog-status-mirror ==> c06-watchdog-status-mirror
+     9  u32   OUT            0x00000059  hm2_test.0.c06.write-success-count ==> c06-write-success
+     9  bit   OUT                 FALSE  hm2_test.0.gpio.000.in
+     9  bit   OUT                  TRUE  hm2_test.0.gpio.000.in_not
+     9  bit   IN                  FALSE  hm2_test.0.gpio.000.out
+     9  bit   OUT                 FALSE  hm2_test.0.gpio.001.in
+     9  bit   OUT                  TRUE  hm2_test.0.gpio.001.in_not
+     9  bit   IN                  FALSE  hm2_test.0.gpio.001.out
+     9  bit   OUT                 FALSE  hm2_test.0.gpio.002.in
+     9  bit   OUT                  TRUE  hm2_test.0.gpio.002.in_not
+     9  bit   IN                  FALSE  hm2_test.0.gpio.002.out
+     9  bit   OUT                 FALSE  hm2_test.0.gpio.003.in
+     9  bit   OUT                  TRUE  hm2_test.0.gpio.003.in_not
+     9  bit   IN                  FALSE  hm2_test.0.gpio.003.out
+     9  bit   OUT                 FALSE  hm2_test.0.gpio.004.in
+     9  bit   OUT                  TRUE  hm2_test.0.gpio.004.in_not
+     9  bit   IN                  FALSE  hm2_test.0.gpio.004.out
+     9  bit   OUT                 FALSE  hm2_test.0.gpio.005.in
+     9  bit   OUT                  TRUE  hm2_test.0.gpio.005.in_not
+     9  bit   IN                  FALSE  hm2_test.0.gpio.005.out
+     9  bit   OUT                 FALSE  hm2_test.0.gpio.006.in
+     9  bit   OUT                  TRUE  hm2_test.0.gpio.006.in_not
+     9  bit   IN                  FALSE  hm2_test.0.gpio.006.out
+     9  bit   OUT                 FALSE  hm2_test.0.gpio.007.in
+     9  bit   OUT                  TRUE  hm2_test.0.gpio.007.in_not
+     9  bit   IN                  FALSE  hm2_test.0.gpio.007.out
+     9  bit   OUT                 FALSE  hm2_test.0.gpio.008.in
+     9  bit   OUT                  TRUE  hm2_test.0.gpio.008.in_not
+     9  bit   IN                  FALSE  hm2_test.0.gpio.008.out
+     9  bit   OUT                 FALSE  hm2_test.0.gpio.009.in
+     9  bit   OUT                  TRUE  hm2_test.0.gpio.009.in_not
+     9  bit   IN                  FALSE  hm2_test.0.gpio.009.out
+     9  bit   OUT                 FALSE  hm2_test.0.gpio.010.in
+     9  bit   OUT                  TRUE  hm2_test.0.gpio.010.in_not
+     9  bit   IN                  FALSE  hm2_test.0.gpio.010.out
+     9  bit   OUT                 FALSE  hm2_test.0.gpio.011.in
+     9  bit   OUT                  TRUE  hm2_test.0.gpio.011.in_not
+     9  bit   IN                  FALSE  hm2_test.0.gpio.011.out
+     9  bit   OUT                 FALSE  hm2_test.0.gpio.012.in
+     9  bit   OUT                  TRUE  hm2_test.0.gpio.012.in_not
+     9  bit   IN                  FALSE  hm2_test.0.gpio.012.out
+     9  bit   OUT                 FALSE  hm2_test.0.gpio.013.in
+     9  bit   OUT                  TRUE  hm2_test.0.gpio.013.in_not
+     9  bit   IN                  FALSE  hm2_test.0.gpio.013.out
+     9  bit   OUT                 FALSE  hm2_test.0.gpio.014.in
+     9  bit   OUT                  TRUE  hm2_test.0.gpio.014.in_not
+     9  bit   IN                  FALSE  hm2_test.0.gpio.014.out
+     9  bit   OUT                 FALSE  hm2_test.0.gpio.015.in
+     9  bit   OUT                  TRUE  hm2_test.0.gpio.015.in_not
+     9  bit   IN                  FALSE  hm2_test.0.gpio.015.out
+     9  bit   OUT                 FALSE  hm2_test.0.gpio.016.in
+     9  bit   OUT                  TRUE  hm2_test.0.gpio.016.in_not
+     9  bit   IN                  FALSE  hm2_test.0.gpio.016.out
+     9  bit   OUT                 FALSE  hm2_test.0.gpio.017.in
+     9  bit   OUT                  TRUE  hm2_test.0.gpio.017.in_not
+     9  bit   IN                  FALSE  hm2_test.0.gpio.017.out
+     9  bit   OUT                 FALSE  hm2_test.0.gpio.018.in
+     9  bit   OUT                  TRUE  hm2_test.0.gpio.018.in_not
+     9  bit   IN                  FALSE  hm2_test.0.gpio.018.out
+     9  bit   OUT                 FALSE  hm2_test.0.gpio.019.in
+     9  bit   OUT                  TRUE  hm2_test.0.gpio.019.in_not
+     9  bit   IN                  FALSE  hm2_test.0.gpio.019.out
+     9  bit   OUT                 FALSE  hm2_test.0.gpio.020.in
+     9  bit   OUT                  TRUE  hm2_test.0.gpio.020.in_not
+     9  bit   IN                  FALSE  hm2_test.0.gpio.020.out
+     9  bit   OUT                 FALSE  hm2_test.0.gpio.021.in
+     9  bit   OUT                  TRUE  hm2_test.0.gpio.021.in_not
+     9  bit   IN                  FALSE  hm2_test.0.gpio.021.out
+     9  bit   OUT                 FALSE  hm2_test.0.gpio.022.in
+     9  bit   OUT                  TRUE  hm2_test.0.gpio.022.in_not
+     9  bit   IN                  FALSE  hm2_test.0.gpio.022.out
+     9  bit   OUT                 FALSE  hm2_test.0.gpio.023.in
+     9  bit   OUT                  TRUE  hm2_test.0.gpio.023.in_not
+     9  bit   IN                  FALSE  hm2_test.0.gpio.023.out
+     9  s32   OUT                   290  hm2_test.0.read.time
+     9  s32   OUT                     0  hm2_test.0.read_gpio.time
+     9  bit   I/O                 FALSE  hm2_test.0.watchdog.has_bit <=> c06-has-bit
+     9  s32   OUT                   401  hm2_test.0.write.time
+     9  s32   OUT                     0  hm2_test.0.write_gpio.time
+
+-- hm2 params --
+Parameters:
+Owner   Type  Dir                 Value  Name
+     9  bit   RW                  FALSE  hm2_test.0.gpio.000.invert_output
+     9  bit   RW                  FALSE  hm2_test.0.gpio.000.is_opendrain
+     9  bit   RW                  FALSE  hm2_test.0.gpio.000.is_output
+     9  bit   RW                  FALSE  hm2_test.0.gpio.001.invert_output
+     9  bit   RW                  FALSE  hm2_test.0.gpio.001.is_opendrain
+     9  bit   RW                  FALSE  hm2_test.0.gpio.001.is_output
+     9  bit   RW                  FALSE  hm2_test.0.gpio.002.invert_output
+     9  bit   RW                  FALSE  hm2_test.0.gpio.002.is_opendrain
+     9  bit   RW                  FALSE  hm2_test.0.gpio.002.is_output
+     9  bit   RW                  FALSE  hm2_test.0.gpio.003.invert_output
+     9  bit   RW                  FALSE  hm2_test.0.gpio.003.is_opendrain
+     9  bit   RW                  FALSE  hm2_test.0.gpio.003.is_output
+     9  bit   RW                  FALSE  hm2_test.0.gpio.004.invert_output
+     9  bit   RW                  FALSE  hm2_test.0.gpio.004.is_opendrain
+     9  bit   RW                  FALSE  hm2_test.0.gpio.004.is_output
+     9  bit   RW                  FALSE  hm2_test.0.gpio.005.invert_output
+     9  bit   RW                  FALSE  hm2_test.0.gpio.005.is_opendrain
+     9  bit   RW                  FALSE  hm2_test.0.gpio.005.is_output
+     9  bit   RW                  FALSE  hm2_test.0.gpio.006.invert_output
+     9  bit   RW                  FALSE  hm2_test.0.gpio.006.is_opendrain
+     9  bit   RW                  FALSE  hm2_test.0.gpio.006.is_output
+     9  bit   RW                  FALSE  hm2_test.0.gpio.007.invert_output
+     9  bit   RW                  FALSE  hm2_test.0.gpio.007.is_opendrain
+     9  bit   RW                  FALSE  hm2_test.0.gpio.007.is_output
+     9  bit   RW                  FALSE  hm2_test.0.gpio.008.invert_output
+     9  bit   RW                  FALSE  hm2_test.0.gpio.008.is_opendrain
+     9  bit   RW                  FALSE  hm2_test.0.gpio.008.is_output
+     9  bit   RW                  FALSE  hm2_test.0.gpio.009.invert_output
+     9  bit   RW                  FALSE  hm2_test.0.gpio.009.is_opendrain
+     9  bit   RW                  FALSE  hm2_test.0.gpio.009.is_output
+     9  bit   RW                  FALSE  hm2_test.0.gpio.010.invert_output
+     9  bit   RW                  FALSE  hm2_test.0.gpio.010.is_opendrain
+     9  bit   RW                  FALSE  hm2_test.0.gpio.010.is_output
+     9  bit   RW                  FALSE  hm2_test.0.gpio.011.invert_output
+     9  bit   RW                  FALSE  hm2_test.0.gpio.011.is_opendrain
+     9  bit   RW                  FALSE  hm2_test.0.gpio.011.is_output
+     9  bit   RW                  FALSE  hm2_test.0.gpio.012.invert_output
+     9  bit   RW                  FALSE  hm2_test.0.gpio.012.is_opendrain
+     9  bit   RW                  FALSE  hm2_test.0.gpio.012.is_output
+     9  bit   RW                  FALSE  hm2_test.0.gpio.013.invert_output
+     9  bit   RW                  FALSE  hm2_test.0.gpio.013.is_opendrain
+     9  bit   RW                  FALSE  hm2_test.0.gpio.013.is_output
+     9  bit   RW                  FALSE  hm2_test.0.gpio.014.invert_output
+     9  bit   RW                  FALSE  hm2_test.0.gpio.014.is_opendrain
+     9  bit   RW                  FALSE  hm2_test.0.gpio.014.is_output
+     9  bit   RW                  FALSE  hm2_test.0.gpio.015.invert_output
+     9  bit   RW                  FALSE  hm2_test.0.gpio.015.is_opendrain
+     9  bit   RW                  FALSE  hm2_test.0.gpio.015.is_output
+     9  bit   RW                  FALSE  hm2_test.0.gpio.016.invert_output
+     9  bit   RW                  FALSE  hm2_test.0.gpio.016.is_opendrain
+     9  bit   RW                  FALSE  hm2_test.0.gpio.016.is_output
+     9  bit   RW                  FALSE  hm2_test.0.gpio.017.invert_output
+     9  bit   RW                  FALSE  hm2_test.0.gpio.017.is_opendrain
+     9  bit   RW                  FALSE  hm2_test.0.gpio.017.is_output
+     9  bit   RW                  FALSE  hm2_test.0.gpio.018.invert_output
+     9  bit   RW                  FALSE  hm2_test.0.gpio.018.is_opendrain
+     9  bit   RW                  FALSE  hm2_test.0.gpio.018.is_output
+     9  bit   RW                  FALSE  hm2_test.0.gpio.019.invert_output
+     9  bit   RW                  FALSE  hm2_test.0.gpio.019.is_opendrain
+     9  bit   RW                  FALSE  hm2_test.0.gpio.019.is_output
+     9  bit   RW                  FALSE  hm2_test.0.gpio.020.invert_output
+     9  bit   RW                  FALSE  hm2_test.0.gpio.020.is_opendrain
+     9  bit   RW                  FALSE  hm2_test.0.gpio.020.is_output
+     9  bit   RW                  FALSE  hm2_test.0.gpio.021.invert_output
+     9  bit   RW                  FALSE  hm2_test.0.gpio.021.is_opendrain
+     9  bit   RW                  FALSE  hm2_test.0.gpio.021.is_output
+     9  bit   RW                  FALSE  hm2_test.0.gpio.022.invert_output
+     9  bit   RW                  FALSE  hm2_test.0.gpio.022.is_opendrain
+     9  bit   RW                  FALSE  hm2_test.0.gpio.022.is_output
+     9  bit   RW                  FALSE  hm2_test.0.gpio.023.invert_output
+     9  bit   RW                  FALSE  hm2_test.0.gpio.023.is_opendrain
+     9  bit   RW                  FALSE  hm2_test.0.gpio.023.is_output
+     9  bit   RW                  FALSE  hm2_test.0.io_error
+     9  s32   RW                   5548  hm2_test.0.read.tmax
+     9  bit   RO                  FALSE  hm2_test.0.read.tmax-increased
+     9  s32   RW                      0  hm2_test.0.read_gpio.tmax
+     9  bit   RO                  FALSE  hm2_test.0.read_gpio.tmax-increased
+     9  u32   RW             0x004C4B40  hm2_test.0.watchdog.timeout_ns
+     9  s32   RW                   4697  hm2_test.0.write.tmax
+     9  bit   RO                  FALSE  hm2_test.0.write.tmax-increased
+     9  s32   RW                      0  hm2_test.0.write_gpio.tmax
+     9  bit   RO                  FALSE  hm2_test.0.write_gpio.tmax-increased
+
+-- threads/functions --
+Realtime Threads:
+     Period  FP     Name               (     Time, Max-Time )
+    1000000  YES            c06-thread (      841,    11087 )
+                  1 hm2_test.0.read
+                  2 hm2_test.0.write
+                  3 sampler.0
+
+-- shmem --
+
+------ Shared Memory Segments --------
+key        shmid      owner      perms      bytes      nattch     status      
+0x48484c34 6          runner     600        16         2                       
+0x48414c32 7          runner     600        2097152    2                       
+0x48534130 8          runner     600        2640120    1                       
+

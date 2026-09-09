@@ -1,0 +1,2 @@
+ready=1 halsampler_rc=0 parseable_rows=20 overruns=0
+PREFLIGHT PASS: real object readiness + accepted fixture + full static P0 topology + exact sampler attached and retained data.

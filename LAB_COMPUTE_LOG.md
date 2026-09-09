@@ -38,21 +38,28 @@ If a run is cancelled, times out, is harness-invalid, or fails substantively, st
 | 2026-09-09 | C06-036 clean fixture preflight | `34306117465` | `102323048875` | 2026-09-09T03:11:06Z | 2026-09-09T03:15:02Z | 3.9 | PREFLIGHT PASS | Non-authoritative clean pattern-15 compile/load/object proof; exact fixture patch retained; frozen P0-P6 unscored. |
 | 2026-09-09 | C06-037 redesigned behavioral attempt 1 | `34306570963` | `102324397610` | 2026-09-09T03:17:52Z | 2026-09-09T03:21:20Z | 3.5 | HARNESS INVALID | `halsampler` failed `hal_stream_attach` before atomic observation; zero rows. Gate-A prerequisites reached; behavioral Gates B-H unscored. |
 | 2026-09-09 | C06-038 sampler-ready behavioral attempt 2 | `34306960420` | `102325539319` | 2026-09-09T03:23:55Z | 2026-09-09T03:27:30Z | 3.6 | HARNESS INVALID | Sampler-owned HAL objects existed, disproving the simple early-load race, but userspace `halsampler` still failed `hal_stream_attach` before P0. |
+| 2026-09-08 | C03-025 attempt 1 | `34226127383` | `102060512004` | 2026-09-08T12:27:03Z | 2026-09-08T12:31:22Z | 4.3 | HARNESS INVALID | First C03 authoritative-family attempt; no accepted behavioral verdict. Exact job timestamps backfilled 2026-09-09. |
+| 2026-09-08 | C03-025 attempt 2 | `34227719033` | `102065820535` | 2026-09-08T12:42:57Z | 2026-09-08T12:46:39Z | 3.7 | NOT ACCEPTED STANDALONE | In-process clip drove state; preserved as consumed compute, not final accepted evidence. Exact job timestamps backfilled 2026-09-09. |
+| 2026-09-08 | C03-025 accepted attempt 3 | `34228231147` | `102067547546` | 2026-09-08T12:49:03Z | 2026-09-08T12:53:28Z | 4.4 | PASS | Accepted C03 evidence; exact job timestamps backfilled 2026-09-09. |
+| 2026-09-08 | C04-026 attempt 1 | `34231940180` | `102079994732` | 2026-09-08T14:03:27Z | 2026-09-08T14:07:44Z | 4.3 | HARNESS INVALID | SyntaxError before valid behavioral execution. Exact job timestamps backfilled 2026-09-09. |
+| 2026-09-08 | C04-026 attempt 2 | `34243768815` | `102119299104` | 2026-09-08T19:06:42Z | 2026-09-08T19:10:22Z | 3.7 | PASS / FOLLOW-UP REQUIRED | Behavioral run passed its harness; later C04 continuation resolved the source-transition issue. Exact job timestamps backfilled 2026-09-09. |
+| 2026-09-09 | C08-051 diagnostic trace preflight | `34327928519` | `102389431379` | 2026-09-09T08:13:43Z | 2026-09-09T08:17:36Z | 3.9 | PREFLIGHT PASS | Non-authoritative collector/order/trace-validity proof; 31 producer overruns coexisted with retained contiguous tags `[0,1,2]`; C08 frozen gates unscored. |
+| 2026-09-09 | C08-052 authoritative diagnostic discrimination | `34328731569` | `102392025784` | 2026-09-09T08:22:16Z | 2026-09-09T08:26:07Z | 3.9 | PASS | Accepted TEST-CONFIRMED C08 evidence; unchanged Gates A-J all passed; artifact `10094968899`. |
 
 ## Running totals
 
 Keep these totals current whenever new rows are added:
 
-- **Exactly backfilled lab compute:** 85.8 min (1.43 h)
-- **Total lab compute used:** 1.43 h + unbackfilled historical usage
+- **Exactly backfilled lab compute:** 114.0 min (1.90 h)
+- **Total lab compute used:** 1.90 h + unbackfilled historical usage
 - **Remaining from 120 h first-draft allowance:** unknown until historical backfill
-- **Current-day exactly backfilled lab compute (2026-09-09):** 17.7 min (0.30 h) + unbackfilled same-day historical usage
+- **Current-day exactly backfilled lab compute (2026-09-09):** 25.5 min (0.43 h) + unbackfilled same-day historical usage
 
 ## Immediate backfill queue
 
-Backfill C03-025 and C04-026 authoritative jobs from GitHub Actions metadata when convenient; they remain uncounted in the exact total above.
+C03-025 and C04-026 are now backfilled from exact GitHub Actions job timestamps.
 
-C05-029 attempts 1–7 and C06 work through C06-038 are now exactly accounted.
+C05-029 attempts 1–7, C06 work through C06-038, and C08-051/C08-052 are exactly accounted. Later C06 runs after C06-038 and C07 laboratory runs remain historical/same-day backfill work and must not be silently included in the exact totals above.
 
 No known T02-T05, C01, C02, or earlier C05 jobs through C05-029 attempt 7 remain in the immediate backfill queue.
 

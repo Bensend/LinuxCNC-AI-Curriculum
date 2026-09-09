@@ -1,0 +1,3 @@
+/tmp/x01_source.comp:2:25: Array name contains no #: 'value'
+>  pin out float value[15];
+>                          ^

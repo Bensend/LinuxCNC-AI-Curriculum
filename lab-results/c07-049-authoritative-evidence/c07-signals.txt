@@ -1,0 +1,47 @@
+Signals:
+Type                  Value  Name     (linked to)
+float                     0  XYZvel
+                                 <== vel_xyz.out
+float                     0  XYvel
+                                 <== vel_xy.out
+                                 ==> vel_xyz.in1
+float                     0  Xacc
+                                 <== ddt_xv.out
+float                     0  Xpos
+                                 ==> ddt_x.in
+                                 <== joint.0.motor-pos-cmd
+                                 ==> joint.0.motor-pos-fb
+float                     0  Xvel
+                                 <== ddt_x.out
+                                 ==> ddt_xv.in
+                                 ==> vel_xy.in0
+float                     0  Yacc
+                                 <== ddt_yv.out
+float                     0  Ypos
+                                 ==> ddt_y.in
+                                 <== joint.1.motor-pos-cmd
+                                 ==> joint.1.motor-pos-fb
+float                     0  Yvel
+                                 <== ddt_y.out
+                                 ==> ddt_yv.in
+                                 ==> vel_xy.in1
+float                     0  Zacc
+                                 <== ddt_zv.out
+float                     0  Zpos
+                                 ==> ddt_z.in
+                                 <== joint.2.motor-pos-cmd
+                                 ==> joint.2.motor-pos-fb
+float                     0  Zvel
+                                 <== ddt_z.out
+                                 ==> ddt_zv.in
+                                 ==> vel_xyz.in0
+bit                   FALSE  estop-loop
+                                 ==> iocontrol.0.emc-enable-in
+                                 <== iocontrol.0.user-enable-out
+bit                   FALSE  tool-change-loop
+                                 <== iocontrol.0.tool-change
+                                 ==> iocontrol.0.tool-changed
+bit                   FALSE  tool-prep-loop
+                                 <== iocontrol.0.tool-prepare
+                                 ==> iocontrol.0.tool-prepared
+

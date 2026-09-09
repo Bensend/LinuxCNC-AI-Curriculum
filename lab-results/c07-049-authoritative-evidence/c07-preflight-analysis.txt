@@ -1,0 +1,12 @@
+PRECHECK observation-ordering=PASS
+PRECHECK phase-before-mutation=PASS
+PRECHECK one-authorization-one-request=PASS P2=1 P5=1 P8=1 P3/P4/P7=0
+PRECHECK blocked-request-waits-for-achieved-state=PASS
+PRECHECK restore-without-retry=PASS
+PRECHECK explicit-retry-status-gating=PASS
+PRECHECK active-status-loss-revokes-permission=PASS same-sequencer-tick
+PRECHECK no-auto-restart=PASS
+PRECHECK guarded-recovery=PASS
+PRECHECK safety-boundary=ordinary state-integrity fixture only; NOT functional-safety evidence
+PRECHECK RESULT=PASS; frozen C07-047 Gates A-J remain UNSCORED
+rows 103 max_sample_span_ms 13.264867

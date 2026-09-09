@@ -1,0 +1,7 @@
+4a6a891cbc6afe31bf1726bc5e55e3a48b2d37b3fa1a728992380c9d411bd647  src/emc/usr_intf/halui.cc
+b656873328b0dfb9ed5182b923ec67e2e83043e53a6a41d2a85b18a87602a4a6  src/emc/task/emctask.cc
+07dede64e8763ce26f6451d300ada6b45fb4fe7b6c47c421cef67a3fb32e61c4  src/emc/task/emctaskmain.cc
+50619c2624bcdcfa2e44820ec3d147ebbeb1dc38f9cf437fd82728798da5df5b  src/emc/task/taskintf.cc
+0e6228e709f6039bb750da7fce8ae8f1b391381e557e8debcfa7673a8ea55105  src/emc/motion/command.c
+581106226e23706d2de16c70f8f6a208c80bb86230f107739cad645b0d8b44ab  src/emc/motion/control.c
+fe835b0c8ded17ec0168cafab9955935bcd0ba18ee04fed1f4142d444693cf2c  src/emc/motion/motion.c

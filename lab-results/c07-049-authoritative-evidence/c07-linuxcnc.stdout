@@ -1,0 +1,10 @@
+Machine configuration file is 'c07-full-preflight.ini'
+Starting LinuxCNC...
+linuxcnc TPMOD=tpmod HOMEMOD=homemod EMCMOT=motmod
+Found file(REL): ./lcncrsh_sim.hal
+task: main loop took 0.020340 seconds
+task: main loop took 0.039396 seconds
+linuxcncrsh: New connection from ::1:49762
+linuxcncrsh: Read close 'Default-4' (4)
+linuxcncrsh: Connection terminated 'Default-4' (4)
+task: main loop took 0.020452 seconds

@@ -1,0 +1,16 @@
+e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855  /home/runner/work/LinuxCNC-AI-Curriculum/LinuxCNC-AI-Curriculum/lab-results/c07-049-authoritative-evidence/SHA256SUMS.txt
+f1d8b76a885fcc8666744841150ee0b63860c0547ac6febbd3eecc06c1bbf9ea  /home/runner/work/LinuxCNC-AI-Curriculum/LinuxCNC-AI-Curriculum/lab-results/c07-049-authoritative-evidence/authoritative-wrapper-049.sh
+6b30fecb09fdbac064f35b1ff3d43958326fd1feaf03688bdeeabe2b95fdc890  /home/runner/work/LinuxCNC-AI-Curriculum/LinuxCNC-AI-Curriculum/lab-results/c07-049-authoritative-evidence/c07-full-preflight.ini
+64def1981014ca466cf3120176a87c735160fbb2b6c8b8f6d85d2474b334d4b5  /home/runner/work/LinuxCNC-AI-Curriculum/LinuxCNC-AI-Curriculum/lab-results/c07-049-authoritative-evidence/c07-linuxcnc.stderr
+74a7150eb1d7fad08e94a9301e2b6d8f5c0ec75e6fc27947fcdf1fd4a7976c82  /home/runner/work/LinuxCNC-AI-Curriculum/LinuxCNC-AI-Curriculum/lab-results/c07-049-authoritative-evidence/c07-linuxcnc.stdout
+39eec935dee6f94e76e06aebcc58b43cc60dd46a8d10777d89b40dd77bad273b  /home/runner/work/LinuxCNC-AI-Curriculum/LinuxCNC-AI-Curriculum/lab-results/c07-049-authoritative-evidence/c07-preflight-analysis.txt
+1365ccdaf6496925dd3bafdf749518f4ee9e0d74db57ba1f24011aa0102eba83  /home/runner/work/LinuxCNC-AI-Curriculum/LinuxCNC-AI-Curriculum/lab-results/c07-049-authoritative-evidence/c07-production-source-sha256.txt
+b428649e77200ccce03c2732b3755e112b103a39e068f58b24fd94ef4c76b065  /home/runner/work/LinuxCNC-AI-Curriculum/LinuxCNC-AI-Curriculum/lab-results/c07-049-authoritative-evidence/c07-required-hal-objects.txt
+cbc4a4a17d855a1da588bd7c83feee5833fe8901130619015a69c6b3c21e57ac  /home/runner/work/LinuxCNC-AI-Curriculum/LinuxCNC-AI-Curriculum/lab-results/c07-049-authoritative-evidence/c07-sequencer-preflight.py
+f5bd8f01e968ae060c004728cd987b56598247f856114cd367f42556f9f6d127  /home/runner/work/LinuxCNC-AI-Curriculum/LinuxCNC-AI-Curriculum/lab-results/c07-049-authoritative-evidence/c07-signals.txt
+374d7b2d305addd91b56f034303c599d20e510d3b93a27f5fc141fd4947c80b5  /home/runner/work/LinuxCNC-AI-Curriculum/LinuxCNC-AI-Curriculum/lab-results/c07-049-authoritative-evidence/c07-test-config-sha256.txt
+3d98d67580729f0c916da4d0288276aff039a2529f68cb0d6a0c8a41067c0008  /home/runner/work/LinuxCNC-AI-Curriculum/LinuxCNC-AI-Curriculum/lab-results/c07-049-authoritative-evidence/c07-trace.csv
+fd7e6e83ad6cbdc09a0cd4f7b2f2f86a6e1cfa99effbc6a16e1788d8cfb29b1e  /home/runner/work/LinuxCNC-AI-Curriculum/LinuxCNC-AI-Curriculum/lab-results/c07-049-authoritative-evidence/frozen-plan.md
+5adad8a9dfe5c5c8bd55dabccbe5c027a04ebf707919e07f5a5e1e02130111ac  /home/runner/work/LinuxCNC-AI-Curriculum/LinuxCNC-AI-Curriculum/lab-results/c07-049-authoritative-evidence/gate-analysis.txt
+d244cb04bed10b3a105483b40d138fc5ffd1818fe8061dee3eb297764a9096d6  /home/runner/work/LinuxCNC-AI-Curriculum/LinuxCNC-AI-Curriculum/lab-results/c07-049-authoritative-evidence/harness-048-exact.sh
+95101a41f70565284d276d87537847297ab4e428dd289cf3b64565b5355147c7  /home/runner/work/LinuxCNC-AI-Curriculum/LinuxCNC-AI-Curriculum/lab-results/c07-049-authoritative-evidence/lcncrsh_sim.hal

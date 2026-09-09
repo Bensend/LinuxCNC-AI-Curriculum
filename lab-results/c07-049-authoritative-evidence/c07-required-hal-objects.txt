@@ -1,0 +1,16 @@
+Component Pins:
+Owner   Type  Dir                 Value  Name
+    25  bit   IN                  FALSE  halui.machine.on
+
+Component Pins:
+Owner   Type  Dir                 Value  Name
+    25  bit   OUT                 FALSE  halui.machine.is-on
+
+Component Pins:
+Owner   Type  Dir                 Value  Name
+    33  bit   IN                   TRUE  motion.enable
+
+Component Pins:
+Owner   Type  Dir                 Value  Name
+    33  bit   OUT                 FALSE  motion.motion-enabled
+

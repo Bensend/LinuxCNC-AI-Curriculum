@@ -1,0 +1,11 @@
+Gate A PASS — pinned production hashes/config retained; required real HAL objects observed; harness uses one direct unlinked motion.enable injection path.
+Gate B PASS — 103 monotonic rows; max sequential HAL-read span=13.264867 ms; every decisive phase marker precedes its mutation.
+Gate C PASS — P0 out-of-estop, machine OFF, request low, cycle permission false.
+Gate D PASS — exactly one P2 ON rising edge while blocked; P2/P3 achieved ON stayed false and sequencer never confirmed/allowed cycle.
+Gate E PASS — P4 restored motion.enable without a request edge; achieved ON and cycle permission stayed false.
+Gate F PASS — one fresh P5 request; no confirmed/cycle state precedes observed machine.is-on=true.
+Gate G PASS — achieved ON loss caused recovery entry and cycle-permission revocation in the same sequencer evaluation tick.
+Gate H PASS — P7 prerequisite restoration without fresh authorization/request did not restore active state.
+Gate I PASS — fresh P8 authorization + fresh request required; active permission followed achieved ON confirmation.
+Gate J PASS — ordinary Task/HAL sequencing state integrity only; NOT functional-safety evidence; real-machine restart additionally requires machine-specific physical-state, energy, E-stop and interlock verification.
+AUTHORITATIVE C07-047 RESULT: GATES A-J PASS

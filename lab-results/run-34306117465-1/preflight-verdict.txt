@@ -1,0 +1,2 @@
+PREFLIGHT PASS: clean pattern-15 fixture compiled and loaded; all required lab controls plus real io_error/watchdog objects exist.
+No P0-P6 behavioral phase executed; frozen C06-030 Gates A-H remain unscored.

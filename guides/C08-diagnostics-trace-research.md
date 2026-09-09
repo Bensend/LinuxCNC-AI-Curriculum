@@ -1,6 +1,6 @@
 # C08 — Diagnostics and Trace Capture — 1000-level Research Guide
 
-Status: **RESEARCH / INITIAL DOCS-COMMUNITY-SOURCE PASS**
+Status: **SOURCE / EVIDENCE-MATRIX PASS**
 
 Pinned LinuxCNC revision: `8bf4605ae81042248add031e94c77300406e0413`
 
@@ -8,164 +8,150 @@ Pinned LinuxCNC revision: `8bf4605ae81042248add031e94c77300406e0413`
 
 Build a practical evidence-selection model for debugging LinuxCNC: choose an observation surface appropriate to the question, preserve provenance and ordering, recognize realtime-vs-userspace boundaries, detect dropped/ambiguous evidence, and avoid treating one convenient GUI/HAL value as proof of a deeper causal or physical fact.
 
-C08 is not a catalog of every debugging command. The important skill is **choosing evidence whose execution context and timing can actually discriminate competing fault hypotheses**.
-
-## Initial official-documentation pass
+## Observation surfaces established
 
 ### `halcmd`
 
-Current official man page: https://www.linuxcnc.org/docs/devel/html/en/man/man1/halcmd.1.html
+`halcmd` is a userspace topology/spot-check surface. Separate `getp`/`show` invocations are not an atomic servo-cycle snapshot. Use it to prove object presence, connection, and slow point state; do not infer simultaneous fast-state relationships from sequential reads.
 
-`halcmd` manipulates and inspects HAL from userspace. It is excellent for topology/object presence and point-in-time values, but a sequence of separate `getp`/`show` calls is not an atomic servo-cycle snapshot. Earlier curriculum experiments already demonstrated why sequential userspace reads can produce a one-cycle temporal tear.
+### Halscope
 
-C08 consequence: use `halcmd` for **structure and bounded spot checks**, not for claiming simultaneous fast-state relationships unless a specific synchronization mechanism is proven.
-
-### HAL tools / Halscope
-
-Current official HAL tools guide: https://www.linuxcnc.org/docs/stable/html/hal/tools.html
-
-The guide describes Halscope as a HAL oscilloscope that captures pins/signals/parameters as a function of time. The HAL tutorial clarifies that Halscope has a realtime acquisition part and a non-realtime display part, and that its sampling function is attached to a selected realtime thread.
-
-C08 consequence: Halscope can answer fast timing/order questions that a userspace meter cannot, but the engineer still needs to record the selected thread/sample rate, trigger semantics, channels, and configuration. A screenshot without that provenance can be misleading.
+Halscope combines realtime acquisition with non-realtime display. A useful retained capture therefore needs thread/sample period, function order, trigger, channel identity, scaling and units. A screenshot without those is weak evidence.
 
 ### `sampler` / `halsampler`
 
-Current sampler man page: https://linuxcnc.org/docs/master/html/man/man9/sampler.9.html (localized mirrors may surface first)
+Pinned `src/hal/components/sampler.c` creates a shared-memory HAL stream and its realtime `sample()` reads all configured HAL values during one function invocation before calling `hal_stream_write()`. Its relationship to other producers is determined by HAL thread function order.
 
-The documented architecture is intentionally split:
+Pinned `src/hal/components/sampler_usr.c` is a separate userspace consumer: it attaches to the pre-existing stream, waits for data, reads records, checks sample-number continuity, optionally prints sample tags, and drains to stdout/file.
 
-```text
-realtime sampler component
-  -> samples HAL pins in its attached realtime function
-  -> shared-memory FIFO
-  -> userspace halsampler
-  -> stdout/file
-```
+## Resolved pinned `hal_stream` semantics
 
-The FIFO depth is explicitly configurable because realtime production and userspace draining are separate activities. `halsampler -t` can emit sample numbers.
+Implementation: `src/hal/hal_lib.c`.
 
-C08 consequence: this is a strong reproducible trace surface when the target quantities are HAL-visible and same-thread/same-function ordering is controlled. But FIFO state/overrun evidence is part of the trace's validity, not an optional detail.
+### Creation / attachment
 
-## Initial community pass — hypotheses / field failure modes
+`hal_stream_create()` parses the type string, allocates shared memory sized for `depth * (1 + pin_count)` data elements plus metadata, zeroes the metadata, records depth/types/pin count, writes the FIFO magic, then publishes with a release fence.
 
-Community reports are diagnostic leads, not normative implementation truth.
+`hal_stream_attach()` first maps enough shared memory to inspect the header. It rejects a missing/invalid stream when the magic is wrong and rejects an explicitly supplied incompatible type string. It then reopens the shared-memory segment at the full size derived from the creator's depth and pin count.
 
-### Asynchronous userspace drain can look like bad sampling
+Diagnostic consequence: **object-looking HAL readiness is not sufficient proof that the userspace collector can attach to the stream**. A valid automated harness should prove actual collector attachment/readiness, not merely that sampler pins exist.
 
-Forum case: https://forum.linuxcnc.org/24-hal-components/46426-problems-with-sampler-halsampler-solved
+### Ring capacity
 
-A user reported apparently unreliable sampler behavior when launching/killing `halsampler` asynchronously. Their eventual diagnosis was userspace `subprocess.Popen` / FIFO-drain handling: they killed the reader before it completed, then fixed the workflow by collecting a bounded sample count and waiting for reader completion.
+The FIFO advances `in` and `out` modulo `depth`; writable requires `advance(in) != out`. One slot is reserved to distinguish full from empty, so usable queued-record capacity is **depth - 1**, not depth.
 
-Transferable diagnostic lesson: **collector lifecycle can corrupt or truncate evidence even when realtime acquisition is correct**. Separate “sampler did not capture” from “userspace did not fully drain/retain the capture.”
+### Write / sample numbering
 
-### Automated trace retention needs provenance
+On a successful `hal_stream_write()`:
 
-Forum case: https://forum.linuxcnc.org/24-hal-components/42901-halsampler-tools
+1. writer confirms space exists;
+2. copies all configured values into the current input slot;
+3. increments shared `this_sample` and stores that sample number in the extra record element;
+4. release-stores the new input index.
 
-A community toolset paired `halcmd` configuration changes and parameter logs with the corresponding `halsampler` data. This is useful field evidence for a C08 principle: waveform data alone is much less useful if the configuration/state changes that produced it are not retained alongside it.
+If no slot is available, it increments stream `num_overruns` and returns `-ENOSPC`. Crucially, `this_sample` is incremented only on successful enqueue. Therefore a producer-side rejected write does **not by itself create a gap in the successfully enqueued sample-number sequence**.
 
-### Display/interpretation mistakes are real diagnostic faults
+This corrects an overly broad preliminary interpretation: userspace sample-number continuity is useful for detecting records absent from the sequence it receives, but it is not a substitute for producer-side overrun evidence. A valid trace must retain `sampler.N.overruns/full/curr-depth` (or equivalent producer evidence) as well as consumer completion/continuity.
 
-Forum case: https://forum.linuxcnc.org/38-general-linuxcnc-questions/39126-halscope-scaling-axis-acceleration-behaviour
+### Read
 
-A user misread Halscope time/division by an order of magnitude until the major/minor division convention was clarified. This is not an implementation defect; it is an **evidence-interpretation defect**. C08 must teach that trace scaling, sample period, units and trigger location are part of the evidence.
+`hal_stream_read()` returns `-ENOSPC` and increments `num_underruns` if empty. Otherwise it copies the complete record, returns the stored sample number when requested, and release-stores the advanced output index.
 
-### Realtime debugging can perturb timing
+### Atomicity boundary
 
-Forum case: https://www.forum.linuxcnc.org/10-advanced-configuration/36786-how-to-debug-a-real-time-component
+The ring uses acquire/release atomic indexes so a consumer sees a completed record after the producer publishes the input index. This provides FIFO record publication/ordering, **not** a universal timestamp or simultaneity guarantee across unrelated LinuxCNC subsystems. Values sampled in one `sampler.N` invocation are coherent to that invocation, but causal ordering relative to other realtime functions still depends on function placement, and ordering against Task/NML/userspace logs requires additional evidence.
 
-Community advice includes slowing a realtime thread dramatically or conditionally single-stepping a custom component for debugging. This can be useful, but it also changes the timing regime being investigated.
+## Task/NML error and status evidence path
 
-C08 rule: distinguish a **logic-debug fixture** from a **timing-valid reproduction**. If the act of debugging changes thread period/execution behavior, do not reuse the result as proof of original realtime timing.
+Pinned Task provides a distinct diagnostic surface from HAL traces.
 
-### Field example of selecting discriminating HAL evidence
+### Command completion/status
 
-Forum case: https://forum.linuxcnc.org/38-general-linuxcnc-questions/39375-read-error-and-following-error-mesa-7i96
+Userspace `shcom.cc::emcCommandWaitDone()` repeatedly calls `updateStatus()` and compares `emcStatus->echo_serial_number` with the sent command serial. For the matching command, `RCS_STATUS::EXEC` means still executing, `DONE` returns success, and `ERROR` returns failure. This is command/status evidence, not physical-state evidence.
 
-A developer response recommends observing both the hm2 Ethernet `io_error` and read execution time in Halscope to distinguish communication-timeout behavior from a generic following-error symptom. This is a good example of choosing evidence near the suspected cause rather than diagnosing from the final machine symptom alone.
+### Operator-error publication
 
-## Pinned-source pass — realtime sampler path
+Pinned `emctaskmain.cc::emcOperatorError()`:
 
-### `src/hal/components/sampler.c`
+1. checks that the error channel has room;
+2. formats an `EMC_OPERATOR_ERROR` message;
+3. emits the text through `rcs_print()`;
+4. writes the typed message to `emcErrorBuffer`.
 
-At the pinned revision, `sampler_t` contains the shared-memory stream handle plus `curr_depth`, `full`, `enable`, `overruns`, `sample_num`, and configured sample pins.
+A userspace consumer such as `shcom.cc::updateError()` independently calls `emcErrorBuffer->read()`. On `EMC_OPERATOR_ERROR_TYPE`, it copies the NML message into its local `error_string`.
 
-`rtapi_app_main()`:
-
-1. initializes the `sampler` HAL component;
-2. allocates sampler state in HAL shared memory;
-3. calls `hal_stream_create()` for each configured channel;
-4. exports the channel pins/function;
-5. marks the component ready.
-
-Realtime `sample(void *arg, long period)`:
-
-1. returns early while disabled after updating FIFO depth/full state;
-2. reads every configured HAL pin into one local stream-data array during that function invocation;
-3. calls `hal_stream_write()` to enqueue the sample;
-4. if the FIFO is full, records lost-data evidence by incrementing `overruns`, setting `full`, and reporting maximum depth;
-5. otherwise updates full/depth status normally.
-
-Important observation boundary: all configured pin reads occur within one invocation of `sampler.N`, but their exact relationship to other realtime functions depends on **where `sampler.N` is placed in the HAL thread function order**. “Realtime sampled” does not automatically mean “after all relevant producers.”
-
-### `src/hal/components/sampler_usr.c`
-
-Pinned `halsampler`:
-
-1. initializes its own userspace HAL component;
-2. calls `hal_stream_attach()` to the already-created sampler stream;
-3. waits for readable FIFO data;
-4. calls `hal_stream_read()`;
-5. compares returned sample number with the expected sequence and prints `overrun` on discontinuity;
-6. optionally prints the sample tag with `-t`;
-7. formats the typed values to stdout;
-8. detaches/exits on completion or signal.
-
-This creates two distinct validity checks:
+This yields two observable descendants of one Task report:
 
 ```text
-realtime producer-side: sampler.N.overruns / full / curr-depth
-userspace consumer-side: sample-number continuity / read errors / process completion
+Task detects/rejects condition
+  -> emcOperatorError(...)
+      -> rcs_print(text)                    [process/log surface]
+      -> emcErrorBuffer->write(error_msg)   [NML error-channel surface]
+           -> userspace updateError()/error_channel consumer
+                -> GUI/script retained text if that consumer records it
 ```
 
-A valid retained trace should preserve enough of both sides to rule out dropped/truncated data.
+The process print and NML consumer are **not an atomic paired trace**. Their wall-clock appearance can differ because they travel through different mechanisms. Message presence proves Task published that diagnostic; it does not establish servo-cycle timing or physical machine truth.
 
-## Initial diagnostic evidence matrix
+### Example fault-to-retained-artifact flow
 
-| Observation question | Preferred surface | Execution context | Ordering / timing strength | Failure mode to retain | What it cannot prove |
+A source-grounded representative path is a Task command rejected because machine state is unsuitable. `emctaskmain.cc` calls `emcOperatorError("command ... cannot be executed until ...")`; `emcOperatorError()` prints and writes `EMC_OPERATOR_ERROR`; a userspace NML consumer reads that typed message. For a reproducible lab artifact, retain both the originating command/result/status and the error-channel text with explicit collector timestamps/provenance. Do not use the error text alone to infer the exact realtime transition that preceded it.
+
+## Community failure modes retained
+
+- Prematurely killing an asynchronous `halsampler` reader can truncate evidence even when realtime acquisition was correct.
+- Automated trace data is substantially more useful when configuration/state changes are retained with it.
+- Halscope scaling/time-division interpretation errors can create false diagnoses.
+- Slowing/single-stepping realtime code may be valid for logic debugging but invalidates claims about the original timing regime.
+- Field debugging of Mesa read/following-error symptoms benefits from observing cause-near evidence such as `io_error` and read execution timing rather than only the final following-error symptom.
+
+These remain COMMUNITY-REPORTED leads unless separately source/test confirmed.
+
+## Diagnostic evidence matrix
+
+| Observation question | Preferred surface | Execution context | Ordering/timing guarantee | Failure/validity evidence to retain | What it cannot prove |
 |---|---|---|---|---|---|
-| Does a HAL object/signal exist and how is it connected? | `halcmd show` / topology dump | userspace | structural snapshot | command stderr + exact object match | fast temporal ordering |
-| What is one slow-changing HAL value now? | `halcmd getp`, halmeter | userspace | point-in-time only | read failure / object missing | simultaneity with separate reads |
-| Did multiple HAL-visible states change in a realtime sequence? | `sampler`/`halsampler` or Halscope | realtime acquisition + userspace drain/display | strong if attached after relevant producers and sample continuity retained | FIFO overrun, stream attach/read error, wrong function order | non-HAL internal state or physical truth |
-| Did a transient exist around a trigger? | Halscope | realtime acquisition | thread/sample-rate bounded | wrong trigger, sample rate, channel scaling/config | causal interpretation by itself |
-| Was an automated capture complete? | `sampler` + bounded `halsampler -n` + retained exit/stderr/sample tags | RT producer + userspace consumer | strong only with continuity/overrun checks | premature reader kill, FIFO loss, attach failure | correct interpretation of each signal |
-| Did LinuxCNC command/state differ from physical machine behavior? | combine Task/Motion/HAL status with device/plant evidence | mixed layers | depends on synchronized surfaces | stale userspace status, missing hardware measurement | physical truth from software state alone |
+| Does a HAL object/signal exist and how is it connected? | `halcmd show` / topology dump | userspace | structural snapshot | stderr + exact object match | fast ordering or simultaneity |
+| What is one slow HAL value now? | `halcmd getp`, halmeter | userspace | point observation | read failure/object missing | same-cycle relation to another separate read |
+| Did multiple HAL-visible states change in a realtime sequence? | `sampler`/`halsampler` or Halscope | RT acquisition + userspace drain/display | same sampler invocation; relative producer order only if function order known | producer overruns/full/depth, consumer exit/stderr, sample tags, thread order | Task-internal state, universal timestamps, physical truth |
+| Was every attempted realtime sample retained? | sampler producer validity + consumer trace | mixed RT/userspace | FIFO publication ordering | **producer overrun count is mandatory**; consumer continuity alone is insufficient | that no sample attempt was rejected if producer overrun evidence is absent |
+| Can collector attach to intended stream? | actual `halsampler` attach/read readiness | userspace + shmem | proves stream header/key/type compatibility at attach time | attach stderr/exit and first valid read | correct function order or semantic correctness of pins |
+| Did a command complete or fail? | NML status (`echo_serial_number`, `RCS_STATUS`) | userspace reading Task status | command-serial/status ordering | command serial, status polls, timeout/result | physical achievement beyond reported controller state |
+| Did Task publish an operator error? | NML error channel; corroborating process log | Task -> NML/userspace | typed message ordering within channel; process-print order is separate | message type/text, collector lifecycle, timestamps | servo-cycle timing or physical root cause by itself |
+| Did a transient exist around a trigger? | Halscope | RT acquisition | bounded by selected thread/sample period and function order | trigger, sample period, channels, scaling | causality by itself |
+| Did software state differ from plant behavior? | synchronized controller evidence + independent device/plant measurement | mixed | only as strong as explicit synchronization | timestamps/clocks/provenance for each surface | physical truth from software-only observation |
 
-## Already-known curriculum diagnostic traps to carry forward
-
-These are not new C08 experiments, but they are high-value regression lessons:
-
-- A successful command exit is not proof that an expected HAL object existed; C06 found a `halcmd show pin <pattern>` readiness check that could return success even when the intended object was absent.
-- Sequential userspace pin reads can straddle servo cycles; C01's first observation harness was invalid for same-cycle equality claims.
-- A trace can be perfectly ordered yet semantically mislabeled if the phase marker is written **after** the fault mutation; C06 exposed this and required phase-first observation.
-- Workflow success is not the oracle; inspect inner exit, raw data, analyzer output and retained evidence.
-- A GUI/status cache may be stale while the underlying controller has changed; T04/T05 require status freshness/ownership reasoning.
-
-## Preliminary claims ledger
+## Claims ledger
 
 | Claim | Evidence | Class | Confidence | Remaining verification |
 |---|---|---|---|---|
-| `sampler` acquires configured HAL values in realtime and transfers via shared-memory stream | pinned `sampler.c`, official docs | SOURCE + DOC | high | experiment should confirm thread-order consequence |
-| FIFO overflow is explicitly observable through sampler overrun/full state | pinned `sampler.c` | SOURCE | high | test a forced small-depth overrun |
-| `halsampler` is a userspace consumer, not the realtime sampler itself | pinned `sampler_usr.c`, official docs | SOURCE + DOC | high | none for 1000 concept |
-| sample-number discontinuity is a consumer-visible lost-data signal | pinned `sampler_usr.c` | SOURCE | high | determine exact stream sample-number semantics in `hal_stream` implementation |
-| userspace collector lifecycle can create apparent capture unreliability | community solved case | COMMUNITY | medium | reproduce only if it becomes central to C08 experiment |
-| realtime trace validity depends on function order relative to signal producers | sampler source + HAL thread model from earlier modules | SOURCE-REASONED | high | build explicit call-flow / bounded experiment |
+| `sampler` acquires configured HAL values in realtime and transfers via shared-memory stream | pinned sampler + hal_stream source | SOURCE-CONFIRMED | high | experiment thread-order consequence |
+| usable stream capacity is depth-1 | pinned `hal_stream_writable/advance` | SOURCE-CONFIRMED | high | optional bounded test |
+| failed full-FIFO write increments producer overrun and does not increment successful-enqueue sample number | pinned `hal_stream_write` | SOURCE-CONFIRMED | high | force small-depth overrun in C08 experiment/preflight |
+| consumer sample-number continuity alone cannot prove producer attempted no dropped writes | pinned `hal_stream_write/read` | SOURCE-CONFIRMED | high | adversarial exam target |
+| Task operator error is both process-printed and written as typed NML error message | pinned `emcOperatorError` | SOURCE-CONFIRMED | high | bounded runtime capture desirable |
+| command completion status is tracked separately from error text | pinned `emcCommandWaitDone/updateStatus` | SOURCE-CONFIRMED | high | experiment may use this as second surface |
+| collector lifecycle can truncate otherwise-correct capture | solved community case | COMMUNITY-REPORTED | medium | reproduce only if central |
 
-## Exact next source-work checkpoint
+## Experiment-design consequence
 
-1. Trace pinned `hal_stream_create/write/read/attach` implementation enough to document sample numbering, FIFO full behavior and attach failure boundaries.
-2. Inventory the pinned Task/NML error/status publication path and LinuxCNC stderr/error channel so C08 is not HAL-only.
-3. Document at least one complete fault -> internal report/status -> retained user-observable artifact call flow.
-4. Expand the evidence matrix with Task/NML/process-log surfaces and explicit timestamp/ordering guarantees.
-5. Freeze a C08 experiment only after that pass. Highest-value candidate: construct two competing interpretations of one observed userspace symptom and prove that a properly ordered realtime trace plus retained collector-validity evidence distinguishes them, while a naive sequential `halcmd` trace does not.
+The highest-value C08 experiment should discriminate two plausible interpretations of the same coarse symptom rather than merely prove tools execute. Freeze it before output inspection.
+
+Preferred shape:
+
+- one deterministic realtime producer exposes a short-lived fault/cause signal and a downstream symptom;
+- construct two phases that produce the **same userspace coarse symptom** through different cause ordering;
+- show that deliberately sequential userspace `halcmd` observations are insufficient/ambiguous for same-cycle attribution;
+- place `sampler` after the relevant realtime producers and retain a monotonic phase/cause/symptom stream;
+- force or separately preflight a small FIFO overrun to verify that producer `overruns` catches rejected writes even when successful sample tags remain contiguous;
+- retain collector attach/exit/stderr, producer overrun/full/depth, exact function order, and raw trace;
+- optionally pair one Task/NML error/status artifact to demonstrate why cross-surface timestamps are provenance, not atomic ordering.
+
+Safety boundary: diagnostic visibility is evidence, not a safety function. A correct trace does not make a software path safety-rated and does not prove physical machine state.
+
+## Exact next checkpoint
+
+1. Create `guides/C08-function-symbol-guide.md` from the resolved symbols (`sample`, `hal_stream_create/attach/write/read`, `halsampler` consumer loop, `emcOperatorError`, `updateError`, `updateStatus`, `emcCommandWaitDone`).
+2. Create `call-flows/C08-fault-to-retained-evidence.md` with the HAL-stream path and Task-error path, explicitly marking their ordering boundary.
+3. Freeze a C08 experiment with predictions and gates **before implementation/output inspection**. The core gates must include: same coarse symptom from two causes; realtime trace discriminates them; producer-overrun evidence is required; consumer continuity alone is rejected as a sufficient validity oracle; sequential userspace reads are not promoted to atomic evidence.
+4. Then implement a non-authoritative topology/ordering preflight before one authoritative run.

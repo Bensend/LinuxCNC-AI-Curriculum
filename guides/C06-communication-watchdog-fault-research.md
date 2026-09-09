@@ -14,8 +14,10 @@ Current hm2_eth documentation separately defines `packet-read-timeout` and packe
 
 These are two related but non-identical mechanisms: transport/read health is host-side hm2_eth state; watchdog timeout is FPGA-side loss of timely pet/write activity.
 
-### Version-sensitive documentation warning
-Older HostMot2 documentation (including 2.8-era material) additionally says that when the watchdog bites, "all communication with the board stops." The current stable HostMot2 driver guide describes the I/O-pin disconnect/high-impedance behavior and continuing internal module state without retaining that blanket communication statement. The pinned source used by this course also contains a host-side path that can process watchdog status after a successful low-level read and later perform `hm2_force_write()` recovery. Therefore C06 does **not** teach "watchdog bite itself proves communication stopped" as a version-independent invariant. Treat the older wording as version-sensitive documentation that must be reconciled with the specific firmware/driver revision before use in diagnostics.
+### Documentation-divergence warning
+The LinuxCNC documentation currently presents a material wording divergence. The current stable/master **HostMot2 driver guide** describes a watchdog bite as disconnecting the board I/O pins from module instances and leaving internal module state running, but does not say that all communication stops. The current `hostmot2(9)` **man-page text**, like older HostMot2 documentation, still says that when the watchdog bites, "all communication with the board stops." The pinned source used by this course contains a host-side path that can process watchdog status after a successful low-level read and later perform `hm2_force_write()` recovery.
+
+Therefore C06 does **not** teach "watchdog bite itself proves communication stopped" as an invariant. The contradiction exists even among current official documentation surfaces, not merely between old and new releases. For diagnostic reasoning, prefer the pinned implementation and the actual board/firmware contract being tested; treat the blanket communication-stop wording as a statement requiring version/firmware-specific verification rather than using it as an inference from `watchdog.has_bit` alone.
 
 ## Pinned source findings
 ### `src/hal/drivers/mesa-hostmot2/hm2_eth.c`
@@ -66,7 +68,7 @@ FPGA watchdog independently measures elapsed servicing time
 one packet error != permanent io-error
 io-error != necessarily watchdog.has_bit
 host receive timeout != proof FPGA watchdog bit
-watchdog bite != proof communication has stopped on every LinuxCNC/firmware version
+watchdog bite != proof communication has stopped in the tested driver/firmware contract
 watchdog bite != proof physical machine reached a safe state
 I/O pins becoming inputs != complete machine functional-safety architecture
 clearing a HAL fault != proof external plant state is safe to resume
@@ -75,7 +77,7 @@ clearing a HAL fault != proof external plant state is safe to resume
 ## Community leads (not authoritative)
 LinuxCNC forum examples show users observing the hm2_eth `packet-error`, `packet-error-level`, `packet-error-limit`, `packet-read-timeout`, and `io_error` pins on real Mesa Ethernet systems. One field discussion warns that hiding stale-feedback packet errors by substituting commanded position for feedback may avoid following-error trips but can mask real problems; this is retained only as a community-reported diagnostic/safety lead, not a design recommendation.
 
-Historical documentation and developer discussions also indicate that transport delay/loss and watchdog bites can be causally linked: delayed HostMot2 service can allow a watchdog timeout. C06 retains this only as a causal possibility, never as state identity. A packet/read error is not itself watchdog evidence, and a watchdog indication does not identify which upstream timing/transport cause produced it.
+A 2016 developer discussion provides a useful causal example: a missing hm2_eth read response could delay realtime processing long enough that a Mesa watchdog might subsequently bite. A 2025 field report likewise pairs watchdog indications with network/realtime troubleshooting. These are retained as community/developer experience, not normative behavior. They support a causal chain `transport/timing problem -> delayed watchdog service -> possible watchdog bite`, but never the state identity `packet error == watchdog bite`.
 
 ## Source questions for next pass
 1. Locate exactly where HostMot2 generic read/write functions call the low-level queued hm2_eth operations and where watchdog prepare/process functions sit in TRAM ordering.

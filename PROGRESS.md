@@ -7,7 +7,8 @@ Repository artifacts, not chat history, are authoritative.
 ## Current session marker
 
 - Session start (UTC): `2026-09-09T15:13:58Z`
-- Session end: `PENDING FINAL TIMING APPEND`
+- Session end (UTC): `2026-09-09T15:18:18Z`
+- Actual elapsed: `4.3 minutes`
 - Active work: D01 clean evidence-retention lineage attempt 3, workflow `34369209171`, is running. Attempt 2 reproduced the validated runtime but its downloaded Actions artifact omitted the actual evidence directory; `results/D01-004-clean-retention-attempt-2-reconciliation.md` records the publication-path defect. Frozen numeric fixture and D01-002 Gates A-J remain unchanged and UNSCORED.
 
 ## Current critical-path state

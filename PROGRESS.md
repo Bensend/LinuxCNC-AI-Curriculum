@@ -10,7 +10,7 @@ All modules through **T05** and **C01–C09** are **GRADUATED at 1000 level**. *
 
 **S02 — feedback integrity, diversity and common-cause reasoning has completed its authoritative experiment, Gates A–J, frozen adversarial exam, and counterfactual/promotion test.** Its sole remaining graduation requirement is the deliberately information-separated **fresh-AI handoff**; the current learner instance must not self-certify as fresh. S02 therefore remains graduation-pending rather than falsely marked `GRADUATED`.
 
-The highest-priority currently executable dependency is **E20 — hm2_eth / HostMot2 watchdog recovery across versions**, state `EXPERIMENT`. Source/community/version-delta work, call-flow documentation, experiment freeze, implementation, and the first non-authoritative preflight launch are complete.
+The highest-priority currently executable dependency is **E20 — hm2_eth / HostMot2 watchdog recovery across versions**, state `EXPERIMENT`. Source/community/version-delta work, call-flow documentation, experiment freeze, implementation and non-authoritative preflight validation are complete. A separate independent authoritative execution is now running.
 
 F02 remains blocked by completion/acceptance of S02, E20 and X02. X02 remains dependent on X01.
 
@@ -29,62 +29,40 @@ Authoritative workflow `34375315740`, job `102546527680`, artifact `10113726545`
 
 Pinned source baseline: LinuxCNC `8bf4605ae81042248add031e94c77300406e0413`.
 
-The first stale progress checkpoint (`34394006626`) was superseded by later repository history. The valid preflight was reconciled and a separate authoritative run completed:
+Authoritative workflow **`34395556653`**, job **`102614270967`**, artifact **`10121464851`**, source commit `1a916e7ea4fb567d9606e6d46767031ca09163ad`, exact job runtime 2026-09-09T19:31:25Z–19:34:37Z = **3.2 min**.
 
-- authoritative workflow **`34395556653`**;
-- job **`102614270967`**;
-- artifact **`10121464851`**;
-- source commit `1a916e7ea4fb567d9606e6d46767031ca09163ad`;
-- exact job runtime 2026-09-09T19:31:25Z–19:34:37Z = **3.2 min**.
-
-`results/S02-004-authoritative-gate-reconciliation.md` independently inspected the retained artifact: **1,400 contiguous samples (0..1399), zero sampler overruns, Gates A–J 10/10 PASS**. The trace verified differential disagreement detection, stale-channel diagnosis only when an independent laboratory oracle exists, stationary freshness=`UNKNOWN`, and a common-mode false-agreement case invisible to a detector restricted to the two agreeing reports plus healthy transport.
-
-`results/S02-005-adversarial-exam-grade.md`: frozen exam **20/20 PASS**, all ten critical conceptual/safety traps rejected.
-
-`results/S02-006-counterfactual-promotion.md`: no 3000 promotion; H30 remains a candidate. It explicitly preserves the remaining fresh-AI handoff requirement. The present learner must not manufacture this evidence.
+`results/S02-004-authoritative-gate-reconciliation.md` independently inspected the retained artifact: **1,400 contiguous samples (0..1399), zero sampler overruns, Gates A–J 10/10 PASS**. `results/S02-005-adversarial-exam-grade.md`: frozen exam **20/20 PASS**. `results/S02-006-counterfactual-promotion.md`: no 3000 promotion; H30 remains a candidate. Fresh-AI handoff remains required.
 
 ## E20 active evidence
 
-Durable artifacts:
-
-- `guides/E20-hm2-eth-watchdog-recovery-version-matrix.md`;
-- `call-flows/E20-hm2-eth-soft-error-watchdog-recovery.md`;
-- frozen `experiments/E20-001-transport-watchdog-recovery-boundaries.md`;
-- `lab-jobs/025-e20-transport-watchdog-preflight.sh`.
+Durable artifacts include `guides/E20-hm2-eth-watchdog-recovery-version-matrix.md`, `call-flows/E20-hm2-eth-soft-error-watchdog-recovery.md`, frozen `experiments/E20-001-transport-watchdog-recovery-boundaries.md`, preflight `lab-jobs/025-e20-transport-watchdog-preflight.sh`, authoritative wrapper `lab-jobs/026-e20-authoritative-transport-watchdog.sh`, `results/E20-001-preflight-reconciliation.md`, and frozen ungraded `evaluation/E20-adversarial-exam-draft.md`.
 
 ### Source/version findings
 
-Historical source at commit `554fa0f3cc3ec05cf9a70ef077cdebb32b23e004` (2015-10-10) materially differs from current 2.9.x: queued reads used a fixed ~200 ms receive loop and the inspected path lacked the later packet-error accumulator/decay/`io_error` threshold state machine. The commit itself states that prior packet-loss behavior could crash `rtapi_app` because counters were not reset after a failed receive. Nearby 2015 commits also repaired probe receive timing/socket-error behavior.
+Historical source at commit `554fa0f3cc3ec05cf9a70ef077cdebb32b23e004` (2015-10-10) materially differs from current 2.9.x: queued reads used a fixed ~200 ms receive loop and the inspected path lacked the later packet-error accumulator/decay/`io_error` threshold state machine.
 
-Current **v2.9.10** has the later soft-error model: `record_soft_error()` sets `needs_soft_reset`, current packet error and cumulative/level evidence; reaching `packet-error-limit` asserts `io_error` / exceeded. Clean confirmed cycles call `decrement_soft_error()`, so a clean current cycle can coexist with nonzero accumulated history. When the counter is saturated and external logic clears `io_error`, the receive path can reset the internal communication-error counter; that is a driver recovery interaction, **not machine motion authorization**.
+Current **v2.9.10** has the later soft-error model: `record_soft_error()` sets `needs_soft_reset`, current packet error and cumulative/level evidence; reaching `packet-error-limit` asserts `io_error` / exceeded. Clean confirmed cycles call `decrement_soft_error()`, so a clean current cycle can coexist with nonzero accumulated history. Driver recovery is not machine motion authorization.
 
-Current master preserves the high-level state model but has changed receive/backend and confirmation-bookkeeping implementation. Exact timing/syscall/packet-layout conclusions therefore remain version-pinned.
+HostMot2 watchdog state remains a separate authority mechanism. A watchdog bite can disconnect physical I/O pins while internal FPGA module state continues, so internal activity cannot prove physical output-pin activity or machine-state validity.
 
-HostMot2 watchdog state remains a separate authority mechanism. A watchdog bite disconnects physical I/O pins while internal FPGA module state can continue, so changing internal encoder/step/PWM state cannot prove physical output-pin activity. Old 2.5/2.7 documentation's blanket wording that all board communication stops after a watchdog bite is retained only as a historical/version-sensitive claim, not a timeless current-version invariant.
+### E20-001 frozen experiment and preflight result
 
-### E20-001 frozen experiment and first preflight
+The deterministic no-hardware model was frozen before implementation against v2.9.10/current-lineage distinctions using `limit=10`, increment `2`, decrement `1` and a 1 ms realtime sampler. Frozen P0–P8 and Gates A–J remain unchanged.
 
-The deterministic no-hardware model was frozen before implementation. It targets v2.9.10/current-lineage state distinctions using source-backed defaults `limit=10`, `increment=2`, `decrement=1` and a 1 ms realtime sampler.
+Preflight workflow **`34397554426`**, job **`102620888697`**, artifact **`10122285082`** completed successfully. `results/E20-001-preflight-reconciliation.md` independently inspected the retained artifact rather than trusting workflow status: **1,100 contiguous samples, zero producer sampler overruns, empty collector stderr**, complete retained component/HAL/topology/provenance, and all intended P1–P8 runtime discriminators present. It is classified **NON-AUTHORITATIVE PREFLIGHT PASS**; Gates A–J remain unscored by that run.
 
-Frozen P0–P8 cover clean baseline; one soft packet error; a clean cycle that clears current error while accumulated history remains; five consecutive errors reaching `io_error`; explicit `io_error` clear/driver recovery; a separate watchdog bite; internal-generator continuation while physical I/O authority is absent; physical-I/O restoration without state revalidation; explicit revalidation/reauthorization; and immediate revocation on a fresh relapse.
+The P6 boundary was explicitly rechecked in retained component source: `needs_soft_reset` is the driver/board-recovery latch and is intentionally cleared during modeled P6 recovery, while `state_revalidated` remains a separate false machine-authority signal until P7. Transport/driver recovery therefore does not smuggle in machine revalidation.
 
-Frozen Gates A–J require one atomic realtime stream with producer recorder-health evidence and explicitly forbid automatic motion reauthorization from transport recovery, `io_error` clear, watchdog reset, or internal generator activity alone. Watchdog/physical-I/O/state-revalidation signals are laboratory-only witnesses; the experiment cannot establish physical stopping or functional-safety performance.
+`evaluation/E20-adversarial-exam-draft.md` is now **FROZEN / UNGRADED** before authoritative-result review.
 
-`lab-jobs/025-e20-transport-watchdog-preflight.sh` implements the frozen model as a standalone realtime component placed before `sampler` in one 1 ms thread and retains component source, HAL/topology/thread order, atomic samples, analysis and producer overrun state.
-
-First non-authoritative preflight:
-
-- workflow **`34397554426`**;
-- job **`102620888697`**;
-- source commit **`fb99e81ad98fcace8c6af88c0751d8c3fa4cf136`**;
-- current state at this checkpoint: **RUNNING**;
-- frozen Gates A–J remain **UNSCORED**.
+Independent authoritative job `lab-jobs/026-e20-authoritative-transport-watchdog.sh` preserves the already-preflighted numeric contract, component logic, HAL topology, P0–P8 and assertions while changing only run/evidence classification labels and work-directory names. Workflow **`34399792261`** is currently **RUNNING**. Do not launch a duplicate.
 
 ## Exact next-work checkpoint
 
-1. Inspect only workflow `34397554426`; do not launch a duplicate while it is running.
-2. If it fails, classify harness/retention/model-implementation defect versus a real contradiction of the frozen prediction. Correct only a harness defect; do not retune `limit=10`, increment=2, decrement=1, P0–P8 or Gates A–J.
-3. If it passes, download and independently inspect the workflow artifact instead of trusting workflow status. Verify atomic tag continuity, zero producer overruns and the exact P1/P2/P3/P4/P5/P6/P7/P8 discriminators from retained samples.
-4. Only after artifact-level preflight validity, create one separate independent authoritative E20 execution with the frozen behavioral contract unchanged.
-5. Score Gates A–J only from retained authoritative evidence; then freeze/execute the E20 adversarial exam, correction loop if needed, fresh-AI handoff and counterfactual promotion test.
-6. Keep F02 blocked until S02's fresh handoff plus accepted E20 and X02 contracts are complete. Preserve delayed-retention/sealed-benchmark information separation.
+1. Inspect only authoritative workflow **`34399792261`**; do not launch a duplicate while it is running.
+2. If it completes successfully, download its artifact and independently inspect actual retained evidence: fixture identity, atomic tag continuity, zero producer overruns, retained P1–P8 discriminators, topology/provenance and evidence completeness. Workflow success alone does not score a gate.
+3. Score unchanged frozen Gates A–J only from the independently retained authoritative artifact.
+4. Then execute and grade the already-frozen `evaluation/E20-adversarial-exam-draft.md`; do not alter questions/traps after seeing the authoritative result.
+5. If authoritative evidence or the exam fails, classify the defect and follow the correction/three-attempt rules without retuning the frozen experiment to fit observations.
+6. If E20 reaches technical acceptance, complete the required fresh-AI handoff and counterfactual promotion test without self-certifying information-separated evidence.
+7. Keep F02 blocked until S02's fresh handoff plus accepted E20 and X02 contracts are complete. Preserve delayed-retention/sealed-benchmark information separation.

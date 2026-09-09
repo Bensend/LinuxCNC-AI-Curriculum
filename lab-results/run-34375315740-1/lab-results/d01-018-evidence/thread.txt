@@ -1,0 +1,10 @@
+Realtime Threads:
+     Period  FP     Name               (     Time, Max-Time )
+    1000000  YES          servo-thread (     4820,    19306 )
+                  1 motion-command-handler
+                  2 motion-controller
+                  3 mux16.0
+                  4 mux2.0
+                  5 sum2.0
+                  6 sampler.0
+

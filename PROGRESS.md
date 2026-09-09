@@ -6,9 +6,9 @@ Repository artifacts, not chat history, are authoritative.
 
 ## Current critical-path state
 
-All modules through **T05**, **C01**, **C02**, **C03**, **C04**, **C05**, **C06**, and **C07** are **GRADUATED at 1000 level**.
+All modules through **T05** and **C01–C08** are **GRADUATED at 1000 level**.
 
-Phase 10 remains active. Highest-priority unblocked work is **C08 — diagnostics and trace capture**, state **EXPERIMENT / PREFLIGHT**.
+Phase 10 remains active. Highest-priority unblocked work is now **C09 — fresh-AI architecture handoff**, state **RESEARCH / HANDOFF DESIGN**.
 
 ## Blind external-feedback state
 
@@ -16,7 +16,7 @@ Phase 10 remains active. Highest-priority unblocked work is **C08 — diagnostic
 - **BL-DEV-002:** VALID, 9/10, 88% confidence.
 - **BL-DEV-002-TRANSFER-01:** VALID, 10/10, 95% confidence.
 - Delayed retention remains separate; do not count the immediate transfer retest as delayed retention.
-- A new blind challenge is not required merely because C08 is active; follow `evaluation/BLIND_FEEDBACK_PROTOCOL.md` cadence.
+- Follow `evaluation/BLIND_FEEDBACK_PROTOCOL.md` cadence; C08 graduation alone does not require an unscheduled new blind challenge.
 
 ## C06 — communication/watchdog fault handling — GRADUATED
 
@@ -37,8 +37,6 @@ Do not rerun C06-030 absent a newly discovered specific defect.
 
 ## C07 — state-machine sequencing — GRADUATED at 1000 level
 
-Pinned revision: `8bf4605ae81042248add031e94c77300406e0413`.
-
 Accepted runtime model:
 
 ```text
@@ -51,51 +49,72 @@ Task/HAL logical recovery != physical safe restart
 
 Primary evidence: `results/C07-049-authoritative-request-achieved-reconciliation.md`, adversarial exam, novel transfer, and graduation audit. Do not rerun absent a concrete defect.
 
-## C08 — diagnostics and trace capture — EXPERIMENT / PREFLIGHT
+## C08 — diagnostics and trace capture — GRADUATED at 1000 level
 
 Pinned revision: `8bf4605ae81042248add031e94c77300406e0413`.
 
-### Source/evidence pass completed
+### Accepted evidence
 
-Durable artifacts:
+Durable research/source/call-flow artifacts:
 
 - `guides/C08-diagnostics-trace-research.md`
 - `guides/C08-function-symbol-guide.md`
 - `call-flows/C08-fault-to-retained-evidence.md`
 - `guides/C08-hal-stream-doc-source-conflict.md`
-- frozen experiment `experiments/C08-050-diagnostic-discrimination-trace-plan.md`
 
-Resolved source conclusions:
+Frozen experiment:
 
-- `sampler.N` captures configured HAL values during one realtime function invocation, but its causal meaning depends on function order relative to producers.
-- `hal_stream` is a single-producer/single-consumer ring with usable capacity `depth-1` at the pinned revision.
-- successful `hal_stream_write()` assigns the record's sample number immediately before publishing the input index.
-- a full-FIFO write increments producer overrun and returns `-ENOSPC` **without incrementing the successful-enqueue sample number** at both the pinned source and currently inspected development source. Therefore contiguous `halsampler` sample tags alone cannot prove that no producer sample attempts were rejected.
-- current development `hal_stream(3)` documentation conflicts with that implementation by describing sample numbering as incrementing even on failed writes. This conflict is explicitly recorded and must not be silently harmonized; C08-050's tiny-FIFO subtest is the bounded independent discriminator.
-- actual `hal_stream_attach()` validates stream magic and optional type compatibility; HAL object presence alone is not an attach-readiness oracle.
-- Task `emcOperatorError()` emits a process-print descendant and separately writes typed `EMC_OPERATOR_ERROR` to the NML error channel; userspace `updateError()` consumes that channel.
-- command completion/status (`echo_serial_number`, EXEC/DONE/ERROR) is a separate diagnostic surface from operator-error text.
-- HAL realtime trace, Task status, NML error text, and process logs do not share a universal atomic timestamp. Cross-surface evidence must be described as correlated unless explicit synchronization is proven.
+- `experiments/C08-050-diagnostic-discrimination-trace-plan.md`
+- frozen-plan commit `5f1918372167337405f03373f6950602683cc89b`
 
-Safety boundary remains: diagnostic visibility is evidence, not a safety function and not physical-state proof.
+Preflight:
 
-### Frozen C08-050 experiment
+- C08-051 workflow `34327928519`, job `102389431379`, artifact `10093374756`
+- **PREFLIGHT PASS / NON-AUTHORITATIVE**
+- main trace: 280 rows, producer overruns 0
+- independent depth-4 FIFO: 31 producer overruns while retained tags `[0,1,2]` remained contiguous
 
-The plan was committed **before implementation/output inspection**. It requires two phases with the same coarse `symptom=TRUE` userspace observation but different realtime cause ordering, an exact producer-before-sampler function-order record, actual collector attach/lifecycle evidence, producer-side no-loss evidence for the main trace, and a separate depth-4 overrun subtest proving why consumer continuity alone is insufficient.
+Authoritative experiment:
 
-Frozen Gates A–J must not be weakened after output is known. A run that fails provenance/topology/collector/main-trace validity is HARNESS INVALID rather than a LinuxCNC behavioral failure.
+- C08-052 workflow `34328731569`, job `102392025784`, artifact `10094968899`
+- digest `sha256:9c53778cc743e4e393dea15145b0058cd7c35d49809d9fd3cb26187dd825f742`
+- **PASS / TEST-CONFIRMED** under unchanged frozen Gates A–J
+- 285 main realtime rows, main producer overruns 0, clean collector lifecycle
+- Cause-B-only sampled row preceded Cause-B+symptom by one sampled boundary
+- independent depth-4 FIFO accumulated 32 producer overruns while retained tags `[0,1,2]` were still contiguous
 
-### Active laboratory checkpoint
+Evaluation:
 
-- Non-authoritative implementation/topology/order/collector preflight: `lab-jobs/051-c08-diagnostic-trace-preflight.sh`
-- Source commit launching it: `a5ca22019320b3bb7f04eebf8eca4230dcea37e3`
-- Workflow run: `34327928519`
-- Job: `102389431379`
-- Status at this checkpoint: running; do not launch a duplicate while it remains active.
+- `evaluation/C08-adversarial-exam-draft.md` frozen before C08-052 result review
+- `evaluation/C08-adversarial-exam-result.md`: **10/10 PASS**
+- `evaluation/C08-fresh-ai-handoff.md`: **PASS**
+- `evaluation/C08-promotion-audit.md`: **GRADUATED — 1000 level**
+
+### Durable C08 teaching
+
+```text
+sequential point reads != one atomic realtime state
+trace values require retained function-order provenance
+HAL object existence != collector readiness/retention proof
+consumer tag continuity != no attempted-sample loss at the pinned revision
+producer-side overrun evidence is mandatory for a no-loss claim
+same coarse symptom != same realtime causal history
+HAL/Task/NML/process-log evidence != one atomic global clock unless explicitly synchronized
+diagnostic evidence != physical plant truth != safety/restart authority
+```
+
+Current development `hal_stream(3)` prose conflicts with inspected source/sample-number behavior. The conflict is retained explicitly with a version boundary. C08-051 and C08-052 independently reproduced the pinned-source mechanism, so do not silently harmonize the manual and implementation.
+
+Do not rerun C08-050 absent a newly discovered concrete defect.
+
+## C09 — fresh-AI architecture handoff — RESEARCH / HANDOFF DESIGN
+
+Purpose: test whether a fresh architecture/design handoff preserves the accumulated LinuxCNC boundaries from timing, HAL/NML/Task semantics, tandem-axis coordination, fault handling and diagnostic evidence without relying on private machine-specific design data.
 
 ### Exact next-work checkpoint
 
-1. Inspect only workflow `34327928519` / job `102389431379` and retain its actual artifact, logs, exact job runtime, evidence directory, collector stderr/exit, function-order record, main trace validity, and tiny-FIFO producer/consumer evidence.
-2. If C08-051 passes its explicitly non-authoritative preflight contract, reconcile it durably and create a separate authoritative wrapper/run declared authoritative before execution, scoring unchanged C08-050 Gates A–J.
-3. If C08-051 is harness-invalid, diagnose only the concrete harness defect; do not alter the frozen causal predictions or Gates A–J merely to fit output.
-4. After authoritative evidence is accepted, continue C08 adversarial exam, corrections, fresh-AI novel-scenario handoff, higher-level promotion queue, counterfactual audit, and minimum-evidence graduation decision.
+1. Read the accumulated 1000-level promotion artifacts for T02–T05 and C01–C08 and extract the minimum architecture invariants a fresh handoff must preserve.
+2. Define a generic, public, non-machine-specific architecture scenario and freeze its evaluation rubric before generating/reviewing the fresh handoff answer.
+3. Require the handoff to distinguish at minimum: realtime control vs userspace supervision; requested vs achieved state; feedback truth vs physical truth; transport/watchdog fault classes; diagnostic correlation vs atomic evidence; ordinary LinuxCNC control vs safety-rated authority.
+4. Adversarially test the handoff for attractive architecture errors such as stale authorization reuse, single-sensor self-authentication, assuming network recovery restores watchdog/state, treating logging as safety evidence, or moving servo-critical logic into userspace.
+5. Preserve a 2000/3000-level uncertainty queue rather than blocking 1000-level completion on hardware-specific validation that belongs to later work.

@@ -1,6 +1,6 @@
 # D01 — coupled-control stability and tandem-joint authority
 
-Status: **RESEARCH / SOURCE**
+Status: **EXPERIMENT FROZEN / PREFLIGHT ACTIVE**
 
 Pinned LinuxCNC revision for source-grounded 1000→2000 continuity: `8bf4605ae81042248add031e94c77300406e0413`.
 
@@ -15,6 +15,8 @@ Current LinuxCNC `kins(9)` explicitly supports duplicated coordinate letters in 
 Current homing documentation says a negative `HOME_SEQUENCE` synchronizes the *final homing move* of the joints in that sequence and disallows individual joint jogging for synchronized groups because doing so can cause gantry racking. This is initialization/squaring behavior. It is not documentation of continuous cross-joint geometry authentication during later coordinated motion.
 
 Current INI documentation defines `FERROR`/`MIN_FERROR` around the difference between each joint's commanded and sensed position. It is therefore a joint tracking constraint inside the configured measurement chain, not a direct measurement of gantry squareness or another external mechanical degree of freedom.
+
+The pinned upstream sample `configs/sim/axis/gantry/gantry_mm.ini` is a useful minimal fixture: it uses `trivkins coordinates=xyyz kinstype=BOTH`, four joints, and negative synchronized `HOME_SEQUENCE` values for the duplicated Y joints. Its HAL file loops each motor command directly to its corresponding motor feedback, so replacing only the duplicate-Y loopback with an offsettable realtime path preserves the real motion/kinematics stack while creating a controlled asymmetric observation.
 
 ## Pinned-source findings
 
@@ -46,9 +48,23 @@ This means the evidence surfaces must not be collapsed:
 - each joint still has its own command, feedback, fault and following-error state;
 - Cartesian feedback is a kinematics result, not an independent geometry sensor.
 
+### 4. Servo-cycle update order is now pinned
+
+The D01 call-flow trace now establishes the relevant `control.c` sequence:
+
+1. `process_inputs()` reads joint feedback and calculates each joint's following error and velocity-dependent limit;
+2. `do_forward_kins()` publishes Cartesian feedback from the current joint feedback set;
+3. `process_probe_inputs()` runs;
+4. `check_for_faults()` evaluates per-joint fault flags and may clear the internal enabling state;
+5. `set_operating_mode()` and later controller work follow.
+
+The following-error comparison is strict (`abs(ferror) > ferror_limit`). This ordering makes a same-cycle hidden-divergence observation technically meaningful: Cartesian feedback may already have been projected from the principal joint before the duplicate-joint following-error consequence revokes global motion.
+
 ## Community evidence boundary
 
-LinuxCNC community gantry guidance consistently uses duplicated joints plus synchronized homing and warns about racking/independent jogging. Treat this as practitioner evidence about configuration hazards and useful tests, not as proof of a universal physical-machine recovery rule.
+Community reports reinforce two practical hazards without upgrading them to universal proof. Gantry troubleshooting repeatedly emphasizes independent home-switch/joint observations when racking occurs, and a reported XYYZ servo failure showed that the joint named by an amplifier/following problem need not be the root physical cause—the coupled partner can force the observed joint into trouble. Another tandem-Y report describes inability to reset cleanly while the two DRO/joint positions remain offset after a following-error halt.
+
+These are practitioner observations that motivate independent per-joint diagnostics and skepticism about single-symptom root-cause claims. They are not safety-certification evidence and do not establish a universal recovery sequence.
 
 ## Four truth layers for D01
 
@@ -71,19 +87,22 @@ These remain hypotheses until the D01 experiment/evaluation chain is complete.
 
 H5 is an architecture requirement to adversarially test, not a claim that LinuxCNC automatically implements every machine-specific coupled-fault policy.
 
-## Required experiment shape — not yet frozen
+## Experiment freeze
 
-A bounded software plant should expose at least:
+The runtime experiment is now frozen in `results/D01-002-frozen-runtime-experiment.md` before implementation. It uses P0–P8 and unchanged Gates A–J. The discriminating case is a duplicate-only feedback offset below the ferror threshold: both Y joint commands remain duplicated, Cartesian Y remains principal-looking, the duplicate feedback is measurably wrong, and motion remains enabled. A later above-threshold offset must produce duplicate-only ferror and bounded global disable.
 
-- one Cartesian coordinate mapped to two joints;
-- independent per-joint feedback paths;
-- asymmetric lag/authority/saturation controls;
-- per-joint following error and fault state;
-- Cartesian feedback from the real kinematics path;
-- explicit authorization/restart state;
-- one atomic realtime trace with recorder-validity evidence.
+A non-authoritative preflight is required before any authoritative scoring. `lab-jobs/012-d01-duplicated-feedback-preflight.sh` is the first such fixture-validation run; it intentionally does not score Gates A–J.
 
-The experiment must include a case where the principal joint tracks while the duplicate joint is deliberately made to lag or lose authority. The decisive question is whether a coarse Cartesian observation could look acceptable while per-joint evidence reveals disagreement.
+## Remaining instrumentation question
+
+The principal unresolved implementation detail is how to retain **Cartesian feedback in the same realtime atomic stream** as joint command/feedback/ferror. The core `emcmotStatus->carte_pos_fb` value is not exposed as an ordinary realtime HAL pin in the same way as the joint quantities. Using asynchronous HALUI/NML display feedback would violate the frozen atomic-ordering requirement.
+
+Therefore the authoritative harness must either:
+
+1. add a minimal, retained, test-only observer export at the exact pinned forward-kinematics publication point, with source diff and perturbation limitations documented; or
+2. identify an existing realtime production surface that exposes the same value without changing motion source.
+
+The preflight may validate the real duplicated-joint plant and ferror thresholds before this observer is added, but the authoritative run is blocked until the atomic Cartesian observation problem is solved explicitly.
 
 ## Adversarial claims the module must reject
 
@@ -94,14 +113,6 @@ The experiment must include a case where the principal joint tracks while the du
 5. `fault cleared -> coupled mechanism may automatically resume`.
 6. `following-error trip -> complete diagnosis of the physical cause`.
 7. `simulation passed -> physical actuator authority/stopping/safety proven`.
-
-## Open questions before experiment freeze
-
-- Exact pinned-source update order from kinematic joint command generation through per-joint ferror calculation and motion disable.
-- Whether the existing simulated dual-actuator fixture can use real `trivkins coordinates=XYY...` without obscuring the deliberately asymmetric plant.
-- How to expose a principal-joint-versus-duplicate-joint disagreement without fabricating a Cartesian measurement unavailable in production LinuxCNC.
-- Minimum extra diagnostic quantity needed to express measured cross-joint disagreement without incorrectly calling it independent physical squareness.
-- Which fault/recovery behaviors belong to D01 versus later F02 compound-fault sequencing.
 
 ## Promotion boundary
 

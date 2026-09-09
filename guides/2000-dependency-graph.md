@@ -17,6 +17,7 @@ Working priority score is `P + U + C + IG - IC` for prerequisite value, uncertai
 | X02 | Synchronized multi-surface diagnostics | **13** | requires X01 recorder perturbation evidence |
 | X01 | Recorder perturbation and long-duration retention | **12** | unblocked |
 | T20 | UI/Task/NML freshness and ownership under stress | **11** | strengthened by X02 |
+| T21 | 3D HMI, QtVismach and live machine visualization | **10** | follows T20; consume X02 diagnostics/freshness findings |
 | H30? | Custom HostMot2 FPGA/driver/distributed realtime extension | — | **3000 candidate only**; D01/S02 do not justify promotion |
 
 ## Dependency graph
@@ -27,10 +28,10 @@ Working priority score is `P + U + C + IG - IC` for prerequisite value, uncertai
         +--> D01 GRADUATED --> S02 technical evidence complete --fresh handoff--+
         |                                                                      |
         +--> X01 recorder perturbation --> X02 correlation --------------------+--> F02 compound faults
+        |                                      |
+        |                                      +--> T20 UI/Task/NML stress --> T21 3D HMI / QtVismach
         |                                                                      |
         +--> E20 hm2_eth/watchdog version behavior ACTIVE ---------------------+
-        |
-        +--> X02 --> T20 UI/Task/NML stress
 
 E20 / X02 / later evidence --only if justified--> H30? 3000 candidate
 ```
@@ -56,6 +57,24 @@ Source/community/version work establishes a material recovery delta:
 
 `experiments/E20-001-transport-watchdog-recovery-boundaries.md` freezes P0–P8 and Gates A–J before implementation. It specifically forbids automatic motion reauthorization from a clean current packet, clearing `io_error`, watchdog reset, or changing internal generator state alone.
 
+## T21 advanced HMI / 3D visualization addition
+
+T21 was added after research found both official LinuxCNC support and press-brake-specific community precedent for moving 3D machine models inside custom HMIs.
+
+Key discoveries now assigned to the 2000 level:
+
+- **QtVismach is an official QtVCP machine-graphics library.** It supports embedded 3D viewports, STL/OBJ model import, hierarchical rigid assemblies, and HAL-driven `HalTranslate` / `HalRotate` animation.
+- **LinuxCNC users have built a press-brake simulator around Vismach.** The published forum work includes a bend-sequence table, press state machine and moving Vismach brake through rapid/start/bend/finish behavior, with backstop/operator-sequence work also discussed.
+- **A press-brake Vismach model has been embedded inside QtDragon.** The community example imports a press-brake model window and inserts it into a QtDragon layout, demonstrating a practical custom-HMI integration route rather than a separate graphics-only application.
+- **Rigid machine visualization and sheet deformation are different problems.** QtVismach directly addresses transformed rigid parts; realistic workpiece bending/collision/deformation must be investigated separately rather than assumed.
+- **Visualization inherits the T20 authority problem.** Smooth 3D motion is not proof of fresh status, physical synchronization, collision safety or realtime authority. T21 must deliberately test stale/frozen/disagreeing data behavior.
+
+The detailed discovery notes, proposed experiments and graduation traps are in `guides/T21-3d-hmi-qtvismach-discovery.md`.
+
+T21 should cover custom QtVCP/QtVismach architecture, CAD-to-HMI STL/OBJ workflow, independent multi-joint motion, auxiliary-axis/backgauge/tooling visualization, provenance/freshness indicators, deliberate stale-state behavior, optional clearly-labelled diagnostic exaggeration of small joint disagreement, rendering/performance perturbation, and the boundary between schematic bend visualization and validated deformation/collision models.
+
+T21 follows T20 and may consume X02 synchronized diagnostic findings. It is part of completing the advanced HMI branch but is **not** a prerequisite for F02 compound-fault sequencing.
+
 ## Re-promotion safeguards
 
 1. Do not create a 3000 module merely because a 2000 experiment is difficult.
@@ -63,6 +82,7 @@ Source/community/version work establishes a material recovery delta:
 3. Keep physical sensor coupling, actuator authority, stopping performance and functional-safety certification outside software-only proof.
 4. A successful synthetic fault/recovery state model proves only the modeled software distinctions.
 5. The end-of-1000 sealed benchmark and fresh-AI tests remain information-separated.
+6. Do not promote 3D work to 3000 merely because CAD or graphics are involved. Promote only if evidence shows that validated deformation/collision physics, custom rendering infrastructure or another specialized prerequisite is actually needed.
 
 ## Exact next dependency checkpoint
 

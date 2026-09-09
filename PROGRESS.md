@@ -8,13 +8,13 @@ Repository artifacts, not chat history, are authoritative.
 
 - Session start (UTC): `2026-09-09T11:39:19Z`
 - Session end: OPEN
-- Active work: D01 pinned-source update-order trace and runtime experiment freeze.
+- Active work: D01 redesigned runtime preflight with atomic Cartesian-feedback observer.
 
 ## Current critical-path state
 
 All modules through **T05** and **C01–C09** are **GRADUATED at 1000 level**.
 
-The 1000-series critical path is complete. The initial 2000-series promotion inventory has now been deduplicated and scored in `guides/2000-dependency-graph.md`. Highest-priority unblocked work is **D01 — coupled-control stability and tandem-joint authority**, state **RESEARCH / SOURCE**.
+The 1000-series critical path is complete. The initial 2000-series promotion inventory has been deduplicated and scored in `guides/2000-dependency-graph.md`. Highest-priority unblocked work remains **D01 — coupled-control stability and tandem-joint authority**, state **EXPERIMENT / REDESIGNED PREFLIGHT ACTIVE**.
 
 ## Blind external-feedback state
 
@@ -115,44 +115,51 @@ Durable scheduling artifacts:
 
 Current priority order is D01 coupled-control authority, then evidence-dependent S02/E20/X01/X02 work, with F02 compound faults deliberately blocked until its prerequisite fault domains are understood. Custom HostMot2 FPGA/driver/distributed-realtime work remains a **3000 candidate only**.
 
-## D01 — coupled-control stability and tandem-joint authority — RESEARCH / SOURCE
+## D01 — coupled-control stability and tandem-joint authority — EXPERIMENT / REDESIGNED PREFLIGHT ACTIVE
 
 Pinned revision: `8bf4605ae81042248add031e94c77300406e0413`.
 
-Durable artifacts:
+Durable artifacts include:
 
 - `guides/D01-coupled-control-stability-authority-research.md`;
 - `call-flows/D01-duplicated-coordinate-command-feedback.md`;
-- `results/D01-001-pinned-kinematics-source-probe.md` — non-authoritative source-algorithm verification.
+- `call-flows/D01-servo-cycle-feedback-ferror-fault-order.md`;
+- `results/D01-001-pinned-kinematics-source-probe.md`;
+- `results/D01-002-frozen-runtime-experiment.md` — P0–P8 and Gates A–J frozen before implementation;
+- `results/D01-003-preflight-three-attempt-reconciliation.md` — **ESSENTIAL NOW / REDESIGN** decision;
+- `lab-jobs/015-d01-redesigned-observer-preflight.sh` — new materially redesigned non-authoritative preflight.
 
-Source-grounded finding now requiring runtime verification:
+Accepted source model remains:
 
 ```text
 duplicated Cartesian coordinate command
     -> inverse kinematics copies the coordinate to every mapped joint
 
-per-joint feedback
-    -> each joint retains independent tracking/ferror state
-    -> ordinary duplicated-coordinate trivkins forward mapping reports the principal/first mapped joint
-       rather than averaging or validating the duplicate pair
+process_inputs()
+    -> each joint independently forms feedback, ferror and ferror limit
+
+do_forward_kins()
+    -> ordinary duplicated-coordinate trivkins reports the principal/first mapped joint
+       rather than averaging or validating duplicate feedback
+
+check_for_faults()
+    -> a qualifying per-joint fault can revoke machine-wide motion authority
 ```
 
-Thus command agreement is not measured-joint agreement, and plausible Cartesian feedback is not proof that the duplicate joint—or the physical coupled geometry—agrees. Negative `HOME_SEQUENCE` synchronization is reference-establishment behavior, not a continuous geometry-authentication mechanism.
+The first preflight lineage reached three materially similar harness failures and is retired. Attempt 3, workflow `34345951372` / job `102447454146`, did reach a valid real `motmod + trivkins` duplicated-Y topology and correct realtime thread ordering, but its userspace `linuxcncrsh` command driver returned `SET MDI NAK`; both Y commands therefore remained zero and no D01 fault behavior was scored. Frozen Gates A–J remain **UNSCORED**.
 
-D01-001 transcribed the pinned mapping algorithm for `XYY`: world Y=10 produced both Y joint commands=10, while feedback `[principal Y=10, duplicate Y=9]` still produced Cartesian Y=10. This is a falsifiable source-level prediction only; it is not yet LinuxCNC runtime evidence.
+Per the three-attempt rule this is **ESSENTIAL NOW**, not PROMOTE or DROP: the principal-joint Cartesian-feedback rule is central to the 2000-level coupled-authority contract and still requires independent runtime verification.
+
+The redesigned preflight removes `linuxcncrsh` from the command-driving causal path, uses `linuxcnc.command()`/NML with explicit homing and MDI state checks, adds phase-before-mutation evidence, and adds one minimal test-only `motion.d01-cart-y-observer` HAL output that copies already-computed `emcmotStatus->carte_pos_fb.tran.y` immediately after `do_forward_kins()`. That observer is sampled atomically with both Y command/feedback paths, ferror/limits/faults, offset, phase and global motion enable. It is instrumentation only and is never consumed by motion control.
+
+Redesigned workflow run `34347323567` for commit `8afb5c9c17fcf7b5343e30ff018573be1cfbe6a5` is currently **in progress**. Do not launch a duplicate while it is running.
 
 ### Exact next-work checkpoint
 
-1. Finish the pinned-source update-order trace from joint feedback/following-error calculation through `check_for_faults()`, motion enable revocation and forward-kinematics feedback publication.
-2. Decide the smallest real-LinuxCNC duplicated-coordinate fixture that preserves independent asymmetric plant controls without fabricating an unavailable Cartesian measurement.
-3. **Freeze D01 runtime phases and gates before implementation.** At minimum the frozen experiment must discriminate:
-   - common Cartesian command fan-out;
-   - principal-joint Cartesian feedback;
-   - secondary-joint disagreement/following error;
-   - authority revocation after a sufficiently large modeled tracking failure;
-   - fault clear versus fresh restart authorization;
-   - software measurement agreement versus unobserved physical geometry.
-4. Require one atomic realtime evidence stream plus producer-side recorder-validity evidence. Sequential `halcmd` reads cannot score causal gates.
-5. Run a non-authoritative topology/ordering preflight before one independent authoritative run; do not tune gates from the authoritative result.
+1. Inspect only redesigned preflight workflow `34347323567` when it completes; capture its job ID, actual job runtime, artifact ID/digest, exit code, full logs, exact observer patch, topology/thread order, full atomic stream and recorder-health evidence.
+2. If it fails, classify it as **redesigned cycle attempt 1** and correct only the source-grounded harness defect; do not weaken D01-002 hypotheses or Gates A–J.
+3. If it passes, reconcile it as non-authoritative topology/order/numeric/observer validation. Freeze the exact test-only observer patch and confirmed numeric thresholds without scoring Gates A–J.
+4. Only after a passing redesigned preflight, create one separate independent authoritative D01 run using the unchanged P0–P8 semantics and Gates A–J. Do not tune behavioral gates from preflight output.
+5. Authoritative evidence must retain one atomic realtime stream, zero producer overruns, monotonic sample indices, empty/nonfatal collector stderr, phase-before-mutation witnesses, and the exact observer-source diff.
 6. Keep F02 blocked until D01 has an accepted authority/fault-containment contract.
-7. Preserve the end-of-1000 sealed blind benchmark information boundary; do not inspect a sealed oracle merely to satisfy cadence.
+7. Preserve the end-of-1000 sealed benchmark information boundary and the separate delayed-retention obligation.

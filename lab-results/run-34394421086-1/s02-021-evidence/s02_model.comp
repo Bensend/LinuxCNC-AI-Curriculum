@@ -1,0 +1,68 @@
+component s02_model "S02 deterministic synthetic feedback-observability fixture";
+pin out float phase;
+pin out float physical_a;
+pin out float physical_b;
+pin out float reported_a;
+pin out float reported_b;
+pin out bit transport_healthy;
+pin out bit quadrature_diag;
+pin out bit pair_disagreement;
+pin out bit oracle_stale_b;
+pin out bit freshness_unknown;
+pin out bit restricted_detect;
+pin out bit oracle_common_mode;
+param rw u32 phase_cycles = 200;
+param rw float disagree_threshold = 0.050;
+param rw float p1_offset = 0.200;
+param rw float p2_step = 0.002;
+param rw float stale_threshold = 0.050;
+function _;
+license "GPL";
+;;
+#include <math.h>
+static unsigned long cyc = 0;
+FUNCTION(_) {
+    unsigned long plen = phase_cycles ? phase_cycles : 1;
+    unsigned long p = cyc / plen;
+    unsigned long k = cyc % plen;
+    if (p > 5) p = 5;
+
+    phase = (double)p;
+    transport_healthy = 1;
+    quadrature_diag = 0;
+    pair_disagreement = 0;
+    oracle_stale_b = 0;
+    freshness_unknown = 0;
+    restricted_detect = 0;
+    oracle_common_mode = 0;
+
+    if (p == 0) {
+        physical_a = physical_b = reported_a = reported_b = 0.0;
+    } else if (p == 1) {
+        double truth = 1.0 + 0.001 * (double)k;
+        physical_a = physical_b = truth;
+        reported_a = truth;
+        reported_b = truth + p1_offset;
+    } else if (p == 2) {
+        double truth = 2.0 + p2_step * (double)k;
+        physical_a = physical_b = truth;
+        reported_a = truth;
+        reported_b = 2.0;
+    } else if (p == 3) {
+        physical_a = physical_b = reported_a = reported_b = 3.0;
+        freshness_unknown = 1;
+    } else if (p == 4) {
+        physical_a = physical_b = 4.0;
+        reported_a = reported_b = 3.5;
+        oracle_common_mode = 1;
+    } else {
+        physical_a = physical_b = reported_a = reported_b = 5.0;
+        quadrature_diag = 1;
+    }
+
+    pair_disagreement = fabs(reported_a - reported_b) > disagree_threshold;
+    oracle_stale_b = fabs(physical_b - reported_b) > stale_threshold;
+    /* Restricted detector deliberately has no synthetic-oracle access. */
+    restricted_detect = transport_healthy && pair_disagreement;
+    cyc++;
+}

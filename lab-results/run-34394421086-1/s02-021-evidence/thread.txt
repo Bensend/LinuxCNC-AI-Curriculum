@@ -1,0 +1,6 @@
+Realtime Threads:
+     Period  FP     Name               (     Time, Max-Time )
+    1000000  YES          servo-thread (      691,     1964 )
+                  1 s02-model.0
+                  2 sampler.0
+

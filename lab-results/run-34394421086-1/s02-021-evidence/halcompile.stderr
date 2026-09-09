@@ -1,0 +1,162 @@
+s02_model.c:40:5: warning: ‘hal_float_t’ is deprecated: Use getter/setter API [-Wdeprecated-declarations]
+   40 |     hal_float_t *phase_p;
+      |     ^~~~~~~~~~~
+s02_model.c:41:5: warning: ‘hal_float_t’ is deprecated: Use getter/setter API [-Wdeprecated-declarations]
+   41 |     hal_float_t *physical_a_p;
+      |     ^~~~~~~~~~~
+s02_model.c:42:5: warning: ‘hal_float_t’ is deprecated: Use getter/setter API [-Wdeprecated-declarations]
+   42 |     hal_float_t *physical_b_p;
+      |     ^~~~~~~~~~~
+s02_model.c:43:5: warning: ‘hal_float_t’ is deprecated: Use getter/setter API [-Wdeprecated-declarations]
+   43 |     hal_float_t *reported_a_p;
+      |     ^~~~~~~~~~~
+s02_model.c:44:5: warning: ‘hal_float_t’ is deprecated: Use getter/setter API [-Wdeprecated-declarations]
+   44 |     hal_float_t *reported_b_p;
+      |     ^~~~~~~~~~~
+s02_model.c:45:5: warning: ‘hal_bit_t’ is deprecated: Use getter/setter API [-Wdeprecated-declarations]
+   45 |     hal_bit_t *transport_healthy_p;
+      |     ^~~~~~~~~
+s02_model.c:46:5: warning: ‘hal_bit_t’ is deprecated: Use getter/setter API [-Wdeprecated-declarations]
+   46 |     hal_bit_t *quadrature_diag_p;
+      |     ^~~~~~~~~
+s02_model.c:47:5: warning: ‘hal_bit_t’ is deprecated: Use getter/setter API [-Wdeprecated-declarations]
+   47 |     hal_bit_t *pair_disagreement_p;
+      |     ^~~~~~~~~
+s02_model.c:48:5: warning: ‘hal_bit_t’ is deprecated: Use getter/setter API [-Wdeprecated-declarations]
+   48 |     hal_bit_t *oracle_stale_b_p;
+      |     ^~~~~~~~~
+s02_model.c:49:5: warning: ‘hal_bit_t’ is deprecated: Use getter/setter API [-Wdeprecated-declarations]
+   49 |     hal_bit_t *freshness_unknown_p;
+      |     ^~~~~~~~~
+s02_model.c:50:5: warning: ‘hal_bit_t’ is deprecated: Use getter/setter API [-Wdeprecated-declarations]
+   50 |     hal_bit_t *restricted_detect_p;
+      |     ^~~~~~~~~
+s02_model.c:51:5: warning: ‘hal_bit_t’ is deprecated: Use getter/setter API [-Wdeprecated-declarations]
+   51 |     hal_bit_t *oracle_common_mode_p;
+      |     ^~~~~~~~~
+s02_model.c:52:5: warning: ‘hal_u32_t’ is deprecated: Use getter/setter API [-Wdeprecated-declarations]
+   52 |     hal_u32_t phase_cycles_p;
+      |     ^~~~~~~~~
+s02_model.c:53:5: warning: ‘hal_float_t’ is deprecated: Use getter/setter API [-Wdeprecated-declarations]
+   53 |     hal_float_t disagree_threshold_p;
+      |     ^~~~~~~~~~~
+s02_model.c:54:5: warning: ‘hal_float_t’ is deprecated: Use getter/setter API [-Wdeprecated-declarations]
+   54 |     hal_float_t p1_offset_p;
+      |     ^~~~~~~~~~~
+s02_model.c:55:5: warning: ‘hal_float_t’ is deprecated: Use getter/setter API [-Wdeprecated-declarations]
+   55 |     hal_float_t p2_step_p;
+      |     ^~~~~~~~~~~
+s02_model.c:56:5: warning: ‘hal_float_t’ is deprecated: Use getter/setter API [-Wdeprecated-declarations]
+   56 |     hal_float_t stale_threshold_p;
+      |     ^~~~~~~~~~~
+s02_model.c: In function ‘export’:
+s02_model.c:78:5: warning: ‘hal_pin_float_newf’ is deprecated: Use hal_pin_new_real() [-Wdeprecated-declarations]
+   78 |     r = hal_pin_float_newf(HAL_OUT, &(inst->phase_p), comp_id,
+      |     ^
+In file included from s02_model.c:9:
+/home/runner/work/_temp/linuxcnc-s02-preflight/include/hal.h:693:12: note: declared here
+  693 | extern int hal_pin_float_newf(hal_pin_dir_t dir,
+      |            ^~~~~~~~~~~~~~~~~~
+s02_model.c:81:5: warning: ‘hal_pin_float_newf’ is deprecated: Use hal_pin_new_real() [-Wdeprecated-declarations]
+   81 |     r = hal_pin_float_newf(HAL_OUT, &(inst->physical_a_p), comp_id,
+      |     ^
+/home/runner/work/_temp/linuxcnc-s02-preflight/include/hal.h:693:12: note: declared here
+  693 | extern int hal_pin_float_newf(hal_pin_dir_t dir,
+      |            ^~~~~~~~~~~~~~~~~~
+s02_model.c:84:5: warning: ‘hal_pin_float_newf’ is deprecated: Use hal_pin_new_real() [-Wdeprecated-declarations]
+   84 |     r = hal_pin_float_newf(HAL_OUT, &(inst->physical_b_p), comp_id,
+      |     ^
+/home/runner/work/_temp/linuxcnc-s02-preflight/include/hal.h:693:12: note: declared here
+  693 | extern int hal_pin_float_newf(hal_pin_dir_t dir,
+      |            ^~~~~~~~~~~~~~~~~~
+s02_model.c:87:5: warning: ‘hal_pin_float_newf’ is deprecated: Use hal_pin_new_real() [-Wdeprecated-declarations]
+   87 |     r = hal_pin_float_newf(HAL_OUT, &(inst->reported_a_p), comp_id,
+      |     ^
+/home/runner/work/_temp/linuxcnc-s02-preflight/include/hal.h:693:12: note: declared here
+  693 | extern int hal_pin_float_newf(hal_pin_dir_t dir,
+      |            ^~~~~~~~~~~~~~~~~~
+s02_model.c:90:5: warning: ‘hal_pin_float_newf’ is deprecated: Use hal_pin_new_real() [-Wdeprecated-declarations]
+   90 |     r = hal_pin_float_newf(HAL_OUT, &(inst->reported_b_p), comp_id,
+      |     ^
+/home/runner/work/_temp/linuxcnc-s02-preflight/include/hal.h:693:12: note: declared here
+  693 | extern int hal_pin_float_newf(hal_pin_dir_t dir,
+      |            ^~~~~~~~~~~~~~~~~~
+s02_model.c:93:5: warning: ‘hal_pin_bit_newf’ is deprecated: Use hal_pin_new_bool() [-Wdeprecated-declarations]
+   93 |     r = hal_pin_bit_newf(HAL_OUT, &(inst->transport_healthy_p), comp_id,
+      |     ^
+/home/runner/work/_temp/linuxcnc-s02-preflight/include/hal.h:690:12: note: declared here
+  690 | extern int hal_pin_bit_newf(hal_pin_dir_t dir,
+      |            ^~~~~~~~~~~~~~~~
+s02_model.c:96:5: warning: ‘hal_pin_bit_newf’ is deprecated: Use hal_pin_new_bool() [-Wdeprecated-declarations]
+   96 |     r = hal_pin_bit_newf(HAL_OUT, &(inst->quadrature_diag_p), comp_id,
+      |     ^
+/home/runner/work/_temp/linuxcnc-s02-preflight/include/hal.h:690:12: note: declared here
+  690 | extern int hal_pin_bit_newf(hal_pin_dir_t dir,
+      |            ^~~~~~~~~~~~~~~~
+s02_model.c:99:5: warning: ‘hal_pin_bit_newf’ is deprecated: Use hal_pin_new_bool() [-Wdeprecated-declarations]
+   99 |     r = hal_pin_bit_newf(HAL_OUT, &(inst->pair_disagreement_p), comp_id,
+      |     ^
+/home/runner/work/_temp/linuxcnc-s02-preflight/include/hal.h:690:12: note: declared here
+  690 | extern int hal_pin_bit_newf(hal_pin_dir_t dir,
+      |            ^~~~~~~~~~~~~~~~
+s02_model.c:102:5: warning: ‘hal_pin_bit_newf’ is deprecated: Use hal_pin_new_bool() [-Wdeprecated-declarations]
+  102 |     r = hal_pin_bit_newf(HAL_OUT, &(inst->oracle_stale_b_p), comp_id,
+      |     ^
+/home/runner/work/_temp/linuxcnc-s02-preflight/include/hal.h:690:12: note: declared here
+  690 | extern int hal_pin_bit_newf(hal_pin_dir_t dir,
+      |            ^~~~~~~~~~~~~~~~
+s02_model.c:105:5: warning: ‘hal_pin_bit_newf’ is deprecated: Use hal_pin_new_bool() [-Wdeprecated-declarations]
+  105 |     r = hal_pin_bit_newf(HAL_OUT, &(inst->freshness_unknown_p), comp_id,
+      |     ^
+/home/runner/work/_temp/linuxcnc-s02-preflight/include/hal.h:690:12: note: declared here
+  690 | extern int hal_pin_bit_newf(hal_pin_dir_t dir,
+      |            ^~~~~~~~~~~~~~~~
+s02_model.c:108:5: warning: ‘hal_pin_bit_newf’ is deprecated: Use hal_pin_new_bool() [-Wdeprecated-declarations]
+  108 |     r = hal_pin_bit_newf(HAL_OUT, &(inst->restricted_detect_p), comp_id,
+      |     ^
+/home/runner/work/_temp/linuxcnc-s02-preflight/include/hal.h:690:12: note: declared here
+  690 | extern int hal_pin_bit_newf(hal_pin_dir_t dir,
+      |            ^~~~~~~~~~~~~~~~
+s02_model.c:111:5: warning: ‘hal_pin_bit_newf’ is deprecated: Use hal_pin_new_bool() [-Wdeprecated-declarations]
+  111 |     r = hal_pin_bit_newf(HAL_OUT, &(inst->oracle_common_mode_p), comp_id,
+      |     ^
+/home/runner/work/_temp/linuxcnc-s02-preflight/include/hal.h:690:12: note: declared here
+  690 | extern int hal_pin_bit_newf(hal_pin_dir_t dir,
+      |            ^~~~~~~~~~~~~~~~
+s02_model.c:114:5: warning: ‘hal_param_u32_newf’ is deprecated: Use hal_param_new_ui32() [-Wdeprecated-declarations]
+  114 |     r = hal_param_u32_newf(HAL_RW, &(inst->phase_cycles_p), comp_id,
+      |     ^
+/home/runner/work/_temp/linuxcnc-s02-preflight/include/hal.h:855:12: note: declared here
+  855 | extern int hal_param_u32_newf(hal_param_dir_t dir,
+      |            ^~~~~~~~~~~~~~~~~~
+s02_model.c:118:5: warning: ‘hal_param_float_newf’ is deprecated: Use hal_param_new_real() [-Wdeprecated-declarations]
+  118 |     r = hal_param_float_newf(HAL_RW, &(inst->disagree_threshold_p), comp_id,
+      |     ^
+/home/runner/work/_temp/linuxcnc-s02-preflight/include/hal.h:852:12: note: declared here
+  852 | extern int hal_param_float_newf(hal_param_dir_t dir,
+      |            ^~~~~~~~~~~~~~~~~~~~
+s02_model.c:122:5: warning: ‘hal_param_float_newf’ is deprecated: Use hal_param_new_real() [-Wdeprecated-declarations]
+  122 |     r = hal_param_float_newf(HAL_RW, &(inst->p1_offset_p), comp_id,
+      |     ^
+/home/runner/work/_temp/linuxcnc-s02-preflight/include/hal.h:852:12: note: declared here
+  852 | extern int hal_param_float_newf(hal_param_dir_t dir,
+      |            ^~~~~~~~~~~~~~~~~~~~
+s02_model.c:126:5: warning: ‘hal_param_float_newf’ is deprecated: Use hal_param_new_real() [-Wdeprecated-declarations]
+  126 |     r = hal_param_float_newf(HAL_RW, &(inst->p2_step_p), comp_id,
+      |     ^
+/home/runner/work/_temp/linuxcnc-s02-preflight/include/hal.h:852:12: note: declared here
+  852 | extern int hal_param_float_newf(hal_param_dir_t dir,
+      |            ^~~~~~~~~~~~~~~~~~~~
+s02_model.c:130:5: warning: ‘hal_param_float_newf’ is deprecated: Use hal_param_new_real() [-Wdeprecated-declarations]
+  130 |     r = hal_param_float_newf(HAL_RW, &(inst->stale_threshold_p), comp_id,
+      |     ^
+/home/runner/work/_temp/linuxcnc-s02-preflight/include/hal.h:852:12: note: declared here
+  852 | extern int hal_param_float_newf(hal_param_dir_t dir,
+      |            ^~~~~~~~~~~~~~~~~~~~
+/tmp/s02_model.comp: In function ‘_’:
+s02_model.c:199:80: warning: unused parameter ‘period’ [-Wunused-parameter]
+  199 | #define FUNCTION(name) static void name(struct __comp_state *__comp_inst, long period)
+      |                                                                           ~~~~~^~~~~~
+/tmp/s02_model.comp:24:1: note: in expansion of macro ‘FUNCTION’
+   24 | FUNCTION(_) {
+      | ^~~~~~~~

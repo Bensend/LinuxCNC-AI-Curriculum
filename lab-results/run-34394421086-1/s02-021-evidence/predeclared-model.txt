@@ -1,0 +1,15 @@
+S02-021 NON-AUTHORITATIVE PREFLIGHT
+Pinned LinuxCNC: 8bf4605ae81042248add031e94c77300406e0413
+Servo period: 1000000 ns
+Phase length: 200 cycles
+P1 disagreement threshold: 0.050
+P1 injected B offset: 0.200
+P1 detection bound: <= 1 servo cycle after P1 begins
+P2 physical ramp: 0.002 units/cycle
+P2 stale threshold: 0.050
+P2 oracle-stale detection bound: <= 30 servo cycles after P2 begins
+P3 required classification: UNKNOWN sensor freshness from value-only evidence
+P4 restricted detector inputs: reported_A, reported_B, transport_healthy only
+P4 required restricted result: no detection while synthetic physical oracle disagrees
+P5 quadrature diagnostic: modeled limited diagnostic only, never universal validity
+Frozen P0-P5 and Gates A-J remain unchanged and UNSCORED in this preflight.

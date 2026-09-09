@@ -1,0 +1,149 @@
+--- src/hal/components/sampler_usr.c:186 ---
+168:     /* register signal handlers - if the process is killed
+169:        we need to call hal_exit() to free the shared memory */
+170:     signal(SIGINT, quit);
+171:     signal(SIGTERM, quit);
+172:     signal(SIGPIPE, quit);
+173:     /* connect to HAL */
+174:     /* create module name for specified channel */
+175:     snprintf(comp_name, sizeof(comp_name), "halsampler%d", channel);
+176:     /* connect to the HAL */
+177:     ignore_sig = 1;
+178:     comp_id = hal_init(comp_name);
+179:     ignore_sig = 0;
+180:     /* check result */
+181:     if (comp_id < 0) {
+182: 	fprintf(stderr, "ERROR: hal_init() failed: %d\n", comp_id );
+183: 	goto out;
+184:     }
+185:     hal_ready(comp_id);
+186:     int res = hal_stream_attach(&stream, comp_id, SAMPLER_SHMEM_KEY+channel, NULL);
+187:     if (res < 0) {
+188: 	errno = -res;
+189: 	perror("hal_stream_attach");
+190: 	goto out;
+191:     }
+192:     int num_pins = hal_stream_element_count(&stream);
+193:     while ( samples != 0 ) {
+194: 	union hal_stream_data buf[num_pins];
+195: 	hal_stream_wait_readable(&stream, &stop);
+196: 	if(stop) break;
+197: 	int res = hal_stream_read(&stream, buf, &this_sample);
+198: 	if (res < 0) {
+199: 	    errno = -res;
+200: 	    perror("hal_stream_read");
+201: 	    goto out;
+202: 	}
+203: 	++last_sample;
+204: 	if ( this_sample != last_sample ) {
+205: 	    printf ( "overrun\n");
+206: 	    last_sample = this_sample;
+207: 	}
+208: 	if ( tag ) {
+209: 	    printf ( "%u ", this_sample-1 );
+210: 	}
+211: 	for ( n = 0 ; n < num_pins; n++ ) {
+212: 	    switch ( hal_stream_element_type(&stream, n) ) {
+213: 	    case HAL_REAL:
+214: 		printf ( "%f ", buf[n].f);
+215: 		break;
+216: 	    case HAL_BOOL:
+217: 		if ( buf[n].b ) {
+218: 		    printf ( "1 " );
+219: 		} else {
+220: 		    printf ( "0 " );
+221: 		}
+222: 		break;
+223: 	    case HAL_U32:
+224: 		printf ( "%lu ", (unsigned long)buf[n].u);
+225: 		break;
+226: 	    case HAL_S32:
+227: 		printf ( "%ld ", (long)buf[n].s);
+228: 		break;
+229: 	    case HAL_UINT:
+230: 		printf ( "%llu ", (unsigned long long)buf[n].k);
+231: 		break;
+232: 	    case HAL_SINT:
+233: 		printf ( "%lld ", (long long)buf[n].l);
+234: 		break;
+235: 	    default:
+236: 		/* better not happen */
+237: 		goto out;
+238: 	    }
+239: 	}
+240: 	printf ( "\n" );
+
+--- src/hal/components/sampler_usr.c:189 ---
+171:     signal(SIGTERM, quit);
+172:     signal(SIGPIPE, quit);
+173:     /* connect to HAL */
+174:     /* create module name for specified channel */
+175:     snprintf(comp_name, sizeof(comp_name), "halsampler%d", channel);
+176:     /* connect to the HAL */
+177:     ignore_sig = 1;
+178:     comp_id = hal_init(comp_name);
+179:     ignore_sig = 0;
+180:     /* check result */
+181:     if (comp_id < 0) {
+182: 	fprintf(stderr, "ERROR: hal_init() failed: %d\n", comp_id );
+183: 	goto out;
+184:     }
+185:     hal_ready(comp_id);
+186:     int res = hal_stream_attach(&stream, comp_id, SAMPLER_SHMEM_KEY+channel, NULL);
+187:     if (res < 0) {
+188: 	errno = -res;
+189: 	perror("hal_stream_attach");
+190: 	goto out;
+191:     }
+192:     int num_pins = hal_stream_element_count(&stream);
+193:     while ( samples != 0 ) {
+194: 	union hal_stream_data buf[num_pins];
+195: 	hal_stream_wait_readable(&stream, &stop);
+196: 	if(stop) break;
+197: 	int res = hal_stream_read(&stream, buf, &this_sample);
+198: 	if (res < 0) {
+199: 	    errno = -res;
+200: 	    perror("hal_stream_read");
+201: 	    goto out;
+202: 	}
+203: 	++last_sample;
+204: 	if ( this_sample != last_sample ) {
+205: 	    printf ( "overrun\n");
+206: 	    last_sample = this_sample;
+207: 	}
+208: 	if ( tag ) {
+209: 	    printf ( "%u ", this_sample-1 );
+210: 	}
+211: 	for ( n = 0 ; n < num_pins; n++ ) {
+212: 	    switch ( hal_stream_element_type(&stream, n) ) {
+213: 	    case HAL_REAL:
+214: 		printf ( "%f ", buf[n].f);
+215: 		break;
+216: 	    case HAL_BOOL:
+217: 		if ( buf[n].b ) {
+218: 		    printf ( "1 " );
+219: 		} else {
+220: 		    printf ( "0 " );
+221: 		}
+222: 		break;
+223: 	    case HAL_U32:
+224: 		printf ( "%lu ", (unsigned long)buf[n].u);
+225: 		break;
+226: 	    case HAL_S32:
+227: 		printf ( "%ld ", (long)buf[n].s);
+228: 		break;
+229: 	    case HAL_UINT:
+230: 		printf ( "%llu ", (unsigned long long)buf[n].k);
+231: 		break;
+232: 	    case HAL_SINT:
+233: 		printf ( "%lld ", (long long)buf[n].l);
+234: 		break;
+235: 	    default:
+236: 		/* better not happen */
+237: 		goto out;
+238: 	    }
+239: 	}
+240: 	printf ( "\n" );
+241: 	if ( samples > 0 ) {
+242: 	    samples--;
+243: 	}

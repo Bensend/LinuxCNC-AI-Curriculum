@@ -1,0 +1,55 @@
+== exact-after-attach ==
+UTC 2026-09-09T04:18:14Z
+-- hal components --
+Loaded HAL Components:
+ID      Type  Name                                                    PID   State
+    14  User  halcmd17593                                             17593 ready
+    10  RT    sampler                                                       ready
+     9  User  halcmd17582                                             17582 ready
+     7  RT    __diag-thread                                                 ready
+     6  RT    threads                                                       ready
+
+-- hal pins --
+Component Pins:
+Owner   Type  Dir                 Value  Name
+    10  s32   OUT                     7  sampler.0.curr-depth
+    10  bit   IN                   TRUE  sampler.0.enable
+    10  bit   OUT                 FALSE  sampler.0.full
+    10  s32   I/O                     0  sampler.0.overruns
+    10  u32   IN             0x00000000  sampler.0.pin.0
+    10  u32   IN             0x00000000  sampler.0.pin.1
+    10  bit   IN                  FALSE  sampler.0.pin.2
+    10  bit   IN                  FALSE  sampler.0.pin.3
+    10  bit   IN                  FALSE  sampler.0.pin.4
+    10  u32   IN             0x00000000  sampler.0.pin.5
+    10  u32   IN             0x00000000  sampler.0.pin.6
+    10  u32   IN             0x00000000  sampler.0.pin.7
+    10  u32   IN             0x00000000  sampler.0.pin.8
+    10  bit   IN                  FALSE  sampler.0.pin.9
+    10  s32   I/O                     0  sampler.0.sample-num
+    10  s32   OUT                   220  sampler.0.time
+
+-- hal params --
+Parameters:
+Owner   Type  Dir                 Value  Name
+    10  s32   RW                    832  sampler.0.tmax
+    10  bit   RO                  FALSE  sampler.0.tmax-increased
+
+-- System V shared memory --
+
+------ Shared Memory Segments --------
+key        shmid      owner      perms      bytes      nattch     status      
+0x48484c34 14         runner     600        16         2                       
+0x48414c32 15         runner     600        2097152    2                       
+0x48534130 16         runner     600        2640120    1                       
+
+-- /dev/shm --
+total 84
+drwxrwxrwt  2 root root    60 Sep  9 04:07 .
+drwxr-xr-x 19 root root  4000 Sep  9 04:07 ..
+-rw-------  1 root root 82488 Sep  9 04:07 libpod_lock
+-- processes --
+runner      2352    2346  0 04:13 ?        00:00:00 timeout --signal=TERM --kill-after=15s 70m bash lab-jobs/039-c06-sampler-stream-attach-diagnostic.sh
+runner      2353    2352  0 04:13 ?        00:00:00 bash lab-jobs/039-c06-sampler-stream-attach-diagnostic.sh
+runner     17556    2353  0 04:18 ?        00:00:00 /bin/bash /home/runner/work/_temp/linuxcnc-c06-039/scripts/halrun -I
+runner     17580       1  0 04:18 ?        00:00:00 rtapi_app start

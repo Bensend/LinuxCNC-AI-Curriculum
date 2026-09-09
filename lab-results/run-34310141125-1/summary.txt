@@ -1,0 +1,2 @@
+CASE exact depth=30000 cfg=uubbbuuuub: halsampler_rc=0 parseable_rows=10
+DIAGNOSTIC VERDICT: exact C06 sampler stream attaches successfully in isolation. The C06-037/038 -EINVAL requires an interaction present in the behavioral harness, not depth/cfg alone.

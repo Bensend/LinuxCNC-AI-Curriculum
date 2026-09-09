@@ -1,0 +1,74 @@
+--- src/hal/hal_lib.c:5029 ---
+5011:         rtapi_print_msg(RTAPI_MSG_ERR, "hal_stream_read: Invalid stream\n");
+5012:         return -EINVAL;
+5013:     }
+5014:     if(!hal_stream_readable(stream)) {
+5015:         stream->fifo->num_underruns++;
+5016:         return -ENOSPC;
+5017:     }
+5018:     unsigned out = hal_stream_atomic_load_out(stream);
+5019:     unsigned newout = hal_stream_advance(stream, out);
+5020:     int num_pins = stream->fifo->num_pins;
+5021:     int stride = num_pins + 1;
+5022:     hal_stream_data_u *dptr = &stream->fifo->data[out * stride];
+5023:     memcpy(buf, dptr, sizeof(hal_stream_data_u) * num_pins);
+5024:     if(this_sample) *this_sample = dptr[num_pins].s;
+5025:     hal_stream_atomic_store_out(stream, newout);
+5026:     return 0;
+5027: }
+5028: 
+5029: int hal_stream_attach(hal_stream_t *stream, int comp_id, int key, const char *typestring)
+5030: {
+5031:     if(!stream) {
+5032:         rtapi_print_msg(RTAPI_MSG_ERR, "hal_stream_attach: Invalid stream\n");
+5033:         return -EINVAL;
+5034:     }
+5035:     stream->shmem_id = stream->comp_id = -1;
+5036:     stream->fifo = NULL;
+5037:     int result = rtapi_shmem_new(key, comp_id, sizeof(hal_stream_shm_t));
+5038:     int shmem_id = result;
+5039:     if ( result < 0 ) goto fail;
+5040: 
+5041:     hal_stream_shm_t *fifo;
+5042:     result = rtapi_shmem_getptr(shmem_id, (void **)&fifo);
+5043:     if ( result < 0 ) goto fail;
+5044: 
+5045:     if ( fifo->magic != HAL_STREAM_MAGIC_NUM ) {
+5046:         result = -EINVAL;
+5047:         goto fail;
+5048:     }
+5049:     if(typestring) {
+5050:         hal_type_t type[HAL_STREAM_MAX_PINS];
+5051:         result = hal_stream_parse_types(type, typestring);
+5052:         if(!result) {
+5053:             result = -EINVAL;
+5054:             goto fail;
+5055:         }
+5056:         for(int i = 0; i < result; i++) {
+5057:             if(fifo->type[i] != type[i]) {
+5058:                 char tn0[32], tn1[32];
+5059:                 hal_stream_type_string(fifo->type[i], tn0, sizeof(tn0));
+5060:                 hal_stream_type_string(type[i], tn1, sizeof(tn1));
+5061:                 rtapi_print_msg(RTAPI_MSG_ERR, "hal_stream_attach: Type mismatch: types[%d]: '%s' != '%s'\n", i, tn0, tn1);
+5062:                 result = -EINVAL;
+5063:                 goto fail;
+5064:             }
+5065:         }
+5066:     }
+5067:     /* now use data in fifo structure to calculate proper shmem size */
+5068:     unsigned depth = fifo->depth;
+5069:     int pin_count = fifo->num_pins;
+5070:     size_t size = sizeof(hal_stream_shm_t) + sizeof(hal_stream_data_u) * depth * (1+pin_count);
+5071:     /* close shmem, re-open with proper size */
+5072:     rtapi_shmem_delete(shmem_id, comp_id);
+5073:     shmem_id = result = rtapi_shmem_new(key, comp_id, size);
+5074:     if ( result < 0 ) goto fail;
+5075:     result = rtapi_shmem_getptr(shmem_id, (void **)&fifo);
+5076:     if ( result < 0 ) goto fail;
+5077: 
+5078:     stream->shmem_id = shmem_id;
+5079:     stream->comp_id = comp_id;
+5080:     stream->fifo = fifo;
+5081:     return 0;
+5082: 
+5083: fail:

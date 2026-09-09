@@ -1,0 +1,33 @@
+== exact-before-attach ==
+UTC 2026-09-09T04:18:14Z
+-- hal components --
+Loaded HAL Components:
+ID      Type  Name                                                    PID   State
+     2  User  halcmd17572                                             17572 ready
+
+-- hal pins --
+Component Pins:
+Owner   Type  Dir                 Value  Name
+
+-- hal params --
+Parameters:
+Owner   Type  Dir                 Value  Name
+
+-- System V shared memory --
+
+------ Shared Memory Segments --------
+key        shmid      owner      perms      bytes      nattch     status      
+0x48484c34 14         runner     600        16         2                       
+0x48414c32 15         runner     600        2097152    2                       
+0x48534130 16         runner     600        2640120    1                       
+
+-- /dev/shm --
+total 84
+drwxrwxrwt  2 root root    60 Sep  9 04:07 .
+drwxr-xr-x 19 root root  4000 Sep  9 04:07 ..
+-rw-------  1 root root 82488 Sep  9 04:07 libpod_lock
+-- processes --
+runner      2352    2346  0 04:13 ?        00:00:00 timeout --signal=TERM --kill-after=15s 70m bash lab-jobs/039-c06-sampler-stream-attach-diagnostic.sh
+runner      2353    2352  0 04:13 ?        00:00:00 bash lab-jobs/039-c06-sampler-stream-attach-diagnostic.sh
+runner     17556    2353  0 04:18 ?        00:00:00 /bin/bash /home/runner/work/_temp/linuxcnc-c06-039/scripts/halrun -I
+runner     17580       1  0 04:18 ?        00:00:00 rtapi_app start

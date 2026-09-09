@@ -1,0 +1,74 @@
+--- src/hal/components/sampler.c:121 ---
+103: ************************************************************************/
+104: 
+105: int rtapi_app_main(void)
+106: {
+107:     int n, retval;
+108: 
+109:     comp_id = hal_init("sampler");
+110:     if (comp_id < 0) {
+111: 	rtapi_print_msg(RTAPI_MSG_ERR, "SAMPLER: ERROR: hal_init() failed\n");
+112: 	return -EINVAL;
+113:     }
+114: 
+115:     samplers = hal_malloc(MAX_SAMPLERS * sizeof(sampler_t));
+116:     /* validate config info */
+117:     for ( n = 0 ; n < MAX_SAMPLERS ; n++ ) {
+118: 	if (( cfg[n] == NULL ) || ( *(cfg[n]) == '\0' ) || ( depth[n] <= 0 )) {
+119: 	    break;
+120: 	}
+121: 	retval = hal_stream_create(&samplers[n].fifo, comp_id, SAMPLER_SHMEM_KEY+n, depth[n], cfg[n]);
+122: 	if(retval < 0) {
+123: 	    goto fail;
+124: 	}
+125: 	nsamplers++;
+126: 	retval = init_sampler(n, &samplers[n]);
+127:     }
+128:     if ( n == 0 ) {
+129: 	rtapi_print_msg(RTAPI_MSG_ERR,
+130: 	    "SAMPLER: ERROR: no channels specified\n");
+131: 	return -EINVAL;
+132:     }
+133: 
+134:     hal_ready(comp_id);
+135:     return 0;
+136: fail:
+137:     for(n=0; n<nsamplers; n++) hal_stream_detach(&samplers[n].fifo);
+138:     hal_exit(comp_id);
+139:     return retval;
+140: }
+141: 
+142: void rtapi_app_exit(void)
+143: {
+144:     int i;
+145:     for(i=0; i<nsamplers; i++) hal_stream_detach(&samplers[i].fifo);
+146:     hal_exit(comp_id);
+147: }
+148: 
+149: /***********************************************************************
+150: *            REALTIME COUNTER COUNTING AND UPDATE FUNCTIONS            *
+151: ************************************************************************/
+152: 
+153: static void sample(void *arg, long period)
+154: {
+155:     (void)period;
+156:     sampler_t *samp = (sampler_t *)arg; /* point at sampler struct in HAL shmem */
+157: 
+158:     /* are we enabled? */
+159:     if (!hal_get_bool(samp->enable)) {
+160:         hal_set_si32(samp->curr_depth, hal_stream_depth(&samp->fifo));
+161:         hal_set_bool(samp->full, !hal_stream_writable(&samp->fifo));
+162:         return;
+163:     }
+164: 
+165:     /* copy data from HAL pins to fifo */
+166:     union hal_stream_data data[HAL_STREAM_MAX_PINS];
+167:     int num_pins = hal_stream_element_count(&samp->fifo);
+168:     for (int n = 0; n < num_pins; n++) {
+169:         switch (hal_stream_element_type(&samp->fifo, n)) {
+170:         case HAL_REAL: data[n].f = hal_get_real(samp->pins[n].r); break;
+171:         case HAL_S32:  data[n].s = hal_get_si32(samp->pins[n].s); break;
+172:         case HAL_U32:  data[n].u = hal_get_ui32(samp->pins[n].u); break;
+173:         case HAL_SINT: data[n].l = hal_get_sint(samp->pins[n].s); break;
+174:         case HAL_UINT: data[n].k = hal_get_uint(samp->pins[n].u); break;
+175:         case HAL_BOOL: data[n].b = hal_get_bool(samp->pins[n].b); break;

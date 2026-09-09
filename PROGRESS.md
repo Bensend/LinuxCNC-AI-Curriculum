@@ -6,14 +6,14 @@ Repository artifacts, not chat history, are authoritative.
 
 ## Current critical-path state
 
-All modules through **T05**, **C01**, **C02**, **C03**, **C04**, and **C05** are **GRADUATED at 1000 level**. Phase 10 remains active. Highest-priority unblocked work is **C06 — communication/watchdog fault handling**, state **EXPERIMENT / AUTHORITATIVE PHASE-FIRST RUN IN PROGRESS**.
+All modules through **T05**, **C01**, **C02**, **C03**, **C04**, and **C05** are **GRADUATED at 1000 level**. Phase 10 remains active. Highest-priority unblocked work is **C06 — communication/watchdog fault handling**, state **EXAM / HANDOFF / PROMOTION AUDIT**. The required independent behavioral experiment is now accepted.
 
 ## Blind external-feedback state
 
 - **BL-DEV-001:** VALID, 10/10, 92% confidence.
 - **BL-DEV-002:** VALID, 9/10, 88% confidence.
 - **BL-DEV-002-TRANSFER-01:** VALID, **10/10**, 95% confidence. Novel numeric same-mechanism retest correctly retrieved the pinned velocity-scaled-plus-`MIN_FERROR` floor and strict `>` comparison. This is transfer evidence, not delayed-retention evidence.
-- No new blind challenge is due merely because C06 remains active; delayed retention remains distinct and should not contaminate the active C06 evidence chain.
+- No new blind challenge is due merely because C06 reached its internal exam stage; delayed retention remains distinct.
 
 ## C06 — communication/watchdog fault handling
 
@@ -34,7 +34,8 @@ Primary durable artifacts:
 - `results/C06-041-043-readiness-diagnostic-reconciliation.md`
 - `results/C06-044-phase-publication-reconciliation.md`
 - `results/C06-045-phase-publication-preflight-attempt-1.md`
-- accepted clean fixture patch: `lab-results/run-34306117465-1/c06-clean-hm2test.patch`
+- `results/C06-046-authoritative-phase-first-reconciliation.md` — **accepted TEST-CONFIRMED evidence**.
+- accepted clean fixture patch: `lab-results/run-34306117465-1/c06-clean-hm2test.patch`.
 
 Pinned-source findings remain unchanged:
 
@@ -83,38 +84,37 @@ Workflow `34310141125`, job `102334943692`, artifact `10088152204`. Exact `depth
 
 ### C06-041 / C06-043 — readiness root cause confirmed
 
-C06-041 workflow `34310509116`, job `102336017000`, artifact `10088240415` exposed the faulty readiness predicate. C06-043 workflow `34311305551`, job `102338355587`, artifact `10088513656` required actual object-name matches plus live `halrun`; it passed with `ready=1`, `halsampler_rc=0`, 20 rows, zero overruns. The root cause is now both TEST-CONFIRMED and SOURCE-CONFIRMED through pinned `do_show_cmd()` behavior.
+C06-041 workflow `34310509116`, job `102336017000`, artifact `10088240415` exposed the faulty readiness predicate. C06-043 workflow `34311305551`, job `102338355587`, artifact `10088513656` required actual object-name matches plus live `halrun`; it passed with `ready=1`, `halsampler_rc=0`, 20 rows, zero overruns. The root cause is both TEST-CONFIRMED and SOURCE-CONFIRMED through pinned `do_show_cmd()` behavior.
 
 ### C06-044 — HARNESS INVALID after valid observation; phase-publication defect
 
-Workflow `34311582310`, job `102339170004`, artifact `10088629138` retained **2,967 strictly ordered single-stream rows**. The analyzer printed A–C/E–H PASS and D FAIL, but raw-trace reconciliation shows a phase-publication defect: the P1 fault command was consumed before P1 became observable. Similar early transitions appear at P2, P4, and P6. The frozen plan explicitly classifies phase-publication defects as HARNESS INVALID, so this does not falsify the prediction.
+Workflow `34311582310`, job `102339170004`, artifact `10088629138` retained **2,967 strictly ordered single-stream rows**. Raw reconciliation showed the P1 fault mutation could be consumed before the P1 label became visible, with the same ordering defect visible at additional transitions. The frozen plan explicitly classifies phase-publication defects as HARNESS INVALID. This did not falsify the prediction.
 
 The redesigned behavioral lineage reached three nonaccepted attempts (037, 038, 044), triggering **ESSENTIAL NOW / REDESIGN** rather than blind retry.
 
 ### C06-045 — phase-first publication preflight PASS / NON-AUTHORITATIVE
 
-Attempt 1 workflow `34312449313` was PREFLIGHT INVALID before LinuxCNC because the editor targeted the 044 wrapper rather than its retained expanded harness. Corrected workflow **`34312552726`**, artifact **`10088950336`**, passed.
+Attempt 1 workflow `34312449313` was PREFLIGHT INVALID before LinuxCNC because the editor targeted the 044 wrapper rather than its retained expanded harness. Corrected workflow `34312552726`, artifact `10088950336`, passed with **2,981** ordered rows and direct P1/P2/P3/P4/P6 publication-after-label PASS checks. Its embedded Gate A–H analyzer also passed but was not promoted because the run was predeclared non-authoritative.
 
-The corrected preflight retained **2,981 strictly ordered rows** and directly proved:
+### C06-046 — AUTHORITATIVE PASS / ACCEPTED
+
+Workflow **`34312802937`**, job **`102342754452`**, artifact **`10089037385`**, authoritative runtime **3.4 min**. The preflight→authoritative diff changes exactly two label lines and no behavior. The run retained **2,976 strictly ordered single-stream rows**, empty sampler stderr, exact pinned-source/fixture provenance, and **frozen Gates A–H all PASS**.
+
+Accepted TEST-CONFIRMED result at the pinned revision/fixture:
 
 ```text
-P1 publication-after-label: PASS
-P2 publication-after-label: PASS
-P3 publication-after-label: PASS
-P4 publication-after-label: PASS
-P6 publication-after-label: PASS
+communication failure state != watchdog-bite state
+io_error can assert while watchdog.has_bit remains false
+watchdog.has_bit can assert with healthy transport and io_error=false
+transport recovery != watchdog recovery
+fault reset != proof a physical machine is safe to resume
 ```
-
-Its unchanged embedded Gate A–H analyzer also reached PASS, but those gate results remain deliberately **NON-AUTHORITATIVE** because the run was predeclared only as a publication-protocol preflight. This result validates the exact phase-first observation redesign without post-hoc promotion.
-
-### C06-046 — authoritative phase-first run
-
-`lab-jobs/046-c06-authoritative-phase-first.sh` uses the exact retained C06-045 expanded harness and changes only preflight/authoritative labels. A retained diff must prove label-only change. Workflow **`34312802937`** is the sole authoritative C06-046 run at this checkpoint.
 
 ## Exact next-work checkpoint
 
-1. Reconcile only authoritative workflow **`34312802937`**. Retain its complete artifact, exact executed harness, preflight-to-authoritative diff, raw atomic trace, sampler stderr, source hashes, and Gate A–H analysis.
-2. Verify the diff from accepted C06-045 is label-only. Do not accept the run if any phase timing, threshold, fixture behavior, watchdog address, production HostMot2 source, or gate logic changed.
-3. If C06-046 retains complete ordered evidence with frozen Gates A–H PASS, accept C06-030 as TEST-CONFIRMED and advance immediately to the already-required C06 adversarial exam and fresh-AI novel-scenario handoff.
-4. If C06-046 fails, classify from raw evidence before making any correction; do not rerun blindly.
-5. After accepted behavioral evidence, finish C06 corrections, higher-level promotion queue, counterfactual promotion audit, and 1000-level graduation sufficiency decision.
+1. Do **not** rerun C06-030. Its authoritative behavioral evidence is accepted.
+2. Construct and score the C06 1000-level adversarial exam from the durable research/source/call-flow/experiment artifacts. It must include a misleading premise, version-sensitive documentation conflict, failure-path trace, and a small diagnostic/configuration change task.
+3. Run a fresh-AI novel-scenario handoff that is not answered verbatim in the guide; require it to distinguish transport `io_error`, valid watchdog-status evidence, recovery state, and physical-safety uncertainty.
+4. Incorporate any exam/handoff corrections into the guide before graduation.
+5. Populate the higher-level promotion/uncertainty queue, including version-sensitive watchdog communication semantics and hardware/firmware-specific timing/physical validation that cannot be established by the current fixture.
+6. Apply the counterfactual promotion test and minimum graduation evidence floor. If all central claims remain supported, graduate C06 at 1000 level and advance the dependency graph.

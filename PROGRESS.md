@@ -6,61 +6,75 @@ Repository artifacts, not chat history, are authoritative.
 
 ## Current critical-path state
 
-All modules through **T05** and **C01–C09** are **GRADUATED at 1000 level**. **D01 — coupled-control stability and tandem-joint authority is GRADUATED at 2000 level.** Highest-priority unblocked work is **S02 — feedback integrity, diversity and common-cause reasoning**, state `EXPERIMENT` after source/call-flow analysis, experiment freeze and first implementation launch.
+All modules through **T05** and **C01–C09** are **GRADUATED at 1000 level**. **D01 — coupled-control stability and tandem-joint authority is GRADUATED at 2000 level.**
+
+**S02 — feedback integrity, diversity and common-cause reasoning has completed its authoritative experiment, Gates A–J, frozen adversarial exam, and counterfactual/promotion test.** Its sole remaining graduation requirement is the deliberately information-separated **fresh-AI handoff**; the current learner instance must not self-certify as fresh. S02 therefore remains graduation-pending rather than falsely marked `GRADUATED`.
+
+The highest-priority currently executable dependency is **E20 — hm2_eth / HostMot2 watchdog recovery across versions**, now state `EXPERIMENT` after source/community/version-delta work, call-flow documentation, and experiment freeze.
+
+F02 remains blocked by completion/acceptance of S02, E20 and X02. X02 remains dependent on X01.
 
 ## Blind external-feedback state
 
 - BL-DEV-001 VALID 10/10; BL-DEV-002 VALID 9/10; BL-DEV-002-TRANSFER-01 VALID 10/10.
-- Delayed retention remains separate and is now near/due under the protocol's ~24-hour / ~10-lesson guidance. Preserve information separation; do not inspect evaluator-hidden answers from the learner role merely to satisfy cadence.
-- Preserve end-of-1000 sealed-benchmark information separation.
+- Delayed retention and the end-of-1000 sealed benchmark remain information-separated obligations. Do not inspect evaluator-hidden answers from the learner role merely to satisfy cadence.
 
 ## D01 closure
 
-Frozen experiment: `results/D01-002-frozen-runtime-experiment.md`.
+Authoritative workflow `34375315740`, job `102546527680`, artifact `10113726545` passed unchanged frozen Gates A–J. Retained evidence had 2,200 contiguous atomic samples with zero producer overruns and demonstrated low hidden duplicate disagreement, high duplicate-only following-error trip, principal-looking Cartesian feedback, and bounded global motion disable.
 
-Authoritative workflow `34375315740`, job `102546527680`, artifact `10113726545` passed unchanged frozen Gates A–J. Independent artifact inspection found the 2,200-row atomic trace, nonempty observer patch, pinned LinuxCNC SHA, INI/HAL, topology/thread order, LinuxCNC logs, collector state and producer recorder-health evidence. Sample tags were contiguous 0–2199 and producer overruns were zero. The retained trace reproduced the low hidden disagreement (`0.020 < 0.050`), high duplicate-only trip (`0.200`), principal-looking Cartesian Y, and bounded global motion-disable consequence.
+`results/D01-006-authoritative-evidence-and-exam.md` records Gates **10/10 PASS** and adversarial exam **20/20 PASS**. D01 did not justify promoting H30/custom FPGA-driver-distributed-realtime work to 3000.
 
-`results/D01-006-authoritative-evidence-and-exam.md` records gate scoring, the frozen adversarial exam, counterfactual and promotion test. Gates: **10/10 PASS**. Frozen adversarial exam: **20/20**, no predeclared conceptual/safety trap accepted. No corrective teaching loop was required.
-
-Accepted D01 boundary: duplicated-coordinate command agreement and principal-looking Cartesian feedback do not prove duplicate-joint agreement or physical tandem geometry. Joint-level following-error authority can revoke ordinary global motion while Cartesian feedback remains principal-looking. D01 does not establish physical geometry authentication, sensor diversity/common-cause integrity, actuator stopping performance, or functional-safety authority. The result is version-pinned where source/update-order details matter.
-
-D01 did **not** justify promotion of custom FPGA/driver/distributed-realtime work to 3000. H30 remains only a candidate.
-
-## S02 active evidence
+## S02 technical closure / handoff pending
 
 Pinned source baseline: LinuxCNC `8bf4605ae81042248add031e94c77300406e0413`.
 
-`guides/S02-feedback-integrity-common-cause-research.md` and `call-flows/S02-feedback-transport-observability.md` establish the key source boundary: hm2_eth transaction counters, response checks and packet-error surfaces can provide evidence about a current checked **board transport transaction**, but they do not prove per-encoder physical freshness, mechanical coupling, sensor independence or physical truth. HostMot2 watchdog state is a separate output/I/O authority mechanism and likewise is not a sensor-validity oracle.
+The first stale progress checkpoint (`34394006626`) was superseded by later repository history. The valid preflight was reconciled and a separate authoritative run completed:
 
-The S02 experiment is frozen before implementation. P0–P5 cover baseline, ordinary differential disagreement, one stale/frozen channel during modeled motion, stationary freshness ambiguity, common-mode false agreement, and a limited modeled quadrature diagnostic. Gates A–J require atomic evidence and force `UNKNOWN` where value-only evidence cannot establish sensor freshness. The common-mode phase requires both reported channels and transport to look clean while an explicitly synthetic physical oracle shows the physical state is wrong; the analysis must state that this oracle is laboratory-only and cannot be assumed in production.
+- authoritative workflow **`34395556653`**;
+- job **`102614270967`**;
+- artifact **`10121464851`**;
+- source commit `1a916e7ea4fb567d9606e6d46767031ca09163ad`;
+- exact job runtime 2026-09-09T19:31:25Z–19:34:37Z = **3.2 min**.
 
-### S02-021 non-authoritative implementation/preflight
+`results/S02-004-authoritative-gate-reconciliation.md` independently inspected the retained artifact: **1,400 contiguous samples (0..1399), zero sampler overruns, Gates A–J 10/10 PASS**. The trace verified differential disagreement detection, stale-channel diagnosis only when an independent laboratory oracle exists, stationary freshness=`UNKNOWN`, and a common-mode false-agreement case invisible to a detector restricted to the two agreeing reports plus healthy transport.
 
-Committed job: `lab-jobs/021-s02-observability-preflight.sh` at `b539488a56c1cbf745ef7b3afe5feef953fbf06b`.
+`results/S02-005-adversarial-exam-grade.md`: frozen exam **20/20 PASS**, all ten critical conceptual/safety traps rejected.
 
-Frozen numeric predeclarations made before first execution:
+`results/S02-006-counterfactual-promotion.md`: no 3000 promotion; H30 remains a candidate. It explicitly preserves the remaining fresh-AI handoff requirement. The present learner must not manufacture this evidence.
 
-- servo period: **1 ms**;
-- phase length: **200 servo cycles** each;
-- pairwise disagreement threshold: **0.050**;
-- P1 injected reported-B offset: **0.200**;
-- P1 required detection latency: **<=1 servo cycle** after P1 begins;
-- P2 physical-B ramp: **0.002 units/cycle** while reported B is frozen;
-- P2 stale threshold against the explicitly synthetic oracle: **0.050**;
-- P2 required oracle-stale latency: **<=30 servo cycles** after P2 begins;
-- P3 value-only classification: **UNKNOWN sensor freshness**;
-- P4 restricted detector may consume only reported A/B + transport health and must remain false under common-mode false agreement;
-- P5 modeled quadrature diagnostic remains a limited fault-class diagnostic only.
+## E20 active evidence
 
-The fixture uses a deterministic realtime HAL component followed by `sampler` in the same 1 ms thread and retains phase, synthetic physical A/B, reported A/B, transport health, quadrature diagnostic, detector outputs, raw atomic samples, topology/order and producer-side sampler-overrun evidence. Synthetic `physical_*` / `oracle_*` pins are explicitly laboratory-only.
+Durable artifacts:
 
-Workflow **`34394006626`**, job **`102609072085`** is the first non-authoritative preflight and is currently running. Frozen Gates A–J remain **UNSCORED**.
+- `guides/E20-hm2-eth-watchdog-recovery-version-matrix.md`;
+- `call-flows/E20-hm2-eth-soft-error-watchdog-recovery.md`;
+- frozen `experiments/E20-001-transport-watchdog-recovery-boundaries.md`.
 
-### Exact next-work checkpoint
+### Source/version findings
 
-1. Inspect only workflow `34394006626`; do not launch a duplicate while it runs.
-2. If it fails, classify whether the failure is harness/retention/model implementation versus a genuine contradiction of the frozen prediction. Correct only the harness when justified; do not retune P0–P5/Gates A–J or the predeclared thresholds to fit output.
-3. If it passes, download and independently inspect the retained artifact rather than trusting workflow success. Verify atomic sample continuity, zero producer overruns, phase coverage, declared P1/P2 detection bounds, P3 `UNKNOWN`, and P4 restricted-detector non-detection under false agreement.
-4. Only after artifact-level preflight validity, create one separate independent authoritative S02 execution using unchanged frozen P0–P5/Gates A–J and unchanged numeric contract.
-5. Score Gates A–J only from retained authoritative evidence; then freeze/execute the S02 adversarial exam, corrections if needed, fresh-AI handoff and counterfactual promotion test.
-6. Keep F02 blocked until S02, E20 and X02 establish accepted contracts. Preserve delayed-retention and sealed-benchmark obligations.
+Historical source at commit `554fa0f3cc3ec05cf9a70ef077cdebb32b23e004` (2015-10-10) materially differs from current 2.9.x: queued reads used a fixed ~200 ms receive loop and the inspected path lacked the later packet-error accumulator/decay/`io_error` threshold state machine. The commit itself states that prior packet-loss behavior could crash `rtapi_app` because counters were not reset after a failed receive. Nearby 2015 commits also repaired probe receive timing/socket-error behavior.
+
+Current **v2.9.10** has the later soft-error model: `record_soft_error()` sets `needs_soft_reset`, current packet error and cumulative/level evidence; reaching `packet-error-limit` asserts `io_error` / exceeded. Clean confirmed cycles call `decrement_soft_error()`, so a clean current cycle can coexist with nonzero accumulated history. When the counter is saturated and external logic clears `io_error`, the receive path can reset the internal communication-error counter; that is a driver recovery interaction, **not machine motion authorization**.
+
+Current master preserves the high-level state model but has changed receive/backend and confirmation-bookkeeping implementation. Exact timing/syscall/packet-layout conclusions therefore remain version-pinned.
+
+HostMot2 watchdog state remains a separate authority mechanism. A watchdog bite disconnects physical I/O pins while internal FPGA module state can continue, so changing internal encoder/step/PWM state cannot prove physical output-pin activity. Old 2.5/2.7 documentation's blanket wording that all board communication stops after a watchdog bite is retained only as a historical/version-sensitive claim, not a timeless current-version invariant.
+
+### E20-001 frozen experiment
+
+The first deterministic no-hardware model is frozen before implementation. It targets v2.9.10/current-lineage state distinctions using source-backed defaults `limit=10`, `increment=2`, `decrement=1` and a 1 ms realtime sampler.
+
+Frozen P0–P8 cover clean baseline; one soft packet error; a clean cycle that clears current error while accumulated history remains; five consecutive errors reaching `io_error`; explicit `io_error` clear/driver recovery; a separate watchdog bite; internal-generator continuation while physical I/O authority is absent; physical-I/O restoration without state revalidation; explicit revalidation/reauthorization; and immediate revocation on a fresh relapse.
+
+Frozen Gates A–J require one atomic realtime stream with producer recorder-health evidence and explicitly forbid automatic motion reauthorization from transport recovery, `io_error` clear, watchdog reset, or internal generator activity alone. Watchdog/physical-I/O/state-revalidation signals are laboratory-only witnesses; the experiment cannot establish physical stopping or functional-safety performance.
+
+## Exact next-work checkpoint
+
+1. Implement `E20-001` as the smallest standalone realtime HAL component, placed before `sampler` in one **1 ms** thread.
+2. Preserve the frozen numeric contract (`limit=10`, `increment=2`, `decrement=1`), P0–P8 and Gates A–J exactly; do not tune them after seeing output.
+3. Retain model source, generated HAL/topology/thread order, atomic samples and producer-side sampler-overrun state.
+4. Run one **non-authoritative preflight**. Correct harness defects only; a model contradiction must be reconciled rather than hidden by retuning.
+5. Only after artifact-level preflight validity, run one separate authoritative E20 execution and score frozen Gates A–J from retained evidence.
+6. Then freeze/execute the E20 adversarial exam, correction loop if needed, fresh-AI handoff and counterfactual promotion test.
+7. Keep F02 blocked until S02's fresh handoff plus accepted E20 and X02 contracts are complete. Preserve delayed-retention/sealed-benchmark information separation.

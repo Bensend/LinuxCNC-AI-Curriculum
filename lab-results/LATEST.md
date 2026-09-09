@@ -1,37 +1,37 @@
 # Latest LinuxCNC Lab Result
 
-- Job: `016-d01-redesigned-observer-preflight-mux16-fix`
-- Job file: `lab-jobs/016-d01-redesigned-observer-preflight-mux16-fix.sh`
-- Workflow run ID: `34349942532`
+- Job: `017-d01-redesigned-observer-preflight-phase-helper-fix`
+- Job file: `lab-jobs/017-d01-redesigned-observer-preflight-phase-helper-fix.sh`
+- Workflow run ID: `34350408741`
 - Attempt: `1`
-- Source commit: `5d6cc1c3d0163262d043f0ffafc1934f8b5e099a`
-- Exit code: `127`
-- Finished UTC: `2026-09-09T12:19:04Z`
+- Source commit: `8b6e67eab9113aaffe6e8212b3b5cca8097a1415`
+- Exit code: `129`
+- Finished UTC: `2026-09-09T12:24:38Z`
 
 ## Metadata
 ```text
 LinuxCNC AI Curriculum Lab
-UTC start: 2026-09-09T12:15:12Z
-Repository commit: 5d6cc1c3d0163262d043f0ffafc1934f8b5e099a
-Workflow run: 34349942532 attempt 1
-Job file: lab-jobs/016-d01-redesigned-observer-preflight-mux16-fix.sh
+UTC start: 2026-09-09T12:20:10Z
+Repository commit: 8b6e67eab9113aaffe6e8212b3b5cca8097a1415
+Workflow run: 34350408741 attempt 1
+Job file: lab-jobs/017-d01-redesigned-observer-preflight-phase-helper-fix.sh
 Runner: Linux runnervmejwal 6.17.0-1022-azure #22-Ubuntu SMP Mon Jul 27 17:24:03 UTC 2026 x86_64 x86_64 x86_64 GNU/Linux
 Inner lab timeout: 70 minutes (job ceiling: 75 minutes)
 
-UTC finish: 2026-09-09T12:19:04Z
+UTC finish: 2026-09-09T12:24:38Z
 ```
 
 ## Standard output
 ```text
-D01-016 correction scope: mux16 uses sel0..sel3 and out-f; frozen P0-P8 semantics and Gates A-J are unchanged/unscored.
---- lab-jobs/015-d01-redesigned-observer-preflight.sh	2026-09-09 12:15:12.740467170 +0000
-+++ /home/runner/work/_temp/d01-016-preflight.sh	2026-09-09 12:15:12.974844799 +0000
+D01-017 correction scope: valid mux16 interface plus phase helper defined before first phase mutation; frozen P0-P8/Gates A-J unchanged and unscored.
+--- lab-jobs/015-d01-redesigned-observer-preflight.sh	2026-09-09 12:20:10.715056223 +0000
++++ /home/runner/work/_temp/d01-017-preflight.sh	2026-09-09 12:20:10.953207822 +0000
 @@ -5,11 +5,11 @@
  LINUXCNC_COMMIT="8bf4605ae81042248add031e94c77300406e0413"
  WORK="${RUNNER_TEMP:-/tmp}/linuxcnc-d01-redesign"
  
 -printf '== D01 redesigned non-authoritative observer preflight ==\n'
-+printf '== D01 redesigned non-authoritative observer preflight, attempt 2 ==\n'
++printf '== D01 redesigned non-authoritative observer preflight, attempt 3 ==\n'
  date -u '+UTC start: %Y-%m-%dT%H:%M:%SZ'
  printf 'Pinned upstream commit: %s\n' "$LINUXCNC_COMMIT"
  printf '%s\n' 'Three-attempt classification: ESSENTIAL NOW / REDESIGN. Retired linuxcncrsh command-driver lineage.'
@@ -61,7 +61,21 @@ D01-016 correction scope: mux16 uses sel0..sel3 and out-f; frozen P0-P8 semantic
  net Ypos => sampler.0.pin.1 sampler.0.pin.3
  net D01-y2-cmd joint.2.motor-pos-cmd => sum2.0.in0 sampler.0.pin.2
  net D01-offset mux2.0.out => sum2.0.in1 sampler.0.pin.10
-@@ -165,7 +168,7 @@
+@@ -135,6 +138,13 @@
+   wait "$LCPID" 2>/dev/null || true
+ }
+ trap cleanup EXIT
++set_phase(){
++  local n="$1"
++  halcmd setp mux16.0.sel0 $(( n & 1 ))
++  halcmd setp mux16.0.sel1 $(( (n >> 1) & 1 ))
++  halcmd setp mux16.0.sel2 $(( (n >> 2) & 1 ))
++  halcmd setp mux16.0.sel3 $(( (n >> 3) & 1 ))
++}
+ 
+ READY=0
+ for i in $(seq 1 160); do
+@@ -165,7 +175,7 @@
  sleep .030
  
  # P1 is visible before enabling/homing/MDI mutations.
@@ -70,18 +84,11 @@ D01-016 correction scope: mux16 uses sel0..sel3 and out-f; frozen P0-P8 semantic
  sleep .010
  python3 - <<'PY'
  import linuxcnc,time
-@@ -194,18 +197,25 @@
+@@ -194,18 +204,18 @@
  PY
  
  readp(){ timeout 3s halcmd getp "$1" | tr -d '[:space:]'; }
 -halcmd setp mux16.0.sel 2
-+set_phase(){
-+  local n="$1"
-+  halcmd setp mux16.0.sel0 $(( n & 1 ))
-+  halcmd setp mux16.0.sel1 $(( (n >> 1) & 1 ))
-+  halcmd setp mux16.0.sel2 $(( (n >> 2) & 1 ))
-+  halcmd setp mux16.0.sel3 $(( (n >> 3) & 1 ))
-+}
 +set_phase 2
  sleep .030
  printf 'settled y1cmd=%s y2cmd=%s y1fb=%s y2fb=%s cartY=%s motion=%s\n' \
@@ -126,41 +133,41 @@ D01-016 correction scope: mux16 uses sel0..sel3 and out-f; frozen P0-P8 semantic
  sleep .010
  python3 - <<'PY'
  import linuxcnc,time
-== D01 redesigned non-authoritative observer preflight, attempt 2 ==
-UTC start: 2026-09-09T12:15:13Z
+== D01 redesigned non-authoritative observer preflight, attempt 3 ==
+UTC start: 2026-09-09T12:20:10Z
 Pinned upstream commit: 8bf4605ae81042248add031e94c77300406e0413
 Three-attempt classification: ESSENTIAL NOW / REDESIGN. Retired linuxcncrsh command-driver lineage.
 This corrected run validates topology/order/numerics and the test-only atomic Cartesian observer. It DOES NOT score frozen D01-002 Gates A-J.
 Get:1 file:/etc/apt/apt-mirrors.txt Mirrorlist [144 B]
 Get:6 https://packages.microsoft.com/ubuntu/24.04/prod noble InRelease [3600 B]
+Get:7 https://dl.google.com/linux/chrome-stable/deb stable InRelease [2548 B]
+Get:8 https://dl.google.com/linux/chrome-stable/deb stable/main amd64 Packages [1405 B]
 Hit:2 http://azure.archive.ubuntu.com/ubuntu noble InRelease
 Get:3 http://azure.archive.ubuntu.com/ubuntu noble-updates InRelease [126 kB]
 Get:4 http://azure.archive.ubuntu.com/ubuntu noble-backports InRelease [126 kB]
 Get:5 http://azure.archive.ubuntu.com/ubuntu noble-security InRelease [126 kB]
-Get:7 https://dl.google.com/linux/chrome-stable/deb stable InRelease [2548 B]
-Get:8 https://packages.microsoft.com/ubuntu/24.04/prod noble/main arm64 Packages [406 kB]
 Get:9 https://packages.microsoft.com/ubuntu/24.04/prod noble/main amd64 Packages [454 kB]
-Get:10 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 Packages [1260 kB]
-Get:11 http://azure.archive.ubuntu.com/ubuntu noble-updates/main Translation-en [292 kB]
-Get:12 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 Components [181 kB]
-Get:13 http://azure.archive.ubuntu.com/ubuntu noble-updates/universe amd64 Packages [1690 kB]
-Get:14 http://azure.archive.ubuntu.com/ubuntu noble-updates/universe Translation-en [339 kB]
-Get:15 http://azure.archive.ubuntu.com/ubuntu noble-updates/universe amd64 Components [388 kB]
-Get:16 http://azure.archive.ubuntu.com/ubuntu noble-updates/restricted amd64 Packages [1536 kB]
-Get:17 http://azure.archive.ubuntu.com/ubuntu noble-updates/restricted Translation-en [352 kB]
-Get:18 http://azure.archive.ubuntu.com/ubuntu noble-updates/multiverse amd64 Components [940 B]
-Get:19 http://azure.archive.ubuntu.com/ubuntu noble-backports/main amd64 Components [5760 B]
-Get:20 http://azure.archive.ubuntu.com/ubuntu noble-backports/universe amd64 Components [12.6 kB]
-Get:21 http://azure.archive.ubuntu.com/ubuntu noble-security/main amd64 Packages [1005 kB]
-Get:22 http://azure.archive.ubuntu.com/ubuntu noble-security/main Translation-en [213 kB]
-Get:23 http://azure.archive.ubuntu.com/ubuntu noble-security/main amd64 Components [46.5 kB]
-Get:24 http://azure.archive.ubuntu.com/ubuntu noble-security/universe amd64 Packages [1206 kB]
-Get:25 http://azure.archive.ubuntu.com/ubuntu noble-security/universe Translation-en [241 kB]
-Get:26 http://azure.archive.ubuntu.com/ubuntu noble-security/universe amd64 Components [76.3 kB]
-Get:27 http://azure.archive.ubuntu.com/ubuntu noble-security/restricted amd64 Packages [1441 kB]
-Get:28 http://azure.archive.ubuntu.com/ubuntu noble-security/restricted Translation-en [334 kB]
-Get:29 https://dl.google.com/linux/chrome-stable/deb stable/main amd64 Packages [1405 B]
-Fetched 11.9 MB in 1s (8819 kB/s)
+Get:10 https://packages.microsoft.com/ubuntu/24.04/prod noble/main arm64 Packages [406 kB]
+Get:11 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 Packages [1260 kB]
+Get:12 http://azure.archive.ubuntu.com/ubuntu noble-updates/main Translation-en [292 kB]
+Get:13 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 Components [181 kB]
+Get:14 http://azure.archive.ubuntu.com/ubuntu noble-updates/universe amd64 Packages [1690 kB]
+Get:15 http://azure.archive.ubuntu.com/ubuntu noble-updates/universe Translation-en [339 kB]
+Get:16 http://azure.archive.ubuntu.com/ubuntu noble-updates/universe amd64 Components [388 kB]
+Get:17 http://azure.archive.ubuntu.com/ubuntu noble-updates/restricted amd64 Packages [1536 kB]
+Get:18 http://azure.archive.ubuntu.com/ubuntu noble-updates/restricted Translation-en [352 kB]
+Get:19 http://azure.archive.ubuntu.com/ubuntu noble-updates/multiverse amd64 Components [940 B]
+Get:20 http://azure.archive.ubuntu.com/ubuntu noble-backports/main amd64 Components [5760 B]
+Get:21 http://azure.archive.ubuntu.com/ubuntu noble-backports/universe amd64 Components [12.6 kB]
+Get:22 http://azure.archive.ubuntu.com/ubuntu noble-security/main amd64 Packages [1005 kB]
+Get:23 http://azure.archive.ubuntu.com/ubuntu noble-security/main Translation-en [213 kB]
+Get:24 http://azure.archive.ubuntu.com/ubuntu noble-security/main amd64 Components [46.5 kB]
+Get:25 http://azure.archive.ubuntu.com/ubuntu noble-security/universe amd64 Packages [1206 kB]
+Get:26 http://azure.archive.ubuntu.com/ubuntu noble-security/universe Translation-en [241 kB]
+Get:27 http://azure.archive.ubuntu.com/ubuntu noble-security/universe amd64 Components [76.3 kB]
+Get:28 http://azure.archive.ubuntu.com/ubuntu noble-security/restricted amd64 Packages [1441 kB]
+Get:29 http://azure.archive.ubuntu.com/ubuntu noble-security/restricted Translation-en [334 kB]
+Fetched 11.9 MB in 1s (8550 kB/s)
 Reading package lists...
 Reading package lists...
 Building dependency tree...
@@ -458,7 +465,7 @@ Get:166 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 python3-
 Get:167 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 python3-unidiff all 0.7.3-1 [11.0 kB]
 Get:168 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 equivs all 2.3.1 [19.0 kB]
 Get:169 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 libauthen-sasl-perl all 2.1700-1 [42.9 kB]
-Fetched 11.0 MB in 12s (901 kB/s)
+Fetched 11.0 MB in 28s (391 kB/s)
 Selecting previously unselected package autopoint.
 (Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 201676 files and directories currently installed.)
 Preparing to unpack .../000-autopoint_0.21-14ubuntu2_all.deb ...
@@ -1603,7 +1610,7 @@ Get:327 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 libmodbus-de
 Get:328 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 libtirpc-dev amd64 1.3.4+ds-1.1build1 [193 kB]
 Get:329 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 python3-xlib all 0.33-2 [120 kB]
 Preconfiguring packages ...
-Fetched 270 MB in 32s (8558 kB/s)
+Fetched 270 MB in 1min 5s (4131 kB/s)
 Selecting previously unselected package libdebuginfod-common.
 (Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 208197 files and directories currently installed.)
 Preparing to unpack .../000-libdebuginfod-common_0.190-1.1ubuntu0.1_all.deb ...
@@ -3255,8 +3262,8 @@ converting conv for conv_u64_bit.comp
 converting conv for conv_u32_u64.comp
 converting conv for conv_u32_s64.comp
 converting conv for conv_u32_s32.comp
-converting conv for conv_u32_bit.comp
 converting conv for conv_u32_float.comp
+converting conv for conv_u32_bit.comp
 converting conv for conv_s64_u64.comp
 converting conv for conv_s64_u32.comp
 converting conv for conv_s64_s32.comp
@@ -3308,11 +3315,11 @@ Creating conv_u32_bit.mak
 Creating conv_s64_u64.mak
 Creating conv_s64_u32.mak
 Creating conv_s64_s32.mak
-Creating conv_s64_bit.mak
 Creating conv_s64_float.mak
+Creating conv_s64_bit.mak
 Creating conv_s32_u64.mak
-Creating conv_s32_s64.mak
 Creating conv_s32_u32.mak
+Creating conv_s32_s64.mak
 Creating conv_s32_float.mak
 Creating conv_s32_bit.mak
 Creating conv_float_u64.mak
@@ -3328,8 +3335,8 @@ Exporting hal.h
 Exporting hostmot2-serial.h
 Exporting linuxcnc.h
 Exporting kinematics.h
-Exporting emcmotcfg.h
 Exporting inifile.hh
+Exporting emcmotcfg.h
 Exporting inifile.h
 Exporting emcpos.h
 Exporting motion_types.h
@@ -3344,8 +3351,8 @@ Exporting rtapi_bitops.h
 Exporting rtapi_bool.h
 Exporting rtapi_byteorder.h
 Exporting rtapi_ctype.h
-Exporting rtapi_device.h
 Exporting rtapi_errno.h
+Exporting rtapi_device.h
 Exporting rtapi_firmware.h
 Exporting rtapi_gfp.h
 Exporting rtapi_io.h
@@ -3358,18 +3365,18 @@ Exporting rtapi_mutex.h
 Exporting rtapi_parport.h
 Exporting rtapi_pci.h
 Exporting rtapi_slab.h
-Exporting rtapi_stdint.h
 Exporting rtapi_string.h
+Exporting rtapi_stdint.h
 Exporting rtapi_vsnprintf.h
 Copying test input hal/components/lincurve.comp
 Copying test input hal/components/logic.comp
-sed hal/drivers/mesa_uart.comp -e "1 s/mesa_uart/mesa_uart_test/" > ../tests/halcompile/serial-out-of-tree/mesa_uart_test.comp
 Copying test input hal/components/bitslice.comp
+sed hal/drivers/mesa_uart.comp -e "1 s/mesa_uart/mesa_uart_test/" > ../tests/halcompile/serial-out-of-tree/mesa_uart_test.comp
 sed ../tests/halcompile/userspace/rand.comp -e "1 s/rand/rand_test/" > ../tests/halcompile/userspace/rand_test.comp
 cp ../scripts/rtapi.conf ../tests/uspace/spawnv-root/rtapi.conf
 Compiling libposemath/_posemath.c
-Compiling libposemath/gomath.c
 Compiling libposemath/posemath.cc
+Compiling libposemath/gomath.c
 Compiling libposemath/emcpose.c
 Compiling libnml/rcs/rcs_print.cc
 Compiling libnml/rcs/rcs_exit.cc
@@ -3399,8 +3406,8 @@ Compiling libnml/cms/cms_xup.cc
 Compiling libnml/cms/cmsdiag.cc
 Compiling libnml/cms/tcp_opts.cc
 Compiling libnml/cms/tcp_srv.cc
-Compiling libnml/nml/nml_oi.cc
 Compiling libnml/nml/cmd_msg.cc
+Compiling libnml/nml/nml_oi.cc
 Compiling libnml/nml/nml_srv.cc
 Compiling libnml/nml/nml.cc
 Compiling libnml/nml/nmldiag.cc
@@ -3636,48 +3643,48 @@ Syntax checking python script mitsub_vfd
 Syntax checking python script pmx485
 Copying python script hal_input
 Copying python script scorbot-er-3
-Copying python script mitsub_vfd
 Syntax checking python script sim-torch
+Copying python script mitsub_vfd
 Syntax checking python script z_level_compensation
 Syntax checking python script mqtt-publisher
 Copying python script pmx485
 Syntax checking python script hal_bridge
 Copying python script sim-torch
 Copying python script z_level_compensation
-Copying python script mqtt-publisher
 Syntax checking python script mtconnect-agent
+Copying python script mqtt-publisher
 Syntax checking python script pumagui
 Syntax checking python script puma560gui
 Copying python script hal_bridge
 Syntax checking python script lineardelta
-Copying python script pumagui
 Copying python script mtconnect-agent
-Copying python script puma560gui
+Copying python script pumagui
 Syntax checking python script scaragui
+Copying python script puma560gui
 Syntax checking python script hexagui
 Syntax checking python script 5axisgui
 Copying python script lineardelta
 Syntax checking python script max5gui
 Copying python script scaragui
-Copying python script 5axisgui
 Copying python script hexagui
-Syntax checking python script hbmgui
 Syntax checking python script maho600gui
+Syntax checking python script hbmgui
+Copying python script 5axisgui
 Syntax checking python script rotarydelta
 Copying python script max5gui
 Syntax checking python script melfagui
 Copying python script maho600gui
 Copying python script hbmgui
-Copying python script rotarydelta
 Syntax checking python script millturngui
+Copying python script rotarydelta
 Syntax checking python script xyzac-trt-gui
 Syntax checking python script xyzbc-trt-gui
 Copying python script melfagui
 Syntax checking python script xyzab-tdr-gui
-Copying python script xyzac-trt-gui
 Copying python script millturngui
-Copying python script xyzbc-trt-gui
+Copying python script xyzac-trt-gui
 Compiling hal/halmodule.cc
+Copying python script xyzbc-trt-gui
 Compiling hal/halquery.cc
 Compiling emc/usr_intf/axis/extensions/emcmodule.cc
 Copying python script xyzab-tdr-gui
@@ -3854,10 +3861,13 @@ Linking liblinuxcnc-uspace-posix.so.0
 Creating shared library liblinuxcnchal.so.0
 Creating shared library liblinuxcncini.so.1
 Syntax checking python script halcompile
+ln -sf liblinuxcnchal.so.0 ../lib/liblinuxcnchal.so
+Linking hy_vfd
+Linking xhc-whb04b-6
 Linking liblinuxcnc.a
+Copying python script halcompile
 tooldata: depends: objects/emc/tooldata/tooldata_mmap.o objects/emc/tooldata/tooldata_common.o objects/emc/tooldata/tooldata_db.o
 tooldata: Linking: libtooldata.so.0
-Copying python script halcompile
 ln -sf liblinuxcncini.so.1 ../lib/liblinuxcncini.so
 Linking libpyplugin.so.0
 c++ -std=gnu++20 -g -L/home/runner/work/_temp/linuxcnc-d01-redesign/lib -Wl,-rpath,/home/runner/work/_temp/linuxcnc-d01-redesign/lib -ltirpc  -lgpiod  -Xlinker -export-dynamic -Wl,-O1 -Wl,-Bsymbolic-functions -Wl,-soname,libpyplugin.so.0 -shared -o ../lib/libpyplugin.so.0 objects/emc/pythonplugin/python_plugin.o ../lib/liblinuxcncini.so.1 -lstdc++ -lboost_python312 -L/usr/lib/x86_64-linux-gnu -lpython3.12 -ldl -lm
@@ -3866,6 +3876,7 @@ Linking motion-logger
 ln -sf libtooldata.so.0 ../lib/libtooldata.so
 Linking linuxcnc_module_helper
 gcc -Wl,-z,relro -o ../bin/linuxcnc_module_helper objects/module_helper/module_helper.o
+Linking python module _hal.so
 Linking python module lineardeltakins.so
 c++ -std=gnu++20 -L/home/runner/work/_temp/linuxcnc-d01-redesign/lib -Wl,-rpath,/home/runner/work/_temp/linuxcnc-d01-redesign/lib -ltirpc  -lgpiod  -shared -o ../lib/python/lineardeltakins.so objects/emc/kinematics/lineardeltakins.o -lboost_python312
 Linking python module rotarydeltakins.so
@@ -4187,8 +4198,8 @@ Linking ../rtlib/debounce.so
 Linking ../rtlib/demux_generic.so
 Linking ../rtlib/encoder.so
 Linking ../rtlib/enum.so
-Linking ../rtlib/encoder_ratio.so
 Linking ../rtlib/counter.so
+Linking ../rtlib/encoder_ratio.so
 Linking ../rtlib/stepgen.so
 Linking ../rtlib/lcd.so
 Linking ../rtlib/matrix_kb.so
@@ -4208,8 +4219,8 @@ Linking ../rtlib/hal_parport.so
 Linking ../rtlib/hal_speaker.so
 Linking ../rtlib/hal_gm.so
 Linking ../rtlib/hal_ppmc.so
-Linking ../rtlib/hal_bb_gpio.so
 Linking ../rtlib/hal_pi_gpio.so
+Linking ../rtlib/hal_bb_gpio.so
 Linking ../rtlib/hal_gpio.so
 Linking ../rtlib/hostmot2.so
 Linking ../rtlib/hm2_test.so
@@ -4260,25 +4271,21 @@ Linking shuttle
 Linking xhc-hb04
 Linking sendkeys
 Preprocessing thermistor.comp
-ln -sf liblinuxcnchal.so.0 ../lib/liblinuxcnchal.so
 Linking vfs11_vfd
 Linking halcmd
 Linking halrmt
 Linking vfdb_vfd
 Preprocessing wj200_vfd.comp
 Preprocessing pi500_vfd.comp
-Linking hy_vfd
-Linking xhc-whb04b-6
 Linking linuxcncrsh
 Linking schedrmt
 Linking linuxcnclcd
 Linking halui
-Linking linuxcncsvr
 ln -sf libpyplugin.so.0 ../lib/libpyplugin.so
+Linking linuxcncsvr
 emc/Submakefile:Linking genserkins
-Linking python module _hal.so
-Linking ../rtlib/abs.so
 Linking python module linuxcnc.so
+Linking ../rtlib/abs.so
 Linking ../rtlib/abs_s32.so
 Linking ../rtlib/abs_s64.so
 Linking ../rtlib/and2.so
@@ -4457,12 +4464,12 @@ readiness PASS at probe 3
 Component Pins:
 Owner   Type  Dir                 Value  Name
     33  float OUT                     0  joint.1.f-error ==> D01-y1-ferr
-    33  float OUT                  0.01  joint.1.f-error-lim ==> D01-y1-flim
+    33  float OUT                  0.05  joint.1.f-error-lim ==> D01-y1-flim
     33  bit   OUT                 FALSE  joint.1.f-errored ==> D01-y1-ferrored
     33  float OUT                     0  joint.1.motor-pos-cmd ==> Ypos
     33  float IN                      0  joint.1.motor-pos-fb <== Ypos
     33  float OUT                     0  joint.2.f-error ==> D01-y2-ferr
-    33  float OUT                  0.01  joint.2.f-error-lim ==> D01-y2-flim
+    33  float OUT                  0.05  joint.2.f-error-lim ==> D01-y2-flim
     33  bit   OUT                 FALSE  joint.2.f-errored ==> D01-y2-ferrored
     33  float OUT                     0  joint.2.motor-pos-cmd ==> D01-y2-cmd
     33  float IN                      0  joint.2.motor-pos-fb <== D01-y2-fb
@@ -4471,7 +4478,7 @@ Owner   Type  Dir                 Value  Name
 
 Realtime Threads:
      Period  FP     Name               (     Time, Max-Time )
-    1000000  YES          servo-thread (     4829,    22843 )
+    1000000  YES          servo-thread (    42088,    42088 )
                   1 motion-command-handler
                   2 motion-controller
                   3 mux16.0
@@ -4479,6 +4486,15 @@ Realtime Threads:
                   5 sum2.0
                   6 sampler.0
 
+python-driver PASS homed=(1, 1, 1, 1) posY=10.0 actualY=10.0 task_state=4
+settled y1cmd=10 y2cmd=10 y1fb=10 y2fb=10 cartY=10 motion=TRUE
+low y2-ferror=-0.02 lim=0.05 y2fault=FALSE cartY=10 motion=TRUE
+high y1-ferror=0 y2-ferror=-0.2 y2lim=0.05 y1fault=FALSE y2fault=TRUE cartY=10 motion=FALSE
+fresh-reenable observed task_state=4 enabled=True
+sampler-overruns=0
+sample-count 2200
+analysis p3-pre=27 low-hidden=58 cart-low=58 p5-pre=26 high-trip=68 principal-clean=68 disabled=68 cmddup=927
+D01-REDESIGNED-PREFLIGHT=PASS
 ```
 
 ## Standard error
@@ -4494,7 +4510,7 @@ No user sessions are running outdated binaries.
 
 No VM guests are running outdated hypervisor (qemu) binaries on this host.
 Cloning into '/home/runner/work/_temp/linuxcnc-d01-redesign'...
-Updating files:   0% (1/9526)Updating files:   1% (96/9526)Updating files:   2% (191/9526)Updating files:   3% (286/9526)Updating files:   4% (382/9526)Updating files:   5% (477/9526)Updating files:   6% (572/9526)Updating files:   7% (667/9526)Updating files:   8% (763/9526)Updating files:   9% (858/9526)Updating files:  10% (953/9526)Updating files:  11% (1048/9526)Updating files:  12% (1144/9526)Updating files:  13% (1239/9526)Updating files:  14% (1334/9526)Updating files:  15% (1429/9526)Updating files:  16% (1525/9526)Updating files:  17% (1620/9526)Updating files:  18% (1715/9526)Updating files:  19% (1810/9526)Updating files:  20% (1906/9526)Updating files:  21% (2001/9526)Updating files:  22% (2096/9526)Updating files:  23% (2191/9526)Updating files:  23% (2202/9526)Updating files:  24% (2287/9526)Updating files:  25% (2382/9526)Updating files:  26% (2477/9526)Updating files:  27% (2573/9526)Updating files:  28% (2668/9526)Updating files:  29% (2763/9526)Updating files:  30% (2858/9526)Updating files:  31% (2954/9526)Updating files:  32% (3049/9526)Updating files:  33% (3144/9526)Updating files:  34% (3239/9526)Updating files:  35% (3335/9526)Updating files:  36% (3430/9526)Updating files:  37% (3525/9526)Updating files:  38% (3620/9526)Updating files:  39% (3716/9526)Updating files:  40% (3811/9526)Updating files:  41% (3906/9526)Updating files:  42% (4001/9526)Updating files:  43% (4097/9526)Updating files:  44% (4192/9526)Updating files:  45% (4287/9526)Updating files:  46% (4382/9526)Updating files:  47% (4478/9526)Updating files:  48% (4573/9526)Updating files:  49% (4668/9526)Updating files:  50% (4763/9526)Updating files:  51% (4859/9526)Updating files:  52% (4954/9526)Updating files:  53% (5049/9526)Updating files:  54% (5145/9526)Updating files:  55% (5240/9526)Updating files:  56% (5335/9526)Updating files:  57% (5430/9526)Updating files:  58% (5526/9526)Updating files:  59% (5621/9526)Updating files:  60% (5716/9526)Updating files:  61% (5811/9526)Updating files:  62% (5907/9526)Updating files:  63% (6002/9526)Updating files:  64% (6097/9526)Updating files:  65% (6192/9526)Updating files:  66% (6288/9526)Updating files:  67% (6383/9526)Updating files:  68% (6478/9526)Updating files:  69% (6573/9526)Updating files:  70% (6669/9526)Updating files:  71% (6764/9526)Updating files:  72% (6859/9526)Updating files:  73% (6954/9526)Updating files:  74% (7050/9526)Updating files:  75% (7145/9526)Updating files:  76% (7240/9526)Updating files:  77% (7336/9526)Updating files:  78% (7431/9526)Updating files:  79% (7526/9526)Updating files:  80% (7621/9526)Updating files:  81% (7717/9526)Updating files:  82% (7812/9526)Updating files:  83% (7907/9526)Updating files:  84% (8002/9526)Updating files:  85% (8098/9526)Updating files:  86% (8193/9526)Updating files:  87% (8288/9526)Updating files:  88% (8383/9526)Updating files:  89% (8479/9526)Updating files:  90% (8574/9526)Updating files:  91% (8669/9526)Updating files:  92% (8764/9526)Updating files:  93% (8860/9526)Updating files:  94% (8955/9526)Updating files:  95% (9050/9526)Updating files:  96% (9145/9526)Updating files:  97% (9241/9526)Updating files:  98% (9336/9526)Updating files:  99% (9431/9526)Updating files: 100% (9526/9526)Updating files: 100% (9526/9526), done.
+Updating files:   0% (1/9526)Updating files:   1% (96/9526)Updating files:   2% (191/9526)Updating files:   3% (286/9526)Updating files:   4% (382/9526)Updating files:   5% (477/9526)Updating files:   6% (572/9526)Updating files:   7% (667/9526)Updating files:   8% (763/9526)Updating files:   9% (858/9526)Updating files:  10% (953/9526)Updating files:  11% (1048/9526)Updating files:  12% (1144/9526)Updating files:  13% (1239/9526)Updating files:  14% (1334/9526)Updating files:  14% (1381/9526)Updating files:  15% (1429/9526)Updating files:  16% (1525/9526)Updating files:  17% (1620/9526)Updating files:  18% (1715/9526)Updating files:  19% (1810/9526)Updating files:  20% (1906/9526)Updating files:  21% (2001/9526)Updating files:  22% (2096/9526)Updating files:  23% (2191/9526)Updating files:  24% (2287/9526)Updating files:  25% (2382/9526)Updating files:  26% (2477/9526)Updating files:  27% (2573/9526)Updating files:  28% (2668/9526)Updating files:  29% (2763/9526)Updating files:  30% (2858/9526)Updating files:  31% (2954/9526)Updating files:  32% (3049/9526)Updating files:  33% (3144/9526)Updating files:  34% (3239/9526)Updating files:  35% (3335/9526)Updating files:  36% (3430/9526)Updating files:  37% (3525/9526)Updating files:  38% (3620/9526)Updating files:  39% (3716/9526)Updating files:  40% (3811/9526)Updating files:  41% (3906/9526)Updating files:  42% (4001/9526)Updating files:  43% (4097/9526)Updating files:  44% (4192/9526)Updating files:  45% (4287/9526)Updating files:  46% (4382/9526)Updating files:  47% (4478/9526)Updating files:  48% (4573/9526)Updating files:  49% (4668/9526)Updating files:  50% (4763/9526)Updating files:  51% (4859/9526)Updating files:  52% (4954/9526)Updating files:  53% (5049/9526)Updating files:  54% (5145/9526)Updating files:  55% (5240/9526)Updating files:  56% (5335/9526)Updating files:  57% (5430/9526)Updating files:  58% (5526/9526)Updating files:  59% (5621/9526)Updating files:  60% (5716/9526)Updating files:  61% (5811/9526)Updating files:  62% (5907/9526)Updating files:  63% (6002/9526)Updating files:  64% (6097/9526)Updating files:  65% (6192/9526)Updating files:  66% (6288/9526)Updating files:  67% (6383/9526)Updating files:  68% (6478/9526)Updating files:  69% (6573/9526)Updating files:  70% (6669/9526)Updating files:  71% (6764/9526)Updating files:  72% (6859/9526)Updating files:  73% (6954/9526)Updating files:  74% (7050/9526)Updating files:  75% (7145/9526)Updating files:  76% (7240/9526)Updating files:  77% (7336/9526)Updating files:  78% (7431/9526)Updating files:  79% (7526/9526)Updating files:  80% (7621/9526)Updating files:  81% (7717/9526)Updating files:  82% (7812/9526)Updating files:  83% (7907/9526)Updating files:  84% (8002/9526)Updating files:  85% (8098/9526)Updating files:  86% (8193/9526)Updating files:  87% (8288/9526)Updating files:  88% (8383/9526)Updating files:  89% (8479/9526)Updating files:  90% (8574/9526)Updating files:  91% (8669/9526)Updating files:  92% (8764/9526)Updating files:  93% (8860/9526)Updating files:  94% (8955/9526)Updating files:  95% (9050/9526)Updating files:  95% (9103/9526)Updating files:  96% (9145/9526)Updating files:  97% (9241/9526)Updating files:  98% (9336/9526)Updating files:  99% (9431/9526)Updating files: 100% (9526/9526)Updating files: 100% (9526/9526), done.
 HEAD is now at 8bf4605ae Merge pull request #4501 from grandixximo/gmoccapy-quit-4500
 
 Running kernel seems to be up-to-date.
@@ -4514,5 +4530,135 @@ Reading 0/189 dependency files
 Done reading dependencies
 Reading 0/303 realtime dependency files
 Done reading realtime dependencies
-/home/runner/work/_temp/d01-016-preflight.sh: line 171: set_phase: command not found
+warning: Limiting comparison with pathspecs is only supported if both paths are directories.
+usage: git diff --no-index [<options>] <path> <path> [<pathspec>...]
+
+Diff output format options
+    -p, --patch           generate patch
+    -s, --no-patch        suppress diff output
+    -u                    generate patch
+    -U, --unified[=<n>]   generate diffs with <n> lines context
+    -W, --[no-]function-context
+                          generate diffs with <n> lines context
+    --raw                 generate the diff in raw format
+    --patch-with-raw      synonym for '-p --raw'
+    --patch-with-stat     synonym for '-p --stat'
+    --numstat             machine friendly --stat
+    --shortstat           output only the last line of --stat
+    -X, --dirstat[=<param1>,<param2>...]
+                          output the distribution of relative amount of changes for each sub-directory
+    --cumulative          synonym for --dirstat=cumulative
+    --dirstat-by-file[=<param1>,<param2>...]
+                          synonym for --dirstat=files,<param1>,<param2>...
+    --check               warn if changes introduce conflict markers or whitespace errors
+    --summary             condensed summary such as creations, renames and mode changes
+    --name-only           show only names of changed files
+    --name-status         show only names and status of changed files
+    --stat[=<width>[,<name-width>[,<count>]]]
+                          generate diffstat
+    --stat-width <width>  generate diffstat with a given width
+    --stat-name-width <width>
+                          generate diffstat with a given name width
+    --stat-graph-width <width>
+                          generate diffstat with a given graph width
+    --stat-count <count>  generate diffstat with limited lines
+    --[no-]compact-summary
+                          generate compact summary in diffstat
+    --binary              output a binary diff that can be applied
+    --[no-]full-index     show full pre- and post-image object names on the "index" lines
+    --[no-]color[=<when>] show colored diff
+    --ws-error-highlight <kind>
+                          highlight whitespace errors in the 'context', 'old' or 'new' lines in the diff
+    -z                    do not munge pathnames and use NULs as output field terminators in --raw or --numstat
+    --[no-]abbrev[=<n>]   use <n> digits to display object names
+    --src-prefix <prefix> show the given source prefix instead of "a/"
+    --dst-prefix <prefix> show the given destination prefix instead of "b/"
+    --line-prefix <prefix>
+                          prepend an additional prefix to every line of output
+    --no-prefix           do not show any source or destination prefix
+    --default-prefix      use default prefixes a/ and b/
+    --inter-hunk-context <n>
+                          show context between diff hunks up to the specified number of lines
+    --output-indicator-new <char>
+                          specify the character to indicate a new line instead of '+'
+    --output-indicator-old <char>
+                          specify the character to indicate an old line instead of '-'
+    --output-indicator-context <char>
+                          specify the character to indicate a context instead of ' '
+
+Diff rename options
+    -B, --break-rewrites[=<n>[/<m>]]
+                          break complete rewrite changes into pairs of delete and create
+    -M, --find-renames[=<n>]
+                          detect renames
+    -D, --irreversible-delete
+                          omit the preimage for deletes
+    -C, --find-copies[=<n>]
+                          detect copies
+    --[no-]find-copies-harder
+                          use unmodified files as source to find copies
+    --no-renames          disable rename detection
+    --[no-]rename-empty   use empty blobs as rename source
+    --[no-]follow         continue listing the history of a file beyond renames
+    -l <n>                prevent rename/copy detection if the number of rename/copy targets exceeds given limit
+
+Diff algorithm options
+    --minimal             produce the smallest possible diff
+    -w, --ignore-all-space
+                          ignore whitespace when comparing lines
+    -b, --ignore-space-change
+                          ignore changes in amount of whitespace
+    --ignore-space-at-eol ignore changes in whitespace at EOL
+    --ignore-cr-at-eol    ignore carrier-return at the end of line
+    --ignore-blank-lines  ignore changes whose lines are all blank
+    -I, --[no-]ignore-matching-lines <regex>
+                          ignore changes whose all lines match <regex>
+    --[no-]indent-heuristic
+                          heuristic to shift diff hunk boundaries for easy reading
+    --patience            generate diff using the "patience diff" algorithm
+    --histogram           generate diff using the "histogram diff" algorithm
+    --diff-algorithm <algorithm>
+                          choose a diff algorithm
+    --anchored <text>     generate diff using the "anchored diff" algorithm
+    --word-diff[=<mode>]  show word diff, using <mode> to delimit changed words
+    --word-diff-regex <regex>
+                          use <regex> to decide what a word is
+    --color-words[=<regex>]
+                          equivalent to --word-diff=color --word-diff-regex=<regex>
+    --[no-]color-moved[=<mode>]
+                          moved lines of code are colored differently
+    --[no-]color-moved-ws <mode>
+                          how white spaces are ignored in --color-moved
+
+Other diff options
+    --[no-]relative[=<prefix>]
+                          when run from subdir, exclude changes outside and show relative paths
+    -a, --[no-]text       treat all files as text
+    -R                    swap two inputs, reverse the diff
+    --[no-]exit-code      exit with 1 if there were differences, 0 otherwise
+    --[no-]quiet          disable all output of the program
+    --[no-]ext-diff       allow an external diff helper to be executed
+    --[no-]textconv       run external text conversion filters when comparing binary files
+    --ignore-submodules[=<when>]
+                          ignore changes to submodules in the diff generation
+    --submodule[=<format>]
+                          specify how differences in submodules are shown
+    --ita-invisible-in-index
+                          hide 'git add -N' entries from the index
+    --ita-visible-in-index
+                          treat 'git add -N' entries as real in the index
+    -S <string>           look for differences that change the number of occurrences of the specified string
+    -G <regex>            look for differences that change the number of occurrences of the specified regex
+    --pickaxe-all         show all changes in the changeset with -S or -G
+    --pickaxe-regex       treat <string> in -S as extended POSIX regular expression
+    -O <file>             control the order in which files appear in the output
+    --rotate-to <path>    show the change in the specified path first
+    --skip-to <path>      skip the output to the specified path
+    --find-object <object-id>
+                          look for differences that change the number of occurrences of the specified object
+    --diff-filter [(A|C|D|M|R|T|U|X|B)...[*]]
+                          select files by diff type
+    --max-depth <depth>   maximum tree depth to recurse
+    --output <file>       output to a specific file
+
 ```

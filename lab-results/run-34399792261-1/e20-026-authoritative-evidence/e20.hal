@@ -1,0 +1,26 @@
+loadrt threads name1=servo-thread period1=1000000
+loadrt e20_model
+loadrt sampler depth=5000 cfg=fbbbbbbffbbbbfbb
+addf e20-model.0 servo-thread
+addf sampler.0 servo-thread
+setp e20-model.0.error-limit 10
+setp e20-model.0.error-increment 2
+setp e20-model.0.error-decrement 1
+setp sampler.0.enable 0
+net e20-phase e20-model.0.phase => sampler.0.pin.0
+net e20-tx-error e20-model.0.transaction-error => sampler.0.pin.1
+net e20-clear e20-model.0.io-error-clear-request => sampler.0.pin.2
+net e20-watchdog e20-model.0.watchdog-bitten => sampler.0.pin.3
+net e20-revalidated e20-model.0.state-revalidated => sampler.0.pin.4
+net e20-reauth-req e20-model.0.reauthorize-request => sampler.0.pin.5
+net e20-packet-current e20-model.0.packet-error-current => sampler.0.pin.6
+net e20-total e20-model.0.packet-error-total => sampler.0.pin.7
+net e20-level e20-model.0.packet-error-level => sampler.0.pin.8
+net e20-exceeded e20-model.0.packet-error-exceeded => sampler.0.pin.9
+net e20-io-error e20-model.0.io-error => sampler.0.pin.10
+net e20-needs-reset e20-model.0.needs-soft-reset => sampler.0.pin.11
+net e20-physical-authority e20-model.0.physical-io-authority => sampler.0.pin.12
+net e20-internal-counter e20-model.0.internal-generator-counter => sampler.0.pin.13
+net e20-transport-good e20-model.0.transport-current-good => sampler.0.pin.14
+net e20-authorized e20-model.0.machine-motion-authorized => sampler.0.pin.15
+start

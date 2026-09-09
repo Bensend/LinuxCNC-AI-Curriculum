@@ -1,0 +1,93 @@
+component e20_model "E20 deterministic hm2_eth/watchdog recovery-boundary fixture";
+pin out float phase;
+pin out bit transaction_error;
+pin out bit io_error_clear_request;
+pin out bit watchdog_bitten;
+pin out bit state_revalidated;
+pin out bit reauthorize_request;
+pin out bit packet_error_current;
+pin out float packet_error_total;
+pin out float packet_error_level;
+pin out bit packet_error_exceeded;
+pin out bit io_error;
+pin out bit needs_soft_reset;
+pin out bit physical_io_authority;
+pin out float internal_generator_counter;
+pin out bit transport_current_good;
+pin out bit machine_motion_authorized;
+param rw s32 error_limit = 10;
+param rw s32 error_increment = 2;
+param rw s32 error_decrement = 1;
+function _;
+license "GPL";
+;;
+static unsigned long cyc = 0;
+static long level = 0;
+static unsigned long total = 0;
+static int ioerr = 0;
+static int needs = 0;
+static int authorized = 1;
+static unsigned long internal_count = 0;
+
+FUNCTION(_) {
+    unsigned long p;
+    /* P0 300 cycles; P1 1; P2 100; P3 5; P4..P7 100 each; P8 thereafter. */
+    if (cyc < 300) p = 0;
+    else if (cyc < 301) p = 1;
+    else if (cyc < 401) p = 2;
+    else if (cyc < 406) p = 3;
+    else if (cyc < 506) p = 4;
+    else if (cyc < 606) p = 5;
+    else if (cyc < 706) p = 6;
+    else if (cyc < 806) p = 7;
+    else p = 8;
+
+    phase = (double)p;
+    transaction_error = (p == 1 || p == 3 || p == 8);
+    io_error_clear_request = (p == 4 && cyc == 406);
+    watchdog_bitten = (p == 5);
+    state_revalidated = (p == 7);
+    reauthorize_request = (p == 7);
+
+    /* Mirrors the current-lineage saturated-counter/io_error clear interaction. */
+    if (ioerr && level >= error_limit && io_error_clear_request) {
+        ioerr = 0;
+        level = 0;
+    }
+
+    if (transaction_error) {
+        packet_error_current = 1;
+        total++;
+        needs = 1;
+        level += error_increment < 1 ? 1 : error_increment;
+        if (level > error_limit) level = error_limit;
+        if (level >= error_limit) ioerr = 1;
+    } else {
+        packet_error_current = 0;
+        level -= error_decrement < 1 ? 1 : error_decrement;
+        if (level < 0) level = 0;
+    }
+
+    /* P6 is the explicit modeled driver/board soft-reset completion. */
+    if (p == 6) needs = 0;
+
+    packet_error_total = (double)total;
+    packet_error_level = (double)level;
+    packet_error_exceeded = ioerr && level >= error_limit;
+    io_error = ioerr;
+    needs_soft_reset = needs;
+    transport_current_good = !transaction_error;
+
+    physical_io_authority = !watchdog_bitten;
+    internal_count++;
+    internal_generator_counter = (double)internal_count;
+
+    if (transaction_error || ioerr || watchdog_bitten || !physical_io_authority) {
+        authorized = 0;
+    }
+    if (p == 7 && transport_current_good && !ioerr && !needs && physical_io_authority && state_revalidated && reauthorize_request) {
+        authorized = 1;
+    }
+    machine_motion_authorized = authorized;
+    cyc++;
+}

@@ -1,0 +1,13 @@
+E20-026 AUTHORITATIVE RUNTIME PREDICATES PASS
+samples=1100
+phase_counts={0: 281, 1: 1, 2: 100, 3: 5, 4: 100, 5: 100, 6: 100, 7: 100, 8: 313}
+P1 isolated error: level=2, io_error=false, authorization revoked
+P2 first clean cycle: packet_error=false, level=1, authorization remains false
+P3 levels=[2.0, 4.0, 6.0, 8.0, 10.0] with io_error on fifth error
+P4 driver error clears but authorization remains false
+P5 internal generator advances while physical I/O authority=false and current transport is clean
+P6 transport/driver/board authority restored without state revalidation; authorization=false
+P7 explicit revalidation+request authorizes
+P8 fresh fault revokes authorization immediately
+NOTE: watchdog/physical-I/O/state-revalidation signals are synthetic laboratory witnesses.
+NOTE: this run does not prove Ethernet physics, exact Mesa-output timing, or functional safety. Frozen Gates A-J require independent artifact scoring.

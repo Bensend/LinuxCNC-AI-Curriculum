@@ -1,57 +1,57 @@
 # Latest LinuxCNC Lab Result
 
-- Job: `025-e20-transport-watchdog-preflight`
-- Job file: `lab-jobs/025-e20-transport-watchdog-preflight.sh`
-- Workflow run ID: `34397554426`
+- Job: `026-e20-authoritative-transport-watchdog`
+- Job file: `lab-jobs/026-e20-authoritative-transport-watchdog.sh`
+- Workflow run ID: `34399792261`
 - Attempt: `1`
-- Source commit: `fb99e81ad98fcace8c6af88c0751d8c3fa4cf136`
+- Source commit: `0c80076a57c9f8188224e0e3ef4d2fd6e9f33ac0`
 - Exit code: `0`
-- Finished UTC: `2026-09-09T19:56:26Z`
+- Finished UTC: `2026-09-09T20:18:58Z`
 
 ## Metadata
 ```text
 LinuxCNC AI Curriculum Lab
-UTC start: 2026-09-09T19:51:36Z
-Repository commit: fb99e81ad98fcace8c6af88c0751d8c3fa4cf136
-Workflow run: 34397554426 attempt 1
-Job file: lab-jobs/025-e20-transport-watchdog-preflight.sh
+UTC start: 2026-09-09T20:14:08Z
+Repository commit: 0c80076a57c9f8188224e0e3ef4d2fd6e9f33ac0
+Workflow run: 34399792261 attempt 1
+Job file: lab-jobs/026-e20-authoritative-transport-watchdog.sh
 Runner: Linux runnervmejwal 6.17.0-1022-azure #22-Ubuntu SMP Mon Jul 27 17:24:03 UTC 2026 x86_64 x86_64 x86_64 GNU/Linux
 Inner lab timeout: 70 minutes (job ceiling: 75 minutes)
 
-UTC finish: 2026-09-09T19:56:26Z
+UTC finish: 2026-09-09T20:18:58Z
 ```
 
 ## Standard output
 ```text
-== E20 frozen transport/watchdog recovery-boundary preflight ==
-UTC start: 2026-09-09T19:51:36Z
-E20-025 NON-AUTHORITATIVE PREFLIGHT
+== E20 frozen transport/watchdog recovery-boundary authoritative execution ==
+UTC start: 2026-09-09T20:14:08Z
+E20-026 AUTHORITATIVE EXECUTION
 Target source: LinuxCNC v2.9.10
 Servo period: 1000000 ns
 packet-error-limit: 10
 packet-error-increment: 2
 packet-error-decrement: 1
 Frozen phases: P0-P8 exactly as experiments/E20-001-transport-watchdog-recovery-boundaries.md
-Frozen Gates A-J remain UNSCORED in this preflight.
+Frozen Gates A-J must be scored only after independent retained-artifact inspection.
 Synthetic watchdog/physical-I/O/state-revalidation signals are laboratory-only witnesses.
 Get:1 file:/etc/apt/apt-mirrors.txt Mirrorlist [144 B]
 Hit:2 http://azure.archive.ubuntu.com/ubuntu noble InRelease
-Get:6 https://packages.microsoft.com/ubuntu/24.04/prod noble InRelease [3600 B]
 Get:3 http://azure.archive.ubuntu.com/ubuntu noble-updates InRelease [126 kB]
 Get:4 http://azure.archive.ubuntu.com/ubuntu noble-backports InRelease [126 kB]
+Get:6 https://packages.microsoft.com/ubuntu/24.04/prod noble InRelease [3600 B]
 Get:5 http://azure.archive.ubuntu.com/ubuntu noble-security InRelease [126 kB]
 Get:7 https://dl.google.com/linux/chrome-stable/deb stable InRelease [2548 B]
-Get:8 https://packages.microsoft.com/ubuntu/24.04/prod noble/main arm64 Packages [409 kB]
-Get:9 https://packages.microsoft.com/ubuntu/24.04/prod noble/main amd64 Packages [458 kB]
-Get:10 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 Packages [1260 kB]
-Get:11 http://azure.archive.ubuntu.com/ubuntu noble-updates/main Translation-en [292 kB]
-Get:12 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 Components [181 kB]
-Get:13 http://azure.archive.ubuntu.com/ubuntu noble-updates/universe amd64 Packages [1690 kB]
-Get:14 http://azure.archive.ubuntu.com/ubuntu noble-updates/universe Translation-en [339 kB]
-Get:15 http://azure.archive.ubuntu.com/ubuntu noble-updates/universe amd64 Components [388 kB]
-Get:16 http://azure.archive.ubuntu.com/ubuntu noble-updates/restricted amd64 Packages [1536 kB]
-Get:17 http://azure.archive.ubuntu.com/ubuntu noble-updates/restricted Translation-en [352 kB]
-Get:18 http://azure.archive.ubuntu.com/ubuntu noble-updates/multiverse amd64 Components [940 B]
+Get:8 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 Packages [1260 kB]
+Get:9 http://azure.archive.ubuntu.com/ubuntu noble-updates/main Translation-en [292 kB]
+Get:10 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 Components [181 kB]
+Get:11 http://azure.archive.ubuntu.com/ubuntu noble-updates/universe amd64 Packages [1690 kB]
+Get:12 http://azure.archive.ubuntu.com/ubuntu noble-updates/universe Translation-en [339 kB]
+Get:13 http://azure.archive.ubuntu.com/ubuntu noble-updates/universe amd64 Components [388 kB]
+Get:14 http://azure.archive.ubuntu.com/ubuntu noble-updates/restricted amd64 Packages [1536 kB]
+Get:15 http://azure.archive.ubuntu.com/ubuntu noble-updates/restricted Translation-en [352 kB]
+Get:16 http://azure.archive.ubuntu.com/ubuntu noble-updates/multiverse amd64 Components [940 B]
+Get:17 https://packages.microsoft.com/ubuntu/24.04/prod noble/main arm64 Packages [409 kB]
+Get:18 https://packages.microsoft.com/ubuntu/24.04/prod noble/main amd64 Packages [458 kB]
 Get:19 http://azure.archive.ubuntu.com/ubuntu noble-backports/main amd64 Components [5760 B]
 Get:20 http://azure.archive.ubuntu.com/ubuntu noble-backports/universe amd64 Components [12.6 kB]
 Get:21 http://azure.archive.ubuntu.com/ubuntu noble-security/main amd64 Packages [1005 kB]
@@ -63,7 +63,7 @@ Get:26 http://azure.archive.ubuntu.com/ubuntu noble-security/universe amd64 Comp
 Get:27 http://azure.archive.ubuntu.com/ubuntu noble-security/restricted amd64 Packages [1441 kB]
 Get:28 http://azure.archive.ubuntu.com/ubuntu noble-security/restricted Translation-en [334 kB]
 Get:29 https://dl.google.com/linux/chrome-stable/deb stable/main amd64 Packages [1405 B]
-Fetched 11.9 MB in 1s (8231 kB/s)
+Fetched 11.9 MB in 1s (8432 kB/s)
 Reading package lists...
 Reading package lists...
 Building dependency tree...
@@ -361,7 +361,7 @@ Get:166 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 python3-
 Get:167 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 python3-unidiff all 0.7.3-1 [11.0 kB]
 Get:168 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 equivs all 2.3.1 [19.0 kB]
 Get:169 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 libauthen-sasl-perl all 2.1700-1 [42.9 kB]
-Fetched 11.0 MB in 6s (1861 kB/s)
+Fetched 11.0 MB in 7s (1485 kB/s)
 Selecting previously unselected package autopoint.
 (Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 201676 files and directories currently installed.)
 Preparing to unpack .../000-autopoint_0.21-14ubuntu2_all.deb ...
@@ -1133,7 +1133,7 @@ The following packages will be upgraded:
 Need to get 765 MB of archives.
 After this operation, 1952 MB of additional disk space will be used.
 Get:1 file:/etc/apt/apt-mirrors.txt Mirrorlist [144 B]
-Get:2 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 poppler-data all 0.4.12-1 [2060 kB]
+Ign:2 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 poppler-data all 0.4.12-1
 Get:3 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 asciidoc-common all 10.2.0-2 [104 kB]
 Get:4 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 docbook-xsl all 1.79.2+dfsg-7 [1070 kB]
 Get:5 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 libxml2-utils amd64 2.9.14+dfsg-1.3ubuntu3.8 [39.4 kB]
@@ -1456,8 +1456,9 @@ Get:321 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 libmodbus5 a
 Get:322 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 libmodbus-dev amd64 3.1.10-1ubuntu1 [18.6 kB]
 Get:323 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 libtirpc-dev amd64 1.3.4+ds-1.1build1 [193 kB]
 Get:324 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 python3-xlib all 0.33-2 [120 kB]
+Get:2 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 poppler-data all 0.4.12-1 [2060 kB]
 Preconfiguring packages ...
-Fetched 765 MB in 21s (36.5 MB/s)
+Fetched 765 MB in 21s (36.2 MB/s)
 Selecting previously unselected package poppler-data.
 (Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 208197 files and directories currently installed.)
 Preparing to unpack .../000-poppler-data_0.4.12-1_all.deb ...
@@ -2816,7 +2817,7 @@ checking whether c++ accepts -g... yes
 checking for c++ option to enable C++11 features... none needed
 checking for a BSD-compatible install... /usr/bin/install -c
 checking whether c++ supports C++17 features with -std=gnu++17... yes
-checking build toplevel... /home/runner/work/_temp/linuxcnc-e20-preflight
+checking build toplevel... /home/runner/work/_temp/linuxcnc-e20-authoritative
 checking installation prefix... run in place
 checking for grep... /usr/bin/grep
 checking for egrep... /usr/bin/egrep
@@ -2855,7 +2856,7 @@ checking for libusb-1.0... yes
 checking for libgpiod < 3.0.0... yes
 configure: libgpiod version 1.6.3 found
 checking for module installation directory... configuring for run-in-place
-/home/runner/work/_temp/linuxcnc-e20-preflight/rtlib
+/home/runner/work/_temp/linuxcnc-e20-authoritative/rtlib
 checking for glib... yes - 2.80.0
 checking for GTK 3.22.4 or above... yes - 3.24.41
 checking for GTK 2.4.0 or above... yes - 2.24.33
@@ -2894,8 +2895,8 @@ checking for a version of Python >= '2.1.0'... yes
 checking for the sysconfig Python package... yes
 checking for Python include path... -I/usr/include/python3.12
 checking for Python library path... -L/usr/lib/x86_64-linux-gnu -lpython3.12
-checking for Python site-packages path... /home/runner/work/_temp/linuxcnc-e20-preflight/lib/python3.12/site-packages
-checking for Python platform specific site-packages path... /home/runner/work/_temp/linuxcnc-e20-preflight/lib/python3.12/site-packages
+checking for Python site-packages path... /home/runner/work/_temp/linuxcnc-e20-authoritative/lib/python3.12/site-packages
+checking for Python platform specific site-packages path... /home/runner/work/_temp/linuxcnc-e20-authoritative/lib/python3.12/site-packages
 checking python extra libraries... -ldl -lm
 checking python extra linking flags... -Xlinker -export-dynamic -Wl,-O1 -Wl,-Bsymbolic-functions
 checking consistency of all components of python development environment... yes
@@ -2994,13 +2995,13 @@ config.status: creating config.h
 ######################################################################
 
 
-make: Entering directory '/home/runner/work/_temp/linuxcnc-e20-preflight/src'
+make: Entering directory '/home/runner/work/_temp/linuxcnc-e20-authoritative/src'
 Creating mesa_uart.mak
 Creating mesa_7i65.mak
 Creating serport.mak
 Creating xyzab_tdr_kins.mak
-Creating xhc_hb04_util.mak
 Creating xor2.mak
+Creating xhc_hb04_util.mak
 Creating wcomp.mak
 Creating userkins.mak
 Creating updown.mak
@@ -3008,8 +3009,8 @@ Creating tristate_float.mak
 Creating tristate_bit.mak
 Creating tp.mak
 Creating ton.mak
-Creating toggle.mak
 Creating toggle2nist.mak
+Creating toggle.mak
 Creating tof.mak
 Creating timedelta.mak
 Creating timedelay.mak
@@ -3024,8 +3025,8 @@ Creating spindle.mak
 Creating sphereprobe.mak
 Creating simple_tp.mak
 Creating sim_spindle.mak
-Creating sim_matrix_kb.mak
 Creating sim_parport.mak
+Creating sim_matrix_kb.mak
 Creating sim_home_switch.mak
 Creating sim_axis_hardware.mak
 Creating select8.mak
@@ -3037,8 +3038,8 @@ Creating plasmac.mak
 Creating orient.mak
 Creating or2.mak
 Creating oneshot.mak
-Creating ohmic.mak
 Creating offset.mak
+Creating ohmic.mak
 Creating not.mak
 Creating near.mak
 Creating mux8.mak
@@ -3059,8 +3060,8 @@ Creating maj3.mak
 Creating lut5.mak
 Creating lowpass.mak
 Creating logic.mak
-Creating lincurve.mak
 Creating limit_axis.mak
+Creating lincurve.mak
 Creating limit3.mak
 Creating limit2.mak
 Creating limit1.mak
@@ -3203,17 +3204,17 @@ a2x -v --doctype manpage \
 a2x: args: ['-v', '--doctype', 'manpage', '--format', 'manpage', '--destination-dir', '../docs/man/man1', '--xsltproc-opts=--nonet', '-a', 'mansource=LinuxCNC', '-a', 'manmanual=LinuxCNC Documentation', '../docs/src/man/man1/emccalib.1.adoc']
 a2x: resource files: []
 a2x: resource directories: ['/etc/asciidoc/stylesheets']
-a2x: executing: asciidoc [('--doctype', 'manpage'), ('--attribute', 'mansource=LinuxCNC'), ('--attribute', 'manmanual=LinuxCNC Documentation'), ('--verbose',), ('--backend', 'docbook'), ('-a', 'a2x-format=manpage'), ('--out-file', '/home/runner/work/_temp/linuxcnc-e20-preflight/docs/man/man1/emccalib.1.xml')]
-a2x: executing: "xmllint" --nonet --noout --valid "/home/runner/work/_temp/linuxcnc-e20-preflight/docs/man/man1/emccalib.1.xml"
+a2x: executing: asciidoc [('--doctype', 'manpage'), ('--attribute', 'mansource=LinuxCNC'), ('--attribute', 'manmanual=LinuxCNC Documentation'), ('--verbose',), ('--backend', 'docbook'), ('-a', 'a2x-format=manpage'), ('--out-file', '/home/runner/work/_temp/linuxcnc-e20-authoritative/docs/man/man1/emccalib.1.xml')]
+a2x: executing: "xmllint" --nonet --noout --valid "/home/runner/work/_temp/linuxcnc-e20-authoritative/docs/man/man1/emccalib.1.xml"
 
 
-a2x: chdir /home/runner/work/_temp/linuxcnc-e20-preflight/docs/man/man1
-a2x: executing: "xsltproc" --nonet --nonet --stringparam callout.graphics 0 --stringparam navig.graphics 0 --stringparam admon.textlabel 1 --stringparam admon.graphics 0  "/etc/asciidoc/docbook-xsl/manpage.xsl" "/home/runner/work/_temp/linuxcnc-e20-preflight/docs/man/man1/emccalib.1.xml"
+a2x: chdir /home/runner/work/_temp/linuxcnc-e20-authoritative/docs/man/man1
+a2x: executing: "xsltproc" --nonet --nonet --stringparam callout.graphics 0 --stringparam navig.graphics 0 --stringparam admon.textlabel 1 --stringparam admon.graphics 0  "/etc/asciidoc/docbook-xsl/manpage.xsl" "/home/runner/work/_temp/linuxcnc-e20-authoritative/docs/man/man1/emccalib.1.xml"
 
 Note: Writing emccalib.1
 
-a2x: chdir /home/runner/work/_temp/linuxcnc-e20-preflight/src
-a2x: deleting /home/runner/work/_temp/linuxcnc-e20-preflight/docs/man/man1/emccalib.1.xml
+a2x: chdir /home/runner/work/_temp/linuxcnc-e20-authoritative/src
+a2x: deleting /home/runner/work/_temp/linuxcnc-e20-authoritative/docs/man/man1/emccalib.1.xml
 a2x -v --doctype manpage \
 	--format manpage \
 	--destination-dir `dirname ../docs/man/man1/hy_gt_vfd.1` \
@@ -3231,17 +3232,17 @@ a2x -v --doctype manpage \
 a2x: args: ['-v', '--doctype', 'manpage', '--format', 'manpage', '--destination-dir', '../docs/man/man1', '--xsltproc-opts=--nonet', '-a', 'mansource=LinuxCNC', '-a', 'manmanual=LinuxCNC Documentation', '../docs/src/man/man1/halstreamer.1.adoc']
 a2x: resource files: []
 a2x: resource directories: ['/etc/asciidoc/stylesheets']
-a2x: executing: asciidoc [('--doctype', 'manpage'), ('--attribute', 'mansource=LinuxCNC'), ('--attribute', 'manmanual=LinuxCNC Documentation'), ('--verbose',), ('--backend', 'docbook'), ('-a', 'a2x-format=manpage'), ('--out-file', '/home/runner/work/_temp/linuxcnc-e20-preflight/docs/man/man1/halstreamer.1.xml')]
-a2x: executing: "xmllint" --nonet --noout --valid "/home/runner/work/_temp/linuxcnc-e20-preflight/docs/man/man1/halstreamer.1.xml"
+a2x: executing: asciidoc [('--doctype', 'manpage'), ('--attribute', 'mansource=LinuxCNC'), ('--attribute', 'manmanual=LinuxCNC Documentation'), ('--verbose',), ('--backend', 'docbook'), ('-a', 'a2x-format=manpage'), ('--out-file', '/home/runner/work/_temp/linuxcnc-e20-authoritative/docs/man/man1/halstreamer.1.xml')]
+a2x: executing: "xmllint" --nonet --noout --valid "/home/runner/work/_temp/linuxcnc-e20-authoritative/docs/man/man1/halstreamer.1.xml"
 
 
-a2x: chdir /home/runner/work/_temp/linuxcnc-e20-preflight/docs/man/man1
-a2x: executing: "xsltproc" --nonet --nonet --stringparam callout.graphics 0 --stringparam navig.graphics 0 --stringparam admon.textlabel 1 --stringparam admon.graphics 0  "/etc/asciidoc/docbook-xsl/manpage.xsl" "/home/runner/work/_temp/linuxcnc-e20-preflight/docs/man/man1/halstreamer.1.xml"
+a2x: chdir /home/runner/work/_temp/linuxcnc-e20-authoritative/docs/man/man1
+a2x: executing: "xsltproc" --nonet --nonet --stringparam callout.graphics 0 --stringparam navig.graphics 0 --stringparam admon.textlabel 1 --stringparam admon.graphics 0  "/etc/asciidoc/docbook-xsl/manpage.xsl" "/home/runner/work/_temp/linuxcnc-e20-authoritative/docs/man/man1/halstreamer.1.xml"
 
 Note: Writing halstreamer.1
 
-a2x: chdir /home/runner/work/_temp/linuxcnc-e20-preflight/src
-a2x: deleting /home/runner/work/_temp/linuxcnc-e20-preflight/docs/man/man1/halstreamer.1.xml
+a2x: chdir /home/runner/work/_temp/linuxcnc-e20-authoritative/src
+a2x: deleting /home/runner/work/_temp/linuxcnc-e20-authoritative/docs/man/man1/halstreamer.1.xml
 a2x -v --doctype manpage \
 	--format manpage \
 	--destination-dir `dirname ../docs/man/man1/mqtt-publisher.1` \
@@ -3252,17 +3253,17 @@ a2x -v --doctype manpage \
 a2x: args: ['-v', '--doctype', 'manpage', '--format', 'manpage', '--destination-dir', '../docs/man/man1', '--xsltproc-opts=--nonet', '-a', 'mansource=LinuxCNC', '-a', 'manmanual=LinuxCNC Documentation', '../docs/src/man/man1/hy_gt_vfd.1.adoc']
 a2x: resource files: []
 a2x: resource directories: ['/etc/asciidoc/stylesheets']
-a2x: executing: asciidoc [('--doctype', 'manpage'), ('--attribute', 'mansource=LinuxCNC'), ('--attribute', 'manmanual=LinuxCNC Documentation'), ('--verbose',), ('--backend', 'docbook'), ('-a', 'a2x-format=manpage'), ('--out-file', '/home/runner/work/_temp/linuxcnc-e20-preflight/docs/man/man1/hy_gt_vfd.1.xml')]
-a2x: executing: "xmllint" --nonet --noout --valid "/home/runner/work/_temp/linuxcnc-e20-preflight/docs/man/man1/hy_gt_vfd.1.xml"
+a2x: executing: asciidoc [('--doctype', 'manpage'), ('--attribute', 'mansource=LinuxCNC'), ('--attribute', 'manmanual=LinuxCNC Documentation'), ('--verbose',), ('--backend', 'docbook'), ('-a', 'a2x-format=manpage'), ('--out-file', '/home/runner/work/_temp/linuxcnc-e20-authoritative/docs/man/man1/hy_gt_vfd.1.xml')]
+a2x: executing: "xmllint" --nonet --noout --valid "/home/runner/work/_temp/linuxcnc-e20-authoritative/docs/man/man1/hy_gt_vfd.1.xml"
 
 
-a2x: chdir /home/runner/work/_temp/linuxcnc-e20-preflight/docs/man/man1
-a2x: executing: "xsltproc" --nonet --nonet --stringparam callout.graphics 0 --stringparam navig.graphics 0 --stringparam admon.textlabel 1 --stringparam admon.graphics 0  "/etc/asciidoc/docbook-xsl/manpage.xsl" "/home/runner/work/_temp/linuxcnc-e20-preflight/docs/man/man1/hy_gt_vfd.1.xml"
+a2x: chdir /home/runner/work/_temp/linuxcnc-e20-authoritative/docs/man/man1
+a2x: executing: "xsltproc" --nonet --nonet --stringparam callout.graphics 0 --stringparam navig.graphics 0 --stringparam admon.textlabel 1 --stringparam admon.graphics 0  "/etc/asciidoc/docbook-xsl/manpage.xsl" "/home/runner/work/_temp/linuxcnc-e20-authoritative/docs/man/man1/hy_gt_vfd.1.xml"
 
 Note: Writing hy_gt_vfd.1
 
-a2x: chdir /home/runner/work/_temp/linuxcnc-e20-preflight/src
-a2x: deleting /home/runner/work/_temp/linuxcnc-e20-preflight/docs/man/man1/hy_gt_vfd.1.xml
+a2x: chdir /home/runner/work/_temp/linuxcnc-e20-authoritative/src
+a2x: deleting /home/runner/work/_temp/linuxcnc-e20-authoritative/docs/man/man1/hy_gt_vfd.1.xml
 a2x -v --doctype manpage \
 	--format manpage \
 	--destination-dir `dirname ../docs/man/man1/sendkeys.1` \
@@ -3273,17 +3274,17 @@ a2x -v --doctype manpage \
 a2x: args: ['-v', '--doctype', 'manpage', '--format', 'manpage', '--destination-dir', '../docs/man/man1', '--xsltproc-opts=--nonet', '-a', 'mansource=LinuxCNC', '-a', 'manmanual=LinuxCNC Documentation', '../docs/src/man/man1/mqtt-publisher.1.adoc']
 a2x: resource files: []
 a2x: resource directories: ['/etc/asciidoc/stylesheets']
-a2x: executing: asciidoc [('--doctype', 'manpage'), ('--attribute', 'mansource=LinuxCNC'), ('--attribute', 'manmanual=LinuxCNC Documentation'), ('--verbose',), ('--backend', 'docbook'), ('-a', 'a2x-format=manpage'), ('--out-file', '/home/runner/work/_temp/linuxcnc-e20-preflight/docs/man/man1/mqtt-publisher.1.xml')]
-a2x: executing: "xmllint" --nonet --noout --valid "/home/runner/work/_temp/linuxcnc-e20-preflight/docs/man/man1/mqtt-publisher.1.xml"
+a2x: executing: asciidoc [('--doctype', 'manpage'), ('--attribute', 'mansource=LinuxCNC'), ('--attribute', 'manmanual=LinuxCNC Documentation'), ('--verbose',), ('--backend', 'docbook'), ('-a', 'a2x-format=manpage'), ('--out-file', '/home/runner/work/_temp/linuxcnc-e20-authoritative/docs/man/man1/mqtt-publisher.1.xml')]
+a2x: executing: "xmllint" --nonet --noout --valid "/home/runner/work/_temp/linuxcnc-e20-authoritative/docs/man/man1/mqtt-publisher.1.xml"
 
 
-a2x: chdir /home/runner/work/_temp/linuxcnc-e20-preflight/docs/man/man1
-a2x: executing: "xsltproc" --nonet --nonet --stringparam callout.graphics 0 --stringparam navig.graphics 0 --stringparam admon.textlabel 1 --stringparam admon.graphics 0  "/etc/asciidoc/docbook-xsl/manpage.xsl" "/home/runner/work/_temp/linuxcnc-e20-preflight/docs/man/man1/mqtt-publisher.1.xml"
+a2x: chdir /home/runner/work/_temp/linuxcnc-e20-authoritative/docs/man/man1
+a2x: executing: "xsltproc" --nonet --nonet --stringparam callout.graphics 0 --stringparam navig.graphics 0 --stringparam admon.textlabel 1 --stringparam admon.graphics 0  "/etc/asciidoc/docbook-xsl/manpage.xsl" "/home/runner/work/_temp/linuxcnc-e20-authoritative/docs/man/man1/mqtt-publisher.1.xml"
 
 Note: Writing mqtt-publisher.1
 
-a2x: chdir /home/runner/work/_temp/linuxcnc-e20-preflight/src
-a2x: deleting /home/runner/work/_temp/linuxcnc-e20-preflight/docs/man/man1/mqtt-publisher.1.xml
+a2x: chdir /home/runner/work/_temp/linuxcnc-e20-authoritative/src
+a2x: deleting /home/runner/work/_temp/linuxcnc-e20-authoritative/docs/man/man1/mqtt-publisher.1.xml
 a2x -v --doctype manpage \
 	--format manpage \
 	--destination-dir `dirname ../docs/man/man1/svd-ps_vfd.1` \
@@ -3291,20 +3292,20 @@ a2x -v --doctype manpage \
 	-a mansource=LinuxCNC \
 	-a manmanual='LinuxCNC Documentation' \
 	../docs/src/man/man1/svd-ps_vfd.1.adoc
-a2x: args: ['-v', '--doctype', 'manpage', '--format', 'manpage', '--destination-dir', '../docs/man/man1', '--xsltproc-opts=--nonet', '-a', 'mansource=LinuxCNC', '-a', 'manmanual=LinuxCNC Documentation', '../docs/src/man/man1/sendkeys.1.adoc']
+a2x: args: ['-v', '--doctype', 'manpage', '--format', 'manpage', '--destination-dir', '../docs/man/man1', '--xsltproc-opts=--nonet', '-a', 'mansource=LinuxCNC', '-a', 'manmanual=LinuxCNC Documentation', '../docs/src/man/man1/mesambccc.1.adoc']
 a2x: resource files: []
 a2x: resource directories: ['/etc/asciidoc/stylesheets']
-a2x: executing: asciidoc [('--doctype', 'manpage'), ('--attribute', 'mansource=LinuxCNC'), ('--attribute', 'manmanual=LinuxCNC Documentation'), ('--verbose',), ('--backend', 'docbook'), ('-a', 'a2x-format=manpage'), ('--out-file', '/home/runner/work/_temp/linuxcnc-e20-preflight/docs/man/man1/sendkeys.1.xml')]
-a2x: executing: "xmllint" --nonet --noout --valid "/home/runner/work/_temp/linuxcnc-e20-preflight/docs/man/man1/sendkeys.1.xml"
+a2x: executing: asciidoc [('--doctype', 'manpage'), ('--attribute', 'mansource=LinuxCNC'), ('--attribute', 'manmanual=LinuxCNC Documentation'), ('--verbose',), ('--backend', 'docbook'), ('-a', 'a2x-format=manpage'), ('--out-file', '/home/runner/work/_temp/linuxcnc-e20-authoritative/docs/man/man1/mesambccc.1.xml')]
+a2x: executing: "xmllint" --nonet --noout --valid "/home/runner/work/_temp/linuxcnc-e20-authoritative/docs/man/man1/mesambccc.1.xml"
 
 
-a2x: chdir /home/runner/work/_temp/linuxcnc-e20-preflight/docs/man/man1
-a2x: executing: "xsltproc" --nonet --nonet --stringparam callout.graphics 0 --stringparam navig.graphics 0 --stringparam admon.textlabel 1 --stringparam admon.graphics 0  "/etc/asciidoc/docbook-xsl/manpage.xsl" "/home/runner/work/_temp/linuxcnc-e20-preflight/docs/man/man1/sendkeys.1.xml"
+a2x: chdir /home/runner/work/_temp/linuxcnc-e20-authoritative/docs/man/man1
+a2x: executing: "xsltproc" --nonet --nonet --stringparam callout.graphics 0 --stringparam navig.graphics 0 --stringparam admon.textlabel 1 --stringparam admon.graphics 0  "/etc/asciidoc/docbook-xsl/manpage.xsl" "/home/runner/work/_temp/linuxcnc-e20-authoritative/docs/man/man1/mesambccc.1.xml"
 
-Note: Writing sendkeys.1
+Note: Writing mesambccc.1
 
-a2x: chdir /home/runner/work/_temp/linuxcnc-e20-preflight/src
-a2x: deleting /home/runner/work/_temp/linuxcnc-e20-preflight/docs/man/man1/sendkeys.1.xml
+a2x: chdir /home/runner/work/_temp/linuxcnc-e20-authoritative/src
+a2x: deleting /home/runner/work/_temp/linuxcnc-e20-authoritative/docs/man/man1/mesambccc.1.xml
 a2x -v --doctype manpage \
 	--format manpage \
 	--destination-dir `dirname ../docs/man/man1/xhc-whb04b-6.1` \
@@ -3312,20 +3313,20 @@ a2x -v --doctype manpage \
 	-a mansource=LinuxCNC \
 	-a manmanual='LinuxCNC Documentation' \
 	../docs/src/man/man1/xhc-whb04b-6.1.adoc
-a2x: args: ['-v', '--doctype', 'manpage', '--format', 'manpage', '--destination-dir', '../docs/man/man1', '--xsltproc-opts=--nonet', '-a', 'mansource=LinuxCNC', '-a', 'manmanual=LinuxCNC Documentation', '../docs/src/man/man1/mesambccc.1.adoc']
+a2x: args: ['-v', '--doctype', 'manpage', '--format', 'manpage', '--destination-dir', '../docs/man/man1', '--xsltproc-opts=--nonet', '-a', 'mansource=LinuxCNC', '-a', 'manmanual=LinuxCNC Documentation', '../docs/src/man/man1/sendkeys.1.adoc']
 a2x: resource files: []
 a2x: resource directories: ['/etc/asciidoc/stylesheets']
-a2x: executing: asciidoc [('--doctype', 'manpage'), ('--attribute', 'mansource=LinuxCNC'), ('--attribute', 'manmanual=LinuxCNC Documentation'), ('--verbose',), ('--backend', 'docbook'), ('-a', 'a2x-format=manpage'), ('--out-file', '/home/runner/work/_temp/linuxcnc-e20-preflight/docs/man/man1/mesambccc.1.xml')]
-a2x: executing: "xmllint" --nonet --noout --valid "/home/runner/work/_temp/linuxcnc-e20-preflight/docs/man/man1/mesambccc.1.xml"
+a2x: executing: asciidoc [('--doctype', 'manpage'), ('--attribute', 'mansource=LinuxCNC'), ('--attribute', 'manmanual=LinuxCNC Documentation'), ('--verbose',), ('--backend', 'docbook'), ('-a', 'a2x-format=manpage'), ('--out-file', '/home/runner/work/_temp/linuxcnc-e20-authoritative/docs/man/man1/sendkeys.1.xml')]
+a2x: executing: "xmllint" --nonet --noout --valid "/home/runner/work/_temp/linuxcnc-e20-authoritative/docs/man/man1/sendkeys.1.xml"
 
 
-a2x: chdir /home/runner/work/_temp/linuxcnc-e20-preflight/docs/man/man1
-a2x: executing: "xsltproc" --nonet --nonet --stringparam callout.graphics 0 --stringparam navig.graphics 0 --stringparam admon.textlabel 1 --stringparam admon.graphics 0  "/etc/asciidoc/docbook-xsl/manpage.xsl" "/home/runner/work/_temp/linuxcnc-e20-preflight/docs/man/man1/mesambccc.1.xml"
+a2x: chdir /home/runner/work/_temp/linuxcnc-e20-authoritative/docs/man/man1
+a2x: executing: "xsltproc" --nonet --nonet --stringparam callout.graphics 0 --stringparam navig.graphics 0 --stringparam admon.textlabel 1 --stringparam admon.graphics 0  "/etc/asciidoc/docbook-xsl/manpage.xsl" "/home/runner/work/_temp/linuxcnc-e20-authoritative/docs/man/man1/sendkeys.1.xml"
 
-Note: Writing mesambccc.1
+Note: Writing sendkeys.1
 
-a2x: chdir /home/runner/work/_temp/linuxcnc-e20-preflight/src
-a2x: deleting /home/runner/work/_temp/linuxcnc-e20-preflight/docs/man/man1/mesambccc.1.xml
+a2x: chdir /home/runner/work/_temp/linuxcnc-e20-authoritative/src
+a2x: deleting /home/runner/work/_temp/linuxcnc-e20-authoritative/docs/man/man1/sendkeys.1.xml
 a2x -v --doctype manpage \
 	--format manpage \
 	--destination-dir `dirname ../docs/man/man3/hm2_pktuart.3` \
@@ -3336,17 +3337,17 @@ a2x -v --doctype manpage \
 a2x: args: ['-v', '--doctype', 'manpage', '--format', 'manpage', '--destination-dir', '../docs/man/man1', '--xsltproc-opts=--nonet', '-a', 'mansource=LinuxCNC', '-a', 'manmanual=LinuxCNC Documentation', '../docs/src/man/man1/svd-ps_vfd.1.adoc']
 a2x: resource files: []
 a2x: resource directories: ['/etc/asciidoc/stylesheets']
-a2x: executing: asciidoc [('--doctype', 'manpage'), ('--attribute', 'mansource=LinuxCNC'), ('--attribute', 'manmanual=LinuxCNC Documentation'), ('--verbose',), ('--backend', 'docbook'), ('-a', 'a2x-format=manpage'), ('--out-file', '/home/runner/work/_temp/linuxcnc-e20-preflight/docs/man/man1/svd-ps_vfd.1.xml')]
-a2x: executing: "xmllint" --nonet --noout --valid "/home/runner/work/_temp/linuxcnc-e20-preflight/docs/man/man1/svd-ps_vfd.1.xml"
+a2x: executing: asciidoc [('--doctype', 'manpage'), ('--attribute', 'mansource=LinuxCNC'), ('--attribute', 'manmanual=LinuxCNC Documentation'), ('--verbose',), ('--backend', 'docbook'), ('-a', 'a2x-format=manpage'), ('--out-file', '/home/runner/work/_temp/linuxcnc-e20-authoritative/docs/man/man1/svd-ps_vfd.1.xml')]
+a2x: executing: "xmllint" --nonet --noout --valid "/home/runner/work/_temp/linuxcnc-e20-authoritative/docs/man/man1/svd-ps_vfd.1.xml"
 
 
-a2x: chdir /home/runner/work/_temp/linuxcnc-e20-preflight/docs/man/man1
-a2x: executing: "xsltproc" --nonet --nonet --stringparam callout.graphics 0 --stringparam navig.graphics 0 --stringparam admon.textlabel 1 --stringparam admon.graphics 0  "/etc/asciidoc/docbook-xsl/manpage.xsl" "/home/runner/work/_temp/linuxcnc-e20-preflight/docs/man/man1/svd-ps_vfd.1.xml"
+a2x: chdir /home/runner/work/_temp/linuxcnc-e20-authoritative/docs/man/man1
+a2x: executing: "xsltproc" --nonet --nonet --stringparam callout.graphics 0 --stringparam navig.graphics 0 --stringparam admon.textlabel 1 --stringparam admon.graphics 0  "/etc/asciidoc/docbook-xsl/manpage.xsl" "/home/runner/work/_temp/linuxcnc-e20-authoritative/docs/man/man1/svd-ps_vfd.1.xml"
 
 Note: Writing svd-ps_vfd.1
 
-a2x: chdir /home/runner/work/_temp/linuxcnc-e20-preflight/src
-a2x: deleting /home/runner/work/_temp/linuxcnc-e20-preflight/docs/man/man1/svd-ps_vfd.1.xml
+a2x: chdir /home/runner/work/_temp/linuxcnc-e20-authoritative/src
+a2x: deleting /home/runner/work/_temp/linuxcnc-e20-authoritative/docs/man/man1/svd-ps_vfd.1.xml
 a2x -v --doctype manpage \
 	--format manpage \
 	--destination-dir `dirname ../docs/man/man9/enum.9` \
@@ -3354,6 +3355,34 @@ a2x -v --doctype manpage \
 	-a mansource=LinuxCNC \
 	-a manmanual='LinuxCNC Documentation' \
 	../docs/src/man/man9/enum.9.adoc
+a2x: args: ['-v', '--doctype', 'manpage', '--format', 'manpage', '--destination-dir', '../docs/man/man3', '--xsltproc-opts=--nonet', '-a', 'mansource=LinuxCNC', '-a', 'manmanual=LinuxCNC Documentation', '../docs/src/man/man3/hm2_pktuart.3.adoc']
+a2x: resource files: []
+a2x: resource directories: ['/etc/asciidoc/stylesheets']
+a2x: executing: asciidoc [('--doctype', 'manpage'), ('--attribute', 'mansource=LinuxCNC'), ('--attribute', 'manmanual=LinuxCNC Documentation'), ('--verbose',), ('--backend', 'docbook'), ('-a', 'a2x-format=manpage'), ('--out-file', '/home/runner/work/_temp/linuxcnc-e20-authoritative/docs/man/man3/hm2_pktuart.3.xml')]
+a2x: executing: "xmllint" --nonet --noout --valid "/home/runner/work/_temp/linuxcnc-e20-authoritative/docs/man/man3/hm2_pktuart.3.xml"
+
+
+a2x: chdir /home/runner/work/_temp/linuxcnc-e20-authoritative/docs/man/man3
+a2x: executing: "xsltproc" --nonet --nonet --stringparam callout.graphics 0 --stringparam navig.graphics 0 --stringparam admon.textlabel 1 --stringparam admon.graphics 0  "/etc/asciidoc/docbook-xsl/manpage.xsl" "/home/runner/work/_temp/linuxcnc-e20-authoritative/docs/man/man3/hm2_pktuart.3.xml"
+
+Note: Writing hm2_pktuart.3
+
+a2x: chdir /home/runner/work/_temp/linuxcnc-e20-authoritative/src
+a2x: deleting /home/runner/work/_temp/linuxcnc-e20-authoritative/docs/man/man3/hm2_pktuart.3.xml
+a2x: args: ['-v', '--doctype', 'manpage', '--format', 'manpage', '--destination-dir', '../docs/man/man1', '--xsltproc-opts=--nonet', '-a', 'mansource=LinuxCNC', '-a', 'manmanual=LinuxCNC Documentation', '../docs/src/man/man1/xhc-whb04b-6.1.adoc']
+a2x: resource files: []
+a2x: resource directories: ['/etc/asciidoc/stylesheets']
+a2x: executing: asciidoc [('--doctype', 'manpage'), ('--attribute', 'mansource=LinuxCNC'), ('--attribute', 'manmanual=LinuxCNC Documentation'), ('--verbose',), ('--backend', 'docbook'), ('-a', 'a2x-format=manpage'), ('--out-file', '/home/runner/work/_temp/linuxcnc-e20-authoritative/docs/man/man1/xhc-whb04b-6.1.xml')]
+a2x: executing: "xmllint" --nonet --noout --valid "/home/runner/work/_temp/linuxcnc-e20-authoritative/docs/man/man1/xhc-whb04b-6.1.xml"
+
+
+a2x: chdir /home/runner/work/_temp/linuxcnc-e20-authoritative/docs/man/man1
+a2x: executing: "xsltproc" --nonet --nonet --stringparam callout.graphics 0 --stringparam navig.graphics 0 --stringparam admon.textlabel 1 --stringparam admon.graphics 0  "/etc/asciidoc/docbook-xsl/manpage.xsl" "/home/runner/work/_temp/linuxcnc-e20-authoritative/docs/man/man1/xhc-whb04b-6.1.xml"
+
+Note: Writing xhc-whb04b-6.1
+
+a2x: chdir /home/runner/work/_temp/linuxcnc-e20-authoritative/src
+a2x: deleting /home/runner/work/_temp/linuxcnc-e20-authoritative/docs/man/man1/xhc-whb04b-6.1.xml
 a2x -v --doctype manpage \
 	--format manpage \
 	--destination-dir `dirname ../docs/man/man9/hm2_modbus.9` \
@@ -3361,34 +3390,6 @@ a2x -v --doctype manpage \
 	-a mansource=LinuxCNC \
 	-a manmanual='LinuxCNC Documentation' \
 	../docs/src/man/man9/hm2_modbus.9.adoc
-a2x: args: ['-v', '--doctype', 'manpage', '--format', 'manpage', '--destination-dir', '../docs/man/man3', '--xsltproc-opts=--nonet', '-a', 'mansource=LinuxCNC', '-a', 'manmanual=LinuxCNC Documentation', '../docs/src/man/man3/hm2_pktuart.3.adoc']
-a2x: resource files: []
-a2x: resource directories: ['/etc/asciidoc/stylesheets']
-a2x: executing: asciidoc [('--doctype', 'manpage'), ('--attribute', 'mansource=LinuxCNC'), ('--attribute', 'manmanual=LinuxCNC Documentation'), ('--verbose',), ('--backend', 'docbook'), ('-a', 'a2x-format=manpage'), ('--out-file', '/home/runner/work/_temp/linuxcnc-e20-preflight/docs/man/man3/hm2_pktuart.3.xml')]
-a2x: executing: "xmllint" --nonet --noout --valid "/home/runner/work/_temp/linuxcnc-e20-preflight/docs/man/man3/hm2_pktuart.3.xml"
-
-
-a2x: chdir /home/runner/work/_temp/linuxcnc-e20-preflight/docs/man/man3
-a2x: executing: "xsltproc" --nonet --nonet --stringparam callout.graphics 0 --stringparam navig.graphics 0 --stringparam admon.textlabel 1 --stringparam admon.graphics 0  "/etc/asciidoc/docbook-xsl/manpage.xsl" "/home/runner/work/_temp/linuxcnc-e20-preflight/docs/man/man3/hm2_pktuart.3.xml"
-
-Note: Writing hm2_pktuart.3
-
-a2x: chdir /home/runner/work/_temp/linuxcnc-e20-preflight/src
-a2x: deleting /home/runner/work/_temp/linuxcnc-e20-preflight/docs/man/man3/hm2_pktuart.3.xml
-a2x: args: ['-v', '--doctype', 'manpage', '--format', 'manpage', '--destination-dir', '../docs/man/man1', '--xsltproc-opts=--nonet', '-a', 'mansource=LinuxCNC', '-a', 'manmanual=LinuxCNC Documentation', '../docs/src/man/man1/xhc-whb04b-6.1.adoc']
-a2x: resource files: []
-a2x: resource directories: ['/etc/asciidoc/stylesheets']
-a2x: executing: asciidoc [('--doctype', 'manpage'), ('--attribute', 'mansource=LinuxCNC'), ('--attribute', 'manmanual=LinuxCNC Documentation'), ('--verbose',), ('--backend', 'docbook'), ('-a', 'a2x-format=manpage'), ('--out-file', '/home/runner/work/_temp/linuxcnc-e20-preflight/docs/man/man1/xhc-whb04b-6.1.xml')]
-a2x: executing: "xmllint" --nonet --noout --valid "/home/runner/work/_temp/linuxcnc-e20-preflight/docs/man/man1/xhc-whb04b-6.1.xml"
-
-
-a2x: chdir /home/runner/work/_temp/linuxcnc-e20-preflight/docs/man/man1
-a2x: executing: "xsltproc" --nonet --nonet --stringparam callout.graphics 0 --stringparam navig.graphics 0 --stringparam admon.textlabel 1 --stringparam admon.graphics 0  "/etc/asciidoc/docbook-xsl/manpage.xsl" "/home/runner/work/_temp/linuxcnc-e20-preflight/docs/man/man1/xhc-whb04b-6.1.xml"
-
-Note: Writing xhc-whb04b-6.1
-
-a2x: chdir /home/runner/work/_temp/linuxcnc-e20-preflight/src
-a2x: deleting /home/runner/work/_temp/linuxcnc-e20-preflight/docs/man/man1/xhc-whb04b-6.1.xml
 a2x -v --doctype manpage \
 	--format manpage \
 	--destination-dir `dirname ../docs/man/man9/hm2_spix.9` \
@@ -3396,6 +3397,20 @@ a2x -v --doctype manpage \
 	-a mansource=LinuxCNC \
 	-a manmanual='LinuxCNC Documentation' \
 	../docs/src/man/man9/hm2_spix.9.adoc
+a2x: args: ['-v', '--doctype', 'manpage', '--format', 'manpage', '--destination-dir', '../docs/man/man9', '--xsltproc-opts=--nonet', '-a', 'mansource=LinuxCNC', '-a', 'manmanual=LinuxCNC Documentation', '../docs/src/man/man9/enum.9.adoc']
+a2x: resource files: []
+a2x: resource directories: ['/etc/asciidoc/stylesheets']
+a2x: executing: asciidoc [('--doctype', 'manpage'), ('--attribute', 'mansource=LinuxCNC'), ('--attribute', 'manmanual=LinuxCNC Documentation'), ('--verbose',), ('--backend', 'docbook'), ('-a', 'a2x-format=manpage'), ('--out-file', '/home/runner/work/_temp/linuxcnc-e20-authoritative/docs/man/man9/enum.9.xml')]
+a2x: executing: "xmllint" --nonet --noout --valid "/home/runner/work/_temp/linuxcnc-e20-authoritative/docs/man/man9/enum.9.xml"
+
+
+a2x: chdir /home/runner/work/_temp/linuxcnc-e20-authoritative/docs/man/man9
+a2x: executing: "xsltproc" --nonet --nonet --stringparam callout.graphics 0 --stringparam navig.graphics 0 --stringparam admon.textlabel 1 --stringparam admon.graphics 0  "/etc/asciidoc/docbook-xsl/manpage.xsl" "/home/runner/work/_temp/linuxcnc-e20-authoritative/docs/man/man9/enum.9.xml"
+
+Note: Writing enum.9
+
+a2x: chdir /home/runner/work/_temp/linuxcnc-e20-authoritative/src
+a2x: deleting /home/runner/work/_temp/linuxcnc-e20-authoritative/docs/man/man9/enum.9.xml
 a2x -v --doctype manpage \
 	--format manpage \
 	--destination-dir `dirname ../docs/man/man9/streamer.9` \
@@ -3403,72 +3418,58 @@ a2x -v --doctype manpage \
 	-a mansource=LinuxCNC \
 	-a manmanual='LinuxCNC Documentation' \
 	../docs/src/man/man9/streamer.9.adoc
-a2x: args: ['-v', '--doctype', 'manpage', '--format', 'manpage', '--destination-dir', '../docs/man/man9', '--xsltproc-opts=--nonet', '-a', 'mansource=LinuxCNC', '-a', 'manmanual=LinuxCNC Documentation', '../docs/src/man/man9/enum.9.adoc']
-a2x: resource files: []
-a2x: resource directories: ['/etc/asciidoc/stylesheets']
-a2x: executing: asciidoc [('--doctype', 'manpage'), ('--attribute', 'mansource=LinuxCNC'), ('--attribute', 'manmanual=LinuxCNC Documentation'), ('--verbose',), ('--backend', 'docbook'), ('-a', 'a2x-format=manpage'), ('--out-file', '/home/runner/work/_temp/linuxcnc-e20-preflight/docs/man/man9/enum.9.xml')]
-a2x: executing: "xmllint" --nonet --noout --valid "/home/runner/work/_temp/linuxcnc-e20-preflight/docs/man/man9/enum.9.xml"
-
-
-a2x: chdir /home/runner/work/_temp/linuxcnc-e20-preflight/docs/man/man9
-a2x: executing: "xsltproc" --nonet --nonet --stringparam callout.graphics 0 --stringparam navig.graphics 0 --stringparam admon.textlabel 1 --stringparam admon.graphics 0  "/etc/asciidoc/docbook-xsl/manpage.xsl" "/home/runner/work/_temp/linuxcnc-e20-preflight/docs/man/man9/enum.9.xml"
-
-Note: Writing enum.9
-
-a2x: chdir /home/runner/work/_temp/linuxcnc-e20-preflight/src
-a2x: deleting /home/runner/work/_temp/linuxcnc-e20-preflight/docs/man/man9/enum.9.xml
 Compiling hal/components/streamer_usr.c
 Compiling hal/components/sampler_usr.c
 Compiling hal/components/panelui.c
-a2x: args: ['-v', '--doctype', 'manpage', '--format', 'manpage', '--destination-dir', '../docs/man/man9', '--xsltproc-opts=--nonet', '-a', 'mansource=LinuxCNC', '-a', 'manmanual=LinuxCNC Documentation', '../docs/src/man/man9/hm2_modbus.9.adoc']
-a2x: resource files: []
-a2x: resource directories: ['/etc/asciidoc/stylesheets']
-a2x: executing: asciidoc [('--doctype', 'manpage'), ('--attribute', 'mansource=LinuxCNC'), ('--attribute', 'manmanual=LinuxCNC Documentation'), ('--verbose',), ('--backend', 'docbook'), ('-a', 'a2x-format=manpage'), ('--out-file', '/home/runner/work/_temp/linuxcnc-e20-preflight/docs/man/man9/hm2_modbus.9.xml')]
-a2x: executing: "xmllint" --nonet --noout --valid "/home/runner/work/_temp/linuxcnc-e20-preflight/docs/man/man9/hm2_modbus.9.xml"
-
-
-a2x: chdir /home/runner/work/_temp/linuxcnc-e20-preflight/docs/man/man9
-a2x: executing: "xsltproc" --nonet --nonet --stringparam callout.graphics 0 --stringparam navig.graphics 0 --stringparam admon.textlabel 1 --stringparam admon.graphics 0  "/etc/asciidoc/docbook-xsl/manpage.xsl" "/home/runner/work/_temp/linuxcnc-e20-preflight/docs/man/man9/hm2_modbus.9.xml"
-
-Note: Writing hm2_modbus.9
-
-a2x: chdir /home/runner/work/_temp/linuxcnc-e20-preflight/src
-a2x: deleting /home/runner/work/_temp/linuxcnc-e20-preflight/docs/man/man9/hm2_modbus.9.xml
-Compiling hal/user_comps/mb2hal/mb2hal.c
 a2x: args: ['-v', '--doctype', 'manpage', '--format', 'manpage', '--destination-dir', '../docs/man/man9', '--xsltproc-opts=--nonet', '-a', 'mansource=LinuxCNC', '-a', 'manmanual=LinuxCNC Documentation', '../docs/src/man/man9/streamer.9.adoc']
 a2x: resource files: []
 a2x: resource directories: ['/etc/asciidoc/stylesheets']
-a2x: executing: asciidoc [('--doctype', 'manpage'), ('--attribute', 'mansource=LinuxCNC'), ('--attribute', 'manmanual=LinuxCNC Documentation'), ('--verbose',), ('--backend', 'docbook'), ('-a', 'a2x-format=manpage'), ('--out-file', '/home/runner/work/_temp/linuxcnc-e20-preflight/docs/man/man9/streamer.9.xml')]
-a2x: executing: "xmllint" --nonet --noout --valid "/home/runner/work/_temp/linuxcnc-e20-preflight/docs/man/man9/streamer.9.xml"
+a2x: executing: asciidoc [('--doctype', 'manpage'), ('--attribute', 'mansource=LinuxCNC'), ('--attribute', 'manmanual=LinuxCNC Documentation'), ('--verbose',), ('--backend', 'docbook'), ('-a', 'a2x-format=manpage'), ('--out-file', '/home/runner/work/_temp/linuxcnc-e20-authoritative/docs/man/man9/streamer.9.xml')]
+a2x: executing: "xmllint" --nonet --noout --valid "/home/runner/work/_temp/linuxcnc-e20-authoritative/docs/man/man9/streamer.9.xml"
 
 
-a2x: chdir /home/runner/work/_temp/linuxcnc-e20-preflight/docs/man/man9
-a2x: executing: "xsltproc" --nonet --nonet --stringparam callout.graphics 0 --stringparam navig.graphics 0 --stringparam admon.textlabel 1 --stringparam admon.graphics 0  "/etc/asciidoc/docbook-xsl/manpage.xsl" "/home/runner/work/_temp/linuxcnc-e20-preflight/docs/man/man9/streamer.9.xml"
+a2x: chdir /home/runner/work/_temp/linuxcnc-e20-authoritative/docs/man/man9
+a2x: executing: "xsltproc" --nonet --nonet --stringparam callout.graphics 0 --stringparam navig.graphics 0 --stringparam admon.textlabel 1 --stringparam admon.graphics 0  "/etc/asciidoc/docbook-xsl/manpage.xsl" "/home/runner/work/_temp/linuxcnc-e20-authoritative/docs/man/man9/streamer.9.xml"
 
 Note: Writing streamer.9
 
-a2x: chdir /home/runner/work/_temp/linuxcnc-e20-preflight/src
-a2x: deleting /home/runner/work/_temp/linuxcnc-e20-preflight/docs/man/man9/streamer.9.xml
+a2x: chdir /home/runner/work/_temp/linuxcnc-e20-authoritative/src
+a2x: deleting /home/runner/work/_temp/linuxcnc-e20-authoritative/docs/man/man9/streamer.9.xml
+a2x: args: ['-v', '--doctype', 'manpage', '--format', 'manpage', '--destination-dir', '../docs/man/man9', '--xsltproc-opts=--nonet', '-a', 'mansource=LinuxCNC', '-a', 'manmanual=LinuxCNC Documentation', '../docs/src/man/man9/hm2_modbus.9.adoc']
+a2x: resource files: []
+a2x: resource directories: ['/etc/asciidoc/stylesheets']
+a2x: executing: asciidoc [('--doctype', 'manpage'), ('--attribute', 'mansource=LinuxCNC'), ('--attribute', 'manmanual=LinuxCNC Documentation'), ('--verbose',), ('--backend', 'docbook'), ('-a', 'a2x-format=manpage'), ('--out-file', '/home/runner/work/_temp/linuxcnc-e20-authoritative/docs/man/man9/hm2_modbus.9.xml')]
+a2x: executing: "xmllint" --nonet --noout --valid "/home/runner/work/_temp/linuxcnc-e20-authoritative/docs/man/man9/hm2_modbus.9.xml"
+
+
+a2x: chdir /home/runner/work/_temp/linuxcnc-e20-authoritative/docs/man/man9
+a2x: executing: "xsltproc" --nonet --nonet --stringparam callout.graphics 0 --stringparam navig.graphics 0 --stringparam admon.textlabel 1 --stringparam admon.graphics 0  "/etc/asciidoc/docbook-xsl/manpage.xsl" "/home/runner/work/_temp/linuxcnc-e20-authoritative/docs/man/man9/hm2_modbus.9.xml"
+
+Note: Writing hm2_modbus.9
+
+a2x: chdir /home/runner/work/_temp/linuxcnc-e20-authoritative/src
+a2x: deleting /home/runner/work/_temp/linuxcnc-e20-authoritative/docs/man/man9/hm2_modbus.9.xml
+Compiling hal/user_comps/mb2hal/mb2hal.c
 Compiling hal/user_comps/mb2hal/mb2hal_init.c
-Compiling hal/user_comps/mb2hal/mb2hal_modbus.c
-Compiling hal/user_comps/mb2hal/mb2hal_hal.c
 a2x: args: ['-v', '--doctype', 'manpage', '--format', 'manpage', '--destination-dir', '../docs/man/man9', '--xsltproc-opts=--nonet', '-a', 'mansource=LinuxCNC', '-a', 'manmanual=LinuxCNC Documentation', '../docs/src/man/man9/hm2_spix.9.adoc']
 a2x: resource files: []
 a2x: resource directories: ['/etc/asciidoc/stylesheets']
-a2x: executing: asciidoc [('--doctype', 'manpage'), ('--attribute', 'mansource=LinuxCNC'), ('--attribute', 'manmanual=LinuxCNC Documentation'), ('--verbose',), ('--backend', 'docbook'), ('-a', 'a2x-format=manpage'), ('--out-file', '/home/runner/work/_temp/linuxcnc-e20-preflight/docs/man/man9/hm2_spix.9.xml')]
-a2x: executing: "xmllint" --nonet --noout --valid "/home/runner/work/_temp/linuxcnc-e20-preflight/docs/man/man9/hm2_spix.9.xml"
+a2x: executing: asciidoc [('--doctype', 'manpage'), ('--attribute', 'mansource=LinuxCNC'), ('--attribute', 'manmanual=LinuxCNC Documentation'), ('--verbose',), ('--backend', 'docbook'), ('-a', 'a2x-format=manpage'), ('--out-file', '/home/runner/work/_temp/linuxcnc-e20-authoritative/docs/man/man9/hm2_spix.9.xml')]
+a2x: executing: "xmllint" --nonet --noout --valid "/home/runner/work/_temp/linuxcnc-e20-authoritative/docs/man/man9/hm2_spix.9.xml"
 
 
-a2x: chdir /home/runner/work/_temp/linuxcnc-e20-preflight/docs/man/man9
-a2x: executing: "xsltproc" --nonet --nonet --stringparam callout.graphics 0 --stringparam navig.graphics 0 --stringparam admon.textlabel 1 --stringparam admon.graphics 0  "/etc/asciidoc/docbook-xsl/manpage.xsl" "/home/runner/work/_temp/linuxcnc-e20-preflight/docs/man/man9/hm2_spix.9.xml"
+a2x: chdir /home/runner/work/_temp/linuxcnc-e20-authoritative/docs/man/man9
+a2x: executing: "xsltproc" --nonet --nonet --stringparam callout.graphics 0 --stringparam navig.graphics 0 --stringparam admon.textlabel 1 --stringparam admon.graphics 0  "/etc/asciidoc/docbook-xsl/manpage.xsl" "/home/runner/work/_temp/linuxcnc-e20-authoritative/docs/man/man9/hm2_spix.9.xml"
 
 Warn: meta author : no refentry/info/author                        hm2_spix
 Note: meta author : see http://www.docbook.org/tdg5/en/html/autho  hm2_spix
 Warn: meta author : no author data, so inserted a fixme            hm2_spix
 Note: Writing hm2_spix.9
 
-a2x: chdir /home/runner/work/_temp/linuxcnc-e20-preflight/src
-a2x: deleting /home/runner/work/_temp/linuxcnc-e20-preflight/docs/man/man9/hm2_spix.9.xml
+a2x: chdir /home/runner/work/_temp/linuxcnc-e20-authoritative/src
+a2x: deleting /home/runner/work/_temp/linuxcnc-e20-authoritative/docs/man/man9/hm2_spix.9.xml
+Compiling hal/user_comps/mb2hal/mb2hal_modbus.c
+Compiling hal/user_comps/mb2hal/mb2hal_hal.c
 Compiling hal/user_comps/gs2_vfd.c
 Compiling hal/user_comps/hy_gt_vfd.c
 Compiling hal/user_comps/svd-ps_vfd.c
@@ -3477,8 +3478,8 @@ Compiling hal/user_comps/xhc-hb04.cc
 Compiling hal/user_comps/sendkeys.c
 Compiling hal/user_comps/vfs11_vfd/vfs11_vfd.c
 Compiling hal/classicladder/arithm_eval.c
-Compiling hal/classicladder/arrays.c
 Compiling hal/classicladder/calc.c
+Compiling hal/classicladder/arrays.c
 Compiling hal/classicladder/calc_sequential.c
 Compiling hal/classicladder/classicladder.c
 Compiling hal/classicladder/classicladder_gtk.c
@@ -3486,8 +3487,8 @@ Compiling hal/classicladder/config.c
 Compiling hal/classicladder/config_gtk.c
 Compiling hal/classicladder/drawing.c
 Compiling hal/classicladder/drawing_sequential.c
-Compiling hal/classicladder/edit_gtk.c
 Compiling hal/classicladder/edit.c
+Compiling hal/classicladder/edit_gtk.c
 Compiling hal/classicladder/edit_sequential.c
 Compiling hal/classicladder/editproperties_gtk.c
 Compiling hal/classicladder/emc_mods.c
@@ -3522,8 +3523,8 @@ Compiling hal/utils/scope_disp.c
 Compiling hal/utils/scope_files.c
 Syntax checking python script elbpcom
 Syntax checking python script modcompile
-Copying python script elbpcom
 Copying python script modcompile
+Copying python script elbpcom
 Copying Modbus template mesa_modbus.c.tmpl
 Syntax checking python script mesambccc
 Compiling hal/user_comps/vfdb_vfd/vfdb_vfd.c
@@ -3797,49 +3798,49 @@ Syntax checking python script gladevcp
 Syntax checking python script scorbot-er-3
 Copying python script pyvcp
 Copying python script hal_input
-Syntax checking python script mitsub_vfd
-Copying python script scorbot-er-3
 Copying python script gladevcp
+Copying python script scorbot-er-3
+Syntax checking python script mitsub_vfd
 Syntax checking python script pmx485
 Syntax checking python script sim-torch
 Syntax checking python script z_level_compensation
-Copying python script mitsub_vfd
 Copying python script pmx485
+Copying python script z_level_compensation
+Copying python script mitsub_vfd
 Copying python script sim-torch
 Syntax checking python script mqtt-publisher
-Copying python script z_level_compensation
 Syntax checking python script pumagui
 Syntax checking python script puma560gui
 Syntax checking python script lineardelta
-Copying python script mqtt-publisher
 Copying python script pumagui
+Copying python script mqtt-publisher
 Copying python script puma560gui
+Copying python script lineardelta
 Syntax checking python script scaragui
 Syntax checking python script hexagui
-Copying python script lineardelta
 Syntax checking python script 5axisgui
 Syntax checking python script max5gui
+Copying python script 5axisgui
 Copying python script hexagui
 Copying python script scaragui
-Copying python script 5axisgui
+Copying python script max5gui
 Syntax checking python script maho600gui
 Syntax checking python script hbmgui
-Copying python script max5gui
-Syntax checking python script rotarydelta
 Syntax checking python script melfagui
+Syntax checking python script rotarydelta
 Copying python script maho600gui
+Copying python script melfagui
 Copying python script hbmgui
 Copying python script rotarydelta
 Syntax checking python script millturngui
-Copying python script melfagui
 Syntax checking python script xyzac-trt-gui
 Syntax checking python script xyzbc-trt-gui
 Syntax checking python script xyzab-tdr-gui
+Copying python script xyzbc-trt-gui
 Copying python script millturngui
 Copying python script xyzac-trt-gui
-Copying python script xyzbc-trt-gui
-Compiling hal/halmodule.cc
 Copying python script xyzab-tdr-gui
+Compiling hal/halmodule.cc
 Compiling emc/usr_intf/axis/extensions/emcmodule.cc
 Compiling emc/usr_intf/axis/extensions/_toglmodule.c
 Syntax checking python script axis
@@ -3857,24 +3858,24 @@ Copying python script image-to-gcode
 Syntax checking python script lintini
 Copying python script lintini
 Syntax checking python script debuglevel
-Syntax checking python script teach-in
 Copying python script debuglevel
+Syntax checking python script teach-in
 Syntax checking python script tracking-test
+Copying python script tracking-test
 Copying python script teach-in
 Syntax checking python script touchy
-Copying python script tracking-test
 Syntax checking python script mdi.py
+Copying python script mdi.py
 Copying python script touchy
 Syntax checking python script emc_interface.py
-Copying python script mdi.py
 Syntax checking python script hal_interface.py
+Copying python script hal_interface.py
 Copying python script emc_interface.py
 Syntax checking python script filechooser.py
-Copying python script hal_interface.py
 Syntax checking python script listing.py
 Copying python script filechooser.py
-Syntax checking python script preferences.py
 Copying python script listing.py
+Syntax checking python script preferences.py
 Copying glade file touchy.glade
 Syntax checking python script stepconf
 Copying python script preferences.py
@@ -3884,14 +3885,14 @@ Syntax checking python script pages.py
 Copying python script stepconf
 Syntax checking python script build_INI.py
 Copying python script pages.py
-Syntax checking python script build_HAL.py
 Copying python script build_INI.py
+Syntax checking python script build_HAL.py
 Syntax checking python script import_mach.py
 Copying python script build_HAL.py
+Copying python script import_mach.py
 Copying glade file main_page.glade
 Copying glade file base.glade
 Copying glade file start.glade
-Copying python script import_mach.py
 Copying glade file pport1.glade
 Copying glade file pport2.glade
 Copying glade file spindle.glade
@@ -3915,9 +3916,10 @@ Copying python script pncconf
 Syntax checking python script build_HAL.py
 Copying python script build_INI.py
 Syntax checking python script private_data.py
-Copying python script build_HAL.py
 Syntax checking python script tests.py
+Copying python script build_HAL.py
 Syntax checking python script data.py
+Copying python script tests.py
 Copying python script private_data.py
 Copying glade file main_page.glade
 Copying glade file help.glade
@@ -3925,10 +3927,9 @@ Copying glade file mesa0.glade
 Copying python script data.py
 Copying glade file mesa1.glade
 Copying glade file start.glade
-Copying python script tests.py
 Copying glade file external.glade
-Copying glade file screen.glade
 Copying glade file base.glade
+Copying glade file screen.glade
 Copying glade file vcp.glade
 Copying glade file ubuttons.glade
 Copying glade file thcad.glade
@@ -3953,50 +3954,50 @@ Syntax checking python script qt5_graphics.py
 Copying python script gremlin
 Syntax checking python script gscreen
 Copying python script gremlin.py
-Syntax checking python script mdi.py
 Copying python script qt5_graphics.py
+Syntax checking python script mdi.py
 Syntax checking python script emc_interface.py
 Copying python script mdi.py
-Syntax checking python script preferences.py
 Copying python script emc_interface.py
+Syntax checking python script preferences.py
 Syntax checking python script keybindings.py
 Copying python script gscreen
 Copying glade file gscreen.glade
-Copying python script preferences.py
 Copying glade file gscreen2.glade
+Copying python script keybindings.py
+Copying python script preferences.py
 Syntax checking python script pyui
 Syntax checking python script master.py
-Copying python script keybindings.py
 Syntax checking python script widgets.py
 Copying python script pyui
 Copying python script master.py
 Syntax checking python script __init__.py
-Syntax checking python script commands.py
 Copying python script widgets.py
+Syntax checking python script commands.py
 Syntax checking python script panelui_validate.py
 Copying python script __init__.py
 Copying INI script panelui_spec.ini
 Copying python script commands.py
 cp emc/usr_intf/pyui/panelui_spec.ini ../lib/python/pyui/panelui_spec.ini
+Copying python script panelui_validate.py
 Copying INI script _panelui.ini
 Syntax checking python script qtvcp
 cp emc/usr_intf/pyui/_panelui.ini ../lib/python/pyui/_panelui.ini
 Syntax checking python script gmoccapy
-Copying python script panelui_validate.py
 Syntax checking python script dialogs.py
 Copying python script qtvcp
 Syntax checking python script getiniinfo.py
 Copying python script dialogs.py
 Syntax checking python script notification.py
 Copying python script getiniinfo.py
-Syntax checking python script player.py
 Copying python script gmoccapy
-Syntax checking python script preferences.py
+Syntax checking python script player.py
 Copying python script notification.py
+Syntax checking python script preferences.py
 Syntax checking python script widgets.py
 Copying python script player.py
-Syntax checking python script icon_theme_helper.py
 Copying python script preferences.py
+Syntax checking python script icon_theme_helper.py
 Copying glade file gmoccapy.glade
 Copying python script widgets.py
 Syntax checking python script qtplasmac-materials
@@ -4004,16 +4005,16 @@ Syntax checking python script qtplasmac-plasmac2qt
 Copying python script icon_theme_helper.py
 Syntax checking python script qtplasmac-cfg2prefs
 Copying python script qtplasmac-materials
+Syntax checking python script qtplasmac_gcode
 Copying python script qtplasmac-plasmac2qt
 Syntax checking python script pmx485-test
-Syntax checking python script qtplasmac_gcode
 Copying python script qtplasmac-cfg2prefs
 Syntax checking python script M190
 Copying python script pmx485-test
-Syntax checking python script mdro
 Copying python script qtplasmac_gcode
-Copying python script M190
+Syntax checking python script mdro
 Compiling emc/kinematics/lineardeltakins.cc
+Copying python script M190
 Compiling emc/kinematics/rotarydeltakins.cc
 Copying python script mdro
 Syntax checking python script update_ini
@@ -4069,8 +4070,8 @@ Compiling realtime hal/drivers/mesa-hostmot2/sserial.c
 Compiling realtime hal/drivers/mesa-hostmot2/ssr.c
 Compiling realtime hal/drivers/mesa-hostmot2/outm.c
 Compiling realtime hal/drivers/mesa-hostmot2/stepgen.c
-Compiling realtime hal/drivers/mesa-hostmot2/tram.c
 Compiling realtime hal/drivers/mesa-hostmot2/tp_pwmgen.c
+Compiling realtime hal/drivers/mesa-hostmot2/tram.c
 Compiling realtime hal/drivers/mesa-hostmot2/uart.c
 Compiling realtime hal/drivers/mesa-hostmot2/watchdog.c
 Compiling realtime hal/drivers/mesa-hostmot2/xy2mod.c
@@ -4158,8 +4159,8 @@ Linking hy_gt_vfd
 Linking svd-ps_vfd
 Linking shuttle
 Linking xhc-hb04
-Preprocessing thermistor.comp
 Linking sendkeys
+Preprocessing thermistor.comp
 Linking vfs11_vfd
 Linking classicladder
 Linking hal.so
@@ -4179,9 +4180,9 @@ Linking linuxcnc_module_helper
 gcc -Wl,-z,relro -o ../bin/linuxcnc_module_helper objects/module_helper/module_helper.o
 Linking python module _togl.so
 Linking python module lineardeltakins.so
-c++ -std=gnu++17 -L/home/runner/work/_temp/linuxcnc-e20-preflight/lib -Wl,-rpath,/home/runner/work/_temp/linuxcnc-e20-preflight/lib -ltirpc  -lgpiod  -shared -o ../lib/python/lineardeltakins.so objects/emc/kinematics/lineardeltakins.o -lboost_python312
+c++ -std=gnu++17 -L/home/runner/work/_temp/linuxcnc-e20-authoritative/lib -Wl,-rpath,/home/runner/work/_temp/linuxcnc-e20-authoritative/lib -ltirpc  -lgpiod  -shared -o ../lib/python/lineardeltakins.so objects/emc/kinematics/lineardeltakins.o -lboost_python312
 Linking python module rotarydeltakins.so
-c++ -std=gnu++17 -L/home/runner/work/_temp/linuxcnc-e20-preflight/lib -Wl,-rpath,/home/runner/work/_temp/linuxcnc-e20-preflight/lib -ltirpc  -lgpiod  -shared -o ../lib/python/rotarydeltakins.so objects/emc/kinematics/rotarydeltakins.o -lboost_python312
+c++ -std=gnu++17 -L/home/runner/work/_temp/linuxcnc-e20-authoritative/lib -Wl,-rpath,/home/runner/work/_temp/linuxcnc-e20-authoritative/lib -ltirpc  -lgpiod  -shared -o ../lib/python/rotarydeltakins.so objects/emc/kinematics/rotarydeltakins.o -lboost_python312
 Preprocessing abs.comp
 Preprocessing abs_s32.comp
 Preprocessing and2.comp
@@ -4267,8 +4268,8 @@ Preprocessing oneshot.comp
 Preprocessing or2.comp
 Preprocessing orient.comp
 Preprocessing plasmac.comp
-Preprocessing radiobutton.comp
 Preprocessing sample_hold.comp
+Preprocessing radiobutton.comp
 Preprocessing scale.comp
 Preprocessing scaled_s32_sums.comp
 Preprocessing select8.comp
@@ -4497,254 +4498,254 @@ ln -sf liblinuxcnchal.so.0 ../lib/liblinuxcnchal.so
 Making halcompile manpage abs.9
 Making halcompile manpage abs_s32.9
 Making halcompile manpage and2.9
+Making halcompile manpage anglejog.9
 rm -f ../docs/man/man9/abs.9.new
 rm -f ../docs/man/man9/abs_s32.9.new
-rm -f ../docs/man/man9/and2.9.new
-Making halcompile manpage anglejog.9
 Making halcompile manpage axistest.9
 Making halcompile manpage bin2gray.9
-rm -f ../docs/man/man9/bin2gray.9.new
+rm -f ../docs/man/man9/and2.9.new
 Making halcompile manpage biquad.9
-rm -f ../docs/man/man9/axistest.9.new
 rm -f ../docs/man/man9/anglejog.9.new
 Making halcompile manpage bitslice.9
+rm -f ../docs/man/man9/bin2gray.9.new
+rm -f ../docs/man/man9/axistest.9.new
 Making halcompile manpage bitwise.9
-rm -f ../docs/man/man9/bitslice.9.new
 Making halcompile manpage bldc.9
 rm -f ../docs/man/man9/biquad.9.new
 Making halcompile manpage blend.9
-rm -f ../docs/man/man9/bitwise.9.new
+rm -f ../docs/man/man9/bitslice.9.new
 Making halcompile manpage carousel.9
-rm -f ../docs/man/man9/carousel.9.new
-Making halcompile manpage charge_pump.9
+rm -f ../docs/man/man9/bitwise.9.new
 rm -f ../docs/man/man9/blend.9.new
+Making halcompile manpage charge_pump.9
 Making halcompile manpage clarke2.9
 rm -f ../docs/man/man9/bldc.9.new
 Making halcompile manpage clarke3.9
-rm -f ../docs/man/man9/clarke2.9.new
+rm -f ../docs/man/man9/carousel.9.new
 Making halcompile manpage clarkeinv.9
 rm -f ../docs/man/man9/charge_pump.9.new
+rm -f ../docs/man/man9/clarke2.9.new
 Making halcompile manpage comp.9
-rm -f ../docs/man/man9/clarke3.9.new
 Making halcompile manpage constant.9
-rm -f ../docs/man/man9/clarkeinv.9.new
+rm -f ../docs/man/man9/clarke3.9.new
 Making halcompile manpage conv_bit_float.9
-rm -f ../docs/man/man9/comp.9.new
+rm -f ../docs/man/man9/clarkeinv.9.new
 Making halcompile manpage conv_bit_s32.9
+rm -f ../docs/man/man9/comp.9.new
 rm -f ../docs/man/man9/constant.9.new
 Making halcompile manpage conv_bit_u32.9
-rm -f ../docs/man/man9/conv_bit_float.9.new
 Making halcompile manpage conv_float_s32.9
-rm -f ../docs/man/man9/conv_bit_s32.9.new
+rm -f ../docs/man/man9/conv_bit_float.9.new
 Making halcompile manpage conv_float_u32.9
-rm -f ../docs/man/man9/conv_bit_u32.9.new
+rm -f ../docs/man/man9/conv_bit_s32.9.new
 Making halcompile manpage conv_s32_bit.9
-rm -f ../docs/man/man9/conv_float_u32.9.new
+rm -f ../docs/man/man9/conv_bit_u32.9.new
 rm -f ../docs/man/man9/conv_float_s32.9.new
 Making halcompile manpage conv_s32_float.9
 Making halcompile manpage conv_s32_u32.9
-rm -f ../docs/man/man9/conv_s32_bit.9.new
+rm -f ../docs/man/man9/conv_float_u32.9.new
 Making halcompile manpage conv_u32_bit.9
-rm -f ../docs/man/man9/conv_s32_u32.9.new
+rm -f ../docs/man/man9/conv_s32_bit.9.new
 Making halcompile manpage conv_u32_float.9
 rm -f ../docs/man/man9/conv_s32_float.9.new
+rm -f ../docs/man/man9/conv_s32_u32.9.new
 Making halcompile manpage conv_u32_s32.9
-rm -f ../docs/man/man9/conv_u32_bit.9.new
 Making halcompile manpage corexy_by_hal.9
-rm -f ../docs/man/man9/conv_u32_float.9.new
+rm -f ../docs/man/man9/conv_u32_bit.9.new
 Making halcompile manpage dbounce.9
-rm -f ../docs/man/man9/conv_u32_s32.9.new
+rm -f ../docs/man/man9/conv_u32_float.9.new
 Making halcompile manpage ddt.9
+rm -f ../docs/man/man9/conv_u32_s32.9.new
 rm -f ../docs/man/man9/corexy_by_hal.9.new
 Making halcompile manpage deadzone.9
-rm -f ../docs/man/man9/dbounce.9.new
 Making halcompile manpage demux.9
-rm -f ../docs/man/man9/ddt.9.new
+rm -f ../docs/man/man9/dbounce.9.new
 Making halcompile manpage differential.9
-rm -f ../docs/man/man9/deadzone.9.new
+rm -f ../docs/man/man9/ddt.9.new
 Making halcompile manpage div2.9
+rm -f ../docs/man/man9/deadzone.9.new
 rm -f ../docs/man/man9/demux.9.new
 Making halcompile manpage edge.9
-rm -f ../docs/man/man9/differential.9.new
 Making halcompile manpage eoffset_per_angle.9
-rm -f ../docs/man/man9/div2.9.new
+rm -f ../docs/man/man9/differential.9.new
 Making halcompile manpage estop_latch.9
-rm -f ../docs/man/man9/edge.9.new
+rm -f ../docs/man/man9/div2.9.new
 Making halcompile manpage feedcomp.9
-rm -f ../docs/man/man9/estop_latch.9.new
+rm -f ../docs/man/man9/edge.9.new
 rm -f ../docs/man/man9/eoffset_per_angle.9.new
-rm -f ../docs/man/man9/feedcomp.9.new
 Making halcompile manpage filter_kalman.9
 Making halcompile manpage flipflop.9
+rm -f ../docs/man/man9/estop_latch.9.new
 Making halcompile manpage gantry.9
-rm -f ../docs/man/man9/filter_kalman.9.new
+rm -f ../docs/man/man9/feedcomp.9.new
 Making halcompile manpage gearchange.9
 rm -f ../docs/man/man9/flipflop.9.new
-rm -f ../docs/man/man9/gantry.9.new
+rm -f ../docs/man/man9/filter_kalman.9.new
 Making halcompile manpage gray2bin.9
 Making halcompile manpage histobins.9
-rm -f ../docs/man/man9/gearchange.9.new
-rm -f ../docs/man/man9/histobins.9.new
+rm -f ../docs/man/man9/gantry.9.new
 Making halcompile manpage homecomp.9
-Making halcompile manpage hypot.9
+rm -f ../docs/man/man9/gearchange.9.new
 rm -f ../docs/man/man9/gray2bin.9.new
+rm -f ../docs/man/man9/histobins.9.new
+Making halcompile manpage hypot.9
 Making halcompile manpage ilowpass.9
 Making halcompile manpage integ.9
 rm -f ../docs/man/man9/homecomp.9.new
-rm -f ../docs/man/man9/hypot.9.new
 Making halcompile manpage invert.9
-Making halcompile manpage joyhandle.9
+rm -f ../docs/man/man9/hypot.9.new
 rm -f ../docs/man/man9/ilowpass.9.new
-Making halcompile manpage knob2float.9
 rm -f ../docs/man/man9/integ.9.new
+Making halcompile manpage joyhandle.9
+Making halcompile manpage knob2float.9
 Making halcompile manpage latencybins.9
-rm -f ../docs/man/man9/joyhandle.9.new
-Making halcompile manpage limit1.9
 rm -f ../docs/man/man9/invert.9.new
+Making halcompile manpage limit1.9
 rm -f ../docs/man/man9/knob2float.9.new
+rm -f ../docs/man/man9/joyhandle.9.new
+rm -f ../docs/man/man9/latencybins.9.new
 Making halcompile manpage limit2.9
 Making halcompile manpage limit3.9
-rm -f ../docs/man/man9/latencybins.9.new
 Making halcompile manpage limit_axis.9
 rm -f ../docs/man/man9/limit1.9.new
 Making halcompile manpage lincurve.9
 rm -f ../docs/man/man9/limit2.9.new
 rm -f ../docs/man/man9/limit3.9.new
+rm -f ../docs/man/man9/limit_axis.9.new
 Making halcompile manpage logic.9
 Making halcompile manpage lowpass.9
-rm -f ../docs/man/man9/limit_axis.9.new
 Making halcompile manpage lut5.9
 rm -f ../docs/man/man9/lincurve.9.new
 Making halcompile manpage maj3.9
 rm -f ../docs/man/man9/logic.9.new
-rm -f ../docs/man/man9/lowpass.9.new
-Making halcompile manpage match8.9
-Making halcompile manpage max31855.9
 rm -f ../docs/man/man9/lut5.9.new
-rm -f ../docs/man/man9/maj3.9.new
+Making halcompile manpage match8.9
+rm -f ../docs/man/man9/lowpass.9.new
+Making halcompile manpage max31855.9
 Making halcompile manpage mesa_pktgyro_test.9
+rm -f ../docs/man/man9/maj3.9.new
 Making halcompile manpage message.9
 rm -f ../docs/man/man9/match8.9.new
-rm -f ../docs/man/man9/max31855.9.new
-Making halcompile manpage millturn.9
-Making halcompile manpage minmax.9
 rm -f ../docs/man/man9/mesa_pktgyro_test.9.new
-rm -f ../docs/man/man9/message.9.new
+Making halcompile manpage millturn.9
+rm -f ../docs/man/man9/max31855.9.new
+Making halcompile manpage minmax.9
 Making halcompile manpage moveoff.9
+rm -f ../docs/man/man9/message.9.new
 Making halcompile manpage mult2.9
 rm -f ../docs/man/man9/millturn.9.new
-Making halcompile manpage multiclick.9
 rm -f ../docs/man/man9/minmax.9.new
+Making halcompile manpage multiclick.9
 Making halcompile manpage multiswitch.9
-rm -f ../docs/man/man9/mult2.9.new
 rm -f ../docs/man/man9/moveoff.9.new
 Making halcompile manpage mux16.9
+rm -f ../docs/man/man9/mult2.9.new
 Making halcompile manpage mux2.9
-rm -f ../docs/man/man9/multiclick.9.new
 rm -f ../docs/man/man9/multiswitch.9.new
+rm -f ../docs/man/man9/multiclick.9.new
 Making halcompile manpage mux4.9
 Making halcompile manpage mux8.9
 rm -f ../docs/man/man9/mux16.9.new
-rm -f ../docs/man/man9/mux2.9.new
 Making halcompile manpage near.9
+rm -f ../docs/man/man9/mux2.9.new
 Making halcompile manpage not.9
 rm -f ../docs/man/man9/mux4.9.new
 rm -f ../docs/man/man9/mux8.9.new
 Making halcompile manpage offset.9
 Making halcompile manpage ohmic.9
 rm -f ../docs/man/man9/near.9.new
-rm -f ../docs/man/man9/not.9.new
 Making halcompile manpage oneshot.9
+rm -f ../docs/man/man9/not.9.new
 Making halcompile manpage or2.9
 rm -f ../docs/man/man9/offset.9.new
 rm -f ../docs/man/man9/ohmic.9.new
 Making halcompile manpage orient.9
 Making halcompile manpage plasmac.9
-rm -f ../docs/man/man9/or2.9.new
 rm -f ../docs/man/man9/oneshot.9.new
 Making halcompile manpage radiobutton.9
+rm -f ../docs/man/man9/or2.9.new
 Making halcompile manpage sample_hold.9
 rm -f ../docs/man/man9/orient.9.new
 Making halcompile manpage scale.9
 rm -f ../docs/man/man9/radiobutton.9.new
-rm -f ../docs/man/man9/sample_hold.9.new
-rm -f ../docs/man/man9/plasmac.9.new
 Making halcompile manpage scaled_s32_sums.9
+rm -f ../docs/man/man9/plasmac.9.new
 Making halcompile manpage select8.9
+rm -f ../docs/man/man9/sample_hold.9.new
 Making halcompile manpage sim_axis_hardware.9
 rm -f ../docs/man/man9/scale.9.new
-Making halcompile manpage sim_home_switch.9
-rm -f ../docs/man/man9/select8.9.new
 rm -f ../docs/man/man9/scaled_s32_sums.9.new
+Making halcompile manpage sim_home_switch.9
 Making halcompile manpage sim_matrix_kb.9
+rm -f ../docs/man/man9/select8.9.new
 Making halcompile manpage sim_parport.9
 rm -f ../docs/man/man9/sim_axis_hardware.9.new
 Making halcompile manpage sim_spindle.9
 rm -f ../docs/man/man9/sim_home_switch.9.new
-Making halcompile manpage simple_tp.9
 rm -f ../docs/man/man9/sim_matrix_kb.9.new
-rm -f ../docs/man/man9/sim_spindle.9.new
+Making halcompile manpage simple_tp.9
 Making halcompile manpage sphereprobe.9
-Making halcompile manpage spindle.9
 rm -f ../docs/man/man9/sim_parport.9.new
+Making halcompile manpage spindle.9
+rm -f ../docs/man/man9/sim_spindle.9.new
 Making halcompile manpage spindle_monitor.9
 rm -f ../docs/man/man9/simple_tp.9.new
-Making halcompile manpage steptest.9
 rm -f ../docs/man/man9/sphereprobe.9.new
+Making halcompile manpage steptest.9
 Making halcompile manpage sum2.9
-rm -f ../docs/man/man9/spindle_monitor.9.new
 rm -f ../docs/man/man9/spindle.9.new
 Making halcompile manpage thc.9
+rm -f ../docs/man/man9/spindle_monitor.9.new
 Making halcompile manpage thcud.9
+rm -f ../docs/man/man9/sum2.9.new
 rm -f ../docs/man/man9/steptest.9.new
 Making halcompile manpage threadtest.9
-rm -f ../docs/man/man9/sum2.9.new
-rm -f ../docs/man/man9/thc.9.new
 Making halcompile manpage time.9
+rm -f ../docs/man/man9/thc.9.new
 Making halcompile manpage timedelay.9
 rm -f ../docs/man/man9/thcud.9.new
-rm -f ../docs/man/man9/threadtest.9.new
 Making halcompile manpage timedelta.9
+rm -f ../docs/man/man9/threadtest.9.new
 Making halcompile manpage tof.9
 rm -f ../docs/man/man9/time.9.new
-rm -f ../docs/man/man9/timedelta.9.new
-rm -f ../docs/man/man9/timedelay.9.new
 Making halcompile manpage toggle.9
-rm -f ../docs/man/man9/tof.9.new
+rm -f ../docs/man/man9/timedelay.9.new
 Making halcompile manpage toggle2nist.9
+rm -f ../docs/man/man9/timedelta.9.new
 Making halcompile manpage ton.9
-Making halcompile manpage tp.9
+rm -f ../docs/man/man9/tof.9.new
 rm -f ../docs/man/man9/toggle.9.new
-rm -f ../docs/man/man9/ton.9.new
-rm -f ../docs/man/man9/toggle2nist.9.new
-rm -f ../docs/man/man9/tp.9.new
+Making halcompile manpage tp.9
 Making halcompile manpage tristate_bit.9
+rm -f ../docs/man/man9/toggle2nist.9.new
+rm -f ../docs/man/man9/ton.9.new
 Making halcompile manpage tristate_float.9
 Making halcompile manpage updown.9
-Making halcompile manpage userkins.9
+rm -f ../docs/man/man9/tp.9.new
 rm -f ../docs/man/man9/tristate_bit.9.new
+Making halcompile manpage wcomp.9
+Making halcompile manpage userkins.9
 rm -f ../docs/man/man9/tristate_float.9.new
 rm -f ../docs/man/man9/updown.9.new
-Making halcompile manpage wcomp.9
 Making halcompile manpage xhc_hb04_util.9
-rm -f ../docs/man/man9/userkins.9.new
 Making halcompile manpage xor2.9
-Making halcompile manpage xyzab_tdr_kins.9
-rm -f ../docs/man/man9/xhc_hb04_util.9.new
-rm -f ../docs/man/man9/xor2.9.new
-rm -f ../docs/man/man9/xyzab_tdr_kins.9.new
 rm -f ../docs/man/man9/wcomp.9.new
+rm -f ../docs/man/man9/userkins.9.new
+Making halcompile manpage xyzab_tdr_kins.9
 Making halcompile manpage tpcomp.9
+rm -f ../docs/man/man9/xor2.9.new
+rm -f ../docs/man/man9/xhc_hb04_util.9.new
 Making halcompile manpage serport.9
 Making halcompile manpage mesa_7i65.9
+rm -f ../docs/man/man9/xyzab_tdr_kins.9.new
+rm -f ../docs/man/man9/tpcomp.9.new
 Making halcompile manpage mesa_uart.9
 Making halcompile manpage thermistor.1
-rm -f ../docs/man/man9/tpcomp.9.new
 Compiling objects/hal/user_comps/thermistor.c
 Compiling hal/user_comps/wj200_vfd/wj200_vfd.c
 Compiling hal/user_comps/pi500_vfd/pi500_vfd.c
 Linking libpyplugin.so.0
-c++ -std=gnu++17 -g -L/home/runner/work/_temp/linuxcnc-e20-preflight/lib -Wl,-rpath,/home/runner/work/_temp/linuxcnc-e20-preflight/lib -ltirpc  -lgpiod  -Xlinker -export-dynamic -Wl,-O1 -Wl,-Bsymbolic-functions -Wl,-soname,libpyplugin.so.0 -shared -o ../lib/libpyplugin.so.0 objects/emc/pythonplugin/python_plugin.o ../lib/liblinuxcncini.so -lstdc++ -lboost_python312 -L/usr/lib/x86_64-linux-gnu -lpython3.12 -ldl -lm
+c++ -std=gnu++17 -g -L/home/runner/work/_temp/linuxcnc-e20-authoritative/lib -Wl,-rpath,/home/runner/work/_temp/linuxcnc-e20-authoritative/lib -ltirpc  -lgpiod  -Xlinker -export-dynamic -Wl,-O1 -Wl,-Bsymbolic-functions -Wl,-soname,libpyplugin.so.0 -shared -o ../lib/libpyplugin.so.0 objects/emc/pythonplugin/python_plugin.o ../lib/liblinuxcncini.so -lstdc++ -lboost_python312 -L/usr/lib/x86_64-linux-gnu -lpython3.12 -ldl -lm
 emc/Submakefile:Linking genserkins
 ln -sf libtooldata.so.0 ../lib/libtooldata.so
 Linking python module _hal.so
@@ -4816,8 +4817,8 @@ Linking ../rtlib/max31855.so
 Linking ../rtlib/mesa_pktgyro_test.so
 Linking ../rtlib/message.so
 Linking ../rtlib/millturn.so
-Linking ../rtlib/moveoff.so
 Linking ../rtlib/minmax.so
+Linking ../rtlib/moveoff.so
 Linking ../rtlib/mult2.so
 Linking ../rtlib/multiclick.so
 Linking ../rtlib/multiswitch.so
@@ -4840,8 +4841,8 @@ Linking ../rtlib/scaled_s32_sums.so
 Linking ../rtlib/select8.so
 Linking ../rtlib/sim_axis_hardware.so
 Linking ../rtlib/sim_home_switch.so
-Linking ../rtlib/sim_parport.so
 Linking ../rtlib/sim_matrix_kb.so
+Linking ../rtlib/sim_parport.so
 Linking ../rtlib/sim_spindle.so
 Linking ../rtlib/simple_tp.so
 Linking ../rtlib/sphereprobe.so
@@ -4877,7 +4878,7 @@ Linking wj200_vfd
 Linking pi500_vfd
 ln -sf libpyplugin.so.0 ../lib/libpyplugin.so
 Linking librs274.so.0
-c++ -std=gnu++17 -g -L/home/runner/work/_temp/linuxcnc-e20-preflight/lib -Wl,-rpath,/home/runner/work/_temp/linuxcnc-e20-preflight/lib -ltirpc  -lgpiod  -Xlinker -export-dynamic -Wl,-O1 -Wl,-Bsymbolic-functions -Wl,-soname,librs274.so.0 -shared -o ../lib/librs274.so.0 objects/emc/rs274ngc/interp_arc.o objects/emc/rs274ngc/interp_array.o objects/emc/rs274ngc/interp_base.o objects/emc/rs274ngc/interp_check.o objects/emc/rs274ngc/interp_convert.o objects/emc/rs274ngc/interp_queue.o objects/emc/rs274ngc/interp_cycles.o objects/emc/rs274ngc/interp_execute.o objects/emc/rs274ngc/interp_find.o objects/emc/rs274ngc/interp_internal.o objects/emc/rs274ngc/interp_inverse.o objects/emc/rs274ngc/interp_read.o objects/emc/rs274ngc/interp_write.o objects/emc/rs274ngc/interp_o_word.o objects/emc/rs274ngc/interp_g7x.o objects/emc/rs274ngc/modal_state.o objects/emc/rs274ngc/nurbs_additional_functions.o objects/emc/rs274ngc/interp_namedparams.o objects/emc/rs274ngc/interp_python.o objects/emc/rs274ngc/interp_remap.o objects/emc/rs274ngc/interp_setup.o objects/emc/rs274ngc/canonmodule.o objects/emc/rs274ngc/pyparamclass.o objects/emc/rs274ngc/pyemctypes.o objects/emc/rs274ngc/pyinterp1.o objects/emc/rs274ngc/pyblock.o objects/emc/rs274ngc/pyarrays.o objects/emc/rs274ngc/interpmodule.o objects/emc/rs274ngc/rs274ngc_pre.o objects/emc/rs274ngc/interp_inspection.o ../lib/liblinuxcncini.so ../lib/libpyplugin.so ../lib/liblinuxcnchal.so.0 ../lib/libtooldata.so.0 -lstdc++ -lboost_python312 -L/usr/lib/x86_64-linux-gnu -lpython3.12 -ldl -lm
+c++ -std=gnu++17 -g -L/home/runner/work/_temp/linuxcnc-e20-authoritative/lib -Wl,-rpath,/home/runner/work/_temp/linuxcnc-e20-authoritative/lib -ltirpc  -lgpiod  -Xlinker -export-dynamic -Wl,-O1 -Wl,-Bsymbolic-functions -Wl,-soname,librs274.so.0 -shared -o ../lib/librs274.so.0 objects/emc/rs274ngc/interp_arc.o objects/emc/rs274ngc/interp_array.o objects/emc/rs274ngc/interp_base.o objects/emc/rs274ngc/interp_check.o objects/emc/rs274ngc/interp_convert.o objects/emc/rs274ngc/interp_queue.o objects/emc/rs274ngc/interp_cycles.o objects/emc/rs274ngc/interp_execute.o objects/emc/rs274ngc/interp_find.o objects/emc/rs274ngc/interp_internal.o objects/emc/rs274ngc/interp_inverse.o objects/emc/rs274ngc/interp_read.o objects/emc/rs274ngc/interp_write.o objects/emc/rs274ngc/interp_o_word.o objects/emc/rs274ngc/interp_g7x.o objects/emc/rs274ngc/modal_state.o objects/emc/rs274ngc/nurbs_additional_functions.o objects/emc/rs274ngc/interp_namedparams.o objects/emc/rs274ngc/interp_python.o objects/emc/rs274ngc/interp_remap.o objects/emc/rs274ngc/interp_setup.o objects/emc/rs274ngc/canonmodule.o objects/emc/rs274ngc/pyparamclass.o objects/emc/rs274ngc/pyemctypes.o objects/emc/rs274ngc/pyinterp1.o objects/emc/rs274ngc/pyblock.o objects/emc/rs274ngc/pyarrays.o objects/emc/rs274ngc/interpmodule.o objects/emc/rs274ngc/rs274ngc_pre.o objects/emc/rs274ngc/interp_inspection.o ../lib/liblinuxcncini.so ../lib/libpyplugin.so ../lib/liblinuxcnchal.so.0 ../lib/libtooldata.so.0 -lstdc++ -lboost_python312 -L/usr/lib/x86_64-linux-gnu -lpython3.12 -ldl -lm
 ln -sf libnml.so.0 ../lib/libnml.so
 Linking linuxcnc.so
 Linking linuxcncrsh
@@ -4891,16 +4892,16 @@ Linking motion-logger
 Linking python module linuxcnc.so
 ln -sf librs274.so.0 ../lib/librs274.so
 Linking milltask
-c++ -std=gnu++17 -o ../bin/milltask objects/emc/motion/emcmotglb.o objects/emc/task/emctask.o objects/emc/task/emccanon.o objects/emc/task/emctaskmain.o objects/emc/motion/usrmotintf.o objects/emc/motion/emcmotutil.o objects/emc/task/taskintf.o objects/emc/motion/dbuf.o objects/emc/motion/stashf.o objects/emc/task/taskmodule.o objects/emc/task/taskclass.o objects/emc/task/backtrace.o ../lib/librs274.so.0 ../lib/liblinuxcnc.a ../lib/libnml.so.0 ../lib/liblinuxcncini.so.0 ../lib/libposemath.so.0 ../lib/liblinuxcnchal.so.0 ../lib/libpyplugin.so.0 ../lib/libtooldata.so.0 -L/home/runner/work/_temp/linuxcnc-e20-preflight/lib -Wl,-rpath,/home/runner/work/_temp/linuxcnc-e20-preflight/lib -ltirpc  -lgpiod  -Xlinker -export-dynamic -Wl,-O1 -Wl,-Bsymbolic-functions -lboost_python312 -L/usr/lib/x86_64-linux-gnu -lpython3.12 -ldl -lm
+c++ -std=gnu++17 -o ../bin/milltask objects/emc/motion/emcmotglb.o objects/emc/task/emctask.o objects/emc/task/emccanon.o objects/emc/task/emctaskmain.o objects/emc/motion/usrmotintf.o objects/emc/motion/emcmotutil.o objects/emc/task/taskintf.o objects/emc/motion/dbuf.o objects/emc/motion/stashf.o objects/emc/task/taskmodule.o objects/emc/task/taskclass.o objects/emc/task/backtrace.o ../lib/librs274.so.0 ../lib/liblinuxcnc.a ../lib/libnml.so.0 ../lib/liblinuxcncini.so.0 ../lib/libposemath.so.0 ../lib/liblinuxcnchal.so.0 ../lib/libpyplugin.so.0 ../lib/libtooldata.so.0 -L/home/runner/work/_temp/linuxcnc-e20-authoritative/lib -Wl,-rpath,/home/runner/work/_temp/linuxcnc-e20-authoritative/lib -ltirpc  -lgpiod  -Xlinker -export-dynamic -Wl,-O1 -Wl,-Bsymbolic-functions -lboost_python312 -L/usr/lib/x86_64-linux-gnu -lpython3.12 -ldl -lm
 Linking rs274
 Linking python module gcode.so
-c++ -std=gnu++17 -L/home/runner/work/_temp/linuxcnc-e20-preflight/lib -Wl,-rpath,/home/runner/work/_temp/linuxcnc-e20-preflight/lib -ltirpc  -lgpiod  -shared -o ../lib/python/gcode.so objects/emc/rs274ngc/gcodemodule.o ../lib/librs274.so.0 -lstdc++
+c++ -std=gnu++17 -L/home/runner/work/_temp/linuxcnc-e20-authoritative/lib -Wl,-rpath,/home/runner/work/_temp/linuxcnc-e20-authoritative/lib -ltirpc  -lgpiod  -shared -o ../lib/python/gcode.so objects/emc/rs274ngc/gcodemodule.o ../lib/librs274.so.0 -lstdc++
 Linking canterp.so
 You now need to run 'sudo make setuid' in order to run in place with access to hardware.
-make: Leaving directory '/home/runner/work/_temp/linuxcnc-e20-preflight/src'
+make: Leaving directory '/home/runner/work/_temp/linuxcnc-e20-authoritative/src'
 Component Pins:
 Owner   Type  Dir         Value  Name
-     8  float OUT            15  e20-model.0.internal-generator-counter ==> e20-internal-counter
+     8  float OUT            14  e20-model.0.internal-generator-counter ==> e20-internal-counter
      8  bit   OUT         FALSE  e20-model.0.io-error ==> e20-io-error
      8  bit   OUT         FALSE  e20-model.0.io-error-clear-request ==> e20-clear
      8  bit   OUT          TRUE  e20-model.0.machine-motion-authorized ==> e20-authorized
@@ -4913,21 +4914,21 @@ Owner   Type  Dir         Value  Name
      8  bit   OUT          TRUE  e20-model.0.physical-io-authority ==> e20-physical-authority
      8  bit   OUT         FALSE  e20-model.0.reauthorize-request ==> e20-reauth-req
      8  bit   OUT         FALSE  e20-model.0.state-revalidated ==> e20-revalidated
-     8  s32   OUT           390  e20-model.0.time
+     8  s32   OUT            78  e20-model.0.time
      8  bit   OUT         FALSE  e20-model.0.transaction-error ==> e20-tx-error
      8  bit   OUT          TRUE  e20-model.0.transport-current-good ==> e20-transport-good
      8  bit   OUT         FALSE  e20-model.0.watchdog-bitten ==> e20-watchdog
 
 Realtime Threads:
      Period  FP     Name               (     Time, Max-Time )
-    1000000  YES          servo-thread (     1222,     2262 )
+    1000000  YES          servo-thread (      182,     2574 )
                   1 e20-model.0
                   2 sampler.0
 
 sampler-overruns=0
-E20-025 PREFLIGHT RUNTIME PREDICATES PASS
+E20-026 AUTHORITATIVE RUNTIME PREDICATES PASS
 samples=1100
-phase_counts={0: 280, 1: 1, 2: 100, 3: 5, 4: 100, 5: 100, 6: 100, 7: 100, 8: 314}
+phase_counts={0: 281, 1: 1, 2: 100, 3: 5, 4: 100, 5: 100, 6: 100, 7: 100, 8: 313}
 P1 isolated error: level=2, io_error=false, authorization revoked
 P2 first clean cycle: packet_error=false, level=1, authorization remains false
 P3 levels=[2.0, 4.0, 6.0, 8.0, 10.0] with io_error on fifth error
@@ -4937,25 +4938,26 @@ P6 transport/driver/board authority restored without state revalidation; authori
 P7 explicit revalidation+request authorizes
 P8 fresh fault revokes authorization immediately
 NOTE: watchdog/physical-I/O/state-revalidation signals are synthetic laboratory witnesses.
-NOTE: this preflight does not prove Ethernet physics, Mesa stopping behavior, or functional safety. Frozen Gates A-J remain UNSCORED.
-analysis.txt 911 bytes
-atomic.samples 74575 bytes
+NOTE: this run does not prove Ethernet physics, exact Mesa-output timing, or functional safety. Frozen Gates A-J require independent artifact scoring.
+analysis.txt 932 bytes
+atomic.samples 74570 bytes
 e20.hal 1412 bytes
 e20_model.comp 2941 bytes
 hal-setup.stderr 31 bytes
 hal-setup.stdout 0 bytes
 halcompile.stderr 0 bytes
-halcompile.stdout 122 bytes
+halcompile.stdout 126 bytes
 halsampler.stderr 0 bytes
 halsampler.stdout 0 bytes
+inventory.txt 0 bytes
 linuxcnc-commit.txt 41 bytes
-predeclared-model.txt 404 bytes
+predeclared-model.txt 433 bytes
 realtime-start.stderr 0 bytes
 realtime-start.stdout 0 bytes
 recorder-health.txt 19 bytes
 thread.txt 205 bytes
 topology.txt 1431 bytes
-E20-025 EVIDENCE-RETENTION PREFLIGHT PASS; frozen Gates A-J remain UNSCORED.
+E20-026 AUTHORITATIVE EVIDENCE PACKAGE PRODUCED; score frozen Gates A-J only from retained artifact.
 ```
 
 ## Standard error
@@ -4970,7 +4972,7 @@ No containers need to be restarted.
 No user sessions are running outdated binaries.
 
 No VM guests are running outdated hypervisor (qemu) binaries on this host.
-Cloning into '/home/runner/work/_temp/linuxcnc-e20-preflight'...
+Cloning into '/home/runner/work/_temp/linuxcnc-e20-authoritative'...
 warning: refs/tags/v2.9.10 4e7abeab3e764a42ef9def932333a1d4004e547b is not a commit!
 Note: switching to '86cdca76fa2a36274c432caa21952b23c267989a'.
 
@@ -4989,7 +4991,7 @@ Or undo this operation with:
 
 Turn off this advice by setting config variable advice.detachedHead to false
 
-Updating files:   0% (1/8769)Updating files:   1% (88/8769)Updating files:   2% (176/8769)Updating files:   3% (264/8769)Updating files:   4% (351/8769)Updating files:   5% (439/8769)Updating files:   6% (527/8769)Updating files:   7% (614/8769)Updating files:   8% (702/8769)Updating files:   9% (790/8769)Updating files:  10% (877/8769)Updating files:  11% (965/8769)Updating files:  12% (1053/8769)Updating files:  13% (1140/8769)Updating files:  14% (1228/8769)Updating files:  15% (1316/8769)Updating files:  16% (1404/8769)Updating files:  17% (1491/8769)Updating files:  18% (1579/8769)Updating files:  19% (1667/8769)Updating files:  20% (1754/8769)Updating files:  21% (1842/8769)Updating files:  22% (1930/8769)Updating files:  23% (2017/8769)Updating files:  24% (2105/8769)Updating files:  25% (2193/8769)Updating files:  26% (2280/8769)Updating files:  26% (2315/8769)Updating files:  27% (2368/8769)Updating files:  28% (2456/8769)Updating files:  29% (2544/8769)Updating files:  30% (2631/8769)Updating files:  31% (2719/8769)Updating files:  32% (2807/8769)Updating files:  33% (2894/8769)Updating files:  34% (2982/8769)Updating files:  35% (3070/8769)Updating files:  36% (3157/8769)Updating files:  37% (3245/8769)Updating files:  38% (3333/8769)Updating files:  39% (3420/8769)Updating files:  40% (3508/8769)Updating files:  41% (3596/8769)Updating files:  42% (3683/8769)Updating files:  43% (3771/8769)Updating files:  44% (3859/8769)Updating files:  45% (3947/8769)Updating files:  46% (4034/8769)Updating files:  47% (4122/8769)Updating files:  48% (4210/8769)Updating files:  49% (4297/8769)Updating files:  50% (4385/8769)Updating files:  51% (4473/8769)Updating files:  52% (4560/8769)Updating files:  53% (4648/8769)Updating files:  54% (4736/8769)Updating files:  55% (4823/8769)Updating files:  56% (4911/8769)Updating files:  57% (4999/8769)Updating files:  58% (5087/8769)Updating files:  59% (5174/8769)Updating files:  60% (5262/8769)Updating files:  61% (5350/8769)Updating files:  62% (5437/8769)Updating files:  63% (5525/8769)Updating files:  64% (5613/8769)Updating files:  65% (5700/8769)Updating files:  66% (5788/8769)Updating files:  67% (5876/8769)Updating files:  68% (5963/8769)Updating files:  69% (6051/8769)Updating files:  70% (6139/8769)Updating files:  71% (6226/8769)Updating files:  72% (6314/8769)Updating files:  73% (6402/8769)Updating files:  74% (6490/8769)Updating files:  75% (6577/8769)Updating files:  76% (6665/8769)Updating files:  77% (6753/8769)Updating files:  78% (6840/8769)Updating files:  79% (6928/8769)Updating files:  80% (7016/8769)Updating files:  81% (7103/8769)Updating files:  82% (7191/8769)Updating files:  83% (7279/8769)Updating files:  84% (7366/8769)Updating files:  85% (7454/8769)Updating files:  86% (7542/8769)Updating files:  87% (7630/8769)Updating files:  88% (7717/8769)Updating files:  89% (7805/8769)Updating files:  90% (7893/8769)Updating files:  91% (7980/8769)Updating files:  92% (8068/8769)Updating files:  93% (8156/8769)Updating files:  94% (8243/8769)Updating files:  95% (8331/8769)Updating files:  96% (8419/8769)Updating files:  97% (8506/8769)Updating files:  98% (8594/8769)Updating files:  99% (8682/8769)Updating files: 100% (8769/8769)Updating files: 100% (8769/8769), done.
+Updating files:   0% (1/8769)Updating files:   1% (88/8769)Updating files:   2% (176/8769)Updating files:   3% (264/8769)Updating files:   4% (351/8769)Updating files:   5% (439/8769)Updating files:   6% (527/8769)Updating files:   7% (614/8769)Updating files:   8% (702/8769)Updating files:   9% (790/8769)Updating files:  10% (877/8769)Updating files:  11% (965/8769)Updating files:  12% (1053/8769)Updating files:  13% (1140/8769)Updating files:  14% (1228/8769)Updating files:  15% (1316/8769)Updating files:  16% (1404/8769)Updating files:  17% (1491/8769)Updating files:  18% (1579/8769)Updating files:  19% (1667/8769)Updating files:  20% (1754/8769)Updating files:  21% (1842/8769)Updating files:  22% (1930/8769)Updating files:  23% (2017/8769)Updating files:  24% (2105/8769)Updating files:  25% (2193/8769)Updating files:  26% (2280/8769)Updating files:  26% (2353/8769)Updating files:  27% (2368/8769)Updating files:  28% (2456/8769)Updating files:  29% (2544/8769)Updating files:  30% (2631/8769)Updating files:  31% (2719/8769)Updating files:  32% (2807/8769)Updating files:  33% (2894/8769)Updating files:  34% (2982/8769)Updating files:  35% (3070/8769)Updating files:  36% (3157/8769)Updating files:  37% (3245/8769)Updating files:  38% (3333/8769)Updating files:  39% (3420/8769)Updating files:  40% (3508/8769)Updating files:  41% (3596/8769)Updating files:  42% (3683/8769)Updating files:  43% (3771/8769)Updating files:  44% (3859/8769)Updating files:  45% (3947/8769)Updating files:  46% (4034/8769)Updating files:  47% (4122/8769)Updating files:  48% (4210/8769)Updating files:  49% (4297/8769)Updating files:  50% (4385/8769)Updating files:  51% (4473/8769)Updating files:  52% (4560/8769)Updating files:  53% (4648/8769)Updating files:  54% (4736/8769)Updating files:  55% (4823/8769)Updating files:  56% (4911/8769)Updating files:  57% (4999/8769)Updating files:  58% (5087/8769)Updating files:  59% (5174/8769)Updating files:  60% (5262/8769)Updating files:  61% (5350/8769)Updating files:  62% (5437/8769)Updating files:  63% (5525/8769)Updating files:  64% (5613/8769)Updating files:  65% (5700/8769)Updating files:  66% (5788/8769)Updating files:  67% (5876/8769)Updating files:  68% (5963/8769)Updating files:  69% (6051/8769)Updating files:  70% (6139/8769)Updating files:  71% (6226/8769)Updating files:  72% (6314/8769)Updating files:  73% (6402/8769)Updating files:  74% (6490/8769)Updating files:  75% (6577/8769)Updating files:  76% (6665/8769)Updating files:  77% (6753/8769)Updating files:  78% (6840/8769)Updating files:  79% (6928/8769)Updating files:  80% (7016/8769)Updating files:  81% (7103/8769)Updating files:  82% (7191/8769)Updating files:  83% (7279/8769)Updating files:  84% (7366/8769)Updating files:  85% (7454/8769)Updating files:  86% (7542/8769)Updating files:  87% (7630/8769)Updating files:  88% (7717/8769)Updating files:  89% (7805/8769)Updating files:  90% (7893/8769)Updating files:  91% (7980/8769)Updating files:  92% (8068/8769)Updating files:  93% (8156/8769)Updating files:  94% (8243/8769)Updating files:  95% (8331/8769)Updating files:  96% (8419/8769)Updating files:  97% (8506/8769)Updating files:  98% (8594/8769)Updating files:  99% (8682/8769)Updating files: 100% (8769/8769)Updating files: 100% (8769/8769), done.
 
 Running kernel seems to be up-to-date.
 
@@ -5011,7 +5013,7 @@ Done reading dependencies
 Reading 0/246 realtime dependency files
 Done reading realtime dependencies
 asciidoc: reading: /etc/asciidoc/asciidoc.conf
-asciidoc: reading: /home/runner/work/_temp/linuxcnc-e20-preflight/docs/src/man/man1/emccalib.1.adoc
+asciidoc: reading: /home/runner/work/_temp/linuxcnc-e20-authoritative/docs/src/man/man1/emccalib.1.adoc
 asciidoc: reading: /etc/asciidoc/docbook45.conf
 asciidoc: reading: /etc/asciidoc/filters/source/source-highlight-filter.conf
 asciidoc: reading: /etc/asciidoc/filters/code/code-filter.conf
@@ -5021,9 +5023,9 @@ asciidoc: reading: /etc/asciidoc/filters/graphviz/graphviz-filter.conf
 asciidoc: reading: /etc/asciidoc/lang-en.conf
 <unknown>:1: SyntaxWarning: invalid escape sequence '\S'
 <unknown>:1: SyntaxWarning: invalid escape sequence '\S'
-asciidoc: writing: /home/runner/work/_temp/linuxcnc-e20-preflight/docs/man/man1/emccalib.1.xml
+asciidoc: writing: /home/runner/work/_temp/linuxcnc-e20-authoritative/docs/man/man1/emccalib.1.xml
 asciidoc: reading: /etc/asciidoc/asciidoc.conf
-asciidoc: reading: /home/runner/work/_temp/linuxcnc-e20-preflight/docs/src/man/man1/halstreamer.1.adoc
+asciidoc: reading: /home/runner/work/_temp/linuxcnc-e20-authoritative/docs/src/man/man1/halstreamer.1.adoc
 asciidoc: reading: /etc/asciidoc/docbook45.conf
 asciidoc: reading: /etc/asciidoc/filters/source/source-highlight-filter.conf
 asciidoc: reading: /etc/asciidoc/filters/code/code-filter.conf
@@ -5033,130 +5035,46 @@ asciidoc: reading: /etc/asciidoc/filters/graphviz/graphviz-filter.conf
 asciidoc: reading: /etc/asciidoc/lang-en.conf
 <unknown>:1: SyntaxWarning: invalid escape sequence '\S'
 <unknown>:1: SyntaxWarning: invalid escape sequence '\S'
-asciidoc: writing: /home/runner/work/_temp/linuxcnc-e20-preflight/docs/man/man1/halstreamer.1.xml
-asciidoc: reading: /etc/asciidoc/asciidoc.conf
-asciidoc: reading: /home/runner/work/_temp/linuxcnc-e20-preflight/docs/src/man/man1/hy_gt_vfd.1.adoc
-asciidoc: reading: /etc/asciidoc/docbook45.conf
-asciidoc: reading: /etc/asciidoc/asciidoc.conf
-asciidoc: reading: /etc/asciidoc/filters/source/source-highlight-filter.conf
-asciidoc: reading: /etc/asciidoc/filters/code/code-filter.conf
-asciidoc: reading: /etc/asciidoc/filters/latex/latex-filter.conf
-asciidoc: reading: /etc/asciidoc/filters/music/music-filter.conf
-asciidoc: reading: /etc/asciidoc/filters/graphviz/graphviz-filter.conf
-asciidoc: reading: /etc/asciidoc/lang-en.conf
-<unknown>:1: SyntaxWarning: invalid escape sequence '\S'
-<unknown>:1: SyntaxWarning: invalid escape sequence '\S'
-asciidoc: writing: /home/runner/work/_temp/linuxcnc-e20-preflight/docs/man/man1/hy_gt_vfd.1.xml
-asciidoc: reading: /home/runner/work/_temp/linuxcnc-e20-preflight/docs/src/man/man1/mesambccc.1.adoc
-asciidoc: reading: /etc/asciidoc/docbook45.conf
-asciidoc: reading: /etc/asciidoc/filters/source/source-highlight-filter.conf
-asciidoc: reading: /etc/asciidoc/filters/code/code-filter.conf
-asciidoc: reading: /etc/asciidoc/filters/latex/latex-filter.conf
-asciidoc: reading: /etc/asciidoc/filters/music/music-filter.conf
-asciidoc: reading: /etc/asciidoc/filters/graphviz/graphviz-filter.conf
-asciidoc: reading: /etc/asciidoc/lang-en.conf
-<unknown>:1: SyntaxWarning: invalid escape sequence '\S'
-<unknown>:1: SyntaxWarning: invalid escape sequence '\S'
-asciidoc: writing: /home/runner/work/_temp/linuxcnc-e20-preflight/docs/man/man1/mesambccc.1.xml
-asciidoc: reading: /etc/asciidoc/asciidoc.conf
-asciidoc: reading: /home/runner/work/_temp/linuxcnc-e20-preflight/docs/src/man/man1/mqtt-publisher.1.adoc
-asciidoc: reading: /etc/asciidoc/docbook45.conf
-asciidoc: reading: /etc/asciidoc/filters/source/source-highlight-filter.conf
-asciidoc: reading: /etc/asciidoc/filters/code/code-filter.conf
-asciidoc: reading: /etc/asciidoc/filters/latex/latex-filter.conf
-asciidoc: reading: /etc/asciidoc/filters/music/music-filter.conf
-asciidoc: reading: /etc/asciidoc/filters/graphviz/graphviz-filter.conf
-asciidoc: reading: /etc/asciidoc/lang-en.conf
-<unknown>:1: SyntaxWarning: invalid escape sequence '\S'
-<unknown>:1: SyntaxWarning: invalid escape sequence '\S'
-asciidoc: writing: /home/runner/work/_temp/linuxcnc-e20-preflight/docs/man/man1/mqtt-publisher.1.xml
-asciidoc: reading: /etc/asciidoc/asciidoc.conf
-asciidoc: reading: /home/runner/work/_temp/linuxcnc-e20-preflight/docs/src/man/man1/sendkeys.1.adoc
-asciidoc: reading: /etc/asciidoc/docbook45.conf
-asciidoc: reading: /etc/asciidoc/filters/source/source-highlight-filter.conf
-asciidoc: reading: /etc/asciidoc/filters/code/code-filter.conf
-asciidoc: reading: /etc/asciidoc/filters/latex/latex-filter.conf
-asciidoc: reading: /etc/asciidoc/filters/music/music-filter.conf
-asciidoc: reading: /etc/asciidoc/filters/graphviz/graphviz-filter.conf
-asciidoc: reading: /etc/asciidoc/lang-en.conf
-<unknown>:1: SyntaxWarning: invalid escape sequence '\S'
-<unknown>:1: SyntaxWarning: invalid escape sequence '\S'
-asciidoc: writing: /home/runner/work/_temp/linuxcnc-e20-preflight/docs/man/man1/sendkeys.1.xml
-asciidoc: reading: /etc/asciidoc/asciidoc.conf
-asciidoc: reading: /home/runner/work/_temp/linuxcnc-e20-preflight/docs/src/man/man1/svd-ps_vfd.1.adoc
-asciidoc: reading: /etc/asciidoc/docbook45.conf
-asciidoc: reading: /etc/asciidoc/filters/source/source-highlight-filter.conf
-asciidoc: reading: /etc/asciidoc/filters/code/code-filter.conf
-asciidoc: reading: /etc/asciidoc/filters/latex/latex-filter.conf
-asciidoc: reading: /etc/asciidoc/filters/music/music-filter.conf
-asciidoc: reading: /etc/asciidoc/filters/graphviz/graphviz-filter.conf
-asciidoc: reading: /etc/asciidoc/lang-en.conf
-<unknown>:1: SyntaxWarning: invalid escape sequence '\S'
-<unknown>:1: SyntaxWarning: invalid escape sequence '\S'
-asciidoc: writing: /home/runner/work/_temp/linuxcnc-e20-preflight/docs/man/man1/svd-ps_vfd.1.xml
-asciidoc: reading: /etc/asciidoc/asciidoc.conf
-asciidoc: reading: /home/runner/work/_temp/linuxcnc-e20-preflight/docs/src/man/man1/xhc-whb04b-6.1.adoc
-asciidoc: reading: /etc/asciidoc/docbook45.conf
-asciidoc: reading: /etc/asciidoc/filters/source/source-highlight-filter.conf
-asciidoc: reading: /etc/asciidoc/filters/code/code-filter.conf
-asciidoc: reading: /etc/asciidoc/filters/latex/latex-filter.conf
-asciidoc: reading: /etc/asciidoc/filters/music/music-filter.conf
-asciidoc: reading: /etc/asciidoc/filters/graphviz/graphviz-filter.conf
-asciidoc: reading: /etc/asciidoc/lang-en.conf
-<unknown>:1: SyntaxWarning: invalid escape sequence '\S'
-<unknown>:1: SyntaxWarning: invalid escape sequence '\S'
-asciidoc: writing: /home/runner/work/_temp/linuxcnc-e20-preflight/docs/man/man1/xhc-whb04b-6.1.xml
-asciidoc: reading: /etc/asciidoc/asciidoc.conf
-asciidoc: reading: /home/runner/work/_temp/linuxcnc-e20-preflight/docs/src/man/man3/hm2_pktuart.3.adoc
-asciidoc: reading: /etc/asciidoc/docbook45.conf
-asciidoc: reading: /etc/asciidoc/filters/source/source-highlight-filter.conf
-asciidoc: reading: /etc/asciidoc/filters/code/code-filter.conf
-asciidoc: reading: /etc/asciidoc/filters/latex/latex-filter.conf
-asciidoc: reading: /etc/asciidoc/filters/music/music-filter.conf
-asciidoc: reading: /etc/asciidoc/filters/graphviz/graphviz-filter.conf
-asciidoc: reading: /etc/asciidoc/lang-en.conf
-<unknown>:1: SyntaxWarning: invalid escape sequence '\S'
-<unknown>:1: SyntaxWarning: invalid escape sequence '\S'
-asciidoc: writing: /home/runner/work/_temp/linuxcnc-e20-preflight/docs/man/man3/hm2_pktuart.3.xml
-asciidoc: reading: /etc/asciidoc/asciidoc.conf
-asciidoc: reading: /home/runner/work/_temp/linuxcnc-e20-preflight/docs/src/man/man9/enum.9.adoc
-asciidoc: reading: /etc/asciidoc/docbook45.conf
-asciidoc: reading: /etc/asciidoc/filters/source/source-highlight-filter.conf
-asciidoc: reading: /etc/asciidoc/filters/code/code-filter.conf
-asciidoc: reading: /etc/asciidoc/filters/latex/latex-filter.conf
-asciidoc: reading: /etc/asciidoc/filters/music/music-filter.conf
-asciidoc: reading: /etc/asciidoc/filters/graphviz/graphviz-filter.conf
-asciidoc: reading: /etc/asciidoc/lang-en.conf
-<unknown>:1: SyntaxWarning: invalid escape sequence '\S'
-<unknown>:1: SyntaxWarning: invalid escape sequence '\S'
-asciidoc: writing: /home/runner/work/_temp/linuxcnc-e20-preflight/docs/man/man9/enum.9.xml
-asciidoc: reading: /etc/asciidoc/asciidoc.conf
-asciidoc: reading: /home/runner/work/_temp/linuxcnc-e20-preflight/docs/src/man/man9/hm2_modbus.9.adoc
-asciidoc: reading: /etc/asciidoc/docbook45.conf
-asciidoc: reading: /etc/asciidoc/filters/source/source-highlight-filter.conf
-asciidoc: reading: /etc/asciidoc/filters/code/code-filter.conf
-asciidoc: reading: /etc/asciidoc/filters/latex/latex-filter.conf
-asciidoc: reading: /etc/asciidoc/filters/music/music-filter.conf
-asciidoc: reading: /etc/asciidoc/filters/graphviz/graphviz-filter.conf
-asciidoc: reading: /etc/asciidoc/lang-en.conf
-<unknown>:1: SyntaxWarning: invalid escape sequence '\S'
-<unknown>:1: SyntaxWarning: invalid escape sequence '\S'
-asciidoc: writing: /home/runner/work/_temp/linuxcnc-e20-preflight/docs/man/man9/hm2_modbus.9.xml
+asciidoc: writing: /home/runner/work/_temp/linuxcnc-e20-authoritative/docs/man/man1/halstreamer.1.xml
 asciidoc: reading: /etc/asciidoc/asciidoc.conf
 asciidoc: reading: /etc/asciidoc/asciidoc.conf
-asciidoc: reading: /home/runner/work/_temp/linuxcnc-e20-preflight/docs/src/man/man9/hm2_spix.9.adoc
+asciidoc: reading: /home/runner/work/_temp/linuxcnc-e20-authoritative/docs/src/man/man1/hy_gt_vfd.1.adoc
+asciidoc: reading: /home/runner/work/_temp/linuxcnc-e20-authoritative/docs/src/man/man1/mesambccc.1.adoc
+asciidoc: reading: /etc/asciidoc/docbook45.conf
+asciidoc: reading: /etc/asciidoc/docbook45.conf
+asciidoc: reading: /etc/asciidoc/filters/source/source-highlight-filter.conf
+asciidoc: reading: /etc/asciidoc/filters/source/source-highlight-filter.conf
+asciidoc: reading: /etc/asciidoc/filters/code/code-filter.conf
+asciidoc: reading: /etc/asciidoc/filters/code/code-filter.conf
+asciidoc: reading: /etc/asciidoc/filters/latex/latex-filter.conf
+asciidoc: reading: /etc/asciidoc/filters/latex/latex-filter.conf
+asciidoc: reading: /etc/asciidoc/filters/music/music-filter.conf
+asciidoc: reading: /etc/asciidoc/filters/music/music-filter.conf
+asciidoc: reading: /etc/asciidoc/filters/graphviz/graphviz-filter.conf
+asciidoc: reading: /etc/asciidoc/filters/graphviz/graphviz-filter.conf
+asciidoc: reading: /etc/asciidoc/lang-en.conf
+asciidoc: reading: /etc/asciidoc/lang-en.conf
+<unknown>:1: SyntaxWarning: invalid escape sequence '\S'
+<unknown>:1: SyntaxWarning: invalid escape sequence '\S'
+<unknown>:1: SyntaxWarning: invalid escape sequence '\S'
+<unknown>:1: SyntaxWarning: invalid escape sequence '\S'
+asciidoc: writing: /home/runner/work/_temp/linuxcnc-e20-authoritative/docs/man/man1/mesambccc.1.xml
+asciidoc: writing: /home/runner/work/_temp/linuxcnc-e20-authoritative/docs/man/man1/hy_gt_vfd.1.xml
+asciidoc: reading: /etc/asciidoc/asciidoc.conf
+asciidoc: reading: /home/runner/work/_temp/linuxcnc-e20-authoritative/docs/src/man/man1/mqtt-publisher.1.adoc
 asciidoc: reading: /etc/asciidoc/docbook45.conf
 asciidoc: reading: /etc/asciidoc/filters/source/source-highlight-filter.conf
 asciidoc: reading: /etc/asciidoc/filters/code/code-filter.conf
 asciidoc: reading: /etc/asciidoc/filters/latex/latex-filter.conf
 asciidoc: reading: /etc/asciidoc/filters/music/music-filter.conf
 asciidoc: reading: /etc/asciidoc/filters/graphviz/graphviz-filter.conf
-asciidoc: reading: /home/runner/work/_temp/linuxcnc-e20-preflight/docs/src/man/man9/streamer.9.adoc
 asciidoc: reading: /etc/asciidoc/lang-en.conf
+<unknown>:1: SyntaxWarning: invalid escape sequence '\S'
+<unknown>:1: SyntaxWarning: invalid escape sequence '\S'
+asciidoc: writing: /home/runner/work/_temp/linuxcnc-e20-authoritative/docs/man/man1/mqtt-publisher.1.xml
+asciidoc: reading: /etc/asciidoc/asciidoc.conf
+asciidoc: reading: /home/runner/work/_temp/linuxcnc-e20-authoritative/docs/src/man/man1/sendkeys.1.adoc
 asciidoc: reading: /etc/asciidoc/docbook45.conf
-<unknown>:1: SyntaxWarning: invalid escape sequence '\S'
-<unknown>:1: SyntaxWarning: invalid escape sequence '\S'
-asciidoc: writing: /home/runner/work/_temp/linuxcnc-e20-preflight/docs/man/man9/hm2_spix.9.xml
 asciidoc: reading: /etc/asciidoc/filters/source/source-highlight-filter.conf
 asciidoc: reading: /etc/asciidoc/filters/code/code-filter.conf
 asciidoc: reading: /etc/asciidoc/filters/latex/latex-filter.conf
@@ -5165,7 +5083,91 @@ asciidoc: reading: /etc/asciidoc/filters/graphviz/graphviz-filter.conf
 asciidoc: reading: /etc/asciidoc/lang-en.conf
 <unknown>:1: SyntaxWarning: invalid escape sequence '\S'
 <unknown>:1: SyntaxWarning: invalid escape sequence '\S'
-asciidoc: writing: /home/runner/work/_temp/linuxcnc-e20-preflight/docs/man/man9/streamer.9.xml
+asciidoc: writing: /home/runner/work/_temp/linuxcnc-e20-authoritative/docs/man/man1/sendkeys.1.xml
+asciidoc: reading: /etc/asciidoc/asciidoc.conf
+asciidoc: reading: /home/runner/work/_temp/linuxcnc-e20-authoritative/docs/src/man/man1/svd-ps_vfd.1.adoc
+asciidoc: reading: /etc/asciidoc/docbook45.conf
+asciidoc: reading: /etc/asciidoc/filters/source/source-highlight-filter.conf
+asciidoc: reading: /etc/asciidoc/filters/code/code-filter.conf
+asciidoc: reading: /etc/asciidoc/filters/latex/latex-filter.conf
+asciidoc: reading: /etc/asciidoc/filters/music/music-filter.conf
+asciidoc: reading: /etc/asciidoc/filters/graphviz/graphviz-filter.conf
+asciidoc: reading: /etc/asciidoc/lang-en.conf
+<unknown>:1: SyntaxWarning: invalid escape sequence '\S'
+<unknown>:1: SyntaxWarning: invalid escape sequence '\S'
+asciidoc: writing: /home/runner/work/_temp/linuxcnc-e20-authoritative/docs/man/man1/svd-ps_vfd.1.xml
+asciidoc: reading: /etc/asciidoc/asciidoc.conf
+asciidoc: reading: /home/runner/work/_temp/linuxcnc-e20-authoritative/docs/src/man/man1/xhc-whb04b-6.1.adoc
+asciidoc: reading: /etc/asciidoc/docbook45.conf
+asciidoc: reading: /etc/asciidoc/filters/source/source-highlight-filter.conf
+asciidoc: reading: /etc/asciidoc/filters/code/code-filter.conf
+asciidoc: reading: /etc/asciidoc/filters/latex/latex-filter.conf
+asciidoc: reading: /etc/asciidoc/filters/music/music-filter.conf
+asciidoc: reading: /etc/asciidoc/filters/graphviz/graphviz-filter.conf
+asciidoc: reading: /etc/asciidoc/lang-en.conf
+<unknown>:1: SyntaxWarning: invalid escape sequence '\S'
+<unknown>:1: SyntaxWarning: invalid escape sequence '\S'
+asciidoc: writing: /home/runner/work/_temp/linuxcnc-e20-authoritative/docs/man/man1/xhc-whb04b-6.1.xml
+asciidoc: reading: /etc/asciidoc/asciidoc.conf
+asciidoc: reading: /home/runner/work/_temp/linuxcnc-e20-authoritative/docs/src/man/man3/hm2_pktuart.3.adoc
+asciidoc: reading: /etc/asciidoc/docbook45.conf
+asciidoc: reading: /etc/asciidoc/filters/source/source-highlight-filter.conf
+asciidoc: reading: /etc/asciidoc/filters/code/code-filter.conf
+asciidoc: reading: /etc/asciidoc/filters/latex/latex-filter.conf
+asciidoc: reading: /etc/asciidoc/filters/music/music-filter.conf
+asciidoc: reading: /etc/asciidoc/filters/graphviz/graphviz-filter.conf
+asciidoc: reading: /etc/asciidoc/lang-en.conf
+<unknown>:1: SyntaxWarning: invalid escape sequence '\S'
+<unknown>:1: SyntaxWarning: invalid escape sequence '\S'
+asciidoc: writing: /home/runner/work/_temp/linuxcnc-e20-authoritative/docs/man/man3/hm2_pktuart.3.xml
+asciidoc: reading: /etc/asciidoc/asciidoc.conf
+asciidoc: reading: /home/runner/work/_temp/linuxcnc-e20-authoritative/docs/src/man/man9/enum.9.adoc
+asciidoc: reading: /etc/asciidoc/docbook45.conf
+asciidoc: reading: /etc/asciidoc/filters/source/source-highlight-filter.conf
+asciidoc: reading: /etc/asciidoc/filters/code/code-filter.conf
+asciidoc: reading: /etc/asciidoc/filters/latex/latex-filter.conf
+asciidoc: reading: /etc/asciidoc/filters/music/music-filter.conf
+asciidoc: reading: /etc/asciidoc/filters/graphviz/graphviz-filter.conf
+asciidoc: reading: /etc/asciidoc/lang-en.conf
+<unknown>:1: SyntaxWarning: invalid escape sequence '\S'
+<unknown>:1: SyntaxWarning: invalid escape sequence '\S'
+asciidoc: writing: /home/runner/work/_temp/linuxcnc-e20-authoritative/docs/man/man9/enum.9.xml
+asciidoc: reading: /etc/asciidoc/asciidoc.conf
+asciidoc: reading: /etc/asciidoc/asciidoc.conf
+asciidoc: reading: /home/runner/work/_temp/linuxcnc-e20-authoritative/docs/src/man/man9/hm2_modbus.9.adoc
+asciidoc: reading: /etc/asciidoc/docbook45.conf
+asciidoc: reading: /etc/asciidoc/filters/source/source-highlight-filter.conf
+asciidoc: reading: /etc/asciidoc/filters/code/code-filter.conf
+asciidoc: reading: /etc/asciidoc/filters/latex/latex-filter.conf
+asciidoc: reading: /etc/asciidoc/filters/music/music-filter.conf
+asciidoc: reading: /home/runner/work/_temp/linuxcnc-e20-authoritative/docs/src/man/man9/hm2_spix.9.adoc
+asciidoc: reading: /etc/asciidoc/filters/graphviz/graphviz-filter.conf
+asciidoc: reading: /etc/asciidoc/docbook45.conf
+asciidoc: reading: /etc/asciidoc/lang-en.conf
+<unknown>:1: SyntaxWarning: invalid escape sequence '\S'
+asciidoc: reading: /etc/asciidoc/asciidoc.conf
+<unknown>:1: SyntaxWarning: invalid escape sequence '\S'
+asciidoc: writing: /home/runner/work/_temp/linuxcnc-e20-authoritative/docs/man/man9/hm2_modbus.9.xml
+asciidoc: reading: /etc/asciidoc/filters/source/source-highlight-filter.conf
+asciidoc: reading: /etc/asciidoc/filters/code/code-filter.conf
+asciidoc: reading: /etc/asciidoc/filters/latex/latex-filter.conf
+asciidoc: reading: /etc/asciidoc/filters/music/music-filter.conf
+asciidoc: reading: /etc/asciidoc/filters/graphviz/graphviz-filter.conf
+asciidoc: reading: /etc/asciidoc/lang-en.conf
+<unknown>:1: SyntaxWarning: invalid escape sequence '\S'
+<unknown>:1: SyntaxWarning: invalid escape sequence '\S'
+asciidoc: writing: /home/runner/work/_temp/linuxcnc-e20-authoritative/docs/man/man9/hm2_spix.9.xml
+asciidoc: reading: /home/runner/work/_temp/linuxcnc-e20-authoritative/docs/src/man/man9/streamer.9.adoc
+asciidoc: reading: /etc/asciidoc/docbook45.conf
+asciidoc: reading: /etc/asciidoc/filters/source/source-highlight-filter.conf
+asciidoc: reading: /etc/asciidoc/filters/code/code-filter.conf
+asciidoc: reading: /etc/asciidoc/filters/latex/latex-filter.conf
+asciidoc: reading: /etc/asciidoc/filters/music/music-filter.conf
+asciidoc: reading: /etc/asciidoc/filters/graphviz/graphviz-filter.conf
+asciidoc: reading: /etc/asciidoc/lang-en.conf
+<unknown>:1: SyntaxWarning: invalid escape sequence '\S'
+<unknown>:1: SyntaxWarning: invalid escape sequence '\S'
+asciidoc: writing: /home/runner/work/_temp/linuxcnc-e20-authoritative/docs/man/man9/streamer.9.xml
 emc/rs274ngc/interp_remap.cc: In member function ‘int Interp::add_parameters(setup_pointer, block_pointer, char*)’:
 emc/rs274ngc/interp_remap.cc:297:16: warning: ‘char* __builtin___strncat_chk(char*, const char*, long unsigned int, long unsigned int)’ output truncated before terminating nul copying 1 byte from a string of the same length [-Wstringop-truncation]
   297 |         strncat(tail,&c,1);

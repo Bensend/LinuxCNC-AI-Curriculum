@@ -1,0 +1,3 @@
+Compiling realtime e20_model.c
+Linking e20_model.so
+cp e20_model.so /home/runner/work/_temp/linuxcnc-e20-authoritative/rtlib/

@@ -1,0 +1,20 @@
+Component Pins:
+Owner   Type  Dir         Value  Name
+     8  float OUT            14  e20-model.0.internal-generator-counter ==> e20-internal-counter
+     8  bit   OUT         FALSE  e20-model.0.io-error ==> e20-io-error
+     8  bit   OUT         FALSE  e20-model.0.io-error-clear-request ==> e20-clear
+     8  bit   OUT          TRUE  e20-model.0.machine-motion-authorized ==> e20-authorized
+     8  bit   OUT         FALSE  e20-model.0.needs-soft-reset ==> e20-needs-reset
+     8  bit   OUT         FALSE  e20-model.0.packet-error-current ==> e20-packet-current
+     8  bit   OUT         FALSE  e20-model.0.packet-error-exceeded ==> e20-exceeded
+     8  float OUT             0  e20-model.0.packet-error-level ==> e20-level
+     8  float OUT             0  e20-model.0.packet-error-total ==> e20-total
+     8  float OUT             0  e20-model.0.phase ==> e20-phase
+     8  bit   OUT          TRUE  e20-model.0.physical-io-authority ==> e20-physical-authority
+     8  bit   OUT         FALSE  e20-model.0.reauthorize-request ==> e20-reauth-req
+     8  bit   OUT         FALSE  e20-model.0.state-revalidated ==> e20-revalidated
+     8  s32   OUT            78  e20-model.0.time
+     8  bit   OUT         FALSE  e20-model.0.transaction-error ==> e20-tx-error
+     8  bit   OUT          TRUE  e20-model.0.transport-current-good ==> e20-transport-good
+     8  bit   OUT         FALSE  e20-model.0.watchdog-bitten ==> e20-watchdog
+

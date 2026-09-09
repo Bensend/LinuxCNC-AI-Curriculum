@@ -6,14 +6,15 @@ Repository artifacts, not chat history, are authoritative.
 
 ## Current critical-path state
 
-All modules through **T05**, **C01**, **C02**, **C03**, **C04**, and **C05** are **GRADUATED at 1000 level**. Phase 10 remains active. Highest-priority unblocked work is **C06 — communication/watchdog fault handling**, state **EXPERIMENT / BEHAVIORAL HARNESS IMPLEMENTATION**.
+All modules through **T05**, **C01**, **C02**, **C03**, **C04**, and **C05** are **GRADUATED at 1000 level**. Phase 10 remains active. Highest-priority unblocked work is **C06 — communication/watchdog fault handling**, state **EXPERIMENT / AUTHORITATIVE RUN IN PROGRESS**.
 
 ## Blind external-feedback state
 
 - **BL-DEV-001:** VALID, 10/10, 92% confidence.
-- **BL-DEV-002:** VALID, 9/10, 88% confidence. Schedule a novel same-mechanism transfer challenge after roughly 3–8 subsequent lessons.
+- **BL-DEV-002:** VALID, 9/10, 88% confidence.
+- **BL-DEV-002-TRANSFER-01:** VALID, 10/10, 95% confidence. Novel numeric same-mechanism retest correctly retrieved the pinned velocity-scaled-plus-`MIN_FERROR` floor and strict `>` comparison. Delayed retention remains separate.
 
-## C06 — communication/watchdog fault handling — EXPERIMENT / BEHAVIORAL HARNESS IMPLEMENTATION
+## C06 — communication/watchdog fault handling — EXPERIMENT / AUTHORITATIVE RUN IN PROGRESS
 
 Pinned LinuxCNC revision: `8bf4605ae81042248add031e94c77300406e0413`.
 
@@ -27,6 +28,7 @@ Primary artifacts:
 - `lab-jobs/030-c06-watchdog-fixture-preflight.sh`
 - `lab-jobs/031-c06-watchdog-layout-preflight.sh`
 - `lab-jobs/032-c06-watchdog-load-preflight.sh`
+- `lab-jobs/033-c06-transport-watchdog-authoritative.sh` — authoritative P0–P6 implementation committed as `77a274b1275cea22dd3f8df63c866b20ba4c4c40`.
 
 Pinned-source findings established:
 
@@ -54,14 +56,16 @@ ordinary HostMot2/HAL fault handling != functional-safety certification
 
 ## Current lab checkpoint
 
-Watchdog load-preflight workflow `34289817535`, job `102273633349`, tested curriculum commit `3847152bb8f6dad0a0a4612f2276aec448f12bf3` and completed successfully. Retained exit code is 0. The HAL output proves `hm2_test.0.watchdog.has_bit`, `.timeout_ns`, `.read`, and `.write` exist and ends with `LOAD_PREFLIGHT_PASS`. This result is **non-authoritative** and must not be scored against C06-030 Gates A–H.
+Authoritative C06-030 workflow **`34298423081`**, job **`102299966701`**, was launched automatically from commit `77a274b1275cea22dd3f8df63c866b20ba4c4c40` and was still executing when this checkpoint was written. Do not launch a duplicate while it is running.
 
-The descriptor/topology blocker is closed. No frozen C06-030 behavioral gate, threshold, or phase was changed.
+The authoritative harness extends only lab-scoped `hm2_test.c` pattern-15 behavior. It SHA-checks generic `hostmot2.c`, `tram.c`, `watchdog.c`, and `hostmot2-lowlevel.h`; uses a deterministic three-consecutive-failed-read threshold before the low-level fixture asserts the real generic `io_error`; injects watchdog bite only through fake register `0x2004` bit 0; observes state in one atomic realtime sampler stream; and retains the complete patch/raw trace before gate analysis.
+
+Frozen C06-030 Gates A–H and P0–P6 semantics remain unchanged.
 
 ## Exact next-work checkpoint
 
-1. Implement the authoritative C06-030 harness by extending only lab-scoped `hm2_test.c` pattern-15 instrumentation. Add deterministic read-failure controls/counters and an emulated watchdog-status control at register `0x2004` bit 0. Do **not** alter generic `hostmot2.c`, `tram.c`, `watchdog.c`, or `hostmot2-lowlevel.h`.
-2. P0–P6 must remain exactly as frozen. P2 communication escalation must be caused by consecutive injected failed low-level reads before the fixture asserts the real generic `llio->io_error`; P4 must set only the fake watchdog status bit and let a successful generic HostMot2 read assert the real `watchdog.has_bit`.
-3. Use one atomic realtime sampler stream for phase, injection state, `io_error`, `watchdog.has_bit`, and normal-service activity evidence. Retain raw trace and complete fixture patch before analysis can exit; any overrun or missing decisive phase is HARNESS INVALID.
-4. Execute exactly one authoritative run and reconcile unchanged Gates A–H. A valid behavioral failure is evidence and must not be retuned post hoc.
-5. If accepted, perform the already-required adversarial exam, fresh-AI novel-scenario handoff, and promotion/counterfactual audit before C06 graduation.
+1. Inspect only authoritative workflow `34298423081`, job `102299966701`; preserve final job runtime, artifact ID, readable result, raw trace, controller log, full fixture patch, build log, and final exit code.
+2. Reconcile the raw single-stream evidence against **unchanged** C06-030 Gates A–H. Any build, HAL topology, sampler, retention, or phase-publication defect is HARNESS INVALID; a valid frozen-gate violation is behavioral evidence and must not be retuned post hoc.
+3. If the run is accepted, update `LAB_COMPUTE_LOG.md` from actual job timestamps, then perform the required C06 adversarial exam, fresh-AI novel-scenario handoff, correction pass, and promotion/counterfactual audit before graduation.
+4. If the run is harness-invalid, diagnose only the actual harness defect and preserve the frozen behavior. Do not weaken gates or change the prediction to fit output.
+5. Keep BL-DEV-002 delayed retention separate from the successful transfer retest; do not repeat the transfer surface as retention evidence.

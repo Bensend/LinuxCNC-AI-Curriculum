@@ -1,9 +1,9 @@
-START 2026-09-09T04:12:13Z
+START 2026-09-09T04:39:52Z
 END OPEN
 ELAPSED_MIN OPEN
 MODULE C06 communication/watchdog fault handling
-STATUS RESUMED / SAMPLER-ATTACH DIAGNOSTIC
-RESULT Session start recorded before substantive work. Resuming the pinned minimal hal_stream_attach diagnostic checkpoint from the prior session.
-CHECKPOINT Read mission/course/evaluation/lab state, then run the non-authoritative sampler/stream attach diagnostic before any further authoritative C06-030 retry.
-PREVIOUS_SESSION_END 2026-09-09T03:29:37Z
-OVERLAP No overlap at start; previous canonical lesson ended 42m36s before this session began.
+STATUS RESUMED / FIXTURE-SAMPLER INTERACTION DIAGNOSTIC
+RESULT Session start recorded before substantive work. Resuming exact PROGRESS.md checkpoint: reconcile non-authoritative workflow 34310509116 before any authoritative C06-030 retry.
+CHECKPOINT Inspect required mission/course/evaluation/lab state and reconcile workflow 34310509116 stages A/B; if both pass, diff retained C06-038 harness against passing Stage-B startup before any behavioral rerun.
+PREVIOUS_SESSION_END UNKNOWN: prior SESSION_ACTIVE marker began 2026-09-09T04:12:13Z and remained OPEN.
+OVERLAP POSSIBLE/UNRESOLVED at start because the prior 04:12:13Z marker was never canonically closed. Preserve this fact in the final timing row.

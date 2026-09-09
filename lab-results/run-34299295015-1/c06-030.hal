@@ -1,0 +1,35 @@
+loadrt hostmot2
+loadrt hm2_test test_pattern=15
+loadrt threads name1=c06-thread period1=1000000
+loadrt sampler depth=30000 cfg=uubbbuuuub
+
+addf hm2_test.0.read c06-thread
+addf hm2_test.0.write c06-thread
+addf sampler.0 c06-thread
+
+newsig c06-phase u32
+newsig c06-fail-remaining u32
+newsig c06-watchdog-command bit
+newsig c06-io-error-mirror bit
+newsig c06-has-bit bit
+newsig c06-read-success u32
+newsig c06-read-fail u32
+newsig c06-write-success u32
+newsig c06-consecutive u32
+newsig c06-watchdog-status-mirror bit
+
+net c06-phase => sampler.0.pin.0
+net c06-fail-remaining hm2_test.0.c06.fail-reads-remaining => sampler.0.pin.1
+net c06-watchdog-command => hm2_test.0.c06.watchdog-status-command sampler.0.pin.2
+net c06-io-error-mirror hm2_test.0.c06.io-error-mirror => sampler.0.pin.3
+net c06-has-bit hm2_test.0.watchdog.has_bit => sampler.0.pin.4
+net c06-read-success hm2_test.0.c06.read-success-count => sampler.0.pin.5
+net c06-read-fail hm2_test.0.c06.read-fail-count => sampler.0.pin.6
+net c06-write-success hm2_test.0.c06.write-success-count => sampler.0.pin.7
+net c06-consecutive hm2_test.0.c06.consecutive-failures => sampler.0.pin.8
+net c06-watchdog-status-mirror hm2_test.0.c06.watchdog-status-mirror => sampler.0.pin.9
+
+sets c06-phase 0
+sets c06-fail-remaining 0
+sets c06-watchdog-command false
+start

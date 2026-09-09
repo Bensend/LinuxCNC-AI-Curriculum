@@ -1,63 +1,63 @@
 # Latest LinuxCNC Lab Result
 
-- Job: `012-d01-duplicated-feedback-preflight`
-- Job file: `lab-jobs/012-d01-duplicated-feedback-preflight.sh`
-- Workflow run ID: `34344887755`
+- Job: `013-d01-duplicated-feedback-preflight-ready`
+- Job file: `lab-jobs/013-d01-duplicated-feedback-preflight-ready.sh`
+- Workflow run ID: `34345438042`
 - Attempt: `1`
-- Source commit: `3ac8b01bb0b4fa02c937b61e0c4747c5cef23198`
-- Exit code: `1`
-- Finished UTC: `2026-09-09T11:22:53Z`
+- Source commit: `250e004e8c98c78146f852a31922fb3cc5dd4263`
+- Exit code: `2`
+- Finished UTC: `2026-09-09T11:29:22Z`
 
 ## Metadata
 ```text
 LinuxCNC AI Curriculum Lab
-UTC start: 2026-09-09T11:18:58Z
-Repository commit: 3ac8b01bb0b4fa02c937b61e0c4747c5cef23198
-Workflow run: 34344887755 attempt 1
-Job file: lab-jobs/012-d01-duplicated-feedback-preflight.sh
+UTC start: 2026-09-09T11:25:12Z
+Repository commit: 250e004e8c98c78146f852a31922fb3cc5dd4263
+Workflow run: 34345438042 attempt 1
+Job file: lab-jobs/013-d01-duplicated-feedback-preflight-ready.sh
 Runner: Linux runnervmejwal 6.17.0-1022-azure #22-Ubuntu SMP Mon Jul 27 17:24:03 UTC 2026 x86_64 x86_64 x86_64 GNU/Linux
 Inner lab timeout: 70 minutes (job ceiling: 75 minutes)
 
-UTC finish: 2026-09-09T11:22:53Z
+UTC finish: 2026-09-09T11:29:22Z
 ```
 
 ## Standard output
 ```text
-== D01 non-authoritative duplicated-feedback preflight ==
-UTC start: 2026-09-09T11:18:58Z
+== D01 non-authoritative duplicated-feedback preflight — readiness corrected ==
+UTC start: 2026-09-09T11:25:12Z
 Pinned upstream commit: 8bf4605ae81042248add031e94c77300406e0413
-Purpose: validate a real motmod+trivkins XYY fixture, independent duplicate feedback injection, and duplicate-only ferror disable before authoritative instrumentation.
+Attempt-1 correction: require BOTH realtime HAL objects and linuxcncrsh TCP command channel before issuing machine/motion commands.
 This run DOES NOT score frozen D01-002 Gates A-J.
 Get:1 file:/etc/apt/apt-mirrors.txt Mirrorlist [144 B]
 Hit:2 http://azure.archive.ubuntu.com/ubuntu noble InRelease
+Get:6 https://packages.microsoft.com/ubuntu/24.04/prod noble InRelease [3600 B]
 Get:3 http://azure.archive.ubuntu.com/ubuntu noble-updates InRelease [126 kB]
 Get:4 http://azure.archive.ubuntu.com/ubuntu noble-backports InRelease [126 kB]
 Get:5 http://azure.archive.ubuntu.com/ubuntu noble-security InRelease [126 kB]
-Get:6 https://packages.microsoft.com/ubuntu/24.04/prod noble InRelease [3600 B]
-Get:7 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 Packages [1260 kB]
-Get:8 http://azure.archive.ubuntu.com/ubuntu noble-updates/main Translation-en [292 kB]
-Get:9 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 Components [181 kB]
-Get:10 http://azure.archive.ubuntu.com/ubuntu noble-updates/universe amd64 Packages [1690 kB]
-Get:11 http://azure.archive.ubuntu.com/ubuntu noble-updates/universe Translation-en [339 kB]
-Get:12 http://azure.archive.ubuntu.com/ubuntu noble-updates/universe amd64 Components [388 kB]
-Get:13 http://azure.archive.ubuntu.com/ubuntu noble-updates/restricted amd64 Packages [1536 kB]
-Get:14 http://azure.archive.ubuntu.com/ubuntu noble-updates/restricted Translation-en [352 kB]
-Get:16 https://dl.google.com/linux/chrome-stable/deb stable InRelease [2548 B]
-Get:15 http://azure.archive.ubuntu.com/ubuntu noble-updates/multiverse amd64 Components [940 B]
-Get:17 http://azure.archive.ubuntu.com/ubuntu noble-backports/main amd64 Components [5760 B]
-Get:18 http://azure.archive.ubuntu.com/ubuntu noble-backports/universe amd64 Components [12.6 kB]
-Get:19 http://azure.archive.ubuntu.com/ubuntu noble-security/main amd64 Packages [1005 kB]
-Get:20 http://azure.archive.ubuntu.com/ubuntu noble-security/main Translation-en [213 kB]
-Get:21 http://azure.archive.ubuntu.com/ubuntu noble-security/main amd64 Components [46.5 kB]
-Get:22 http://azure.archive.ubuntu.com/ubuntu noble-security/universe amd64 Packages [1206 kB]
-Get:23 http://azure.archive.ubuntu.com/ubuntu noble-security/universe Translation-en [241 kB]
-Get:24 http://azure.archive.ubuntu.com/ubuntu noble-security/universe amd64 Components [76.3 kB]
-Get:25 http://azure.archive.ubuntu.com/ubuntu noble-security/restricted amd64 Packages [1441 kB]
-Get:26 http://azure.archive.ubuntu.com/ubuntu noble-security/restricted Translation-en [334 kB]
-Get:27 https://packages.microsoft.com/ubuntu/24.04/prod noble/main amd64 Packages [454 kB]
-Get:28 https://packages.microsoft.com/ubuntu/24.04/prod noble/main arm64 Packages [406 kB]
+Get:7 https://dl.google.com/linux/chrome-stable/deb stable InRelease [2548 B]
+Get:8 https://packages.microsoft.com/ubuntu/24.04/prod noble/main amd64 Packages [454 kB]
+Get:9 https://packages.microsoft.com/ubuntu/24.04/prod noble/main arm64 Packages [406 kB]
+Get:10 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 Packages [1260 kB]
+Get:11 http://azure.archive.ubuntu.com/ubuntu noble-updates/main Translation-en [292 kB]
+Get:12 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 Components [181 kB]
+Get:13 http://azure.archive.ubuntu.com/ubuntu noble-updates/universe amd64 Packages [1690 kB]
+Get:14 http://azure.archive.ubuntu.com/ubuntu noble-updates/universe Translation-en [339 kB]
+Get:15 http://azure.archive.ubuntu.com/ubuntu noble-updates/universe amd64 Components [388 kB]
+Get:16 http://azure.archive.ubuntu.com/ubuntu noble-updates/restricted amd64 Packages [1536 kB]
+Get:17 http://azure.archive.ubuntu.com/ubuntu noble-updates/restricted Translation-en [352 kB]
+Get:18 http://azure.archive.ubuntu.com/ubuntu noble-updates/multiverse amd64 Components [940 B]
+Get:19 http://azure.archive.ubuntu.com/ubuntu noble-backports/main amd64 Components [5760 B]
+Get:20 http://azure.archive.ubuntu.com/ubuntu noble-backports/universe amd64 Components [12.6 kB]
+Get:21 http://azure.archive.ubuntu.com/ubuntu noble-security/main amd64 Packages [1005 kB]
+Get:22 http://azure.archive.ubuntu.com/ubuntu noble-security/main Translation-en [213 kB]
+Get:23 http://azure.archive.ubuntu.com/ubuntu noble-security/main amd64 Components [46.5 kB]
+Get:24 http://azure.archive.ubuntu.com/ubuntu noble-security/universe amd64 Packages [1206 kB]
+Get:25 http://azure.archive.ubuntu.com/ubuntu noble-security/universe Translation-en [241 kB]
+Get:26 http://azure.archive.ubuntu.com/ubuntu noble-security/universe amd64 Components [76.3 kB]
+Get:27 http://azure.archive.ubuntu.com/ubuntu noble-security/restricted amd64 Packages [1441 kB]
+Get:28 http://azure.archive.ubuntu.com/ubuntu noble-security/restricted Translation-en [334 kB]
 Get:29 https://dl.google.com/linux/chrome-stable/deb stable/main amd64 Packages [1405 B]
-Fetched 11.9 MB in 1s (8572 kB/s)
+Fetched 11.9 MB in 1s (8730 kB/s)
 Reading package lists...
 Reading package lists...
 Building dependency tree...
@@ -357,7 +357,7 @@ Get:166 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 python3-
 Get:167 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 python3-unidiff all 0.7.3-1 [11.0 kB]
 Get:168 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 equivs all 2.3.1 [19.0 kB]
 Get:169 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 libauthen-sasl-perl all 2.1700-1 [42.9 kB]
-Fetched 11.0 MB in 6s (1693 kB/s)
+Fetched 11.0 MB in 8s (1331 kB/s)
 Selecting previously unselected package autopoint.
 (Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 201676 files and directories currently installed.)
 Preparing to unpack .../000-autopoint_0.21-14ubuntu2_all.deb ...
@@ -1466,7 +1466,7 @@ Get:327 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 libmodbus-de
 Get:328 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 libtirpc-dev amd64 1.3.4+ds-1.1build1 [193 kB]
 Get:329 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 python3-xlib all 0.33-2 [120 kB]
 Preconfiguring packages ...
-Fetched 270 MB in 14s (18.7 MB/s)
+Fetched 270 MB in 19s (14.0 MB/s)
 Selecting previously unselected package libdebuginfod-common.
 (Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 208197 files and directories currently installed.)
 Preparing to unpack .../000-libdebuginfod-common_0.190-1.1ubuntu0.1_all.deb ...
@@ -2831,7 +2831,7 @@ checking for c++ option to enable C++11 features... none needed
 checking for a BSD-compatible install... /usr/bin/install -c
 checking whether c++ supports C++20 features by default... no
 checking whether c++ supports C++20 features with -std=gnu++20... yes
-checking build toplevel... /home/runner/work/_temp/linuxcnc-d01-preflight
+checking build toplevel... /home/runner/work/_temp/linuxcnc-d01-preflight-ready
 checking installation prefix... run in place
 checking for grep... /usr/bin/grep
 checking for pkg-config... /usr/bin/pkg-config
@@ -2870,7 +2870,7 @@ checking for libusb-1.0... yes
 checking for libgpiod < 3.0.0... yes
 configure: libgpiod version 1.6.3 found
 checking for module installation directory... configuring for run-in-place
-/home/runner/work/_temp/linuxcnc-d01-preflight/rtlib
+/home/runner/work/_temp/linuxcnc-d01-preflight-ready/rtlib
 checking for glib... yes - 2.80.0
 checking whether make sets $(MAKE)... yes
 checking for ranlib... ranlib
@@ -2907,8 +2907,8 @@ checking for a version of Python >= '2.1.0'... yes
 checking for the sysconfig Python package... yes
 checking for Python include path... -I/usr/include/python3.12
 checking for Python library path... -L/usr/lib/x86_64-linux-gnu -lpython3.12
-checking for Python site-packages path... /home/runner/work/_temp/linuxcnc-d01-preflight/lib/python3.12/site-packages
-checking for Python platform specific site-packages path... /home/runner/work/_temp/linuxcnc-d01-preflight/lib/python3.12/site-packages
+checking for Python site-packages path... /home/runner/work/_temp/linuxcnc-d01-preflight-ready/lib/python3.12/site-packages
+checking for Python platform specific site-packages path... /home/runner/work/_temp/linuxcnc-d01-preflight-ready/lib/python3.12/site-packages
 checking python extra libraries... -ldl -lm
 checking python extra linking flags... -Xlinker -export-dynamic -Wl,-O1 -Wl,-Bsymbolic-functions
 checking consistency of all components of python development environment... yes
@@ -3001,7 +3001,7 @@ config.status: creating config.h
 ######################################################################
 
 
-make: Entering directory '/home/runner/work/_temp/linuxcnc-d01-preflight/src'
+make: Entering directory '/home/runner/work/_temp/linuxcnc-d01-preflight-ready/src'
 Creating mesa_uart.mak
 Creating mesa_7i65.mak
 Creating serport.mak
@@ -3014,8 +3014,8 @@ Creating wcomp.mak
 Creating userkins.mak
 Creating updown.mak
 Creating tristate_float.mak
-Creating tp.mak
 Creating tristate_bit.mak
+Creating tp.mak
 Creating ton.mak
 Creating toggle2nist.mak
 Creating toggle.mak
@@ -3108,8 +3108,8 @@ Creating differential.mak
 Creating demux.mak
 Creating deadzone.mak
 Creating ddt.mak
-Creating corexy_by_hal.mak
 Creating dbounce.mak
+Creating corexy_by_hal.mak
 converting conv for conv_u64_u32.comp
 converting conv for conv_u64_s64.comp
 converting conv for conv_u64_s32.comp
@@ -3132,8 +3132,8 @@ converting conv for conv_s32_float.comp
 converting conv for conv_s32_bit.comp
 converting conv for conv_float_u64.comp
 converting conv for conv_float_u32.comp
-converting conv for conv_float_s32.comp
 converting conv for conv_float_s64.comp
+converting conv for conv_float_s32.comp
 converting conv for conv_bit_u64.comp
 converting conv for conv_bit_u32.comp
 converting conv for conv_bit_s64.comp
@@ -3184,8 +3184,8 @@ Creating conv_float_s64.mak
 Creating conv_float_s32.mak
 Creating conv_bit_u64.mak
 Creating conv_bit_u32.mak
-Creating conv_bit_s64.mak
 Creating conv_bit_s32.mak
+Creating conv_bit_s64.mak
 Creating conv_bit_float.mak
 Exporting hal.h
 Exporting hostmot2-serial.h
@@ -3195,12 +3195,12 @@ Exporting emcmotcfg.h
 Exporting inifile.hh
 Exporting inifile.h
 Exporting emcpos.h
-Exporting emcpose.h
 Exporting motion_types.h
 Exporting posemath.h
+Exporting emcpose.h
 Exporting posemath.hh
-Exporting posemath_types.h
 Exporting rtapi.h
+Exporting posemath_types.h
 Exporting rtapi_app.h
 Exporting rtapi_atomic.h
 Exporting rtapi_bitops.h
@@ -3219,8 +3219,8 @@ Exporting rtapi_math_i386.h
 Exporting rtapi_math64.h
 Exporting rtapi_mutex.h
 Exporting rtapi_parport.h
-Exporting rtapi_pci.h
 Exporting rtapi_slab.h
+Exporting rtapi_pci.h
 Exporting rtapi_stdint.h
 Exporting rtapi_string.h
 Exporting rtapi_vsnprintf.h
@@ -3463,8 +3463,8 @@ Compiling localized gmoccapy message catalog ../share/locale/sr/LC_MESSAGES/gmoc
 Compiling localized gmoccapy message catalog ../share/locale/sv/LC_MESSAGES/gmoccapy.mo
 Compiling localized gmoccapy message catalog ../share/locale/tr/LC_MESSAGES/gmoccapy.mo
 Compiling localized gmoccapy message catalog ../share/locale/uk/LC_MESSAGES/gmoccapy.mo
-Compiling localized gmoccapy message catalog ../share/locale/vi/LC_MESSAGES/gmoccapy.mo
 Compiling localized gmoccapy message catalog ../share/locale/zh_CN/LC_MESSAGES/gmoccapy.mo
+Compiling localized gmoccapy message catalog ../share/locale/vi/LC_MESSAGES/gmoccapy.mo
 Compiling localized gmoccapy message catalog ../share/locale/zh_HK/LC_MESSAGES/gmoccapy.mo
 Compiling localized gmoccapy message catalog ../share/locale/zh_TW/LC_MESSAGES/gmoccapy.mo
 Compiling localized message catalog objects/ar.msg
@@ -3502,32 +3502,32 @@ Copying python script scorbot-er-3
 Syntax checking python script sim-torch
 Syntax checking python script z_level_compensation
 Copying python script mitsub_vfd
-Copying python script pmx485
 Syntax checking python script mqtt-publisher
+Copying python script pmx485
 Syntax checking python script hal_bridge
 Copying python script sim-torch
 Copying python script z_level_compensation
 Syntax checking python script mtconnect-agent
 Syntax checking python script pumagui
 Copying python script mqtt-publisher
-Copying python script hal_bridge
 Syntax checking python script puma560gui
+Copying python script hal_bridge
 Syntax checking python script lineardelta
-Copying python script mtconnect-agent
 Copying python script pumagui
+Copying python script mtconnect-agent
 Syntax checking python script scaragui
 Syntax checking python script hexagui
 Copying python script puma560gui
-Copying python script lineardelta
 Syntax checking python script 5axisgui
+Copying python script lineardelta
 Syntax checking python script max5gui
 Copying python script scaragui
 Copying python script hexagui
-Syntax checking python script maho600gui
 Syntax checking python script hbmgui
+Syntax checking python script maho600gui
 Copying python script 5axisgui
-Copying python script max5gui
 Syntax checking python script rotarydelta
+Copying python script max5gui
 Syntax checking python script melfagui
 Copying python script maho600gui
 Copying python script hbmgui
@@ -3649,8 +3649,8 @@ Compiling realtime emc/kinematics/kins_util.c
 Compiling realtime emc/kinematics/maxkins.c
 Compiling realtime emc/kinematics/rotatekins.c
 Compiling realtime emc/kinematics/tripodkins.c
-Compiling realtime emc/kinematics/corexykins.c
 Compiling realtime emc/kinematics/lineardeltakins.c
+Compiling realtime emc/kinematics/corexykins.c
 Compiling realtime emc/kinematics/pentakins.c
 Compiling realtime libposemath/_posemath.c
 Compiling realtime emc/kinematics/rotarydeltakins.c
@@ -3718,21 +3718,16 @@ Creating shared library liblinuxcnchal.so.0
 Creating shared library liblinuxcncini.so.1
 Syntax checking python script halcompile
 Linking liblinuxcnc.a
+Copying python script halcompile
 tooldata: depends: objects/emc/tooldata/tooldata_mmap.o objects/emc/tooldata/tooldata_common.o objects/emc/tooldata/tooldata_db.o
 tooldata: Linking: libtooldata.so.0
-Copying python script halcompile
-ln -sf liblinuxcncini.so.1 ../lib/liblinuxcncini.so
-Linking libpyplugin.so.0
-c++ -std=gnu++20 -g -L/home/runner/work/_temp/linuxcnc-d01-preflight/lib -Wl,-rpath,/home/runner/work/_temp/linuxcnc-d01-preflight/lib -ltirpc  -lgpiod  -Xlinker -export-dynamic -Wl,-O1 -Wl,-Bsymbolic-functions -Wl,-soname,libpyplugin.so.0 -shared -o ../lib/libpyplugin.so.0 objects/emc/pythonplugin/python_plugin.o ../lib/liblinuxcncini.so.1 -lstdc++ -lboost_python312 -L/usr/lib/x86_64-linux-gnu -lpython3.12 -ldl -lm
-Linking inivalue
 Linking motion-logger
-ln -sf libtooldata.so.0 ../lib/libtooldata.so
 Linking linuxcnc_module_helper
 gcc -Wl,-z,relro -o ../bin/linuxcnc_module_helper objects/module_helper/module_helper.o
 Linking python module lineardeltakins.so
-c++ -std=gnu++20 -L/home/runner/work/_temp/linuxcnc-d01-preflight/lib -Wl,-rpath,/home/runner/work/_temp/linuxcnc-d01-preflight/lib -ltirpc  -lgpiod  -shared -o ../lib/python/lineardeltakins.so objects/emc/kinematics/lineardeltakins.o -lboost_python312
+c++ -std=gnu++20 -L/home/runner/work/_temp/linuxcnc-d01-preflight-ready/lib -Wl,-rpath,/home/runner/work/_temp/linuxcnc-d01-preflight-ready/lib -ltirpc  -lgpiod  -shared -o ../lib/python/lineardeltakins.so objects/emc/kinematics/lineardeltakins.o -lboost_python312
 Linking python module rotarydeltakins.so
-c++ -std=gnu++20 -L/home/runner/work/_temp/linuxcnc-d01-preflight/lib -Wl,-rpath,/home/runner/work/_temp/linuxcnc-d01-preflight/lib -ltirpc  -lgpiod  -shared -o ../lib/python/rotarydeltakins.so objects/emc/kinematics/rotarydeltakins.o -lboost_python312
+c++ -std=gnu++20 -L/home/runner/work/_temp/linuxcnc-d01-preflight-ready/lib -Wl,-rpath,/home/runner/work/_temp/linuxcnc-d01-preflight-ready/lib -ltirpc  -lgpiod  -shared -o ../lib/python/rotarydeltakins.so objects/emc/kinematics/rotarydeltakins.o -lboost_python312
 Preprocessing abs.comp
 Preprocessing abs_s32.comp
 Preprocessing abs_s64.comp
@@ -3766,8 +3761,8 @@ Preprocessing conv_s32_float.comp
 Preprocessing conv_s32_s64.comp
 Preprocessing conv_s32_u32.comp
 Preprocessing conv_s32_u64.comp
-Preprocessing conv_s64_bit.comp
 Preprocessing conv_s64_float.comp
+Preprocessing conv_s64_bit.comp
 Preprocessing conv_s64_s32.comp
 Preprocessing conv_s64_u32.comp
 Preprocessing conv_s64_u64.comp
@@ -3787,8 +3782,8 @@ Preprocessing ddt.comp
 Preprocessing deadzone.comp
 Preprocessing demux.comp
 Preprocessing differential.comp
-Preprocessing div2.comp
 Preprocessing edge.comp
+Preprocessing div2.comp
 Preprocessing eoffset_per_angle.comp
 Preprocessing estop_latch.comp
 Preprocessing feedcomp.comp
@@ -3799,8 +3794,8 @@ Preprocessing gearchange.comp
 Preprocessing gray2bin.comp
 Preprocessing histobins.comp
 Preprocessing histobinstream.comp
-Preprocessing homecomp.comp
 Preprocessing hypot.comp
+Preprocessing homecomp.comp
 Preprocessing ilowpass.comp
 Preprocessing integ.comp
 Preprocessing invert.comp
@@ -3811,8 +3806,8 @@ Preprocessing laserpower.comp
 Preprocessing latencybins.comp
 Preprocessing latencybinstream.comp
 Preprocessing led_dim.comp
-Preprocessing limit2.comp
 Preprocessing limit1.comp
+Preprocessing limit2.comp
 Preprocessing limit3.comp
 Preprocessing limit_axis.comp
 Preprocessing lincurve.comp
@@ -3886,8 +3881,8 @@ Preprocessing xor2.comp
 Preprocessing xyzab_tdr_kins.comp
 Preprocessing xyzacb_trsrn.comp
 Preprocessing xyzbca_trsrn.comp
-Preprocessing mesa_7i65.comp
 Preprocessing serport.comp
+Preprocessing mesa_7i65.comp
 Preprocessing mesa_uart.comp
 Compiling realtime objects/hal/components/abs.c
 Compiling realtime objects/hal/components/abs_s32.c
@@ -3929,8 +3924,8 @@ Compiling realtime objects/hal/components/conv_s64_u32.c
 Compiling realtime objects/hal/components/conv_s64_u64.c
 Compiling realtime objects/hal/components/conv_u32_bit.c
 Compiling realtime objects/hal/components/conv_u32_float.c
-Compiling realtime objects/hal/components/conv_u32_s32.c
 Compiling realtime objects/hal/components/conv_u32_s64.c
+Compiling realtime objects/hal/components/conv_u32_s32.c
 Compiling realtime objects/hal/components/conv_u32_u64.c
 Compiling realtime objects/hal/components/conv_u64_bit.c
 Compiling realtime objects/hal/components/conv_u64_float.c
@@ -4082,8 +4077,8 @@ Linking ../rtlib/hm2_7i90.so
 Linking ../rtlib/setsserial.so
 Linking ../rtlib/hm2_modbus.so
 Linking ../rtlib/hm2_eth.so
-Linking ../rtlib/hm2_rpspi.so
 Linking ../rtlib/hm2_spi.so
+Linking ../rtlib/hm2_rpspi.so
 Linking ../rtlib/hm2_spix.so
 Linking ../rtlib/classicladder_rt.so
 Linking ../rtlib/scope_rt.so
@@ -4122,8 +4117,8 @@ Linking svd-ps_vfd
 Linking shuttle
 Linking xhc-hb04
 Linking sendkeys
-ln -sf liblinuxcnchal.so.0 ../lib/liblinuxcnchal.so
 Preprocessing thermistor.comp
+ln -sf liblinuxcnchal.so.0 ../lib/liblinuxcnchal.so
 Linking vfs11_vfd
 Linking halcmd
 Linking halrmt
@@ -4137,8 +4132,12 @@ Linking schedrmt
 Linking linuxcnclcd
 Linking halui
 Linking linuxcncsvr
-ln -sf libpyplugin.so.0 ../lib/libpyplugin.so
+ln -sf liblinuxcncini.so.1 ../lib/liblinuxcncini.so
+Linking libpyplugin.so.0
 emc/Submakefile:Linking genserkins
+c++ -std=gnu++20 -g -L/home/runner/work/_temp/linuxcnc-d01-preflight-ready/lib -Wl,-rpath,/home/runner/work/_temp/linuxcnc-d01-preflight-ready/lib -ltirpc  -lgpiod  -Xlinker -export-dynamic -Wl,-O1 -Wl,-Bsymbolic-functions -Wl,-soname,libpyplugin.so.0 -shared -o ../lib/libpyplugin.so.0 objects/emc/pythonplugin/python_plugin.o ../lib/liblinuxcncini.so.1 -lstdc++ -lboost_python312 -L/usr/lib/x86_64-linux-gnu -lpython3.12 -ldl -lm
+Linking inivalue
+ln -sf libtooldata.so.0 ../lib/libtooldata.so
 Linking python module _hal.so
 Linking python module linuxcnc.so
 Linking ../rtlib/abs.so
@@ -4170,12 +4169,12 @@ Linking ../rtlib/conv_float_s64.so
 Linking ../rtlib/conv_float_u32.so
 Linking ../rtlib/conv_float_u64.so
 Linking ../rtlib/conv_s32_bit.so
-Linking ../rtlib/conv_s32_float.so
 Linking ../rtlib/conv_s32_s64.so
+Linking ../rtlib/conv_s32_float.so
 Linking ../rtlib/conv_s32_u32.so
 Linking ../rtlib/conv_s32_u64.so
-Linking ../rtlib/conv_s64_bit.so
 Linking ../rtlib/conv_s64_float.so
+Linking ../rtlib/conv_s64_bit.so
 Linking ../rtlib/conv_s64_s32.so
 Linking ../rtlib/conv_s64_u32.so
 Linking ../rtlib/conv_s64_u64.so
@@ -4241,8 +4240,8 @@ Linking ../rtlib/mult2.so
 Linking ../rtlib/multiclick.so
 Linking ../rtlib/multiswitch.so
 Linking ../rtlib/mux16.so
-Linking ../rtlib/mux4.so
 Linking ../rtlib/mux2.so
+Linking ../rtlib/mux4.so
 Linking ../rtlib/mux8.so
 Linking ../rtlib/near.so
 Linking ../rtlib/not.so
@@ -4278,8 +4277,8 @@ Linking ../rtlib/thcud.so
 Linking ../rtlib/threadtest.so
 Linking ../rtlib/time.so
 Linking ../rtlib/timedelay.so
-Linking ../rtlib/timedelta.so
 Linking ../rtlib/tof.so
+Linking ../rtlib/timedelta.so
 Linking ../rtlib/toggle.so
 Linking ../rtlib/toggle2nist.so
 Linking ../rtlib/ton.so
@@ -4300,46 +4299,21 @@ Linking ../rtlib/mesa_uart.so
 Compiling objects/hal/user_comps/thermistor.c
 Compiling hal/user_comps/wj200_vfd/wj200_vfd.c
 Compiling hal/user_comps/pi500_vfd/pi500_vfd.c
+ln -sf libpyplugin.so.0 ../lib/libpyplugin.so
 Linking librs274.so.0
-c++ -std=gnu++20 -g -L/home/runner/work/_temp/linuxcnc-d01-preflight/lib -Wl,-rpath,/home/runner/work/_temp/linuxcnc-d01-preflight/lib -ltirpc  -lgpiod  -Xlinker -export-dynamic -Wl,-O1 -Wl,-Bsymbolic-functions -Wl,-soname,librs274.so.0 -shared -o ../lib/librs274.so.0 objects/emc/rs274ngc/interp_arc.o objects/emc/rs274ngc/interp_array.o objects/emc/rs274ngc/interp_base.o objects/emc/rs274ngc/interp_check.o objects/emc/rs274ngc/interp_convert.o objects/emc/rs274ngc/interp_queue.o objects/emc/rs274ngc/interp_cycles.o objects/emc/rs274ngc/interp_execute.o objects/emc/rs274ngc/interp_find.o objects/emc/rs274ngc/interp_internal.o objects/emc/rs274ngc/interp_inverse.o objects/emc/rs274ngc/interp_read.o objects/emc/rs274ngc/interp_write.o objects/emc/rs274ngc/interp_o_word.o objects/emc/rs274ngc/interp_g7x.o objects/emc/rs274ngc/nurbs_additional_functions.o objects/emc/rs274ngc/interp_namedparams.o objects/emc/rs274ngc/interp_python.o objects/emc/rs274ngc/interp_remap.o objects/emc/rs274ngc/interp_setup.o objects/emc/rs274ngc/canonmodule.o objects/emc/rs274ngc/pyparamclass.o objects/emc/rs274ngc/pyemctypes.o objects/emc/rs274ngc/pyinterp1.o objects/emc/rs274ngc/pyblock.o objects/emc/rs274ngc/pyarrays.o objects/emc/rs274ngc/interpmodule.o objects/emc/rs274ngc/rs274ngc_pre.o objects/emc/rs274ngc/interp_inspection.o objects/emc/nml_intf/modal_state.o ../lib/liblinuxcncini.so ../lib/libpyplugin.so ../lib/liblinuxcnchal.so.0 ../lib/libtooldata.so.0 -lstdc++ -lboost_python312 -L/usr/lib/x86_64-linux-gnu -lpython3.12 -ldl -lm
+c++ -std=gnu++20 -g -L/home/runner/work/_temp/linuxcnc-d01-preflight-ready/lib -Wl,-rpath,/home/runner/work/_temp/linuxcnc-d01-preflight-ready/lib -ltirpc  -lgpiod  -Xlinker -export-dynamic -Wl,-O1 -Wl,-Bsymbolic-functions -Wl,-soname,librs274.so.0 -shared -o ../lib/librs274.so.0 objects/emc/rs274ngc/interp_arc.o objects/emc/rs274ngc/interp_array.o objects/emc/rs274ngc/interp_base.o objects/emc/rs274ngc/interp_check.o objects/emc/rs274ngc/interp_convert.o objects/emc/rs274ngc/interp_queue.o objects/emc/rs274ngc/interp_cycles.o objects/emc/rs274ngc/interp_execute.o objects/emc/rs274ngc/interp_find.o objects/emc/rs274ngc/interp_internal.o objects/emc/rs274ngc/interp_inverse.o objects/emc/rs274ngc/interp_read.o objects/emc/rs274ngc/interp_write.o objects/emc/rs274ngc/interp_o_word.o objects/emc/rs274ngc/interp_g7x.o objects/emc/rs274ngc/nurbs_additional_functions.o objects/emc/rs274ngc/interp_namedparams.o objects/emc/rs274ngc/interp_python.o objects/emc/rs274ngc/interp_remap.o objects/emc/rs274ngc/interp_setup.o objects/emc/rs274ngc/canonmodule.o objects/emc/rs274ngc/pyparamclass.o objects/emc/rs274ngc/pyemctypes.o objects/emc/rs274ngc/pyinterp1.o objects/emc/rs274ngc/pyblock.o objects/emc/rs274ngc/pyarrays.o objects/emc/rs274ngc/interpmodule.o objects/emc/rs274ngc/rs274ngc_pre.o objects/emc/rs274ngc/interp_inspection.o objects/emc/nml_intf/modal_state.o ../lib/liblinuxcncini.so ../lib/libpyplugin.so ../lib/liblinuxcnchal.so.0 ../lib/libtooldata.so.0 -lstdc++ -lboost_python312 -L/usr/lib/x86_64-linux-gnu -lpython3.12 -ldl -lm
 Linking thermistor
 Linking wj200_vfd
 Linking pi500_vfd
 ln -sf librs274.so.0 ../lib/librs274.so
 Linking milltask
-c++ -std=gnu++20 -o ../bin/milltask objects/emc/motion/emcmotglb.o objects/emc/task/emctask.o objects/emc/task/emccanon.o objects/emc/task/emctaskmain.o objects/emc/motion/usrmotintf.o objects/emc/motion/emcmotutil.o objects/emc/task/taskintf.o objects/emc/motion/dbuf.o objects/emc/motion/stashf.o objects/emc/task/taskclass.o objects/emc/task/backtrace.o objects/emc/usr_intf/mapini.o ../lib/librs274.so.0 ../lib/liblinuxcnc.a ../lib/libnml.so.0 ../lib/liblinuxcncini.so.1 ../lib/libposemath.so.0 ../lib/liblinuxcnchal.so.0 ../lib/libpyplugin.so.0 ../lib/libtooldata.so.0 -L/home/runner/work/_temp/linuxcnc-d01-preflight/lib -Wl,-rpath,/home/runner/work/_temp/linuxcnc-d01-preflight/lib -ltirpc  -lgpiod  -Xlinker -export-dynamic -Wl,-O1 -Wl,-Bsymbolic-functions -lboost_python312 -L/usr/lib/x86_64-linux-gnu -lpython3.12 -ldl -lm -lfmt
+c++ -std=gnu++20 -o ../bin/milltask objects/emc/motion/emcmotglb.o objects/emc/task/emctask.o objects/emc/task/emccanon.o objects/emc/task/emctaskmain.o objects/emc/motion/usrmotintf.o objects/emc/motion/emcmotutil.o objects/emc/task/taskintf.o objects/emc/motion/dbuf.o objects/emc/motion/stashf.o objects/emc/task/taskclass.o objects/emc/task/backtrace.o objects/emc/usr_intf/mapini.o ../lib/librs274.so.0 ../lib/liblinuxcnc.a ../lib/libnml.so.0 ../lib/liblinuxcncini.so.1 ../lib/libposemath.so.0 ../lib/liblinuxcnchal.so.0 ../lib/libpyplugin.so.0 ../lib/libtooldata.so.0 -L/home/runner/work/_temp/linuxcnc-d01-preflight-ready/lib -Wl,-rpath,/home/runner/work/_temp/linuxcnc-d01-preflight-ready/lib -ltirpc  -lgpiod  -Xlinker -export-dynamic -Wl,-O1 -Wl,-Bsymbolic-functions -lboost_python312 -L/usr/lib/x86_64-linux-gnu -lpython3.12 -ldl -lm -lfmt
 Linking rs274
 Linking python module gcode.so
-c++ -std=gnu++20 -L/home/runner/work/_temp/linuxcnc-d01-preflight/lib -Wl,-rpath,/home/runner/work/_temp/linuxcnc-d01-preflight/lib -ltirpc  -lgpiod  -shared -o ../lib/python/gcode.so objects/emc/rs274ngc/gcodemodule.o ../lib/librs274.so.0 -lstdc++
+c++ -std=gnu++20 -L/home/runner/work/_temp/linuxcnc-d01-preflight-ready/lib -Wl,-rpath,/home/runner/work/_temp/linuxcnc-d01-preflight-ready/lib -ltirpc  -lgpiod  -shared -o ../lib/python/gcode.so objects/emc/rs274ngc/gcodemodule.o ../lib/librs274.so.0 -lstdc++
 Linking canterp.so
 You now need to run 'sudo make setuid' or 'sudo make setcap' in order to run in place with access to hardware.
-make: Leaving directory '/home/runner/work/_temp/linuxcnc-d01-preflight/src'
-
-== Topology ==
-Component Pins:
-Owner   Type  Dir                 Value  Name
-    33  float OUT                     0  joint.1.f-error
-    33  float OUT                     0  joint.1.f-error-lim
-    33  bit   OUT                 FALSE  joint.1.f-errored
-    33  float OUT                     0  joint.1.motor-pos-cmd ==> Ypos
-    33  float IN                      0  joint.1.motor-pos-fb <== Ypos
-    33  float OUT                     0  joint.2.f-error
-    33  float OUT                     0  joint.2.f-error-lim
-    33  bit   OUT                 FALSE  joint.2.f-errored
-    33  float OUT                     0  joint.2.motor-pos-cmd ==> D01-y2-cmd
-    33  float IN                      0  joint.2.motor-pos-fb <== D01-y2-fb
-    33  bit   OUT                 FALSE  motion.motion-enabled
-
-Realtime Threads:
-     Period  FP     Name               (     Time, Max-Time )
-    1000000  YES          servo-thread (        0,        0 )
-                  1 motion-command-handler
-                  2 motion-controller
-                  3 sum2.0
-                  4 sampler.0
-
-status-after-move task_state=0 interp_state=0 actual_position=(0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0) position=(0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0)
-settled y1cmd= y2cmd= y1fb= y2fb= motion=
+make: Leaving directory '/home/runner/work/_temp/linuxcnc-d01-preflight-ready/src'
 ```
 
 ## Standard error
@@ -4354,8 +4328,8 @@ No containers need to be restarted.
 No user sessions are running outdated binaries.
 
 No VM guests are running outdated hypervisor (qemu) binaries on this host.
-Cloning into '/home/runner/work/_temp/linuxcnc-d01-preflight'...
-Updating files:   0% (1/9526)Updating files:   1% (96/9526)Updating files:   2% (191/9526)Updating files:   3% (286/9526)Updating files:   4% (382/9526)Updating files:   5% (477/9526)Updating files:   6% (572/9526)Updating files:   7% (667/9526)Updating files:   8% (763/9526)Updating files:   9% (858/9526)Updating files:  10% (953/9526)Updating files:  11% (1048/9526)Updating files:  11% (1058/9526)Updating files:  12% (1144/9526)Updating files:  13% (1239/9526)Updating files:  14% (1334/9526)Updating files:  15% (1429/9526)Updating files:  16% (1525/9526)Updating files:  17% (1620/9526)Updating files:  18% (1715/9526)Updating files:  19% (1810/9526)Updating files:  20% (1906/9526)Updating files:  21% (2001/9526)Updating files:  22% (2096/9526)Updating files:  23% (2191/9526)Updating files:  24% (2287/9526)Updating files:  25% (2382/9526)Updating files:  26% (2477/9526)Updating files:  27% (2573/9526)Updating files:  28% (2668/9526)Updating files:  29% (2763/9526)Updating files:  30% (2858/9526)Updating files:  31% (2954/9526)Updating files:  32% (3049/9526)Updating files:  33% (3144/9526)Updating files:  34% (3239/9526)Updating files:  35% (3335/9526)Updating files:  36% (3430/9526)Updating files:  37% (3525/9526)Updating files:  38% (3620/9526)Updating files:  39% (3716/9526)Updating files:  40% (3811/9526)Updating files:  41% (3906/9526)Updating files:  42% (4001/9526)Updating files:  43% (4097/9526)Updating files:  44% (4192/9526)Updating files:  45% (4287/9526)Updating files:  46% (4382/9526)Updating files:  47% (4478/9526)Updating files:  48% (4573/9526)Updating files:  49% (4668/9526)Updating files:  50% (4763/9526)Updating files:  51% (4859/9526)Updating files:  52% (4954/9526)Updating files:  53% (5049/9526)Updating files:  54% (5145/9526)Updating files:  55% (5240/9526)Updating files:  56% (5335/9526)Updating files:  57% (5430/9526)Updating files:  58% (5526/9526)Updating files:  59% (5621/9526)Updating files:  60% (5716/9526)Updating files:  61% (5811/9526)Updating files:  62% (5907/9526)Updating files:  63% (6002/9526)Updating files:  64% (6097/9526)Updating files:  65% (6192/9526)Updating files:  66% (6288/9526)Updating files:  67% (6383/9526)Updating files:  68% (6478/9526)Updating files:  69% (6573/9526)Updating files:  70% (6669/9526)Updating files:  71% (6764/9526)Updating files:  72% (6859/9526)Updating files:  73% (6954/9526)Updating files:  74% (7050/9526)Updating files:  75% (7145/9526)Updating files:  76% (7240/9526)Updating files:  77% (7336/9526)Updating files:  78% (7431/9526)Updating files:  78% (7463/9526)Updating files:  79% (7526/9526)Updating files:  80% (7621/9526)Updating files:  81% (7717/9526)Updating files:  82% (7812/9526)Updating files:  83% (7907/9526)Updating files:  84% (8002/9526)Updating files:  85% (8098/9526)Updating files:  86% (8193/9526)Updating files:  87% (8288/9526)Updating files:  88% (8383/9526)Updating files:  89% (8479/9526)Updating files:  90% (8574/9526)Updating files:  91% (8669/9526)Updating files:  92% (8764/9526)Updating files:  93% (8860/9526)Updating files:  94% (8955/9526)Updating files:  95% (9050/9526)Updating files:  96% (9145/9526)Updating files:  97% (9241/9526)Updating files:  98% (9336/9526)Updating files:  99% (9431/9526)Updating files: 100% (9526/9526)Updating files: 100% (9526/9526), done.
+Cloning into '/home/runner/work/_temp/linuxcnc-d01-preflight-ready'...
+Updating files:   0% (1/9526)Updating files:   1% (96/9526)Updating files:   2% (191/9526)Updating files:   3% (286/9526)Updating files:   4% (382/9526)Updating files:   5% (477/9526)Updating files:   6% (572/9526)Updating files:   7% (667/9526)Updating files:   8% (763/9526)Updating files:   9% (858/9526)Updating files:  10% (953/9526)Updating files:  11% (1048/9526)Updating files:  12% (1144/9526)Updating files:  13% (1239/9526)Updating files:  14% (1334/9526)Updating files:  15% (1429/9526)Updating files:  16% (1525/9526)Updating files:  17% (1620/9526)Updating files:  18% (1715/9526)Updating files:  19% (1810/9526)Updating files:  20% (1906/9526)Updating files:  21% (2001/9526)Updating files:  22% (2096/9526)Updating files:  22% (2189/9526)Updating files:  23% (2191/9526)Updating files:  24% (2287/9526)Updating files:  25% (2382/9526)Updating files:  26% (2477/9526)Updating files:  27% (2573/9526)Updating files:  28% (2668/9526)Updating files:  29% (2763/9526)Updating files:  30% (2858/9526)Updating files:  31% (2954/9526)Updating files:  32% (3049/9526)Updating files:  33% (3144/9526)Updating files:  34% (3239/9526)Updating files:  35% (3335/9526)Updating files:  36% (3430/9526)Updating files:  37% (3525/9526)Updating files:  38% (3620/9526)Updating files:  39% (3716/9526)Updating files:  40% (3811/9526)Updating files:  41% (3906/9526)Updating files:  42% (4001/9526)Updating files:  43% (4097/9526)Updating files:  44% (4192/9526)Updating files:  45% (4287/9526)Updating files:  46% (4382/9526)Updating files:  47% (4478/9526)Updating files:  48% (4573/9526)Updating files:  49% (4668/9526)Updating files:  50% (4763/9526)Updating files:  51% (4859/9526)Updating files:  52% (4954/9526)Updating files:  53% (5049/9526)Updating files:  54% (5145/9526)Updating files:  55% (5240/9526)Updating files:  56% (5335/9526)Updating files:  57% (5430/9526)Updating files:  58% (5526/9526)Updating files:  59% (5621/9526)Updating files:  60% (5716/9526)Updating files:  61% (5811/9526)Updating files:  62% (5907/9526)Updating files:  63% (6002/9526)Updating files:  64% (6097/9526)Updating files:  65% (6192/9526)Updating files:  66% (6288/9526)Updating files:  67% (6383/9526)Updating files:  68% (6478/9526)Updating files:  69% (6573/9526)Updating files:  70% (6669/9526)Updating files:  71% (6764/9526)Updating files:  72% (6859/9526)Updating files:  73% (6954/9526)Updating files:  74% (7050/9526)Updating files:  75% (7145/9526)Updating files:  76% (7240/9526)Updating files:  77% (7336/9526)Updating files:  78% (7431/9526)Updating files:  79% (7526/9526)Updating files:  80% (7621/9526)Updating files:  81% (7717/9526)Updating files:  82% (7812/9526)Updating files:  83% (7907/9526)Updating files:  84% (8002/9526)Updating files:  85% (8098/9526)Updating files:  86% (8193/9526)Updating files:  87% (8288/9526)Updating files:  88% (8383/9526)Updating files:  89% (8479/9526)Updating files:  90% (8574/9526)Updating files:  91% (8669/9526)Updating files:  92% (8764/9526)Updating files:  93% (8860/9526)Updating files:  94% (8955/9526)Updating files:  95% (9050/9526)Updating files:  96% (9145/9526)Updating files:  97% (9241/9526)Updating files:  98% (9336/9526)Updating files:  99% (9431/9526)Updating files: 100% (9526/9526)Updating files: 100% (9526/9526), done.
 HEAD is now at 8bf4605ae Merge pull request #4501 from grandixximo/gmoccapy-quit-4500
 
 Running kernel seems to be up-to-date.
@@ -4375,10 +4349,38 @@ Reading 0/189 dependency files
 Done reading dependencies
 Reading 0/303 realtime dependency files
 Done reading realtime dependencies
-<commandline>:0: parameter or pin 'joint.1.motor-pos-cmd': not found
-<commandline>:0: parameter or pin 'joint.2.motor-pos-cmd': not found
-<commandline>:0: parameter or pin 'joint.1.motor-pos-fb': not found
-<commandline>:0: parameter or pin 'joint.2.motor-pos-fb': not found
-<commandline>:0: parameter or pin 'motion.motion-enabled': not found
-<commandline>:0: parameter or pin 'sampler.0.enable': not found
+D01 fixture failed composite readiness.
+Machine configuration file is 'd01.ini'
+Starting LinuxCNC...
+linuxcnc TPMOD=tpmod HOMEMOD=homemod EMCMOT=motmod
+Found file(ABS): /tmp/d01/d01.hal
+Shutting down and cleaning up LinuxCNC...
+USRMOT: ERROR: command 32 timeout (seq: 1)
+emcMotionInit: emcTrajInit failed
+
+identityKinematicsSetup: coordinates:xyyz
+   Joint 0 ==> Axis X
+   Joint 1 ==> Axis Y
+   Joint 2 ==> Axis Y
+   Joint 3 ==> Axis Z
+
+LinuxCNC terminated with an error.  You can find more information in the log:
+    /home/runner/linuxcnc_debug.txt
+and
+    /home/runner/linuxcnc_print.txt
+as well as in the output of the shell command 'dmesg' and in the terminal
+application-specific initialization failed: no display name and no $DISPLAY environment variable
+Error in startup script: couldn't load file "/home/runner/work/_temp/linuxcnc-d01-preflight-ready/tcl/bin/../linuxcnc.so": /home/runner/work/_temp/linuxcnc-d01-preflight-ready/tcl/bin/../linuxcnc.so: cannot open shared object file: No such file or directory
+    while executing
+"load [file join [file dirname [info script]] .. linuxcnc.so]"
+    (file "/home/runner/work/_temp/linuxcnc-d01-preflight-ready/tcl/bin/popimage" line 33)
+Note: realtime scheduling unavailable (sched_setscheduler SCHED_FIFO: Operation not permitted).
+  Process capabilities: cap_sys_nice=no cap_ipc_lock=no.
+  Falling back to POSIX non-realtime.
+  Fix: 'sudo make setcap' (preferred) or 'sudo make setuid' on rtapi_app.
+  Override (testing only): set LINUXCNC_FORCE_REALTIME=1.
+Note: Using POSIX non-realtime
+No isolated CPU's found, expect some latency or set RTAPI_CPU_NUMBER to select CPU
+/tmp/d01/d01.hal:34: Pin 'joint.1.motor-pos-cmd' was already linked to signal 'Ypos'
+cat: /tmp/d01/ready.err: No such file or directory
 ```

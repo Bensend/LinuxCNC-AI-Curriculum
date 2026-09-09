@@ -1,0 +1,1 @@
+tiny_collector_exit=0

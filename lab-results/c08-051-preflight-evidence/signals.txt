@@ -1,0 +1,16 @@
+Signals:
+Type                  Value  Name     (linked to)
+bit                   FALSE  c08-cause-a
+                                 <== c08diag.0.cause-a
+                                 ==> sampler.1.pin.1
+bit                   FALSE  c08-cause-b
+                                 <== c08diag.0.cause-b
+                                 ==> sampler.1.pin.2
+u32              0x00000004  c08-phase
+                                 <== c08diag.0.phase
+                                 ==> sampler.1.pin.0
+bit                   FALSE  c08-symptom
+                                 <== c08diag.0.symptom
+                                 ==> sampler.0.pin.0
+                                 ==> sampler.1.pin.3
+

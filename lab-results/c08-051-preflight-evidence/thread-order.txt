@@ -1,0 +1,7 @@
+Realtime Threads:
+     Period  FP     Name               (     Time, Max-Time )
+    1000000  YES            c08-thread (        0,        0 )
+                  1 c08diag.0
+                  2 sampler.0
+                  3 sampler.1
+

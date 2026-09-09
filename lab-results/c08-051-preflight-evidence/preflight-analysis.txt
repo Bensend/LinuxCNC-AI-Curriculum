@@ -1,0 +1,4 @@
+preflight_shape=PASS main_rows=280 p1_rows=75 p3_rows=76
+tiny_tags=[0, 1, 2] tiny_tags_contiguous=1 producer_overruns=31
+interpretation=consumer continuity coexists with proven rejected producer writes; continuity alone is not a no-loss oracle
+authority=NON-AUTHORITATIVE; frozen C08-050 Gates A-J remain UNSCORED

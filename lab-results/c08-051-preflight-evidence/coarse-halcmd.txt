@@ -1,0 +1,2 @@
+P1 coarse symptom=TRUE
+P3 coarse symptom=TRUE

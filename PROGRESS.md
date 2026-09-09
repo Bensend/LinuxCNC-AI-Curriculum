@@ -6,9 +6,9 @@ Repository artifacts, not chat history, are authoritative.
 
 ## Current session marker
 
-- Session start (UTC): `2026-09-09T13:13:21Z`
-- Session end: OPEN
-- Active work: D01 clean standalone evidence-retention/provenance preflight `lab-jobs/018-d01-clean-evidence-retention-preflight.sh`, workflow `34355802800`, is queued/running. Frozen numeric fixture and D01-002 Gates A-J are unchanged and unscored.
+- Session start (UTC): `2026-09-09T14:11:06Z`
+- Session end: `2026-09-09T14:11:54Z`
+- Active work: D01 clean evidence-retention lineage attempt 2, `lab-jobs/019-d01-clean-retention-preflight-fix1.sh`, workflow `34362010265`, queued/running. Frozen numeric fixture and D01-002 Gates A-J remain unchanged and UNSCORED.
 
 ## Current critical-path state
 
@@ -43,14 +43,14 @@ check_for_faults()
 
 ### Clean evidence-retention redesign
 
-A new standalone lineage begins with `lab-jobs/018-d01-clean-evidence-retention-preflight.sh`, commit `24376f64c2f0816e320a8288c09ff66130ae5744`, workflow `34355802800`.
+The standalone retention lineage began with `018`, workflow `34355802800`. Attempt 1 failed before runtime because its Python rewrite inserted early provenance commands and then an over-broad regex deleted every line beginning `git diff`, `git rev-parse`, or `git status`, including the newly inserted commands. Consequently `/tmp/d01-observer.patch` was never created and `cp` failed. This is a pure harness rewrite defect; it does not challenge the validated runtime fixture and does not score D01-002 gates.
 
-It deliberately does not retune behavior. It keeps low/high offsets `0.020/0.200`, relevant ferror limit `0.050`, the validated `linuxcnc.command()`/NML homing+MDI path, correct `mux16.sel0..sel3/out-f`, phase-before-mutation semantics, and the test-only Cartesian observer. Its new purpose is evidence integrity: retain observer patch and pinned source revision before leaving the source tree, and package the atomic stream, collector stderr/stdout, INI/HAL, topology, thread order, LinuxCNC logs and recorder-health evidence under `lab-results/d01-018-evidence/`. It asserts nonempty observer patch and trace, zero producer overruns and empty collector stderr before declaring retention-preflight PASS.
+Attempt 2 is `lab-jobs/019-d01-clean-retention-preflight-fix1.sh`, commit `f0cd9efed7cf82f76b300f104decdccf3e4085c6`, workflow `34362010265`. It changes only the rewrite logic: preserve the early source-tree provenance-producing commands and remove only the inherited final provenance block that executes after leaving the source tree. Runtime values remain low/high offsets `0.020/0.200`, relevant ferror limit `0.050`; NML homing/MDI, mux interface, observer placement and phase semantics are unchanged.
 
 ### Exact next-work checkpoint
 
-1. Inspect only workflow `34355802800` when complete; do not launch a duplicate while it is active.
-2. If it fails, classify whether the new standalone retention lineage has a harness/evidence defect and correct only that defect; do not retune frozen runtime values or D01-002 gates.
+1. Inspect only workflow `34362010265` when complete; do not launch a duplicate while active.
+2. If it fails, classify only the retention-lineage harness/evidence defect. This is attempt 2 of the clean retention lineage; one materially similar correction remains before the three-attempt classification boundary. Do not retune runtime values or frozen gates.
 3. If it passes, reconcile the retained artifact contents and provenance as non-authoritative evidence-retention proof.
 4. Then create one separate independent authoritative D01 run using unchanged D01-002 P0-P8 and Gates A-J. Score gates from retained evidence, not live assertions.
 5. Authoritative evidence must retain one atomic realtime stream, zero producer overruns, monotonic sample indices, collector stderr state, phase-before-mutation witnesses, exact observer-source diff, config/HAL/test source, startup logs, topology/order and gate-analysis output.

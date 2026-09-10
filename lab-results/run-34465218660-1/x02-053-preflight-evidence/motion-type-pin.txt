@@ -1,0 +1,4 @@
+Component Pins:
+Owner   Type  Dir                 Value  Name
+    27  s32   OUT                     0  motion.motion-type ==> x02-motion-type
+

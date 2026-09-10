@@ -1,0 +1,8 @@
+1518:static PyObject *Stat_heartbeat(pyStatChannel *s, void *) {
+1520:    return PyLong_FromUInt64(s->status.motion.heartbeat);
+1522:    return PyLong_FromUnsignedLongLong(s->status.motion.heartbeat);
+1526:static PyObject *Stat_taskbeat(pyStatChannel *s, void *) {
+1528:    return PyLong_FromUInt64(s->status.task.taskbeat);
+1530:    return PyLong_FromUnsignedLongLong(s->status.task.taskbeat);
+1567:    {(char*)"heartbeat", (getter)Stat_heartbeat, NULL,
+1568:        (char*)"Motion controller heartbeat counter. Increments every servo cycle.", NULL

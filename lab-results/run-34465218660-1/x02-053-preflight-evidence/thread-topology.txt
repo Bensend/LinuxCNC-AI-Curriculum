@@ -1,0 +1,16 @@
+Realtime Threads:
+     Period  FP     Name               (     Time, Max-Time )
+    1000000  YES          servo-thread (     4669,    21350 )
+                  1 motion-command-handler
+                  2 motion-controller
+                  3 ddt_x
+                  4 ddt_xv
+                  5 ddt_y
+                  6 ddt_yv
+                  7 ddt_z
+                  8 ddt_zv
+                  9 vel_xy
+                 10 vel_xyz
+                 11 x02-source.0
+                 12 sampler.0
+

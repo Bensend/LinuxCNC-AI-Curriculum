@@ -1,0 +1,10 @@
+component x02_source "X02 deterministic servo-cycle witness";
+pin out s32 cycle;
+function _;
+license "GPL";
+;;
+static rtapi_s32 cyc = 0;
+FUNCTION(_) {
+    cyc++;
+    cycle = cyc;
+}

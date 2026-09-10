@@ -1,0 +1,56 @@
+component pb_prep "PB-PREP-001 generic two-side software preflight fixture";
+pin in float r1; pin in float r2;
+pin in float pid1_out; pin in float pid2_out;
+pin out float pid1_ref; pin out float pid2_ref;
+pin out float y1; pin out float y2;
+pin out float corr_req; pin out float corr_applied;
+pin out float final1; pin out float final2;
+pin out bit final1_sat; pin out bit final2_sat;
+pin out s32 cycle;
+pin out s32 phase;
+param rw u32 architecture = 0;
+param rw bit run = 0;
+param rw float sync_gain = 2.0;
+param rw float diff_max = 0.25;
+param rw float u_max = 2.0;
+param rw float plant_alpha = 0.05;
+param rw float plant_gain1 = 1.0;
+param rw float plant_gain2 = 1.0;
+param rw float initial_delta = 0.02;
+param rw float c_pgain = 6.0;
+function prepare;
+function finish;
+license "GPL";
+;;
+#include <math.h>
+static int initialized = 0;
+static double clip(double v, double m) { return v > m ? m : (v < -m ? -m : v); }
+FUNCTION(prepare) {
+    double ed, c;
+    if (!initialized) { y1 = initial_delta; y2 = 0.0; initialized = 1; }
+    ed = y1 - y2;
+    corr_req = sync_gain * ed;
+    c = clip(corr_req, diff_max);
+    corr_applied = c;
+    if (architecture == 0) { pid1_ref = r1 - c; pid2_ref = r2 + c; }
+    else { pid1_ref = r1; pid2_ref = r2; }
+}
+FUNCTION(finish) {
+    double c = corr_applied, u1 = 0.0, u2 = 0.0, common;
+    if (!run) {
+        final1 = final2 = 0.0; final1_sat = final2_sat = 0; phase = 0; cycle++;
+        return;
+    }
+    phase = 1;
+    if (architecture == 0) { u1 = pid1_out; u2 = pid2_out; }
+    else if (architecture == 1) { u1 = pid1_out - c; u2 = pid2_out + c; }
+    else {
+        common = c_pgain * (((r1 - y1) + (r2 - y2)) * 0.5);
+        u1 = common - c; u2 = common + c;
+    }
+    final1_sat = fabs(u1) > u_max; final2_sat = fabs(u2) > u_max;
+    final1 = clip(u1, u_max); final2 = clip(u2, u_max);
+    y1 += plant_alpha * ((plant_gain1 * final1) - y1);
+    y2 += plant_alpha * ((plant_gain2 * final2) - y2);
+    cycle++;
+}

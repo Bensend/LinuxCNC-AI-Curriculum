@@ -1,31 +1,35 @@
 # Latest LinuxCNC Lab Result
 
-- Job: `061-pb-prep-001-y1y2-preflight-posthome-enable`
-- Job file: `lab-jobs/061-pb-prep-001-y1y2-preflight-posthome-enable.sh`
-- Workflow run ID: `34539058746`
+- Job: `062-pb-prep-001-y1y2-preflight-true-posthome-seed`
+- Job file: `lab-jobs/062-pb-prep-001-y1y2-preflight-true-posthome-seed.sh`
+- Workflow run ID: `34539104351`
 - Attempt: `1`
-- Source commit: `79515b956b74b6165d4c5d1589d2080496e2c4d3`
+- Source commit: `b6c8e73d1f87a5ca2fbc1ddd713f744b399e6960`
 - Exit code: `1`
-- Finished UTC: `2026-09-10T22:46:22Z`
+- Finished UTC: `2026-09-10T22:46:59Z`
 
 ## Metadata
 ```text
 LinuxCNC AI Curriculum Lab
-UTC start: 2026-09-10T22:46:22Z
-Repository commit: 79515b956b74b6165d4c5d1589d2080496e2c4d3
-Workflow run: 34539058746 attempt 1
-Job file: lab-jobs/061-pb-prep-001-y1y2-preflight-posthome-enable.sh
+UTC start: 2026-09-10T22:46:59Z
+Repository commit: b6c8e73d1f87a5ca2fbc1ddd713f744b399e6960
+Workflow run: 34539104351 attempt 1
+Job file: lab-jobs/062-pb-prep-001-y1y2-preflight-true-posthome-seed.sh
 Runner: Linux runnervmlun5p 6.17.0-1022-azure #22-Ubuntu SMP Mon Jul 27 17:24:03 UTC 2026 x86_64 x86_64 x86_64 GNU/Linux
 Inner lab timeout: 70 minutes (job ceiling: 75 minutes)
 
-UTC finish: 2026-09-10T22:46:22Z
+UTC finish: 2026-09-10T22:46:59Z
 ```
 
 ## Standard output
 ```text
+PB-PREP-001 correction: seed enable is now generated after the homed predicate; frozen P0/P1 contract otherwise unchanged.
 ```
 
 ## Standard error
 ```text
-HARNESS_INVALID: expected exactly one occurrence: '  halcmd setp pb-prep.0.run true\n\n  ARCH="$ARCH" python3 - <<\'PY\'\nimport linuxcnc, time, sys, os', got 0
+  File "<stdin>", line 51
+    one('  halcmd setp pb-prep.0.run true\n\n  ARCH="$ARCH" python3 - <<'PY'\nimport linuxcnc, time, sys, os',
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+SyntaxError: invalid syntax. Perhaps you forgot a comma?
 ```

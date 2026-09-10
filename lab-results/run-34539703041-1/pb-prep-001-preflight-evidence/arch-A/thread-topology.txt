@@ -1,0 +1,11 @@
+Realtime Threads:
+     Period  FP     Name               (     Time, Max-Time )
+    1000000  YES          servo-thread (     1804,    23173 )
+                  1 motion-command-handler
+                  2 motion-controller
+                  3 pb-prep.0.prepare
+                  4 pb-pid1.do-pid-calcs
+                  5 pb-pid2.do-pid-calcs
+                  6 pb-prep.0.finish
+                  7 sampler.0
+

@@ -1,0 +1,3 @@
+architecture=A retained-rows=2500
+payload-cycle-first=430 last=2929 gaps=0
+sign-row e_diff_used=0.020000000 corr_req=0.020000000 corr_applied=0.020000000 ref1=-0.020000000 ref2=0.020000000 final1=-0.120000000 final2=0.000000000

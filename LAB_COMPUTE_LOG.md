@@ -45,21 +45,24 @@ If a run is cancelled, times out, is harness-invalid, or fails substantively, st
 | 2026-09-08 | C04-026 attempt 2 | `34243768815` | `102119299104` | 2026-09-08T19:06:42Z | 2026-09-08T19:10:22Z | 3.7 | PASS / FOLLOW-UP REQUIRED | Behavioral run passed its harness; later C04 continuation resolved the source-transition issue. Exact job timestamps backfilled 2026-09-09. |
 | 2026-09-09 | C08-051 diagnostic trace preflight | `34327928519` | `102389431379` | 2026-09-09T08:13:43Z | 2026-09-09T08:17:36Z | 3.9 | PREFLIGHT PASS | Non-authoritative collector/order/trace-validity proof; 31 producer overruns coexisted with retained contiguous tags `[0,1,2]`; C08 frozen gates unscored. |
 | 2026-09-09 | C08-052 authoritative diagnostic discrimination | `34328731569` | `102392025784` | 2026-09-09T08:22:16Z | 2026-09-09T08:26:07Z | 3.9 | PASS | Accepted TEST-CONFIRMED C08 evidence; unchanged Gates A-J all passed; artifact `10094968899`. |
+| 2026-09-10 | X01-002 redesigned preflight | `34428664862` | `102719239856` | 2026-09-10T02:14:36Z | 2026-09-10T02:19:03Z | 4.45 | PREFLIGHT PASS | Artifact `10133717168`; validly exercised redesigned producer-overrun + deterministic-payload-gap oracle; frozen authoritative gates unscored. |
+| 2026-09-10 | X01-002 authoritative wrapper attempt 1 | `34432706789` | `102731363601` | 2026-09-10T03:16:39Z | 2026-09-10T03:16:47Z | 0.13 | HARNESS INVALID | Python source-rewrite SyntaxError before LinuxCNC/P0; no behavioral evidence and Gates A-J unscored. |
+| 2026-09-10 | X01-002 authoritative accepted run | `34436256547` | `102741829103` | 2026-09-10T04:12:20Z | 2026-09-10T04:16:18Z | 3.97 | PASS | Artifact `10136342576`; independent raw-artifact audit passed frozen Gates A-J 10/10 including predeclared 10,000-row P5. |
 
 ## Running totals
 
 Keep these totals current whenever new rows are added:
 
-- **Exactly backfilled lab compute:** 114.0 min (1.90 h)
-- **Total lab compute used:** 1.90 h + unbackfilled historical usage
+- **Exactly backfilled lab compute:** 122.55 min (2.04 h)
+- **Total lab compute used:** 2.04 h + unbackfilled historical usage
 - **Remaining from 120 h first-draft allowance:** unknown until historical backfill
-- **Current-day exactly backfilled lab compute (2026-09-09):** 25.5 min (0.43 h) + unbackfilled same-day historical usage
+- **Current-day exactly backfilled lab compute (2026-09-10):** 8.55 min (0.14 h) + unbackfilled same-day historical usage
 
 ## Immediate backfill queue
 
 C03-025 and C04-026 are now backfilled from exact GitHub Actions job timestamps.
 
-C05-029 attempts 1–7, C06 work through C06-038, and C08-051/C08-052 are exactly accounted. Later C06 runs after C06-038 and C07 laboratory runs remain historical/same-day backfill work and must not be silently included in the exact totals above.
+C05-029 attempts 1–7, C06 work through C06-038, C08-051/C08-052, and X01-002 preflight/current authoritative attempts are exactly accounted. Later C06 runs after C06-038, C07 laboratory runs, and earlier X01-001 attempts remain historical backfill work where exact job metadata has not yet been integrated and must not be silently included in the exact totals above.
 
 No known T02-T05, C01, C02, or earlier C05 jobs through C05-029 attempt 7 remain in the immediate backfill queue.
 

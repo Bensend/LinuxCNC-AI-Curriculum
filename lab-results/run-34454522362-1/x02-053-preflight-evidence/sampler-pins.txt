@@ -1,0 +1,11 @@
+Component Pins:
+Owner   Type  Dir                 Value  Name
+    72  s32   OUT                    11  sampler.0.curr-depth
+    72  bit   IN                  FALSE  sampler.0.enable
+    72  bit   OUT                 FALSE  sampler.0.full
+    72  s32   I/O                     0  sampler.0.overruns
+    72  s32   IN                     21  sampler.0.pin.0 <== x02-cycle
+    72  s32   IN                      0  sampler.0.pin.1 <== x02-motion-type
+    72  s32   I/O                     0  sampler.0.sample-num
+    72  s32   OUT                   211  sampler.0.time
+

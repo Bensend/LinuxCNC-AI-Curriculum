@@ -1,0 +1,5 @@
+architecture=C retained-rows=2500
+payload-cycle-first=224 last=2723 gaps=0
+sign-row e_diff_used=0.020000000 corr_req=0.020000000 corr_applied=0.020000000 ref1=0.000000000 ref2=0.000000000 final1=-0.080000000 final2=-0.040000000
+common-request-span=0.449500000 max-r1-r2=0 max-y1-y2=0.000000000
+P0/P1-preflight=PASS

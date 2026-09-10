@@ -1,0 +1,25 @@
+Machine configuration file is 'pb-prep.ini'
+Starting LinuxCNC...
+linuxcnc TPMOD=tpmod HOMEMOD=homemod EMCMOT=motmod
+Found file(REL): ./pb-prep.hal
+task: main loop took 0.086991 seconds
+task: main loop took 0.020067 seconds
+linuxcncrsh: New connection from ::1:47226
+linuxcncrsh: Read close 'Default-4' (4)
+linuxcncrsh: Connection terminated 'Default-4' (4)
+linuxcncrsh: New connection from ::1:47230
+linuxcncrsh: Linked 'pbshutdown' (4)
+linuxcncrsh: Enabled 'pbshutdown' (4)
+linuxcncrsh: Shutdown initiated by 'pbshutdown' (4)
+linuxcncrsh: Disabled 'pbshutdown' (4)
+linuxcncrsh: Connection terminated 'pbshutdown' (4)
+Shutting down and cleaning up LinuxCNC...
+task: 2273 cycles, min=0.000002, max=0.020067, avg=0.001110, 2 latency excursions (> 10x expected cycle time of 0.001000s)
+Shutting down and cleaning up LinuxCNC...
+
+identityKinematicsSetup: coordinates:XYZY
+   Joint 0 ==> Axis X
+   Joint 1 ==> Axis Y
+   Joint 2 ==> Axis Z
+   Joint 3 ==> Axis Y
+

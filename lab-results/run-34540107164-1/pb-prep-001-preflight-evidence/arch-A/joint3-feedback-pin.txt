@@ -1,0 +1,4 @@
+Component Pins:
+Owner   Type  Dir                 Value  Name
+    27  float IN                      0  joint.3.motor-pos-fb <== y2fb
+

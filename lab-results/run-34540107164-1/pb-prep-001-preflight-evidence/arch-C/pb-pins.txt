@@ -1,0 +1,22 @@
+Component Pins:
+Owner   Type  Dir                 Value  Name
+    34  float OUT                     0  pb-prep.0.corr-applied ==> scap
+    34  float OUT                     0  pb-prep.0.corr-req ==> screq
+    34  s32   OUT                   112  pb-prep.0.cycle ==> cyc
+    34  float OUT                     0  pb-prep.0.e-diff-used ==> sedused
+    34  float OUT                     0  pb-prep.0.final1 ==> sfinal1
+    34  bit   OUT                 FALSE  pb-prep.0.final1-sat ==> ssat1
+    34  float OUT                     0  pb-prep.0.final2 ==> sfinal2
+    34  bit   OUT                 FALSE  pb-prep.0.final2-sat ==> ssat2
+    34  s32   OUT                    30  pb-prep.0.finish.time
+    34  s32   OUT                     0  pb-prep.0.phase ==> ph
+    34  float IN                      0  pb-prep.0.pid1-out <== pid1out
+    34  float OUT                     0  pb-prep.0.pid1-ref ==> ref1
+    34  float IN                      0  pb-prep.0.pid2-out <== pid2out
+    34  float OUT                     0  pb-prep.0.pid2-ref ==> ref2
+    34  s32   OUT                    36  pb-prep.0.prepare.time
+    34  float IN                      0  pb-prep.0.r1 <== y1cmd
+    34  float IN                      0  pb-prep.0.r2 <== y2cmd
+    34  float OUT                     0  pb-prep.0.y1 ==> y1fb
+    34  float OUT                     0  pb-prep.0.y2 ==> y2fb
+

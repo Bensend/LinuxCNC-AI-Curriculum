@@ -2,6 +2,15 @@
 
 This curriculum is dependency-driven rather than a fixed reading list. Modules may spawn prerequisites when source reading exposes missing knowledge.
 
+## Curriculum level roadmap
+
+- **1000 level — LinuxCNC foundations:** architecture, realtime, HAL, motion, HostMot2, hm2_eth, I/O paths, failure engineering, Task/NML/UI, and a generic machine-control capstone.
+- **2000 level — advanced control and diagnostics:** coupled-axis authority, feedback integrity, communication/watchdog recovery, recorder integrity, synchronized diagnostics, compound faults, advanced HMI behavior, QtVismach/live 3D visualization, and deeper control topics promoted by evidence.
+- **3000 level — hardware and AI-assisted implementation:** custom HostMot2/FPGA work when justified, reusable board blocks, Ethernet/control-board architecture, safety-oriented hardware blocks, simulation and fault testing, and AI-readable hardware design contracts/playbooks. Specialized DXF/bend-planning or advanced rendering/physics work may also be promoted here when evidence justifies it.
+- **4000 level — machine-specific specialization:** deep, evidence-based tracks for the major machine classes LinuxCNC users build and retrofit. Each track mines real forum build diaries, configs, source, custom components, HMIs, failure reports, and open-source projects, then turns the findings into an AI-readable machine build playbook.
+
+The levels are cumulative. Higher level does not merely mean harder; a topic is promoted when it requires specialized knowledge, infrastructure, hardware, or machine-domain reasoning beyond the previous level.
+
 ## Critical Path
 
 The first branch is deliberately chosen to support future Ethernet FPGA machine-control development while still establishing LinuxCNC fundamentals:
@@ -133,10 +142,60 @@ The autonomous curriculum may continue hourly, but paid/limited laboratory compu
 - C08 — diagnostics and trace capture
 - C09 — fresh-AI architecture handoff
 
+## 4000-Level Machine-Specific Specialization
+
+The 4000 level applies the LinuxCNC, advanced-control, hardware, and AI-readable design methods to real machine classes. Each track should study multiple existing implementations rather than treating one configuration as canonical.
+
+### 4100 — Mills and VMCs
+Study manual-mill conversions, knee mills, benchtop mills, VMC retrofits and machining centers. Include spindle/VFD control, rigid tapping, spindle orient, ATC/toolchanger sequencing, probing, tool tables, coolant/lube, homing/limits, pallet/auxiliary mechanisms, and production HMI workflows.
+
+### 4200 — Lathes and Turning Centers
+Cover X/Z conventions, diameter/radius mode, spindle encoder/index handling, CSS, threading synchronization and G76, tool tables and turret logic, spindle orientation, rigid tapping where applicable, C-axis/live tooling, probing, chuck/tailstock/steady-rest integration, and lathe-specific operator interfaces.
+
+### 4300 — Plasma, Laser and Waterjet Gantries
+Study QtPlasmaC/PlasmaC and other community implementations, THC and arc-voltage handling, probing and pierce sequencing, process interlocks, gantry squaring, height control, consumables/process state, process-enable paths, material libraries, and production nesting/HMI workflows.
+
+### 4400 — Routers and Woodworking Machines
+Cover gantry routers, vacuum tables, automatic tool changers, spindle/VFD interfaces, dust collection, probing, tool length handling, workholding, auxiliary pneumatics, multi-spindle/router configurations, and approachable setup patterns suitable for hobby and small-shop users.
+
+### 4500 — Robots and Custom Kinematics
+Study SCARA, six-axis arms, delta/parallel mechanisms, non-Cartesian machines, custom kinematics, singularities, joint/Cartesian limits, homing/reference strategies, path-planning boundaries, visualization, and diagnostics for unusual kinematic systems.
+
+### 4600 — Press Brakes
+This should be one of the first deep 4000 tracks because it exercises LinuxCNC in ways conventional mills do not. Mine LinuxCNC forum build diaries and open-source projects from the earliest design discussion through later changes and failures, not just final configs.
+
+Topics should include Y1/Y2 independent feedback and beam-level control, hydraulic/proportional-valve command architecture, rapid approach/change-point/bend/decompression/return sequencing, pressure and tonnage concepts, backgauge X/R/Z-style control, manual typed-position and jog modes, bend-program sequencing, tooling geometry, bend allowance/deduction, springback and crowning/deflection compensation, calibration/reference procedures, press-specific fault/recovery behavior, physical guarding and safety-oriented control integration, and custom HMI/3D visualization.
+
+The track should compare multiple LinuxCNC press-brake architectures, including realtime state-machine components, remap/G-code approaches, machine-specific hydraulic decoders and QtVCP/Vismach interfaces. It should record how each project evolved, what failed, why changes were made, and which lessons generalize.
+
+DXF-assisted work should begin by documenting how commercial systems and open-source tools represent bend lines/layers, build bend lists, choose gauging surfaces, position backgauges, and check sequencing/collision constraints. Open-source projects outside LinuxCNC—including sheet-metal CAD, bend-manufacturability datasets/tools and standalone backgauge controllers—should be actively researched for reusable ideas. Full automatic DXF-to-bend sequencing is not required at 4000; a staged path from manual positioning to imported geometry plus human-confirmed sequencing is acceptable.
+
+### 4700 — Grinding, EDM and Specialty Process Machines
+Study surface/cylindrical grinding, sinker/wire EDM and other process machines where the process loop matters as much as geometric motion. Cover process feedback, spark/contact sensing, dressing, feed adaptation, auxiliary state machines, flushing/coolant, and failure/recovery behavior.
+
+### 4800 — Saws, Feeders, Indexing and Automation Cells
+Cover cutoff saws, positioning stops, stock feeders, rotary/indexing machines, transfer mechanisms and mixed motion/PLC-style automation. Emphasize sequencing, interlocks, part-presence sensors, recovery from partial cycles and operator-friendly manual modes.
+
+### 4900 — Emerging and Unusual Machines
+Use this track for gear hobbing, tube/pipe machinery, foam cutters, wire machines, additive/hybrid systems and other machines whose user community or control problem justifies a dedicated specialization. Topics can later be promoted into their own numbered track if evidence shows enough depth or adoption.
+
+## 4000-Level Research Method
+
+Every machine specialization should:
+
+1. Locate and read several real LinuxCNC forum build threads from beginning to end where practical, preserving the evolution of the design rather than only its final state.
+2. Inspect public configs, HAL, custom components, GUI code and source modifications associated with those machines.
+3. Compare multiple architectures and record why builders chose them, what failed, and what they changed.
+4. Search for relevant non-LinuxCNC open-source projects and commercial workflow concepts to avoid reinventing solved domain problems.
+5. Separate generic reusable LinuxCNC lessons from machine-specific requirements.
+6. Produce an AI-readable machine playbook describing requirements, architecture, interfaces, reusable blocks, configuration patterns, commissioning steps, diagnostics, failure modes, test plans and known limits.
+7. Include practical safeguarding and physical-guard guidance where appropriate while making clear that the builder must evaluate the actual machine, hazards, operating environment and applicable requirements.
+8. End with reproducible demonstrations or simulations, adversarial review, corrections and a fresh-AI handoff just like lower-level modules.
+
 ## Graduation Rule
 
 Every module uses `MODULE_TEMPLATE.md`. A module does not graduate from prose alone. It requires source evidence, reproducible experiments where practical, an adversarial exam, corrections, and a fresh-AI handoff test.
 
 ## Public/Private Boundary
 
-Machine-specific proprietary design information belongs outside this public curriculum. Capstone simulations should remain generic enough to teach LinuxCNC behavior without publishing private machine drawings or private hardware design details.
+Machine-specific proprietary design information belongs outside this public curriculum. Capstone simulations and 4000-level examples should remain generic or use public community examples so they teach LinuxCNC behavior without publishing private machine drawings or private hardware design details.

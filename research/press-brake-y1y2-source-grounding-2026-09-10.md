@@ -2,207 +2,124 @@
 
 ## Scope and dependency boundary
 
-This is dependency-safe press-brake specialization preparation while F02 remains blocked on genuinely information-separated fresh-AI handoffs for S02, E20, X01, and X02. It does not self-certify those modules, activate F02, prescribe a machine-specific hydraulic circuit, or claim functional-safety adequacy.
+Dependency-safe press-brake specialization preparation while F02 remains blocked on genuinely information-separated fresh-AI handoffs for S02, E20, X01, and X02. This does not self-certify those modules, activate F02, prescribe machine-specific hydraulics, or claim functional-safety adequacy.
 
-Pinned LinuxCNC source revision used for source conclusions:
-
-`8bf4605ae81042248add031e94c77300406e0413`
-
-The concrete question is deliberately generic: if a machine has two independently actuated physical sides that conceptually share one Cartesian bend-depth coordinate, what does stock LinuxCNC duplicated-coordinate motion actually provide, and what synchronization behavior must be added explicitly?
+Current source trace is pinned to LinuxCNC `8bf4605ae81042248add031e94c77300406e0413`.
 
 ## Predeclared prediction
 
-Before inspecting the detailed identity-kinematics mapping implementation for this session:
+Before detailed identity-kinematics inspection, the prediction was:
 
-1. `trivkins` with a duplicated coordinate such as `coordinates=YY`/`XYYZ` should fan one Cartesian Y request into two distinct joint command channels.
-2. Each joint should retain its own motor-feedback input, following-error state, amplifier-enable output, and optional PID/control path.
-3. Stock duplicate-coordinate kinematics should not itself calculate a continuous Y1-vs-Y2 differential correction.
-4. Forward Cartesian Y should not be assumed to be an independent aggregate agreement witness for both duplicated joints.
+1. duplicated `trivkins` coordinates fan one Cartesian Y request into distinct joint command channels;
+2. each joint retains independent feedback/following-error/enable/control state;
+3. duplicate-coordinate kinematics does not itself implement continuous Y1-vs-Y2 correction; and
+4. Cartesian Y must not be assumed to be an aggregate tandem-agreement witness.
 
-Existing C01/C02/D01 laboratory evidence was not used as a substitute for source reading; it is used below as independent verification after the source trace.
+The source trace supports all four predictions.
 
-## Official documentation pass
+## Documentation pass
 
-Current LinuxCNC kinematics documentation explicitly permits an axis letter to appear more than once and gives `coordinates=xyyz` as the example where two joints move one Cartesian Y coordinate. The `kins(9)` documentation recommends `KINEMATICS_BOTH` for duplicated-coordinate machines so individual joints can be handled unambiguously in joint mode, especially around homing and setup.
+Official LinuxCNC kinematics material permits duplicate axis letters (for example `coordinates=xyyz`) so multiple joints can represent one Cartesian coordinate, and the `kins(9)` material recommends `KINEMATICS_BOTH` for duplicate-coordinate machines where individual joint handling is needed. The old `gantry` component is documented as superseded by general-purpose duplicated coordinates in `trivkins`.
 
-Current official docs also describe the old `gantry` component as superseded by general-purpose `trivkins` duplicated coordinates. This is significant: duplicated coordinates are a supported representation of one Cartesian coordinate backed by multiple joints, not a press-brake-specific cross-coupled controller.
-
-Relevant current documentation:
+Relevant documentation:
 
 - https://www.linuxcnc.org/docs/html/motion/kinematics.html
 - https://www.linuxcnc.org/docs/html/man/man9/kins.9.html
 - https://www.linuxcnc.org/docs/master/html/en/man/man9/gantry.9.html
 
-Classification: DOC-CONFIRMED for duplicate-coordinate support and the joint/axis distinction. Documentation does not claim that duplicate mapping supplies continuous anti-racking/differential control.
+Classification: DOC-CONFIRMED for duplicate-coordinate support and joint/axis distinction. The documentation does not claim duplicated mapping supplies continuous differential synchronization.
 
-## Source inventory
+## Source trace at `8bf4605...`
 
-| Path | Symbol / structure | Role in this question | Evidence |
-|---|---|---|---|
-| `src/emc/kinematics/trivkins.c` | `rtapi_app_main`, `kinematicsInverse`, `kinematicsForward` | Enables duplicate coordinate mapping (`allow_duplicates = 1`) and delegates to identity helpers | SOURCE-CONFIRMED |
-| `src/emc/kinematics/kins_util.c` | `map_coordinates_to_jnumbers` | Maps repeated coordinate letters to multiple joint numbers; retains one principal joint and a bitmap of all mapped joints | SOURCE-CONFIRMED |
-| `src/emc/kinematics/kins_util.c` | `position_to_mapped_joints` | Inverse path copies one Cartesian coordinate value into every joint mapped to that coordinate | SOURCE-CONFIRMED |
-| `src/emc/kinematics/kins_util.c` | `mapped_joints_to_position` | Forward path publishes the coordinate from the principal/first joint, not an average or disagreement calculation | SOURCE-CONFIRMED |
-| `src/emc/motion/control.c` | `emcmotController`, `get_pos_cmds`, `process_inputs`, `output_to_hal` | Servo-cycle chain from kinematics-generated joint commands through feedback/following-error processing to HAL | SOURCE-CONFIRMED |
-| `src/emc/motion/motion.c` | `export_joint` | Exports distinct `joint.N.motor-pos-cmd`, `joint.N.motor-pos-fb`, `joint.N.pos-cmd`, `joint.N.pos-fb`, `joint.N.amp-enable-out` interfaces for each joint | SOURCE-CONFIRMED |
-| `src/hal/components/pid.c` | per-instance `hal_pid_t`, `calc_pid` | Each PID instance owns its own command, feedback, error, integrator/state and output; there is no implicit peer-joint comparison | SOURCE-CONFIRMED |
+### `src/emc/kinematics/trivkins.c`
 
-## Function / call-flow reconstruction
+`trivkins` delegates forward/inverse operations to identity helpers and sets `allow_duplicates = 1` during setup.
 
-### 1. Cartesian request to duplicate joint commands
+### `src/emc/kinematics/kins_util.c`
 
-`emcmotController()` runs once per servo period. In its core sequence it calls `get_pos_cmds(period)`, then screw compensation, `output_to_hal()`, and finally status publication.
+`map_coordinates_to_jnumbers()` maps repeated coordinate letters to multiple joint numbers, stores the first mapped joint as the principal joint (`JY` for Y), and stores a bitmap containing every mapped joint.
 
-In coordinated/teleop paths, `get_pos_cmds()` calls `kinematicsInverse(&emcmotStatus->carte_pos_cmd, positions, ...)`. With `trivkins`, that delegates to `identityKinematicsInverse()`, which calls `position_to_mapped_joints()`.
+`position_to_mapped_joints()` is the inverse-kinematics fanout: for every joint in the Y bitmap it assigns the same `pos->tran.y`. Therefore one Cartesian Y request becomes the same nominal target for all duplicate Y joints.
 
-For a duplicated Y mapping, the Y bitmap contains both Y joints. `position_to_mapped_joints()` iterates joints and assigns `joints[jno] = pos->tran.y` for every bit set in that Y bitmap. Therefore one Cartesian Y request becomes the same pre-correction joint-position target on both mapped joints.
+`mapped_joints_to_position()` performs the opposite representation using `joints[JY]` for Cartesian Y. It does not average duplicate joints and does not compute their disagreement.
 
-**SOURCE-CONFIRMED conclusion:** duplicate-coordinate inverse kinematics is command fanout. It is not a differential controller.
+**SOURCE-CONFIRMED:** duplicated identity kinematics is command mapping/fanout, not a differential controller; Cartesian Y is principal-joint representation at this revision, not an agreement oracle.
 
-### 2. Distinct per-joint HAL authority remains after fanout
+### `src/emc/motion/control.c`
 
-`motion.c::export_joint()` creates separate HAL interfaces per joint, including:
+`emcmotController()` executes once per servo cycle and includes `process_inputs()`, forward kinematics, fault checks, `get_pos_cmds()`, `output_to_hal()`, and status update.
 
-- `joint.N.motor-pos-cmd` — HAL OUT;
-- `joint.N.motor-pos-fb` — HAL IN;
-- `joint.N.pos-cmd` and `joint.N.pos-fb` — HAL OUT status/observation surfaces;
-- `joint.N.amp-enable-out` — HAL OUT.
-
-`control.c::output_to_hal()` computes each joint's `motor_pos_cmd` from that joint's `pos_cmd`, backlash compensation, and motor offset, then writes the corresponding joint HAL pins.
-
-This leaves a clean architecture boundary where each duplicated joint can feed a separate actuator/controller chain even though the nominal Cartesian target is common.
-
-### 3. Independent feedback and following-error path
-
-During each servo cycle, `control.c::process_inputs()` reads each active joint's `joint.N.motor-pos-fb` independently. In the normal non-index special case it derives the joint feedback and then calculates:
+The coordinated command path calls `kinematicsInverse()` to generate joint positions. For each active joint, `process_inputs()` independently reads `joint.N.motor-pos-fb` and computes normal joint feedback. Motion's own following error is:
 
 `joint->ferror = joint->pos_cmd - joint->pos_fb`
 
-It computes the velocity-scaled/floor following-error limit and sets that joint's following-error flag when absolute error exceeds the limit.
+The limit is velocity-scaled from `max_ferror`, floored by `min_ferror`, and the joint ferror flag asserts when absolute error is strictly greater than that limit.
 
-Therefore two duplicated Y joints can receive identical nominal commands but produce different feedback, different following error, and different joint-fault state.
+`output_to_hal()` separately generates each joint's `motor_pos_cmd` from its `pos_cmd` plus motion-owned compensation/offset terms.
 
-**SOURCE-CONFIRMED conclusion:** command equality does not collapse the two joints into one feedback/control state.
+**SOURCE-CONFIRMED:** equal nominal duplicate commands do not collapse feedback, tracking error, or joint fault state into one state.
 
-### 4. Forward Cartesian feedback authority
+### `src/emc/motion/motion.c`
 
-`kins_util.c::map_coordinates_to_jnumbers()` records the first joint mapped to each coordinate as the principal joint (`JY` for Y) while also keeping a bitmap of all duplicate Y joints.
+`export_joint()` creates distinct per-joint HAL pins including `joint.N.motor-pos-cmd` (OUT), `joint.N.motor-pos-fb` (IN), `joint.N.pos-cmd`, `joint.N.pos-fb`, and `joint.N.amp-enable-out`.
 
-`mapped_joints_to_position()` uses the principal joint value when assigning Cartesian Y. The loop tests the Y bitmap, but the value assigned is always `joints[JY]`; it does not average all Y joints and it does not compute their difference.
+### `src/hal/components/pid.c`
 
-**SOURCE-CONFIRMED conclusion:** for this pinned identity/trivkins implementation, Cartesian Y feedback is a principal-joint representation, not a tandem-agreement oracle.
+Each PID channel owns a separate `hal_pid_t`: command, feedback, error, integral/differential state, output, limits, and saturation state. Its calculation consumes that instance's command/feedback; there is no implicit peer-joint comparison.
 
-### 5. Separate ordinary control loops
+**SOURCE-CONFIRMED:** two normal PIDs sharing one nominal command remain independent loops unless an explicit cross-coupling mechanism is added.
 
-Pinned `pid.c` allocates one `hal_pid_t` per loop. Each instance has its own `command`, `feedback`, `error`, integrator/differentiator state, output limits, and output. The PID calculation is local to that instance: error is command minus that instance's feedback. No implicit peer PID/joint feedback is consumed.
+## Independent verification with version discipline
 
-**SOURCE-CONFIRMED conclusion:** two normal PID instances sharing one nominal command remain independent loops. Cross-coupling exists only if explicitly wired/implemented outside those independent loops.
+No new paid lab was necessary for the source claims already covered by retained experiments. Version scopes are kept separate rather than silently merged.
 
-## Independent laboratory verification already available
+### C01-023 — pinned `8bf4605...`
 
-No new paid lab run was necessary for this source-grounding step because the repository already contains stronger retained experiments at the same pinned revision.
+A nontrivial 5-inch coordinated Y move with `trivkins coordinates=XYZY kinstype=BOTH` produced 5,798 same-servo-cycle samples with zero recorder overruns and exactly zero difference between the duplicate joint command signals.
 
-### C01-023 — duplicate command fanout
+Classification: TEST-CONFIRMED at `8bf4605...`; independently verifies duplicate command fanout.
 
-Accepted retained evidence observed a nontrivial 5-inch coordinated world-Y move with duplicated Y joints. In 5,798 same-servo-cycle samples, the two duplicate joint commands had exactly zero difference and the recorder had zero overruns.
+### C02-024 — pinned `8bf4605...`
 
-Classification: TEST-CONFIRMED. This independently matches the inverse-kinematics fanout trace.
+Separate PID/plant/feedback paths received the common Y command. A B-side-only plant gain disturbance produced sustained divergence in feedback, PID error, and control output while the nominal command remained shared.
 
-### C02-024 — independent loop state
+Classification: TEST-CONFIRMED at `8bf4605...`; independently verifies that shared command is not shared controller/plant state and is not cross-coupling.
 
-Accepted retained evidence fed the shared Y command into separate PID/plant/feedback paths. A B-only plant disturbance caused sustained divergence in feedback, PID error, and PID output while the common command remained shared. No stock peer-comparison mechanism appeared.
+### D01-006 — pinned `6e20ea4c50208ae7b04d1aefaecc8f00a576e394`
 
-Classification: TEST-CONFIRMED. This independently matches the per-instance PID/source ownership model.
+D01 is deliberately **not** described as the same source revision. Its authoritative 2000-level run independently exercised the same architectural boundary at a different pinned revision: low duplicate-side disagreement could coexist with principal-looking Cartesian Y, while high duplicate-side disagreement asserted that joint's following error and revoked global motion authority with the principal side still visually clean.
 
-### D01-006 — principal Cartesian authority and duplicate-side fault
+Classification: TEST-CONFIRMED at `6e20ea4...`; useful corroborating evidence, but not silently generalized back to or forward from `8bf4605...`.
 
-The 2000-level authoritative experiment injected disagreement into the duplicate side. At low disagreement Cartesian Y stayed principal-looking; at high disagreement the duplicate joint asserted following error and global motion authorization was revoked while principal-joint/Cartesian Y remained visually clean. Frozen Gates A-J passed 10/10.
+## Adversarial checks
 
-Classification: TEST-CONFIRMED. This independently matches the principal-joint forward-kinematics and independent joint-ferror source trace.
+- **"Both joints are Y, so LinuxCNC automatically synchronizes them."** Rejected. Source gives equal nominal fanout plus independent per-joint state; continuous differential correction must be explicit.
+- **"Cartesian Y proves Y1 and Y2 agree."** Rejected for pinned identity/trivkins behavior; it is principal-joint representation.
+- **"Two PIDs sharing a command are cross-coupled."** Rejected; each PID owns independent feedback/error/output state.
+- **"Following-error shutdown is therefore an anti-racking safety function."** Rejected. It is ordinary machine-control fault behavior and does not authenticate physical geometry, common-cause sensor correctness, stopping performance, or functional-safety integrity.
+- **"A differential term can be inserted anywhere downstream and LinuxCNC will take care of it."** Rejected. Motion ferror remains referenced to motion's own joint target, and downstream changes can alter controller/saturation semantics.
 
-## Adversarial architecture checks
+## Generic architecture decomposition
 
-### Misleading premise: "If both joints are mapped to Y, LinuxCNC automatically keeps them synchronized."
+A defensible generic study model now has seven distinct layers:
 
-Rejected. Source and experiment show equal nominal command fanout plus independent feedback/control state. Synchronization beyond both following their common target must be implemented explicitly.
+1. one common Cartesian/request surface;
+2. duplicate per-side joint targets;
+3. independent Y1/Y2 feedback and motion following-error state;
+4. independent side actuator loops;
+5. an explicit differential synchronization layer if active correction is needed;
+6. explicit correction/saturation/validity authority and independent disagreement monitoring; and
+7. a separate safety layer that must not be inferred from LinuxCNC/HAL/PID behavior alone.
 
-### Misleading premise: "Cartesian Y tells us whether Y1 and Y2 agree."
+## Open specialization questions
 
-Rejected at the pinned revision. `mapped_joints_to_position()` uses the principal joint for Cartesian Y; D01 independently demonstrated a duplicate-side disagreement while Cartesian Y remained principal-looking.
-
-### Misleading premise: "Two separate PID loops are already a cross-coupled controller because they share a command."
-
-Rejected. Each PID instance owns and calculates from its own state. C02 demonstrated large B-only divergence with the shared command unchanged.
-
-### Safety trap: "Following-error shutdown is therefore an anti-racking safety function."
-
-Rejected. It is an ordinary LinuxCNC machine-control fault mechanism. It does not authenticate physical geometry under common-cause sensing, prove stopping performance, or establish functional-safety integrity.
-
-### Design trap: "Put arbitrary differential correction after `joint.N.motor-pos-cmd`; LinuxCNC will take care of the rest."
-
-Not established. Because motion calculates joint following error against its own joint `pos_cmd`/feedback model, downstream command modification can change the relationship between LinuxCNC's expected joint trajectory and the physical actuator trajectory. Any explicit differential correction layer must be analyzed together with per-joint feedback, actuator saturation, following-error thresholds, loop ordering, and authority limits. Treat downstream summing as a candidate architecture, not a free insertion point.
-
-## Architecture conclusions for a generic hydraulic/tandem Y1/Y2 study
-
-The strongest source-grounded decomposition is:
-
-1. **Common coordinate/request layer** — one Cartesian bend-depth/request surface can legitimately map to two Y joints.
-2. **Per-side joint state** — preserve independent Y1 and Y2 command/feedback/following-error/enable observability.
-3. **Per-side actuator loop** — each side can have an independent ordinary servo loop driven by the shared nominal request.
-4. **Explicit differential synchronization layer** — any term based on Y1-Y2 disagreement must be explicit; stock duplicated-coordinate mapping does not create it.
-5. **Explicit authority/saturation contract** — the synchronization term must have bounded authority and defined interaction with per-side loop saturation and LinuxCNC following-error behavior.
-6. **Independent disagreement/validity monitor** — do not use Cartesian Y as the tandem-agreement source. Consume the per-side feedback/validity channels directly.
-7. **Separate safety layer** — do not equate HAL/PID/following-error/watchdog logic with safety-rated stopping or hydraulic energy isolation.
-
-## Candidate control formulations to test later — not yet endorsed
-
-Two generic software architectures are worth discriminating experimentally after the dependency gate is open:
-
-### A. Common target + symmetric differential bias
-
-Let `Yc` be the common nominal request and `eΔ = Y1_fb - Y2_fb`. Construct bounded side references such as:
-
-- `Y1_ref = Yc - KΔ * eΔ`
-- `Y2_ref = Yc + KΔ * eΔ`
-
-This preserves a common-mode request while adding equal/opposite correction. Questions: where exactly should this correction enter, how should it be rate/position limited, and how does it interact with each side's PID/following-error state?
-
-### B. Independent common-target loops + supervisory disagreement authority
-
-Keep both actuator loops referenced to the same Y target and use a separate realtime disagreement monitor only to reduce/withdraw ordinary motion authority when bounded position/velocity disagreement criteria are violated.
-
-This is simpler but may not actively correct load/plant asymmetry before the disagreement threshold is reached.
-
-These are control-study hypotheses only. Hydraulic dynamics, valve architecture, load transfer, frame compliance, sensor placement, and required stopping behavior can materially change the correct machine-specific design.
-
-## Proposed next software-only experiment
-
-When the dependency graph permits activation, freeze a two-side synthetic plant experiment that compares the two candidate architectures under the same disturbances:
-
-- identical common Y command;
-- controlled B-side gain reduction and lag increase;
-- correction authority limits;
-- per-side output saturation;
-- independent encoder bias/freeze cases;
-- per-side following-error state;
-- explicit differential position/velocity witnesses;
-- atomic realtime sampling with X01 recorder-health proof;
-- observer-generation witnesses where userspace diagnostics are compared, per X02.
-
-Predeclare discriminators before execution: peak and steady-state differential error, common-mode tracking error, saturation duration, recovery behavior, fault timing, and whether correction hides or aggravates individual following error.
-
-A result must not be promoted to a physical press-brake prescription without a hydraulic/plant model justified by public component data or controlled machine measurements.
-
-## Open questions / specialization queue
-
-1. Where should explicit differential correction live relative to LinuxCNC `joint.N.motor-pos-cmd`, ordinary PID position loops, and hardware/FPGA valve-command generation?
-2. Should the synchronization loop operate primarily on position difference, velocity difference, or a cascaded/observer state for hydraulic systems?
-3. What anti-windup and common/differential saturation strategy prevents one side's limit from commanding the other side into a worse condition?
-4. How should disagreement thresholds distinguish transient elastic/pressure effects from loss of synchronization?
-5. What feedback-validity/common-cause checks must be satisfied before differential correction is allowed to continue?
-6. How should homing/squaring establish the initial Y1/Y2 geometric relationship without implying continuous geometric validity afterward?
-7. Which of these questions belong in F02 integration versus a justified later specialized press-brake/control module?
+- Where should differential correction enter relative to `joint.N.motor-pos-cmd`, stock PID, and hardware-facing command generation?
+- How should common and differential authority share limited actuator range when one side saturates?
+- Should hydraulic synchronization primarily use position difference, velocity difference, or a cascaded/observer state?
+- What validity/common-cause conditions must be met before correction remains authorized?
+- How should homing/squaring establish the initial geometric relation without implying continuous geometric validity?
+- Which questions belong in F02 integration versus a later justified specialized control module?
 
 ## Precise checkpoint
 
-F02 remains blocked on external fresh-AI handoffs. The next useful unblocked specialization task is to source-ground the **insertion-point and saturation question**: trace a normal Mesa/HostMot2 or generic velocity-command servo HAL chain from `joint.N.motor-pos-cmd` through PID output to hardware-facing command and back through `motor-pos-fb`, then identify exactly which signals/state would be bypassed or distorted by inserting a differential correction before PID command, after PID output, or in a custom two-axis controller. Do not launch a physical-machine experiment and do not treat any candidate insertion point as approved until that trace is complete.
+The immediate next task is the insertion-point/saturation trace: follow a normal Mesa/HostMot2 servo HAL chain from `joint.N.motor-pos-cmd` through PID to the hardware-facing command and back through `motor-pos-fb`, then compare pre-PID reference correction, post-PID effort correction, and an explicit two-channel controller. Preserve motion following-error and final actuator saturation as separate authority witnesses. Do not treat any insertion point as approved before that trace and a bounded software experiment are complete.

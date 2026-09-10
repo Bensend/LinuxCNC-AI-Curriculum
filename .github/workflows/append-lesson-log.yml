@@ -9,6 +9,10 @@ on:
 permissions:
   contents: write
 
+concurrency:
+  group: append-lesson-log
+  cancel-in-progress: false
+
 jobs:
   append:
     runs-on: ubuntu-latest
@@ -19,7 +23,7 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Validate and append requested row
+      - name: Validate, append, and push requested row safely
         shell: bash
         run: |
           set -euo pipefail
@@ -32,21 +36,33 @@ jobs:
             echo "Request must contain one row only." >&2
             exit 3
           fi
-          if grep -Fqx -- "$ROW" LESSON_LOG.md; then
-            echo "Timing row already present; no append needed."
-            exit 0
-          fi
-          printf '%s\n' "$ROW" >> LESSON_LOG.md
 
-      - name: Commit timing row
-        shell: bash
-        run: |
-          set -euo pipefail
-          if git diff --quiet -- LESSON_LOG.md; then
-            exit 0
-          fi
           git config user.name "linuxcnc-curriculum-log-bot"
           git config user.email "linuxcnc-curriculum-log-bot@users.noreply.github.com"
-          git add LESSON_LOG.md
-          git commit -m "log: append curriculum session timing [skip ci]"
-          git push
+
+          # Capture ROW from the triggering commit, then always rebuild the append
+          # on the latest origin/main. This prevents a concurrent curriculum commit
+          # from turning a valid timing append into a non-fast-forward failure.
+          for attempt in 1 2 3 4 5; do
+            git fetch origin main
+            git reset --hard origin/main
+
+            if grep -Fqx -- "$ROW" LESSON_LOG.md; then
+              echo "Timing row already present; no append needed."
+              exit 0
+            fi
+
+            printf '%s\n' "$ROW" >> LESSON_LOG.md
+            git add LESSON_LOG.md
+            git commit -m "log: append curriculum session timing [skip ci]"
+
+            if git push origin HEAD:main; then
+              exit 0
+            fi
+
+            echo "Concurrent main update detected; retrying append on latest main (attempt $attempt/5)."
+            sleep 1
+          done
+
+          echo "Unable to append timing row after 5 race-safe attempts." >&2
+          exit 4

@@ -14,8 +14,8 @@ Working priority score is `P + U + C + IG - IC` for prerequisite value, uncertai
 | F02 | Compound-fault state-machine sequencing | **16** | blocked by S02, E20 and X02 |
 | S02 | Feedback integrity, diversity and common-cause reasoning | **15** | authoritative gates + exam + promotion complete; **fresh-AI handoff pending** |
 | E20 | HostMot2/hm2_eth watchdog/recovery across versions | **14** | **TECHNICALLY ACCEPTED; fresh-AI handoff pending** |
-| X02 | Synchronized multi-surface diagnostics | **13** | requires accepted X01 recorder perturbation evidence |
-| X01 | Recorder perturbation and long-duration retention | **12** | **ACTIVE; frozen preflight launched** |
+| X02 | Synchronized multi-surface diagnostics | **13** | **ACTIVE RESEARCH; X01 technical prerequisite accepted** |
+| X01 | Recorder perturbation and long-duration retention | **12** | **TECHNICALLY ACCEPTED; fresh-AI handoff pending** |
 | T20 | UI/Task/NML freshness and ownership under stress | **11** | strengthened by X02 |
 | T21 | 3D HMI, QtVismach and live machine visualization | **10** | follows T20; consume X02 diagnostics/freshness findings |
 | H30? | Custom HostMot2 FPGA/driver/distributed realtime extension | — | **3000 candidate only**; D01/S02/E20 do not currently justify promotion |
@@ -27,14 +27,18 @@ Working priority score is `P + U + C + IG - IC` for prerequisite value, uncertai
         |
         +--> D01 GRADUATED --> S02 technical evidence complete --fresh handoff--+
         |                                                                      |
-        +--> X01 recorder perturbation ACTIVE --> X02 correlation -------------+--> F02 compound faults
-        |                                              |
-        |                                              +--> T20 UI/Task/NML stress --> T21 3D HMI / QtVismach
+        +--> X01 technical evidence ACCEPTED --fresh handoff pending            |
+        |          |                                                            |
+        |          +--> X02 correlation ACTIVE --------------------------------+--> F02 compound faults
+        |                       |
+        |                       +--> T20 UI/Task/NML stress --> T21 3D HMI / QtVismach
         |                                                                      |
         +--> E20 technical evidence complete --fresh handoff-------------------+
 
 E20 / X02 / later evidence --only if justified--> H30? 3000 candidate
 ```
+
+Technical acceptance and full graduation are deliberately distinguished. X02's prerequisite is accepted X01 recorder evidence; it does not require the current learner to violate information separation by self-certifying X01's fresh-AI handoff.
 
 ## D01 closure
 
@@ -52,21 +56,44 @@ E20 completed its frozen authoritative transport/watchdog recovery experiment in
 
 The module is therefore technically accepted but not labeled graduated until a genuinely information-separated fresh-AI handoff is completed. The central retained distinction is that current transport health, accumulated driver error state, HostMot2 watchdog/physical-I/O authority, state revalidation and machine motion authorization are separate evidence/authority surfaces.
 
-## X01 activation — recorder integrity before cross-surface correlation
+## X01 technical acceptance — recorder integrity contract
 
-X01 is the next independent prerequisite because X02 cannot responsibly correlate multiple diagnostics until the recorder itself has an accepted integrity and perturbation contract.
+Pinned LinuxCNC: `8bf4605ae81042248add031e94c77300406e0413`.
 
-Pinned-source work at LinuxCNC `8bf4605ae81042248add031e94c77300406e0413` now establishes:
+X01-001 exhausted its three materially similar attempts after the forced-loss experiment falsified the old assumption that producer FIFO loss must create a `halsampler -t` tag gap. It was explicitly classified **ESSENTIAL NOW / MATERIAL REDESIGN** rather than tuned into a pass.
 
-- `sampler.c::sample()` executes as a scheduled realtime HAL function, snapshots configured HAL inputs, and attempts one `hal_stream_write()` per retained record;
-- a full stream loses the recorder record and increments producer-side `sampler.N.overruns` rather than proving that the underlying control loop skipped a cycle;
-- `sampler_usr.c::main()` is a userspace consumer that obtains the stream's implicit sample number from `hal_stream_read()` and reports discontinuity as `overrun`;
-- the pinned source exports `sampler.N.sample-num`, but the inspected realtime path does not use that exported pin as the `halsampler -t` sequence, so X01 treats implicit stream tags plus producer-side recorder-health evidence as the current oracle;
-- userspace drain lifecycle can truncate evidence independently of realtime producer behavior, so stop/drain behavior is part of the experiment rather than an afterthought.
+X01-002 froze a corrected loss oracle before execution: producer overrun evidence plus a discontinuity in a deterministic sampled cycle witness; `-t` tags remain ordering evidence for successfully returned stream records only.
 
-`guides/X01-recorder-perturbation-and-long-duration-retention.md` preserves the source/community/evidence model. `experiments/X01-001-sampler-retention-perturbation.md` freezes P0–P5 and Gates A–J before execution.
+The valid redesigned preflight was workflow `34428664862`, artifact `10133717168`.
 
-`lab-jobs/027-x01-sampler-retention-preflight.sh` is a non-authoritative implementation preflight. Its creation automatically launched workflow **`34411511393`**. The run must be judged from the retained artifact, not workflow status. The frozen gates remain unscored until the preflight proves that the harness actually exercises the declared model.
+The first authoritative wrapper attempt `34432706789` failed before LinuxCNC behavior because of a Python source-rewrite syntax error and remained harness-invalid/unscored. A wrapper-only correction then launched authoritative workflow `34436256547`, job `102741829103`, artifact `10136342576`.
+
+Independent raw-artifact audit passed frozen Gates A–J **10/10**:
+
+- 2,000-row baseline: contiguous stream/payload, zero producer overruns;
+- bounded stop/drain: exactly 354 residual rows drained, terminal payload within frozen three-cycle boundary and final FIFO depth zero;
+- forced depth-64 saturation: producer overruns 192 -> 206 while deterministic source counter advanced 282 -> 473; retained `-t` tags remained contiguous but deterministic sampled payload jumped **79 -> 286**;
+- narrow/wide timing evidence retained with zero overruns, without converting cloud timing into a production deadline guarantee;
+- predeclared P5: exactly 10,000 retained narrow-config rows, contiguous stream and payload, producer overruns zero.
+
+`call-flows/X01-sampler-recording-and-loss-boundary.md` records the source boundary. `exams/X01-adversarial-exam.md` was frozen before answers and scored **20/20** with all critical traps passed. `handoffs/X01-fresh-ai-recorder-integrity-transfer.md` is prepared and intentionally UNSCORED by the current learner.
+
+**Decision:** X01 is technically accepted at 2000 level; full graduation awaits a genuinely fresh-AI handoff. That is sufficient to unlock X02 under this graph's prerequisite wording.
+
+## X02 activation — synchronize evidence, not wall-clock appearances
+
+`guides/X02-synchronized-multi-surface-diagnostics.md` has begun the official/community/source inventory.
+
+Initial boundaries now established:
+
+- motion/HAL state has a realtime ownership/update path;
+- pinned `taskintf.cc` documents `emcMotionUpdate()` as the motion-status acquisition point whose local `emcmotStatus` is then reused by joint/trajectory status updates;
+- pinned `emctaskmain.cc` owns cyclic Task execution plus command/status/error NML channels and global `EMC_STAT`;
+- current Python-interface documentation describes `linuxcnc.stat().poll()` as a userspace status-channel observation;
+- a community pattern republishes polled NML status into HAL, demonstrating why a HAL-visible value can still have userspace/NML freshness semantics;
+- X01 recorder health must invalidate/qualify cross-surface correlation intervals rather than being ignored because a trace looks plausible.
+
+X02's next source task is to trace `emcMotionUpdate()` through Task `EMC_STAT` publication and trace Python `linuxcnc.stat().poll()` to the status-channel read, identifying explicit heartbeat/sequence/echo fields before freezing X02-001.
 
 ## T21 advanced HMI / 3D visualization addition
 
@@ -75,16 +102,14 @@ T21 was added after research found both official LinuxCNC support and press-brak
 Key discoveries now assigned to the 2000 level:
 
 - **QtVismach is an official QtVCP machine-graphics library.** It supports embedded 3D viewports, STL/OBJ model import, hierarchical rigid assemblies, and HAL-driven `HalTranslate` / `HalRotate` animation.
-- **LinuxCNC users have built a press-brake simulator around Vismach.** The published forum work includes a bend-sequence table, press state machine and moving Vismach brake through rapid/start/bend/finish behavior, with backstop/operator-sequence work also discussed.
-- **A press-brake Vismach model has been embedded inside QtDragon.** The community example imports a press-brake model window and inserts it into a QtDragon layout, demonstrating a practical custom-HMI integration route rather than a separate graphics-only application.
+- **LinuxCNC users have built a press-brake simulator around Vismach.** Published forum work includes a bend-sequence table, press state machine and moving Vismach brake through rapid/start/bend/finish behavior, with backstop/operator-sequence work also discussed.
+- **A press-brake Vismach model has been embedded inside QtDragon.** The community example demonstrates practical custom-HMI integration rather than a graphics-only side application.
 - **Rigid machine visualization and sheet deformation are different problems.** QtVismach directly addresses transformed rigid parts; realistic workpiece bending/collision/deformation must be investigated separately rather than assumed.
 - **Visualization inherits the T20 authority problem.** Smooth 3D motion is not proof of fresh status, physical synchronization, collision safety or realtime authority. T21 must deliberately test stale/frozen/disagreeing data behavior.
 
 The detailed discovery notes, proposed experiments and graduation traps are in `guides/T21-3d-hmi-qtvismach-discovery.md`.
 
-T21 should cover custom QtVCP/QtVismach architecture, CAD-to-HMI STL/OBJ workflow, independent multi-joint motion, auxiliary-axis/backgauge/tooling visualization, provenance/freshness indicators, deliberate stale-state behavior, optional clearly-labelled diagnostic exaggeration of small joint disagreement, rendering/performance perturbation, and the boundary between schematic bend visualization and validated deformation/collision models.
-
-T21 follows T20 and may consume X02 synchronized diagnostic findings. It is part of completing the advanced HMI branch but is **not** a prerequisite for F02 compound-fault sequencing.
+T21 follows T20 and may consume X02 synchronized diagnostic findings. It is not a prerequisite for F02 compound-fault sequencing.
 
 ## Re-promotion safeguards
 
@@ -97,4 +122,4 @@ T21 follows T20 and may consume X02 synchronized diagnostic findings. It is part
 
 ## Exact next dependency checkpoint
 
-Inspect only X01 preflight workflow `34411511393`. On completion, independently inspect its retained artifact and classify the result as harness-valid PASS, harness failure, source-model contradiction, or infrastructure failure. Do not score or retune frozen Gates A–J from workflow status alone. If the preflight validly exercises P0–P5, launch a separate authoritative X01 run unchanged; otherwise correct only the demonstrated harness defect and apply the three-attempt rule. X02 remains blocked until X01 has an accepted recorder-integrity/perturbation contract. Do not advance F02 until S02 and E20 fresh handoffs plus accepted X02 are complete.
+Continue X02 source tracing at pinned revision `8bf4605ae81042248add031e94c77300406e0413`. Locate the exact Task call order for `emcMotionUpdate()` and `emcStatusBuffer->write(...)`; locate the Python `linuxcnc.stat().poll()` implementation/status read; identify heartbeat/sequence/echo fields that can act as freshness/order witnesses. Only after that source-grounded model exists should X02-001 choose the smallest multi-surface fixture and freeze its prediction/gates. Preserve X01/S02/E20 fresh handoffs as pending and do not self-certify them. F02 remains blocked until S02 and E20 fresh handoffs plus accepted X02 are complete.

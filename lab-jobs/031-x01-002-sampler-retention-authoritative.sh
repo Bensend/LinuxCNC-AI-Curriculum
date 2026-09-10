@@ -52,8 +52,22 @@ if needle not in s:
 s = s.replace(needle, inject)
 
 # Extend the authoritative scorer with P5 before summary construction.
-needle2 = '''for d in (nt,wt):\n    assert float(d['servo-thread.tmax']) >= 0\nsummary=f'''\'\'\'X01-027 PREFLIGHT RUNTIME PREDICATES PASS'''
-replace2 = '''for d in (nt,wt):\n    assert float(d['servo-thread.tmax']) >= 0\n\nsustained, sustained_overrun_lines=parse_samples(out/'sustained.samples')\nassert len(sustained)==10000, len(sustained)\nassert sustained_overrun_lines==0, sustained_overrun_lines\nassert all(sustained[i+1][0]==sustained[i][0]+1 for i in range(len(sustained)-1))\nassert all(round(sustained[i+1][1][0])==round(sustained[i][1][0])+1 for i in range(len(sustained)-1))\nsh=kv(out/'sustained-health.txt')\nassert int(float(sh['overruns']))==0, sh\nsummary=f'''\'\'\'X01-031 / X01-002 AUTHORITATIVE GATES A-J PASS'''
+# Use triple-double-quoted Python literals so the embedded generated scorer's
+# f'''...''' delimiter cannot terminate this wrapper string.
+needle2 = """for d in (nt,wt):
+    assert float(d['servo-thread.tmax']) >= 0
+summary=f'''X01-027 PREFLIGHT RUNTIME PREDICATES PASS"""
+replace2 = """for d in (nt,wt):
+    assert float(d['servo-thread.tmax']) >= 0
+
+sustained, sustained_overrun_lines=parse_samples(out/'sustained.samples')
+assert len(sustained)==10000, len(sustained)
+assert sustained_overrun_lines==0, sustained_overrun_lines
+assert all(sustained[i+1][0]==sustained[i][0]+1 for i in range(len(sustained)-1))
+assert all(round(sustained[i+1][1][0])==round(sustained[i][1][0])+1 for i in range(len(sustained)-1))
+sh=kv(out/'sustained-health.txt')
+assert int(float(sh['overruns']))==0, sh
+summary=f'''X01-031 / X01-002 AUTHORITATIVE GATES A-J PASS"""
 if needle2 not in s:
     raise SystemExit('authoritative scorer injection target not found')
 s = s.replace(needle2, replace2)

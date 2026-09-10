@@ -1,0 +1,7 @@
+X01-031 / X01-002 AUTHORITATIVE
+Pinned LinuxCNC commit: 8bf4605ae81042248add031e94c77300406e0413
+Servo period: 1000000 ns
+Baseline retained samples: 2000
+Forced-starvation FIFO depth: 64
+Frozen phases/gates: experiments/X01-002-sampler-retention-redesign.md P0-P5 / Gates A-J
+Authoritative run: frozen Gates A-J are scored by retained evidence; P5 sustained count is 10000.

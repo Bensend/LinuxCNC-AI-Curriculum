@@ -1,0 +1,10 @@
+X01-031 / X01-002 AUTHORITATIVE GATES A-J PASS
+baseline_rows=2000 contiguous=yes producer_overruns=0
+stop_drain_rows=354 expected_depth=354 stop_counter=373.0 last_retained_counter=370.0
+forced_loss_rows=220 producer_overruns_before=192 producer_overruns_after=206 consumer_overrun_markers=0 tag_gaps=0 payload_gaps=1
+narrow_servo_thread_time=251 narrow_tmax=2855
+wide_servo_thread_time=400 wide_tmax=3196
+sustained_rows=10000 sustained_overruns=0 sustained_stream_and_payload_contiguous=yes
+NOTE: timing values are quantitative observed thread-cost evidence, not a claim of zero or causal deadline perturbation.
+NOTE: forced recorder loss is not classified as a producer/control-loop cycle skip.
+GATES: A=PASS B=PASS C=PASS D=PASS E=PASS F=PASS G=PASS H=PASS I=PASS J=PASS.

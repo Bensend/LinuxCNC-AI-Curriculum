@@ -1,0 +1,2 @@
+servo-thread.time=400
+servo-thread.tmax=3196

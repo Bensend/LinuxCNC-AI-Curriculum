@@ -1,0 +1,12 @@
+loadrt threads name1=servo-thread period1=1000000
+loadrt x01_source
+loadrt sampler depth=1000 cfg=ffffb
+addf x01-source.0 servo-thread
+addf sampler.0 servo-thread
+setp sampler.0.enable 0
+net x01-v0 x01-source.0.value-00 => sampler.0.pin.0
+net x01-v1 x01-source.0.value-01 => sampler.0.pin.1
+net x01-v2 x01-source.0.value-02 => sampler.0.pin.2
+net x01-v3 x01-source.0.value-03 => sampler.0.pin.3
+net x01-marker x01-source.0.marker => sampler.0.pin.4
+start

@@ -1,0 +1,20 @@
+Component Pins:
+Owner   Type  Dir                 Value  Name
+    10  bit   OUT                 FALSE  x01-source.0.marker ==> x01-marker
+    10  s32   OUT                   110  x01-source.0.time
+    10  float OUT                     9  x01-source.0.value-00 ==> x01-v0
+    10  float OUT                     9  x01-source.0.value-01 ==> x01-v1
+    10  float OUT                  0.09  x01-source.0.value-02 ==> x01-v2
+    10  float OUT                     0  x01-source.0.value-03 ==> x01-v3
+    10  float OUT                 9.004  x01-source.0.value-04 ==> x01-v4
+    10  float OUT                 9.005  x01-source.0.value-05 ==> x01-v5
+    10  float OUT                 9.006  x01-source.0.value-06 ==> x01-v6
+    10  float OUT                 9.007  x01-source.0.value-07 ==> x01-v7
+    10  float OUT                 9.008  x01-source.0.value-08 ==> x01-v8
+    10  float OUT                 9.009  x01-source.0.value-09 ==> x01-v9
+    10  float OUT                  9.01  x01-source.0.value-10 ==> x01-v10
+    10  float OUT                 9.011  x01-source.0.value-11 ==> x01-v11
+    10  float OUT                 9.012  x01-source.0.value-12 ==> x01-v12
+    10  float OUT                 9.013  x01-source.0.value-13 ==> x01-v13
+    10  float OUT                 9.014  x01-source.0.value-14 ==> x01-v14
+

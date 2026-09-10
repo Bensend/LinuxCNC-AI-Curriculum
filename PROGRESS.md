@@ -12,7 +12,7 @@ All modules through **T05** and **C01–C09** are **GRADUATED at 1000 level**. *
 
 **X01 — recorder perturbation and long-duration retention:** authoritative X01-002 workflow `34436256547`, job `102741829103`, retained artifact `10136342576`, passed frozen Gates A–J **10/10** after independent raw-artifact inspection. The frozen adversarial exam subsequently passed **20/20**, including all critical traps. The corrected X01 contract explicitly treats producer overrun + deterministic sampled payload discontinuity as recorder-loss evidence; contiguous `halsampler -t` tags alone are not a complete producer-loss oracle for the pinned/tested model. `handoffs/X01-fresh-ai-recorder-integrity-transfer.md` is prepared but intentionally UNSCORED by this learner.
 
-**X02 — synchronized multi-surface diagnostics is now the highest-priority unblocked technical module.** The dependency graph requires accepted X01 recorder-perturbation evidence, which now exists. X02 must inherit X01's evidence-validity boundary: correlation is not trustworthy for intervals where recorder producer health, witness continuity, lifecycle, provenance, or thread order cannot establish usable coverage.
+**X02 — synchronized multi-surface diagnostics is the highest-priority unblocked technical module and is now SOURCE/CALL-FLOW active.** Pinned source tracing at `8bf4605ae81042248add031e94c77300406e0413` now establishes the generation chain from realtime motion status through Task publication to Python `linuxcnc.stat().poll()`. `call-flows/X02-multi-surface-status-publication.md` records the durable trace. X02 inherits X01's evidence-validity boundary: correlation is not trustworthy for intervals where recorder producer health, witness continuity, lifecycle, provenance, or thread order cannot establish usable coverage.
 
 F02 remains blocked by completion/acceptance of S02, E20 and X02. S02/E20/X01 graduation labels remain pending their genuinely fresh handoffs, but independent technical work may continue where the dependency graph requires technical acceptance rather than fresh-handoff graduation.
 
@@ -67,11 +67,26 @@ Promoted/deferred items include deep HAL-stream memory-order proof, filesystem/p
 
 **Technical sufficiency decision: ACCEPTED at 2000 level; full GRADUATION pending fresh-AI handoff only.**
 
+## X02 source/call-flow checkpoint
+
+Pinned LinuxCNC: `8bf4605ae81042248add031e94c77300406e0413`.
+
+Source tracing now establishes:
+
+- realtime `control.c` completes `update_status()`, increments `emcmotStatus->heartbeat`, and commits status coherence with `tail = head`;
+- userspace `usrmotReadEmcmotStatus()` copies shared motion status and accepts only `head == tail`, retrying a split read at most three times;
+- `emcMotionUpdate()` maps the completed motion heartbeat into `EMC_STAT.motion.heartbeat`;
+- Task increments `task_beat`, maps it into `EMC_STAT.task.taskbeat`, updates the aggregate status and publishes it with `emcStatusBuffer->write(emcStatus)`;
+- Python `linuxcnc.stat().poll()` peeks the RCS status channel and memcpy-copies the published `EMC_STAT` into its local object.
+
+Thus motion heartbeat and taskbeat are distinct generation witnesses owned by different loops. Python poll time is observer time, not realtime production time. A new Task generation can legitimately contain the same motion heartbeat; multiple motion generations can also occur between Task/Python observations. Wall-clock nearest-neighbor alignment alone is therefore insufficient evidence of same-cycle or causal correspondence.
+
 ## Exact next-work checkpoint
 
 1. Preserve S02, E20 and X01 as graduation-pending fresh-AI handoff; do not self-certify.
-2. Begin X02 synchronized multi-surface diagnostics as the highest-priority unblocked technical module.
-3. X02 must first define which LinuxCNC surfaces are being correlated, their execution/process/thread ownership, timestamp/order semantics, and what evidence can establish freshness/causal ordering without relying on wall-clock coincidence.
-4. Carry forward X01 invalidity rules: any interval with unresolved recorder overrun, payload-cycle discontinuity, reader truncation, unknown topology/thread order, or provenance loss must be marked unusable/uncertain for correlation rather than silently interpolated into a machine-event narrative.
-5. Record X01 preflight, invalid wrapper attempt and accepted authoritative runtime in `LAB_COMPUTE_LOG.md` if canonical ledger integration is not yet complete.
-6. F02 remains blocked pending S02 fresh handoff, E20 fresh handoff and accepted X02 contracts. Preserve delayed-retention/sealed-benchmark information separation.
+2. Continue X02 as highest-priority work. Complete documentation/community cross-checks specifically for NML status freshness, heartbeat interpretation, and diagnostic correlation pitfalls.
+3. Freeze X02-001 only after defining a deterministic cross-surface experiment that records `(observer monotonic time, taskbeat, motion heartbeat, selected status value)` from Python plus an X01-valid realtime/HAL payload-cycle witness.
+4. The experiment must deliberately exercise different observation rates and predeclare gates for repeated Task publications, skipped motion generations, and invalid recorder intervals. Gates must use generation/witness relationships, not nearest wall-clock timestamps.
+5. Carry forward X01 invalidity rules: any interval with unresolved recorder overrun, payload-cycle discontinuity, reader truncation, unknown topology/thread order, or provenance loss must be marked unusable/uncertain for correlation rather than silently interpolated into a machine-event narrative.
+6. Record X01 preflight, invalid wrapper attempt and accepted authoritative runtime in `LAB_COMPUTE_LOG.md` if canonical ledger integration is not yet complete.
+7. F02 remains blocked pending S02 fresh handoff, E20 fresh handoff and accepted X02 contracts. Preserve delayed-retention/sealed-benchmark information separation.

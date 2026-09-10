@@ -1,0 +1,18 @@
+component x01_source "X01 deterministic recorder-integrity source";
+pin out float value-##[15];
+pin out bit marker;
+function _;
+license "GPL";
+;;
+static unsigned long cyc = 0;
+FUNCTION(_) {
+    cyc++;
+    value(0) = (double)cyc;
+    value(1) = (double)(cyc % 1000);
+    value(2) = (double)(cyc % 100) / 100.0;
+    value(3) = (double)((cyc / 100) % 10);
+    for (int i = 4; i < 15; i++) {
+        value(i) = (double)cyc + ((double)i / 1000.0);
+    }
+    marker = ((cyc / 25) & 1) ? 1 : 0;
+}

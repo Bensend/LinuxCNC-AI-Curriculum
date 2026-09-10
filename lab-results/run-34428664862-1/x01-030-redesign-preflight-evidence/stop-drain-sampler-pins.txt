@@ -1,0 +1,14 @@
+Component Pins:
+Owner   Type  Dir                 Value  Name
+    13  s32   OUT                     0  sampler.0.curr-depth
+    13  bit   IN                  FALSE  sampler.0.enable
+    13  bit   OUT                 FALSE  sampler.0.full
+    13  s32   I/O                     0  sampler.0.overruns
+    13  float IN                      8  sampler.0.pin.0 <== x01-v0
+    13  float IN                      8  sampler.0.pin.1 <== x01-v1
+    13  float IN                   0.08  sampler.0.pin.2 <== x01-v2
+    13  float IN                      0  sampler.0.pin.3 <== x01-v3
+    13  bit   IN                  FALSE  sampler.0.pin.4 <== x01-marker
+    13  s32   I/O                     0  sampler.0.sample-num
+    13  s32   OUT                   293  sampler.0.time
+

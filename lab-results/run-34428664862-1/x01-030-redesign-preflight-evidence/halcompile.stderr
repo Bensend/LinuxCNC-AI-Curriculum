@@ -1,0 +1,27 @@
+x01_source.c:25:5: warning: ‘hal_float_t’ is deprecated: Use getter/setter API [-Wdeprecated-declarations]
+   25 |     hal_float_t *value_p[15];
+      |     ^~~~~~~~~~~
+x01_source.c:26:5: warning: ‘hal_bit_t’ is deprecated: Use getter/setter API [-Wdeprecated-declarations]
+   26 |     hal_bit_t *marker_p;
+      |     ^~~~~~~~~
+x01_source.c: In function ‘export’:
+x01_source.c:50:9: warning: ‘hal_pin_float_newf’ is deprecated: Use hal_pin_new_real() [-Wdeprecated-declarations]
+   50 |         r = hal_pin_float_newf(HAL_OUT, &(inst->value_p[j]), comp_id,
+      |         ^
+In file included from x01_source.c:9:
+/home/runner/work/_temp/linuxcnc-x01-preflight/include/hal.h:693:12: note: declared here
+  693 | extern int hal_pin_float_newf(hal_pin_dir_t dir,
+      |            ^~~~~~~~~~~~~~~~~~
+x01_source.c:54:5: warning: ‘hal_pin_bit_newf’ is deprecated: Use hal_pin_new_bool() [-Wdeprecated-declarations]
+   54 |     r = hal_pin_bit_newf(HAL_OUT, &(inst->marker_p), comp_id,
+      |     ^
+/home/runner/work/_temp/linuxcnc-x01-preflight/include/hal.h:690:12: note: declared here
+  690 | extern int hal_pin_bit_newf(hal_pin_dir_t dir,
+      |            ^~~~~~~~~~~~~~~~
+/tmp/x01_source.comp: In function ‘_’:
+x01_source.c:122:80: warning: unused parameter ‘period’ [-Wunused-parameter]
+  122 | #define FUNCTION(name) static void name(struct __comp_state *__comp_inst, long period)
+      |                                                                           ~~~~~^~~~~~
+/tmp/x01_source.comp:8:1: note: in expansion of macro ‘FUNCTION’
+    8 | FUNCTION(_) {
+      | ^~~~~~~~

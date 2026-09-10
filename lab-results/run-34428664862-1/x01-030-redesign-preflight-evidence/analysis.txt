@@ -1,0 +1,9 @@
+X01-030 / X01-002 PREFLIGHT RUNTIME PREDICATES PASS
+baseline_rows=2000 contiguous=yes producer_overruns=0
+stop_drain_rows=353 expected_depth=353 stop_counter=367.0 last_retained_counter=364.0
+forced_loss_rows=220 producer_overruns_before=191 producer_overruns_after=201 consumer_overrun_markers=0 tag_gaps=0 payload_gaps=1
+narrow_servo_thread_time=566 narrow_tmax=1650
+wide_servo_thread_time=167 wide_tmax=1885
+NOTE: timing values are quantitative observed thread-cost evidence, not a claim of zero or causal deadline perturbation.
+NOTE: forced recorder loss is not classified as a producer/control-loop cycle skip.
+NOTE: frozen Gates A-J remain UNSCORED in this non-authoritative preflight.

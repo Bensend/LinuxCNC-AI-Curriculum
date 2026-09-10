@@ -1,7 +1,7 @@
 STATUS CLOSED
-SESSION_START 2026-09-09T21:13:04Z
-SESSION_END 2026-09-09T21:20:01Z
-ELAPSED_MINUTES 7.0
-MODULE E20 hm2_eth / HostMot2 watchdog recovery across versions
-CHECKPOINT E20 authoritative retained evidence passed Gates A-J 10/10; frozen adversarial exam passed 20/20; counterfactual/promotion review complete; fresh-AI handoff packet is ready but must be evaluated by a genuinely information-separated learner. S02 has the same fresh-handoff boundary. Resume X01 next only if its durable prerequisite definition confirms it is unblocked; keep F02 blocked until S02, E20 and X02 acceptance contracts are complete.
-OVERLAP no overlap; previous canonical lesson ended 2026-09-09T20:16:49Z, 56m15s before this session began.
+SESSION_START 2026-09-10T04:10:57Z
+SESSION_END 2026-09-10T04:23:21Z
+ELAPSED_MINUTES 12.4
+MODULE X01 technical acceptance / X02 synchronized multi-surface diagnostics activation
+CHECKPOINT X01 authoritative artifact 10136342576 passed frozen Gates A-J 10/10 after raw audit; frozen adversarial exam passed 20/20; corrected guide/call-flow and fresh-AI handoff packet committed; X01 remains technically accepted/fresh-handoff pending. X02 is now ACTIVE RESEARCH. Next trace pinned `emcMotionUpdate()` through Task EMC_STAT publication and trace `linuxcnc.stat().poll()` to its status-channel read; identify heartbeat/sequence/echo witnesses before freezing X02-001. Preserve X01 recorder-invalidity rules for every correlation interval.
+OVERLAP no overlap; previous canonical lesson ended 2026-09-10T03:16:42Z, 54m15s before this session began.

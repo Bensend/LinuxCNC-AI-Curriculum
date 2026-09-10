@@ -1,0 +1,14 @@
+PB-PREP-001 NON-AUTHORITATIVE P0/P1 PREFLIGHT
+Pinned LinuxCNC: 8bf4605ae81042248add031e94c77300406e0413
+Frozen contract: experiments/PB-PREP-001-y1y2-insertion-comparison-plan.md
+Servo period: 1000000 ns
+Architectures: A=pre-PID reference bias; B=post-PID effort correction; C=explicit two-channel P controller
+Common synthetic plant equation, once per servo cycle after controller output:
+  y_next = y + PLANT_ALPHA * ((gain * u_final) - y)
+PLANT_ALPHA=0.05; gain1=gain2=1.0; dimensionless software-only model
+U_MAX=2.0; SYNC_GAIN=2.0; DIFF_MAX=0.25
+P1 sign seed: y1-y2 starts at +0.02 with otherwise identical plant parameters.
+Positive e_diff=y1-y2 therefore requires side-1 reduction and side-2 increase.
+Recorder: sampler depth=5000, requested rows=2500, atomic same-thread payload with deterministic component cycle.
+No P2-P7 comparative scoring in this run.
+No physical hydraulic suitability or functional-safety claim may be derived from this fixture.

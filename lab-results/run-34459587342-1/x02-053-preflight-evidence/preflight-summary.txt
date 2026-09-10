@@ -1,0 +1,14 @@
+X02-053 / X02-001 PREFLIGHT PREDICATES
+realtime_rows=20000 producer_overruns=0 payload_contiguous=yes stream_contiguous=yes
+python_rows=7351 taskbeat_range=125..10804 motion_heartbeat_range=306..11599
+python_motion_states=[0, 1, 0, 2, 0, 1, 0, 2, 0]
+realtime_motion_states=[0, 1, 0, 2, 0, 1, 0, 2, 0]
+same_task_generation_repeat=True
+non_one_to_one_generation_delta=True
+equal_state_with_generation_advance=True
+slow_observer_skip=True
+ordered_state_subsequence=True
+preflight_gate_observations=A=PASS B=PASS C=PASS D=PASS E=PASS F=PASS G=PASS H=PASS I=PASS J=PASS
+I uses accepted X01-002 producer-overrun + deterministic-payload-discontinuity evidence as the invalid-recorder counterexample; no invalid interval is admitted here.
+J: no nearest-timestamp join was used; monotonic_ns is retained only as observer-order/time evidence.
+NOTE: this is NON-AUTHORITATIVE preflight evidence. Frozen gates are not course-accepted until a separate unchanged authoritative run is independently inspected.

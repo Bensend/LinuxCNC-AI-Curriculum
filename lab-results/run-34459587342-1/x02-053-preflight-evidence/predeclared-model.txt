@@ -1,0 +1,13 @@
+X02-053 / X02-001 NON-AUTHORITATIVE PREFLIGHT
+Pinned LinuxCNC commit: 8bf4605ae81042248add031e94c77300406e0413
+Frozen contract: experiments/X02-001-multi-surface-generation-correlation-plan.md
+Frozen contract commit: 903036d31e8c1e4d114cf43878c96a4e789744d7
+Fixture: upstream tests/linuxcncrsh/linuxcncrsh-test.ini + lcncrsh_sim.hal
+Servo period: 1000000 ns
+Task cycle: 0.001 s
+Realtime recorder: sampler cfg=ss, depth=24000, retained rows=20000
+Recorder fields: deterministic x02_source cycle; motion.motion-type
+Python observation fields: monotonic_ns, phase, taskbeat, heartbeat (motion heartbeat), motion_type, interp_state, exec_state, commanded X
+Poll requests: fast=0.0001 s, normal=0.005 s, slow=0.050 s
+P5: accepted X01-002 artifact is used as the invalid-recorder counterexample; no loss is injected into X02 authoritative-eligible P1-P4 evidence.
+Nearest timestamps are NOT a same-cycle oracle.

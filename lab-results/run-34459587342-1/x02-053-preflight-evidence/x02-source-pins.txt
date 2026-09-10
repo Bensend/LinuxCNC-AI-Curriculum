@@ -1,0 +1,5 @@
+Component Pins:
+Owner   Type  Dir                 Value  Name
+    73  s32   OUT                    10  x02-source.0.cycle ==> x02-cycle
+    73  s32   OUT                    68  x02-source.0.time
+

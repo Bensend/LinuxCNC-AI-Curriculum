@@ -1,0 +1,3 @@
+linuxcnc-module= /home/runner/work/_temp/linuxcnc-x02-preflight/lib/python/linuxcnc.so
+stat-has-heartbeat= True
+stat-has-taskbeat= True

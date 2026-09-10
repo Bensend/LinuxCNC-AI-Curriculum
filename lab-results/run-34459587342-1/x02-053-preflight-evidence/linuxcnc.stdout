@@ -1,0 +1,10 @@
+Machine configuration file is 'linuxcncrsh-test.ini'
+Starting LinuxCNC...
+linuxcnc TPMOD=tpmod HOMEMOD=homemod EMCMOT=motmod
+Found file(REL): ./lcncrsh_sim.hal
+task: main loop took 0.020704 seconds
+task: main loop took 0.018968 seconds
+task: main loop took 0.032055 seconds
+linuxcncrsh: New connection from ::1:55272
+linuxcncrsh: Read close 'Default-4' (4)
+linuxcncrsh: Connection terminated 'Default-4' (4)

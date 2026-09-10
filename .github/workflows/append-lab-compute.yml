@@ -1,0 +1,30 @@
+name: Append Lab Compute
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "LAB_COMPUTE_APPEND_REQUEST.md"
+
+permissions:
+  contents: write
+
+jobs:
+  append:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Apply verified rows
+        run: python3 tools/apply_lab_compute_append.py
+      - name: Commit ledger update
+        run: |
+          set -euo pipefail
+          if git diff --quiet -- LAB_COMPUTE_LOG.md; then exit 0; fi
+          git config user.name "linuxcnc-curriculum-log-bot"
+          git config user.email "linuxcnc-curriculum-log-bot@users.noreply.github.com"
+          git add LAB_COMPUTE_LOG.md
+          git commit -m "log: integrate verified lab compute backfill [skip ci]"
+          git push

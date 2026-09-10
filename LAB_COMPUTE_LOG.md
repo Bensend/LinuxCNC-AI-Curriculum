@@ -45,6 +45,9 @@ If a run is cancelled, times out, is harness-invalid, or fails substantively, st
 | 2026-09-08 | C04-026 attempt 2 | `34243768815` | `102119299104` | 2026-09-08T19:06:42Z | 2026-09-08T19:10:22Z | 3.7 | PASS / FOLLOW-UP REQUIRED | Behavioral run passed its harness; later C04 continuation resolved the source-transition issue. Exact job timestamps backfilled 2026-09-09. |
 | 2026-09-09 | C08-051 diagnostic trace preflight | `34327928519` | `102389431379` | 2026-09-09T08:13:43Z | 2026-09-09T08:17:36Z | 3.9 | PREFLIGHT PASS | Non-authoritative collector/order/trace-validity proof; 31 producer overruns coexisted with retained contiguous tags `[0,1,2]`; C08 frozen gates unscored. |
 | 2026-09-09 | C08-052 authoritative diagnostic discrimination | `34328731569` | `102392025784` | 2026-09-09T08:22:16Z | 2026-09-09T08:26:07Z | 3.9 | PASS | Accepted TEST-CONFIRMED C08 evidence; unchanged Gates A-J all passed; artifact `10094968899`. |
+| 2026-09-09 | X01-001 preflight attempt 1 | `34411511393` | `102666749355` | 2026-09-09T22:18:06Z | 2026-09-09T22:22:01Z | 3.92 | HARNESS INVALID | First artifact audit exposed the harness/array setup defect; no accepted behavioral verdict. Exact job timestamps backfilled 2026-09-10. |
+| 2026-09-09 | X01-001 preflight attempt 2 | `34416110919` | `102681240404` | 2026-09-09T23:15:34Z | 2026-09-09T23:19:09Z | 3.58 | HARNESS INVALID | Zero-padded sampler pin-name correction was still required; no accepted behavioral verdict. Exact job timestamps backfilled 2026-09-10. |
+| 2026-09-10 | X01-001 preflight attempt 3 | `34420657736` | `102695115020` | 2026-09-10T00:17:29Z | 2026-09-10T00:21:08Z | 3.65 | NOT ACCEPTED / OLD ORACLE FALSIFIED | Third attempt led to the three-attempt ESSENTIAL NOW reconciliation and X01-002 material redesign; not accepted as recorder-loss evidence. Exact job timestamps backfilled 2026-09-10. |
 | 2026-09-10 | X01-002 redesigned preflight | `34428664862` | `102719239856` | 2026-09-10T02:14:36Z | 2026-09-10T02:19:03Z | 4.45 | PREFLIGHT PASS | Artifact `10133717168`; validly exercised redesigned producer-overrun + deterministic-payload-gap oracle; frozen authoritative gates unscored. |
 | 2026-09-10 | X01-002 authoritative wrapper attempt 1 | `34432706789` | `102731363601` | 2026-09-10T03:16:39Z | 2026-09-10T03:16:47Z | 0.13 | HARNESS INVALID | Python source-rewrite SyntaxError before LinuxCNC/P0; no behavioral evidence and Gates A-J unscored. |
 | 2026-09-10 | X01-002 authoritative accepted run | `34436256547` | `102741829103` | 2026-09-10T04:12:20Z | 2026-09-10T04:16:18Z | 3.97 | PASS | Artifact `10136342576`; independent raw-artifact audit passed frozen Gates A-J 10/10 including predeclared 10,000-row P5. |
@@ -56,16 +59,16 @@ If a run is cancelled, times out, is harness-invalid, or fails substantively, st
 
 Keep these totals current whenever new rows are added:
 
-- **Exactly backfilled lab compute:** 135.07 min (2.25 h)
-- **Total lab compute used:** 2.25 h + unbackfilled historical usage
+- **Exactly backfilled lab compute:** 146.22 min (2.44 h)
+- **Total lab compute used:** 2.44 h + unbackfilled historical usage
 - **Remaining from 120 h first-draft allowance:** unknown until historical backfill
-- **Current-day exactly backfilled lab compute (2026-09-10):** 21.07 min (0.35 h) + unbackfilled same-day historical usage
+- **Current-day exactly backfilled lab compute (2026-09-10):** 24.72 min (0.41 h) + unbackfilled same-day historical usage
 
 ## Immediate backfill queue
 
 C03-025 and C04-026 are now backfilled from exact GitHub Actions job timestamps.
 
-C05-029 attempts 1–7, C06 work through C06-038, C08-051/C08-052, X01-002, and X02-001 preflight/authoritative attempts are exactly accounted. Later C06 runs after C06-038, C07 laboratory runs, and earlier X01-001 attempts remain historical backfill work where exact job metadata has not yet been integrated and must not be silently included in the exact totals above.
+C05-029 attempts 1–7, C06 work through C06-038, C08-051/C08-052, X01-001 attempts 1–3, X01-002, and X02-001 preflight/authoritative attempts are exactly accounted. Later C06 runs after C06-038 and C07 laboratory runs remain historical backfill work where exact job metadata has not yet been integrated and must not be silently included in the exact totals above.
 
 No known T02-T05, C01, C02, or earlier C05 jobs through C05-029 attempt 7 remain in the immediate backfill queue.
 

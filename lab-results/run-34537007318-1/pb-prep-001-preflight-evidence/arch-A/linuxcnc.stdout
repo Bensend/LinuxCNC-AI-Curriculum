@@ -1,0 +1,17 @@
+Machine configuration file is 'pb-prep.ini'
+Starting LinuxCNC...
+linuxcnc TPMOD=tpmod HOMEMOD=homemod EMCMOT=motmod
+Found file(REL): ./pb-prep.hal
+Shutting down and cleaning up LinuxCNC...
+
+identityKinematicsSetup: coordinates:XYZY
+   Joint 0 ==> Axis X
+   Joint 1 ==> Axis Y
+   Joint 2 ==> Axis Z
+   Joint 3 ==> Axis Y
+
+LinuxCNC terminated with an error.  You can find more information in the log:
+    /home/runner/linuxcnc_debug.txt
+and
+    /home/runner/linuxcnc_print.txt
+as well as in the output of the shell command 'dmesg' and in the terminal

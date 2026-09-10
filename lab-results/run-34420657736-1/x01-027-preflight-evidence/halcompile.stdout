@@ -1,0 +1,3 @@
+Compiling realtime x01_source.c
+Linking x01_source.so
+cp x01_source.so /home/runner/work/_temp/linuxcnc-x01-preflight/rtlib/

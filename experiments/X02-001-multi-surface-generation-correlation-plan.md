@@ -22,7 +22,7 @@ Demonstrate, in a software-only LinuxCNC fixture, what can and cannot be inferre
 
 - Realtime/HAL: `motion.motion-type` (`s32`, output).
 - Task/NML/Python: `linuxcnc.stat().motion_type` from `status.motion.traj.motion_type`.
-- Generation witnesses in Python: `taskbeat` and the motion heartbeat exposed by the pinned status interface if available under the fixture; the implementation must source-trace the exact Python member used before execution and abort preflight if it cannot be provenance-verified.
+- Generation witnesses in Python: `taskbeat` plus `heartbeat`. At the pinned source, `emcmodule.cc::Stat_heartbeat()` returns `s->status.motion.heartbeat`; therefore Python `stat.heartbeat` is the motion-status heartbeat, distinct from `stat.taskbeat`.
 - Realtime recorder integrity/generation: deterministic X01-style payload-cycle counter, producer overrun count, retained-row continuity, and explicit topology/order metadata.
 
 `motion_type` is deliberately **not** a generation identifier.
@@ -48,7 +48,7 @@ P1 — **Fast Python polling / idle**
 P2 — **Normal-rate transition sequence**
 - Execute the deterministic motion program while polling at a moderate rate.
 - Realtime recorder continuously captures payload cycle + HAL `motion.motion-type`.
-- Python records monotonic time + taskbeat + motion heartbeat + `motion_type`.
+- Python records monotonic time + taskbeat + motion heartbeat (`heartbeat`) + `motion_type`.
 
 P3 — **Slow Python polling**
 - Poll substantially slower than Task and motion publication for a bounded interval while another deterministic motion sequence executes.
@@ -99,4 +99,4 @@ Workflow success alone is never the oracle; raw artifacts must be independently 
 
 ## Next action
 
-Implement a preflight exactly against this frozen contract. Before launching, source-trace the exact Python motion-heartbeat member available at the pinned revision and record it in the implementation notes. Do not alter P0–P4 or Gates A–J after observing results; harness-only defects may be corrected under the three-attempt rule.
+Implement a preflight exactly against this frozen contract. Python motion-heartbeat provenance is now source-confirmed as `stat.heartbeat` -> `status.motion.heartbeat`. Do not alter P0–P4 or Gates A–J after observing results; harness-only defects may be corrected under the three-attempt rule.

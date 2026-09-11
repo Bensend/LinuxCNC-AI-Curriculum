@@ -1,0 +1,4 @@
+machine-on=PASS
+manual=PASS
+homed=PASS
+mdi=PASS

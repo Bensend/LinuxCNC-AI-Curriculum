@@ -1,0 +1,1 @@
+12000 /home/runner/work/LinuxCNC-AI-Curriculum/LinuxCNC-AI-Curriculum/lab-results/run-34569046910-1/pb-prep-001-p2-p7-evidence/arch-B/realtime.samples

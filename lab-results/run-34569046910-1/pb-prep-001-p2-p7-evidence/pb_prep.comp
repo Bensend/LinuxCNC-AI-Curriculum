@@ -1,0 +1,95 @@
+component pb_prep "PB-PREP-001 frozen P2-P7 packed-stream two-side fixture";
+pin in float r1; pin in float r2;
+pin in float pid1_out; pin in float pid2_out;
+pin in bit pid1_sat; pin in bit pid2_sat;
+pin in bit motion_enabled;
+pin in float ferror_lim1; pin in float ferror_lim3;
+pin out float pid1_ref; pin out float pid2_ref;
+pin out float y1; pin out float y2;
+pin out float e_diff_used;
+pin out float corr_req; pin out float corr_applied;
+pin out float prelimit1; pin out float prelimit2;
+pin out float final1; pin out float final2;
+pin out bit final1_sat; pin out bit final2_sat;
+pin out float plant_gain2; pin out float plant_alpha2;
+pin out s32 state_word;
+pin out s32 disturbance_word;
+pin out s32 ferror_limit_word;
+pin out s32 cycle;
+param rw u32 architecture = 0;
+param rw u32 phase_cmd = 2;
+param rw bit run = 0;
+param rw float sync_gain = 1.0;
+param rw float diff_max = 0.25;
+param rw float u_max = 2.0;
+param rw float c_pgain = 6.0;
+function prepare;
+function finish;
+license "GPL";
+;;
+static int initialized = 0;
+static double absd(double v) { return v < 0.0 ? -v : v; }
+static double clip(double v, double m) { return v > m ? m : (v < -m ? -m : v); }
+FUNCTION(prepare) {
+    double ed;
+    if (!initialized) { y1 = 0.0; y2 = 0.0; initialized = 1; }
+    plant_gain2 = 1.0; plant_alpha2 = 0.05;
+    if (phase_cmd == 3) { plant_gain2 = 0.75; }
+    else if (phase_cmd == 4) { plant_alpha2 = 0.025; }
+    else if (phase_cmd == 6 || phase_cmd == 7) { plant_gain2 = 0.20; }
+    ed = y1 - y2;
+    e_diff_used = ed;
+    corr_req = sync_gain * ed;
+    corr_applied = clip(corr_req, diff_max);
+    if (architecture == 0) {
+        pid1_ref = r1 - corr_applied;
+        pid2_ref = r2 + corr_applied;
+    } else {
+        pid1_ref = r1;
+        pid2_ref = r2;
+    }
+}
+FUNCTION(finish) {
+    double common = 0.0;
+    unsigned int sw, dw, lw, gq, aq, l1q, l3q;
+    if (!run) {
+        prelimit1 = prelimit2 = 0.0;
+        final1 = final2 = 0.0;
+        final1_sat = final2_sat = 0;
+    } else {
+        if (architecture == 0) {
+            prelimit1 = pid1_out;
+            prelimit2 = pid2_out;
+        } else if (architecture == 1) {
+            prelimit1 = pid1_out - corr_applied;
+            prelimit2 = pid2_out + corr_applied;
+        } else {
+            common = c_pgain * (((r1 - y1) + (r2 - y2)) * 0.5);
+            prelimit1 = common - corr_applied;
+            prelimit2 = common + corr_applied;
+        }
+        final1_sat = absd(prelimit1) > u_max;
+        final2_sat = absd(prelimit2) > u_max;
+        final1 = clip(prelimit1, u_max);
+        final2 = clip(prelimit2, u_max);
+        y1 += 0.05 * ((1.0 * final1) - y1);
+        y2 += plant_alpha2 * ((plant_gain2 * final2) - y2);
+    }
+    sw = (phase_cmd & 0xffu);
+    if (run) sw |= (1u << 8);
+    if (pid1_sat) sw |= (1u << 9);
+    if (pid2_sat) sw |= (1u << 10);
+    if (final1_sat) sw |= (1u << 11);
+    if (final2_sat) sw |= (1u << 12);
+    if (motion_enabled) sw |= (1u << 13);
+    state_word = (int)sw;
+    gq = (unsigned int)(plant_gain2 * 1000.0 + 0.5);
+    aq = (unsigned int)(plant_alpha2 * 10000.0 + 0.5);
+    dw = (gq & 0xffffu) | ((aq & 0xffffu) << 16);
+    disturbance_word = (int)dw;
+    l1q = (unsigned int)(ferror_lim1 * 1000.0 + 0.5);
+    l3q = (unsigned int)(ferror_lim3 * 1000.0 + 0.5);
+    lw = (l1q & 0xffffu) | ((l3q & 0xffffu) << 16);
+    ferror_limit_word = (int)lw;
+    cycle++;
+}

@@ -1,0 +1,21 @@
+0 cycle s32
+1 state_word s32 [phase bits0..7; run b8; pid1sat b9; pid2sat b10; final1sat b11; final2sat b12; motion-enabled b13]
+2 r1 float
+3 r2 float
+4 y1 float
+5 y2 float
+6 e_diff_used float
+7 corr_req float
+8 corr_applied float
+9 pid1_ref float
+10 pid2_ref float
+11 pid1_out float
+12 pid2_out float
+13 prelimit1 float
+14 prelimit2 float
+15 final1 float
+16 final2 float
+17 joint1_ferror float
+18 joint3_ferror float
+19 disturbance_word s32 [gain2*1000 low16; alpha2*10000 high16]
+20 ferror_limit_word s32 [joint1 limit*1000 low16; joint3 limit*1000 high16]

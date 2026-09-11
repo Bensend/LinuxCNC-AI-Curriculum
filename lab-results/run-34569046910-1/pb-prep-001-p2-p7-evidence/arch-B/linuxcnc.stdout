@@ -1,0 +1,11 @@
+Machine configuration file is 'pb-prep.ini'
+Starting LinuxCNC...
+linuxcnc TPMOD=tpmod HOMEMOD=homemod EMCMOT=motmod
+Found file(REL): ./pb-prep.hal
+task: main loop took 0.018795 seconds
+task: main loop took 0.019104 seconds
+linuxcncrsh: New connection from ::1:59392
+linuxcncrsh: Read close 'Default-4' (4)
+linuxcncrsh: Connection terminated 'Default-4' (4)
+task: 3740233 cycles, min=0.000003, max=0.019104, avg=0.001059, 2 latency excursions (> 10x expected cycle time of 0.001000s)
+Shutting down and cleaning up LinuxCNC...

@@ -1,0 +1,43 @@
+Component Pins:
+Owner   Type  Dir                 Value  Name
+    27  float OUT                     0  joint.1.acc-cmd
+    27  bit   OUT                  TRUE  joint.1.active
+    27  bit   OUT                 FALSE  joint.1.amp-enable-out
+    27  bit   IN                  FALSE  joint.1.amp-fault-in
+    27  float OUT                     0  joint.1.backlash-corr
+    27  float OUT                     0  joint.1.backlash-filt
+    27  float OUT                     0  joint.1.backlash-vel
+    27  float OUT                     0  joint.1.coarse-pos-cmd
+    27  bit   OUT                 FALSE  joint.1.error
+    27  float OUT                     0  joint.1.f-error ==> sjf1
+    27  float OUT                     1  joint.1.f-error-lim ==> jl1
+    27  bit   OUT                 FALSE  joint.1.f-errored
+    27  bit   OUT                 FALSE  joint.1.faulted
+    27  float OUT                     0  joint.1.free-pos-cmd
+    27  bit   OUT                 FALSE  joint.1.free-tp-enable
+    27  float OUT                     0  joint.1.free-vel-lim
+    27  s32   OUT                     0  joint.1.home-state
+    27  bit   IN                  FALSE  joint.1.home-sw-in
+    27  bit   OUT                 FALSE  joint.1.homed
+    27  bit   OUT                 FALSE  joint.1.homing
+    27  bit   OUT                  TRUE  joint.1.in-position
+    27  bit   I/O                 FALSE  joint.1.index-enable
+    27  float OUT                     0  joint.1.jerk-cmd
+    27  float IN                      1  joint.1.jog-accel-fraction
+    27  s32   IN                      0  joint.1.jog-counts
+    27  bit   IN                  FALSE  joint.1.jog-enable
+    27  float IN                      0  joint.1.jog-scale
+    27  bit   IN                  FALSE  joint.1.jog-vel-mode
+    27  bit   OUT                 FALSE  joint.1.kb-jog-active
+    27  float OUT                     0  joint.1.motor-offset
+    27  float OUT                     0  joint.1.motor-pos-cmd ==> y1cmd
+    27  float IN                      0  joint.1.motor-pos-fb <== y1fb
+    27  bit   OUT                 FALSE  joint.1.neg-hard-limit
+    27  bit   IN                  FALSE  joint.1.neg-lim-sw-in
+    27  float OUT                     0  joint.1.pos-cmd
+    27  float OUT                     0  joint.1.pos-fb
+    27  bit   OUT                 FALSE  joint.1.pos-hard-limit
+    27  bit   IN                  FALSE  joint.1.pos-lim-sw-in
+    27  float OUT                     0  joint.1.vel-cmd
+    27  bit   OUT                 FALSE  joint.1.wheel-jog-active
+

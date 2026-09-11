@@ -80,9 +80,9 @@ Independent parsing found:
 
 `LAB_COMPUTE_LOG.md` now includes PB-PREP-001 run 078's exact Actions timestamps: workflow `34569046910`, job `103167029904`, **70.17 min**. Exactly backfilled compute is now **264.14 min (4.40 h)**, with **83.49 min (1.39 h)** exactly backfilled for 2026-09-11 plus explicitly unbackfilled historical usage. Historical gaps and press-brake runs 073–077 still prevent a trustworthy full-project total.
 
-## Dependency-safe 4600 / press-brake preparation
+## Dependency-safe 3600 / press-brake preparation
 
-This work is **RESEARCH/SOURCE/EXPERIMENT preparation only** while F02 is blocked. It must not be interpreted as activating or graduating the 4600 specialization.
+This work is **RESEARCH/SOURCE/EXPERIMENT preparation only** while F02 is blocked. It must not be interpreted as activating or graduating the 3600 specialization.
 
 ### PB-PREP-001 — frozen experiment closed INCONCLUSIVE
 
@@ -109,7 +109,7 @@ Pinned source `8bf4605ae81042248add031e94c77300406e0413` establishes:
 - forward Cartesian Y is reported from the principal/first mapped Y joint rather than averaging/comparing all duplicate Y joints, so Cartesian Y is **not** a Y1/Y2 squareness witness;
 - homed LinuxCNC `extra joints` are outside coordinated kinematics, take command from `joint.N.posthome-cmd`, and ordinary motmod following error is explicitly made irrelevant for them after homing.
 
-Therefore duplicated-Y joints and extra joints are not interchangeable tandem-ram architectures. Any 4600 design must explicitly assign common trajectory ownership, independent side truth/fault ownership, differential synchronization authority, and hydraulic-mode ownership.
+Therefore duplicated-Y joints and extra joints are not interchangeable tandem-ram architectures. Any 3600 design must explicitly assign common trajectory ownership, independent side truth/fault ownership, differential synchronization authority, and hydraulic-mode ownership.
 
 ### Public press-brake implementation/evolution evidence
 
@@ -147,8 +147,8 @@ Durable artifact: `research/press-brake-ursviken-y1-y2-field-architecture-2026-0
 
 1. Preserve S02, E20, X01, and X02 as technically accepted / fresh-handoff pending. Do not self-score any prepared fresh-AI packet; **F02 remains blocked**.
 2. Preserve PB-PREP-001 as **INCONCLUSIVE / no architecture recommendation**. Do not strengthen P6, alter its thresholds, or run architecture C merely to search for a preferred result.
-3. Continue bounded 4600 research for a downloadable **tandem Y1/Y2** configuration. First check later Ursviken/Pullmax posts/attachments after the July 22 success report; if no source is public after a bounded search, record SOURCE UNAVAILABLE and move to a second independent tandem implementation rather than repeatedly searching one thread.
+3. Continue bounded 3600 research for a downloadable **tandem Y1/Y2** configuration. First check later Ursviken/Pullmax posts/attachments after the July 22 success report; if no source is public after a bounded search, record SOURCE UNAVAILABLE and move to a second independent tandem implementation rather than repeatedly searching one thread.
 4. For any tandem source found, trace physical scale producers, common side commands, Y1−Y2 producer/sign, exact sync-correction insertion point, all downstream limits/muxes, final-side saturation witness, realtime addf order, per-side following-error ownership, and disable/fault behavior before copying gains.
-5. Treat the Accurpress chronology as a 4600 architecture-evolution case study: April hybrid ambiguity -> May standalone ownership correction -> 2022 timing/pressure maturation -> 2024 regular-use report with persistent backstop-homing weakness.
+5. Treat the Accurpress chronology as a 3600 architecture-evolution case study: April hybrid ambiguity -> May standalone ownership correction -> 2022 timing/pressure maturation -> 2024 regular-use report with persistent backstop-homing weakness.
 6. Backfill exact Actions runtimes for remaining 073–077 gaps before restating a complete global laboratory-compute total.
 7. Once the four genuinely information-separated prerequisite handoffs are valid, mark those modules fully graduated and activate **F02** according to the 2000-level dependency graph. Preserve blind-evaluation separation for delayed retention and the sealed benchmark.

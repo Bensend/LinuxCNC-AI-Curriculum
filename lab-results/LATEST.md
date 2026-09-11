@@ -1,33 +1,31 @@
 # Latest LinuxCNC Lab Result
 
-- Job: `074-pb-prep-001-p2-p7-scoped-prefix-proof`
-- Job file: `lab-jobs/074-pb-prep-001-p2-p7-scoped-prefix-proof.sh`
-- Workflow run ID: `34557615860`
+- Job: `075-pb-prep-001-p2-p7-exact-raw-boundary`
+- Job file: `lab-jobs/075-pb-prep-001-p2-p7-exact-raw-boundary.sh`
+- Workflow run ID: `34557700647`
 - Attempt: `1`
-- Source commit: `08a8ec8f61cbbafdf5335788b8ecf335da982131`
+- Source commit: `34c26ca5ae18a49b1f3dc1b847238c376a34b0c0`
 - Exit code: `1`
-- Finished UTC: `2026-09-11T03:13:27Z`
+- Finished UTC: `2026-09-11T03:14:47Z`
 
 ## Metadata
 ```text
 LinuxCNC AI Curriculum Lab
-UTC start: 2026-09-11T03:13:27Z
-Repository commit: 08a8ec8f61cbbafdf5335788b8ecf335da982131
-Workflow run: 34557615860 attempt 1
-Job file: lab-jobs/074-pb-prep-001-p2-p7-scoped-prefix-proof.sh
+UTC start: 2026-09-11T03:14:47Z
+Repository commit: 34c26ca5ae18a49b1f3dc1b847238c376a34b0c0
+Workflow run: 34557700647 attempt 1
+Job file: lab-jobs/075-pb-prep-001-p2-p7-exact-raw-boundary.sh
 Runner: Linux runnervmlun5p 6.17.0-1022-azure #22-Ubuntu SMP Mon Jul 27 17:24:03 UTC 2026 x86_64 x86_64 x86_64 GNU/Linux
 Inner lab timeout: 70 minutes (job ceiling: 75 minutes)
 
-UTC finish: 2026-09-11T03:13:27Z
+UTC finish: 2026-09-11T03:14:47Z
 ```
 
 ## Standard output
 ```text
-PB-PREP-001 074: oldnets immutability now proven by preserved byte prefix; frozen behavioral contract unchanged.
-PB-PREP-001 073: scoped newnets construction validation passed; running render-validated frozen experiment.
 ```
 
 ## Standard error
 ```text
-HARNESS_INVALID: bytes through oldnets changed during scoped newnets transformation
+HARNESS_INVALID: 075 raw-boundary helper patch point count=0
 ```

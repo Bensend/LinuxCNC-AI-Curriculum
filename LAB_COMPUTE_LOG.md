@@ -66,14 +66,20 @@ If a run is cancelled, times out, is harness-invalid, or fails substantively, st
 | 2026-09-09 | C07-047 sequencing preflight | `34314733007` | `102348466843` | 2026-09-09T05:24:19Z | 2026-09-09T05:27:49Z | 3.50 | PREFLIGHT PASS | Non-authoritative preflight. |
 | 2026-09-09 | C07-048 sequencing preflight | `34318296679` | `102359108023` | 2026-09-09T06:15:57Z | 2026-09-09T06:19:25Z | 3.47 | PREFLIGHT PASS | Non-authoritative preflight. |
 | 2026-09-09 | C07-049 authoritative state-machine sequencing | `34318656849` | `102360226472` | 2026-09-09T06:21:01Z | 2026-09-09T06:24:10Z | 3.15 | PASS | Authoritative accepted C07 evidence. |
+| 2026-09-11 | PB-PREP-001 067 direct 29-element behavioral attempt | `34550104154` | `103111016396` | 2026-09-11T01:17:57Z | 2026-09-11T01:22:12Z | 4.25 | HARNESS INVALID | Direct 29-element sampler exceeded pinned LinuxCNC 21-element stream ceiling; no A/B/C behavioral verdict. Supersedes earlier conversational 7.45-minute estimate with exact Actions job interval. |
+| 2026-09-11 | PB-PREP-001 068 packed-stream wrapper attempt | `34550419067` | `103111965316` | 2026-09-11T01:22:47Z | 2026-09-11T01:22:56Z | 0.15 | HARNESS INVALID | Outer PY here-document collided with embedded analyzer terminator; failed before LinuxCNC. |
+| 2026-09-11 | PB-PREP-001 069 delimiter-corrected packed attempt | `34553671043` | `103121641570` | 2026-09-11T02:11:53Z | 2026-09-11T02:16:00Z | 4.12 | HARNESS INVALID | Reached pinned build; generated script retained duplicate EOF terminator and failed before HAL behavior. |
+| 2026-09-11 | PB-PREP-001 070 render-validated redesign attempt 1 | `34554034350` | `103122742371` | 2026-09-11T02:17:23Z | 2026-09-11T02:17:32Z | 0.15 | HARNESS INVALID | Cheap pre-execution failure: temp generator lacked execute permission; no LinuxCNC execution. |
+| 2026-09-11 | PB-PREP-001 071 render-validated redesign attempt 2 | `34554096034` | `103122932037` | 2026-09-11T02:18:20Z | 2026-09-11T02:22:50Z | 4.50 | HARNESS INVALID | Render validation and pinned build passed; HAL rejected sampler tap treating existing signal y1cmd as a pin; no behavioral phases. |
+| 2026-09-11 | PB-PREP-001 072 scoped-observability correction preflight | `34554444939` | `103123986052` | 2026-09-11T02:23:42Z | 2026-09-11T02:23:51Z | 0.15 | HARNESS INVALID | Cheap preflight refused ambiguous global sampler-tap replacement because target occurs in both oldnets and newnets; no LinuxCNC execution. |
 ## Running totals
 
 Keep these totals current whenever new rows are added:
 
-- **Exactly backfilled lab compute:** 180.65 min (3.01 h)
-- **Total lab compute used:** 3.01 h + unbackfilled historical usage
+- **Exactly backfilled lab compute:** 193.97 min (3.23 h)
+- **Total lab compute used:** 3.23 h + unbackfilled historical usage
 - **Remaining from 120 h first-draft allowance:** unknown until historical backfill
-- **Current-day exactly backfilled lab compute (2026-09-10):** 24.72 min (0.41 h) + unbackfilled same-day historical usage
+- **Current-day exactly backfilled lab compute (2026-09-11):** 13.32 min (0.22 h) + unbackfilled same-day historical usage
 
 ## Immediate backfill queue
 

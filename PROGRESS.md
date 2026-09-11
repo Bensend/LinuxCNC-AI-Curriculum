@@ -80,10 +80,53 @@ Independent parsing found:
 
 `LAB_COMPUTE_LOG.md` now includes exact job timestamps for all three X02-001 runs. Exactly backfilled compute is 135.07 min (2.25 h), with 21.07 min (0.35 h) exactly backfilled for 2026-09-10 plus explicitly unbackfilled historical usage.
 
+**Later compute-ledger integration exists beyond this stale X02-era subtotal. Do not use the 135.07-minute figure as the current global total.** The press-brake harness series through 072 was separately reconciled at 193.97 min exact backfilled compute; 073 onward still require exact Actions-time integration before the global subtotal is restated here.
+
+## Dependency-safe 4600 / press-brake preparation
+
+This work is **RESEARCH/SOURCE/EXPERIMENT preparation only** while F02 is blocked. It must not be interpreted as activating or graduating the 4600 specialization.
+
+### PB-PREP-001
+
+PB-PREP-001 studies ordinary software architecture for two duplicated-Y joints with independent feedback. P0/P1 construction work was accepted as harness validation only. Behavioral constants and P2–P7 cases were frozen before comparison.
+
+Runs 067–075 are **HARNESS INVALID / compute only** and provide no A/B/C architecture verdict. Their repeated failures triggered the curriculum's three-similar-failure rule rather than blind retrying.
+
+Run 076 flattened the fully generated candidate and passed static construction checks. Its retained `behavioral-rendered.sh` is SHA-256 bound as `7c185fb0af4b056d7e9406de164a79ae6eb30d06510a6b3ce77ed12d46c4a0e6`.
+
+Candidate 077 executes exactly that retained render as workflow `34557828294`, job `103134175120`, source commit `8d01d2dab5823ed0fcf43ef944b98f266343cb8a`. An independent raw-evidence audit was frozen while 077 was still executing, before seeing its behavioral result. A further audit-only temporal-alignment correction was frozen before results after source inspection showed `prepare -> PID -> finish -> sampler`, with synthetic plant state advanced inside `finish`; controller-law checks must therefore reconstruct the pre-update plant state rather than treating same-row post-update `y1/y2` as simultaneous controller inputs. No experiment parameter, threshold, gate, or classification rule changed.
+
+The frozen discriminator remains: if a valid architecture-B P6 trace does not contain downstream final saturation while corresponding stock PID saturation is false, the result is **INCONCLUSIVE** and must not be retuned.
+
+### Source / architecture findings
+
+Pinned source `8bf4605ae81042248add031e94c77300406e0413` now establishes:
+
+- duplicated `trivkins` coordinates fan one Cartesian Y request to every Y-mapped kinematic joint;
+- duplicate joints retain independent joint feedback and ordinary per-joint following-error state;
+- forward Cartesian Y is reported from the principal/first mapped Y joint rather than averaging/comparing all duplicate Y joints, so Cartesian Y is **not** a Y1/Y2 squareness witness;
+- homed LinuxCNC `extra joints` are outside coordinated kinematics, take command from `joint.N.posthome-cmd`, and ordinary motmod following error is explicitly made irrelevant for them after homing.
+
+Therefore duplicated-Y joints and extra joints are not interchangeable tandem-ram architectures. Any 4600 design must explicitly assign common trajectory ownership, independent side truth/fault ownership, differential synchronization authority, and hydraulic-mode ownership.
+
+Community research across public Accurpress, proportional-valve retrofit, and Ursviken Pullmax work reinforces an architecture question rather than a generic hydraulic recipe: successful/evolving builds repeatedly separate motion ownership from press-cycle/hydraulic sequencing, and real manifolds may include nested valve-amplifier loops plus discrete routing/mode valves. These reports remain community evidence and do not establish machine-specific valve sequencing or safety suitability.
+
+Durable current artifacts include:
+
+- `research/press-brake-motion-ownership-extra-joints-vs-duplicated-y-2026-09-11.md`
+- `research/press-brake-duplicated-y-command-feedback-source-trace-2026-09-11.md`
+- `research/press-brake-community-architecture-evolution-2026-09-11.md`
+- `research/press-brake-layered-interface-contract-draft-2026-09-11.md`
+- `experiments/PB-PREP-001-077-independent-audit-freeze.md`
+- `experiments/PB-PREP-001-077-audit-temporal-alignment-correction.md`
+
+The layered draft deliberately separates press-cycle coordination, motmod/joint motion, Y1/Y2 synchronization/final ordinary allocation, machine-specific hydraulic decoding, nested electrical/drive interfaces, and an external functional-safety boundary. It deliberately supplies no generic valve truth table, coil current, pressure limit, or safety claim.
+
 ## Exact next-work checkpoint
 
-1. Preserve S02, E20, X01, and X02 as technically accepted / fresh-handoff pending. Do not self-score any prepared fresh-AI packet.
-2. Obtain genuinely information-separated fresh-AI evaluations for the four pending modules; record each result and perform only the minimal mechanism-level correction required by any miss.
-3. Preserve the blind-evaluation separation for delayed retention and the sealed benchmark. Do not expose evaluator answers to the learner.
-4. Once the prerequisite handoffs are valid, mark the corresponding modules fully graduated and activate **F02** according to the 2000-level dependency graph.
-5. Until those external/fresh evaluations are available, useful unblocked work may include exact historical lab-compute backfill and repository/evidence-integrity maintenance, but must not be used to manufacture a self-certified graduation.
+1. Preserve S02, E20, X01, and X02 as technically accepted / fresh-handoff pending. Do not self-score any prepared fresh-AI packet; **F02 remains blocked**.
+2. When PB-PREP-001 candidate 077 completes, download/inspect its retained raw evidence and independently score the already frozen provenance, topology, recorder, phase, disturbance, ferror, final-saturation, recovery/disable and architecture-specific gates. Apply the pre-frozen temporal-alignment correction for control-law reconstruction. Do not accept generated `analysis.txt` alone.
+3. If 077 is construction/recorder invalid, take no behavioral verdict. If valid but B/P6 lacks the frozen downstream-only saturation witness, classify **INCONCLUSIVE**. Do not strengthen P6 or tune thresholds after seeing results.
+4. Continue 4600 research by locating at least one downloadable public press-brake HAL/COMP/config set and mapping it against the layered ownership contract. Keep physical valve sequencing and functional safety machine-specific.
+5. Backfill exact Actions runtimes for 073 onward before restating the global compute total in this file.
+6. Once the four genuinely information-separated prerequisite handoffs are valid, mark those modules fully graduated and activate **F02** according to the 2000-level dependency graph. Preserve the blind-evaluation separation for delayed retention and the sealed benchmark.

@@ -1,0 +1,3 @@
+Compiling realtime pb_prep.c
+Linking pb_prep.so
+cp pb_prep.so /home/runner/work/_temp/linuxcnc-pb-prep-001-p2p7/rtlib/

@@ -78,15 +78,13 @@ Independent parsing found:
 
 ## Compute checkpoint
 
-`LAB_COMPUTE_LOG.md` now includes exact job timestamps for all three X02-001 runs. Exactly backfilled compute is 135.07 min (2.25 h), with 21.07 min (0.35 h) exactly backfilled for 2026-09-10 plus explicitly unbackfilled historical usage.
-
-**Later compute-ledger integration exists beyond this stale X02-era subtotal. Do not use the 135.07-minute figure as the current global total.** The press-brake harness series through 072 was separately reconciled at 193.97 min exact backfilled compute; 073 onward still require exact Actions-time integration before the global subtotal is restated here.
+`LAB_COMPUTE_LOG.md` now includes PB-PREP-001 run 078's exact Actions timestamps: workflow `34569046910`, job `103167029904`, **70.17 min**. Exactly backfilled compute is now **264.14 min (4.40 h)**, with **83.49 min (1.39 h)** exactly backfilled for 2026-09-11 plus explicitly unbackfilled historical usage. Historical gaps and press-brake runs 073–077 still prevent a trustworthy full-project total.
 
 ## Dependency-safe 4600 / press-brake preparation
 
 This work is **RESEARCH/SOURCE/EXPERIMENT preparation only** while F02 is blocked. It must not be interpreted as activating or graduating the 4600 specialization.
 
-### PB-PREP-001
+### PB-PREP-001 — frozen experiment closed INCONCLUSIVE
 
 PB-PREP-001 studies ordinary software architecture for two duplicated-Y joints with independent feedback. P0/P1 construction work was accepted as harness validation only. Behavioral constants and P2–P7 cases were frozen before comparison.
 
@@ -94,13 +92,17 @@ Runs 067–075 are **HARNESS INVALID / compute only** and provide no A/B/C archi
 
 Run 076 flattened the fully generated candidate and passed static construction checks. Its retained `behavioral-rendered.sh` is SHA-256 bound as `7c185fb0af4b056d7e9406de164a79ae6eb30d06510a6b3ce77ed12d46c4a0e6`.
 
-Candidate 077 executes exactly that retained render as workflow `34557828294`, job `103134175120`, source commit `8d01d2dab5823ed0fcf43ef944b98f266343cb8a`. An independent raw-evidence audit was frozen while 077 was still executing, before seeing its behavioral result. A further audit-only temporal-alignment correction was frozen before results after source inspection showed `prepare -> PID -> finish -> sampler`, with synthetic plant state advanced inside `finish`; controller-law checks must therefore reconstruct the pre-update plant state rather than treating same-row post-update `y1/y2` as simultaneous controller inputs. No experiment parameter, threshold, gate, or classification rule changed.
+Run 077 timed out after retaining only a complete architecture-A trace, so it could not provide an A/B/C verdict. Run 078 then executed architecture B in isolation from the exact frozen retained render. Workflow `34569046910`, job `103167029904`, source commit `928377ad1a7c70af7032e08dc9b5d30e1d22b16d`, artifact `10188937382` retained a complete **12,000-row** B trace with zero recorder overruns.
 
-The frozen discriminator remains: if a valid architecture-B P6 trace does not contain downstream final saturation while corresponding stock PID saturation is false, the result is **INCONCLUSIVE** and must not be retuned.
+Independent raw parsing found P6 had **2,052 rows**, exercised nonzero differential correction (`max(abs(corr_applied)) = 0.126316`), but contained **zero stock-PID saturation rows and zero downstream-final-saturation rows**. The experiment's pre-frozen discriminator explicitly required downstream-only final saturation in valid B/P6 evidence; absence forces **INCONCLUSIVE** and forbids strengthening P6 after seeing the result.
+
+**PB-PREP-001 is therefore closed as INCONCLUSIVE / NO ARCHITECTURE RECOMMENDATION under the frozen contract unless a concrete provenance or recorder defect later invalidates retained B evidence.** Running architecture C cannot retroactively create the missing B/P6 discriminator and is not required merely to seek a preferred answer.
+
+Durable audit: `experiments/PB-PREP-001-078-independent-audit.md`.
 
 ### Source / architecture findings
 
-Pinned source `8bf4605ae81042248add031e94c77300406e0413` now establishes:
+Pinned source `8bf4605ae81042248add031e94c77300406e0413` establishes:
 
 - duplicated `trivkins` coordinates fan one Cartesian Y request to every Y-mapped kinematic joint;
 - duplicate joints retain independent joint feedback and ordinary per-joint following-error state;
@@ -109,24 +111,44 @@ Pinned source `8bf4605ae81042248add031e94c77300406e0413` now establishes:
 
 Therefore duplicated-Y joints and extra joints are not interchangeable tandem-ram architectures. Any 4600 design must explicitly assign common trajectory ownership, independent side truth/fault ownership, differential synchronization authority, and hydraulic-mode ownership.
 
-Community research across public Accurpress, proportional-valve retrofit, and Ursviken Pullmax work reinforces an architecture question rather than a generic hydraulic recipe: successful/evolving builds repeatedly separate motion ownership from press-cycle/hydraulic sequencing, and real manifolds may include nested valve-amplifier loops plus discrete routing/mode valves. These reports remain community evidence and do not establish machine-specific valve sequencing or safety suitability.
+### Public press-brake implementation/evolution evidence
 
-Durable current artifacts include:
+The public Accurpress build diary now supplies an inspectable real HAL/INI/COMP evolution series rather than forum prose alone:
 
-- `research/press-brake-motion-ownership-extra-joints-vs-duplicated-y-2026-09-11.md`
-- `research/press-brake-duplicated-y-command-feedback-source-trace-2026-09-11.md`
-- `research/press-brake-community-architecture-evolution-2026-09-11.md`
-- `research/press-brake-layered-interface-contract-draft-2026-09-11.md`
-- `experiments/PB-PREP-001-077-independent-audit-freeze.md`
-- `experiments/PB-PREP-001-077-audit-temporal-alignment-correction.md`
+- April 2021 `accurpress.hal` is a hybrid MOTMOD/custom topology. Physical encoder feedback reaches PID/MOTMOD, but active Y command bypasses `joint.1.motor-pos-cmd`; the press state machine's nominal `brake-pos-fb` is actually driven by `simple_tp.current-pos`, i.e. planner command state rather than physical ram truth. Its addf order also gives the PID a previous-cycle planner command. This is durable evidence that signal names and loaded subsystems do not establish ownership; trace producers and execution order.
+- May 2021 `bender.hal` removes MOTMOD/KINS, routes the physical encoder into the press component, and uses `simple_tp.current-pos` as the PID position command. Homing/jogging now become explicit responsibilities of the custom press component. Its addf order still creates one-period state-age boundaries (`press` before `hm2.read`, `hm2.write` before PID).
+- April 2022 `bender_2022-04-25.hal` keeps the standalone custom architecture but changes realtime order to **hm2.read -> press -> simple_tp -> PID -> hm2.write**, giving the cycle logic and PID fresh feedback and publishing the same invocation's new controller output. Pressure/tonnage is wired into ordinary control, and the adjacent component contains executable overpressure state logic. Exact adjacent-day HAL/component pairing remains unproven because the HAL expects `press.overload` while the inspected component does not export that pin.
+- A 2024 field report from the same builder says the retrofit is used regularly for bending while still mentioning a backstop-homing issue, giving longitudinal community evidence that the custom architecture reached useful operation but did not eliminate generic-motion maintenance burdens.
 
-The layered draft deliberately separates press-cycle coordination, motmod/joint motion, Y1/Y2 synchronization/final ordinary allocation, machine-specific hydraulic decoding, nested electrical/drive interfaces, and an external functional-safety boundary. It deliberately supplies no generic valve truth table, coil current, pressure limit, or safety claim.
+Durable artifacts:
+
+- `research/press-brake-accurpress-public-config-ownership-audit-2026-09-11.md`
+- `research/press-brake-accurpress-architecture-evolution-may-2021.md`
+- `research/press-brake-accurpress-2022-stabilization-trace.md`
+
+The current generic layered contract remains appropriate: press-cycle semantics, motion/joint ownership, Y1/Y2 differential synchronization/final allocation, machine-specific hydraulic decoding, electrical/drive interface and functional-safety boundary must be distinguished. Public files provide architecture evidence but no generic valve truth table, coil current, pressure limit or safety claim.
+
+### Public tandem Y1/Y2 field evidence
+
+The Ursviken Pullmax Optima build diary provides the strongest located public real-machine tandem evidence so far. By July 2026 the builder reported replacing hydraulic flow-divider behavior electronically in LinuxCNC/HAL and successfully bending steel with:
+
+- one position PID for Y1;
+- one position PID for Y2;
+- a separate sync PID commanded to zero with Y1−Y2 as feedback;
+- synchronization action that slows whichever side is ahead.
+
+This supports the bounded field conclusion that separate common-side position loops plus a differential synchronization loop can work on a physical press. It does **not** reveal the exact final correction insertion point, command limiting/saturation path, ferror ownership or thread order. The builder said a configuration would be shared after loose ends were resolved, but no final downloadable Y1/Y2 config was found in the inspected diary pages, and a bounded GitHub code search for `pullmax_optima` found no public implementation.
+
+Therefore the Ursviken result is classified **COMMUNITY-REPORTED FIELD SUCCESS / FINAL SOURCE UNAVAILABLE**, not source-confirmed architecture A/B/C evidence. It cannot rescue PB-PREP-001 from its frozen INCONCLUSIVE classification.
+
+Durable artifact: `research/press-brake-ursviken-y1-y2-field-architecture-2026-09-11.md`.
 
 ## Exact next-work checkpoint
 
 1. Preserve S02, E20, X01, and X02 as technically accepted / fresh-handoff pending. Do not self-score any prepared fresh-AI packet; **F02 remains blocked**.
-2. When PB-PREP-001 candidate 077 completes, download/inspect its retained raw evidence and independently score the already frozen provenance, topology, recorder, phase, disturbance, ferror, final-saturation, recovery/disable and architecture-specific gates. Apply the pre-frozen temporal-alignment correction for control-law reconstruction. Do not accept generated `analysis.txt` alone.
-3. If 077 is construction/recorder invalid, take no behavioral verdict. If valid but B/P6 lacks the frozen downstream-only saturation witness, classify **INCONCLUSIVE**. Do not strengthen P6 or tune thresholds after seeing results.
-4. Continue 4600 research by locating at least one downloadable public press-brake HAL/COMP/config set and mapping it against the layered ownership contract. Keep physical valve sequencing and functional safety machine-specific.
-5. Backfill exact Actions runtimes for 073 onward before restating the global compute total in this file.
-6. Once the four genuinely information-separated prerequisite handoffs are valid, mark those modules fully graduated and activate **F02** according to the 2000-level dependency graph. Preserve the blind-evaluation separation for delayed retention and the sealed benchmark.
+2. Preserve PB-PREP-001 as **INCONCLUSIVE / no architecture recommendation**. Do not strengthen P6, alter its thresholds, or run architecture C merely to search for a preferred result.
+3. Continue bounded 4600 research for a downloadable **tandem Y1/Y2** configuration. First check later Ursviken/Pullmax posts/attachments after the July 22 success report; if no source is public after a bounded search, record SOURCE UNAVAILABLE and move to a second independent tandem implementation rather than repeatedly searching one thread.
+4. For any tandem source found, trace physical scale producers, common side commands, Y1−Y2 producer/sign, exact sync-correction insertion point, all downstream limits/muxes, final-side saturation witness, realtime addf order, per-side following-error ownership, and disable/fault behavior before copying gains.
+5. Treat the Accurpress chronology as a 4600 architecture-evolution case study: April hybrid ambiguity -> May standalone ownership correction -> 2022 timing/pressure maturation -> 2024 regular-use report with persistent backstop-homing weakness.
+6. Backfill exact Actions runtimes for remaining 073–077 gaps before restating a complete global laboratory-compute total.
+7. Once the four genuinely information-separated prerequisite handoffs are valid, mark those modules fully graduated and activate **F02** according to the 2000-level dependency graph. Preserve blind-evaluation separation for delayed retention and the sealed benchmark.

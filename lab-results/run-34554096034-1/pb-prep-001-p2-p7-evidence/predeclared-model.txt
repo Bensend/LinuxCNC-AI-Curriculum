@@ -1,0 +1,17 @@
+PB-PREP-001 FIRST FROZEN P2-P7 BEHAVIORAL EXECUTION
+Pinned LinuxCNC: 8bf4605ae81042248add031e94c77300406e0413
+Contracts:
+  experiments/PB-PREP-001-y1y2-insertion-comparison-plan.md
+  experiments/PB-PREP-001-behavioral-execution-freeze.md
+  experiments/PB-PREP-001-P2-P7-runner-implementation-contract.md
+  experiments/PB-PREP-001-P2-P7-observability-clarification.md
+Servo period: 1000000 ns
+Rows/architecture: 12000; FIFO depth: 20000
+A/B stock P gain: 6.0; C common P gain: 6.0
+SYNC_GAIN=1.0; DIFF_MAX=0.25; U_MAX=2.0
+Plant: y_next = y + alpha * ((gain * final) - y)
+A side fixed: gain=1.0 alpha=0.05
+B side by phase: P2 1.0/0.05, P3 0.75/0.05, P4 1.0/0.025, P5 1.0/0.05, P6 0.20/0.05, P7 inherited P6 state until run=false.
+Trajectory: duplicated Y move 0 -> 0.5 at F30 during P2.
+All 29 frozen logical witnesses are encoded into one 21-element stock HAL stream per the pre-result packed-stream redesign.
+No physical hydraulic suitability or functional-safety conclusion is permitted.

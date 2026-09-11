@@ -1,0 +1,4 @@
+linuxcnc-bin=/home/runner/work/_temp/linuxcnc-pb-prep-001-p2p7/scripts/linuxcnc
+halsampler-bin=/home/runner/work/_temp/linuxcnc-pb-prep-001-p2p7/bin/halsampler
+halcompile-bin=/home/runner/work/_temp/linuxcnc-pb-prep-001-p2p7/bin/halcompile
+halcmd-bin=/home/runner/work/_temp/linuxcnc-pb-prep-001-p2p7/bin/halcmd

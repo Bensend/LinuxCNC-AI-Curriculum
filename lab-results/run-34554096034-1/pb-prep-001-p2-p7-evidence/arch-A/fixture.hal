@@ -1,0 +1,69 @@
+loadrt [KINS]KINEMATICS
+loadrt [EMCMOT]EMCMOT base_period_nsec=[EMCMOT]BASE_PERIOD servo_period_nsec=[EMCMOT]SERVO_PERIOD num_joints=[KINS]JOINTS num_spindles=[TRAJ]SPINDLES
+loadrt pid names=pb-pid1,pb-pid2
+loadrt pb_prep
+loadrt sampler depth=20000 cfg=ssfffffffffffffffffss
+setp pb-prep.0.architecture 0
+setp pb-prep.0.phase-cmd 2
+setp pb-prep.0.run false
+setp pb-prep.0.sync-gain 1.0
+setp pb-prep.0.diff-max 0.25
+setp pb-prep.0.u-max 2.0
+setp pb-prep.0.c-pgain 6.0
+setp pb-pid1.Pgain 6.0
+setp pb-pid2.Pgain 6.0
+setp pb-pid1.Igain 0
+setp pb-pid2.Igain 0
+setp pb-pid1.Dgain 0
+setp pb-pid2.Dgain 0
+setp pb-pid1.maxoutput 2.0
+setp pb-pid2.maxoutput 2.0
+setp pb-pid1.enable true
+setp pb-pid2.enable true
+addf motion-command-handler servo-thread
+addf motion-controller servo-thread
+addf pb-prep.0.prepare servo-thread
+addf pb-pid1.do-pid-calcs servo-thread
+addf pb-pid2.do-pid-calcs servo-thread
+addf pb-prep.0.finish servo-thread
+addf sampler.0 servo-thread
+net x0 joint.0.motor-pos-cmd => joint.0.motor-pos-fb
+net z2 joint.2.motor-pos-cmd => joint.2.motor-pos-fb
+net y1cmd joint.1.motor-pos-cmd => pb-prep.0.r1
+net y2cmd joint.3.motor-pos-cmd => pb-prep.0.r2
+net y1fb pb-prep.0.y1 => joint.1.motor-pos-fb pb-pid1.feedback
+net y2fb pb-prep.0.y2 => joint.3.motor-pos-fb pb-pid2.feedback
+net ref1 pb-prep.0.pid1-ref => pb-pid1.command
+net ref2 pb-prep.0.pid2-ref => pb-pid2.command
+net pid1out pb-pid1.output => pb-prep.0.pid1-out
+net pid2out pb-pid2.output => pb-prep.0.pid2-out
+net estop-loop iocontrol.0.user-enable-out iocontrol.0.emc-enable-in
+net tool-prep-loop iocontrol.0.tool-prepare iocontrol.0.tool-prepared
+net tool-change-loop iocontrol.0.tool-change iocontrol.0.tool-changed
+net ps1 pb-pid1.saturated => pb-prep.0.pid1-sat
+net ps2 pb-pid2.saturated => pb-prep.0.pid2-sat
+net men motion.motion-enabled => pb-prep.0.motion-enabled
+net jl1 joint.1.f-error-lim => pb-prep.0.ferror-lim1
+net jl3 joint.3.f-error-lim => pb-prep.0.ferror-lim3
+net cyc pb-prep.0.cycle => sampler.0.pin.0
+net state pb-prep.0.state-word => sampler.0.pin.1
+net sr1 y1cmd => sampler.0.pin.2
+net sr2 y2cmd => sampler.0.pin.3
+net sy1 y1fb => sampler.0.pin.4
+net sy2 y2fb => sampler.0.pin.5
+net sed pb-prep.0.e-diff-used => sampler.0.pin.6
+net screq pb-prep.0.corr-req => sampler.0.pin.7
+net scap pb-prep.0.corr-applied => sampler.0.pin.8
+net sref1 ref1 => sampler.0.pin.9
+net sref2 ref2 => sampler.0.pin.10
+net spid1 pid1out => sampler.0.pin.11
+net spid2 pid2out => sampler.0.pin.12
+net spre1 pb-prep.0.prelimit1 => sampler.0.pin.13
+net spre2 pb-prep.0.prelimit2 => sampler.0.pin.14
+net sfinal1 pb-prep.0.final1 => sampler.0.pin.15
+net sfinal2 pb-prep.0.final2 => sampler.0.pin.16
+net sjf1 joint.1.f-error => sampler.0.pin.17
+net sjf3 joint.3.f-error => sampler.0.pin.18
+net sdw pb-prep.0.disturbance-word => sampler.0.pin.19
+net slw pb-prep.0.ferror-limit-word => sampler.0.pin.20
+setp sampler.0.enable false

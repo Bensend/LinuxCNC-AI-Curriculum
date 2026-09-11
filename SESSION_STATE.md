@@ -1,12 +1,14 @@
 # Active Curriculum Session State
 
-Session start UTC: `2026-09-11T17:10:41Z`
-Session end UTC: `2026-09-11T17:12:35Z`
-Actual elapsed: **1.9 minutes**
-Status: **CLOSED — PB-PREP-002 executed and passed frozen Gates A-J 10/10; 3600 evidence gaps consolidated.**
+Session start UTC: `2026-09-11T23:07:24Z`
+Session end UTC: `2026-09-11T23:15:17Z`
+Actual elapsed: **7.9 minutes**
+Status: **CLOSED — prerequisite fresh-AI passes reconciled; F02 technically accepted; one fresh-AI F02 handoff remains before 2000 graduation.**
 
-Results: implemented frozen PB-PREP-002 as `lab-jobs/079-pb-prep-002-abstract-process-state.sh`. Authoritative workflow `34626267634`, job `103352015350`, artifact `10274194188` completed successfully. Retained 38 invocation-level rows; P0 exact nominal sequence passed; authorization loss, process timeout, intermediate-following loss, coordination loss and I/O loss retained distinct causes; all reset cases entered RECONCILE rather than blind-resuming. Audit: `results/PB-PREP-002-079-authoritative-audit.md`. The result proves only abstract ordinary-control software semantics, not hydraulic movement, commissioning values or functional safety. `research/3600-press-brake-evidence-gap-map-2026-09-11.md` records that generic hydraulic/state ownership has reached diminishing returns and explicitly forbids invented physical detail as filler.
+Results: preserved the valid information-separated S02/E20/X01/X02 evaluator response at `evaluation/fresh-ai-evaluation-2026-09-11-valid.md`; all four exact packet routes PASS with no corrections, removing the F02 prerequisite block. Materialized F02 as the 2000-level compound-fault integration lesson. Completed documentation/community/pinned-source/call-flow analysis, froze F02-001 before implementation, executed workflow `34657204415` from commit `4d3277d1d11b60cf68126c65190d7ee42886f8e8`, and independently inspected the retained 19-row invocation trace. Frozen Gates A–J passed **10/10**. The separately frozen adversarial exam passed **20/20**. Durable audit: `results/F02-001-authoritative-audit.md`. Fresh packet: `handoffs/F02-fresh-ai-compound-fault-transfer.md`.
 
-Next checkpoint: begin the bounded 3600 backgauge/operator-mode pass. Establish LinuxCNC typed-position/jog/homing terminology and inspect at least two public press-brake/backgauge implementations plus one non-LinuxCNC/open-source backgauge or bend-workflow project. Trace command ownership, interruption and recovery. Keep manual typed positioning/jog as the first-stage capability; do not jump directly to automatic DXF bend sequencing. Preserve S02/E20/X01/X02 fresh-AI separation, F02 block and PB-PREP-001 INCONCLUSIVE.
+Next checkpoint: run a genuinely information-separated evaluator against exactly `handoffs/F02-fresh-ai-compound-fault-transfer.md`. Do not provide `exams/F02-adversarial-answers-and-score.md` or `results/F02-001-authoritative-audit.md` before it answers. Preserve evaluator identity/header/full response. If the correctly routed F02 packet PASSes with no required corrections, mark F02 GRADUATED and close the 2000 series unless that evaluation exposes a new material defect.
 
-Overlap: **No overlap.** Previous canonical lesson ended `2026-09-11T16:12:31Z`, **58m10s** before this session began.
+Overlap: **Known 45-second overlap.** A separate curriculum session marker began `2026-09-11T23:14:32Z` while this session remained active through `23:15:17Z`. The previous completed canonical lesson ended `2026-09-11T22:16:29Z`, 50m55s before this session began.
+
+Timing-log note: the race-safe append workflow first appended the row before the concurrent 23:14:32Z start became visible, then appended the corrected overlap-marked row after the correction request. The corrected overlap-marked row is authoritative; the earlier duplicate should be removed during the next log-maintenance pass rather than silently treated as a second lesson.

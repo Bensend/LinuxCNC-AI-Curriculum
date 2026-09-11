@@ -1,4 +1,4 @@
 STATUS ACTIVE
-SESSION_START 2026-09-10T22:10:51Z
-MODULE press-brake specialization / PB-PREP-001 preflight harness
-CHECKPOINT Implement the preflight-only PB-PREP-001 harness from the accepted C02 four-joint/sampler fixture, using one shared synthetic two-side plant/final-limiter implementation for architectures A/B/C. First execution validates P0/P1, sign convention, topology, independent feedback, final-saturation witnesses, atomic recorder health and retention only; it is not authoritative comparison evidence. Record exact Actions runtime afterward. F02 remains blocked on genuinely information-separated S02/E20/X01/X02 handoffs.
+SESSION_START 2026-09-11T02:10:05Z
+MODULE press-brake specialization / PB-PREP-001 behavioral harness repair
+CHECKPOINT Resume from interrupted run after 067 failed as a harness execution. Inspect START_HERE contract, current progress/evaluation gates, latest PB-PREP-001 artifacts and Actions results. Apply only the pre-identified packed-stream wrapper-boundary correction to produce the next harness revision without changing frozen A/B/C parameters, P2-P7 timing, thresholds, Gates A-J, or the B/P6 missing-discriminator => INCONCLUSIVE rule. Execute/audit evidence if available, record exact Actions compute, preserve F02 fresh-AI boundary, then commit an exact next checkpoint and timing row.

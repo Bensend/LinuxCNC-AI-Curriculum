@@ -1,31 +1,38 @@
 # Latest LinuxCNC Lab Result
 
-- Job: `081-pb-bg-002-typed-position`
-- Job file: `lab-jobs/081-pb-bg-002-typed-position.sh`
-- Workflow run ID: `34653163036`
+- Job: `082-f02-compound-fault-arbitration`
+- Job file: `lab-jobs/082-f02-compound-fault-arbitration.sh`
+- Workflow run ID: `34657204415`
 - Attempt: `1`
-- Source commit: `087aff9f2187596ea51d1b574097411755ede321`
+- Source commit: `4d3277d1d11b60cf68126c65190d7ee42886f8e8`
 - Exit code: `0`
-- Finished UTC: `2026-09-11T22:15:15Z`
+- Finished UTC: `2026-09-11T23:13:13Z`
 
 ## Metadata
 ```text
 LinuxCNC AI Curriculum Lab
-UTC start: 2026-09-11T22:15:15Z
-Repository commit: 087aff9f2187596ea51d1b574097411755ede321
-Workflow run: 34653163036 attempt 1
-Job file: lab-jobs/081-pb-bg-002-typed-position.sh
+UTC start: 2026-09-11T23:13:13Z
+Repository commit: 4d3277d1d11b60cf68126c65190d7ee42886f8e8
+Workflow run: 34657204415 attempt 1
+Job file: lab-jobs/082-f02-compound-fault-arbitration.sh
 Runner: Linux runnervmlun5p 6.17.0-1022-azure #22-Ubuntu SMP Mon Jul 27 17:24:03 UTC 2026 x86_64 x86_64 x86_64 GNU/Linux
 Inner lab timeout: 70 minutes (job ceiling: 75 minutes)
 
-UTC finish: 2026-09-11T22:15:15Z
+UTC finish: 2026-09-11T23:13:13Z
 ```
 
 ## Standard output
 ```text
 {
-  "rows": 44,
-  "sha256": "43b6b8ae6761087166881ce2e06dd761378d755260fb16f61eb507822197e4c8",
+  "contract": "F02-001",
+  "course_level": 2000,
+  "pinned_linuxcnc": "8bf4605ae81042248add031e94c77300406e0413",
+  "rows": 19,
+  "retention": {
+    "strict_monotonic_complete_seq": true,
+    "rows": 19,
+    "required_columns_present": true
+  },
   "gates": {
     "A": true,
     "B": true,
@@ -38,8 +45,10 @@ UTC finish: 2026-09-11T22:15:15Z
     "I": true,
     "J": true
   },
-  "pass": true
+  "prediction_match": true,
+  "boundary": "deterministic ordinary-control policy only; not physical, network, machine-commissioning, or functional-safety evidence"
 }
+F02-001 PASS: compound-fault policy contract only; no physical-machine or functional-safety claim.
 ```
 
 ## Standard error

@@ -23,4 +23,3 @@
   "prediction_match": true,
   "boundary": "deterministic ordinary-control policy only; not physical, network, machine-commissioning, or functional-safety evidence"
 }
-F02-001 PASS: compound-fault policy contract only; no physical-machine or functional-safety claim.

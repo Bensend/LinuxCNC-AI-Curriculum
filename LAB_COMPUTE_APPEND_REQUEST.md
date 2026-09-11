@@ -1,13 +1,8 @@
-# Verified lab-compute append request — 2026-09-10
+# Verified lab-compute append request — 2026-09-11 PB-PREP-001 harness cycle
 
-| 2026-09-09 | C06-039 sampler/stream diagnostic | `34310141125` | `102334943692` | 2026-09-09T04:13:51Z | 2026-09-09T04:18:21Z | 4.50 | DIAGNOSTIC / NON-AUTHORITATIVE | Positive Actions match; consumed compute only. |
-| 2026-09-09 | C06-041 failed diagnostic | `34310509116` | `102336017000` | 2026-09-09T04:19:19Z | 2026-09-09T04:22:18Z | 2.98 | DIAGNOSTIC / NON-AUTHORITATIVE | Positive Actions match; failed diagnostic, not behavioral evidence. |
-| 2026-09-09 | C06-042 diagnostic pass | `34310857967` | `102337051002` | 2026-09-09T04:24:40Z | 2026-09-09T04:28:09Z | 3.48 | DIAGNOSTIC PASS | Positive Actions match; non-authoritative. |
-| 2026-09-09 | C06-043 readiness preflight | `34311305551` | `102338355587` | 2026-09-09T04:31:35Z | 2026-09-09T04:34:40Z | 3.08 | PREFLIGHT PASS | Corrected readiness check; non-authoritative. |
-| 2026-09-09 | C06-044 behavioral construction | `34311582310` | `102339170004` | 2026-09-09T04:36:27Z | 2026-09-09T04:39:52Z | 3.42 | HARNESS INVALID | Count compute only; no behavioral verdict. |
-| 2026-09-09 | C06-045 construction failure | `34312449313` | `102341723740` | 2026-09-09T04:49:20Z | 2026-09-09T04:49:28Z | 0.13 | HARNESS INVALID | Workflow failed before useful behavior; exact 8-second job runtime. |
-| 2026-09-09 | C06-045 successful preflight | `34312552726` | `102342021620` | 2026-09-09T04:50:51Z | 2026-09-09T04:54:10Z | 3.32 | PREFLIGHT PASS | Positive Actions match; non-authoritative. |
-| 2026-09-09 | C06-046 authoritative communication/watchdog fault | `34312802937` | `102342754452` | 2026-09-09T04:54:49Z | 2026-09-09T04:58:13Z | 3.40 | PASS | Authoritative accepted C06 evidence. |
-| 2026-09-09 | C07-047 sequencing preflight | `34314733007` | `102348466843` | 2026-09-09T05:24:19Z | 2026-09-09T05:27:49Z | 3.50 | PREFLIGHT PASS | Non-authoritative preflight. |
-| 2026-09-09 | C07-048 sequencing preflight | `34318296679` | `102359108023` | 2026-09-09T06:15:57Z | 2026-09-09T06:19:25Z | 3.47 | PREFLIGHT PASS | Non-authoritative preflight. |
-| 2026-09-09 | C07-049 authoritative state-machine sequencing | `34318656849` | `102360226472` | 2026-09-09T06:21:01Z | 2026-09-09T06:24:10Z | 3.15 | PASS | Authoritative accepted C07 evidence. |
+| 2026-09-11 | PB-PREP-001 067 direct 29-element behavioral attempt | `34550104154` | `103111016396` | 2026-09-11T01:17:57Z | 2026-09-11T01:22:12Z | 4.25 | HARNESS INVALID | Direct 29-element sampler exceeded pinned LinuxCNC 21-element stream ceiling; no A/B/C behavioral verdict. Supersedes earlier conversational 7.45-minute estimate with exact Actions job interval. |
+| 2026-09-11 | PB-PREP-001 068 packed-stream wrapper attempt | `34550419067` | `103111965316` | 2026-09-11T01:22:47Z | 2026-09-11T01:22:56Z | 0.15 | HARNESS INVALID | Outer PY here-document collided with embedded analyzer terminator; failed before LinuxCNC. |
+| 2026-09-11 | PB-PREP-001 069 delimiter-corrected packed attempt | `34553671043` | `103121641570` | 2026-09-11T02:11:53Z | 2026-09-11T02:16:00Z | 4.12 | HARNESS INVALID | Reached pinned build; generated script retained duplicate EOF terminator and failed before HAL behavior. |
+| 2026-09-11 | PB-PREP-001 070 render-validated redesign attempt 1 | `34554034350` | `103122742371` | 2026-09-11T02:17:23Z | 2026-09-11T02:17:32Z | 0.15 | HARNESS INVALID | Cheap pre-execution failure: temp generator lacked execute permission; no LinuxCNC execution. |
+| 2026-09-11 | PB-PREP-001 071 render-validated redesign attempt 2 | `34554096034` | `103122932037` | 2026-09-11T02:18:20Z | 2026-09-11T02:22:50Z | 4.50 | HARNESS INVALID | Render validation and pinned build passed; HAL rejected sampler tap treating existing signal y1cmd as a pin; no behavioral phases. |
+| 2026-09-11 | PB-PREP-001 072 scoped-observability correction preflight | `34554444939` | `103123986052` | 2026-09-11T02:23:42Z | 2026-09-11T02:23:51Z | 0.15 | HARNESS INVALID | Cheap preflight refused ambiguous global sampler-tap replacement because target occurs in both oldnets and newnets; no LinuxCNC execution. |

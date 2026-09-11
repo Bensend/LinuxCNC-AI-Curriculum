@@ -1,76 +1,63 @@
 # Latest LinuxCNC Lab Result
 
-- Job: `078-pb-prep-001-arch-b-retained-render`
-- Job file: `lab-jobs/078-pb-prep-001-arch-b-retained-render.sh`
-- Workflow run ID: `34569046910`
+- Job: `079-pb-m66-timeout-stale-dwell`
+- Job file: `lab-jobs/079-pb-m66-timeout-stale-dwell.sh`
+- Workflow run ID: `34593401753`
 - Attempt: `1`
-- Source commit: `928377ad1a7c70af7032e08dc9b5d30e1d22b16d`
-- Exit code: `124`
-- Finished UTC: `2026-09-11T07:23:50Z`
+- Source commit: `cd46cacf7696a714472fa72a1549e6e577365df1`
+- Exit code: `0`
+- Finished UTC: `2026-09-11T11:21:53Z`
 
 ## Metadata
 ```text
 LinuxCNC AI Curriculum Lab
-UTC start: 2026-09-11T06:13:50Z
-Repository commit: 928377ad1a7c70af7032e08dc9b5d30e1d22b16d
-Workflow run: 34569046910 attempt 1
-Job file: lab-jobs/078-pb-prep-001-arch-b-retained-render.sh
+UTC start: 2026-09-11T11:18:53Z
+Repository commit: cd46cacf7696a714472fa72a1549e6e577365df1
+Workflow run: 34593401753 attempt 1
+Job file: lab-jobs/079-pb-m66-timeout-stale-dwell.sh
 Runner: Linux runnervmlun5p 6.17.0-1022-azure #22-Ubuntu SMP Mon Jul 27 17:24:03 UTC 2026 x86_64 x86_64 x86_64 GNU/Linux
 Inner lab timeout: 70 minutes (job ceiling: 75 minutes)
 
-UTC finish: 2026-09-11T07:23:50Z
+UTC finish: 2026-09-11T11:21:53Z
 ```
 
 ## Standard output
 ```text
-PB-PREP-001 078 source digest verified: 7c185fb0af4b056d7e9406de164a79ae6eb30d06510a6b3ce77ed12d46c4a0e6
-PB-PREP-001 078 packaging-only execution: B enabled; A/C top-level calls suppressed; frozen behavioral contract unchanged.
-PB-PREP-001 FIRST FROZEN P2-P7 BEHAVIORAL EXECUTION
-Pinned LinuxCNC: 8bf4605ae81042248add031e94c77300406e0413
-Contracts:
-  experiments/PB-PREP-001-y1y2-insertion-comparison-plan.md
-  experiments/PB-PREP-001-behavioral-execution-freeze.md
-  experiments/PB-PREP-001-P2-P7-runner-implementation-contract.md
-  experiments/PB-PREP-001-P2-P7-observability-clarification.md
-Servo period: 1000000 ns
-Rows/architecture: 12000; FIFO depth: 20000
-A/B stock P gain: 6.0; C common P gain: 6.0
-SYNC_GAIN=1.0; DIFF_MAX=0.25; U_MAX=2.0
-Plant: y_next = y + alpha * ((gain * final) - y)
-A side fixed: gain=1.0 alpha=0.05
-B side by phase: P2 1.0/0.05, P3 0.75/0.05, P4 1.0/0.025, P5 1.0/0.05, P6 0.20/0.05, P7 inherited P6 state until run=false.
-Trajectory: duplicated Y move 0 -> 0.5 at F30 during P2.
-All 29 frozen logical witnesses are encoded into one 21-element stock HAL stream per the pre-result packed-stream redesign.
-No physical hydraulic suitability or functional-safety conclusion is permitted.
-UTC lab start: 2026-09-11T06:13:50Z
+== M66-TIMEOUT-001 stale-wait / subsequent-G4 regression ==
+UTC start: 2026-09-11T11:18:53Z
+Pinned upstream commit: 8bf4605ae81042248add031e94c77300406e0413
+FROZEN PREDICTION: M66 P0 L1 Q0.20 times out with input held low. Source inspection shows the timeout branch does not clear emcAuxInputWaitIndex and leaves RISE internally transformed to HIGH. Because G4 shares WAITING_FOR_DELAY and its issue path only replaces taskExecDelayTimeout, raising the old input during the following G4 may terminate that dwell early.
+PRIMARY DISCRIMINATOR: compare a fresh G4 P0.50 control with M66-timeout -> G4 P0.50. Input 0 starts LOW and is forced HIGH 0.30 s after AUTO_RUN in the experimental program. exp-control <= -0.10 s confirms stale-wait interaction; exp-control >= +0.10 s falsifies it; the middle band is nondiscriminating.
+CONTRACT: Q=0.20, G4=0.50, input transition=0.30 s, thresholds and ordering are frozen before runtime result inspection.
+BOUNDARY: this is a stock loopback Task/interpreter regression test, not physical press-brake, field-I/O, realtime synchronization, or functional-safety evidence.
 Get:1 file:/etc/apt/apt-mirrors.txt Mirrorlist [144 B]
 Hit:2 http://azure.archive.ubuntu.com/ubuntu noble InRelease
-Get:6 https://dl.google.com/linux/chrome-stable/deb stable InRelease [2548 B]
-Get:7 https://packages.microsoft.com/ubuntu/24.04/prod noble InRelease [3600 B]
 Get:3 http://azure.archive.ubuntu.com/ubuntu noble-updates InRelease [126 kB]
 Get:4 http://azure.archive.ubuntu.com/ubuntu noble-backports InRelease [126 kB]
 Get:5 http://azure.archive.ubuntu.com/ubuntu noble-security InRelease [126 kB]
-Get:8 https://dl.google.com/linux/chrome-stable/deb stable/main amd64 Packages [1412 B]
-Get:9 https://packages.microsoft.com/ubuntu/24.04/prod noble/main amd64 Packages [460 kB]
-Get:10 https://packages.microsoft.com/ubuntu/24.04/prod noble/main arm64 Packages [411 kB]
-Get:11 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 Packages [1262 kB]
-Get:12 http://azure.archive.ubuntu.com/ubuntu noble-updates/main Translation-en [292 kB]
-Get:13 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 Components [180 kB]
-Get:14 http://azure.archive.ubuntu.com/ubuntu noble-updates/universe amd64 Packages [1690 kB]
-Get:15 http://azure.archive.ubuntu.com/ubuntu noble-updates/universe amd64 Components [388 kB]
-Get:16 http://azure.archive.ubuntu.com/ubuntu noble-updates/restricted amd64 Packages [1540 kB]
-Get:17 http://azure.archive.ubuntu.com/ubuntu noble-updates/restricted Translation-en [353 kB]
-Get:18 http://azure.archive.ubuntu.com/ubuntu noble-updates/multiverse amd64 Components [940 B]
-Get:19 http://azure.archive.ubuntu.com/ubuntu noble-backports/main amd64 Components [5784 B]
-Get:20 http://azure.archive.ubuntu.com/ubuntu noble-backports/universe amd64 Components [12.6 kB]
-Get:21 http://azure.archive.ubuntu.com/ubuntu noble-security/main amd64 Packages [1006 kB]
-Get:22 http://azure.archive.ubuntu.com/ubuntu noble-security/main Translation-en [213 kB]
-Get:23 http://azure.archive.ubuntu.com/ubuntu noble-security/main amd64 Components [46.4 kB]
-Get:24 http://azure.archive.ubuntu.com/ubuntu noble-security/universe amd64 Packages [1206 kB]
-Get:25 http://azure.archive.ubuntu.com/ubuntu noble-security/universe amd64 Components [76.2 kB]
-Get:26 http://azure.archive.ubuntu.com/ubuntu noble-security/restricted amd64 Packages [1445 kB]
-Get:27 http://azure.archive.ubuntu.com/ubuntu noble-security/restricted Translation-en [336 kB]
-Fetched 11.3 MB in 1s (9636 kB/s)
+Get:6 https://dl.google.com/linux/chrome-stable/deb stable InRelease [2548 B]
+Get:7 https://packages.microsoft.com/ubuntu/24.04/prod noble InRelease [3600 B]
+Get:8 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 Packages [1262 kB]
+Get:9 http://azure.archive.ubuntu.com/ubuntu noble-updates/main Translation-en [292 kB]
+Get:10 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 Components [180 kB]
+Get:11 http://azure.archive.ubuntu.com/ubuntu noble-updates/universe amd64 Packages [1690 kB]
+Get:12 http://azure.archive.ubuntu.com/ubuntu noble-updates/universe amd64 Components [387 kB]
+Get:13 http://azure.archive.ubuntu.com/ubuntu noble-updates/restricted amd64 Packages [1540 kB]
+Get:14 http://azure.archive.ubuntu.com/ubuntu noble-updates/restricted Translation-en [353 kB]
+Get:15 http://azure.archive.ubuntu.com/ubuntu noble-updates/multiverse amd64 Components [940 B]
+Get:16 http://azure.archive.ubuntu.com/ubuntu noble-backports/main amd64 Components [5748 B]
+Get:17 http://azure.archive.ubuntu.com/ubuntu noble-backports/universe amd64 Components [12.6 kB]
+Get:18 http://azure.archive.ubuntu.com/ubuntu noble-security/main amd64 Packages [1006 kB]
+Get:19 http://azure.archive.ubuntu.com/ubuntu noble-security/main Translation-en [213 kB]
+Get:20 http://azure.archive.ubuntu.com/ubuntu noble-security/main amd64 Components [46.5 kB]
+Get:21 http://azure.archive.ubuntu.com/ubuntu noble-security/universe amd64 Packages [1206 kB]
+Get:22 http://azure.archive.ubuntu.com/ubuntu noble-security/universe amd64 Components [76.3 kB]
+Get:23 http://azure.archive.ubuntu.com/ubuntu noble-security/restricted amd64 Packages [1445 kB]
+Get:25 https://dl.google.com/linux/chrome-stable/deb stable/main amd64 Packages [1409 B]
+Get:24 http://azure.archive.ubuntu.com/ubuntu noble-security/restricted Translation-en [336 kB]
+Get:26 https://packages.microsoft.com/ubuntu/24.04/prod noble/main arm64 Packages [411 kB]
+Get:27 https://packages.microsoft.com/ubuntu/24.04/prod noble/main amd64 Packages [460 kB]
+Fetched 11.3 MB in 1s (8582 kB/s)
 Reading package lists...
 Reading package lists...
 Building dependency tree...
@@ -371,7 +358,7 @@ Get:166 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 python3-
 Get:167 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 python3-unidiff all 0.7.3-1 [11.0 kB]
 Get:168 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 equivs all 2.3.1 [19.0 kB]
 Get:169 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 libauthen-sasl-perl all 2.1700-1 [42.9 kB]
-Fetched 11.0 MB in 9s (1281 kB/s)
+Fetched 11.0 MB in 1s (15.0 MB/s)
 Selecting previously unselected package autopoint.
 (Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 201818 files and directories currently installed.)
 Preparing to unpack .../000-autopoint_0.21-14ubuntu2_all.deb ...
@@ -1054,7 +1041,7 @@ Processing triggers for man-db (2.12.0-4build2) ...
 Not building database; man-db/auto-update is not 'true'.
 Processing triggers for install-info (7.1-3build2) ...
 Processing triggers for libc-bin (2.39-0ubuntu8.8) ...
-8bf4605ae81042248add031e94c77300406e0413
+checked-out-commit=8bf4605ae81042248add031e94c77300406e0413
 D: Found operating system 'linux-gnu'.
 I: Argument uspace is accepted for compatibility, but ignored
 I: Successfully configured for 'uspace-Ubuntu-24.04'.
@@ -1477,7 +1464,7 @@ Get:325 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 libmodbus-de
 Get:326 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 libtirpc-dev amd64 1.3.4+ds-1.1build1 [193 kB]
 Get:327 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 python3-xlib all 0.33-2 [120 kB]
 Preconfiguring packages ...
-Fetched 270 MB in 20s (13.5 MB/s)
+Fetched 270 MB in 6s (47.0 MB/s)
 Selecting previously unselected package libdebuginfod-common.
 (Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 208339 files and directories currently installed.)
 Preparing to unpack .../000-libdebuginfod-common_0.190-1.1ubuntu0.1_all.deb ...
@@ -2836,7 +2823,7 @@ checking for c++ option to enable C++11 features... none needed
 checking for a BSD-compatible install... /usr/bin/install -c
 checking whether c++ supports C++20 features by default... no
 checking whether c++ supports C++20 features with -std=gnu++20... yes
-checking build toplevel... /home/runner/work/_temp/linuxcnc-pb-prep-001-p2p7
+checking build toplevel... /home/runner/work/_temp/linuxcnc-m66-timeout-001
 checking installation prefix... run in place
 checking for grep... /usr/bin/grep
 checking for pkg-config... /usr/bin/pkg-config
@@ -2875,7 +2862,7 @@ checking for libusb-1.0... yes
 checking for libgpiod < 3.0.0... yes
 configure: libgpiod version 1.6.3 found
 checking for module installation directory... configuring for run-in-place
-/home/runner/work/_temp/linuxcnc-pb-prep-001-p2p7/rtlib
+/home/runner/work/_temp/linuxcnc-m66-timeout-001/rtlib
 checking for glib... yes - 2.80.0
 checking whether make sets $(MAKE)... yes
 checking for ranlib... ranlib
@@ -2912,8 +2899,8 @@ checking for a version of Python >= '2.1.0'... yes
 checking for the sysconfig Python package... yes
 checking for Python include path... -I/usr/include/python3.12
 checking for Python library path... -L/usr/lib/x86_64-linux-gnu -lpython3.12
-checking for Python site-packages path... /home/runner/work/_temp/linuxcnc-pb-prep-001-p2p7/lib/python3.12/site-packages
-checking for Python platform specific site-packages path... /home/runner/work/_temp/linuxcnc-pb-prep-001-p2p7/lib/python3.12/site-packages
+checking for Python site-packages path... /home/runner/work/_temp/linuxcnc-m66-timeout-001/lib/python3.12/site-packages
+checking for Python platform specific site-packages path... /home/runner/work/_temp/linuxcnc-m66-timeout-001/lib/python3.12/site-packages
 checking python extra libraries... -ldl -lm
 checking python extra linking flags... -Xlinker -export-dynamic -Wl,-O1 -Wl,-Bsymbolic-functions
 checking consistency of all components of python development environment... yes
@@ -3006,15 +2993,15 @@ config.status: creating config.h
 ######################################################################
 
 
-make: Entering directory '/home/runner/work/_temp/linuxcnc-pb-prep-001-p2p7/src'
+make: Entering directory '/home/runner/work/_temp/linuxcnc-m66-timeout-001/src'
 Creating mesa_uart.mak
 Creating mesa_7i65.mak
 Creating serport.mak
 Creating xyzbca_trsrn.mak
 Creating xyzacb_trsrn.mak
 Creating xyzab_tdr_kins.mak
-Creating xor2.mak
 Creating xhc_hb04_util.mak
+Creating xor2.mak
 Creating wcomp.mak
 Creating userkins.mak
 Creating updown.mak
@@ -3032,13 +3019,13 @@ Creating threadtest.mak
 Creating thcud.mak
 Creating thc.mak
 Creating sum2.mak
-Creating steptest.mak
 Creating spindle_monitor.mak
+Creating steptest.mak
 Creating spindle.mak
 Creating sphereprobe.mak
 Creating simple_tp.mak
-Creating sim_spindle.mak
 Creating sim_parport.mak
+Creating sim_spindle.mak
 Creating sim_matrix_kb.mak
 Creating sim_home_switch.mak
 Creating sim_axis_hardware.mak
@@ -3089,8 +3076,8 @@ Creating led_dim.mak
 Creating latencybinstream.mak
 Creating latencybins.mak
 Creating laserpower.mak
-Creating joyhandle.mak
 Creating knob2float.mak
+Creating joyhandle.mak
 Creating joint_axis_mapper.mak
 Creating invert.mak
 Creating integ.mak
@@ -3231,8 +3218,8 @@ Exporting rtapi_string.h
 Exporting rtapi_vsnprintf.h
 Copying test input hal/components/lincurve.comp
 Copying test input hal/components/logic.comp
-Copying test input hal/components/bitslice.comp
 sed hal/drivers/mesa_uart.comp -e "1 s/mesa_uart/mesa_uart_test/" > ../tests/halcompile/serial-out-of-tree/mesa_uart_test.comp
+Copying test input hal/components/bitslice.comp
 sed ../tests/halcompile/userspace/rand.comp -e "1 s/rand/rand_test/" > ../tests/halcompile/userspace/rand_test.comp
 cp ../scripts/rtapi.conf ../tests/uspace/spawnv-root/rtapi.conf
 Compiling libposemath/_posemath.c
@@ -3415,8 +3402,8 @@ Compiling emc/tp/cruckig/position_second_step1.c
 Compiling emc/tp/cruckig/position_second_step2.c
 Compiling emc/tp/cruckig/position_third_step1.c
 Compiling emc/tp/cruckig/position_third_step2.c
-Compiling emc/tp/cruckig/velocity_second_step1.c
 Compiling emc/tp/cruckig/velocity_second_step2.c
+Compiling emc/tp/cruckig/velocity_second_step1.c
 Compiling emc/tp/cruckig/velocity_third_step1.c
 Compiling emc/tp/cruckig/velocity_third_step2.c
 Compiling module_helper/module_helper.c
@@ -3481,8 +3468,8 @@ Compiling localized message catalog objects/es.msg
 Compiling localized message catalog objects/fi.msg
 Compiling localized message catalog objects/fr.msg
 Compiling localized message catalog objects/hu.msg
-Compiling localized message catalog objects/it.msg
 Compiling localized message catalog objects/ja.msg
+Compiling localized message catalog objects/it.msg
 Compiling localized message catalog objects/ka.msg
 Compiling localized message catalog objects/nb.msg
 Compiling localized message catalog objects/pl.msg
@@ -3504,51 +3491,51 @@ Syntax checking python script mitsub_vfd
 Syntax checking python script pmx485
 Copying python script hal_input
 Copying python script scorbot-er-3
-Copying python script pmx485
 Syntax checking python script sim-torch
-Copying python script mitsub_vfd
 Syntax checking python script z_level_compensation
+Copying python script mitsub_vfd
+Copying python script pmx485
 Syntax checking python script mqtt-publisher
 Syntax checking python script hal_bridge
 Copying python script sim-torch
 Copying python script z_level_compensation
-Copying python script mqtt-publisher
-Copying python script hal_bridge
 Syntax checking python script mtconnect-agent
 Syntax checking python script pumagui
+Copying python script mqtt-publisher
 Syntax checking python script puma560gui
+Copying python script hal_bridge
 Syntax checking python script lineardelta
-Copying python script pumagui
 Copying python script mtconnect-agent
-Copying python script puma560gui
-Copying python script lineardelta
+Copying python script pumagui
 Syntax checking python script scaragui
 Syntax checking python script hexagui
+Copying python script puma560gui
 Syntax checking python script 5axisgui
+Copying python script lineardelta
 Syntax checking python script max5gui
 Copying python script scaragui
 Copying python script hexagui
-Copying python script 5axisgui
-Copying python script max5gui
 Syntax checking python script maho600gui
+Copying python script 5axisgui
 Syntax checking python script hbmgui
 Syntax checking python script rotarydelta
+Copying python script max5gui
 Syntax checking python script melfagui
 Copying python script maho600gui
 Copying python script hbmgui
-Copying python script rotarydelta
-Copying python script melfagui
 Syntax checking python script millturngui
+Copying python script rotarydelta
 Syntax checking python script xyzac-trt-gui
 Syntax checking python script xyzbc-trt-gui
+Copying python script melfagui
 Syntax checking python script xyzab-tdr-gui
 Copying python script millturngui
-Copying python script xyzbc-trt-gui
 Copying python script xyzac-trt-gui
-Copying python script xyzab-tdr-gui
 Compiling hal/halmodule.cc
+Copying python script xyzbc-trt-gui
 Compiling hal/halquery.cc
 Compiling emc/usr_intf/axis/extensions/emcmodule.cc
+Copying python script xyzab-tdr-gui
 Syntax checking python script linuxcnctop
 Copying python script linuxcnctop
 Syntax checking python script mdi
@@ -3721,38 +3708,23 @@ Linking rtapi_app
 Linking liblinuxcnc-uspace-posix.so.0
 Creating shared library liblinuxcnchal.so.0
 Creating shared library liblinuxcncini.so.1
-Linking gs2_vfd
-Linking hy_gt_vfd
-Linking svd-ps_vfd
-Linking shuttle
-Linking sendkeys
-ln -sf liblinuxcnchal.so.0 ../lib/liblinuxcnchal.so
 Syntax checking python script halcompile
-Linking vfs11_vfd
-Linking halcmd
-Linking halrmt
-Copying python script halcompile
-Linking vfdb_vfd
-Preprocessing wj200_vfd.comp
-Preprocessing pi500_vfd.comp
-Linking hy_vfd
-Linking xhc-whb04b-6
 Linking liblinuxcnc.a
 tooldata: depends: objects/emc/tooldata/tooldata_mmap.o objects/emc/tooldata/tooldata_common.o objects/emc/tooldata/tooldata_db.o
 tooldata: Linking: libtooldata.so.0
+Copying python script halcompile
 ln -sf liblinuxcncini.so.1 ../lib/liblinuxcncini.so
 Linking libpyplugin.so.0
+c++ -std=gnu++20 -g -L/home/runner/work/_temp/linuxcnc-m66-timeout-001/lib -Wl,-rpath,/home/runner/work/_temp/linuxcnc-m66-timeout-001/lib -ltirpc  -lgpiod  -Xlinker -export-dynamic -Wl,-O1 -Wl,-Bsymbolic-functions -Wl,-soname,libpyplugin.so.0 -shared -o ../lib/libpyplugin.so.0 objects/emc/pythonplugin/python_plugin.o ../lib/liblinuxcncini.so.1 -lstdc++ -lboost_python312 -L/usr/lib/x86_64-linux-gnu -lpython3.12 -ldl -lm
 Linking inivalue
-c++ -std=gnu++20 -g -L/home/runner/work/_temp/linuxcnc-pb-prep-001-p2p7/lib -Wl,-rpath,/home/runner/work/_temp/linuxcnc-pb-prep-001-p2p7/lib -ltirpc  -lgpiod  -Xlinker -export-dynamic -Wl,-O1 -Wl,-Bsymbolic-functions -Wl,-soname,libpyplugin.so.0 -shared -o ../lib/libpyplugin.so.0 objects/emc/pythonplugin/python_plugin.o ../lib/liblinuxcncini.so.1 -lstdc++ -lboost_python312 -L/usr/lib/x86_64-linux-gnu -lpython3.12 -ldl -lm
 Linking motion-logger
 ln -sf libtooldata.so.0 ../lib/libtooldata.so
 Linking linuxcnc_module_helper
 gcc -Wl,-z,relro -o ../bin/linuxcnc_module_helper objects/module_helper/module_helper.o
-Linking python module _hal.so
 Linking python module lineardeltakins.so
-c++ -std=gnu++20 -L/home/runner/work/_temp/linuxcnc-pb-prep-001-p2p7/lib -Wl,-rpath,/home/runner/work/_temp/linuxcnc-pb-prep-001-p2p7/lib -ltirpc  -lgpiod  -shared -o ../lib/python/lineardeltakins.so objects/emc/kinematics/lineardeltakins.o -lboost_python312
+c++ -std=gnu++20 -L/home/runner/work/_temp/linuxcnc-m66-timeout-001/lib -Wl,-rpath,/home/runner/work/_temp/linuxcnc-m66-timeout-001/lib -ltirpc  -lgpiod  -shared -o ../lib/python/lineardeltakins.so objects/emc/kinematics/lineardeltakins.o -lboost_python312
 Linking python module rotarydeltakins.so
-c++ -std=gnu++20 -L/home/runner/work/_temp/linuxcnc-pb-prep-001-p2p7/lib -Wl,-rpath,/home/runner/work/_temp/linuxcnc-pb-prep-001-p2p7/lib -ltirpc  -lgpiod  -shared -o ../lib/python/rotarydeltakins.so objects/emc/kinematics/rotarydeltakins.o -lboost_python312
+c++ -std=gnu++20 -L/home/runner/work/_temp/linuxcnc-m66-timeout-001/lib -Wl,-rpath,/home/runner/work/_temp/linuxcnc-m66-timeout-001/lib -ltirpc  -lgpiod  -shared -o ../lib/python/rotarydeltakins.so objects/emc/kinematics/rotarydeltakins.o -lboost_python312
 Preprocessing abs.comp
 Preprocessing abs_s32.comp
 Preprocessing abs_s64.comp
@@ -3777,8 +3749,8 @@ Preprocessing conv_bit_s32.comp
 Preprocessing conv_bit_s64.comp
 Preprocessing conv_bit_u32.comp
 Preprocessing conv_bit_u64.comp
-Preprocessing conv_float_s64.comp
 Preprocessing conv_float_s32.comp
+Preprocessing conv_float_s64.comp
 Preprocessing conv_float_u32.comp
 Preprocessing conv_float_u64.comp
 Preprocessing conv_s32_bit.comp
@@ -3787,15 +3759,15 @@ Preprocessing conv_s32_s64.comp
 Preprocessing conv_s32_u32.comp
 Preprocessing conv_s32_u64.comp
 Preprocessing conv_s64_bit.comp
-Preprocessing conv_s64_s32.comp
 Preprocessing conv_s64_float.comp
+Preprocessing conv_s64_s32.comp
 Preprocessing conv_s64_u32.comp
 Preprocessing conv_s64_u64.comp
 Preprocessing conv_u32_bit.comp
 Preprocessing conv_u32_float.comp
 Preprocessing conv_u32_s32.comp
-Preprocessing conv_u32_s64.comp
 Preprocessing conv_u32_u64.comp
+Preprocessing conv_u32_s64.comp
 Preprocessing conv_u64_bit.comp
 Preprocessing conv_u64_float.comp
 Preprocessing conv_u64_s32.comp
@@ -4127,21 +4099,40 @@ Linking ../rtlib/pumakins.so
 Linking ../rtlib/three21kins.so
 Linking ../rtlib/5axiskins.so
 Linking ../rtlib/motmod.so
+ln -sf libposemath.so.0 ../lib/libposemath.so
 Linking ../rtlib/homemod.so
 Linking ../rtlib/tpmod.so
-ln -sf libposemath.so.0 ../lib/libposemath.so
 ln -sf libnml.so.0 ../lib/libnml.so
 ln -sf liblinuxcnc-uspace-posix.so.0 ../lib/liblinuxcnc-uspace-posix.so
 Linking halstreamer
 Linking halsampler
 Linking panelui
 Linking mb2hal
+Linking gs2_vfd
+Linking hy_gt_vfd
+Linking svd-ps_vfd
+Linking shuttle
 Linking xhc-hb04
+Linking sendkeys
 Preprocessing thermistor.comp
-Compiling hal/user_comps/wj200_vfd/wj200_vfd.c
-Compiling hal/user_comps/pi500_vfd/pi500_vfd.c
+ln -sf liblinuxcnchal.so.0 ../lib/liblinuxcnchal.so
+Linking vfs11_vfd
+Linking halcmd
+Linking halrmt
+Linking vfdb_vfd
+Preprocessing wj200_vfd.comp
+Preprocessing pi500_vfd.comp
+Linking hy_vfd
+Linking xhc-whb04b-6
+Linking linuxcncrsh
+Linking schedrmt
+Linking linuxcnclcd
+Linking halui
+Linking linuxcncsvr
 ln -sf libpyplugin.so.0 ../lib/libpyplugin.so
 emc/Submakefile:Linking genserkins
+Linking python module _hal.so
+Linking python module linuxcnc.so
 Linking ../rtlib/abs.so
 Linking ../rtlib/abs_s32.so
 Linking ../rtlib/abs_s64.so
@@ -4299,31 +4290,50 @@ Linking ../rtlib/serport.so
 Linking ../rtlib/mesa_7i65.so
 Linking ../rtlib/mesa_uart.so
 Compiling objects/hal/user_comps/thermistor.c
-Linking wj200_vfd
-Linking pi500_vfd
+Compiling hal/user_comps/wj200_vfd/wj200_vfd.c
+Compiling hal/user_comps/pi500_vfd/pi500_vfd.c
 Linking librs274.so.0
-c++ -std=gnu++20 -g -L/home/runner/work/_temp/linuxcnc-pb-prep-001-p2p7/lib -Wl,-rpath,/home/runner/work/_temp/linuxcnc-pb-prep-001-p2p7/lib -ltirpc  -lgpiod  -Xlinker -export-dynamic -Wl,-O1 -Wl,-Bsymbolic-functions -Wl,-soname,librs274.so.0 -shared -o ../lib/librs274.so.0 objects/emc/rs274ngc/interp_arc.o objects/emc/rs274ngc/interp_array.o objects/emc/rs274ngc/interp_base.o objects/emc/rs274ngc/interp_check.o objects/emc/rs274ngc/interp_convert.o objects/emc/rs274ngc/interp_queue.o objects/emc/rs274ngc/interp_cycles.o objects/emc/rs274ngc/interp_execute.o objects/emc/rs274ngc/interp_find.o objects/emc/rs274ngc/interp_internal.o objects/emc/rs274ngc/interp_inverse.o objects/emc/rs274ngc/interp_read.o objects/emc/rs274ngc/interp_write.o objects/emc/rs274ngc/interp_o_word.o objects/emc/rs274ngc/interp_g7x.o objects/emc/rs274ngc/nurbs_additional_functions.o objects/emc/rs274ngc/interp_namedparams.o objects/emc/rs274ngc/interp_python.o objects/emc/rs274ngc/interp_remap.o objects/emc/rs274ngc/interp_setup.o objects/emc/rs274ngc/canonmodule.o objects/emc/rs274ngc/pyparamclass.o objects/emc/rs274ngc/pyemctypes.o objects/emc/rs274ngc/pyinterp1.o objects/emc/rs274ngc/pyblock.o objects/emc/rs274ngc/pyarrays.o objects/emc/rs274ngc/interpmodule.o objects/emc/rs274ngc/rs274ngc_pre.o objects/emc/rs274ngc/interp_inspection.o objects/emc/nml_intf/modal_state.o ../lib/liblinuxcncini.so ../lib/libpyplugin.so ../lib/liblinuxcnchal.so.0 ../lib/libtooldata.so.0 -lstdc++ -lboost_python312 -L/usr/lib/x86_64-linux-gnu -lpython3.12 -ldl -lm
+c++ -std=gnu++20 -g -L/home/runner/work/_temp/linuxcnc-m66-timeout-001/lib -Wl,-rpath,/home/runner/work/_temp/linuxcnc-m66-timeout-001/lib -ltirpc  -lgpiod  -Xlinker -export-dynamic -Wl,-O1 -Wl,-Bsymbolic-functions -Wl,-soname,librs274.so.0 -shared -o ../lib/librs274.so.0 objects/emc/rs274ngc/interp_arc.o objects/emc/rs274ngc/interp_array.o objects/emc/rs274ngc/interp_base.o objects/emc/rs274ngc/interp_check.o objects/emc/rs274ngc/interp_convert.o objects/emc/rs274ngc/interp_queue.o objects/emc/rs274ngc/interp_cycles.o objects/emc/rs274ngc/interp_execute.o objects/emc/rs274ngc/interp_find.o objects/emc/rs274ngc/interp_internal.o objects/emc/rs274ngc/interp_inverse.o objects/emc/rs274ngc/interp_read.o objects/emc/rs274ngc/interp_write.o objects/emc/rs274ngc/interp_o_word.o objects/emc/rs274ngc/interp_g7x.o objects/emc/rs274ngc/nurbs_additional_functions.o objects/emc/rs274ngc/interp_namedparams.o objects/emc/rs274ngc/interp_python.o objects/emc/rs274ngc/interp_remap.o objects/emc/rs274ngc/interp_setup.o objects/emc/rs274ngc/canonmodule.o objects/emc/rs274ngc/pyparamclass.o objects/emc/rs274ngc/pyemctypes.o objects/emc/rs274ngc/pyinterp1.o objects/emc/rs274ngc/pyblock.o objects/emc/rs274ngc/pyarrays.o objects/emc/rs274ngc/interpmodule.o objects/emc/rs274ngc/rs274ngc_pre.o objects/emc/rs274ngc/interp_inspection.o objects/emc/nml_intf/modal_state.o ../lib/liblinuxcncini.so ../lib/libpyplugin.so ../lib/liblinuxcnchal.so.0 ../lib/libtooldata.so.0 -lstdc++ -lboost_python312 -L/usr/lib/x86_64-linux-gnu -lpython3.12 -ldl -lm
 Linking thermistor
+Linking pi500_vfd
+Linking wj200_vfd
 ln -sf librs274.so.0 ../lib/librs274.so
-Linking python module gcode.so
-c++ -std=gnu++20 -L/home/runner/work/_temp/linuxcnc-pb-prep-001-p2p7/lib -Wl,-rpath,/home/runner/work/_temp/linuxcnc-pb-prep-001-p2p7/lib -ltirpc  -lgpiod  -shared -o ../lib/python/gcode.so objects/emc/rs274ngc/gcodemodule.o ../lib/librs274.so.0 -lstdc++
-Linking canterp.so
-Linking schedrmt
-Linking linuxcncrsh
-Linking linuxcnclcd
-Linking halui
-Linking linuxcncsvr
 Linking milltask
 Linking rs274
-c++ -std=gnu++20 -o ../bin/milltask objects/emc/motion/emcmotglb.o objects/emc/task/emctask.o objects/emc/task/emccanon.o objects/emc/task/emctaskmain.o objects/emc/motion/usrmotintf.o objects/emc/motion/emcmotutil.o objects/emc/task/taskintf.o objects/emc/motion/dbuf.o objects/emc/motion/stashf.o objects/emc/task/taskclass.o objects/emc/task/backtrace.o objects/emc/usr_intf/mapini.o ../lib/librs274.so.0 ../lib/liblinuxcnc.a ../lib/libnml.so.0 ../lib/liblinuxcncini.so.1 ../lib/libposemath.so.0 ../lib/liblinuxcnchal.so.0 ../lib/libpyplugin.so.0 ../lib/libtooldata.so.0 -L/home/runner/work/_temp/linuxcnc-pb-prep-001-p2p7/lib -Wl,-rpath,/home/runner/work/_temp/linuxcnc-pb-prep-001-p2p7/lib -ltirpc  -lgpiod  -Xlinker -export-dynamic -Wl,-O1 -Wl,-Bsymbolic-functions -lboost_python312 -L/usr/lib/x86_64-linux-gnu -lpython3.12 -ldl -lm -lfmt
-Linking python module linuxcnc.so
+c++ -std=gnu++20 -o ../bin/milltask objects/emc/motion/emcmotglb.o objects/emc/task/emctask.o objects/emc/task/emccanon.o objects/emc/task/emctaskmain.o objects/emc/motion/usrmotintf.o objects/emc/motion/emcmotutil.o objects/emc/task/taskintf.o objects/emc/motion/dbuf.o objects/emc/motion/stashf.o objects/emc/task/taskclass.o objects/emc/task/backtrace.o objects/emc/usr_intf/mapini.o ../lib/librs274.so.0 ../lib/liblinuxcnc.a ../lib/libnml.so.0 ../lib/liblinuxcncini.so.1 ../lib/libposemath.so.0 ../lib/liblinuxcnchal.so.0 ../lib/libpyplugin.so.0 ../lib/libtooldata.so.0 -L/home/runner/work/_temp/linuxcnc-m66-timeout-001/lib -Wl,-rpath,/home/runner/work/_temp/linuxcnc-m66-timeout-001/lib -ltirpc  -lgpiod  -Xlinker -export-dynamic -Wl,-O1 -Wl,-Bsymbolic-functions -lboost_python312 -L/usr/lib/x86_64-linux-gnu -lpython3.12 -ldl -lm -lfmt
+Linking python module gcode.so
+c++ -std=gnu++20 -L/home/runner/work/_temp/linuxcnc-m66-timeout-001/lib -Wl,-rpath,/home/runner/work/_temp/linuxcnc-m66-timeout-001/lib -ltirpc  -lgpiod  -shared -o ../lib/python/gcode.so objects/emc/rs274ngc/gcodemodule.o ../lib/librs274.so.0 -lstdc++
+Linking canterp.so
 You now need to run 'sudo make setuid' or 'sudo make setcap' in order to run in place with access to hardware.
-make: Leaving directory '/home/runner/work/_temp/linuxcnc-pb-prep-001-p2p7/src'
-linuxcnc-bin=/home/runner/work/_temp/linuxcnc-pb-prep-001-p2p7/scripts/linuxcnc
-halsampler-bin=/home/runner/work/_temp/linuxcnc-pb-prep-001-p2p7/bin/halsampler
-halcompile-bin=/home/runner/work/_temp/linuxcnc-pb-prep-001-p2p7/bin/halcompile
-halcmd-bin=/home/runner/work/_temp/linuxcnc-pb-prep-001-p2p7/bin/halcmd
-12000 /home/runner/work/LinuxCNC-AI-Curriculum/LinuxCNC-AI-Curriculum/lab-results/run-34569046910-1/pb-prep-001-p2-p7-evidence/arch-B/realtime.samples
+make: Leaving directory '/home/runner/work/_temp/linuxcnc-m66-timeout-001/src'
+gate-A-provenance=PASS
+control-sha256=84009e4f2c637370aef9457ea1fd09fbc1dafda593d57fc99e7b96148981e777
+experiment-sha256=ab6047e8fb842868a971be70eec6218834c13e6bb110fdff05d5992b5be6d4e6
+runtime-ready-probe=4
+estop-reset-wait_complete=1
+machine-on-wait_complete=1
+manual-wait_complete=1
+joint-0-homed=PASS
+joint-1-homed=PASS
+joint-2-homed=PASS
+inpos=PASS
+auto-wait_complete=1
+digital-in-commanded=0 readback=FALSE
+gate-B-fixture-input=PASS
+digital-in-commanded=0 readback=FALSE
+program-open-wait_complete=1
+control-duration-s=0.505165
+gate-C-control=PASS
+digital-in-commanded=0 readback=FALSE
+program-open-wait_complete=1
+digital-in-commanded=1 readback=TRUE
+input-transition-elapsed=0.301064
+experiment-duration-s=0.311439
+exp-minus-control-s=-0.193726
+gate-D-experiment-completed=PASS
+VERDICT=STALE-WAIT INTERACTION CONFIRMED
+gate-E-discriminator=PASS
+M66-TIMEOUT-001 completed with frozen discriminator.
 ```
 
 ## Standard error
@@ -4338,8 +4348,8 @@ No containers need to be restarted.
 No user sessions are running outdated binaries.
 
 No VM guests are running outdated hypervisor (qemu) binaries on this host.
-Cloning into '/home/runner/work/_temp/linuxcnc-pb-prep-001-p2p7'...
-Updating files:   0% (1/9526)Updating files:   1% (96/9526)Updating files:   2% (191/9526)Updating files:   3% (286/9526)Updating files:   4% (382/9526)Updating files:   5% (477/9526)Updating files:   6% (572/9526)Updating files:   7% (667/9526)Updating files:   8% (763/9526)Updating files:   9% (858/9526)Updating files:  10% (953/9526)Updating files:  11% (1048/9526)Updating files:  12% (1144/9526)Updating files:  13% (1239/9526)Updating files:  14% (1334/9526)Updating files:  15% (1429/9526)Updating files:  16% (1525/9526)Updating files:  17% (1620/9526)Updating files:  18% (1715/9526)Updating files:  19% (1810/9526)Updating files:  20% (1906/9526)Updating files:  21% (2001/9526)Updating files:  22% (2096/9526)Updating files:  23% (2191/9526)Updating files:  24% (2287/9526)Updating files:  25% (2382/9526)Updating files:  26% (2477/9526)Updating files:  27% (2573/9526)Updating files:  28% (2668/9526)Updating files:  29% (2763/9526)Updating files:  30% (2858/9526)Updating files:  31% (2954/9526)Updating files:  32% (3049/9526)Updating files:  33% (3144/9526)Updating files:  34% (3239/9526)Updating files:  35% (3335/9526)Updating files:  36% (3430/9526)Updating files:  37% (3525/9526)Updating files:  38% (3620/9526)Updating files:  39% (3716/9526)Updating files:  40% (3811/9526)Updating files:  41% (3906/9526)Updating files:  41% (3974/9526)Updating files:  42% (4001/9526)Updating files:  43% (4097/9526)Updating files:  44% (4192/9526)Updating files:  45% (4287/9526)Updating files:  46% (4382/9526)Updating files:  47% (4478/9526)Updating files:  48% (4573/9526)Updating files:  49% (4668/9526)Updating files:  50% (4763/9526)Updating files:  51% (4859/9526)Updating files:  52% (4954/9526)Updating files:  53% (5049/9526)Updating files:  54% (5145/9526)Updating files:  55% (5240/9526)Updating files:  56% (5335/9526)Updating files:  57% (5430/9526)Updating files:  58% (5526/9526)Updating files:  59% (5621/9526)Updating files:  60% (5716/9526)Updating files:  61% (5811/9526)Updating files:  62% (5907/9526)Updating files:  63% (6002/9526)Updating files:  64% (6097/9526)Updating files:  65% (6192/9526)Updating files:  66% (6288/9526)Updating files:  67% (6383/9526)Updating files:  68% (6478/9526)Updating files:  69% (6573/9526)Updating files:  70% (6669/9526)Updating files:  71% (6764/9526)Updating files:  72% (6859/9526)Updating files:  73% (6954/9526)Updating files:  74% (7050/9526)Updating files:  75% (7145/9526)Updating files:  76% (7240/9526)Updating files:  77% (7336/9526)Updating files:  78% (7431/9526)Updating files:  79% (7526/9526)Updating files:  80% (7621/9526)Updating files:  81% (7717/9526)Updating files:  82% (7812/9526)Updating files:  83% (7907/9526)Updating files:  84% (8002/9526)Updating files:  85% (8098/9526)Updating files:  86% (8193/9526)Updating files:  87% (8288/9526)Updating files:  88% (8383/9526)Updating files:  89% (8479/9526)Updating files:  90% (8574/9526)Updating files:  91% (8669/9526)Updating files:  92% (8764/9526)Updating files:  93% (8860/9526)Updating files:  94% (8955/9526)Updating files:  95% (9050/9526)Updating files:  96% (9145/9526)Updating files:  97% (9241/9526)Updating files:  98% (9336/9526)Updating files:  99% (9431/9526)Updating files: 100% (9526/9526)Updating files: 100% (9526/9526), done.
+Cloning into '/home/runner/work/_temp/linuxcnc-m66-timeout-001'...
+Updating files:   0% (1/9526)Updating files:   1% (96/9526)Updating files:   2% (191/9526)Updating files:   3% (286/9526)Updating files:   4% (382/9526)Updating files:   5% (477/9526)Updating files:   6% (572/9526)Updating files:   7% (667/9526)Updating files:   8% (763/9526)Updating files:   9% (858/9526)Updating files:  10% (953/9526)Updating files:  11% (1048/9526)Updating files:  12% (1144/9526)Updating files:  13% (1239/9526)Updating files:  14% (1334/9526)Updating files:  15% (1429/9526)Updating files:  16% (1525/9526)Updating files:  17% (1620/9526)Updating files:  18% (1715/9526)Updating files:  19% (1810/9526)Updating files:  20% (1906/9526)Updating files:  21% (2001/9526)Updating files:  22% (2096/9526)Updating files:  23% (2191/9526)Updating files:  23% (2194/9526)Updating files:  24% (2287/9526)Updating files:  25% (2382/9526)Updating files:  26% (2477/9526)Updating files:  27% (2573/9526)Updating files:  28% (2668/9526)Updating files:  29% (2763/9526)Updating files:  30% (2858/9526)Updating files:  31% (2954/9526)Updating files:  32% (3049/9526)Updating files:  33% (3144/9526)Updating files:  34% (3239/9526)Updating files:  35% (3335/9526)Updating files:  36% (3430/9526)Updating files:  37% (3525/9526)Updating files:  38% (3620/9526)Updating files:  39% (3716/9526)Updating files:  40% (3811/9526)Updating files:  41% (3906/9526)Updating files:  42% (4001/9526)Updating files:  43% (4097/9526)Updating files:  44% (4192/9526)Updating files:  45% (4287/9526)Updating files:  46% (4382/9526)Updating files:  47% (4478/9526)Updating files:  48% (4573/9526)Updating files:  49% (4668/9526)Updating files:  50% (4763/9526)Updating files:  51% (4859/9526)Updating files:  52% (4954/9526)Updating files:  53% (5049/9526)Updating files:  54% (5145/9526)Updating files:  55% (5240/9526)Updating files:  56% (5335/9526)Updating files:  57% (5430/9526)Updating files:  58% (5526/9526)Updating files:  59% (5621/9526)Updating files:  60% (5716/9526)Updating files:  61% (5811/9526)Updating files:  62% (5907/9526)Updating files:  63% (6002/9526)Updating files:  64% (6097/9526)Updating files:  65% (6192/9526)Updating files:  66% (6288/9526)Updating files:  67% (6383/9526)Updating files:  68% (6478/9526)Updating files:  69% (6573/9526)Updating files:  70% (6669/9526)Updating files:  71% (6764/9526)Updating files:  72% (6859/9526)Updating files:  73% (6954/9526)Updating files:  74% (7050/9526)Updating files:  75% (7145/9526)Updating files:  76% (7240/9526)Updating files:  77% (7336/9526)Updating files:  78% (7431/9526)Updating files:  79% (7526/9526)Updating files:  80% (7621/9526)Updating files:  81% (7717/9526)Updating files:  82% (7812/9526)Updating files:  83% (7907/9526)Updating files:  84% (8002/9526)Updating files:  85% (8098/9526)Updating files:  86% (8193/9526)Updating files:  87% (8288/9526)Updating files:  88% (8383/9526)Updating files:  89% (8479/9526)Updating files:  90% (8574/9526)Updating files:  91% (8669/9526)Updating files:  92% (8764/9526)Updating files:  93% (8860/9526)Updating files:  94% (8955/9526)Updating files:  95% (9050/9526)Updating files:  96% (9145/9526)Updating files:  97% (9241/9526)Updating files:  98% (9336/9526)Updating files:  99% (9431/9526)Updating files: 100% (9526/9526)Updating files: 100% (9526/9526), done.
 HEAD is now at 8bf4605ae Merge pull request #4501 from grandixximo/gmoccapy-quit-4500
 
 Running kernel seems to be up-to-date.

@@ -39,4 +39,3 @@
   },
   "boundary": "simulation-only ordinary-control semantics; NOT functional safety or machine commissioning evidence"
 }
-PB-PREP-002 PASS: frozen abstract ownership/state contract only; no physical hydraulic behavior modeled.

@@ -1,12 +1,12 @@
 # Active Curriculum Session State
 
-Session start UTC: `2026-09-11T16:08:59Z`
-Session end UTC: `2026-09-11T16:12:31Z`
-Actual elapsed: **3.5 minutes**
-Status: **CLOSED — press-brake dependency-safe source analysis advanced; repeated generic hydraulic source hunting stopped; abstract process-state experiment frozen.**
+Session start UTC: `2026-09-11T17:10:41Z`
+Session end UTC: `2026-09-11T17:12:35Z`
+Actual elapsed: **1.9 minutes**
+Status: **CLOSED — PB-PREP-002 executed and passed frozen Gates A-J 10/10; 3600 evidence gaps consolidated.**
 
-Results: inspected pinned LinuxCNC `plasmac.comp` as an executable realtime process-state analogue. Source confirms a servo-thread state owner with a global per-invocation `machine_is_on` gate, sensor-driven probing transitions, and explicit arc-start timeout/retry/attempt-cap behavior. Official QtPlasmaC docs corroborate Start Fail Timer / Max Starts / Retry Delay semantics; a 2022 community report provides independent field evidence that retry-delay/state behavior is operator-visible and historically bug-sensitive. Scored the analogue against the press-brake hydraulic-mode review matrix and recorded a formal evidence-gap decision: generic state/authorization/completion/timeout architecture is sufficiently supported, but machine-specific valve truth tables, decompression thresholds, safe hydraulic states and physical dynamics remain legitimately machine-specific. Frozen `PB-PREP-002-abstract-process-state-contract.md` to test only software ownership/fault/reconciliation semantics; no numeric hydraulic plant is permitted.
+Results: implemented frozen PB-PREP-002 as `lab-jobs/079-pb-prep-002-abstract-process-state.sh`. Authoritative workflow `34626267634`, job `103352015350`, artifact `10274194188` completed successfully. Retained 38 invocation-level rows; P0 exact nominal sequence passed; authorization loss, process timeout, intermediate-following loss, coordination loss and I/O loss retained distinct causes; all reset cases entered RECONCILE rather than blind-resuming. Audit: `results/PB-PREP-002-079-authoritative-audit.md`. The result proves only abstract ordinary-control software semantics, not hydraulic movement, commissioning values or functional safety. `research/3600-press-brake-evidence-gap-map-2026-09-11.md` records that generic hydraulic/state ownership has reached diminishing returns and explicitly forbids invented physical detail as filler.
 
-Next checkpoint: implement PB-PREP-002 unchanged only if it remains the highest-priority unblocked experimental task. Otherwise use its frozen gates as the review oracle for genuinely new public press-brake source. Do not resume generic hydraulic source hunting unless a mature downloadable tandem Y1/Y2 implementation or executable decompression decoder appears. Preserve S02/E20/X01/X02 fresh-AI separation, F02 block, and PB-PREP-001 INCONCLUSIVE.
+Next checkpoint: begin the bounded 3600 backgauge/operator-mode pass. Establish LinuxCNC typed-position/jog/homing terminology and inspect at least two public press-brake/backgauge implementations plus one non-LinuxCNC/open-source backgauge or bend-workflow project. Trace command ownership, interruption and recovery. Keep manual typed positioning/jog as the first-stage capability; do not jump directly to automatic DXF bend sequencing. Preserve S02/E20/X01/X02 fresh-AI separation, F02 block and PB-PREP-001 INCONCLUSIVE.
 
-Overlap: **No overlap.** Previous canonical lesson ended `2026-09-11T14:20:17Z`, **108m42s** before this session began.
+Overlap: **No overlap.** Previous canonical lesson ended `2026-09-11T16:12:31Z`, **58m10s** before this session began.

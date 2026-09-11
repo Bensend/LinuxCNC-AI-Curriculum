@@ -72,14 +72,15 @@ If a run is cancelled, times out, is harness-invalid, or fails substantively, st
 | 2026-09-11 | PB-PREP-001 070 render-validated redesign attempt 1 | `34554034350` | `103122742371` | 2026-09-11T02:17:23Z | 2026-09-11T02:17:32Z | 0.15 | HARNESS INVALID | Cheap pre-execution failure: temp generator lacked execute permission; no LinuxCNC execution. |
 | 2026-09-11 | PB-PREP-001 071 render-validated redesign attempt 2 | `34554096034` | `103122932037` | 2026-09-11T02:18:20Z | 2026-09-11T02:22:50Z | 4.50 | HARNESS INVALID | Render validation and pinned build passed; HAL rejected sampler tap treating existing signal y1cmd as a pin; no behavioral phases. |
 | 2026-09-11 | PB-PREP-001 072 scoped-observability correction preflight | `34554444939` | `103123986052` | 2026-09-11T02:23:42Z | 2026-09-11T02:23:51Z | 0.15 | HARNESS INVALID | Cheap preflight refused ambiguous global sampler-tap replacement because target occurs in both oldnets and newnets; no LinuxCNC execution. |
+| 2026-09-11 | PB-PREP-001 078 isolated frozen architecture-B execution | `34569046910` | `103167029904` | 2026-09-11T06:13:47Z | 2026-09-11T07:23:57Z | 70.17 | COMPLETE B TRACE / WORKFLOW TIMEOUT | Retained B evidence contains 12,000 rows with zero recorder overruns. Workflow exited 124 after full B retention. Independent raw parse found no P6 final saturation and no stock-PID saturation, triggering the pre-frozen B/P6 => INCONCLUSIVE discriminator; no retuning permitted. |
 ## Running totals
 
 Keep these totals current whenever new rows are added:
 
-- **Exactly backfilled lab compute:** 193.97 min (3.23 h)
-- **Total lab compute used:** 3.23 h + unbackfilled historical usage
+- **Exactly backfilled lab compute:** 264.14 min (4.40 h)
+- **Total lab compute used:** 4.40 h + unbackfilled historical usage
 - **Remaining from 120 h first-draft allowance:** unknown until historical backfill
-- **Current-day exactly backfilled lab compute (2026-09-11):** 13.32 min (0.22 h) + unbackfilled same-day historical usage
+- **Current-day exactly backfilled lab compute (2026-09-11):** 83.49 min (1.39 h) + unbackfilled same-day historical usage
 
 ## Immediate backfill queue
 

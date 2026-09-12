@@ -1,38 +1,31 @@
 # Latest LinuxCNC Lab Result
 
-- Job: `082-f02-compound-fault-arbitration`
-- Job file: `lab-jobs/082-f02-compound-fault-arbitration.sh`
-- Workflow run ID: `34657204415`
+- Job: `083-pb-bg-003-episode-state-contract`
+- Job file: `lab-jobs/083-pb-bg-003-episode-state-contract.sh`
+- Workflow run ID: `34664318311`
 - Attempt: `1`
-- Source commit: `4d3277d1d11b60cf68126c65190d7ee42886f8e8`
+- Source commit: `2f1d77fcb85ffc5188f6c96754535e9445b6e116`
 - Exit code: `0`
-- Finished UTC: `2026-09-11T23:13:13Z`
+- Finished UTC: `2026-09-12T01:16:20Z`
 
 ## Metadata
 ```text
 LinuxCNC AI Curriculum Lab
-UTC start: 2026-09-11T23:13:13Z
-Repository commit: 4d3277d1d11b60cf68126c65190d7ee42886f8e8
-Workflow run: 34657204415 attempt 1
-Job file: lab-jobs/082-f02-compound-fault-arbitration.sh
+UTC start: 2026-09-12T01:16:20Z
+Repository commit: 2f1d77fcb85ffc5188f6c96754535e9445b6e116
+Workflow run: 34664318311 attempt 1
+Job file: lab-jobs/083-pb-bg-003-episode-state-contract.sh
 Runner: Linux runnervmlun5p 6.17.0-1022-azure #22-Ubuntu SMP Mon Jul 27 17:24:03 UTC 2026 x86_64 x86_64 x86_64 GNU/Linux
 Inner lab timeout: 70 minutes (job ceiling: 75 minutes)
 
-UTC finish: 2026-09-11T23:13:13Z
+UTC finish: 2026-09-12T01:16:20Z
 ```
 
 ## Standard output
 ```text
 {
-  "contract": "F02-001",
-  "course_level": 2000,
-  "pinned_linuxcnc": "8bf4605ae81042248add031e94c77300406e0413",
-  "rows": 19,
-  "retention": {
-    "strict_monotonic_complete_seq": true,
-    "rows": 19,
-    "required_columns_present": true
-  },
+  "contract": "PB-BG-003",
+  "rows": 28,
   "gates": {
     "A": true,
     "B": true,
@@ -46,9 +39,8 @@ UTC finish: 2026-09-11T23:13:13Z
     "J": true
   },
   "prediction_match": true,
-  "boundary": "deterministic ordinary-control policy only; not physical, network, machine-commissioning, or functional-safety evidence"
+  "boundary": "pure synthetic state-logic verification; no machine or hardware behavior"
 }
-F02-001 PASS: compound-fault policy contract only; no physical-machine or functional-safety claim.
 ```
 
 ## Standard error

@@ -1,0 +1,324 @@
+[
+  {
+    "phase": "P0",
+    "action": "arm_gen10",
+    "inputs": {
+      "targetset_valid": true,
+      "generation": 10,
+      "arm": true,
+      "ordinary": true,
+      "reference": true,
+      "drive": true,
+      "feedback": true,
+      "fault_clear": true,
+      "at_position": false
+    },
+    "state": {
+      "episode": 1,
+      "bound_gen": 10,
+      "authorized": true,
+      "completion": false,
+      "last_invalidated_gen": 0,
+      "reason": "NONE"
+    }
+  },
+  {
+    "phase": "P0",
+    "action": "complete_gen10",
+    "inputs": {
+      "targetset_valid": true,
+      "generation": 10,
+      "arm": false,
+      "ordinary": true,
+      "reference": true,
+      "drive": true,
+      "feedback": true,
+      "fault_clear": true,
+      "at_position": true
+    },
+    "state": {
+      "episode": 1,
+      "bound_gen": 10,
+      "authorized": true,
+      "completion": true,
+      "last_invalidated_gen": 0,
+      "reason": "NONE"
+    }
+  },
+  {
+    "phase": "P1",
+    "action": "targetset_invalid",
+    "inputs": {
+      "targetset_valid": false,
+      "generation": 10,
+      "arm": false,
+      "ordinary": true,
+      "reference": true,
+      "drive": true,
+      "feedback": true,
+      "fault_clear": true,
+      "at_position": false
+    },
+    "state": {
+      "episode": 1,
+      "bound_gen": 10,
+      "authorized": false,
+      "completion": false,
+      "last_invalidated_gen": 10,
+      "reason": "TARGETSET_INVALID"
+    }
+  },
+  {
+    "phase": "P2",
+    "action": "same_gen_rearm",
+    "inputs": {
+      "targetset_valid": true,
+      "generation": 10,
+      "arm": true,
+      "ordinary": true,
+      "reference": true,
+      "drive": true,
+      "feedback": true,
+      "fault_clear": true,
+      "at_position": false
+    },
+    "state": {
+      "episode": 1,
+      "bound_gen": 10,
+      "authorized": false,
+      "completion": false,
+      "last_invalidated_gen": 10,
+      "reason": "STALE_GENERATION_REARM_BLOCKED"
+    }
+  },
+  {
+    "phase": "P3",
+    "action": "gen11_no_arm",
+    "inputs": {
+      "targetset_valid": true,
+      "generation": 11,
+      "arm": false,
+      "ordinary": true,
+      "reference": true,
+      "drive": true,
+      "feedback": true,
+      "fault_clear": true,
+      "at_position": false
+    },
+    "state": {
+      "episode": 1,
+      "bound_gen": 10,
+      "authorized": false,
+      "completion": false,
+      "last_invalidated_gen": 10,
+      "reason": "ARM_REQUIRED"
+    }
+  },
+  {
+    "phase": "P4",
+    "action": "arm_gen11",
+    "inputs": {
+      "targetset_valid": true,
+      "generation": 11,
+      "arm": true,
+      "ordinary": true,
+      "reference": true,
+      "drive": true,
+      "feedback": true,
+      "fault_clear": true,
+      "at_position": false
+    },
+    "state": {
+      "episode": 2,
+      "bound_gen": 11,
+      "authorized": true,
+      "completion": false,
+      "last_invalidated_gen": 10,
+      "reason": "NONE"
+    }
+  },
+  {
+    "phase": "P5",
+    "action": "ordinary_auth_loss",
+    "inputs": {
+      "targetset_valid": true,
+      "generation": 11,
+      "arm": false,
+      "ordinary": false,
+      "reference": true,
+      "drive": true,
+      "feedback": true,
+      "fault_clear": true,
+      "at_position": true
+    },
+    "state": {
+      "episode": 2,
+      "bound_gen": 11,
+      "authorized": false,
+      "completion": false,
+      "last_invalidated_gen": 11,
+      "reason": "AUTHORIZATION_INVALID"
+    }
+  },
+  {
+    "phase": "P6",
+    "action": "recovery_no_arm",
+    "inputs": {
+      "targetset_valid": true,
+      "generation": 11,
+      "arm": false,
+      "ordinary": true,
+      "reference": true,
+      "drive": true,
+      "feedback": true,
+      "fault_clear": true,
+      "at_position": false
+    },
+    "state": {
+      "episode": 2,
+      "bound_gen": 11,
+      "authorized": false,
+      "completion": false,
+      "last_invalidated_gen": 11,
+      "reason": "ARM_REQUIRED"
+    }
+  },
+  {
+    "phase": "P6",
+    "action": "same_gen_rearm_after_auth",
+    "inputs": {
+      "targetset_valid": true,
+      "generation": 11,
+      "arm": true,
+      "ordinary": true,
+      "reference": true,
+      "drive": true,
+      "feedback": true,
+      "fault_clear": true,
+      "at_position": false
+    },
+    "state": {
+      "episode": 2,
+      "bound_gen": 11,
+      "authorized": false,
+      "completion": false,
+      "last_invalidated_gen": 11,
+      "reason": "STALE_GENERATION_REARM_BLOCKED"
+    }
+  },
+  {
+    "phase": "P7",
+    "action": "arm_gen12",
+    "inputs": {
+      "targetset_valid": true,
+      "generation": 12,
+      "arm": true,
+      "ordinary": true,
+      "reference": true,
+      "drive": true,
+      "feedback": true,
+      "fault_clear": true,
+      "at_position": false
+    },
+    "state": {
+      "episode": 3,
+      "bound_gen": 12,
+      "authorized": true,
+      "completion": false,
+      "last_invalidated_gen": 11,
+      "reason": "NONE"
+    }
+  },
+  {
+    "phase": "P7",
+    "action": "reference_loss",
+    "inputs": {
+      "targetset_valid": true,
+      "generation": 12,
+      "arm": false,
+      "ordinary": true,
+      "reference": false,
+      "drive": true,
+      "feedback": true,
+      "fault_clear": true,
+      "at_position": false
+    },
+    "state": {
+      "episode": 3,
+      "bound_gen": 12,
+      "authorized": false,
+      "completion": false,
+      "last_invalidated_gen": 12,
+      "reason": "REFERENCE_INVALID"
+    }
+  },
+  {
+    "phase": "P7",
+    "action": "arm_gen13",
+    "inputs": {
+      "targetset_valid": true,
+      "generation": 13,
+      "arm": true,
+      "ordinary": true,
+      "reference": true,
+      "drive": true,
+      "feedback": true,
+      "fault_clear": true,
+      "at_position": false
+    },
+    "state": {
+      "episode": 4,
+      "bound_gen": 13,
+      "authorized": true,
+      "completion": false,
+      "last_invalidated_gen": 12,
+      "reason": "NONE"
+    }
+  },
+  {
+    "phase": "P7",
+    "action": "feedback_loss",
+    "inputs": {
+      "targetset_valid": true,
+      "generation": 13,
+      "arm": false,
+      "ordinary": true,
+      "reference": true,
+      "drive": true,
+      "feedback": false,
+      "fault_clear": true,
+      "at_position": false
+    },
+    "state": {
+      "episode": 4,
+      "bound_gen": 13,
+      "authorized": false,
+      "completion": false,
+      "last_invalidated_gen": 13,
+      "reason": "FEEDBACK_INVALID"
+    }
+  },
+  {
+    "phase": "P8",
+    "action": "arm_gen14_equal_numeric_external",
+    "inputs": {
+      "targetset_valid": true,
+      "generation": 14,
+      "arm": true,
+      "ordinary": true,
+      "reference": true,
+      "drive": true,
+      "feedback": true,
+      "fault_clear": true,
+      "at_position": false
+    },
+    "state": {
+      "episode": 5,
+      "bound_gen": 14,
+      "authorized": true,
+      "completion": false,
+      "last_invalidated_gen": 13,
+      "reason": "NONE"
+    }
+  }
+]

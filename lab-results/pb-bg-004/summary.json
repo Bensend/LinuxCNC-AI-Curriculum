@@ -18,4 +18,3 @@
   "forbidden_output_keys_present": [],
   "boundary": "TargetSet-generation/runtime-episode ownership only; no planner, motion, hydraulic, physical, or functional-safety evidence"
 }
-PB-BG-004 PASS: TargetSet generation/runtime episode ownership only.

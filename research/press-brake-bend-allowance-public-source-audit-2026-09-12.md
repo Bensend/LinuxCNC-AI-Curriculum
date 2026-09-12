@@ -1,42 +1,50 @@
-# 3600 Press-Brake Preparation — Public Bend-Allowance Source Audit
+# 3600 Press-Brake Preparation — Public Bend-Calculation Source Audit
 
 Date: 2026-09-12
 Status: dependency-safe 3600 preparation; F02 fresh-AI gate remains external and untouched.
 
 ## Why this pass exists
 
-`PROGRESS.md` places generic 3600 work at an information-gain stop, but explicitly allows new public tooling/process-calculation source when it adds information beyond the established provenance contract. This pass inspects one concrete, downloadable calculator implementation and reconciles it against current CAD documentation.
+`PROGRESS.md` places generic 3600 work at an information-gain stop, but explicitly allows new public tooling/process-calculation source when it adds information beyond the established provenance contract. This pass inspects two concrete, downloadable implementations and reconciles them against current CAD documentation.
 
-The objective is not to endorse a universal bend formula. It is to determine what a real implementation actually assumes, what its call flow is, and which pieces are safe to reuse in a future bend-program/TargetCalculation layer.
+The objective is not to endorse a universal bend formula. It is to determine what real implementations actually assume, which inputs their geometry paths really consume, what fails at their domain boundaries, and which semantics must survive into a future bend-program/TargetCalculation layer.
 
 ## Sources
 
-### Public implementation
+### Implementation A — explicit bend calculator
 
 Repository: `ramugopal92/Bend-Allowance-Calculator`
 Pinned commit: `72fd7c4ba457281f689d7338d3483d1a5a49a171` (2026-03-12)
 Primary source: `FrmBendCalc.vb`, blob `f8aaf385b610269398a7bce0d6a6c31ecd340fb4`
 
-README describes the application as a simple utility taking sheet thickness, bend radius, bend angle and K-factor and returning setback, bend allowance and bend deduction.
+The README describes a simple utility taking sheet thickness, bend radius, bend angle and K-factor and returning setback, bend allowance and bend deduction.
+
+### Implementation B — flat-pattern/DXF generator
+
+Repository: `1Lab-vibe/SheetMetalGen-AI`
+Pinned commit: `10e1d1968d83d8cfd4d79665e7c6d14b3f04c87b` (2026-01-25)
+Primary source: `services/geometryService.ts`, blob `0e698e935e0c0343858688af289f00618d799557`
+Input schema: `types.ts`, blob `1a2a51840ec9049ed4cdd5301bbb6fb1c34d271b`
+
+The README tells the operator to supply thickness, K-factor and bend radius and specifically recommends a K-factor matching the material and bending equipment. The `Dimensions` type indeed carries both `bendRadius` and `kFactor`.
 
 ### Documentation cross-checks
 
 1. SOLIDWORKS Design Help, **K-Factor**: defines K as neutral-sheet location ratio and gives `BA = pi * (R + K*T) * A / 180`.
-2. SOLIDWORKS Design Help, **Bend Allowance and Bend Deduction**: defines bend allowance as neutral-axis arc length and bend deduction in relation to outside setback; flat length may be expressed using explicit BA or BD values.
+2. SOLIDWORKS Design Help, **Bend Allowance and Bend Deduction**: defines bend allowance as neutral-axis arc length and bend deduction in relation to outside setback.
 3. Autodesk Inventor Help, **Sheet Metal Unfold Reference**: linear unfold uses `(R + K*T) * angle_radians`; K-factor input is documented over 0..1.
 4. Autodesk Inventor Help, **About Bend Tables for Sheet Metal Materials**: bend tables encode material/thickness/radius/angle behavior and may better reflect particular machinery/tooling than a single uniform K-factor.
 
-These documentation sources are authoritative for their products' public semantics, not for the target press brake.
+These documentation sources establish CAD semantics, not target-machine values.
 
-## Source inventory and call flow
+## Implementation A — source inventory and call flow
 
-### `FrmBendCalc_Load`
-Calls `ClearOutputs()` only. No material/tool/process state is loaded.
+### UI path
 
-### Text-change handlers
-`txtThickness_TextChanged`, `txtRadius_TextChanged`, `txtAngle_TextChanged`, and `txtK_TextChanged` all call `CalculateValues()` immediately. Therefore the calculation is a pure UI-input calculation with no machine, tool-library, material-revision, or calibration lookup.
+`txtThickness_TextChanged`, `txtRadius_TextChanged`, `txtAngle_TextChanged`, and `txtK_TextChanged` all call `CalculateValues()` immediately. No material/tool/process state is loaded.
 
 ### `CalculateValues()`
+
 Inputs:
 - `T`: sheet thickness
 - `R`: bend radius
@@ -60,43 +68,15 @@ BD   = 2*SB - BA
 
 Outputs are rounded for display to 0.001 units.
 
-No source path introduces:
-- material identity/revision;
-- punch or die identity/geometry;
-- air-bend/bottom/coining method;
-- springback/overbend;
-- empirical correction;
-- machine calibration;
-- target X/R/Z backgauge positions;
-- ram/Y target;
-- pressure/tonnage;
-- bend-sequence authority.
+No source path introduces material identity/revision, punch/die identity, bend method, springback, empirical correction, machine calibration, backgauge targets, ram target, pressure/tonnage, or bend-sequence authority. This is a nominal geometric calculator only.
 
-Therefore this implementation is useful as a **nominal geometric flat-pattern calculator example only**.
+## Implementation A — documentation reconciliation and adversarial checks
 
-## Documentation reconciliation
+The BA equation matches the documented SOLIDWORKS/Inventor linear K-factor equation when the same angle convention and inside radius are used. The BD relation is structurally consistent with bend deduction as outside-setback sum minus bend allowance.
 
-### Bend allowance equation — confirmed
+The app's `K <= 0.5` validation is application policy, not a universal physics/CAD limit: Autodesk documents a broader 0..1 linear-unfold K-factor domain. Therefore this guard must not become a curriculum rule.
 
-The implementation's `BA = angle_rad * (R + K*T)` matches the current documented SOLIDWORKS K-factor equation and Autodesk Inventor's linear unfold equation when the same angle convention and inside radius are used.
-
-Classification: **SOURCE-CONFIRMED + DOC-CONFIRMED** for the implementation and those CAD conventions.
-
-### Bend deduction relation — structurally confirmed
-
-The implementation uses `BD = 2*SB - BA`, consistent with the documented relationship between bend deduction, outside setback and bend allowance.
-
-Classification: **SOURCE-CONFIRMED + DOC-CONFIRMED**, but only after the dimension/angle convention feeding `SB` is explicit.
-
-### K-factor validation range — application policy, not universal physics
-
-The implementation rejects `K > 0.5`. Autodesk documents its linear-unfold K-factor input over 0..1, and SOLIDWORKS defines K as the neutral-axis-location ratio `t/T`. Therefore the calculator's `0 < K <= 0.5` guard must not be promoted into a universal curriculum rule.
-
-Classification: **SOURCE-CONFIRMED application behavior; conflict with broader CAD input domain; do not generalize**.
-
-## Adversarial numeric checks
-
-The exact source equations were evaluated without modifying them, using `T=1`, `R=1`, `K=0.4`:
+The exact source equations were checked at `T=1`, `R=1`, `K=0.4`:
 
 | A (deg) | SB | BA | BD |
 |---:|---:|---:|---:|
@@ -107,72 +87,124 @@ The exact source equations were evaluated without modifying them, using `T=1`, `
 | 179 | 229.177300 | 4.373795 | 453.980805 |
 | 180 | ~3.266e16 | 4.398230 | ~6.532e16 |
 
-The UI explicitly permits `A=180`, but the tangent-based setback becomes singular at 180 degrees. This is a concrete invalid-input/failure boundary in the public implementation: it can display a finite floating-point approximation to a mathematically divergent outside-setback calculation instead of rejecting the geometry or changing representation.
+The UI permits `A=180`, but tangent-based setback is singular there. The finite floating-point magnitude is an implementation artifact, not a meaningful setback. This does **not** mean a 180-degree formed geometry is impossible; it means this outside-setback representation is invalid at that boundary.
 
-This does **not** show that 180-degree sheet-metal forming is impossible. It shows that this particular outside-setback representation is not valid at that boundary.
+The source/README also leave the meaning of `Bend Angle` implicit. Material rotation, included angle and complementary angle are not interchangeable. A correct equation can therefore be fed a semantically wrong angle.
 
-## Semantic risk: angle and dimension convention must be provenance
+## Implementation B — actual geometry call flow
 
-The source names the input only `Bend Angle`; the README does not define whether that means material rotation, included angle, complementary angle, or a particular CAD convention. The BA equation can be correct while a user supplies a geometrically different angle convention. The setback equation is even more sensitive because it uses `tan(A/2)` and becomes singular at its 180-degree endpoint.
+The input type explicitly contains:
 
-Therefore a reusable `TargetCalculation`/flat-pattern artifact must carry, at minimum:
+- `thickness`
+- `bendRadius`
+- `kFactor`
 
-- angle value;
-- **angle convention/definition**;
-- inside-radius definition;
-- thickness;
-- K-factor value **and source/convention**;
-- dimensional datum used by any setback/deduction calculation;
-- calculation-method/version identifier.
+and the README instructs the operator to choose K-factor according to material/equipment.
 
-A scalar `angle`, `radius`, `thickness`, `K` tuple without those semantics is insufficient provenance.
+However the actual geometry path is:
+
+`generateGeometry()` -> `generateCassette()` -> `calculateBendDeduction(dims)` -> `bd` -> outer/bend-line coordinates.
+
+`calculateBendDeduction()` contains comments describing itself as simplified/demo logic and then returns only:
+
+```
+return dims.thickness * 1.8;
+```
+
+It does **not** read `dims.bendRadius` or `dims.kFactor`. It has no bend-angle input at all. `generateCassette()` then uses that fixed-thickness deduction in expressions such as:
+
+```
+extLeft  = -(D + F - bd)
+innerLeft = -(D - bd/2)
+```
+
+with analogous right/top/bottom coordinates.
+
+### Adversarial consequence
+
+For otherwise identical geometry and thickness, changing the declared `kFactor` or `bendRadius` leaves this generator's bend deduction unchanged. At thickness 1.0, the geometry path receives `bd = 1.8` whether K is 0.30 or 0.50 and whether bend radius is 1 or 5.
+
+This is stronger evidence than a prose warning: a field can exist in the schema and UI, and documentation can instruct the operator to tune it, while the production geometry path never consumes it.
+
+Classification:
+- presence of K/radius inputs: **SOURCE-CONFIRMED**;
+- non-consumption by the bend-deduction/flat-geometry path: **SOURCE-CONFIRMED**;
+- README expectation that K relates to material/equipment: **DOC/PROJECT-DESCRIPTION evidence for intended use, contradicted by current implementation path**.
+
+## Source-to-interface conflict rule
+
+The second implementation adds a new curriculum requirement: **input provenance is insufficient without input-consumption provenance**.
+
+A future importer or AI-generated bend workflow must not infer that a generated flat pattern embodies K-factor/radius/tooling semantics merely because those fields appear in its UI, JSON schema, prompt, or metadata. The exact calculation implementation/version and the set of inputs actually consumed by that path matter.
+
+For generated manufacturing geometry, preserve enough provenance to answer:
+
+1. Which calculation implementation/version generated this result?
+2. Which input fields were actually consumed by that implementation path?
+3. Which values were ignored/defaulted/approximated?
+4. Was the result produced by a nominal formula, empirical table, rule-of-thumb, or machine-calibrated model?
+5. What angle/radius/dimension datum conventions did that implementation use?
+
+If those answers are unavailable, the process semantics are **UNKNOWN**, even if the DXF geometry itself is parseable.
 
 ## Process implication
 
-Autodesk's bend-table documentation explicitly distinguishes a uniform linear K-factor model from tables that can represent particular machinery/tooling behavior. That reinforces the current curriculum boundary:
+Autodesk's bend-table documentation distinguishes uniform linear K-factor calculation from tables intended to capture material/process/machinery behavior. The two public implementations show why the existing curriculum separation is necessary:
 
-`nominal geometry calculation != machine/process correction != runtime machine target`
+`nominal geometry calculation != empirical process correction != machine target != runtime authority`
 
-The public calculator is a good example of the first layer. It is not evidence for a press-brake backgauge solver or Y target model.
+Implementation A is a recognizable nominal formula with a domain/convention trap. Implementation B is a usable example of an apparently richer UI/schema whose actual geometry path falls back to a fixed `1.8 * thickness` approximation.
+
+Neither is evidence for a production press-brake backgauge solver or ram/Y target model.
 
 ## Failure modes / adversarial review
 
-1. **180-degree tangent singularity** — accepted by UI validation but produces unusable setback/BD magnitude.
-2. **Undefined angle convention** — correct-looking equations can be fed semantically wrong angles.
-3. **K-factor range overgeneralization** — UI rejects values above 0.5 although other CAD systems support a wider domain.
-4. **No process provenance** — same numeric K is not tied to material/tool/method/revision.
-5. **No empirical correction** — calculation cannot claim production accuracy for a particular machine/tool/material stack.
-6. **Display rounding** — outputs are formatted to 0.001; downstream machine targets should not be reconstructed from rounded display strings when higher-precision calculation state exists.
+1. **180-degree tangent singularity** — Implementation A accepts a domain endpoint where its setback representation diverges.
+2. **Undefined angle convention** — a mathematically correct BA expression can still receive a semantically wrong angle.
+3. **K-factor range overgeneralization** — Implementation A's K <= 0.5 guard is narrower than Autodesk's documented model domain.
+4. **Declared-but-unused inputs** — Implementation B exposes bend radius and K-factor but its geometry deduction ignores both.
+5. **Rule-of-thumb silently entering manufacturing geometry** — Implementation B's `1.8*T` approximation directly affects exported flat-pattern extents.
+6. **No process provenance** — neither implementation binds the calculation to a material/tool/method revision or measured coupon evidence.
+7. **No empirical correction** — neither implementation demonstrates production accuracy for a particular machine/tool/material stack.
+8. **Display/serialization precision** — downstream targets should not be reconstructed from rounded presentation values when higher-precision calculation state exists.
 
 ## Claims ledger
 
 | Claim | Classification | Confidence |
 |---|---|---:|
-| The audited app computes BA from `angle_rad*(R+K*T)` | SOURCE-CONFIRMED | High |
+| Implementation A computes BA from `angle_rad*(R+K*T)` | SOURCE-CONFIRMED | High |
 | That BA equation matches documented SOLIDWORKS/Inventor linear K-factor semantics | DOC-CONFIRMED | High |
-| The app computes BD as `2*SB-BA` | SOURCE-CONFIRMED | High |
-| The app's `K<=0.5` guard is not a universal CAD/physics limit | DOC-CONFIRMED conflict/reconciliation | High |
-| `A=180` is unsafe for this app's tangent setback representation | SOURCE-CONFIRMED + deterministic numeric check | High |
-| A future press-brake calculation layer must preserve angle/datum/calculation-method provenance | INFERENCE from source/documentation conflict | High |
-| These equations determine production backgauge or ram targets by themselves | UNKNOWN / explicitly unsupported | High confidence that current evidence is insufficient |
+| Implementation A computes BD as `2*SB-BA` | SOURCE-CONFIRMED | High |
+| Implementation A's `K<=0.5` guard is not a universal CAD/physics limit | DOC-CONFIRMED conflict/reconciliation | High |
+| `A=180` is invalid for Implementation A's tangent setback representation | SOURCE-CONFIRMED + deterministic numeric check | High |
+| Implementation B's schema contains `bendRadius` and `kFactor` | SOURCE-CONFIRMED | High |
+| Implementation B's actual bend-deduction path ignores both and returns `1.8*thickness` | SOURCE-CONFIRMED | High |
+| A UI/schema field proves the generated geometry used that field | FALSIFIED by source trace | High |
+| Bend-calculation provenance must include method/version, conventions and actual consumed inputs | INFERENCE from source/documentation reconciliation | High |
+| These public formulas determine production backgauge or ram targets by themselves | UNKNOWN / explicitly unsupported | High confidence that evidence is insufficient |
 
 ## Information-gain decision
 
-This source **does add new information** beyond the previous generic provenance model: it exposes a real implementation where a nominal BA formula is valid under documented CAD semantics while UI-domain choices and undefined angle conventions can still make the surrounding calculation unsafe or non-portable.
+This pass adds concrete information beyond the previous generic provenance model:
 
-No GitHub Actions lab is justified. The discovered questions are deterministic source/math semantics, not LinuxCNC runtime behavior, and a synthetic workflow would only re-run arithmetic already directly inspectable.
+- source-valid equations can still fail at representation-domain boundaries;
+- angle and datum convention are first-class semantic state;
+- a UI/schema can advertise K-factor/radius while the actual manufacturing-geometry path ignores them;
+- therefore calculation provenance must include **implementation and consumed-input lineage**, not merely the values presented to the user.
+
+No GitHub Actions lab is justified. These are deterministic source/math/dataflow questions, and a synthetic workflow would only re-run directly inspectable arithmetic.
 
 ## Durable rule added to 3600 preparation
 
-Before importing or generating any bend-calculation result, preserve calculation semantics separately from the numeric result:
+Before importing or generating any bend-calculation result, preserve calculation semantics and consumption lineage separately from the numeric result:
 
-`CalculationMethodRevision + AngleConvention + DimensionDatum + Material/Thickness + RadiusDefinition + K/TableProvenance -> NominalFlatPatternResult`
+`CalculationMethodRevision + ConsumedInputSet + AngleConvention + DimensionDatum + Material/Thickness + RadiusDefinition + K/TableProvenance -> NominalFlatPatternResult`
 
 Only later, separately versioned layers may add empirical process correction and generate machine targets.
 
 ## Next checkpoint
 
 1. Re-check the information-separated F02 transfer first.
-2. If F02 remains blocked, do not create another nominal calculator fixture merely to repeat these equations.
-3. A next calculation-source pass is justified only if it adds one of: explicit tooling geometry, bend-method selection, empirical bend-table generation, measured-coupon fitting, or a real flange/gauging-surface-to-backgauge target solver with defined datums.
-4. Preserve the tandem and sensor-bending SOURCE-UNAVAILABLE boundaries until genuinely new implementation evidence appears.
+2. If F02 remains blocked, treat the generic nominal-calculator branch as sufficiently sampled; do not add another calculator merely to collect another formula.
+3. A next calculation-source pass is justified only if it adds one of: explicit tooling geometry/method selection, empirical bend-table generation, measured-coupon fitting, or a real flange/gauging-surface-to-backgauge target solver with defined datums.
+4. Preserve tandem Y1/Y2 and active sensor-bending SOURCE-UNAVAILABLE boundaries until genuinely new implementation evidence appears.

@@ -1,0 +1,22 @@
+name: PB-DXF-001 metadata importer fixture
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'lab-jobs/085-pb-dxf-001-metadata-import-fixture.py'
+      - '.github/workflows/pb-dxf-001.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  fixture:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Execute frozen metadata fixture
+        run: python3 lab-jobs/085-pb-dxf-001-metadata-import-fixture.py | tee pb-dxf-001-result.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: pb-dxf-001-evidence
+          path: pb-dxf-001-result.json

@@ -79,14 +79,15 @@ If a run is cancelled, times out, is harness-invalid, or fails substantively, st
 | 2026-09-12 | PB-DXF-001 metadata importer fixture | `34666985713` | `103480777779` | 2026-09-12T02:11:57Z | 2026-09-12T02:12:03Z | 0.10 | PASS / TEST-CONFIRMED METADATA CONTRACT | Frozen metadata/provenance fixture passed Gates A-J 10/10. Six-second exact Actions job interval. No CAD-truth, gauge-planning, motion or functional-safety claim. |
 | 2026-09-12 | PB-DXF-002 human-confirmation recipe fixture | `34669718957` | `103488664098` | 2026-09-12T03:12:08Z | 2026-09-12T03:12:16Z | 0.13 | PASS / TEST-CONFIRMED APPLICATION-STATE CONTRACT | Frozen operator-confirmation/recipe identity fixture retained 10 state snapshots and passed Gates A-J 10/10. Eight-second exact Actions job interval. No gauge-planning, machine-motion, tooling, hydraulic or functional-safety claim. |
 | 2026-09-12 | PB-DXF-003 GaugePlan provenance fixture | `34669836019` | `103488990203` | 2026-09-12T03:14:42Z | 2026-09-12T03:14:51Z | 0.15 | PASS / TEST-CONFIRMED GAUGEPLAN STATE CONTRACT | Frozen GaugePlan provenance/invalidation fixture retained eight state snapshots and passed Gates A-J 10/10. Nine-second exact Actions job interval. No numeric target, machine-motion, tooling, hydraulic or functional-safety claim. |
+| 2026-09-12 | PB-DXF-004 TargetSet provenance fixture | `34670122426` | `103489793017` | 2026-09-12T03:21:01Z | 2026-09-12T03:21:11Z | 0.17 | PASS / TEST-CONFIRMED TARGETSET STATE CONTRACT | Frozen TargetCalculation/TargetSet provenance fixture retained ten state snapshots and passed Gates A-J 10/10. Ten-second exact Actions job interval. Numeric values are opaque test data; no physical target, machine-motion, tooling, hydraulic or functional-safety claim. |
 ## Running totals
 
 Keep these totals current whenever new rows are added:
 
-- **Exactly backfilled lab compute:** 267.81 min (4.46 h)
-- **Total lab compute used:** 4.46 h + unbackfilled historical usage
+- **Exactly backfilled lab compute:** 267.98 min (4.47 h)
+- **Total lab compute used:** 4.47 h + unbackfilled historical usage
 - **Remaining from 120 h first-draft allowance:** unknown until historical backfill
-- **Current-day exactly backfilled lab compute (2026-09-12):** 0.55 min (0.01 h) + unbackfilled same-day historical usage
+- **Current-day exactly backfilled lab compute (2026-09-12):** 0.72 min (0.01 h) + unbackfilled same-day historical usage
 
 ## Immediate backfill queue
 

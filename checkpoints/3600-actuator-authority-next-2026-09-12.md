@@ -46,9 +46,9 @@ Classification remains **COMMUNITY-REPORTED FIELD SUCCESS / FINAL SOURCE UNAVAIL
 
 ## Compute maintenance
 
-The exact PB-PREP-001 073–077 runtime artifact had already recovered an additional **70.427147 min** of historical Actions compute without integrating it into the canonical ledger. This session used the repository's race-safe `LAB_COMPUTE_APPEND_REQUEST.md` path to queue those five exact rows rather than rewriting `LAB_COMPUTE_LOG.md` directly.
+The exact PB-PREP-001 073–077 runtime artifact had already recovered an additional **70.427147 min** of historical Actions compute without integrating it into the canonical ledger. This session used the repository's race-safe `LAB_COMPUTE_APPEND_REQUEST.md` path to append those five exact rows without rewriting `LAB_COMPUTE_LOG.md` directly.
 
-Expected integrated arithmetic total, once the append workflow is present on main, is **338.56 min (5.64 h)**; evidence classifications remain unchanged and PB-PREP-001 remains **INCONCLUSIVE / NO ARCHITECTURE RECOMMENDATION**.
+Commit `046ffc537e8f6e1b057c32134514bfa17e01147c` integrated the rows successfully. The canonical ledger now reports **338.56 min (5.64 h)** exactly backfilled, with the 2026-09-12 subtotal still **0.87 min** because runs 073–077 occurred September 11. Evidence classifications remain unchanged and PB-PREP-001 remains **INCONCLUSIVE / NO ARCHITECTURE RECOMMENDATION**.
 
 ## Information-gain decision
 
@@ -57,7 +57,7 @@ No new synthetic lab was justified. The new questions were source/field-evidence
 ## Precise next-work checkpoint
 
 1. Re-check the independent F02 handoff result first. PASS/no corrections => graduate F02 and close 2000; never self-certify it.
-2. Confirm the queued PB-PREP-001 073–077 compute append reached `LAB_COMPUTE_LOG.md`; if so, use the integrated total rather than the old 268.13-min figure.
+2. Use **338.56 min (5.64 h)** as the current canonical exactly-backfilled compute total unless later exact rows change it.
 3. Keep PB-PREP-001 INCONCLUSIVE and do not retune its frozen discriminator.
 4. Keep mature tandem Y1/Y2 and sensor-bending branches at SOURCE UNAVAILABLE unless genuinely new source appears.
 5. For backgauge extra joints, carry the explicit post-home fault matrix forward: reference validity, limits, amplifier/drive fault, external episode validity, external tracking/convergence, feedback freshness and at-position are distinct witnesses.

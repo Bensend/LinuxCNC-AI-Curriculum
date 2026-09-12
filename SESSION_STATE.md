@@ -1,9 +1,9 @@
 # Active Curriculum Session State
 
-Session start UTC: `2026-09-12T17:14:06Z`
-Session end UTC: `2026-09-12T17:18:07Z`
-Actual elapsed: **4.0 minutes**
-Status: **CLOSED — F02 external gate preserved; 3600 tandem cascade ordering/source boundary sharpened.**
+Session start UTC: `2026-09-12T18:10:53Z`
+Session end UTC: `2026-09-12T18:12:53Z`
+Actual elapsed: **2.0 minutes**
+Status: **CLOSED — F02 external gate preserved; 3600 Ursviken final-config source-availability boundary verified.**
 
 ## Critical path
 
@@ -13,33 +13,28 @@ Status: **CLOSED — F02 external gate preserved; 3600 tandem cascade ordering/s
 
 New durable artifacts:
 
-- `research/3600-tandem-cascade-ordering-source-reconciliation-2026-09-12.md`
-- `checkpoints/3600-tandem-cascade-ordering-next-2026-09-12.md`
+- `research/3600-ursviken-final-config-availability-audit-2026-09-12.md`
+- `checkpoints/3600-ursviken-final-config-availability-next-2026-09-12.md`
 
-The Ursviken/Pullmax February and July field chronology was reconciled against LinuxCNC `pid.c` at `f325d51f52da7d5e0e227ac35e3672ee6f873b4f` and official HAL scheduling semantics.
+A fresh inspection of all four currently exposed LinuxCNC forum pages for the Ursviken/Pullmax retrofit verified the exact source-availability boundary rather than relying on generic search failure.
 
-The February field report describes a per-side position-PID output feeding a per-side velocity-PID command, with the velocity-PID output driving each servo valve. The July field report later describes a successful 90-degree bend using two per-side position PIDs plus a differential synchronization PID with command 0 and feedback `Y1-Y2`, slowing the leading side.
+The public chronology still ends on 2026-07-22, where NWE reports a successful 90-degree bend using two per-side position PIDs plus a differential sync PID (`command=0`, feedback from `Y1-Y2`, slowing the leading side), then states that the configuration will be shared after remaining loose ends are completed. The first post remains last edited 2025-12-18; it does not contain the later tandem configuration.
 
-Pinned `pid.c` confirms that each PID instance exports an independent realtime `<name>.do-pid-calcs` function; LinuxCNC does not encode parent/child cascade execution internally. HAL realtime functions execute according to `addf` ordering. Therefore an outer-position -> inner-velocity cascade is same-cycle only if the outer PID executes before the inner PID. Reversing that order does not disconnect the cascade; it makes the inner loop consume the previous cycle's outer output. The same ordering issue applies to differential production, sync PID execution, correction insertion, final limiting/mapping and hardware write.
+The older 2025-12-09 “complete config” is explicitly an early snapshot centered on joint 6 and predates the later Y1/Y2 tandem implementation. It must not be treated as final tandem source.
 
-The research also tightens three boundaries:
+The February design posts also show an evolving split between a generic press-state component and a machine-specific `pullmax-optima` interface, but the final implementation remains unavailable. Therefore exact addf order, feedback producers/units/freshness, sync correction insertion/sign/selection, final presence/absence of inner velocity loops, downstream limiting/saturation, dither/deadband behavior, process gating, ferror/disagreement ownership, and fault/recovery semantics remain SOURCE UNAVAILABLE / UNKNOWN.
 
-- HAL float typing does not enforce engineering units; the position-output -> velocity-command unit contract is configuration-owned.
-- per-loop `saturated` is controller-local and does not establish downstream valve/hydraulic authority.
-- coherent `Y1-Y2` feedback freshness cannot be inferred from two encoders merely existing on the same machine.
-
-Adversarial boundary review passed **7/7**. No synthetic lab was run because generic `addf` ordering is already source/documentation-confirmed and a toy fixture would not reveal the missing final machine HAL/component implementation. Laboratory compute is unchanged.
+Adversarial boundary review passed **6/6**. A direct public/GitHub search for `pullmax_optima.comp` found no inspectable source outside the forum discussion. No synthetic lab was run because another PID/addf fixture would not resolve the absent machine implementation; laboratory compute is unchanged.
 
 ## Next checkpoint
 
-1. Re-check F02 first and preserve evaluator identity/header plus the full response before changing F02 status.
-2. Correctly routed F02 PASS/no corrections closes F02 and the 2000 series; do not self-certify it.
-3. If F02 remains blocked, do not add another synthetic tandem/cascade fixture merely to demonstrate PID ordering.
-4. Reopen tandem work only for the promised final Ursviken config or equivalent inspectable HAL/component source.
-5. Required source must expose enough to reconstruct: `hardware read -> Y1/Y2 feedback -> differential -> outer PIDs -> sync PID -> correction insertion -> optional inner velocity PIDs -> downstream limiting/mapping -> hardware write`.
-6. Capture exact `addf` order, velocity-feedback producer/units, correction sign/selection, limits/saturation, dither/deadband handling, process gating, freshness/disagreement, faults and recovery.
-7. PB-PREP-001 remains **INCONCLUSIVE / NO ARCHITECTURE RECOMMENDATION**.
+1. Re-check F02 first and preserve evaluator identity/header plus full response before changing status.
+2. Correctly routed F02 PASS/no corrections closes F02 and the 2000 series unless a material defect is identified.
+3. If F02 remains blocked, keep the tandem branch at the current source-availability stop.
+4. Reopen only if the promised final Ursviken config/component becomes public, a forum attachment becomes directly inspectable, or equivalent real source exposes the complete read -> feedback/differential -> PID/sync -> correction/limits -> hardware-write graph and recovery semantics.
+5. Do not substitute the December early config or another synthetic ordering fixture for the missing final source.
+6. PB-PREP-001 remains **INCONCLUSIVE / NO ARCHITECTURE RECOMMENDATION**.
 
-Overlap: **No overlap.** Previous completed canonical lesson ended `2026-09-12T16:11:43Z`; this session began `2026-09-12T17:14:06Z`, **62m23s later**.
+Overlap: **No overlap.** Previous completed canonical lesson ended `2026-09-12T17:18:07Z`; this session began `2026-09-12T18:10:53Z`, **52m46s later**.
 
-Short-session continuation check: a useful unblocked source-reconciliation task existed and was completed. Further progress on this branch now requires the final/equivalent inspectable machine implementation rather than another generic ordering experiment.
+Short-session continuation check: the useful unblocked task was to verify whether the promised final config had actually become public and search for `pullmax_optima.comp` elsewhere. Both paths were exhausted without new inspectable implementation source. Further progress on this branch now depends on new external source rather than additional synthetic work.

@@ -76,14 +76,16 @@ If a run is cancelled, times out, is harness-invalid, or fails substantively, st
 | 2026-09-11 | M66-TIMEOUT-001 run 079 stale-wait regression | `34593401753` | `103243588697` | 2026-09-11T11:18:50Z | 2026-09-11T11:21:57Z | 3.12 | PASS / STALE-WAIT INTERACTION CONFIRMED | Frozen control G4=0.505165 s; experimental M66 RISE timeout then G4 completed at 0.311439 s when stale input went HIGH at 0.301064 s; delta=-0.193726 s crossed the pre-frozen confirmation threshold. Stock loopback Task/interpreter evidence only. |
 | 2026-09-12 | PB-BG-003 run 083 generic-health harness | `34664318311` | `103473039987` | 2026-09-12T01:16:17.8408261Z | 2026-09-12T01:16:24.0427350Z | 0.10 | HARNESS INVALID | Workflow succeeded, but independent raw audit found that implementation collapsed the frozen reference/authority/drive/feedback/joint-fault witnesses into one generic health bit. Retained as construction/provenance evidence only; no PB-BG-003 behavioral PASS claim. |
 | 2026-09-12 | PB-BG-003 run 084 separated-witness correction | `34664404337` | `103473294403` | 2026-09-12T01:18:01.1560696Z | 2026-09-12T01:18:05.4780000Z | 0.07 | PASS / TEST-CONFIRMED STATE CONTRACT | Corrected pure-software harness retained distinct reference, ordinary-authorization, drive, feedback and controller-fault-clear inputs. 28-row trace independently audited against unchanged frozen Gates A-J. No physical-machine, hardware or functional-safety claim. |
+| 2026-09-12 | PB-DXF-001 metadata importer fixture | `34666985713` | `103480777779` | 2026-09-12T02:11:57Z | 2026-09-12T02:12:03Z | 0.10 | PASS / TEST-CONFIRMED METADATA CONTRACT | Frozen metadata/provenance fixture passed Gates A-J 10/10. Six-second exact Actions job interval. No CAD-truth, gauge-planning, motion or functional-safety claim. |
+| 2026-09-12 | PB-DXF-002 human-confirmation recipe fixture | `34669718957` | `103488664098` | 2026-09-12T03:12:08Z | 2026-09-12T03:12:16Z | 0.13 | PASS / TEST-CONFIRMED APPLICATION-STATE CONTRACT | Frozen operator-confirmation/recipe identity fixture retained 10 state snapshots and passed Gates A-J 10/10. Eight-second exact Actions job interval. No gauge-planning, machine-motion, tooling, hydraulic or functional-safety claim. |
 ## Running totals
 
 Keep these totals current whenever new rows are added:
 
-- **Exactly backfilled lab compute:** 267.43 min (4.46 h)
+- **Exactly backfilled lab compute:** 267.66 min (4.46 h)
 - **Total lab compute used:** 4.46 h + unbackfilled historical usage
 - **Remaining from 120 h first-draft allowance:** unknown until historical backfill
-- **Current-day exactly backfilled lab compute (2026-09-12):** 0.17 min (0.00 h) + unbackfilled same-day historical usage
+- **Current-day exactly backfilled lab compute (2026-09-12):** 0.40 min (0.01 h) + unbackfilled same-day historical usage
 
 ## Immediate backfill queue
 

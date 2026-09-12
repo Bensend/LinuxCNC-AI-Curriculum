@@ -18,4 +18,3 @@
   "forbidden_output_keys_present": [],
   "boundary": "application confirmation/recipe-state semantics only; no gauge planning, machine motion, tooling, collision, hydraulic, or functional-safety evidence"
 }
-PB-DXF-002 PASS: human-confirmation/recipe identity contract only; no machine authority modeled.

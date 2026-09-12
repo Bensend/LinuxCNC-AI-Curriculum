@@ -1,0 +1,284 @@
+[
+  {
+    "phase": "P0",
+    "action": "accept_recipe",
+    "note": "",
+    "candidates": [
+      {
+        "bend_id": "B1",
+        "rev": "R1",
+        "review": "CONFIRMED",
+        "angle": 90,
+        "radius": 1.5,
+        "direction": "UP"
+      },
+      {
+        "bend_id": "B2",
+        "rev": "R1",
+        "review": "CONFIRMED",
+        "angle": 45,
+        "radius": 1.0,
+        "direction": "DOWN"
+      }
+    ],
+    "steps": [
+      {
+        "step_id": "S1",
+        "bend_id": "B1",
+        "ordinal": 1,
+        "rev": "R1",
+        "validation": "ACCEPTED",
+        "reason": "NONE"
+      },
+      {
+        "step_id": "S2",
+        "bend_id": "B2",
+        "ordinal": 2,
+        "rev": "R1",
+        "validation": "ACCEPTED",
+        "reason": "NONE"
+      }
+    ]
+  },
+  {
+    "phase": "P1",
+    "action": "reorder",
+    "note": "",
+    "candidates": [
+      {
+        "bend_id": "B1",
+        "rev": "R1",
+        "review": "CONFIRMED",
+        "angle": 90,
+        "radius": 1.5,
+        "direction": "UP"
+      },
+      {
+        "bend_id": "B2",
+        "rev": "R1",
+        "review": "CONFIRMED",
+        "angle": 45,
+        "radius": 1.0,
+        "direction": "DOWN"
+      }
+    ],
+    "steps": [
+      {
+        "step_id": "S1",
+        "bend_id": "B1",
+        "ordinal": 2,
+        "rev": "R1",
+        "validation": "ACCEPTED",
+        "reason": "NONE"
+      },
+      {
+        "step_id": "S2",
+        "bend_id": "B2",
+        "ordinal": 1,
+        "rev": "R1",
+        "validation": "ACCEPTED",
+        "reason": "NONE"
+      }
+    ]
+  },
+  {
+    "phase": "P2",
+    "action": "attempt_accept_unknown_direction",
+    "note": "",
+    "candidates": [
+      {
+        "bend_id": "B3",
+        "rev": "R1",
+        "review": "CONFIRMED",
+        "angle": 90,
+        "radius": 1.2,
+        "direction": "UNKNOWN"
+      }
+    ],
+    "steps": [
+      {
+        "step_id": "S3",
+        "bend_id": "B3",
+        "ordinal": 1,
+        "rev": "R1",
+        "validation": "REVIEW_REQUIRED",
+        "reason": "UNKNOWN_REQUIRED:direction"
+      }
+    ]
+  },
+  {
+    "phase": "P3",
+    "action": "attempt_accept_ambiguous",
+    "note": "",
+    "candidates": [
+      {
+        "bend_id": "B4",
+        "rev": "R1",
+        "review": "AMBIGUOUS",
+        "angle": 90,
+        "radius": 1.0,
+        "direction": "UP"
+      }
+    ],
+    "steps": [
+      {
+        "step_id": "S4",
+        "bend_id": "B4",
+        "ordinal": 1,
+        "rev": "R1",
+        "validation": "REVIEW_REQUIRED",
+        "reason": "FEATURE_AMBIGUOUS"
+      }
+    ]
+  },
+  {
+    "phase": "P4",
+    "action": "draft_created",
+    "note": "",
+    "candidates": [
+      {
+        "bend_id": "B5",
+        "rev": "R1",
+        "review": "CONFIRMED",
+        "angle": 90,
+        "radius": 1.0,
+        "direction": "UP"
+      }
+    ],
+    "steps": [
+      {
+        "step_id": "S5",
+        "bend_id": "B5",
+        "ordinal": 1,
+        "rev": "R1",
+        "validation": "DRAFT",
+        "reason": "NONE"
+      }
+    ]
+  },
+  {
+    "phase": "P4",
+    "action": "feature_rejected",
+    "note": "",
+    "candidates": [
+      {
+        "bend_id": "B5",
+        "rev": "R1",
+        "review": "REJECTED",
+        "angle": 90,
+        "radius": 1.0,
+        "direction": "UP"
+      }
+    ],
+    "steps": [
+      {
+        "step_id": "S5",
+        "bend_id": "B5",
+        "ordinal": 1,
+        "rev": "R1",
+        "validation": "INVALID",
+        "reason": "FEATURE_REJECTED"
+      }
+    ]
+  },
+  {
+    "phase": "P5",
+    "action": "reimport_without_trusted_remap",
+    "note": "",
+    "candidates": [
+      {
+        "bend_id": "B1-R2",
+        "rev": "R2",
+        "review": "UNREVIEWED",
+        "angle": 90,
+        "radius": 1.5,
+        "direction": "UP"
+      }
+    ],
+    "steps": [
+      {
+        "step_id": "S1",
+        "bend_id": "B1",
+        "ordinal": 1,
+        "rev": "R1",
+        "validation": "REVIEW_REQUIRED",
+        "reason": "SOURCE_REVISION_CHANGED_NO_TRUSTED_REMAP"
+      }
+    ]
+  },
+  {
+    "phase": "P6",
+    "action": "trusted_remap_proposed",
+    "note": "",
+    "candidates": [
+      {
+        "bend_id": "B1",
+        "rev": "R2",
+        "review": "CONFIRMED",
+        "angle": 90,
+        "radius": 1.5,
+        "direction": "UP"
+      }
+    ],
+    "steps": [
+      {
+        "step_id": "S1",
+        "bend_id": "B1",
+        "ordinal": 1,
+        "rev": "R1",
+        "validation": "REVIEW_REQUIRED",
+        "reason": "TRUSTED_REMAP_REBIND_REQUIRED"
+      }
+    ]
+  },
+  {
+    "phase": "P6",
+    "action": "explicit_current_validation",
+    "note": "",
+    "candidates": [
+      {
+        "bend_id": "B1",
+        "rev": "R2",
+        "review": "CONFIRMED",
+        "angle": 90,
+        "radius": 1.5,
+        "direction": "UP"
+      }
+    ],
+    "steps": [
+      {
+        "step_id": "S1",
+        "bend_id": "B1",
+        "ordinal": 1,
+        "rev": "R2",
+        "validation": "ACCEPTED",
+        "reason": "NONE"
+      }
+    ]
+  },
+  {
+    "phase": "P7",
+    "action": "trusted_remap_semantic_changed",
+    "note": "",
+    "candidates": [
+      {
+        "bend_id": "B1",
+        "rev": "R2",
+        "review": "CONFIRMED",
+        "angle": 90,
+        "radius": 1.5,
+        "direction": "DOWN"
+      }
+    ],
+    "steps": [
+      {
+        "step_id": "S1",
+        "bend_id": "B1",
+        "ordinal": 1,
+        "rev": "R2",
+        "validation": "REVIEW_REQUIRED",
+        "reason": "REQUIRED_SEMANTIC_CHANGED:direction"
+      }
+    ]
+  }
+]

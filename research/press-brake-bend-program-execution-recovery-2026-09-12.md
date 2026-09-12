@@ -25,7 +25,9 @@ Classification: `COMMUNITY-REPORTED`. These examples establish viable architectu
 
 A plan-execute request queues a Task-plan synchronization command before interpreter execution because the machine may have moved externally. This is a strong source boundary for a press-brake program runner: domain sequencing may request execution, but LinuxCNC Task retains responsibility for interpreter/motion synchronization.
 
-`src/emc/task/emctask.cc` shows that OFF, ESTOP_RESET, and ESTOP transitions call Task/motion abort paths, perform abort cleanup, and resynchronize the Task plan; volatile-home joints may be unhomed. Therefore an application must not interpret a later return to ON/green transport as permission to continue a previously accepted bend episode.
+`src/emc/task/emctask.cc::emcTaskAbort()` is stronger than a generic pause. It calls `emcMotionAbort()`, clears the pending Task command and `interp_list`, sets interpreter state IDLE and execution state DONE, clears pause/line/call-level/stepping state, queues an interpreter synchronization command, closes the open task plan and resets unflushed segments. The source comment explicitly says that *without* `emcTaskPlanClose()` a new run would resume at the aborted line; the implementation deliberately closes it. Therefore application recovery must not assume LinuxCNC preserves an implicit aborted-line resume contract.
+
+OFF, ESTOP_RESET, and ESTOP transitions also invoke Task/motion abort/cleanup/resynchronization paths; volatile-home joints may be unhomed. A later return to ON or healthy transport is consequently not permission to continue a previously accepted bend episode.
 
 Classification: `SOURCE-CONFIRMED` at the pinned revision.
 
@@ -58,11 +60,13 @@ Classify interruption rather than using one generic pause bit:
 
 After an abort-class interruption, recovery is **reconcile then rearm**, not automatic resume. Reconciliation must determine the physical/current machine state, current bend step, accepted program revision, current TargetSet generation, reference state, and whether material/tool state makes repeating or skipping the bend a human/domain decision. The software must not silently infer that an interrupted physical bend is safe to repeat.
 
+Because `emcTaskAbort()` closes/resets the plan, a domain controller that chooses to retry the same semantic bend after reconciliation must explicitly issue a **fresh** execution request/episode; it must not rely on a hidden LinuxCNC continuation of the aborted line.
+
 ## Function/call-flow summary
 
 Domain program row -> accepted `BendStepId` -> accepted `TargetSetGeneration` -> create fresh `ExecutionEpisode` -> issue supported LinuxCNC command surface -> Task `emcTaskPlan()` mode/state arbitration -> interpreter/command queue -> `emcTaskExecute()` preconditions/issue/postconditions -> motion/IO -> independent mechanism completion witnesses -> episode complete -> sequence advances.
 
-Abort-class path: state/fault transition -> Task/motion abort + cleanup/resynchronization -> application invalidates `ExecutionEpisode` -> sequence pointer remains semantically identifiable but **not authorized** -> physical/domain reconciliation -> explicit rearm -> fresh episode.
+Abort-class path: state/fault transition -> `emcTaskAbort()` -> `emcMotionAbort()` -> pending command + interpreter list cleared -> interpreter IDLE / exec DONE -> Task plan sync queued -> task plan close/reset -> application invalidates `ExecutionEpisode` -> semantic bend pointer remains identifiable but **not authorized** -> physical/domain reconciliation -> explicit rearm -> fresh episode/request.
 
 ## Adversarial cases
 
@@ -71,9 +75,12 @@ Abort-class path: state/fault transition -> Task/motion abort + cleanup/resynchr
 3. Target calculation is regenerated with identical numbers: old episode remains stale because `TargetSetGeneration` changed.
 4. UI advances the highlighted row before all required mechanism completion witnesses arrive: this is a UI/sequence bug; row index is not completion evidence.
 5. Physical bend was partially formed when abort occurred: software cannot safely decide repeat-vs-skip from LinuxCNC motion state alone; require domain/human reconciliation.
+6. UI offers “resume step 4” after Task abort: if domain policy permits retry, it must create a fresh episode and explicit command; LinuxCNC's aborted interpreter line was deliberately not preserved for automatic run-resume.
 
 ## Evidence boundary and next work
 
-This contract is sufficient to stop adding synthetic ownership layers merely for completeness. The next useful evidence should be a real operator-program execution surface or a small integration fixture that exercises LinuxCNC Task abort/resynchronization semantics, only if it resolves a LinuxCNC-specific ambiguity.
+This source result resolves the important LinuxCNC-specific ambiguity: Task abort is not ordinary pause and does not provide an implicit aborted-line continuation contract. A synthetic experiment that merely re-demonstrates this source branch has low information gain.
+
+Next useful work should move to a real operator-program execution surface: define run/hold/abort/reconcile UI state and persistence semantics, then compare against an inspectable public press-brake implementation if one exists. Only add a lab fixture if a concrete Task/UI integration ambiguity remains.
 
 Do not claim that LinuxCNC Task abort is a safety-rated function. Do not infer material bend state from backgauge/ram software state alone.

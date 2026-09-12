@@ -34,6 +34,18 @@ Later in `emcmotController()`, the normal joint command is initially published, 
 
 That explicit pass-through makes the ownership transfer concrete: after homing, the external planner supplies the positional command surface while MOTMOD retains reference/enable/limit/fault plumbing rather than owning normal tracking control for that extra joint.
 
+### Command value is not authority
+
+The source publishes `joint.N.amp-enable-out` from the joint enable flag and then performs the homed-extra-joint `posthome-cmd` pass-through without conditioning that pass-through on `amp-enable-out`.
+
+Therefore a homed extra joint can still present a `motor-pos-cmd` value sourced from `posthome-cmd` while its amplifier-enable request is false. This is a critical ownership distinction:
+
+- `motor-pos-cmd` says what position the externally owned mechanism is being commanded toward;
+- `amp-enable-out` says whether LinuxCNC is currently requesting ordinary joint amplifier authority;
+- neither signal alone proves that the physical drive/brake/hydraulic mechanism actually has authority.
+
+A downstream implementation must not interpret the mere presence or change of `motor-pos-cmd` as permission to actuate when enable/authorization has been revoked.
+
 ## Consequence for press-brake backgauge architecture
 
 For a homed extra joint driven from an external bounded planner through `posthome-cmd`:
@@ -42,6 +54,7 @@ For a homed extra joint driven from an external bounded planner through `posthom
 - hard-limit inputs remain meaningful;
 - amplifier fault input remains meaningful if machine hardware/HAL drives it;
 - ordinary MOTMOD following error is intentionally not a tracking witness after homing;
+- command and authority remain separate surfaces;
 - an external tracking supervisor should use the actual feedback signal and the external command/episode provenance it owns, rather than interpreting `joint.N.f-error` as the answer.
 
 Therefore production `at-position`, stall, tracking-error and downstream-authority supervision must come from the external controller/planner/drive-feedback architecture rather than assuming MOTMOD will trip on post-home extra-joint tracking disagreement.
@@ -66,6 +79,9 @@ Reject. Pinned source explicitly forces `ferror = 0` for homed extra joints.
 **Premise:** "The docs say motor feedback is ignored, so an external controller cannot monitor the encoder."  
 Reject. The statement is about MOTMOD ownership after homing. The HAL feedback source remains available to machine-specific logic if it is wired there.
 
+**Premise:** "`motor-pos-cmd` is nonzero, so the drive is authorized to move."  
+Reject. The post-home command can remain published independently of the joint amplifier-enable request. Command value and authority are separate.
+
 **Premise:** "If `amp-fault-in` remains false, tracking is therefore valid."  
 Reject. Amplifier fault and tracking validity are distinct witnesses.
 
@@ -77,14 +93,15 @@ Reject. Completion must remain bound to the current command episode and whatever
 The 3600 backgauge playbook should show a post-home extra-joint fault matrix with at least separate columns for:
 
 - homed/reference validity;
+- command value / TargetSet episode;
+- LinuxCNC joint enable request;
+- observed downstream readiness/authority where available;
 - hard limits;
 - amplifier/drive fault;
-- external command episode validity;
 - external tracking/convergence error;
-- downstream actuator readiness/authority where observable;
 - stale/frozen feedback detection;
 - completion/at-position.
 
-Do not label ordinary `joint.N.f-error` as the post-home extra-joint tracking monitor.
+Do not label ordinary `joint.N.f-error` as the post-home extra-joint tracking monitor, and do not infer actuation permission merely from `motor-pos-cmd`.
 
 No laboratory job is needed for this narrow question because the behavior is an explicit source branch, already consistent with the previously tested PB-BG ownership fixtures. A new lab would mostly re-encode the source condition rather than add independent information.

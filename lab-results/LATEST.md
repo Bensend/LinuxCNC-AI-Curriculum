@@ -1,32 +1,32 @@
 # Latest LinuxCNC Lab Result
 
-- Job: `086-pb-dxf-002-human-confirmation-recipe`
-- Job file: `lab-jobs/086-pb-dxf-002-human-confirmation-recipe.sh`
-- Workflow run ID: `34669718957`
+- Job: `087-pb-dxf-003-gaugeplan-provenance`
+- Job file: `lab-jobs/087-pb-dxf-003-gaugeplan-provenance.sh`
+- Workflow run ID: `34669836019`
 - Attempt: `1`
-- Source commit: `38a5a0775539b65f6d7c3abf7627fd5174e8bc25`
+- Source commit: `5b2fb70022b542c431e3e677a7ebd4690e0f8e98`
 - Exit code: `0`
-- Finished UTC: `2026-09-12T03:12:11Z`
+- Finished UTC: `2026-09-12T03:14:46Z`
 
 ## Metadata
 ```text
 LinuxCNC AI Curriculum Lab
-UTC start: 2026-09-12T03:12:11Z
-Repository commit: 38a5a0775539b65f6d7c3abf7627fd5174e8bc25
-Workflow run: 34669718957 attempt 1
-Job file: lab-jobs/086-pb-dxf-002-human-confirmation-recipe.sh
+UTC start: 2026-09-12T03:14:46Z
+Repository commit: 5b2fb70022b542c431e3e677a7ebd4690e0f8e98
+Workflow run: 34669836019 attempt 1
+Job file: lab-jobs/087-pb-dxf-003-gaugeplan-provenance.sh
 Runner: Linux runnervmlun5p 6.17.0-1022-azure #22-Ubuntu SMP Mon Jul 27 17:24:03 UTC 2026 x86_64 x86_64 x86_64 GNU/Linux
 Inner lab timeout: 70 minutes (job ceiling: 75 minutes)
 
-UTC finish: 2026-09-12T03:12:11Z
+UTC finish: 2026-09-12T03:14:46Z
 ```
 
 ## Standard output
 ```text
 {
-  "contract": "PB-DXF-002",
+  "contract": "PB-DXF-003",
   "course_level": 3600,
-  "records": 10,
+  "records": 8,
   "gates": {
     "A": true,
     "B": true,
@@ -41,9 +41,9 @@ UTC finish: 2026-09-12T03:12:11Z
   },
   "prediction_match": true,
   "forbidden_output_keys_present": [],
-  "boundary": "application confirmation/recipe-state semantics only; no gauge planning, machine motion, tooling, collision, hydraulic, or functional-safety evidence"
+  "boundary": "GaugePlan provenance/invalidation only; no numeric targets or machine authority"
 }
-PB-DXF-002 PASS: human-confirmation/recipe identity contract only; no machine authority modeled.
+PB-DXF-003 PASS: GaugePlan provenance/invalidation contract only.
 ```
 
 ## Standard error

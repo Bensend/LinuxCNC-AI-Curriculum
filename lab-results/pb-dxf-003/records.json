@@ -1,0 +1,195 @@
+[
+  {
+    "phase": "P0",
+    "action": "accept",
+    "step": {
+      "step_id": "S1",
+      "bend_id": "B1",
+      "ordinal": 1,
+      "rev": "R1",
+      "validation": "ACCEPTED"
+    },
+    "plan": {
+      "gauge_plan_id": "GP1",
+      "step_id": "S1",
+      "bend_id": "B1",
+      "rev": "R1",
+      "datum_id": "D1",
+      "datum_provenance": "entity:E17",
+      "mechanisms": [
+        "X"
+      ],
+      "validation": "ACCEPTED",
+      "reason": "NONE"
+    }
+  },
+  {
+    "phase": "P1",
+    "action": "reorder",
+    "step": {
+      "step_id": "S1",
+      "bend_id": "B1",
+      "ordinal": 3,
+      "rev": "R1",
+      "validation": "ACCEPTED"
+    },
+    "plan": {
+      "gauge_plan_id": "GP1",
+      "step_id": "S1",
+      "bend_id": "B1",
+      "rev": "R1",
+      "datum_id": "D1",
+      "datum_provenance": "entity:E17",
+      "mechanisms": [
+        "X"
+      ],
+      "validation": "ACCEPTED",
+      "reason": "NONE"
+    }
+  },
+  {
+    "phase": "P2",
+    "action": "no_datum",
+    "step": {
+      "step_id": "S2",
+      "bend_id": "B2",
+      "ordinal": 1,
+      "rev": "R1",
+      "validation": "ACCEPTED"
+    },
+    "plan": {
+      "gauge_plan_id": "GP2",
+      "step_id": "S2",
+      "bend_id": "B2",
+      "rev": "R1",
+      "datum_id": "UNASSIGNED",
+      "datum_provenance": "",
+      "mechanisms": [
+        "X"
+      ],
+      "validation": "REVIEW_REQUIRED",
+      "reason": "DATUM_UNASSIGNED"
+    }
+  },
+  {
+    "phase": "P3",
+    "action": "step_invalidated",
+    "step": {
+      "step_id": "S1",
+      "bend_id": "B1",
+      "ordinal": 3,
+      "rev": "R1",
+      "validation": "REVIEW_REQUIRED"
+    },
+    "plan": {
+      "gauge_plan_id": "GP1",
+      "step_id": "S1",
+      "bend_id": "B1",
+      "rev": "R1",
+      "datum_id": "D1",
+      "datum_provenance": "entity:E17",
+      "mechanisms": [
+        "X"
+      ],
+      "validation": "REVIEW_REQUIRED",
+      "reason": "STEP_REVIEW_REQUIRED"
+    }
+  },
+  {
+    "phase": "P4",
+    "action": "reimport_no_datum_remap",
+    "step": {
+      "step_id": "S1",
+      "bend_id": "B1",
+      "ordinal": 3,
+      "rev": "R2",
+      "validation": "ACCEPTED"
+    },
+    "plan": {
+      "gauge_plan_id": "GP1",
+      "step_id": "S1",
+      "bend_id": "B1",
+      "rev": "R1",
+      "datum_id": "D1",
+      "datum_provenance": "entity:E17",
+      "mechanisms": [
+        "X"
+      ],
+      "validation": "REVIEW_REQUIRED",
+      "reason": "DATUM_REMAP_REQUIRED"
+    }
+  },
+  {
+    "phase": "P5",
+    "action": "trusted_remap_proposed",
+    "step": {
+      "step_id": "S1",
+      "bend_id": "B1",
+      "ordinal": 3,
+      "rev": "R2",
+      "validation": "ACCEPTED"
+    },
+    "plan": {
+      "gauge_plan_id": "GP1",
+      "step_id": "S1",
+      "bend_id": "B1",
+      "rev": "R1",
+      "datum_id": "D1",
+      "datum_provenance": "entity:E17",
+      "mechanisms": [
+        "X"
+      ],
+      "validation": "REVIEW_REQUIRED",
+      "reason": "TRUSTED_DATUM_REBIND_REQUIRED"
+    }
+  },
+  {
+    "phase": "P5",
+    "action": "explicit_revalidate",
+    "step": {
+      "step_id": "S1",
+      "bend_id": "B1",
+      "ordinal": 3,
+      "rev": "R2",
+      "validation": "ACCEPTED"
+    },
+    "plan": {
+      "gauge_plan_id": "GP1",
+      "step_id": "S1",
+      "bend_id": "B1",
+      "rev": "R2",
+      "datum_id": "D1",
+      "datum_provenance": "entity:E44",
+      "mechanisms": [
+        "X"
+      ],
+      "validation": "ACCEPTED",
+      "reason": "NONE"
+    }
+  },
+  {
+    "phase": "P6",
+    "action": "mechanism_change",
+    "step": {
+      "step_id": "S1",
+      "bend_id": "B1",
+      "ordinal": 3,
+      "rev": "R2",
+      "validation": "ACCEPTED"
+    },
+    "plan": {
+      "gauge_plan_id": "GP1",
+      "step_id": "S1",
+      "bend_id": "B1",
+      "rev": "R2",
+      "datum_id": "D1",
+      "datum_provenance": "entity:E44",
+      "mechanisms": [
+        "X",
+        "R"
+      ],
+      "validation": "REVIEW_REQUIRED",
+      "reason": "MECHANISM_SET_CHANGED"
+    }
+  }
+]

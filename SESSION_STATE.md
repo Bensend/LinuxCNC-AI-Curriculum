@@ -1,8 +1,8 @@
 # Active Curriculum Session State
 
 Session start UTC: `2026-09-12T20:11:57Z`
-Session end UTC: `2026-09-12T20:14:01Z`
-Actual elapsed: **2.1 minutes**
+Session end UTC: `2026-09-12T20:14:42Z`
+Actual elapsed: **2.8 minutes**
 Status: **CLOSED — F02 external gate preserved; binary press-cycle sensor semantics and retract ownership source-traced.**
 
 ## Critical path

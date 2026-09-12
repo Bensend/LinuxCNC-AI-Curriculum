@@ -27,11 +27,17 @@ Classification: COMMUNITY-REPORTED; not a source-level prescription.
 
 ### Pinned LinuxCNC measurement path
 
-The current upstream HostMot2 documentation and source expose encoder measurement directly as HAL data. `hostmot2.9` defines encoder `position` as scaled counts and warns that `position-interpolated` is an estimate useful in narrow cases and should not be used for position control. `src/hal/drivers/mesa-hostmot2/encoder.c` updates the ordinary measured `position` and derives the interpolated value separately when appropriate.
+Pinned LinuxCNC revision for the source-level claims in this section:
 
-This means LinuxCNC already has a natural representation for a measurement-only transducer: a **HAL signal sourced by the actual acquisition path**, without inventing a commanded motion joint.
+`8bf4605ae81042248add031e94c77300406e0413`
 
-For the curriculum’s pinned source discipline, any eventual implementation must re-check these semantics against the exact deployed LinuxCNC commit rather than relying on current-master behavior.
+At that exact revision, `docs/src/man/man9/hostmot2.9.adoc` defines HostMot2 encoder `position` as encoder count divided by scale. It defines `position-interpolated` separately, says it is valid only when velocity is approximately constant and the time between counts is below the velocity-timeout boundary, and explicitly states: **do not use for position control**.
+
+At the same revision, `src/hal/drivers/mesa-hostmot2/encoder.c` keeps ordinary measured `position` and `position-interpolated` as separate HAL outputs. On a new encoder event it updates raw counts/position and resets interpolated position to the measured position; interpolation/velocity estimation is handled separately between events. Direction reversals around one edge are treated specially because the velocity estimate can become misleading.
+
+This means LinuxCNC already has a natural representation for a measurement-only transducer: a **HAL signal sourced by the actual acquisition path**, without inventing a commanded motion joint. The interpolation caveat is not a current-master-only observation; it is verified at the curriculum’s pinned source baseline.
+
+Any eventual deployed implementation must still re-check semantics against its exact installed LinuxCNC build/package if that differs from the curriculum pin.
 
 ## Core architecture result
 
@@ -134,13 +140,13 @@ Without this evidence, the correct status is **SOURCE/IMPLEMENTATION UNAVAILABLE
 3. **“HostMot2 encoder position changed, so the bent part angle changed.”** Only true if the sensor’s mechanical coupling, scaling, provenance and phase validity are independently established.
 4. **“A post-release 2° error means increase global material overbend by 2°.”** Not justified; first determine correction scope and whether tooling, thickness, setup, calibration or sensor error explains the residual.
 5. **“Sensor bending exists commercially, so a realtime angle PID is the obvious implementation.”** Unsupported. Public product material exposes the feature surface, not its control topology.
-6. **“Use `position-interpolated` for smoother angle control.”** HostMot2 documentation explicitly warns not to use that interpolated encoder output for position control; a sensor-bending design needs a source-specific measurement/filtering contract instead.
+6. **“Use `position-interpolated` for smoother angle control.”** The pinned HostMot2 documentation explicitly warns not to use that interpolated encoder output for position control; a sensor-bending design needs a source-specific measurement/filtering contract instead.
 
 ## Evidence classification
 
 - Commercial availability of protractor/angle/sensor-bending correction: **DOC-CONFIRMED**.
 - LinuxCNC field desire for a measurement-only press-brake scale and difficulty forcing it into joint semantics: **COMMUNITY-REPORTED**.
-- HostMot2 encoder measurement as independent HAL position output, and interpolation caveat: **SOURCE/DOC-CONFIRMED** for inspected upstream source/docs.
+- HostMot2 encoder measurement as independent HAL position output, and interpolation caveat: **SOURCE/DOC-CONFIRMED at LinuxCNC `8bf4605ae81042248add031e94c77300406e0413`**.
 - Recommended `BendMeasurement` provenance wrapper: **ENGINEERING INFERENCE** derived from 2000-series freshness/generation evidence and current 3600 provenance contracts.
 - Generic realtime closed-loop angle-correction topology: **UNKNOWN / SOURCE UNAVAILABLE** in this pass.
 

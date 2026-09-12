@@ -1,38 +1,39 @@
 # Active Curriculum Session State
 
-Session start UTC: `2026-09-12T15:14:29Z`
-Session end UTC: `2026-09-12T15:17:51Z`
-Actual elapsed: **3.4 minutes**
-Status: **CLOSED — F02 external gate preserved; 3600 gravity-loaded auxiliary-axis brake/PID authority field failure reconciled with stock LinuxCNC source.**
+Session start UTC: `2026-09-12T16:10:24Z`
+Session end UTC: `2026-09-12T16:11:43Z`
+Actual elapsed: **1.3 minutes**
+Status: **CLOSED — F02 external gate preserved; 3600 tandem field topology and custom-firmware/amp authority layering advanced.**
 
 ## Critical path
 
-`handoffs/F02-fresh-ai-compound-fault-transfer.md` remains **PREPARED / UNSCORED**. Repository code/issue checks found no correctly routed information-separated F02 evaluator response. F02 remains the sole known 2000-series graduation gate and was not self-scored.
+`handoffs/F02-fresh-ai-compound-fault-transfer.md` remains **PREPARED / UNSCORED**. Repository issue search found no correctly routed information-separated F02 evaluator response. F02 remains the sole known 2000-series graduation gate and was not self-scored.
 
 ## Work completed
 
 New durable artifacts:
 
-- `research/3600-gravity-axis-brake-pid-authority-field-failure-2026-09-12.md`
-- `checkpoints/3600-gravity-axis-brake-authority-next-2026-09-12.md`
+- `research/3600-pwmgen-firmware-amp-enable-layering-2026-09-12.md`
+- `research/3600-tandem-y1-y2-field-architecture-update-2026-09-12.md`
+- `checkpoints/3600-tandem-field-topology-next-2026-09-12.md`
 
-A public Ursviken/Pullmax press-brake retrofit chronology supplies a concrete gravity-loaded R-axis failure case: with a mechanical holding brake preventing expected motion while closed-loop authority remained active, persistent position error drove the DC servo until it overheated and was destroyed. The same field chronology later records brake logic momentarily re-applying during sufficiently slow commanded motion and a separate feedback/hard-stop high-power event. These observations remain **COMMUNITY-REPORTED**; the exact machine configuration attachment is not publicly inspectable from the source used here.
+Continuing through the later Ursviken/Pullmax retrofit chronology produced genuinely new field evidence. In February 2026 the builder reported initial closed-loop left/right ram synchronization using per-side cascaded position/velocity control, though with hydraulic groaning and tuning uncertainty. By July 2026 the builder reported an actual 90-degree steel bend and disclosed the higher-level final topology: two position PIDs, one per side, plus a synchronization PID with command 0 and feedback from Y1−Y2; the synchronization correction was described as slowing whichever side is ahead. This is now classified **COMMUNITY-REPORTED FIELD SUCCESS WITH DISCLOSED HIGH-LEVEL TOPOLOGY**, not source-confirmed final implementation.
 
-Pinned LinuxCNC source at `f325d51f52da7d5e0e227ac35e3672ee6f873b4f`, `src/hal/components/pid.c`, confirms the controlling software boundary. While enabled, PID computes from command/feedback and its configured limits. Its anti-windup behavior is tied to its own `maxoutput` limit state, and `pid.N.saturated`/duration/count report that internal clipping state. They do not prove mechanical brake release, amplifier readiness, external current/torque saturation, freedom from a hard stop, encoder validity, or actual actuator motion. Disabling PID resets its integral accumulator and forces output to zero, but does not by itself validate those downstream states.
+The same chronology also exposed a useful electrical authority boundary. PCW reported that this machine's custom firmware used PWMGEN 0 to enable all 7i54 PWMgens, while stock LinuxCNC `pwmgen.c` at `f325d51f52da7d5e0e227ac35e3672ee6f873b4f` creates per-instance HAL enable pins and constructs the enable register as a per-instance bitmask. The reconciliation is that custom FPGA physical routing can couple outputs differently from generic HostMot2 software semantics. The builder separately planned a discrete R-axis Cybelec amplifier enable while leaving shared PWM availability tied to machine-on.
 
-The 3600 ordinary-control model therefore now makes **mechanical holding-brake state/authority explicit and separate** from position/TargetSet demand, PID output, LinuxCNC enable request, amplifier readiness/fault, feedback freshness/tracking, limits, and completion.
+The ordinary-control authority chain is therefore explicitly layered: HAL command/enable → HostMot2 registers → FPGA firmware routing → physical output stage → external amplifier readiness → mechanical brake state → actuator motion/feedback. No earlier layer proves a later one.
 
-A 5/5 adversarial boundary check passed. No synthetic laboratory run was launched: the software mechanism is directly inspectable in stock LinuxCNC source, while a software-only fixture cannot validate physical brake or motor thermal behavior. Laboratory compute is unchanged.
+Adversarial checks passed 5/5 for the enable-layering trace and 6/6 for the tandem topology boundary. No new synthetic lab was launched because prose-only field disclosures cannot establish the missing final realtime wiring or physical authority semantics. Laboratory compute is unchanged.
 
 ## Next checkpoint
 
 1. Re-check F02 first and preserve evaluator identity/header plus the full response before changing F02 status.
 2. Correctly routed F02 PASS/no corrections closes F02 and the 2000 series; do not self-certify it.
-3. If F02 remains blocked, reopen the gravity-axis/brake branch only for a complete inspectable config/component exposing brake release/engage, drive readiness/enable, stall/tracking, homing and recovery semantics; do not invent universal delay/current/stall values.
-4. Keep PID saturation classified as an internal controller witness unless downstream evidence explicitly establishes more.
-5. Preserve the prior source gates for tandem Y1/Y2, active sensor bending, and explicit-datum tooling/gauging-surface backgauge target calculation.
-6. Preserve PB-PREP-001 as **INCONCLUSIVE / NO ARCHITECTURE RECOMMENDATION** and do not launch another ownership-only synthetic fixture merely to consume a lesson.
+3. If F02 remains blocked, the tandem branch should reopen only if the promised final config or equivalent inspectable HAL/component source appears.
+4. Required missing tandem details remain exact correction insertion/sign, realtime ordering, output/saturation limits, process-state gating, feedback freshness/disagreement, fault ownership and recovery.
+5. Preserve custom-firmware authority layering; never infer physical output independence from stock HostMot2 per-instance enables when custom firmware is used.
+6. PB-PREP-001 remains **INCONCLUSIVE / NO ARCHITECTURE RECOMMENDATION**.
 
-Overlap: **No overlap.** Previous completed canonical lesson ended `2026-09-12T14:16:01Z`; this session began `2026-09-12T15:14:29Z`, **58m28s later**.
+Overlap: **No overlap.** Previous completed canonical lesson ended `2026-09-12T15:17:51Z`; this session began `2026-09-12T16:10:24Z`, **52m33s later**.
 
-Short-session continuation check: after the initial allowed-source search, this session continued into a new field-failure trace, pinned LinuxCNC PID source reconciliation, failure-path analysis, and adversarial boundary checks. Further same-branch work is source-gated by the missing complete public brake/drive/stall implementation rather than by lack of a synthetic fixture.
+Short-session continuation check: rather than stopping after the initial source-gated recheck, the session continued through the remaining public retrofit thread pages and found materially new July 2026 field topology evidence. Further work is now gated by the promised but not-yet-inspectable final configuration rather than lack of another synthetic experiment.

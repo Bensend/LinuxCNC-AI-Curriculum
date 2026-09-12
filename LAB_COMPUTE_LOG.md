@@ -74,14 +74,16 @@ If a run is cancelled, times out, is harness-invalid, or fails substantively, st
 | 2026-09-11 | PB-PREP-001 072 scoped-observability correction preflight | `34554444939` | `103123986052` | 2026-09-11T02:23:42Z | 2026-09-11T02:23:51Z | 0.15 | HARNESS INVALID | Cheap preflight refused ambiguous global sampler-tap replacement because target occurs in both oldnets and newnets; no LinuxCNC execution. |
 | 2026-09-11 | PB-PREP-001 078 isolated frozen architecture-B execution | `34569046910` | `103167029904` | 2026-09-11T06:13:47Z | 2026-09-11T07:23:57Z | 70.17 | COMPLETE B TRACE / WORKFLOW TIMEOUT | Retained B evidence contains 12,000 rows with zero recorder overruns. Workflow exited 124 after full B retention. Independent raw parse found no P6 final saturation and no stock-PID saturation, triggering the pre-frozen B/P6 => INCONCLUSIVE discriminator; no retuning permitted. |
 | 2026-09-11 | M66-TIMEOUT-001 run 079 stale-wait regression | `34593401753` | `103243588697` | 2026-09-11T11:18:50Z | 2026-09-11T11:21:57Z | 3.12 | PASS / STALE-WAIT INTERACTION CONFIRMED | Frozen control G4=0.505165 s; experimental M66 RISE timeout then G4 completed at 0.311439 s when stale input went HIGH at 0.301064 s; delta=-0.193726 s crossed the pre-frozen confirmation threshold. Stock loopback Task/interpreter evidence only. |
+| 2026-09-12 | PB-BG-003 run 083 generic-health harness | `34664318311` | `103473039987` | 2026-09-12T01:16:17.8408261Z | 2026-09-12T01:16:24.0427350Z | 0.10 | HARNESS INVALID | Workflow succeeded, but independent raw audit found that implementation collapsed the frozen reference/authority/drive/feedback/joint-fault witnesses into one generic health bit. Retained as construction/provenance evidence only; no PB-BG-003 behavioral PASS claim. |
+| 2026-09-12 | PB-BG-003 run 084 separated-witness correction | `34664404337` | `103473294403` | 2026-09-12T01:18:01.1560696Z | 2026-09-12T01:18:05.4780000Z | 0.07 | PASS / TEST-CONFIRMED STATE CONTRACT | Corrected pure-software harness retained distinct reference, ordinary-authorization, drive, feedback and controller-fault-clear inputs. 28-row trace independently audited against unchanged frozen Gates A-J. No physical-machine, hardware or functional-safety claim. |
 ## Running totals
 
 Keep these totals current whenever new rows are added:
 
-- **Exactly backfilled lab compute:** 267.26 min (4.45 h)
-- **Total lab compute used:** 4.45 h + unbackfilled historical usage
+- **Exactly backfilled lab compute:** 267.43 min (4.46 h)
+- **Total lab compute used:** 4.46 h + unbackfilled historical usage
 - **Remaining from 120 h first-draft allowance:** unknown until historical backfill
-- **Current-day exactly backfilled lab compute (2026-09-11):** 86.61 min (1.44 h) + unbackfilled same-day historical usage
+- **Current-day exactly backfilled lab compute (2026-09-12):** 0.17 min (0.00 h) + unbackfilled same-day historical usage
 
 ## Immediate backfill queue
 

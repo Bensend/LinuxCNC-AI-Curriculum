@@ -8,25 +8,41 @@ Pinned LinuxCNC: `8bf4605ae81042248add031e94c77300406e0413`
 
 After a press-brake X/R/Z-style mechanism is modeled as a homed LinuxCNC extra joint and motion ownership transfers to `joint.N.posthome-cmd`, which ordinary MOTMOD fault witnesses still retain meaning?
 
+## Documentation boundary
+
+Pinned `motion.9` states that after an extra joint is homed, control transfers to `joint.N.posthome-cmd` and the motor feedback value is ignored by MOTMOD for the extra-joint motion function. It also says extra joints must be managed by independent motion planners/controllers, typically `limit3`-based.
+
+That is an ownership statement, not a claim that the encoder signal disappears from HAL. A machine-specific external controller can still consume its physical feedback signal; it just must not assume MOTMOD's normal post-home following-error machinery is supervising that externally owned motion.
+
 ## Pinned source result
 
 `src/emc/motion/control.c::process_inputs()` explicitly distinguishes homed extra joints from ordinary kinematic joints when calculating following error:
 
-- if `IS_EXTRA_JOINT(joint_num)` and the joint is homed, `joint->ferror` is forced to zero with the source comment `not relevant for homed extrajoints`;
+- `motor_pos_fb` is still read and converted into the joint feedback representation;
+- if `IS_EXTRA_JOINT(joint_num)` and the joint is homed, `joint->ferror` is then forced to zero with the source comment `not relevant for homed extrajoints`;
 - otherwise following error is `pos_cmd - pos_fb` and is checked against the normal velocity-scaled/floor limit;
 - in the same per-joint input pass, hard-limit states are still read;
 - `joint.N.amp-fault-in` is still read and mapped to the joint fault flag.
 
 Later, `check_for_faults()` independently trips enabled active joints for amplifier fault, hard limit, or following error. Because homed extra-joint ferror is deliberately zero, the MOTMOD following-error branch cannot be treated as post-home tracking/stall supervision for an extra-joint backgauge.
 
+## Post-home command publication
+
+Later in `emcmotController()`, the normal joint command is initially published, but a homed extra joint then overrides `joint.N.motor-pos-cmd` with:
+
+`joint.N.posthome-cmd + motor_offset`.
+
+That explicit pass-through makes the ownership transfer concrete: after homing, the external planner supplies the positional command surface while MOTMOD retains reference/enable/limit/fault plumbing rather than owning normal tracking control for that extra joint.
+
 ## Consequence for press-brake backgauge architecture
 
 For a homed extra joint driven from an external bounded planner through `posthome-cmd`:
 
-- LinuxCNC still provides reference state and motor feedback surfaces;
+- LinuxCNC still provides reference state and HAL feedback surfaces;
 - hard-limit inputs remain meaningful;
 - amplifier fault input remains meaningful if machine hardware/HAL drives it;
-- ordinary MOTMOD following error is intentionally not a tracking witness after homing.
+- ordinary MOTMOD following error is intentionally not a tracking witness after homing;
+- an external tracking supervisor should use the actual feedback signal and the external command/episode provenance it owns, rather than interpreting `joint.N.f-error` as the answer.
 
 Therefore production `at-position`, stall, tracking-error and downstream-authority supervision must come from the external controller/planner/drive-feedback architecture rather than assuming MOTMOD will trip on post-home extra-joint tracking disagreement.
 
@@ -46,6 +62,9 @@ The Ursviken backgauge diary includes a real stalled/locked-axis history. Combin
 
 **Premise:** "A homed extra joint still has `joint.N.f-error`, so MOTMOD will stop it if `posthome-cmd` is not followed."  
 Reject. Pinned source explicitly forces `ferror = 0` for homed extra joints.
+
+**Premise:** "The docs say motor feedback is ignored, so an external controller cannot monitor the encoder."  
+Reject. The statement is about MOTMOD ownership after homing. The HAL feedback source remains available to machine-specific logic if it is wired there.
 
 **Premise:** "If `amp-fault-in` remains false, tracking is therefore valid."  
 Reject. Amplifier fault and tracking validity are distinct witnesses.

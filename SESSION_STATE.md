@@ -1,40 +1,38 @@
 # Active Curriculum Session State
 
-Session start UTC: `2026-09-12T14:12:03Z`
-Session end UTC: `2026-09-12T14:16:01Z`
-Actual elapsed: **4.0 minutes**
-Status: **CLOSED — F02 external gate preserved; 3600 tooling-aware gauge workflow evidence integrated without inventing implementation detail.**
+Session start UTC: `2026-09-12T15:14:29Z`
+Session end UTC: **pending final timing append**
+Actual elapsed: **pending**
+Status: **ACTIVE — F02 external gate preserved; 3600 gravity-loaded auxiliary-axis brake/PID authority field failure reconciled with stock LinuxCNC source.**
 
 ## Critical path
 
-`handoffs/F02-fresh-ai-compound-fault-transfer.md` remains **PREPARED / UNSCORED**. A repository search found no correctly routed information-separated F02 evaluator response. F02 remains the sole known 2000-series graduation gate and was not self-scored.
+`handoffs/F02-fresh-ai-compound-fault-transfer.md` remains **PREPARED / UNSCORED**. Repository code/issue checks found no correctly routed information-separated F02 evaluator response. F02 remains the sole known 2000-series graduation gate and was not self-scored.
 
 ## Work completed
 
 New durable artifacts:
 
-- `research/3600-commercial-tooling-gauge-workflow-boundary-2026-09-12.md`
-- `checkpoints/3600-tooling-gauge-workflow-next-2026-09-12.md`
+- `research/3600-gravity-axis-brake-pid-authority-field-failure-2026-09-12.md`
+- `checkpoints/3600-gravity-axis-brake-authority-next-2026-09-12.md`
 
-Official LVD CADMAN-B documentation confirms a production workflow that combines product geometry, actual press-brake bend interface/tooling data, bend allowance/unfold preparation, tool and bend-sequence selection, automatic gauge positioning, and 3D collision simulation. Official Delem documentation independently confirms automatic axis-position computation, machine/tool-scale bend simulation, X1-X2 angle programming, and separate sensor-bending/correction and tandem capabilities/options.
+A public Ursviken/Pullmax press-brake retrofit chronology supplies a concrete gravity-loaded R-axis failure case: with a mechanical holding brake preventing expected motion while closed-loop authority remained active, persistent position error drove the DC servo until it overheated and was destroyed. The same field chronology later records brake logic momentarily re-applying during sufficiently slow commanded motion and a separate feedback/hard-stop high-power event. These observations remain **COMMUNITY-REPORTED**; the exact machine configuration attachment is not publicly inspectable from the source used here.
 
-This evidence strengthens a **workflow/provenance requirement only**. The documentation does not expose the actual gauging-surface/tooling -> X/R/Z transformation, function/call graph, solver equations, collision kernel, sensor-bending correction insertion/saturation/recovery, tandem Y1/Y2 realtime synchronization, or safety behavior. Those remain SOURCE UNAVAILABLE / UNKNOWN.
+Pinned LinuxCNC source at `f325d51f52da7d5e0e227ac35e3672ee6f873b4f`, `src/hal/components/pid.c`, confirms the controlling software boundary. While enabled, PID computes from command/feedback and its configured limits. Its anti-windup behavior is tied to its own `maxoutput` limit state, and `pid.N.saturated`/duration/count report that internal clipping state. They do not prove mechanical brake release, amplifier readiness, external current/torque saturation, freedom from a hard stop, encoder validity, or actual actuator motion. Disabling PID resets its integral accumulator and forces output to zero, but does not by itself validate those downstream states.
 
-The durable target-calculation contract should therefore retain the selected gauging/reference surface, datum convention, tool-set identity/revision, material/process revision, machine/backgauge kinematic convention, relevant finger/setup identity, calculation-engine revision, generated TargetSet, and collision/feasibility result as separately provenance-bearing state. Numeric target generation must not be conflated with collision-free feasibility.
+The 3600 ordinary-control model therefore now makes **mechanical holding-brake state/authority explicit and separate** from position/TargetSet demand, PID output, LinuxCNC enable request, amplifier readiness/fault, feedback freshness/tracking, limits, and completion.
 
-A 5/5 adversarial boundary check passed: capability documentation was not promoted to proprietary algorithm knowledge, simulation was not treated as a physical guarantee, and sensor/tandem options were not treated as open implementation evidence.
-
-No synthetic laboratory run was launched because the current information-gain stop explicitly prohibits equivalent ownership/calculator fixtures without new implementation evidence. Laboratory compute is unchanged.
+A 5/5 adversarial boundary check passed. No synthetic laboratory run was launched: the software mechanism is directly inspectable in stock LinuxCNC source, while a software-only fixture cannot validate physical brake or motor thermal behavior. Laboratory compute is unchanged.
 
 ## Next checkpoint
 
 1. Re-check F02 first and preserve evaluator identity/header plus the full response before changing F02 status.
 2. Correctly routed F02 PASS/no corrections closes F02 and the 2000 series; do not self-certify it.
-3. If F02 remains blocked, resume the backgauge calculation branch only for inspectable source exposing an actual gauging-surface/tooling -> target transformation or an independently reproducible implementation with explicit datums.
-4. Resume tandem Y1/Y2 only when source exposes correction insertion, downstream saturation/limits, realtime order, per-side ferror/fault/disable ownership.
-5. Resume active sensor bending only when source exposes measurement freshness/generation, process phase, correction authority/insertion, saturation and recovery.
-6. Do not add another generic calculator, interpolation fixture, or ownership-only synthetic lab merely to consume a lesson.
+3. If F02 remains blocked, reopen the gravity-axis/brake branch only for a complete inspectable config/component exposing brake release/engage, drive readiness/enable, stall/tracking, homing and recovery semantics; do not invent universal delay/current/stall values.
+4. Keep PID saturation classified as an internal controller witness unless downstream evidence explicitly establishes more.
+5. Preserve the prior source gates for tandem Y1/Y2, active sensor bending, and explicit-datum tooling/gauging-surface backgauge target calculation.
+6. Preserve PB-PREP-001 as **INCONCLUSIVE / NO ARCHITECTURE RECOMMENDATION** and do not launch another ownership-only synthetic fixture merely to consume a lesson.
 
-Overlap: **No overlap.** Previous completed canonical lesson ended `2026-09-12T13:10:58Z`; this session began `2026-09-12T14:12:03Z`, **61m05s later**.
+Overlap: **No overlap.** Previous completed canonical lesson ended `2026-09-12T14:16:01Z`; this session began `2026-09-12T15:14:29Z`, **58m28s later**.
 
-Short-session note: this run stopped below the usual ~15-minute continuation target because the permitted branch reached the existing information-gain boundary after a bounded fresh implementation search and a useful commercial-workflow provenance result. Further work in the same branch without new inspectable implementation evidence would violate the repository's explicit stop rule.
+Short-session continuation check: after the initial allowed-source search, this session continued into a new field-failure trace, pinned LinuxCNC PID source reconciliation, failure-path analysis, and adversarial boundary checks. Further same-branch work is source-gated by the missing complete public brake/drive/stall implementation rather than by lack of a synthetic fixture.

@@ -1,0 +1,294 @@
+[
+  {
+    "phase": "P0",
+    "action": "direct_accept",
+    "gp": {
+      "gid": "GP1",
+      "rev": "R1",
+      "mechanisms": [
+        "X"
+      ],
+      "validation": "ACCEPTED"
+    },
+    "targetset": {
+      "tid": "TS0",
+      "gid": "GP1",
+      "kind": "DIRECT_MACHINE_COORDINATE",
+      "method": "manual-v1",
+      "deps": {
+        "gp_rev": "R1",
+        "calibration": "C1"
+      },
+      "targets": {
+        "X": 100.0
+      },
+      "validation": "ACCEPTED",
+      "reason": "NONE",
+      "generation": 1
+    }
+  },
+  {
+    "phase": "P1",
+    "action": "calculated_accept",
+    "gp": {
+      "gid": "GP1",
+      "rev": "R1",
+      "mechanisms": [
+        "X"
+      ],
+      "validation": "ACCEPTED"
+    },
+    "targetset": {
+      "tid": "TS1",
+      "gid": "GP1",
+      "kind": "CALCULATED",
+      "method": "flange-x-demo-v1",
+      "deps": {
+        "gp_rev": "R1",
+        "calibration": "C1",
+        "tooling": "T1",
+        "bend_model": "B1"
+      },
+      "targets": {
+        "X": 95.0
+      },
+      "validation": "ACCEPTED",
+      "reason": "NONE",
+      "generation": 2
+    }
+  },
+  {
+    "phase": "P2",
+    "action": "calibration_changed",
+    "gp": {
+      "gid": "GP1",
+      "rev": "R1",
+      "mechanisms": [
+        "X"
+      ],
+      "validation": "ACCEPTED"
+    },
+    "targetset": {
+      "tid": "TS1",
+      "gid": "GP1",
+      "kind": "CALCULATED",
+      "method": "flange-x-demo-v1",
+      "deps": {
+        "gp_rev": "R1",
+        "calibration": "C1",
+        "tooling": "T1",
+        "bend_model": "B1"
+      },
+      "targets": {
+        "X": 95.0
+      },
+      "validation": "REVIEW_REQUIRED",
+      "reason": "DEPENDENCY_CHANGED:calibration",
+      "generation": 2
+    }
+  },
+  {
+    "phase": "P3",
+    "action": "numeric_coincidence_stale",
+    "gp": {
+      "gid": "GP1",
+      "rev": "R1",
+      "mechanisms": [
+        "X"
+      ],
+      "validation": "ACCEPTED"
+    },
+    "targetset": {
+      "tid": "TS2",
+      "gid": "GP1",
+      "kind": "CALCULATED",
+      "method": "flange-x-demo-v1",
+      "deps": {
+        "gp_rev": "R1",
+        "calibration": "C1",
+        "tooling": "T1",
+        "bend_model": "B1"
+      },
+      "targets": {
+        "X": 95.0
+      },
+      "validation": "REVIEW_REQUIRED",
+      "reason": "DEPENDENCY_CHANGED:calibration",
+      "generation": 2
+    }
+  },
+  {
+    "phase": "P3",
+    "action": "explicit_revalidate_same_number",
+    "gp": {
+      "gid": "GP1",
+      "rev": "R1",
+      "mechanisms": [
+        "X"
+      ],
+      "validation": "ACCEPTED"
+    },
+    "targetset": {
+      "tid": "TS2",
+      "gid": "GP1",
+      "kind": "CALCULATED",
+      "method": "flange-x-demo-v1",
+      "deps": {
+        "gp_rev": "R1",
+        "calibration": "C2",
+        "tooling": "T1",
+        "bend_model": "B1"
+      },
+      "targets": {
+        "X": 95.0
+      },
+      "validation": "ACCEPTED",
+      "reason": "NONE",
+      "generation": 3
+    }
+  },
+  {
+    "phase": "P4",
+    "action": "gp_invalid",
+    "gp": {
+      "gid": "GP1",
+      "rev": "R1",
+      "mechanisms": [
+        "X"
+      ],
+      "validation": "REVIEW_REQUIRED"
+    },
+    "targetset": {
+      "tid": "TS4",
+      "gid": "GP1",
+      "kind": "DIRECT_MACHINE_COORDINATE",
+      "method": "manual-v1",
+      "deps": {
+        "gp_rev": "R1",
+        "calibration": "C2"
+      },
+      "targets": {
+        "X": 100.0
+      },
+      "validation": "REVIEW_REQUIRED",
+      "reason": "GAUGEPLAN_REVIEW_REQUIRED",
+      "generation": 0
+    }
+  },
+  {
+    "phase": "P5",
+    "action": "coverage_mismatch",
+    "gp": {
+      "gid": "GP1",
+      "rev": "R1",
+      "mechanisms": [
+        "X",
+        "R"
+      ],
+      "validation": "ACCEPTED"
+    },
+    "targetset": {
+      "tid": "TS5",
+      "gid": "GP1",
+      "kind": "DIRECT_MACHINE_COORDINATE",
+      "method": "manual-v1",
+      "deps": {
+        "gp_rev": "R1",
+        "calibration": "C2"
+      },
+      "targets": {
+        "X": 100.0
+      },
+      "validation": "REVIEW_REQUIRED",
+      "reason": "MECHANISM_COVERAGE_MISMATCH",
+      "generation": 0
+    }
+  },
+  {
+    "phase": "P6",
+    "action": "cam_missing_compat",
+    "gp": {
+      "gid": "GP1",
+      "rev": "R1",
+      "mechanisms": [
+        "X"
+      ],
+      "validation": "ACCEPTED"
+    },
+    "targetset": {
+      "tid": "TS6",
+      "gid": "GP1",
+      "kind": "IMPORTED_CAM",
+      "method": "cam-import-v1",
+      "deps": {
+        "gp_rev": "R1",
+        "calibration": "C2",
+        "cam_package": "PK1"
+      },
+      "targets": {
+        "X": 91.0
+      },
+      "validation": "REVIEW_REQUIRED",
+      "reason": "CAM_PROVENANCE_INCOMPLETE",
+      "generation": 0
+    }
+  },
+  {
+    "phase": "P6",
+    "action": "cam_current_accept",
+    "gp": {
+      "gid": "GP1",
+      "rev": "R1",
+      "mechanisms": [
+        "X"
+      ],
+      "validation": "ACCEPTED"
+    },
+    "targetset": {
+      "tid": "TS6b",
+      "gid": "GP1",
+      "kind": "IMPORTED_CAM",
+      "method": "cam-import-v1",
+      "deps": {
+        "gp_rev": "R1",
+        "calibration": "C2",
+        "cam_package": "PK1",
+        "cam_compat": "MC1"
+      },
+      "targets": {
+        "X": 91.0
+      },
+      "validation": "ACCEPTED",
+      "reason": "NONE",
+      "generation": 4
+    }
+  },
+  {
+    "phase": "P7",
+    "action": "direct_still_provenanced",
+    "gp": {
+      "gid": "GP1",
+      "rev": "R1",
+      "mechanisms": [
+        "X"
+      ],
+      "validation": "ACCEPTED"
+    },
+    "targetset": {
+      "tid": "TS7",
+      "gid": "GP1",
+      "kind": "DIRECT_MACHINE_COORDINATE",
+      "method": "manual-v1",
+      "deps": {
+        "gp_rev": "R1",
+        "calibration": "C2"
+      },
+      "targets": {
+        "X": 101.0
+      },
+      "validation": "ACCEPTED",
+      "reason": "NONE",
+      "generation": 5
+    }
+  }
+]

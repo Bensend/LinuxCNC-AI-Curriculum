@@ -50,9 +50,9 @@ See `evaluation/BLIND_FEEDBACK_PROTOCOL.md` and `evaluation/FEEDBACK_SCORE_LOG.m
 
 ## Laboratory compute checkpoint
 
-The latest exactly reconciled ledger state is **268.13 minutes (4.47 h)** of exactly backfilled laboratory compute, including **0.87 minutes** exactly backfilled for 2026-09-12. Historical gaps still mean this is not a trustworthy full-project total.
+The authoritative ledger currently contains **338.56 minutes (5.64 h)** of exactly backfilled laboratory compute, including **0.87 minutes** exactly backfilled for 2026-09-12. Historical gaps still mean this is not a trustworthy full-project total.
 
-`LAB_COMPUTE_LOG.md` is authoritative for individual job timestamps. No laboratory compute was consumed in the 2026-09-12 tooling/material/measured-angle source pass.
+`LAB_COMPUTE_LOG.md` is authoritative for individual job timestamps. PB-PREP-001 historical runs 073–077 are already integrated there; do not append them again. No laboratory compute was consumed in the 2026-09-12 bend-calculation/table source passes.
 
 Latest lab result remains PB-BG-004 (`lab-jobs/089-pb-bg-004-targetset-runtime-episode.sh`), workflow `34670275431`, which passed frozen Gates A–J 10/10 under the narrow TargetSet-generation/runtime-episode boundary.
 
@@ -122,9 +122,15 @@ Current source/documentation pass adds explicit provenance for:
 Durable artifacts:
 
 - `research/press-brake-tooling-material-springback-ownership-2026-09-12.md`;
-- `research/press-brake-bend-technology-table-provenance-2026-09-12.md`.
+- `research/press-brake-bend-technology-table-provenance-2026-09-12.md`;
+- `research/press-brake-bend-allowance-public-source-audit-2026-09-12.md`;
+- `research/press-brake-empirical-bend-table-semantics-2026-09-12.md`.
 
-Pinned FreeCAD SheetMetal source demonstrates that K-factor standard is semantic state: material tables identify radius/thickness lookup plus ANSI/DIN convention, invalid/missing/ambiguous standards are rejected, and DIN values are normalized differently. A naked numeric K-factor is therefore not sufficient provenance. No universal K-factor, springback or press-Y formula is claimed.
+The public bend-calculation source audit adds two concrete failure classes. One calculator implements the conventional `BA = angle_rad*(R+K*T)` relation but permits a 180-degree endpoint where its tangent-based outside setback diverges. A second flat-pattern/DXF generator exposes K-factor and bend radius in its schema/UI while its actual geometry path ignores both and uses fixed `BD = 1.8*thickness`. Therefore calculation provenance must include the implementation/version and the **actual consumed-input set**, not merely values present in a UI or schema.
+
+The empirical-table pass shows that a "bend table" is not one portable semantic object. Public CAD documentation includes full/half deduction, compensation and actual-radius table meanings, explicit angle/datum semantics, and tooling-indexed lookup axes. Pinned FreeCAD SheetMetal source further shows lookup-engine provenance matters: at the same repository revision, the legacy unfold path uses a non-interpolating range/step lookup while the newer unfold path uses endpoint clamping plus piecewise-linear interpolation. With the workbench's own test table `{1:0.38, 3:0.43, 99:0.50}`, `R/T=4` yields `K=0.50` in the legacy path versus approximately `0.430729` in the newer path.
+
+A naked numeric K-factor, raw bend-table rows, or a project name without semantic/engine identity is therefore insufficient provenance. No universal K-factor, interpolation rule, springback or press-Y formula is claimed.
 
 ### Measured angle / sensor bending
 
@@ -144,13 +150,13 @@ The frozen tooling/angle adversarial review `exams/PB-DOMAIN-tooling-angle-adver
 
 ## Current information-gain stop
 
-Generic 3600 preparation has reached a deliberate information-gain stop. Do not extend synthetic ownership fixtures merely to create activity. Resume a branch only when real source/documentation resolves a concrete remaining implementation question.
+Generic 3600 preparation has reached a deliberate information-gain stop. Do not extend synthetic ownership fixtures, generic bend calculators, equivalent bend-table examples or toy interpolation fixtures merely to create activity. Resume a branch only when real source/documentation resolves a concrete remaining implementation question.
 
 Highest-value evidence opportunities are:
 
 1. a downloadable tandem Y1/Y2 implementation exposing scale producers, common commands, differential sign, exact correction insertion, downstream limits/saturation, addf order, per-side ferror and fault/disable behavior;
 2. a real sensor-bending implementation exposing acquisition freshness/generation, phase, correction authority, saturation and recovery;
-3. concrete public tooling/process calculation source that adds information beyond the established provenance contract.
+3. implementation-level process-calculation evidence such as measured-coupon fitting/table generation, a real flange/gauging-surface-to-backgauge target solver with explicit datums/tool geometry, or a production tooling/method calculator whose actual source consumes its declared tooling inputs.
 
 ## Exact next-work checkpoint
 
@@ -159,6 +165,7 @@ Highest-value evidence opportunities are:
 3. If F02 is still externally blocked, keep 3600 at the current information-gain stop unless genuinely new public implementation/source becomes available.
 4. Preserve PB-PREP-001 as INCONCLUSIVE / no architecture recommendation; do not retune its frozen discriminator.
 5. Preserve the measured-angle closed-loop topology as SOURCE UNAVAILABLE until real evidence resolves it.
-6. Do not invent target-machine hydraulic, tooling, material, pressure, springback, sensor-dynamics, stopping-performance, safety or acceptance-tolerance values.
+6. Preserve UNKNOWN for bend-table full/half semantics, angle convention, dimensional datum, calculation engine, interpolation/out-of-range policy or empirical origin whenever evidence does not establish them.
+7. Do not invent target-machine hydraulic, tooling, material, pressure, springback, sensor-dynamics, stopping-performance, safety or acceptance-tolerance values.
 
 Latest checkpoint artifact: `checkpoints/3600-tooling-angle-next-2026-09-12.md`.

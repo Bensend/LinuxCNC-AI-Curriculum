@@ -1,4 +1,3 @@
-# Verified lab-compute append request — 2026-09-12 PB-DXF-001/002
+# Verified lab-compute append request — 2026-09-12 PB-DXF-003
 
-| 2026-09-12 | PB-DXF-001 metadata importer fixture | `34666985713` | `103480777779` | 2026-09-12T02:11:57Z | 2026-09-12T02:12:03Z | 0.10 | PASS / TEST-CONFIRMED METADATA CONTRACT | Frozen metadata/provenance fixture passed Gates A-J 10/10. Six-second exact Actions job interval. No CAD-truth, gauge-planning, motion or functional-safety claim. |
-| 2026-09-12 | PB-DXF-002 human-confirmation recipe fixture | `34669718957` | `103488664098` | 2026-09-12T03:12:08Z | 2026-09-12T03:12:16Z | 0.13 | PASS / TEST-CONFIRMED APPLICATION-STATE CONTRACT | Frozen operator-confirmation/recipe identity fixture retained 10 state snapshots and passed Gates A-J 10/10. Eight-second exact Actions job interval. No gauge-planning, machine-motion, tooling, hydraulic or functional-safety claim. |
+| 2026-09-12 | PB-DXF-003 GaugePlan provenance fixture | `34669836019` | `103488990203` | 2026-09-12T03:14:42Z | 2026-09-12T03:14:51Z | 0.15 | PASS / TEST-CONFIRMED GAUGEPLAN STATE CONTRACT | Frozen GaugePlan provenance/invalidation fixture retained eight state snapshots and passed Gates A-J 10/10. Nine-second exact Actions job interval. No numeric target, machine-motion, tooling, hydraulic or functional-safety claim. |

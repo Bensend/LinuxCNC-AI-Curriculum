@@ -1,4 +1,4 @@
-# 3600 press-brake checkpoint — TargetSet provenance / runtime bridge
+# 3600 press-brake checkpoint — TargetSet / runtime-episode ownership closed
 
 Date: 2026-09-12
 
@@ -6,63 +6,63 @@ Date: 2026-09-12
 
 The sole remaining 2000-series graduation gate is the genuinely information-separated evaluation of `handoffs/F02-fresh-ai-compound-fault-transfer.md`. F02 is technically accepted; the current learner must not self-score that packet or expose learner-side answer material to its evaluator.
 
-## Newly closed 3600 preparation work
+## Closed 3600 preparation chain
 
 - PB-DXF-002 — human confirmation + recipe-step identity/invalidation: TEST-CONFIRMED, frozen Gates A-J 10/10.
 - PB-DXF-003 — GaugePlan datum/mechanism provenance + invalidation: TEST-CONFIRMED, frozen Gates A-J 10/10.
-- PB-DXF-004 — TargetCalculation/TargetSet provenance + runtime generation semantics: TEST-CONFIRMED, frozen Gates A-J 10/10.
+- PB-DXF-004 — TargetCalculation/TargetSet provenance + generation semantics: TEST-CONFIRMED, frozen Gates A-J 10/10.
+- PB-BG-004 — accepted TargetSet generation -> fresh runtime target episode, with fail-closed invalidation: TEST-CONFIRMED, frozen Gates A-J 10/10.
 
 Together with PB-DXF-001 and PB-BG-003, the staged ownership chain is now:
 
 `ImportedPart -> BendFeature -> BendStep -> GaugePlan -> TargetCalculation -> TargetSet generation -> runtime target episode -> bounded planner/controller -> extra-joint posthome-cmd`
 
-Do not add more synthetic state fixtures merely for volume.
+Do not add more synthetic ownership/state fixtures merely for volume.
 
 ## Source/documentation findings
 
-### LinuxCNC `limit3`
+Pinned LinuxCNC `limit3` is numeric command shaping, not authorization. With `enable=0`, its output returns toward zero under constraints instead of freezing the previous value. `load` can set the limited input immediately while bypassing velocity/acceleration limiting. Current TargetSet/episode authority must therefore remain separate from `limit3.enable` and `limit3.out`.
 
-Pinned source `8bf4605ae81042248add031e94c77300406e0413` confirms `limit3` is command shaping, not authorization. With `enable=0`, it drives its internal requested input to zero and moves `out` toward zero under constraints; it does not freeze the previous command. `load` bypasses velocity/acceleration limiting for a limited immediate set.
+FreeCAD SheetMetal provides inspectable bend-development math depending on radius, thickness, K-factor and bend angle. Official Cybelec CybTouch documentation confirms flange length and calculated X are separate concepts, with optional calculated R, machine-parameter backgauge geometry, recalculation and correction ownership. The public internal flange-to-X formula remains unavailable.
 
-Therefore keep current TargetSet/runtime authority separate from `limit3.enable` and from `limit3.out` plausibility.
+A bounded open-source search found no inspectable geometry-to-backgauge target solver meeting the evidence standard. Preserve this as SOURCE UNAVAILABLE rather than inventing a universal formula.
 
-### Target-calculation evidence
-
-FreeCAD SheetMetal provides inspectable bend-development math that depends on radius, thickness, K-factor and bend angle. This proves finished/flat geometry is not generally an identity transformation, but it is not a universal backgauge solver.
-
-Official Cybelec CybTouch documentation confirms a useful architectural separation: the operator may enter flange length while the controller calculates X; optional R can also be calculated; backgauge geometry comes from machine parameters; recalculation and corrections are separately managed. The internal flange-to-X formula is not exposed publicly enough to treat as a universal implementation.
-
-A bounded open-source search found no inspectable geometry-to-backgauge target solver meeting the curriculum's evidence standard. Preserve that as SOURCE UNAVAILABLE rather than inventing a formula.
-
-## PB-DXF-004 authoritative result
+## PB-DXF-004 result
 
 - workflow `34670122426`
 - job `103489793017`
-- source commit `3af3549b7ed5a0b852cd4d4067076e2f7cdcd22c`
 - artifact `10290852409`
-- exact Actions job interval `2026-09-12T03:21:01Z`–`03:21:11Z` = 0.17 min
-- retained snapshots: 10
+- exact interval `03:21:01Z`–`03:21:11Z` = 0.17 min
+- 10 retained snapshots
 - frozen Gates A-J: 10/10 PASS
 
-Key result: direct, calculated and imported-CAM targets remain distinct method classes; dependency changes revoke authority; identical numeric values do not restore authority; explicit current acceptance creates a new monotonically advancing application generation; mechanism coverage and GaugePlan validity remain prerequisites.
+Direct, calculated and imported-CAM target methods remain distinct; dependency changes revoke authority; numeric coincidence does not restore it; explicit current acceptance creates a new monotonically advancing TargetSet generation.
 
-Numeric values in the fixture are deliberately opaque and have no physical correctness claim.
+## PB-BG-004 result
+
+- workflow `34670275431`
+- job `103490218883`
+- source commit `fdb75f88bde3700ccf1306a4d16b9ed7e9843670`
+- artifact `10290233358`
+- exact interval `03:24:26Z`–`03:24:35Z` = 0.15 min
+- 14 retained snapshots
+- frozen Gates A-J: 10/10 PASS
+
+A current valid TargetSet generation plus explicit arm creates a fresh runtime episode. TargetSet invalidation, ordinary authorization loss, reference loss and feedback loss revoke current episode authority and completion. The same invalidated generation cannot be silently rearmed; a newer accepted generation plus explicit arm creates a new episode. Numeric equality has no authority role.
 
 ## Compute checkpoint
 
-Exactly backfilled lab compute is now **267.98 min (4.47 h)**; 2026-09-12 exactly backfilled subtotal is **0.72 min** plus explicitly unbackfilled same-day historical usage.
+Exactly backfilled lab compute is now **268.13 min (4.47 h)**. The exactly backfilled 2026-09-12 subtotal is **0.87 min (0.01 h)** plus explicitly unbackfilled historical usage.
 
 ## Exact next dependency-safe 3600 work
 
-If the F02 external transfer still has not arrived, bridge the now-accepted TargetSet generation into the already proven PB-BG-003 runtime episode semantics:
+If the F02 external transfer still has not arrived, stop extending the synthetic ownership chain. Resume source/community/domain work from the 3600 dependency map. Highest-value candidates are:
 
-1. a current accepted TargetSet generation may request a new runtime episode;
-2. any TargetSet/GaugePlan/calibration/authorization/reference invalidation clears current episode authority;
-3. revalidation must create a new TargetSet generation and then a new runtime episode; neither old generation nor old episode may be silently resurrected;
-4. `limit3` stays downstream as numeric shaping only;
-5. completion remains bound to the current runtime episode and independent feedback/at-position evidence.
+1. operator-facing bend-program execution/recovery workflow: step advance, hold/retry/skip/reconcile semantics and how target generations are regenerated after edits;
+2. machine-specific target/calibration/correction ownership using inspectable public configuration/manual evidence;
+3. another unresolved press-brake domain area such as homing/calibration, tooling/reachability, or sequence/collision workflow, selected by existing open-question priority.
 
-Do this as the smallest application/control-ownership integration. Do not add motor physics or a guessed flange-to-X formula.
+Prefer inspectable real implementation/source or authoritative documentation. Do not add motor physics, guessed hydraulic detail, or a guessed flange-to-X formula merely to extend simulation depth.
 
 ## Evidence boundary
 

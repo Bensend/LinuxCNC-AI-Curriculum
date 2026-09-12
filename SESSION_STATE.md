@@ -1,9 +1,9 @@
 # Active Curriculum Session State
 
 Session start UTC: `2026-09-12T15:14:29Z`
-Session end UTC: **pending final timing append**
-Actual elapsed: **pending**
-Status: **ACTIVE — F02 external gate preserved; 3600 gravity-loaded auxiliary-axis brake/PID authority field failure reconciled with stock LinuxCNC source.**
+Session end UTC: `2026-09-12T15:17:51Z`
+Actual elapsed: **3.4 minutes**
+Status: **CLOSED — F02 external gate preserved; 3600 gravity-loaded auxiliary-axis brake/PID authority field failure reconciled with stock LinuxCNC source.**
 
 ## Critical path
 

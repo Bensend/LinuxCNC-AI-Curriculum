@@ -49,23 +49,41 @@ Critically, two unfold engines at the **same pinned repository revision** use ma
 
 #### Legacy `SheetMetalUnfolder.py`
 
-`k_Factor` calls:
-
-`get_val_from_range(k_factor_lookup, innerRadius / thickness)`
-
-without enabling interpolation. `lookup.py::get_val_from_range(..., interpolate=False)` therefore behaves as a step/range lookup: it sorts the table, returns the first table value at/above an in-range query, and clamps beyond the high end to the last value. The source contains assertions for this behavior.
+`k_Factor` calls `get_val_from_range(k_factor_lookup, innerRadius / thickness)` without enabling interpolation. `lookup.py::get_val_from_range(..., interpolate=False)` sorts the table, returns the first table value at/above an in-range query, and clamps beyond the high end to the last value. The source contains assertions for this behavior.
 
 #### Newer `SheetMetalNewUnfolder.py`
 
-The newer lookup path consumes the same radius/thickness concept but source comments explicitly specify:
+The newer path consumes the same radius/thickness concept but explicitly uses:
 
-- below the lowest table ratio: first K-factor;
+- below the lowest ratio: first K-factor;
 - above the highest ratio: last K-factor;
 - between specified ratios: **piecewise linear interpolation**.
 
-This is an adversarially important correction: it would be wrong to say "FreeCAD SheetMetal uses linear interpolation" without naming the unfold engine/versioned path. Lookup policy is part of implementation provenance even inside one repository revision.
+This is an adversarially important correction: it is wrong to say "FreeCAD SheetMetal uses linear interpolation" without naming the unfold engine/versioned path. Lookup policy is part of implementation provenance even inside one repository revision.
 
 Classification: **SOURCE-CONFIRMED**.
+
+## Deterministic adversarial discriminator — same table, different engine result
+
+Using the source test table:
+
+`{ R/T 1 -> K 0.38, 3 -> 0.43, 99 -> 0.50 }`
+
+produces these engine-dependent results:
+
+| R/T query | Legacy range/step lookup | Newer linear lookup | Difference |
+|---:|---:|---:|---:|
+| 0.5 | 0.380000 | 0.380000 | 0 |
+| 2.0 | 0.430000 | 0.405000 | 0.025000 |
+| 3.0 | 0.430000 | 0.430000 | 0 |
+| 4.0 | 0.500000 | 0.430729 | 0.069271 |
+| 10.0 | 0.500000 | 0.435104 | 0.064896 |
+| 98.0 | 0.500000 | 0.499271 | 0.000729 |
+| 100.0 | 0.500000 | 0.500000 | 0 |
+
+The `R/T=4` case is especially diagnostic: identical table rows and identical input ratio yield `K=0.50` under the legacy engine but approximately `K=0.430729` under the newer engine. If the downstream bend allowance uses `(R + K*T)*angle`, this lookup difference directly changes developed length.
+
+This table was calculated from the two pinned source policies; it is deterministic source-level verification, not a claim that either policy is correct for a physical material.
 
 ## Main finding — a "bend table" is not one portable semantic object
 
@@ -139,7 +157,7 @@ Without table/source revision identity, reconciliation after empirical or toolin
 
 ### Case 6 — lookup-engine mismatch
 
-The same FreeCAD K-factor rows can produce different in-between values depending on whether the legacy range/step lookup or newer linear-interpolation engine is used. Row provenance alone is therefore insufficient.
+The same FreeCAD K-factor rows can produce materially different in-between values depending on legacy range/step versus newer linear lookup. Row provenance alone is insufficient.
 
 ### Case 7 — extrapolation assumption
 
@@ -156,16 +174,17 @@ A consumer that linearly extrapolates beyond a table boundary can disagree with 
 | Onshape public bend-table response exposes `SourceMicroversion` plus structured table data | SOURCE-CONFIRMED | High |
 | FreeCAD SheetMetal keys K-factor tables by radius/thickness and requires ANSI/DIN semantic identity | SOURCE-CONFIRMED | High |
 | FreeCAD legacy unfold uses non-interpolating range lookup while newer unfold uses piecewise-linear interpolation | SOURCE-CONFIRMED at pinned revision | High |
-| A project/repository name alone defines the interpolation policy | FALSIFIED by source trace | High |
+| Identical FreeCAD test rows can produce K=0.50 versus ~0.430729 at R/T=4 solely from engine policy | deterministic source-policy check | High |
+| A project/repository name alone defines interpolation policy | FALSIFIED by source trace | High |
 | Raw bend-table rows are portable without semantic/engine metadata | FALSIFIED | High |
 | A universal interpolation rule can be inferred across systems | UNKNOWN / unsupported | High confidence evidence insufficient |
 | These tables define production ram/backgauge targets by themselves | UNKNOWN / explicitly unsupported | High confidence evidence insufficient |
 
 ## Experiment / verification decision
 
-No new GitHub Actions experiment is justified. FreeCAD's implementation and source assertions already provide independently checkable behavior for the legacy lookup, while the newer source directly specifies its distinct interpolation path. A synthetic duplicate would not add meaningful evidence.
+No new GitHub Actions experiment is justified. FreeCAD's implementation and source assertions already provide independently checkable behavior for the legacy lookup, while the newer source specifies its distinct interpolation path. The deterministic cross-engine table above checks the practical consequence without consuming laboratory compute.
 
-The source trace itself served as adversarial verification and produced a correction: the initial broad statement that "FreeCAD SheetMetal clamps and linearly interpolates" was narrowed to the newer unfold engine, with legacy non-interpolating behavior recorded separately.
+The source trace served as adversarial verification and produced a correction: the initial broad statement that "FreeCAD SheetMetal clamps and linearly interpolates" was narrowed to the newer unfold engine, with legacy non-interpolating behavior recorded separately.
 
 Future experimental work becomes justified when there is an open measured-coupon **fitting/table-generation** algorithm or a real tool-aware backgauge/target solver whose transformations can be frozen and tested.
 

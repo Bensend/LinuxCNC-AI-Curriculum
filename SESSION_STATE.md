@@ -1,7 +1,9 @@
 # Active Curriculum Session State
 
 Session start UTC: `2026-09-13T03:11:23Z`
-Status: **CLOSEOUT IN PROGRESS — F02 external gate preserved; quantitative sensor-bending interface source advanced.**
+Session end UTC: `2026-09-13T03:15:58Z`
+Actual elapsed: **4.6 minutes**
+Status: **CLOSED — F02 external gate preserved; quantitative sensor-bending interface source advanced.**
 
 ## Critical path
 
@@ -28,3 +30,5 @@ A bounded repository search for producers/consumers returned interface/reference
 6. PB-PREP-001 remains **INCONCLUSIVE / NO ARCHITECTURE RECOMMENDATION**.
 
 Overlap: **No overlap.** Previous completed canonical lesson ended `2026-09-12T20:14:42Z`; this session began `2026-09-13T03:11:23Z`, **416m41s later**.
+
+Short-session continuation check: the fresh source was traced through the available interface declarations and a bounded producer/consumer search. That search returned duplicated declarations/reference material rather than the missing correction kernel. Further synthetic work would invent the missing implementation rather than verify it, so the documented information-gain stop applies.

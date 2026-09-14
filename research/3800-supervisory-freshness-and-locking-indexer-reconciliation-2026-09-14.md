@@ -186,21 +186,47 @@ The forum discussion also warns that continuously jogging a locking indexer can 
 
 Evidence classification: `COMMUNITY-REPORTED` field mechanism and control recommendation.
 
-## 7. Native LinuxCNC locking-indexer surface
+## 7. Native LinuxCNC locking-indexer surface and exact TP transaction
 
-Pinned/current LinuxCNC source exposes per-joint HAL pins for configured lockable joints:
+Pinned LinuxCNC source exposes per-joint HAL pins for configured lockable joints:
 
 - `joint.N.unlock` — Motion output requesting unlock;
 - `joint.N.is-unlocked` — Motion input reporting unlock state.
 
 `unlock_joints_mask` determines which joints receive those pins, and the homing path can mark a locking indexer with `HOME_UNLOCK_FIRST`.
 
+The pinned trajectory planner source closes the ordinary indexing-move transaction more precisely. An index move carries `indexer_jnum` on its trajectory segment. Before starting that segment, TP:
+
+1. asserts the rotary unlock request with `tpSetRotaryUnlock(indexer_jnum, 1)`;
+2. samples the physical unlock witness through `tpGetRotaryIsUnlocked(indexer_jnum)`;
+3. returns `TP_ERR_WAITING` and does not start the move until that witness becomes true.
+
+When the indexing segment finishes, TP does **not** immediately remove the finished segment. It first:
+
+1. deasserts the unlock request with `tpSetRotaryUnlock(indexer_jnum, 0)`;
+2. checks the same `is-unlocked` witness;
+3. while the witness still says unlocked, returns without completing/removing the segment;
+4. only falls through to normal segment completion after the witness becomes false.
+
+Therefore native locking-indexer motion is explicitly bracketed by the configured physical unlock witness:
+
+`unlock request -> wait is-unlocked=1 -> index motion -> lock request -> wait is-unlocked=0 -> complete segment`.
+
+### Important failure boundary
+
+In the inspected TP path there is **no local elapsed-time timeout** around either wait. The planner simply revisits the condition on later cycles. A failed/stuck unlock witness can therefore hold the indexing transaction waiting unless another supervisory/fault mechanism intervenes.
+
+This is a crucial production boundary: an integrator should not mistake native physical acknowledgement for a complete fault policy. Timeout/fault annunciation, contradictory up/down sensors, hydraulic pressure qualification, manual recovery and safety behavior still belong to the machine design.
+
+### Witness semantics boundary
+
+The completion-side TP test waits for `is-unlocked` to become false. That means LinuxCNC's native generic contract proves only **not reporting unlocked**. On a machine such as the reported hydraulic rise/drop table that has distinct up/unlocked and down/locked proximity switches, production process authorization may still require the independent down/locked proof rather than treating `!is-unlocked` as equivalent to mechanically locked.
+
 This is materially different from `carousel.ready`:
 
-- `carousel.ready` reports indexed position completion for the carousel mechanism;
-- locking-indexer Motion has an explicit **physical unlock acknowledgement input** separate from commanded rotary position.
-
-Do not infer from this that LinuxCNC knows fixture clamp pressure, workpiece retention, tooth engagement quality or safety-rated state. `joint.N.is-unlocked` only means whatever the integrator connected and validated as the unlock witness.
+- `carousel.ready` reports indexed-position completion for the carousel mechanism;
+- locking-indexer Motion has an explicit **physical unlock acknowledgement input** separate from commanded rotary position;
+- neither generic surface proves fixture clamp pressure, workpiece retention, tooth engagement quality or a safety-rated condition beyond what the integrator's actual sensors establish.
 
 ## 8. Cross-process 3800 transaction model after this pass
 
@@ -238,23 +264,23 @@ A defect at one layer must not be papered over by a success indicator from anoth
 8. **After bridge restart, a retained `done=1` may be consumed for the next request?** No, not without a freshness/generation/reconciliation rule.
 9. **Independent safety trip arrives over the same supervisory protocol, so ordinary software messaging is safety-rated?** No. Field evidence explicitly keeps safety authority separate.
 10. **A generation-tagged handshake reconstructs an unknown pallet after power loss?** No. Software freshness cannot recover lost physical workpiece identity.
+11. **Native locking-indexer TP waits for `is-unlocked=1`; therefore it has a built-in hydraulic timeout?** No. No local timeout was found in the inspected wait path.
+12. **After the move, `is-unlocked=0` necessarily proves a separate lock switch is made?** No. It proves only the generic unlock witness is no longer asserted unless the machine wiring/logic deliberately makes that implication valid.
 
-Result: **10/10 boundary checks passed.**
+Result: **12/12 boundary checks passed.**
 
 ## 10. Lab decision
 
 No lab is justified yet.
 
-The LinuxCNC command-serial, heartbeat and state distinctions are directly documented/source-backed, and the locking-indexer field/source boundary is already clear. A future lab would add evidence only if a concrete proposed supervisor or sequence implementation needs validation of a specific stale-ack/restart algorithm.
+The LinuxCNC command-serial, heartbeat, state and locking-indexer wait distinctions are directly source/documentation-backed. A future lab would add evidence only if a concrete proposed supervisor or mechanism implementation needs validation of a specific stale-ack/restart or timeout design.
 
 ## Promotion / next work
 
-3800-S2/F2 is now at a bounded public-source stop.
+3800-S2/F2 is at a bounded public-source stop. 3800-I2's generic native transaction is source-closed enough for the breadth pass; remaining lock-pressure/contradictory-sensor/recovery behavior is machine-specific and needs a stronger named implementation before more generic searching.
 
-Continue 3800 with one of these higher-information paths:
+One final useful 3800 path remains: inspect another real automation cell/transfer implementation only if it publishes request identity, heartbeat or restart behavior. Otherwise rotate rather than repeat generic material-handling searches.
 
-1. inspect a stronger native `LOCKING_INDEXER` source/test path to document exact wait/timeout/failure semantics for `joint.N.unlock` / `joint.N.is-unlocked`;
-2. inspect another real automation cell/transfer implementation if it publishes request identity, heartbeat or restart behavior;
-3. if those paths are also bounded, rotate to the genuinely underdeveloped 3900 or 3100 track rather than repeat generic searches.
+Per `CURRICULUM.md` and `WORK_SELECTION_POLICY.md`, the best next breadth rotation is **3100 — Mills/VMCs**: it is genuinely underdeveloped, has the broadest LinuxCNC community/config/source base, and its spindle-orient/rigid-tap/ATC/probing/tool-table/lube/pallet topics transfer strongly to several other tracks. 3900 remains available afterward for emerging/unusual machines.
 
 Reopen the saw/feeder completion branch only when a named implementation exposes a materially stronger physical-ack/recovery contract.

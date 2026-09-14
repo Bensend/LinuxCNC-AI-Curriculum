@@ -15,11 +15,13 @@ Do not reopen or repoll closed 2000 work unless a genuinely new material defect 
 
 ## Active curriculum level
 
-**3000 — machine-specific specialization.** Current active work branch: **3400 — Routers / Woodworking**, reached by work-selection rotation after the current highest-value 3300 source paths hit branch-local information-gain stops.
+**3000 — machine-specific specialization.** Current active work branch: **3500 — Robots / Custom Kinematics**, reached by work-selection rotation after the current 3400 router breadth/source pass closed its remaining generic Motion-DOUT question.
 
-Latest active checkpoint: `checkpoints/3400-next-2026-09-14c.md`.
+Latest active checkpoint: `checkpoints/3500-next-2026-09-14b.md`.
 
-3300 remains open, not graduated, with latest preserved checkpoint `checkpoints/3300-next-2026-09-14f.md`. 3200 remains intentionally paused. 3600 retains its branch-local information-gain stop.
+The earlier authoritative 3500 breadth/ROS checkpoint `checkpoints/3500-next-2026-09-14.md` remains valid; checkpoint B adds native kinematics failure propagation and a pinned Tormach HAL/ros2_control realtime-loop trace without displacing the ROS/ROS2 deep-dive priority.
+
+3300 remains open, not graduated, with latest preserved checkpoint `checkpoints/3300-next-2026-09-14f.md`. 3200 remains intentionally paused. 3400 is paused after a clean breadth/source stop. 3600 retains its branch-local information-gain stop.
 
 ## 3300 — Plasma / Laser / Waterjet
 
@@ -69,23 +71,23 @@ W1 remains open and the 3-axis state machine is not frozen. Reopen only when str
 
 ## 3400 — Routers / Woodworking
 
-Existing foundation and earlier deep work:
+Existing foundation and deep work include:
 
 - `research/3400-router-woodworking-breadth-survey-2026-09-14.md`
 - `research/3400-fenja-router-atc-source-audit-2026-09-14.md`
 - `research/3400-fenja-atc-abort-recovery-audit-2026-09-14.md`
 - `research/3400-linuxcnc-abort-motion-dout-source-trace-2026-09-14.md`
-
-New authoritative work:
-
 - `research/3400-funkenjaeger-dcnc-atc-dust-spindle-gantry-audit-2026-09-14.md`
 - `research/3400-gantry-negative-home-sequence-source-trace-2026-09-14.md`
 - `research/3400-router-spindle-vfd-readiness-fault-boundary-2026-09-14.md`
 - `research/3400-router-vacuum-dust-authority-community-boundary-2026-09-14.md`
+- `research/3400-motion-dout-transition-source-closeout-2026-09-14.md`
+
+Latest preserved checkpoint: `checkpoints/3400-next-2026-09-14d.md`.
 
 ### ATC / pneumatic authority
 
-Two materially different real router ATC configurations now support the state separation:
+Two materially different real router ATC configurations support the state separation:
 
 `tool request -> pneumatic/source readiness -> physical transfer geometry -> actuator command -> clamp/pocket/tool witnesses -> logical tool identity -> measured/valid tool length`.
 
@@ -93,44 +95,68 @@ At `Funkenjaeger/fj-lcnc-cfg@f4877f862ab757bd396b02e54acb12e6835f8259`, a six-po
 
 Repository chronology records a 2025 fix for an indefinite Auto-mode toolchange pause caused by spindle-at-speed interaction and a later fix for interference with an adjacent tool post. ATC commissioning must therefore include task/spindle-readiness interactions and real physical clearance, not only nominal geometry.
 
-### Dust / workholding
+### Dust / workholding / spindle / gantry
 
-The DCNC dust shoe is an explicit auxiliary state machine: it preserves prior state, obtains Z clearance, sequences pneumatic outputs, waits on its retract-position sensor, aborts on failed transition and conditionally restores after M6. Full down/swing-under completion remains partly dwell-based in the inspected source.
+The DCNC dust shoe is an explicit auxiliary state machine with clearance, pneumatic sequencing, feedback/timeout and conditional restoration. Community evidence preserves distinct collector, dust-foot, vacuum-command and vacuum-achieved authority. A production public vacuum pressure-ready/loss-recovery configuration remains source-poor.
 
-Community evidence shows dust collection may be machine-owned, spindle-timed or continuously shop-owned, while vacuum clamping commonly needs program/manual/HMI authority arbitration. Preserve distinct states for collector availability, dust-foot position, vacuum command and vacuum achieved. A production public vacuum-zone/pressure-ready/loss-recovery configuration remains source-poor; do not invent thresholds or recovery rules.
+The real WJ200 userspace driver exposes running, at-speed, ready, alarm, actual frequency and communications watchdog separately. The inspected machine uses at-speed and exposes alarms but does not establish READY/watchdog as a cut/ATC permissive. Status availability is not status authority.
 
-### Spindle / VFD
+Pinned LinuxCNC homing source closes the negative-HOME_SEQUENCE behavior used by the XYYZ router: reference acquisition remains per-joint; synchronized final HOME movement is grouped; a HOME_ABORT clears homing/homed state for the full synchronized group.
 
-The real WJ200 userspace driver exposes running, at-speed, ready, alarm, actual frequency and a communication watchdog separately. The inspected machine HAL uses `is-at-speed` for `spindle.0.at-speed` and exposes alarm diagnostics, but no evidence was found that READY or watchdog freshness is a cut/ATC permissive. Status availability is not status authority.
+### Motion-DOUT closeout
 
-Preserve command, running, at-speed, ready, alarm and communications freshness as distinct facts. Ordinary Modbus/VFD status is not safety-rated standstill.
+Pinned Motion source now closes the remaining generic R5 question:
 
-### XYY gantry homing
+- immediate M64/M65-style DOUT writes set the Motion HAL output;
+- an already-applied custom DOUT is not generically reset by `EMCMOT_ABORT`;
+- Motion Disable / machine OFF does not generically reset it;
+- the traced Task E-stop sequence contains Abort, spindle off, Disable and IO/amp actions but no custom-DOUT reset command;
+- a queued future synchronized DOUT is a different state and can disappear when TP is aborted;
+- exact physical terminal state on process shutdown/watchdog remains hardware/driver/external-circuit specific.
 
-Pinned LinuxCNC `homing.c` and homing documentation close the negative-HOME_SEQUENCE behavior for the real XYYZ DCNC configuration:
+The narrow generic DOUT lab is therefore unnecessary. Reopen only for a named hardware terminal-state question, stronger vacuum authority evidence, or a real ATC with explicit interrupted-state reconciliation.
 
-- joints sharing a negative absolute sequence value home as a group;
-- switch/search/latch reference acquisition remains per joint;
-- `sync_ready()` synchronizes the final move to `[JOINT_n]HOME`;
-- a `HOME_ABORT` caused by a joint failure clears homing/homed state, stops free homing motion and clears sequence membership for all joints.
+## 3500 — Robots / Custom Kinematics
 
-Thus one-side homing failure leaves the inspected software state globally unhomed. No synthetic lab is needed for this question. This does not guarantee mechanical anti-racking or replace correctly designed switches/overtravel protection.
+Existing authoritative breadth/ROS artifacts include:
 
-### Remaining 3400 evidence
+- `research/3500-robots-custom-kinematics-breadth-survey-2026-09-14.md`
+- `research/3500-ros-ros2-implementation-deep-dive-2026-09-14.md`
 
-Continue from `checkpoints/3400-next-2026-09-14c.md`:
+New source-deepening artifacts:
 
-1. finish the custom Motion-DOUT transition boundary across program Abort, machine OFF / `EMCMOT_DISABLE`, E-stop/task state and shutdown/HostMot2 behavior;
-2. if source cannot resolve the user-visible already-applied M64 state, run only the narrow DOUT transition lab while observing built-in iocontrol tool-change pins in parallel;
-3. reopen vacuum workholding only for a real pressure/ready/loss/recovery implementation;
-4. rotate to another underdeveloped 3000 track once the DOUT boundary is closed or checkpointed rather than over-mining 3400.
+- `research/3500-robots-custom-kinematics-foundation-2026-09-14.md`
+- `research/3500-kinematics-failure-propagation-2026-09-14.md`
+- `research/3500-tormach-hal-ros-control-realtime-loop-source-trace-2026-09-14.md`
+
+### Native LinuxCNC kinematics
+
+Pinned source establishes that synchronized `G12.1/G13.1` switching coordinates interpreter and Motion, while the raw HAL kinstype input is deprecated because lookahead can retain stale kinematics state. Kinstype persists across Abort/program end.
+
+`genserkins` uses an iterative Jacobian inverse with current/supplied joint position as the seed. Matrix-inversion failure or iteration exhaustion returns failure. Realtime coordinated/teleop inverse failure or a non-finite joint result sets Motion error and requests disable; joint soft limits remain a separate downstream backstop. Thus `IK success != dynamic feasibility`, and Cartesian endpoint validity is not the same as safe/trackable robot motion.
+
+Pinned `scarakins` carries elbow branch state through kinematics flags and clamps the `acos` input into `[-1,1]`; its near/outside-reach behavior remains a bounded validation target rather than something to infer.
+
+### ROS2 / Tormach realtime bridge
+
+At `tormach/hal_ros_control@506a3d109cb306e1d1cdb70f24440bde1159b256`, the exported HAL realtime function executes:
+
+`controller_manager.read -> update -> write`.
+
+The ROS executor is a separate userspace thread. `HalSystemInterface::read()` copies HAL feedback pins into ros2_control state storage and `write()` copies ros2_control command storage to HAL command pins.
+
+The generic bridge's activate/deactivate callbacks do not explicitly reset command pins, and `CM_OK=0` returns from the realtime function without a source-visible command reset. Therefore the next high-value trace is downstream stale-command containment and actual drive/device-manager/EtherCAT authority, plus current JointTrajectoryController cancellation/tolerance/deactivation semantics. The bridge itself is not sufficient evidence of drive/brake/STO safety.
+
+Latest checkpoint: `checkpoints/3500-next-2026-09-14b.md`.
 
 ## Other open 3000 branches
 
 - **3200 Lathes / Turning Centers:** paused; latest preserved checkpoint `checkpoints/3200-lathe-next-2026-09-14b.md`.
 - **3300 Plasma / Laser / Waterjet:** open with bounded current source stops; latest checkpoint `checkpoints/3300-next-2026-09-14f.md`.
+- **3400 Routers / Woodworking:** paused after breadth/source closeout; latest checkpoint `checkpoints/3400-next-2026-09-14d.md`.
+- **3500 Robots / Custom Kinematics:** ACTIVE; latest checkpoint `checkpoints/3500-next-2026-09-14b.md`.
 - **3600 Press Brakes:** not graduated; documented branch-local information-gain stop. Integration map `research/3600-press-brake-integration-playbook-outline-2026-09-12.md`.
-- 3100/3500/3700/3800/3900 remain parallel specialization branches for later rotation.
+- 3100/3700/3800/3900 remain parallel specialization branches for later rotation.
 
 ## Laboratory compute checkpoint
 
@@ -138,4 +164,4 @@ Continue from `checkpoints/3400-next-2026-09-14c.md`:
 
 ## Global next-work rule
 
-Continue from `checkpoints/3400-next-2026-09-14c.md` while the custom-DOUT transition question has a concrete evidence-gain path. Reopen 3300 opportunistically only for genuinely new waterjet pressure/readiness or mature fiber process-recovery evidence. When 3400 reaches a bounded stop, rotate to an underdeveloped 3000 track according to `WORK_SELECTION_POLICY.md`; a branch-local source stop is not a curriculum stop.
+Continue from `checkpoints/3500-next-2026-09-14b.md`: source-trace current ros2_control ControllerManager/ResourceManager and JointTrajectoryController lifecycle/cancel/tolerance behavior, then the Tormach ZA6 downstream drive/device-manager/EtherCAT enable/watchdog path. Freeze an RRBot cancel/reset/stale-command lab only if source leaves a real nonduplicate uncertainty. When the ROS2 path reaches a clean source boundary, continue real native robot commissioning evidence or rotate to another underdeveloped 3000 track according to `WORK_SELECTION_POLICY.md`; branch-local stops are not curriculum stops.

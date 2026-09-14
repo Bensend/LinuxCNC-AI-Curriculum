@@ -15,11 +15,11 @@ Do not reopen or repoll closed 2000 work unless a genuinely new material defect 
 
 ## Active curriculum level
 
-**3000 — machine-specific specialization.** Current owner-selected branch: **3300 — Plasma / Laser / Waterjet**.
+**3000 — machine-specific specialization.** Current active work branch: **3400 — Routers / Woodworking**, reached by work-selection rotation after the current highest-value 3300 source paths hit branch-local information-gain stops.
 
-Latest active checkpoint: `checkpoints/3300-next-2026-09-14f.md`.
+Latest active checkpoint: `checkpoints/3400-next-2026-09-14b.md`.
 
-3200 remains paused by explicit owner rotation, not graduated. 3600 retains its branch-local information-gain stop. Do not fall back to either without evidence/rotation authority.
+3300 remains open, not graduated, with latest preserved checkpoint `checkpoints/3300-next-2026-09-14f.md`. 3200 remains intentionally paused. 3600 retains its branch-local information-gain stop.
 
 ## 3300 — Plasma / Laser / Waterjet
 
@@ -41,36 +41,27 @@ Do not repeat generic plasma tracing. Reopen opportunistically for strong downlo
 
 ### Laser L1
 
-Authoritative artifacts:
+Authoritative artifacts now include:
 
 - `research/3300-laser-native-source-foundation-2026-09-14.md`
 - `research/3300-laser-real-implementation-comparison-2026-09-14.md`
 - `research/3300-laser-sector67-raycus-config-trace-2026-09-14.md`
 - `research/3300-laser-laserpower-deployment-availability-audit-2026-09-14.md`
+- `research/3300-laser-qtplasmac-laser-mode-source-history-2026-09-14.md`
 
-Native source establishes:
+Native source establishes `laserpower.comp`, `raster.comp`, and queued/immediate M62/M63/M67/M64/M65/M68 semantics. Real public machines currently show multiple materially different architectures rather than one canonical stack.
 
-- `laserpower.comp`: vector/raster modes, actual/requested velocity scaling, min/max normalization and vector interpolation by distance-to-go;
-- `raster.comp`: position-driven pixel stream, bidirectional sweep, interpolation, OFF sentinel and explicit faults/reset;
-- M62/M63/M67 are queued to the next motion; with no following motion the queued change does not occur; M64/M65/M68 are immediate.
+A bounded global search found `loadrt laserpower` / `laser.control.power` only in the shipped LinuxCNC laser simulator and source-tree forks/copies, not an independently evidenced physical machine. Treat `laserpower.comp` as native reusable realtime infrastructure, not as a proven dominant production architecture.
 
-Real implementations now include:
+A new source-history trace established that the 2024 community fiber-height-control experiment became merged upstream QtPlasmaC `laser_mode` through PR #2973. At the pinned revision:
 
-1. historical Buildlog CO2: M3/M5 master permission, analog power, custom PPI/raster streaming, chiller/assist and overscan;
-2. JTrantow diode/Fusion at `687c83c5906b2483e4f4754ee26e894832a7c259`: Fusion emits M67 power by jet mode and `motion.analog-out-00` directly drives Mesa 20 kHz PWM;
-3. **Sector67 Raycus C500 fiber at pinned revision `938b501bfd092505170af8146c1b77a8564754d1` with a downloadable full config.**
+- `(torch_on || laser_mode)` admits the CUT_MODE_01 height-control path;
+- `laser_mode` bypasses the initial near-requested-velocity target-acquisition gate;
+- configured downstream corner-lock and void-lock logic still remain capable of suppressing correction.
 
-Sector67 source/config confirms:
+Thus `laser_mode` is a real upstream **fiber-specific height-control adaptation**, not a complete fiber process controller and not unconditional THC at all velocities. Source READY/FAULT, optical emission proof, gas readiness, focus, pierce recipe, chiller/interlocks and abort/restart remain separate machine-specific evidence requirements.
 
-- power path: `QtPlasmaC material cut_amps -> custom_filter M03 spindle speed -> spindle.0.speed-out-abs -> Mesa PWM -> PWM-to-0-10 V converter -> Raycus analog power`;
-- capacitive height path: `BCL-AMP frequency -> Schmitt trigger -> HostMot2 encoder counter mode -> encoder velocity -> scaling/limit -> QtPlasmaC arc-voltage surface`;
-- synthetic ohmic probe from capacitive threshold and an always-true fake Arc OK are compatibility glue, not physical plasma semantics;
-- Raycus analog power, modulation, enable and READY are separate surfaces; READY is not integrated into machine-on qualification in the preserved config, and source enable during source power-up can fault the source, so startup correctness is currently procedural;
-- gas control is a simple program-running timed solenoid and is explicitly described by the project as naive.
-
-A fresh global code audit found `loadrt laserpower` / `laser.control.power` only in the shipped LinuxCNC laser simulator and source-tree forks/copies, not an independently evidenced physical machine. This is a bounded **public deployment gap**, not evidence that no field machine uses the component. Treat `laserpower.comp` as native reusable realtime infrastructure, not a canonical production laser architecture.
-
-Key L1 boundary: CO2, diode/vector-raster and fiber metal cutting require separate source-readiness, gas, height/focus, recipe and recovery evidence. The highest-value remaining L1 evidence is a mature fiber implementation with integrated READY/FAULT, gas pressure/type, focus/pierce and abort/restart behavior. Do not repeat exact `laserpower.*` deployment searches without a new candidate.
+Highest-value L1 work is now mature fiber field evidence with integrated READY/FAULT, gas type/pressure, focus/pierce and recovery. Do not repeat exact `laserpower.*` or `laser_mode` history searches without a new candidate or specific source question.
 
 ### Waterjet W1
 
@@ -84,23 +75,69 @@ Real LinuxCNC evidence supports distinct nozzle/water and abrasive commands, exp
 
 A 2022 retrofit chronology now adds commissioning evidence from original process-I/O identification through working LinuxCNC/Mesa control. Its waterjet command was intentionally active-low so controller shutdown would leave the machine depressurized; this is machine-specific field behavior, not a universal or safety-rated LinuxCNC contract. The same chronology separates successful CNC control from later independent hydraulic leaks. A converted FLOW machine provides long-lived LinuxCNC deployment evidence but exposes no process sequence.
 
-Industrial process evidence sharpens the authority model without inventing LinuxCNC semantics: CNC low-pressure-pierce requests can be handed to a separate pump PLC/controller that owns the pressure transition; vacuum-assisted piercing can intentionally establish abrasive before water; abrasive availability/transfer/metering are distinct; clog recovery may require purge/diverter behavior; intensifier and direct-drive pump idle behavior differ. Therefore **do not freeze a universal water-before-abrasive rule** and do not treat a pressure command as proof that pressure is achieved.
+Industrial process evidence sharpens the authority model without inventing LinuxCNC semantics: CNC low-pressure-pierce requests can be handed to a separate pump PLC/controller that owns the pressure transition; vacuum-assisted piercing can intentionally establish abrasive before water; abrasive availability/transfer/metering are distinct; clog recovery may require purge/diverter behavior. Therefore do not freeze a universal water-before-abrasive rule and do not treat a pressure command as proof that pressure is achieved.
 
-The targeted pump/readiness search has reached a bounded source-availability stop: no downloadable LinuxCNC HAL/remap/custom component was found that exposes a complete `pump/intensifier command -> pressure transition -> READY/fault qualification -> cut authorization -> pause/abort recovery` chain.
+The targeted pump/readiness search reached a bounded source-availability stop: no downloadable LinuxCNC HAL/remap/custom component was found that exposes a complete `pump/intensifier command -> pressure transition -> READY/fault qualification -> cut authorization -> pause/abort recovery` chain.
 
 W1 remains open and the 3-axis state machine is not frozen. Reopen the pressure-readiness sub-branch only when a pump PLC mapping, pressure/ready/fault witness, high-pressure-valve ownership path, real sequencing component/remap, or recovery implementation becomes inspectable.
 
-W2 dual-head/5-axis taper compensation remains deferred until the 3-axis process contract is evidence-backed.
+## 3400 — Routers / Woodworking
 
-### Lab decision
+Existing breadth foundation:
 
-No new lab in this 3300 pass. Source/config/build-diary work remains higher information gain for the open questions. Frozen candidates remain queued M67/M62 with no following motion, vector deceleration/corner power scaling, raster pixel boundaries, and water/abrasive recovery only after a real waterjet sequencing contract is found.
+- `research/3400-router-woodworking-breadth-survey-2026-09-14.md`
+
+New deep source work:
+
+- `research/3400-fenja-router-atc-source-audit-2026-09-14.md`
+- `research/3400-fenja-atc-abort-recovery-audit-2026-09-14.md`
+- `research/3400-linuxcnc-abort-motion-dout-source-trace-2026-09-14.md`
+
+### FENJA/Groot real ATC source contract
+
+At `GuiHue/myfenjalinuxcnc@16af9ade9484e9f6897b19bd6453ab4bbe79c0ac`:
+
+- manual and automatic drawbar requests converge through HAL arbitration;
+- WJ200 VFD `is-running` is used as an ordinary-control spindle-stop witness;
+- rack M6 separates pocket provenance, safe machine-coordinate transfer geometry, drawbar command, drawbar-state feedback, tool-present feedback, logical `M61` tool update and later fixed-setter measurement;
+- a separate 6-bar air-pressure signal exists;
+- several `M66 ... L0` checks described in timeout-style comments are actually immediate input snapshots after fixed dwell, not transition waits with timeout.
+
+Preserve the state chain:
+
+`tool requested -> physical transfer -> clamp/tool witnesses -> logical tool identity -> measured/valid tool length`.
+
+### Interrupted M6 / abort boundary
+
+The inspected `groot.ini` has its `ON_ABORT_COMMAND=O <on_abort> call` line commented out. The preserved `on_abort.ngc` only restores G90/G40/G49 and does not reconcile drawbar output, physical tool state, rack/pocket inventory, air pressure or tool length.
+
+Pinned LinuxCNC source further establishes:
+
+- `emcTaskAbort()` clears task/interpreter execution state and invokes Motion abort;
+- realtime `EMCMOT_ABORT` stops active motion paths and clears execution/error state but its inspected case does not explicitly reset arbitrary current `motion.digital-out-NN` values;
+- `Task::emcIoAbort()` separately and explicitly clears the built-in `iocontrol.0.tool-change` and `iocontrol.0.tool-prepare` handshake outputs;
+- LinuxCNC has an upstream regression test for abort-during-built-in-toolchange cleanup.
+
+Therefore built-in iocontrol toolchanger cleanup must not be silently generalized to an M64/M65-driven custom drawbar output. A custom router ATC needs an explicit physical/logical recovery contract. Do not teach blind `retry M6` as idempotent.
+
+The source result is deliberately bounded: it does not claim every E-stop, machine-OFF, module unload or startup transition preserves a DOUT. Those are separate transitions.
+
+### Next 3400 evidence
+
+Continue from `checkpoints/3400-next-2026-09-14b.md`:
+
+1. compare a second materially different production router ATC with explicit failure/recovery behavior;
+2. find real vacuum-table zone/pressure-proof and dust collector/dust-foot authority paths;
+3. trace real spindle/VFD ready/fault around cutting and ATC;
+4. compare XYYZ gantry squaring/home fault behavior;
+5. only then decide whether a bounded M64-abort/machine-OFF/E-stop DOUT lab adds independent evidence.
 
 ## Other open 3000 branches
 
-- **3200 Lathes / Turning Centers:** paused by owner rotation; latest preserved checkpoint `checkpoints/3200-lathe-next-2026-09-14b.md`.
+- **3200 Lathes / Turning Centers:** paused; latest preserved checkpoint `checkpoints/3200-lathe-next-2026-09-14b.md`.
+- **3300 Plasma / Laser / Waterjet:** open with bounded current source stops; latest checkpoint `checkpoints/3300-next-2026-09-14f.md`.
 - **3600 Press Brakes:** not graduated; documented branch-local information-gain stop. Integration map `research/3600-press-brake-integration-playbook-outline-2026-09-12.md`.
-- 3100/3400/3500/3700/3800/3900 remain parallel specialization branches for later rotation.
+- 3100/3500/3700/3800/3900 remain parallel specialization branches for later rotation.
 
 ## Laboratory compute checkpoint
 
@@ -108,6 +145,4 @@ No new lab in this 3300 pass. Source/config/build-diary work remains higher info
 
 ## Global next-work rule
 
-Continue from `checkpoints/3300-next-2026-09-14f.md`.
-
-Prioritize mature fiber implementations with integrated source READY/FAULT, gas type/pressure, focus/pierce and pause/abort/restart behavior. Reopen W1 pump/pressure-ready work only on genuinely new inspectable implementation evidence rather than repeating generic searches. If those 3300 paths both remain source-limited, checkpoint 3300 and rotate to another underdeveloped open 3000 branch according to `WORK_SELECTION_POLICY.md` rather than returning by default to paused 3200 or source-limited 3600.
+Continue from `checkpoints/3400-next-2026-09-14b.md` while 3400 has concrete evidence-gain paths. Reopen 3300 opportunistically only when genuinely new waterjet pressure/readiness or mature fiber process-recovery evidence becomes inspectable. Continue rotating among open 3000 tracks according to `WORK_SELECTION_POLICY.md`; a branch-local source stop is not a curriculum stop.

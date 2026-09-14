@@ -17,9 +17,9 @@ Do not reopen or repoll closed 2000 work unless a genuinely new material defect 
 
 **3000 — machine-specific specialization.** Current active work branch: **3500 — Robots / Custom Kinematics**, reached by work-selection rotation after the current 3400 router breadth/source pass closed its remaining generic Motion-DOUT question.
 
-Latest active checkpoint: `checkpoints/3500-next-2026-09-14b.md`.
+Latest active checkpoint: `checkpoints/3500-next-2026-09-14c.md`.
 
-The earlier authoritative 3500 breadth/ROS checkpoint `checkpoints/3500-next-2026-09-14.md` remains valid; checkpoint B adds native kinematics failure propagation and a pinned Tormach HAL/ros2_control realtime-loop trace without displacing the ROS/ROS2 deep-dive priority.
+The earlier authoritative 3500 breadth/ROS checkpoints remain valid. Checkpoint C adds the bounded ZA6 command-freshness/supervision result and a real PUMA 200 genserkins field-commissioning chronology.
 
 3300 remains open, not graduated, with latest preserved checkpoint `checkpoints/3300-next-2026-09-14f.md`. 3200 remains intentionally paused. 3400 is paused after a clean breadth/source stop. 3600 retains its branch-local information-gain stop.
 
@@ -118,16 +118,16 @@ The narrow generic DOUT lab is therefore unnecessary. Reopen only for a named ha
 
 ## 3500 — Robots / Custom Kinematics
 
-Existing authoritative breadth/ROS artifacts include:
+Authoritative breadth/ROS and source artifacts include:
 
 - `research/3500-robots-custom-kinematics-breadth-survey-2026-09-14.md`
 - `research/3500-ros-ros2-implementation-deep-dive-2026-09-14.md`
-
-New source-deepening artifacts:
-
 - `research/3500-robots-custom-kinematics-foundation-2026-09-14.md`
 - `research/3500-kinematics-failure-propagation-2026-09-14.md`
 - `research/3500-tormach-hal-ros-control-realtime-loop-source-trace-2026-09-14.md`
+- `research/3500-za6-runtime-stale-command-fault-containment-source-trace-2026-09-14.md`
+- `research/3500-za6-launch-supervision-controller-death-boundary-2026-09-14.md`
+- `research/3500-puma200-genserkins-field-commissioning-chronology-2026-09-14.md`
 
 ### Native LinuxCNC kinematics
 
@@ -137,24 +137,32 @@ Pinned source establishes that synchronized `G12.1/G13.1` switching coordinates 
 
 Pinned `scarakins` carries elbow branch state through kinematics flags and clamps the `acos` input into `[-1,1]`; its near/outside-reach behavior remains a bounded validation target rather than something to infer.
 
-### ROS2 / Tormach realtime bridge
+### ROS2 / Tormach realtime bridge and stale-command boundary
 
-At `tormach/hal_ros_control@506a3d109cb306e1d1cdb70f24440bde1159b256`, the exported HAL realtime function executes:
+At `tormach/hal_ros_control@506a3d109cb306e1d1cdb70f24440bde1159b256`, the exported HAL realtime function executes `controller_manager.read -> update -> write`; the ROS executor is a separate userspace thread. `HalSystemInterface::read()` copies HAL feedback pins into ros2_control state storage and `write()` copies ros2_control command storage to HAL command pins.
 
-`controller_manager.read -> update -> write`.
+The downstream ZA6 trace now establishes strong but distinct containment for EtherCAT/drive failures: lcec `online`/`oper` loss becomes device-manager fault, CiA-402 faults are visible, and `drive_safety` applies cross-drive quick-stop-compatible control-word masking for its explicit trigger set. That does **not** establish high-level target freshness.
 
-The ROS executor is a separate userspace thread. `HalSystemInterface::read()` copies HAL feedback pins into ros2_control state storage and `write()` copies ros2_control command storage to HAL command pins.
+No command generation/age/heartbeat witness was found for `hal_hw_interface.*.position_cmd`. `hal_control_node` sets `cm_ok=0` and stops ControllerManager read/update/write if the ROS context becomes invalid, but the inspected ZA6 repository does not wire `cm_ok` into drive enable or quick-stop authority and does not reset command pins in that path. Preserve `fieldbus healthy != command fresh`.
 
-The generic bridge's activate/deactivate callbacks do not explicitly reset command pins, and `CM_OK=0` returns from the realtime function without a source-visible command reset. Therefore the next high-value trace is downstream stale-command containment and actual drive/device-manager/EtherCAT authority, plus current JointTrajectoryController cancellation/tolerance/deactivation semantics. The bridge itself is not sufficient evidence of drive/brake/STO safety.
+Launch supervision explicitly emits global shutdown on `hal_mgr` exit and ordered HAL setup/readiness failures. The inspected source does not prove a timely STOP/quick-stop transition for every individual support-node/controller failure. Software quick stop also remains distinct from STO/functional safety.
 
-Latest checkpoint: `checkpoints/3500-next-2026-09-14b.md`.
+Current ROS2 Humble JointTrajectoryController source is retained only as a semantic comparator because exact ZA6 `ros2_controllers` provenance is not pinned. Current Humble source transitions tolerance failures to hold and, on deactivate, preserves the existing position command while zeroing velocity/acceleration/effort.
+
+### Real PUMA 200 field commissioning
+
+A July–August 2026 real PUMA 200 conversion adds a strong native field chronology. Working joints/brakes/encoders did not imply correct Cartesian motion. The eventual repair path separated singularity avoidance, exact physical home pose, modified-DH frame/sign/offset correctness, coupled wrist transmission compensation, and actual gear-ratio verification. Family documentation contained gearing from a different PUMA 2xx variant, forcing direct physical measurement. After correcting frame/DH reasoning and machine-specific transmission data, the owner reported correct world-coordinate moves and later scale/backlash refinement, while formal production accuracy validation remained pending.
+
+Promote this commissioning order: actuator/feedback identity -> physical transmission truth/coupling -> logical joints -> exact home/zero pose -> DH model -> simple analytically checkable forward poses -> singularity-aware Cartesian tests -> later accuracy/tool/load validation.
+
+Latest checkpoint: `checkpoints/3500-next-2026-09-14c.md`.
 
 ## Other open 3000 branches
 
 - **3200 Lathes / Turning Centers:** paused; latest preserved checkpoint `checkpoints/3200-lathe-next-2026-09-14b.md`.
 - **3300 Plasma / Laser / Waterjet:** open with bounded current source stops; latest checkpoint `checkpoints/3300-next-2026-09-14f.md`.
 - **3400 Routers / Woodworking:** paused after breadth/source closeout; latest checkpoint `checkpoints/3400-next-2026-09-14d.md`.
-- **3500 Robots / Custom Kinematics:** ACTIVE; latest checkpoint `checkpoints/3500-next-2026-09-14b.md`.
+- **3500 Robots / Custom Kinematics:** ACTIVE; latest checkpoint `checkpoints/3500-next-2026-09-14c.md`.
 - **3600 Press Brakes:** not graduated; documented branch-local information-gain stop. Integration map `research/3600-press-brake-integration-playbook-outline-2026-09-12.md`.
 - 3100/3700/3800/3900 remain parallel specialization branches for later rotation.
 
@@ -164,4 +172,4 @@ Latest checkpoint: `checkpoints/3500-next-2026-09-14b.md`.
 
 ## Global next-work rule
 
-Continue from `checkpoints/3500-next-2026-09-14b.md`: source-trace current ros2_control ControllerManager/ResourceManager and JointTrajectoryController lifecycle/cancel/tolerance behavior, then the Tormach ZA6 downstream drive/device-manager/EtherCAT enable/watchdog path. Freeze an RRBot cancel/reset/stale-command lab only if source leaves a real nonduplicate uncertainty. When the ROS2 path reaches a clean source boundary, continue real native robot commissioning evidence or rotate to another underdeveloped 3000 track according to `WORK_SELECTION_POLICY.md`; branch-local stops are not curriculum stops.
+Continue from `checkpoints/3500-next-2026-09-14c.md`: inspect one second real robot implementation with downloadable HAL/INI/source and preserve brake/home/coupling/enable/fault authority, then reconcile native genserkins failure semantics with real field symptoms if needed. Reopen ZA6 stale-command work only for exact controller-version provenance, an external `cm_ok`/heartbeat consumer, or a reproducible timing question. After one more high-value real implementation/source pass, rotate to the highest-information underdeveloped 3000 track if 3500 reaches a breadth stop; branch-local stops are not curriculum stops.

@@ -36,7 +36,7 @@ Parallel tracks:
 
 Current active branch: **3300 — Plasma / Laser / Waterjet**.
 
-Latest active checkpoint: `checkpoints/3300-next-2026-09-14b.md`.
+Latest active checkpoint: `checkpoints/3300-next-2026-09-14c.md`.
 
 The owner explicitly rotated to 3300 for a breadth-first pass. **Do not fall back to 3200 unless a later explicit rotation says to do so.**
 
@@ -95,13 +95,14 @@ Cross-machine lesson: `physical source/sensor -> electrical interface -> Mesa/en
 
 P2 bounded adversarial review: **6/6 passed**.
 
-P2 remains open for a downloadable ohmic+float config, Powermax RS485 implementation/failure history and later-stage tandem production evidence.
+P2 remains open for a downloadable ohmic+float config, Powermax RS485 field failure/recovery history and later-stage tandem production evidence.
 
 ### 3300-P3 — production plasma workflow
 
-Artifact:
+Artifacts:
 
 - `research/3300-plasma-production-workflow-foundation-2026-09-14.md`
+- `research/3300-plasma-rfl-pmx-source-trace-2026-09-14.md`
 
 Current contracts:
 
@@ -112,20 +113,24 @@ Current contracts:
 - `M67 E3` schedules feed reduction/restoration for feature strategy; it is not itself a THC command.
 - `M62/M63 P3` is the synchronized torch-disable/enable surface recognized by the QtPlasmaC filter/run-from-line workflow and supports overcut-style strategies.
 - `qtplasmac_gcode.py` actively validates/transforms incoming plasma G-code; it is not transparent pass-through.
-- Run From Line has dedicated reconstruction/recovery code and cannot safely be modeled as jumping the interpreter directly to a line with no process-state rebuilding.
-- PowerMax RS485 settings/telemetry are a **non-realtime** communication path and must remain separate from realtime cut/Arc OK/THC authority.
+- Pinned `run_from_line.py` reconstructs modal/process state from the program prefix, including units/path/distance modes, parameters, material + material acknowledgement wait, cut feed, M03/M05, P2 THC state, P3 torch state and E3 velocity state. It rejects active cutter compensation/unresolved subroutine context and constructs a new safe-entry program rather than simply seeking to line N.
+- Run From Line is distinct from realtime `CUT_RECOVERY_ON/OFF`, which uses X/Y external offsets around an interrupted kerf.
+- Pinned `pmx485.py` is a Python userspace/non-realtime serial component. Desired mode/current/pressure, reported mode/current/pressure, connection status, fault/limits and arc time are separate surfaces.
+- `pmx485.py` validates write echoes/read checksums; repeated failed communication cycles clear status, close/return remote control toward local state and permit reconnection. `pmx485.status` is a communications witness, **not** realtime Torch/Arc OK or functional-safety authority.
 
-P3 bounded adversarial review: **7/7 passed**.
+P3 foundation adversarial review: **7/7 passed**. RFL/PMX continuation adversarial review: **8/8 passed**.
 
 ### Exact next 3300 work
 
-Continue from `checkpoints/3300-next-2026-09-14b.md`:
+Continue from `checkpoints/3300-next-2026-09-14c.md`:
 
-1. continue P2 with inspectable ohmic+float, Powermax RS485 and later tandem-gantry configuration/build evidence;
-2. continue P3 by tracing `run_from_line.py`, exact hole/overcut transformations in `qtplasmac_gcode.py`, a current QtPlasmaC CAM post, and `pmx485` integration/failure diagnostics;
-3. then 3300-L1: pinned `laserpower.comp`, `raster.comp`, laser sim and M62/M63/M67/M68 semantics followed by real laser implementations;
-4. then 3300-W1: multiple real waterjet configs/build diaries before freezing any process state model;
-5. later build the cross-process 3300 playbook while preserving plasma/laser/waterjet process differences.
+1. source-trace exact hole/overcut transformations in `qtplasmac_gcode.py`, with representative input -> filtered output for P2/P3/E3 behavior;
+2. inspect a current SheetCam and/or Fusion QtPlasmaC post to identify which layer emits M190/P2/P3/E3 patterns;
+3. find a real `pmx485` field failure/recovery history and downloadable ohmic+float configuration if available;
+4. integrate those into a concise plasma production-diagnostics playbook;
+5. then rotate to 3300-L1: pinned `laserpower.comp`, `raster.comp`, laser sim and M62/M63/M67/M68 semantics followed by real laser implementations;
+6. then 3300-W1: multiple real waterjet configs/build diaries before freezing any process state model;
+7. later build the cross-process 3300 playbook while preserving plasma/laser/waterjet process differences.
 
 ### 3300 lab decision
 
@@ -200,6 +205,6 @@ No lab compute was consumed in the current 3300 plasma source/community/workflow
 
 ## Global next-work rule
 
-Continue from `checkpoints/3300-next-2026-09-14b.md`.
+Continue from `checkpoints/3300-next-2026-09-14c.md`.
 
 Do substantive source/config/build-diary work, not repeated status checks or synthetic activity. When a 3300 branch reaches a real information-gain stop, rotate according to the explicit 3300 order or select another open 3000 branch by expected information gain, community use, cross-machine value, coverage gap and inspectable evidence.

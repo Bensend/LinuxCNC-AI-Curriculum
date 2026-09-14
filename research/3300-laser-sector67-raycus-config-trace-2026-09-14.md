@@ -7,7 +7,7 @@ Status: CONFIG-CONFIRMED + PROJECT-DOC-CONFIRMED deployed proof-of-concept behav
 
 ## Why this matters
 
-Earlier L1 evidence had only community prose for a 500 W Raycus fiber retrofit. This repository exposes the actual LinuxCNC/QtPlasmaC configuration, custom HAL, custom G-code filter and project documentation. It therefore upgrades several fiber-laser claims from COMMUNITY-REPORTED to inspectable configuration evidence.
+Earlier L1 evidence had only community prose for a 500 W Raycus fiber retrofit. This repository exposes the actual LinuxCNC/QtPlasmaC configuration, custom HAL, custom G-code filter, material file and project documentation. It therefore upgrades several fiber-laser claims from COMMUNITY-REPORTED to inspectable configuration evidence.
 
 The project reports successful basic cuts in stainless and mild steel. It should still be treated as a machine-specific proof of concept, not as a canonical production fiber architecture.
 
@@ -56,6 +56,8 @@ The resulting software path is:
 `head capacitance -> BCL-AMP variable-frequency output -> Schmitt trigger -> Mesa encoder A input/counter mode -> encoder velocity -> limit/scaling -> QtPlasmaC arc-voltage surface -> adapted height-control logic`
 
 This is an intentional semantic adaptation: the physical quantity is **capacitive standoff**, not plasma arc voltage.
+
+The preserved preference-fix script explicitly enables both `Ohmic probe enable` and `THC enable` while setting Arc Voltage Offset/Scale and Height Per Volt for the capacitive signal. This is configuration evidence that the project intentionally drives QtPlasmaC's height-control machinery from the repurposed capacitive measurement rather than merely displaying it.
 
 ## Probe and Arc OK compatibility glue
 
@@ -106,11 +108,18 @@ This machine reuses QtPlasmaC's material infrastructure rather than creating a n
 
 The preserved `M190` helper still performs material change by setting QtPlasmaC material-change pins and waiting with a timeout.
 
+The pinned material file provides concrete examples of field repurposing:
+
+- `CUT_AMPS` varies with intended laser power (for example 10 for marking, 50-80 for cutting recipes) and is the field consumed by the custom M03 power rewrite;
+- `CUT_VOLTS` remains 100 across the shown recipes even though the actual physical height signal is capacitive frequency mapped through the QtPlasmaC arc-voltage surface;
+- `GAS_PRESSURE` is 0 in the shown recipes while gas is controlled separately by the simple HAL timed solenoid;
+- pierce height/delay, cut height and cut speed remain meaningful recipe fields and vary by material/operation.
+
 Therefore recipe provenance on this machine is:
 
-`QtPlasmaC material selection -> material cut_amps field -> custom_filter M03 rewrite -> spindle/PWM laser-power path`
+`QtPlasmaC material selection -> material fields with machine-specific reinterpretation -> custom_filter M03 rewrite + plasmac motion/height behavior -> spindle/PWM laser-power path`
 
-Other plasma-oriented material fields must not automatically be assumed to have physically correct fiber-laser meanings without machine-specific use evidence.
+Do not infer physical meaning from a plasma-oriented field name. The exact machine-specific semantic mapping must be documented.
 
 ## Source READY gap and startup fault
 
@@ -131,18 +140,19 @@ It is also a stronger future experiment/design-review target than a toy PWM simu
 
 The project documentation explicitly warns of immediate eye hazards and reports enclosing the system and using cameras. The downloadable config still cannot establish a functional-safety architecture. Software torch/machine signals, diagnostic lights and an enclosure must not be represented as safety-rated interlocks without separate evidence.
 
-## Adversarial review — 10/10
+## Adversarial review — 11/11
 
 1. Does `plasmac:torch-on` prove the Raycus is ready? **No.** Ready is a distinct source signal and is not integrated into qualification here.
 2. Does the fake always-true Arc OK mean fiber laser has physical Arc OK? **No.** It is interface compatibility glue.
 3. Is the BCL-AMP measuring arc voltage? **No.** It measures capacitive standoff through a frequency signal mapped onto an existing software surface.
 4. Is `cut_amps` physically current in this machine? **No.** The custom filter repurposes it as laser-power percentage/intention.
-5. Does the project use native `laserpower.comp`? **No.** Power goes through spindle speed -> Mesa PWM -> 0-10 V conversion.
-6. Does PWM enable alone command emission? **No.** The project documents separate source enable/modulation/analog-power inputs.
-7. Is gas readiness verified before every cut? **No.** Current gas control is a simple program-running timed delay and the builders describe it as naive.
-8. Does the source-ready omission make the project nonfunctional? **No.** It worked via a procedural startup order, but that leaves an architectural readiness gap.
-9. Can the final custom component execution order be inferred solely from `laser_cutter.hal`? **No.** Full include/addf order must be reconstructed before timing claims.
-10. Does a successful proof-of-concept config define a universal fiber process architecture? **No.** Preserve machine-specific adaptations and unresolved source/gas/focus/readiness boundaries.
+5. Does `cut_volts=100` prove a 100 V process signal? **No.** It is a plasma-oriented recipe field retained inside an adapted workflow; physical height comes from the capacitive path.
+6. Does the project use native `laserpower.comp`? **No.** Power goes through spindle speed -> Mesa PWM -> 0-10 V conversion.
+7. Does PWM enable alone command emission? **No.** The project documents separate source enable/modulation/analog-power inputs.
+8. Is gas readiness verified before every cut? **No.** Current gas control is a simple program-running timed delay and the builders describe it as naive.
+9. Does the source-ready omission make the project nonfunctional? **No.** It worked via a procedural startup order, but that leaves an architectural readiness gap.
+10. Can the final custom component execution order be inferred solely from `laser_cutter.hal`? **No.** Full include/addf order must be reconstructed before timing claims.
+11. Does a successful proof-of-concept config define a universal fiber process architecture? **No.** Preserve machine-specific adaptations and unresolved source/gas/focus/readiness boundaries.
 
 ## Promotion consequence
 

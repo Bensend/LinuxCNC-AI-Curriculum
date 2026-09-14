@@ -1,80 +1,86 @@
 # Active Curriculum Session State
 
-Session start UTC: `2026-09-14T19:33:49Z`
-Session end UTC: `2026-09-14T19:42:32Z`
-Actual elapsed: **8.7 minutes**
-Status: **CLOSED — second production-style router ATC integrated; XYY gantry negative-HOME_SEQUENCE behavior source-closed; spindle/VFD readiness and dust/vacuum authority boundaries advanced.**
+Session start UTC: `2026-09-14T20:38:18Z`
+Session end UTC: `2026-09-14T20:50:54Z`
+Actual elapsed: **12.6 minutes**
+Status: **CLOSED — 3400 generic Motion-DOUT boundary source-closed; 3500 native kinematics failure path and Tormach ROS2/HAL drive-authority path advanced.**
 
 ## Prerequisite state
 
-The 1000 and 2000 series remain **GRADUATED / CLOSED**. F02 remains graduated under the preserved valid information-separated evaluation. This session did not reopen, poll or score closed prerequisite work.
+The 1000 and 2000 series remain **GRADUATED / CLOSED**. F02 remains graduated under the preserved valid information-separated evaluation. This session did not reopen, repoll or rescore closed prerequisite work.
 
 ## Active branch
 
-Active 3000 work remains **3400 — Routers / Woodworking**.
+Active 3000 work is now **3500 — Robots / Custom Kinematics**.
 
-Latest checkpoint: `checkpoints/3400-next-2026-09-14c.md`.
+Latest checkpoint: `checkpoints/3500-next-2026-09-14b.md`.
 
-3300 remains open with preserved checkpoint `checkpoints/3300-next-2026-09-14f.md`. 3200 remains intentionally paused. 3600 remains at its branch-local information-gain stop.
+The prior `checkpoints/3500-next-2026-09-14.md` remains authoritative background and already promoted ROS/ROS2 to a major 3500 subtrack. Checkpoint B adds the new native-kins and Tormach field-authority evidence.
 
-Pinned LinuxCNC revision for upstream source claims: `f666f1a51ae7c4d991cc61233e785dcc53fbe98d`.
+3400 is paused at `checkpoints/3400-next-2026-09-14d.md`. 3300 remains open at its bounded source stops, 3200 remains intentionally paused, and 3600 remains at its branch-local information-gain stop.
 
 ## Durable work completed
 
 Created:
 
-- `research/3400-funkenjaeger-dcnc-atc-dust-spindle-gantry-audit-2026-09-14.md`
-- `research/3400-gantry-negative-home-sequence-source-trace-2026-09-14.md`
-- `research/3400-router-spindle-vfd-readiness-fault-boundary-2026-09-14.md`
-- `research/3400-router-vacuum-dust-authority-community-boundary-2026-09-14.md`
-- `checkpoints/3400-next-2026-09-14c.md`
+- `research/3400-motion-dout-transition-source-closeout-2026-09-14.md`
+- `checkpoints/3400-next-2026-09-14d.md`
+- `research/3500-robots-custom-kinematics-foundation-2026-09-14.md`
+- `research/3500-kinematics-failure-propagation-2026-09-14.md`
+- `research/3500-tormach-hal-ros-control-realtime-loop-source-trace-2026-09-14.md`
+- `research/3500-za6-drive-enable-zero-error-brake-authority-source-trace-2026-09-14.md`
+- `research/3500-za6-joint-command-quickstop-source-trace-2026-09-14.md`
+- `checkpoints/3500-next-2026-09-14b.md`
 
-Updated `PROGRESS.md` to promote the evidence-backed 3400 contracts and preserve remaining gaps.
+Updated `PROGRESS.md` to make 3500 the active 3000 branch and preserve the newer ROS/ROS2 priority already present in the repository.
 
-### Second real router ATC
+## 3400 source closeout
 
-`Funkenjaeger/fj-lcnc-cfg@f4877f862ab757bd396b02e54acb12e6835f8259` provides a materially different six-pocket rack ATC. The remapped M6 separates pneumatic source readiness, source/destination pocket occupancy, rack actuation, drawbar command, physical transfer evidence, logical `M61` tool identity, later fixed-tool measurement and prior dust-shoe restoration.
+Pinned LinuxCNC Motion source established that already-applied custom `motion.digital-out-NN` state is not generically cleared by program Abort or Motion Disable. The upstream Task E-stop sequence uses Motion Abort, spindle off, Disable and IO/amp actions but exposes no custom-DOUT reset. A queued future synchronized DOUT is a different state and may disappear when TP is aborted.
 
-The inspected files expose six pocket sensors, an air-pressure switch and explicit drawbar/purge/rack outputs, but no direct drawbar-clamped/released feedback. Local abort paths clean some states; no global custom-output/tool-inventory reconciliation hook was found. Therefore an interrupted custom M6 remains a physical/logical reconciliation problem rather than an idempotent retry.
+Therefore a custom M64/M65 drawbar/auxiliary output cannot be treated as an Abort/E-stop cleanup primitive. Exact physical terminal state at process shutdown remains hardware/driver/external-circuit specific. The proposed generic DOUT transition lab is dropped as duplicate evidence.
 
-Repository history records a 2025 Auto-mode indefinite-pause fix involving spindle-at-speed behavior on the first feed move inside the toolchange and a subsequent physical adjacent-tool interference fix. This is useful commissioning chronology, not merely a final config snapshot.
+## 3500 native kinematics
 
-### Dust / vacuum workholding
+Pinned LinuxCNC source established:
 
-The DCNC dust shoe is a real auxiliary state machine with saved prior state, Z-clearance motion, pneumatic sequencing, retract-position feedback, timeout/abort and conditional restoration after M6. Its full down/swing-under completion remains partly dwell-based.
+- switchkins changes should use synchronized `G12.1/G13.1`; the raw HAL switch path is deprecated because interpreter lookahead can retain stale kinematics;
+- kinstype persists across program end/Abort;
+- `genserkins` uses an iterative Jacobian inverse seeded from current/supplied joints;
+- Jacobian inversion failure or iteration exhaustion returns inverse failure;
+- coordinated/teleop realtime inverse failure or non-finite joint output sets Motion error and requests disable;
+- resulting joint soft limits remain a separate downstream backstop;
+- `scarakins` explicitly carries elbow branch state and clamps its cosine argument, leaving a bounded reach-boundary validation target.
 
-Community evidence supports multiple dust-collection ownership patterns and program/manual/VCP arbitration for vacuum clamping, but no trustworthy public production config surfaced with vacuum-zone control plus independent achieved/ready proof, loss response and restart recovery. Vacuum command and vacuum achieved remain separate; no universal threshold or recovery sequence was invented.
+## 3500 Tormach ROS2/HAL implementation
 
-### Spindle / VFD
+At `tormach/hal_ros_control@506a3d109cb306e1d1cdb70f24440bde1159b256`, the HAL realtime function owns:
 
-The real WJ200 userspace driver exposes `is_running`, `is_at_speed`, `is_ready`, `is_alarm`, actual frequency and a communications watchdog separately. The machine HAL wires at-speed into `spindle.0.at-speed` and surfaces alarm diagnostics, but no evidence was found that READY or watchdog freshness is used as a cut/ATC permissive. Status availability is not status authority.
+`controller_manager.read -> update -> write`.
 
-### XYY gantry homing
+The ROS executor runs in a separate userspace thread. The generic HalSystemInterface copies HAL feedback into ros2_control state and ros2_control commands back to HAL command pins. Its generic activate/deactivate and `CM_OK=0` path do not explicitly drive command pins to a safe value, so downstream field authority had to be traced.
 
-Pinned LinuxCNC `homing.c` closes the previous gantry question. Negative HOME_SEQUENCE groups joints having the same absolute sequence value, but switch/search/latch reference acquisition remains per joint. `sync_ready()` synchronizes the **final HOME move** after participating joints reach the same final-move state.
+At `tormach/tormach_za_ros2_drivers@b58078aac3004f3932079ea7228ab0432cf8ac18`, drive START/STOP is explicitly separate from controller ownership. Before drive START, `zero_error()` publishes a one-point trajectory equal to current joint feedback and waits until command-feedback error is within 0.001 rad. START then waits for device-manager state feedback plus `goal_reached`, with timeout/fault handling.
 
-If a homing episode reaches `HOME_ABORT`, the inspected source clears `homing`, `homed`, sequence membership and homing motion for **all joints**, not merely the failing gantry side. A one-side failed home therefore leaves the machine globally unhomed in this source contract. No synthetic gantry lab is justified.
+Homing separately manipulates Inovance brake-function SDO state, asserts a per-joint home request, waits for success/error/timeout, zeroes command error, then restores normal brake behavior. Per-joint HAL plumbing inserts joint limits and realtime command shaping between ros2_control and EtherCAT.
 
-## Adversarial / verification state
+The EtherCAT path also exposes a cross-drive quick-stop rule: when any drive faults, the drive-safety chain forces the CiA-402 quick-stop bit low across drive control words before they reach EtherCAT. This is operational fault containment, not proof of safety-rated STO.
 
-- second ATC / dust / gantry config audit: **8/8 passed**;
-- synchronized gantry homing source trace: **7/7 passed**;
-- spindle/VFD readiness/fault boundary: **7/7 passed**;
-- vacuum/dust authority boundary: **7/7 passed**.
+## Remaining 3500 gap
 
-## Lab decision
+Runtime stale-command containment is not yet fully closed. The new source shows enable-time command reconciliation and drive-fault quick-stop, but not what happens if `hal_control_node`/controller-manager simply stops updating while EtherCAT and drives remain otherwise healthy.
+
+Exact next work is preserved in `checkpoints/3500-next-2026-09-14b.md`: trace `hw_device_mgr`/lcec command freshness/watchdog behavior and current JointTrajectoryController cancel/deactivate/hold semantics before deciding whether an RRBot/ZA6 stale-command experiment adds independent evidence.
+
+## Adversarial / lab state
+
+- 3400 Motion-DOUT closeout: **7/7 passed**.
+- 3500 native foundation: **8/8 passed**.
+- 3500 inverse-failure propagation: **6/6 passed**.
+- Tormach HAL realtime-loop trace: **8/8 passed**.
+- ZA6 drive-state/brake trace: **8/8 passed**.
+- ZA6 quick-stop/command pipeline trace: **7/7 passed**.
 
 No lab was run. `LAB_COMPUTE_LOG.md` remains unchanged at the preserved exact-recorded total of **338.56 minutes (5.64 h)**.
 
-The gantry failure question was directly resolved by pinned source. The remaining potentially useful 3400 lab is narrow: if source inspection cannot resolve the user-visible state of an already-applied M64 Motion DOUT across Abort, machine OFF and E-stop, observe that DOUT in parallel with built-in iocontrol toolchange pins. Do not broaden it into a generic simulation campaign.
-
-## Exact next checkpoint
-
-Continue from `checkpoints/3400-next-2026-09-14c.md`:
-
-1. finish source tracing arbitrary Motion DOUT behavior across program Abort, machine OFF / `EMCMOT_DISABLE`, E-stop/task state and shutdown/HostMot2 behavior;
-2. run the bounded DOUT transition lab only if source still cannot answer the real runtime question;
-3. reopen vacuum workholding only for a real implementation with pressure/ready/loss/recovery evidence;
-4. if R5 closes or reaches a clean stop, checkpoint 3400 and rotate to an underdeveloped 3000 branch rather than over-mining routers.
-
-Overlap: **No overlap.** Previous canonical session ended `2026-09-14T18:52:08Z`; this session began `2026-09-14T19:33:49Z`, **41m41s later**.
+Overlap: **No overlap.** Previous canonical session ended `2026-09-14T19:42:32Z`; this session began `2026-09-14T20:38:18Z`, **55m46s later**.

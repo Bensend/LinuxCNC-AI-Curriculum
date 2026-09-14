@@ -1,50 +1,84 @@
 # Active Curriculum Session State
 
-Session start UTC: `2026-09-14T12:42:27Z`
-Session end UTC: `2026-09-14T12:51:42Z`
-Actual elapsed: **9.2 minutes**
-Status: **CLOSED — F02 external gate preserved; rotated from source-exhausted 3600 to substantive 3200 lathe specialization.**
+Session start UTC: `2026-09-14T16:37:41Z`
+Session end UTC: `2026-09-14T16:47:42Z`
+Actual elapsed: **10.0 minutes**
+Status: **CLOSED — 3300 plasma P1 source trace established; P2 real-machine commissioning and P3 production/recovery contracts materially advanced.**
 
-## Critical path
+## Prerequisite state
 
-`handoffs/F02-fresh-ai-compound-fault-transfer.md` remains **PREPARED / UNSCORED**. The evaluation directory and recent repository history were checked once at session start; no new correctly routed information-separated evaluator result was found. F02 was not self-scored or contaminated.
+The 1000 and 2000 series remain **GRADUATED / CLOSED**. F02 remains graduated under its preserved valid information-separated evaluation. This session did not reopen, re-poll or re-score closed 2000 work.
+
+## Active branch
+
+Owner-selected active branch: **3300 — Plasma / Laser / Waterjet**.
+
+Pinned LinuxCNC revision for source claims: `f666f1a51ae7c4d991cc61233e785dcc53fbe98d`.
+
+Latest checkpoint: `checkpoints/3300-next-2026-09-14c.md`.
+
+3200 remains intentionally paused and not graduated. 3600 remains at its preserved information-gain stop.
 
 ## Work completed
 
-The 3600 information-gain stop was treated as branch-local under `WORK_SELECTION_POLICY.md`, and work rotated to the previously underdeveloped **3200 — Lathes / Turning Centers** track.
-
-Pinned LinuxCNC revision: `f666f1a51ae7c4d991cc61233e785dcc53fbe98d`.
-
 New durable artifacts:
 
-- `research/3200-lathe-spindle-sync-foundation-2026-09-14.md`
-- `research/3200-g76-pass-generation-source-trace-2026-09-14.md`
-- `research/3200-spindle-index-readiness-config-comparison-2026-09-14.md`
-- `research/3200-lathe-turret-toolchange-boundary-2026-09-14.md`
-- `research/3200-css-x-origin-control-boundary-2026-09-14.md`
-- `checkpoints/3200-lathe-next-2026-09-14.md`
+- `research/3300-qtplasmac-process-eoffset-source-trace-2026-09-14.md`
+- `research/3300-plasma-build-diary-comparison-2026-09-14.md`
+- `research/3300-plasma-production-workflow-foundation-2026-09-14.md`
+- `research/3300-plasma-rfl-pmx-source-trace-2026-09-14.md`
+- `checkpoints/3300-next-2026-09-14b.md`
+- `checkpoints/3300-next-2026-09-14c.md`
+- updated `PROGRESS.md`
 
-Key source-grounded findings:
+### P1 — process and external-offset ownership
 
-1. G76 pass geometry is expanded in the interpreter into multiple positioning/synchronized-cut/retract episodes; realtime TP/Motion owns spindle-synchronized segment execution.
-2. The call path is `G33/G76 -> START_SPEED_FEED_SYNCH -> EMC_TRAJ_SET_SPINDLESYNC -> emcTrajSetSpindleSync -> EMCMOT_SET_SPINDLESYNC -> tpSetSpindleSync -> TP synchronized trajectory`.
-3. TP maintains separate waiting-for-index and waiting-for-at-speed states, so phase acquisition and cutting readiness are not the same condition.
-4. Two public lathe configurations demonstrated legitimate variation around the same contract: one mechanically synchronized spindle forces `at-speed` true while retaining encoder/index synchronization; another uses VFD readiness plus independent Mesa encoder phase/speed and machine-specific gear-command scaling.
-5. `carousel.comp` is a reusable pocket-orientation state machine with homing, alignment, reverse-lock and multiple encoder schemes, but its `ready` output must not be generalized into proof that a multi-stage lathe turret is clamped/locked/down and safe for cutting.
-6. Generic iocontrol tool preparation/change requires external acknowledgement; machine-specific physical witnesses remain outside the generic request.
-7. G96 CSS couples spindle command to X centerline/tool geometry and requires finite limiting near zero radius; command calculation and `spindle.N.at-speed` authorization remain separate surfaces.
+Source-traced `plasmac.comp`, `qtplasmac_comp.hal`, Motion `axis.c`, Motion `control.c` and official external-offset documentation.
 
-Five bounded adversarial reviews scored **7/7 PASS** each. No new laboratory compute was consumed; source/docs/community/config evidence had higher information gain than another synthetic fixture. The next possible lab remains conditional on source/test inspection exposing a non-duplicate fault claim.
+Established that QtPlasmaC owns realtime plasma process decisions and requested X/Y/Z external-offset count evolution, while LinuxCNC Motion owns the separately planned applied external offset, its velocity/acceleration allocation, insertion into Cartesian command and generic soft-limit clipping.
 
-## Next checkpoint
+Preserved distinct nominal, requested and applied offset surfaces. Eoffset disable does not itself clear a nonzero offset. QtPlasmaC additionally maintains process-local Z bounds and explicit MAX_HEIGHT/END_JOB/recovery cleanup.
 
-1. Re-check F02 once at the next session; if unchanged, continue 3200 without repeated polling.
-2. Finish the iocontrol/tool-change source trace, especially abort/restart and stale acknowledgement semantics.
-3. Inspect one complete public lathe turret implementation and map physical clamp/lift/lock witnesses to `tool-changed`.
-4. Inspect TP spindle-sync pause/resume/index-failure behavior and upstream synchronized-motion/threading tests.
-5. Only freeze a fault lab if that inspection leaves a real evidence gap.
-6. Continue 3200 breadth afterward (tool-table/turret conventions, spindle orient/C-axis/live tooling, chuck/tailstock, probing/HMI) rather than over-investigating one subsystem.
+The source trace covered IHS/probe qualification, ohmic retry/float fallback, pierce, Torch On, Arc OK, separate arc-start failure versus arc-loss handling, pierce delay, puddle jump, cut-height transition, THC qualification, cut end/retract, limit faults, pause and cut recovery.
 
-Overlap: **No overlap.** Previous completed canonical lesson ended `2026-09-13T04:17:18Z`; this session began `2026-09-14T12:42:27Z`, **32h25m09s later**.
+P1 bounded adversarial review: **8/8 passed**.
 
-Short-session continuation check: the session did not stop at the first coherent spindle-sync pass. It continued through G76 internals, TP index/readiness semantics, two real public configurations, turret/carousel state-machine boundaries, and CSS/X-origin semantics. Additional work remains unblocked and is preserved in the 3200 checkpoint for the next heartbeat rather than manufacturing a redundant laboratory experiment.
+### P2 — real machine commissioning evidence
+
+Preserved three materially different field histories:
+
+1. Powermax 45XP + Mesa 7i96 + THCAD5 + external Arc OK — HAL-visible Arc OK still failed when QtPlasmaC mode was wrong; Mode 1 fixed Arc OK, then physical THCAD polarity had to be corrected; CAM/post behavior became the next layer.
+2. QtPlasmaC + Mesa 7i96 + tandem-Y gantry — commissioning exposed Cartesian-axis versus physical-joint topology confusion; the machine remains XYZ with two Y joints/step generators.
+3. Everlast 82i + Mesa 7i96 + THCAD-2 — credible voltage required correct THCAD frequency divide plus source-divider/scale/offset provenance; `/32` and scaling changes resolved the reported issue.
+
+P2 bounded adversarial review: **6/6 passed**.
+
+### P3 — material/CAM/recovery/PowerMax authority
+
+Established production authority chain:
+
+`CAD -> CAM/process intent -> postprocessor G-code/material commands -> QtPlasmaC filter -> interpreter/trajectory -> plasmac realtime state -> synchronized outputs/eoffsets -> physical process`.
+
+Preserved M190 + material acknowledgement wait, P2 synchronized THC inhibit, P3 synchronized torch inhibit and E3 synchronized velocity reduction as command-intent surfaces distinct from realtime process qualification.
+
+Pinned `run_from_line.py` was traced end-to-end far enough to establish that Run From Line reconstructs prefix modal/process state — units, path/distance modes, parameters, material+wait, feed, M03/M05, P2, P3 and E3 state — and synthesizes a new safe-entry program. It refuses active cutter compensation / unresolved subroutine contexts. This is distinct from realtime cut recovery using X/Y external offsets.
+
+Pinned `pmx485.py` was traced as a Python userspace/non-realtime serial component with separate desired and reported mode/current/pressure, status, fault, limits and arc-time surfaces. It validates protocol replies, drops status and closes/returns remote control toward local state after repeated failures, and can attempt reconnection. `pmx485.status` is a communications witness, not realtime Torch/Arc OK or functional-safety authority.
+
+P3 foundation adversarial review: **7/7 passed**. RFL/PMX continuation adversarial review: **8/8 passed**.
+
+## Lab decision
+
+No laboratory experiment was launched. Pinned source, official documentation and real-machine build histories provided higher information gain and directly resolved the active questions. `LAB_COMPUTE_LOG.md` therefore remains unchanged.
+
+## Exact next checkpoint
+
+Continue from `checkpoints/3300-next-2026-09-14c.md`:
+
+1. trace exact `qtplasmac_gcode.py` hole/overcut transformations with representative input -> filtered output for P2/P3/E3 behavior;
+2. inspect a current SheetCam and/or Fusion QtPlasmaC post to assign M190/P2/P3/E3 generation to the correct layer;
+3. find a real `pmx485` field failure/recovery history and, if available, an inspectable/downloadable ohmic+float machine config;
+4. integrate the result into a concise plasma production-diagnostics playbook;
+5. when plasma P2/P3 reaches diminishing returns, rotate to **3300-L1** rather than over-mining plasma, then later W1.
+
+Overlap: **No overlap.** Previous canonical session ended `2026-09-14T12:51:42Z`; this session began `2026-09-14T16:37:41Z`, **3h45m59s later**.

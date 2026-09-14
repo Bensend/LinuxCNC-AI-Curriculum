@@ -17,7 +17,7 @@ Do not reopen or repoll closed 2000 work unless a genuinely new material defect 
 
 **3000 — machine-specific specialization.** Current owner-selected branch: **3300 — Plasma / Laser / Waterjet**.
 
-Latest active checkpoint: `checkpoints/3300-next-2026-09-14e.md`.
+Latest active checkpoint: `checkpoints/3300-next-2026-09-14f.md`.
 
 3200 remains paused by explicit owner rotation, not graduated. 3600 retains its branch-local information-gain stop. Do not fall back to either without evidence/rotation authority.
 
@@ -46,6 +46,7 @@ Authoritative artifacts:
 - `research/3300-laser-native-source-foundation-2026-09-14.md`
 - `research/3300-laser-real-implementation-comparison-2026-09-14.md`
 - `research/3300-laser-sector67-raycus-config-trace-2026-09-14.md`
+- `research/3300-laser-laserpower-deployment-availability-audit-2026-09-14.md`
 
 Native source establishes:
 
@@ -67,7 +68,9 @@ Sector67 source/config confirms:
 - Raycus analog power, modulation, enable and READY are separate surfaces; READY is not integrated into machine-on qualification in the preserved config, and source enable during source power-up can fault the source, so startup correctness is currently procedural;
 - gas control is a simple program-running timed solenoid and is explicitly described by the project as naive.
 
-Key L1 boundary: `laserpower.comp` is optional reusable infrastructure, not mandatory architecture. CO2, diode/vector-raster and fiber metal cutting require separate source-readiness, gas, height/focus, recipe and recovery evidence.
+A fresh global code audit found `loadrt laserpower` / `laser.control.power` only in the shipped LinuxCNC laser simulator and source-tree forks/copies, not an independently evidenced physical machine. This is a bounded **public deployment gap**, not evidence that no field machine uses the component. Treat `laserpower.comp` as native reusable realtime infrastructure, not a canonical production laser architecture.
+
+Key L1 boundary: CO2, diode/vector-raster and fiber metal cutting require separate source-readiness, gas, height/focus, recipe and recovery evidence. The highest-value remaining L1 evidence is a mature fiber implementation with integrated READY/FAULT, gas pressure/type, focus/pierce and abort/restart behavior. Do not repeat exact `laserpower.*` deployment searches without a new candidate.
 
 ### Waterjet W1
 
@@ -75,26 +78,23 @@ Authoritative artifacts:
 
 - `research/3300-waterjet-w1-implementation-hunt-2026-09-14.md`
 - `research/3300-waterjet-vendor-process-boundaries-2026-09-14.md`
+- `research/3300-waterjet-w1-field-chronology-pressure-authority-2026-09-14.md`
 
 Real LinuxCNC evidence supports distinct nozzle/water and abrasive commands, explicit program/manual authority arbitration, nominal Z versus cutting-time correction authority, and careful preservation of original servo/feedback topology.
 
-Primary vendor documentation sharpens but does not fill the missing LinuxCNC contract: low/high pressure modes and low-pressure pierce exist; vacuum-assist can establish abrasive before water; abrasive availability/transfer/metering are distinct layers; clog recovery may require purge/diverter state; intensifier and direct-drive pump idle behavior differ. Therefore **do not freeze a universal water-before-abrasive rule**.
+A 2022 retrofit chronology now adds commissioning evidence from original process-I/O identification through working LinuxCNC/Mesa control. Its waterjet command was intentionally active-low so controller shutdown would leave the machine depressurized; this is machine-specific field behavior, not a universal or safety-rated LinuxCNC contract. The same chronology separates successful CNC control from later independent hydraulic leaks. A converted FLOW machine provides long-lived LinuxCNC deployment evidence but exposes no process sequence.
 
-Highest-value W1 unknowns remain:
+Industrial process evidence sharpens the authority model without inventing LinuxCNC semantics: CNC low-pressure-pierce requests can be handed to a separate pump PLC/controller that owns the pressure transition; vacuum-assisted piercing can intentionally establish abrasive before water; abrasive availability/transfer/metering are distinct; clog recovery may require purge/diverter behavior; intensifier and direct-drive pump idle behavior differ. Therefore **do not freeze a universal water-before-abrasive rule** and do not treat a pressure command as proof that pressure is achieved.
 
-- pump/intensifier start, READY and fault semantics;
-- high-pressure valve/pressure qualification;
-- recipe-specific water/abrasive lead-lag and pierce timing;
-- automatic standoff feedback/control;
-- nozzle/abrasive flow faults and purge recovery;
-- pause/feed-hold/abort/restart reconciliation;
-- high-pressure safeguarding/interlocks.
+The targeted pump/readiness search has reached a bounded source-availability stop: no downloadable LinuxCNC HAL/remap/custom component was found that exposes a complete `pump/intensifier command -> pressure transition -> READY/fault qualification -> cut authorization -> pause/abort recovery` chain.
+
+W1 remains open and the 3-axis state machine is not frozen. Reopen the pressure-readiness sub-branch only when a pump PLC mapping, pressure/ready/fault witness, high-pressure-valve ownership path, real sequencing component/remap, or recovery implementation becomes inspectable.
 
 W2 dual-head/5-axis taper compensation remains deferred until the 3-axis process contract is evidence-backed.
 
 ### Lab decision
 
-No new lab in this 3300 pass. Source/config/build-diary work is still higher information gain. Frozen candidates remain queued M67/M62 with no following motion, vector deceleration/corner power scaling, raster pixel boundaries, and water/abrasive recovery only after a real waterjet sequencing contract is found.
+No new lab in this 3300 pass. Source/config/build-diary work remains higher information gain for the open questions. Frozen candidates remain queued M67/M62 with no following motion, vector deceleration/corner power scaling, raster pixel boundaries, and water/abrasive recovery only after a real waterjet sequencing contract is found.
 
 ## Other open 3000 branches
 
@@ -108,6 +108,6 @@ No new lab in this 3300 pass. Source/config/build-diary work is still higher inf
 
 ## Global next-work rule
 
-Continue from `checkpoints/3300-next-2026-09-14e.md`.
+Continue from `checkpoints/3300-next-2026-09-14f.md`.
 
-Prioritize W1 retrieval of a real pump/pressure-ready implementation and a real water/abrasive sequencing implementation. In parallel, collect mature fiber configs with integrated source READY/FAULT, gas pressure/selection, focus/pierce and abort/recovery, and search for a real deployment using upstream `laserpower.power`. Build the cross-process 3300 playbook only after W1 has a defensible 3-axis contract.
+Prioritize mature fiber implementations with integrated source READY/FAULT, gas type/pressure, focus/pierce and pause/abort/restart behavior. Reopen W1 pump/pressure-ready work only on genuinely new inspectable implementation evidence rather than repeating generic searches. If those 3300 paths both remain source-limited, checkpoint 3300 and rotate to another underdeveloped open 3000 branch according to `WORK_SELECTION_POLICY.md` rather than returning by default to paused 3200 or source-limited 3600.

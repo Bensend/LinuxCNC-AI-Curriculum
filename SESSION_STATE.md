@@ -1,86 +1,82 @@
 # Active Curriculum Session State
 
-Session start UTC: `2026-09-14T20:38:18Z`
-Session end UTC: `2026-09-14T20:50:54Z`
-Actual elapsed: **12.6 minutes**
-Status: **CLOSED — 3400 generic Motion-DOUT boundary source-closed; 3500 native kinematics failure path and Tormach ROS2/HAL drive-authority path advanced.**
+Session start UTC: `2026-09-14T21:36:26Z`
+Session end UTC: `2026-09-14T21:50:44Z`
+Actual elapsed: **14.3 minutes**
+Status: **CLOSED — 3500 bounded breadth stop preserved; active work rotated to 3700 and EDM adaptive/reverse-path authority advanced.**
 
 ## Prerequisite state
 
-The 1000 and 2000 series remain **GRADUATED / CLOSED**. F02 remains graduated under the preserved valid information-separated evaluation. This session did not reopen, repoll or rescore closed prerequisite work.
+The 1000 and 2000 series remain **GRADUATED / CLOSED**. F02 remains graduated under the preserved valid information-separated evaluation. No closed prerequisite work was reopened or rescored.
 
-## Active branch
+## Branch selection
 
-Active 3000 work is now **3500 — Robots / Custom Kinematics**.
+Repository-authoritative state at session start was newer than the stale 3300 instruction embedded in the invocation: `PROGRESS.md` and `checkpoints/3500-next-2026-09-14b.md` made **3500 Robots / Custom Kinematics** active. That newer state was followed.
 
-Latest checkpoint: `checkpoints/3500-next-2026-09-14b.md`.
+3500 then reached a clean breadth/source stop, so work rotated under `WORK_SELECTION_POLICY.md` to **3700 Grinding / EDM / Specialty Finishing** rather than ending the session.
 
-The prior `checkpoints/3500-next-2026-09-14.md` remains authoritative background and already promoted ROS/ROS2 to a major 3500 subtrack. Checkpoint B adds the new native-kins and Tormach field-authority evidence.
+Latest active checkpoint: `checkpoints/3700-next-2026-09-14.md`.
 
-3400 is paused at `checkpoints/3400-next-2026-09-14d.md`. 3300 remains open at its bounded source stops, 3200 remains intentionally paused, and 3600 remains at its branch-local information-gain stop.
-
-## Durable work completed
+## Durable 3500 work completed
 
 Created:
 
-- `research/3400-motion-dout-transition-source-closeout-2026-09-14.md`
-- `checkpoints/3400-next-2026-09-14d.md`
-- `research/3500-robots-custom-kinematics-foundation-2026-09-14.md`
-- `research/3500-kinematics-failure-propagation-2026-09-14.md`
-- `research/3500-tormach-hal-ros-control-realtime-loop-source-trace-2026-09-14.md`
-- `research/3500-za6-drive-enable-zero-error-brake-authority-source-trace-2026-09-14.md`
-- `research/3500-za6-joint-command-quickstop-source-trace-2026-09-14.md`
-- `checkpoints/3500-next-2026-09-14b.md`
+- `research/3500-za6-runtime-stale-command-fault-containment-source-trace-2026-09-14.md`
+- `research/3500-za6-launch-supervision-controller-death-boundary-2026-09-14.md`
+- `research/3500-puma200-genserkins-field-commissioning-chronology-2026-09-14.md`
+- `research/3500-genserkins-inverse-failure-field-reconciliation-2026-09-14.md`
+- `checkpoints/3500-next-2026-09-14c.md`
 
-Updated `PROGRESS.md` to make 3500 the active 3000 branch and preserve the newer ROS/ROS2 priority already present in the repository.
+### ZA6 result
 
-## 3400 source closeout
+Pinned Tormach/HAL/device-manager source now separates high-level trajectory freshness, HAL command storage, EtherCAT online/oper state, CiA-402 drive state, software quick stop, and functional safety/STO.
 
-Pinned LinuxCNC Motion source established that already-applied custom `motion.digital-out-NN` state is not generically cleared by program Abort or Motion Disable. The upstream Task E-stop sequence uses Motion Abort, spindle off, Disable and IO/amp actions but exposes no custom-DOUT reset. A queued future synchronized DOUT is a different state and may disappear when TP is aborted.
+EtherCAT/drive faults have real containment: lcec online/oper loss reaches device-manager fault and `drive_safety` can impose cross-drive quick-stop-compatible control-word masking. No downstream command-age/generation/heartbeat witness was found for `hal_hw_interface.*.position_cmd` itself.
 
-Therefore a custom M64/M65 drawbar/auxiliary output cannot be treated as an Abort/E-stop cleanup primitive. Exact physical terminal state at process shutdown remains hardware/driver/external-circuit specific. The proposed generic DOUT transition lab is dropped as duplicate evidence.
+`hal_control_node` can set `cm_ok=0` and stop ControllerManager read/update/write without resetting command pins, and no ZA6 use of `cm_ok` as a drive/quick-stop permissive was found. Launch supervision does globally shut down on HAL-manager exit/readiness failure, but that is not proof of timely STOP/quick-stop for every individual high-level controller failure.
 
-## 3500 native kinematics
+Preserved rule: **fieldbus healthy != high-level command fresh**.
 
-Pinned LinuxCNC source established:
+### PUMA/genserkins result
 
-- switchkins changes should use synchronized `G12.1/G13.1`; the raw HAL switch path is deprecated because interpreter lookahead can retain stale kinematics;
-- kinstype persists across program end/Abort;
-- `genserkins` uses an iterative Jacobian inverse seeded from current/supplied joints;
-- Jacobian inversion failure or iteration exhaustion returns inverse failure;
-- coordinated/teleop realtime inverse failure or non-finite joint output sets Motion error and requests disable;
-- resulting joint soft limits remain a separate downstream backstop;
-- `scarakins` explicitly carries elbow branch state and clamps its cosine argument, leaving a bounded reach-boundary validation target.
+The real 2026 PUMA 200 commissioning chronology separates working joint motion from valid Cartesian kinematics. The actual repair path required correct physical zero/home geometry, modified-DH frames/signs, wrist transmission coupling, and physical gear-ratio verification; supplied family gearing was for another PUMA 2xx variant.
 
-## 3500 Tormach ROS2/HAL implementation
+Pinned genserkins source confirms a seeded iterative Jacobian inverse. Jacobian build/inversion can fail before max-iteration exhaustion; nonconvergence, singularity, wrong mechanism/model calibration, joint soft limits and following error are distinct failure classes. Blindly raising `max-iterations` is not a repair for bad machine geometry.
 
-At `tormach/hal_ros_control@506a3d109cb306e1d1cdb70f24440bde1159b256`, the HAL realtime function owns:
+3500 is open/paused, not graduated.
 
-`controller_manager.read -> update -> write`.
+## Durable 3700 work completed
 
-The ROS executor runs in a separate userspace thread. The generic HalSystemInterface copies HAL feedback into ros2_control state and ros2_control commands back to HAL command pins. Its generic activate/deactivate and `CM_OK=0` path do not explicitly drive command pins to a safe value, so downstream field authority had to be traced.
+Created/advanced:
 
-At `tormach/tormach_za_ros2_drivers@b58078aac3004f3932079ea7228ab0432cf8ac18`, drive START/STOP is explicitly separate from controller ownership. Before drive START, `zero_error()` publishes a one-point trajectory equal to current joint feedback and waits until command-feedback error is within 0.001 rad. START then waits for device-manager state feedback plus `goal_reached`, with timeout/fault handling.
+- `research/3700-grinding-edm-breadth-survey-2026-09-14.md`
+- `research/3700-edm-adaptive-feed-source-trace-2026-09-14.md`
+- `research/3700-edm-reverse-path-synced-io-source-trace-2026-09-14.md`
+- updated `checkpoints/3700-next-2026-09-14.md`
+- updated `PROGRESS.md` to make 3700 active.
 
-Homing separately manipulates Inovance brake-function SDO state, asserts a per-joint home request, waits for success/error/timeout, zeroes command error, then restores normal brake behavior. Per-joint HAL plumbing inserts joint limits and realtime command shaping between ros2_control and EtherCAT.
+### EDM adaptive-feed result
 
-The EtherCAT path also exposes a cross-drive quick-stop rule: when any drive faults, the drive-safety chain forces the CiA-402 quick-stop bit low across drive control words before they reach EtherCAT. This is operational fault containment, not proof of safety-rated STO.
+Pinned LinuxCNC source shows M52/adaptive-feed as a native EDM-relevant motion primitive. Realtime Motion samples `motion.adaptive-feed`, clips it to `+-MAX_FEED_OVERRIDE`, uses magnitude as feed scaling and sign as TP direction request. When sign changes while motion is active, the effective adaptive scale is forced to zero until TP can stop and change direction.
 
-## Remaining 3500 gap
+Thus negative adaptive feed is an explicit controlled path-direction transition, not a naive negative velocity multiplier.
 
-Runtime stale-command containment is not yet fully closed. The new source shows enable-time command reconciliation and drive-fault quick-stop, but not what happens if `hal_control_node`/controller-manager simply stops updating while EtherCAT and drives remain otherwise healthy.
+### Reverse-path synchronized-output result
 
-Exact next work is preserved in `checkpoints/3500-next-2026-09-14b.md`: trace `hw_device_mgr`/lcec command freshness/watchdog behavior and current JointTrajectoryController cancel/deactivate/hold semantics before deciding whether an RRBot/ZA6 stale-command experiment adds independent evidence.
+Reverse segment completion uses `tcqBackStep()` through retained trajectory segments. Synchronized M62/M63/M67 changes are stored on TC segments as commanded values. No reverse-specific output inversion/rollback path was found.
 
-## Adversarial / lab state
+Therefore **reverse path != process-state rollback**. A wire/sinker EDM controller must explicitly own spark, wire and dielectric/flushing state instead of assuming path rewind reconstructs output chronology. Abort clears pending cached synchronized outputs and resets TP reverse/queue state after stopping, but it does not establish physical EDM process-state reconciliation.
 
-- 3400 Motion-DOUT closeout: **7/7 passed**.
-- 3500 native foundation: **8/8 passed**.
-- 3500 inverse-failure propagation: **6/6 passed**.
-- Tormach HAL realtime-loop trace: **8/8 passed**.
-- ZA6 drive-state/brake trace: **8/8 passed**.
-- ZA6 quick-stop/command pipeline trace: **7/7 passed**.
+The generic reverse/DIO lab was not run because source already resolves the architectural question.
 
-No lab was run. `LAB_COMPUTE_LOG.md` remains unchanged at the preserved exact-recorded total of **338.56 minutes (5.64 h)**.
+## Next work
 
-Overlap: **No overlap.** Previous canonical session ended `2026-09-14T19:42:32Z`; this session began `2026-09-14T20:38:18Z`, **55m46s later**.
+Continue 3700-E2 with real wire-EDM process authority: gap-voltage conditioning/freshness, forward/slow/hold/reverse law, spark generator state, wire run/tension/break, dielectric/flushing readiness, U/V taper authority, and pause/abort/restart recovery. Then inspect adjacent OpenEDM subsystem architecture and rotate within 3700 to materially different real grinder implementations when the EDM source path reaches a local stop.
+
+## Laboratory state
+
+No lab was run. `LAB_COMPUTE_LOG.md` remains unchanged at the preserved exactly recorded total of **338.56 minutes (5.64 h)**; historical gaps mean that is not a trustworthy full-project total.
+
+## Overlap
+
+**No overlap.** Previous canonical session ended `2026-09-14T20:50:54Z`; this session began `2026-09-14T21:36:26Z`, **45m32s later**.

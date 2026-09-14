@@ -2,51 +2,27 @@
 
 Status values: `PLANNED`, `RESEARCH`, `SOURCE`, `EXPERIMENT`, `EXAM`, `CORRECTIONS`, `GRADUATED`.
 
-Repository artifacts, not chat history, are authoritative. Detailed historical progress remains preserved in Git history and in the referenced research/results/evaluation artifacts; this file is the current dependency/checkpoint view.
+Repository artifacts, not chat history, are authoritative. Detailed historical progress remains preserved in Git history and the referenced research/results/evaluation artifacts; this file is the current dependency/checkpoint view.
 
-## Current critical-path state
+## Closed prerequisite levels
 
 All modules through **T05** and **C01–C09** are **GRADUATED at 1000 level**.
 
-The **2000 series — advanced control and diagnostics is GRADUATED / CLOSED as of 2026-09-14**. Final closeout is preserved at `evaluation/2000-series-closeout-state-2026-09-11.md` (finalized 2026-09-14).
+The **2000 series — advanced control and diagnostics is GRADUATED / CLOSED as of 2026-09-14**.
 
-Prerequisite information-separated evaluation is preserved at `evaluation/fresh-ai-evaluation-2026-09-11-valid.md`:
+Final 2000 closeout: `evaluation/2000-series-closeout-state-2026-09-11.md` (finalized 2026-09-14).
 
-- **S02 — PASS**
-- **E20 — PASS**
-- **X01 — PASS**
-- **X02 — PASS**
+F02 — compound-fault diagnosis/recovery integration is **GRADUATED at 2000 level**. Its valid information-separated evaluator result is `evaluation/F02-fresh-ai-evaluation-2026-09-14-valid.md` — **PASS, no corrections required, no graduation blocker**.
 
-No corrections were required.
+The 2000-level advanced HMI / QtVismach/live-3D assessment is preserved at `evaluation/2000-hmi-qtvismach-assessment-2026-09-14.md` — **PASS, approximately 93/100**.
 
-### F02 — compound-fault diagnosis/recovery integration
-
-F02 is **GRADUATED at 2000 level**.
-
-Durable F02 evidence:
-
-- source/documentation/community/function/call-flow pass: `research/F02-compound-fault-source-community-pass-2026-09-11.md`;
-- frozen experiment: `experiments/F02-001-compound-fault-arbitration-plan.md`;
-- implementation: `lab-jobs/082-f02-compound-fault-arbitration.sh`;
-- authoritative workflow `34657204415`, source commit `4d3277d1d11b60cf68126c65190d7ee42886f8e8`;
-- retained 19-row trace: `lab-results/f02-001/raw.csv`;
-- frozen Gates A–J: **10/10 PASS**;
-- independent audit: `results/F02-001-authoritative-audit.md`;
-- separately frozen adversarial exam: **20/20 PASS**;
-- authoritative transfer packet: `handoffs/F02-fresh-ai-compound-fault-transfer.md`;
-- valid information-separated evaluator result: `evaluation/F02-fresh-ai-evaluation-2026-09-14-valid.md` — **PASS, no corrections required, no graduation blocker**.
-
-The fresh evaluator explicitly confirmed repository identity, exact packet path, information separation, non-use of prohibited learner-side answer/grading files, and returned PASS after independently answering tasks A–G. The former F02 handoff blocker is satisfied and must not be reintroduced from historical `PREPARED / UNSCORED` snapshots.
-
-### Advanced HMI / QtVismach roadmap topic
-
-`evaluation/2000-hmi-qtvismach-assessment-2026-09-14.md` records **PASS at approximately 93/100** for the 2000-level advanced HMI / QtVismach/live-3D scope. Remaining exact API/lifecycle details are version-specific implementation work and do not block 2000 graduation.
+Do not reintroduce historical F02 or other 2000 fresh-AI blockers unless a new material defect is actually discovered in preserved evidence.
 
 ## Active curriculum level
 
-The active curriculum level is now **3000 — machine-specific specialization** under `LEVEL_ORDER.md` and `CURRICULUM.md`.
+The active level is **3000 — machine-specific specialization** under `LEVEL_ORDER.md` and `CURRICULUM.md`.
 
-Tracks are parallel specialization branches:
+Parallel tracks:
 
 - 3100 — Mills / VMCs
 - 3200 — Lathes / Turning Centers
@@ -58,141 +34,126 @@ Tracks are parallel specialization branches:
 - 3800 — Saws / Feeders / Automation Cells
 - 3900 — Emerging / Unusual Machines
 
-The most recently active branch is **3200 — Lathes / Turning Centers**. Latest durable checkpoint: `checkpoints/3200-lathe-next-2026-09-14.md`.
+Current active branch: **3200 — Lathes / Turning Centers**.
 
-## Blind external-feedback state
+Latest active checkpoint: `checkpoints/3200-lathe-next-2026-09-14b.md`.
 
-- BL-DEV-001 VALID 10/10.
-- BL-DEV-002 VALID 9/10.
-- BL-DEV-002-TRANSFER-01 VALID 10/10.
-- Delayed retention remains separate; the immediate transfer success is not long-term retention evidence.
-- Sealed benchmark answers remain information-separated. Do not reveal learner-side hidden answers to accelerate evaluation.
+## 3200 — Lathes / Turning Centers
 
-See `evaluation/BLIND_FEEDBACK_PROTOCOL.md` and `evaluation/FEEDBACK_SCORE_LOG.md`.
+Pinned LinuxCNC revision for current source claims: `f666f1a51ae7c4d991cc61233e785dcc53fbe98d`.
 
-## Laboratory compute checkpoint
+### Durable artifacts
 
-The authoritative ledger currently contains **338.56 minutes (5.64 h)** of exactly backfilled laboratory compute, including **0.87 minutes** exactly backfilled for 2026-09-12. Historical gaps still mean this is not a trustworthy full-project total.
+Foundation:
 
-`LAB_COMPUTE_LOG.md` is authoritative for individual job timestamps. PB-PREP-001 historical runs 073–077 are already integrated there; do not append them again. No laboratory compute was consumed in the 2026-09-12 bend-calculation/table source passes.
+- `research/3200-lathe-spindle-sync-foundation-2026-09-14.md`
+- `research/3200-g76-pass-generation-source-trace-2026-09-14.md`
+- `research/3200-spindle-index-readiness-config-comparison-2026-09-14.md`
+- `research/3200-lathe-turret-toolchange-boundary-2026-09-14.md`
+- `research/3200-css-x-origin-control-boundary-2026-09-14.md`
 
-Latest lab result remains PB-BG-004 (`lab-jobs/089-pb-bg-004-targetset-runtime-episode.sh`), workflow `34670275431`, which passed frozen Gates A–J 10/10 under the narrow TargetSet-generation/runtime-episode boundary.
+Continuation:
 
-## 3600 press-brake specialization state
+- `research/3200-toolchange-abort-ack-ownership-2026-09-14.md`
+- `research/3200-lathe-carousel-public-implementation-2026-09-14.md`
+- `research/3200-spindle-sync-pause-index-failure-2026-09-14.md`
+- `research/3200-lathe-tool-identity-offset-compensation-2026-09-14.md`
+- `research/3200-spindle-orient-caxis-mode-ownership-2026-09-14.md`
 
-The 3600 specialization is **not graduated**. With the 2000 series now closed, its prior dependency-safe preparation becomes valid 3000-level prerequisite evidence and should be integrated rather than repeated blindly.
+### Current established contracts
+
+#### Spindle synchronization / G33 / G76
+
+- G76 pass geometry and sequencing are expanded by the interpreter; realtime TP/Motion owns synchronized segment execution.
+- Spindle command, at-speed readiness, index/phase acquisition and ongoing feedback validity are distinct evidence surfaces.
+- TP has separate waiting-for-index and waiting-for-at-speed states.
+- Missing required index does not silently start position-synchronized motion.
+- Ordinary pause does not feed-scale an active `TC_SYNC_POSITION` segment to zero mid-thread; LinuxCNC preserves synchronization through the active segment. Abort is a different ownership/recovery class.
+- Upstream TP regression inputs include simple G33, multi-segment/blended G33, rigid tapping and at-speed programs, but the inspected harness is not a dedicated missing-index/pause-cycle fault injector.
+
+#### Tool-change / turret ownership
+
+- `iocontrol.0` prepare/change completion is a level handshake: request AND acknowledgement.
+- `emcIoAbort()` drops tool-change/prep requests and explicitly returns IO status to DONE; the upstream abort-during-change regression independently confirms recovery and that an unfinished tool is not falsely installed.
+- The basic handshake has no per-request generation ID, so external turret logic must make acknowledgements request-scoped. A stale held-high `tool-changed` / `tool-prepared` is an integration hazard.
+- A real public five-position lathe ATT in LinuxCNC issue #2025 uses `tool-change -> carousel.enable`, physical index/pulse sensing, `carousel.motor-vel -> stepgen`, and `carousel.ready -> tool-changed`.
+- The inspected carousel mechanism includes a reverse-latch phase and request-release state. Its `ready` is valid for that mechanism, but cannot be generalized as universal proof of hydraulic clamp/down/shot-pin state on heavier turrets.
+- GUI/current-tool identity is not physical turret-position evidence.
+
+#### Tool identity / offsets / compensation
+
+- A fixed-station lathe turret is a LinuxCNC **nonrandom** changer even when physically circular.
+- Preserve tool number, physical station/pocket, internal tooldata index, selected/prepared target, current tool, active G43 offset and cutter/nose compensation as distinct state.
+- `Txxx` selection/preparation is not M6 physical completion.
+- `G43` offset authority is separate from current-tool identity.
+- Native D-word semantics belong to cutter/nose compensation lookup; do not assume a commercial-control-style `T0101 = station 1 + wear register 1` without an explicit remap/application contract.
+- `M61` changes software current-tool identity without physical toolchanger motion and therefore cannot prove turret reconciliation.
+
+#### Spindle orientation / C-axis / live tooling
+
+- Native M19 is a discrete spindle-orientation transaction with target angle, direction/index mode, Q timeout, `orient`, `is-oriented`, `orient-fault` and `locked` surfaces. It is not a continuously coordinated C coordinate.
+- Pinned `orient.comp` supplies orient position-command generation, optional index reacquisition and debounced in-position completion for an orient PID.
+- Indexed live-tool operations may use M19 without a full C axis. Continuous coordinated milling requires actual C-axis trajectory ownership.
+- A dual-role spindle/C-axis must arbitrate velocity command, C position command, encoder feedback, index-enable, PID/drive mode, homing/reference state, brake/inhibit and stale command ownership.
+- LinuxCNC issue #3556 documented a real shared-`index-enable` ownership bug that could make G33 rapid instead of synchronize. Merged PR #4200 fixed the cause by preventing idle homing from clamping a shared `HAL_IO` signal.
+- Same-hardware testing confirmed the fix. The pinned revision is 638 commits ahead of PR #4200's merge commit; the old disconnect-joint-index workaround is historical and must not be taught as current generic behavior.
+- A current 2026 field C-axis implementation uses M19 to align the spindle before reconnecting C feedback/PID and explicitly neutralizes spindle command authority during ownership transfer. Its reported latent-M3 incident reinforces the stale-command hazard.
+- Model the dual-role spindle as an ownership state machine (`SPINDLE_SPEED`, `ORIENT`, `C_AXIS`, plus machine-specific fault/reconcile/maintenance states), not merely as a command mux.
+
+### 3200 lab decision
+
+No new lab was launched for the latest passes because source/upstream regression/real-machine evidence already resolves the current questions more strongly than a synthetic duplicate.
+
+Future labs are justified only for a real remaining evidence gap, for example:
+
+- stale tool acknowledgement across a new request;
+- post-index spindle feedback freeze/jump;
+- pause/feed-inhibit/abort comparison in one synchronized-motion trace;
+- bumpless spindle-to-C transfer;
+- stale M3/S reactivation during ownership transfer;
+- drive-mode acknowledgement failure or abort mid-transfer.
+
+### Exact next 3200 work
+
+1. **Chuck / collet / tailstock / steady-rest integration** — inspect real configs/components; separate command, physical open/closed/clamped witnesses, permissives, continuation acknowledgement, partial-cycle abort and recovery.
+2. **Lathe probing / tool setter** — inspect tool-touch/probe workflows; separate measurement event, validity, calculated geometry update, persistence and active-offset refresh; cover already-tripped/no-trip/wrong-tool/stale-offset failures.
+3. **Lathe HMI/operator workflow** — compare AXIS/Gmoccapy/QtVCP and inspect at least one community/production HMI; define minimum diagnostic surfaces for spindle sync, turret, current/active tool offsets, C-axis ownership, workholding and recovery state.
+4. **Spindle/live-tool follow-up only if new implementation evidence appears** — inspect complete downloadable dual-role configs, drive-mode acknowledgement, brake/lock and coordinated live-tool programming rather than inventing generic behavior.
+5. **Tool-table follow-up only where it adds evidence** — cutter-comp orientation/nose-radius implementation or explicit commercial-style wear remaps.
+6. If 3200 reaches a real information-gain stop, rotate to another underdeveloped 3000 track rather than manufacturing more lathe simulation.
+
+## 3600 — Press Brake specialization state
+
+The 3600 specialization is **not graduated**. With the 2000 series closed, its prior preparation is valid 3000-level prerequisite evidence and should be integrated rather than repeated.
 
 Integration map: `research/3600-press-brake-integration-playbook-outline-2026-09-12.md`.
 
-### Y1/Y2 / hydraulic architecture
+Current preserved contracts include:
 
-- `PB-PREP-001` remains **INCONCLUSIVE / NO ARCHITECTURE RECOMMENDATION** under its frozen contract. Do not strengthen its P6 discriminator or run architecture C merely to search for a preferred result.
-- Public Ursviken/Pullmax evidence supports bounded real-machine feasibility of separate Y1/Y2 position loops plus a differential sync loop, but the final downloadable source remains unavailable; exact correction insertion, final saturation, ferror ownership and realtime order remain open.
-- Public Accurpress chronology remains a useful architecture-evolution case study: hybrid ownership ambiguity -> standalone custom ownership -> improved read/compute/write order and pressure integration -> later regular-use report.
-- Semantic press-cycle state, LinuxCNC motion ownership, differential synchronization, machine-specific hydraulic decoding, electrical/drive interface and functional-safety boundary remain separate layers.
+- PB-BG-001 through PB-BG-004: TEST-CONFIRMED backgauge command/target episode ownership and stale-generation protection;
+- PB-DXF-001 through PB-DXF-004: TEST-CONFIRMED `ImportedPart -> BendFeature -> BendStep -> GaugePlan -> TargetCalculation -> TargetSet -> ExecutionEpisode` provenance chain;
+- program abort/restart requires reconciliation and a fresh runtime episode rather than stale motion replay;
+- machine reference/calibration, nominal process calculation, empirical first-piece correction, pressure command/feedback/derived force and external safety observation remain distinct;
+- tooling/material/bend-technology/table semantics require explicit provenance;
+- measured bend angle is a process measurement channel, not a fake commanded axis.
 
-### Backgauge and runtime command ownership
+Preserved 3600 unknowns:
 
-PB-BG-001 through PB-BG-004 are TEST-CONFIRMED bounded preparation artifacts. Current contract includes:
+- `PB-PREP-001` remains **INCONCLUSIVE / NO ARCHITECTURE RECOMMENDATION**. Do not retune its frozen discriminator.
+- A downloadable tandem Y1/Y2 implementation exposing exact correction insertion/saturation/addf/ferror/fault behavior remains unavailable.
+- A real inspectable sensor-bending closed-loop implementation remains unavailable; do not invent an angle PID topology.
+- Unknown bend-table semantics, interpolation policy, empirical origin and target-machine hydraulic/tooling/material/pressure/safety values must remain UNKNOWN when not evidenced.
 
-- manual jog and typed-position ownership;
-- homing/reference authority;
-- extra-joint `posthome-cmd` behavior;
-- planner shaping distinct from authorization;
-- application-owned command/target episode identity;
-- atomic completion/`at-position` predicate;
-- TargetSet generation -> fresh ExecutionEpisode transition;
-- stale generations/episodes cannot silently regain authority after invalidation.
+Generic 3600 preparation is at an information-gain stop until new inspectable implementation/source appears; this stop is branch-local and must not block other 3000 tracks.
 
-### CAD/DXF and bend-program data model
+## Laboratory compute checkpoint
 
-PB-DXF-001 through PB-DXF-004 are TEST-CONFIRMED bounded preparation artifacts. Current data chain is:
+The authoritative ledger contains **338.56 minutes (5.64 h)** of exactly backfilled laboratory compute through the last recorded checkpoint. Historical gaps mean this is not a trustworthy full-project total.
 
-`ImportedPart -> BendFeature -> BendStep -> GaugePlan -> TargetCalculation -> TargetSet -> ExecutionEpisode`
+`LAB_COMPUTE_LOG.md` remains authoritative for individual job timestamps. Latest recorded lab result remains PB-BG-004 (`lab-jobs/089-pb-bg-004-targetset-runtime-episode.sh`), workflow `34670275431`, frozen Gates A–J 10/10.
 
-with explicit revision/provenance boundaries. DXF bend lines are geometry, not guaranteed process semantics; UNKNOWN metadata must be preserved; automatic sequencing must not be inferred from geometry alone.
+## Global next-work rule
 
-### Program execution/recovery
+Continue from `checkpoints/3200-lathe-next-2026-09-14b.md`.
 
-Pinned LinuxCNC Task source confirms ordinary Pause/Resume and abort-class behavior must not be conflated. `emcTaskAbort()` aborts motion, clears pending Task/interpreter state and closes/resets the task plan. A selected BendStep may remain operator context, but abort/restart/reference loss requires reconciliation and a fresh runtime episode rather than replay of stale motion authority.
-
-### Calibration, correction, HMI and pressure/crowning
-
-Current durable contracts separate:
-
-- machine reference/calibration from product correction;
-- nominal requested geometry from empirical first-piece correction;
-- correction scope/revision from TargetSet generation;
-- LinuxCNC controller state from BendStep/program state, runtime authorization and external safety-chain observation;
-- pressure command/feedback, derived force/tonnage and crowning state.
-
-Machine-specific numeric limits, acceptance tolerances, hydraulic truth tables, pressure/force models and safety requirements remain intentionally unclaimed.
-
-### Tooling, material, bend technology and springback
-
-Current source/documentation pass adds explicit provenance for:
-
-- material identity/revision;
-- punch/die/tool geometry revision;
-- bend-technology revision;
-- K-factor or other bend-calculation convention;
-- nominal bend allowance/deduction and springback/overbend model;
-- machine-specific TargetCalculation;
-- empirical correction revision;
-- generated TargetSet and runtime ExecutionEpisode.
-
-Durable artifacts:
-
-- `research/press-brake-tooling-material-springback-ownership-2026-09-12.md`;
-- `research/press-brake-bend-technology-table-provenance-2026-09-12.md`;
-- `research/press-brake-bend-allowance-public-source-audit-2026-09-12.md`;
-- `research/press-brake-empirical-bend-table-semantics-2026-09-12.md`.
-
-The public bend-calculation source audit adds two concrete failure classes. One calculator implements the conventional `BA = angle_rad*(R+K*T)` relation but permits a 180-degree endpoint where its tangent-based outside setback diverges. A second flat-pattern/DXF generator exposes K-factor and bend radius in its schema/UI while its actual geometry path ignores both and uses fixed `BD = 1.8*thickness`. Therefore calculation provenance must include the implementation/version and the **actual consumed-input set**, not merely values present in a UI or schema.
-
-The empirical-table pass shows that a "bend table" is not one portable semantic object. Public CAD documentation includes full/half deduction, compensation and actual-radius table meanings, explicit angle/datum semantics, and tooling-indexed lookup axes. Pinned FreeCAD SheetMetal source further shows lookup-engine provenance matters: at the same repository revision, the legacy unfold path uses a non-interpolating range/step lookup while the newer unfold path uses endpoint clamping plus piecewise-linear interpolation. With the workbench's own test table `{1:0.38, 3:0.43, 99:0.50}`, `R/T=4` yields `K=0.50` in the legacy path versus approximately `0.430729` in the newer path.
-
-A naked numeric K-factor, raw bend-table rows, or a project name without semantic/engine identity is therefore insufficient provenance. No universal K-factor, interpolation rule, springback or press-Y formula is claimed.
-
-### Measured angle / sensor bending
-
-Measured bend angle is modeled as a **process measurement channel**, not a fake commanded axis and not the same state as requested angle, nominal springback technology or accepted empirical correction.
-
-Durable artifacts:
-
-- `research/press-brake-measured-angle-sensor-boundary-2026-09-12.md`;
-- `research/press-brake-sensor-bending-public-source-audit-2026-09-12.md`;
-- `research/press-brake-measurement-only-qtvcp-display-2026-09-12.md`.
-
-At pinned LinuxCNC `8bf4605ae81042248add031e94c77300406e0413`, HostMot2 encoder `position` is a measured HAL output; `position-interpolated` is separate and the documentation explicitly says not to use it for position control. QtVCP `HALLabel` can display a HAL float input directly, so measurement-only HMI data does not require inventing a commanded W joint.
-
-A bounded public search found commercial sensor-bending feature documentation and LinuxCNC community use cases but **no inspectable public LinuxCNC press-brake sensor-bending implementation** exposing acquisition timing, phase qualification, correction insertion, Y1/Y2 interaction, saturation, stale/fault handling and recovery. Generic realtime sensor-bending topology is therefore **SOURCE UNAVAILABLE / UNKNOWN**; do not invent an `angle PID` merely because a toy loop can converge.
-
-The frozen tooling/angle adversarial review `exams/PB-DOMAIN-tooling-angle-adversarial-2026-09-12.md` scored **16/16 PASS** in `exams/PB-DOMAIN-tooling-angle-adversarial-answers-2026-09-12.md`; no correction to the current ownership/provenance teaching was required.
-
-## Current 3600 information-gain stop
-
-Generic 3600 preparation has reached a deliberate information-gain stop. Do not extend synthetic ownership fixtures, generic bend calculators, equivalent bend-table examples or toy interpolation fixtures merely to create activity. Resume a branch only when real source/documentation resolves a concrete remaining implementation question.
-
-Highest-value 3600 evidence opportunities are:
-
-1. a downloadable tandem Y1/Y2 implementation exposing scale producers, common commands, differential sign, exact correction insertion, downstream limits/saturation, addf order, per-side ferror and fault/disable behavior;
-2. a real sensor-bending implementation exposing acquisition freshness/generation, phase, correction authority, saturation and recovery;
-3. implementation-level process-calculation evidence such as measured-coupon fitting/table generation, a real flange/gauging-surface-to-backgauge target solver with explicit datums/tool geometry, or a production tooling/method calculator whose actual source consumes its declared tooling inputs.
-
-## Exact next-work checkpoint
-
-The 2000 series is closed; **do not re-check F02 as a recurring gate** unless a material defect in the preserved evaluation is later discovered.
-
-Current priority is substantive 3000-series specialization work. The latest active branch is 3200 Lathes / Turning Centers:
-
-1. Continue from `checkpoints/3200-lathe-next-2026-09-14.md`.
-2. Finish the iocontrol/tool-change source trace, especially abort/restart and stale acknowledgement semantics.
-3. Inspect one complete public lathe turret implementation and map physical clamp/lift/lock witnesses to `tool-changed`.
-4. Inspect TP spindle-sync pause/resume/index-failure behavior and upstream synchronized-motion/threading tests.
-5. Only freeze a fault lab if that inspection leaves a real non-duplicate evidence gap.
-6. Continue 3200 breadth afterward: tool-table/turret conventions, spindle orient/C-axis/live tooling, chuck/tailstock, probing and HMI.
-7. If 3200 hits an information-gain stop, rotate to another underdeveloped 3000 track rather than returning to already-closed 2000 material.
-8. Preserve 3600's current bounded unknowns: PB-PREP-001 remains INCONCLUSIVE/no architecture recommendation; measured-angle closed-loop topology remains SOURCE UNAVAILABLE until real evidence resolves it; unknown bend-table semantics and machine-specific hydraulic/tooling/material/pressure/safety values must not be invented.
-
-Latest active checkpoint artifact: `checkpoints/3200-lathe-next-2026-09-14.md`.
+Do substantive source/config/build-diary work, not repeated status checks or synthetic activity. When the active branch reaches a real information-gain stop, rotate to another open 3000 branch using expected information gain, community use, cross-machine value, coverage gap and availability of inspectable implementations.

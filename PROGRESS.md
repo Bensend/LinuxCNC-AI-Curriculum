@@ -6,20 +6,22 @@ Repository artifacts, not chat history, are authoritative. Detailed historical p
 
 ## Current critical-path state
 
-All modules through **T05** and **C01–C09** are **GRADUATED at 1000 level**. **D01 — coupled-control stability and tandem-joint authority is GRADUATED at 2000 level.**
+All modules through **T05** and **C01–C09** are **GRADUATED at 1000 level**.
 
-The genuinely information-separated prerequisite evaluation is preserved at `evaluation/fresh-ai-evaluation-2026-09-11-valid.md`. It validly evaluated the exact authoritative packets from `evaluation/fresh-ai-packet-manifest.md` and returned:
+The **2000 series — advanced control and diagnostics is GRADUATED / CLOSED as of 2026-09-14**. Final closeout is preserved at `evaluation/2000-series-closeout-state-2026-09-11.md` (finalized 2026-09-14).
+
+Prerequisite information-separated evaluation is preserved at `evaluation/fresh-ai-evaluation-2026-09-11-valid.md`:
 
 - **S02 — PASS**
 - **E20 — PASS**
 - **X01 — PASS**
 - **X02 — PASS**
 
-No corrections were required. Their former fresh-AI-only blockers are satisfied. The previous PROGRESS snapshot that still described those four handoffs as pending is historical and must not be used to re-block F02.
+No corrections were required.
 
 ### F02 — compound-fault diagnosis/recovery integration
 
-F02 is **TECHNICALLY ACCEPTED / FRESH-AI HANDOFF PENDING**.
+F02 is **GRADUATED at 2000 level**.
 
 Durable F02 evidence:
 
@@ -31,12 +33,32 @@ Durable F02 evidence:
 - frozen Gates A–J: **10/10 PASS**;
 - independent audit: `results/F02-001-authoritative-audit.md`;
 - separately frozen adversarial exam: **20/20 PASS**;
-- closeout state: `evaluation/2000-series-closeout-state-2026-09-11.md`;
-- final transfer packet: `handoffs/F02-fresh-ai-compound-fault-transfer.md` — **PREPARED / UNSCORED**.
+- authoritative transfer packet: `handoffs/F02-fresh-ai-compound-fault-transfer.md`;
+- valid information-separated evaluator result: `evaluation/F02-fresh-ai-evaluation-2026-09-14-valid.md` — **PASS, no corrections required, no graduation blocker**.
 
-The **sole known 2000-series graduation gate** is a genuinely information-separated evaluation of exactly `handoffs/F02-fresh-ai-compound-fault-transfer.md`. The current learner must not self-score it or expose `exams/F02-adversarial-answers-and-score.md` / `results/F02-001-authoritative-audit.md` to that evaluator before it answers.
+The fresh evaluator explicitly confirmed repository identity, exact packet path, information separation, non-use of prohibited learner-side answer/grading files, and returned PASS after independently answering tasks A–G. The former F02 handoff blocker is satisfied and must not be reintroduced from historical `PREPARED / UNSCORED` snapshots.
 
-If the correctly routed F02 evaluator returns PASS with no required corrections, graduate F02 and close the 2000 series unless that evaluation discovers a new material defect. A valid FAIL/CONDITIONAL PASS triggers only the corrections identified by the evaluator.
+### Advanced HMI / QtVismach roadmap topic
+
+`evaluation/2000-hmi-qtvismach-assessment-2026-09-14.md` records **PASS at approximately 93/100** for the 2000-level advanced HMI / QtVismach/live-3D scope. Remaining exact API/lifecycle details are version-specific implementation work and do not block 2000 graduation.
+
+## Active curriculum level
+
+The active curriculum level is now **3000 — machine-specific specialization** under `LEVEL_ORDER.md` and `CURRICULUM.md`.
+
+Tracks are parallel specialization branches:
+
+- 3100 — Mills / VMCs
+- 3200 — Lathes / Turning Centers
+- 3300 — Plasma / Laser / Waterjet
+- 3400 — Routers / Woodworking
+- 3500 — Robots / Custom Kinematics
+- 3600 — Press Brakes
+- 3700 — Grinding / EDM
+- 3800 — Saws / Feeders / Automation Cells
+- 3900 — Emerging / Unusual Machines
+
+The most recently active branch is **3200 — Lathes / Turning Centers**. Latest durable checkpoint: `checkpoints/3200-lathe-next-2026-09-14.md`.
 
 ## Blind external-feedback state
 
@@ -56,9 +78,9 @@ The authoritative ledger currently contains **338.56 minutes (5.64 h)** of exact
 
 Latest lab result remains PB-BG-004 (`lab-jobs/089-pb-bg-004-targetset-runtime-episode.sh`), workflow `34670275431`, which passed frozen Gates A–J 10/10 under the narrow TargetSet-generation/runtime-episode boundary.
 
-## Dependency-safe 3600 press-brake preparation
+## 3600 press-brake specialization state
 
-The 3600 specialization is **not graduated**. Until F02 closes, this work remains dependency-safe preparation. Existing experiments and research should be integrated as prerequisites when 3600 formally activates rather than blindly repeated.
+The 3600 specialization is **not graduated**. With the 2000 series now closed, its prior dependency-safe preparation becomes valid 3000-level prerequisite evidence and should be integrated rather than repeated blindly.
 
 Integration map: `research/3600-press-brake-integration-playbook-outline-2026-09-12.md`.
 
@@ -148,11 +170,11 @@ A bounded public search found commercial sensor-bending feature documentation an
 
 The frozen tooling/angle adversarial review `exams/PB-DOMAIN-tooling-angle-adversarial-2026-09-12.md` scored **16/16 PASS** in `exams/PB-DOMAIN-tooling-angle-adversarial-answers-2026-09-12.md`; no correction to the current ownership/provenance teaching was required.
 
-## Current information-gain stop
+## Current 3600 information-gain stop
 
 Generic 3600 preparation has reached a deliberate information-gain stop. Do not extend synthetic ownership fixtures, generic bend calculators, equivalent bend-table examples or toy interpolation fixtures merely to create activity. Resume a branch only when real source/documentation resolves a concrete remaining implementation question.
 
-Highest-value evidence opportunities are:
+Highest-value 3600 evidence opportunities are:
 
 1. a downloadable tandem Y1/Y2 implementation exposing scale producers, common commands, differential sign, exact correction insertion, downstream limits/saturation, addf order, per-side ferror and fault/disable behavior;
 2. a real sensor-bending implementation exposing acquisition freshness/generation, phase, correction authority, saturation and recovery;
@@ -160,12 +182,17 @@ Highest-value evidence opportunities are:
 
 ## Exact next-work checkpoint
 
-1. **Re-check F02 first every session.** If an information-separated result exists, preserve its full identity header and response before changing status.
-2. Correctly routed F02 PASS/no corrections => mark F02 GRADUATED and close the 2000 series; do not self-certify the transfer.
-3. If F02 is still externally blocked, keep 3600 at the current information-gain stop unless genuinely new public implementation/source becomes available.
-4. Preserve PB-PREP-001 as INCONCLUSIVE / no architecture recommendation; do not retune its frozen discriminator.
-5. Preserve the measured-angle closed-loop topology as SOURCE UNAVAILABLE until real evidence resolves it.
-6. Preserve UNKNOWN for bend-table full/half semantics, angle convention, dimensional datum, calculation engine, interpolation/out-of-range policy or empirical origin whenever evidence does not establish them.
-7. Do not invent target-machine hydraulic, tooling, material, pressure, springback, sensor-dynamics, stopping-performance, safety or acceptance-tolerance values.
+The 2000 series is closed; **do not re-check F02 as a recurring gate** unless a material defect in the preserved evaluation is later discovered.
 
-Latest checkpoint artifact: `checkpoints/3600-tooling-angle-next-2026-09-12.md`.
+Current priority is substantive 3000-series specialization work. The latest active branch is 3200 Lathes / Turning Centers:
+
+1. Continue from `checkpoints/3200-lathe-next-2026-09-14.md`.
+2. Finish the iocontrol/tool-change source trace, especially abort/restart and stale acknowledgement semantics.
+3. Inspect one complete public lathe turret implementation and map physical clamp/lift/lock witnesses to `tool-changed`.
+4. Inspect TP spindle-sync pause/resume/index-failure behavior and upstream synchronized-motion/threading tests.
+5. Only freeze a fault lab if that inspection leaves a real non-duplicate evidence gap.
+6. Continue 3200 breadth afterward: tool-table/turret conventions, spindle orient/C-axis/live tooling, chuck/tailstock, probing and HMI.
+7. If 3200 hits an information-gain stop, rotate to another underdeveloped 3000 track rather than returning to already-closed 2000 material.
+8. Preserve 3600's current bounded unknowns: PB-PREP-001 remains INCONCLUSIVE/no architecture recommendation; measured-angle closed-loop topology remains SOURCE UNAVAILABLE until real evidence resolves it; unknown bend-table semantics and machine-specific hydraulic/tooling/material/pressure/safety values must not be invented.
+
+Latest active checkpoint artifact: `checkpoints/3200-lathe-next-2026-09-14.md`.

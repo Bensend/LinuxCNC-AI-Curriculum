@@ -1,25 +1,27 @@
-# 2000-series closeout state — updated 2026-09-14
+# 2000-series closeout state — FINAL — 2026-09-14
 
-Status: **ONE INFORMATION-SEPARATED HANDOFF REMAINS**
+Status: **GRADUATED / CLOSED**
+
+The 2000 series has satisfied its remaining graduation gate. No known 2000-level blocker remains.
 
 ## Prerequisite fresh-AI reconciliation
 
-The valid evaluator response is preserved at `evaluation/fresh-ai-evaluation-2026-09-11-valid.md`.
+The valid prerequisite evaluator response is preserved at `evaluation/fresh-ai-evaluation-2026-09-11-valid.md`.
 
-The exact paths/scenarios match `evaluation/fresh-ai-packet-manifest.md`:
+The exact paths/scenarios matched `evaluation/fresh-ai-packet-manifest.md` and returned:
 
-- S02 — PASS
-- E20 — PASS
-- X01 — PASS
-- X02 — PASS
+- S02 — **PASS**
+- E20 — **PASS**
+- X01 — **PASS**
+- X02 — **PASS**
 
-No corrections were required. Their former fresh-AI-only graduation blockers are satisfied.
+No corrections were required.
 
-## F02 activation and technical result
+## F02 — compound-fault diagnosis/recovery integration
 
-The explicit dependency block on F02 is removed. F02 has been materialized as the 2000-level compound-fault diagnosis/recovery integration lesson, consistent with the 2000 roadmap item `compound faults`.
+F02 is **GRADUATED at 2000 level**.
 
-Durable evidence:
+Durable technical evidence:
 
 - source/documentation/community/function/call-flow pass: `research/F02-compound-fault-source-community-pass-2026-09-11.md`;
 - frozen experiment: `experiments/F02-001-compound-fault-arbitration-plan.md`;
@@ -30,43 +32,43 @@ Durable evidence:
 - independent audit: `results/F02-001-authoritative-audit.md`;
 - frozen adversarial exam: `exams/F02-adversarial-exam.md`;
 - adversarial result: **20/20 PASS**;
-- fresh-AI transfer: `handoffs/F02-fresh-ai-compound-fault-transfer.md` — **PREPARED / UNSCORED**.
+- authoritative fresh-AI packet: `handoffs/F02-fresh-ai-compound-fault-transfer.md`;
+- valid information-separated evaluation: `evaluation/F02-fresh-ai-evaluation-2026-09-14-valid.md` — **PASS, no corrections required, no graduation blocker**.
 
-## Advanced HMI / QtVismach closeout assessment — 2026-09-14
+### Fresh-AI routing validation
 
-The 2000-roadmap topic covering advanced HMI behavior and QtVismach/live 3D visualization received a new scenario-based assessment and **PASSED at approximately 93/100**.
+The evaluator explicitly stated:
 
-Durable assessment: `evaluation/2000-hmi-qtvismach-assessment-2026-09-14.md`.
+- repository identity: `Bensend/LinuxCNC-AI-Curriculum`;
+- exact packet path: `handoffs/F02-fresh-ai-compound-fault-transfer.md`;
+- information separation: **YES**;
+- prohibited learner-side answer/grading files were not opened or used;
+- result: **PASS**;
+- material deficiencies: **none**;
+- exact corrections required: **none**;
+- graduation blocked: **no**.
 
-The response demonstrated the required 2000-level architecture: read-only visualization authority, independent Y1/Y2 evidence, average-plus-differential beam reconstruction, display-only mismatch exaggeration, explicit stale-data handling, bounded GUI/render rates, failure diagnosis, and separation of graphics from motion/safety authority.
+The response separately reasoned through all required tasks A–G and satisfied the packet's critical boundaries: recorder overruns remain an evidence-integrity defect despite contiguous `-t` tags; timestamp proximity does not create same-cycle identity; lower-layer transport/watchdog recovery does not resurrect stale AUTO authority; reconciliation is invalidated by a newly observed required interlock fault; explicit rearm and a new motion request are required; the pinned `emcTaskAbort()` path was traced; and functional-safety/physical-machine claims remained bounded.
 
-The remaining uncertainty is implementation-specific current QtVismach/QtVCP API and lifecycle detail. The counterfactual check shows that API-name or constructor differences would not overturn the central 2000-level architectural conclusions, so this work is safely deferred to later implementation/machine-specific work and does **not** create a new 2000-level blocker.
+## Advanced HMI / QtVismach closeout assessment
 
-## 2026-09-14 closeout audit
+The 2000-roadmap topic covering advanced HMI behavior and QtVismach/live 3D visualization is also closed at 2000 level.
 
-Repository status was rechecked after the HMI/QtVismach assessment.
+Durable assessment: `evaluation/2000-hmi-qtvismach-assessment-2026-09-14.md` — **PASS, approximately 93/100**.
 
-- No additional 2000-level technical lesson or lab blocker is identified in the authoritative progress state.
-- No F02 evaluator-result artifact is present in the repository evaluation set at this audit point.
-- A connected-mail search for recent F02 / compound-fault / curriculum evaluator traffic found GitHub workflow notifications but no independent F02 evaluator response suitable for reconciliation.
-- `MODULE_TEMPLATE.md` still requires a fresh-AI handoff test with a novel course-level scenario; the current learner therefore cannot legitimately replace the missing information-separated evaluator with a self-score.
+The assessment demonstrated read-only visualization authority, independent Y1/Y2 evidence, average-plus-differential beam reconstruction, display-only mismatch exaggeration, explicit stale-data handling, bounded GUI/render rates, failure diagnosis, and separation of graphics from motion/safety authority.
 
-## Current graduation consequence
+Exact QtVismach/QtVCP API/lifecycle details remain valid later implementation work; the counterfactual promotion check showed those version-specific details cannot overturn the central 2000-level architecture, so they are not graduation blockers.
 
-F02 is **TECHNICALLY ACCEPTED / FRESH-AI HANDOFF PENDING**.
+## Final graduation consequence
 
-All currently identified learner-side 2000-series technical work is complete. The advanced HMI/QtVismach topic is now explicitly assessed and passed. The remaining blocker is not more curriculum study: it is one external information-separated evaluation.
+The previous sole blocker — a genuinely information-separated F02 handoff evaluation — has now returned a correctly routed **PASS with no corrections**.
 
-Under `MODULE_TEMPLATE.md`, the learner cannot self-certify the final novel handoff. Therefore the 2000 series is **READY TO CLOSE BUT NOT YET FORMALLY GRADUATED**.
+Therefore:
 
-If a correctly routed fresh evaluator returns PASS with no required corrections against exactly `handoffs/F02-fresh-ai-compound-fault-transfer.md`, F02 may be marked GRADUATED and the 2000 series can be closed immediately unless that evaluation discovers a new material defect. A valid FAIL/CONDITIONAL PASS triggers only the corrections actually identified by that evaluator.
+- F02 — **GRADUATED**;
+- 2000-series advanced control and diagnostics — **GRADUATED / CLOSED**;
+- no additional learner-side 2000 lesson, lab, exam, correction, or fresh-AI gate remains known;
+- machine-specific 3000-series specialization may proceed as the active curriculum level under `LEVEL_ORDER.md` and `CURRICULUM.md`.
 
-## Precise remaining checkpoint
-
-Run a genuinely information-separated evaluator against exactly:
-
-`handoffs/F02-fresh-ai-compound-fault-transfer.md`
-
-Do not provide it `exams/F02-adversarial-answers-and-score.md` or `results/F02-001-authoritative-audit.md` before it answers.
-
-The evaluator must state repository identity, exact packet path, information-separation confirmation, PASS / CONDITIONAL PASS / FAIL, reasoning, and any required corrections. Preserve its identity header and full response before changing graduation state.
+Historical artifacts that described F02 as `PREPARED / UNSCORED` or the 2000 series as waiting on one external gate are preserved for provenance but are superseded by this final closeout state and the valid evaluator record above.

@@ -6,142 +6,135 @@ Repository artifacts, not chat history, are authoritative. Detailed historical p
 
 ## Closed prerequisite levels
 
-All modules through **T05** and **C01–C09** are **GRADUATED at 1000 level**.
+- **1000 series:** GRADUATED / CLOSED.
+- **2000 series:** GRADUATED / CLOSED as of 2026-09-14.
+- F02 is GRADUATED. Valid information-separated evaluation: `evaluation/F02-fresh-ai-evaluation-2026-09-14-valid.md` — PASS, no corrections required.
+- Final 2000 closeout: `evaluation/2000-series-closeout-state-2026-09-11.md` finalized 2026-09-14.
 
-The **2000 series — advanced control and diagnostics is GRADUATED / CLOSED as of 2026-09-14**.
-
-Final 2000 closeout: `evaluation/2000-series-closeout-state-2026-09-11.md` (finalized 2026-09-14).
-
-F02 — compound-fault diagnosis/recovery integration is **GRADUATED at 2000 level**. Its valid information-separated evaluator result is `evaluation/F02-fresh-ai-evaluation-2026-09-14-valid.md` — **PASS, no corrections required, no graduation blocker**.
-
-The 2000-level advanced HMI / QtVismach/live-3D assessment is preserved at `evaluation/2000-hmi-qtvismach-assessment-2026-09-14.md` — **PASS, approximately 93/100**.
-
-Do not reintroduce historical F02 or other 2000 fresh-AI blockers unless a new material defect is actually discovered in preserved evidence.
+Do not reopen or repoll closed 2000 work unless a genuinely new material defect is discovered in preserved evidence.
 
 ## Active curriculum level
 
-The active level is **3000 — machine-specific specialization** under `LEVEL_ORDER.md` and `CURRICULUM.md`.
+**3000 — machine-specific specialization.** Parallel branches remain:
 
-Parallel tracks:
+- 3100 Mills / VMCs
+- 3200 Lathes / Turning Centers
+- 3300 Plasma / Laser / Waterjet
+- 3400 Routers / Woodworking
+- 3500 Robots / Custom Kinematics
+- 3600 Press Brakes
+- 3700 Grinding / EDM
+- 3800 Saws / Feeders / Automation Cells
+- 3900 Emerging / Unusual Machines
 
-- 3100 — Mills / VMCs
-- 3200 — Lathes / Turning Centers
-- 3300 — Plasma / Laser / Waterjet
-- 3400 — Routers / Woodworking
-- 3500 — Robots / Custom Kinematics
-- 3600 — Press Brakes
-- 3700 — Grinding / EDM
-- 3800 — Saws / Feeders / Automation Cells
-- 3900 — Emerging / Unusual Machines
+Current owner-selected branch: **3300 — Plasma / Laser / Waterjet**.
 
-Current active branch: **3300 — Plasma / Laser / Waterjet**.
+Latest active checkpoint: `checkpoints/3300-next-2026-09-14d.md`.
 
-Latest active checkpoint: `checkpoints/3300-next-2026-09-14c.md`.
-
-The owner explicitly rotated to 3300 for a breadth-first pass. **Do not fall back to 3200 unless a later explicit rotation says to do so.**
+Do not fall back to 3200 without a later explicit owner rotation. 3200 is paused, not graduated. Preserve the 3600 information-gain stop.
 
 ---
 
 ## 3300 — Plasma / Laser / Waterjet
 
-Pinned LinuxCNC revision for current source claims: `f666f1a51ae7c4d991cc61233e785dcc53fbe98d`.
+Pinned LinuxCNC revision for current upstream source claims: `f666f1a51ae7c4d991cc61233e785dcc53fbe98d`.
 
-### Track asymmetry preserved
+### Breadth asymmetry
 
-- **Plasma:** richest first-class LinuxCNC implementation through QtPlasmaC / `plasmac.comp`; current deep branch.
-- **Laser:** native realtime `laserpower.comp`, `raster.comp` and laser simulation exist, but integrated production workflow is thinner; L1 follows plasma P1/P2/P3.
-- **Waterjet:** real LinuxCNC retrofit evidence exists, but the bounded survey has not found an upstream dedicated process controller comparable to QtPlasmaC; W1 must begin from real implementations rather than copied plasma assumptions.
+- **Plasma:** richest first-class LinuxCNC process implementation through QtPlasmaC / `plasmac.comp`. P1 source ownership is established and P2/P3 have reached a breadth-first diminishing-return point.
+- **Laser:** upstream realtime `laserpower.comp`, `raster.comp` and `configs/sim/axis/laser` are now source-traced. Real CO2, diode/Fusion and fiber-retrofit architectures differ materially; no universal integrated laser process controller has been established.
+- **Waterjet:** real LinuxCNC retrofits exist, but bounded upstream source search still finds no dedicated waterjet process component comparable to QtPlasmaC. W1 has begun from real machine evidence and retains major process-sequencing unknowns.
 
-Breadth artifact:
+### 3300-P1/P2/P3 — plasma state
+
+Authoritative artifacts include:
 
 - `research/3300-plasma-laser-waterjet-breadth-survey-2026-09-14.md`
-
-### 3300-P1 — QtPlasmaC process / external-offset source trace
-
-Artifact:
-
 - `research/3300-qtplasmac-process-eoffset-source-trace-2026-09-14.md`
-
-Current source-established contracts:
-
-- `plasmac.comp` is a realtime state machine covering IHS/probe, pierce, Torch On, Arc OK, pierce delay, optional puddle jump, cut-height transition, THC, cut end/retract, pause, tests, consumable change and cut recovery.
-- A pre-existing float/ohmic/breakaway input is not a valid fresh probe episode merely because it is high; sensor meaning is state-qualified.
-- Ohmic probing can retry and fall back to the float switch according to configured attempt policy.
-- Arc-start failure and later arc loss are separate failure classes. Start uses `arc_fail_delay`/retry count; established-arc loss uses Arc OK qualification plus `arc_lost_delay`.
-- THC activation is qualified by process state, velocity/delay or stable-voltage sampling, configured enable/inhibit, Arc OK policy, corner lock/void lock and offset bounds.
-- QtPlasmaC owns process decisions and requested X/Y/Z external-offset count evolution; LinuxCNC Motion owns the external-offset trajectory planner, acceleration/velocity allocation, insertion into Cartesian command and generic soft-limit clipping.
-- Nominal axis position, requested external offset and applied external offset are distinct state surfaces. QtPlasmaC waits for applied offset convergence at important pierce/cut-height transitions.
-- Removing eoffset enable while a nonzero offset exists does **not** clear the applied offset. Cleanup is a separate explicit action/trajectory.
-- QtPlasmaC performs process-local Z offset bound checks before THC moves and separately reacts to Motion's `motion.eoffset-limited` feedback.
-- MAX_HEIGHT, END_JOB and cut-recovery paths actively reconcile offsets; logical state completion is not treated as proof that physical/applied offsets are already zero.
-
-P1 bounded adversarial review: **8/8 passed**.
-
-No P1 lab launched: pinned source and Motion documentation are stronger than a synthetic duplicate for the current ownership questions.
-
-### 3300-P2 — real plasma implementations / commissioning
-
-Artifact:
-
 - `research/3300-plasma-build-diary-comparison-2026-09-14.md`
-
-Current community/config evidence:
-
-1. **Powermax 45XP + Mesa 7i96 + THCAD5 + external Arc OK** — Arc OK was visible in HAL yet the process failed because QtPlasmaC was configured for the wrong Arc OK mode; correcting Mode 1 fixed Arc OK, then Hypertherm->THCAD wiring polarity had to be corrected for arc voltage. CAM/post problems became the next failure layer.
-2. **QtPlasmaC + Mesa 7i96 + tandem-Y gantry** — early configuration confused Cartesian axis count with tandem-joint topology; the machine remains XYZ while Y has two joints/step generators.
-3. **Everlast 82i + Mesa 7i96 + THCAD-2** — credible voltage acquisition required correct THCAD frequency divide plus correct source-divider/scale/offset provenance; `/32` and corrected scaling resolved the reported voltage problem.
-
-Cross-machine lesson: `physical source/sensor -> electrical interface -> Mesa/encoder/GPIO -> HAL signal -> QtPlasmaC mode/config interpretation -> plasmac process state -> Motion applied offset -> physical process` is a chain. A correct observation at one layer does not certify downstream interpretation.
-
-P2 bounded adversarial review: **6/6 passed**.
-
-P2 remains open for a downloadable ohmic+float config, Powermax RS485 field failure/recovery history and later-stage tandem production evidence.
-
-### 3300-P3 — production plasma workflow
-
-Artifacts:
-
 - `research/3300-plasma-production-workflow-foundation-2026-09-14.md`
 - `research/3300-plasma-rfl-pmx-source-trace-2026-09-14.md`
+- `research/3300-plasma-hole-filter-pmx-field-trace-2026-09-14.md`
 
-Current contracts:
+Preserved contracts:
 
-- Authority is separated as `CAD -> CAM/process intent -> postprocessor G-code/material commands -> QtPlasmaC G-code filter -> LinuxCNC interpreter/trajectory -> plasmac realtime state -> synchronized outputs/eoffsets -> physical process feedback`.
-- `M190 Pn` requests a material change; documented workflow uses `M66 P3 ...` to wait for confirmation before relying on the selected material's feed.
-- Standard QtPlasmaC plasma programs do not own process Z; filtering normally removes cut-program Z while the realtime plasma controller owns IHS/pierce/cut/retract through external offsets.
-- `M62/M63 P2` schedule synchronized THC inhibit/enable intent; actual THC activity still depends on realtime qualification.
-- `M67 E3` schedules feed reduction/restoration for feature strategy; it is not itself a THC command.
-- `M62/M63 P3` is the synchronized torch-disable/enable surface recognized by the QtPlasmaC filter/run-from-line workflow and supports overcut-style strategies.
-- `qtplasmac_gcode.py` actively validates/transforms incoming plasma G-code; it is not transparent pass-through.
-- Pinned `run_from_line.py` reconstructs modal/process state from the program prefix, including units/path/distance modes, parameters, material + material acknowledgement wait, cut feed, M03/M05, P2 THC state, P3 torch state and E3 velocity state. It rejects active cutter compensation/unresolved subroutine context and constructs a new safe-entry program rather than simply seeking to line N.
-- Run From Line is distinct from realtime `CUT_RECOVERY_ON/OFF`, which uses X/Y external offsets around an interrupted kerf.
-- Pinned `pmx485.py` is a Python userspace/non-realtime serial component. Desired mode/current/pressure, reported mode/current/pressure, connection status, fault/limits and arc time are separate surfaces.
-- `pmx485.py` validates write echoes/read checksums; repeated failed communication cycles clear status, close/return remote control toward local state and permit reconnection. `pmx485.status` is a communications witness, **not** realtime Torch/Arc OK or functional-safety authority.
+- `plasmac.comp` owns plasma process decisions; Motion owns external-offset trajectory/application/limits.
+- requested, applied and nominal eoffset state are distinct; disable does not itself clear nonzero applied offset.
+- IHS/probe, pierce, Torch On, Arc OK, THC qualification, arc-start failure, arc loss, pause/recovery and offset cleanup are state-qualified rather than inferred from one signal.
+- real commissioning histories preserve Arc OK mode mismatch, THCAD wiring polarity, THCAD divide/scaling provenance and tandem-axis/joint topology failures.
+- material/CAM/filter/interpreter/realtime process authority are separate layers.
+- Run From Line reconstructs modal/process state rather than merely seeking line N.
+- `pmx485.py` is userspace/non-realtime communications/diagnostics, not Torch/Arc OK/safety authority.
+- automatic small-hole filtering can insert `M67 E3` velocity reduction and computed overcut with `M62 P3`; normal M5 cleanup explicitly reconciles lingering E3/P3 filter state.
+- a real PMX485 field history shows adapter replacement alone did not exhaust the fault tree; software-version/dependency provenance belongs in diagnostics.
 
-P3 foundation adversarial review: **7/7 passed**. RFL/PMX continuation adversarial review: **8/8 passed**.
+Plasma remains open for strong new evidence such as downloadable ohmic+float configs, current CAM-post provenance, later tandem production evidence or a specific unresolved abort/recovery question, but do not repeat the generic source pass.
 
-### Exact next 3300 work
+### 3300-L1 — laser state
 
-Continue from `checkpoints/3300-next-2026-09-14c.md`:
+Authoritative artifacts:
 
-1. source-trace exact hole/overcut transformations in `qtplasmac_gcode.py`, with representative input -> filtered output for P2/P3/E3 behavior;
-2. inspect a current SheetCam and/or Fusion QtPlasmaC post to identify which layer emits M190/P2/P3/E3 patterns;
-3. find a real `pmx485` field failure/recovery history and downloadable ohmic+float configuration if available;
-4. integrate those into a concise plasma production-diagnostics playbook;
-5. then rotate to 3300-L1: pinned `laserpower.comp`, `raster.comp`, laser sim and M62/M63/M67/M68 semantics followed by real laser implementations;
-6. then 3300-W1: multiple real waterjet configs/build diaries before freezing any process state model;
-7. later build the cross-process 3300 playbook while preserving plasma/laser/waterjet process differences.
+- `research/3300-laser-native-source-foundation-2026-09-14.md`
+- `research/3300-laser-real-implementation-comparison-2026-09-14.md`
+
+Source-established native contracts:
+
+- `laserpower.comp` supports vector/raster power modes, actual/requested velocity scaling, min/max normalization and vector interpolation by distance-to-go.
+- `raster.comp` consumes preprogrammed raster lines from a HAL port, maps motion position to pixel position, supports bidirectional sweeps, interpolation, an all-ones OFF sentinel and explicit parse/runtime faults.
+- the shipped laser simulator maps motion analog outputs to min/max/vector power and uses feed/arc motion type as its simulator enable; it does not define a universal physical source interface.
+- raster M10-M13 remaps use `INTERP_EXECUTE_FINISH` around begin/start/stop so prior motion completes before raster state changes.
+- M62/M63/M67 are queued and take effect at the beginning of the next motion; without later motion the queued change does not occur. M64/M65/M68 are immediate and break blending.
+
+Real implementation comparison:
+
+1. Buildlog CO2: M3/M5 master permission, analog power, custom PPI/raster streaming, chiller/assist sequencing and raster overscan.
+2. JTrantow diode/Fusion at public head `687c83c5906b2483e4f4754ee26e894832a7c259`: Fusion emits M67 power by jet mode; `motion.analog-out-00` directly drives Mesa 20 kHz PWM; spindle-enable gates relay/PWM; air/crosshair use coolant outputs.
+3. community 500 W Raycus fiber retrofit: adapted QtPlasmaC with capacitive BCL-AMP head sensing mapped into height-control surfaces plus fake Arc OK/ohmic compatibility signals and modified qualification behavior.
+
+Key boundary: `laserpower.comp` is optional reusable infrastructure, not mandatory architecture. CO2, diode vector/raster and fiber metal cutting require separate process/readiness/height/focus evidence.
+
+### 3300-W1 — waterjet state
+
+Authoritative artifact:
+
+- `research/3300-waterjet-w1-implementation-hunt-2026-09-14.md`
+
+Evidence-backed surfaces:
+
+- water/nozzle and abrasive-sender commands can be distinct;
+- multi-head implementations exist;
+- program command and physical/manual override authority must be explicitly arbitrated rather than implemented as MDI injection during AUTO;
+- nominal Z/retract and cutting-time Z correction authority can be separate;
+- industrial servo/feedback topology must be verified before interface selection.
+
+Public implementation evidence currently includes a two-nozzle/two-abrasive retrofit, a dual plasma/waterjet Mesa retrofit, a cutting-time manual-Z discussion, a CMS 5-axis retrofit investigation and an older converted FLOW machine reported to have run LinuxCNC reliably for roughly 8-9 years before a PC/input-device fault.
+
+Still UNKNOWN and highest-value W1 targets:
+
+- pump/intensifier start, READY and fault semantics;
+- low/high-pressure water-valve ownership;
+- pressure feedback/qualification;
+- abrasive lead/lag and postflow;
+- water-only/abrasive/low-pressure pierce strategy and dwell provenance;
+- automatic standoff feedback/control;
+- nozzle/abrasive-flow diagnostics;
+- pause/feed-hold/abort/restart reconciliation;
+- multi-head process arbitration;
+- high-pressure safeguarding/interlocks.
+
+Do not freeze a production waterjet state machine until those are backed by real public source/config/build-diary evidence. W2 dual-head/5-axis taper compensation remains deferred until the 3-axis process contract is evidence-backed.
 
 ### 3300 lab decision
 
-No lab launched in the current plasma passes. Source/config/build-diary evidence is still adding more information.
+No lab has been launched in the current 3300 source/config/build-diary passes. Continue source evidence while it has higher information gain.
 
-Candidate lab only if a real source/config gap remains:
+Frozen nonduplicate candidates include:
 
-- plasma external-offset cleanup on abort;
-- stale/high Arc OK or probe state across a fresh pierce request;
-- requested-vs-applied eoffset behavior during induced limit interruption;
-- later laser synchronized-output/raster boundary experiments only after L1 source work.
+- plasma abort with nonzero applied eoffset / stale process state if source leaves a real uncertainty;
+- laser queued M67/M62 with no following motion;
+- laser controlled deceleration/corner power scaling;
+- raster pixel/position boundaries;
+- water/abrasive lead-lag recovery only after a real public process contract exists.
 
 ---
 
@@ -149,62 +142,28 @@ Candidate lab only if a real source/config gap remains:
 
 Status: **PAUSED BY OWNER ROTATION — not graduated**.
 
-Pinned LinuxCNC revision: `f666f1a51ae7c4d991cc61233e785dcc53fbe98d`.
-
 Latest preserved checkpoint: `checkpoints/3200-lathe-next-2026-09-14b.md`.
 
-Durable source/config artifacts:
+Preserve the established distinctions among spindle command, at-speed readiness, index/phase feedback, tool-change handshake, tool identity/offset authority and spindle/orient/C-axis ownership. Do not resume without later explicit rotation.
 
-- `research/3200-lathe-spindle-sync-foundation-2026-09-14.md`
-- `research/3200-g76-pass-generation-source-trace-2026-09-14.md`
-- `research/3200-spindle-index-readiness-config-comparison-2026-09-14.md`
-- `research/3200-lathe-turret-toolchange-boundary-2026-09-14.md`
-- `research/3200-css-x-origin-control-boundary-2026-09-14.md`
-- `research/3200-toolchange-abort-ack-ownership-2026-09-14.md`
-- `research/3200-lathe-carousel-public-implementation-2026-09-14.md`
-- `research/3200-spindle-sync-pause-index-failure-2026-09-14.md`
-- `research/3200-lathe-tool-identity-offset-compensation-2026-09-14.md`
-- `research/3200-spindle-orient-caxis-mode-ownership-2026-09-14.md`
+## 3600 — Press Brakes
 
-Preserve the established distinctions among spindle command, at-speed readiness, index/phase feedback, tool-change handshake, tool identity/offset authority and spindle/orient/C-axis ownership. Do not resume until a later explicit rotation chooses 3200.
-
----
-
-## 3600 — Press Brake specialization state
-
-The 3600 specialization is **not graduated**. Its generic preparation remains at a documented information-gain stop until new inspectable implementation/source appears.
+Status: **not graduated; documented branch-local information-gain stop**.
 
 Integration map: `research/3600-press-brake-integration-playbook-outline-2026-09-12.md`.
 
-Preserved contracts include:
-
-- PB-BG-001 through PB-BG-004: TEST-CONFIRMED backgauge command/target episode ownership and stale-generation protection;
-- PB-DXF-001 through PB-DXF-004: TEST-CONFIRMED `ImportedPart -> BendFeature -> BendStep -> GaugePlan -> TargetCalculation -> TargetSet -> ExecutionEpisode` provenance chain;
-- abort/restart requires reconciliation and a fresh runtime episode;
-- reference/calibration, nominal process calculation, empirical correction, pressure command/feedback/derived force and external safety observation remain separate;
-- measured bend angle is a process measurement channel, not a fake commanded axis.
-
-Preserved unknowns:
-
-- `PB-PREP-001` remains **INCONCLUSIVE / NO ARCHITECTURE RECOMMENDATION**;
-- exact downloadable tandem Y1/Y2 correction insertion/saturation/addf/ferror/fault implementation remains unavailable;
-- a real inspectable sensor-bending closed-loop implementation remains unavailable;
-- unsupported bend-table/hydraulic/tooling/material/safety semantics remain UNKNOWN.
-
-The 3600 stop is branch-local and must not block 3300 or another open specialization.
+Preserve PB-BG/PB-DXF test-confirmed command/target/provenance contracts and existing bounded unknowns. Do not let the 3600 stop block other 3000 branches.
 
 ---
 
 ## Laboratory compute checkpoint
 
-The authoritative ledger contains **338.56 minutes (5.64 h)** of exactly backfilled laboratory compute through the last recorded checkpoint. Historical gaps mean this is not a trustworthy full-project total.
+`LAB_COMPUTE_LOG.md` remains authoritative. The ledger contains **338.56 minutes (5.64 h)** of exactly backfilled laboratory compute through the last recorded checkpoint; historical gaps mean it is not a trustworthy full-project total.
 
-`LAB_COMPUTE_LOG.md` remains authoritative for individual job timestamps. Latest recorded lab result remains PB-BG-004 (`lab-jobs/089-pb-bg-004-targetset-runtime-episode.sh`), workflow `34670275431`, frozen Gates A–J 10/10.
-
-No lab compute was consumed in the current 3300 plasma source/community/workflow pass.
+Latest recorded lab remains PB-BG-004, workflow `34670275431`, Gates A-J 10/10. No new lab compute was consumed in the current 3300 plasma/laser/waterjet source pass.
 
 ## Global next-work rule
 
-Continue from `checkpoints/3300-next-2026-09-14c.md`.
+Continue from `checkpoints/3300-next-2026-09-14d.md`.
 
-Do substantive source/config/build-diary work, not repeated status checks or synthetic activity. When a 3300 branch reaches a real information-gain stop, rotate according to the explicit 3300 order or select another open 3000 branch by expected information gain, community use, cross-machine value, coverage gap and inspectable evidence.
+Prioritize W1 public evidence for pump/high-pressure readiness and water/abrasive timing, while opportunistically collecting strong L1 contemporary fiber source/config evidence. Use source/config/build-diary reasoning rather than manufacturing simulations. Build the final cross-process 3300 playbook only after W1 has a defensible 3-axis process contract.

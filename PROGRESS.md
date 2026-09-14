@@ -15,11 +15,11 @@ Do not reopen or repoll closed 2000 work unless a genuinely new material defect 
 
 ## Active curriculum level
 
-**3000 — machine-specific specialization.** Current active branch: **3700 — Grinding / EDM / Specialty Finishing**.
+**3000 — machine-specific specialization.** Current active branch: **3800 — Saws / Feeders / Indexing / Automation Cells**.
 
-Latest active checkpoint: `checkpoints/3700-next-2026-09-14.md`.
+Latest active checkpoint: `checkpoints/3800-next-2026-09-14.md`.
 
-3700 was activated after 3500 reached a bounded breadth/source stop. Branch-local stops do not imply graduation. 3200, 3300, 3400 and 3500 remain open/paused; 3600 retains its documented information-gain stop.
+3800 was selected after 3700 reached bounded local stops for the wire-EDM public process contract and the first servo-versus-hydraulic grinder comparison. Branch-local stops do not imply graduation. 3200, 3300, 3400, 3500 and 3700 remain open/paused; 3600 retains its documented information-gain stop.
 
 ## 3200 — Lathes / Turning Centers
 
@@ -47,7 +47,7 @@ Real evidence supports separate water/nozzle and abrasive authority plus nominal
 
 Latest preserved checkpoint: `checkpoints/3400-next-2026-09-14d.md`.
 
-The breadth/source pass now preserves two materially different ATC implementations, pneumatic/tool-identity authority, dust-shoe state, spindle/VFD readiness/fault witnesses, synchronized gantry homing and the custom Motion-DOUT abort boundary.
+The breadth/source pass preserves two materially different ATC implementations, pneumatic/tool-identity authority, dust-shoe state, spindle/VFD readiness/fault witnesses, synchronized gantry homing and the custom Motion-DOUT abort boundary.
 
 Key rule: an already-applied custom `motion.digital-out-NN` is not generically cleared by Motion Abort/Disable; interrupted custom M6 recovery therefore requires explicit physical/logical reconciliation. The generic DOUT lab was dropped as duplicate evidence.
 
@@ -57,28 +57,9 @@ Status: **OPEN / PAUSED at bounded breadth stop**.
 
 Latest preserved checkpoint: `checkpoints/3500-next-2026-09-14c.md`.
 
-Authoritative new artifacts include:
+Pinned Tormach/ZA6 work separates high-level trajectory command freshness, HAL command storage/shaping, EtherCAT slave health, CiA-402 drive state, software quick stop and independent STO/safety authority. Preserve: **fieldbus healthy != command fresh** and **software quick stop != STO**.
 
-- `research/3500-za6-runtime-stale-command-fault-containment-source-trace-2026-09-14.md`
-- `research/3500-za6-launch-supervision-controller-death-boundary-2026-09-14.md`
-- `research/3500-puma200-genserkins-field-commissioning-chronology-2026-09-14.md`
-- `research/3500-genserkins-inverse-failure-field-reconciliation-2026-09-14.md`
-
-### ZA6 / ROS2 authority result
-
-Pinned Tormach source separates high-level trajectory command, HAL command storage/shaping, EtherCAT slave health, CiA-402 drive state, software quick stop and independent STO/safety authority.
-
-`hw_device_mgr` detects lcec online/oper loss and drive faults; `drive_safety` provides cross-drive quick-stop-compatible containment for explicit triggers. No high-level command age/generation/heartbeat witness was found downstream of `hal_hw_interface.*.position_cmd`. `hal_control_node` can set `cm_ok=0` and stop ControllerManager read/update/write without a source-visible command reset, and no use of that `cm_ok` pin was found in the pinned ZA6 config as a drive/quick-stop permissive.
-
-Preserve: **fieldbus healthy != command fresh** and **software quick stop != STO**.
-
-### Native robot field/source result
-
-The PUMA 200 field chronology proves that working joint mode does not validate Cartesian kinematics. The repair path separated singularity, exact physical home pose, modified-DH geometry/signs, coupled wrist transmission and actual machine gear ratios. Family documentation contained gearing for another PUMA 2xx variant, forcing physical verification.
-
-Pinned genserkins source confirms iterative Jacobian inverse behavior: Jacobian construction/inversion can fail before iteration exhaustion, convergence is seed-dependent, and downstream limits/following errors remain separate from inverse-solver failure.
-
-3500 should reopen for a materially different inspectable real robot implementation, exact ZA6 controller/heartbeat provenance, or a named runtime timing question—not another generic stale-command or genserkins search.
+The PUMA 200/genserkins field/source pass also proved that working joint mode does not validate Cartesian kinematics. Exact home geometry, modified-DH frames/signs, mechanical wrist coupling and actual gear ratios must be reconciled separately from inverse-solver, joint-limit and following-error failures.
 
 ## 3600 — Press Brakes
 
@@ -86,37 +67,93 @@ Not graduated. Preserve the documented branch-local information-gain stop and bo
 
 ## 3700 — Grinding / EDM / Specialty Finishing
 
-Status: **ACTIVE / SOURCE**.
+Status: **OPEN / PAUSED at bounded breadth/source stop**.
 
-Latest checkpoint: `checkpoints/3700-next-2026-09-14.md`.
+Latest preserved checkpoint: `checkpoints/3700-next-2026-09-14.md`.
 
-Authoritative breadth/deep artifacts include:
+Authoritative deep artifacts now additionally include:
 
-- `research/3700-grinding-edm-specialty-breadth-audit-2026-09-14.md`
-- `research/3700-grinding-edm-breadth-survey-2026-09-14.md`
-- `research/3700-edm-adaptive-feed-source-trace-2026-09-14.md`
+- `research/3700-wire-edm-real-authority-openedm-reconciliation-2026-09-14.md`
+- `research/3700-grinder-servo-vs-hydraulic-authority-comparison-2026-09-14.md`
 
 ### EDM
 
-LinuxCNC has a native adaptive-motion primitive explicitly relevant to EDM. With M52/adaptive feed enabled, realtime Motion samples `motion.adaptive-feed`, clips it to `+-MAX_FEED_OVERRIDE`, uses magnitude for feed scaling and sign for trajectory-planner direction. A requested sign reversal calls `tpSetRunDir()`; if direction cannot change immediately, Motion forces adaptive scale to zero so the path stops/decelerates before reversing. Feed hold/inhibit remain separate authorities.
+Pinned LinuxCNC source already established negative adaptive feed as a controlled trajectory-direction transition, not a naive negative velocity multiplier, and separately established that reverse trajectory traversal does **not** reconstruct synchronized process-output chronology.
 
-Thus negative adaptive feed is an explicit path-direction state transition, not a naive negative velocity multiplier. It still does not implement spark-gap logic, spark power, wire, dielectric/flushing or recovery.
+The new real-process reconciliation preserves distinct authorities for:
 
-A real Sodick A320s retrofit provides field evidence for separate X/Y/U/V, wire run/tension, spark-source replacement, material/process recipes and gap-voltage adaptive control. Wire EDM and sinker EDM remain distinct branches.
+- LinuxCNC X/Y/U/V(/Z) geometry and adaptive motion;
+- gap-voltage acquisition/validation and feed-direction request;
+- spark-generator enable/recipe/fault;
+- wire feed/tension/break state;
+- dielectric/flushing readiness;
+- interrupted-cycle recovery.
 
-Exact next source question: trace trajectory reverse behavior through segment boundaries and synchronized M62/M63/M67 process outputs. Do not assume reverse path reconstructs output chronology.
+The real Sodick A320s chronology demonstrates that successful XY/UV motion plus working wire transport still did not produce a useful production EDM without a capable spark generator. Adjacent OpenEDM source further demonstrates spark generation as an explicit realtime state machine and wire tension as a separate load-cell/PID loop with a low-tension stop threshold. These are architecture evidence, not a LinuxCNC production controller.
+
+Exact public gap-law scaling/filtering/hysteresis, mature spark-generator handshake/fault behavior, wire-break restart/rethread and complete dielectric recovery remain unavailable in the bounded pass. Reopen 3700-E2 for materially stronger implementation evidence rather than generic searches.
 
 ### Grinding
 
-Breadth evidence already separates servo/ballscrew grinders, hydraulic directional-valve grinders and later nonround/cam grinding. Direct linear feedback changes loop topology and does not erase mechanical compliance/backlash. High-value next comparison is wheel/dresser/infeed/spark-out authority across real servo and hydraulic grinder implementations.
+The first deep comparison now separates:
 
-### Specialty finishing
+- servo/ballscrew/direct-scale architectures, where direct scale closes around drivetrain error but does not remove backlash/compliance/stiction;
+- hydraulic directional-table architectures, where binary LEFT/RIGHT reciprocation may be the correct machine abstraction rather than pretending a non-proportional valve is a servo axis.
 
-Honing remains prepared as a later subbranch. Do not let it displace the current EDM reverse-path source question.
+Grinding process state—wheel readiness, dressing, workholding, coolant, infeed, spark-out and interrupted-cycle recovery—remains separate from axis position and needs a stronger mature field implementation before a full playbook is frozen.
 
-## 3800 / 3900 and 3100
+## 3800 — Saws / Feeders / Indexing / Automation Cells
 
-These remain parallel specialization branches for later work-selection rotation. Prefer genuinely underdeveloped tracks when the current 3700 evidence path reaches diminishing returns.
+Status: **ACTIVE / SOURCE + FIELD DEEP PASS**.
+
+Latest checkpoint: `checkpoints/3800-next-2026-09-14.md`.
+
+Authoritative artifacts include:
+
+- `research/3800-saws-feeders-indexing-automation-cells-breadth-audit-2026-09-14.md`
+- `research/3800-saws-feeders-automation-breadth-survey-2026-09-14.md`
+- `research/3800-classicladder-realtime-sequence-recovery-source-trace-2026-09-14.md`
+- `research/3800-pick-place-feeder-supervisory-vs-realtime-authority-2026-09-14.md`
+
+### Automatic saw / feeder field result
+
+The Marvel V10A chronology supplies a concrete failure mode: an encoder-controlled hydraulic shuttle oscillated around target and then continued creeping from hydraulic leakage. Preserve:
+
+**position in window != feeder/material stable**.
+
+A defensible cutting transaction needs explicit treatment of feed target, physical stability, clamp ownership/proof, saw readiness and cut authorization.
+
+### ClassicLadder source result
+
+At pinned LinuxCNC revision `f666f1a51ae7c4d991cc61233e785dcc53fbe98d`:
+
+- `classicladder.0.refresh` is a realtime HAL function, but ladder scans are capped at no faster than 1 ms;
+- the scan path is input copy -> ordered ladder/sequential evaluation -> output copy;
+- Sequential/Grafcet transitions can cascade more than one step in the same scan while conditions remain true;
+- the normal STOP/RUN toggle does not reset the SFC to initial steps;
+- when STOPPED, ClassicLadder skips logic and output-copy rather than generically forcing HAL outputs false.
+
+Preserve: **ClassicLadder STOP != safe output state != cycle reset**.
+
+### Feeder supervisory/realtime result
+
+A real LinuxCNC pick-and-place feeder implementation uses:
+
+`M201 supervisory pickup -> M161 userspace feeder request -> ClassicLadder feeder logic`.
+
+The uploaded M161 shell script pulses ClassicLadder inputs and exits without a physical completion acknowledgement. Preserve:
+
+**command returned != actuator completed** and **request pulse issued != proven realtime consumption**.
+
+First reusable 3800 transaction model:
+
+`fresh request -> deterministic actuator sequence -> physical completion/stability -> fresh acknowledgement -> next cycle`.
+
+Exact next work is a real public implementation with explicit completion feedback, stale-ack prevention and partial-cycle recovery. After that, source-trace extra-joint feeder authority and then position+lock indexer semantics per the active checkpoint.
+
+## 3900 and 3100
+
+These remain parallel specialization branches for later work-selection rotation. Prefer genuinely underdeveloped tracks when 3800 reaches a bounded local stop.
 
 ## Laboratory compute checkpoint
 
@@ -124,4 +161,4 @@ These remain parallel specialization branches for later work-selection rotation.
 
 ## Global next-work rule
 
-Continue from `checkpoints/3700-next-2026-09-14.md`. First source-trace EDM trajectory reversal across segment boundaries and queued synchronized process outputs; then deepen one real wire-EDM process contract. Run a lab only if source leaves a real nonduplicate queued-I/O/reverse ambiguity. When EDM reaches a clean local stop, compare real servo and hydraulic grinder implementations before rotating to another underdeveloped 3000 branch.
+Continue from `checkpoints/3800-next-2026-09-14.md`. First seek a completion-feedback saw/feeder/transfer implementation with real request/ack/fault/recovery behavior. If that public source path reaches a bounded stop, proceed to the pinned LinuxCNC extra-joint/`posthome-cmd`/`limit3` feeder authority trace rather than repeating generic saw searches. Run a lab only for a concrete nonduplicate uncertainty exposed by a real implementation.

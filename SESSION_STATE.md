@@ -1,140 +1,107 @@
 # Active Curriculum Session State
 
-Session start UTC: `2026-09-14T22:36:15Z`
-Session end UTC: `2026-09-14T22:49:23Z`
-Actual elapsed: **13.1 minutes**
-Status: **CLOSED — 3700 local source stops preserved; active work rotated to 3800 and saw/feed/sequence/extra-joint/indexer/cell authority advanced.**
+Session start UTC: `2026-09-14T23:33:04Z`
+Session end UTC: `2026-09-14T23:44:24Z`
+Actual elapsed: **11.3 minutes**
+Status: **CLOSED — 3800 current breadth paths bounded; active work rotated to 3100 and advanced ATC/spindle-orient/probing authority.**
 
 ## Prerequisite state
 
-The 1000 and 2000 series remain **GRADUATED / CLOSED**. F02 remains graduated under the preserved valid information-separated evaluation. No closed prerequisite work was reopened or rescored.
+The 1000 and 2000 series remain **GRADUATED / CLOSED**. F02 remains graduated under the preserved valid information-separated evaluation. No closed prerequisite work was reopened, repolled, or rescored.
 
-## Branch selection
+## Branch selection and 3800 closeout
 
-Repository-authoritative state at session start made **3700 Grinding / EDM / Specialty Finishing** active. The wire-EDM process-authority path and first grinder architecture comparison were advanced until each reached a clean public/source boundary, then work rotated under `WORK_SELECTION_POLICY.md` to the already-mapped **3800 Saws / Feeders / Indexing / Automation Cells** branch instead of repeating low-yield searches.
+Repository-authoritative state at session start made **3800 Saws / Feeders / Indexing / Automation Cells** active.
 
-Latest active checkpoint: `checkpoints/3800-next-2026-09-14.md`.
+A fresh bounded search still did not surface a mature public saw/bar-feeder/transfer implementation exposing request generation, physical completion, stale-ack rejection, stability/clamp proof, timeout/jam behavior and interrupted-cycle reconciliation. That branch is therefore preserved as a public-source gap rather than searched repetitively.
 
-## Durable 3700 work completed
+Created and source-closed:
 
-Created:
+- `research/3800-supervisory-freshness-and-locking-indexer-reconciliation-2026-09-14.md`
 
-- `research/3700-wire-edm-real-authority-openedm-reconciliation-2026-09-14.md`
-- `research/3700-grinder-servo-vs-hydraulic-authority-comparison-2026-09-14.md`
+Key 3800 results:
 
-### Wire EDM result
+- LinuxCNC command serial/`echo_serial_number`, Task/Motion heartbeat, execution/interpreter state and local physical completion are distinct supervisory evidence surfaces.
+- Preserve: **command acknowledgement != program completion != physical transfer permission**.
+- Native locking-indexer TP explicitly performs `unlock request -> wait is-unlocked=1 -> index motion -> lock request -> wait is-unlocked=0 -> complete segment`.
+- No local elapsed-time timeout was found in that inspected TP wait path.
+- `is-unlocked=0` does not generically prove a separate machine-specific locked/down witness.
 
-Real Sodick A320s chronology now separates successful LinuxCNC XY/UV motion and existing wire transport from the much harder spark/process problem. The retrofit eventually produced cuts with a custom MOSFET generator but did not publicly mature into a production-quality process controller.
+With the remaining useful 3800 paths bounded, work rotated under `WORK_SELECTION_POLICY.md` to the genuinely underdeveloped **3100 Mills / VMCs** branch.
 
-Adjacent OpenEDM source reinforces distinct process authorities: the arc generator has its own realtime power-stage/timing/current-limit state machine, while the wire tensioner has a separate load-cell/PID loop and low-tension stop rule. These are adjacent architecture evidence, not proof of LinuxCNC production behavior.
-
-Preserve the minimum wire-EDM decomposition:
-
-`program/XYUV geometry + adaptive path direction`
-
-in parallel with:
-
-`spark generator recipe/fault`, `wire run/tension/break`, and `dielectric/flushing readiness`.
-
-Exact production gap-law filtering/hysteresis, mature spark handshake/fault behavior and complete wire-break/restart recovery remain public-source gaps. 3700-E2 is therefore paused until materially stronger implementation evidence appears.
-
-### Grinding result
-
-The first architecture comparison distinguishes:
-
-- servo/ballscrew/direct-scale grinders, where direct scale closes around drivetrain error but does not eliminate backlash/compliance/stiction;
-- hydraulic directional-table grinders, where binary LEFT/RIGHT reciprocation can be the correct state-machine abstraction and should not be disguised as a proportional servo axis.
-
-Wheel readiness, dressing, workholding, coolant, infeed, spark-out and interrupted-cycle recovery remain separate grinding process authorities. A mature public process implementation is still needed before freezing a full grinder playbook.
-
-## Durable 3800 work completed
+## Durable 3100 work completed
 
 Created:
 
-- `research/3800-saws-feeders-automation-breadth-survey-2026-09-14.md`
-- `research/3800-classicladder-realtime-sequence-recovery-source-trace-2026-09-14.md`
-- `research/3800-pick-place-feeder-supervisory-vs-realtime-authority-2026-09-14.md`
-- `research/3800-extra-joint-feeder-posthome-limit3-source-trace-2026-09-14.md`
-- `research/3800-indexer-carousel-position-vs-lock-source-boundary-2026-09-14.md`
-- `research/3800-industrial-cell-plc-python-linuxcnc-handshake-chronology-2026-09-14.md`
+- `research/3100-mills-vmcs-breadth-foundation-2026-09-14.md`
+- `research/3100-vmc-atc-field-chronology-first-pass-2026-09-14.md`
+- `research/3100-atcduino-inspectable-config-abort-boundary-2026-09-14.md`
+- `research/3100-probing-tool-setting-authority-foundation-2026-09-14.md`
 
 Updated:
 
-- `checkpoints/3800-next-2026-09-14.md`
+- `checkpoints/3100-next-2026-09-14.md`
 - `PROGRESS.md`
 
-### Saw / feeder field result
+### M6 / M19 / spindle authority
 
-The Marvel V10A commissioning chronology gives a concrete material-position failure: a linear-encoder-controlled hydraulic shuttle could reach the requested window yet continue creeping due to hydraulic leakage. Therefore:
+Pinned LinuxCNC documentation/source separates:
 
-**encoder position in tolerance != stock/mechanism stable**.
+- tool selected;
+- physical M6 transfer;
+- logical tool identity;
+- G43 tool-length-offset activation;
+- spindle at-speed;
+- spindle phase/index synchronization;
+- M19 orientation/locked state.
 
-A separate LinuxCNC pick-and-place feeder implementation gives the complementary software boundary. Its M161 script pulses a ClassicLadder request input and exits without waiting for physical feeder completion. Therefore:
+M19 has explicit request/ack/fault/timeout semantics. Its Q word bounds the wait for `spindle.N.is-oriented`, unlike the inspected native locking-indexer path. Rigid tapping remains a spindle-synchronized-motion problem, not spindle orientation.
 
-**command returned != actuator completed** and **request pulse issued != proven realtime event consumption**.
+### Real VMC ATC chronology
 
-First reusable transaction model:
+Two materially different field architectures were preserved:
 
-`fresh request -> deterministic sequence -> physical completion/stability -> fresh acknowledgement -> next cycle`.
+- EMCO VMC100/VMC300 spindle-driven carousel: the main spindle drive temporarily changes authority from machining spindle to carousel drive after orientation/mechanical coupling, with separate proximity feedback for carousel/reference/coupling state.
+- OKADA VM500: independent carousel mechanism plus coordinated Z motion, favoring M6 remap/G-code orchestration for axis movement and a mechanism component such as `carousel.comp` for magazine positioning.
 
-### ClassicLadder source result
+The chronology preserves failed/removed early HAL/NGC approaches, sensor noise/debounce, strobe-validity clarification and the fact that one exact VMC ATC sequence is not canonical.
 
-At pinned LinuxCNC revision `f666f1a51ae7c4d991cc61233e785dcc53fbe98d`:
+### Inspectable ATCduino implementation
 
-- `classicladder.0.refresh` is a realtime HAL function but ladder scans run no faster than 1 ms;
-- scan order is HAL input copy -> ordered ladder/sequential sections -> HAL output copy;
-- Grafcet transitions can cascade across multiple logical steps in one scan if downstream conditions are already true;
-- ordinary STOP/RUN does not invoke `PrepareSequential()`;
-- while STOPPED, the realtime task skips logic and output copying rather than generically forcing outputs false.
+The public ATCduino source provides real bounded acknowledgements for carousel `INPOSITION` and piston-return/enable using M66 timeouts. However, spindle/toolholder lock/unlock and piston extension are dwell-based in the inspected routine rather than independently proven physical states.
 
-Preserve:
+Its visible `on_abort.ngc` does not establish complete recovery: direct output-clearing commands are commented and the called `reset_state` implementation was not found in the inspected default branch.
 
-**ClassicLadder STOP != safe output state != cycle reset.**
+Preserve: **some physical acknowledgements + some timeouts != complete physical transfer proof**.
 
-### Extra-joint feeder result
+### Probing / tool-setting foundation
 
-Pinned docs/source establish that a homed extra joint leaves kinematics and takes its command from `joint.N.posthome-cmd`; Motion maps `posthome-cmd + motor_offset` directly to `motor-pos-cmd`, and the post-home command path does not use ordinary motor feedback as the position planner.
+Pinned G38.x documentation establishes:
 
-The shipped example uses `limit3`. Pinned `limit3` source shows that disabling it does **not** hold position; it makes the target zero and returns output toward zero under velocity/acceleration constraints.
+- G38.2/G38.4 signal error when the requested contact/release transition does not occur;
+- G38.3/G38.5 leave failure handling to the macro;
+- `#5061..#5069` receive probe-coordinate values even after an unsuccessful probe, where they become the programmed endpoint;
+- `#5070` is the explicit success discriminator;
+- probe coordinates are expressed in the active work coordinate frame.
 
-Preserve:
-
-**extra-joint planner enable semantics must be engineered deliberately; shipped `homed -> limit3.enable` wiring is not a complete feeder permissive.**
-
-### Indexer result
-
-Pinned `carousel.comp` is useful for encoded/index/count position acquisition, approach, alignment and in-position completion, but its `ready` output means **carousel in-position**. It is not a universal mechanical-lock/clamp proof.
-
-A production indexed station with separate locking therefore needs an outer contract such as:
-
-`unlock proof -> index move -> in-position -> lock command -> lock proof -> process authorization`.
-
-### Industrial cell result
-
-A long-running field example separates responsibilities cleanly:
-
-- PLC: broader conveyors/pallets/heat-press/material flow;
-- Python: Modbus + LinuxCNC supervisory bridge, product-code/G-code mapping and run/completion orchestration;
-- LinuxCNC: CNC homing and cutting cycle.
-
-The reported bridge waits for LinuxCNC completion before setting the PLC transfer bit, giving real evidence for completion-before-material-transfer. Exact heartbeat, generation and stale-bit handling are not public and remain UNKNOWN.
+Preserve: **a plausible `#506x` value != a successful measurement**. A machine-fixed tool setter still requires deliberate frame/calibration math before a persistent tool-table update, and writing the table is separate from activating compensation with G43.
 
 ## Next work
 
-Continue from `checkpoints/3800-next-2026-09-14.md`.
+Continue from `checkpoints/3100-next-2026-09-14.md`.
 
-Priority order:
+Priority:
 
-1. find a real saw/feeder/transfer implementation with explicit physical completion acknowledgement, stale-request handling and partial-cycle recovery;
-2. if that bounded public search stops cleanly, deepen the PLC/supervisor handshake branch rather than repeating generic feeder searches;
-3. find a real non-tool indexer with independent position and lock proof and compare it against the `carousel` source boundary.
+1. inspect a real production probing/tool-setting implementation, preferably with initial-state qualification, coarse/fine touches, calibration, `#5070` checks and explicit failure paths;
+2. perform only a bounded search for a stronger VMC ATC with independent drawbar/tool-present proof plus meaningful abort/restart handling;
+3. then inspect spindle/VFD readiness, lube, coolant/chiller, chip handling and fixture/pallet authority.
 
-Run a lab only if a concrete implementation exposes a nonduplicate uncertainty such as stale acknowledgement acceptance, extra-joint re-enable/retained-target behavior or exact abort cleanup.
+No lab should start merely because 3100 is new; source/config/field evidence still has higher information gain.
 
 ## Laboratory state
 
-No lab was run. `LAB_COMPUTE_LOG.md` remains unchanged at the preserved exactly recorded total of **338.56 minutes (5.64 h)**; historical gaps mean that is not a trustworthy full-project total.
+No laboratory run was launched. `LAB_COMPUTE_LOG.md` remains unchanged.
 
 ## Overlap
 
-**No overlap.** Previous canonical session ended `2026-09-14T21:50:44Z`; this session began `2026-09-14T22:36:15Z`, **45m31s later**.
+**No overlap.** Previous canonical session ended `2026-09-14T22:49:23Z`; this session began `2026-09-14T23:33:04Z`, **43m41s later**.

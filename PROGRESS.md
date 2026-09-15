@@ -12,54 +12,67 @@ Repository artifacts, not chat history, are authoritative. Detailed history rema
 - Final 2000 closeout: `evaluation/2000-series-closeout-state-2026-09-11.md` finalized 2026-09-14.
 - **3000 series:** GRADUATED / CLOSED as of 2026-09-15 after formal promotion/playbook-completeness review. Closeout: `evaluation/3000-series-promotion-closeout-2026-09-15.md`.
 
-Do not reopen closed 1000/2000 work without a genuinely new material defect. Do not routinely mine 3000 branches after closeout; their checkpoints remain reopen maps for materially stronger machine-specific evidence.
-
-## 3000 closeout summary
-
-All nine machine-specialization tracks received substantive source/community/config/build-diary passes and durable architecture/failure/recovery coverage. The cross-track synthesis is `research/3000-cross-machine-authority-patterns-2026-09-15.md`; 3300 also has `research/3300-cross-process-gantry-cutting-playbook-2026-09-15.md`.
-
-The reusable machine-control contract entering 4000 is:
-
-`request -> actuation path -> physical witness -> qualified completion -> continuation acknowledgement`
-
-Preserve value/validity/freshness separation, explicit ownership transfer, independent process cleanup/recovery, distinct commanded/electrical/physical/process-valid states, and the boundary between normal-control permissives, software fault containment and independent safety-rated authority.
-
-### Preserved 3000 reopen maps
-
-- 3100 Mills/VMCs — `checkpoints/3100-next-2026-09-15.md`
-- 3200 Lathes/Turning — `checkpoints/3200-lathe-next-2026-09-15.md`
-- 3300 Plasma/Laser/Waterjet — `checkpoints/3300-next-2026-09-15.md`
-- 3400 Routers/Woodworking — `checkpoints/3400-next-2026-09-14d.md`
-- 3500 Robots/Custom Kinematics — `checkpoints/3500-next-2026-09-14c.md`
-- 3600 Press Brakes — documented information-gain stop; integration map `research/3600-press-brake-integration-playbook-outline-2026-09-12.md`
-- 3700 Grinding/EDM — `checkpoints/3700-next-2026-09-14.md`
-- 3800 Saws/Feeders/Cells — `checkpoints/3800-next-2026-09-14.md`
-- 3900 Emerging/Unusual — `checkpoints/3900-next-2026-09-15c.md`
+Do not routinely reopen closed levels without a genuinely new material defect. 3000 checkpoints remain reopen maps for materially stronger machine-specific evidence.
 
 ## Active curriculum level
 
 **4000 — hardware and AI-assisted implementation.**
 
-Active checkpoint: `checkpoints/4000-next-2026-09-15.md`.
+Active checkpoint: `checkpoints/4000-next-2026-09-15b.md`.
 
-### 4000 foundation completed this session
+## 4000 foundation and core state
 
-- Canonical hardware block contract: `hardware/BLOCK_SPEC_TEMPLATE.md`.
-- First reusable block map: `hardware/4000-block-map.md`.
-- First Colorlight core baseline: `research/4000-colorlight-core-baseline-first-pass-2026-09-15.md`.
-- First Colorlight LinuxCNC watchdog/enable trace: `research/4000-colorlight-linuxcnc-firmware-watchdog-first-pass-2026-09-15.md`.
+Completed durable foundation:
 
-Current hardware direction is to use proven Colorlight 5A-75B/5A-75E ECP5/Ethernet architecture as a primary copy/adapt reference for applicable core circuitry while **not** blindly copying its HUB75 field-I/O front end. Press-brake-specific blocks without a true equivalent, especially proportional-solenoid/current drive, remain independently engineered from suitable reference designs and standard engineering principles.
+- `hardware/BLOCK_SPEC_TEMPLATE.md` — canonical block authority/electrical/failure/recovery/verification contract.
+- `hardware/4000-block-map.md` — reusable controller block map.
+- `research/4000-colorlight-core-baseline-first-pass-2026-09-15.md` — Colorlight core baseline.
+- `research/4000-colorlight-linuxcnc-firmware-watchdog-first-pass-2026-09-15.md` — Lcnc/ColorCNC watchdog/enable trace.
+- `research/4000-litexcnc-watchdog-output-gating-trace-2026-09-15.md` — initial LiteX-CNC watchdog/PWM trace.
+- `research/4000-hostmot2-watchdog-recovery-first-pass-2026-09-15.md` — HostMot2 bite/rearm/reconstruction trace.
+- `research/4000-firmware-protocol-comparison-2026-09-15.md` — HostMot2 vs Lcnc/ColorCNC vs LiteX-CNC architecture comparison.
+- `research/4000-litexcnc-output-watchdog-audit-2026-09-15.md` — GPIO/PWM/stepgen watchdog/reset audit.
+- `hardware/4000-colorlight-core-copy-adapt-contract.md` — explicit Colorlight V8 core copy/adapt/omit contract.
 
-The firmware/protocol decision is intentionally not frozen yet. Keep upstream HostMot2/`hm2_eth`, ColorCNC/Lcnc-style custom Etherbone firmware, and LiteX-CNC distinct until their watchdog, latency/freshness, integration, extensibility and maintainability tradeoffs are source-compared.
+### Working firmware selection
 
-### 4000 exact next work
+**LiteX-CNC is the preferred working baseline**, not yet an irreversible freeze. HostMot2/`hm2_eth` remains the maturity/reference standard and fallback; Lcnc/ColorCNC remains the minimal known-working Colorlight reference.
 
-1. Source-compare HostMot2/`hm2_eth`, Lcnc/ColorCNC and LiteX-CNC for the core firmware/protocol decision.
-2. Extract the Colorlight V8 FPGA/PHY/configuration/power circuit details needed for an explicit copy/adapt contract.
-3. Freeze one-versus-two PHY, SDRAM necessity, USB-C role, power-entry domains and watchdog/output-gating architecture before schematic placement.
-4. Then proceed through encoder, digital I/O, step/dir, PWM/analog and proportional-current blocks using the canonical block template.
-5. Before freezing each block, inspect applicable open electronics/PCB/FPGA/KiCad skills and use them as design-review aids, subordinate to schematics/datasheets/source/engineering calculations.
+Reasons: native open-toolchain Colorlight/ECP5 support, modular custom-function architecture suitable for a proportional-current block, LinuxCNC realtime integration and FPGA-local watchdog behavior with lower project-owned protocol burden than Lcnc.
+
+Required hardening before final freeze:
+
+1. explicit failed-read VALID/FRESH handling — the inspected LiteX-CNC generic read loop currently processes its read buffer after the board read call and contains a TODO to stop processing failed reads;
+2. explicit command/feedback generation or equivalent freshness witness;
+3. authoritative transport latency/jitter/dropout/watchdog measurement on final hardware;
+4. every custom output module must consume the global FPGA watchdog/output-authority state.
+
+The standard LiteX-CNC GPIO, PWM and stepgen modules have now been source-checked: GPIO returns to configured safe states on reset/watchdog, PWM enable is cleared, and stepgen enable is gated by inverse watchdog-bite state.
+
+### Core hardware working freeze
+
+Primary copy/adapt reference remains Colorlight 5A-75B V8-class ECP5/Ethernet architecture.
+
+Working decisions:
+
+- one Gigabit Ethernet PHY, not two;
+- no SDRAM unless a concrete memory-requiring feature appears;
+- ECP5-25 BG256-class core with SPI NOR + accessible sysCONFIG/JTAG;
+- dedicated oscillator/clock architecture rather than copying V8.0's dependency on a PHY-generated 25 MHz FPGA clock;
+- 1.1 V core and 3.3 V I/O/logic rails retained as required; do not copy unused SDRAM-related rails;
+- machine/24 V power entry is a separate protected industrial power block, not a copy of Colorlight's ~5 V input;
+- USB-C is service/program/debug only for now, not realtime machine-control transport;
+- HUB75/5 V 74HC245 field I/O is explicitly not copied as industrial CNC I/O.
+
+Frozen cross-firmware requirement remains: an FPGA-local command-freshness watchdog SHALL independently remove normal machine-facing output authority, expose diagnostic fault state, and require explicit recovery/rearm rather than automatically restoring stale outputs when communications return. This is fault containment, not a claim of safety-rated authority.
+
+## 4000 exact next work
+
+1. Begin the **encoder input block** using `hardware/BLOCK_SPEC_TEMPLATE.md`: inspect proven LinuxCNC/Colorlight/community differential encoder front ends, receiver/protection/index topology and failure/freshness semantics.
+2. Then digital inputs/outputs, step/dir and PWM/analog blocks, preserving proven topology first.
+3. In parallel, select exact current-production PHY, oscillator and regulators for the core after datasheet/BOM review; do not pick parts solely by copied footprint.
+4. Design the proportional-current/valve block after the generic I/O foundation, using suitable proven current-driver references and standard engineering; keep it parameterized for coil classes.
+5. Before freezing each block, inspect applicable open electronics/PCB/FPGA/KiCad skills as design-review aids subordinate to datasheets, schematics, calculations and measured evidence.
 
 ## Laboratory compute checkpoint
 
@@ -67,4 +80,4 @@ The firmware/protocol decision is intentionally not frozen yet. Keep upstream Ho
 
 ## Global next-work rule
 
-Continue 4000 from `checkpoints/4000-next-2026-09-15.md`. Prefer proven topology and standard engineering over unnecessary simulation. Use simulation only for real nonduplicate uncertainty such as control-loop stability, switching/current-control behavior, transient margin, timing-sensitive interfaces or fault transitions. Preserve 3000 machine authority/recovery requirements in every hardware block rather than optimizing only for electrical connectivity.
+Continue 4000 from `checkpoints/4000-next-2026-09-15b.md`. Prefer proven topology and standard engineering over unnecessary simulation. The next justified core experiment is eventual real transport measurement on concrete hardware, not a toy simulation. Preserve the 3000 authority/recovery contract in every hardware block.

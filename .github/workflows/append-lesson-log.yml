@@ -15,7 +15,7 @@ concurrency:
 
 jobs:
   append:
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, openpressbrake]
     timeout-minutes: 5
     steps:
       - name: Check out curriculum repository

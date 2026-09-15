@@ -17,29 +17,37 @@ Do not reopen or repoll closed 2000 work unless a genuinely new material defect 
 
 **3000 — machine-specific specialization.** Current active branch: **3100 — Mills / VMCs**.
 
-Latest active checkpoint: `checkpoints/3100-next-2026-09-14.md`.
+Latest active checkpoint: `checkpoints/3100-next-2026-09-15.md`.
 
-3100 was selected after 3800 reached bounded breadth-level stops for its current completion-feedback saw/feeder search and generic locking-indexer transaction. Branch-local stops do not imply graduation. 3200, 3300, 3400, 3500, 3700 and 3800 remain open/paused; 3600 retains its documented information-gain stop.
+3100 remains active after 3800 reached bounded breadth-level stops. Branch-local stops do not imply graduation. 3200, 3300, 3400, 3500, 3700 and 3800 remain open/paused; 3600 retains its documented information-gain stop.
 
 ## 3100 — Mills / VMCs
 
 Status: **ACTIVE / BREADTH + FIELD PASS**.
 
-Authoritative new artifacts:
+Authoritative artifacts include:
 
 - `research/3100-mills-vmcs-breadth-foundation-2026-09-14.md`
 - `research/3100-vmc-atc-field-chronology-first-pass-2026-09-14.md`
-- `checkpoints/3100-next-2026-09-14.md`
+- `research/3100-atcduino-inspectable-config-abort-boundary-2026-09-14.md`
+- `research/3100-probing-tool-setting-authority-foundation-2026-09-14.md`
+- `research/3100-real-toolsetter-probe-readiness-audit-2026-09-15.md`
+- `research/3100-upstream-persistent-tool-calibration-trace-2026-09-15.md`
+- `checkpoints/3100-next-2026-09-15.md`
 
-Preserved first-pass conclusions:
+Preserved conclusions:
 
 - M6 physical transfer, logical tool identity and G43 tool-length-offset activation are separate states.
-- M19 has explicit orientation request/ack/fault/timeout semantics; spindle at-speed, phase/index synchronization and orient/locked are separate witnesses.
+- M19 has explicit request/ack/fault/timeout semantics; spindle at-speed, phase/index synchronization and orient/locked are separate witnesses.
 - Rigid tapping is spindle-synchronized motion, not spindle orientation.
-- Real VMC ATCs differ materially: OKADA-style independent carousel + coordinated Z versus EMCO spindle-driven carousel requiring temporary main-drive authority transfer.
-- Real EMCO chronology preserves failed spindle-HAL/NGC attempts, sensor noise/debounce, strobe-validity clarification and successful intermediate carousel/remap/coupling logic; do not treat a final sequence as canonical.
+- Real VMC ATCs differ materially and commissioning chronology matters.
+- Probe coordinates require validity qualification; #5070 is the probe-success discriminator.
+- A real machine combines probe + TLS through OR + debounce; debounce addresses transition quality but does not establish which sensor fired or whether the measurement path is semantically healthy.
+- Double-touch does not imply persistent tool calibration: the real machine macro writes G10 L2 WCO, while upstream `qt_auto_probe_tool.ngc` performs dual #5070 checks, writes G10 L1 persistent tool-table Z and then applies G43.
+- WCO touch-off, persistent tool-length calibration and measurement-path validity are separate authorities/products.
+- The inspected real machine exposes independent tool-clamped/tool-released inputs and VFD-derived spindle-at-speed feedback.
 
-Next: inspect at least one complete downloadable VMC ATC config with HAL/remap/component source and physical transfer acknowledgements, then move into probing/tool-setting and production readiness auxiliaries.
+Next: production-readiness auxiliaries—lube, coolant/chiller, chip handling, fixture/pallet and spindle/VFD ready/fault—with explicit `status available != status used as authority` analysis. Bounded stronger ATC search only if a named source appears. Rotate to 3900 when 3100 reaches a clean breadth stop.
 
 ## 3200 — Lathes / Turning Centers
 
@@ -83,24 +91,13 @@ Wire-EDM work preserves distinct LinuxCNC geometry/adaptive motion, gap-feed, sp
 
 Status: **OPEN / PAUSED at bounded breadth stop**.
 
-Preserved checkpoint: `checkpoints/3800-next-2026-09-14.md` plus the newer synthesis `research/3800-supervisory-freshness-and-locking-indexer-reconciliation-2026-09-14.md`.
+Preserved checkpoint: `checkpoints/3800-next-2026-09-14.md` plus `research/3800-supervisory-freshness-and-locking-indexer-reconciliation-2026-09-14.md`.
 
-Preserved conclusions now include:
-
-- encoder position in tolerance != feeder/material stable;
-- command returned != actuator completed;
-- ClassicLadder STOP != safe output state != cycle reset;
-- extra-joint `posthome-cmd` planner semantics must be deliberately engineered;
-- `carousel.ready` means in-position, not universal mechanical lock proof;
-- command acknowledgement != program completion != physical transfer permission;
-- LinuxCNC command serial/echo, Task/Motion heartbeat and execution/interpreter state are distinct supervisory evidence surfaces;
-- native locking-indexer TP performs `unlock request -> wait is-unlocked -> index -> lock request -> wait !is-unlocked -> segment complete`, with no local elapsed-time timeout found in the inspected TP path.
-
-The stronger full public saw/feeder stale-request + physical-completion + partial-cycle-recovery implementation remains source-unavailable. Reopen only for a named stronger implementation or a concrete machine-specific question.
+Preserved conclusions include encoder-position versus material stability, command versus physical completion, ClassicLadder STOP semantics, extra-joint posthome command planning, carousel in-position versus lock proof, supervisory command/heartbeat distinctions, and native locking-indexer transaction behavior. Reopen only for a named stronger implementation or concrete machine-specific question.
 
 ## 3900 — Emerging / Unusual Machines
 
-Still underdeveloped and available for a later breadth rotation after 3100 reaches a bounded stop.
+Still underdeveloped and available for the next breadth rotation after 3100 reaches a bounded stop.
 
 ## Laboratory compute checkpoint
 
@@ -108,4 +105,4 @@ Still underdeveloped and available for a later breadth rotation after 3100 reach
 
 ## Global next-work rule
 
-Continue from `checkpoints/3100-next-2026-09-14.md`. First inspect a complete real VMC ATC configuration with physical acknowledgements and abort/restart behavior. Then move into probing/tool-setting and spindle/lube/coolant readiness. Run a lab only for a concrete nonduplicate uncertainty exposed by a real implementation.
+Continue from `checkpoints/3100-next-2026-09-15.md`. Inspect real production-readiness auxiliaries and how their status is used as authority. Run a lab only for a concrete nonduplicate uncertainty exposed by a real configuration. Rotate to 3900 when 3100 reaches a clean breadth stop.

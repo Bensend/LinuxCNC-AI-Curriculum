@@ -327,147 +327,68 @@ The research project runs in parallel with the course build. Its job is to gathe
 
 ### Research stream R-SAFE-01 — LinuxCNC safety practice
 
-Mine LinuxCNC manuals, forum threads, configs, and community examples for:
-- external E-stop circuits
-- hardware safety relays
-- redundant contactors
-- STO integration
-- watchdog behavior
-- HostMot2 watchdog behavior
-- LinuxCNC `estop_latch`
-- software-requested stop versus hardware authority
-- reset/restart behavior
-- real failure reports and lessons learned
+Mine LinuxCNC manuals, forum threads, configs, and community examples for external E-stop circuits, hardware safety relays, redundant contactors, STO integration, watchdog behavior, LinuxCNC `estop_latch`, software-requested stop versus hardware authority, reset/restart behavior, and real failure reports.
 
 Deliverable: `linuxcnc-safety-patterns.md`
 
 ### R-SAFE-02 — Commercial safety relay teardown by datasheet
 
-Study representative families from Pilz, Siemens, Phoenix Contact, Omron, Schneider, ABB/Jokab, and others where useful.
-
-Extract into a comparison matrix:
-- supply voltage
-- input architecture
-- reset modes
-- cross-short detection
-- discrepancy timing
-- EDM
-- output architecture
-- force-guided contact assumptions
-- switching/load limits
-- fuse requirements
-- response time
-- Category / PL / SIL claims
-- PFHd / PFD data
-- B10d / mission-time assumptions where supplied
-- environmental assumptions
-- required proof/functional test intervals
+Study representative families from Pilz, Siemens, Phoenix Contact, Omron, Schneider, ABB/Jokab, and others where useful. Extract supply/input/reset/cross-short/EDM/output behavior, force-guided assumptions, load limits, response time, Category/PL/SIL claims, reliability data and environmental/test assumptions.
 
 Deliverable: `safety-relay-comparison.md`
 
 ### R-SAFE-03 — What actually creates each rating
 
-Trace commercial claims back to ISO 13849 and IEC 62061 concepts.
-
-Questions:
-- What specifically distinguishes Cat 2, Cat 3, and Cat 4 architectures?
-- Which faults must be detected and when?
-- How do MTTFd, DCavg, and CCF affect PL?
-- Which parts of a commercial safety relay’s rating depend on internal architecture versus component reliability data versus manufacturing controls versus validation?
-- Which benefits can an open reference circuit reproduce even if it cannot reproduce the formal certification claim?
+Trace commercial claims back to ISO 13849 and IEC 62061 concepts: Category architecture, fault detection timing, MTTFd, DCavg, CCF, internal architecture, component reliability, manufacturing controls and validation. Separate reproducible engineering benefits from formal certification claims.
 
 Deliverable: `rating-mechanics.md`
 
 ### R-SAFE-04 — Open-source functional safety projects
 
-Search beyond LinuxCNC.
-
-Initial projects to study:
-- Open Source Safety Consortium / Protective Stop
-- OpenVVVF hardware and its HARA/fault-injection documentation
-- open-source robot E-stop / protective-stop projects
-- open industrial machines with published safety architecture
-- open PLC/safety-runtime work where credible evidence exists
-- relevant MCU vendor functional-safety libraries and diagnostic examples
-
-Evaluate each project on:
-- schematics/source availability
-- hazard analysis quality
-- failure assumptions
-- independence/redundancy
-- diagnostics
-- test artifacts
-- hardware cost
-- what is reusable for CNC builders
+Search beyond LinuxCNC. Evaluate inspectable projects on schematics/source, hazard analysis, failure assumptions, independence/redundancy, diagnostics, tests, cost and reuse value.
 
 Deliverable: `open-safety-projects.md`
 
 ### R-SAFE-05 — Force-guided relay and contactor physics
 
-Research the actual switching side rather than blindly overbuilding it.
-
-Topics:
-- contact welding mechanisms
-- DC versus AC interruption
-- inductive kick
-- motor/transformer/capacitive inrush
-- contact material
-- contact rating categories
-- suppression and its tradeoffs
-- contactor/relay B10d data
-- why auxiliary feedback contacts matter
-- when a small relay is adequate for logic and when a heavy contactor is needed for hazardous energy isolation
+Research contact welding, AC/DC interruption, inductive kick, inrush, contact material/rating categories, suppression, B10d data, feedback contacts and the boundary between logic relays and hazardous-energy contactors.
 
 Deliverable: `relay-contactor-physics.md`
 
 ### R-SAFE-06 — Low-cost open reference safety blocks
 
-After the preceding research, design educational reference blocks rather than immediately attempting a certified product.
-
-Potential blocks:
-- dual-channel E-stop input monitor
-- manual reset / restart inhibit block
-- dual force-guided relay output block
-- contactor EDM block
-- STO interface block
-- guard-interlock block
-- two-hand-control logic study block
-- watchdog/heartbeat interface block
-
-Each block must include:
-- interface contract
-- schematic
-- BOM and low-cost substitutions
-- fault table
-- assumptions
-- test procedure
-- known limitations
-- what would be required to make a formal rating claim
+After the preceding research, design educational reference blocks: dual-channel E-stop input, manual reset/restart inhibit, dual force-guided relay output, contactor EDM, STO interface, guard interlock, two-hand-control study and watchdog/heartbeat interface. Each must include interface contract, schematic, BOM/substitutions, fault table, assumptions, tests, limitations and formal-rating gap.
 
 Deliverable: `reference-safety-blocks/`
 
 ### R-SAFE-07 — Human-factors and safeguard usability
 
-Collect examples of safeguards that operators commonly defeat and why.
-
-Look especially for:
-- farm machinery guarding
-- machine-tool enclosure/interlock bypasses
-- inconvenient reset systems
-- poor maintenance access
-- nuisance-tripping sensors
-- guards that destroy visibility
-- safeguards that require tools or excessive disassembly for routine tasks
-
-Turn findings into concrete design rules.
+Collect real defeat incentives: inconvenient guards/resets, poor maintenance access, nuisance trips, visibility loss and excessive disassembly. Turn findings into concrete design rules.
 
 Deliverable: `human-factors-safeguards.md`
 
 ### R-SAFE-08 — Machine-specific safety patterns
 
-Build concise safety-pattern summaries for each 3000-level machine class. Do not simply copy regulatory checklists; focus on hazards, energy sources, failure modes, guarding patterns, and practical architectures.
+Build concise safety-pattern summaries for each machine class, focused on hazards, energy sources, failure modes, guarding patterns and practical architectures.
 
-Deliverable: one section consumed by each 3000-level playbook.
+Deliverable: one section consumed by each machine-specific playbook.
+
+### R-SAFE-09 — Safety Sandbox simulator reuse
+
+Investigate open-source circuit/PLC simulation engines before writing a new simulator. Initial candidates are DigitalJS/DigitalJS Online and PLC_Simulator. The target is not general SPICE: it is a browser-friendly educational engine in which a learner can wire relay/contactor/safety blocks, operate a machine model, inject faults, and see both hazard authority and diagnostic/rearm consequences.
+
+Required capabilities:
+- one physical relay/contactor object may own multiple main/auxiliary contacts;
+- coil command, mechanical state and actual per-contact continuity remain separate;
+- welded/stuck/open/short/broken-wire/reset/power-loss faults can persist independently of command state;
+- feedback/EDM proves only what the modeled device/contact architecture actually witnesses;
+- machine hazard/energy models remain separate from electrical command state;
+- user circuits/scenarios serialize to an inspectable data format;
+- automated fault campaigns explain detected, latent and hazardous outcomes without claiming PL/SIL certification.
+
+Research artifact: `research/safety-sandbox-reuse-research-2026-09-15.md`.
+
+First bounded experiment, `SIM-REUSE-01`, is a dual relay/contactor + EDM circuit with a welded-main-contact fault. Do not implement it until source inspection shows whether the candidate engine naturally supports independent physical/fault state. Use standard reasoning before compute.
 
 ## Source hierarchy
 
@@ -507,6 +428,7 @@ Do not treat marketing labels such as “SIL 3 capable” or “safety relay” 
 - ISO 13855:2010 safeguard-positioning methodology
 - Open Source Safety Consortium Protective Stop as an example of publishing hardware/software together with safety evidence and known gaps
 - OpenVVVF as an example of open hardware with independent safety paths, HARA, and explicit fault-injection planning
+- DigitalJS/DigitalJS Online and PLC_Simulator as inspectable simulator reuse candidates for R-SAFE-09
 
 ## Definition of done for the first draft
 
@@ -521,5 +443,6 @@ The safety course is not considered drafted merely because the lesson titles exi
 - at least three low-cost reference architectures with fault tables and bench/simulation test plans
 - one human-factors safeguard-design guide
 - one complete generic-machine capstone safety package
-- press-brake safety case study outline ready for integration into 3600
+- press-brake safety case study outline ready for integration into the machine-specific curriculum
 - adversarial review identifying where the course accidentally overclaims safety or where a cheaper practical safeguard was overlooked
+- Safety Sandbox reuse decision recorded before any large simulator implementation effort

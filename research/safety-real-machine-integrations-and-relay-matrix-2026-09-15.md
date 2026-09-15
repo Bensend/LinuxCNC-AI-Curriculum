@@ -27,15 +27,22 @@ Teaching consequence: the status signal into LinuxCNC is a **permission/status w
 
 ## Integration B — XYYZ gantry router, Mesa 7i95T + Pilz PNOZ s4
 
-Public repo: `zmrdko/mesa_7i95t_config`, current README plus indexed configuration at `94af1eb5b86127b314181fc5809d75f2d59526e8`.
+Public repo: `zmrdko/mesa_7i95t_config`, pinned inspection at `94af1eb5b86127b314181fc5809d75f2d59526e8`.
 
 The README identifies four Delta ASD-B2 servos, a Mesa 7i95T, a **Pilz PNOZ s4**, dual-Y gantry and an **on-screen safety-relay reset**.
 
-Evidence classification:
-- Hardware presence and software-exposed reset feature: **project-DOC-CONFIRMED**.
-- Exact electrical reset circuit, whether the GUI command is a monitored reset request rather than safety authorization, STO/contactors controlled by PNOZ, EDM, and restart behavior after a fault: **UNKNOWN** until the specific HAL/wiring path and PNOZ s4 manual are reconciled.
+The actual HAL now makes the software side precise. In `hallib/02_io.hal`, `iocontrol.0.user-request-enable` drives signal `estop.reset`. That signal simultaneously drives Mesa SSR output 03, a 0.1-s `timedelay`, and several ordinary LinuxCNC `estop_latch` reset pins. The delayed signal then drives `halui.estop.reset`. Separately, Mesa input 23-not is ORed with joint-latch fault state into the main software E-stop latch, whose `ok-out` feeds `iocontrol.0.emc-enable-in`. Two other SSR outputs are driven from an E-stop pulse path.
 
-Human-factors lesson: a convenient GUI reset can be acceptable only as a **reset request** where the safety device itself enforces the required reset semantics. A normal PC/HAL bit must not become the sole proof that the danger zone is clear or the sole safety authorization.
+This is **SOURCE-CONFIRMED** for the LinuxCNC/Mesa command path. It proves that a normal LinuxCNC enable request can energize a physical Mesa output used by the project as part of its safety-relay reset arrangement. It does **not** by itself prove what terminal SSR03 reaches in the cabinet.
+
+The exact Pilz PNOZ s4 manual resolves the device-side semantic boundary. Pilz documents both automatic start and **monitored manual start/restart**, with the latter using reset button S3 into S34 and optional feedback-loop monitoring through external devices K5/K6. Pilz explicitly warns that automatic start or a bridged start contact can cause automatic startup when the safeguard is reset and says external measures are required to prevent unexpected restart. The manual also says OUT means safety contacts closed/Y32 high and RESET means 24 VDC at S34. It requires periodic proof that relay-output safety contacts actually open: at least monthly for SIL CL3/PL e use and annually for SIL CL2/PL d use, under the manual's stated application conditions.
+
+Therefore the safest evidence-backed interpretation is:
+- `iocontrol.0.user-request-enable -> Mesa SSR03` is an **ordinary reset request path**;
+- PNOZ s4 can independently implement monitored manual restart and external feedback-loop monitoring **if wired/configured according to the manual**;
+- whether this particular machine wires SSR03 to S34, includes K5/K6 feedback, uses monitored manual mode, and controls servo STO/contactors is still **UNKNOWN from the public repo**.
+
+Important correction to the earlier open question: the HAL path is no longer unknown. The **cabinet-side wiring and selected PNOZ mode** remain unknown. Do not call the on-screen button a safety-authorizing control unless the external safety circuit is independently shown to enforce the required conditions.
 
 ## Integration C — Maho MH600T retrofit drawing chronology
 
@@ -50,7 +57,7 @@ Teaching consequence: preserve chronology. A later drawing with explicit stuck-c
 
 ## Cross-machine pattern now supported
 
-Across the Fenja router and Maho drawing, LinuxCNC receives/report states while external safety hardware owns at least part of hazardous-energy interruption. The second router independently demonstrates the same design family (external PNOZ safety relay with a software-facing reset request), although its exact wiring still needs tracing.
+Across the Fenja router and Maho drawing, LinuxCNC receives/reports states while external safety hardware owns at least part of hazardous-energy interruption. The second router independently demonstrates the same design family and now gives a source-visible ordinary reset-request path into a Mesa output.
 
 Freeze the conceptual boundary:
 
@@ -62,7 +69,7 @@ in parallel with
 
 and, where reset is software-originated:
 
-`LinuxCNC/HMI reset request -> safety device reset input -> safety device decides whether reset/rearm conditions are valid`.
+`LinuxCNC/HMI reset request -> ordinary output -> safety-device reset input -> safety device decides whether reset/rearm conditions are valid`.
 
 The arrows do **not** imply that LinuxCNC grants personnel-safety authorization.
 
@@ -81,6 +88,10 @@ Evidence: **DOC-CONFIRMED** from Omron product/specification/FAQ pages. Exact G9
 Rockwell's current MSR127R product data identifies **Manual Monitored Reset**. The MSR117T identifies **Automatic/Manual Monitored** reset. A current Guardmaster relay product page (440R-M23143) exposes a **15 ms response time**, **100 ms recovery time**, Category 4 instantaneous architecture data, DC 90%, PFHd and MTTFd values for that exact product record.
 
 Evidence: **DOC-CONFIRMED** for those exact product records. Do not transpose the 15 ms or Category/PL-related data to another Guardmaster model.
+
+### Pilz PNOZ s4
+
+Exact Pilz manual `21396-EN` was inspected. It documents automatic start and monitored manual start/restart, optional feedback-loop monitoring using external switching elements K5/K6, RESET indication for 24 VDC at S34, OUT/Y32 status, explicit unexpected-restart warning for automatic/bridged-start behavior, and periodic output-opening proof-test requirements. The current Pilz product page lists manual revision `21396-23` dated 2026-06-22; indexed manual content from revisions 17/20 was used for the behavior above, so revision-sensitive numeric claims must be checked against 23 before freezing them.
 
 ### Pilz PNOZ X3
 
@@ -108,20 +119,22 @@ Do not award a PL/category/SIL answer from topology alone. The exercise is about
 - Diagnostics should say *which prerequisite is missing* (E-stop channel open, guard open, EDM mismatch, drive not safe, etc.) without exposing a bypass control.
 - If an HMI reset request is used, loss/reboot/stuck-state of the ordinary controller must not create safety authorization.
 - Safeguard wiring and connectors should make correct restoration easier than bypassing or leaving a channel defeated.
+- A software-originated reset request is much easier to justify when the external safety device requires a valid edge/pulse and independently checks input channels plus external-device feedback; a level-sensitive bridged reset that silently restarts after guard restoration is a materially different hazard.
 
 ## Remaining high-information work
 
-1. Fetch the exact current PNOZ X3 and PNOZ s4 manuals and extract channel/cross-short behavior, reset modes, EDM, response/recovery times, output ratings/fusing, PL/SIL restrictions and wiring examples.
-2. Trace the `zmrdko` on-screen PNOZ reset path through HAL and identify whether the safety relay itself performs monitored reset semantics.
-3. Find a third public LinuxCNC integration with **explicit STO wiring** (not merely an E-stop input) and preserve commissioning chronology.
-4. Turn the welded-contactor seed above into the first scored safety exercise after exact EDM manual evidence is captured.
-5. Build the first generic hazard -> hazardous event -> safety function -> safe state -> reset/restart -> validation teaching artifact. Do not assign performance level from a generic drawing.
+1. Fetch the exact current PNOZ X3 manual and current PNOZ s4 revision 23 numeric tables; finish channel/cross-short behavior, response/recovery times, output ratings/fusing, PL/SIL restrictions and wiring examples without transposing values between revisions/models.
+2. Find a third public LinuxCNC integration with **explicit drive STO wiring** (not merely an E-stop input) and preserve commissioning chronology.
+3. Turn the welded-contactor seed above into the first scored safety exercise using the now-confirmed PNOZ feedback-loop pattern.
+4. Build the first generic hazard -> hazardous event -> safety function -> safe state -> reset/restart -> validation teaching artifact. Do not assign performance level from a generic drawing.
+5. Revisit the zmrdko cabinet side only if a wiring drawing/photo/source becomes public; do not infer SSR03->S34 or STO wiring from HAL.
 
 ## Sources
 
 - GuiHue/myfenjalinuxcnc README and HAL, GitHub.
-- zmrdko/mesa_7i95t_config README/configuration, GitHub.
+- zmrdko/mesa_7i95t_config README and `hallib/02_io.hal`, pinned GitHub commit `94af1eb5b86127b314181fc5809d75f2d59526e8`.
 - Finngineering Maho MH600T CNC safety-circuit drafts, LinuxCNC forum attachments dated 2023-08-11 and 2023-08-24.
 - Omron G9SE specifications and Omron safety-relay reset FAQ.
 - Rockwell Automation Guardmaster/MSR product records.
+- Pilz PNOZ s4 operating manual 21396-EN and current product/manual index.
 - Pilz PNOZ X3 product/document page and operating-manual index.

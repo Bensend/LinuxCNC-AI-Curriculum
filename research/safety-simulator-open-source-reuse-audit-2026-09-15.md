@@ -1,7 +1,7 @@
 # Safety Simulator — Open-Source Reuse Research Project
 
 Date: 2026-09-15
-Status: ACTIVE RESEARCH
+Status: ACTIVE RESEARCH — DIGITALJS SYNCHRONOUS PROTOTYPE PATH FROZEN
 
 ## Question
 Can the Practical Machine Safety Engineering course build its proposed browser Safety Sandbox by adapting or embedding proven open-source circuit/PLC simulators instead of writing a general simulator from scratch?
@@ -21,7 +21,18 @@ SOURCE-CONFIRMED at DigitalJS commit `a77a6b3a916996e215e6c33c75ffe05dc6f55e3d`:
 - The base `Gate` owns explicit `inputSignals` and `outputSignals`, preprocesses arbitrary declared ports, resets each port to an unknown `Vector3vl`, and propagates output changes through graph-connected `Wire` objects. Ports carry IDs, bit widths and directions; therefore a custom multiport device can expose coil/control inputs and multiple contact outputs without changing the wire model.
 - Gate serialization is parameter-driven through `_gateParams`/`getGateParams()`, while wires serialize source/target device IDs and ports. A custom relay can preserve fault/configuration fields by adding them to its gate parameters rather than hiding lesson state outside the circuit model.
 - The synchronous engine listens for `inputSignals` changes and enqueues the affected gate at `tick + propagation`; at execution it calls `gate.operation(args)` and replaces `outputSignals`. It also provides monitors and tick alarms. This is enough for deterministic contact propagation and bounded discrepancy/rearm timing without analog coil simulation.
-- The default `Gate` is combinational. A relay model that needs retained physical/fault state must explicitly own model properties/state and trigger reevaluation when those properties change; merely encoding a welded contact as a Boolean input would blur commanded versus actual state. The source already demonstrates model-property-triggered enqueueing for stateful built-ins (`manualMemChange`, `constantCache`), so a custom fault-state event or engine hook is a plausible clean extension.
+
+### Custom-state reevaluation audit — resolved for V1
+
+SOURCE-CONFIRMED findings from `src/cells/base.mjs`, `src/cells/dff.mjs`, `src/circuit.mjs`, `src/engines/synch.mjs`, `src/engines/worker.mjs`, and `src/engines/worker-worker.mjs`:
+
+1. **State may live on a custom Gate object.** Stateful built-ins already retain non-signal state; for example `Dff` retains `last_clk` as an object member while its `operation()` can also read prior `outputSignals`. A custom relay can therefore retain mechanical state separately from coil input and contact outputs.
+2. **Serializable fault/configuration properties are natural.** `getGateParams()` serializes every field named in a cell's `_gateParams`. A relay cell can add fields such as `fault_power_welded_closed`, `fault_coil_open`, `fault_aux_stuck`, contact role metadata and initial mechanical state without a DigitalJS core serialization patch.
+3. **Synchronous engine has no generic `change:<custom-param> -> enqueue` listener.** `SynchEngine` explicitly enqueues on input changes plus the built-in `manualMemChange` and `constantCache` events. Merely calling `relay.set('fault_power_welded_closed', true)` will serialize the new value but does not, by itself, schedule `operation()`.
+4. **A custom cell can request reevaluation without a core patch by using the existing graph event seam.** The synchronous engine listens for graph-level `manualMemChange` and enqueues the gate argument. For the bounded V1, a relay method may set its fault property and then trigger a dedicated cell-level event that is bridged to the existing enqueue seam, or the Safety Sandbox may expose a tiny custom SynchEngine subclass that listens to `change:fault_*`/`change:mechanical_override` and calls the inherited `_enqueue(gate)`. This is an extension, not a modification of DigitalJS source.
+5. **Preferred V1 is a small custom synchronous engine subclass.** It makes fault reevaluation explicit and avoids abusing a memory-specific event name. The subclass should listen only to the Safety Sandbox's declared physical/fault properties, enqueue the changed gate once, and otherwise retain DigitalJS scheduling unchanged. This meets the no-core-patch criterion.
+6. **WorkerEngine is not the V1 target.** Although the UI-side WorkerEngine forwards supported `_gateParams` changes as `changeParam`, the worker-side `changeParam()` only sets the parameter; it does not enqueue the gate. More importantly, the worker reconstructs operations from `cells[gateParams.type].prototype`, i.e. its built-in imported namespace, so arbitrary `cellsNamespace` custom classes are not automatically available in the worker. Supporting custom safety cells there would require a worker extension/bundle path. The first Safety Sandbox does not need that complexity.
+7. **Synchronous `HeadlessCircuit` remains browser-capable.** The Safety Sandbox workload is small relay/state graphs, not a huge high-frequency digital design. Keeping the first prototype synchronous makes custom classes, deterministic single-step fault campaigns, monitors and alarms available with no worker changes.
 
 ### DigitalJS relay representation decision
 Working choice: **one multiport electromechanical device cell per physical relay/contactor**, not independent unlinked contact cells for V1.
@@ -34,42 +45,63 @@ Reasoning (INFERENCE from source + safety model):
 
 A later editor may offer linked remote contact symbols backed by one relay device ID if schematic readability demands it. Do not duplicate physical state across free-standing contacts.
 
-Assessment: **highest-priority browser-engine candidate.** Remaining uncertainty is primarily UI/editor ergonomics and the cleanest custom-state reevaluation hook, not basic representability.
+Assessment: **DigitalJS synchronous engine is suitable for the first bounded prototype without modifying DigitalJS core source.** The remaining implementation uncertainty is ordinary integration work, not a representability blocker.
 
 Sources: https://github.com/tilk/digitaljs and https://github.com/tilk/digitaljs_online
-Source traces: `src/circuit.mjs`, `src/cells/base.mjs`, `src/engines/synch.mjs` at the pinned commit above.
+Source traces at pinned commit: `src/circuit.mjs`, `src/cells/base.mjs`, `src/cells/dff.mjs`, `src/engines/synch.mjs`, `src/engines/worker.mjs`, `src/engines/worker-worker.mjs`.
 
 ## Candidate B — PLC_Simulator (ironhero1544)
 
-SOURCE-CONFIRMED at repository tree commit `66489904882f6d05c275a6762cebb00010eb2838`:
+SOURCE-CONFIRMED at repository commit `66489904882f6d05c275a6762cebb00010eb2838`:
 - GPL-3.0 C++20 desktop simulator with separate source areas for components, wiring, physics, programming and application layers.
 - `src/components/emergency_stop_def.cpp` defines an E-stop as a registered component with four electrical ports labelled `NC_1`, `NC_2`, `NO_1`, `NO_2`, its own render function and default internal state. This is a useful precedent for a component owning multiple physical contacts rather than treating the E-stop as a single Boolean.
 - `component_behavior.cpp` separates user interaction from component definition/state: a double-click emits `ToggleEmergencyStop`, and the command application layer changes the component's internal E-stop state. That command/state separation is worth copying conceptually for fault injection: UI action should request a fault/state change, while the simulator owns resulting contact behavior.
-- The wiring subsystem is substantial and separate (`src/wiring/application_wiring.cpp` ~175 kB), reinforcing that directly porting this desktop UI would be a large project. The component model is a better architectural study target than wholesale reuse for a static browser course.
+- `physics_electrical.cpp` rebuilds dynamic electrical connectivity from component-owned physical state. For `EMERGENCY_STOP`, released state unites the two NC ports while pressed state instead unites the two NO ports. This is a strong source-confirmed precedent for modeling a physical contact as topology/continuity, not merely as a displayed Boolean label.
+- The electrical solver separates fixed wiring topology from state-dependent component connectivity and then derives net voltage. That architecture is more physical than DigitalJS's directional signal graph, but port/net machinery is much larger than V1 needs.
 - No source-confirmed relay/contact fault model was found in this pass. Do not infer welded-contact/EDM capability merely from the README's component list.
 
 Assessment: **high-value architecture/component-behavior reference, lower-priority direct web foundation.** GPL plus C++/ImGui makes direct reuse a larger commitment; use its component/state/wiring separation as design evidence, not as copied implementation unless GPL distribution is intentionally accepted.
 
 Source: https://github.com/ironhero1544/PLC_Simulator
 
-## Candidate C — CircuitJS1
-SOURCE-CONFIRMED public README: browser electronic circuit simulator, GWT adaptation of Falstad's simulator, embedding/import/export support, GPL-2.0-or-later.
+## Reuse decision matrix
 
-Assessment: reference/fallback, not preferred starting point. It solves analog/electrical equations beyond the Safety Sandbox requirement.
+| Criterion | DigitalJS synchronous | DigitalJS WorkerEngine | PLC_Simulator | Tiny purpose-built engine |
+|---|---|---|---|---|
+| License fit | Strong, BSD-2-Clause | Strong, BSD-2-Clause | GPL-3.0 obligations | Project-owned |
+| Browser fit | Strong | Strong | Weak/direct port large | Strong if written for web |
+| Custom multiport physical block | SOURCE-CONFIRMED | Worker custom namespace gap | SOURCE-CONFIRMED component pattern | Must build |
+| Independent retained physical/fault state | SOURCE-CONFIRMED pattern + small subclass seam | Param transport exists but custom operation loading is awkward | SOURCE-CONFIRMED component-owned state pattern | Must build |
+| Fault-state reevaluation | Small custom engine subclass, no core patch | Worker changes required for clean custom-cell path | Would require project-specific extension | Must build |
+| Serialization | SOURCE-CONFIRMED `_gateParams` + connectors | Same UI-side model | Existing project-specific state | Must build |
+| Wiring/editor foundation | Existing | Existing | Mature desktop wiring, not web | Must build |
+| Deterministic fault campaign | Strong synchronous tick/monitor/alarm path | Strong but unnecessary complexity | Possible, larger integration | Must build |
+| Machine-physics extensibility | Separate state abstraction recommended | Same | Existing electrical/pneumatic/physics ideas | Fully controllable |
+| V1 maintenance burden | Lowest | Medium/high | High | Medium/high |
 
-## Architecture freeze for SIM-REUSE-01
+**Decision:** prototype on **DigitalJS `HeadlessCircuit` + a Safety Sandbox custom synchronous engine subclass + custom relay/contactor cells**. Keep PLC_Simulator as a source/proven-pattern reference. Do not fork DigitalJS core for V1. Do not build a new general wiring engine unless the bounded prototype exposes a concrete limitation.
+
+## Frozen V1 relay/contactor contract
+
+One physical `SafetyRelayContactDevice` owns:
+- input port `coil_cmd`;
+- output/status ports sufficient for the bounded lesson: `main_a_actual`, `main_b_actual`, `aux_nc_actual`, `mechanical_operated`;
+- serialized properties `initial_mechanical_state`, `fault_coil_open`, `fault_main_a_welded_closed`, `fault_main_b_welded_closed`, `fault_aux_nc_stuck_closed`, and explicit feedback/contact-role metadata;
+- retained runtime mechanical state separate from input command;
+- `operation()` computes actual contact continuity from coil command + mechanical state + persistent per-contact fault overrides.
+
+For V1, output ports represent **actual continuity/status facts** consumed by the lesson graph; they are not yet a general bidirectional electrical-net solver. The hazardous-energy model consumes the two interruption-path facts explicitly. A later version may add remote contact symbols or net-continuity semantics if teaching value justifies them.
+
+Fault mutation API requirement:
+- `setFault(name, value)` changes only a declared fault property;
+- the custom synchronous engine observes those property changes and enqueues that physical device;
+- no fault setter may directly force downstream outputs, because that would bypass the physical-device model being taught.
+
+## SIM-REUSE-01 — frozen bounded prototype plan
+
 The first model is deliberately a **state/fault reasoning experiment**, not a general safety simulator.
 
-Physical relay/contactor object:
-- `coil_command`
-- `mechanical_state`
-- `power_contact_actual`
-- `aux_nc_actual`
-- `fault_power_welded_closed`
-- `fault_coil_open`
-- `fault_aux_stuck`
-
-System/monitor object:
+System/monitor state:
 - `safety_authorization`
 - `hazardous_energy_path`
 - `reset_request`
@@ -84,24 +116,28 @@ Required causal separation:
 5. EDM may inhibit the next rearm but is not retroactive proof that hazardous energy was removed;
 6. LinuxCNC/ordinary-control frozen asserted is an external request fault, not safety authority.
 
-### Minimal scenario sequence
+Minimal scenario sequence:
 A. healthy start -> relay picks up -> power contact conducts -> auxiliary NC opens.
 B. stop request -> coil command OFF -> relay releases -> power contact opens -> auxiliary NC closes -> EDM healthy.
-C. inject `POWER_CONTACT_WELDED_CLOSED`; repeat stop -> coil/mechanical state releases but hazardous-energy path remains conducting.
-D. EDM/rearm logic must inhibit the next authorization when feedback/model indicates the output device did not return to the required state. If the chosen auxiliary contact cannot reveal the welded power pole, the simulator must show that diagnostic limitation rather than magically detect the weld.
-E. inject auxiliary-feedback stuck/misreporting and demonstrate why diagnostic evidence is not equivalent to direct proof of every power pole.
+C. inject `fault_main_a_welded_closed`; repeat stop -> coil/mechanical state releases but that pole remains conducting.
+D. two independent interruption devices in series must still remove the modeled hazardous authority when only one pole is welded, while the fault remains latent or detectable according to the selected feedback model.
+E. attempted rearm is inhibited only when the modeled EDM witness actually detects the failed return state.
+F. inject auxiliary feedback stuck/misreporting and demonstrate why diagnostic evidence is not equivalent to direct proof of every power pole.
+G. loss/restoration of control power must not silently regrant hazardous authority; explicit rearm remains required.
 
-This last distinction is important: the simulator must not teach that an auxiliary contact universally proves a main contact physically opened. Real force-guided/mirror-contact assumptions belong to the selected device's documented behavior.
+### Predeclared prototype prediction
+If the custom synchronous engine enqueues a relay on fault-property mutation, DigitalJS should deterministically propagate the changed actual-contact outputs through the bounded graph without any DigitalJS core modification. A welded main-contact property should survive command OFF and serialization, while the unaffected second interruption path still removes the modeled hazardous authority. EDM behavior will differ depending on whether the selected feedback model is explicitly linked to the failed main contact.
 
-## Pass/fail gate before prototype
-DigitalJS is considered suitable for the first prototype if a custom cell can, without patching core source:
-- declare coil/control input plus at least two contact/status outputs;
-- retain explicit fault/mechanical state across ticks;
-- reevaluate when a fault toggle changes;
-- serialize those custom properties;
-- run the A-E sequence deterministically.
+Falsifier: if a custom cell cannot retain/serialize its fault state while being reevaluated by the subclassed synchronous engine, or if the directional signal model cannot express the bounded actual-continuity facts without bypassing the physical model, reassess against a tiny purpose-built engine before further implementation.
 
-If the only blocker is graphical remote-contact placement, proceed with a compact relay block first. If core state semantics require invasive modification, compare against a tiny independent state engine before committing to a fork.
+## EDM / feedback teaching boundary
+
+The simulator must distinguish at least three educational feedback cases:
+1. **ordinary auxiliary contact** — reports its own modeled state only; do not infer main-pole position;
+2. **documented mechanically linked / mirror-contact model** — may support a defined relationship only when the lesson explicitly states the device assumption and source;
+3. **failed feedback path** — the diagnostic witness itself can stick/open/misreport and must be fault-injectable.
+
+Therefore the fault campaign reports two independent questions: **was hazardous authority actually removed?** and **did the diagnostic architecture know enough to permit or inhibit rearm?** Never collapse these into one `safe=true` flag.
 
 ## Machine-family reuse target
 Reuse the same component/fault model across mill/router spindle energy, lathe examples, plasma motion versus process-energy authority, robot/cell gate and STO examples, and press-brake hydraulic/gravity examples where electrical de-energization explicitly does not prove removal of physical hazard. Machine physics may initially be state abstractions.
@@ -110,6 +146,4 @@ Reuse the same component/fault model across mill/router spindle energy, lathe ex
 Before copying source rather than studying architecture, record exact license consequences. Prefer permissive reusable foundations where capability is comparable. GPL projects remain valuable references and may be usable if the project intentionally accepts their distribution obligations. Never copy LunchBox Sessions implementation/content; use only the general teaching pattern independently.
 
 ## Current recommendation
-**Proceed toward a tiny DigitalJS custom-cell prototype, but first source-confirm the custom property/state reevaluation hook.** PLC_Simulator has already contributed a useful architectural lesson: multi-contact physical components and UI-command/state separation are proven simulator patterns, while its large desktop wiring layer argues against direct porting for our V1.
-
-No compute was used or justified in this source-audit pass. Any later executable experiment must use only `[self-hosted, openpressbrake]` if repository compute is required.
+**The source gate is passed for a bounded DigitalJS synchronous prototype.** The prototype is now justified only to verify the custom-cell integration seam and causal lesson, not to prove ordinary Boolean logic. Any executable workflow must target only `[self-hosted, openpressbrake]`; do not dispatch hosted compute. If runner access is unavailable, continue manufacturer/standards EDM evidence and prototype specification work instead.

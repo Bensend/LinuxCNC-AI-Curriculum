@@ -7,105 +7,64 @@ Repository artifacts, not chat history, are authoritative. Detailed history rema
 ## Closed prerequisite levels
 
 - **1000 series:** GRADUATED / CLOSED.
-- **2000 series:** GRADUATED / CLOSED as of 2026-09-14.
-- F02 is GRADUATED. Valid information-separated evaluation: `evaluation/F02-fresh-ai-evaluation-2026-09-14-valid.md` — PASS, no corrections required.
-- Final 2000 closeout: `evaluation/2000-series-closeout-state-2026-09-11.md` finalized 2026-09-14.
+- **2000 series:** GRADUATED / CLOSED as of 2026-09-14. F02 GRADUATED; valid evaluator `evaluation/F02-fresh-ai-evaluation-2026-09-14-valid.md`; closeout `evaluation/2000-series-closeout-state-2026-09-11.md` finalized 2026-09-14.
 - **3000 series:** GRADUATED / CLOSED as of 2026-09-15 after formal promotion/playbook-completeness review. Closeout: `evaluation/3000-series-promotion-closeout-2026-09-15.md`.
 
-Do not routinely reopen closed levels without a genuinely new material defect. 3000 checkpoints remain reopen maps for materially stronger machine-specific evidence.
+Do not routinely reopen closed levels without a genuinely new material defect.
 
 ## Active curriculum level
 
 **4000 — hardware and AI-assisted implementation.**
 
-Active checkpoint: `checkpoints/4000-next-2026-09-15c.md`.
+Active checkpoint: `checkpoints/4000-next-2026-09-15e.md`.
 
-## 4000 foundation and core state
+## 4000 foundation/core
 
-Completed durable foundation:
+Durable foundation includes `hardware/BLOCK_SPEC_TEMPLATE.md`, `hardware/4000-block-map.md`, Colorlight core research/copy-adapt contract, firmware/watchdog comparisons and LiteX-CNC output audit.
 
-- `hardware/BLOCK_SPEC_TEMPLATE.md` — canonical block authority/electrical/failure/recovery/verification contract.
-- `hardware/4000-block-map.md` — reusable controller block map.
-- `research/4000-colorlight-core-baseline-first-pass-2026-09-15.md` — Colorlight core baseline.
-- `research/4000-colorlight-linuxcnc-firmware-watchdog-first-pass-2026-09-15.md` — Lcnc/ColorCNC watchdog/enable trace.
-- `research/4000-litexcnc-watchdog-output-gating-trace-2026-09-15.md` — initial LiteX-CNC watchdog/PWM trace.
-- `research/4000-hostmot2-watchdog-recovery-first-pass-2026-09-15.md` — HostMot2 bite/rearm/reconstruction trace.
-- `research/4000-firmware-protocol-comparison-2026-09-15.md` — HostMot2 vs Lcnc/ColorCNC vs LiteX-CNC architecture comparison.
-- `research/4000-litexcnc-output-watchdog-audit-2026-09-15.md` — GPIO/PWM/stepgen watchdog/reset audit.
-- `hardware/4000-colorlight-core-copy-adapt-contract.md` — explicit Colorlight V8 core copy/adapt/omit contract.
+Working firmware baseline: **LiteX-CNC**, with HostMot2/hm2_eth as maturity/fallback reference. Required hardening remains failed-read VALID/FRESH handling, command/feedback generation witness, final-hardware transport measurement and global FPGA watchdog consumption by every custom actuator module.
 
-### Working firmware selection
+Core working freeze: Colorlight 5A-75B V8-class ECP5/Ethernet copy/adapt reference; one GbE PHY; no SDRAM unless justified; ECP5-25 BG256-class core; SPI NOR + JTAG/sysCONFIG; dedicated oscillator; 1.1/3.3-V FPGA rails; protected machine-power entry; USB-C service/debug only; no HUB75 field front end.
 
-**LiteX-CNC is the preferred working baseline**, not yet an irreversible freeze. HostMot2/`hm2_eth` remains the maturity/reference standard and fallback; Lcnc/ColorCNC remains the minimal known-working Colorlight reference.
+Frozen rule: FPGA-local command-freshness watchdog independently removes normal output authority and requires explicit recovery/rearm. This is fault containment, not safety-rated authority.
 
-Required hardening before final freeze:
-1. failed-read VALID/FRESH handling;
-2. command/feedback generation or equivalent freshness witness;
-3. real transport latency/jitter/dropout/watchdog measurement on final hardware;
-4. every custom actuator module consumes global FPGA watchdog/output authority.
+## 4300 reusable I/O blocks
 
-### Core hardware working freeze
+### Encoder — working contract
+`hardware/4300-encoder-input-block.md`: four differential A/B/Z channels; AM26LV32E-class receivers; configurable 120-ohm termination; differential-only base connector; connector-edge protection; 10-MHz working transition contract; index/illegal-transition/transport freshness diagnostics separated.
 
-Primary copy/adapt reference remains Colorlight 5A-75B V8-class ECP5/Ethernet architecture.
+### Digital field I/O — working contract
+`hardware/4300-digital-field-io-block.md`: 24 isolated 24-V inputs using ISO1212-class receivers; 16 protected sourcing outputs using TPS4H160-Q1-class smart switches; default-LOW isolation; watchdog gate before isolation barrier. Exact resistor/isolation/DC-DC/thermal/fusing work remains.
 
-Working decisions:
-- one Gigabit Ethernet PHY;
-- no SDRAM unless required;
-- ECP5-25 BG256-class core with SPI NOR + JTAG/sysCONFIG;
-- dedicated oscillator rather than PHY-owned FPGA clock;
-- required 1.1-V and 3.3-V rails only;
-- separate protected machine-power entry;
-- USB-C service/program/debug only;
-- no copied HUB75/74HC245 machine-I/O front end.
+### STEP/DIR — working contract
+`hardware/4300-stepdir-output-block.md`: six axes; 5-V differential STEP/DIR; 10-MHz working maximum; MAX3042B-class transmitters; single-ended compatibility where drive supports one polarity; watchdog forces STEP static inactive before line driver; explicit rearm; enable/fault/STO separate.
 
-Frozen cross-firmware requirement: an FPGA-local command-freshness watchdog SHALL independently remove normal machine-facing output authority, expose diagnostic fault state, and require explicit recovery/rearm rather than automatically restoring stale outputs when communications return. This is fault containment, not safety-rated authority.
+### PWM / analog — working contract
+Artifacts: `research/4000-pwm-analog-interface-first-pass-2026-09-15.md`, `research/4000-analog-output-source-trace-2026-09-15.md`, `hardware/4300-pwm-analog-output-block.md`.
 
-## 4300 reusable I/O block progress
+Freeze at interface level:
+- >=4 watchdog-gated PWM/PDM resources;
+- 1–2 isolated VFD potentiometer-replacement analog channels on base board, 10–20-kHz PWM working target and deterministic minimum-command startup/watchdog state;
+- precision +/-10-V servo output stays daughterboard/variant using a dedicated precision conversion path and independent enable/zeroing contract.
 
-### Encoder block — working schematic contract created
+Public evidence did not expose Mesa's internal board-level 7I96S/7I77 analog circuitry; do not manufacture an internal topology from the manuals.
 
-Artifacts:
-- `research/4000-encoder-electrical-reference-and-receiver-selection-2026-09-15.md`
-- `hardware/4300-encoder-input-block.md`
+### Proportional-current / solenoid — RESEARCH started
+Artifact: `research/4000-proportional-solenoid-driver-reference-pass-2026-09-15.md`.
 
-Working baseline:
-- four differential A/B/Z channels;
-- AM26LV32E-class 3.3-V RS-422 receivers;
-- configurable 120-ohm termination;
-- differential-only base connector;
-- connector-edge low-capacitance protection + deliberate signal-common/shield/chassis strategy;
-- 10-MHz transition-rate contract pending final PCB/FPGA integration proof;
-- index, illegal-transition and transport generation/VALID/FRESH diagnostics kept separate.
+Primary proportional reference is TI TIDA-020023: PWM proportional-solenoid drive plus accurate high-side current measurement. DRV110/TIDA-00289 are adjacent peak/hold and fault-detection references, not the continuously variable baseline.
 
-Single-ended and galvanically isolated encoder support remain external variants/adapters unless real machine inventory justifies base-board complexity.
+Working architecture: 24-V-class coil, low-side N-MOSFET switching, engineered recirculation/clamp, measured current feedback, current setpoint as the command variable. Current request, gate/PWM, measured current, electrical fault, spool/hydraulic response and safety authority remain distinct. Present measured 22–28-ohm coils imply roughly 0.86–1.09 A at 24 V before control/thermal effects; design the light-duty baseline first and parameterize upward rather than defaulting to the previous 250-V MOSFET.
 
-### Digital field I/O — working schematic contract created
+## Exact next work
 
-Artifacts:
-- `research/4000-digital-field-io-first-pass-2026-09-15.md`
-- `research/4000-digital-input-receiver-selection-2026-09-15.md`
-- `research/4000-digital-output-driver-selection-2026-09-15.md`
-- `research/4000-digital-output-isolation-architecture-2026-09-15.md`
-- `hardware/4300-digital-field-io-block.md`
-
-Working baseline:
-- 24 isolated 24-V inputs using ISO1212-class IEC 61131-2 digital-input receivers;
-- source/sink configurable field wiring;
-- 16 protected sourcing/high-side outputs using TPS4H160-Q1-class smart switches;
-- default-LOW digital isolation between FPGA and output field domain;
-- watchdog/output-authority gating occurs before the isolation barrier;
-- electrical driver fault is distinct from physical actuator witness;
-- ordinary robust I/O only, no safety-rated claim.
-
-Open before schematic/PCB freeze: exact input resistor networks, output isolator/DC-DC, current-limit/thermal/clamp calculations, connectors/fusing and field-side supply-loss truth table.
-
-## 4000 exact next work
-
-1. **Step/dir output block** — inspect proven Mesa/Colorlight/open CNC differential driver circuits; freeze channel count, electrical standard, maximum rate, single-ended compatibility and watchdog behavior.
-2. Then PWM/analog interfaces, explicitly separating raw PWM/PDM from filtered 0-10-V and +/-10-V interfaces.
-3. Then the parameterized proportional-current/solenoid block.
-4. In parallel, finish exact current-production PHY, oscillator and regulator selections for the core after datasheet/reference-design review.
-5. Before freezing each block, inspect applicable open electronics/PCB/FPGA/KiCad skills as design-review aids subordinate to datasheets, schematics, calculations and measured evidence.
+1. Calculate current, switching/clamp energy and dissipation bounds for the 24-V / 22–28-ohm present coil class.
+2. Select a modern MOSFET from SOA/avalanche/transient evidence, likely 40–60-V class unless clamp strategy justifies more margin.
+3. Select shunt/current-sense architecture and compare high-side PWM-rejecting sensing with low-side simplicity.
+4. Freeze freewheel/TVS/active-clamp decay behavior from valve response and device-stress requirements.
+5. Decide FPGA+ADC versus local analog/current-controller loop partition and write the first schematic-level proportional-current block.
+6. Only then simulate/bench a remaining nontrivial loop/stress uncertainty.
+7. Parallel BOM work remains for exact VFD analog isolation parts, precision +/-10-V daughterboard DAC/op-amp, core PHY/oscillator/regulators and DIO thermal/fusing.
 
 ## Laboratory compute checkpoint
 
@@ -113,4 +72,4 @@ Open before schematic/PCB freeze: exact input resistor networks, output isolator
 
 ## Global next-work rule
 
-Continue 4000 from `checkpoints/4000-next-2026-09-15c.md`. Prefer proven topology and standard engineering over unnecessary simulation. Preserve the 3000 authority/recovery contract in every hardware block.
+Continue 4000 from `checkpoints/4000-next-2026-09-15e.md`. Prefer proven topology and standard engineering over unnecessary simulation. Preserve the 3000 authority/recovery contract in every hardware block.

@@ -16,7 +16,7 @@ Do not routinely reopen closed levels without a genuinely new material defect.
 
 **4000 — hardware and AI-assisted implementation.**
 
-Active checkpoint: `checkpoints/4000-next-2026-09-15e.md`.
+Active checkpoint: `checkpoints/4000-next-2026-09-15f.md`.
 
 ## 4000 foundation/core
 
@@ -49,22 +49,23 @@ Freeze at interface level:
 
 Public evidence did not expose Mesa's internal board-level 7I96S/7I77 analog circuitry; do not manufacture an internal topology from the manuals.
 
-### Proportional-current / solenoid — RESEARCH started
-Artifact: `research/4000-proportional-solenoid-driver-reference-pass-2026-09-15.md`.
+### Proportional-current / solenoid — working schematic contract
+Artifacts: `research/4000-proportional-solenoid-driver-reference-pass-2026-09-15.md`, `research/4000-proportional-solenoid-electrical-sizing-2026-09-15.md`, `research/4000-proportional-current-adc-partition-2026-09-15.md`, `hardware/4300-proportional-current-driver-block.md`.
 
-Primary proportional reference is TI TIDA-020023: PWM proportional-solenoid drive plus accurate high-side current measurement. DRV110/TIDA-00289 are adjacent peak/hold and fault-detection references, not the continuously variable baseline.
+Present measured 22–28-ohm / 24-V coils imply roughly 0.86–1.09 A DC. First light-duty variant uses a 1.5-A engineering ceiling pending hot-coil measurements. Working architecture: low-side 80-V-class N-MOSFET, engineered fast-decay clamp, 50-milliohm high-side Kelvin shunt + INA240A1-class PWM-rejecting current sense, ADS7953-class shared SAR ADC, FPGA-local fresh-sample current loop and independent hardware overcurrent gate inhibit.
 
-Working architecture: 24-V-class coil, low-side N-MOSFET switching, engineered recirculation/clamp, measured current feedback, current setpoint as the command variable. Current request, gate/PWM, measured current, electrical fault, spool/hydraulic response and safety authority remain distinct. Present measured 22–28-ohm coils imply roughly 0.86–1.09 A at 24 V before control/thermal effects; design the light-duty baseline first and parameterize upward rather than defaulting to the previous 250-V MOSFET.
+Current request, PWM/gate state, measured current, electrical fault, spool/hydraulic response, ram motion and safety authority remain separate. Watchdog or stale current feedback removes gate authority and requires explicit rearm; stale loop integrator state must not survive rearm.
+
+Clamp voltage, final MOSFET, PWM frequency and loop gains are intentionally not frozen because coil inductance and desired current fall/rise behavior are not yet authoritative. Magnetic energy remains E=0.5*L*I^2. No 250-V MOSFET is presently justified.
 
 ## Exact next work
 
-1. Calculate current, switching/clamp energy and dissipation bounds for the 24-V / 22–28-ohm present coil class.
-2. Select a modern MOSFET from SOA/avalanche/transient evidence, likely 40–60-V class unless clamp strategy justifies more margin.
-3. Select shunt/current-sense architecture and compare high-side PWM-rejecting sensing with low-side simplicity.
-4. Freeze freewheel/TVS/active-clamp decay behavior from valve response and device-stress requirements.
-5. Decide FPGA+ADC versus local analog/current-controller loop partition and write the first schematic-level proportional-current block.
-6. Only then simulate/bench a remaining nontrivial loop/stress uncertainty.
-7. Parallel BOM work remains for exact VFD analog isolation parts, precision +/-10-V daughterboard DAC/op-amp, core PHY/oscillator/regulators and DIO thermal/fusing.
+1. Write/validate a practical coil characterization procedure for R, L and current rise/fall; measurements now have higher information gain than simulation.
+2. Select gate driver plus independent overcurrent comparator/latch with deterministic OFF at startup/watchdog.
+3. Define 24-V rail maximum/transient bound, then select the clamp family/voltage from measured L and desired current fall time.
+4. Reconcile proportional-current channel count/base-board packaging and produce a KiCad/schematic-AI-ready interface/net specification.
+5. Only then simulate/bench remaining nontrivial loop stability, clamp overshoot/energy, current-sense aperture or watchdog/rearm uncertainty.
+6. Parallel BOM work remains for exact VFD analog isolation parts, precision +/-10-V daughterboard DAC/op-amp, core PHY/oscillator/regulators and DIO thermal/fusing.
 
 ## Laboratory compute checkpoint
 
@@ -72,4 +73,4 @@ Working architecture: 24-V-class coil, low-side N-MOSFET switching, engineered r
 
 ## Global next-work rule
 
-Continue 4000 from `checkpoints/4000-next-2026-09-15e.md`. Prefer proven topology and standard engineering over unnecessary simulation. Preserve the 3000 authority/recovery contract in every hardware block.
+Continue 4000 from `checkpoints/4000-next-2026-09-15f.md`. Prefer proven topology and standard engineering over unnecessary simulation. Preserve the 3000 authority/recovery contract in every hardware block.

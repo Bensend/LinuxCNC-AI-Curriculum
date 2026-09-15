@@ -15,9 +15,9 @@ Do not reopen or repoll closed 2000 work unless a genuinely new material defect 
 
 ## Active curriculum level
 
-**3000 — machine-specific specialization. Current active branch: 3900 — Emerging / Unusual Machines.**
+**3000 — machine-specific specialization. 3900 has reached a bounded breadth stop and is ready for branch rotation.**
 
-Latest active checkpoint: `checkpoints/3900-next-2026-09-15b.md`.
+Latest 3900 checkpoint: `checkpoints/3900-next-2026-09-15c.md`.
 
 3100 reached a clean breadth stop after real ATC, probing/tool-setting, VFD/readiness and auxiliary-authority work. 3200, 3300, 3400, 3500, 3700 and 3800 remain open/paused; 3600 retains its documented information-gain stop. Branch-local stops do not imply graduation.
 
@@ -57,23 +57,28 @@ Status: **OPEN / PAUSED at bounded breadth stop**. Checkpoint: `checkpoints/3800
 
 ## 3900 — Emerging / Unusual Machines
 
-Status: **ACTIVE / BREADTH + ADDITIVE AUTHORITY PASS**.
+Status: **OPEN / PAUSED at bounded breadth stop**.
 
-Authoritative artifacts:
+Authoritative artifacts now include:
 
 - `research/3900-emerging-unusual-breadth-additive-first-pass-2026-09-15.md`
-- `checkpoints/3900-next-2026-09-15b.md`
+- `research/3900-remora-additive-second-implementation-authority-audit-2026-09-15.md`
+- `research/3900-winding-rotary-synchronization-bounded-survey-2026-09-15.md`
+- `research/3900-genhexkins-convergence-failure-authority-trace-2026-09-15.md`
+- `checkpoints/3900-next-2026-09-15c.md`
 
 Preserved conclusions:
 
-- Additive/extrusion is the first selected unusual class because it adds thermal/process authority rather than duplicating 3500 robot kinematics.
-- Inspectable LinuxCNC-RepRap uses coordinated LinuxCNC motion plus a fourth stepgen for extrusion/feed and custom realtime thermistor acquisition.
-- `ADC2Temp` updates its visible temperature only when `NewValue` toggles; no separate sample-age/freshness or thermistor-health witness was found in the inspected path.
-- Heater authority in the inspected HAL is a hysteresis comparator driving a heater output; no production thermal-runaway/failure-to-heat/max-temperature/freshness contract was found.
-- Durable rule: **temperature value != fresh/valid temperature != heater authority != extrusion-ready**.
-- Native `genhexkins` remains a later unusual-machine target, but future work should focus on convergence/failure/switching authority rather than duplicate 3500 serial-robot IK work.
+- LinuxCNC-RepRap and Remora provide two materially different inspectable additive architectures.
+- Remora uses coordinated A/joint-4 extrusion, remote-MCU thermistor/PWM endpoints, LinuxCNC PID, and communication status tied into machine enable.
+- Remora's temperature path updates at 1 Hz and provides a limited PV=999 sensor-error sentinel, but no complete freshness/runaway/failure-to-heat/thermal-readiness contract was found.
+- Durable additive rule: **temperature scalar != fresh/valid temperature != heater authority != thermal readiness != extrusion/material-flow correctness**.
+- Coordinated extrusion proves geometric coupling, not deposited-material correctness.
+- Public LinuxCNC winding evidence supports coordinated rotary/traverse geometry, but production tension/material-break/restart authority remains source-thin. Preserve **rotary/traverse coordination != winding-process correctness**.
+- Native `genhexkins` forward kinematics is iterative and seed/nearby-solution dependent; convergence/failure is observable, but numerical convergence does not prove intended physical assembly branch or safe mechanical workspace.
+- On a hexapod, ordinary-looking tool-offset changes can create physical joint transitions; source warns against G43/G49 changes while tilted.
 
-Next: find a stronger second real additive/hybrid implementation and compare readiness/fault/recovery authority. If source is exhausted, rotate within 3900 to winding/rotary synchronization or a bounded genhexkins convergence/failure trace.
+3900 should not be over-mined. Reopen only when stronger production additive/winding/parallel-kinematics evidence appears or another unusual class offers clearly higher transfer value.
 
 ## Laboratory compute checkpoint
 
@@ -81,4 +86,4 @@ Next: find a stronger second real additive/hybrid implementation and compare rea
 
 ## Global next-work rule
 
-Continue from `checkpoints/3900-next-2026-09-15b.md`. Prefer real source/config evidence. Run a lab only for a concrete nonduplicate uncertainty exposed by a real implementation; rotate branches on information-gain stops rather than repeating searches.
+Rotate from `checkpoints/3900-next-2026-09-15c.md` to the highest-information open 3000 branch. Prefer real source/config evidence. Run a lab only for a concrete nonduplicate uncertainty exposed by a real implementation; rotate branches on information-gain stops rather than repeating searches.

@@ -16,7 +16,7 @@ Do not routinely reopen closed levels without a genuinely new material defect.
 
 **4000 — hardware and AI-assisted implementation.**
 
-Active checkpoint: `checkpoints/4000-next-2026-09-15g.md`.
+Active checkpoint: `checkpoints/4000-next-2026-09-15h.md`.
 
 ## 4000 foundation/core
 
@@ -26,6 +26,8 @@ Working firmware baseline: **LiteX-CNC**, with HostMot2/hm2_eth as maturity/fall
 
 Core working freeze: Colorlight 5A-75B V8-class ECP5/Ethernet copy/adapt reference; one GbE PHY; no SDRAM unless justified; ECP5-25 BG256-class core; SPI NOR + JTAG/sysCONFIG; dedicated oscillator; 1.1/3.3-V FPGA rails; protected machine-power entry; USB-C service/debug only; no HUB75 field front end.
 
+New BOM freeze: `research/4000-core-phy-clock-power-bom-2026-09-15.md`. Working PHY is RTL8211FI-CG-class industrial RGMII; dedicated 25.000-MHz 3.3-V reference clock; PHY reset must not own FPGA clock availability. Exact 1.1/3.3-V regulator MPNs wait for whole-board load calculation.
+
 Frozen rule: FPGA-local command-freshness watchdog independently removes normal output authority and requires explicit recovery/rearm. This is fault containment, not safety-rated authority.
 
 ## 4300 reusable I/O blocks
@@ -34,7 +36,9 @@ Frozen rule: FPGA-local command-freshness watchdog independently removes normal 
 `hardware/4300-encoder-input-block.md`: four differential A/B/Z channels; AM26LV32E-class receivers; configurable 120-ohm termination; differential-only base connector; connector-edge protection; 10-MHz working transition contract; index/illegal-transition/transport freshness diagnostics separated.
 
 ### Digital field I/O — working contract
-`hardware/4300-digital-field-io-block.md`: 24 isolated 24-V inputs using ISO1212-class receivers; 16 protected sourcing outputs using TPS4H160-Q1-class smart switches; default-LOW isolation; watchdog gate before isolation barrier. Exact resistor/isolation/DC-DC/thermal/fusing work remains.
+`hardware/4300-digital-field-io-block.md`: 24 isolated 24-V inputs using ISO1212-class receivers; 16 protected sourcing outputs using TPS4H160-Q1-class smart switches; default-LOW isolation; watchdog gate before isolation barrier.
+
+Power/protection freeze: `research/4000-dio-power-fusing-freeze-2026-09-15.md`. Default input personality is low-power IEC Type-3; general outputs use a 0.5-A/channel working limit; four 4-output field-power groups use a 2-A working group-protection target; output isolation power is split into two 8-output banks. Exact resistor, DC/DC and fuse MPN/curve values remain calculation/procurement-bound.
 
 ### STEP/DIR — working contract
 `hardware/4300-stepdir-output-block.md`: six axes; 5-V differential STEP/DIR; 10-MHz working maximum; MAX3042B-class transmitters; single-ended compatibility where drive supports one polarity; watchdog forces STEP static inactive before line driver; explicit rearm; enable/fault/STO separate.
@@ -62,11 +66,12 @@ Current request, PWM/gate state, measured current, electrical fault, spool/hydra
 
 ## Exact next work
 
-1. While coil/rail physical data is unavailable, freeze exact core PHY/oscillator/regulator candidates from the Colorlight copy/adapt contract.
-2. Close DIO isolation/DC-DC/thermal/fusing and exact VFD analog isolation/conversion parts.
-3. When physical coil data arrives, calculate clamp energy/decay/repetition/VDS margin before any simulation.
-4. Assemble the first whole-board schematic-AI/KiCad package from the frozen block contracts.
-5. Use labs only for nontrivial residual loop stability, clamp overshoot/energy, current-sense aperture or watchdog/rearm uncertainty.
+1. Freeze exact VFD analog isolation/conversion circuit and parts with deterministic minimum/zero watchdog behavior.
+2. Build whole-board 3.3-V/1.1-V/isolated-logic power budget; then select exact regulators/DC-DC parts.
+3. Reconcile FPGA bank/pin budget across RGMII, encoder, STEP/DIR, DIO, PWM, proportional-current and service interfaces.
+4. When physical coil data arrives, calculate clamp energy/decay/repetition/VDS margin before any simulation.
+5. Assemble the first whole-board schematic-AI/KiCad package from the frozen block contracts.
+6. Use labs only for nontrivial residual loop stability, clamp overshoot/energy, current-sense aperture or watchdog/rearm uncertainty.
 
 ## Laboratory compute checkpoint
 
@@ -74,4 +79,4 @@ Current request, PWM/gate state, measured current, electrical fault, spool/hydra
 
 ## Global next-work rule
 
-Continue 4000 from `checkpoints/4000-next-2026-09-15g.md`. Prefer proven topology and standard engineering over unnecessary simulation. Preserve the 3000 authority/recovery contract in every hardware block.
+Continue 4000 from `checkpoints/4000-next-2026-09-15h.md`. Prefer proven topology and standard engineering over unnecessary simulation. Preserve the 3000 authority/recovery contract in every hardware block.

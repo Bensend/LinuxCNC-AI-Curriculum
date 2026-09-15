@@ -16,7 +16,7 @@ Do not routinely reopen closed levels without a genuinely new material defect.
 
 **4000 — hardware and AI-assisted implementation.**
 
-Active checkpoint: `checkpoints/4000-next-2026-09-15f.md`.
+Active checkpoint: `checkpoints/4000-next-2026-09-15g.md`.
 
 ## 4000 foundation/core
 
@@ -49,23 +49,24 @@ Freeze at interface level:
 
 Public evidence did not expose Mesa's internal board-level 7I96S/7I77 analog circuitry; do not manufacture an internal topology from the manuals.
 
-### Proportional-current / solenoid — working schematic contract
-Artifacts: `research/4000-proportional-solenoid-driver-reference-pass-2026-09-15.md`, `research/4000-proportional-solenoid-electrical-sizing-2026-09-15.md`, `research/4000-proportional-current-adc-partition-2026-09-15.md`, `hardware/4300-proportional-current-driver-block.md`.
+### Proportional-current / solenoid — drawable working contract
+Artifacts include `hardware/4300-proportional-current-driver-block.md`, `research/4000-proportional-driver-gate-fault-net-contract-2026-09-15.md`, and `hardware/4300-proportional-current-kicad-interface.md`.
 
 Present measured 22–28-ohm / 24-V coils imply roughly 0.86–1.09 A DC. First light-duty variant uses a 1.5-A engineering ceiling pending hot-coil measurements. Working architecture: low-side 80-V-class N-MOSFET, engineered fast-decay clamp, 50-milliohm high-side Kelvin shunt + INA240A1-class PWM-rejecting current sense, ADS7953-class shared SAR ADC, FPGA-local fresh-sample current loop and independent hardware overcurrent gate inhibit.
 
-Current request, PWM/gate state, measured current, electrical fault, spool/hydraulic response, ram motion and safety authority remain separate. Watchdog or stale current feedback removes gate authority and requires explicit rearm; stale loop integrator state must not survive rearm.
+Gate/fault freeze: UCC27511A-class driver with deterministic LOW on UVLO/floating inputs; independent fast comparator + SET-dominant OC latch directly inhibits gate drive. Hardware trip is not merely reported to FPGA. Explicit zero-command/healthy-feedback rearm is required.
 
-Clamp voltage, final MOSFET, PWM frequency and loop gains are intentionally not frozen because coil inductance and desired current fall/rise behavior are not yet authoritative. Magnetic energy remains E=0.5*L*I^2. No 250-V MOSFET is presently justified.
+Working base-board allocation is four proportional-current channels, implemented as a reusable hierarchical sheet so channel count remains parameterized. Exact clamp voltage/TVS, final MOSFET, PWM frequency and loop gains remain measurement-bound. The schematic-AI contract explicitly rejects inventing clamp values before coil L/current-decay and rail-envelope evidence.
+
+Current request, PWM/gate state, measured current, electrical fault, spool/hydraulic response, ram motion and safety authority remain separate. Watchdog or stale current feedback removes gate authority and requires explicit rearm; stale loop integrator state must not survive rearm.
 
 ## Exact next work
 
-1. Write/validate a practical coil characterization procedure for R, L and current rise/fall; measurements now have higher information gain than simulation.
-2. Select gate driver plus independent overcurrent comparator/latch with deterministic OFF at startup/watchdog.
-3. Define 24-V rail maximum/transient bound, then select the clamp family/voltage from measured L and desired current fall time.
-4. Reconcile proportional-current channel count/base-board packaging and produce a KiCad/schematic-AI-ready interface/net specification.
-5. Only then simulate/bench remaining nontrivial loop stability, clamp overshoot/energy, current-sense aperture or watchdog/rearm uncertainty.
-6. Parallel BOM work remains for exact VFD analog isolation parts, precision +/-10-V daughterboard DAC/op-amp, core PHY/oscillator/regulators and DIO thermal/fusing.
+1. While coil/rail physical data is unavailable, freeze exact core PHY/oscillator/regulator candidates from the Colorlight copy/adapt contract.
+2. Close DIO isolation/DC-DC/thermal/fusing and exact VFD analog isolation/conversion parts.
+3. When physical coil data arrives, calculate clamp energy/decay/repetition/VDS margin before any simulation.
+4. Assemble the first whole-board schematic-AI/KiCad package from the frozen block contracts.
+5. Use labs only for nontrivial residual loop stability, clamp overshoot/energy, current-sense aperture or watchdog/rearm uncertainty.
 
 ## Laboratory compute checkpoint
 
@@ -73,4 +74,4 @@ Clamp voltage, final MOSFET, PWM frequency and loop gains are intentionally not 
 
 ## Global next-work rule
 
-Continue 4000 from `checkpoints/4000-next-2026-09-15f.md`. Prefer proven topology and standard engineering over unnecessary simulation. Preserve the 3000 authority/recovery contract in every hardware block.
+Continue 4000 from `checkpoints/4000-next-2026-09-15g.md`. Prefer proven topology and standard engineering over unnecessary simulation. Preserve the 3000 authority/recovery contract in every hardware block.

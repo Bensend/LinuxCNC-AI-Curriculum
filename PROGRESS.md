@@ -10,71 +10,56 @@ Repository artifacts, not chat history, are authoritative. Detailed history rema
 - **2000 series:** GRADUATED / CLOSED as of 2026-09-14.
 - F02 is GRADUATED. Valid information-separated evaluation: `evaluation/F02-fresh-ai-evaluation-2026-09-14-valid.md` — PASS, no corrections required.
 - Final 2000 closeout: `evaluation/2000-series-closeout-state-2026-09-11.md` finalized 2026-09-14.
+- **3000 series:** GRADUATED / CLOSED as of 2026-09-15 after formal promotion/playbook-completeness review. Closeout: `evaluation/3000-series-promotion-closeout-2026-09-15.md`.
 
-Do not reopen or repoll closed 2000 work unless a genuinely new material defect is discovered.
+Do not reopen closed 1000/2000 work without a genuinely new material defect. Do not routinely mine 3000 branches after closeout; their checkpoints remain reopen maps for materially stronger machine-specific evidence.
+
+## 3000 closeout summary
+
+All nine machine-specialization tracks received substantive source/community/config/build-diary passes and durable architecture/failure/recovery coverage. The cross-track synthesis is `research/3000-cross-machine-authority-patterns-2026-09-15.md`; 3300 also has `research/3300-cross-process-gantry-cutting-playbook-2026-09-15.md`.
+
+The reusable machine-control contract entering 4000 is:
+
+`request -> actuation path -> physical witness -> qualified completion -> continuation acknowledgement`
+
+Preserve value/validity/freshness separation, explicit ownership transfer, independent process cleanup/recovery, distinct commanded/electrical/physical/process-valid states, and the boundary between normal-control permissives, software fault containment and independent safety-rated authority.
+
+### Preserved 3000 reopen maps
+
+- 3100 Mills/VMCs — `checkpoints/3100-next-2026-09-15.md`
+- 3200 Lathes/Turning — `checkpoints/3200-lathe-next-2026-09-15.md`
+- 3300 Plasma/Laser/Waterjet — `checkpoints/3300-next-2026-09-15.md`
+- 3400 Routers/Woodworking — `checkpoints/3400-next-2026-09-14d.md`
+- 3500 Robots/Custom Kinematics — `checkpoints/3500-next-2026-09-14c.md`
+- 3600 Press Brakes — documented information-gain stop; integration map `research/3600-press-brake-integration-playbook-outline-2026-09-12.md`
+- 3700 Grinding/EDM — `checkpoints/3700-next-2026-09-14.md`
+- 3800 Saws/Feeders/Cells — `checkpoints/3800-next-2026-09-14.md`
+- 3900 Emerging/Unusual — `checkpoints/3900-next-2026-09-15c.md`
 
 ## Active curriculum level
 
-**3000 — machine-specific specialization. All nine tracks have now received substantive evidence passes and are at branch-local bounded breadth/source stops; the next high-value task is a deliberate 3000 promotion/playbook-completeness review, not repetitive branch mining.**
+**4000 — hardware and AI-assisted implementation.**
 
-New cross-track synthesis: `research/3000-cross-machine-authority-patterns-2026-09-15.md`.
+Active checkpoint: `checkpoints/4000-next-2026-09-15.md`.
 
-## 3100 — Mills / VMCs
+### 4000 foundation completed this session
 
-Status: **OPEN / PAUSED at bounded breadth stop**. Latest checkpoint: `checkpoints/3100-next-2026-09-15.md`.
+- Canonical hardware block contract: `hardware/BLOCK_SPEC_TEMPLATE.md`.
+- First reusable block map: `hardware/4000-block-map.md`.
+- First Colorlight core baseline: `research/4000-colorlight-core-baseline-first-pass-2026-09-15.md`.
+- First Colorlight LinuxCNC watchdog/enable trace: `research/4000-colorlight-linuxcnc-firmware-watchdog-first-pass-2026-09-15.md`.
 
-Preserved conclusions include separate M6 physical transfer/logical tool/G43 state; M19 request/ack/fault/timeout; probe `#5070` validity; WCO versus persistent G10 L1 tool calibration; measurement-path validity; spindle/VFD and gravity-axis readiness; and the rule `status available != status trustworthy != status used as authority`.
+Current hardware direction is to use proven Colorlight 5A-75B/5A-75E ECP5/Ethernet architecture as a primary copy/adapt reference for applicable core circuitry while **not** blindly copying its HUB75 field-I/O front end. Press-brake-specific blocks without a true equivalent, especially proportional-solenoid/current drive, remain independently engineered from suitable reference designs and standard engineering principles.
 
-## 3200 — Lathes / Turning Centers
+The firmware/protocol decision is intentionally not frozen yet. Keep upstream HostMot2/`hm2_eth`, ColorCNC/Lcnc-style custom Etherbone firmware, and LiteX-CNC distinct until their watchdog, latency/freshness, integration, extensibility and maintainability tradeoffs are source-compared.
 
-Status: **OPEN / PAUSED at bounded breadth stop**. Latest checkpoint: `checkpoints/3200-lathe-next-2026-09-15.md`.
+### 4000 exact next work
 
-Preserves spindle synchronization/G76, index/at-speed, turret/carousel, CSS/X-origin, tool identity/offset, M19/C-axis ownership, plus new workholding/tailstock/toolsetter authority. Durable workholding rule: `command != valve state != pressure != clamp proof != workpiece retention != safe-to-spin authorization`. Lathe toolsetter work preserves orientation-specific pad geometry, explicit probe validity, G10 L1 persistence and G7/G8 frame conventions.
-
-## 3300 — Plasma / Laser / Waterjet
-
-Status: **OPEN / PAUSED at bounded breadth stop**. Latest checkpoint: `checkpoints/3300-next-2026-09-15.md`.
-
-Plasma QtPlasmaC P1/P2/P3 are mature enough for breadth rotation. Laser covers native laserpower/raster, Sector67 Raycus integration and QtPlasmaC laser mode. Waterjet preserves separate water/abrasive/height authority while complete public pump-pressure-ready/recovery source remains a gap. Cross-process playbook: `research/3300-cross-process-gantry-cutting-playbook-2026-09-15.md`.
-
-## 3400 — Routers / Woodworking
-
-Status: **OPEN / PAUSED at bounded breadth stop**. Latest checkpoint: `checkpoints/3400-next-2026-09-14d.md`. Preserves two ATCs, pneumatic/tool identity, dust-shoe state, spindle/VFD readiness, synchronized gantry homing and custom Motion-DOUT abort boundaries.
-
-## 3500 — Robots / Custom Kinematics
-
-Status: **OPEN / PAUSED at bounded breadth stop**. Latest checkpoint: `checkpoints/3500-next-2026-09-14c.md`. Preserves separation of trajectory-command freshness, HAL command storage/shaping, EtherCAT health, CiA-402 state, software quick stop and independent STO/safety authority, plus genserkins physical-home/DH/coupling/solver distinctions.
-
-## 3600 — Press Brakes
-
-Status: **OPEN / PAUSED at documented information-gain stop**. Not graduated. Integration map: `research/3600-press-brake-integration-playbook-outline-2026-09-12.md`. Reopen only for genuinely new tandem Y1/Y2, quantitative sensor-bending, tooling/datum-aware backgauge-target, or equivalent high-value implementation evidence.
-
-## 3700 — Grinding / EDM / Specialty Finishing
-
-Status: **OPEN / PAUSED at bounded breadth/source stop**. Latest checkpoint: `checkpoints/3700-next-2026-09-14.md`. Preserves separate EDM geometry/adaptive motion, gap-feed, spark, wire/tension/break and dielectric/flushing authorities, plus servo/direct-scale versus binary hydraulic grinder architectures.
-
-## 3800 — Saws / Feeders / Indexing / Automation Cells
-
-Status: **OPEN / PAUSED at bounded breadth stop**. Checkpoint: `checkpoints/3800-next-2026-09-14.md`. Preserves encoder-position versus material stability, command versus physical completion, ClassicLadder STOP semantics, extra-joint planning, carousel in-position versus lock proof, supervisory freshness and locking-indexer transaction behavior.
-
-## 3900 — Emerging / Unusual Machines
-
-Status: **OPEN / PAUSED at bounded breadth stop**. Latest checkpoint: `checkpoints/3900-next-2026-09-15c.md`.
-
-Preserves two materially different additive architectures, the thermal scalar/freshness/readiness distinction, coordinated-extrusion versus material correctness, bounded winding evidence, and genhexkins convergence/physical-branch/workspace distinctions.
-
-## Cross-track 3000 conclusions
-
-The strongest reusable machine-control patterns are now preserved in `research/3000-cross-machine-authority-patterns-2026-09-15.md`:
-
-- `request -> actuation -> physical witness -> qualified completion -> continuation acknowledgement`;
-- value, validity and freshness are separate dimensions;
-- ownership transfers require explicit neutralize/reconcile/request/ack/enable/fault sequencing;
-- `stop/reverse/abort motion != stop/reverse/reset process state`;
-- commanded, electrical/interface, physical and process-valid states should not be collapsed;
-- normal-control permissives, software fault containment and independent safety-rated authority remain separate.
-
-These conclusions are intended to feed 4000 reusable hardware/AI-assisted implementation block contracts.
+1. Source-compare HostMot2/`hm2_eth`, Lcnc/ColorCNC and LiteX-CNC for the core firmware/protocol decision.
+2. Extract the Colorlight V8 FPGA/PHY/configuration/power circuit details needed for an explicit copy/adapt contract.
+3. Freeze one-versus-two PHY, SDRAM necessity, USB-C role, power-entry domains and watchdog/output-gating architecture before schematic placement.
+4. Then proceed through encoder, digital I/O, step/dir, PWM/analog and proportional-current blocks using the canonical block template.
+5. Before freezing each block, inspect applicable open electronics/PCB/FPGA/KiCad skills and use them as design-review aids, subordinate to schematics/datasheets/source/engineering calculations.
 
 ## Laboratory compute checkpoint
 
@@ -82,4 +67,4 @@ These conclusions are intended to feed 4000 reusable hardware/AI-assisted implem
 
 ## Global next-work rule
 
-Perform a deliberate **3000 promotion/playbook-completeness review** against the curriculum objective before starting 4000. Do not declare 3000 graduated merely because every branch has a breadth stop. Identify any machine track missing durable architecture/failure/recovery/playbook coverage; fill only material gaps with evidence. If the review passes, preserve a formal 3000 closeout and transition to 4000 hardware/AI-assisted implementation. Labs remain evidence-driven only.
+Continue 4000 from `checkpoints/4000-next-2026-09-15.md`. Prefer proven topology and standard engineering over unnecessary simulation. Use simulation only for real nonduplicate uncertainty such as control-loop stability, switching/current-control behavior, transient margin, timing-sensitive interfaces or fault transitions. Preserve 3000 machine authority/recovery requirements in every hardware block rather than optimizing only for electrical connectivity.

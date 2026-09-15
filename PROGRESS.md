@@ -18,7 +18,7 @@ Do not routinely reopen closed levels without a genuinely new material defect. 3
 
 **4000 — hardware and AI-assisted implementation.**
 
-Active checkpoint: `checkpoints/4000-next-2026-09-15b.md`.
+Active checkpoint: `checkpoints/4000-next-2026-09-15c.md`.
 
 ## 4000 foundation and core state
 
@@ -38,40 +38,73 @@ Completed durable foundation:
 
 **LiteX-CNC is the preferred working baseline**, not yet an irreversible freeze. HostMot2/`hm2_eth` remains the maturity/reference standard and fallback; Lcnc/ColorCNC remains the minimal known-working Colorlight reference.
 
-Reasons: native open-toolchain Colorlight/ECP5 support, modular custom-function architecture suitable for a proportional-current block, LinuxCNC realtime integration and FPGA-local watchdog behavior with lower project-owned protocol burden than Lcnc.
-
 Required hardening before final freeze:
-
-1. explicit failed-read VALID/FRESH handling — the inspected LiteX-CNC generic read loop currently processes its read buffer after the board read call and contains a TODO to stop processing failed reads;
-2. explicit command/feedback generation or equivalent freshness witness;
-3. authoritative transport latency/jitter/dropout/watchdog measurement on final hardware;
-4. every custom output module must consume the global FPGA watchdog/output-authority state.
-
-The standard LiteX-CNC GPIO, PWM and stepgen modules have now been source-checked: GPIO returns to configured safe states on reset/watchdog, PWM enable is cleared, and stepgen enable is gated by inverse watchdog-bite state.
+1. failed-read VALID/FRESH handling;
+2. command/feedback generation or equivalent freshness witness;
+3. real transport latency/jitter/dropout/watchdog measurement on final hardware;
+4. every custom actuator module consumes global FPGA watchdog/output authority.
 
 ### Core hardware working freeze
 
 Primary copy/adapt reference remains Colorlight 5A-75B V8-class ECP5/Ethernet architecture.
 
 Working decisions:
+- one Gigabit Ethernet PHY;
+- no SDRAM unless required;
+- ECP5-25 BG256-class core with SPI NOR + JTAG/sysCONFIG;
+- dedicated oscillator rather than PHY-owned FPGA clock;
+- required 1.1-V and 3.3-V rails only;
+- separate protected machine-power entry;
+- USB-C service/program/debug only;
+- no copied HUB75/74HC245 machine-I/O front end.
 
-- one Gigabit Ethernet PHY, not two;
-- no SDRAM unless a concrete memory-requiring feature appears;
-- ECP5-25 BG256-class core with SPI NOR + accessible sysCONFIG/JTAG;
-- dedicated oscillator/clock architecture rather than copying V8.0's dependency on a PHY-generated 25 MHz FPGA clock;
-- 1.1 V core and 3.3 V I/O/logic rails retained as required; do not copy unused SDRAM-related rails;
-- machine/24 V power entry is a separate protected industrial power block, not a copy of Colorlight's ~5 V input;
-- USB-C is service/program/debug only for now, not realtime machine-control transport;
-- HUB75/5 V 74HC245 field I/O is explicitly not copied as industrial CNC I/O.
+Frozen cross-firmware requirement: an FPGA-local command-freshness watchdog SHALL independently remove normal machine-facing output authority, expose diagnostic fault state, and require explicit recovery/rearm rather than automatically restoring stale outputs when communications return. This is fault containment, not safety-rated authority.
 
-Frozen cross-firmware requirement remains: an FPGA-local command-freshness watchdog SHALL independently remove normal machine-facing output authority, expose diagnostic fault state, and require explicit recovery/rearm rather than automatically restoring stale outputs when communications return. This is fault containment, not a claim of safety-rated authority.
+## 4300 reusable I/O block progress
+
+### Encoder block — working schematic contract created
+
+Artifacts:
+- `research/4000-encoder-electrical-reference-and-receiver-selection-2026-09-15.md`
+- `hardware/4300-encoder-input-block.md`
+
+Working baseline:
+- four differential A/B/Z channels;
+- AM26LV32E-class 3.3-V RS-422 receivers;
+- configurable 120-ohm termination;
+- differential-only base connector;
+- connector-edge low-capacitance protection + deliberate signal-common/shield/chassis strategy;
+- 10-MHz transition-rate contract pending final PCB/FPGA integration proof;
+- index, illegal-transition and transport generation/VALID/FRESH diagnostics kept separate.
+
+Single-ended and galvanically isolated encoder support remain external variants/adapters unless real machine inventory justifies base-board complexity.
+
+### Digital field I/O — working schematic contract created
+
+Artifacts:
+- `research/4000-digital-field-io-first-pass-2026-09-15.md`
+- `research/4000-digital-input-receiver-selection-2026-09-15.md`
+- `research/4000-digital-output-driver-selection-2026-09-15.md`
+- `research/4000-digital-output-isolation-architecture-2026-09-15.md`
+- `hardware/4300-digital-field-io-block.md`
+
+Working baseline:
+- 24 isolated 24-V inputs using ISO1212-class IEC 61131-2 digital-input receivers;
+- source/sink configurable field wiring;
+- 16 protected sourcing/high-side outputs using TPS4H160-Q1-class smart switches;
+- default-LOW digital isolation between FPGA and output field domain;
+- watchdog/output-authority gating occurs before the isolation barrier;
+- electrical driver fault is distinct from physical actuator witness;
+- ordinary robust I/O only, no safety-rated claim.
+
+Open before schematic/PCB freeze: exact input resistor networks, output isolator/DC-DC, current-limit/thermal/clamp calculations, connectors/fusing and field-side supply-loss truth table.
 
 ## 4000 exact next work
 
-1. Begin the **encoder input block** using `hardware/BLOCK_SPEC_TEMPLATE.md`: inspect proven LinuxCNC/Colorlight/community differential encoder front ends, receiver/protection/index topology and failure/freshness semantics.
-2. Then digital inputs/outputs, step/dir and PWM/analog blocks, preserving proven topology first.
-3. In parallel, select exact current-production PHY, oscillator and regulators for the core after datasheet/BOM review; do not pick parts solely by copied footprint.
-4. Design the proportional-current/valve block after the generic I/O foundation, using suitable proven current-driver references and standard engineering; keep it parameterized for coil classes.
+1. **Step/dir output block** — inspect proven Mesa/Colorlight/open CNC differential driver circuits; freeze channel count, electrical standard, maximum rate, single-ended compatibility and watchdog behavior.
+2. Then PWM/analog interfaces, explicitly separating raw PWM/PDM from filtered 0-10-V and +/-10-V interfaces.
+3. Then the parameterized proportional-current/solenoid block.
+4. In parallel, finish exact current-production PHY, oscillator and regulator selections for the core after datasheet/reference-design review.
 5. Before freezing each block, inspect applicable open electronics/PCB/FPGA/KiCad skills as design-review aids subordinate to datasheets, schematics, calculations and measured evidence.
 
 ## Laboratory compute checkpoint
@@ -80,4 +113,4 @@ Frozen cross-firmware requirement remains: an FPGA-local command-freshness watch
 
 ## Global next-work rule
 
-Continue 4000 from `checkpoints/4000-next-2026-09-15b.md`. Prefer proven topology and standard engineering over unnecessary simulation. The next justified core experiment is eventual real transport measurement on concrete hardware, not a toy simulation. Preserve the 3000 authority/recovery contract in every hardware block.
+Continue 4000 from `checkpoints/4000-next-2026-09-15c.md`. Prefer proven topology and standard engineering over unnecessary simulation. Preserve the 3000 authority/recovery contract in every hardware block.

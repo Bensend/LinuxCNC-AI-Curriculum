@@ -4,49 +4,49 @@ Status: ACTIVE
 
 ## Durable state
 
-Independent lane added `safety-course/SENSOR_FEEDBACK_INDEPENDENCE_COMMON_CAUSE_WORKSHEET.md` at commit `eb3b3a5a7148af663c10bc768f4f27c64ed7b7f9`.
+Independent lane added `safety-course/DIAGNOSTIC_BLIND_SPOTS_LATENT_FAULT_ACCUMULATION_WORKSHEET.md` at commit `2c9b46f4a2347e6f696051d1e0cdd135042b62c0`.
 
-The worksheet prevents channel-count inflation: multiple screens, tags, sensors, or feedback values count as independent evidence only to the extent that their sensing, power, reference, wiring, controller, transport, software derivation, freshness, configuration, mechanical target, environment, calibration, and maintenance dependencies support that conclusion.
+Frozen rule: **`no diagnostic fault` is not proof that the physical safety path is healthy. A diagnostic is evidence only for the path it actually stimulates and observes.**
 
-Frozen rule: **three displays derived from one stale bit are one witness, not three independent witnesses.**
+The worksheet separates continuously detected faults, state-change/demand diagnostics, startup/restart challenges, deliberate proof tests, and potentially latent faults. It forces a latent-first-fault/second-fault analysis and a full `test request -> physical stimulus -> sensing element -> electrical channel -> diagnostic logic -> independent observation -> decision` trace.
 
 ## Parallel-work reconciliation
 
-Before selecting work, current `main` showed the primary safety lane at `f3ad56a620d333d648b3c56b616c8ed382c42db6`. The primary lane completed `safety-course/STORED_ENERGY_ZERO_VS_CONTROLLED_SAFE_STATE.md` and is now explicitly advancing an energy-isolation verification/witness-design lesson covering multiple feeds, trapped hydraulic/pneumatic energy, gravity/springs/flywheels, blocking/standstill, reaccumulation, and maintainable isolation/test points.
+Before selection, current `main` showed primary safety work at `d0071a58f0d565116099ad1fdb178c3647b39d03`, immediately after `safety-course/ENERGY_ISOLATION_VERIFICATION_WITNESS_DESIGN.md`. The primary checkpoint's precise next work is temporary re-energization for testing/positioning during maintenance, including the OSHA 1910.147(f)(1) sequence, clearing personnel/tools, bounded re-energization, deenergization/reapplication of controls, stale jog/remote commands, changed stored/gravity energy, group coordination, and repeated-cycle adversarial cases.
 
-Lane B therefore did not create or modify energy-isolation, stored-energy, bleed/test-point, blocking, zero-energy, or primary-checkpoint artifacts. It followed its previous checkpoint and advanced sensor/feedback independence and common-cause analysis in a new file.
+Lane B therefore did not create or modify temporary re-energization, lockout sequence, maintenance positioning, energy-isolation witness, or primary-checkpoint artifacts. It followed the existing Lane-B checkpoint and created a new latent-fault diagnostics file.
 
-After the Lane-B artifact commit, `main` was re-read. The new Lane-B commit was head and the preceding primary commit remained `f3ad56a`; no overlapping file changed during this run. The Lane-B checkpoint itself was then re-fetched before this update.
+After the Lane-B artifact commit, `main` was re-read. `2c9b46f4a2347e6f696051d1e0cdd135042b62c0` was head with parent `d0071a58f0d565116099ad1fdb178c3647b39d03`; no overlapping primary-lane file changed during the run.
 
 ## Evidence frozen
 
-- Agreement is not independence.
-- Separate UI presentations are not separate witnesses when they derive from one source.
-- Separate electrical channels may still share power, cable, connector, mechanical target, environment, configuration, calibration, or maintenance common causes.
-- Separate software tags are not separate sensors when derived from one ADC/register/value.
-- Freshness/session identity is part of evidence validity; common stale state can produce false agreement.
-- Disagreement is diagnostically valuable and must not be suppressed merely to preserve availability.
-- Rockwell GuardLogix documentation distinguishes module-level dual-channel discrepancy checking from controller-instruction discrepancy diagnostics; the comparison/diagnostic layer must be traced rather than inferred from channel count.
-- OSHA hazardous-energy guidance keeps control circuitry distinct from physical energy isolation and requires verification of isolation/deenergization, potentially using multiple methods.
-- LinuxCNC/HAL and the ordinary FPGA remain useful diagnostic/normal-control participants, not personnel-safety authority merely because they supervise or disagree with another channel.
+- `SOURCE-CONFIRMED`: OSHA 29 CFR 1910.147(c)(1) requires procedures, training, and periodic inspections as part of the energy-control program.
+- `SOURCE-CONFIRMED`: 1910.147(c)(4)(ii)(D) requires requirements for testing to determine/verify effectiveness of energy-control measures; (d)(6) requires verification of isolation/deenergization before work.
+- `SOURCE-CONFIRMED`: 1910.147(d)(5)(ii) requires continued verification where hazardous stored energy can reaccumulate, illustrating that a prior safe observation may not remain fresh indefinitely.
+- `SOURCE-CONFIRMED`: OSHA enforcement guidance treats periodic inspection as an essential check on continued procedure effectiveness/utilization and requires correction of deficiencies.
+- `SOURCE-CONFIRMED`: OSHA's 2008 PLC interpretation warns against treating ordinary PLC control as hazardous-energy protection for servicing absent the narrow, case-specific minor-servicing effective-protection demonstration.
+- `INFERENCE`: a component stuck in the state currently expected can remain latent if diagnostics never cause and independently observe the state change that would expose it.
+- `INFERENCE`: redundant channels can both pass a common inadequate diagnostic; agreement does not establish independence.
+- `UNKNOWN`: OpenPressBrake diagnostic coverage, proof-test intervals, stopping distances, hydraulic truth tables, safe speeds/pressures, and other physical acceptance values remain unknown until justified by device documentation, engineering analysis, and/or physical test.
 
-Evidence classes remain `SOURCE-CONFIRMED`, `DOC-CONFIRMED`, `TEST-CONFIRMED`, `COMMUNITY-REPORTED`, `INFERENCE`, and `UNKNOWN`.
+LinuxCNC/HAL, ordinary FPGA logic, HMI and network diagnostics remain useful normal-control/diagnostic participants, not independent personnel-safety authority.
 
 No executable verification was justified, so no compute was consumed.
 
 ## Precise next independent work
 
-If still independent of the primary lane, build a **diagnostic blind-spot / latent-fault accumulation worksheet**.
+If still independent of the primary lane, build a **proof-test stimulus and observability matrix**.
 
-It should force identification of:
-1. faults detected immediately versus only on demand/change of state;
-2. faults that can remain latent during normal operation;
-3. which second fault could combine with a latent first fault to defeat the intended safety function;
-4. whether diagnostics observe the physical channel or merely a command/software representation;
-5. startup/restart tests that expose otherwise latent faults;
-6. proof-test stimuli and observability needed to challenge the actual final-element/sensor path;
-7. common-cause cases where both channels pass the same inadequate diagnostic;
-8. what evidence invalidates a prior `healthy` state after reboot, maintenance, wiring change, device replacement, or stale communication;
-9. machine-specific facts that must remain `UNKNOWN` rather than inventing diagnostic-coverage percentages or proof-test intervals.
+For representative cross-machine safety-significant sensors and final elements, require:
+1. the exact failure mode/question being challenged;
+2. the minimum physical stimulus needed to expose it;
+3. the independent observation/witness needed to support the claim;
+4. which software-only/same-path observations are insufficient;
+5. safe test preconditions and personnel/hazard boundary;
+6. stale-state/session/configuration invalidation rules;
+7. bounded pass conclusions and explicit claims the test cannot prove;
+8. handling for tests that cannot safely be automated at startup;
+9. common-cause cases where redundant channels receive one inadequate stimulus;
+10. `UNKNOWN` machine-specific acceptance values rather than invented intervals, diagnostic percentages, pressure/speed thresholds, stopping distances, or hydraulic behavior.
 
-Keep the lesson architecture-focused and cross-machine. Do not duplicate the primary lane's energy-isolation verification/witness-design artifact. If the primary lane occupies latent-fault diagnostics before the next run, switch to an independent proof-test stimulus/observability study or safety-diagnostic startup/restart challenge matrix using different files and evidence artifacts.
+Keep this independent of the primary lane's temporary re-energization/maintenance-positioning lesson. If the primary lane occupies proof-test stimulus/observability before the next run, switch to a distinct **fault-reset causal-clearance / recurring-fault escalation** study using different files and evidence artifacts.

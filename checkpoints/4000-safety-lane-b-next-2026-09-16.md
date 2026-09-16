@@ -1,38 +1,48 @@
 # 4000 Safety Lane B Checkpoint — 2026-09-16
 
+Status: ACTIVE
+
 ## Durable state
 
-Independent lane added `safety-course/SAFETY_SANDBOX_EVALUATOR_RUBRIC_SCORECARD.md` at commit `44d3c3a`.
+Independent lane added `safety-course/SAFETY_EVIDENCE_ACCEPTANCE_REJECTION_GATE_MATRIX.md` at commit `f89ec0f07722c3d31ab4acdb8dfd4d7a814e10f6`.
 
-The rubric grades seven dimensions: hazard/task boundary, authority separation, independent evidence, recovery semantics, UNKNOWN/provenance discipline, human factors/defeat resistance, and validation/change control. It includes automatic-fail gates so verbosity or standards terminology cannot compensate for unsafe overclaims.
+The matrix turns the existing evidence chain-of-custody discipline into claim-relative gates: `REJECT`, `REVIEW`, and `ACCEPT-AS-BOUNDED`. There is intentionally no unqualified ACCEPT state. It separates command, logic, final-element, physical-hazard and personnel/space evidence; grades independence, raw retention, configuration binding, transformations, freshness/order, actual test challenge, recovery and bypass/restoration state; and forbids converting test count into diagnostic coverage or safety performance.
 
 ## Parallel-work reconciliation
 
-Before selection, current `main` showed the primary safety lane's newest durable work as `research/4000-safety-reset-restart-rearm-contract-2026-09-16.md` plus `checkpoints/4000-safety-next-2026-09-16b.md`. Its next branch is a cross-machine reset/restart/rearm failure-path matrix.
+Immediately before selection, current `main` showed the primary safety lane at commit `871635ebf89ed682f963f8f99e5d2b28eedda3dd`, after `safety-course/POST_MAINTENANCE_RESTORATION_VALIDATION.md`. Its exact next work is a cross-machine configuration/change invalidation worksheet spanning press brake, mill, lathe, plasma, robot and automated cell.
 
-Lane B therefore did not modify that research artifact, checkpoint, reset/restart matrix, or executable Safety Sandbox fixture. This lane worked only on evaluator scoring/human-factors calibration. `main` was re-read immediately before the Lane B commit and again afterward; no overlapping file changed.
+Lane B therefore did not create or modify that worksheet, the primary checkpoint, the post-maintenance module, or machine-family change matrices. Lane B stayed on evidence adjudication infrastructure and used a new independent file.
 
-## Evidence added/frozen
+Before committing the artifact, `main` was re-read and remained at the same primary-lane head; no overlapping file had changed. The Lane-B checkpoint was re-fetched after the artifact commit before this update.
 
-- OSHA 1910.212: point-of-operation guarding prevents body entry into the danger zone during the operating cycle.
-- OSHA machine-guarding guidance: safeguards should resist easy removal/tampering; safeguards that interfere with doing the job may be overridden/disregarded.
-- OSHA interlocked-guard guidance: opening/removal stops/disengages and prevents start; replacing the guard should not automatically restart.
-- OSHA interpretation: interlocked access is inadequate if a person can enter the danger zone before inertia-driven hazardous motion stops.
-- Rockwell Logix SIS documentation: overriding a safety fault does not clear the fault and continued-safe-operation proof remains the implementer's responsibility.
+## Evidence frozen
 
-Evidence classes remain `SOURCE-CONFIRMED`, `DOC-CONFIRMED`, `TEST-CONFIRMED`, `COMMUNITY-REPORTED`, `INFERENCE`, and `UNKNOWN`. Test count or rubric score must never be converted to diagnostic coverage, PL, SIL, Category, PFHd, stopping performance, or machine suitability.
+- `event_logged` is not `physical_event_proven`.
+- `configuration_identity_matches` is not `physical_installation_validated`.
+- `command_removed` is not `final_element_safe` and not `hazard_absent`.
+- A rejected artifact may still be accepted for a narrower claim that its observer actually supports.
+- Rockwell GuardLogix documentation: changed safety-signature elements require revalidation; safety-I/O configuration signatures identify configuration and are considered verified only after user testing.
+- OSHA machine-guarding guidance: return to service after servicing includes guards/safety devices being in place and functional and checking the area before startup.
+- Ordinary LinuxCNC/HAL/FPGA evidence remains useful for normal-control containment and diagnostics but does not become personnel-safety authority.
 
-## Next independent work
+Evidence classes remain `SOURCE-CONFIRMED`, `DOC-CONFIRMED`, `TEST-CONFIRMED`, `COMMUNITY-REPORTED`, `INFERENCE`, and `UNKNOWN`.
 
-Build `safety-course/SAFETY_SANDBOX_EVALUATOR_CALIBRATION_PACK.md` with paired learner answers that exercise the rubric without duplicating the primary lane's reset/restart matrix:
+No compute was consumed; no executable verification question survived source/engineering reasoning.
 
-1. concise evidence-bounded answer vs verbose standards-heavy overclaim;
-2. conservative-but-wrong blanket shutdown answer vs task/hazard-specific safe architecture;
-3. command/status evidence vs independent physical witness;
-4. practical defeat-resistant safeguard vs nuisance safeguard likely to be bypassed;
-5. correct `UNKNOWN` plus verification request vs invented machine-specific number;
-6. prior PASS after configuration change vs dependency-based evidence invalidation.
+## Precise next independent work
 
-Include expected dimension scores and automatic-fail gates, but do not create hidden answers that would contaminate any active blind evaluation. If the calibration pack would overlap an active primary evaluator artifact at the next run, switch to an independent source-tracing topic instead.
+Build an **evidence-conflict adjudication worksheet** for cases where two apparently valid artifacts disagree, without duplicating the primary lane's configuration/change invalidation matrix.
 
-No compute was consumed. No executable question justified use of the self-hosted runner.
+Priority cases:
+1. command/logic says OFF while independent final-element feedback says ON;
+2. final-element feedback says safe while physical motion/energy observation disagrees;
+3. two independent sensors disagree or one becomes stale;
+4. HMI/log ordering conflicts with monotonic/raw acquisition ordering;
+5. matching configuration signature conflicts with documented physical wiring/guard change;
+6. current test conflicts with an older validated baseline;
+7. one artifact is transformed/cropped while another retains raw context.
+
+The worksheet must default to preserving the conflict, bounding conclusions, and inhibiting unsupported promotion rather than selecting the more convenient artifact. It should define when to mark the claim `UNKNOWN`, when a fault itself is established, what independent retest would resolve the conflict, and how to retain both artifacts in chain of custody.
+
+If the primary lane occupies evidence-conflict adjudication before the next Lane-B run, switch to an independent source trace on diagnostic independence/common-cause evidence rather than editing overlapping files.

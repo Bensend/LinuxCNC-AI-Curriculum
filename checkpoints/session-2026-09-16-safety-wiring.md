@@ -1,33 +1,34 @@
 # Safety wiring research session — 2026-09-16
 
-- Session start UTC: `2026-09-16T15:32:15Z`
-- Session end UTC: `2026-09-16T15:34:19Z`
-- Actual elapsed: `2.06 min`
-- Overlap status: `UNKNOWN` — no authoritative concurrent-session marker was available in the inspected state.
+- Latest continuation start UTC: `2026-09-16T18:38:46Z`
+- Latest continuation end UTC: `2026-09-16T18:41:46Z`
+- Actual elapsed: `3.0 min`
+- Overlap status: `NO EVIDENCE OF OVERLAP` — prior checkpointed safety session ended 2026-09-16T15:34:19Z.
 - Compute: `NONE`; documentation/source research only. No GitHub-hosted Actions minutes consumed.
-- Status: CHECKPOINTED — continue next invocation.
+- Status: CHECKPOINTED — safety course remains active.
 
 ## Durable work completed
 
-- Added `safety-course/PROFESSIONAL_SAFETY_WIRING_REFERENCE_STUDY_01.md`.
-- Re-centered `PROGRESS.md` on complete professional E-stop/interlock wiring and explicit hazardous-energy boundaries.
-- First reference set covers Pilz PNOZ X3.1 E-stop/guard + feedback-loop pattern, SICK deTec4/UE48 light-curtain + K1/K2 EDM pattern, Siemens SINAMICS STO energy-boundary distinction, and HAWE SAKB professional press-brake hydraulic architecture.
-- Explicitly froze the home-shop maintenance rule: control/remove relevant hazards before work; when an unsafe/incomplete/bypassed machine is left unattended, make OUT OF SERVICE / DO NOT OPERATE state unmistakable; tag-out does not substitute for physical hazard control.
+- `safety-course/PROFESSIONAL_SAFETY_WIRING_REFERENCE_STUDY_01.md` established final-element/energy-boundary tracing using Pilz, SICK, Siemens and HAWE references.
+- `safety-course/CROSS_MACHINE_SAFE_MOTION_AND_CELL_REFERENCE_2026-09-16.md` extends the study to servo/safe-motion machinery and an automated robot/turntable cell.
+- Cross-machine matrix now distinguishes press-brake hydraulic/gravity hazards, servo-drive torque/inertia/gravity hazards, and multi-zone automation-cell hazards.
 
 ## Key evidence gained
 
-1. Professional safety wiring must be traced through the final elements; stopping at a safety-relay contact or OSSD is incomplete.
-2. SICK's reference architecture demonstrates OSSD1/OSSD2 -> safety relay -> K1/K2 with positively guided EDM feedback before restart.
-3. Siemens explicitly distinguishes STO from electrical isolation: STO suppresses torque-producing drive pulses while the power unit/motor remain electrically connected.
-4. HAWE's SAKB press-brake system shows why the electrical trace must cross into the hydraulic diagram: proportional directional valves, monitored holding/seated valves, pump path, anti-cavitation valves and Y1/Y2 cylinders are part of the actual hazardous-motion chain.
+1. Professional safe motion may intentionally permit guarded access while motion remains, but only under an independently safety-rated function such as SLS/SDI/SOS; `guard open` does not universally mean `all actuator power removed`.
+2. Pilz documents SS1 as controlled braking followed by STO and separately documents safe restart interlock; reset need not itself release STO.
+3. SICK's Flexi Soft cell example combines E-stops, interlocked service door, light-beam devices and safe-position switches. The protective response can be zone/context dependent while remaining owned by the safety controller.
+4. This strengthens the curriculum boundary: LinuxCNC/HAL/ordinary FPGA logic may coordinate normal machine state and diagnostics but cannot inherit personnel-safety authority merely by reproducing the same Boolean logic.
+5. Maintenance isolation remains a separate physical-energy-control problem from STO, SLS, guard interlock or hydraulic run inhibition.
 
 ## Exact next work
 
-1. Find a publicly inspectable **complete OEM press-brake electrical schematic/service manual** where E-stop, guards/light curtains, safety relay/PLC, reset, contactors/STO and hydraulic-valve safety outputs can be traced on one machine.
-2. Pair it with that machine's hydraulic diagram and mark exactly what loses power, what is only torque/command inhibited, what hydraulic paths close/open, and what remains energized.
-3. Repeat for a professional servo machine tool and an automated/robotic cell, then build a cross-machine comparison matrix.
-4. Do not infer a press-brake E-stop valve truth table from component manuals; preserve it as UNKNOWN until an OEM or validated architecture supplies the missing machine-level evidence.
+1. Continue searching for a publicly inspectable complete OEM press-brake electrical + hydraulic drawing pair. Do not invent the missing valve/contact truth table.
+2. Find a complete servo machine-tool electrical diagram that exposes guard/E-stop -> safety logic -> drive STO/SS1/contactor/brake and mark what remains electrically energized.
+3. Find a complete automated-cell safety schematic exposing safety PLC outputs, zone final elements and feedback/EDM; pair it with the physical actuator energy paths.
+4. Convert these examples into a reusable safety-course worksheet: safety demand -> safety logic -> final element -> hazardous-energy interruption/control -> feedback proof -> reset/rearm -> maintenance isolation.
+5. Preserve practical human factors: engineered setup/safe-motion modes should reduce incentives to bypass guards, but do not invent safe speeds, stopping distances or safety performance levels.
 
-## LESSON_LOG append status
+## LESSON_LOG safe-append status
 
-The required timing row is preserved here because the available GitHub connector exposes whole-file replacement but no atomic append operation. `LESSON_LOG.md` is a large ledger and was not completely fetched; overwriting it from truncated content would violate the repository's safe-append rule. Append this session timing to `LESSON_LOG.md` only when an atomic/safe append path is available.
+The required timing is preserved here. `LESSON_LOG.md` was only partially returned by the available connector and the connector exposes whole-file replacement rather than an atomic append action. Per repository governance, do not overwrite the large log from incomplete content. Append this timing only when a safe complete-file/atomic append path is available.

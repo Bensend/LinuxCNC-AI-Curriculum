@@ -16,7 +16,17 @@ Do not routinely reopen closed levels without a genuinely new material defect.
 
 **4000 — hardware and AI-assisted implementation.**
 
-Active checkpoint: `checkpoints/4000-next-2026-09-15h.md`.
+### Primary active priority — safety course / professional machine implementation
+
+The owner has promoted the LinuxCNC/OpenPressBrake safety course to the primary active 4000 priority. Routine controller-board development remains a separate automation concern and must not displace safety work here.
+
+Current safety emphasis: study **complete professional machine E-stop/interlock implementations and wiring diagrams**, tracing every safety demand end-to-end through safety relay/PLC, reset/restart logic, EDM/feedback, contactors, drive STO/safe-motion interfaces, hydraulic/pneumatic safety elements and the actual hazardous-energy boundary. Every reference must explicitly identify **where power/energy is removed or controlled and what remains energized**.
+
+First durable reference study: `safety-course/PROFESSIONAL_SAFETY_WIRING_REFERENCE_STUDY_01.md`.
+
+Home-shop maintenance rule: before work, remove/isolate/discharge/block/restrain or otherwise control the hazards relevant to the task. Never leave an unsafe/incomplete/bypassed machine unattended without unmistakable OUT OF SERVICE / DO NOT OPERATE tag-out or equivalent status. Tag-out communicates/preserves the state; it is not a substitute for physical hazard control.
+
+Active checkpoint: `checkpoints/session-2026-09-16-safety-wiring.md`.
 
 ## 4000 foundation/core
 
@@ -66,12 +76,11 @@ Current request, PWM/gate state, measured current, electrical fault, spool/hydra
 
 ## Exact next work
 
-1. Freeze exact VFD analog isolation/conversion circuit and parts with deterministic minimum/zero watchdog behavior.
-2. Build whole-board 3.3-V/1.1-V/isolated-logic power budget; then select exact regulators/DC-DC parts.
-3. Reconcile FPGA bank/pin budget across RGMII, encoder, STEP/DIR, DIO, PWM, proportional-current and service interfaces.
-4. When physical coil data arrives, calculate clamp energy/decay/repetition/VDS margin before any simulation.
-5. Assemble the first whole-board schematic-AI/KiCad package from the frozen block contracts.
-6. Use labs only for nontrivial residual loop stability, clamp overshoot/energy, current-sense aperture or watchdog/rearm uncertainty.
+1. Locate and study complete OEM/professional-machine safety wiring diagrams, starting with press brakes, where E-stop/guards/light curtains can be followed through safety logic to physical contactors, STO and hydraulic final elements.
+2. Pair electrical safety drawings with hydraulic/pneumatic drawings and explicitly mark what remains energized after each safety demand.
+3. Build a comparison matrix across at least three professional implementations: press brake, servo machine tool, and automated/robotic cell.
+4. Preserve the independent safety boundary: ordinary LinuxCNC/HAL/FPGA may monitor or request normal operation but does not become personnel-safety authority by convenience.
+5. Resume routine 4000 controller-board exact-BOM/power/pin work only when it directly supports the safety checkpoint or after the safety priority reaches a genuine information-gain stop.
 
 ## Laboratory compute checkpoint
 
@@ -79,4 +88,4 @@ Current request, PWM/gate state, measured current, electrical fault, spool/hydra
 
 ## Global next-work rule
 
-Continue 4000 from `checkpoints/4000-next-2026-09-15h.md`. Prefer proven topology and standard engineering over unnecessary simulation. Preserve the 3000 authority/recovery contract in every hardware block.
+Continue from `checkpoints/session-2026-09-16-safety-wiring.md`. Prefer authoritative professional schematics, manufacturer safety documentation and standard engineering before simulation. Do not use GitHub-hosted runners for curriculum compute; when a concrete unresolved question justifies compute, target the self-hosted runner `[self-hosted, openpressbrake]` only.

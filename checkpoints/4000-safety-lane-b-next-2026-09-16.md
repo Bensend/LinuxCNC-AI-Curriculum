@@ -4,45 +4,49 @@ Status: ACTIVE
 
 ## Durable state
 
-Independent lane added `safety-course/SAFETY_EVIDENCE_ACCEPTANCE_REJECTION_GATE_MATRIX.md` at commit `f89ec0f07722c3d31ab4acdb8dfd4d7a814e10f6`.
+Independent lane added `safety-course/SENSOR_FEEDBACK_INDEPENDENCE_COMMON_CAUSE_WORKSHEET.md` at commit `eb3b3a5a7148af663c10bc768f4f27c64ed7b7f9`.
 
-The matrix turns the existing evidence chain-of-custody discipline into claim-relative gates: `REJECT`, `REVIEW`, and `ACCEPT-AS-BOUNDED`. There is intentionally no unqualified ACCEPT state. It separates command, logic, final-element, physical-hazard and personnel/space evidence; grades independence, raw retention, configuration binding, transformations, freshness/order, actual test challenge, recovery and bypass/restoration state; and forbids converting test count into diagnostic coverage or safety performance.
+The worksheet prevents channel-count inflation: multiple screens, tags, sensors, or feedback values count as independent evidence only to the extent that their sensing, power, reference, wiring, controller, transport, software derivation, freshness, configuration, mechanical target, environment, calibration, and maintenance dependencies support that conclusion.
+
+Frozen rule: **three displays derived from one stale bit are one witness, not three independent witnesses.**
 
 ## Parallel-work reconciliation
 
-Immediately before selection, current `main` showed the primary safety lane at commit `871635ebf89ed682f963f8f99e5d2b28eedda3dd`, after `safety-course/POST_MAINTENANCE_RESTORATION_VALIDATION.md`. Its exact next work is a cross-machine configuration/change invalidation worksheet spanning press brake, mill, lathe, plasma, robot and automated cell.
+Before selecting work, current `main` showed the primary safety lane at `f3ad56a620d333d648b3c56b616c8ed382c42db6`. The primary lane completed `safety-course/STORED_ENERGY_ZERO_VS_CONTROLLED_SAFE_STATE.md` and is now explicitly advancing an energy-isolation verification/witness-design lesson covering multiple feeds, trapped hydraulic/pneumatic energy, gravity/springs/flywheels, blocking/standstill, reaccumulation, and maintainable isolation/test points.
 
-Lane B therefore did not create or modify that worksheet, the primary checkpoint, the post-maintenance module, or machine-family change matrices. Lane B stayed on evidence adjudication infrastructure and used a new independent file.
+Lane B therefore did not create or modify energy-isolation, stored-energy, bleed/test-point, blocking, zero-energy, or primary-checkpoint artifacts. It followed its previous checkpoint and advanced sensor/feedback independence and common-cause analysis in a new file.
 
-Before committing the artifact, `main` was re-read and remained at the same primary-lane head; no overlapping file had changed. The Lane-B checkpoint was re-fetched after the artifact commit before this update.
+After the Lane-B artifact commit, `main` was re-read. The new Lane-B commit was head and the preceding primary commit remained `f3ad56a`; no overlapping file changed during this run. The Lane-B checkpoint itself was then re-fetched before this update.
 
 ## Evidence frozen
 
-- `event_logged` is not `physical_event_proven`.
-- `configuration_identity_matches` is not `physical_installation_validated`.
-- `command_removed` is not `final_element_safe` and not `hazard_absent`.
-- A rejected artifact may still be accepted for a narrower claim that its observer actually supports.
-- Rockwell GuardLogix documentation: changed safety-signature elements require revalidation; safety-I/O configuration signatures identify configuration and are considered verified only after user testing.
-- OSHA machine-guarding guidance: return to service after servicing includes guards/safety devices being in place and functional and checking the area before startup.
-- Ordinary LinuxCNC/HAL/FPGA evidence remains useful for normal-control containment and diagnostics but does not become personnel-safety authority.
+- Agreement is not independence.
+- Separate UI presentations are not separate witnesses when they derive from one source.
+- Separate electrical channels may still share power, cable, connector, mechanical target, environment, configuration, calibration, or maintenance common causes.
+- Separate software tags are not separate sensors when derived from one ADC/register/value.
+- Freshness/session identity is part of evidence validity; common stale state can produce false agreement.
+- Disagreement is diagnostically valuable and must not be suppressed merely to preserve availability.
+- Rockwell GuardLogix documentation distinguishes module-level dual-channel discrepancy checking from controller-instruction discrepancy diagnostics; the comparison/diagnostic layer must be traced rather than inferred from channel count.
+- OSHA hazardous-energy guidance keeps control circuitry distinct from physical energy isolation and requires verification of isolation/deenergization, potentially using multiple methods.
+- LinuxCNC/HAL and the ordinary FPGA remain useful diagnostic/normal-control participants, not personnel-safety authority merely because they supervise or disagree with another channel.
 
 Evidence classes remain `SOURCE-CONFIRMED`, `DOC-CONFIRMED`, `TEST-CONFIRMED`, `COMMUNITY-REPORTED`, `INFERENCE`, and `UNKNOWN`.
 
-No compute was consumed; no executable verification question survived source/engineering reasoning.
+No executable verification was justified, so no compute was consumed.
 
 ## Precise next independent work
 
-Build an **evidence-conflict adjudication worksheet** for cases where two apparently valid artifacts disagree, without duplicating the primary lane's configuration/change invalidation matrix.
+If still independent of the primary lane, build a **diagnostic blind-spot / latent-fault accumulation worksheet**.
 
-Priority cases:
-1. command/logic says OFF while independent final-element feedback says ON;
-2. final-element feedback says safe while physical motion/energy observation disagrees;
-3. two independent sensors disagree or one becomes stale;
-4. HMI/log ordering conflicts with monotonic/raw acquisition ordering;
-5. matching configuration signature conflicts with documented physical wiring/guard change;
-6. current test conflicts with an older validated baseline;
-7. one artifact is transformed/cropped while another retains raw context.
+It should force identification of:
+1. faults detected immediately versus only on demand/change of state;
+2. faults that can remain latent during normal operation;
+3. which second fault could combine with a latent first fault to defeat the intended safety function;
+4. whether diagnostics observe the physical channel or merely a command/software representation;
+5. startup/restart tests that expose otherwise latent faults;
+6. proof-test stimuli and observability needed to challenge the actual final-element/sensor path;
+7. common-cause cases where both channels pass the same inadequate diagnostic;
+8. what evidence invalidates a prior `healthy` state after reboot, maintenance, wiring change, device replacement, or stale communication;
+9. machine-specific facts that must remain `UNKNOWN` rather than inventing diagnostic-coverage percentages or proof-test intervals.
 
-The worksheet must default to preserving the conflict, bounding conclusions, and inhibiting unsupported promotion rather than selecting the more convenient artifact. It should define when to mark the claim `UNKNOWN`, when a fault itself is established, what independent retest would resolve the conflict, and how to retain both artifacts in chain of custody.
-
-If the primary lane occupies evidence-conflict adjudication before the next Lane-B run, switch to an independent source trace on diagnostic independence/common-cause evidence rather than editing overlapping files.
+Keep the lesson architecture-focused and cross-machine. Do not duplicate the primary lane's energy-isolation verification/witness-design artifact. If the primary lane occupies latent-fault diagnostics before the next run, switch to an independent proof-test stimulus/observability study or safety-diagnostic startup/restart challenge matrix using different files and evidence artifacts.

@@ -20,13 +20,13 @@ Do not routinely reopen closed levels without a genuinely new material defect.
 
 The owner has promoted the LinuxCNC/OpenPressBrake safety course to the primary active 4000 priority. Routine controller-board development remains a separate automation concern and must not displace safety work here.
 
-Current safety emphasis: study **complete professional machine E-stop/interlock implementations and wiring diagrams**, tracing every safety demand end-to-end through safety relay/PLC, reset/restart logic, EDM/feedback, contactors, drive STO/safe-motion interfaces, hydraulic/pneumatic safety elements and the actual hazardous-energy boundary. Every reference must explicitly identify **where power/energy is removed or controlled and what remains energized**.
+Current safety emphasis: complete professional-machine energy-boundary study has now been converted into a **commissioning / validation / fault-injection method**. Continue proving safety demands end-to-end through safety logic, final elements, EDM/feedback and the physical hazardous-energy boundary, then use the validation package to expose missing requirements/evidence rather than inventing machine-specific values.
 
-First durable reference study: `safety-course/PROFESSIONAL_SAFETY_WIRING_REFERENCE_STUDY_01.md`.
+Durable reference studies include `safety-course/PROFESSIONAL_SAFETY_WIRING_REFERENCE_STUDY_01.md`, the complete-machine trace worksheet, reset/restart/EDM work, power-restoration work, service/setup-mode work, return-to-service work, and `safety-course/COMMISSIONING_VALIDATION_FAULT_INJECTION_PACKAGE_2026-09-17.md`.
 
 Home-shop maintenance rule: before work, remove/isolate/discharge/block/restrain or otherwise control the hazards relevant to the task. Never leave an unsafe/incomplete/bypassed machine unattended without unmistakable OUT OF SERVICE / DO NOT OPERATE tag-out or equivalent status. Tag-out communicates/preserves the state; it is not a substitute for physical hazard control.
 
-Active checkpoint: `checkpoints/session-2026-09-16-safety-wiring.md`.
+Active checkpoint: `checkpoints/session-2026-09-17-safety-validation.md`.
 
 ## 4000 foundation/core
 
@@ -76,9 +76,9 @@ Current request, PWM/gate state, measured current, electrical fault, spool/hydra
 
 ## Exact next work
 
-1. Locate and study complete OEM/professional-machine safety wiring diagrams, starting with press brakes, where E-stop/guards/light curtains can be followed through safety logic to physical contactors, STO and hydraulic final elements.
-2. Pair electrical safety drawings with hydraulic/pneumatic drawings and explicitly mark what remains energized after each safety demand.
-3. Build a comparison matrix across at least three professional implementations: press brake, servo machine tool, and automated/robotic cell.
+1. Apply `safety-course/COMMISSIONING_VALIDATION_FAULT_INJECTION_PACKAGE_2026-09-17.md` to a complete professional implementation and mark each validation item `CLOSED FROM EVIDENCE`, `NOT APPLICABLE`, or `UNKNOWN`.
+2. Expand failure-path analysis for common-cause and latent failures: paired contactors/valves, shared supply/reference faults, feedback wiring faults, mode-selection faults and restart interlock defeat. Do not assign PL/SIL/DC values without design-specific evidence.
+3. Build a concise pre-energization minimum-safe-to-operate gate for experimental/home-shop machines, including explicit remote/isolation fallback when the gate cannot be met.
 4. Preserve the independent safety boundary: ordinary LinuxCNC/HAL/FPGA may monitor or request normal operation but does not become personnel-safety authority by convenience.
 5. Resume routine 4000 controller-board exact-BOM/power/pin work only when it directly supports the safety checkpoint or after the safety priority reaches a genuine information-gain stop.
 
@@ -88,4 +88,4 @@ Current request, PWM/gate state, measured current, electrical fault, spool/hydra
 
 ## Global next-work rule
 
-Continue from `checkpoints/session-2026-09-16-safety-wiring.md`. Prefer authoritative professional schematics, manufacturer safety documentation and standard engineering before simulation. Do not use GitHub-hosted runners for curriculum compute; when a concrete unresolved question justifies compute, target the self-hosted runner `[self-hosted, openpressbrake]` only.
+Continue from `checkpoints/session-2026-09-17-safety-validation.md`. Prefer authoritative professional schematics, manufacturer safety documentation and standard engineering before simulation. Do not use GitHub-hosted runners for curriculum compute; when a concrete unresolved question justifies compute, target the self-hosted runner `[self-hosted, openpressbrake]` only.

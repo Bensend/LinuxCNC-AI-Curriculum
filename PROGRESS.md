@@ -20,13 +20,13 @@ Do not routinely reopen closed levels without a genuinely new material defect.
 
 The owner has promoted the LinuxCNC/OpenPressBrake safety course to the primary active 4000 priority. Routine controller-board development remains a separate automation concern and must not displace safety work here.
 
-Current safety emphasis: complete professional-machine energy-boundary study has now been converted into a **commissioning / validation / fault-injection method**. Continue proving safety demands end-to-end through safety logic, final elements, EDM/feedback and the physical hazardous-energy boundary, then use the validation package to expose missing requirements/evidence rather than inventing machine-specific values.
+Current safety emphasis: commissioning/validation work now includes explicit **common-cause and latent-failure analysis** plus a qualitative **minimum-safe-to-operate pre-energization gate**. Continue applying these methods to real professional implementations and convert remaining UNKNOWN items into machine-specific requirements/verification tasks without inventing PL/SIL/DC, stopping, pressure or timing values.
 
-Durable reference studies include `safety-course/PROFESSIONAL_SAFETY_WIRING_REFERENCE_STUDY_01.md`, the complete-machine trace worksheet, reset/restart/EDM work, power-restoration work, service/setup-mode work, return-to-service work, and `safety-course/COMMISSIONING_VALIDATION_FAULT_INJECTION_PACKAGE_2026-09-17.md`.
+Durable reference studies include `safety-course/PROFESSIONAL_SAFETY_WIRING_REFERENCE_STUDY_01.md`, the complete-machine trace worksheet, reset/restart/EDM work, power-restoration work, service/setup-mode work, return-to-service work, `safety-course/COMMISSIONING_VALIDATION_FAULT_INJECTION_PACKAGE_2026-09-17.md`, and `safety-course/COMMON_CAUSE_LATENT_FAILURE_AND_MINIMUM_OPERATE_GATE_2026-09-17.md`.
 
 Home-shop maintenance rule: before work, remove/isolate/discharge/block/restrain or otherwise control the hazards relevant to the task. Never leave an unsafe/incomplete/bypassed machine unattended without unmistakable OUT OF SERVICE / DO NOT OPERATE tag-out or equivalent status. Tag-out communicates/preserves the state; it is not a substitute for physical hazard control.
 
-Active checkpoint: `checkpoints/session-2026-09-17-safety-validation.md`.
+Active checkpoint: `checkpoints/session-2026-09-17-safety-common-cause.md`.
 
 ## 4000 foundation/core
 
@@ -76,9 +76,9 @@ Current request, PWM/gate state, measured current, electrical fault, spool/hydra
 
 ## Exact next work
 
-1. Apply `safety-course/COMMISSIONING_VALIDATION_FAULT_INJECTION_PACKAGE_2026-09-17.md` to a complete professional implementation and mark each validation item `CLOSED FROM EVIDENCE`, `NOT APPLICABLE`, or `UNKNOWN`.
-2. Expand failure-path analysis for common-cause and latent failures: paired contactors/valves, shared supply/reference faults, feedback wiring faults, mode-selection faults and restart interlock defeat. Do not assign PL/SIL/DC values without design-specific evidence.
-3. Build a concise pre-energization minimum-safe-to-operate gate for experimental/home-shop machines, including explicit remote/isolation fallback when the gate cannot be met.
+1. Apply the commissioning package plus common-cause/minimum-operate gate to one complete professional implementation, marking each item `CLOSED FROM EVIDENCE`, `NOT APPLICABLE`, or `UNKNOWN`.
+2. Deepen mode-selection and feedback-path common-cause analysis: identify how one selector/configuration/feedback wiring fault could defeat nominally redundant safety paths and what professional architectures do about it.
+3. Convert the minimum-operate gate into a compact curriculum commissioning card after it survives application to a real implementation; do not treat the first synthesis as validated merely because it is concise.
 4. Preserve the independent safety boundary: ordinary LinuxCNC/HAL/FPGA may monitor or request normal operation but does not become personnel-safety authority by convenience.
 5. Resume routine 4000 controller-board exact-BOM/power/pin work only when it directly supports the safety checkpoint or after the safety priority reaches a genuine information-gain stop.
 
@@ -88,4 +88,4 @@ Current request, PWM/gate state, measured current, electrical fault, spool/hydra
 
 ## Global next-work rule
 
-Continue from `checkpoints/session-2026-09-17-safety-validation.md`. Prefer authoritative professional schematics, manufacturer safety documentation and standard engineering before simulation. Do not use GitHub-hosted runners for curriculum compute; when a concrete unresolved question justifies compute, target the self-hosted runner `[self-hosted, openpressbrake]` only.
+Continue from `checkpoints/session-2026-09-17-safety-common-cause.md`. Prefer authoritative professional schematics, manufacturer safety documentation and standard engineering before simulation. Do not use GitHub-hosted runners for curriculum compute; when a concrete unresolved question justifies compute, target the self-hosted runner `[self-hosted, openpressbrake]` only.

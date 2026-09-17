@@ -20,13 +20,13 @@ Do not routinely reopen closed levels without a genuinely new material defect.
 
 The owner has promoted the LinuxCNC/OpenPressBrake safety course to the primary active 4000 priority. Routine controller-board development remains a separate automation concern and must not displace safety work here.
 
-Current safety emphasis: commissioning/validation work now includes explicit **common-cause and latent-failure analysis** plus a qualitative **minimum-safe-to-operate pre-energization gate**. Continue applying these methods to real professional implementations and convert remaining UNKNOWN items into machine-specific requirements/verification tasks without inventing PL/SIL/DC, stopping, pressure or timing values.
+Current safety emphasis: commissioning/validation now includes explicit common-cause and latent-failure analysis, a qualitative minimum-safe-to-operate pre-energization gate, and concrete application of those methods to safely evaluated mode selection and EDM/final-contactor feedback. Continue applying these methods to real professional implementations and convert remaining UNKNOWN items into machine-specific requirements/verification tasks without inventing PL/SIL/DC, stopping, pressure or timing values.
 
-Durable reference studies include `safety-course/PROFESSIONAL_SAFETY_WIRING_REFERENCE_STUDY_01.md`, the complete-machine trace worksheet, reset/restart/EDM work, power-restoration work, service/setup-mode work, return-to-service work, `safety-course/COMMISSIONING_VALIDATION_FAULT_INJECTION_PACKAGE_2026-09-17.md`, and `safety-course/COMMON_CAUSE_LATENT_FAILURE_AND_MINIMUM_OPERATE_GATE_2026-09-17.md`.
+Durable reference studies include `safety-course/PROFESSIONAL_SAFETY_WIRING_REFERENCE_STUDY_01.md`, the complete-machine trace worksheet, reset/restart/EDM work, power-restoration work, service/setup-mode work, return-to-service work, `safety-course/COMMISSIONING_VALIDATION_FAULT_INJECTION_PACKAGE_2026-09-17.md`, `safety-course/COMMON_CAUSE_LATENT_FAILURE_AND_MINIMUM_OPERATE_GATE_2026-09-17.md`, and `safety-course/MODE_SELECTION_EDM_COMMON_CAUSE_APPLICATION_2026-09-17.md`.
 
 Home-shop maintenance rule: before work, remove/isolate/discharge/block/restrain or otherwise control the hazards relevant to the task. Never leave an unsafe/incomplete/bypassed machine unattended without unmistakable OUT OF SERVICE / DO NOT OPERATE tag-out or equivalent status. Tag-out communicates/preserves the state; it is not a substitute for physical hazard control.
 
-Active checkpoint: `checkpoints/session-2026-09-17-safety-common-cause.md`.
+Active checkpoint: `checkpoints/session-2026-09-17-safety-mode-edm-ccf.md`.
 
 ## 4000 foundation/core
 
@@ -76,10 +76,10 @@ Current request, PWM/gate state, measured current, electrical fault, spool/hydra
 
 ## Exact next work
 
-1. Apply the commissioning package plus common-cause/minimum-operate gate to one complete professional implementation, marking each item `CLOSED FROM EVIDENCE`, `NOT APPLICABLE`, or `UNKNOWN`.
-2. Deepen mode-selection and feedback-path common-cause analysis: identify how one selector/configuration/feedback wiring fault could defeat nominally redundant safety paths and what professional architectures do about it.
-3. Convert the minimum-operate gate into a compact curriculum commissioning card after it survives application to a real implementation; do not treat the first synthesis as validated merely because it is concise.
-4. Preserve the independent safety boundary: ordinary LinuxCNC/HAL/FPGA may monitor or request normal operation but does not become personnel-safety authority by convenience.
+1. Apply the full commissioning + CCF + minimum-operate package to a complete modern machine implementation/drawing set when sufficient public evidence exposes safeguarding, safety logic, final elements and physical energy paths together.
+2. Preserve the new mode-integrity rule: invalid selector combinations must fail safe where the architecture relies on safely evaluated mode selection; selecting a mode must not itself start hazardous motion; ordinary LinuxCNC/HAL/FPGA is not sole safety-mode authority.
+3. Preserve the new feedback-integrity rule: EDM/final-element feedback must not share a common wiring/configuration failure that can falsely prove multiple final elements safe. EDM proof is not proof that all hazardous energy is absent.
+4. Convert the minimum-operate gate into a compact curriculum commissioning card after one more complete-machine application; include explicit MODE INTEGRITY and FEEDBACK INTEGRITY checks.
 5. Resume routine 4000 controller-board exact-BOM/power/pin work only when it directly supports the safety checkpoint or after the safety priority reaches a genuine information-gain stop.
 
 ## Laboratory compute checkpoint
@@ -88,4 +88,4 @@ Current request, PWM/gate state, measured current, electrical fault, spool/hydra
 
 ## Global next-work rule
 
-Continue from `checkpoints/session-2026-09-17-safety-common-cause.md`. Prefer authoritative professional schematics, manufacturer safety documentation and standard engineering before simulation. Do not use GitHub-hosted runners for curriculum compute; when a concrete unresolved question justifies compute, target the self-hosted runner `[self-hosted, openpressbrake]` only.
+Continue from `checkpoints/session-2026-09-17-safety-mode-edm-ccf.md`. Prefer authoritative professional schematics, manufacturer safety documentation and standard engineering before simulation. Do not use GitHub-hosted runners for curriculum compute; when a concrete unresolved question justifies compute, target the self-hosted runner `[self-hosted, openpressbrake]` only.

@@ -20,13 +20,13 @@ Do not routinely reopen closed levels without a genuinely new material defect.
 
 The owner has promoted the LinuxCNC/OpenPressBrake safety course to the primary active 4000 priority. Routine controller-board development remains a separate automation concern and must not displace safety work here.
 
-Current safety emphasis: commissioning/validation now includes explicit common-cause and latent-failure analysis, a qualitative minimum-safe-to-operate pre-energization gate, and concrete application of those methods to safely evaluated mode selection and EDM/final-contactor feedback. Continue applying these methods to real professional implementations and convert remaining UNKNOWN items into machine-specific requirements/verification tasks without inventing PL/SIL/DC, stopping, pressure or timing values.
+Current safety emphasis: commissioning/validation includes common-cause and latent-failure analysis, a qualitative minimum-safe-to-operate gate, mode/feedback integrity, physical final-element proof, and personnel-retention/restart-prevention for bodily-entry hazards. Continue applying these methods to real professional implementations without inventing PL/SIL/DC, stopping, pressure or timing values.
 
-Durable reference studies include `safety-course/PROFESSIONAL_SAFETY_WIRING_REFERENCE_STUDY_01.md`, the complete-machine trace worksheet, reset/restart/EDM work, power-restoration work, service/setup-mode work, return-to-service work, `safety-course/COMMISSIONING_VALIDATION_FAULT_INJECTION_PACKAGE_2026-09-17.md`, `safety-course/COMMON_CAUSE_LATENT_FAILURE_AND_MINIMUM_OPERATE_GATE_2026-09-17.md`, and `safety-course/MODE_SELECTION_EDM_COMMON_CAUSE_APPLICATION_2026-09-17.md`.
+Durable reference studies include `safety-course/PROFESSIONAL_SAFETY_WIRING_REFERENCE_STUDY_01.md`, the complete-machine trace worksheet, reset/restart/EDM work, power-restoration work, service/setup-mode work, return-to-service work, `safety-course/COMMISSIONING_VALIDATION_FAULT_INJECTION_PACKAGE_2026-09-17.md`, `safety-course/COMMON_CAUSE_LATENT_FAILURE_AND_MINIMUM_OPERATE_GATE_2026-09-17.md`, `safety-course/MODE_SELECTION_EDM_COMMON_CAUSE_APPLICATION_2026-09-17.md`, and `safety-course/PERSONNEL_RETENTION_RESTART_AUTHORITY_TRACE_2026-09-17.md`.
+
+Personnel-retention freeze: **ACCESS CLEAR != PERSONNEL CLEAR != RETAINED-PERSON LIST EMPTY != BLIND AREA CLEAR != SAFETY RELEASE != FINAL-ELEMENT PROOF != ORDINARY START AUTHORITY.** For hazards where a person can bodily enter and disappear behind a perimeter safeguard, restart-prevention authority belongs to the independent safety system; LinuxCNC/HAL/ordinary FPGA may consume diagnostics/permissives but must not be the sole memory that a person remains inside.
 
 Home-shop maintenance rule: before work, remove/isolate/discharge/block/restrain or otherwise control the hazards relevant to the task. Never leave an unsafe/incomplete/bypassed machine unattended without unmistakable OUT OF SERVICE / DO NOT OPERATE tag-out or equivalent status. Tag-out communicates/preserves the state; it is not a substitute for physical hazard control.
-
-Active checkpoint: `checkpoints/session-2026-09-17-safety-mode-edm-ccf.md`.
 
 ## 4000 foundation/core
 
@@ -48,38 +48,25 @@ Frozen rule: FPGA-local command-freshness watchdog independently removes normal 
 ### Digital field I/O — working contract
 `hardware/4300-digital-field-io-block.md`: 24 isolated 24-V inputs using ISO1212-class receivers; 16 protected sourcing outputs using TPS4H160-Q1-class smart switches; default-LOW isolation; watchdog gate before isolation barrier.
 
-Power/protection freeze: `research/4000-dio-power-fusing-freeze-2026-09-15.md`. Default input personality is low-power IEC Type-3; general outputs use a 0.5-A/channel working limit; four 4-output field-power groups use a 2-A working group-protection target; output isolation power is split into two 8-output banks. Exact resistor, DC/DC and fuse MPN/curve values remain calculation/procurement-bound.
-
 ### STEP/DIR — working contract
 `hardware/4300-stepdir-output-block.md`: six axes; 5-V differential STEP/DIR; 10-MHz working maximum; MAX3042B-class transmitters; single-ended compatibility where drive supports one polarity; watchdog forces STEP static inactive before line driver; explicit rearm; enable/fault/STO separate.
 
 ### PWM / analog — working contract
 Artifacts: `research/4000-pwm-analog-interface-first-pass-2026-09-15.md`, `research/4000-analog-output-source-trace-2026-09-15.md`, `hardware/4300-pwm-analog-output-block.md`.
 
-Freeze at interface level:
-- >=4 watchdog-gated PWM/PDM resources;
-- 1–2 isolated VFD potentiometer-replacement analog channels on base board, 10–20-kHz PWM working target and deterministic minimum-command startup/watchdog state;
-- precision +/-10-V servo output stays daughterboard/variant using a dedicated precision conversion path and independent enable/zeroing contract.
-
-Public evidence did not expose Mesa's internal board-level 7I96S/7I77 analog circuitry; do not manufacture an internal topology from the manuals.
+Freeze at interface level: >=4 watchdog-gated PWM/PDM resources; 1–2 isolated VFD potentiometer-replacement analog channels; precision +/-10-V servo output remains a daughterboard/variant using a dedicated precision conversion path and independent enable/zeroing contract.
 
 ### Proportional-current / solenoid — drawable working contract
 Artifacts include `hardware/4300-proportional-current-driver-block.md`, `research/4000-proportional-driver-gate-fault-net-contract-2026-09-15.md`, and `hardware/4300-proportional-current-kicad-interface.md`.
-
-Present measured 22–28-ohm / 24-V coils imply roughly 0.86–1.09 A DC. First light-duty variant uses a 1.5-A engineering ceiling pending hot-coil measurements. Working architecture: low-side 80-V-class N-MOSFET, engineered fast-decay clamp, 50-milliohm high-side Kelvin shunt + INA240A1-class PWM-rejecting current sense, ADS7953-class shared SAR ADC, FPGA-local fresh-sample current loop and independent hardware overcurrent gate inhibit.
-
-Gate/fault freeze: UCC27511A-class driver with deterministic LOW on UVLO/floating inputs; independent fast comparator + SET-dominant OC latch directly inhibits gate drive. Hardware trip is not merely reported to FPGA. Explicit zero-command/healthy-feedback rearm is required.
-
-Working base-board allocation is four proportional-current channels, implemented as a reusable hierarchical sheet so channel count remains parameterized. Exact clamp voltage/TVS, final MOSFET, PWM frequency and loop gains remain measurement-bound. The schematic-AI contract explicitly rejects inventing clamp values before coil L/current-decay and rail-envelope evidence.
 
 Current request, PWM/gate state, measured current, electrical fault, spool/hydraulic response, ram motion and safety authority remain separate. Watchdog or stale current feedback removes gate authority and requires explicit rearm; stale loop integrator state must not survive rearm.
 
 ## Exact next work
 
-1. Apply the full commissioning + CCF + minimum-operate package to a complete modern machine implementation/drawing set when sufficient public evidence exposes safeguarding, safety logic, final elements and physical energy paths together.
-2. Preserve the new mode-integrity rule: invalid selector combinations must fail safe where the architecture relies on safely evaluated mode selection; selecting a mode must not itself start hazardous motion; ordinary LinuxCNC/HAL/FPGA is not sole safety-mode authority.
-3. Preserve the new feedback-integrity rule: EDM/final-element feedback must not share a common wiring/configuration failure that can falsely prove multiple final elements safe. EDM proof is not proof that all hazardous energy is absent.
-4. Convert the minimum-operate gate into a compact curriculum commissioning card after one more complete-machine application; include explicit MODE INTEGRITY and FEEDBACK INTEGRITY checks.
+1. Trace a complete professional implementation exposing personnel entry/presence or retained-person logic through the independent safety controller to physical final-element re-enable and separate ordinary START. Preserve UNKNOWN if public evidence stops before the final elements.
+2. Continue complete-machine hydraulic/fall-protection evidence when it exposes actual cylinder volumes, blocking/load-holding/dump elements, feedback and gravity-load path together; do not infer an OpenPressBrake hydraulic truth table from generic practice.
+3. Preserve mode-integrity and feedback-integrity rules: invalid selector combinations fail safe where relied upon; selecting mode does not start hazardous motion; EDM does not prove all hazardous energy absent.
+4. Apply the commissioning + CCF + minimum-operate package to complete professional implementations as evidence becomes available.
 5. Resume routine 4000 controller-board exact-BOM/power/pin work only when it directly supports the safety checkpoint or after the safety priority reaches a genuine information-gain stop.
 
 ## Laboratory compute checkpoint
@@ -88,4 +75,4 @@ Current request, PWM/gate state, measured current, electrical fault, spool/hydra
 
 ## Global next-work rule
 
-Continue from `checkpoints/session-2026-09-17-safety-mode-edm-ccf.md`. Prefer authoritative professional schematics, manufacturer safety documentation and standard engineering before simulation. Do not use GitHub-hosted runners for curriculum compute; when a concrete unresolved question justifies compute, target the self-hosted runner `[self-hosted, openpressbrake]` only.
+Continue safety-course professional implementation tracing. Prefer authoritative professional schematics, manufacturer safety documentation and standard engineering before simulation. Do not use GitHub-hosted runners for curriculum compute; when a concrete unresolved question justifies compute, target the self-hosted runner `[self-hosted, openpressbrake]` only.

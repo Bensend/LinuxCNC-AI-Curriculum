@@ -16,7 +16,11 @@ Sources:
 - https://www.hawe.com/applications/manufacturing-efficiency/press-brakes/
 - https://www.hawe.com/nl-nl/fluid-lexicon/detail/switching-position-monitoring/
 
-**DOC-CONFIRMED.** HAWE's SAKB press-brake hydraulic drive consists of a central control block plus two separate suction valves and is presented as DIN 12622-certified. This is useful physical architecture evidence, but the public product page does not expose a complete fault truth table for a single failed suction/safety valve.
+**DOC-CONFIRMED — stronger same-system evidence.** Current HAWE product documentation D 6335 for SAKB exposes a monitored press-brake variant directly. Type `S` is the valve-monitoring version. The current document states that the **two proportional directional valves, two holding valves, and the 4/2-way directional valve are equipped with position monitoring**. This materially strengthens the earlier generic product-page evidence because it identifies multiple monitored hydraulic final elements inside the actual press-brake control system.
+
+Source: https://productfinder.hawe.com/downloads/D6335-en.pdf
+
+**DOC-CONFIRMED.** The SAKB press-brake hydraulic drive consists of a central control block plus two separate suction valves and is presented as DIN 12622-certified. The public D 6335 material exposes the monitored elements but still does not provide a complete machine-level single-fault/recovery truth table.
 
 Source: https://www.hawe.com/en-us/products/product-finder/integrated%2Bsolutions/control%2Bfor%2Bpress%2Bbrakes/sakb%2B-%2Bcontrol%2Bfor%2Bpress%2Bbrakes/
 
@@ -33,21 +37,22 @@ Source: https://salesportal.hydac.com/shop/media/catalog/crossbase/PRD_DOC_BPR/P
 ## Claim ledger
 
 - **DOC-CONFIRMED:** Valve switching-position monitoring can provide evidence about the physical switching element rather than merely the electrical command.
-- **DOC-CONFIRMED:** A professional monitored hydraulic safety architecture can treat failure of one monitored valve as a condition requiring safe shutdown.
+- **DOC-CONFIRMED:** HAWE D 6335 exposes a real press-brake hydraulic control variant with position monitoring on two proportional directional valves, two holding valves, and a 4/2-way directional valve.
+- **DOC-CONFIRMED:** A professional monitored hydraulic safety architecture can treat failure of one monitored valve as a condition requiring safe shutdown (HYDAC PSV; different press class).
 - **DOC-CONFIRMED:** Press-brake hydraulic architectures can contain multiple physically separate hydraulic elements; HAWE SAKB exposes a central block plus two separate suction valves.
-- **INFERENCE:** A disagreement between commanded-safe state and monitored valve position should be represented as a latched safety fault/inhibit until the relevant safety function is restored and validated. This is a conservative architecture rule consistent with the professional evidence, but the exact reset/re-proof sequence remains machine/design-specific.
-- **UNKNOWN:** The public HAWE evidence inspected here does not establish the exact SAKB/ePRAX single-valve-failure hydraulic state, diagnostic timing, pressure threshold, allowable degraded mode, repair sequence, or required post-repair re-proof.
+- **INFERENCE:** A disagreement between commanded-safe state and monitored valve position should be represented as a safety fault/inhibit until the relevant safety function is restored and validated. This is a conservative architecture rule consistent with the professional evidence, but the exact latch/reset/re-proof sequence remains machine/design-specific.
+- **UNKNOWN:** D 6335 does not establish the complete SAKB machine-level response to one monitored element disagreeing, diagnostic timing, pressure threshold, allowable degraded mode, repair sequence, or required post-repair re-proof.
 - **UNKNOWN:** Valve-position feedback alone does not establish that a press-brake beam is physically retained, that pressure/stored energy is safe, or that measured stopping performance remains acceptable.
 
 ## Frozen teaching boundary
 
-**SAFE COMMAND ISSUED != VALVE COIL DE-ENERGIZED != VALVE SWITCHING ELEMENT IN SAFE POSITION != ALL REQUIRED REDUNDANT HYDRAULIC ELEMENTS PROVED != RAM/LOAD PHYSICALLY RETAINED != STORED PRESSURE/ENERGY SAFE != STOP PERFORMANCE VALID != PERSONNEL ACCESS SAFE.**
+**SAFE COMMAND ISSUED != VALVE COIL DE-ENERGIZED != VALVE SWITCHING ELEMENT IN SAFE POSITION != ALL REQUIRED MONITORED HYDRAULIC ELEMENTS PROVED != RAM/LOAD PHYSICALLY RETAINED != STORED PRESSURE/ENERGY SAFE != STOP PERFORMANCE VALID != PERSONNEL ACCESS SAFE.**
 
 And:
 
 **ONE MONITORED FINAL ELEMENT DISAGREES -> DO NOT MASK IT WITH THE COMPANION ELEMENT OR ORDINARY CONTROLLER STATE.**
 
-A healthy companion valve may keep the machine from immediately moving, but that is not evidence that the required redundant safety function remains valid for continued production. No degraded-production permission is inferred.
+A healthy companion element may prevent immediate motion, but that is not evidence that the required redundant safety function remains valid for continued production. No degraded-production permission is inferred.
 
 ## OpenPressBrake curriculum application
 
@@ -62,14 +67,14 @@ LinuxCNC/HAL may display these states and refuse normal commands, but it must no
 
 ## Adversarial commissioning cases
 
-1. Safe shutdown is commanded; both valve coils are off; one monitored spool remains in the non-safe position. Expected disposition: safety function remains invalid; no production rearm from ordinary reset.
-2. Both monitored valve positions report safe, but the ram continues moving. Expected disposition: valve proof does not overrule contradictory physical-motion evidence; access remains prohibited.
+1. Safe shutdown is commanded; valve coils are off; one monitored spool remains in the non-safe position. Expected disposition: safety function remains invalid; no production rearm from ordinary reset.
+2. All monitored valve positions report safe, but the ram continues moving. Expected disposition: valve proof does not overrule contradictory physical-motion evidence; access remains prohibited.
 3. Ram is stationary but stored hydraulic energy remains capable of hazardous movement after a component is disturbed. Expected disposition: stationary is not equivalent to service-safe energy state.
-4. Valve B is repaired after a disagreement while valve A remained healthy. Expected disposition: do not assume A's earlier proof plus B repair reconstructs complete proof; determine the manufacturer's required post-service validation for the actual architecture.
+4. One monitored holding/directional element is repaired after a disagreement while companions remained healthy. Expected disposition: do not assume earlier companion proofs plus repair reconstruct complete proof; determine the manufacturer's required post-service validation for the actual architecture.
 5. LinuxCNC retains START/JOG/DOWN intent across fault repair. Expected disposition: restoring safety authority must not convert stale ordinary intent into fresh hazardous-motion initiation.
 
 ## Information-gain stop / exact next evidence
 
-Seek an OEM or hydraulic manufacturer press-brake document that explicitly exposes **two required retaining/safety elements, each element's monitored feedback, a single-element disagreement/failure reaction, physical ram/load-safe disposition, and post-repair validation/re-proof before production rearm**. Do not infer the missing sequence from HYDAC's mechanical/servo-press PSV or from HAWE product-page architecture alone.
+The same-machine evidence gap is now narrower: D 6335 proves that the SAKB can monitor multiple specific hydraulic final elements. Next seek OEM/manufacturer evidence exposing **single monitored-element disagreement -> machine-level safe reaction/load disposition -> fault retention -> repair -> required re-proof/stop validation -> safety rearm -> separate fresh production initiation**. Also seek whether the two holding-valve proofs can mask one another and how each is challenged after service. Do not infer the missing sequence from HYDAC's mechanical/servo-press PSV.
 
-No simulation or build is justified by this evidence question; authoritative physical-system documentation has higher information value. No GitHub-hosted compute was used.
+No simulation or build is justified by this evidence question; authoritative physical-system documentation has higher information value. No GitHub-hosted or self-hosted compute was used.

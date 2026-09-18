@@ -1,10 +1,10 @@
-# Linked-machine E-stop span, signal forwarding, and reset authority trace
+# Linked-machine E-stop span, signal forwarding, final-element feedback, and reset authority trace
 
 Date: 2026-09-18
 
 ## Question
 
-For a linked machine/line with local safety zones, what professional evidence exists for the chain from an E-stop in one functional unit through its intended span of control, adjacent-machine hazard assumptions, output reaction, reset, and return of ordinary production authority?
+For a linked machine/line with local safety zones, what professional evidence exists for the chain from an E-stop in one functional unit through its intended span of control, adjacent-machine hazard assumptions, output/final-element reaction, reset, and return of ordinary production authority?
 
 This study is intentionally generic. It does **not** define an OpenPressBrake E-stop span, stop category, hydraulic reaction, stopping time/distance, PL/SIL/category/DC, or final-element design.
 
@@ -27,6 +27,16 @@ Source: https://www.pilz.com/download/open/myPNOZ_Signalforwarding_1005677-EN-02
 The same application states that when E-STOP ES2 is operated or an error occurs, outputs of all zones of the involved myPNOZ are reset. It explicitly cautions that this E-stop affects the relevant functional unit and feeding assembly line and that continued operation of upstream/downstream devices must not present a hazard.
 
 The example also documents reset behavior: with its configured start type, cold start, warm start, or reactivation of the E-stop requires a reset with a rising and falling edge before the output is set again.
+
+### Pilz final-element feedback in the same application
+
+**DOC-CONFIRMED.** The same application includes feedback-loop monitoring for external contactors KM21-KM24 connected to non-delayed/delayed outputs. N/C feedback contacts are returned to the associated myPNOZ feedback-loop inputs. Those contacts must be closed before starting; if a required N/C feedback contact remains open, myPNOZ and the connected plant/machine cannot restart.
+
+Pilz further states that, for higher safety in the documented arrangement, two actuators are used. A short between 24 VDC and a safety output is detected as an error and the load can be switched off through the second shutdown route.
+
+This closes an important part of the evidence chain: the example does not stop at a safety-controller output bit; it includes external contactor state as a restart prerequisite.
+
+**Boundary:** contactor feedback proves the monitored contactor state represented by those feedback contacts. It does not prove all hazardous energy absent, nor does it establish an OpenPressBrake hydraulic/gravity safe state.
 
 **Important boundary:** this is evidence for the documented Pilz example, not a universal permission to leave adjacent equipment running. The adjacent-equipment continuation is conditional on the hazard assessment.
 
@@ -52,18 +62,20 @@ Source: https://support.industry.siemens.com/cs/attachments/109793462/109793462_
 
 ## Authority trace
 
-A defensible linked-machine trace is:
+The manufacturer evidence now supports this linked-machine trace:
 
 `E-stop device/location`
 `-> defined local/global span`
 `-> safety evaluator`
 `-> safety-rated cross-unit forwarding where required`
 `-> receiving zone evaluator`
-`-> zone actuator network / final safety outputs`
-`-> physical machine reaction`
+`-> safety outputs`
+`-> external contactors/final elements`
+`-> feedback-loop witness of monitored contactor state`
 `-> adjacent-zone hazard consequence checked`
 `-> stop remains latched as required`
 `-> E-stop device restored`
+`-> feedback prerequisites valid`
 `-> deliberate safety reset/acknowledgement`
 `-> safety outputs eligible to return`
 `-> separate ordinary production START where required by the machine design`
@@ -73,6 +85,8 @@ The key teaching point is that **span selection is part of the safety function**
 ## Freeze
 
 `LOCAL E-STOP ACTUATED != ONLY LOCAL HAZARD EXISTS != ADJACENT EQUIPMENT MAY CONTINUE SAFELY != ALL RELEVANT FINAL ELEMENTS REACTED != PHYSICAL HAZARD ABSENT != RESET PERMITTED != PRODUCTION START AUTHORIZED.`
+
+`SAFETY OUTPUT OFF != EXTERNAL CONTACTOR OPEN != ALL HAZARDOUS ENERGY ABSENT.`
 
 `SAFETY ZONE BOUNDARY != CONTROLLER/ENCLOSURE BOUNDARY != MATERIAL-TRANSFER HAZARD BOUNDARY.`
 
@@ -87,38 +101,40 @@ The key teaching point is that **span selection is part of the safety function**
 1. **Wrong span configured.** Pressing a local E-stop removes one unit's outputs while an upstream/downstream conveyor, robot, feeder, transfer mechanism, or gravity/hydraulic hazard can still injure a person in the affected space. Result: local output reaction may be correct while the safety function is wrong at the machine-system level.
 2. **Forwarded safety signal lost or misassigned.** In the Pilz topology, a downstream unit's E-stop can deliberately stop the upstream assembly line feeding it. Misrouting that propagation can therefore leave a transfer hazard active even though the originating unit itself stopped. Treat forwarding faults according to the safety architecture; do not substitute an ordinary PLC/LinuxCNC network bit as the sole cross-unit safety authority.
 3. **Adjacent machine continues by design.** Validation must demonstrate that its continued operation cannot create the hazard that the local E-stop is intended to control. The Pilz example states this condition explicitly.
-4. **Reset performed from an HMI.** A normal HMI communication path is not automatically a safety reset path. Siemens specifically calls out safe-transfer measures for HMI acknowledgement.
-5. **Cold/warm restart.** Do not assume power return or STOP->RUN transition restores outputs. The Pilz example deliberately requires reset under its configured start behavior.
-6. **Stale ordinary command.** LinuxCNC/HAL/ordinary FPGA START, JOG, cycle request, conveyor request, DOWN, or ENABLE that remained asserted through the E-stop must not be reinterpreted as fresh operator intent merely because safety outputs become eligible again.
-7. **Electrical safe output but residual energy remains.** STO or de-energized contactors do not by themselves prove gravity, hydraulic, pneumatic, thermal, stored mechanical, or process hazards absent.
-8. **One forwarded path tested, another assumed.** The FU1/FU2/FU3 topology contains different propagation paths. Commissioning one E-stop does not prove the neighboring device's span, receiving zone, or outputs.
+4. **Safety output changes but contactor does not.** The same application provides feedback-loop monitoring. A required N/C feedback contact that does not close prevents restart. Commissioning must challenge welded/stuck final elements rather than stopping at controller diagnostics.
+5. **Feedback contact lies or is miswired.** EDM/feedback is evidence about the monitored contact state, not direct proof of every energy path. Challenge feedback wiring and common-cause faults separately.
+6. **Reset performed from an HMI.** A normal HMI communication path is not automatically a safety reset path. Siemens specifically calls out safe-transfer measures for HMI acknowledgement.
+7. **Cold/warm restart.** Do not assume power return or STOP->RUN transition restores outputs. The Pilz example deliberately requires reset under its configured start behavior.
+8. **Stale ordinary command.** LinuxCNC/HAL/ordinary FPGA START, JOG, cycle request, conveyor request, DOWN, or ENABLE that remained asserted through the E-stop must not be reinterpreted as fresh operator intent merely because safety outputs become eligible again.
+9. **Electrical final elements safe but residual energy remains.** Open contactors or STO do not by themselves prove gravity, hydraulic, pneumatic, thermal, stored mechanical, or process hazards absent.
+10. **One forwarded path tested, another assumed.** The FU1/FU2/FU3 topology contains different propagation paths. Commissioning one E-stop does not prove the neighboring device's span, receiving zone, outputs, contactors, or feedback.
 
 ## Commissioning checks derived from the evidence
 
-For each E-stop device, record its intended span and physically challenge every relevant hazardous actuator inside and adjacent to that span. Verify the actual final-element reaction, not only the safety-controller bit. For any adjacent equipment allowed to continue, document why that continuation cannot create a hazard in the stopped span and challenge foreseeable transfer/coupling paths.
+For each E-stop device, record its intended span and physically challenge every relevant hazardous actuator inside and adjacent to that span. Verify the actual final-element reaction, not only the safety-controller bit. Where external contactor feedback is part of the design, deliberately challenge a stuck/open feedback condition and confirm restart remains inhibited.
 
 For linked units, build an E-stop span matrix: rows are E-stop/protective devices and columns are hazardous functions/final elements across all adjacent units. Challenge every required intersection physically. A matrix is a commissioning aid, not a substitute for the risk assessment that determines which intersections are required.
 
-Challenge power cycle, controller STOP/RUN, restored E-stop device, reset from every permitted station, wrong reset station, loss/misassignment of cross-unit safety forwarding, one failed final element, and stale ordinary production commands. Confirm that restoring the safety function does not itself create hazardous motion.
+Challenge power cycle, controller STOP/RUN, restored E-stop device, reset from every permitted station, wrong reset station, loss/misassignment of cross-unit safety forwarding, one failed final element, feedback disagreement, and stale ordinary production commands. Confirm that restoring the safety function does not itself create hazardous motion.
 
 ## LinuxCNC/OpenPressBrake boundary
 
-LinuxCNC may receive diagnostic state such as `E_STOP_ACTIVE`, `ZONE_INHIBITED`, `SAFETY_READY`, or an ordinary run permissive, but LinuxCNC/HAL and the normal FPGA controller must not become the sole authority that decides personnel-safety E-stop span, cross-zone safety forwarding, or reset validity.
+LinuxCNC may receive diagnostic state such as `E_STOP_ACTIVE`, `ZONE_INHIBITED`, `SAFETY_READY`, `FINAL_ELEMENT_FEEDBACK_OK`, or an ordinary run permissive, but LinuxCNC/HAL and the normal FPGA controller must not become the sole authority that decides personnel-safety E-stop span, cross-zone safety forwarding, EDM validity, or reset validity.
 
 For a press brake specifically, no inference is made here that STO, pump contactor removal, valve de-energization, or any generic zone output proves the beam/load safe. The physical final-element and retained-energy evidence remains machine-specific and must be validated separately.
 
 ## Evidence status
 
-The three-functional-unit linked-zone topology, directional safety-signal propagation, explicit adjacent-hazard condition, configured reset behavior, Siemens zone actuator network, and separation of acknowledgement/start are **DOC-CONFIRMED** from manufacturer documentation.
+The three-functional-unit linked-zone topology, directional safety-signal propagation, explicit adjacent-hazard condition, external-contactor feedback-loop restart prerequisite, configured reset behavior, Siemens zone actuator network, and separation of acknowledgement/start are **DOC-CONFIRMED** from manufacturer documentation.
 
-A complete public same-machine trace that exposes every internal voting path, actual physical final-element feedback, injected cross-unit forwarding failure, and separate production START remains **UNKNOWN** from the evidence inspected in this session.
+A complete public same-machine trace that exposes actual mechanical/process hazard cessation after the contactors, injected cross-unit forwarding failure, and separate production START remains **UNKNOWN** from the evidence inspected in this session.
 
 No executable lab is justified by this evidence gap: the unresolved questions are implementation- and machine-specific and are better answered by authoritative application/wiring/commissioning evidence than by synthetic simulation.
 
 ## Next evidence target
 
-Use the Pilz FU1/FU2/FU3 topology as the professional linked-line baseline and seek its wiring/commissioning detail or a comparable implementation exposing:
+Use the Pilz FU1/FU2/FU3 topology as the professional linked-line baseline and seek its detailed circuit/commissioning material or a comparable implementation exposing:
 
-`device/location -> span matrix -> cross-unit safety forwarding -> receiving evaluator -> final element -> physical witness -> adjacent-zone behavior -> forwarding fault -> latched state -> reset/rearm -> separate production START`.
+`device/location -> span matrix -> cross-unit safety forwarding -> receiving evaluator -> safety output -> contactor/final element -> feedback witness -> physical hazard witness -> adjacent-zone behavior -> forwarding/final-element fault -> latched state -> reset/rearm -> separate production START`.
 
-Prefer documentation containing a failed cross-unit communication, wrong-span commissioning case, or actual output/contactor/drive feedback. Preserve `UNKNOWN` rather than inventing the physical machine response.
+Prefer documentation containing a failed cross-unit communication, wrong-span commissioning case, or physical process/drive feedback beyond contactor EDM. Preserve `UNKNOWN` rather than inventing the physical machine response.

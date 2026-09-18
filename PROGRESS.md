@@ -20,11 +20,13 @@ Do not routinely reopen closed levels without a genuinely new material defect.
 
 The owner has promoted the LinuxCNC/OpenPressBrake safety course to the primary active 4000 priority. Routine controller-board development remains a separate automation concern and must not displace safety work here.
 
-Current safety emphasis: commissioning/validation includes common-cause and latent-failure analysis, a qualitative minimum-safe-to-operate gate, mode/feedback integrity, physical final-element proof, and personnel-retention/restart-prevention for bodily-entry hazards. Continue applying these methods to real professional implementations without inventing PL/SIL/DC, stopping, pressure or timing values.
+Current safety emphasis: commissioning/validation includes common-cause and latent-failure analysis, a qualitative minimum-safe-to-operate gate, mode/feedback integrity, physical final-element proof, personnel-retention/restart-prevention for bodily-entry hazards, and gravity-axis retaining-function proof/recovery. Continue applying these methods to real professional implementations without inventing PL/SIL/DC, stopping, pressure or timing values.
 
-Durable reference studies include `safety-course/PROFESSIONAL_SAFETY_WIRING_REFERENCE_STUDY_01.md`, the complete-machine trace worksheet, reset/restart/EDM work, power-restoration work, service/setup-mode work, return-to-service work, `safety-course/COMMISSIONING_VALIDATION_FAULT_INJECTION_PACKAGE_2026-09-17.md`, `safety-course/COMMON_CAUSE_LATENT_FAILURE_AND_MINIMUM_OPERATE_GATE_2026-09-17.md`, `safety-course/MODE_SELECTION_EDM_COMMON_CAUSE_APPLICATION_2026-09-17.md`, and `safety-course/PERSONNEL_RETENTION_RESTART_AUTHORITY_TRACE_2026-09-17.md`.
+Durable reference studies include `safety-course/PROFESSIONAL_SAFETY_WIRING_REFERENCE_STUDY_01.md`, the complete-machine trace worksheet, reset/restart/EDM work, power-restoration work, service/setup-mode work, return-to-service work, `safety-course/COMMISSIONING_VALIDATION_FAULT_INJECTION_PACKAGE_2026-09-17.md`, `safety-course/COMMON_CAUSE_LATENT_FAILURE_AND_MINIMUM_OPERATE_GATE_2026-09-17.md`, `safety-course/MODE_SELECTION_EDM_COMMON_CAUSE_APPLICATION_2026-09-17.md`, `safety-course/PERSONNEL_RETENTION_RESTART_AUTHORITY_TRACE_2026-09-17.md`, and `safety-course/GRAVITY_AXIS_BRAKE_PROOF_FAILURE_DISPOSITION_TRACE_2026-09-18.md`.
 
 Personnel-retention freeze: **ACCESS CLEAR != PERSONNEL CLEAR != RETAINED-PERSON LIST EMPTY != BLIND AREA CLEAR != SAFETY RELEASE != FINAL-ELEMENT PROOF != ORDINARY START AUTHORITY.** For hazards where a person can bodily enter and disappear behind a perimeter safeguard, restart-prevention authority belongs to the independent safety system; LinuxCNC/HAL/ordinary FPGA may consume diagnostics/permissives but must not be the sole memory that a person remains inside.
+
+Gravity-axis proof freeze: **BRAKE TEST REQUEST != TEST TORQUE APPLIED != BRAKE HELD TEST TORQUE != LOAD PHYSICALLY RETAINED != TEST PASS != PRODUCTION AUTHORITY.** A failed required brake proof removes further-operation authority; STO alone is not load retention for a gravity axis. Fault acknowledgement is not repair or re-proof, and stale ordinary START/JOG/ENABLE must not become fresh intent when safety authority returns.
 
 Home-shop maintenance rule: before work, remove/isolate/discharge/block/restrain or otherwise control the hazards relevant to the task. Never leave an unsafe/incomplete/bypassed machine unattended without unmistakable OUT OF SERVICE / DO NOT OPERATE tag-out or equivalent status. Tag-out communicates/preserves the state; it is not a substitute for physical hazard control.
 
@@ -63,11 +65,12 @@ Current request, PWM/gate state, measured current, electrical fault, spool/hydra
 
 ## Exact next work
 
-1. Trace a complete professional implementation exposing personnel entry/presence or retained-person logic through the independent safety controller to physical final-element re-enable and separate ordinary START. Preserve UNKNOWN if public evidence stops before the final elements.
+1. Find a same-machine professional implementation that exposes failed mechanical/hydraulic retaining proof through safety latch/inhibit, physical load-safe disposition, repair/reset prerequisites, required re-proof, final-element re-enable, and separate ordinary START. Preserve UNKNOWN where public evidence stops.
 2. Continue complete-machine hydraulic/fall-protection evidence when it exposes actual cylinder volumes, blocking/load-holding/dump elements, feedback and gravity-load path together; do not infer an OpenPressBrake hydraulic truth table from generic practice.
-3. Preserve mode-integrity and feedback-integrity rules: invalid selector combinations fail safe where relied upon; selecting mode does not start hazardous motion; EDM does not prove all hazardous energy absent.
-4. Apply the commissioning + CCF + minimum-operate package to complete professional implementations as evidence becomes available.
-5. Resume routine 4000 controller-board exact-BOM/power/pin work only when it directly supports the safety checkpoint or after the safety priority reaches a genuine information-gain stop.
+3. Trace dual-retaining-element disagreement/common-cause behavior where a professional safety concept actually defines it; do not assume one passing brake permits degraded production after another required brake fails.
+4. Preserve mode-integrity and feedback-integrity rules: invalid selector combinations fail safe where relied upon; selecting mode does not start hazardous motion; EDM does not prove all hazardous energy absent.
+5. Apply the commissioning + CCF + minimum-operate package to complete professional implementations as evidence becomes available.
+6. Resume routine 4000 controller-board exact-BOM/power/pin work only when it directly supports the safety checkpoint or after the safety priority reaches a genuine information-gain stop.
 
 ## Laboratory compute checkpoint
 

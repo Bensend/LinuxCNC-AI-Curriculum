@@ -26,6 +26,12 @@ This is strong evidence for an engineering pattern the curriculum had previously
 
 The manual's fault table also states that the footswitch must be held until the beam is completely stopped to ensure the secondary stop works, reinforcing that the relevant witness is physical stop completion, not merely an output transition.
 
+### Periodic integrity boundary
+
+**DOC-CONFIRMED.** The same machine manual says presence-sensing safeguarding must receive regular safety-integrity tests with records retained. It explicitly lists stop-time measurements, safety-distance calculations/inspections, operator checks, and periodic maintenance checks. This establishes that the physical stopping witness is not only a one-time commissioning concern.
+
+**UNKNOWN.** The accessible manual does not say that replacement of the secondary safety valve itself is the trigger for rerunning the FoldSafe secondary-stop test, nor does it provide a named post-replacement static holding-valve retention test. Do not infer either trigger.
+
 ## Evidence boundary
 
 This source closes a **dynamic unmasked stop-path proof** gap. It does **not** establish all of the harder post-service holding-valve chain.

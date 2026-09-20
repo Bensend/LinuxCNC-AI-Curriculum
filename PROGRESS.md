@@ -22,6 +22,8 @@ Routine controller-board development remains a separate automation concern and m
 
 Current safety emphasis includes machine hazard boundaries; independent safety authority; hydraulic/electrical/mechanical final-element proof; maintenance and return-to-service evidence; reset/restart/cold-start freshness; two-hand physical stopping/safety-distance authority; operating-mode commissioning; and explicit separation of normal stop, safety-related stop, hazardous-energy isolation, and deliberately bounded energized diagnostic authority.
 
+Newest independent Lane-B presence/restart study: `safety-course/PRESENCE_SENSING_REAR_ACCESS_RESTART_INTERLOCK_AUTHORITY_STUDY_2026-09-20.md` traces SICK and Pilz manufacturer guidance for stand-behind/rear-access hazards. Freeze: **ACCESS FIELD CLEAR != HAZARD AREA PERSONNEL-CLEAR != RESTART INTERLOCK SATISFIED**, and **PROTECTIVE DEVICE RESET != SAFETY REQUALIFIED != MACHINE RESTART AUTHORIZED != FRESH ORDINARY START**. Where a person can pass beyond the access field or cannot be detected everywhere, clearing the access sensor cannot silently become personnel-clear evidence; reset/restart controls, continued presence detection or other validated clearance architecture must match the actual geometry.
+
 Newest cross-domain final-element study: `safety-course/FINAL_ELEMENT_WITNESS_EDM_STO_HYDRAULIC_POSITION_COMPARISON_2026-09-20.md` compares electrical contactor EDM, drive STO/torque-disabled status, safety brake feedback, and hydraulic spool/neutral-position monitoring. Manufacturer evidence supports a reusable witness ladder from safety demand -> command -> actuator/function status -> energy-path state -> physical machine response -> performance acceptance -> restart/rearm. Freeze: **STO REQUESTED != STO ACTIVE != TORQUE DISABLED != AXIS STATIONARY != LOAD RETAINED != ELECTRICAL ENERGY ISOLATED** and **VALVE COMMAND OFF != SOLENOID DE-ENERGIZED != SPOOL/POPPET IN EXPECTED POSITION != HYDRAULIC FLOW BLOCKED != PRESSURE REMOVED != RAM PHYSICALLY STOPPED/RETAINED**. Do not collapse heterogeneous witnesses into a generic `SAFE=true` bit.
 
 Newest safety-input evidence: `safety-course/SAFETY_INPUT_MULTI_FAULT_SAFE_OUTPUT_AND_RESTART_DISPOSITION_STUDY_2026-09-20.md` closes the bounded Lane-B search with current Rockwell and SICK manufacturer evidence for multiple field-fault classes, safe-output disposition, repair/reset semantics, cold-start device testing, and restart separation. Freeze: **FAULT PHYSICALLY REMOVED != FAULT LATCH CLEARED != REQUIRED DEVICE TEST/CYCLE COMPLETE != MANUAL RESET COMPLETE != OUTPUT REAUTHORIZED**, and **RESET SIGNAL PRESENT != VALID RESET EDGE != FAULT REPAIRED != SAFE RESTART**. Generic safety-input fault-table searching is now information-gain limited unless materially new physical validation/masking evidence appears.
@@ -62,17 +64,18 @@ Durable foundation includes `hardware/BLOCK_SPEC_TEMPLATE.md`, `hardware/4000-bl
 
 ## Exact next work
 
-1. Trace one complete manufacturer sequence for **drive STO plus mechanical brake/gravity-axis retention** or **hydraulic position monitoring plus pressure/motion witness**, emphasizing command/status mismatch, fault disposition, restart inhibition, and what physical performance still requires a separate test.
-2. Treat generic EDM/STO/status-bit cataloging as information-gain limited; seek complete physical sequences rather than more bits.
-3. Treat generic safety-input fault-table searching as information-gain limited; reopen only for materially different physical validation or masking evidence.
-4. Treat the post-replacement holding/counterbalance-valve static-retention chain as source-limited unless a genuinely new OEM/manifold source appears.
-5. Preserve the reusable energized-diagnostic authority contract: exact task, remaining hazards, physical configuration, selected control authority, permitted actuation, physical witness, abort behavior, masking control, acceptance criterion, and exit/requalification.
-6. Preserve return-to-service separation: diagnostic complete != personnel clear != safeguards restored/revalidated != safety reset/rearm != fresh production start.
-7. Resume routine 4000 controller-board work only when it directly supports the safety checkpoint or the safety priority reaches a genuine information-gain stop.
+1. Primary lane: trace one complete manufacturer sequence for **drive STO plus mechanical brake/gravity-axis retention** or **hydraulic position monitoring plus pressure/motion witness**, emphasizing command/status mismatch, fault disposition, restart inhibition, and what physical performance still requires a separate test.
+2. Lane B: seek a complete professional **accessible-cell presence-sensing commissioning/validation sequence** showing field geometry/blind-area analysis, deliberate stand-behind occupancy, reset location/visibility, stale-command challenge, final-element response, and fresh restart.
+3. Treat generic EDM/STO/status-bit cataloging as information-gain limited; seek complete physical sequences rather than more bits.
+4. Treat generic safety-input fault-table searching as information-gain limited; reopen only for materially different physical validation or masking evidence.
+5. Treat the post-replacement holding/counterbalance-valve static-retention chain as source-limited unless a genuinely new OEM/manifold source appears.
+6. Preserve the reusable energized-diagnostic authority contract: exact task, remaining hazards, physical configuration, selected control authority, permitted actuation, physical witness, abort behavior, masking control, acceptance criterion, and exit/requalification.
+7. Preserve return-to-service separation: diagnostic complete != personnel clear != safeguards restored/revalidated != safety reset/rearm != fresh production start.
+8. Resume routine 4000 controller-board work only when it directly supports the safety checkpoint or the safety priority reaches a genuine information-gain stop.
 
 ## Laboratory compute checkpoint
 
-`LAB_COMPUTE_LOG.md` remains authoritative. No simulation/build/test compute was consumed in this session. No GitHub-hosted runner was used.
+`LAB_COMPUTE_LOG.md` remains authoritative. No simulation/build/test compute was consumed in this Lane-B session. No GitHub-hosted runner was used.
 
 ## Global next-work rule
 

@@ -22,6 +22,8 @@ Routine controller-board development remains a separate automation concern and m
 
 Current safety emphasis includes machine hazard boundaries; independent safety authority; hydraulic/electrical/mechanical final-element proof; maintenance and return-to-service evidence; reset/restart/cold-start freshness; two-hand physical stopping/safety-distance authority; operating-mode commissioning; and explicit separation of normal stop, safety-related stop, hazardous-energy isolation, and deliberately bounded energized diagnostic authority.
 
+Newest gravity-axis physical-proof study: `safety-course/SINAMICS_SAFE_BRAKE_TEST_UNMASKED_GRAVITY_AXIS_PHYSICAL_PROOF_SEQUENCE_2026-09-20.md` closes the current drive/brake sequence with Siemens manufacturer evidence. SBT establishes the suspended load, selects one brake/test direction/sequence, closes the selected brake, deliberately keeps the companion brake open, applies defined test torque, and uses encoder-observed motion against a parameterized positional tolerance as the physical performance witness. Brake close/open expectations are timed/faulted and test exit is ordered before ordinary setpoint authority returns. Freeze: **STO ACTIVE != SBC COMMAND VALID != BRAKE MECHANICS HEALTHY != REQUIRED HOLDING TORQUE PHYSICALLY PROVED**, **TWO BRAKES PRESENT != EACH BRAKE INDIVIDUALLY PROVED**, and **TEST ABORTED != TEST PASSED != PRODUCTION AUTHORITY**. OpenPressBrake-specific torque, tolerance, interval, brake topology and required PL/SIL remain UNKNOWN.
+
 Newest independent Lane-B presence/restart study: `safety-course/PRESENCE_SENSING_REAR_ACCESS_RESTART_INTERLOCK_AUTHORITY_STUDY_2026-09-20.md` traces SICK and Pilz manufacturer guidance for stand-behind/rear-access hazards. Freeze: **ACCESS FIELD CLEAR != HAZARD AREA PERSONNEL-CLEAR != RESTART INTERLOCK SATISFIED**, and **PROTECTIVE DEVICE RESET != SAFETY REQUALIFIED != MACHINE RESTART AUTHORIZED != FRESH ORDINARY START**. Where a person can pass beyond the access field or cannot be detected everywhere, clearing the access sensor cannot silently become personnel-clear evidence; reset/restart controls, continued presence detection or other validated clearance architecture must match the actual geometry.
 
 Newest cross-domain final-element study: `safety-course/FINAL_ELEMENT_WITNESS_EDM_STO_HYDRAULIC_POSITION_COMPARISON_2026-09-20.md` compares electrical contactor EDM, drive STO/torque-disabled status, safety brake feedback, and hydraulic spool/neutral-position monitoring. Manufacturer evidence supports a reusable witness ladder from safety demand -> command -> actuator/function status -> energy-path state -> physical machine response -> performance acceptance -> restart/rearm. Freeze: **STO REQUESTED != STO ACTIVE != TORQUE DISABLED != AXIS STATIONARY != LOAD RETAINED != ELECTRICAL ENERGY ISOLATED** and **VALVE COMMAND OFF != SOLENOID DE-ENERGIZED != SPOOL/POPPET IN EXPECTED POSITION != HYDRAULIC FLOW BLOCKED != PRESSURE REMOVED != RAM PHYSICALLY STOPPED/RETAINED**. Do not collapse heterogeneous witnesses into a generic `SAFE=true` bit.
@@ -64,9 +66,9 @@ Durable foundation includes `hardware/BLOCK_SPEC_TEMPLATE.md`, `hardware/4000-bl
 
 ## Exact next work
 
-1. Primary lane: trace one complete manufacturer sequence for **drive STO plus mechanical brake/gravity-axis retention** or **hydraulic position monitoring plus pressure/motion witness**, emphasizing command/status mismatch, fault disposition, restart inhibition, and what physical performance still requires a separate test.
+1. Primary lane: trace one complete manufacturer **hydraulic final-element physical sequence** combining monitored valve/spool position with independent pressure and/or ram-motion witness, emphasizing command/status mismatch, timeout/fault disposition, restart inhibition/requalification, and what physical performance still requires a separate test.
 2. Lane B: seek a complete professional **accessible-cell presence-sensing commissioning/validation sequence** showing field geometry/blind-area analysis, deliberate stand-behind occupancy, reset location/visibility, stale-command challenge, final-element response, and fresh restart.
-3. Treat generic EDM/STO/status-bit cataloging as information-gain limited; seek complete physical sequences rather than more bits.
+3. Treat generic EDM/STO/brake/status-bit cataloging as information-gain limited; the Siemens SBT study now provides the required unmasked gravity-axis physical performance sequence.
 4. Treat generic safety-input fault-table searching as information-gain limited; reopen only for materially different physical validation or masking evidence.
 5. Treat the post-replacement holding/counterbalance-valve static-retention chain as source-limited unless a genuinely new OEM/manifold source appears.
 6. Preserve the reusable energized-diagnostic authority contract: exact task, remaining hazards, physical configuration, selected control authority, permitted actuation, physical witness, abort behavior, masking control, acceptance criterion, and exit/requalification.
@@ -75,7 +77,7 @@ Durable foundation includes `hardware/BLOCK_SPEC_TEMPLATE.md`, `hardware/4000-bl
 
 ## Laboratory compute checkpoint
 
-`LAB_COMPUTE_LOG.md` remains authoritative. No simulation/build/test compute was consumed in this Lane-B session. No GitHub-hosted runner was used.
+`LAB_COMPUTE_LOG.md` remains authoritative. No simulation/build/test compute was consumed in this session. No GitHub-hosted runner was used.
 
 ## Global next-work rule
 

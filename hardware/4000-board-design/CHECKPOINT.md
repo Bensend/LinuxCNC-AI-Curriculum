@@ -10,54 +10,54 @@ Independent board-design curriculum lane is active alongside the safety curricul
 - `BD02_REFERENCE_TO_BLOCK_CONTRACT_CALCULATION_PROTECTION_AND_RESOURCES.md`
 - `BD03_MACHINE_IO_TO_BOARD_RESOURCE_AND_CONNECTION_PLAN.md`
 - `BD04_DEFAULT_STATE_OUTPUT_AUTHORITY_WATCHDOG_AND_FAULT_CONTAINMENT.md`
+- `BD05_POWER_DOMAINS_RETURNS_PARTIAL_POWER_AND_FAULT_PATHS.md`
 
-BD01 establishes reusable-block versus board-specific connection-definition ownership. BD02 covers proven-reference selection, explicit deltas, calculations/derating, protection reasoning and resource declarations. BD03 switches to board integration with machine-I/O decomposition, typed resource budgeting, connection requirements and unresolved-resource ownership. BD04 returns to block engineering and teaches output authority, deterministic default/de-energized states, watchdog boundaries, power-domain loss, fault containment and evidence-based qualification.
+BD01 establishes reusable-block versus board-specific connection-definition ownership. BD02 covers proven-reference selection, explicit deltas, calculations/derating, protection reasoning and resource declarations. BD03 switches to board integration with machine-I/O decomposition, typed resource budgeting, connection requirements and unresolved-resource ownership. BD04 returns to block engineering and teaches output authority, deterministic default/de-energized states, watchdog boundaries, power-domain loss, fault containment and evidence-based qualification. BD05 switches back to board integration and teaches source/load ownership, normal and fault-current return tracing, startup/inrush aggregation, return/chassis/PE/shield distinctions, partial-power/back-power analysis and release gates.
 
-## BD04 verified worked-example state
+## BD05 verified worked-example state
 
-Every OpenPressBrake file named to students in BD04 was opened in current main-branch form during this run:
+Every OpenPressBrake file named to students in BD05 was opened and inspected in current main-branch form during this run:
 
-- `hardware/blocks/digital_output_24v/engineering.yaml` — `VERIFIED_FOR_LESSON` for reusable ownership, semantic interfaces, deterministic command-loss invariant, machine-input unknowns, calculation structure and ordinary-control safety boundary.
-- `hardware/blocks/digital_output_24v/manifest.yaml` — `VERIFIED_FOR_LESSON` for default/watchdog state, FPGA-resource declaration, fault requirements and deliberately unresolved board/application ratings.
-- `hardware/blocks/digital_output_24v/design/REV1_ISOLATED_INTERFACE_CONTRACT.md` — `VERIFIED_FOR_LESSON` for separated logic/field-domain architecture, field-side OFF authority and first-machine isolation delta; it is not presented as released production hardware.
-- `hardware/blocks/digital_output_24v/STATUS_CHECKLIST.md` — `VERIFIED_FOR_LESSON` for maturity boundaries. The reusable non-isolated variant is simulation-ready; the Rev1 isolated board path remains explicitly not schematic-ready.
+- `hardware/REV1_BOARD_INTEGRATION.yaml` — `VERIFIED_FOR_LESSON` for board-specific domain ownership and non-collapse rules. It explicitly separates CORE_24V, PROP_FIELD_24V, PVR_SENSOR_24V and SWITCHED_IO_24V, and preserves analog/high-current/switched/core layout-zone distinctions. It is not presented as proof that every branch is production-qualified.
+- `hardware/blocks/machine_power/design/REV11_SENSOR_POWER_DOMAIN_RECONCILIATION.md` — `VERIFIED_FOR_LESSON` for an adversarial catalog/integration correction. It records why the earlier sensor-field-behind-logic-eFuse assumption was invalid for Rev1 and moves source-domain authority back to board integration.
+- `hardware/blocks/machine_power/STATUS_CHECKLIST.md` — `VERIFIED_FOR_LESSON` for maturity/release-gate teaching only. It explicitly says machine_power is NOT YET SCHEMATIC-READY and leaves ILIM/dVdT, separate sensor branch protection/current/drop, return/ground/chassis/PE relationships, PCB/current-path, thermal/fault/EMC and integration gates open.
 
-OpenPressBrake current main tree was re-read before checkpointing at `9893ce2f8d5ac076aad5a19679afa1f750e8433e`. The active engineering state has moved substantially since BD03, including additional Rev1 isolated-output work, so this run consumed that newest state read-only and did not overwrite OpenPressBrake engineering files.
+OpenPressBrake main was re-read before curriculum writes. Current engineering head observed this run was `a873cfdd4e796f0a3f7c49f16a6927c6c2498772` (`integration: instantiate Rev1 proportional valve power boundary`). Because power integration is actively moving, BD05 consumed current engineering state read-only and did not edit OpenPressBrake files.
 
 ## Catalog stress-test result
 
-BD04 confirms a useful reusable-block property: deterministic local OFF authority is explicit and physically grounded in command pull-down behavior rather than being hidden in software assumptions.
+BD05 confirms that the reusable-block/board-integration split survives a real source-domain correction: the reusable machine-power primitive can retain its electrical semantics while the board integration owns which physical machine source actually feeds a field rail.
 
-It also freezes an important board-integration distinction:
+The important freezes are:
 
-`LOCAL COMMAND PULL-DOWN != SYSTEM WATCHDOG`
+`SAME NOMINAL VOLTAGE != SAME POWER DOMAIN`
+
+`PROTECTED DEVICE PRESENT != FAULT CURRENT PATH QUALIFIED`
+
+`DOMAIN OFF != NO ENERGY ENTERS DOMAIN`
 
 and
 
-`WATCHDOG REQUESTS OFF != PHYSICAL OUTPUT PROVED OFF`.
+`SEMANTIC BLOCK RAIL != AUTHORITY TO OVERRIDE VERIFIED BOARD SOURCE ASSIGNMENT`.
 
-The reusable block states that watchdog/control loss must resolve OFF at system integration, but it does not pretend to own the board-level watchdog. A later complete-board lesson must trace watchdog/inhibit authority end-to-end through FPGA logic, translation/isolation, field command node, output device and measured field state.
-
-The current catalog also correctly refuses to promote the IPS1025H device capability into a board channel rating. Actual steady current, inrush, inductance, simultaneous-channel count, copper/vias, connector rating and thermal envelope remain typed machine/board evidence gates.
-
-No catalog correction was justified this run: the important incompleteness is already explicit, and active OpenPressBrake output integration is changing. Curriculum work therefore remained read-only with respect to that block.
+The Rev11 correction is a positive catalog stress-test result because the contradiction was made durable and fail-closed instead of being papered over. The remaining grounding/return and branch-protection gaps are already explicit. No new OpenPressBrake catalog edit was technically justified while active power integration is changing.
 
 ## Next exact work
 
-Build BD05 as a board-integration lesson on:
+Build BD06 as a **block-engineering** lesson on machine-readable connectivity and capture readiness:
 
-`power domains -> source/load budget -> normal current path -> fault-current return -> startup/inrush aggregation -> return-domain joins -> chassis/PE/shield boundary -> cross-block back-power analysis -> verification gates`
+`semantic interfaces -> exact component pins/nets -> parameter/BOM authority -> machine-readable connectivity -> connection-definition binding -> capture gate -> generated/hand-captured KiCad schematic -> ERC -> human schematic review -> revision evidence`
 
-Before assigning any worked example, open current machine-power, field-power, FPGA/core-power, connection-definition and board-integration files actually needed by the lesson. Do not infer readiness from catalog status. Prefer a small cross-block slice that can be traced completely rather than presenting the whole OpenPressBrake power tree as finished.
+The lesson must attack the failure mode where prose and status are mature but exact production connectivity is incomplete. It should teach that a block is not schematic-ready until every required component pin, support part, return, enable/default-state network, protection path and externally bound semantic interface has an exact authority.
 
-BD05 must force students to distinguish normal return, fault-current return, shield/chassis/PE, logic reference and isolated field return. It should explicitly challenge partial-power cases where one domain is alive and another is dead, and should treat connector return pins and board-specific joins as connection/integration authority rather than reusable-block assumptions.
+Before exposing any candidate block to students, open its current engineering contract, manifest, exact connectivity artifact, BOM/parameter authority, status checklist, and any generated schematic/ERC evidence actually referenced. Prefer a block whose machine-readable connectivity is sufficiently complete to teach the positive path, plus one explicitly incomplete case to teach fail-closed capture gating. Do not use current active proportional/power work as a finished positive example unless current main actually supports that claim.
 
-If current power files conflict or are actively being changed, record the exact defect and either use them only as an incomplete case study or select a different verified slice. Do not repair active engineering files merely to simplify the lesson.
+BD06 should also make connection definitions remain board-specific: exact field connector part/pins/placement/silkscreen/harness destination bind to semantic block ports at board integration; they do not become part of the reusable block merely to simplify schematic generation.
 
 ## Compute
 
-No simulation, synthesis, benchmark or executable verification was justified in BD04. No hosted compute was used. Executable board/FPGA work remains restricted to `[self-hosted, openpressbrake]` when a concrete question requires it.
+No simulation, synthesis, benchmark or executable verification was justified in BD05. No hosted compute was used. Executable board/FPGA work remains restricted to `[self-hosted, openpressbrake]` when a concrete question requires it.
 
 ## Safety boundary
 
-BD04 concerns ordinary machine-control output behavior. Deterministic OFF, watchdog action, diagnostics and output-device protection do not create personnel-safety credit. Independent safety authority remains outside ordinary LinuxCNC/FPGA logic unless separately safety-rated and validated.
+BD05 concerns ordinary controller-board power architecture. Domain separation, power-good logic, watchdog qualification, output inhibits and deterministic de-energized behavior do not create personnel-safety credit. Independent safety authority remains outside ordinary LinuxCNC/FPGA logic unless separately safety-rated and validated.

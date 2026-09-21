@@ -4,70 +4,79 @@ Date: 2026-09-21
 
 ## Lane status
 
-Independent board-design curriculum lane remains active alongside the safety curriculum. Durable lessons BD01 through BD09 are present. New this run:
+Independent board-design curriculum lane remains active alongside the safety curriculum. Durable lessons BD01 through BD19 are present. The prior checkpoint text had fallen behind at BD09; this update reconciles it to the actual lesson directory without altering the separate safety-course progress authority.
 
-- `BD09_STAGED_BOARD_BRINGUP_AND_COMMISSIONING_EVIDENCE.md`
+New this run:
 
-BD09 returns to BOARD INTEGRATION and teaches:
+- `BD19_POWER_CONTRACT_CLOSURE_AND_UPSTREAM_PROTECTION_SIZING.md`
 
-`pre-power inspection -> resistance/short checks -> current-limited staged power -> rail verification -> FPGA/config identity -> one interface at a time -> default/fault challenge -> LinuxCNC/HAL mapping -> machine connection -> commissioning/regression record`.
+BD19 teaches:
 
-## BD09 hard student-material audit
+`reusable load contract -> board instance count -> operating-mode simultaneity -> derived-rail referral -> source aggregate -> protection settings -> connector/conductor/copper/thermal checks -> fault coordination -> regression evidence`.
 
-Every OpenPressBrake file assigned to students in BD09 was opened and inspected in current `main` form during this run.
+## BD19 hard student-material audit
 
-`VERIFIED_FOR_LESSON` for the bounded claims made in BD09:
+Every repository file named to students by BD19 was opened and inspected in current form during this run.
 
-- `hardware/blocks/differential_encoder/engineering.yaml`
-- `hardware/blocks/differential_encoder/STATUS_CHECKLIST.md`
-- `hardware/blocks/differential_encoder/integration/rev1_litexcnc_encoder_binding.json`
-- `hardware/connections/REV1_ENCODER_CONNECTIONS.yaml`
+`VERIFIED_FOR_LESSON` for the bounded claims used:
 
-The reusable encoder package provides a traceable electrical/semantic contract and six-instance FPGA binding. The connection definition explicitly binds the first machine's Y1/Y2/X endpoints to ENC1/ENC2/ENC3 and gives every electrical position a semantic disposition.
+- OpenPressBrake `hardware/blocks/README.md`
+- OpenPressBrake `hardware/blocks/STATUS_RULES.md`
+- OpenPressBrake `hardware/integration/REV1_CORE_LOAD_OWNERSHIP_HANDOFF.yaml`
+- OpenPressBrake `hardware/blocks/fpga_core_ecp5_25/design/REV47_CORE_POWER_CONTRACT_OWNERSHIP.md`
+- OpenPressBrake `hardware/blocks/fpga_core_ecp5_25/manifest.yaml`
+- OpenPressBrake `hardware/blocks/modbus_rtu_rs485/manifest.yaml`
+- OpenPressBrake `hardware/blocks/machine_power/manifest.yaml`
+- Curriculum `hardware/4000-board-design/BD18_WHOLE_BOARD_PARTIAL_POWER_AND_BACKPOWER_INTEGRATION_AUDIT.md`
 
-The physical commissioning boundary remains intentionally open. Exact connector family/MPN/footprint/mate, placement/orientation, harness compatibility, cable facts, termination selection, and protected encoder field supply are unresolved. `REV1_ENCODER_CONNECTIONS.yaml` remains `board_capture_ready: false`. Current encoder status also leaves abnormal-condition qualification, schematic visual review, PCB integration, synthesis/place-route/timing, board integration and human release open. BD09 therefore does not claim the OpenPressBrake board is ready for fabrication, energization, machine attachment, or production use.
+Readiness is claim-scoped. The RS-485 manifest is a positive example of a reusable supply-demand handoff: selected THVD1450 port, <=3 mA 3V3 steady current per populated physical transceiver, 100 nF local decoupling, no invented startup-current proxy, and explicit forbidden proxy quantities. This does not promote its unresolved EMC/field/physical integration work.
+
+The FPGA-core power ownership is `ENGINEERING_REVIEW_NEEDED` for numerical closure: ownership is correctly assigned to the reusable core, but the final `5V_CORE_IN` hot/steady and startup envelope remains to be established from the selected population/configured image. Board integration must not reconstruct the core from component maxima.
+
+The machine-power TPS26633 logic-branch ILIM and startup/inrush settings remain open. Current authority explicitly requires actual downstream CORE aggregation and excludes separately sourced sensor/proportional field loads from that logic branch.
 
 ## Catalog stress-test result
 
-The catalog passes an important commissioning-architecture test: reusable receiver engineering, board-specific physical ownership, and FPGA semantic binding can be explained separately without silently moving machine facts into the reusable primitive.
+The catalog now demonstrates both sides of the power-contract method:
 
-The remaining gaps occur at exactly the expected board/machine boundary and are explicit rather than hidden. BD09 therefore freezes:
+- a **closed bounded handoff** in RS-485, where board integration can consume a defensible reusable 3V3 load contract; and
+- an **honestly open handoff** in the FPGA core, where ownership is frozen but the numerical contract is not yet complete.
 
-- `FIRST POWER SUCCESS != BOARD QUALIFICATION`.
-- `FOOTPRINT PRESENT != VARIANT AUTHORIZED`.
-- `CURRENT-LIMITED BENCH SURVIVAL != FAULT-PROTECTION QUALIFICATION`.
-- `HAL NAME EXISTS != EXPECTED FPGA IMAGE IS LOADED`.
-- `LOGICAL FPGA BINDING != ROUTED TIMING PROOF`.
-- `SOFTWARE VALUE CHANGED != FIELD ELECTRICAL STATE PROVED`.
-- `SEMANTIC PIN MAP COMPLETE != PHYSICAL HARNESS READY`.
-- `COMMISSIONED ORDINARY CONTROL != PERSONNEL-SAFETY AUTHORITY`.
+BD19 freezes:
 
-No OpenPressBrake engineering file was changed because the discovered gaps require real physical/integration evidence and current board engineering is active.
+- `CAPACITY != LOAD`.
+- `ABSOLUTE MAXIMUM != OPERATING DEMAND`.
+- `FAULT CURRENT != NORMAL SUPPLY CURRENT`.
+- `FIELD LOAD != LOGIC-RAIL LOAD WHEN SOURCES ARE SEPARATE`.
+- `PHYSICAL DEVICE COUNT != LOGICAL CHANNEL COUNT`.
+- `DOWNSTREAM LOAD REFERRED UPSTREAM != SECOND INDEPENDENT LOAD`.
+- `STEADY STATE != STARTUP/INRUSH != FAULT-CLEARING TRANSIENT`.
+- `SOURCE CAPACITY != DISTRIBUTION-PATH QUALIFICATION`.
+- `OWNERSHIP ASSIGNED != NUMERICAL CONTRACT CLOSED`.
+- `PROTECTION SETTING TBD IS BETTER THAN A PROXY-DERIVED NUMBER`.
+
+No OpenPressBrake engineering file was changed. Current board/power work is active and is already closing the exact reusable contracts BD19 consumes; curriculum remained read-only rather than racing that lane.
 
 ## Current repository reconciliation
 
-Immediately before BD09, OpenPressBrake `main` had advanced to `e6f01dcc7872fe032cf186fdfc9c2515b4815e0e` (`integration: freeze Pilz valve-enable dual-consumer fanout`). The encoder student-facing files were opened from current main after that advancement. OpenPressBrake was re-read again after the lesson commit; no newer OpenPressBrake commit appeared and no overlapping encoder file was changed during the run.
+Immediately before the BD19 write, LinuxCNC-AI-Curriculum `main` was `b24b0ca3a02520301459bb93b443188d04fbc70d`; its latest change was in the separate safety/timing lane. BD19 was added as a new board-design file.
 
-LinuxCNC-AI-Curriculum advanced independently through safety-course work before BD09. BD09 was created as a new file. This checkpoint was re-fetched immediately before replacement so unrelated safety-lane changes were not overwritten.
-
-## Carried catalog defect from BD06
-
-The digital-input manifest reconciliation defect remains open unless a later OpenPressBrake change closes it: engineering/reference authority withdrew the old universal 500 pF / 6.5 pF parasitic release gate while the machine-readable manifest still carried legacy mandatory fields. Do not use that package as finished capture material until current main is re-inspected and the contradiction is actually resolved.
+Immediately before the BD19 write, OpenPressBrake `main` was `88ace815210d624fc309ddfcb7249f31f7c0af9f` (`rs485: record published power-contract evidence`). That change is directly relevant and was consumed read-only: it closes the RS-485 reusable 3V3 supply-demand handoff while leaving other CORE load contracts open.
 
 ## Next exact work
 
-Build BD10 as a BLOCK/INTEGRATION bridge on **LinuxCNC / HostMot2 / LiteX-CNC / HAL mapping contracts and end-to-end semantic identity**:
+Build BD20 on **machine-readable power-budget dependency graphs and release gates**:
 
-`machine function -> connection definition -> reusable block semantic interface -> FPGA package pin -> FPGA module instance -> transport/register identity -> LinuxCNC driver object -> HAL pin/parameter/function -> physical witness`.
+`block contract ID -> instance count -> operating mode -> converter edge -> source-domain total -> unresolved dependency propagation -> protection setting -> physical-path qualification -> change-trigger invalidation`.
 
-Before naming any OpenPressBrake mapping artifact to students, open its current FPGA module/config, package-pin authority, real-image binding, LinuxCNC/LiteX-CNC mapping/config, and relevant block/connection files. Do not infer software readiness from a binding filename or from BD09. Prefer a bounded channel with an inspectable end-to-end path. If the repository lacks a current LinuxCNC/HAL-side artifact sufficient to close the chain, classify that as a catalog/integration defect and teach the missing-contract boundary rather than inventing HAL names.
+The adversarial question is whether the board configuration can answer **which exact missing reusable contract prevents which upstream claim**. A total must not render as authoritative if one of its required dependencies is unresolved. The lesson should distinguish `KNOWN_SUBTOTAL`, `COMPLETE_TOTAL`, `CAPACITY_CHECK`, and `RELEASED_PROTECTION_SETTING` so a partially populated spreadsheet/YAML cannot masquerade as a closed power budget.
 
-The adversarial question is whether a board designer can change a reusable block instance count, FPGA allocation, or board-specific connector without relying on unwritten software mapping knowledge, and can identify exactly which generated/configuration artifacts must change together.
+Before naming any current OpenPressBrake artifact, open it again from current main. If the active board lane publishes additional load contracts, consume them read-only unless a non-overlapping catalog defect is clearly justified.
 
 ## Compute
 
-No simulation, synthesis, benchmark, or executable verification was justified in BD09. No hosted compute was used.
+No new simulation, synthesis, benchmark or executable verification was justified in BD19. The blocking work is contract/evidence closure and physical distribution/fault coordination. Future executable work remains restricted to `[self-hosted, openpressbrake]`; no hosted Actions fallback is allowed.
 
 ## Safety boundary
 
-BD09 concerns ordinary controller-board bring-up. The encoder example explicitly receives no personnel-safety credit. LinuxCNC, LiteX-CNC, FPGA logic, normal-controller watchdogs and diagnostics remain outside independent personnel-safety authority unless a separately safety-rated architecture and validation establishes otherwise.
+BD19 concerns ordinary controller power integrity and protection coordination. No LinuxCNC, FPGA, watchdog, eFuse, ordinary I/O, or board power function receives independent personnel-safety authority from this work.

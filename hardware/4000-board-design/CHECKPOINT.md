@@ -13,82 +13,76 @@ Independent board-design curriculum lane is active alongside the safety curricul
 - `BD05_POWER_DOMAINS_RETURNS_PARTIAL_POWER_AND_FAULT_PATHS.md`
 - `BD06_MACHINE_READABLE_CONNECTIVITY_AND_SCHEMATIC_CAPTURE_READINESS.md`
 - `BD07_WHOLE_BOARD_ASSEMBLY_OWNERSHIP_AND_HIDDEN_GLUE_AUDIT.md`
+- `BD08_QUALIFICATION_EVIDENCE_VERIFICATION_MATRIX_AND_REGRESSION_TRIGGERS.md`
 
-BD01 establishes reusable-block versus board-specific connection-definition ownership. BD02 covers proven-reference selection, explicit deltas, calculations/derating, protection reasoning and resource declarations. BD03 switches to board integration with machine-I/O decomposition, typed resource budgeting, connection requirements and unresolved-resource ownership. BD04 returns to block engineering and teaches output authority, deterministic default/de-energized states, watchdog boundaries, power-domain loss, fault containment and evidence-based qualification. BD05 switches back to board integration and teaches source/load ownership, normal and fault-current return tracing, startup/inrush aggregation, return/chassis/PE/shield distinctions, partial-power/back-power analysis and release gates. BD06 returns to block engineering and teaches exact connectivity/BOM authority, fail-closed schematic-capture gates, board-specific connector binding, ERC limits, human review and revision provenance. BD07 returns to board integration and teaches single-owner whole-board semantic assembly, hidden-glue detection, canonical connection ownership, aggregate resource accounting, capture hierarchy and the distinction between semantic ownership and rendered-net proof.
+BD08 returns to BLOCK ENGINEERING and teaches the evidence chain:
 
-## BD07 verified worked-example state
+`requirement -> failure mode -> evidence needed -> analytical/manufacturer proof -> executable verification when justified -> bench test -> machine verification -> release status -> regression trigger`.
 
-Every OpenPressBrake file assigned to students in BD07 was opened and inspected in current `main` form during this run.
+## BD08 verified worked-example state
 
-### Whole-board ownership and validation
+Every OpenPressBrake file assigned to students in BD08 was opened and inspected in current `main` form during this run.
 
-`VERIFIED_FOR_LESSON` for the specific architecture/validation claims used in BD07:
+`VERIFIED_FOR_LESSON` for the bounded claims made in BD08:
 
-- `hardware/integration/REV1_FIELD_PIN_SEMANTIC_OWNERSHIP.yaml`
-- `hardware/integration/REV1_FIELD_PIN_UNIQUENESS_VALIDATION.md`
-- `hardware/connections/REV1_CONNECTION_COVERAGE_CHECKPOINT.md`
-- `hardware/integration/REV1_SCHEMATIC_RELEASE_GATE_MATRIX.md`
+- `hardware/blocks/differential_encoder/engineering.yaml`
+- `hardware/blocks/differential_encoder/manifest.yaml`
+- `hardware/blocks/differential_encoder/STATUS_CHECKLIST.md`
+- `hardware/blocks/differential_encoder/design/REV1_PRODUCTION_CONNECTIVITY.md`
+- `hardware/blocks/differential_encoder/design/PRODUCTION_BOM_REV1.yaml`
+- `hardware/blocks/differential_encoder/design/REV1_RECEIVER_TIMING_CONTRACT.md`
+- `hardware/blocks/differential_encoder/simulation/validate_production_receiver_rev1.py`
+- `hardware/blocks/differential_encoder/simulation/rev1_datasheet_crosscheck.py`
+- `hardware/blocks/differential_encoder/integration/rev1_litexcnc_encoder_binding.json`
 
-The ownership index gives every currently instantiated machine-facing connector exactly one selected connection-definition owner and keeps unproven endpoints explicit. The newest validation contract requires a future rendered board to prove that ownership fail-closed rather than assuming repository-side semantics imply correct implementation. Review mirrors are explicitly excluded as alternate schematic-generation authorities.
+The encoder package is suitable for teaching evidence boundaries because it contains exact static connectivity/BOM validation, manufacturer-derived timing limits, retained bounded simulation evidence, explicit FPGA semantic binding, named validation states, and recalculation triggers while still leaving real physical/integration gates open.
 
-Current OpenPressBrake evidence therefore supports:
+The current status explicitly leaves cable/reflection behavior, machine-selected termination, protected encoder field power, board-level ESD/surge and miswire/hot-plug qualification, schematic visual review, PCB integration, synthesis/place-route/timing, final cost, board release and human signoff open. BD08 therefore does not call the block `SCHEMATIC-READY`, fully qualified, or `REV 1 READY`.
 
-`SEMANTIC OWNER DEFINED != RENDERED NET VERIFIED`
+## BD08 catalog stress-test result
 
-and
+The encoder package passes the teaching stress test better than many broad status labels because `engineering.yaml` already carries named validation items and recalculation triggers. The main granularity weakness is that `manifest.yaml` summarizes the block as `simulation-ready` while several independent evidence classes and release gates exist beneath that label. This is not treated as a contradiction because the status checklist explicitly bounds the term, but future catalog evolution should prefer machine-readable requirement/evidence/regression relationships over increasingly broad one-word maturity states.
 
-`REVIEW MIRROR != SECOND ELECTRICAL AUTHORITY`.
+BD08 freezes:
 
-The generated full-board comparison is still pending; BD07 does not claim it has executed or passed.
+- `TEST RAN != REQUIREMENT PROVED`.
+- `CI GREEN != BLOCK QUALIFIED`.
+- `STATIC CONNECTIVITY PASS != PHYSICAL QUALIFICATION`.
+- `DATASHEET DEVICE LIMIT != QUALIFIED SYSTEM LIMIT`.
+- `MODEL PASS != OMITTED PHYSICS PASS`.
+- `LOGICAL BINDING PASS != SYNTHESIS/P&R/TIMING PASS`.
+- `REUSABLE BLOCK QUALIFICATION != INSTALLED MACHINE QUALIFICATION`.
+- `EVIDENCE WITHOUT REVISION APPLICABILITY OR REGRESSION TRIGGER BECOMES STALE EVIDENCE`.
+- `ORDINARY-CONTROL VERIFICATION != PERSONNEL-SAFETY AUTHORITY`.
 
-### Bounded connection-block example
-
-`hardware/connections/REV1_POWER_FEED_CONNECTIONS.yaml` is `VERIFIED_FOR_LESSON` as an intentionally incomplete board-specific connection-definition example. It explicitly maps the controller and sensor-field source/return semantics, functional ownership, prohibited joins, placement intent and silkscreen/marking intent while leaving exact connector manufacturer/family/MPN, footprint/pad mapping, conductor range, ampacity/current envelope and physical installation facts unresolved. Its own release fields remain `board_capture_ready: false`.
-
-This is useful teaching material precisely because the unresolved physical facts are machine-readable gates rather than hidden assumptions.
-
-## Catalog stress-test result
-
-BD07 found that the newest OpenPressBrake integration direction directly addresses a major curriculum concern: duplicate connector authority and unwritten cross-board joins. The single machine-readable field-pin ownership index plus explicit rendered-net acceptance contract is a stronger architecture than allowing every connection artifact or review mirror to become an equal source.
-
-The remaining gap is correctly exposed rather than papered over: the repository has semantic ownership before it has rendered-board proof. Full-board release therefore remains open.
-
-BD07 freezes these integration rules:
-
-- `EVERY CROSS-BLOCK EDGE HAS EXACTLY ONE BOARD-INTEGRATION OWNER`.
-- `CONNECTION DEFINITION != REUSABLE PRIMITIVE INTERNAL CIRCUIT`.
-- `MATCHING WIRE NUMBER != PROVEN COMMON NET`.
-- `SAME NOMINAL VOLTAGE != SAME BOARD DOMAIN`.
-- `RENDERER CHOOSES STRUCTURE FROM AUTHORITY; RENDERER DOES NOT DO ELECTRICAL ENGINEERING`.
-
-No OpenPressBrake engineering files were changed. Current board-development work is actively advancing the same field-pin uniqueness lane, so curriculum work consumed the newest state read-only instead of racing it.
+No OpenPressBrake engineering file was changed. Current board-development work is actively advancing whole-board renderer/field-pin authority, so curriculum work remained read-only against that repository.
 
 ## Current repository reconciliation
 
-OpenPressBrake `main` was re-read immediately before this checkpoint update and remained at `65399bf738ce84d3ffd38343e477a9d5392ec691` (`integration: define Rev1 field-pin uniqueness validation gate`). That commit adds the fail-closed validation contract BD07 uses and explicitly says rendered-schematic checking is pending.
+Immediately before the BD08 curriculum write, OpenPressBrake `main` was `469b1c94635859cc3385c4916c522d9af82c3b1d` (`integration: bind Rev1 field-pin ownership into renderer contract`). It was re-read again after the lesson commit and remained unchanged. The differential-encoder path itself has not been modified by the current renderer work; its newest path-specific engineering overlay predates this run.
 
-LinuxCNC-AI-Curriculum `main` also advanced during the run from unrelated safety-course work. BD07 was created as a new independent file, then re-opened in current form before this checkpoint update. No overlapping board-curriculum file had been modified by another lane.
+LinuxCNC-AI-Curriculum `main` had advanced independently through safety-course commits before BD08 was created. BD08 was added as a new file rather than overwriting another lane's work. This checkpoint was fetched again immediately before replacement so the update reconciles against current board-lane state.
 
 ## Carried catalog defect from BD06
 
-The BD06 digital-input manifest reconciliation defect remains open unless a later OpenPressBrake change closes it: current engineering/reference authority withdrew the old universal 500 pF / 6.5 pF parasitic release gate while the machine-readable manifest still carried legacy mandatory fields. Do not use that package as a finished capture example until current main is re-inspected and the contradiction is actually resolved.
+The BD06 digital-input manifest reconciliation defect remains open unless a later OpenPressBrake change closes it: engineering/reference authority withdrew the old universal 500 pF / 6.5 pF parasitic release gate while the machine-readable manifest still carried legacy mandatory fields. Do not use that package as a finished capture example until current main is re-inspected and the contradiction is actually resolved.
 
 ## Next exact work
 
-Build BD08 as a **BLOCK ENGINEERING** lesson on qualification evidence and verification matrices:
+Build BD09 as a **BOARD INTEGRATION** lesson on staged board bring-up and commissioning evidence:
 
-`requirement -> failure mode -> evidence needed -> analytical proof -> executable test when justified -> bench test -> machine verification -> release status -> regression trigger`
+`pre-power inspection -> resistance/short checks -> current-limited staged power -> rail verification -> FPGA/config identity -> one interface at a time -> default/fault challenge -> LinuxCNC/HAL mapping -> machine connection -> commissioning/regression record`
 
-Select a candidate reusable block only after opening its current engineering contract, manifest, exact connectivity/BOM where applicable, calculations, verification artifacts and status checklist. Prefer a block that cleanly distinguishes datasheet/calculation/static-validation evidence from bench/machine evidence and still-open qualification gates.
+Select a bounded controller slice only after opening every current student-facing artifact. Prefer a slice whose power source/return, reusable block, board-specific connection owner, FPGA binding, and open release gates can all be traced without implying that the full OpenPressBrake Rev1 controller is released.
 
-The adversarial question is whether a student can tell exactly what has been proved, by what method, against which revision, and what design change invalidates that evidence. Treat vague statements such as “tested,” “protected,” “validated,” or “CI passes” as catalog defects unless the evidence package identifies the requirement, setup, acceptance criterion, result and revision applicability.
+BD09 must distinguish bench bring-up from qualification: successful first power is not surge/EMC/thermal qualification, successful FPGA communication is not routed timing proof unless the synthesis/P&R evidence exists, and a LinuxCNC/HAL signal changing is not proof of the field electrical state unless the physical witness supports that claim.
 
-Do not run simulation or other compute merely to populate the lesson. If a concrete verification question genuinely requires executable work, use only `[self-hosted, openpressbrake]`; never use GitHub-hosted Actions.
+Do not run compute merely for demonstration. If a concrete unresolved synthesis, P&R, timing, simulation, or regression question genuinely requires executable work, use only `[self-hosted, openpressbrake]`; never use GitHub-hosted Actions.
 
 ## Compute
 
-No simulation, synthesis, benchmark or executable verification was justified in BD07. No hosted compute was used.
+No simulation, synthesis, benchmark or executable verification was justified in BD08. Existing evidence was inspected; unchanged tests were not rerun. No hosted compute was used.
 
 ## Safety boundary
 
-BD07 concerns ordinary controller-board integration. The current OpenPressBrake ownership and validation contracts correctly allow the retained safety-enable boundary to be connected/observed without transferring personnel-safety authority to LinuxCNC or ordinary FPGA logic. The independent safety system remains authoritative unless a separately safety-rated design and validation proves otherwise.
+BD08 concerns evidence for ordinary controller-board functions. The encoder worked example explicitly has no personnel-safety credit. Verification quality does not transfer personnel-safety authority to LinuxCNC, FPGA logic, watchdogs, or ordinary diagnostics. Independent machine safety remains authoritative unless a separately safety-rated design and validation establishes otherwise.

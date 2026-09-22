@@ -20,15 +20,13 @@ Do not routinely reopen closed levels without a genuinely new material defect.
 
 Routine controller-board development remains a separate automation concern and must not displace safety work here.
 
-Current safety emphasis includes independent safety authority; physical final-element proof; process-response evidence; maintenance/return-to-service; reset/restart freshness; operating-mode commissioning; energized diagnostic authority; safe reduced-speed commissioning; human-factors controls against bypass; proposition-specific revalidation after change; composition-aware acceptance scope; durable accepted-baseline/stale-evidence management; evidence freshness; formal finding/disposition handling; non-brake common-cause degradation; recurrence escalation; corrective/preventive-action ownership; handoff persistence; and mechanical/installation common cause.
+Current safety emphasis includes independent safety authority; physical final-element proof; process-response evidence; maintenance/return-to-service; reset/restart freshness; operating-mode commissioning; energized diagnostic authority; safe reduced-speed commissioning; human-factors controls against bypass; proposition-specific revalidation after change; composition-aware acceptance scope; durable accepted-baseline/stale-evidence management; evidence freshness; formal finding/disposition handling; non-brake common-cause degradation; recurrence escalation; corrective/preventive-action ownership; handoff persistence; mechanical/installation common cause; and restart/power-loss persistence of open safety obligations.
 
-Newest learner-facing method: `safety-course/25E0_CORRECTIVE_ACTION_HANDOFF_PERSISTENCE_AND_MECHANICAL_INSTALLATION_COMMON_CAUSE_2026-09-22.md`. It makes open safety obligations durable across shift change, maintenance-ticket closure, controller restart and HMI state; separates containment/correction/cause/CAPA/re-proof/acceptance; and traces guard mounting/alignment/structure as a physical common dependency using Rockwell and SICK manufacturer documentation.
+Newest learner-facing method: `safety-course/25E0_RESTART_PERSISTENCE_AND_DIAGNOSTICS_VS_PHYSICAL_PROOF_2026-09-22.md`. It stress-tests an ordinary LinuxCNC/HMI restart while a physical safety proposition remains stale and traces Rockwell/Pilz external-device-monitoring evidence to distinguish healthy safety logic/I/O diagnostics from external final-element and process proof.
 
-Reusable record: `safety-course/FINDING_DISPOSITION_RECORD_TEMPLATE.md` interoperates with `SF-*`, `PROP-*`, `EVID-*`, `DEP-*`, `CHG-*`, and `VAL-*` accepted-baseline identities. It preserves original adverse evidence, containment, reverse show-where-used, recurrence links, correction, physical re-proof, acceptance, reset/rearm, and fresh ordinary demand as distinct facts.
+Reusable records: `safety-course/OPEN_SAFETY_OBLIGATION_HANDOFF_RECORD.md` defines what open `FIND-*` / stale `PROP-*` / pending `VAL-*` state must survive restart, power loss, shift change and maintenance handoff. `safety-course/FINDING_DISPOSITION_RECORD_TEMPLATE.md` preserves original adverse evidence, containment, reverse show-where-used, recurrence links, correction, physical re-proof, acceptance, reset/rearm, and fresh ordinary demand as distinct facts.
 
-New freezes: **WORK ORDER CLOSED != SAFETY FINDING CLOSED**, **SHIFT HANDOFF COMPLETE != CONTAINMENT REMOVED**, **HMI GREEN != OPEN SAFETY OBLIGATIONS CLEARED**, **TWO SAFETY SENSORS != TWO INDEPENDENT PHYSICAL WITNESSES when both depend on the same moving structure/alignment**, and **OSSD HEALTHY != GUARD GEOMETRY/INSTALLATION PROVED**.
-
-Prior methods retained: `safety-course/25E0_NON_BRAKE_COMMON_CAUSE_AND_RECURRENCE_ESCALATION_2026-09-22.md`, `safety-course/25E0_FINDING_DISPOSITION_CONTAINMENT_AND_COMMON_CAUSE_DEGRADATION_2026-09-22.md`, `safety-course/25E0_PROOF_OBLIGATION_EVIDENCE_FRESHNESS_AND_DISCOVERED_DEGRADATION_2026-09-22.md`, `safety-course/25E0_ACCEPTED_SAFETY_BASELINE_AND_STALE_EVIDENCE_LEDGER_2026-09-22.md`, `safety-course/25E0_ACCEPTANCE_SCOPE_DEPENDENCY_MATRIX_AND_ACCUMULATED_CHANGE_REVIEW_2026-09-22.md`, `safety-course/25E0_MULTI_CHANGE_COMPOSITION_ACCEPTANCE_SCOPE_2026-09-22.md`, and `safety-course/25E0_PROPOSITION_SPECIFIC_REVALIDATION_AFTER_CHANGE_2026-09-22.md`.
+New freezes: **VOLATILE CONTROLLER STATE LOST != SAFETY OBLIGATION CLEARED**, **SAFETY MODULE HEALTHY != EXTERNAL DEVICE STATE PROVED**, **EXTERNAL DEVICE FEEDBACK HEALTHY != EVERY DOWNSTREAM PROCESS PROPOSITION PROVED**, **REBOOT SUCCESS != RETURN-TO-SERVICE ACCEPTANCE**, and **MISSING PERSISTENT RECORD != NO OPEN OBLIGATION**.
 
 Core freezes retained:
 - **ACCESS CLEAR != PERSONNEL CLEAR != SAFETY RELEASE != FINAL-ELEMENT PROOF != ORDINARY START AUTHORITY.**
@@ -51,6 +49,8 @@ Core freezes retained:
 - **REPEATED TEST PASSES != ORIGINAL ADVERSE RESULT DISPOSITIONED.**
 - **RECURRENCE != ROOT CAUSE PROVED.**
 - **REPEATED REPAIR SUCCESS != RECURRING DEFECT DISPOSITIONED.**
+- **WORK ORDER CLOSED != SAFETY FINDING CLOSED.**
+- **HMI GREEN != OPEN SAFETY OBLIGATIONS CLEARED.**
 
 ## 4000 foundation/core
 
@@ -58,9 +58,9 @@ Durable foundation includes `hardware/BLOCK_SPEC_TEMPLATE.md`, `hardware/4000-bl
 
 ## Exact next work
 
-1. Build a compact durable open-safety-obligation / containment-handoff record interoperable with `FIND-*` and the accepted-baseline ledger; define what must survive restart, power loss, shift change and maintenance ownership transfer.
-2. Stress-test persistence semantics against ordinary controller/HMI restart: a green/ready machine indication must not silently clear an independent safety acceptance or re-proof obligation.
-3. Trace an authoritative example where device/logic diagnostics can be healthy while a final-element/process physical proposition remains stale or requires separate proof.
+1. Trace authoritative professional guidance for restart/recovery after loss of safety-controller or safety-I/O power, distinguishing diagnostic fault recovery from return-to-service acceptance and from ordinary production restart.
+2. Build a compact learner exercise covering three persistence authorities: independent safety controller state, durable maintenance/safety ledger state, and volatile LinuxCNC/HMI state; identify which facts may be reconstructed and which require physical re-proof.
+3. Extend the external-device boundary beyond contactors with a professional drive/brake/valve example where status/feedback is useful but a separate process proposition still requires validation.
 4. Preserve machine-specific physics and `UNKNOWN`; do not invent hydraulic truth tables, safe speeds, stopping distances, PL/SIL targets, pressure thresholds, proof intervals, alignment tolerances, escalation counts, acceptable degradation percentages or diagnostic coverage.
 5. If this branch reaches an information-gain stop, rotate to the highest-value open 4000 safety module rather than routine board design or closed 3000 work.
 

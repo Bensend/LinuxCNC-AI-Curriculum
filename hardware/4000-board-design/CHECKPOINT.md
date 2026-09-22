@@ -4,93 +4,100 @@ Date: 2026-09-22
 
 ## Lane status
 
-Independent board-design curriculum lane remains active alongside the separate safety curriculum. Durable lessons BD01 through BD29 are present. This checkpoint is board-design authority only and does not alter safety-course progress authority.
+Independent board-design curriculum lane remains active alongside the separate safety curriculum. Durable lessons BD01 through BD30 are present. This checkpoint is board-design authority only and does not alter safety-course progress authority.
 
 New this run:
 
-- `BD29_RELEASED_CONFIGURATION_IDENTITY_TRACEABILITY_AND_VARIANT_APPLICABILITY.md`
+- `BD30_MANUFACTURING_PROGRAMMING_COMMISSIONING_HANDOFF_AND_AS_BUILT_RECONCILIATION.md`
 
-BD29 teaches:
+BD30 teaches:
 
-`release proposition -> immutable released baseline ID -> exact block/adapter/board/PCB/BOM/FPGA/HAL identities -> machine applicability -> evidence bindings -> designed identity -> built identity -> installed identity -> supported/superseded/withdrawn state -> SHOW WHERE USED / SHOW WHAT IS INSTALLED -> change applicability -> migration/field-action traceability`
+`released baseline -> manufacturing package -> actual population/options -> programmed identity -> assembly inspection -> first-power record -> as-built deviations -> engineering disposition -> commissioned identity -> installed baseline -> release inheritance`
 
-## BD29 hard student-material audit
+## BD30 hard student-material audit
 
-Every repository file named to students by BD29 was opened and inspected in current form during this run.
+Every repository file named to students by BD30 was opened and inspected in current form during this run.
 
 `VERIFIED_FOR_LESSON` for the bounded claims used:
 
-- Curriculum `hardware/4000-board-design/BD25_DEPENDENCY_AWARE_QUALIFICATION_EVIDENCE_AND_RELEASE_STATE_COMPOSITION.md`
-- Curriculum `hardware/4000-board-design/BD28_ENGINEERING_CHANGE_CONTROL_CATALOG_TO_RELEASED_VARIANTS.md`
+- Curriculum `hardware/4000-board-design/BD29_RELEASED_CONFIGURATION_IDENTITY_TRACEABILITY_AND_VARIANT_APPLICABILITY.md`
 - Curriculum `hardware/4000-board-design/CHECKPOINT.md` as it existed before this update
 - Curriculum `WORK_SELECTION_POLICY.md`
 - OpenPressBrake `hardware/blocks/STATUS_RULES.md`
 - OpenPressBrake `hardware/blocks/BLOCK_ADAPTER_INTEGRATION_RULES.md`
+- OpenPressBrake `hardware/blocks/dry_contact_relay_output/REV1_BOARD_POWER_HANDOFF.md`
+- OpenPressBrake `hardware/blocks/dry_contact_relay_output/STATUS_CHECKLIST.md`
 
-The newly created BD29 lesson was re-opened from current main after commit and checked for internal consistency.
+The newly created BD30 lesson was re-opened from current main after commit and checked for internal consistency.
 
 `ENGINEERING_REVIEW_NEEDED`:
 
-- OpenPressBrake still lacks a repository-wide released-configuration/installed-asset registry that binds immutable release IDs to exact reusable semantic revisions, board/connection/PCB/BOM identity, FPGA/HAL identity, evidence bindings, built serial identity, installed identity, retrofit history, and lifecycle/applicability state.
-- Current OpenPressBrake engineering activity is still block/integration development rather than evidence of a production-released controller; no release/serial population is invented for the lesson.
+- the current OpenPressBrake dry-contact relay primitive remains `NOT READY`; CAD mapping, rendered schematic/ERC, PCB copper/creepage, first-machine mapping, bench checks, and board-level worst-case source/thermal qualification remain open;
+- OpenPressBrake still lacks a repository-wide released-configuration/serialized as-built/programming/deviation/installed-asset registry;
+- current engineering activity is not evidence of a production-released or serialized OpenPressBrake controller population, so no release or serial identities are invented.
 
 No inspected file is used to claim complete OpenPressBrake production readiness.
 
-## Rules frozen by BD29
+## Rules frozen by BD30
 
-- a release ID is immutable and must not be a moving `main`/`latest` pointer;
-- release records consume exact reusable semantic revisions, not only family names;
-- board-specific connection identity remains board-specific even though release traceability records it;
-- unrecorded BOM substitution blocks release inheritance until identity/equivalence is established;
-- FPGA image and LinuxCNC/HAL configuration are first-class release components when behavior depends on them;
-- designed, built, and installed identity are distinct propositions and must not be assumed equal;
-- retrofit history does not rewrite the original release record;
-- superseded/legacy does not automatically mean invalid or unsafe;
-- `SHOW WHERE USED` engineering dependencies and `SHOW WHAT IS INSTALLED` asset records are separate graphs that must be joined for field applicability;
-- unknown installed identity remains `VERIFY_AT_MACHINE`/blocked rather than a best-guess baseline;
-- historical evidence/release state remains auditable after later evidence changes;
-- ordinary safety-status interface identity can be traced without granting personnel-safety authority;
-- cross-machine reuse preserves generic block identity while each board/machine owns its own configuration baseline.
+- released design identity and physical as-built identity are different propositions;
+- manufacturing work instructions may resolve a release into process detail but may not silently redesign it;
+- reusable blocks publish per-instance/scalable handoffs while board releases own population and simultaneous-use assumptions;
+- procurement similarity is not release applicability;
+- programming success is not proof that the correct FPGA/software/HAL identity was loaded;
+- inspection reconciles configuration identity as well as workmanship;
+- material rework/deviation history is preserved rather than erased after correction;
+- successful first power/basic I/O does not prove release inheritance;
+- release inheritance fails closed while material hardware/programming identity is unresolved;
+- a valid replacement board still requires machine-specific harness/HAL mapping reconciliation before commissioning;
+- connector/pin/location/silkscreen/harness mapping remains board-specific connection authority through manufacturing;
+- manufacturing/commissioning evidence for an ordinary safety-status receiver does not establish personnel-safety validation.
 
 ## Current OpenPressBrake worked-example result
 
-OpenPressBrake remains useful as engineering source-of-truth for reusable block and composition governance, but current main is not treated as a released product baseline. Current `STATUS_RULES.md` explicitly separates baseline/integration readiness from full Rev-1 qualification, and `BLOCK_ADAPTER_INTEGRATION_RULES.md` keeps reusable blocks, real adapters, board-only mappings, unknown machine facts, and safety authority separate.
+Current `dry_contact_relay_output` provides a useful bounded handoff example. Its board-power artifact publishes 16.7 mA nominal `24V_MACHINE` current and approximately 0.40 W coil dissipation per energized primitive instance, while explicitly leaving configured quantity, credible simultaneous energization, source sizing, thermal density, and machine load facts to board integration/qualification. The status checklist truthfully remains `NOT READY` and keeps the unresolved CAD, PCB, machine, bench, and qualification gates visible.
 
-During this run OpenPressBrake main advanced to `391b7a71b7540d18ef5c458ae79125908308a55c` (`lvdt input: bound LT6015 analog-5V rail demand`). That active work was left read-only. The commit itself demonstrates bounded engineering evidence: a current manufacturer cross-check adds a 315-uA-per-populated-channel `ANALOG_5V` load handoff for the selected LT6015 while explicitly not claiming PCB thermal qualification, sensor current, startup/fault closure, or safety authority. BD29 does not present that file to students and does not promote it into release evidence.
+That is suitable for teaching the direction of manufacturing authority: the reusable primitive publishes scalable facts; the released board would own population; manufacturing would record actual population; commissioning would reconcile installed mapping. It is not presented as a finished student block or production release.
 
-No OpenPressBrake engineering file was changed during BD29.
+No OpenPressBrake engineering file was changed during BD30.
 
 ## Current repository reconciliation
 
-BD29 was committed as `c9b413a6d71d6a3fc91be5fbe2b4a57db86b6f37` and re-opened from current main.
+BD30 was committed as `c782ab91272fb74f6eccbf32efd7e1f4cd1540e3` and re-opened from current main.
 
-Immediately before this checkpoint write, current main was re-read in both repositories. Curriculum main was `c9b413a6d71d6a3fc91be5fbe2b4a57db86b6f37`; no overlapping post-BD29 board-design change was present. OpenPressBrake main was `391b7a71b7540d18ef5c458ae79125908308a55c` and remained read-only.
+Immediately before this checkpoint write, current main was re-read in both repositories. Curriculum main was `c782ab91272fb74f6eccbf32efd7e1f4cd1540e3`; newer safety-lane commits from earlier in the hour were preserved and no overlapping post-BD30 board-design change was present. OpenPressBrake main was `73e6ec20ca4ed9e3fc6251709b75ee98a95a4a9e` (`dry contact relay: record coil power handoff evidence`) and remained read-only.
+
+## Catalog stress-test result
+
+BD30 exposes a concrete infrastructure gap: configuration traceability needs a machine-readable as-built record joining immutable release identity to actual PCB/BOM/options, approved alternates, programming artifacts/hashes, deviations/rework, inspection/test evidence, commissioning mapping, and installed asset identity.
+
+Do not solve this by adding manufacturing quantity or machine-specific connector data to reusable block contracts. The missing layer is release/as-built/integration traceability.
 
 ## Next exact work
 
-Build BD30 on **manufacturing/programming/commissioning handoff and as-built reconciliation**.
+Build BD31 on **production test architecture, fixture contracts, calibration identity, and serialized evidence capture**.
 
 Teach the flow:
 
-`released baseline -> manufacturing package -> component/population/option traceability -> programmed FPGA/software identity -> assembly inspection -> first-power/bring-up record -> as-built deviations -> engineering disposition -> installed baseline -> release inheritance`
+`released/as-built identity -> testable production claims -> fixture interface contract -> test limits/procedure revision -> programmed/calibration identity -> serialized execution -> bounded result/evidence -> deviation/retest rules -> shipment/installation gate`
 
 The adversarial lab should include:
 
-- a wrong-population option on an otherwise correct PCB;
-- an approved alternate that is qualified but absent from an obsolete manufacturing pick list;
-- a correct PCB/BOM loaded with the wrong FPGA image;
-- a reworked board whose as-built delta was not recorded;
-- a board that passes basic bench I/O but has an unresolved identity mismatch;
-- a field replacement board whose machine-specific HAL/harness mapping must be reconciled before commissioning;
-- an unknown legacy installed board requiring a minimal `VERIFY_AT_MACHINE` identity task;
-- an ordinary safety-status input whose configuration is traced without treating manufacturing/commissioning evidence as safety validation.
+- a fixture that can test a board electrically but is wired to an obsolete connection-definition revision;
+- a production test that passes while using limits from an older semantic revision;
+- a calibration constant written successfully but not bound to the serialized board identity;
+- a reused fixture adapter containing real conditioning that should be independently qualified rather than hidden as fixture wiring;
+- a test escape caused by checking only FPGA command state rather than field-side behavior;
+- a retest after rework where original failed evidence must remain preserved;
+- a cross-machine reusable block whose production test requirement stays generic while each board fixture owns physical pin mapping;
+- an ordinary safety-status input production check that proves ordinary electrical function only, not safety validation.
 
-Require explicit distinction among released design authority, manufacturing work instructions, actual as-built population/programming, commissioning evidence, and installed machine identity. Release inheritance must fail closed on unresolved material deviations.
+Require students to distinguish qualification evidence from production-screen evidence, product circuitry from fixture circuitry, generic block test requirements from board-specific fixture mappings, and calibration/configuration identity from mere write success.
 
 ## Compute
 
-No simulation, synthesis, place-and-route, timing run, or other executable engineering verification was justified for BD29. No GitHub-hosted runner was used. Future executable engineering work remains restricted to `[self-hosted, openpressbrake]`; no hosted Actions fallback is allowed.
+No simulation, synthesis, place-and-route, timing run, or other executable engineering verification was justified for BD30. No GitHub-hosted runner was used. Future executable engineering work remains restricted to `[self-hosted, openpressbrake]`; no hosted Actions fallback is allowed.
 
 ## Safety boundary
 
-BD29 teaches configuration identity and traceability for ordinary controller hardware/configuration and ordinary electrical/status interfaces. It does not establish PL/SIL/category, diagnostic coverage, stopping performance, or independent personnel-safety authority. An installed identity record for a safety-status interface proves configuration identity only; actual safety-function changes belong to the separate safety design and validation process.
+BD30 teaches manufacturing/programming/commissioning traceability for ordinary controller hardware/configuration and ordinary electrical/status interfaces. It does not establish PL/SIL/category, diagnostic coverage, stopping performance, or independent personnel-safety authority. Manufacturing or commissioning evidence for a safety-status interface proves only the bounded ordinary-interface claim actually tested.

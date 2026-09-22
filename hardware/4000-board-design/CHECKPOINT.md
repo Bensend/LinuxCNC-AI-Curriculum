@@ -4,104 +4,96 @@ Date: 2026-09-22
 
 ## Lane status
 
-Independent board-design curriculum lane remains active alongside the separate safety curriculum. Durable lessons BD01 through BD31 are present. This checkpoint is board-design authority only and does not alter safety-course progress authority.
+Independent board-design curriculum lane remains active alongside the separate safety curriculum. Durable lessons BD01 through BD32 are present. This checkpoint is board-design authority only and does not alter safety-course progress authority.
 
 New this run:
 
-- `BD31_PRODUCTION_TEST_FIXTURE_CONTRACTS_CALIBRATION_AND_SERIALIZED_EVIDENCE.md`
+- `BD32_PRODUCTION_TEST_COVERAGE_ESCAPE_ANALYSIS_AND_DFT_FEEDBACK.md`
 
-BD31 teaches:
+BD32 teaches:
 
-`released/as-built identity -> testable production claims -> fixture interface contract -> test procedure/limit revision -> fixture/calibration identity -> serialized execution -> bounded result/evidence -> deviation/retest disposition -> shipment/installation gate`
+`released failure modes/critical claims -> stimulatable/observable boundaries -> coverage classification -> escape analysis -> 100%/sampled/qualification-only decision -> fixture self-diagnostics -> retained evidence -> DFT/catalog feedback`
 
-## BD31 hard student-material audit
+## BD32 hard student-material audit
 
-Every repository file named to students by BD31 was opened and inspected in current form during this run.
+Every repository file named to students by BD32 was opened and inspected in current form during this run.
 
 `VERIFIED_FOR_LESSON` for the bounded claims used:
 
-- Curriculum `hardware/4000-board-design/BD30_MANUFACTURING_PROGRAMMING_COMMISSIONING_HANDOFF_AND_AS_BUILT_RECONCILIATION.md`
+- Curriculum `hardware/4000-board-design/BD31_PRODUCTION_TEST_FIXTURE_CONTRACTS_CALIBRATION_AND_SERIALIZED_EVIDENCE.md`
 - Curriculum `hardware/4000-board-design/CHECKPOINT.md` as it existed before this update
 - Curriculum `WORK_SELECTION_POLICY.md`
 - OpenPressBrake `hardware/blocks/STATUS_RULES.md`
 - OpenPressBrake `hardware/blocks/BLOCK_ADAPTER_INTEGRATION_RULES.md`
-- OpenPressBrake `hardware/blocks/digital_input_24v/STATUS_CHECKLIST.md`
-- OpenPressBrake `hardware/blocks/digital_input_24v/manifest.yaml`
+- OpenPressBrake `hardware/blocks/digital_output_24v/STATUS_CHECKLIST.md`
+- OpenPressBrake `hardware/blocks/digital_output_24v/manifest.yaml`
 
-The newly created BD31 lesson was re-opened from current main after commit and checked for internal consistency.
+The newly created BD32 lesson was re-opened from current main after commit and checked for internal consistency.
 
 `ENGINEERING_REVIEW_NEEDED`:
 
-- current OpenPressBrake `digital_input_24v` remains `SIMULATION-READY`, not `SCHEMATIC-READY` or `REV 1 READY`; PCB/layout review, complete BOM/cost, shared-resource closure, and human Rev-1 signoff remain open;
-- OpenPressBrake has no repository-wide production-test/fixture/calibration/serialized-evidence schema;
-- current engineering development is not evidence of a production fixture, production serial population, production calibration program, or shipment authority.
+- current OpenPressBrake `digital_output_24v` reusable non-isolated variant remains `SIMULATION-READY`; the Rev1 isolated board path is not yet `SCHEMATIC-READY` and exact isolated-path CAD/connectivity, fault/abnormal qualification, PCB thermal/current evidence, integration and human release remain open;
+- OpenPressBrake has no repository-wide production failure-mode/claim-to-coverage model;
+- reusable manifests do not yet have a standardized generic DFT/observability section separated from board-specific test-point/fixture mapping;
+- current engineering development is not evidence of a production fixture, serialized production population, production acceptance limits, or shipment authority.
 
 No inspected file is used to claim complete OpenPressBrake production readiness.
 
-## Rules frozen by BD31
+## Rules frozen by BD32
 
-- production-screen evidence and design-qualification evidence are different evidence classes;
-- a qualified design does not prove a particular serialized unit conforms;
-- reusable blocks own generic test requirements, not board J-numbers or fixture pogo-pin mappings;
-- fixtures have explicit compatibility/interface contracts against released board/connection-definition revisions;
-- a fixture that physically connects is not thereby compatible;
-- test limits are versioned engineering inputs bound to the semantic revision that justifies them;
-- a measurement inside an obsolete limit does not create current release evidence;
-- reusable fixture conditioning/translation is real circuitry and must not be hidden as unqualified wiring;
-- production tests must stimulate/observe enough of the causal field path to prove the named claim;
-- command-side or forced-FPGA tests do not prove field circuitry that they bypass;
-- calibration write/readback success is not calibration traceability unless the value is bound to the correct serialized unit, procedure, reference and configuration;
-- failed production evidence survives rework/retest;
-- FCT/production-screen PASS is not shipment or installation authority by itself;
-- ordinary safety-status production checks prove only the bounded ordinary electrical/status claim tested.
+- executing a test step does not prove coverage of a failure mode;
+- correlated observation is not automatically direct coverage;
+- command-side activity does not prove field-driver behavior;
+- one nominal stimulus does not prove threshold/margin coverage;
+- one-channel-at-a-time success does not prove shared-resource behavior;
+- fixture wiring must not mask return/isolation/bias/power defects in the product;
+- fixture self-test has a declared range/envelope and does not prove untested acceptance ranges;
+- sampled evidence is population/process evidence, not a serialized PASS for every untested unit;
+- qualification-only and production-screen claims remain separate;
+- recurring production escapes are design feedback but do not automatically justify modifying a reusable block;
+- generic recurring observability needs may belong in a reusable block; board-specific pads/pins/mappings remain integration/manufacturing authority;
+- DFT hooks must preserve default state, authority, return domains, protection and safety boundaries;
+- production-test coverage percentages are not safety diagnostic coverage.
 
 ## Current OpenPressBrake worked-example result
 
-The current `digital_input_24v` manifest is a useful bounded example of the correct reusable test boundary. It publishes generic `FIELD_INPUT_24V`, `FIELD_RETURN`, `INPUT_STATE`, `INPUT_VALID`, a generic `DIGITAL_INPUT_FIELD_PAIR` connector requirement, FPGA 3V3 resource needs, return/isolation semantics, and PCB constraints while explicitly leaving physical connector selection to board integration.
+The current `digital_output_24v` manifest is a useful bounded coverage example because it publishes `OUTPUT_COMMAND`, field `OUTPUT_24V`/`LOAD_RETURN`, overload/overtemperature diagnostics, FPGA resource demand, shared `FIELD_24V_PROTECTED`/`LOGIC_3V3`/`FIELD0` resources, and explicit block/integration verification questions.
 
-Its status checklist remains truthfully `SIMULATION-READY`. That makes it suitable for teaching how a future production test requirement could say "stimulate the released field-input interface and observe the logic-side state" without hard-coding a particular board connector or fixture pogo pin into the reusable block. It is not presented as a finished production block.
+That structure lets a student reason about causal coverage without inventing a board connector or fixture. It also exposes why one-at-a-time or command-only tests can miss field-path and shared-resource defects. The manifest still leaves board channel current, inrush, duty, simultaneous-instance assumptions, connector rating and PCB current/thermal limits unresolved, so BD32 does not invent production limits.
 
-No OpenPressBrake engineering file was changed during BD31.
+No OpenPressBrake engineering file was changed during BD32.
 
 ## Current repository reconciliation
 
-BD31 was committed as `315370369a6128d6a1d92be8635355581bc343bc` and re-opened from current main.
+BD32 was committed as `97d8a313b21c3fa5f58303c8e2a3b55423fa1ba1` and re-opened from current main.
 
-Immediately before this checkpoint write, current main was re-read in both repositories. Curriculum main was `315370369a6128d6a1d92be8635355581bc343bc`; the prior safety-lane commits were preserved and no overlapping post-BD31 board-design change was present. OpenPressBrake main was `dc821b0481ee131055af47169f9e9d47cbea6d5a` (`digital input: publish ISO1212 3V3 packing power contract`) and remained read-only because active engineering is adjacent to the worked example.
+Immediately before this checkpoint write, current main was re-read in both repositories. Curriculum main was `97d8a313b21c3fa5f58303c8e2a3b55423fa1ba1`; the newer safety-lane timing/progress commits were preserved and no overlapping post-BD32 board-design change was present. OpenPressBrake main was `2b27aafa9ecb805ba8415d5b8c34f0ad1b3778df` (`infrastructure: trigger panel control from owner issues`). The newest hardware engineering immediately below it includes RS-485 and digital-output packing work, so OpenPressBrake remained read-only.
 
 ## Catalog stress-test result
 
-BD31 exposes a concrete infrastructure gap: production/release traceability needs a machine-readable layer joining released/as-built identity to generic block test requirements, board-specific fixture mappings, fixture hardware/software revisions, fixture adapter identities, test procedure and limit provenance, fixture/instrument calibration, unit calibration, serialized raw/results evidence, and rework/retest history.
+BD32 exposes two concrete infrastructure gaps:
 
-Do not solve this by adding fixture pogo-pin numbers, board J-numbers, machine destinations, or fixture-only conditioning to reusable product-block contracts. Fixture mapping is manufacturing integration; genuine reusable fixture conditioning deserves its own engineered fixture-adapter contract.
+1. the production-test layer needs a machine-readable failure-mode/semantic-claim-to-coverage matrix linking stimulus, observation, masking controls, coverage class, screening scope and retained serialized evidence; and
+2. reusable block contracts need a standardized place for generic DFT/observability requirements when intrinsic to the reusable function, while board-specific test pads, J-numbers, pogo pins and fixture mappings remain integration/manufacturing authority.
 
-A mature system should be able to answer `SHOW TEST REQUIREMENTS`, `SHOW FIXTURE APPLICABILITY`, and `SHOW TEST EVIDENCE FOR UNIT`, and mark evidence stale when a consumed semantic facet, board connection definition, limit set, fixture adapter, or calibration state changes.
+Do not solve these gaps by putting fixture details or machine-specific production limits into reusable block manifests. Do not call a test `DIRECT` merely because it usually detects a defect.
 
 ## Next exact work
 
-Build BD32 on **production-test coverage models, escape analysis, and design-for-test feedback**.
+Build BD33 on **production escape containment, nonconformance trends, and catalog feedback without corrupting qualification evidence**.
 
 Teach the flow:
 
-`released failure modes/critical claims -> stimulatable/observable boundaries -> production-screen coverage -> untestable/indirectly tested claims -> escape risk -> 100% versus sampled screening -> fixture self-diagnostics -> retained evidence -> DFT/catalog feedback`
+`serialized escape -> containment -> affected release/as-built population -> defect ownership -> trend/common-cause analysis -> corrective design/process action -> evidence invalidation/regression -> effectiveness check -> release/field applicability`
 
-The adversarial lab should include:
+The adversarial lab should include a repeated solder/open defect that is board/process-owned, a generic block weakness revealed across multiple boards, a fixture-induced false failure trend, a supplier substitution trend with incomplete lot identity, a field escape whose affected population cannot initially be bounded, an apparent common-cause issue that is actually two mechanisms, a corrective action that passes locally but leaves dependent evidence stale, and an ordinary safety-status interface trend that must not be promoted into unsupported safety validation claims.
 
-- an output whose FPGA command and fixture relay both toggle while the product field driver remains unobserved;
-- an input test that proves logic state but cannot distinguish a marginal field threshold from a healthy channel;
-- a shared power/resource defect that one-at-a-time channel tests miss;
-- an isolation/return fault hidden by a fixture that unintentionally ties returns together;
-- a fixture self-test that passes but does not exercise the measurement range used by product acceptance;
-- a failure mode covered only by qualification, not economically by every-unit production screening;
-- a sampled test incorrectly treated as evidence that every serialized unit passed;
-- a recurring production escape that should feed back into block/board design-for-test rather than only tightening operator instructions.
-
-Require students to distinguish coverage of a failure mode from mere execution of a test step, direct from indirect evidence, product observability from fixture observability, qualification-only claims from every-unit screening, and DFT changes that belong in reusable blocks versus board integration.
+Require students to preserve negative evidence, distinguish occurrence trend from design qualification, classify ownership before redesign, use release/as-built/installed identity to bound containment, and prove corrective-action effectiveness without erasing the original failure history.
 
 ## Compute
 
-No simulation, synthesis, place-and-route, timing run, or other executable engineering verification was justified for BD31. No GitHub-hosted runner was used. Future executable engineering work remains restricted to `[self-hosted, openpressbrake]`; no hosted Actions fallback is allowed.
+No simulation, synthesis, place-and-route, timing run, or other executable engineering verification was justified for BD32. No GitHub-hosted runner was used. Future executable engineering work remains restricted to `[self-hosted, openpressbrake]`; no hosted Actions fallback is allowed.
 
 ## Safety boundary
 
-BD31 teaches production-test traceability for ordinary controller hardware/configuration and ordinary electrical/status interfaces. It does not establish PL/SIL/category, diagnostic coverage of a safety function, stopping performance, final-element validation, or independent personnel-safety authority. A production pass on an ordinary safety-status receiver proves only the bounded ordinary-interface claim actually tested.
+BD32 teaches production-test coverage and DFT for ordinary controller hardware/configuration and ordinary electrical/status interfaces. It does not establish PL/SIL/category, safety diagnostic coverage, stopping performance, final-element validation, or independent personnel-safety authority. Production coverage of a safety-status receiver proves only the bounded ordinary-interface claim actually tested.

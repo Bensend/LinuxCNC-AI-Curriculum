@@ -20,15 +20,15 @@ Do not routinely reopen closed levels without a genuinely new material defect.
 
 Routine controller-board development remains a separate automation concern and must not displace safety work here.
 
-Current safety emphasis includes independent safety authority; physical final-element proof; process-response evidence; maintenance/return-to-service; reset/restart freshness; operating-mode commissioning; energized diagnostic authority; safe reduced-speed commissioning; and human-factors controls that make bypass/defeat and temporary commissioning states harder than the intended safe workflow.
+Current safety emphasis includes independent safety authority; physical final-element proof; process-response evidence; maintenance/return-to-service; reset/restart freshness; operating-mode commissioning; energized diagnostic authority; safe reduced-speed commissioning; human-factors controls against bypass; proposition-specific revalidation after change; and composition-aware acceptance scope when multiple changes overlap.
 
-Newest revalidation method: `safety-course/25E0_PROPOSITION_SPECIFIC_REVALIDATION_AFTER_CHANGE_2026-09-22.md` closes the immediate change-impact methodology task. Siemens G220 and SINUMERIK provide concrete component-replacement evidence: replacement/firmware work triggers reduced or complete acceptance work according to the affected object; encoder/sensor-module replacement can require actual-value acquisition, direction/calibration and affected safety-function tests. Siemens S120 explicitly permits reduced acceptance only after identifying affected acceptance-test objects/logical groups. Pilz independently treats validation depth as lifecycle/change dependent. The method maps `change -> stale proposition/evidence -> physical re-proof -> acceptance authority -> configuration record -> reset/rearm -> fresh ordinary demand`.
+Newest composition method: `safety-course/25E0_MULTI_CHANGE_COMPOSITION_ACCEPTANCE_SCOPE_2026-09-22.md`. Siemens SINUMERIK/S120 acceptance methodology establishes that reduced/partial acceptance scope is derived from acceptance-test objects and logical groups after hardware/software/function changes; it is not justified merely by calling a change minor. Pilz independently documents validation depth as application/change dependent. The curriculum now requires taking the union of stale propositions from simultaneous changes and explicitly checking their interfaces. If changed items participate in the same guard/stop/access/retaining/energy-isolation proposition, local component diagnostics do not close the composed function.
 
-Stress tests now cover both hydraulic/gravity-axis and rotating/servo cases. They explicitly separate component health, witness integrity, final-element state, process response, stopping/holding performance, configuration identity, exceptional-state clearance, reset/rearm and ordinary-demand freshness. Freeze **PART REPLACED != SAFETY PROPOSITION RESTORED**, **ALARM ACKNOWLEDGED != FUNCTION VALIDATED**, **CHECKSUM/CONFIGURATION MATCH != FIELD PHYSICS PROVED**, and **FORCE/SIMULATION DISABLED != REAL WITNESS REVALIDATED**.
+Stress tests cover guard-switch + safety-encoder replacement, pressure-witness + load-holding-element replacement, and safety-encoder + drive-dynamics change. Freeze **LOCAL TEST PASS + LOCAL TEST PASS != COMPOSED SAFETY FUNCTION REVALIDATED**, **CHANGE COUNT != ACCEPTANCE SCOPE**, and **PARTIAL ACCEPTANCE != ARBITRARILY SMALL ACCEPTANCE**.
 
-Newest machine-tool supported-exception trace retained: `safety-course/25E0_MACHINE_TOOL_SAFE_LIMITED_SPEED_ACCESS_AND_RETURN_2026-09-21.md` closes the immediate non-robot setup/access evidence gap. Rockwell Kinetix documents SLS with door and enabling-switch monitoring: safe speed is detected before door unlock, enabling is retained during hazardous-area access, and return requires leaving the area, closing the door/restoring the SLS input, reset when configured, then releasing enabling. A separate Rockwell machine assist/production example uses keyed mode selection, enabling-device task motion, and safety-rated speed monitoring. Siemens SINUMERIK independently documents SLS for setup and other machine-tool safety functions.
+Proposition-specific method retained: `safety-course/25E0_PROPOSITION_SPECIFIC_REVALIDATION_AFTER_CHANGE_2026-09-22.md`. The reusable chain remains `change -> stale proposition/evidence -> physical re-proof -> acceptance authority -> configuration record -> reset/rearm -> fresh ordinary demand`.
 
-Supported-exception and adversarial evidence retained: `safety-course/25E0_SETUP_ENABLING_REDUCED_MOTION_SUPPORTED_EXCEPTION_2026-09-21.md`, `safety-course/25E0_SUPPORTED_EXCEPTION_VS_DEFEAT_STRESS_TEST_2026-09-21.md`, `safety-course/25E0_PRODUCTION_RETURN_EXCEPTIONAL_STATE_CHECKLIST_AND_ADVERSARIAL_EXERCISE_2026-09-21.md`, `safety-course/25E0_SICK_PILZ_MUTING_OVERRIDE_INTENTIONAL_EXCEPTION_BOUNDARY_2026-09-21.md`, and `safety-course/25E0_SAFEGUARD_DEFEAT_AND_COMMISSIONING_SHORTCUT_REVIEW_METHOD_2026-09-21.md`.
+Newest machine-tool supported-exception trace retained: `safety-course/25E0_MACHINE_TOOL_SAFE_LIMITED_SPEED_ACCESS_AND_RETURN_2026-09-21.md`. Supported-exception/adversarial evidence remains in the 25E0 setup, muting/override, production-return, exception-authority and safeguard-defeat studies.
 
 Core freezes retained:
 - **ACCESS CLEAR != PERSONNEL CLEAR != SAFETY RELEASE != FINAL-ELEMENT PROOF != ORDINARY START AUTHORITY.**
@@ -44,6 +44,8 @@ Core freezes retained:
 - **COMMANDED REDUCED SPEED != SAFETY-RATED SPEED MONITORING.**
 - **AUTHORIZED BYPASS != SAFE PHYSICAL CONDITION.**
 - **MAINTENANCE COMPLETE != PRODUCTION READY until temporary-state clearance and impact-based revalidation are complete.**
+- **COMPONENT DIAGNOSTIC PASS != SAFETY FUNCTION VALIDATED.**
+- **SAME CHECKSUM != SAME FIELD PHYSICS.**
 
 ## 4000 foundation/core
 
@@ -51,11 +53,11 @@ Durable foundation includes `hardware/BLOCK_SPEC_TEMPLATE.md`, `hardware/4000-bl
 
 ## Exact next work
 
-1. Turn the proposition-specific method into a learner-facing **maintenance/change impact decision record** that can be completed before work starts and closed after validation; it must prevent technicians from discovering required tests only at production-return time.
-2. Trace one authoritative professional example where the required acceptance scope changes with a specific component class or safety-function change, and map that example into the record without generalizing vendor-specific tests to unrelated machines.
-3. Add an adversarial case involving two simultaneous changes whose affected propositions overlap, so the learner must detect that passing each component's local diagnostic does not necessarily revalidate the composed machine safety function.
+1. Turn the composition method into a learner-facing **acceptance-scope dependency matrix**: safety function/proposition × input witness × logic/configuration × final element × process witness × machine dynamics × safeguard/access assumption.
+2. Trace one authoritative professional example where a change outside the nominal safety component itself changes acceptance evidence — preferably control dynamics, mechanics, safeguard geometry, or machine configuration — without generalizing vendor-specific tests.
+3. Add an adversarial accumulated-change case: individually documented changes across several maintenance windows whose combined stale evidence crosses a safety-function boundary even though no single work order appears large.
 4. Preserve machine-specific physics and UNKNOWN handling; do not invent hydraulic truth tables, safe speeds, stopping distances, PL/SIL targets, pressure thresholds or diagnostic coverage.
-5. If this branch reaches an information-gain stop, rotate to the highest-value open 4000 safety module rather than returning to routine board design or closed 3000 work.
+5. If this branch reaches an information-gain stop, rotate to the highest-value open 4000 safety module rather than routine board design or closed 3000 work.
 
 ## Laboratory compute checkpoint
 

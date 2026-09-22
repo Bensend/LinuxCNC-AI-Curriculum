@@ -4,96 +4,87 @@ Date: 2026-09-22
 
 ## Lane status
 
-Independent board-design curriculum lane remains active alongside the separate safety curriculum. Durable lessons BD01 through BD38 are present. This checkpoint is board-design authority only and does not alter safety-course progress authority.
+Independent board-design curriculum lane remains active alongside the separate safety curriculum. Durable lessons BD01 through BD39 are present. This checkpoint is board-design authority only and does not alter safety-course progress authority.
 
-New this run:
+New this run: `BD39_CONFIGURATION_EVIDENCE_ESCROW_DISASTER_RECOVERY_AND_REPRODUCIBILITY.md`.
 
-- `BD38_FLEET_CLOSURE_RESIDUAL_SUPPORT_AND_LEGACY_RETIREMENT.md`
+BD39 teaches:
 
-BD38 teaches:
+`released/as-maintained identity -> authoritative artifact inventory -> integrity verification -> redundant archive/escrow -> toolchain/environment capture -> restore drill -> programming/test recovery -> reproducibility evidence -> loss/degradation disposition`
 
-`migration ledger -> reconciliation audit -> unresolved identity/finding closure -> support-state classification -> spare/tool/software retention -> evidence archive -> retirement authorization -> future SHOW WHAT IS INSTALLED / field-action discoverability`
+## BD39 hard student-material audit
 
-## BD38 hard student-material audit
-
-Every repository file named to students by BD38 was opened and inspected in current form during this run.
+Every repository file named to students by BD39 was opened and inspected in current form during this run.
 
 `VERIFIED_FOR_LESSON` for the bounded claims used:
 
-- Curriculum `hardware/4000-board-design/BD37_MIGRATION_EXECUTION_EVIDENCE_AND_FLEET_CONVERGENCE.md`
-- Curriculum `hardware/4000-board-design/CHECKPOINT.md` as it existed before this update
+- Curriculum `hardware/4000-board-design/BD38_FLEET_CLOSURE_RESIDUAL_SUPPORT_AND_LEGACY_RETIREMENT.md`
 - Curriculum `WORK_SELECTION_POLICY.md`
 - OpenPressBrake `hardware/blocks/STATUS_RULES.md`
 - OpenPressBrake `hardware/blocks/BLOCK_ADAPTER_INTEGRATION_RULES.md`
-- OpenPressBrake `hardware/blocks/dry_contact_relay_output/STATUS_CHECKLIST.md`
-- OpenPressBrake `hardware/blocks/dry_contact_relay_output/CAD_CAPTURE_HANDOFF_REV1.md`
+- OpenPressBrake `hardware/blocks/digital_input_24v/manifest.yaml`
+- OpenPressBrake `hardware/blocks/digital_input_24v/STATUS_CHECKLIST.md`
 
-The newly created BD38 lesson was re-opened from current main after commit and checked against the inspected sources.
+The newly created BD39 lesson was re-opened from current main after commit and checked against the inspected sources.
 
 `ENGINEERING_REVIEW_NEEDED`:
 
-- current OpenPressBrake `dry_contact_relay_output` remains `NOT READY`, not Rev 1 released;
-- installed KiCad library verification, rendered schematic/ERC, actual PCB current geometry, first-machine mapping, creepage/clearance, board-level source/thermal qualification and human release remain open;
-- OpenPressBrake has no repository-wide support/retirement registry joined to exact as-maintained assets, retained programming/toolchain capability and historical field-action applicability;
-- current engineering evidence does not establish a real released OpenPressBrake installed population, service stock, support state, legacy fleet or retirement population.
+- current OpenPressBrake `digital_input_24v` remains `SIMULATION-READY`, not `REV 1 READY`;
+- fault/abnormal-condition work, rendered-schematic review, PCB/layout review, complete cost/shared-resource resolution and human Rev-1 signoff remain open;
+- OpenPressBrake has no repository-wide configuration-evidence escrow/recovery manifest joined to exact release/as-maintained identities;
+- current engineering evidence does not establish a released OpenPressBrake fleet, disaster-recovery archive, reproducible released FPGA/HAL environment, service programmer/fixture inventory or restore-drill history.
 
-No inspected file is used to claim complete OpenPressBrake production, fleet, support or retirement readiness.
+No inspected file is used to claim complete OpenPressBrake production, fleet, recovery or long-horizon support readiness.
 
-## Rules frozen by BD38
+## Rules frozen by BD39
 
-- migration work ending does not retire legacy support obligations;
-- administrative retirement does not prove physical removal;
-- unknown configuration does not become retired configuration;
-- support states attach to exact configuration identities/envelopes rather than vague generations;
-- a support claim requires retained programming/test/configuration capability appropriate to that claim;
-- archived binary existence does not by itself prove support capability;
-- archived source does not by itself prove release reproducibility;
-- a spare on a shelf is not automatically a supported spare;
-- retirement from support does not erase engineering/configuration traceability;
-- negative evidence remains immutable after retirement;
-- no planned service does not prove retirement authorization;
-- unsupported-but-installed is a real discoverable state;
-- fleet retirement does not rewrite reusable block history;
-- ordinary-controller support retirement does not retire or revalidate an independent personnel-safety function.
+- file existence does not prove configuration recoverability;
+- a hash without the artifact is identity evidence, not recovery;
+- an artifact without trusted release binding does not prove release identity;
+- multiple copies do not prove failure-independent escrow;
+- archived source does not prove the build environment is recoverable;
+- a successful build does not by itself prove the released artifact was reproduced;
+- backup-job success does not prove a restore drill succeeds;
+- a system boot does not prove the released board/FPGA/HAL configuration is restored;
+- programmer, fixture and calibration capability are part of recoverability when the support claim depends on them;
+- loss of required recovery capability must change or explicitly narrow the support claim;
+- reusable engineering evidence remains separate from board/configuration escrow but must be joinable;
+- ordinary-controller recovery does not validate an independent personnel-safety function.
 
 ## Current OpenPressBrake worked-example result
 
-The current `dry_contact_relay_output` has frozen Rev-1 electrical capture input around K1 `G5Q-1 DC24`, Q1 `2N7002BK`, D1 `BAS21GW-Q`, R1 1 kOhm and R2 100 kOhm. Its field COM/NC/NO boundary remains abstract in the reusable primitive; physical connector selection/pin mapping remains board integration. The current CAD handoff explicitly requires installed KiCad library/pin verification and forbids changing manufacturer-backed connectivity merely to fit a candidate CAD asset.
+The current `digital_input_24v` reusable block publishes protected 24 V field-input/return semantics, 3.3 V logic outputs, FPGA resource needs, return/isolation constraints, selected component identities and verification artifacts while keeping physical field-connector selection and board-specific mapping in integration. Its status checklist remains `SIMULATION-READY` and explicitly records remaining release work.
 
-That is a useful lifecycle boundary: a future service/support claim would have to bind the actual board revision, connector mapping, programmed controller configuration, applicable electrical envelope and retained programming/verification capability. Possessing a relay or an unidentified shelf board would not establish a supported spare.
+This is a useful recovery boundary: preserving only the reusable manifest would not reconstruct an actual controller board. A future recoverable configuration would also require exact board/BOM/connection definitions, FPGA image/resource/pin identity, LinuxCNC/HAL configuration, final release evidence, and any required programmer/test-fixture capability. Conversely, an archived board image alone would not preserve the generic electrical contract and evidence consumed by that board.
 
-The block remains `NOT READY`, and no actual OpenPressBrake service stock, support state, fleet or retirement action is asserted. OpenPressBrake remained read-only.
+No actual OpenPressBrake escrow, fleet, release or disaster-recovery capability is asserted. OpenPressBrake remained read-only.
 
 ## Current repository reconciliation
 
-At run start, curriculum main had concurrent safety-lane work after the BD37 checkpoint but no overlapping board-design lesson change. OpenPressBrake main had advanced to `14005fbe05a998ab2ca49b83057e933871ab1d37` (`dry contact relay: freeze Rev1 CAD capture handoff`), so that active block was consumed read-only.
+At run start, curriculum main contained concurrent safety-lane work after the BD38 checkpoint but no overlapping board-design lesson change. OpenPressBrake main had advanced to `b4e1a4b4b50c2204e4a1e8a75a4588e735aaa75c` (`digital input: freeze scalable board integration handoff`), so the newly active digital-input engineering was consumed read-only.
 
-BD38 was committed as `2576afa80bfdcdf03c11aabad7b23a32037235be` and re-opened from current main. Immediately before this checkpoint write, curriculum main was re-read and contained BD38 with no overlapping post-BD38 board-design change; OpenPressBrake main was also re-read and remained `14005fbe05a998ab2ca49b83057e933871ab1d37`.
+BD39 was committed as `4a75652ff40c17f1fe85b322bd25f7115e045048` and re-opened from current main. Immediately before this checkpoint write, curriculum main was re-read and contained BD39 with no overlapping post-BD39 board-design change; OpenPressBrake main was also re-read and remained `b4e1a4b4b50c2204e4a1e8a75a4588e735aaa75c`.
 
 ## Catalog stress-test result
 
-BD38 exposes a lifecycle infrastructure need above the reusable catalog: future tooling should join the BD36 compatibility graph and BD37 serialized migration ledger to a support/retirement registry binding exact configuration identity/envelope, support state, installed/historical applicability, physical disposition evidence, board/BOM/adapter/connection definitions, FPGA/firmware binary identity and hashes, source/toolchain/reproducibility state, LinuxCNC/HAL configuration, programming/test/fixture capability, service stock/approved alternates, field actions/nonconformances, negative evidence, archive authority and retirement authorization.
+BD39 exposes a lifecycle infrastructure need above the reusable catalog: a configuration-evidence escrow/recovery manifest should bind exact release/as-maintained identity to authoritative artifact IDs/digests, repository/dependency identities, board/BOM/adapter/connection revisions, FPGA source/toolchain/settings/image/resource map, firmware/software, LinuxCNC/HAL configuration, environment provenance, programmer/fixture/calibration dependencies, independent archive locations, retention authority, restore-drill evidence, exact-image recovery status, rebuild-reproducibility status/equivalence criterion, known degraded dependencies and resulting support restrictions.
 
-This population/lifecycle state belongs outside reusable block manifests. Reusable blocks own generic engineering contracts; support/retirement records own configuration and population history.
-
-This infrastructure need remains `ENGINEERING_REVIEW_NEEDED`; current OpenPressBrake evidence does not justify inventing serial assets, service inventory or retirement state.
+This lifecycle/configuration evidence belongs outside reusable block manifests. Reusable blocks continue to own generic engineering contracts and evidence. This infrastructure need remains `ENGINEERING_REVIEW_NEEDED`; current OpenPressBrake evidence does not justify inventing archive locations, credentials, serial assets or reproducibility claims.
 
 ## Next exact work
 
-Build BD39 on **configuration evidence escrow, disaster recovery, and long-horizon reproducibility**.
+Build BD40 on **configuration provenance attestations, trust boundaries, and artifact promotion**:
 
-Teach:
+`engineering evidence -> candidate artifact -> automated checks -> human release authority -> immutable release identity -> provenance/attestation -> promotion to programming/service artifact -> downstream consumption -> revocation/supersession`
 
-`released/as-maintained identities -> authoritative artifact inventory -> integrity/hash/signature verification -> redundant archive/escrow -> toolchain/environment capture -> restore drill -> programming/test recovery -> evidence of reproducibility -> loss/degradation disposition`
+Stress locally built binaries with no release provenance, CI artifacts from the wrong commit, signed hashes whose signer authority is unclear, mutable `latest` URLs, a programmer selecting an unpromoted engineering image, and superseded artifacts that remain valid historical evidence but are no longer authorized for new programming.
 
-Stress corrupted archives, missing proprietary tool installers/licenses, hashes without binaries, source without submodules/dependencies, VM/container drift, undocumented programmer hardware, calibration/test fixtures that cannot be recreated, and a disaster-recovery restore that boots but cannot prove the released FPGA/HAL identity.
-
-Require students to distinguish possession from recoverability; preserve exact artifact and environment identity; prove restoration with an actual bounded drill rather than a backup-success log; keep loss/degradation explicit; and refuse support/retirement claims that depend on unrecoverable evidence.
+Require students to distinguish integrity from authority, candidate artifacts from promoted release artifacts, provenance from mere filenames, and supersession/revocation from deletion of historical evidence.
 
 ## Compute
 
-No simulation, synthesis, place-and-route, timing run, or other executable engineering verification was justified for BD38. No GitHub-hosted runner was used. Future executable engineering work remains restricted to `[self-hosted, openpressbrake]`; no hosted Actions fallback is allowed.
+No simulation, synthesis, place-and-route, timing run, or other executable engineering verification was justified for BD39. No GitHub-hosted runner was used. Future executable engineering work remains restricted to `[self-hosted, openpressbrake]`; no hosted Actions fallback is allowed.
 
 ## Safety boundary
 
-BD38 teaches lifecycle closure and support/retirement evidence for ordinary controller hardware/configuration and ordinary electrical/status interfaces. It does not establish PL/SIL/category, safety diagnostic coverage, stopping performance, final-element validation, or independent personnel-safety authority. Retirement of ordinary controller support proves nothing about retirement, modification or validation of an independent personnel-safety function.
+BD39 teaches evidence recovery for ordinary controller hardware/configuration and ordinary electrical/status interfaces. It does not establish PL/SIL/category, safety diagnostic coverage, stopping performance, final-element validation, or independent personnel-safety authority. Recovering an ordinary controller's released artifacts proves nothing about recovery or validation of an independent personnel-safety function.

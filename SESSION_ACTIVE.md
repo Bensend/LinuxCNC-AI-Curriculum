@@ -1,6 +1,5 @@
-STATUS CLOSED
-SESSION_START 2026-09-22T10:36:01Z
-SESSION_END 2026-09-22T10:49:00Z
-MODULE Practical Machine Safety Engineering / fresh demand and partial power-domain recovery
-NEXT checkpoints/2026-09-22T1048Z-fresh-demand-partial-power-next.md
-NOTE Added professional unexpected-start trace, recovery-state table, and both partial-power-domain adversarial cases. No executable compute; no GitHub-hosted runner used. Timing append delegated to self-hosted race-safe workflow.
+STATUS ACTIVE
+SESSION_START 2026-09-22T14:33:04Z
+MODULE Practical Machine Safety Engineering / safety-design workflow audit and hazard-to-function derivation
+NEXT Recover newest checkpoint from PROGRESS.md and checkpoints; audit safety-course syllabus/module coverage before adding instruction.
+NOTE Session start recorded before substantive work. Local-compute rule active: no GitHub-hosted compute; use [self-hosted, openpressbrake] only if question-driven compute becomes justified.

@@ -4,95 +4,93 @@ Date: 2026-09-22
 
 ## Lane status
 
-Independent board-design curriculum lane remains active alongside the separate safety curriculum. Durable lessons BD01 through BD28 are present. This checkpoint is board-design authority only and does not alter safety-course progress authority.
+Independent board-design curriculum lane remains active alongside the separate safety curriculum. Durable lessons BD01 through BD29 are present. This checkpoint is board-design authority only and does not alter safety-course progress authority.
 
 New this run:
 
-- `BD28_ENGINEERING_CHANGE_CONTROL_CATALOG_TO_RELEASED_VARIANTS.md`
+- `BD29_RELEASED_CONFIGURATION_IDENTITY_TRACEABILITY_AND_VARIANT_APPLICABILITY.md`
 
-BD28 teaches:
+BD29 teaches:
 
-`change proposal -> old/new configuration baseline -> affected semantic IDs/facets -> compatibility classification -> owning revision -> SHOW WHERE USED -> evidence invalidation -> board/machine applicability -> migration/retrofit decision -> qualification/regression -> new baseline -> design release -> separate field-action decision`
+`release proposition -> immutable released baseline ID -> exact block/adapter/board/PCB/BOM/FPGA/HAL identities -> machine applicability -> evidence bindings -> designed identity -> built identity -> installed identity -> supported/superseded/withdrawn state -> SHOW WHERE USED / SHOW WHAT IS INSTALLED -> change applicability -> migration/field-action traceability`
 
-## BD28 hard student-material audit
+## BD29 hard student-material audit
 
-Every repository file named to students by BD28 was opened and inspected in current form during this run.
+Every repository file named to students by BD29 was opened and inspected in current form during this run.
 
 `VERIFIED_FOR_LESSON` for the bounded claims used:
 
 - Curriculum `hardware/4000-board-design/BD25_DEPENDENCY_AWARE_QUALIFICATION_EVIDENCE_AND_RELEASE_STATE_COMPOSITION.md`
-- Curriculum `hardware/4000-board-design/BD27_QUALIFICATION_FINDING_DISPOSITION_AND_REGRESSION_CLOSURE.md`
+- Curriculum `hardware/4000-board-design/BD28_ENGINEERING_CHANGE_CONTROL_CATALOG_TO_RELEASED_VARIANTS.md`
 - Curriculum `hardware/4000-board-design/CHECKPOINT.md` as it existed before this update
+- Curriculum `WORK_SELECTION_POLICY.md`
 - OpenPressBrake `hardware/blocks/STATUS_RULES.md`
 - OpenPressBrake `hardware/blocks/BLOCK_ADAPTER_INTEGRATION_RULES.md`
-- OpenPressBrake `hardware/blocks/digital_input_24v/design/REV4_CURRENT_DATASHEET_REVALIDATION.md`
-- OpenPressBrake `hardware/blocks/digital_input_24v/STATUS_CHECKLIST.md`
 
-The newly created BD28 lesson was re-opened from current main after commit and checked for internal consistency.
+The newly created BD29 lesson was re-opened from current main after commit and checked for internal consistency.
 
 `ENGINEERING_REVIEW_NEEDED`:
 
-- OpenPressBrake still lacks a repository-wide variant-aware released-configuration registry binding each board/machine baseline to exact reusable semantic revisions, evidence applicability, compatibility classification, migration state, and field-action disposition.
-- Current `digital_input_24v` remains SIMULATION-READY, not SCHEMATIC-READY or REV 1 READY; its PCB/layout review, cost/dependency completion, and human Rev-1 release gates remain open.
+- OpenPressBrake still lacks a repository-wide released-configuration/installed-asset registry that binds immutable release IDs to exact reusable semantic revisions, board/connection/PCB/BOM identity, FPGA/HAL identity, evidence bindings, built serial identity, installed identity, retrofit history, and lifecycle/applicability state.
+- Current OpenPressBrake engineering activity is still block/integration development rather than evidence of a production-released controller; no release/serial population is invented for the lesson.
 
 No inspected file is used to claim complete OpenPressBrake production readiness.
 
-## Rules frozen by BD28
+## Rules frozen by BD29
 
-- a proposed edit is not itself a new engineering baseline;
-- source/provenance revision can change without electrical semantic revision when evidence shows no material electrical delta;
-- compatibility is classified explicitly as no-semantic-change, backward-compatible, conditional, breaking, board-only, machine-only, or unresolved;
-- catalog head is not automatically the required revision for an already released board;
-- backward-compatible improvement does not automatically require retrofit;
-- BOM substitution requires facet-level equivalence evidence, not nominal-value/package matching;
-- board-only connector/location/silkscreen changes do not automatically invalidate generic reusable electrical qualification;
-- one machine retrofit does not mutate reusable catalog authority without independent generic justification;
-- old configuration baselines and superseded evidence remain preserved;
-- design-release approval and field-action/retrofit decisions are separate;
-- change applicability follows exact consumed semantic revisions and `SHOW WHERE USED`, not family name alone;
-- ordinary safety-status interface change does not grant authority to redesign independent personnel-safety functions.
+- a release ID is immutable and must not be a moving `main`/`latest` pointer;
+- release records consume exact reusable semantic revisions, not only family names;
+- board-specific connection identity remains board-specific even though release traceability records it;
+- unrecorded BOM substitution blocks release inheritance until identity/equivalence is established;
+- FPGA image and LinuxCNC/HAL configuration are first-class release components when behavior depends on them;
+- designed, built, and installed identity are distinct propositions and must not be assumed equal;
+- retrofit history does not rewrite the original release record;
+- superseded/legacy does not automatically mean invalid or unsafe;
+- `SHOW WHERE USED` engineering dependencies and `SHOW WHAT IS INSTALLED` asset records are separate graphs that must be joined for field applicability;
+- unknown installed identity remains `VERIFY_AT_MACHINE`/blocked rather than a best-guess baseline;
+- historical evidence/release state remains auditable after later evidence changes;
+- ordinary safety-status interface identity can be traced without granting personnel-safety authority;
+- cross-machine reuse preserves generic block identity while each board/machine owns its own configuration baseline.
 
 ## Current OpenPressBrake worked-example result
 
-Current OpenPressBrake `digital_input_24v` provides a clean change-control example. The newest TI ISO1212 manufacturer-source revalidation found no material electrical delta requiring topology, component-value, operating-envelope, production-connectivity, or simulation change. The correct disposition was therefore to retain the frozen topology and existing applicable evidence rather than create gratuitous design churn. The block status correctly remains SIMULATION-READY and explicitly leaves downstream PCB/layout and human release work open.
+OpenPressBrake remains useful as engineering source-of-truth for reusable block and composition governance, but current main is not treated as a released product baseline. Current `STATUS_RULES.md` explicitly separates baseline/integration readiness from full Rev-1 qualification, and `BLOCK_ADAPTER_INTEGRATION_RULES.md` keeps reusable blocks, real adapters, board-only mappings, unknown machine facts, and safety authority separate.
 
-This demonstrates a useful distinction for students: **SOURCE REVISION CHANGED != CIRCUIT SEMANTICS CHANGED != READINESS PROMOTED**.
+During this run OpenPressBrake main advanced to `391b7a71b7540d18ef5c458ae79125908308a55c` (`lvdt input: bound LT6015 analog-5V rail demand`). That active work was left read-only. The commit itself demonstrates bounded engineering evidence: a current manufacturer cross-check adds a 315-uA-per-populated-channel `ANALOG_5V` load handoff for the selected LT6015 while explicitly not claiming PCB thermal qualification, sensor current, startup/fault closure, or safety authority. BD29 does not present that file to students and does not promote it into release evidence.
 
-No OpenPressBrake engineering file was changed during BD28.
+No OpenPressBrake engineering file was changed during BD29.
 
 ## Current repository reconciliation
 
-The curriculum repository contained newer safety-lane commits after the prior BD27 checkpoint; they were preserved.
+BD29 was committed as `c9b413a6d71d6a3fc91be5fbe2b4a57db86b6f37` and re-opened from current main.
 
-BD28 was committed as `8d700f22540da95d08df582bd87c5af271729a4d` and re-opened from current main.
-
-Immediately before this checkpoint write, current main was re-read in both repositories. Curriculum main was `8d700f22540da95d08df582bd87c5af271729a4d`; no overlapping post-BD28 board-design change was present. OpenPressBrake main was `511b08e7e2608b6c2af4653c663deca0bcdfce61` (`digital input: revalidate ISO1212 baseline against current datasheet`) and remained read-only.
+Immediately before this checkpoint write, current main was re-read in both repositories. Curriculum main was `c9b413a6d71d6a3fc91be5fbe2b4a57db86b6f37`; no overlapping post-BD29 board-design change was present. OpenPressBrake main was `391b7a71b7540d18ef5c458ae79125908308a55c` and remained read-only.
 
 ## Next exact work
 
-Build BD29 on **released-configuration identity, traceability, and variant applicability records**.
+Build BD30 on **manufacturing/programming/commissioning handoff and as-built reconciliation**.
 
 Teach the flow:
 
-`release proposition -> immutable released baseline ID -> exact block/adapter/board/PCB/BOM/FPGA/HAL revisions -> machine applicability -> evidence snapshot/bindings -> supported/superseded/withdrawn state -> SHOW WHERE USED / SHOW WHAT IS INSTALLED -> change applicability -> migration/field-action traceability`
+`released baseline -> manufacturing package -> component/population/option traceability -> programmed FPGA/software identity -> assembly inspection -> first-power/bring-up record -> as-built deviations -> engineering disposition -> installed baseline -> release inheritance`
 
 The adversarial lab should include:
 
-- two board variants using different qualified revisions of the same reusable block;
-- a new catalog revision that applies to new builds but not an old released variant;
-- a board assembled with a BOM substitution whose identity was not captured and therefore cannot inherit the released baseline by assumption;
-- an FPGA image/HAL configuration mismatch on otherwise identical hardware;
-- a machine retrofit whose installed baseline differs from the board's original release record;
-- a superseded but still-supported legacy baseline;
-- a withdrawn/blocked baseline with explicit field-action applicability;
-- an ordinary safety-status interface revision whose installed identity is tracked without granting safety authority.
+- a wrong-population option on an otherwise correct PCB;
+- an approved alternate that is qualified but absent from an obsolete manufacturing pick list;
+- a correct PCB/BOM loaded with the wrong FPGA image;
+- a reworked board whose as-built delta was not recorded;
+- a board that passes basic bench I/O but has an unresolved identity mismatch;
+- a field replacement board whose machine-specific HAL/harness mapping must be reconciled before commissioning;
+- an unknown legacy installed board requiring a minimal `VERIFY_AT_MACHINE` identity task;
+- an ordinary safety-status input whose configuration is traced without treating manufacturing/commissioning evidence as safety validation.
 
-Require explicit stable release IDs, installed-versus-designed distinction, immutable historical baselines, exact evidence binding, and reverse lookup from a changed semantic facet to affected released/installed populations.
+Require explicit distinction among released design authority, manufacturing work instructions, actual as-built population/programming, commissioning evidence, and installed machine identity. Release inheritance must fail closed on unresolved material deviations.
 
 ## Compute
 
-No simulation, synthesis, place-and-route, timing run, or other executable engineering verification was justified for BD28. No GitHub-hosted runner was used. Future executable engineering work remains restricted to `[self-hosted, openpressbrake]`; no hosted Actions fallback is allowed.
+No simulation, synthesis, place-and-route, timing run, or other executable engineering verification was justified for BD29. No GitHub-hosted runner was used. Future executable engineering work remains restricted to `[self-hosted, openpressbrake]`; no hosted Actions fallback is allowed.
 
 ## Safety boundary
 
-BD28 teaches engineering change control for ordinary controller hardware/configuration and ordinary electrical/status interfaces. It does not establish PL/SIL/category, diagnostic coverage, stopping performance, or independent personnel-safety authority. A change that actually alters an independent safety function belongs to the separate safety design and validation process.
+BD29 teaches configuration identity and traceability for ordinary controller hardware/configuration and ordinary electrical/status interfaces. It does not establish PL/SIL/category, diagnostic coverage, stopping performance, or independent personnel-safety authority. An installed identity record for a safety-status interface proves configuration identity only; actual safety-function changes belong to the separate safety design and validation process.

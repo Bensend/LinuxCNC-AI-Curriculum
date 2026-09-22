@@ -4,86 +4,93 @@ Date: 2026-09-22
 
 ## Lane status
 
-Independent board-design curriculum lane remains active alongside the separate safety curriculum. Durable lessons BD01 through BD26 are present. This checkpoint is board-design authority only and does not alter safety-course progress authority.
+Independent board-design curriculum lane remains active alongside the separate safety curriculum. Durable lessons BD01 through BD27 are present. This checkpoint is board-design authority only and does not alter safety-course progress authority.
 
 New this run:
 
-- `BD26_FULL_BOARD_QUALIFICATION_PLANNING_AND_EVIDENCE_CLOSURE.md`
+- `BD27_QUALIFICATION_FINDING_DISPOSITION_AND_REGRESSION_CLOSURE.md`
 
-BD26 turns the BD25 release/evidence graph into a release-oriented verification campaign:
+BD27 closes the loop after BD26 campaign execution:
 
-`release dependency -> unresolved/current evidence -> verification question -> prerequisite/risk ordering -> staged evidence -> residual-open-claim ledger -> composed release review`
+`failed/anomalous evidence -> preserve evidence -> classify finding -> locate owning authority -> corrective revision -> SHOW WHERE USED -> scoped regression -> residual release recomposition`
 
-## BD26 hard student-material audit
+## BD27 hard student-material audit
 
-Every repository file named to students by BD26 was opened and inspected in current form during this run.
+Every repository file named to students by BD27 was opened and inspected in current form during this run.
 
 `VERIFIED_FOR_LESSON` for the bounded claims used:
 
-- Curriculum `hardware/4000-board-design/BD08_QUALIFICATION_EVIDENCE_VERIFICATION_MATRIX_AND_REGRESSION_TRIGGERS.md`
-- Curriculum `hardware/4000-board-design/BD09_STAGED_BOARD_BRINGUP_AND_COMMISSIONING_EVIDENCE.md`
 - Curriculum `hardware/4000-board-design/BD25_DEPENDENCY_AWARE_QUALIFICATION_EVIDENCE_AND_RELEASE_STATE_COMPOSITION.md`
+- Curriculum `hardware/4000-board-design/BD26_FULL_BOARD_QUALIFICATION_PLANNING_AND_EVIDENCE_CLOSURE.md`
 - Curriculum `hardware/4000-board-design/CHECKPOINT.md` as it existed before this update
 - OpenPressBrake `hardware/blocks/STATUS_RULES.md`
 - OpenPressBrake `hardware/blocks/BLOCK_ADAPTER_INTEGRATION_RULES.md`
 - OpenPressBrake `hardware/blocks/digital_output_24v/STATUS_CHECKLIST.md`
-- OpenPressBrake commit `99a95e45ea077c0ade1ee2c61517751845f82ae8`, specifically the added `hardware/blocks/digital_output_24v/integration/STISO620_SUPPLY_CURRENT_BOUND.md` evidence
 
-The newly created BD26 lesson was re-opened from current main after commit and checked for internal consistency.
+The newly created BD27 lesson was re-opened from current main after commit and checked for internal consistency.
 
 `ENGINEERING_REVIEW_NEEDED`:
 
-- OpenPressBrake still lacks a repository-wide machine-readable campaign-derivation/closure layer that enumerates unresolved release claims, binds each to an evidence method/prerequisites/owner, ingests results, and recomputes the residual release graph.
-- The current `digital_output_24v` isolated Rev1 path is intentionally not presented as finished student hardware. Its status still leaves exact isolated-path production BOM/capture, board-contract validator closure, rendered connectivity, abnormal-condition qualification, simultaneous-channel corners, PCB current/thermal qualification, board integration, and human release open.
+- OpenPressBrake still lacks a repository-wide machine-readable finding-disposition layer that binds failed evidence to owning authority, corrective semantic revision, `SHOW WHERE USED`, facet-scoped invalidation, regression results, and recomputed release state.
+- The current `digital_output_24v` isolated Rev1 path remains intentionally not presented as finished student hardware. Its status still leaves isolated-path production BOM/capture, structural validation, rendered connectivity, fault/corner qualification, PCB current/thermal qualification, board integration, and human release open.
 
-No current file inspected for BD26 is used to claim complete OpenPressBrake production readiness.
+No current file inspected for BD27 is used to claim complete OpenPressBrake production readiness.
 
-## Rules frozen by BD26
+## Rules frozen by BD27
 
-- qualification campaigns are derived from release dependencies, not generic checklists;
-- campaign order must respect prerequisites, risk, information value, and destructive potential;
-- evidence classes complement one another and do not silently promote across reusable/board/PCB/FPGA/HAL/machine scopes;
-- current-limited staged-power survival does not qualify production protection;
-- a bounded device/load calculation can feed a thermal analysis without closing actual-PCB thermal qualification;
-- default/reset, watchdog/command loss, partial-power/back-power, and declared electrical fault cases remain distinct questions;
-- a successfully commissioned and working machine may still correctly remain not released;
-- stale reusable evidence, unresolved `VERIFY_AT_MACHINE` facts, stale FPGA implementation evidence, envelope gaps, and failed criteria remain release blockers even after successful operation;
-- negative evidence is preserved and superseded rather than hidden;
-- completion of test execution is not the same as passing the final release review;
-- ordinary safety-status monitoring by LinuxCNC/FPGA remains outside independent personnel-safety authority.
+- failed evidence is preserved and superseded rather than deleted or rewritten;
+- the location where a failure is observed does not determine the authority that owns the defect;
+- findings are classified before corrective circuitry/configuration is invented;
+- a reusable block is revised only when the generic reusable contract/circuit/envelope is actually defective or there is independent generic engineering justification;
+- machine-only mismatches remain machine/configuration facts unless generic engineering justifies a reusable change;
+- adapter defects, board integration defects, connection-definition defects, FPGA/HAL defects, machine mismatches, and test/evidence defects remain distinct corrective homes;
+- J-number/label/mapping-only changes do not automatically stale generic reusable electrical qualification;
+- shared-resource changes propagate through dependent aggregates, protection, thermal/startup evidence, neighboring consumers, and release where causal dependencies exist;
+- regression selection is driven by changed semantic facets and dependency edges, not by convenience or indiscriminate full reruns;
+- a corrected design is not a closed finding until affected regressions and release recomposition are complete;
+- a previously released board is not automatically released after a material change;
+- ordinary safety-status findings do not grant authority to redesign independent personnel-safety functions in FPGA/LinuxCNC.
 
 ## Catalog stress-test result
 
-The current OpenPressBrake digital-output work is a useful positive example: the newest STISO620 datasheet/current arithmetic closes one named resource question while its own evidence and block status explicitly leave PCB thermal, exact capture, fault qualification, integration, and release gates open. That is the desired behavior of bounded evidence.
+BD27 exposes the next machine-readable catalog pressure: finding disposition and corrective-change impact. A future layer should preserve the failed evidence, classify the owning authority, record the corrective semantic revision, generate the affected `SHOW WHERE USED` set, stale only causally affected evidence, preserve unrelated evidence current, ingest regression results, and recompute the release proposition.
 
-BD26 exposes the next catalog pressure: generate a qualification campaign from the dependency/evidence graph and maintain a residual-open-claim ledger without duplicating electrical authority. This should eventually support grouping by article/setup, prerequisite ordering, evidence ingestion, and causal release blockers.
+The current OpenPressBrake digital-output status is useful as an ownership example because it distinguishes a reusable shared-reference output variant from the first-board isolated implementation and explicitly leaves the latter's unresolved production/qualification work open. A future failure at the field connector must not automatically be blamed on or patched into the reusable primitive; the cause may belong to the isolation/interface path, shared resource, board connectivity, or installed machine.
 
-No OpenPressBrake engineering file was changed. Active engineering is adjacent to these qualification/resource questions, so OpenPressBrake remained read-only.
+No OpenPressBrake engineering file was changed. Current main is actively changing analog-input protection/envelope work, so OpenPressBrake remained read-only.
 
 ## Current repository reconciliation
 
-The curriculum repository contained newer safety-lane commits after the prior BD25 checkpoint. Those were preserved.
+The curriculum repository contained newer safety-lane commits after the prior BD26 checkpoint. Those were preserved.
 
-BD26 was committed as `6a1edd6e672fb1ed897002c9ad8188418bd81be4` and re-opened from current main.
+BD27 was committed as `129f493546bbfb0877bc97c615f582016c42e5db` and re-opened from current main.
 
-Immediately before this checkpoint write, current main was re-read in both repositories. Curriculum main was `6a1edd6e672fb1ed897002c9ad8188418bd81be4`; no overlapping post-BD26 board-design change was present. OpenPressBrake main was `99a95e45ea077c0ade1ee2c61517751845f82ae8` (`digital output: close STISO620 switched-5V load bound`) and remained read-only.
+Immediately before this checkpoint write, current main was re-read in both repositories. Curriculum main was `129f493546bbfb0877bc97c615f582016c42e5db`; no overlapping post-BD27 board-design change was present. OpenPressBrake main was `fd279a00dbfcce72744fed5abe4acaba5cd2c7ab` (`analog input: separate TPS26610 measurement and protection envelopes`) and remained read-only.
 
 ## Next exact work
 
-Build BD27 on **qualification finding disposition and regression closure**.
+Build BD28 on **engineering change control from qualified catalog through released board variants**.
 
 Teach the flow:
 
-`failed/anomalous evidence -> preserve evidence -> classify finding -> locate owning authority -> block defect / adapter defect / board integration / connection definition / FPGA/HAL / machine fact -> corrective revision -> dependency SHOW WHERE USED -> scoped regression selection -> rerun/recalculate/review/requalify -> residual release recomposition`
+`change proposal -> affected semantic IDs/facets -> compatibility classification -> reusable/adapter/board revision policy -> evidence invalidation -> board-variant applicability -> migration/retrofit decision -> qualification/regression -> configuration-baseline update -> release-note/field-action decision`
 
-The adversarial lab should include a board-level failure that reveals a genuine reusable-block defect, a machine-only mismatch that must not contaminate the reusable block, an adapter/interface defect, a J-number-only correction that should not stale generic electrical qualification, a fix that changes a shared resource and therefore invalidates neighboring consumers, and a safety-status observation that must not become a safety-function design correction in the ordinary controller lane.
+The adversarial lab should include:
 
-Require preservation of failed/superseded evidence and explicit proof that a local fix did not silently invalidate other blocks or the complete-board release claim.
+- a backward-compatible reusable improvement that should not force unnecessary board respins;
+- a breaking reusable interface revision requiring a different block, qualified adapter, or board respin;
+- a BOM substitution that is not accepted as equivalent merely because nominal values match;
+- a machine-only retrofit that must not mutate generic catalog authority;
+- a board-specific connector/location change with narrow applicability;
+- a change whose engineering benefit is real but does not justify automatic retrofit of already released machines;
+- an ordinary safety-status interface change that must not redefine independent safety authority.
+
+Require explicit old/new configuration baselines, applicability by board/machine revision, retained superseded evidence, causal regression selection, and a field-action decision distinct from design-release approval.
 
 ## Compute
 
-No simulation, synthesis, place-and-route, timing run, or other executable engineering verification was justified for BD26. The work was campaign methodology and current source review. No GitHub-hosted runner was used. Future executable engineering work remains restricted to `[self-hosted, openpressbrake]`; no hosted Actions fallback is allowed.
+No simulation, synthesis, place-and-route, timing run, or other executable engineering verification was justified for BD27. The work was finding-disposition methodology and current source review. No GitHub-hosted runner was used. Future executable engineering work remains restricted to `[self-hosted, openpressbrake]`; no hosted Actions fallback is allowed.
 
 ## Safety boundary
 
-BD26 plans qualification of ordinary controller hardware and its interfaces. It does not establish PL/SIL/category, diagnostic coverage, stopping performance, or independent personnel-safety authority. A correctly read safety-system status signal proves only the bounded ordinary electrical/status interface claim unless the separate safety architecture and validation establish more.
+BD27 teaches disposition of ordinary controller findings and their interfaces. It does not establish PL/SIL/category, diagnostic coverage, stopping performance, or independent personnel-safety authority. An ordinary controller may correct its electrical/status interface to an independent safety system, but must not absorb the safety function merely because a qualification finding was observed there.

@@ -4,69 +4,71 @@ Date: 2026-09-22
 
 ## Lane status
 
-Independent board-design curriculum lane remains active alongside the separate safety curriculum. Durable lessons BD01 through BD43 are present. This checkpoint is board-design authority only and does not alter safety-course progress authority.
+Independent board-design curriculum lane remains active alongside the separate safety curriculum. Durable lessons BD01 through BD44 are present. This checkpoint is board-design authority only and does not alter safety-course progress authority.
 
-New this run: `BD43_RELEASE_TRAIN_OBSERVABILITY_GATE_DASHBOARDS_AND_EXCEPTION_AUTHORITY.md`.
+New this run: `BD44_EXCEPTION_DEBT_WAIVER_BURNDOWN_AND_TEMPORARY_CONTROL_RETIREMENT.md`.
 
-BD43 teaches:
-
-`change waves -> gate graph -> machine-readable status -> evidence freshness -> blocked/waived/failed states -> exception authority -> expiry/revalidation -> promotion visibility -> audit reconstruction`
-
-## BD43 hard student-material audit
-
-Every repository file named to students as finished material by BD43 was opened and inspected in current form during this run.
-
-`VERIFIED_FOR_LESSON` for the bounded claims used:
-
-- OpenPressBrake `hardware/blocks/STATUS_RULES.md`
-- Curriculum `hardware/4000-board-design/CHECKPOINT.md` as it existed when work was selected
-
-No moving OpenPressBrake block implementation is assigned as finished student material in BD43. Current OpenPressBrake main is in active Rev1 whole-board work, so the lesson deliberately uses stable governance semantics instead of freezing a changing implementation as authority.
-
-The newly created BD43 lesson was re-opened from current main after commit and checked against the inspected sources.
-
-## Rules frozen by BD43
-
-- dashboard green does not equal release authorized;
-- a dashboard is a projection of authoritative records, not a second source of truth;
-- last result PASS does not equal current gate PASS;
-- evidence freshness is semantic, not merely time-based or filename-based;
-- unknown freshness is not current;
-- a gate graph must preserve prerequisites rather than flattening release state into a checklist;
-- downstream success does not erase an upstream failure;
-- waived does not equal passed;
-- every exception requires exact scope, rationale, authority, applicability, expiry/revalidation trigger, and closure evidence;
-- a board-specific exception does not qualify or mutate a reusable block unless generic engineering evidence justifies the block change;
-- skipped executable verification is not passed verification;
-- when executable verification is genuinely required, unavailable `[self-hosted, openpressbrake]` compute means BLOCKED/NOT_RUN rather than fallback to hosted compute;
-- engineering state, candidate state, promotion state, and population applicability remain distinct;
-- historical release decisions and negative evidence remain reconstructable after later fixes;
-- ordinary controller release authority cannot validate an independent personnel-safety function.
-
-## Catalog stress-test result
-
-BD43 exposes a release-observability layer above the reusable catalog. A future machine-readable implementation should join stable semantic IDs, exact candidate lineage, dependency snapshots, gate prerequisites/results, evidence digests and freshness, exception authority/scope/expiry, promotion state, population applicability, and immutable historical audit snapshots.
-
-This infrastructure is `ENGINEERING_REVIEW_NEEDED`. Board release waivers, fleet applicability, and dashboard state must not be pushed down into generic reusable-block manifests merely because the release view consumes block data.
-
-## Current repository reconciliation
-
-At run start the board-design checkpoint ended at BD42. Curriculum main had concurrent safety/timing work but no post-BD42 board-design lesson. Immediately before the BD43 write, current OpenPressBrake main was `5e4f4d19164479d658a1eb876f2779e46e72b972` (`Start Rev1 whole-board footprint audit`), following active safety-interface and machine-power changes. OpenPressBrake was therefore consumed read-only.
-
-BD43 was committed as `6a8a30a3076b069fb9ea3e49e33a803a09762032` and re-opened from current main before this checkpoint update.
-
-## Next exact work
-
-Build BD44 on **exception debt, waiver burn-down, and temporary-control retirement**:
+BD44 teaches:
 
 `active exceptions -> risk/expiry queue -> dependency/population reach -> compensating controls -> permanent correction -> targeted regression -> exception closure -> temporary-control removal -> evidence preservation`
 
-Stress an exception whose expiry is approaching, a compensating control that became permanent by neglect, a fix that closes the local defect but leaves dependent evidence stale, a service-only exception accidentally applied to new builds, and a safety-status-monitor exception that must not become personnel-safety acceptance.
+## BD44 hard student-material audit
+
+Every repository file named to students as finished material by BD44 was opened and inspected in current form during this run.
+
+`VERIFIED_FOR_LESSON` for the bounded claims used:
+
+- Curriculum `hardware/4000-board-design/BD43_RELEASE_TRAIN_OBSERVABILITY_GATE_DASHBOARDS_AND_EXCEPTION_AUTHORITY.md`
+- Curriculum `hardware/4000-board-design/CHECKPOINT.md` as it existed when work was selected
+- OpenPressBrake `hardware/blocks/STATUS_RULES.md`
+- OpenPressBrake `hardware/blocks/BLOCK_ADAPTER_INTEGRATION_RULES.md`
+
+No moving OpenPressBrake block implementation is assigned as finished student material in BD44. Current OpenPressBrake main is actively changing Rev1 integration and low-voltage allocations, so the lesson deliberately uses inspected stable governance rather than freezing a moving implementation as authority.
+
+The newly created BD44 lesson was re-opened from current main after commit and checked against the inspected sources.
+
+## Rules frozen by BD44
+
+- exception approved does not mean defect resolved;
+- burn-down priority is driven by consequence, uncertainty, expiry urgency, dependency reach, population reach, and control fragility rather than FIFO age;
+- expiry is a release/use gate, not a reminder;
+- renewal is a new bounded authority decision, not silent extension of the old record;
+- temporary controls remain configuration/evidence dependencies until explicitly retired;
+- long use of a compensating control does not make it a permanent requirement;
+- service-only authority cannot leak into new-build authority;
+- repeated board deviations do not qualify a reusable block or adapter by repetition;
+- a permanent correction requires semantic affected-consumer analysis;
+- a local fix/pass does not make dependent evidence current;
+- exception closure and temporary-control retirement are separate gates;
+- removal of a temporary control requires its own dependency/impact check;
+- corrected defects and closed exceptions retain negative evidence and historical authority records;
+- required executable regression uses only `[self-hosted, openpressbrake]`; unavailable authorized compute remains BLOCKED/NOT_RUN rather than falling back to hosted compute;
+- ordinary-controller exception closure cannot establish independent personnel-safety validation.
+
+## Catalog stress-test result
+
+BD44 exposes a release-management need above the reusable catalog: a machine-readable exception-debt/temporary-control lifecycle should join stable exception IDs to affected semantic claims, exact candidate/population scope, risk/uncertainty, expiry/revalidation triggers, compensating controls, authority, permanent-correction revisions, changed semantic facets, regression evidence, closure, temporary-control retirement, and retained historical/negative evidence.
+
+This infrastructure is `ENGINEERING_REVIEW_NEEDED`. Board/fleet exceptions and compensating controls must not be pushed into generic reusable-block manifests merely because the release layer consumes block contracts.
+
+## Current repository reconciliation
+
+At run start the board-design checkpoint ended at BD43. Curriculum main had concurrent safety/timing work but no post-BD43 board-design lesson. OpenPressBrake had advanced to active Rev1 low-voltage allocation/integration work.
+
+BD44 was committed as `a5eeb79a6ec2fdcfe129ac5b0c3cb05e2d2345fd` and re-opened from current main. Immediately before this checkpoint write, curriculum main still had BD44 as the newest board-design lesson and OpenPressBrake main was `6aea3b411a6238ed98e410bea69627d23ef3b4a3` (`encoder: freeze Rev1 installed 3V3 allocation`). OpenPressBrake was therefore consumed read-only.
+
+## Next exact work
+
+Build BD45 on **exception recurrence, systemic defect detection, and catalog/process feedback**:
+
+`closed/current exceptions -> recurrence clustering -> common semantic cause -> board-only pattern vs reusable defect vs process defect -> corrective action -> cross-population impact -> catalog/process update -> regression -> recurrence monitoring`
+
+Stress repeated board-specific deviations that actually reveal a missing adapter, repeated status/checklist drift that reveals a process defect, superficially similar exceptions with different electrical causes, a recurring service-only substitution that should not silently become a new-build alternate, and an ordinary safety-monitor recurrence that must not be promoted into safety-function authority.
 
 ## Compute
 
-No simulation, synthesis, place-and-route, timing run, or other executable engineering verification was justified for BD43. No GitHub-hosted runner was used.
+No simulation, synthesis, place-and-route, timing run, or other executable engineering verification was justified for BD44. No GitHub-hosted runner was used.
 
 ## Safety boundary
 
-BD43 teaches observability and exception control for ordinary controller hardware/configuration. It does not establish PL/SIL/category, stopping performance, final-element validation, or independent personnel-safety authority. A green release dashboard for ordinary monitors, handshakes, watchdogs, or control outputs proves nothing about validation of the independent safety function.
+BD44 teaches exception-debt retirement for ordinary controller hardware/configuration. It does not establish PL/SIL/category, stopping performance, final-element validation, or independent personnel-safety authority. Closing an exception on an ordinary safety-status monitor, watchdog, handshake, or output proves nothing about validation of the independent safety function.

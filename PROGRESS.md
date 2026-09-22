@@ -20,15 +20,15 @@ Do not routinely reopen closed levels without a genuinely new material defect.
 
 Routine controller-board development remains a separate automation concern and must not displace safety work here.
 
-Current safety emphasis includes independent safety authority; physical final-element proof; process-response evidence; maintenance/return-to-service; reset/restart freshness; operating-mode commissioning; energized diagnostic authority; safe reduced-speed commissioning; human-factors controls against bypass; proposition-specific revalidation after change; and composition-aware acceptance scope when multiple changes overlap.
+Current safety emphasis includes independent safety authority; physical final-element proof; process-response evidence; maintenance/return-to-service; reset/restart freshness; operating-mode commissioning; energized diagnostic authority; safe reduced-speed commissioning; human-factors controls against bypass; proposition-specific revalidation after change; and composition-aware acceptance scope when changes overlap across one or several maintenance windows.
 
-Newest composition method: `safety-course/25E0_MULTI_CHANGE_COMPOSITION_ACCEPTANCE_SCOPE_2026-09-22.md`. Siemens SINUMERIK/S120 acceptance methodology establishes that reduced/partial acceptance scope is derived from acceptance-test objects and logical groups after hardware/software/function changes; it is not justified merely by calling a change minor. Pilz independently documents validation depth as application/change dependent. The curriculum now requires taking the union of stale propositions from simultaneous changes and explicitly checking their interfaces. If changed items participate in the same guard/stop/access/retaining/energy-isolation proposition, local component diagnostics do not close the composed function.
+Newest learner-facing method: `safety-course/25E0_ACCEPTANCE_SCOPE_DEPENDENCY_MATRIX_AND_ACCUMULATED_CHANGE_REVIEW_2026-09-22.md`. It converts the composition method into a safety-function/proposition × input witness × logic/configuration × final element × process witness × machine dynamics/stored energy × safeguard/access dependency matrix. Every cell is explicitly `UNCHANGED/VALID`, `STALE`, `UNKNOWN`, or `N/A`; stale/unknown cells are unioned across changes and traced horizontally into every affected end-to-end proposition.
 
-Stress tests cover guard-switch + safety-encoder replacement, pressure-witness + load-holding-element replacement, and safety-encoder + drive-dynamics change. Freeze **LOCAL TEST PASS + LOCAL TEST PASS != COMPOSED SAFETY FUNCTION REVALIDATED**, **CHANGE COUNT != ACCEPTANCE SCOPE**, and **PARTIAL ACCEPTANCE != ARBITRARILY SMALL ACCEPTANCE**.
+The professional non-safety-component trace is now explicit. Siemens SINUMERIK requires open-/closed-loop commissioning to be complete before Safety Integrated acceptance because changed drive-control dynamics can change over-travel. Pilz and Rockwell independently tie safeguard position to actual/worst-case machine stopping performance and identify brake wear, mechanical condition, load/speed/tooling or control behavior as contributors to stopping response. Freeze **NON-SAFETY PARAMETER != OUTSIDE SAFETY EVIDENCE BOUNDARY**.
 
-Proposition-specific method retained: `safety-course/25E0_PROPOSITION_SPECIFIC_REVALIDATION_AFTER_CHANGE_2026-09-22.md`. The reusable chain remains `change -> stale proposition/evidence -> physical re-proof -> acceptance authority -> configuration record -> reset/rearm -> fresh ordinary demand`.
+The accumulated-change adversarial case spans three maintenance windows: brake replacement, ordinary servo tuning/production-speed change, then safeguard relocation. Each work order can appear locally bounded, yet all three intersect the same protective-device-to-safe-stop-before-access proposition. The learner must compare against the last accepted safety baseline and union stale evidence across windows. Freeze **WORK ORDER CLOSED != SAFETY EVIDENCE REFRESHED**, **NO SINGLE LARGE CHANGE != NO COMPOSED SAFETY CHANGE**, and **CURRENT CONFIGURATION CHECKSUM != CURRENT PHYSICAL ACCEPTANCE BASELINE**.
 
-Newest machine-tool supported-exception trace retained: `safety-course/25E0_MACHINE_TOOL_SAFE_LIMITED_SPEED_ACCESS_AND_RETURN_2026-09-21.md`. Supported-exception/adversarial evidence remains in the 25E0 setup, muting/override, production-return, exception-authority and safeguard-defeat studies.
+Prior composition method retained: `safety-course/25E0_MULTI_CHANGE_COMPOSITION_ACCEPTANCE_SCOPE_2026-09-22.md`. Proposition-specific method retained: `safety-course/25E0_PROPOSITION_SPECIFIC_REVALIDATION_AFTER_CHANGE_2026-09-22.md`.
 
 Core freezes retained:
 - **ACCESS CLEAR != PERSONNEL CLEAR != SAFETY RELEASE != FINAL-ELEMENT PROOF != ORDINARY START AUTHORITY.**
@@ -37,15 +37,13 @@ Core freezes retained:
 - **RESET ACCEPTED != START AUTHORIZED.**
 - **SAFETY-RELATED COMPONENT REPLACED != MACHINE SAFE TO RETURN TO SERVICE.**
 - **TESTED != VALIDATED unless evidence class and acceptance criterion are named.**
-- **PRODUCTION CONFIGURATION CLEAN != PERSONNEL-SAFETY FUNCTION VALIDATED.**
 - **ENERGY REMOVED AT SOURCE != STORED PROCESS ENERGY SAFE.**
 - **TORQUE REMOVED != ROTATION STOPPED.**
-- **ROTATION STOPPED != RETAINING CAPABILITY PROVED.**
 - **COMMANDED REDUCED SPEED != SAFETY-RATED SPEED MONITORING.**
 - **AUTHORIZED BYPASS != SAFE PHYSICAL CONDITION.**
-- **MAINTENANCE COMPLETE != PRODUCTION READY until temporary-state clearance and impact-based revalidation are complete.**
 - **COMPONENT DIAGNOSTIC PASS != SAFETY FUNCTION VALIDATED.**
 - **SAME CHECKSUM != SAME FIELD PHYSICS.**
+- **CHANGE COUNT != ACCEPTANCE SCOPE.**
 
 ## 4000 foundation/core
 
@@ -53,10 +51,10 @@ Durable foundation includes `hardware/BLOCK_SPEC_TEMPLATE.md`, `hardware/4000-bl
 
 ## Exact next work
 
-1. Turn the composition method into a learner-facing **acceptance-scope dependency matrix**: safety function/proposition × input witness × logic/configuration × final element × process witness × machine dynamics × safeguard/access assumption.
-2. Trace one authoritative professional example where a change outside the nominal safety component itself changes acceptance evidence — preferably control dynamics, mechanics, safeguard geometry, or machine configuration — without generalizing vendor-specific tests.
-3. Add an adversarial accumulated-change case: individually documented changes across several maintenance windows whose combined stale evidence crosses a safety-function boundary even though no single work order appears large.
-4. Preserve machine-specific physics and UNKNOWN handling; do not invent hydraulic truth tables, safe speeds, stopping distances, PL/SIL targets, pressure thresholds or diagnostic coverage.
+1. Turn the accepted-baseline idea into a reusable **safety evidence baseline / stale-evidence ledger** with stable proposition IDs, evidence identity, change dependencies, revalidation status, and reverse `show where used` lookup.
+2. Stress-test that ledger against a multi-function machine where one physical change affects two safety functions differently (for example a common brake/drive or shared guard zone), without inventing machine-specific acceptance thresholds.
+3. Trace authoritative professional lifecycle evidence for periodic/recurrent proof versus event-driven revalidation, distinguishing scheduled proof/inspection from revalidation triggered by modification, fault, or exceptional commissioning state.
+4. Preserve machine-specific physics and `UNKNOWN`; do not invent hydraulic truth tables, safe speeds, stopping distances, PL/SIL targets, pressure thresholds or diagnostic coverage.
 5. If this branch reaches an information-gain stop, rotate to the highest-value open 4000 safety module rather than routine board design or closed 3000 work.
 
 ## Laboratory compute checkpoint

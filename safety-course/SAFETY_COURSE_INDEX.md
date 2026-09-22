@@ -6,14 +6,14 @@ This is the concise navigation surface for the 2500 safety course. `SAFETY_COURS
 
 - **2510 — Safety as an engineering problem:** prerequisite mental model from the research/course plan and existing safety-boundary material.
 - **2520 — From hazards to safety functions:** mature learner-facing methodology. Start at `2520_ENTRY_MAP_AND_FRESH_AI_HANDOFF_2026-09-22.md`; it owns the ordered path through hazard/SRS derivation, composition, fault/diagnostic analysis, architecture/dependency/CCF allocation, integrity-method gate, verification/validation/physical proof, and commissioning/change control.
-- **2530 — E-stop systems from first principles:** next course branch. Treat emergency stop as a complementary protective measure and derive the machine-specific stop/reaction from risk and machine physics rather than assuming that every E-stop simply removes all power.
+- **2530 — E-stop systems from first principles:** learner-facing methodology now has a canonical route in `2530_ENTRY_MAP_AND_RELEASE_GATE_2026-09-22.md`. It treats emergency stop as a complementary protective measure and derives machine-specific stop/reaction, fault coverage, span, reset/restart and physical proof from hazards and machine physics rather than assuming every E-stop simply removes all power. The methodology is ready for external/fresh evaluation, not self-certified as graduated.
 - **2540+ —** continue in the sequence defined by `SAFETY_COURSE_RESEARCH.md`.
 
 ## 2520 competency status
 
 Formal learner placement is complete, but information-separated transfer evidence remains open. Use `../evaluation/2520_INFORMATION_SEPARATED_COMPETENCY_HANDOFF.md` with `../evaluation/BLIND_FEEDBACK_PROTOCOL.md`. Do not create or expose the hidden evaluator solution in learner-readable curriculum state before learner precommitment.
 
-A blocked external/fresh evaluator is branch-local: preserve the open gate and continue high-value safety-course source/research work rather than self-grading the same material.
+A blocked external/fresh evaluator is branch-local: preserve the open gate and continue high-value safety-course source/research work rather than self-grading the same material. Apply the same information-separation rule when 2530 receives its formal competency challenge.
 
 ## Safety-authority boundary
 

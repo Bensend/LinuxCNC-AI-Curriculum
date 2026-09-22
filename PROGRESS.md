@@ -20,13 +20,15 @@ Do not routinely reopen closed levels without a genuinely new material defect.
 
 Routine controller-board development remains a separate automation concern and must not displace safety work here.
 
-Current safety emphasis includes independent safety authority; physical final-element proof; process-response evidence; maintenance/return-to-service; reset/restart freshness; operating-mode commissioning; energized diagnostic authority; safe reduced-speed commissioning; human-factors controls against bypass; proposition-specific revalidation after change; composition-aware acceptance scope; durable accepted-baseline/stale-evidence management; evidence freshness; formal finding/disposition handling; common-cause degradation; recurrence escalation; handoff persistence; restart/power-domain recovery; field-power witness reacquisition; asynchronous brownout/recovery ordering; safety-network reintegration; shared-dependency reverse tracing; and cell-level authority separation.
+Current safety emphasis includes independent safety authority; physical final-element proof; process-response evidence; maintenance/return-to-service; reset/restart freshness; operating-mode commissioning; energized diagnostic authority; safe reduced-speed commissioning; human-factors controls against bypass; proposition-specific revalidation after change; composition-aware acceptance scope; durable accepted-baseline/stale-evidence management; evidence freshness; formal finding/disposition handling; common-cause degradation; recurrence escalation; handoff persistence; restart/power-domain recovery; field-power witness reacquisition; asynchronous brownout/recovery ordering; safety-network reintegration; shared-dependency reverse tracing; cell-level authority separation; and now an explicit repeatable hazard-to-safety-function derivation/allocation workflow.
 
-Newest learner-facing consolidation/assessment: `safety-course/25E0_CELL_RECOVERY_AUXILIARY_ENERGY_TRANSIENT_LEDGER_ASSESSMENT_2026-09-22.md`. It turns the mature recovery branch into one adversarial robot/automated-cell exercise: safety communication returns while personnel-clear and auxiliary pneumatic/tooling-energy propositions remain unresolved. It requires explicit `PROP/EVID/DEP/FIND/VAL` chains, distinguishes `UNAVAILABLE` from `STALE` and `UNKNOWN` evidence, reverse-traces a pneumatic finding, and requires a fresh post-recovery ordinary start. ABB robot/cell guidance and Festo pneumatic safety guidance provide professional evidence without inventing machine-specific safe-state truth.
+Newest learner-facing methodology: `safety-course/2520_HAZARD_TO_SAFETY_FUNCTION_DERIVATION_AND_ALLOCATION_2026-09-22.md`. A syllabus/module audit found that the course named 2520 `From hazards to safety functions` but lacked one explicit instruction-ready chain from machine/lifecycle boundary through hazardous event, risk-reduction hierarchy, physical safe-state proposition, safety-function requirement, sensing/logic/final-element allocation, proof obligation, reset/restart, validation and residual risk. The new module closes that gap using SICK ISO-12100-style risk-assessment guidance, Pilz safety-concept/SRS guidance, and Rockwell safety-lifecycle/function/STO guidance. It explicitly keeps machine-specific PL/SIL targets, stopping criteria, pressure thresholds, hydraulic truth tables and similar physical facts `UNKNOWN` until established.
+
+Newest learner-facing recovery consolidation/assessment retained: `safety-course/25E0_CELL_RECOVERY_AUXILIARY_ENERGY_TRANSIENT_LEDGER_ASSESSMENT_2026-09-22.md`. It turns the mature recovery branch into one adversarial robot/automated-cell exercise: safety communication returns while personnel-clear and auxiliary pneumatic/tooling-energy propositions remain unresolved. It requires explicit `PROP/EVID/DEP/FIND/VAL` chains, distinguishes `UNAVAILABLE` from `STALE` and `UNKNOWN` evidence, reverse-traces a pneumatic finding, and requires a fresh post-recovery ordinary start.
 
 Reusable records retained: `safety-course/OPEN_SAFETY_OBLIGATION_HANDOFF_RECORD.md`, `safety-course/FINDING_DISPOSITION_RECORD_TEMPLATE.md`, `safety-course/POWER_RECOVERY_TRANSITION_WORKSHEET.md`, and `safety-course/SAFETY_REINTEGRATION_RETURN_TO_SERVICE_STATE_TABLE.md`.
 
-Newest freezes: **SAFETY COMMUNICATION RECOVERED != CELL HAZARDOUS ENERGY PROVED SAFE**, **REMOTE I/O HEALTHY != AUXILIARY PNEUMATIC/TOOLING PHYSICAL STATE PROVED**, **PERSONNEL CLEAR != AUXILIARY ENERGY SAFE != RESET AUTHORIZED != START AUTHORIZED**, **UNAVAILABLE EVIDENCE != STALE EVIDENCE; STALE EVIDENCE != UNKNOWN EVIDENCE**, **SAFE EXHAUST/DE-ENERGIZATION COMMAND != REQUIRED PHYSICAL EXHAUST/ENERGY PROPOSITION PROVED**, and **NETWORK RECOVERY MUST NOT REVIVE A HELD PRE-FAULT PRODUCTION DEMAND**.
+Newest methodology freezes: **HAZARD IDENTIFIED != SAFETY FUNCTION SPECIFIED**, **SAFETY DEVICE SELECTED != RISK-REDUCTION METHOD DERIVED**, **DEVICE SAFE STATE != MACHINE PHYSICAL SAFE STATE**, **COMMAND/STATUS EVIDENCE != PHYSICAL PROCESS PROOF unless the proposition and architecture justify it**, **PL/SIL-CAPABLE COMPONENT != MACHINE SAFETY FUNCTION PL/SIL**, **TRANSFERABLE METHOD != TRANSFERABLE MACHINE PHYSICS**, **RESET/REARM != ORDINARY START AUTHORITY**, **UNKNOWN PHYSICAL FACT != PERMISSION TO INVENT A CONSERVATIVE NUMBER**, and **LINUXCNC/FPGA NORMAL CONTROL != INDEPENDENT PERSONNEL-SAFETY AUTHORITY**.
 
 Core freezes retained include:
 - **ACCESS CLEAR != PERSONNEL CLEAR != SAFETY RELEASE != FINAL-ELEMENT PROOF != ORDINARY START AUTHORITY.**
@@ -63,7 +65,6 @@ Core freezes retained include:
 - **I/O DIAGNOSTIC CLEARED != RETURN-TO-SERVICE ACCEPTANCE.**
 - **MORE DOMAINS ONLINE != FEWER SAFETY BLOCKERS unless required evidence was actually gained.**
 - **RECOVERY ORDER != AUTHORITY ORDER.**
-- **TRANSFERABLE SAFETY METHOD != TRANSFERABLE MACHINE PHYSICS.**
 - **SAFETY CONNECTION VALID != SAFETY FUNCTION REINTEGRATED.**
 - **SAFETY FUNCTION REINTEGRATED != MACHINE-LEVEL PHYSICAL PROPOSITION FRESH.**
 - **REINTEGRATION ACKNOWLEDGED != RESET/REARM AUTHORIZED != ORDINARY START AUTHORIZED.**
@@ -79,13 +80,16 @@ Durable foundation includes `hardware/BLOCK_SPEC_TEMPLATE.md`, `hardware/4000-bl
 
 ## Exact next work
 
-The safety-network/recovery branch is now consolidated rather than extended with more narrow notes. Next work should rotate to the highest-value open safety-design methodology branch:
+The recovery branch remains consolidated. Continue the repeatable safety-design methodology:
 
-1. Audit the safety-course syllabus/module map for the explicit repeatable safety-design workflow: machine/boundary definition -> hazardous energy/motion -> safe states -> required safety functions -> interfaces/final elements -> diagnostic/fault analysis -> reset/restart -> verification/validation -> maintenance/change control. Identify the highest-value missing learner-facing module rather than assuming coverage from scattered notes.
-2. Prefer a branch that teaches **hazard-to-safety-function derivation and allocation** across electrical, hydraulic/pneumatic, mechanical/gravity and ordinary-control boundaries, because the recovery work now has diminishing marginal information gain.
-3. Use professional complete-machine examples where available, but preserve machine-specific differences and `UNKNOWN`. Do not infer PL/SIL targets, stopping distances, hydraulic truth tables, pressure thresholds, proof intervals or diagnostic coverage without design-specific evidence.
-4. Keep the human-factors rule first-class: make legitimate safe operation/recovery easier than bypass; inconvenience that predictably motivates defeat is a design defect to address.
-5. If the syllabus audit shows that hazard-to-function derivation is already complete and instruction-ready, rotate to the next missing safety-design workflow stage rather than duplicating it.
+1. Stress-test the new 2520 hazard-to-function worksheet on a substantially different machine/cell without transferring press/spindle physics.
+2. Build a learner-facing **safety-function composition and conflict-analysis** stage: multiple safety functions sharing final elements; mode-dependent demands; common power/mechanical/network dependencies; and functions whose requested physical states can interact or conflict.
+3. Use an explicit allocation/dependency matrix tracing `HZ -> PROP -> SF -> input/logic/final element -> DEP -> EVID -> VAL`, with ordinary LinuxCNC/FPGA authority shown separately from independent safety authority.
+4. Include an adversarial case where E-stop, guard, setup/enabling and process-fault functions share a final element. Combining functions must not silently erase the strongest required physical safe-state proposition.
+5. Do not move into component selection or PL/SIL arithmetic until the functions are coherently derived/composed. Do not invent machine-specific integrity targets, stopping distances, hydraulic truth tables, pressure thresholds, diagnostic coverage or proof intervals.
+6. Keep the human-factors rule first-class: make legitimate safe operation/setup/recovery easier than bypass; predictable bypass incentive is a design defect to address.
+
+Newest precise checkpoint: `checkpoints/2026-09-22T1446Z-safety-hazard-function-derivation-next.md`.
 
 ## Laboratory compute checkpoint
 

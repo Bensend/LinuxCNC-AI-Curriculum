@@ -22,11 +22,11 @@ Routine controller-board development remains a separate automation concern and m
 
 Current safety emphasis includes independent safety authority; physical final-element proof; process-response evidence; maintenance/return-to-service; reset/restart freshness; operating-mode commissioning; energized diagnostic authority; safe reduced-speed commissioning; human-factors controls against bypass; proposition-specific revalidation after change; composition-aware acceptance scope; durable accepted-baseline/stale-evidence management; evidence freshness; formal finding/disposition handling; non-brake common-cause degradation; recurrence escalation; corrective/preventive-action ownership; handoff persistence; mechanical/installation common cause; and restart/power-loss persistence of open safety obligations.
 
-Newest learner-facing method: `safety-course/25E0_RESTART_PERSISTENCE_AND_DIAGNOSTICS_VS_PHYSICAL_PROOF_2026-09-22.md`. It stress-tests an ordinary LinuxCNC/HMI restart while a physical safety proposition remains stale and traces Rockwell/Pilz external-device-monitoring evidence to distinguish healthy safety logic/I/O diagnostics from external final-element and process proof.
+Newest learner-facing method: `safety-course/25E0_POWER_LOSS_RECOVERY_THREE_AUTHORITY_AND_PHYSICAL_PROOF_2026-09-22.md`. It traces Siemens/Rockwell/Pilz power-up, fault acknowledgement, cold-start, restart-interlock and safe-status evidence and separates three authorities: independent safety controller/I/O state, durable safety/maintenance evidence, and volatile LinuxCNC/FPGA/HMI state. It extends the physical-proof boundary from contactors into drive/brake/valve propositions without inventing machine physics.
 
 Reusable records: `safety-course/OPEN_SAFETY_OBLIGATION_HANDOFF_RECORD.md` defines what open `FIND-*` / stale `PROP-*` / pending `VAL-*` state must survive restart, power loss, shift change and maintenance handoff. `safety-course/FINDING_DISPOSITION_RECORD_TEMPLATE.md` preserves original adverse evidence, containment, reverse show-where-used, recurrence links, correction, physical re-proof, acceptance, reset/rearm, and fresh ordinary demand as distinct facts.
 
-New freezes: **VOLATILE CONTROLLER STATE LOST != SAFETY OBLIGATION CLEARED**, **SAFETY MODULE HEALTHY != EXTERNAL DEVICE STATE PROVED**, **EXTERNAL DEVICE FEEDBACK HEALTHY != EVERY DOWNSTREAM PROCESS PROPOSITION PROVED**, **REBOOT SUCCESS != RETURN-TO-SERVICE ACCEPTANCE**, and **MISSING PERSISTENT RECORD != NO OPEN OBLIGATION**.
+New freezes: **POWER RESTORED != SAFETY FUNCTIONS FULLY ACTIVE DURING STARTUP**, **POWER CYCLE ACKNOWLEDGED != FAULT CAUSE CORRECTED**, **SAFETY CONTROLLER HEALTHY != DURABLE SAFETY OBLIGATIONS CLEARED**, **EXPECTED SAFETY SIGNATURE != PHYSICAL PROCESS PROPOSITION FRESH**, **RESET AVAILABLE != RESET AUTHORIZED**, **SAFE OUTPUT/DRIVE STATUS != EVERY DOWNSTREAM PHYSICAL PROPOSITION PROVED**, **LINUXCNC READY != PERSONNEL-SAFETY RETURN-TO-SERVICE ACCEPTANCE**, and **PRE-POWER-LOSS ORDINARY DEMAND != FRESH POST-RECOVERY DEMAND**.
 
 Core freezes retained:
 - **ACCESS CLEAR != PERSONNEL CLEAR != SAFETY RELEASE != FINAL-ELEMENT PROOF != ORDINARY START AUTHORITY.**
@@ -51,6 +51,11 @@ Core freezes retained:
 - **REPEATED REPAIR SUCCESS != RECURRING DEFECT DISPOSITIONED.**
 - **WORK ORDER CLOSED != SAFETY FINDING CLOSED.**
 - **HMI GREEN != OPEN SAFETY OBLIGATIONS CLEARED.**
+- **VOLATILE CONTROLLER STATE LOST != SAFETY OBLIGATION CLEARED.**
+- **SAFETY MODULE HEALTHY != EXTERNAL DEVICE STATE PROVED.**
+- **EXTERNAL DEVICE FEEDBACK HEALTHY != EVERY DOWNSTREAM PROCESS PROPOSITION PROVED.**
+- **REBOOT SUCCESS != RETURN-TO-SERVICE ACCEPTANCE.**
+- **MISSING PERSISTENT RECORD != NO OPEN OBLIGATION.**
 
 ## 4000 foundation/core
 
@@ -58,9 +63,9 @@ Durable foundation includes `hardware/BLOCK_SPEC_TEMPLATE.md`, `hardware/4000-bl
 
 ## Exact next work
 
-1. Trace authoritative professional guidance for restart/recovery after loss of safety-controller or safety-I/O power, distinguishing diagnostic fault recovery from return-to-service acceptance and from ordinary production restart.
-2. Build a compact learner exercise covering three persistence authorities: independent safety controller state, durable maintenance/safety ledger state, and volatile LinuxCNC/HMI state; identify which facts may be reconstructed and which require physical re-proof.
-3. Extend the external-device boundary beyond contactors with a professional drive/brake/valve example where status/feedback is useful but a separate process proposition still requires validation.
+1. Trace authoritative professional evidence for **fresh ordinary demand after power restoration** and unexpected-start prevention across safety controller, drive and machine-control layers; distinguish device-level automatic restart features from machine-level permission.
+2. Build a learner-facing recovery-state table for `BOOTING / SAFE-INHIBITED / DIAGNOSTIC-VALID / OBLIGATION-BLOCKED / RESET-ELIGIBLE / REARMED / PRODUCTION-DEMAND-REQUIRED`, explicitly keeping LinuxCNC readiness informational rather than safety authority.
+3. Stress-test partial power-domain recovery: safety controller remains powered while ordinary CNC/HMI power cycles, and the inverse case where CNC remains powered while safety I/O/controller power cycles. Determine which evidence is stale, reacquired, or unaffected.
 4. Preserve machine-specific physics and `UNKNOWN`; do not invent hydraulic truth tables, safe speeds, stopping distances, PL/SIL targets, pressure thresholds, proof intervals, alignment tolerances, escalation counts, acceptable degradation percentages or diagnostic coverage.
 5. If this branch reaches an information-gain stop, rotate to the highest-value open 4000 safety module rather than routine board design or closed 3000 work.
 

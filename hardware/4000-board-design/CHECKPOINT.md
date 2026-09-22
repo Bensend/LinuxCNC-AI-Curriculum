@@ -4,24 +4,25 @@ Date: 2026-09-21
 
 ## Lane status
 
-Independent board-design curriculum lane remains active alongside the safety curriculum. Durable lessons BD01 through BD23 are present. This checkpoint is board-design authority only and does not alter the separate safety-course progress authority.
+Independent board-design curriculum lane remains active alongside the safety curriculum. Durable lessons BD01 through BD24 are present. This checkpoint is board-design authority only and does not alter the separate safety-course progress authority.
 
 New this run:
 
-- `BD23_INTERFACE_CONTRACT_SCHEMA_STABLE_IDS_AND_CHANGE_IMPACT_INVALIDATION.md`
+- `BD24_MACHINE_READABLE_CATALOG_DEPENDENCY_GRAPH_IMPLEMENTATION_AND_MIGRATION.md`
 
-BD23 teaches the maintenance chain:
+BD24 turns the BD23 semantic-dependency model into an incremental live-catalog implementation strategy:
 
-`stable semantic ID -> exact semantic revision -> declared forward dependency -> SHOW WHERE USED reverse lookup -> upstream semantic change -> STALE_PENDING_REVALIDATION -> scoped/transitive revalidation -> CURRENT`
+`authority -> stable registry ID/revision -> declared forward dependencies -> generated reverse index -> graph integrity checks -> stale propagation -> recorded revalidation -> release gate`
 
-The central adversarial requirement is that downstream engineering claims depend on exact semantic propositions rather than copied prose, familiar filenames, net-name searches, or designer memory.
+The migration is intentionally fictional/generic. No OpenPressBrake interface IDs or machine facts were invented merely to demonstrate graph mechanics.
 
-## BD23 hard student-material audit
+## BD24 hard student-material audit
 
-Every repository file named to students by BD23 was opened and inspected in current form during this run.
+Every repository file named to students by BD24 was opened and inspected in current form during this run.
 
 `VERIFIED_FOR_LESSON` for the bounded claims used:
 
+- Curriculum `hardware/4000-board-design/BD23_INTERFACE_CONTRACT_SCHEMA_STABLE_IDS_AND_CHANGE_IMPACT_INVALIDATION.md`
 - Curriculum `hardware/4000-board-design/BD22_BOUNDARY_COMPATIBILITY_MATRICES_AND_MACHINE_READABLE_INTERFACE_MATCHING.md`
 - Curriculum `hardware/4000-board-design/CHECKPOINT.md` as it existed before this update
 - Curriculum `WORK_SELECTION_POLICY.md`
@@ -32,60 +33,64 @@ Every repository file named to students by BD23 was opened and inspected in curr
 
 `ENGINEERING_REVIEW_NEEDED`:
 
-- OpenPressBrake repository-wide dependency tracking — current governance has strong block identity/interface/ownership/status rules but does not yet define a common stable requirement/interface/assumption namespace, forward dependency declarations, reverse `SHOW WHERE USED`, or automatic stale propagation.
+- OpenPressBrake repository-wide dependency-graph implementation remains intentionally unmigrated. Current governance establishes strong block/integration/adapter boundaries but does not yet provide a common namespace registry, stable semantic revisions across artifacts, forward dependency declarations, generated reverse `SHOW WHERE USED`, alias/supersession policy, or automatic stale propagation.
 
-The newly created BD23 lesson was re-opened from current main after commit and checked for internal consistency.
+The newly created BD24 lesson was re-opened from current main after commit and checked for internal consistency.
 
 Readiness remains claim-scoped. No artifact in this lesson establishes production readiness of the complete OpenPressBrake controller.
 
-## Rules frozen by BD23
+## Rules frozen by BD24
 
-- `FILE PATH != SEMANTIC ID`.
-- `TEXT CHANGE != ALWAYS SEMANTIC CHANGE`.
-- `SEMANTIC CHANGE != PERMITTED WITHOUT REVISION`.
-- `COPIED VALUE != DEPENDENCY`.
-- upstream semantic change causes automatic loss of `CURRENT` status until revalidation; it does not automatically prove failure.
-- invalidation should be facet/dependency scoped where possible and transitively propagated where required.
-- `VERIFY_AT_MACHINE` assumptions are first-class dependencies, not prose escape hatches.
-- board-specific connection IDs may depend on reusable interface IDs without leaking J-numbers, placement, harness destination, or machine naming into reusable contracts.
-- `TRACEABLE != SAFETY-RATED`.
+- `REGISTRY != DUPLICATED ELECTRICAL AUTHORITY`.
+- forward dependency edges are authoritative; reverse indexes are generated.
+- duplicate semantic IDs are hard errors; do not select an authority by filename, timestamp, or Git recency.
+- deleting an authority with consumers does not make those dependencies disappear.
+- aliases are identity migrations only; changed semantics require explicit revision/supersession and consumer revalidation.
+- `REPLACEMENT AVAILABLE != CONSUMER REVALIDATED`.
+- `BIDIRECTIONAL PHYSICS != CYCLIC AUTHORITY`.
+- `UNCHANGED FILENAME != UNCHANGED SEMANTICS` and `CHANGED PATH != CHANGED SEMANTICS`.
+- schema representation revision is separate from engineering semantic revision.
+- legacy absent fields migrate to `UNKNOWN`, never plausible defaults; `VERIFY_AT_MACHINE` is never resolved by migration.
+- graph coverage must be declared honestly during incremental adoption.
+- `GRAPH-CLEAN != ELECTRICALLY VERIFIED`.
+- `DEPENDENCY TRACEABILITY != SAFETY AUTHORITY`.
 
 ## Catalog stress-test result
 
-BD23 exposed a durable catalog layer that is still missing from current OpenPressBrake governance:
+BD24 shows that the missing OpenPressBrake dependency layer can be introduced without a flag-day rewrite:
 
-1. stable semantic IDs/revisions for reusable requirements, interfaces, assumptions, resources and important evidence claims;
-2. explicit downstream `depends_on` edges with optional facet scope;
-3. generated reverse lookup supporting `SHOW WHERE USED`;
-4. automatic `STALE_PENDING_REVALIDATION` propagation when an upstream semantic revision changes;
-5. recorded revalidation evidence before stale claims regain `CURRENT` status.
+1. registry-only inventory of existing authorities;
+2. dependency declarations for new/changed work;
+3. migration of high-fan-out reusable authorities;
+4. generated reverse indexes and stale reports;
+5. release-gate enforcement only after graph coverage is sufficient.
 
-The existing OpenPressBrake block-development template already requires block identity, semantic interface contracts, shared-resource declarations, provenance/deltas, calculations and verification. Status rules already require same-change maintenance when material engineering changes. Adapter/integration governance already treats reusable contracts as immutable inputs during composition and fails closed on unresolved boundaries. The new dependency layer should build on those authorities rather than replace them.
+This preserves the existing rule that reusable blocks own their generic electrical engineering while board integration owns instance/pin/connector/placement mapping. It also prevents migration tooling from inventing missing lifecycle, threshold, machine, or safety facts merely to achieve coverage.
 
-No OpenPressBrake engineering file was changed. Current OpenPressBrake main is actively changing FPGA configuration-bias/reference governance and related board-development authority, so this run recorded the catalog defect/action item in curriculum rather than racing active engineering with an ad hoc schema migration.
+No OpenPressBrake engineering file was changed. The repository was consumed read-only because active board/infrastructure work is continuing and an ad hoc schema retrofit would overlap that authority.
 
 ## Current repository reconciliation
 
-At the start of this run, curriculum main had later safety-lane commits after the prior BD22 checkpoint; those changes were preserved.
+At the start of this run, curriculum main had later safety-lane commits after the prior BD23 checkpoint; those changes were preserved.
 
-BD23 was committed as `94f38c486b88df4cc71a7541125231e36dad23c5` and re-opened from current main.
+BD24 was committed as `49263a7b1135c35f16ba87e1f0c65cf959d49af6` and re-opened from current main.
 
-Immediately before this checkpoint write, curriculum main was re-read at `94f38c486b88df4cc71a7541125231e36dad23c5`; no overlapping post-BD23 board-design change was present.
+Immediately before this checkpoint write, curriculum main was re-read at `49263a7b1135c35f16ba87e1f0c65cf959d49af6`; no overlapping post-BD24 board-design change was present.
 
-Immediately before this checkpoint write, OpenPressBrake main was re-read at `891b0bc8cb8b1953085deb1370bdb85643e16c5a` (`governance: correct encoder reference source`). OpenPressBrake remained read-only.
+Immediately before this checkpoint write, OpenPressBrake main was re-read at `ce4821d3dc57282854600509f5fe5767871b1d08` (`infrastructure: run ChatGPT Linux staging on panel`). OpenPressBrake remained read-only.
 
 ## Next exact work
 
-Build BD24 on **machine-readable catalog dependency graph implementation and migration strategy** without prematurely modifying active OpenPressBrake blocks.
+Build BD25 on **dependency-aware qualification evidence and release-state composition**.
 
-The lesson should define how a real catalog can introduce stable IDs incrementally: registry/namespace ownership, uniqueness checks, forward-reference validation, reverse-index generation, semantic-revision rules, stale-state propagation, cycle handling, supersession/aliases, schema-version migration, and CI checks that do not confuse Git/file churn with semantic change. Include a worked migration of a small fictional/generic block set so students can exercise the mechanism without inventing OpenPressBrake facts.
+The lesson should connect semantic dependencies to actual evidence propositions without treating an evidence file as universally valid. Teach evidence scope/envelope, evidence-to-claim bindings, qualification proposition IDs, current/stale/expired/superseded evidence, machine versus reusable evidence, and how a complete board release claim composes block qualification, board-integration verification, PCB/thermal/current-path evidence, FPGA image/timing evidence, LinuxCNC/HAL mapping evidence, and unresolved machine facts.
 
-Adversarially test deleted IDs, duplicate IDs, alias chains, dependency cycles, stale consumers, a semantic change hidden inside an unchanged filename, a file move with unchanged semantics, and a board-only connection change that must not invalidate reusable electrical qualification. Keep the safety boundary explicit.
+Adversarially test evidence that still exists but no longer proves the current semantic revision; evidence valid for nominal operation but not a widened envelope; board-specific bench evidence incorrectly promoted into a reusable block; a reusable qualification result that remains valid after a J-number-only change; and a safety-status interface whose electrical evidence must not be misrepresented as personnel-safety validation.
 
 ## Compute
 
-No simulation, synthesis, place-and-route, benchmark or executable verification was justified for BD23. The work is schema semantics, provenance, dependency modeling, and release-state invalidation. Future executable engineering work remains restricted to `[self-hosted, openpressbrake]`; no hosted Actions fallback is allowed.
+No simulation, synthesis, place-and-route, benchmark or executable engineering verification was justified for BD24. The work is graph/schema/migration methodology. No GitHub-hosted runner was used. Future executable engineering work remains restricted to `[self-hosted, openpressbrake]`; no hosted Actions fallback is allowed.
 
 ## Safety boundary
 
-BD23 improves traceability and change control. It does not establish PL/SIL/category, diagnostic coverage, safety integrity, or independent personnel-safety authority. Ordinary LinuxCNC/FPGA dependencies may reference safety-system status interfaces while remaining outside the independent safety decision path.
+BD24 improves dependency integrity and change impact. It does not establish PL/SIL/category, diagnostic coverage, safety integrity, or independent personnel-safety authority. Ordinary LinuxCNC/FPGA dependencies may reference safety-system status interfaces while remaining outside the independent safety decision path.

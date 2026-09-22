@@ -75,37 +75,18 @@ Lab/output:
 
 ### 2520 — From hazards to safety functions
 
-Purpose: teach the repeatable machine-safety design workflow from hazard identification through release and change control. The canonical learner entry point is `safety-course/2520_ENTRY_MAP_AND_FRESH_AI_HANDOFF_2026-09-22.md`; use that map instead of treating the dated supporting artifacts as an unordered reading pile.
-
-Core workflow:
-
-`machine/lifecycle boundary -> hazardous event -> risk-reduction hierarchy -> physical safe-state proposition -> safety-function/SRS derivation -> composition/allocation -> fault analysis/diagnostic design -> architecture/dependency/CCF allocation -> integrity-method selection/target allocation -> verification/validation/physical proof -> commissioning/release -> maintenance/change control/revalidation`
-
 Topics:
-- defining machine/lifecycle boundaries and hazardous events
-- defining physical safe-state propositions rather than substituting software status
-- deriving safety functions and SRS requirements in plain language
+- defining the hazardous event
+- defining the safety function in plain language
 - safe state versus controlled stop versus energy removal
-- composition/conflict analysis when several safety functions share resources or final elements
-- credible single, latent and common-cause faults
-- diagnostic claims and the physical propositions they do or do not prove
-- architecture, dependency, common-cause and final-element allocation
-- integrity-method selection and target allocation without inferring PL/SIL from topology
-- reset, restart, reintegration and recovery authority
-- response/stopping requirements while preserving machine-specific unknowns until measured/derived
-- verification versus validation versus physical-process proof
-- commissioning baseline, temporary measures, release and maintenance/change revalidation
-- mode-dependent safety requirements and maintenance/setup/manual-mode considerations
-- independent personnel-safety authority versus ordinary LinuxCNC/FPGA control and diagnostics
+- reset behavior and restart prevention
+- response time and stopping time
+- mode-dependent safety requirements
+- maintenance/setup/manual mode considerations
+- defining assumptions and boundaries
 
 Lab/output:
-- convert a hazard list into a small SRS and carry selected functions through fault analysis, architecture/integrity allocation, validation planning and commissioning/change-control reasoning
-- complete a cross-machine transfer exercise while explicitly preserving unsupported physical/integrity values as `UNKNOWN`
-
-Competency gate:
-- learner-readable adversarial material is not sufficient for transfer graduation;
-- use `evaluation/2520_INFORMATION_SEPARATED_COMPETENCY_HANDOFF.md` with `evaluation/BLIND_FEEDBACK_PROTOCOL.md` for a genuinely information-separated fresh-machine challenge;
-- do not commit the hidden solution into learner-readable curriculum state before the learner precommitment.
+- convert a hazard list into a small Safety Requirements Specification (SRS)
 
 ### 2530 — E-stop systems from first principles
 
@@ -197,5 +178,271 @@ Topics:
 - stored pressure
 - gravity loads
 - blocked-center versus dump-to-tank concepts
+- monitored valves
+- redundant valves where justified
+- trapped pressure and accumulators
+- valve spool sticking
+- hose and cylinder failures
+- mechanical restraint and blocking during maintenance
+- press-brake-specific energy and synchronization concerns
 
-<!-- Remaining research-plan sections intentionally retained in Git history; this edit promotes the mature 2520 path into the canonical sequence and does not claim completion of later modules. -->
+Labs:
+- fault-tree a hydraulic press axis
+- identify which hazards can be solved electrically and which require hydraulic/mechanical measures
+
+### 2590 — Guards, interlocks, presence sensing, and two-hand controls
+
+Topics:
+- fixed and movable guards
+- interlock switches
+- guard locking
+- coded/non-contact sensors
+- foreseeable defeat and bypass
+- light curtains and scanners
+- minimum distance / stopping-time concepts
+- two-hand controls and anti-tie-down concepts
+- enabling devices and hold-to-run controls
+- visibility and ergonomics
+- guard usability as a safety requirement
+
+Labs:
+- redesign an intentionally annoying guard so it is faster to use correctly than to bypass
+- calculate a sample safeguard position from measured stopping time using the applicable methodology
+
+### 25A0 — Safety PLCs and programmable safety
+
+Topics:
+- what makes a safety PLC different from an ordinary PLC
+- redundant/diverse processing concepts
+- self-tests and watchdogs
+- safe I/O architectures
+- test pulses and short-circuit detection
+- discrepancy timing
+- black-channel communication concepts
+- why software configuration is only one part of the safety case
+- open-source and inspectable functional-safety projects
+
+Research lab:
+- study at least one open safety hardware/software project with published hazard analysis, tests, and known limitations
+
+### 25B0 — Failure analysis and fault injection
+
+Topics:
+- FMEA/FMEDA concepts
+- fault trees
+- single-fault thinking
+- latent faults
+- common-cause faults
+- diagnostic coverage in practical terms
+- power-supply failure
+- broken wires and shorts
+- welded contacts
+- stuck valves
+- sensor disagreement
+- frozen software
+- network loss
+- corrupted configuration
+
+Labs:
+- bench/simulated fault injection matrix
+- verify that expected safe-state transitions actually occur
+- record surprises and redesign accordingly
+
+### 25C0 — Designing for humans who will defeat safeguards
+
+Topics:
+- bypass incentives
+- nuisance trips
+- poor diagnostics
+- maintenance access
+- guard removal/reinstallation effort
+- reset placement
+- visibility
+- setup and recovery modes
+- why “procedure only” controls are fragile
+- designing safer defaults without making the machine unusable
+
+Lab/output:
+- human-factors review checklist for every machine-specific playbook
+
+### 25D0 — Low-cost safety architectures
+
+Purpose: directly pursue the curriculum mission of large risk reduction at low cost.
+
+Develop reference architectures at several cost/complexity levels. Each architecture must state:
+- hazards addressed
+- hazards not addressed
+- assumed loads and environment
+- single faults detected
+- single faults not detected
+- reset behavior
+- power-loss behavior
+- restart behavior
+- expected failure modes
+- approximate parts cost
+- what additional money buys at the next level
+
+Candidate examples:
+- simple NC E-stop dropping a contactor coil
+- dual-channel E-stop with two independent switching paths and monitored restart
+- force-guided relay architecture with EDM
+- drive STO plus contactor architecture
+- hydraulic dump/enable architecture
+- guard interlock architecture
+
+These are educational/reference risk-reduction designs, not automatically safety-rated products.
+
+### 25E0 — Validation, commissioning, and proof testing
+
+Topics:
+- validation versus “it seems to work”
+- test plans derived from safety requirements
+- restart tests
+- fault injection
+- stopping-time measurement
+- periodic proof tests
+- inspection intervals
+- configuration/version control
+- changes that invalidate previous assumptions
+
+Capstone output:
+- complete safety requirements, architecture, schematic, failure analysis, test plan, results, limitations, and maintenance/proof-test instructions for a generic machine
+
+### 25F0 — Machine safety capstones
+
+Apply the same method to several machine classes:
+- mill/VMC
+- lathe
+- plasma/laser table
+- router
+- robot/custom kinematics
+- press brake
+- saw/feed/indexing cell
+
+The press-brake case should be especially deep and should eventually compare the OpenPressBrake architecture with proven commercial safety patterns while keeping proprietary machine information out of the public curriculum.
+
+## Dedicated safety research project
+
+The research project runs in parallel with the course build. Its job is to gather evidence before the curriculum invents anything.
+
+### Research stream R-SAFE-01 — LinuxCNC safety practice
+
+Mine LinuxCNC manuals, forum threads, configs, and community examples for external E-stop circuits, hardware safety relays, redundant contactors, STO integration, watchdog behavior, LinuxCNC `estop_latch`, software-requested stop versus hardware authority, reset/restart behavior, and real failure reports.
+
+Deliverable: `linuxcnc-safety-patterns.md`
+
+### R-SAFE-02 — Commercial safety relay teardown by datasheet
+
+Study representative families from Pilz, Siemens, Phoenix Contact, Omron, Schneider, ABB/Jokab, and others where useful. Extract supply/input/reset/cross-short/EDM/output behavior, force-guided assumptions, load limits, response time, Category/PL/SIL claims, reliability data and environmental/test assumptions.
+
+Deliverable: `safety-relay-comparison.md`
+
+### R-SAFE-03 — What actually creates each rating
+
+Trace commercial claims back to ISO 13849 and IEC 62061 concepts: Category architecture, fault detection timing, MTTFd, DCavg, CCF, internal architecture, component reliability, manufacturing controls and validation. Separate reproducible engineering benefits from formal certification claims.
+
+Deliverable: `rating-mechanics.md`
+
+### R-SAFE-04 — Open-source functional safety projects
+
+Search beyond LinuxCNC. Evaluate inspectable projects on schematics/source, hazard analysis, failure assumptions, independence/redundancy, diagnostics, tests, cost and reuse value.
+
+Deliverable: `open-safety-projects.md`
+
+### R-SAFE-05 — Force-guided relay and contactor physics
+
+Research contact welding, AC/DC interruption, inductive kick, inrush, contact material/rating categories, suppression, B10d data, feedback contacts and the boundary between logic relays and hazardous-energy contactors.
+
+Deliverable: `relay-contactor-physics.md`
+
+### R-SAFE-06 — Low-cost open reference safety blocks
+
+After the preceding research, design educational reference blocks: dual-channel E-stop input, manual reset/restart inhibit, dual force-guided relay output, contactor EDM, STO interface, guard interlock, two-hand-control study and watchdog/heartbeat interface. Each must include interface contract, schematic, BOM/substitutions, fault table, assumptions, tests, limitations and formal-rating gap.
+
+Deliverable: `reference-safety-blocks/`
+
+### R-SAFE-07 — Human-factors and safeguard usability
+
+Collect real defeat incentives: inconvenient guards/resets, poor maintenance access, nuisance trips, visibility loss and excessive disassembly. Turn findings into concrete design rules.
+
+Deliverable: `human-factors-safeguards.md`
+
+### R-SAFE-08 — Machine-specific safety patterns
+
+Build concise safety-pattern summaries for each machine class, focused on hazards, energy sources, failure modes, guarding patterns and practical architectures.
+
+Deliverable: one section consumed by each machine-specific playbook.
+
+### R-SAFE-09 — Safety Sandbox simulator reuse
+
+Investigate open-source circuit/PLC simulation engines before writing a new simulator. Initial candidates are DigitalJS/DigitalJS Online and PLC_Simulator. The target is not general SPICE: it is a browser-friendly educational engine in which a learner can wire relay/contactor/safety blocks, operate a machine model, inject faults, and see both hazard authority and diagnostic/rearm consequences.
+
+Required capabilities:
+- one physical relay/contactor object may own multiple main/auxiliary contacts;
+- coil command, mechanical state and actual per-contact continuity remain separate;
+- welded/stuck/open/short/broken-wire/reset/power-loss faults can persist independently of command state;
+- feedback/EDM proves only what the modeled device/contact architecture actually witnesses;
+- machine hazard/energy models remain separate from electrical command state;
+- user circuits/scenarios serialize to an inspectable data format;
+- automated fault campaigns explain detected, latent and hazardous outcomes without claiming PL/SIL certification.
+
+Research artifact: `research/safety-sandbox-reuse-research-2026-09-15.md`.
+
+First bounded experiment, `SIM-REUSE-01`, is a dual relay/contactor + EDM circuit with a welded-main-contact fault. Do not implement it until source inspection shows whether the candidate engine naturally supports independent physical/fault state. Use standard reasoning before compute.
+
+## Source hierarchy
+
+Prefer, in order:
+1. ISO/IEC official descriptions, previews, and legally accessible standards text
+2. manufacturer safety manuals, application guides, datasheets, and reliability data
+3. LinuxCNC official documentation and source
+4. detailed LinuxCNC forum build threads with schematics/configs and follow-up failure experience
+5. credible open-source safety projects with published design evidence
+6. academic/industry papers and textbooks
+7. general web commentary only as discovery leads
+
+Do not treat marketing labels such as “SIL 3 capable” or “safety relay” as sufficient evidence without reading the conditions and assumptions.
+
+## Research rules
+
+- Search broadly before designing from scratch.
+- Preserve older but still useful material instead of discarding it solely because a newer revision exists.
+- Record exact product/standard revision when a numerical value is used.
+- Distinguish **certified/rated**, **designed according to principles**, and **educational risk-reduction reference**.
+- Avoid simulation for simulation’s sake. Use ordinary engineering calculations and datasheet reasoning first; simulate or bench-test where uncertainty or failure interaction justifies it.
+- Prefer fault injection and practical bench evidence over decorative models.
+- Reuse labs across multiple lessons to conserve compute time.
+- Keep public examples generic and avoid publishing private machine drawings or proprietary data.
+
+## First research targets already identified
+
+- LinuxCNC `watchdog` component and HostMot2 watchdog behavior
+- LinuxCNC `estop_latch`
+- LinuxCNC forum examples using external hardware E-stop chains, safety relays, redundant contactors, and safety feedback into LinuxCNC
+- ISO 12100 risk-reduction framework
+- ISO 13849-1:2006 as a useful within-20-years baseline for PL/Category concepts, cross-checked against later explanatory sources where useful
+- ISO 13850:2015 emergency-stop principles
+- IEC 60204-1:2016 electrical machine safety
+- IEC 62061:2005 and later editions for machinery SIL concepts
+- ISO 14119:2013 guard-interlock principles and defeat resistance
+- ISO 13855:2010 safeguard-positioning methodology
+- Open Source Safety Consortium Protective Stop as an example of publishing hardware/software together with safety evidence and known gaps
+- OpenVVVF as an example of open hardware with independent safety paths, HARA, and explicit fault-injection planning
+- DigitalJS/DigitalJS Online and PLC_Simulator as inspectable simulator reuse candidates for R-SAFE-09
+
+## Definition of done for the first draft
+
+The safety course is not considered drafted merely because the lesson titles exist. First-draft completion requires:
+
+- evidence-backed lesson notes for all 2500 modules
+- commercial safety-relay comparison matrix
+- standards concept map
+- LinuxCNC safety-pattern survey
+- at least two credible open-source safety projects deeply reviewed
+- a relay/contactor physics note grounded in manufacturer data
+- at least three low-cost reference architectures with fault tables and bench/simulation test plans
+- one human-factors safeguard-design guide
+- one complete generic-machine capstone safety package
+- press-brake safety case study outline ready for integration into the machine-specific curriculum
+- adversarial review identifying where the course accidentally overclaims safety or where a cheaper practical safeguard was overlooked
+- Safety Sandbox reuse decision recorded before any large simulator implementation effort

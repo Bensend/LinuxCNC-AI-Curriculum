@@ -20,15 +20,15 @@ Do not routinely reopen closed levels without a genuinely new material defect.
 
 Routine controller-board development remains a separate automation concern and must not displace safety work here.
 
-Current safety emphasis includes independent safety authority; physical final-element proof; process-response evidence; maintenance/return-to-service; reset/restart freshness; operating-mode commissioning; energized diagnostic authority; safe reduced-speed commissioning; human-factors controls against bypass; proposition-specific revalidation after change; and composition-aware acceptance scope when changes overlap across one or several maintenance windows.
+Current safety emphasis includes independent safety authority; physical final-element proof; process-response evidence; maintenance/return-to-service; reset/restart freshness; operating-mode commissioning; energized diagnostic authority; safe reduced-speed commissioning; human-factors controls against bypass; proposition-specific revalidation after change; composition-aware acceptance scope; and durable accepted-baseline/stale-evidence management.
 
-Newest learner-facing method: `safety-course/25E0_ACCEPTANCE_SCOPE_DEPENDENCY_MATRIX_AND_ACCUMULATED_CHANGE_REVIEW_2026-09-22.md`. It converts the composition method into a safety-function/proposition × input witness × logic/configuration × final element × process witness × machine dynamics/stored energy × safeguard/access dependency matrix. Every cell is explicitly `UNCHANGED/VALID`, `STALE`, `UNKNOWN`, or `N/A`; stale/unknown cells are unioned across changes and traced horizontally into every affected end-to-end proposition.
+Newest learner-facing method: `safety-course/25E0_ACCEPTED_SAFETY_BASELINE_AND_STALE_EVIDENCE_LEDGER_2026-09-22.md`. It gives safety functions, propositions, evidence, dependencies, changes and validation activities stable identities; records evidence validity assumptions; and requires reverse `show where used` lookup from a changed physical/configuration dependency to every affected proposition and safety function. Evidence made stale is not silently reused under a new work order or current checksum.
 
-The professional non-safety-component trace is now explicit. Siemens SINUMERIK requires open-/closed-loop commissioning to be complete before Safety Integrated acceptance because changed drive-control dynamics can change over-travel. Pilz and Rockwell independently tie safeguard position to actual/worst-case machine stopping performance and identify brake wear, mechanical condition, load/speed/tooling or control behavior as contributors to stopping response. Freeze **NON-SAFETY PARAMETER != OUTSIDE SAFETY EVIDENCE BOUNDARY**.
+The shared-change stress test shows why one changed brake or other common physical dependency can invalidate two safety functions differently. A protective-device function may depend on measured stopping performance/separation distance while an access-release function may instead depend on independent stopped-motion evidence—or, in a different architecture, on a delay derived from stopping behavior. Freeze **ONE PHYSICAL CHANGE != ONE UNIVERSAL REVALIDATION TEST** and **SHARED DEPENDENCY != IDENTICAL SAFETY PROPOSITION**.
 
-The accumulated-change adversarial case spans three maintenance windows: brake replacement, ordinary servo tuning/production-speed change, then safeguard relocation. Each work order can appear locally bounded, yet all three intersect the same protective-device-to-safe-stop-before-access proposition. The learner must compare against the last accepted safety baseline and union stale evidence across windows. Freeze **WORK ORDER CLOSED != SAFETY EVIDENCE REFRESHED**, **NO SINGLE LARGE CHANGE != NO COMPOSED SAFETY CHANGE**, and **CURRENT CONFIGURATION CHECKSUM != CURRENT PHYSICAL ACCEPTANCE BASELINE**.
+Lifecycle evidence now explicitly separates two trigger lanes. Rockwell functional-safety documentation treats proof-test intervals as application-dependent and allows system elements to have different proof-test/useful-life requirements. Pilz distinguishes frequent functional checks, periodic safeguard inspection/stop-performance testing, and inspection after modifications or exceptional events. Therefore a calendar/use/degradation proof schedule and event-triggered proposition-specific revalidation are independent obligations. Freeze **PERIODIC PROOF DUE DATE != PERMISSION TO DEFER CHANGE-TRIGGERED REVALIDATION** and **EVENT REVALIDATION COMPLETE != FUTURE PERIODIC PROOF CANCELLED**.
 
-Prior composition method retained: `safety-course/25E0_MULTI_CHANGE_COMPOSITION_ACCEPTANCE_SCOPE_2026-09-22.md`. Proposition-specific method retained: `safety-course/25E0_PROPOSITION_SPECIFIC_REVALIDATION_AFTER_CHANGE_2026-09-22.md`.
+Prior methods retained: `safety-course/25E0_ACCEPTANCE_SCOPE_DEPENDENCY_MATRIX_AND_ACCUMULATED_CHANGE_REVIEW_2026-09-22.md`, `safety-course/25E0_MULTI_CHANGE_COMPOSITION_ACCEPTANCE_SCOPE_2026-09-22.md`, and `safety-course/25E0_PROPOSITION_SPECIFIC_REVALIDATION_AFTER_CHANGE_2026-09-22.md`.
 
 Core freezes retained:
 - **ACCESS CLEAR != PERSONNEL CLEAR != SAFETY RELEASE != FINAL-ELEMENT PROOF != ORDINARY START AUTHORITY.**
@@ -44,6 +44,8 @@ Core freezes retained:
 - **COMPONENT DIAGNOSTIC PASS != SAFETY FUNCTION VALIDATED.**
 - **SAME CHECKSUM != SAME FIELD PHYSICS.**
 - **CHANGE COUNT != ACCEPTANCE SCOPE.**
+- **ACCEPTED ONCE != ACCEPTED FOREVER.**
+- **CURRENT DIAGNOSTICS != CURRENT PHYSICAL VALIDATION EVIDENCE.**
 
 ## 4000 foundation/core
 
@@ -51,9 +53,9 @@ Durable foundation includes `hardware/BLOCK_SPEC_TEMPLATE.md`, `hardware/4000-bl
 
 ## Exact next work
 
-1. Turn the accepted-baseline idea into a reusable **safety evidence baseline / stale-evidence ledger** with stable proposition IDs, evidence identity, change dependencies, revalidation status, and reverse `show where used` lookup.
-2. Stress-test that ledger against a multi-function machine where one physical change affects two safety functions differently (for example a common brake/drive or shared guard zone), without inventing machine-specific acceptance thresholds.
-3. Trace authoritative professional lifecycle evidence for periodic/recurrent proof versus event-driven revalidation, distinguishing scheduled proof/inspection from revalidation triggered by modification, fault, or exceptional commissioning state.
+1. Extend the ledger into a learner-facing **proof obligation / evidence freshness review** that distinguishes evidence expiration, latent-failure proof, wear/drift monitoring, and revalidation after actual change.
+2. Trace authoritative evidence for maintenance/inspection findings that themselves trigger expanded validation scope—for example a stop-time trend or safeguard defect that reveals the accepted physical baseline is no longer representative.
+3. Stress-test evidence freshness where a periodic proof discovers degraded stopping performance even though no work order/change was recorded, and trace how that finding propagates through safeguard positioning/access propositions.
 4. Preserve machine-specific physics and `UNKNOWN`; do not invent hydraulic truth tables, safe speeds, stopping distances, PL/SIL targets, pressure thresholds or diagnostic coverage.
 5. If this branch reaches an information-gain stop, rotate to the highest-value open 4000 safety module rather than routine board design or closed 3000 work.
 

@@ -1,6 +1,5 @@
-STATUS CLOSED
-SESSION_START 2026-09-21T05:37:00Z
-SESSION_END 2026-09-21T05:53:00Z
-MODULE Practical Machine Safety Engineering / exceptional-state production handoff
-NEXT checkpoints/2026-09-21T0550Z-runtime-exception-observability-next.md
-NOTE Added running-application force/audit observability study plus 25C0 baseline-integrity exercise. No executable compute; no GitHub-hosted runner used.
+STATUS ACTIVE
+SESSION_START 2026-09-22T05:34:00Z
+MODULE Practical Machine Safety Engineering / finding-disposition and common-cause degradation
+NEXT PROGRESS.md exact next work
+NOTE Start recorded before substantive work. No executable compute authorized unless question-driven; GitHub-hosted runners prohibited.

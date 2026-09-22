@@ -20,13 +20,13 @@ Do not routinely reopen closed levels without a genuinely new material defect.
 
 Routine controller-board development remains a separate automation concern and must not displace safety work here.
 
-Current safety emphasis includes independent safety authority; physical final-element proof; process-response evidence; maintenance/return-to-service; reset/restart freshness; operating-mode commissioning; energized diagnostic authority; safe reduced-speed commissioning; human-factors controls against bypass; proposition-specific revalidation after change; composition-aware acceptance scope; durable accepted-baseline/stale-evidence management; evidence freshness; formal finding/disposition handling; non-brake common-cause degradation; recurrence escalation; corrective/preventive-action ownership; handoff persistence; mechanical/installation common cause; and restart/power-loss persistence of open safety obligations.
+Current safety emphasis includes independent safety authority; physical final-element proof; process-response evidence; maintenance/return-to-service; reset/restart freshness; operating-mode commissioning; energized diagnostic authority; safe reduced-speed commissioning; human-factors controls against bypass; proposition-specific revalidation after change; composition-aware acceptance scope; durable accepted-baseline/stale-evidence management; evidence freshness; formal finding/disposition handling; common-cause degradation; recurrence escalation; handoff persistence; and restart/power-domain recovery.
 
-Newest learner-facing method: `safety-course/25E0_POWER_LOSS_RECOVERY_THREE_AUTHORITY_AND_PHYSICAL_PROOF_2026-09-22.md`. It traces Siemens/Rockwell/Pilz power-up, fault acknowledgement, cold-start, restart-interlock and safe-status evidence and separates three authorities: independent safety controller/I/O state, durable safety/maintenance evidence, and volatile LinuxCNC/FPGA/HMI state. It extends the physical-proof boundary from contactors into drive/brake/valve propositions without inventing machine physics.
+Newest learner-facing method: `safety-course/25E0_FRESH_DEMAND_AND_PARTIAL_POWER_DOMAIN_RECOVERY_2026-09-22.md`. It traces professional unexpected-start/restart evidence and separates device reset/restart features from machine-level permission. It adds a learner-facing recovery-state table and stress-tests both partial-power cases: safety authority survives while LinuxCNC/HMI cycles, and LinuxCNC/HMI survives while independent safety authority cycles.
 
-Reusable records: `safety-course/OPEN_SAFETY_OBLIGATION_HANDOFF_RECORD.md` defines what open `FIND-*` / stale `PROP-*` / pending `VAL-*` state must survive restart, power loss, shift change and maintenance handoff. `safety-course/FINDING_DISPOSITION_RECORD_TEMPLATE.md` preserves original adverse evidence, containment, reverse show-where-used, recurrence links, correction, physical re-proof, acceptance, reset/rearm, and fresh ordinary demand as distinct facts.
+Reusable records retained: `safety-course/OPEN_SAFETY_OBLIGATION_HANDOFF_RECORD.md` and `safety-course/FINDING_DISPOSITION_RECORD_TEMPLATE.md`.
 
-New freezes: **POWER RESTORED != SAFETY FUNCTIONS FULLY ACTIVE DURING STARTUP**, **POWER CYCLE ACKNOWLEDGED != FAULT CAUSE CORRECTED**, **SAFETY CONTROLLER HEALTHY != DURABLE SAFETY OBLIGATIONS CLEARED**, **EXPECTED SAFETY SIGNATURE != PHYSICAL PROCESS PROPOSITION FRESH**, **RESET AVAILABLE != RESET AUTHORIZED**, **SAFE OUTPUT/DRIVE STATUS != EVERY DOWNSTREAM PHYSICAL PROPOSITION PROVED**, **LINUXCNC READY != PERSONNEL-SAFETY RETURN-TO-SERVICE ACCEPTANCE**, and **PRE-POWER-LOSS ORDINARY DEMAND != FRESH POST-RECOVERY DEMAND**.
+New freezes: **POWER RESTORED != START AUTHORITY**, **AUTOMATIC SAFETY-CIRCUIT RESET != AUTOMATIC MACHINE RESTART PERMISSION**, **DRIVE RESTART INHIBITION CLEARED != FRESH PRODUCTION DEMAND**, **RESET/REARM COMPLETE != START COMMAND**, **HELD PRE-OUTAGE DEMAND != FRESH POST-RECOVERY DEMAND**, **LINUXCNC/HMI STATE SURVIVED != SAFETY AUTHORITY SURVIVED**, **SAFETY AUTHORITY SURVIVED != ORDINARY COMMAND FRESHNESS SURVIVED**, and **PARTIAL POWER-DOMAIN RECOVERY != WHOLE-MACHINE STATE CONTINUITY**.
 
 Core freezes retained:
 - **ACCESS CLEAR != PERSONNEL CLEAR != SAFETY RELEASE != FINAL-ELEMENT PROOF != ORDINARY START AUTHORITY.**
@@ -48,7 +48,6 @@ Core freezes retained:
 - **REPAIR COMPLETE != SAFETY PROPOSITION RESTORED.**
 - **REPEATED TEST PASSES != ORIGINAL ADVERSE RESULT DISPOSITIONED.**
 - **RECURRENCE != ROOT CAUSE PROVED.**
-- **REPEATED REPAIR SUCCESS != RECURRING DEFECT DISPOSITIONED.**
 - **WORK ORDER CLOSED != SAFETY FINDING CLOSED.**
 - **HMI GREEN != OPEN SAFETY OBLIGATIONS CLEARED.**
 - **VOLATILE CONTROLLER STATE LOST != SAFETY OBLIGATION CLEARED.**
@@ -63,11 +62,12 @@ Durable foundation includes `hardware/BLOCK_SPEC_TEMPLATE.md`, `hardware/4000-bl
 
 ## Exact next work
 
-1. Trace authoritative professional evidence for **fresh ordinary demand after power restoration** and unexpected-start prevention across safety controller, drive and machine-control layers; distinguish device-level automatic restart features from machine-level permission.
-2. Build a learner-facing recovery-state table for `BOOTING / SAFE-INHIBITED / DIAGNOSTIC-VALID / OBLIGATION-BLOCKED / RESET-ELIGIBLE / REARMED / PRODUCTION-DEMAND-REQUIRED`, explicitly keeping LinuxCNC readiness informational rather than safety authority.
-3. Stress-test partial power-domain recovery: safety controller remains powered while ordinary CNC/HMI power cycles, and the inverse case where CNC remains powered while safety I/O/controller power cycles. Determine which evidence is stale, reacquired, or unaffected.
-4. Preserve machine-specific physics and `UNKNOWN`; do not invent hydraulic truth tables, safe speeds, stopping distances, PL/SIL targets, pressure thresholds, proof intervals, alignment tolerances, escalation counts, acceptable degradation percentages or diagnostic coverage.
-5. If this branch reaches an information-gain stop, rotate to the highest-value open 4000 safety module rather than routine board design or closed 3000 work.
+1. Turn the recovery-state table into a reusable learner worksheet that forces each transition to name its authority, required evidence, stale-demand handling, and what remains `UNKNOWN`.
+2. Trace professional examples for restoration after **loss of only field-device/safety-I/O power** while controller logic remains alive; distinguish communication/configuration recovery from reacquired physical witness validity.
+3. Stress-test a multi-domain brownout/rapid-recovery case where power domains return in different orders and ordinary command state survives; determine which transitions must be monotonic toward inhibition until evidence is reacquired.
+4. Add a machine-class comparison (press brake/gravity axis, spindle machine, plasma/router) showing that the freshness method transfers while physical propositions differ.
+5. Preserve machine-specific physics and `UNKNOWN`; do not invent hydraulic truth tables, safe speeds, stopping distances, PL/SIL targets, pressure thresholds, proof intervals, alignment tolerances or diagnostic coverage.
+6. If this branch reaches an information-gain stop, rotate to the highest-value open 4000 safety module rather than routine board design or closed 3000 work.
 
 ## Laboratory compute checkpoint
 

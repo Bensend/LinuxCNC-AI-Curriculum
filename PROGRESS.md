@@ -20,15 +20,17 @@ Do not routinely reopen closed levels without a genuinely new material defect.
 
 Routine controller-board development remains a separate automation concern and must not displace safety work here.
 
-The repeatable safety-design methodology now explicitly covers: machine/lifecycle boundary -> hazardous event -> risk-reduction hierarchy -> physical safe-state proposition -> safety-function derivation -> composition/allocation -> fault analysis/diagnostic design -> architecture/integrity requirements -> verification/validation -> maintenance/change control.
+The repeatable safety-design methodology now explicitly covers: machine/lifecycle boundary -> hazardous event -> risk-reduction hierarchy -> physical safe-state proposition -> safety-function derivation -> composition/allocation -> fault analysis/diagnostic design -> architecture/integrity requirements -> integrity-method selection/target allocation -> verification/validation -> maintenance/change control.
 
-Newest learner-facing methodology: `safety-course/2520_ARCHITECTURE_INTEGRITY_ALLOCATION_FROM_FAULT_ANALYSIS_2026-09-22.md`, with reusable `safety-course/SAFETY_ARCHITECTURE_ALLOCATION_WORKSHEET.md`. This converts dangerous-undetected/latent/common-cause gaps from the fault analysis into architecture requirements before component selection or integrity arithmetic. It explicitly separates redundancy, fault tolerance, diagnostic coverage and physical independence; requires reverse `DEP-*` tracing for every claimed independent path; derives final-element/process proof surfaces from the physical proposition; and treats CCF controls and practical validation access as architecture requirements rather than afterthoughts.
+Newest learner-facing methodology: `safety-course/2520_INTEGRITY_METHOD_SELECTION_AND_TARGET_ALLOCATION_2026-09-22.md`, with reusable `safety-course/SAFETY_INTEGRITY_METHOD_GATE_WORKSHEET.md`. This places the ISO 13849-1 / IEC 62061 method-and-edition gate after the SRS, fault analysis and architecture allocation; requires the integrity target to come from the safety function's risk/SRS context rather than topology; separates structural architecture, reliability, diagnostics, CCF, systematic controls and validation; and uses symbolic placeholders rather than invented machine values.
 
-Prior 2520 prerequisites remain: `2520_FAULT_ANALYSIS_DIAGNOSTIC_DESIGN_AND_RESIDUAL_PROPOSITION_2026-09-22.md`, `SAFETY_FUNCTION_FAULT_DIAGNOSTIC_WORKSHEET.md`, `2520_HAZARD_TO_SAFETY_FUNCTION_DERIVATION_AND_ALLOCATION_2026-09-22.md`, `2520_SAFETY_FUNCTION_COMPOSITION_CONFLICT_AND_SHARED_FINAL_ELEMENT_2026-09-22.md`, and `2520_MACHINE_LEVEL_SRS_DERIVATION_EXERCISE_2026-09-22.md`.
+A formal chain-level assessment now exists at `safety-course/2520_ADVERSARIAL_ASSESSMENT_HAZARD_TO_INTEGRITY_GATE_2026-09-22.md`. It spans hazard derivation through integrity-method selection and deliberately tests shared dependencies/final elements, systematic faults, maintenance-invalidated physical evidence, reset/start authority, and refusal to invent PLr/SIL or reliability/timing values.
+
+Prior 2520 prerequisites remain: `2520_ARCHITECTURE_INTEGRITY_ALLOCATION_FROM_FAULT_ANALYSIS_2026-09-22.md`, `SAFETY_ARCHITECTURE_ALLOCATION_WORKSHEET.md`, `2520_FAULT_ANALYSIS_DIAGNOSTIC_DESIGN_AND_RESIDUAL_PROPOSITION_2026-09-22.md`, `SAFETY_FUNCTION_FAULT_DIAGNOSTIC_WORKSHEET.md`, `2520_HAZARD_TO_SAFETY_FUNCTION_DERIVATION_AND_ALLOCATION_2026-09-22.md`, `2520_SAFETY_FUNCTION_COMPOSITION_CONFLICT_AND_SHARED_FINAL_ELEMENT_2026-09-22.md`, and `2520_MACHINE_LEVEL_SRS_DERIVATION_EXERCISE_2026-09-22.md`.
 
 Recovery/return-to-service material remains consolidated and retained, including the cell auxiliary-energy assessment and reusable FIND/handoff/power-recovery/reintegration records.
 
-Newest methodology freezes: **REDUNDANCY != FAULT TOLERANCE != DIAGNOSTIC COVERAGE != PHYSICAL INDEPENDENCE**, **TWO CHANNELS != TWO INDEPENDENT PATHS**, **TWO SAFETY FUNCTIONS != TWO INDEPENDENT FINAL-ELEMENT PATHS**, **DIVERSE COMPONENTS != COMMON-CAUSE CONTROL UNLESS THE DIVERSITY ADDRESSES A DEFINED CAUSE**, **FINAL-ELEMENT FEEDBACK != PROCESS SAFE STATE UNLESS THAT EQUIVALENCE IS ESTABLISHED**, **ALL ELECTRONIC DIAGNOSTICS HEALTHY != REQUIRED PHYSICAL PROCESS PROPOSITION PROVED**, **ARCHITECTURE SKETCH != CATEGORY / PL / SIL CLAIM**, **COMPONENT SAFETY RATING != MACHINE SAFETY-FUNCTION INTEGRITY**, and **ORDINARY LINUXCNC/FPGA DIAGNOSTICS != PERSONNEL-SAFETY AUTHORITY**.
+Newest methodology freezes: **PLr / REQUIRED SIL COMES FROM THE SAFETY FUNCTION'S RISK/SRS CONTEXT, NOT TOPOLOGY**, **CATEGORY / ARCHITECTURE != ACHIEVED PL OR SIL**, **CERTIFIED COMPONENT CAPABILITY != COMPLETE SAFETY-FUNCTION INTEGRITY**, **HIGH-RATED LOGIC CANNOT RESCUE AN UNPROVED SHARED FINAL ELEMENT**, **NUMERICAL TOOL OUTPUT != VALIDATION**, **DIAGNOSTIC COVERAGE CLAIM != PHYSICAL SAFE-STATE PROOF**, **STANDARD METHOD SELECTED != EDITION/APPLICABILITY ESTABLISHED**, **REDUNDANCY != FAULT TOLERANCE != DIAGNOSTIC COVERAGE != PHYSICAL INDEPENDENCE**, **TWO CHANNELS != TWO INDEPENDENT PATHS**, and **ORDINARY LINUXCNC/FPGA DIAGNOSTICS != PERSONNEL-SAFETY AUTHORITY**.
 
 Core safety freezes from prior sessions remain in force, including independent safety authority, physical proof versus command/status, reset/rearm versus start authority, evidence freshness, finding disposition, recovery/reintegration, common-cause reverse tracing, fault/diagnostic scope, and the prohibition on inventing machine-specific physical facts or integrity targets.
 
@@ -38,16 +40,16 @@ Durable foundation includes `hardware/BLOCK_SPEC_TEMPLATE.md`, `hardware/4000-bl
 
 ## Exact next work
 
-Continue from architecture requirements into **integrity-method selection and requirements allocation without turning the course into component arithmetic**:
+The 2520 hazard-to-integrity chain is now mature enough for integration/validation work rather than another narrow integrity note:
 
-1. Build a learner-facing gate for selecting the applicable machinery functional-safety method (for example ISO 13849-1 versus IEC 62061 context) and deriving the required integrity target from risk assessment/SRS rather than topology.
-2. Teach what Category/architecture, reliability data, diagnostic coverage, CCF/systematic-fault controls and validation each contribute, while keeping standard-edition/applicability boundaries explicit and avoiding invented values.
-3. Use one bounded worked example with symbolic/placeholder values first; only use manufacturer numerical data where provenance and applicability are explicit. The objective is to teach the evidence chain, not optimize a fake machine.
-4. Add a counterexample showing why a high-rated component or redundant safety controller cannot rescue an unproved shared final element/process proposition.
-5. Decide whether the completed 2520 chain is mature enough for a formal adversarial assessment covering derivation -> faults -> architecture -> integrity-method gate.
+1. Execute/review the new 2520 adversarial assessment against the durable methodology without contaminating any blind external evaluation; correct genuine chain gaps rather than memorizing answers.
+2. Continue into verification-versus-validation planning: derive test cases directly from `HZ/PROP/SF/FLT/ARCH` requirements and distinguish design verification, functional validation, fault-injection/diagnostic validation, physical-process proof, recovery/restart validation and maintenance/change revalidation.
+3. Build one reusable validation matrix that preserves evidence provenance and explicitly marks tests that require physical machine measurements/human involvement rather than inventing results.
+4. Stress-test the method across two substantially different machine classes (gravity/fluid-power axis and rotating-tool/automated cell) without transferring machine physics.
+5. Audit the complete 2520 methodology for duplication/gaps and decide whether it is ready for a fresh-AI handoff/promotion into the formal safety-course module sequence.
 6. Preserve human factors and independent safety authority; ordinary LinuxCNC/FPGA remains non-authoritative for personnel safety.
 
-Newest precise checkpoint: `checkpoints/2026-09-22T1651Z-safety-architecture-next.md`.
+Newest precise checkpoint: `checkpoints/2026-09-22T1744Z-safety-integrity-gate-next.md`.
 
 ## Laboratory compute checkpoint
 

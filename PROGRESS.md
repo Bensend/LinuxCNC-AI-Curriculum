@@ -34,9 +34,13 @@ Verification/validation remains durable in `safety-course/2520_VERIFICATION_VALI
 
 Cross-machine transfer remains represented by `safety-course/2520_TRANSFER_EXERCISE_SPINDLE_ROBOT_CELL_HAZARD_TO_RELEASE_2026-09-22.md`. Recovery/return-to-service material remains supporting evidence and must not displace the core hazard-to-release sequence.
 
-Because the 2520 external/fresh evaluator is an information-separated dependency, it is branch-local under `WORK_SELECTION_POLICY.md`. High-value **2530 — E-stop systems from first principles** source preparation has therefore begun in `safety-course/2530_ESTOP_FIRST_PRINCIPLES_SOURCE_PREP_2026-09-22.md` without declaring 2520 graduated.
+Because the 2520 external/fresh evaluator is an information-separated dependency, it remains branch-local under `WORK_SELECTION_POLICY.md`; 2520 is not declared graduated.
 
-2530 initial evidence-backed freezes: **E-STOP PRESENT != PRIMARY RISK REDUCTION COMPLETE**, **E-STOP != UNIVERSAL COMPLETE ENERGY REMOVAL**, **STOP CATEGORY != SAFETY INTEGRITY CLAIM**, **DEVICE RELEASED != SAFETY FUNCTION RESET/REARMED != MACHINE START AUTHORIZED**, **EDM HEALTHY != MACHINE PHYSICAL SAFE STATE PROVED**, and **ORDINARY LINUXCNC STOP/ESTOP STATE != INDEPENDENT PERSONNEL-SAFETY AUTHORITY**.
+**2530 — E-stop systems from first principles** has now advanced beyond initial source preparation. `safety-course/2530_ESTOP_ARCHITECTURE_COMPARISON_AND_FAULT_MAP_2026-09-22.md` compares current Rockwell Guardmaster, Siemens SIRIUS 3SK1 and Pilz PNOZ application architectures and reverse-maps input diagnostics, monitored reset/start, feedback/EDM, output/final-element structure and physical proof limits to explicit fault hypotheses. It also contains the required incremental learner exercise: proposition first, then single-channel fault attack, justified diagnostics/redundancy, common-cause attack, reset/restart attack and physical-proof attack. No topology is assigned a generic PL/SIL.
+
+LinuxCNC's ordinary-control boundary is now source-traced at pinned upstream commit `514be4f657b2f1c432ebaaebd117ef112e3e7565` in `safety-course/2530_LINUXCNC_ESTOP_LATCH_BOUNDARY_TRACE_2026-09-22.md`. `estop_latch` is explicitly treated as software state/coordination logic; its reset edge, latch state and watchdog are not evidence of a machine physical safe state or independent personnel-safety authority.
+
+2530 evidence-backed freezes include: **E-STOP PRESENT != PRIMARY RISK REDUCTION COMPLETE**, **E-STOP != UNIVERSAL COMPLETE ENERGY REMOVAL**, **STOP CATEGORY != SAFETY INTEGRITY CLAIM**, **DEVICE RELEASED != SAFETY FUNCTION RESET/REARMED != MACHINE START AUTHORIZED**, **EDM HEALTHY != MACHINE PHYSICAL SAFE STATE PROVED**, **TWO INPUT CHANNELS != TWO INDEPENDENT PHYSICAL WITNESSES**, **TEST PULSES HEALTHY != E-STOP MECHANISM PHYSICALLY OPERATED**, **MONITORED RESET VALID != ZONE CLEAR != ORDINARY START AUTHORIZED**, **A PUBLISHED PL/SIL FOR ONE MANUFACTURER EXAMPLE DOES NOT TRANSFER TO A LOOKALIKE CIRCUIT**, and **ORDINARY LINUXCNC STOP/ESTOP STATE != INDEPENDENT PERSONNEL-SAFETY AUTHORITY**.
 
 Core 2520 freezes remain in force: **VERIFIED DESIGN != VALIDATED MACHINE SAFETY FUNCTION**, **TEST PASSED != CURRENT MACHINE PROVED IF CONFIGURATION IDENTITY IS LOST OR CHANGED**, **PARTIAL REVALIDATION SCOPE COMES FROM IMPACT ANALYSIS, NOT CONVENIENCE**, **PLr / REQUIRED SIL COMES FROM THE SAFETY FUNCTION'S RISK/SRS CONTEXT, NOT TOPOLOGY**, **CATEGORY / ARCHITECTURE != ACHIEVED PL OR SIL**, **CERTIFIED COMPONENT CAPABILITY != COMPLETE SAFETY-FUNCTION INTEGRITY**, **DIAGNOSTIC COVERAGE CLAIM != PHYSICAL SAFE-STATE PROOF**, **TWO CHANNELS != TWO INDEPENDENT PHYSICAL PATHS**, and **ORDINARY LINUXCNC/FPGA DIAGNOSTICS != PERSONNEL-SAFETY AUTHORITY**.
 
@@ -47,12 +51,12 @@ Durable foundation includes `hardware/BLOCK_SPEC_TEMPLATE.md`, `hardware/4000-bl
 ## Exact next work
 
 1. Preserve the 2520 information-separated competency gate until an actually separated evaluator/oracle can execute it; do not contaminate it by committing a hidden answer learner-side.
-2. Continue 2530 source/professional-architecture work: compare at least three current manufacturer E-stop/safety-relay application architectures and reverse-map inputs, reset, diagnostics/EDM and final elements to explicit fault hypotheses and physical propositions.
-3. Build the learner-facing incremental single-channel -> fault analysis -> monitored/redundant architecture exercise only after the source comparison; topology alone must not be presented as a PL/SIL claim.
-4. Trace LinuxCNC `estop_latch` / machine-control interaction only to establish the ordinary-control boundary; do not migrate personnel-safety authority into LinuxCNC/HAL/normal FPGA logic.
-5. Preserve machine-specific stop selection, stopping time/distance, hydraulic/pneumatic behavior and integrity targets as `UNKNOWN` until design-specific evidence exists.
+2. Continue 2530 with emergency-stop span/segmentation and reset-location/zone-visibility human factors for linked machines and cells using current authoritative manufacturer/standards guidance where accessible.
+3. Build a 2530 adversarial assessment that makes the learner select between controlled/uncontrolled stopping conceptually from hazard physics while keeping machine-specific stopping time/distance and brake/hydraulic/pneumatic behavior `UNKNOWN` unless evidence is supplied.
+4. Add commissioning/validation checks specific to E-stop: every device/span, covered input faults, reset behavior, final-element feedback, retained production demand, power-cycle/recovery and physical stopping proposition.
+5. Do not infer PL/SIL, diagnostic coverage percentages, stopping distance, stop category or final-element adequacy from the three manufacturer examples.
 
-Newest precise checkpoint: `checkpoints/2026-09-22T2150Z-safety-2520-gate-2530-source-next.md`.
+Newest precise checkpoint: `checkpoints/2026-09-22T2250Z-safety-2530-architecture-fault-map-next.md`.
 
 ## Laboratory compute checkpoint
 

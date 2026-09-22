@@ -24,23 +24,21 @@ The repeatable safety-design methodology now explicitly covers:
 
 `machine/lifecycle boundary -> hazardous event -> risk-reduction hierarchy -> physical safe-state proposition -> safety-function/SRS derivation -> composition/allocation -> fault analysis/diagnostic design -> architecture/dependency/CCF allocation -> integrity-method selection/target allocation -> verification/validation/physical proof -> commissioning/release -> maintenance/change control/revalidation`
 
-Fresh-AI navigation is durable in `safety-course/2520_ENTRY_MAP_AND_FRESH_AI_HANDOFF_2026-09-22.md`. A path/ownership audit in `safety-course/2520_FRESH_AI_HANDOFF_AUDIT_AND_FORMAL_PLACEMENT_2026-09-22.md` verified the referenced learner path exists and has non-conflicting ownership. The audit deliberately declined to create a redundant commissioning worksheet because the existing validation matrix plus commissioning lesson already provide the needed record surfaces.
+Fresh-AI navigation is durable in `safety-course/2520_ENTRY_MAP_AND_FRESH_AI_HANDOFF_2026-09-22.md`; concise course navigation is now `safety-course/SAFETY_COURSE_INDEX.md`. The broad `SAFETY_COURSE_RESEARCH.md` remains the research/course plan and was deliberately not replaced by another duplicate syllabus.
 
-The audit also makes the formal placement decision: the mature hazard-to-release chain is ready to serve as the learner-facing core of **2520 — From hazards to safety functions** under the existing 2500 Practical Machine Safety Engineering course. This placement is not a claim of blind/fresh competency graduation; an information-separated transfer evaluation remains open.
+The mature hazard-to-release chain is formally placed as the learner-facing core of **2520 — From hazards to safety functions**. Formal placement is not a claim of blind/fresh competency graduation.
 
-Verification/validation is durable in `safety-course/2520_VERIFICATION_VALIDATION_AND_PHYSICAL_PROOF_2026-09-22.md` with reusable `safety-course/SAFETY_VERIFICATION_VALIDATION_MATRIX.md`. It separates design verification, functional validation, fault/diagnostic validation, physical-process proof, recovery/restart validation and maintenance/change revalidation, and marks machine/human evidence boundaries instead of inventing results.
+A clean evaluator-facing protocol now exists at `evaluation/2520_INFORMATION_SEPARATED_COMPETENCY_HANDOFF.md`. It defines challenge-selection requirements, learner deliverables, scoring dimensions, critical-fail conditions and information-separation procedure **without storing a hidden solution**. The challenge must use a machine surface materially distinct from learner-readable worked examples. Actual information-separated execution/scoring remains open and must not be replaced by self-generating then self-reading an answer key.
 
-Commissioning/release/change control is explicit in `safety-course/2520_COMMISSIONING_RELEASE_AND_CHANGE_CONTROL_2026-09-22.md`. It adds configuration identity, commissioning-readiness gates, temporary-measure tracking/removal, release-baseline control, bidirectional change-impact tracing and impact-derived partial/full revalidation.
+Verification/validation remains durable in `safety-course/2520_VERIFICATION_VALIDATION_AND_PHYSICAL_PROOF_2026-09-22.md` with reusable `safety-course/SAFETY_VERIFICATION_VALIDATION_MATRIX.md`. Commissioning/release/change control remains explicit in `safety-course/2520_COMMISSIONING_RELEASE_AND_CHANGE_CONTROL_2026-09-22.md`; the integrity-method gate remains `safety-course/2520_INTEGRITY_METHOD_SELECTION_AND_TARGET_ALLOCATION_2026-09-22.md` with its reusable worksheet.
 
-The integrity-method gate remains `safety-course/2520_INTEGRITY_METHOD_SELECTION_AND_TARGET_ALLOCATION_2026-09-22.md` with `safety-course/SAFETY_INTEGRITY_METHOD_GATE_WORKSHEET.md`. It requires the target to come from the safety function's risk/SRS context rather than topology and separates architecture, reliability, diagnostics, CCF, systematic controls and validation.
+Cross-machine transfer remains represented by `safety-course/2520_TRANSFER_EXERCISE_SPINDLE_ROBOT_CELL_HAZARD_TO_RELEASE_2026-09-22.md`. Recovery/return-to-service material remains supporting evidence and must not displace the core hazard-to-release sequence.
 
-A formal chain-level assessment remains `safety-course/2520_ADVERSARIAL_ASSESSMENT_HAZARD_TO_INTEGRITY_GATE_2026-09-22.md`; its existing review is non-blind curriculum evidence and must not be mistaken for a future information-separated external evaluation.
+Because the 2520 external/fresh evaluator is an information-separated dependency, it is branch-local under `WORK_SELECTION_POLICY.md`. High-value **2530 — E-stop systems from first principles** source preparation has therefore begun in `safety-course/2530_ESTOP_FIRST_PRINCIPLES_SOURCE_PREP_2026-09-22.md` without declaring 2520 graduated.
 
-Cross-machine transfer is now represented by `safety-course/2520_TRANSFER_EXERCISE_SPINDLE_ROBOT_CELL_HAZARD_TO_RELEASE_2026-09-22.md`. It exercises the complete method on a guarded spindle/robot-tending cell with pneumatic energy, retained kinetic energy, full-body access, setup/recovery and maintenance change while deliberately leaving machine-specific stopping, distance, pressure, integrity and final-element facts `UNKNOWN`.
+2530 initial evidence-backed freezes: **E-STOP PRESENT != PRIMARY RISK REDUCTION COMPLETE**, **E-STOP != UNIVERSAL COMPLETE ENERGY REMOVAL**, **STOP CATEGORY != SAFETY INTEGRITY CLAIM**, **DEVICE RELEASED != SAFETY FUNCTION RESET/REARMED != MACHINE START AUTHORIZED**, **EDM HEALTHY != MACHINE PHYSICAL SAFE STATE PROVED**, and **ORDINARY LINUXCNC STOP/ESTOP STATE != INDEPENDENT PERSONNEL-SAFETY AUTHORITY**.
 
-Prior 2520 prerequisites remain durable: hazard/SRS derivation, safety-function composition/shared-final-element analysis, fault/diagnostic design, architecture/integrity allocation, and their reusable worksheets. Recovery/return-to-service material remains supporting evidence for validation/recovery and must not displace the core hazard-to-release sequence.
-
-Core freezes remain in force: **VERIFIED DESIGN != VALIDATED MACHINE SAFETY FUNCTION**, **TEST PASSED != CURRENT MACHINE PROVED IF CONFIGURATION IDENTITY IS LOST OR CHANGED**, **PARTIAL REVALIDATION SCOPE COMES FROM IMPACT ANALYSIS, NOT CONVENIENCE**, **PLr / REQUIRED SIL COMES FROM THE SAFETY FUNCTION'S RISK/SRS CONTEXT, NOT TOPOLOGY**, **CATEGORY / ARCHITECTURE != ACHIEVED PL OR SIL**, **CERTIFIED COMPONENT CAPABILITY != COMPLETE SAFETY-FUNCTION INTEGRITY**, **DIAGNOSTIC COVERAGE CLAIM != PHYSICAL SAFE-STATE PROOF**, **TWO CHANNELS != TWO INDEPENDENT PHYSICAL PATHS**, and **ORDINARY LINUXCNC/FPGA DIAGNOSTICS != PERSONNEL-SAFETY AUTHORITY**.
+Core 2520 freezes remain in force: **VERIFIED DESIGN != VALIDATED MACHINE SAFETY FUNCTION**, **TEST PASSED != CURRENT MACHINE PROVED IF CONFIGURATION IDENTITY IS LOST OR CHANGED**, **PARTIAL REVALIDATION SCOPE COMES FROM IMPACT ANALYSIS, NOT CONVENIENCE**, **PLr / REQUIRED SIL COMES FROM THE SAFETY FUNCTION'S RISK/SRS CONTEXT, NOT TOPOLOGY**, **CATEGORY / ARCHITECTURE != ACHIEVED PL OR SIL**, **CERTIFIED COMPONENT CAPABILITY != COMPLETE SAFETY-FUNCTION INTEGRITY**, **DIAGNOSTIC COVERAGE CLAIM != PHYSICAL SAFE-STATE PROOF**, **TWO CHANNELS != TWO INDEPENDENT PHYSICAL PATHS**, and **ORDINARY LINUXCNC/FPGA DIAGNOSTICS != PERSONNEL-SAFETY AUTHORITY**.
 
 ## 4000 foundation/core
 
@@ -48,12 +46,13 @@ Durable foundation includes `hardware/BLOCK_SPEC_TEMPLATE.md`, `hardware/4000-bl
 
 ## Exact next work
 
-1. Prepare the 2520 information-separated competency-check handoff/protocol without exposing a solution: choose a new machine scenario distinct from learner-readable worked examples and define scoring dimensions only.
-2. Reconcile the formal 2520 placement into the course sequence/navigation surface if a dedicated safety-course index/syllabus artifact exists or is justified; avoid duplicating `SAFETY_COURSE_RESEARCH.md`.
-3. Continue to 2530 only when doing so does not bypass the open 2520 external/fresh competency gate; source/research preparation for 2530 may proceed in parallel under `WORK_SELECTION_POLICY.md`.
-4. Preserve machine-specific `UNKNOWN`s and independent safety authority. Ordinary LinuxCNC/FPGA remains non-authoritative for personnel safety.
+1. Preserve the 2520 information-separated competency gate until an actually separated evaluator/oracle can execute it; do not contaminate it by committing a hidden answer learner-side.
+2. Continue 2530 source/professional-architecture work: compare at least three current manufacturer E-stop/safety-relay application architectures and reverse-map inputs, reset, diagnostics/EDM and final elements to explicit fault hypotheses and physical propositions.
+3. Build the learner-facing incremental single-channel -> fault analysis -> monitored/redundant architecture exercise only after the source comparison; topology alone must not be presented as a PL/SIL claim.
+4. Trace LinuxCNC `estop_latch` / machine-control interaction only to establish the ordinary-control boundary; do not migrate personnel-safety authority into LinuxCNC/HAL/normal FPGA logic.
+5. Preserve machine-specific stop selection, stopping time/distance, hydraulic/pneumatic behavior and integrity targets as `UNKNOWN` until design-specific evidence exists.
 
-Newest precise checkpoint: `checkpoints/2026-09-22T2050Z-safety-2520-placement-transfer-next.md`.
+Newest precise checkpoint: `checkpoints/2026-09-22T2150Z-safety-2520-gate-2530-source-next.md`.
 
 ## Laboratory compute checkpoint
 

@@ -20,19 +20,17 @@ Do not routinely reopen closed levels without a genuinely new material defect.
 
 Routine controller-board development remains a separate automation concern and must not displace safety work here.
 
-Current safety emphasis includes independent safety authority; physical final-element proof; process-response evidence; maintenance/return-to-service; reset/restart freshness; operating-mode commissioning; energized diagnostic authority; safe reduced-speed commissioning; human-factors controls against bypass; proposition-specific revalidation after change; composition-aware acceptance scope; durable accepted-baseline/stale-evidence management; and evidence freshness when physical degradation is discovered without a recorded maintenance change.
+Current safety emphasis includes independent safety authority; physical final-element proof; process-response evidence; maintenance/return-to-service; reset/restart freshness; operating-mode commissioning; energized diagnostic authority; safe reduced-speed commissioning; human-factors controls against bypass; proposition-specific revalidation after change; composition-aware acceptance scope; durable accepted-baseline/stale-evidence management; evidence freshness; and formal finding/disposition handling when inspection or proof contradicts the accepted physical baseline.
 
-Newest learner-facing method: `safety-course/25E0_PROOF_OBLIGATION_EVIDENCE_FRESHNESS_AND_DISCOVERED_DEGRADATION_2026-09-22.md`. It separates four freshness mechanisms: scheduled time/use proof, latent-fault proof, discovered drift/degradation, and explicit change/event invalidation. A new physical measurement that contradicts the accepted baseline is itself a safety-relevant event; the curriculum does not wait for a repair work order before marking dependent evidence stale or failed.
+Newest learner-facing method: `safety-course/25E0_FINDING_DISPOSITION_CONTAINMENT_AND_COMMON_CAUSE_DEGRADATION_2026-09-22.md`. It adds stable `FIND-*` records and separates observation, acceptance criterion, immediate containment, suspected cause, corrective action, re-proof, acceptance, and closure. The original adverse observation is never overwritten by later repair or a passing retest.
 
-Professional evidence from SICK and Pilz establishes that safeguard adequacy depends on actual stopping performance throughout machine life and that brake wear/mechanical degradation can change stopping performance. Periodic/overrun measurement is therefore not merely paperwork: it can reveal that a previously accepted physical baseline is no longer representative. Rockwell safeguarding examples independently reinforce that complete machine stopping performance, not a device response-time number alone, belongs in access/separation reasoning.
+Professional evidence from SICK shows stop-time measurement as a lifecycle method that can detect changes such as brake wear so corresponding measures can be initiated. Pilz safeguard inspection/validation independently separates inspection of current condition/safe function/overrun from validation that protective measures are correctly implemented. Rockwell explicitly warns that controller status indicators are only general diagnostics and must not be used to determine operational status. These support the lifecycle chain `finding -> containment -> affected propositions -> corrective action -> physical re-proof -> acceptance/closure`, rather than `finding -> repeat test until pass`.
 
-The no-recorded-change stress test freezes **NO RECORDED CHANGE != PHYSICAL BASELINE UNCHANGED**, **GREEN DIAGNOSTICS != PHYSICAL STOPPING PERFORMANCE PROVED**, **CONFIGURATION CHECKSUM MATCH != PHYSICAL EVIDENCE FRESH**, and **PROOF DUE DATE IN FUTURE != CONTRARY EVIDENCE MAY BE DEFERRED**. A degraded stop-time finding reverse-traces through stable proposition/dependency IDs to safeguard-positioning and any other safety functions that actually depend on that physical result. Do not invalidate unrelated functions mechanically: an independent stopped-motion access witness can have a different proof obligation from a delay derived from expected stopping behavior.
+The common-cause stress test now freezes **LOGICALLY INDEPENDENT SAFETY FUNCTIONS != PHYSICALLY INDEPENDENT SAFETY FUNCTIONS**. Separate safety sensors/logic may share a brake, drive, mechanical transmission, supply condition, contamination/temperature environment, or other physical dependency. A discovered degradation reverse-traces through the accepted-baseline ledger to each proposition that actually depends on it. It does not mechanically invalidate unrelated propositions, and shared dependency does not imply identical revalidation tests.
+
+Prior freshness method: `safety-course/25E0_PROOF_OBLIGATION_EVIDENCE_FRESHNESS_AND_DISCOVERED_DEGRADATION_2026-09-22.md`. It separates scheduled time/use proof, latent-fault proof, discovered drift/degradation, and explicit change/event invalidation. A new physical measurement that contradicts the accepted baseline is itself a safety-relevant event; the curriculum does not wait for a repair work order before marking dependent evidence stale or failed.
 
 Prior accepted-baseline method: `safety-course/25E0_ACCEPTED_SAFETY_BASELINE_AND_STALE_EVIDENCE_LEDGER_2026-09-22.md`. It gives safety functions, propositions, evidence, dependencies, changes and validation activities stable identities; records evidence validity assumptions; and requires reverse `show where used` lookup from a changed physical/configuration dependency to every affected proposition and safety function. Evidence made stale is not silently reused under a new work order or current checksum.
-
-The shared-change stress test shows why one changed brake or other common physical dependency can invalidate two safety functions differently. A protective-device function may depend on measured stopping performance/separation distance while an access-release function may instead depend on independent stopped-motion evidence—or, in a different architecture, on a delay derived from stopping behavior. Freeze **ONE PHYSICAL CHANGE != ONE UNIVERSAL REVALIDATION TEST** and **SHARED DEPENDENCY != IDENTICAL SAFETY PROPOSITION**.
-
-Lifecycle evidence explicitly separates two trigger lanes. Calendar/use/degradation proof schedules and event-triggered proposition-specific revalidation are independent obligations. Freeze **PERIODIC PROOF DUE DATE != PERMISSION TO DEFER CHANGE-TRIGGERED REVALIDATION** and **EVENT REVALIDATION COMPLETE != FUTURE PERIODIC PROOF CANCELLED**.
 
 Prior methods retained: `safety-course/25E0_ACCEPTANCE_SCOPE_DEPENDENCY_MATRIX_AND_ACCUMULATED_CHANGE_REVIEW_2026-09-22.md`, `safety-course/25E0_MULTI_CHANGE_COMPOSITION_ACCEPTANCE_SCOPE_2026-09-22.md`, and `safety-course/25E0_PROPOSITION_SPECIFIC_REVALIDATION_AFTER_CHANGE_2026-09-22.md`.
 
@@ -52,6 +50,9 @@ Core freezes retained:
 - **CHANGE COUNT != ACCEPTANCE SCOPE.**
 - **ACCEPTED ONCE != ACCEPTED FOREVER.**
 - **CURRENT DIAGNOSTICS != CURRENT PHYSICAL VALIDATION EVIDENCE.**
+- **FINDING RECORDED != ROOT CAUSE KNOWN.**
+- **REPAIR COMPLETE != SAFETY PROPOSITION RESTORED.**
+- **REPEATED TEST PASSES != ORIGINAL ADVERSE RESULT DISPOSITIONED.**
 
 ## 4000 foundation/core
 
@@ -59,9 +60,9 @@ Durable foundation includes `hardware/BLOCK_SPEC_TEMPLATE.md`, `hardware/4000-bl
 
 ## Exact next work
 
-1. Trace an authoritative professional case where periodic proof/inspection discovers a safety defect and the response broadens beyond simply repeating the same test; preserve `finding -> containment -> corrective action/root cause -> affected-proposition revalidation -> closure` semantics.
-2. Extend the accepted-baseline ledger with explicit finding/disposition records while keeping observation, acceptance criterion, corrective action and revalidation evidence separate.
-3. Stress-test common-cause degradation that affects two apparently independent safety functions through a shared physical element or environmental condition.
+1. Create a compact reusable `FIND-*` / disposition record template that interoperates directly with `SF-*`, `PROP-*`, `EVID-*`, `DEP-*`, `CHG-*`, and `VAL-*` accepted-baseline identities.
+2. Trace authoritative common-cause degradation beyond brakes—especially contamination, supply degradation/loss, environmental effects, or mechanical coupling—that can cross apparently independent safety channels/functions.
+3. Develop recurrence/escalation rules: distinguish isolated correctable findings from repeated findings that indicate a design, maintenance, proof-method, or human-factors defect requiring broader corrective action.
 4. Preserve machine-specific physics and `UNKNOWN`; do not invent hydraulic truth tables, safe speeds, stopping distances, PL/SIL targets, pressure thresholds, proof intervals, acceptable degradation percentages or diagnostic coverage.
 5. If this branch reaches an information-gain stop, rotate to the highest-value open 4000 safety module rather than routine board design or closed 3000 work.
 

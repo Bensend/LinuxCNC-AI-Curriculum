@@ -20,21 +20,15 @@ Do not routinely reopen closed levels without a genuinely new material defect.
 
 Routine controller-board development remains a separate automation concern and must not displace safety work here.
 
-Current safety emphasis includes independent safety authority; physical final-element proof; process-response evidence; maintenance/return-to-service; reset/restart freshness; operating-mode commissioning; energized diagnostic authority; safe reduced-speed commissioning; human-factors controls against bypass; proposition-specific revalidation after change; composition-aware acceptance scope; durable accepted-baseline/stale-evidence management; evidence freshness; formal finding/disposition handling; non-brake common-cause degradation; and recurrence escalation.
+Current safety emphasis includes independent safety authority; physical final-element proof; process-response evidence; maintenance/return-to-service; reset/restart freshness; operating-mode commissioning; energized diagnostic authority; safe reduced-speed commissioning; human-factors controls against bypass; proposition-specific revalidation after change; composition-aware acceptance scope; durable accepted-baseline/stale-evidence management; evidence freshness; formal finding/disposition handling; non-brake common-cause degradation; recurrence escalation; corrective/preventive-action ownership; handoff persistence; and mechanical/installation common cause.
 
-Newest learner-facing method: `safety-course/25E0_NON_BRAKE_COMMON_CAUSE_AND_RECURRENCE_ESCALATION_2026-09-22.md`. It extends common-cause reasoning beyond brakes using authoritative SICK contamination/calibration evidence and Rockwell safety field-power/environment requirements, then adds recurrence/escalation rules across design, maintenance/proof, environment/process, and human-factors lanes.
+Newest learner-facing method: `safety-course/25E0_CORRECTIVE_ACTION_HANDOFF_PERSISTENCE_AND_MECHANICAL_INSTALLATION_COMMON_CAUSE_2026-09-22.md`. It makes open safety obligations durable across shift change, maintenance-ticket closure, controller restart and HMI state; separates containment/correction/cause/CAPA/re-proof/acceptance; and traces guard mounting/alignment/structure as a physical common dependency using Rockwell and SICK manufacturer documentation.
 
 Reusable record: `safety-course/FINDING_DISPOSITION_RECORD_TEMPLATE.md` interoperates with `SF-*`, `PROP-*`, `EVID-*`, `DEP-*`, `CHG-*`, and `VAL-*` accepted-baseline identities. It preserves original adverse evidence, containment, reverse show-where-used, recurrence links, correction, physical re-proof, acceptance, reset/rearm, and fresh ordinary demand as distinct facts.
 
-The new common-cause cases freeze **SEPARATE LOGIC CHANNELS != SEPARATE PHYSICAL/ENVIRONMENTAL DEPENDENCIES**, **DEVICE DIAGNOSTIC HEALTHY != SHARED ENVIRONMENTAL CAUSE ABSENT**, **CLEANED != DEVICE-SPECIFIC CALIBRATION/REPROOF COMPLETE**, and **POWER RESTORED != ALL DEPENDENT SAFETY PROPOSITIONS REVALIDATED**. Repeated findings are linked rather than merged; recurrence is an escalation signal, not proof of one root cause or a license to invent a universal failure-count threshold.
+New freezes: **WORK ORDER CLOSED != SAFETY FINDING CLOSED**, **SHIFT HANDOFF COMPLETE != CONTAINMENT REMOVED**, **HMI GREEN != OPEN SAFETY OBLIGATIONS CLEARED**, **TWO SAFETY SENSORS != TWO INDEPENDENT PHYSICAL WITNESSES when both depend on the same moving structure/alignment**, and **OSSD HEALTHY != GUARD GEOMETRY/INSTALLATION PROVED**.
 
-Prior finding method: `safety-course/25E0_FINDING_DISPOSITION_CONTAINMENT_AND_COMMON_CAUSE_DEGRADATION_2026-09-22.md`. It adds stable `FIND-*` records and separates observation, acceptance criterion, immediate containment, suspected cause, corrective action, re-proof, acceptance, and closure. The original adverse observation is never overwritten by later repair or a passing retest.
-
-Prior freshness method: `safety-course/25E0_PROOF_OBLIGATION_EVIDENCE_FRESHNESS_AND_DISCOVERED_DEGRADATION_2026-09-22.md`. It separates scheduled time/use proof, latent-fault proof, discovered drift/degradation, and explicit change/event invalidation. A new physical measurement that contradicts the accepted baseline is itself a safety-relevant event.
-
-Prior accepted-baseline method: `safety-course/25E0_ACCEPTED_SAFETY_BASELINE_AND_STALE_EVIDENCE_LEDGER_2026-09-22.md`. It gives safety functions, propositions, evidence, dependencies, changes and validation activities stable identities; records evidence validity assumptions; and requires reverse `show where used` lookup from a changed physical/configuration dependency to every affected proposition and safety function.
-
-Prior methods retained: `safety-course/25E0_ACCEPTANCE_SCOPE_DEPENDENCY_MATRIX_AND_ACCUMULATED_CHANGE_REVIEW_2026-09-22.md`, `safety-course/25E0_MULTI_CHANGE_COMPOSITION_ACCEPTANCE_SCOPE_2026-09-22.md`, and `safety-course/25E0_PROPOSITION_SPECIFIC_REVALIDATION_AFTER_CHANGE_2026-09-22.md`.
+Prior methods retained: `safety-course/25E0_NON_BRAKE_COMMON_CAUSE_AND_RECURRENCE_ESCALATION_2026-09-22.md`, `safety-course/25E0_FINDING_DISPOSITION_CONTAINMENT_AND_COMMON_CAUSE_DEGRADATION_2026-09-22.md`, `safety-course/25E0_PROOF_OBLIGATION_EVIDENCE_FRESHNESS_AND_DISCOVERED_DEGRADATION_2026-09-22.md`, `safety-course/25E0_ACCEPTED_SAFETY_BASELINE_AND_STALE_EVIDENCE_LEDGER_2026-09-22.md`, `safety-course/25E0_ACCEPTANCE_SCOPE_DEPENDENCY_MATRIX_AND_ACCUMULATED_CHANGE_REVIEW_2026-09-22.md`, `safety-course/25E0_MULTI_CHANGE_COMPOSITION_ACCEPTANCE_SCOPE_2026-09-22.md`, and `safety-course/25E0_PROPOSITION_SPECIFIC_REVALIDATION_AFTER_CHANGE_2026-09-22.md`.
 
 Core freezes retained:
 - **ACCESS CLEAR != PERSONNEL CLEAR != SAFETY RELEASE != FINAL-ELEMENT PROOF != ORDINARY START AUTHORITY.**
@@ -64,10 +58,10 @@ Durable foundation includes `hardware/BLOCK_SPEC_TEMPLATE.md`, `hardware/4000-bl
 
 ## Exact next work
 
-1. Connect recurrence escalation to corrective/preventive-action ownership and prove that open findings/containment/re-proof obligations survive shift and maintenance handoff without collapsing into a green machine-status indication.
-2. Trace one authoritative mechanical-coupling or mounting/alignment common-cause example where nominally separate safety sensing shares a physical structure or installation dependency.
-3. Build a learner adversarial exercise where recurring nuisance trips are treated as a human-factors/design warning rather than justification to weaken, mute, bypass, or transfer safety authority to ordinary LinuxCNC/FPGA control.
-4. Preserve machine-specific physics and `UNKNOWN`; do not invent hydraulic truth tables, safe speeds, stopping distances, PL/SIL targets, pressure thresholds, proof intervals, contamination limits, escalation counts, acceptable degradation percentages or diagnostic coverage.
+1. Build a compact durable open-safety-obligation / containment-handoff record interoperable with `FIND-*` and the accepted-baseline ledger; define what must survive restart, power loss, shift change and maintenance ownership transfer.
+2. Stress-test persistence semantics against ordinary controller/HMI restart: a green/ready machine indication must not silently clear an independent safety acceptance or re-proof obligation.
+3. Trace an authoritative example where device/logic diagnostics can be healthy while a final-element/process physical proposition remains stale or requires separate proof.
+4. Preserve machine-specific physics and `UNKNOWN`; do not invent hydraulic truth tables, safe speeds, stopping distances, PL/SIL targets, pressure thresholds, proof intervals, alignment tolerances, escalation counts, acceptable degradation percentages or diagnostic coverage.
 5. If this branch reaches an information-gain stop, rotate to the highest-value open 4000 safety module rather than routine board design or closed 3000 work.
 
 ## Laboratory compute checkpoint

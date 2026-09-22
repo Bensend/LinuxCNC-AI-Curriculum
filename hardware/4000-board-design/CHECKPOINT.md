@@ -4,96 +4,97 @@ Date: 2026-09-22
 
 ## Lane status
 
-Independent board-design curriculum lane remains active alongside the separate safety curriculum. Durable lessons BD01 through BD36 are present. This checkpoint is board-design authority only and does not alter safety-course progress authority.
+Independent board-design curriculum lane remains active alongside the separate safety curriculum. Durable lessons BD01 through BD37 are present. This checkpoint is board-design authority only and does not alter safety-course progress authority.
 
 New this run:
 
-- `BD36_MULTI_VARIANT_LIFECYCLE_MIGRATION_AND_COEXISTENCE.md`
+- `BD37_MIGRATION_EXECUTION_EVIDENCE_AND_FLEET_CONVERGENCE.md`
 
-BD36 teaches:
+BD37 teaches:
 
-`replacement strategy -> compatibility matrix -> coexistence window -> manufacturing cut-in -> service transition -> FPGA/software/HAL compatibility -> migration evidence -> field rollout -> rollback/containment -> legacy retirement`
+`planned population -> serialized work package -> pre-change identity capture -> controlled change -> verification -> as-maintained update -> exception/rollback handling -> convergence accounting -> residual legacy/unknown population -> closure decision`
 
-## BD36 hard student-material audit
+## BD37 hard student-material audit
 
-Every repository file named to students by BD36 was opened and inspected in current form during this run.
+Every repository file named to students by BD37 was opened and inspected in current form during this run.
 
 `VERIFIED_FOR_LESSON` for the bounded claims used:
 
-- Curriculum `hardware/4000-board-design/BD35_SERVICE_PARTS_APPROVED_ALTERNATES_OBSOLESCENCE_AND_LIFECYCLE_MIGRATION.md`
+- Curriculum `hardware/4000-board-design/BD36_MULTI_VARIANT_LIFECYCLE_MIGRATION_AND_COEXISTENCE.md`
 - Curriculum `hardware/4000-board-design/CHECKPOINT.md` as it existed before this update
 - Curriculum `WORK_SELECTION_POLICY.md`
 - OpenPressBrake `hardware/blocks/STATUS_RULES.md`
 - OpenPressBrake `hardware/blocks/BLOCK_ADAPTER_INTEGRATION_RULES.md`
-- OpenPressBrake `hardware/blocks/motor_drive_interface/manifest.yaml`
-- OpenPressBrake `hardware/blocks/motor_drive_interface/STATUS_CHECKLIST.md`
+- OpenPressBrake `hardware/blocks/relay_contactor_driver/manifest.yaml`
+- OpenPressBrake `hardware/blocks/relay_contactor_driver/STATUS_CHECKLIST.md`
+- OpenPressBrake `hardware/blocks/relay_contactor_driver/REV1_LOGIC_3V3_POWER_HANDOFF.md`
 
-The newly created BD36 lesson was re-opened from current main after commit and checked against the inspected sources.
+The newly created BD37 lesson was re-opened from current main after commit and checked against the inspected sources.
 
 `ENGINEERING_REVIEW_NEEDED`:
 
-- current OpenPressBrake `motor_drive_interface` remains `SIMULATION-READY`, not Rev 1 released;
-- selected-drive timing, abnormal fault qualification, schematic visual review, final connector/cable integration, board integration, simultaneous-axis thermal/SI evidence and human signoff remain open;
-- OpenPressBrake has no repository-wide versioned compatibility/migration graph joining engineering generations to manufacturing, service and installed/as-maintained populations;
-- current engineering evidence does not establish actual released board generations, migration populations, spare compatibility, field rollout or retirement state.
+- current OpenPressBrake `relay_contactor_driver` remains `SIMULATION-READY`, not Rev 1 released;
+- released current/repetition/simultaneity, final connector/current path, PCB/layout, branch coordination, abnormal-condition, repeated-cycle thermal, board-integration and human-release gates remain open;
+- OpenPressBrake has no repository-wide serialized migration ledger joined to exact as-maintained assets and the BD36 compatibility graph;
+- current engineering evidence does not establish a real released OpenPressBrake migration population, serial fleet, rollout, rollback or fleet-convergence state.
 
 No inspected file is used to claim complete OpenPressBrake production/migration readiness.
 
-## Rules frozen by BD36
+## Rules frozen by BD37
 
-- a new generation release does not prove the old population migrated;
-- compatibility is directional and must be recorded by semantic facet;
-- common software does not imply common hardware semantics;
-- manufacturing cut-in and service transition are separate controlled boundaries;
-- a mechanically fitting spare is not automatically service-compatible;
-- migration convenience is not a reason to widen a reusable block contract;
-- board connector/pin generation differences remain board connection/integration facts when the reusable electrical contract is unchanged;
-- real reusable transformations belong in qualified adapters;
-- FPGA image, resource map, watchdog behavior and LinuxCNC/HAL configuration are first-class configuration identity;
-- migration evidence follows changed semantic facets;
-- rollback must be a real supported configuration, not merely possession of old hardware;
-- unknown legacy identity remains `VERIFY_AT_MACHINE` and fails closed;
-- legacy support cannot be retired merely because new manufacturing has stopped using it;
-- ordinary controller-generation compatibility does not revalidate an independent personnel-safety function.
+- work-order closure does not prove configuration convergence;
+- expected old configuration is not a substitute for observed pre-change identity;
+- installing a new PCB does not prove the configuration-complete target is installed;
+- FPGA/HAL programming success does not prove the correct hardware profile;
+- functional pass does not prove exact configuration identity;
+- failed and partial migration attempts remain immutable evidence after retry/recovery;
+- rollback is another controlled migration and produces its own as-maintained identity;
+- service restoration does not count as target migration when the unit was rolled back;
+- fleet metrics derive from per-unit evidence, not technician activity counts;
+- unreachable/unknown population remains visible rather than disappearing from the denominator;
+- no open work orders does not prove no residual legacy/unknown population;
+- recurring migration inconvenience does not justify contaminating reusable block contracts;
+- real reusable transformations belong in adapters; connector/pin/profile mapping remains board/configuration integration when the generic electrical contract is unchanged;
+- ordinary fleet convergence does not revalidate independent personnel-safety functions.
 
 ## Current OpenPressBrake worked-example result
 
-The current `motor_drive_interface` publishes a generic two-pair differential command primitive using exact `AM26LV31EIDR` and `TPD4E05U06DQAR` identities while deliberately keeping physical connector choice in board integration. Its status remains `SIMULATION-READY` with explicit selected-drive timing, fault, schematic, connector/cable, thermal/SI, integration and human-release gates open.
+The current `relay_contactor_driver` remains a one-coil reusable primitive. Its manifest deliberately leaves board-owned released current, simultaneous-instance assumptions, connector/contact selection, PCB geometry and branch protection unresolved. Its current 3V3 handoff publishes a conservative 4.2 mA maximum `LOGIC_3V3` source-capacity allocation plus 100 nF local bypass per populated primitive while explicitly distinguishing that sizing bound from expected operating current and from any released coil/channel rating.
 
-This provides a bounded migration example: a future board generation that changes only connector or FPGA-to-instance mapping should carry those differences in board connection/integration and configuration records rather than adding old/new generation names to the reusable primitive. A materially different transmitter contract would require a real reusable-block revision or qualified adapter.
+That is a useful migration boundary: a future board generation can change instance count, connector mapping, branch protection or FPGA-to-instance mapping without rewriting the reusable primitive. A serialized migration work package would instead bind the exact board/configuration target and aggregate the reusable resource contract for the actual population.
 
-No actual OpenPressBrake released generations, installed population, migration, spare policy, rollout or retirement are asserted. OpenPressBrake remained read-only.
+Undocumented machine coil/load/harness/suppression facts remain `VERIFY_AT_MACHINE`; they cannot be invented to improve a convergence dashboard. No actual OpenPressBrake fleet or field migration is asserted. OpenPressBrake remained read-only.
 
 ## Current repository reconciliation
 
-At run start, current curriculum main had advanced through `1719fdd57f6f1f6436b27a27deff653985690e35` with concurrent safety-lane work that did not overlap the board-design lesson path. OpenPressBrake current main had advanced to `2f2730400d0fbd171a877596f8c5216354502559` (`lvdt input: bound LT6015 5V rail maximum`), with adjacent shared-ADC and analog hardware work active. The motor-drive example was therefore consumed read-only.
+At run start, curriculum main was `b82632145af4e2460707fbae57486c5e9ed73e8a`, containing separate safety-lane work after BD36 but no overlapping board-design change. OpenPressBrake main was `7f3ddff3c71028ed4982e4024e1b10753047c72e` (`relay driver: publish conservative 3V3 logic handoff`), so the newly active relay-driver engineering was consumed read-only.
 
-BD36 was committed as `16bd40d4d28315444150b81f1545518635869ba3` and re-opened from current main. Current curriculum main was re-read immediately before this checkpoint update and contained BD36 with no overlapping post-BD36 board-design change.
+BD37 was committed as `6aac7ef652f4e00f975c0f2fed39fc9f75e5e697` and re-opened from current main. Immediately before this checkpoint write, curriculum main was re-read and contained BD37 with no overlapping post-BD37 board-design change; OpenPressBrake main was also re-read and remained `7f3ddff3c71028ed4982e4024e1b10753047c72e`.
 
 ## Catalog stress-test result
 
-BD36 exposes a concrete migration infrastructure need: future tooling should represent a versioned compatibility/migration graph joining old/new release and board identities, reusable block/adapter revisions, connector/harness definitions, FPGA image/toolchain/resource-map identity, LinuxCNC/HAL/machine configuration, directional compatibility by semantic facet, manufacturing cut-in/WIP disposition, service/spare policy, installed/as-maintained applicability, stale/preserved/regression evidence, rollout/rollback states, unknown `VERIFY_AT_MACHINE` populations, and support/retirement state.
+BD37 exposes a concrete execution-infrastructure need: future tooling should provide a serialized migration ledger joined to the BD36 compatibility graph. It should bind asset identity, applicability provenance, pre-change as-maintained configuration, target release/board/BOM/options, block/adapter/connection revisions, FPGA/toolchain/image/resource map, LinuxCNC/HAL/machine configuration, work-package revision, `VERIFY_AT_MACHINE` observations, actual actions/intermediate state, verification evidence, failure/exception/rollback history, final as-maintained identity, convergence classification and residual support/retirement state.
 
-Do not encode machine-generation exceptions inside reusable block manifests. Reusable blocks own generic electrical function and contract; coexistence and population migration require a separate traceable configuration layer.
+Fleet dashboards should be derived from this ledger, not maintained as an independent optimistic spreadsheet. Serialized fleet history belongs in configuration/service records, not reusable block manifests.
 
-This infrastructure need remains `ENGINEERING_REVIEW_NEEDED`; current OpenPressBrake evidence does not justify inventing released generations or installed assets.
+This infrastructure need remains `ENGINEERING_REVIEW_NEEDED`; current OpenPressBrake evidence does not justify inventing serial assets or field migrations.
 
 ## Next exact work
 
-Build BD37 on **migration execution evidence and fleet convergence**.
+Build BD38 on **fleet-closure audit, residual support states, and evidence-backed legacy retirement**.
 
 Teach:
 
-`planned population -> serialized migration work package -> pre-change identity capture -> hardware/configuration change -> verification -> as-maintained update -> exception handling -> fleet convergence metrics -> residual legacy/unknown population -> closure decision`
+`migration ledger -> reconciliation audit -> unresolved identity/finding closure -> support-state classification -> spare/tool/software retention -> evidence archive -> retirement authorization -> future SHOW WHAT IS INSTALLED / field-action discoverability`
 
-The adversarial lab should include partial migrations, failed field updates, wrong FPGA/HAL profile detection, rollback records, units unreachable for inspection, and the difference between rollout completion percentage and evidence-backed configuration convergence.
+Stress units administratively retired but still physically installed, lost serial traceability, unsupported legacy boards that remain operational, service stock with obsolete FPGA/HAL tooling, archived evidence that can no longer reproduce a programmed image, and the difference between ending migration work and retiring support obligations.
 
-Require students to preserve pre/post identity and negative evidence, fail closed on ambiguous hardware/profile matching, distinguish planned/attempted/successfully-verified migration counts, retain rollback as configuration history, and refuse fleet-closure claims while unknown or unsupported residual populations remain.
+Require students to distinguish target convergence from support retirement; preserve historical configuration and negative evidence; prove reproducibility or explicitly bound its loss; keep unsupported-but-installed assets discoverable; retain enough tooling/images/configuration identity for any support state still claimed; and refuse fleet-retirement claims while unknown installed populations remain unresolved.
 
 ## Compute
 
-No simulation, synthesis, place-and-route, timing run, or other executable engineering verification was justified for BD36. No GitHub-hosted runner was used. Future executable engineering work remains restricted to `[self-hosted, openpressbrake]`; no hosted Actions fallback is allowed.
+No simulation, synthesis, place-and-route, timing run, or other executable engineering verification was justified for BD37. No GitHub-hosted runner was used. Future executable engineering work remains restricted to `[self-hosted, openpressbrake]`; no hosted Actions fallback is allowed.
 
 ## Safety boundary
 
-BD36 teaches lifecycle migration/coexistence for ordinary controller hardware/configuration and ordinary electrical/status interfaces. It does not establish PL/SIL/category, safety diagnostic coverage, stopping performance, final-element validation, or independent personnel-safety authority. A controller-generation migration preserving an ordinary safety-status interface proves only the bounded ordinary electrical/configuration claims actually verified.
+BD37 teaches migration execution and configuration convergence for ordinary controller hardware/configuration and ordinary electrical/status interfaces. It does not establish PL/SIL/category, safety diagnostic coverage, stopping performance, final-element validation, or independent personnel-safety authority. A fleet of ordinary controllers reaching the intended target profile proves only the bounded ordinary-controller claims actually verified.

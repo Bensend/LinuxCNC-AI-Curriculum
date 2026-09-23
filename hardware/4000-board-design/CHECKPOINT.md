@@ -4,82 +4,80 @@ Date: 2026-09-23
 
 ## Lane status
 
-Independent board-design curriculum lane remains active alongside the separate safety curriculum. Durable lessons BD01 through BD57 are present. This checkpoint is board-design authority only and does not alter safety-course progress authority.
+Independent board-design curriculum lane remains active alongside the separate safety curriculum. Durable lessons BD01 through BD58 are present. This checkpoint is board-design authority only and does not alter safety-course progress authority.
 
-New this run: `BD57_EVIDENCE_EQUIVALENCE_DECISIONS_AND_PRESERVATION_PROOFS.md`.
+New this run: `BD58_EQUIVALENCE_PROOF_LIFECYCLE_REVIEW_EXPIRATION_AND_ASSUMPTION_DRIFT.md`.
 
-BD57 teaches:
+BD58 teaches:
 
-`changed dependency -> claimed equivalence -> equivalence criteria -> counterexample search -> bounded preservation proof -> reviewer authority -> preserved-evidence record -> future invalidation trigger`
+`preserved-evidence record -> monitored assumptions -> authority/resource/machine-fact drift -> trigger evaluation -> proof expiration or continued validity -> targeted revalidation -> renewed promotion`
 
-## BD57 hard student-material audit
+## BD58 hard student-material audit
 
-Every repository file named to students as finished material by BD57 was opened and inspected in current form during this run.
+Every repository file named to students as finished material by BD58 was opened and inspected in current form during this run.
 
 `VERIFIED_FOR_LESSON` for bounded claims used:
 
 - Curriculum `README.md`
 - Curriculum `WORK_SELECTION_POLICY.md`
-- Curriculum `hardware/4000-board-design/BD56_EVIDENCE_DEPENDENCY_GRAPHS_SELECTIVE_INVALIDATION_AND_MINIMUM_SAFE_REVALIDATION.md`
+- Curriculum `hardware/4000-board-design/BD57_EVIDENCE_EQUIVALENCE_DECISIONS_AND_PRESERVATION_PROOFS.md`
 - Curriculum `hardware/4000-board-design/CHECKPOINT.md` as it existed when work was selected
 - OpenPressBrake `hardware/blocks/STATUS_RULES.md`
 - OpenPressBrake `hardware/blocks/BLOCK_ADAPTER_INTEGRATION_RULES.md`
-- OpenPressBrake `hardware/blocks/lvdt_input/STATUS_CHECKLIST.md`
-- OpenPressBrake `hardware/blocks/lvdt_input/manifest.yaml`
-- OpenPressBrake `hardware/blocks/lvdt_input/integration/REV1_BOARD_INTEGRATION_HANDOFF.md`
+- OpenPressBrake `hardware/blocks/shared_adc_dac/design/REV32_ADC_REFERENCE_POWER_RECONCILIATION.md`
 
-`ENGINEERING_REVIEW_NEEDED` as a complete current-status authority:
+`ENGINEERING_REVIEW_NEEDED` as complete current-status authority:
 
-- OpenPressBrake `hardware/blocks/lvdt_input/REFERENCE_REBASE.md` — its current-exact-connectivity section still says `manifest.yaml` is Rev-2-era and must be reconciled, while current `manifest.yaml` and the authoritative status checklist record that Rev 9 already reconciled it. BD57 uses the file only for bounded provenance/delta facts consistent with current authority and as defect evidence.
+- OpenPressBrake `hardware/blocks/shared_adc_dac/STATUS_CHECKLIST.md` — current main contains Rev32 REF5020 worst-case power reconciliation, but the authoritative checklist still describes authority through Rev31 and omits Rev32 from its evidence and next-checkpoint sections. Its other bounded statements remain useful. This is status drift under `STATUS_RULES.md` maintenance requirements.
 
-BD57 itself was re-opened from current main after commit.
+BD58 itself was re-opened from current main after commit.
 
-## Rules frozen by BD57
+## Rules frozen by BD58
 
-- preservation is a claim-specific proof obligation, not a convenience decision;
-- unchanged output does not prove unchanged premises;
-- unchanged topology does not prove unchanged operating envelope;
-- equivalence criteria must be defined against the named claim and complete relevant premise set;
-- counterexample search is mandatory before evidence preservation;
-- evidence may be `PROVEN_EQUIVALENT_FOR_CLAIM`, `PRESERVED_WITH_NARROWER_SCOPE`, `NOT_EQUIVALENT_REVALIDATE`, `BLOCKED_UNKNOWN`, `SUPERSEDED`, or `HISTORICAL_ONLY`;
-- stale/contradictory authority blocks a trustworthy preservation proof;
-- old evidence cannot be promoted merely by relabeling it against a new topology;
-- negative scope and future invalidation triggers belong in every preservation record;
-- board-specific equivalence does not justify contaminating a reusable primitive; and
-- ordinary-control equivalence arguments receive zero personnel-safety credit without separate safety-rated authority.
+- a preservation proof is itself versioned evidence with dependencies;
+- proof file unchanged does not mean proof current;
+- prior engineering review is not permanent engineering authority;
+- lifecycle states are `CURRENT_PRESERVED`, `CURRENT_NARROWED`, `STALE_TRIGGERED`, `BLOCKED_UNKNOWN`, `SUPERSEDED`, and `HISTORICAL_ONLY`;
+- invalidation follows claim-relevant semantic triggers rather than arbitrary repository churn or blanket elapsed-time rules;
+- authority, operating envelope, shared resources, physical-machine facts, PCB implementation, and tool/model/method changes can independently expire a proof;
+- proof expiration does not mean the historical test was wrong; it means applicability to the current claim is no longer established;
+- minimum-safe renewal uses the evidence class required by the changed premise rather than rerunning everything;
+- renewal is a new promotion event linked to, not rewriting, historical proof state;
+- reusable primitive evidence and board-integration evidence remain independently invalidatable; and
+- ordinary-control proof lifecycle receives zero personnel-safety credit without separate safety-rated authority.
 
 ## Worked-example stress test
 
-Current OpenPressBrake valve-position feedback is a useful mixed-equivalence case. The legacy block ID remains `lvdt_input`, but current machine authority resolves a powered three-wire 0..12-V transducer rather than a raw LVDT. That interface change is not semantically equivalent merely because both measure valve position.
+Current OpenPressBrake `shared_adc_dac` Rev32 closes a narrow manufacturer-backed power-budget fact without changing topology: ADS7953 +VA contributes 3.0 mA maximum and REF5020 VIN contributes 1.2 mA maximum over -40 C to +125 C, yielding a known guaranteed 4.2-mA `5V_ANALOG` subtotal per populated shared resource. OPA192 `5V_ANALOG` and ADS7953 `+VBD`/3V3 maximum terms remain open, so 4.2 mA is explicitly not the complete shared-ADC controller-side power.
 
-The current checklist also explicitly bounds historical Rev-2 simulation evidence to the Rev-2 topology. Rev-7 changed buffer/protection/acquisition details, so historical simulation is not current-topology qualification. Conversely, the new Rev-1 board handoff says it creates no new electrical topology: it consumes the existing primitive and shared ADS7953 contract. Therefore a bounded primitive claim such as nominal divider mapping may preserve its existing calculation evidence if every claim-relevant premise is demonstrated unchanged, while sensor branch protection, installed endpoint, calibration, bandwidth, grounding, PCB noise, transient qualification and connector mapping remain separate/open claims.
+This change can preserve topology/connectivity evidence while invalidating downstream board-power claims that consumed the older guaranteed subtotal. It also preserves the rail boundary: board integration must not add 5-V milliamps directly to protected-24-V current without the actual regulator topology, efficiency and startup behavior.
 
-The current `REFERENCE_REBASE.md` stale manifest-reconciliation paragraph demonstrates the central BD57 risk: an equivalence proof can be internally logical yet compare against the wrong authority. Current authority must be pinned before old/new equivalence is evaluated.
+The adversarial finding is that `shared_adc_dac/STATUS_CHECKLIST.md` has not yet incorporated Rev32 despite the repository rule that material evidence/design changes update the checklist in the same change. A lifecycle consumer that looked only at that status surface could therefore miss current evidence. This is exactly why proof/status applicability needs dependency-driven drift detection rather than passive files.
 
 ## Catalog stress-test result
 
-Classification: **ENGINEERING_REVIEW_NEEDED** for a machine-readable preservation-proof layer supporting stable claim/facet IDs, old/new authority digests, claim-specific equivalence dimensions, counterexample results, negative scope, reviewer authority, future invalidation triggers, BD56 dependency-graph links, and fail-closed behavior when current authority is contradictory.
+Classification: **ENGINEERING_REVIEW_NEEDED** for a machine-readable proof-lifecycle layer supporting stable proof/claim/facet IDs, reverse dependencies, exact authority/configuration digests, trigger classes, partial/narrowed state, unresolved physical facts, proof-to-generated-artifact/release consumption, renewal lineage, Show Where Used for evidence, and fail-closed detection when current status authority omits material newer evidence.
 
-OpenPressBrake remained read-only because the valve-position/integration area had just advanced on current main. The stale `REFERENCE_REBASE.md` item was recorded rather than overwriting active engineering work.
+OpenPressBrake remained read-only because current main is actively advancing independent block/integration work. The Rev32/checklist drift was recorded rather than racing engineering changes.
 
 ## Current repository reconciliation
 
-At run start the board-design lane ended at BD56. Curriculum main also contained concurrent safety-course work and was preserved. OpenPressBrake had advanced beyond the prior BD56 checkpoint to current valve-position integration work.
+At run start the board-design lane ended at BD57. Curriculum main also contained concurrent safety-course work and was preserved. OpenPressBrake had advanced to current shared-ADC and motor-drive integration work.
 
-BD57 was committed as `c967ab54104911541a3fc991cbbd9d15937e4f64` and re-opened from current main. Immediately before this checkpoint write, curriculum main was that BD57 commit and OpenPressBrake main was `2265a71695487998d3f0bab32c504c4ce7438dba` (`valve position: publish Rev1 board integration handoff`). OpenPressBrake stayed read-only.
+BD58 was committed as `0ec7bdc20cdfd4b416b3e32a3815ddff342f04fd` and re-opened from current main. Immediately before this checkpoint write, curriculum main was that BD58 commit and OpenPressBrake main was `cbce2e989dffd756d96524309423238c4abd36c5` (`motor drive: publish machine-readable Rev1 resource contract`). OpenPressBrake stayed read-only.
 
 ## Next exact work
 
-Build BD58 on **equivalence-proof lifecycle, review expiration, and assumption drift**:
+Build BD59 on **evidence consumption locks, release manifests, and stale-proof rejection**:
 
-`preserved-evidence record -> monitored assumptions -> authority/resource/machine-fact drift -> trigger evaluation -> proof expiration or continued validity -> targeted revalidation -> renewed promotion`
+`current claims + promoted evidence/proofs -> release evidence manifest -> exact consumption locks -> generation/release candidate -> dependency drift -> stale-proof rejection -> targeted recovery -> release promotion`
 
-Stress cases where an initially valid preservation proof becomes stale later because a shared resource, operating envelope, physical-machine fact, tool/model, or board-layout assumption changes without touching the original evidence file.
+Stress the transition from maintaining evidence correctly to proving that a particular generated schematic/board/FPGA/HAL/release candidate consumed only current evidence. Include mixed cases where most proof records remain current but one shared-resource or machine-fact dependency has expired.
 
 ## Compute
 
-No simulation, synthesis, place-and-route, timing run, or other executable engineering verification was required for BD57. No GitHub-hosted compute was initiated.
+No simulation, synthesis, place-and-route, timing run or other executable engineering verification was required for BD58. No GitHub-hosted compute was initiated.
 
 ## Safety boundary
 
-BD57 teaches evidence-equivalence decisions for ordinary board-design/controller authority. It does not establish PL/SIL/category, stopping performance, independent safety diagnostic coverage, final-element validation, or personnel-safety authority. Ordinary LinuxCNC/FPGA evidence remains zero-credit for personnel safety unless separate safety-rated design and validation explicitly establishes otherwise.
+BD58 teaches proof lifecycle for ordinary board-design/controller authority. It does not establish PL/SIL/category, stopping performance, independent safety diagnostic coverage, final-element validation or personnel-safety authority. Ordinary LinuxCNC/FPGA evidence remains zero-credit for personnel safety unless separate safety-rated design and validation explicitly establishes otherwise.

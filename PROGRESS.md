@@ -28,9 +28,9 @@ The repeatable safety-design methodology covers:
 
 **2540–25E0** retain their existing READY FOR EXTERNAL/FRESH EVALUATION state and information-separated handoffs. Do not contaminate those gates.
 
-**25F0 — Machine safety capstones** is the active branch. `research/25F0_MACHINE_SAFETY_CAPSTONE_CONTRACT_2026-09-23.md` defines the cross-machine package. `research/25F0_MILL_VMC_CAPSTONE_BASELINE_2026-09-23.md` now completes the first baseline: lifecycle boundary, hazardous-energy inventory, SRS skeleton, ordinary-control/safety/final-element authority allocation, human-defeat pass, validation skeleton and explicit UNKNOWN register. The mill case is a transferable template, not a universal circuit. Press-brake depth follows after cross-machine transfer is demonstrated; do not invent hydraulic truth tables, stopping distances, pressure thresholds or integrity targets.
+**25F0 — Machine safety capstones** is the active branch. `research/25F0_MACHINE_SAFETY_CAPSTONE_CONTRACT_2026-09-23.md` defines the cross-machine package. The mill/VMC baseline remains the transferable foundation, and `research/25F0_LATHE_TURNING_CENTER_DELTA_2026-09-23.md` now demonstrates the first explicit machine-class delta. The lathe work separates requirements that transfer unchanged from requirements modified by workholding/containment and newly required chuck, bar-stock, turret and tailstock/subspindle safety propositions. Press-brake depth still follows cross-machine transfer; do not invent hydraulic truth tables, stopping distances, pressure thresholds or integrity targets.
 
-Core freezes remain in force, especially: **VERIFIED DESIGN != VALIDATED MACHINE SAFETY FUNCTION**, **FAULT DETECTED != PHYSICAL SAFE STATE ACHIEVED**, **LOW COST != LOW RIGOR**, **MORE COMPONENTS != MORE SAFETY**, **EDM HEALTHY != PHYSICAL SAFE STATE PROVED**, **SAFETY RELAY OUTPUT OFF != FINAL ENERGY PATH OPEN PROVED**, **DUAL CHANNEL INPUT != REDUNDANT FINAL ELEMENT**, **STO ACTIVE != MOTOR STANDSTILL PROVED**, **STO ACTIVE != ELECTRICAL ISOLATION**, **SUPPLY ISOLATED != DOWNSTREAM PRESSURE EXHAUSTED**, **DUMP COMMANDED != PRESSURE SAFE PROVED**, **GUARD CLOSED != DANGEROUS STATE ENDED**, **COMPONENT PL/SIL CLAIM != MACHINE SAFETY FUNCTION PL/SIL CLAIM**, **UNCHANGED SAFETY PROGRAM != UNCHANGED VALIDATED SAFETY FUNCTION**, **STOPPING TIME ON COMMISSIONING DAY != STOPPING TIME PROVED FOR ALL FUTURE MACHINE STATES**, **STATUS BIT TIMING != PHYSICAL CESSATION TIMING**, **RETURN TO NORMAL SOFTWARE STATE != PRODUCTION SAFEGUARDS PHYSICALLY RESTORED**, **ORDINARY LINUXCNC/FPGA DIAGNOSTICS != PERSONNEL-SAFETY AUTHORITY**, **SPINDLE COMMAND OFF != PHYSICAL STANDSTILL PROVED**, and **PRODUCTION INTERLOCK != MAINTENANCE ENERGY ISOLATION**.
+Core freezes remain in force, especially: **VERIFIED DESIGN != VALIDATED MACHINE SAFETY FUNCTION**, **FAULT DETECTED != PHYSICAL SAFE STATE ACHIEVED**, **LOW COST != LOW RIGOR**, **MORE COMPONENTS != MORE SAFETY**, **EDM HEALTHY != PHYSICAL SAFE STATE PROVED**, **SAFETY RELAY OUTPUT OFF != FINAL ENERGY PATH OPEN PROVED**, **DUAL CHANNEL INPUT != REDUNDANT FINAL ELEMENT**, **STO ACTIVE != MOTOR STANDSTILL PROVED**, **STO ACTIVE != ELECTRICAL ISOLATION**, **SUPPLY ISOLATED != DOWNSTREAM PRESSURE EXHAUSTED**, **DUMP COMMANDED != PRESSURE SAFE PROVED**, **GUARD CLOSED != DANGEROUS STATE ENDED**, **COMPONENT PL/SIL CLAIM != MACHINE SAFETY FUNCTION PL/SIL CLAIM**, **UNCHANGED SAFETY PROGRAM != UNCHANGED VALIDATED SAFETY FUNCTION**, **STOPPING TIME ON COMMISSIONING DAY != STOPPING TIME PROVED FOR ALL FUTURE MACHINE STATES**, **STATUS BIT TIMING != PHYSICAL CESSATION TIMING**, **RETURN TO NORMAL SOFTWARE STATE != PRODUCTION SAFEGUARDS PHYSICALLY RESTORED**, **ORDINARY LINUXCNC/FPGA DIAGNOSTICS != PERSONNEL-SAFETY AUTHORITY**, **SPINDLE COMMAND OFF != PHYSICAL STANDSTILL PROVED**, **PRODUCTION INTERLOCK != MAINTENANCE ENERGY ISOLATION**, **DOOR INTERLOCK HEALTHY != WORKPIECE RETENTION PROVED**, **ENCLOSURE CLOSED != CONTAINMENT CAPABILITY PROVED**, **FLUID POWER REMOVED != WORKPIECE RETAINED**, **CHUCK CLAMP COMMAND != WORKPIECE RETENTION PROVED**, **PRESSURE SETPOINT != GRIPPING FORCE PROVED**, **SPINDLE ENCLOSURE CLOSED != REAR BAR-STOCK HAZARD CONTROLLED**, and **TORQUE/MOTION REMOVED != WORKPIECE SUPPORT PRESERVED**.
 
 ## 4000 foundation/core
 
@@ -39,15 +39,15 @@ Durable foundation includes `hardware/BLOCK_SPEC_TEMPLATE.md`, `hardware/4000-bl
 ## Exact next work
 
 1. Preserve the 2520–25E0 information-separated competency gates; do not contaminate them.
-2. Transfer the proven 25F0 template to a lathe/turning-center delta rather than rewriting generic mill material.
-3. Add chuck/workholding release, spindle/workpiece ejection, turret motion and bar-stock/bar-feeder hazards using authoritative evidence.
-4. Explicitly identify which mill SRS requirements transfer unchanged, which require modification, and which new lathe requirements appear.
-5. Preserve ordinary LinuxCNC/FPGA versus independent safety-related control versus physical final-element authority boundaries.
-6. Keep stopping limits, proof-test intervals, quantitative integrity claims, clamping thresholds and machine-specific physical values UNKNOWN until justified evidence exists.
-7. After the lathe delta, transfer to robot/cell, then press brake with its distinct gravity/fluid-power hazards.
+2. Transfer the proven 25F0 template to robot/automated cells rather than rewriting generic mill/lathe material.
+3. Trace whole-body access/occupancy, perimeter guarding, reset visibility, enabling-device/setup behavior, restart, multiple robot/peripheral energy sources and cell-level authority using authoritative evidence.
+4. Explicitly identify which existing SRS requirements transfer unchanged, which require modification, and which new robot/cell requirements appear.
+5. Preserve ordinary LinuxCNC/PLC/robot-controller diagnostics versus independent safety-related control versus physical final-element authority boundaries.
+6. Keep stopping limits/distances, safe-speed values, proof-test intervals, quantitative integrity claims and machine-specific physical values UNKNOWN until justified evidence exists.
+7. After robot/cell transfer, begin the press-brake capstone with distinct gravity/fluid-power/point-of-operation hazards.
 8. Freeze executable compute only if a concrete unresolved implementation question survives authoritative evidence; use `[self-hosted, openpressbrake]` only.
 
-Newest precise checkpoint: `checkpoints/2026-09-23T2248Z-safety-25F0-lathe-transfer-next.md`.
+Newest precise checkpoint: `checkpoints/2026-09-23T2350Z-safety-25F0-robot-cell-transfer-next.md`.
 
 ## Laboratory compute checkpoint
 

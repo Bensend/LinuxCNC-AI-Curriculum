@@ -44,11 +44,11 @@ The repeatable safety-design methodology covers:
 
 **25C0 — Designing for humans who will defeat safeguards** remains READY FOR EXTERNAL/FRESH EVALUATION, not self-graduated. Reset/restart/visibility/setup evidence, canonical learner route and no-solution external gate are durable.
 
-**25D0 — Low-cost safety architectures** is READY FOR EXTERNAL/FRESH EVALUATION, not self-graduated. The syllabus audit found one real gap: a dedicated low-cost guard-interlock reference comparison. `research/25D0_GUARD_INTERLOCK_LOW_COST_COMPARISON_2026-09-23.md` now closes it while preserving guard-closed/interlocked/locked versus dangerous-state-ended distinctions. `research/25D0_COVERAGE_AUDIT_AND_LEARNER_ROUTE_2026-09-23.md` is the canonical route/release gate and `evaluation/25D0_INFORMATION_SEPARATED_COMPETENCY_HANDOFF.md` is the no-solution external evaluator contract. Actual dollar pricing remains unfrozen absent traceable like-for-like current sources.
+**25D0 — Low-cost safety architectures** is READY FOR EXTERNAL/FRESH EVALUATION, not self-graduated. Its low-cost guard-interlock gap is closed; canonical learner route and information-separated evaluator contract are durable. Actual dollar pricing remains unfrozen absent traceable like-for-like current sources.
 
-**25E0 — Validation, commissioning, and proof testing** is now the active branch. `research/25E0_VALIDATION_COMMISSIONING_ENTRY_2026-09-23.md` establishes the canonical syllabus entry: verification versus validation versus commissioning; SRS-derived test traceability; commissioning evidence bundles; physical stopping-time evidence; proof-test purpose; change/revalidation triggers; safe test escalation; and the ordinary LinuxCNC/FPGA evidence boundary. Earlier 25E0 muting/override/intentional-exception artifacts are retained as specialist validation/adversarial evidence rather than allowed to replace the core validation syllabus.
+**25E0 — Validation, commissioning, and proof testing** is the active branch. `research/25E0_VALIDATION_COMMISSIONING_ENTRY_2026-09-23.md` remains the canonical syllabus entry. `research/25E0_SRS_VALIDATION_MATRIX_AND_ADVERSARIAL_COMMISSIONING_2026-09-23.md` now adds an SRS-to-validation matrix spanning E-stop, guard/interlock, STO/coast, fluid-power safe state and reset/restart; five adversarial commissioning cases where software/status evidence can pass while the physical proposition fails; lifecycle stopping-time/revalidation reasoning; proof-test interval boundaries; and reconciliation rules for exceptional-mode/muting/override evidence. SICK stop-time guidance supports physical remeasurement before initial commissioning and after significant or expected usage-related changes such as brake wear. No universal stopping margin, proof-test interval or machine integrity claim is frozen.
 
-Core freezes remain in force, especially: **VERIFIED DESIGN != VALIDATED MACHINE SAFETY FUNCTION**, **FAULT DETECTED != PHYSICAL SAFE STATE ACHIEVED**, **LOW COST != LOW RIGOR**, **MORE COMPONENTS != MORE SAFETY**, **EDM HEALTHY != PHYSICAL SAFE STATE PROVED**, **SAFETY RELAY OUTPUT OFF != FINAL ENERGY PATH OPEN PROVED**, **DUAL CHANNEL INPUT != REDUNDANT FINAL ELEMENT**, **STO ACTIVE != MOTOR STANDSTILL PROVED**, **STO ACTIVE != ELECTRICAL ISOLATION**, **SUPPLY ISOLATED != DOWNSTREAM PRESSURE EXHAUSTED**, **DUMP COMMANDED != PRESSURE SAFE PROVED**, **GUARD CLOSED != DANGEROUS STATE ENDED**, **COMPONENT PL/SIL CLAIM != MACHINE SAFETY FUNCTION PL/SIL CLAIM**, **UNCHANGED SAFETY PROGRAM != UNCHANGED VALIDATED SAFETY FUNCTION**, and **ORDINARY LINUXCNC/FPGA DIAGNOSTICS != PERSONNEL-SAFETY AUTHORITY**.
+Core freezes remain in force, especially: **VERIFIED DESIGN != VALIDATED MACHINE SAFETY FUNCTION**, **FAULT DETECTED != PHYSICAL SAFE STATE ACHIEVED**, **LOW COST != LOW RIGOR**, **MORE COMPONENTS != MORE SAFETY**, **EDM HEALTHY != PHYSICAL SAFE STATE PROVED**, **SAFETY RELAY OUTPUT OFF != FINAL ENERGY PATH OPEN PROVED**, **DUAL CHANNEL INPUT != REDUNDANT FINAL ELEMENT**, **STO ACTIVE != MOTOR STANDSTILL PROVED**, **STO ACTIVE != ELECTRICAL ISOLATION**, **SUPPLY ISOLATED != DOWNSTREAM PRESSURE EXHAUSTED**, **DUMP COMMANDED != PRESSURE SAFE PROVED**, **GUARD CLOSED != DANGEROUS STATE ENDED**, **COMPONENT PL/SIL CLAIM != MACHINE SAFETY FUNCTION PL/SIL CLAIM**, **UNCHANGED SAFETY PROGRAM != UNCHANGED VALIDATED SAFETY FUNCTION**, **STOPPING TIME ON COMMISSIONING DAY != STOPPING TIME PROVED FOR ALL FUTURE MACHINE STATES**, **STATUS BIT TIMING != PHYSICAL CESSATION TIMING**, **RETURN TO NORMAL SOFTWARE STATE != PRODUCTION SAFEGUARDS PHYSICALLY RESTORED**, and **ORDINARY LINUXCNC/FPGA DIAGNOSTICS != PERSONNEL-SAFETY AUTHORITY**.
 
 ## 4000 foundation/core
 
@@ -57,14 +57,13 @@ Durable foundation includes `hardware/BLOCK_SPEC_TEMPLATE.md`, `hardware/4000-bl
 ## Exact next work
 
 1. Preserve the 2520–25D0 information-separated competency gates; do not contaminate them.
-2. Continue 25E0 from `research/25E0_VALIDATION_COMMISSIONING_ENTRY_2026-09-23.md`.
-3. Build an SRS-to-validation matrix spanning E-stop, guard/interlock, STO/coast, fluid-power safe state and reset/restart; tie every test to a physical proposition and acceptance evidence.
-4. Add adversarial commissioning cases where command/status bits pass while physical validation fails.
-5. Reconcile the existing 25E0 exceptional-mode/muting/override artifacts into the canonical validation syllabus and production-return/change-control path without duplicating them.
-6. Strengthen stopping-time measurement, periodic proof-test and revalidation-trigger reasoning from authoritative evidence; do not invent machine-specific intervals, thresholds or integrity claims.
-7. Freeze executable compute only if a concrete unresolved implementation question survives authoritative evidence; use `[self-hosted, openpressbrake]` only.
+2. Perform the 25E0 line-by-line syllabus/competency audit.
+3. Inspect existing exceptional-mode/muting/override artifacts by exact filename and link them into the canonical route rather than duplicating their solution content.
+4. If the audit finds a genuine learner-facing gap, fill only that gap; otherwise create the canonical 25E0 learner route/release gate and separate information-separated no-solution evaluator handoff.
+5. Keep stopping limits, proof-test intervals, quantitative integrity claims and machine-specific physical thresholds UNKNOWN until justified evidence exists.
+6. Freeze executable compute only if a concrete unresolved implementation question survives authoritative evidence; use `[self-hosted, openpressbrake]` only.
 
-Newest precise checkpoint: `checkpoints/2026-09-23T1948Z-safety-25E0-validation-next.md`.
+Newest precise checkpoint: `checkpoints/2026-09-23T2049Z-safety-25E0-audit-next.md`.
 
 ## Laboratory compute checkpoint
 

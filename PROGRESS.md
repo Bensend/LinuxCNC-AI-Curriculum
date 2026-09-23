@@ -34,11 +34,11 @@ The repeatable safety-design methodology covers:
 
 **2570 — Drives, STO, braking, and hazardous motion** remains READY FOR EXTERNAL/FRESH EVALUATION with its drive-function physical-proposition map, ordinary-drive fallback, adversarial assessment, learner route and no-solution handoff.
 
-**2580 — Hydraulic and pneumatic safety** is READY FOR EXTERNAL/FRESH EVALUATION. `safety-course/2580_ENTRY_MAP_AND_RELEASE_GATE_2026-09-23.md` records a completed syllabus audit and canonical learner route. `evaluation/2580_INFORMATION_SEPARATED_COMPETENCY_HANDOFF.md` preserves a no-solution external evaluation path. The release gate confirms coverage of stored pressure/accumulators, gravity loads, directional blocking versus supply isolation versus decompression versus load holding, monitored/redundant final elements, trapped volumes, spool/hose/cylinder failures, pneumatic safe exhaust, controlled repressurization/restart, maintenance restraint and human factors. It is not self-graduated.
+**2580 — Hydraulic and pneumatic safety** remains READY FOR EXTERNAL/FRESH EVALUATION with its completed syllabus audit, canonical learner route and no-solution handoff. It is not self-graduated.
 
-**2590 — Guards, interlocks, presence sensing, and two-hand controls** is now the active branch. `safety-course/2590_GUARDS_INTERLOCKS_PRESENCE_SENSING_SOURCE_PREP_2026-09-23.md` establishes the first physical-access proposition map, separates guard interlocking from guard locking, ties presence-sensing position to actual stopping behavior, introduces pass-through/inside-zone and reset-visibility problems, and treats foreseeable defeat/usability as engineering inputs.
+**2590 — Guards, interlocks, presence sensing, and two-hand controls** is the active branch. Source preparation now has a concrete safeguard-selection map, defeat analysis, ISO 13855-style symbolic distance reasoning with an explicitly sourced illustrative calculation, pass-through/reset architecture, authoritative two-hand-control evidence, authoritative three-position enabling-device evidence, and an eight-scenario adversarial assessment. Actual machine stopping behavior, safety distance, guard-lock force, setup-mode speed/force and integrity targets remain `UNKNOWN` until application evidence exists.
 
-2590 freezes include: **GUARD CLOSED != DANGEROUS STATE ENDED**, **GUARD INTERLOCKED != GUARD LOCKED**, **GUARD LOCKED != APPLICATION-SUFFICIENT HOLDING FORCE PROVED**, **LIGHT CURTAIN INTERRUPTED != MACHINE PHYSICALLY STOPPED**, **PROTECTIVE FIELD CLEAR != PROTECTED SPACE EMPTY**, **DEVICE RESPONSE TIME != COMPLETE MACHINE STOPPING TIME**, **SAFETY DISTANCE != A CATALOG CONSTANT**, **HIGH-CODING INTERLOCK != DEFEAT IMPOSSIBLE**, **SAFETY RESET != MACHINE START AUTHORIZATION**, and **ORDINARY LINUXCNC/FPGA GUARD LOGIC != PERSONNEL-SAFETY AUTHORITY**.
+2590 freezes include: **GUARD CLOSED != DANGEROUS STATE ENDED**, **GUARD INTERLOCKED != GUARD LOCKED**, **GUARD LOCKED != APPLICATION-SUFFICIENT HOLDING FORCE PROVED**, **LIGHT CURTAIN INTERRUPTED != MACHINE PHYSICALLY STOPPED**, **PROTECTIVE FIELD CLEAR != PROTECTED SPACE EMPTY**, **DEVICE RESPONSE TIME != COMPLETE MACHINE STOPPING TIME**, **SAFETY DISTANCE != A CATALOG CONSTANT**, **HIGH-CODING INTERLOCK != DEFEAT IMPOSSIBLE**, **TWO BUTTONS TRUE != VALIDATED TWO-HAND SAFETY FUNCTION**, **TWO-HAND PROTECTION OF ONE OPERATOR != PROTECTION OF EVERY PERSON WITH HAZARD ACCESS**, **ENABLING MIDDLE POSITION != UNRESTRICTED MOTION AUTHORITY**, **THREE-POSITION DEVICE != COMPLETE SETUP-MODE SAFETY FUNCTION**, **SAFETY RESET/REARM != MACHINE START AUTHORIZATION**, and **ORDINARY LINUXCNC/FPGA GUARD LOGIC != PERSONNEL-SAFETY AUTHORITY**.
 
 Core earlier freezes remain in force, especially: **VERIFIED DESIGN != VALIDATED MACHINE SAFETY FUNCTION**, **CATEGORY / ARCHITECTURE != ACHIEVED PL OR SIL**, **CERTIFIED COMPONENT CAPABILITY != COMPLETE SAFETY-FUNCTION INTEGRITY**, **DIAGNOSTIC COVERAGE CLAIM != PHYSICAL SAFE-STATE PROOF**, **DEVICE RELEASED != SAFETY FUNCTION RESET/REARMED != MACHINE START AUTHORIZED**, and **ORDINARY LINUXCNC/FPGA DIAGNOSTICS != PERSONNEL-SAFETY AUTHORITY**.
 
@@ -49,14 +49,13 @@ Durable foundation includes `hardware/BLOCK_SPEC_TEMPLATE.md`, `hardware/4000-bl
 ## Exact next work
 
 1. Preserve the 2520–2580 information-separated competency gates; do not contaminate them with learner-readable hidden solutions.
-2. Continue 2590 with a safeguard-selection map distinguishing fixed guards, interlocked movable guards, guard locking, presence sensing, two-hand controls and enabling/hold-to-run by physical proposition and lifecycle use.
-3. Add an adversarial defeat analysis for mechanical, coded/non-contact and guard-locking devices; make safeguard usability/diagnostics part of the design rather than relying on warnings against bypass.
-4. Teach ISO 13855-style minimum-distance/stopping-time reasoning symbolically and with an explicitly sourced sample, keeping actual machine stopping time/distance UNKNOWN until measured/validated.
-5. Trace pass-through/inside-zone occupancy, reset visibility and restart prevention.
-6. Add authoritative two-hand anti-tie-down/concurrent-operation and enabling-device evidence.
-7. Keep maintenance energy isolation separate from production guarding and keep ordinary LinuxCNC/FPGA logic outside sole personnel-safety authority.
+2. Audit 2590 against its governing syllabus/module requirements and existing source prep, selection/distance map, enabling-device evidence and adversarial assessment.
+3. Fill only a real learner-facing gap found by that audit; do not manufacture extra notes for coverage already present.
+4. If coherent, create a concise 2590 learner route/release gate and information-separated evaluator handoff; mark READY FOR EXTERNAL/FRESH EVALUATION rather than self-graduating.
+5. Then rotate immediately to the next named safety-course module under repository governance.
+6. Preserve maintenance energy isolation as separate from production safeguarding and LinuxCNC/FPGA as ordinary control/diagnostics rather than sole safety authority.
 
-Newest precise checkpoint: `checkpoints/2026-09-23T1048Z-safety-2590-selection-map-next.md`.
+Newest precise checkpoint: `checkpoints/2026-09-23T1146Z-safety-2590-coverage-audit-next.md`.
 
 ## Laboratory compute checkpoint
 

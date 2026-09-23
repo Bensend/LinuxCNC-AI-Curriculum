@@ -42,11 +42,11 @@ The repeatable safety-design methodology covers:
 
 **25B0 — Failure analysis and fault injection** remains READY FOR EXTERNAL/FRESH EVALUATION with its quantitative/DC/proof-test boundary, canonical learner route and no-solution evaluator contract. Percentage of hand-selected injections is not DCavg and missing quantitative inputs remain UNKNOWN.
 
-**25C0 — Designing for humans who will defeat safeguards** is now READY FOR EXTERNAL/FRESH EVALUATION, not self-graduated. `research/25C0_RESET_RESTART_SETUP_EVIDENCE_2026-09-23.md` closes reset/restart/visibility/setup evidence; `research/25C0_COVERAGE_AUDIT_AND_LEARNER_ROUTE_2026-09-23.md` finds no material syllabus gap and defines the canonical route; `evaluation/25C0_INFORMATION_SEPARATED_COMPETENCY_HANDOFF.md` preserves a no-solution external gate. Core boundaries include RESET COMPLETE != MOTION START AUTHORIZED, GUARD CLOSED/FIELD CLEAR != PROTECTED SPACE KNOWN EMPTY, MODE SELECTED != RESTRICTED PERFORMANCE PHYSICALLY PROVED, and SETUP MODE AVAILABLE != ACCEPTABLE ROUTINE PRODUCTION MODE.
+**25C0 — Designing for humans who will defeat safeguards** is READY FOR EXTERNAL/FRESH EVALUATION, not self-graduated. Reset/restart/visibility/setup evidence, canonical learner route and no-solution external gate are durable.
 
-**25D0 — Low-cost safety architectures** is the active branch. `research/25D0_LOW_COST_ARCHITECTURES_ENTRY_2026-09-23.md` defines the mandatory comparison contract and a Tier A-E architecture ladder from a minimal single switching path through dual-channel/monitored outputs, STO/external energy control, and fluid-power architectures. The governing comparison is incremental cost -> named failure path closed -> residual paths/usability consequence, not BOM price or component count alone.
+**25D0 — Low-cost safety architectures** is the active branch. `research/25D0_LOW_COST_ARCHITECTURES_ENTRY_2026-09-23.md` defines the comparison contract and Tier A-E ladder. `research/25D0_TIER_ABC_FAULT_COMPARISON_2026-09-23.md` now compares Tier A single-path, Tier B dual-channel safety-module and Tier C redundant-final-element + EDM architectures across broken wires, cross-shorts, stuck inputs, welded final contacts, feedback/reset faults, power loss/restoration and common cause. It explicitly bounds EDM to its witness-contact proposition and carries 25C0 usability requirements into low-cost reset/diagnostics/maintenance design. Current source pass did not find sufficiently comparable public transaction pricing, so dollar values remain unfrozen rather than fabricated.
 
-Core freezes remain in force, especially: **VERIFIED DESIGN != VALIDATED MACHINE SAFETY FUNCTION**, **FAULT DETECTED != PHYSICAL SAFE STATE ACHIEVED**, **HIGH-CODING INTERLOCK != LOW DEFEAT INCENTIVE**, **RESET COMPLETE != MOTION START AUTHORIZED**, **LOW COST != LOW RIGOR**, **MORE COMPONENTS != MORE SAFETY**, **COMPONENT PL/SIL CLAIM != MACHINE SAFETY FUNCTION PL/SIL CLAIM**, and **ORDINARY LINUXCNC/FPGA DIAGNOSTICS != PERSONNEL-SAFETY AUTHORITY**.
+Core freezes remain in force, especially: **VERIFIED DESIGN != VALIDATED MACHINE SAFETY FUNCTION**, **FAULT DETECTED != PHYSICAL SAFE STATE ACHIEVED**, **LOW COST != LOW RIGOR**, **MORE COMPONENTS != MORE SAFETY**, **EDM HEALTHY != PHYSICAL SAFE STATE PROVED**, **SAFETY RELAY OUTPUT OFF != FINAL ENERGY PATH OPEN PROVED**, **DUAL CHANNEL INPUT != REDUNDANT FINAL ELEMENT**, **COMPONENT PL/SIL CLAIM != MACHINE SAFETY FUNCTION PL/SIL CLAIM**, and **ORDINARY LINUXCNC/FPGA DIAGNOSTICS != PERSONNEL-SAFETY AUTHORITY**.
 
 ## 4000 foundation/core
 
@@ -54,15 +54,14 @@ Durable foundation includes `hardware/BLOCK_SPEC_TEMPLATE.md`, `hardware/4000-bl
 
 ## Exact next work
 
-1. Preserve the 2520–25C0 information-separated competency gates; do not contaminate them with learner-readable hidden solutions.
-2. Continue 25D0 with a comparative fault table for Tier A single-path, Tier B dual-channel safety-module, and Tier C redundant-final-element + EDM architectures.
-3. Re-open exact manufacturer assumptions before transferring diagnostic/rating claims; trace broken wire, cross-short where applicable, stuck input, welded contact, feedback/reset faults, power loss/restoration and common cause.
-4. State what each diagnostic/feedback signal physically proves and what remains unproved.
-5. Add representative current cost classes only from traceable current sources; explain what each incremental cost buys rather than optimizing BOM alone.
-6. Carry 25C0 usability/reset/maintenance requirements into every low-cost architecture.
-7. Freeze executable compute only if a concrete unresolved implementation question survives authoritative source/engineering analysis; use `[self-hosted, openpressbrake]` only.
+1. Preserve the 2520–25C0 information-separated competency gates; do not contaminate them.
+2. Continue 25D0 with two machine-class low-cost comparisons: ordinary VFD without integrated STO using appropriate external energy switching, versus a drive with integrated STO plus separately justified maintenance isolation.
+3. State the physical proposition and residual energy/motion uncertainty for every device; retain coast, gravity, DC-bus/stored-energy and unexpected-restart boundaries.
+4. Decide from syllabus coverage whether Tier E fluid-power low-cost architecture needs its own comparison before 25D0 release-gate work.
+5. Add actual cost figures only if traceable like-for-like current sources exist; otherwise preserve cost classes and explain what each increment buys.
+6. Freeze executable compute only if a concrete unresolved implementation question survives authoritative evidence; use `[self-hosted, openpressbrake]` only.
 
-Newest precise checkpoint: `checkpoints/2026-09-23T1635Z-safety-25D0-low-cost-next.md`.
+Newest precise checkpoint: `checkpoints/2026-09-23T1745Z-safety-25D0-vfd-fluid-next.md`.
 
 ## Laboratory compute checkpoint
 

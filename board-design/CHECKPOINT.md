@@ -1,38 +1,36 @@
 # Board-Design Curriculum Checkpoint
 
-Current durable lesson: **BD64 — Connection-Definition Instance Closure and Generator-Ready Contracts**
+Current durable lesson: **BD65 — KiCad Connection Generation, Provenance-Carrying Capture, and ERC Boundaries**
 
-Curriculum lesson commit: `d449e9f7035e73045e558816dfad42731793a0db`.
+Curriculum lesson commit: `60b0505e11844df7f52f8d242101d3681d6ee1a0`.
 
-OpenPressBrake engineering source inspected for BD64: `a644326acd6fcd57dc7f57dd2d86ae1e51dda00b`.
+OpenPressBrake engineering source inspected for BD65: `857108dc70c62bf4734dee5f4009f479d4ae51d4`.
 
-## Verified student-facing sources for BD64
+## Verified student-facing sources for BD65
 
-- `hardware/CONNECTION_DEFINITION_CONTRACT.md` — VERIFIED_FOR_LESSON for connection ownership, closure fields, generator boundary and release gates.
+- `hardware/CONNECTION_DEFINITION_CONTRACT.md` — VERIFIED_FOR_LESSON for connection ownership, machine-readable handoff, release gates and generator fail-closed behavior.
 - `hardware/connection_definition_schema.yaml` — VERIFIED_FOR_LESSON as the current fail-closed mold; checkpoint remains `SCHEMA_DEFINED_NOT_MIGRATED`.
-- `hardware/REV1_FIELD_CONNECTOR_INTEGRATION_BOUNDARY.md` — VERIFIED_FOR_LESSON for physical-part ownership, selection classes, derating and physical-machine survey boundary.
-- `hardware/REV1_CONNECTOR_MAP.yaml` — VERIFIED_FOR_LESSON only as bounded electrical-pinout authority; ENGINEERING_REVIEW_NEEDED as a complete physical connection-definition set.
-- `hardware/blocks/STATUS_RULES.md` — VERIFIED_FOR_LESSON for evidence/status truthfulness and the distinction between integration readiness and qualification.
-- `board-design/BD63_CONNECTION_VALIDATION_AUTHORITY_RECONCILIATION.md` — VERIFIED_FOR_LESSON as the prerequisite validation method.
+- `hardware/blocks/STATUS_RULES.md` — VERIFIED_FOR_LESSON for evidence/status truthfulness and the rule that passing automation proves only what it actually tests.
+- `board-design/BD64_CONNECTION_INSTANCE_CLOSURE_GENERATOR_READY.md` — VERIFIED_FOR_LESSON as the prerequisite closure/evidence-lock method.
 
 ## Closure result
 
-BD64 separates semantic, physical-part, footprint/pad, electrical-envelope, and placement/service/manufacturing closure. It freezes the rule that semantic reconciliation does not make a connector generator-ready and that generator output must never convert `TBD` or `VERIFY_AT_MACHINE` into plausible-looking production hardware.
+BD65 freezes the rules `GENERATED != ENGINEERED` and `ERC-CLEAN != AUTHORITY-VALID`. Production KiCad generation may consume only BD64 capture-eligible facts; it may not turn `TBD` or `VERIFY_AT_MACHINE` into plausible production hardware. Generated connector objects should carry machine-readable provenance to exact connection, pin authority, functional block/resource contract, connector drawing, footprint, machine evidence and generator configuration.
 
-The bounded `J_DNC_PWR` example is intentionally simple. Current authority supports DNC60 J19, two positions, pin 1 wire 9/L9/controller 24 V and pin 2 wire 4/L06/controller return. It does not support an exact connector MPN, footprint/pad geometry, mate, keying, harness condition, installed conductor size, placement/orientation, service clearance, or released current rating. Therefore it is semantically useful but board-capture-ineligible.
+ERC is treated as bounded downstream electrical-capture evidence. It does not prove connector identity, manufacturer pin numbering, footprint-pad correctness, derating, harness fit, service clearance, return/shield engineering, block qualification or safety authority.
 
-BD64 introduces explicit closure states: `SEMANTICALLY_RECONCILED`, `PHYSICAL_PART_FROZEN`, `FOOTPRINT_VERIFIED`, `ELECTRICAL_ENVELOPE_SUPPORTED`, `PLACEMENT_HARNESS_MARKING_CLOSED`, `BOARD_CAPTURE_ELIGIBLE`, and `GENERATED_ARTIFACT_LOCKED`. A single Boolean is insufficient to explain why a connection can or cannot advance.
+Because current OpenPressBrake connection authority still reports `SCHEMA_DEFINED_NOT_MIGRATED` and retains unresolved physical connector facts, BD65 intentionally uses a fail-closed review-fixture method rather than inventing a production connector merely to demonstrate generation/ERC.
 
 ## Catalog stress-test finding
 
-The current OpenPressBrake architecture has the correct ownership boundary, but it still lacks migrated release-consumable legacy connection instances with exact physical connector evidence. Treat this as ENGINEERING_REVIEW_NEEDED infrastructure, not as permission to select convenient parts. Connection instances should ultimately carry machine-readable closure state and evidence references per facet so tooling can distinguish semantic migration from physical/manufacturing closure.
+Current OpenPressBrake lacks a migrated release-consumable connection instance suitable as a truthful production KiCad-generation worked example. Treat this as ENGINEERING_REVIEW_NEEDED infrastructure. Later tooling should (1) enforce per-facet closure before production generation and (2) carry machine-readable provenance plus semantic-diff/reconciliation evidence for generated CAD objects.
 
-OpenPressBrake remained read-only. Current main is independently advancing reusable resource contracts, and no current evidence justified freezing legacy connector mechanics without machine survey. No simulation, synthesis, timing, place-and-route, regression or other executable verification was required; no hosted compute was used.
+OpenPressBrake remained read-only. Current main independently advanced `safety_interface` board-integration work during this run, so no overlapping engineering files were changed. No simulation, synthesis, timing, place-and-route, regression or other executable verification was required; no hosted compute was used.
 
 ## Next run
 
-Develop **BD65 — KiCad Connection Generation, Provenance-Carrying Capture, and ERC Boundaries**:
+Develop **BD66 — Schematic Integration Reconciliation and Cross-Block Net Ownership**:
 
-`capture-eligible connection instance -> deterministic symbol/footprint/net generation -> provenance metadata -> ERC -> semantic reconciliation -> generated-artifact diff -> evidence lock -> board-integration acceptance`.
+`generated/captured blocks + connection definitions + shared resources -> complete schematic net graph -> owner/driver/load/return reconciliation -> power-domain and authority checks -> ERC/structural evidence -> integration defect loop -> accepted schematic baseline`.
 
-Use only a connection whose capture prerequisites are actually supported, or explicitly teach a fail-closed generator fixture that cannot masquerade as production capture. Re-open every student-facing source on current main before assigning it. Do not let ERC or successful generation substitute for connector identity, pad proof, current/derating, harness, safety, or machine-verification evidence.
+Re-open every student-facing source on current main before assigning it. Use current OpenPressBrake integration evidence only within its actual maturity, and do not claim the current board is production-proven.

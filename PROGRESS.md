@@ -30,13 +30,11 @@ The repeatable safety-design methodology covers:
 
 **2550 — ISO 13849 without the mystique** remains READY FOR EXTERNAL/FRESH EVALUATION with explicit Category B/1/2/3/4 fault-behavior teaching, canonical learner route and no-solution handoff.
 
-**2560 — IEC 62061 / SIL concepts for machine builders** has completed its learner-facing syllabus pass. `safety-course/2560_DUAL_METHOD_PL_SIL_COMPARISON_2026-09-23.md` analyzes one symbolic guarded-motion safety function independently through ISO 13849-style and IEC 62061-style reasoning, maps shared versus method-specific evidence, and includes cases where attractive arithmetic is defeated by architecture/dependency/application evidence. `safety-course/2560_ADVERSARIAL_ASSESSMENT_SIL_WITHOUT_LABEL_TRANSFER_2026-09-23.md` tests the boundary. `safety-course/2560_ENTRY_MAP_AND_RELEASE_GATE_2026-09-23.md` found no remaining material syllabus gap, and `evaluation/2560_INFORMATION_SEPARATED_COMPETENCY_HANDOFF.md` provides a no-solution external gate. 2560 is READY FOR EXTERNAL/FRESH EVALUATION, not self-graduated.
+**2560 — IEC 62061 / SIL concepts for machine builders** is READY FOR EXTERNAL/FRESH EVALUATION with its dual-method PL/SIL comparison, adversarial assessment, learner route and no-solution handoff.
 
-2560 freezes include: **SIL TARGET != COMPONENT SIL LABEL**, **PFHd IN RANGE != COMPLETE SAFETY FUNCTION VALIDATED**, **SMALL PFHd NUMBER != PERMISSION TO IGNORE ARCHITECTURAL CONSTRAINTS**, **RANDOM-HARDWARE CALCULATION != SYSTEMATIC-CORRECTNESS EVIDENCE**, **CORRECT ARITHMETIC OVER AN INCOMPLETE ARCHITECTURE IS STILL THE WRONG MODEL**, **FIX AN OBVIOUS SINGLE-POINT/COMMON-CAUSE WEAKNESS BEFORE OPTIMIZING THE RELIABILITY MODEL AROUND IT**, and **A VALID METHOD CANNOT RESCUE INVALID INPUT PROVENANCE**.
+**2570 — Drives, STO, braking, and hazardous motion** is the active branch. `safety-course/2570_DRIVES_STO_BRAKING_HAZARDOUS_MOTION_SOURCE_PREP_2026-09-23.md` establishes the base drive-safety boundaries. `safety-course/2570_DRIVE_FUNCTION_PHYSICAL_PROPOSITION_MAP_2026-09-23.md` now maps SINAMICS S120 STO, SS1, SS2, SOS, SBC and SBT to exact physical propositions and non-propositions, traces spindle/coast and vertical/gravity hazards, and develops the syllabus-required ordinary-drive contactor fallback pattern using manufacturer evidence without claiming certification. `safety-course/2570_ADVERSARIAL_ASSESSMENT_DRIVE_SAFETY_2026-09-23.md` tests these boundaries.
 
-**2570 — Drives, STO, braking, and hazardous motion** is now the active source branch. `safety-course/2570_DRIVES_STO_BRAKING_HAZARDOUS_MOTION_SOURCE_PREP_2026-09-23.md` establishes from current Rockwell and Siemens manufacturer evidence that STO removes torque-producing capability under its stated architecture but is not electrical isolation, does not establish standstill, and does not control gravity/external-force motion by itself. It distinguishes STO, SS1, SS2, SOS and safe brake control and preserves machine-specific stopping/brake/load facts as UNKNOWN.
-
-Initial 2570 freezes: **STO ACTIVE != SHAFT STANDSTILL**, **STO ACTIVE != ELECTRICAL ISOLATION**, **TORQUE REMOVED != GRAVITY OR EXTERNAL FORCE CONTROLLED**, **STO != SS1 != SS2 != SOS**, **SAFE BRAKE COMMAND != LOAD PHYSICALLY RESTRAINED**, and **FASTEST POWER REMOVAL != SHORTEST OR SAFEST MACHINE STOP IN EVERY MECHANISM**.
+2570 freezes include: **STO ACTIVE != SHAFT STANDSTILL**, **STO ACTIVE != ELECTRICAL ISOLATION**, **TORQUE REMOVED != GRAVITY OR EXTERNAL FORCE CONTROLLED**, **STO != SS1 != SS2 != SOS**, **SAFE BRAKE COMMAND != LOAD PHYSICALLY RESTRAINED**, **TORQUE-PRODUCING CAPABILITY INHIBITED != MOTION PROVED STOPPED**, **SAFE MONITORED STANDSTILL != DE-ENERGIZED DRIVE**, **SAFE BRAKE COMMAND != MECHANICAL BRAKE EFFECT PROVED**, **SUCCESSFUL BRAKE TEST != PERMANENT BRAKE HEALTH**, **CONTACTOR POWER REMOVAL != INTEGRATED STO BY LABEL SUBSTITUTION**, **CONTACTOR OPEN != DC BUS PROVED SAFE**, and **SAFETY RESET != NORMAL MOTION START AUTHORIZATION**.
 
 Core earlier freezes remain in force, especially: **VERIFIED DESIGN != VALIDATED MACHINE SAFETY FUNCTION**, **CATEGORY / ARCHITECTURE != ACHIEVED PL OR SIL**, **CERTIFIED COMPONENT CAPABILITY != COMPLETE SAFETY-FUNCTION INTEGRITY**, **DIAGNOSTIC COVERAGE CLAIM != PHYSICAL SAFE-STATE PROOF**, **DEVICE RELEASED != SAFETY FUNCTION RESET/REARMED != MACHINE START AUTHORIZED**, and **ORDINARY LINUXCNC/FPGA DIAGNOSTICS != PERSONNEL-SAFETY AUTHORITY**.
 
@@ -47,13 +45,13 @@ Durable foundation includes `hardware/BLOCK_SPEC_TEMPLATE.md`, `hardware/4000-bl
 ## Exact next work
 
 1. Preserve the 2520–2560 information-separated competency gates; do not contaminate them with learner-readable hidden solutions.
-2. Continue 2570 by mapping one current servo/VFD manufacturer's STO/SS1/SS2/SOS/brake functions to machine-level physical propositions and explicit non-propositions.
-3. Build the syllabus-required low-cost ordinary-drive fallback architecture for a drive without certified STO, with contactor/energy/restart/feedback limitations stated explicitly and no certification claim.
-4. Include gravity-axis and spindle/coast-down cases so torque removal, motion stopping, holding/restraint and electrical isolation remain distinct.
-5. Keep all absent machine stopping times, brake capacities, coast times, safe distances and load behavior UNKNOWN.
+2. Audit 2570 against the current safety-course syllabus, filling only genuine learner-facing gaps.
+3. If coherent, create the concise 2570 entry map/release gate and information-separated evaluator handoff.
+4. Then recover the next named safety-course module and begin authoritative source preparation rather than manufacturing additional 2570 material.
+5. Keep all absent machine stopping times, brake capacities, coast times, safe distances, load behavior and integrity claims UNKNOWN.
 6. Keep ordinary LinuxCNC/FPGA control, safety-related control, diagnostics/monitoring and physical energy-removal mechanisms explicitly separated.
 
-Newest precise checkpoint: `checkpoints/2026-09-23T0651Z-safety-2570-drive-map-next.md`.
+Newest precise checkpoint: `checkpoints/2026-09-23T0750Z-safety-2570-coverage-next.md`.
 
 ## Laboratory compute checkpoint
 

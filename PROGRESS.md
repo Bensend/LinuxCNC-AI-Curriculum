@@ -24,7 +24,7 @@ The repeatable safety-design methodology covers:
 
 `machine/lifecycle boundary -> hazardous event -> risk-reduction hierarchy -> physical safe-state proposition -> safety-function/SRS derivation -> composition/allocation -> fault analysis/diagnostic design -> architecture/dependency/CCF allocation -> integrity-method selection/target allocation -> verification/validation/physical proof -> commissioning/release -> maintenance/change control/revalidation`
 
-2520 through 25B0 external information-separated competency execution remain OPEN and branch-local; do not self-score or contaminate them.
+2520 through 25C0 external information-separated competency execution remain OPEN and branch-local; do not self-score or contaminate them.
 
 **2540 — Relays, contactors, and the real meaning of a “safety relay”** remains READY FOR EXTERNAL/FRESH EVALUATION with its existing learner route and no-solution handoff.
 
@@ -40,11 +40,13 @@ The repeatable safety-design methodology covers:
 
 **25A0 — Safety PLCs and programmable safety** remains READY FOR EXTERNAL/FRESH EVALUATION with lifecycle/change-control coverage, canonical learner route and no-solution handoff. It is not self-graduated.
 
-**25B0 — Failure analysis and fault injection** is now READY FOR EXTERNAL/FRESH EVALUATION, not self-graduated. `research/25B0_QUANTITATIVE_BOUNDARIES_AND_PROOF_TESTS_2026-09-23.md` closes the quantitative/DC/proof-test boundary: percentage of hand-selected injections is not DCavg; quantitative reliability arithmetic requires defensible failure, operating-cycle, diagnostic, proof-test and CCF inputs; missing inputs remain UNKNOWN rather than guessed. `research/25B0_COVERAGE_AUDIT_AND_LEARNER_ROUTE_2026-09-23.md` found no material syllabus gap and defines the canonical route. `evaluation/25B0_INFORMATION_SEPARATED_COMPETENCY_HANDOFF.md` is the no-solution evaluator contract. No executable lab is justified by the current questions.
+**25B0 — Failure analysis and fault injection** remains READY FOR EXTERNAL/FRESH EVALUATION with its quantitative/DC/proof-test boundary, canonical learner route and no-solution evaluator contract. Percentage of hand-selected injections is not DCavg and missing quantitative inputs remain UNKNOWN.
 
-**25C0 — Designing for humans who will defeat safeguards** is the active branch. `research/25C0_HUMAN_FACTORS_ENTRY_2026-09-23.md` defines a defeat-pressure model, human-factors review table and anti-defeat design sequence grounded in ISO 14119-oriented manufacturer guidance. It freezes the distinction between defeat resistance and low defeat incentive and treats nuisance trips, visibility, diagnostics, setup/recovery, reset placement and easy guard restoration as engineering inputs.
+**25C0 — Designing for humans who will defeat safeguards** is now READY FOR EXTERNAL/FRESH EVALUATION, not self-graduated. `research/25C0_RESET_RESTART_SETUP_EVIDENCE_2026-09-23.md` closes reset/restart/visibility/setup evidence; `research/25C0_COVERAGE_AUDIT_AND_LEARNER_ROUTE_2026-09-23.md` finds no material syllabus gap and defines the canonical route; `evaluation/25C0_INFORMATION_SEPARATED_COMPETENCY_HANDOFF.md` preserves a no-solution external gate. Core boundaries include RESET COMPLETE != MOTION START AUTHORIZED, GUARD CLOSED/FIELD CLEAR != PROTECTED SPACE KNOWN EMPTY, MODE SELECTED != RESTRICTED PERFORMANCE PHYSICALLY PROVED, and SETUP MODE AVAILABLE != ACCEPTABLE ROUTINE PRODUCTION MODE.
 
-Core freezes remain in force, especially: **VERIFIED DESIGN != VALIDATED MACHINE SAFETY FUNCTION**, **FAULT DETECTED != PHYSICAL SAFE STATE ACHIEVED**, **PERCENT OF TEST CASES DETECTED != DIAGNOSTIC COVERAGE**, **ROUTINE MAINTENANCE != PROOF TEST UNLESS IT DETECTS THE ASSUMED LATENT FAILURES**, **HIGH-CODING INTERLOCK != LOW DEFEAT INCENTIVE**, **DIFFICULT TO BYPASS != CONVENIENT TO USE CORRECTLY**, and **ORDINARY LINUXCNC/FPGA DIAGNOSTICS != PERSONNEL-SAFETY AUTHORITY**.
+**25D0 — Low-cost safety architectures** is the active branch. `research/25D0_LOW_COST_ARCHITECTURES_ENTRY_2026-09-23.md` defines the mandatory comparison contract and a Tier A-E architecture ladder from a minimal single switching path through dual-channel/monitored outputs, STO/external energy control, and fluid-power architectures. The governing comparison is incremental cost -> named failure path closed -> residual paths/usability consequence, not BOM price or component count alone.
+
+Core freezes remain in force, especially: **VERIFIED DESIGN != VALIDATED MACHINE SAFETY FUNCTION**, **FAULT DETECTED != PHYSICAL SAFE STATE ACHIEVED**, **HIGH-CODING INTERLOCK != LOW DEFEAT INCENTIVE**, **RESET COMPLETE != MOTION START AUTHORIZED**, **LOW COST != LOW RIGOR**, **MORE COMPONENTS != MORE SAFETY**, **COMPONENT PL/SIL CLAIM != MACHINE SAFETY FUNCTION PL/SIL CLAIM**, and **ORDINARY LINUXCNC/FPGA DIAGNOSTICS != PERSONNEL-SAFETY AUTHORITY**.
 
 ## 4000 foundation/core
 
@@ -52,14 +54,15 @@ Durable foundation includes `hardware/BLOCK_SPEC_TEMPLATE.md`, `hardware/4000-bl
 
 ## Exact next work
 
-1. Preserve the 2520–25B0 information-separated competency gates; do not contaminate them with learner-readable hidden solutions.
-2. Continue 25C0 by turning the entry model into the required machine-playbook human-factors review checklist.
-3. Add adversarial cases for nuisance-trip pressure, blind reset, maintenance guard removal, setup-mode abuse, poor diagnostics and production pressure.
-4. Trace authoritative evidence for reset visibility, unexpected restart prevention, setup/recovery modes and foreseeable defeat; distinguish standard/manufacturer guidance from inference.
-5. Audit 25C0 against `SAFETY_COURSE_RESEARCH.md`; fill only genuine learner-facing gaps.
-6. Freeze executable compute only if a concrete unresolved implementation question survives authoritative source/engineering analysis; use `[self-hosted, openpressbrake]` only.
+1. Preserve the 2520–25C0 information-separated competency gates; do not contaminate them with learner-readable hidden solutions.
+2. Continue 25D0 with a comparative fault table for Tier A single-path, Tier B dual-channel safety-module, and Tier C redundant-final-element + EDM architectures.
+3. Re-open exact manufacturer assumptions before transferring diagnostic/rating claims; trace broken wire, cross-short where applicable, stuck input, welded contact, feedback/reset faults, power loss/restoration and common cause.
+4. State what each diagnostic/feedback signal physically proves and what remains unproved.
+5. Add representative current cost classes only from traceable current sources; explain what each incremental cost buys rather than optimizing BOM alone.
+6. Carry 25C0 usability/reset/maintenance requirements into every low-cost architecture.
+7. Freeze executable compute only if a concrete unresolved implementation question survives authoritative source/engineering analysis; use `[self-hosted, openpressbrake]` only.
 
-Newest precise checkpoint: `checkpoints/2026-09-23T1551Z-safety-25C0-human-factors-next.md`.
+Newest precise checkpoint: `checkpoints/2026-09-23T1635Z-safety-25D0-low-cost-next.md`.
 
 ## Laboratory compute checkpoint
 

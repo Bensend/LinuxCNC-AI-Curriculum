@@ -24,15 +24,17 @@ The repeatable safety-design methodology covers:
 
 `machine/lifecycle boundary -> hazardous event -> risk-reduction hierarchy -> physical safe-state proposition -> safety-function/SRS derivation -> composition/allocation -> fault analysis/diagnostic design -> architecture/dependency/CCF allocation -> integrity-method selection/target allocation -> verification/validation/physical proof -> commissioning/release -> maintenance/change control/revalidation`
 
-2520 and 2530 external information-separated competency execution remain OPEN and branch-local; do not self-score or contaminate them.
+2520, 2530 and 2540 external information-separated competency execution remain OPEN and branch-local; do not self-score or contaminate them.
 
-**2540 — Relays, contactors, and the real meaning of a “safety relay”** now has a coherent learner route in `safety-course/2540_ENTRY_MAP_AND_RELEASE_GATE_2026-09-23.md`. The route owns: component/relay meaning; the five-family commercial comparison and switching/reliability physics; contactor/STO/fluid-power final-element boundaries; and the adversarial assessment `2540_ADVERSARIAL_ASSESSMENT_RELAY_TO_SAFE_STATE_2026-09-23.md`. `evaluation/2540_INFORMATION_SEPARATED_COMPETENCY_HANDOFF.md` preserves a no-solution external evaluator gate. 2540 is READY FOR EXTERNAL/FRESH EVALUATION, not self-graduated.
+**2540 — Relays, contactors, and the real meaning of a “safety relay”** has a coherent learner route in `safety-course/2540_ENTRY_MAP_AND_RELEASE_GATE_2026-09-23.md` and a no-solution external evaluator handoff. It is READY FOR EXTERNAL/FRESH EVALUATION, not self-graduated.
 
 2540 freezes remain: **FORCE-GUIDED CONTACTS != COMPLETE SAFETY FUNCTION**, **CONTACT CARRY CURRENT != SWITCHING SUITABILITY**, **FINAL-ELEMENT COMMAND != FINAL-ELEMENT STATE**, **FINAL-ELEMENT STATE != HAZARDOUS-ENERGY STATE**, **MIRROR/EDM FEEDBACK != SHAFT STANDSTILL OR COMPLETE ENERGY REMOVAL**, **STO ACTIVE != ELECTRICAL ISOLATION, STANDSTILL, OR GRAVITY-LOAD RESTRAINT**, **VALVE POSITION FEEDBACK != DOWNSTREAM SAFE PRESSURE**, **OUTPUT CURRENT RATING != PERMISSION TO SWITCH AN ARBITRARY LOAD**, and **COMPONENT PL/SIL/PFH != COMPLETE SAFETY-FUNCTION PL/SIL/PFH**.
 
-**2550 — ISO 13849 without the mystique** is now the active source branch. Initial source framing is `safety-course/2550_ISO_13849_WITHOUT_MYSTIQUE_SOURCE_PREP_2026-09-23.md`. Current-edition orientation uses ISO 13849-1:2023 evidence from DGUV/IFA and current manufacturer standards guidance. The module explicitly separates PLr, Category, MTTFd, DC/DCavg, CCF, and validation/systematic correctness. SISTEMA is treated as an evaluation/calculation aid whose result remains dependent on defensible inputs and does not replace machine validation.
+**2550 — ISO 13849 without the mystique** is the active branch. Source framing is `safety-course/2550_ISO_13849_WITHOUT_MYSTIQUE_SOURCE_PREP_2026-09-23.md`. `safety-course/2550_EXAMPLE_ARCHITECTURES_AND_ASSUMPTION_TRAPS_2026-09-23.md` now independently varies topology/Category evidence, MTTFd evidence, diagnostic evidence and CCF/dependency evidence without inventing machine values. It includes nominal upstream redundancy defeated by a common final element, two-channel architecture undermined by a common-cause dependency, a stale use-profile/SISTEMA trap, B10d/nop symbolic sensitivity, and certified-subsystem decomposition boundaries.
 
-Initial 2550 freezes: **ARCHITECTURE DOES NOT CREATE PLr**, **CATEGORY 4 != PL e BY DEFINITION**, **DC CLAIM != PHYSICAL SAFE-STATE PROOF**, and **SISTEMA PASS != MACHINE VALIDATION PASS**.
+`2550_ADVERSARIAL_ASSESSMENT_INTEGRITY_VS_REAL_MACHINE_2026-09-23.md` now tests a mixed electromechanical/safety-controller/STO/contactor/pneumatic machine function. It requires the learner to repair the SRS, decompose SRP/CS, audit stale calculation assumptions, identify CCF and final-element dependencies, separate diagnostic propositions from physical safe-state proof, preserve LinuxCNC's non-safety authority boundary, and refuse unsupported personnel-exposed operation.
+
+2550 freezes now include: **ARCHITECTURE DOES NOT CREATE PLr**, **CATEGORY 4 != PL e BY DEFINITION**, **DC CLAIM != PHYSICAL SAFE-STATE PROOF**, **SISTEMA PASS != MACHINE VALIDATION PASS**, **CHANNEL COUNT != CCF CONTROL**, **NUMERICALLY CORRECT MODEL + FALSE APPLICATION ASSUMPTION = UNDEFENSIBLE SAFETY CLAIM**, and **CERTIFIED SUBSYSTEM CAPABILITY != COMPLETE SAFETY-FUNCTION ACHIEVED INTEGRITY**.
 
 Core 2520/2530 freezes remain in force, especially: **VERIFIED DESIGN != VALIDATED MACHINE SAFETY FUNCTION**, **CATEGORY / ARCHITECTURE != ACHIEVED PL OR SIL**, **CERTIFIED COMPONENT CAPABILITY != COMPLETE SAFETY-FUNCTION INTEGRITY**, **DIAGNOSTIC COVERAGE CLAIM != PHYSICAL SAFE-STATE PROOF**, **DEVICE RELEASED != SAFETY FUNCTION RESET/REARMED != MACHINE START AUTHORIZED**, and **ORDINARY LINUXCNC/FPGA DIAGNOSTICS != PERSONNEL-SAFETY AUTHORITY**.
 
@@ -43,13 +45,13 @@ Durable foundation includes `hardware/BLOCK_SPEC_TEMPLATE.md`, `hardware/4000-bl
 ## Exact next work
 
 1. Preserve the 2520, 2530 and 2540 information-separated competency gates; do not contaminate them with learner-readable hidden solutions.
-2. Build 2550 example architectures with symbolic or explicitly sourced data so Category, MTTFd, DCavg and CCF can be varied independently without inventing machine-specific values.
-3. Include a case where nominal redundancy fails to improve the defensible result because a common final element or common-cause dependency dominates.
-4. Include a case where a plausible numerical/SISTEMA result is invalidated by a bad application assumption or stale component/use-profile evidence.
-5. Teach B10d/switching-cycle reasoning and subsystem decomposition only to the depth justified by authoritative evidence; distinguish illustrative math from formal certification.
+2. Audit 2550 coverage against the governing syllabus: PLr, Categories B/1/2/3/4, MTTFd, DCavg, CCF, subsystem decomposition, B10d/cycle reasoning, and the limits of calculation versus validation.
+3. If the coverage is coherent, create a concise 2550 learner entry map/release gate and a no-solution information-separated evaluator handoff rather than manufacturing duplicate ISO 13849 notes.
+4. If the audit exposes a real gap, fill only that gap from authoritative evidence first.
+5. After 2550 reaches external-evaluation readiness, recover the next named safety-course module from the syllabus and begin its authoritative source preparation.
 6. Keep ordinary LinuxCNC/FPGA control, safety-related control, diagnostics/monitoring and physical energy-removal mechanisms explicitly separated.
 
-Newest precise checkpoint: `checkpoints/2026-09-23T0348Z-safety-2550-examples-next.md`.
+Newest precise checkpoint: `checkpoints/2026-09-23T0448Z-safety-2550-audit-next.md`.
 
 ## Laboratory compute checkpoint
 

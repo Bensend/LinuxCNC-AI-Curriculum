@@ -1,34 +1,35 @@
 # Board-Design Curriculum Checkpoint
 
-Current durable lesson: **BD66 — Schematic Integration Reconciliation and Cross-Block Net Ownership**
+Current durable lesson: **BD67 — Whole-Board Power/Return Graph and Fault-Containment Reconciliation**
 
-Curriculum lesson commit: `dd626c13b8aa0d7c28421bc60fdbee1bd6b4a10b`.
+Curriculum lesson commit: `a61505a517c31a086b25ef54fb79916f2168a74d`.
 
-OpenPressBrake engineering source inspected for BD66: `fc47ed9b86db9998cad7549fce82a192809e4068`.
+OpenPressBrake engineering source inspected for BD67: `324892fac20cc81ca9a3ae00a89e88607d17fc41`.
 
-## Verified student-facing sources for BD66
+## Verified student-facing sources for BD67
 
-- `hardware/blocks/STATUS_RULES.md` — VERIFIED_FOR_LESSON for status truthfulness, primitive/shared-resource ownership and integration-versus-qualification boundaries.
-- `hardware/blocks/differential_encoder/integration/REV1_RESOURCE_CONTRACT.yaml` — VERIFIED_FOR_LESSON for current encoder resources, board-owned obligations, integration invariants and unresolved machine facts.
-- `hardware/blocks/differential_encoder/STATUS_CHECKLIST.md` — ENGINEERING_REVIEW_NEEDED as a complete current evidence inventory because it does not yet list the new resource contract; VERIFIED_FOR_LESSON only for bounded maturity/open-gate statements.
-- `board-design/BD65_KICAD_GENERATION_PROVENANCE_ERC_BOUNDARIES.md` — VERIFIED_FOR_LESSON as the prerequisite capture/ERC evidence-boundary method.
+- `hardware/blocks/STATUS_RULES.md` — VERIFIED_FOR_LESSON for status truthfulness, shared-resource/integration boundaries and maintenance requirements.
+- `hardware/blocks/machine_power/design/REV23_5V_RAIL_HIERARCHY_RECONCILIATION.md` — VERIFIED_FOR_LESSON for the current 5-V parent/child hierarchy, known populated continuous subtotal and explicitly open load/startup gates.
+- `hardware/blocks/machine_power/REFERENCE_REBASE.md` — VERIFIED_FOR_LESSON for current Rev23 machine-power authority, source/return boundaries and open production gates.
+- `hardware/blocks/machine_power/STATUS_CHECKLIST.md` — ENGINEERING_REVIEW_NEEDED as a complete current status/evidence index because it still identifies Rev17 and omits Rev23 evidence; VERIFIED_FOR_LESSON only for bounded unresolved-gate statements consistent with current authority.
+- `board-design/BD66_SCHEMATIC_INTEGRATION_NET_OWNERSHIP.md` — VERIFIED_FOR_LESSON as the prerequisite semantic-net reconciliation method.
 
 ## Closure result
 
-BD66 freezes the rule `BLOCK-CORRECT + BLOCK-CORRECT != BOARD-CORRECT`. Complete-board schematic review requires a semantic net graph that reconciles functional owner, electrical driver/load, power and typed return domains, protection-current return, shared-resource dependencies, startup/default state and FPGA/logical endpoints. ERC and semantic reconciliation are separate evidence records.
+BD67 freezes the rule `A POWER BUDGET IS NOT A POWER ARCHITECTURE`. Board-power acceptance requires explicit source ancestry, typed load evidence, normal/startup/transient/fault current graphs, return domains, enable/default dependencies, fault-containment boundaries and evidence locks.
 
-The current differential-encoder contract provides a bounded worked example: raw A/Abar, B/Bbar and Z/Zbar field pairs must pass through the AM26LV32E primitive; connector-edge protection returns to CHASSIS_PE; receiver LOGIC_3V3 capacity allocation is separate from encoder field power; termination population, field power, connector mapping, FPGA allocation and board-level bonding remain integration responsibilities.
+Current OpenPressBrake authority freezes one LMR36520 hierarchy: `5V_MAIN -> ANALOG_BRANCH_FILTER -> 5V_ANALOG`. The 121.36-mA known child load rolls upstream exactly once; with 13.20 mA of direct `5V_MAIN` PVR6 protector demand, the known populated continuous subtotal at the LMR36520 output is 134.56 mA. This remains preliminary rather than a final regulator requirement because direct 5-V consumers and startup/inrush remain open.
 
 ## Catalog stress-test finding
 
-The newly published encoder `integration/REV1_RESOURCE_CONTRACT.yaml` is not yet indexed by the authoritative encoder `STATUS_CHECKLIST.md`, despite the maintenance rule requiring material integration evidence to update that checklist in the same change. Treat the checklist as ENGINEERING_REVIEW_NEEDED as a complete evidence index. The curriculum does not infer a status promotion from the new contract.
+The machine-power `STATUS_CHECKLIST.md` is stale relative to current Rev23 authority despite the repository maintenance rule requiring material changes to update the checklist in the same change. Treat it as ENGINEERING_REVIEW_NEEDED as a complete current evidence index. A future machine-readable whole-board power/return graph should encode parent/child rails, separately sourced field branches, typed load evidence, normal/startup/transient/fault paths, return domains, enables, protection ownership and evidence locks.
 
-OpenPressBrake remained read-only because its latest main commit is the resource-contract change being audited and the active engineering lane owns that area. No simulation, synthesis, timing, place-and-route or other executable verification was required; no hosted compute was used.
+OpenPressBrake remained read-only. Current main was re-read at `324892fac20cc81ca9a3ae00a89e88607d17fc41`; active engineering has just advanced machine-power and safety-interface integration. Curriculum main was re-read after the BD67 lesson commit before this checkpoint update. No simulation, synthesis, timing, place-and-route or other executable verification was required; no hosted compute was used.
 
 ## Next run
 
-Develop **BD67 — Whole-Board Power/Return Graph and Fault-Containment Reconciliation**:
+Develop **BD68 — Startup/Shutdown Sequencing, Brownout, and Output-Authority Reconciliation**:
 
-`accepted semantic net graph -> rail/source tree -> load allocations -> normal return graph -> transient/fault return graph -> enable/startup dependencies -> fault-containment boundaries -> board power acceptance`.
+`accepted power/return graph -> source ramp/order -> reset/enable dependencies -> brownout behavior -> output default/inhibit states -> watchdog/power-fault interactions -> shutdown energy paths -> sequence fault injection plan -> integration acceptance`.
 
-Re-open every student-facing source on current main. Use current OpenPressBrake evidence only within its actual maturity, preserve VERIFY_AT_MACHINE facts, and do not claim the current board is production-proven.
+Re-open every student-facing source on current main. Preserve `VERIFY_AT_MACHINE` facts, keep ordinary controller fault handling separate from independent personnel-safety authority, and do not claim the current OpenPressBrake board is production-proven.

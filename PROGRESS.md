@@ -30,11 +30,13 @@ Fresh-AI navigation is durable in `safety-course/2520_ENTRY_MAP_AND_FRESH_AI_HAN
 
 **2540 — Relays, contactors, and the real meaning of a “safety relay”** is the active source branch. Initial source framing is `safety-course/2540_SAFETY_RELAY_MEANING_SOURCE_PREP_2026-09-23.md`.
 
-The required five-family commercial comparison is now durable in `safety-course/2540_FIVE_FAMILY_SAFETY_RELAY_COMPARISON_AND_PHYSICS_BRIDGE_2026-09-23.md`, covering Pilz PNOZ X3, Allen-Bradley Guardmaster SI 440R-S12R2, Phoenix Contact PSRclassic 2963912, Omron G9SE-201, and ABB Sentry SSR10. Missing fields remain explicitly `UNKNOWN`; published component capability is not transferred to a complete machine safety function.
+The required five-family commercial comparison is durable in `safety-course/2540_FIVE_FAMILY_SAFETY_RELAY_COMPARISON_AND_PHYSICS_BRIDGE_2026-09-23.md`, covering Pilz PNOZ X3, Allen-Bradley Guardmaster SI 440R-S12R2, Phoenix Contact PSRclassic 2963912, Omron G9SE-201, and ABB Sentry SSR10. Missing fields remain explicitly `UNKNOWN`; published component capability is not transferred to a complete machine safety function.
 
-2540 now also has the relay/contactor physics bridge: force-guided contacts are a diagnosability mechanism rather than immunity from failure; carry-current ratings are separated from switching/utilization ratings; AC/DC and resistive/inductive interruption are separated; suppression is treated as part of release-time/lifetime validation; B10d/use profile remains an input to reliability reasoning; and EDM is bounded to the particular feedback proposition it observes.
+The machine final-element boundary is now durable in `safety-course/2540_MACHINE_FINAL_ELEMENTS_CONTACTOR_STO_FLUID_POWER_2026-09-23.md`. It compares contactor/motor-power interruption, certified drive STO, and monitored fluid-power exhaust paths while explicitly separating command state, diagnostic witness, final-element state, hazardous-energy state and physical safe-state proposition. It also defines when direct safety-relay load switching is supportable only from documented load/output suitability and complete-function engineering, rather than from headline current rating.
 
-2540 freezes include: **FORCE-GUIDED CONTACTS != COMPLETE SAFETY FUNCTION**, **FORCE-GUIDED CONTACTS ENABLE COVERED DIAGNOSTICS; THEY DO NOT MAKE A RELAY INFALLIBLE**, **B10d DATA PRESENT != ACHIEVED PL/SIL**, **CONTACT CARRY CURRENT != SWITCHING SUITABILITY**, **RESISTIVE RATING != INDUCTIVE AC/DC INTERRUPTION RATING**, **ARC SUPPRESSION MAY CHANGE RELEASE BEHAVIOR; IT BELONGS IN VALIDATION**, **EDM AUXILIARY STATE != HAZARDOUS ENERGY REMOVED**, **RELAY RESPONSE TIME != MACHINE STOPPING TIME**, **SAFETY RELAY MODULE PRESENT != FINAL-ELEMENT PHYSICAL STATE PROVED**, and **COMPONENT PL/SIL/PFH != COMPLETE SAFETY-FUNCTION PL/SIL/PFH**.
+2540 now covers force-guided/mirror contacts as diagnosability mechanisms rather than immunity from failure; carry current versus switching/utilization duty; AC/DC and resistive/inductive interruption; suppression as part of validated release behavior; B10d/use profile as reliability inputs; EDM bounded to its actual witness; STO bounded to torque-producing switching rather than electrical isolation/standstill/load restraint; and valve-position feedback bounded from downstream pressure/energy proof.
+
+2540 freezes include: **FORCE-GUIDED CONTACTS != COMPLETE SAFETY FUNCTION**, **CONTACT CARRY CURRENT != SWITCHING SUITABILITY**, **MIRROR/EDM FEEDBACK != SHAFT STANDSTILL OR COMPLETE ENERGY REMOVAL**, **STO ACTIVE != ELECTRICAL ISOLATION, STANDSTILL, OR GRAVITY-LOAD RESTRAINT**, **VALVE POSITION FEEDBACK != DOWNSTREAM SAFE PRESSURE**, **FINAL-ELEMENT COMMAND != FINAL-ELEMENT STATE**, **FINAL-ELEMENT STATE != HAZARDOUS-ENERGY STATE**, **OUTPUT CURRENT RATING != PERMISSION TO SWITCH AN ARBITRARY LOAD**, **MAINTENANCE-EQUIVALENT LOOKING PART != VALIDATED SAFETY-EQUIVALENT PART**, and **COMPONENT PL/SIL/PFH != COMPLETE SAFETY-FUNCTION PL/SIL/PFH**.
 
 Core 2520/2530 freezes remain in force, especially: **VERIFIED DESIGN != VALIDATED MACHINE SAFETY FUNCTION**, **CATEGORY / ARCHITECTURE != ACHIEVED PL OR SIL**, **CERTIFIED COMPONENT CAPABILITY != COMPLETE SAFETY-FUNCTION INTEGRITY**, **DIAGNOSTIC COVERAGE CLAIM != PHYSICAL SAFE-STATE PROOF**, **DEVICE RELEASED != SAFETY FUNCTION RESET/REARMED != MACHINE START AUTHORIZED**, and **ORDINARY LINUXCNC/FPGA DIAGNOSTICS != PERSONNEL-SAFETY AUTHORITY**.
 
@@ -45,13 +47,13 @@ Durable foundation includes `hardware/BLOCK_SPEC_TEMPLATE.md`, `hardware/4000-bl
 ## Exact next work
 
 1. Preserve the 2520 and 2530 information-separated competency gates; do not contaminate them with learner-readable hidden solutions.
-2. Continue 2540 at the machine final-element boundary: compare a contactor path, drive STO path, and fluid-power valve path without pretending they are interchangeable.
-3. Derive when a safety relay may directly switch a documented load versus when it is only safety logic feeding a separately engineered final element. Include utilization category, DC/AC interruption, suppression, duty/use profile, feedback/EDM and physical proof.
-4. Trace adversarial welded-main-contact, misleading/stale auxiliary-contact, common-power/common-actuator and maintenance/replacement cases. Map each to the proposition actually observed and to the 2520 validation matrix.
-5. Build the 2540 learner-facing route only after the final-element lesson closes the current evidence gap; do not infer universal Category/PL/SIL or stopping performance from example topology.
+2. Build a 2540 adversarial assessment around the now-complete relay/final-element chain: welded main contact, misleading feedback, wrong utilization category, suppression drift, STO on a gravity load, trapped fluid energy, common final element and replacement drift.
+3. Audit whether 2540 has a coherent learner-facing route from relay meaning -> five-family comparison/physics -> machine final elements -> validation. Create a concise entry map only if it improves navigation rather than duplicating lessons.
+4. If the 2540 route is coherent, create an information-separated evaluator handoff without a hidden learner-readable solution; do not self-graduate.
+5. Then recover the next named safety-course module and begin authoritative source preparation rather than manufacturing additional 2540 notes.
 6. Keep ordinary LinuxCNC/FPGA control, safety-related control, diagnostics/monitoring and physical energy-removal mechanisms explicitly separated.
 
-Newest precise checkpoint: `checkpoints/2026-09-23T0152Z-safety-2540-final-elements-next.md`.
+Newest precise checkpoint: `checkpoints/2026-09-23T0249Z-safety-2540-assessment-next.md`.
 
 ## Laboratory compute checkpoint
 

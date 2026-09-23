@@ -1,83 +1,88 @@
 # 4000 Board-Design Curriculum Checkpoint
 
-Date: 2026-09-22
+Date: 2026-09-23
 
 ## Lane status
 
-Independent board-design curriculum lane remains active alongside the separate safety curriculum. Durable lessons BD01 through BD49 are present. This checkpoint is board-design authority only and does not alter safety-course progress authority.
+Independent board-design curriculum lane remains active alongside the separate safety curriculum. Durable lessons BD01 through BD50 are present. This checkpoint is board-design authority only and does not alter safety-course progress authority.
 
-New this run: `BD49_CONFIGURATION_CHANGE_CONTROL_DETERMINISTIC_REGENERATION_AND_SEMANTIC_DIFF_REVIEW.md`.
+New this run: `BD50_GENERATED_ARTIFACT_EQUIVALENCE_CANONICALIZATION_AND_REPRODUCIBILITY_ACCEPTANCE.md`.
 
-BD49 teaches:
+BD50 teaches:
 
-`locked configuration -> requested change -> semantic intent diff -> affected authority/resource set -> re-solve -> deterministic regeneration -> semantic output diff -> targeted verification -> promotion/release decision`
+`two candidate generations -> normalize non-semantic variation -> compare semantic model -> compare authority/provenance -> classify exact/equivalent/materially-different -> reproducibility evidence -> acceptance or investigation`
 
-## BD49 hard student-material audit
+## BD50 hard student-material audit
 
-Every repository file named to students as finished material by BD49 was opened and inspected in current form during this run.
+Every repository file named to students as finished material by BD50 was opened and inspected in current form during this run.
 
-`VERIFIED_FOR_LESSON` for the bounded claims used:
+`VERIFIED_FOR_LESSON` for bounded claims used:
 
-- Curriculum `hardware/4000-board-design/BD48_CONFIGURATION_SELECTION_CLOSURE_AMBIGUITY_RESOLUTION_AND_FAIL_CLOSED_BOARD_GENERATION.md`
+- Curriculum `hardware/4000-board-design/BD49_CONFIGURATION_CHANGE_CONTROL_DETERMINISTIC_REGENERATION_AND_SEMANTIC_DIFF_REVIEW.md`
 - Curriculum `hardware/4000-board-design/CHECKPOINT.md` as it existed when work was selected
 - OpenPressBrake `hardware/blocks/STATUS_RULES.md`
-- OpenPressBrake `hardware/blocks/BLOCK_ADAPTER_INTEGRATION_RULES.md`
-- OpenPressBrake `hardware/blocks/relay_contactor_driver/manifest.yaml` for the current one-coil reusable contract and resource declaration
-- OpenPressBrake `hardware/blocks/relay_contactor_driver/REV1_BOARD_INTEGRATION_HANDOFF.md` for the current board-owned population, FPGA, connector, field-power, mapping, and current-envelope responsibilities
-- OpenPressBrake `hardware/blocks/relay_contactor_driver/STATUS_CHECKLIST.md` for current `SIMULATION-READY` status and remaining qualification/release gates
+- OpenPressBrake `hardware/blocks/analog_output/integration/REV1_BOARD_INTEGRATION_HANDOFF.md`
+- OpenPressBrake `hardware/blocks/analog_output/STATUS_CHECKLIST.md`
 
-The relay-driver material is bounded integration evidence, not proof that `relay_contactor_driver` is schematic-ready, production-proven, safety-rated, or `REV 1 READY`. BD49 itself was re-opened from current main after commit and checked against these inspected sources.
+`ENGINEERING_REVIEW_NEEDED`:
 
-## Rules frozen by BD49
+- OpenPressBrake `hardware/blocks/analog_output/manifest.yaml` as a complete current first-machine authority. The authoritative status checklist explicitly says `REV1_COMMAND_PROFILE_OVERLAY.yaml` supersedes stale first-machine +/-10-V manifest fields, while the manifest still contains first-machine bipolar wording/fields. Its machine-readable status wording also does not cleanly match the checklist's explicit **NOT YET SIMULATION-READY OR SCHEMATIC-READY** state.
 
-- latest files do not establish a known baseline;
-- requested changes are classified by semantic intent before textual diff size;
-- text-diff size does not measure engineering impact;
-- unchanged files do not prove that their evidence remains applicable;
-- board-only connector/pin/harness/FPGA mapping changes do not justify reusable-block redesign when published contracts remain satisfied;
-- population changes require re-solving every shared resource whose equation includes population, grouping, simultaneity, or package allocation;
-- old selection plus new intent is not a valid configuration;
-- deterministic regeneration is necessary but does not prove engineering equivalence;
-- same-looking schematic does not establish the same release identity when consumed authority/provenance differs;
-- targeted regression follows changed semantic claims and dependency closure rather than minimal convenient testing;
-- superseded baseline identity and negative evidence remain recoverable;
-- ordinary-controller diff review does not establish independent personnel-safety validation;
+The manifest is used only as inspected defect evidence, not assigned as finished student material. BD50 itself was re-opened from current main after commit and checked against the inspected sources.
+
+## Rules frozen by BD50
+
+- byte identity does not prove authorization;
+- canonical identity does not prove release equivalence;
+- visual identity does not prove semantic identity;
+- normalizable formatting is not automatically normalizable engineering meaning;
+- canonicalization may remove only variation proven non-semantic for that artifact class;
+- canonicalization must remove no engineering question;
+- repeated successful generation is not reproducibility without pinned inputs;
+- authority/provenance changes remain visible even when connectivity is unchanged;
+- unknown authority/canonicalization state fails closed;
+- stale authority is reconciled, not normalized away;
+- reusable electrical capability remains separate from board/machine configuration overlays;
+- ordinary-controller equivalence does not establish independent personnel-safety validation;
 - required executable verification uses only `[self-hosted, openpressbrake]`; unavailable authorized compute remains `BLOCKED/NOT_RUN`.
 
 ## Worked-example stress test
 
-Current OpenPressBrake `relay_contactor_driver` is a one-coil primitive. Each populated instance consumes one FPGA command output and two FPGA diagnostic inputs. Shared field-power/branch protection, installed count, physical connector, FPGA ball assignment, machine mapping, simultaneous-load assumptions, and final published current/repetition envelope remain board/integration responsibilities.
+Current OpenPressBrake analog-output integration makes a useful authority-equivalence example. The reusable primitive remains bipolar, but the current first-machine Rev1 handoff constrains Commander SK T4 to the manufacturer-established 0..10-V profile, keeps B5/B6 as separate ordinary direction inputs, prohibits intentional negative T4 command until installed parameter/configuration evidence supports otherwise, and preserves B4/wire 63 as retained independent Pilz authority.
 
-BD49 uses this to show why an `N -> N+1` population change is not a one-row edit: GPIO demand changes from `N` command outputs plus `2N` diagnostic inputs to `N+1` plus `2(N+1)`, while field distribution, branch protection, connector allocation, simultaneous-load/thermal assumptions, and PCB current paths must also be reconsidered. None of that justifies forking the reusable primitive into a machine-count variant.
+The authoritative `STATUS_CHECKLIST.md` explicitly says the first-machine profile is `CONFIGURATION_PENDING` and that the machine-readable command-profile overlay supersedes stale +/-10-V first-machine fields in the manifest. It also says the block is not yet SIMULATION-READY or SCHEMATIC-READY.
 
-The current block remains `SIMULATION-READY`. Final controller current/repetition/simultaneity qualification, fault/abnormal checks, PCB constraints, shared-resource closure, board integration, and human release remain open.
+Therefore two generated artifacts can be visually or electrically similar yet not be release-equivalent if one consumed current overlay authority and the other consumed a stale copied manifest assumption. This is an authority-consumption/catalog defect; it is not justification to narrow the reusable bipolar electrical primitive.
 
 ## Catalog stress-test result
 
-BD49 exposes a missing machine-readable **configuration-change and semantic-regeneration layer** above selection locks. It should connect authorized semantic intent changes to reverse dependencies, shared-resource re-solving, generated-output semantic diffs, evidence invalidation/preservation, targeted regression, candidate identity, and promotion/applicability decisions.
+BD50 exposes two related missing infrastructure layers:
 
-The relay-driver example adds an important integration requirement: per-instance resource demand is insufficient unless tooling can also identify board-owned resources whose closure depends on aggregate population, simultaneity, protection, connector, thermal, and current-path assumptions.
+1. a machine-readable canonical semantic model/digest for generated board artifacts, with versioned normalization rules by artifact class; and
+2. an authority-consumption consistency check that detects contradictions among manifests, overlays, status checklists, connection definitions, generated artifacts, and resource reports before generation or promotion.
+
+The current analog-output discrepancy demonstrates why generators must fail closed on unresolved authority precedence instead of selecting whichever file is easiest to parse.
 
 Proposed infrastructure remains `ENGINEERING_REVIEW_NEEDED`.
 
 ## Current repository reconciliation
 
-At run start the board-design checkpoint ended at BD48. Curriculum main also contained concurrent safety-course work, which remained intact. OpenPressBrake had advanced to active relay-driver Rev1 board-integration work.
+At run start the board-design checkpoint ended at BD49. Curriculum main also contained concurrent safety-course work, which remained intact. OpenPressBrake had advanced to active analog-output Rev1 board-integration work.
 
-BD49 was committed as `fd123e042529b9768aac88d43453f339a6f96340` and re-opened from current main. Immediately before this checkpoint write, curriculum main had BD49 as its newest commit. OpenPressBrake current main was `c551aa6dd366058def9b60f18267f20c4f0bb3e1` (`relay driver: publish Rev1 board integration handoff`). OpenPressBrake was consumed read-only; no active engineering artifact was overwritten.
+BD50 was committed as `f7a8c8f51616ec9b040b0ff175f08eac13864f0f` and re-opened from current main. Immediately before the checkpoint update, curriculum main still contained that lesson on top of the concurrent safety-course commits. OpenPressBrake current main observed for this run was `71d65e78a47ca212f6f9b1f5d726feded47859c2` (`analog output: publish Rev1 board integration handoff`). OpenPressBrake was consumed read-only; no active engineering artifact was overwritten.
 
 ## Next exact work
 
-Build BD50 on **generated-artifact equivalence, canonicalization, and reproducibility acceptance**:
+Build BD51 on **semantic digest schemas, authority precedence, and fail-closed source reconciliation**:
 
-`two candidate generations -> normalize non-semantic variation -> compare semantic model -> compare authority/provenance -> classify exact/equivalent/materially-different -> reproducibility evidence -> acceptance or investigation`
+`source artifacts -> authority precedence -> semantic extraction -> contradiction detection -> unresolved-fact handling -> canonical semantic digest -> generated-consumer lock -> stale-source rejection -> audit`
 
-Stress byte-different but semantically identical generated netlists, visually identical schematics with different authority inputs, reordered BOM/resource output, tool-version changes that alter formatting but not connectivity, and a change that appears cosmetic but changes default/output authority or current-return semantics.
+Re-open the then-current analog-output files before using the discrepancy again; do not assume the current mismatch persists after active engineering work.
 
 ## Compute
 
-No simulation, synthesis, place-and-route, timing run, or other executable engineering verification was justified for BD49. No GitHub-hosted runner was used.
+No simulation, synthesis, place-and-route, timing run, or other executable engineering verification was justified for BD50. No GitHub-hosted runner was used.
 
 ## Safety boundary
 
-BD49 teaches configuration change control and semantic diff review for ordinary controller hardware/configuration. It does not establish PL/SIL/category, stopping performance, final-element validation, or independent personnel-safety authority. An ordinary status-monitor, watchdog, inhibit, STO request, or enable-interface remap remains ordinary-controller work unless a separately engineered and validated safety architecture establishes more.
+BD50 teaches generated-artifact equivalence and reproducibility for ordinary controller hardware/configuration. It does not establish PL/SIL/category, stopping performance, final-element validation, or independent personnel-safety authority. Equivalent ordinary-control artifacts remain ordinary-control artifacts unless a separately engineered and validated safety architecture establishes more.

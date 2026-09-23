@@ -24,17 +24,19 @@ The repeatable safety-design methodology covers:
 
 `machine/lifecycle boundary -> hazardous event -> risk-reduction hierarchy -> physical safe-state proposition -> safety-function/SRS derivation -> composition/allocation -> fault analysis/diagnostic design -> architecture/dependency/CCF allocation -> integrity-method selection/target allocation -> verification/validation/physical proof -> commissioning/release -> maintenance/change control/revalidation`
 
-2520 through 2560 external information-separated competency execution remain OPEN and branch-local; do not self-score or contaminate them.
+2520 through 2570 external information-separated competency execution remain OPEN and branch-local; do not self-score or contaminate them.
 
 **2540 — Relays, contactors, and the real meaning of a “safety relay”** remains READY FOR EXTERNAL/FRESH EVALUATION with its existing learner route and no-solution handoff.
 
 **2550 — ISO 13849 without the mystique** remains READY FOR EXTERNAL/FRESH EVALUATION with explicit Category B/1/2/3/4 fault-behavior teaching, canonical learner route and no-solution handoff.
 
-**2560 — IEC 62061 / SIL concepts for machine builders** is READY FOR EXTERNAL/FRESH EVALUATION with its dual-method PL/SIL comparison, adversarial assessment, learner route and no-solution handoff.
+**2560 — IEC 62061 / SIL concepts for machine builders** remains READY FOR EXTERNAL/FRESH EVALUATION with its dual-method PL/SIL comparison, adversarial assessment, learner route and no-solution handoff.
 
-**2570 — Drives, STO, braking, and hazardous motion** is the active branch. `safety-course/2570_DRIVES_STO_BRAKING_HAZARDOUS_MOTION_SOURCE_PREP_2026-09-23.md` establishes the base drive-safety boundaries. `safety-course/2570_DRIVE_FUNCTION_PHYSICAL_PROPOSITION_MAP_2026-09-23.md` now maps SINAMICS S120 STO, SS1, SS2, SOS, SBC and SBT to exact physical propositions and non-propositions, traces spindle/coast and vertical/gravity hazards, and develops the syllabus-required ordinary-drive contactor fallback pattern using manufacturer evidence without claiming certification. `safety-course/2570_ADVERSARIAL_ASSESSMENT_DRIVE_SAFETY_2026-09-23.md` tests these boundaries.
+**2570 — Drives, STO, braking, and hazardous motion** is READY FOR EXTERNAL/FRESH EVALUATION. `safety-course/2570_ENTRY_MAP_AND_RELEASE_GATE_2026-09-23.md` confirms coverage of drive enable/STO, SS1/SS2/SOS, braking/holding, inertia/coast, gravity/external forces, ordinary-drive fallback, stored energy, reset/restart, isolation, LinuxCNC authority boundary and validation. `evaluation/2570_INFORMATION_SEPARATED_COMPETENCY_HANDOFF.md` preserves a no-solution external evaluation path.
 
-2570 freezes include: **STO ACTIVE != SHAFT STANDSTILL**, **STO ACTIVE != ELECTRICAL ISOLATION**, **TORQUE REMOVED != GRAVITY OR EXTERNAL FORCE CONTROLLED**, **STO != SS1 != SS2 != SOS**, **SAFE BRAKE COMMAND != LOAD PHYSICALLY RESTRAINED**, **TORQUE-PRODUCING CAPABILITY INHIBITED != MOTION PROVED STOPPED**, **SAFE MONITORED STANDSTILL != DE-ENERGIZED DRIVE**, **SAFE BRAKE COMMAND != MECHANICAL BRAKE EFFECT PROVED**, **SUCCESSFUL BRAKE TEST != PERMANENT BRAKE HEALTH**, **CONTACTOR POWER REMOVAL != INTEGRATED STO BY LABEL SUBSTITUTION**, **CONTACTOR OPEN != DC BUS PROVED SAFE**, and **SAFETY RESET != NORMAL MOTION START AUTHORIZATION**.
+**2580 — Hydraulic and pneumatic safety** is now the active branch. `safety-course/2580_HYDRAULIC_PNEUMATIC_SAFETY_SOURCE_PREP_2026-09-23.md` establishes the first physical-proposition map for pump shutdown, directional commands, monitored valve position, supply shutoff, dump/decompression, load holding, pressure sensing and mechanical restraint. Manufacturer evidence anchors hydraulic area shutoff, monitored press-control integration and hose-failure/load-holding architectures without transferring component claims to complete-machine claims.
+
+2580 freezes include: **PUMP OFF != HYDRAULIC ENERGY GONE**, **VALVE COMMANDED SAFE != VALVE PHYSICALLY SAFE**, **VALVE POSITION SAFE != DOWNSTREAM PRESSURE PROVED SAFE**, **SUPPLY SHUTOFF != TRAPPED ENERGY EXHAUSTED**, **DUMP COMMANDED != RESIDUAL PRESSURE PROVED SAFE**, **DIRECTIONAL NEUTRAL != GRAVITY LOAD HELD**, **PRESSURE LOW AT ONE SENSOR != ALL HAZARDOUS VOLUMES DE-ENERGIZED**, **ELECTRICAL STOP != HYDRAULIC/MECHANICAL SAFE STATE**, and **FUNCTIONAL FLUID-POWER SAFE STATE != MAINTENANCE ENERGY ISOLATION**.
 
 Core earlier freezes remain in force, especially: **VERIFIED DESIGN != VALIDATED MACHINE SAFETY FUNCTION**, **CATEGORY / ARCHITECTURE != ACHIEVED PL OR SIL**, **CERTIFIED COMPONENT CAPABILITY != COMPLETE SAFETY-FUNCTION INTEGRITY**, **DIAGNOSTIC COVERAGE CLAIM != PHYSICAL SAFE-STATE PROOF**, **DEVICE RELEASED != SAFETY FUNCTION RESET/REARMED != MACHINE START AUTHORIZED**, and **ORDINARY LINUXCNC/FPGA DIAGNOSTICS != PERSONNEL-SAFETY AUTHORITY**.
 
@@ -44,14 +46,15 @@ Durable foundation includes `hardware/BLOCK_SPEC_TEMPLATE.md`, `hardware/4000-bl
 
 ## Exact next work
 
-1. Preserve the 2520–2560 information-separated competency gates; do not contaminate them with learner-readable hidden solutions.
-2. Audit 2570 against the current safety-course syllabus, filling only genuine learner-facing gaps.
-3. If coherent, create the concise 2570 entry map/release gate and information-separated evaluator handoff.
-4. Then recover the next named safety-course module and begin authoritative source preparation rather than manufacturing additional 2570 material.
-5. Keep all absent machine stopping times, brake capacities, coast times, safe distances, load behavior and integrity claims UNKNOWN.
-6. Keep ordinary LinuxCNC/FPGA control, safety-related control, diagnostics/monitoring and physical energy-removal mechanisms explicitly separated.
+1. Preserve the 2520–2570 information-separated competency gates; do not contaminate them with learner-readable hidden solutions.
+2. Build the 2580 generic hydraulic press/vertical-axis fault tree backward from `hazardous closing/descent prevented`.
+3. Distinguish blocked-center, shutoff, dump/decompression and load-holding functions and add accumulator/trapped-volume plus hose/cylinder failure branches.
+4. Add the pneumatic analogue: safe exhaust, trapped downstream volume, gravity loads and restart/repressurization.
+5. Explicitly classify which risk reductions can be electrical and which require fluid-power or mechanical measures.
+6. Keep machine-specific hydraulic truth tables, pressure thresholds, stopping times, valve diagnostic coverage, PL/SIL and load capacity UNKNOWN unless applicable evidence exists.
+7. Keep ordinary LinuxCNC/FPGA control, safety-related control, diagnostics/monitoring and physical energy-removal mechanisms explicitly separated.
 
-Newest precise checkpoint: `checkpoints/2026-09-23T0750Z-safety-2570-coverage-next.md`.
+Newest precise checkpoint: `checkpoints/2026-09-23T0855Z-safety-2580-fault-tree-next.md`.
 
 ## Laboratory compute checkpoint
 

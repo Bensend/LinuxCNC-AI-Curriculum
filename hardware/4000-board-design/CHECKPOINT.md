@@ -4,80 +4,80 @@ Date: 2026-09-22
 
 ## Lane status
 
-Independent board-design curriculum lane remains active alongside the separate safety curriculum. Durable lessons BD01 through BD48 are present. This checkpoint is board-design authority only and does not alter safety-course progress authority.
+Independent board-design curriculum lane remains active alongside the separate safety curriculum. Durable lessons BD01 through BD49 are present. This checkpoint is board-design authority only and does not alter safety-course progress authority.
 
-New this run: `BD48_CONFIGURATION_SELECTION_CLOSURE_AMBIGUITY_RESOLUTION_AND_FAIL_CLOSED_BOARD_GENERATION.md`.
+New this run: `BD49_CONFIGURATION_CHANGE_CONTROL_DETERMINISTIC_REGENERATION_AND_SEMANTIC_DIFF_REVIEW.md`.
 
-BD48 teaches:
+BD49 teaches:
 
-`eligible authorities -> exact configuration intent -> compatibility/constraint solving -> ambiguity detection -> explicit selection/VERIFY_AT_MACHINE -> deterministic board/resource output -> provenance lock -> generation audit`
+`locked configuration -> requested change -> semantic intent diff -> affected authority/resource set -> re-solve -> deterministic regeneration -> semantic output diff -> targeted verification -> promotion/release decision`
 
-## BD48 hard student-material audit
+## BD49 hard student-material audit
 
-Every repository file named to students as finished material by BD48 was opened and inspected in current form during this run.
+Every repository file named to students as finished material by BD49 was opened and inspected in current form during this run.
 
 `VERIFIED_FOR_LESSON` for the bounded claims used:
 
-- Curriculum `hardware/4000-board-design/BD47_AUTHORITY_STATE_PROPAGATION_SUPERSESSION_SAFE_DISCOVERY_AND_CONFIGURATION_CONSUMPTION.md`
+- Curriculum `hardware/4000-board-design/BD48_CONFIGURATION_SELECTION_CLOSURE_AMBIGUITY_RESOLUTION_AND_FAIL_CLOSED_BOARD_GENERATION.md`
 - Curriculum `hardware/4000-board-design/CHECKPOINT.md` as it existed when work was selected
 - OpenPressBrake `hardware/blocks/STATUS_RULES.md`
 - OpenPressBrake `hardware/blocks/BLOCK_ADAPTER_INTEGRATION_RULES.md`
-- OpenPressBrake `hardware/blocks/machine_power/design/REV20_5V_ANALOG_CAPACITANCE_AND_BUCK_STARTUP_BOUNDARY.md` for current board-level startup/capacitance accounting and its explicit unresolved gates
-- OpenPressBrake `hardware/blocks/machine_power/STATUS_CHECKLIST.md` for current incomplete machine-power status and remaining ILIM/dVdT, core-load, exact-connectivity, PCB/integration, and release work
+- OpenPressBrake `hardware/blocks/relay_contactor_driver/manifest.yaml` for the current one-coil reusable contract and resource declaration
+- OpenPressBrake `hardware/blocks/relay_contactor_driver/REV1_BOARD_INTEGRATION_HANDOFF.md` for the current board-owned population, FPGA, connector, field-power, mapping, and current-envelope responsibilities
+- OpenPressBrake `hardware/blocks/relay_contactor_driver/STATUS_CHECKLIST.md` for current `SIMULATION-READY` status and remaining qualification/release gates
 
-The machine-power material is bounded board-integration evidence, not proof that `machine_power` is schematic-ready, production-proven, safety-rated, or `REV 1 READY`. The newly created BD48 lesson was re-opened from current main after commit and checked against these inspected sources.
+The relay-driver material is bounded integration evidence, not proof that `relay_contactor_driver` is schematic-ready, production-proven, safety-rated, or `REV 1 READY`. BD49 itself was re-opened from current main after commit and checked against these inspected sources.
 
-## Rules frozen by BD48
+## Rules frozen by BD49
 
-- individually eligible artifacts are not automatically jointly feasible;
-- catalog content does not define machine requirements;
-- hard constraints, engineering preferences, and unknown physical facts are distinct input classes;
-- an unknown physical fact is not a free design variable and remains `VERIFY_AT_MACHINE`/blocked unless the design truthfully covers all admissible cases;
-- first valid match is not a justified selection when multiple valid candidates remain;
-- configuration solving should report `UNIQUE_VALID_SELECTION`, `MULTIPLE_VALID_SELECTIONS`, `NO_VALID_SELECTION`, or `BLOCKED_UNKNOWN_FACT` rather than hiding ambiguity;
-- connection blocks own board-specific connector/pin/mapping/location/label facts, not hidden electrical transformation circuitry;
-- resource aggregation must preserve topology, domains, startup modes, package sharing, bank constraints, and return/current-path semantics;
-- a right numeric total on the wrong electrical node is not a valid resource budget;
-- partial deterministic accounting may be consumed without falsely closing unresolved component/configuration decisions;
-- deterministic generation requires an exact selection lock over intent, authorities, connection blocks, decisions, resource allocations, generator/schema version, and output identity;
-- generation success does not establish engineering closure;
-- a uniquely solvable ordinary-controller configuration does not establish independent personnel-safety validation;
+- latest files do not establish a known baseline;
+- requested changes are classified by semantic intent before textual diff size;
+- text-diff size does not measure engineering impact;
+- unchanged files do not prove that their evidence remains applicable;
+- board-only connector/pin/harness/FPGA mapping changes do not justify reusable-block redesign when published contracts remain satisfied;
+- population changes require re-solving every shared resource whose equation includes population, grouping, simultaneity, or package allocation;
+- old selection plus new intent is not a valid configuration;
+- deterministic regeneration is necessary but does not prove engineering equivalence;
+- same-looking schematic does not establish the same release identity when consumed authority/provenance differs;
+- targeted regression follows changed semantic claims and dependency closure rather than minimal convenient testing;
+- superseded baseline identity and negative evidence remain recoverable;
+- ordinary-controller diff review does not establish independent personnel-safety validation;
 - required executable verification uses only `[self-hosted, openpressbrake]`; unavailable authorized compute remains `BLOCKED/NOT_RUN`.
 
 ## Worked-example stress test
 
-Current OpenPressBrake machine-power Rev20 provides a bounded real partial-closure example. It freezes 15.3 uF nominal direct `5V_ANALOG` capacitance as a downstream LMR36520 startup load and 4.92 uF nominal direct `24V_LOGIC_PROTECTED` capacitance as the present simple TPS26633 protected-node inventory. Those values must not be summed across the buck as if they occupy one electrical node.
+Current OpenPressBrake `relay_contactor_driver` is a one-coil primitive. Each populated instance consumes one FPGA command output and two FPGA diagnostic inputs. Shared field-power/branch protection, installed count, physical connector, FPGA ball assignment, machine mapping, simultaneous-load assumptions, and final published current/repetition envelope remain board/integration responsibilities.
 
-The same current evidence explicitly leaves final TPS26633 dVdT unresolved pending effective 5-V MLCC capacitance, LMR36520 startup behavior into the real load/network, and final FPGA/core startup demand. The status checklist also leaves TPS26633 ILIM/dVdT, FPGA-core power, remaining low-voltage load aggregation, exact connectivity, PCB/integration qualification, and human release open.
+BD49 uses this to show why an `N -> N+1` population change is not a one-row edit: GPIO demand changes from `N` command outputs plus `2N` diagnostic inputs to `N+1` plus `2(N+1)`, while field distribution, branch protection, connector allocation, simultaneous-load/thermal assumptions, and PCB current paths must also be reconsidered. None of that justifies forking the reusable primitive into a machine-count variant.
 
-BD48 uses this to teach that automation may deterministically consume already frozen topology/accounting facts while refusing to fabricate a final component/programming decision from unresolved physical/electrical constraints.
+The current block remains `SIMULATION-READY`. Final controller current/repetition/simultaneity qualification, fault/abnormal checks, PCB constraints, shared-resource closure, board integration, and human release remain open.
 
 ## Catalog stress-test result
 
-BD48 exposes a missing machine-readable **configuration-selection closure layer** above authority-state filtering. It should combine exact board/machine intent, eligible block/adapter authorities, board-specific connection blocks, topology-aware FPGA/bus/power/connector constraints, preferences, unresolved machine facts, explicit ambiguity state, decision rationale, and generation provenance.
+BD49 exposes a missing machine-readable **configuration-change and semantic-regeneration layer** above selection locks. It should connect authorized semantic intent changes to reverse dependencies, shared-resource re-solving, generated-output semantic diffs, evidence invalidation/preservation, targeted regression, candidate identity, and promotion/applicability decisions.
 
-The worked example adds a key requirement: selection infrastructure must support **partial closure** so known resource/topology facts can advance without converting unresolved effective-capacitance/startup evidence into false finality.
+The relay-driver example adds an important integration requirement: per-instance resource demand is insufficient unless tooling can also identify board-owned resources whose closure depends on aggregate population, simultaneity, protection, connector, thermal, and current-path assumptions.
 
 Proposed infrastructure remains `ENGINEERING_REVIEW_NEEDED`.
 
 ## Current repository reconciliation
 
-At run start the board-design checkpoint ended at BD47. Curriculum main also contained concurrent safety-course work, which remained intact. OpenPressBrake had advanced beyond the prior motor-drive handoff into active machine-power and digital-input Rev-1 reconciliation.
+At run start the board-design checkpoint ended at BD48. Curriculum main also contained concurrent safety-course work, which remained intact. OpenPressBrake had advanced to active relay-driver Rev1 board-integration work.
 
-BD48 was committed as `5338c8c32f4d45a3c83b5b8c4add7260d02104d7` and re-opened from current main. Immediately before this checkpoint write, curriculum main had BD48 as its newest commit. OpenPressBrake current main was `2f41212b5405c3d62fa4d41f23258905c9044eb4` (`digital input: reconcile Rev1 EMC release gate`). OpenPressBrake was consumed read-only; no active engineering artifact was overwritten.
+BD49 was committed as `fd123e042529b9768aac88d43453f339a6f96340` and re-opened from current main. Immediately before this checkpoint write, curriculum main had BD49 as its newest commit. OpenPressBrake current main was `c551aa6dd366058def9b60f18267f20c4f0bb3e1` (`relay driver: publish Rev1 board integration handoff`). OpenPressBrake was consumed read-only; no active engineering artifact was overwritten.
 
 ## Next exact work
 
-Build BD49 on **configuration change control, deterministic regeneration, and semantic diff review**:
+Build BD50 on **generated-artifact equivalence, canonicalization, and reproducibility acceptance**:
 
-`locked configuration -> requested change -> semantic intent diff -> affected authority/resource set -> re-solve -> deterministic regeneration -> semantic output diff -> targeted verification -> promotion/release decision`
+`two candidate generations -> normalize non-semantic variation -> compare semantic model -> compare authority/provenance -> classify exact/equivalent/materially-different -> reproducibility evidence -> acceptance or investigation`
 
-Stress a one-channel population change that alters shared-package packing, a connector-only mapping change that must not trigger block redesign, an upstream block contract change that invalidates generated resource evidence, an apparently identical regenerated schematic produced from different authority inputs, and a safety-related interface change whose ordinary-controller diff review must not be represented as safety validation.
+Stress byte-different but semantically identical generated netlists, visually identical schematics with different authority inputs, reordered BOM/resource output, tool-version changes that alter formatting but not connectivity, and a change that appears cosmetic but changes default/output authority or current-return semantics.
 
 ## Compute
 
-No simulation, synthesis, place-and-route, timing run, or other executable engineering verification was justified for BD48. No GitHub-hosted runner was used.
+No simulation, synthesis, place-and-route, timing run, or other executable engineering verification was justified for BD49. No GitHub-hosted runner was used.
 
 ## Safety boundary
 
-BD48 teaches configuration closure and deterministic generation for ordinary controller hardware/configuration. It does not establish PL/SIL/category, stopping performance, final-element validation, or independent personnel-safety authority. A uniquely resolved status monitor, watchdog, inhibit, STO request, or interface remains an ordinary-controller function unless a separate safety-rated design and validation establishes more.
+BD49 teaches configuration change control and semantic diff review for ordinary controller hardware/configuration. It does not establish PL/SIL/category, stopping performance, final-element validation, or independent personnel-safety authority. An ordinary status-monitor, watchdog, inhibit, STO request, or enable-interface remap remains ordinary-controller work unless a separately engineered and validated safety architecture establishes more.

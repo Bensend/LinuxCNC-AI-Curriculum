@@ -1,36 +1,34 @@
 # Board-Design Curriculum Checkpoint
 
-Current durable lesson: **BD65 — KiCad Connection Generation, Provenance-Carrying Capture, and ERC Boundaries**
+Current durable lesson: **BD66 — Schematic Integration Reconciliation and Cross-Block Net Ownership**
 
-Curriculum lesson commit: `60b0505e11844df7f52f8d242101d3681d6ee1a0`.
+Curriculum lesson commit: `dd626c13b8aa0d7c28421bc60fdbee1bd6b4a10b`.
 
-OpenPressBrake engineering source inspected for BD65: `857108dc70c62bf4734dee5f4009f479d4ae51d4`.
+OpenPressBrake engineering source inspected for BD66: `fc47ed9b86db9998cad7549fce82a192809e4068`.
 
-## Verified student-facing sources for BD65
+## Verified student-facing sources for BD66
 
-- `hardware/CONNECTION_DEFINITION_CONTRACT.md` — VERIFIED_FOR_LESSON for connection ownership, machine-readable handoff, release gates and generator fail-closed behavior.
-- `hardware/connection_definition_schema.yaml` — VERIFIED_FOR_LESSON as the current fail-closed mold; checkpoint remains `SCHEMA_DEFINED_NOT_MIGRATED`.
-- `hardware/blocks/STATUS_RULES.md` — VERIFIED_FOR_LESSON for evidence/status truthfulness and the rule that passing automation proves only what it actually tests.
-- `board-design/BD64_CONNECTION_INSTANCE_CLOSURE_GENERATOR_READY.md` — VERIFIED_FOR_LESSON as the prerequisite closure/evidence-lock method.
+- `hardware/blocks/STATUS_RULES.md` — VERIFIED_FOR_LESSON for status truthfulness, primitive/shared-resource ownership and integration-versus-qualification boundaries.
+- `hardware/blocks/differential_encoder/integration/REV1_RESOURCE_CONTRACT.yaml` — VERIFIED_FOR_LESSON for current encoder resources, board-owned obligations, integration invariants and unresolved machine facts.
+- `hardware/blocks/differential_encoder/STATUS_CHECKLIST.md` — ENGINEERING_REVIEW_NEEDED as a complete current evidence inventory because it does not yet list the new resource contract; VERIFIED_FOR_LESSON only for bounded maturity/open-gate statements.
+- `board-design/BD65_KICAD_GENERATION_PROVENANCE_ERC_BOUNDARIES.md` — VERIFIED_FOR_LESSON as the prerequisite capture/ERC evidence-boundary method.
 
 ## Closure result
 
-BD65 freezes the rules `GENERATED != ENGINEERED` and `ERC-CLEAN != AUTHORITY-VALID`. Production KiCad generation may consume only BD64 capture-eligible facts; it may not turn `TBD` or `VERIFY_AT_MACHINE` into plausible production hardware. Generated connector objects should carry machine-readable provenance to exact connection, pin authority, functional block/resource contract, connector drawing, footprint, machine evidence and generator configuration.
+BD66 freezes the rule `BLOCK-CORRECT + BLOCK-CORRECT != BOARD-CORRECT`. Complete-board schematic review requires a semantic net graph that reconciles functional owner, electrical driver/load, power and typed return domains, protection-current return, shared-resource dependencies, startup/default state and FPGA/logical endpoints. ERC and semantic reconciliation are separate evidence records.
 
-ERC is treated as bounded downstream electrical-capture evidence. It does not prove connector identity, manufacturer pin numbering, footprint-pad correctness, derating, harness fit, service clearance, return/shield engineering, block qualification or safety authority.
-
-Because current OpenPressBrake connection authority still reports `SCHEMA_DEFINED_NOT_MIGRATED` and retains unresolved physical connector facts, BD65 intentionally uses a fail-closed review-fixture method rather than inventing a production connector merely to demonstrate generation/ERC.
+The current differential-encoder contract provides a bounded worked example: raw A/Abar, B/Bbar and Z/Zbar field pairs must pass through the AM26LV32E primitive; connector-edge protection returns to CHASSIS_PE; receiver LOGIC_3V3 capacity allocation is separate from encoder field power; termination population, field power, connector mapping, FPGA allocation and board-level bonding remain integration responsibilities.
 
 ## Catalog stress-test finding
 
-Current OpenPressBrake lacks a migrated release-consumable connection instance suitable as a truthful production KiCad-generation worked example. Treat this as ENGINEERING_REVIEW_NEEDED infrastructure. Later tooling should (1) enforce per-facet closure before production generation and (2) carry machine-readable provenance plus semantic-diff/reconciliation evidence for generated CAD objects.
+The newly published encoder `integration/REV1_RESOURCE_CONTRACT.yaml` is not yet indexed by the authoritative encoder `STATUS_CHECKLIST.md`, despite the maintenance rule requiring material integration evidence to update that checklist in the same change. Treat the checklist as ENGINEERING_REVIEW_NEEDED as a complete evidence index. The curriculum does not infer a status promotion from the new contract.
 
-OpenPressBrake remained read-only. Current main independently advanced `safety_interface` board-integration work during this run, so no overlapping engineering files were changed. No simulation, synthesis, timing, place-and-route, regression or other executable verification was required; no hosted compute was used.
+OpenPressBrake remained read-only because its latest main commit is the resource-contract change being audited and the active engineering lane owns that area. No simulation, synthesis, timing, place-and-route or other executable verification was required; no hosted compute was used.
 
 ## Next run
 
-Develop **BD66 — Schematic Integration Reconciliation and Cross-Block Net Ownership**:
+Develop **BD67 — Whole-Board Power/Return Graph and Fault-Containment Reconciliation**:
 
-`generated/captured blocks + connection definitions + shared resources -> complete schematic net graph -> owner/driver/load/return reconciliation -> power-domain and authority checks -> ERC/structural evidence -> integration defect loop -> accepted schematic baseline`.
+`accepted semantic net graph -> rail/source tree -> load allocations -> normal return graph -> transient/fault return graph -> enable/startup dependencies -> fault-containment boundaries -> board power acceptance`.
 
-Re-open every student-facing source on current main before assigning it. Use current OpenPressBrake integration evidence only within its actual maturity, and do not claim the current board is production-proven.
+Re-open every student-facing source on current main. Use current OpenPressBrake evidence only within its actual maturity, preserve VERIFY_AT_MACHINE facts, and do not claim the current board is production-proven.

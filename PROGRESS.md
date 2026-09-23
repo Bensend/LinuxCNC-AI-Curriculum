@@ -24,7 +24,7 @@ The repeatable safety-design methodology covers:
 
 `machine/lifecycle boundary -> hazardous event -> risk-reduction hierarchy -> physical safe-state proposition -> safety-function/SRS derivation -> composition/allocation -> fault analysis/diagnostic design -> architecture/dependency/CCF allocation -> integrity-method selection/target allocation -> verification/validation/physical proof -> commissioning/release -> maintenance/change control/revalidation`
 
-2520 through 2570 external information-separated competency execution remain OPEN and branch-local; do not self-score or contaminate them.
+2520 through 2580 external information-separated competency execution remain OPEN and branch-local; do not self-score or contaminate them.
 
 **2540 — Relays, contactors, and the real meaning of a “safety relay”** remains READY FOR EXTERNAL/FRESH EVALUATION with its existing learner route and no-solution handoff.
 
@@ -32,11 +32,13 @@ The repeatable safety-design methodology covers:
 
 **2560 — IEC 62061 / SIL concepts for machine builders** remains READY FOR EXTERNAL/FRESH EVALUATION with its dual-method PL/SIL comparison, adversarial assessment, learner route and no-solution handoff.
 
-**2570 — Drives, STO, braking, and hazardous motion** is READY FOR EXTERNAL/FRESH EVALUATION. `safety-course/2570_ENTRY_MAP_AND_RELEASE_GATE_2026-09-23.md` confirms coverage of drive enable/STO, SS1/SS2/SOS, braking/holding, inertia/coast, gravity/external forces, ordinary-drive fallback, stored energy, reset/restart, isolation, LinuxCNC authority boundary and validation. `evaluation/2570_INFORMATION_SEPARATED_COMPETENCY_HANDOFF.md` preserves a no-solution external evaluation path.
+**2570 — Drives, STO, braking, and hazardous motion** remains READY FOR EXTERNAL/FRESH EVALUATION with its drive-function physical-proposition map, ordinary-drive fallback, adversarial assessment, learner route and no-solution handoff.
 
-**2580 — Hydraulic and pneumatic safety** is the active branch. `safety-course/2580_HYDRAULIC_PNEUMATIC_SAFETY_SOURCE_PREP_2026-09-23.md` established the initial physical-proposition map. `safety-course/2580_FLUID_POWER_FAULT_TREE_AND_PNEUMATIC_ANALOGUE_2026-09-23.md` works backward from `hazardous closing/descent prevented`, explicitly separates directional blocking, supply isolation, decompression and load holding, and covers stuck-spool, leakage/drift, accumulator/trapped-volume, hose/fitting, cylinder/seal, diagnostic disagreement and common-hydraulic-path branches. `safety-course/2580_ADVERSARIAL_ASSESSMENT_FLUID_POWER_SAFE_STATE_2026-09-23.md` now tests those concepts across eight mixed hydraulic/pneumatic failure scenarios including common final elements, misleading pressure evidence, gravity load, hose failure, trapped pneumatic volume, hazardous repressurization, maintenance exposure and replacement drift.
+**2580 — Hydraulic and pneumatic safety** is READY FOR EXTERNAL/FRESH EVALUATION. `safety-course/2580_ENTRY_MAP_AND_RELEASE_GATE_2026-09-23.md` records a completed syllabus audit and canonical learner route. `evaluation/2580_INFORMATION_SEPARATED_COMPETENCY_HANDOFF.md` preserves a no-solution external evaluation path. The release gate confirms coverage of stored pressure/accumulators, gravity loads, directional blocking versus supply isolation versus decompression versus load holding, monitored/redundant final elements, trapped volumes, spool/hose/cylinder failures, pneumatic safe exhaust, controlled repressurization/restart, maintenance restraint and human factors. It is not self-graduated.
 
-2580 freezes include: **PUMP OFF != HYDRAULIC ENERGY GONE**, **VALVE COMMANDED SAFE != VALVE PHYSICALLY SAFE**, **VALVE POSITION SAFE != DOWNSTREAM PRESSURE PROVED SAFE**, **SUPPLY SHUTOFF != TRAPPED ENERGY EXHAUSTED**, **DUMP COMMANDED != RESIDUAL PRESSURE PROVED SAFE**, **DIRECTIONAL NEUTRAL != GRAVITY LOAD HELD**, **PRESSURE LOW AT ONE SENSOR != ALL HAZARDOUS VOLUMES DE-ENERGIZED**, **LOSS OF PUMP/ELECTRIC POWER != LOSS OF ACCUMULATOR ENERGY**, **REDUNDANT ELECTRICAL CHANNELS != REDUNDANT HYDRAULIC FINAL ELEMENTS**, **SAFE EXHAUST VALVE OPEN != EVERY DOWNSTREAM VOLUME PROVED DEPRESSURIZED**, **PNEUMATIC SUPPLY EXHAUSTED != GRAVITY LOAD RESTRAINED**, **SAFETY RESET != REPRESSURIZATION != MOTION START AUTHORIZATION**, and **FUNCTIONAL FLUID-POWER SAFE STATE != MAINTENANCE ENERGY ISOLATION**.
+**2590 — Guards, interlocks, presence sensing, and two-hand controls** is now the active branch. `safety-course/2590_GUARDS_INTERLOCKS_PRESENCE_SENSING_SOURCE_PREP_2026-09-23.md` establishes the first physical-access proposition map, separates guard interlocking from guard locking, ties presence-sensing position to actual stopping behavior, introduces pass-through/inside-zone and reset-visibility problems, and treats foreseeable defeat/usability as engineering inputs.
+
+2590 freezes include: **GUARD CLOSED != DANGEROUS STATE ENDED**, **GUARD INTERLOCKED != GUARD LOCKED**, **GUARD LOCKED != APPLICATION-SUFFICIENT HOLDING FORCE PROVED**, **LIGHT CURTAIN INTERRUPTED != MACHINE PHYSICALLY STOPPED**, **PROTECTIVE FIELD CLEAR != PROTECTED SPACE EMPTY**, **DEVICE RESPONSE TIME != COMPLETE MACHINE STOPPING TIME**, **SAFETY DISTANCE != A CATALOG CONSTANT**, **HIGH-CODING INTERLOCK != DEFEAT IMPOSSIBLE**, **SAFETY RESET != MACHINE START AUTHORIZATION**, and **ORDINARY LINUXCNC/FPGA GUARD LOGIC != PERSONNEL-SAFETY AUTHORITY**.
 
 Core earlier freezes remain in force, especially: **VERIFIED DESIGN != VALIDATED MACHINE SAFETY FUNCTION**, **CATEGORY / ARCHITECTURE != ACHIEVED PL OR SIL**, **CERTIFIED COMPONENT CAPABILITY != COMPLETE SAFETY-FUNCTION INTEGRITY**, **DIAGNOSTIC COVERAGE CLAIM != PHYSICAL SAFE-STATE PROOF**, **DEVICE RELEASED != SAFETY FUNCTION RESET/REARMED != MACHINE START AUTHORIZED**, and **ORDINARY LINUXCNC/FPGA DIAGNOSTICS != PERSONNEL-SAFETY AUTHORITY**.
 
@@ -46,15 +48,15 @@ Durable foundation includes `hardware/BLOCK_SPEC_TEMPLATE.md`, `hardware/4000-bl
 
 ## Exact next work
 
-1. Preserve the 2520–2570 information-separated competency gates; do not contaminate them with learner-readable hidden solutions.
-2. Audit 2580 syllabus coverage against the source prep, fault tree and adversarial assessment: stored energy, gravity loads, redundant/monitored valves, accumulators/trapped pressure, hose/cylinder failures, maintenance restraint, safe exhaust, repressurization/restart and human factors.
-3. Fill only genuine learner-facing gaps exposed by that audit.
-4. If coverage is coherent, create the concise 2580 learner route and information-separated evaluator handoff and mark READY FOR EXTERNAL/FRESH EVALUATION rather than self-graduating.
-5. Then rotate immediately to the next named safety module rather than manufacturing additional 2580 notes.
-6. Keep machine-specific hydraulic truth tables, pressure thresholds, stopping times, valve diagnostic coverage, PL/SIL and load capacity UNKNOWN unless applicable evidence exists.
-7. Keep ordinary LinuxCNC/FPGA control, safety-related control, diagnostics/monitoring and physical energy-removal mechanisms explicitly separated.
+1. Preserve the 2520–2580 information-separated competency gates; do not contaminate them with learner-readable hidden solutions.
+2. Continue 2590 with a safeguard-selection map distinguishing fixed guards, interlocked movable guards, guard locking, presence sensing, two-hand controls and enabling/hold-to-run by physical proposition and lifecycle use.
+3. Add an adversarial defeat analysis for mechanical, coded/non-contact and guard-locking devices; make safeguard usability/diagnostics part of the design rather than relying on warnings against bypass.
+4. Teach ISO 13855-style minimum-distance/stopping-time reasoning symbolically and with an explicitly sourced sample, keeping actual machine stopping time/distance UNKNOWN until measured/validated.
+5. Trace pass-through/inside-zone occupancy, reset visibility and restart prevention.
+6. Add authoritative two-hand anti-tie-down/concurrent-operation and enabling-device evidence.
+7. Keep maintenance energy isolation separate from production guarding and keep ordinary LinuxCNC/FPGA logic outside sole personnel-safety authority.
 
-Newest precise checkpoint: `checkpoints/2026-09-23T0940Z-safety-2580-coverage-audit-next.md`.
+Newest precise checkpoint: `checkpoints/2026-09-23T1048Z-safety-2590-selection-map-next.md`.
 
 ## Laboratory compute checkpoint
 

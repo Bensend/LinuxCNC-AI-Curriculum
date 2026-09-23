@@ -24,7 +24,7 @@ The repeatable safety-design methodology covers:
 
 `machine/lifecycle boundary -> hazardous event -> risk-reduction hierarchy -> physical safe-state proposition -> safety-function/SRS derivation -> composition/allocation -> fault analysis/diagnostic design -> architecture/dependency/CCF allocation -> integrity-method selection/target allocation -> verification/validation/physical proof -> commissioning/release -> maintenance/change control/revalidation`
 
-2520 through 2590 external information-separated competency execution remain OPEN and branch-local; do not self-score or contaminate them.
+2520 through 25A0 external information-separated competency execution remain OPEN and branch-local; do not self-score or contaminate them.
 
 **2540 — Relays, contactors, and the real meaning of a “safety relay”** remains READY FOR EXTERNAL/FRESH EVALUATION with its existing learner route and no-solution handoff.
 
@@ -36,11 +36,13 @@ The repeatable safety-design methodology covers:
 
 **2580 — Hydraulic and pneumatic safety** remains READY FOR EXTERNAL/FRESH EVALUATION with its completed syllabus audit, canonical learner route and no-solution handoff. It is not self-graduated.
 
-**2590 — Guards, interlocks, presence sensing, and two-hand controls** is READY FOR EXTERNAL/FRESH EVALUATION. Its line-item syllabus audit found no material learner-facing gap. `research/2590_ENTRY_MAP_AND_RELEASE_GATE_2026-09-23.md` provides the canonical route and `evaluation/2590_INFORMATION_SEPARATED_COMPETENCY_HANDOFF.md` provides a no-solution fresh-evaluation contract. Actual machine stopping behavior, safety distance, guard-lock force, setup-mode speed/force and integrity targets remain `UNKNOWN` until application evidence exists. It is not self-graduated.
+**2590 — Guards, interlocks, presence sensing, and two-hand controls** remains READY FOR EXTERNAL/FRESH EVALUATION with its completed syllabus audit, canonical learner route and no-solution handoff. Application-specific stopping behavior, safety distance and integrity targets remain UNKNOWN until evidence exists.
 
-**25A0 — Safety PLCs and programmable safety** is the active branch. Initial source preparation is now extended by `research/25A0_END_TO_END_AND_BLACK_CHANNEL_2026-09-23.md`, which traces a Siemens fail-safe-controller family across CPU/internal diagnostics -> F-DI diagnostics -> safety application -> F-DQ diagnostics -> external final element; adds a dry-contact/OSSD/PNP fault-detection matrix; separates PROFIsafe black-channel mechanisms from ordinary network availability; records an inspectable open assurance project with explicit non-certification limits; and adds an adversarial machine case where correct PLC logic still fails because field/timing/CCF/final-element assumptions are wrong.
+**25A0 — Safety PLCs and programmable safety** is now READY FOR EXTERNAL/FRESH EVALUATION. `research/25A0_LIFECYCLE_CHANGE_CONTROL_AND_RELEASE_GATE_2026-09-23.md` closes the lifecycle/change-control gap, adds configuration/signature/replacement/revalidation reasoning, a five-layer evidence-separation exercise, syllabus audit and canonical learner route. `evaluation/25A0_INFORMATION_SEPARATED_COMPETENCY_HANDOFF.md` is the no-solution fresh-evaluation contract. It is not self-graduated.
 
-25A0 freezes include: **SAFETY PLC INTERNAL DIAGNOSTICS != COMPLETE SAFETY FUNCTION VALIDATED**, **TEST PULSE PRESENT != EVERY WIRING FAULT DETECTED**, **TEST-PULSE DIAGNOSTIC != PHYSICAL SAFE-STATE PROOF**, **LONGER DISCREPANCY WINDOW != FREE NUISANCE-TRIP FIX**, **SAFE OUTPUT RATING MATCH != ACTUATOR TEST-PULSE COMPATIBILITY PROVED**, **CERTIFIED FUNCTION BLOCK != CERTIFIED MACHINE SAFETY FUNCTION**, **CORRECT SAFETY-PLC LOGIC != CORRECT FIELD ASSUMPTIONS**, **SAFE OUTPUT OFF != FINAL ELEMENT PHYSICALLY SAFE**, **TWO VALID INPUT BITS != TWO INDEPENDENT PHYSICAL SAFETY CHANNELS**, **ELECTRICAL FAULT DETECTION != COMMON-CAUSE CONTROL**, **LOGIC UNCHANGED != SAFETY FUNCTION UNCHANGED WHEN TIMING PARAMETERS CHANGE**, **BLACK-CHANNEL SAFETY != SAFETY-RATED ETHERNET**, **SAFETY TELEGRAM ACCEPTED != PHYSICAL SAFE STATE PROVED**, **COMMUNICATION TIMEOUT TO SAFE COMMAND != FINAL ELEMENT SUCCESS**, **OPEN SOURCE + TESTS != FUNCTIONAL-SAFETY CERTIFICATION**, and **SAFETY PROGRAM REVIEW PASS != MACHINE SAFETY VALIDATION PASS**.
+25A0 freezes include: **SAFETY PLC INTERNAL DIAGNOSTICS != COMPLETE SAFETY FUNCTION VALIDATED**, **TEST PULSE PRESENT != EVERY WIRING FAULT DETECTED**, **TEST-PULSE DIAGNOSTIC != PHYSICAL SAFE-STATE PROOF**, **SAFE OUTPUT OFF != FINAL ELEMENT PHYSICALLY SAFE**, **TWO VALID INPUT BITS != TWO INDEPENDENT PHYSICAL SAFETY CHANNELS**, **BLACK-CHANNEL SAFETY != SAFETY-RATED ETHERNET**, **SAFETY TELEGRAM ACCEPTED != PHYSICAL SAFE STATE PROVED**, **SAFETY PROGRAM REVIEW PASS != MACHINE SAFETY VALIDATION PASS**, **F-SW SIGNATURE UNCHANGED != COMPLETE SAFETY FUNCTION UNCHANGED**, and **PARAMETER-ONLY CHANGE != NON-SAFETY CHANGE**.
+
+**25B0 — Failure analysis and fault injection** is the active branch. `research/25B0_FAILURE_ANALYSIS_ENTRY_2026-09-23.md` defines the SRS-to-fault-to-evidence chain; separates FMEA/FMEDA/fault-tree roles; enumerates single, latent, CCF, power, wiring, final-element, feedback, software, network and configuration fault classes; defines a guarded-spindle fault-tree example; and imposes a question-driven fault-injection rule. No executable lab is justified yet.
 
 Core earlier freezes remain in force, especially: **VERIFIED DESIGN != VALIDATED MACHINE SAFETY FUNCTION**, **CATEGORY / ARCHITECTURE != ACHIEVED PL OR SIL**, **CERTIFIED COMPONENT CAPABILITY != COMPLETE SAFETY-FUNCTION INTEGRITY**, **DIAGNOSTIC COVERAGE CLAIM != PHYSICAL SAFE-STATE PROOF**, **DEVICE RELEASED != SAFETY FUNCTION RESET/REARMED != MACHINE START AUTHORIZED**, and **ORDINARY LINUXCNC/FPGA DIAGNOSTICS != PERSONNEL-SAFETY AUTHORITY**.
 
@@ -50,14 +52,14 @@ Durable foundation includes `hardware/BLOCK_SPEC_TEMPLATE.md`, `hardware/4000-bl
 
 ## Exact next work
 
-1. Preserve the 2520–2590 information-separated competency gates; do not contaminate them with learner-readable hidden solutions.
-2. Perform a 25A0 syllabus/competency coverage audit and fill only a material learner-facing gap.
-3. Strengthen programmable-safety lifecycle/change-control coverage if needed: configuration/version identity, parameter changes, replacement hardware/firmware, proof-test assumptions and revalidation triggers.
-4. Add a compact learner exercise separating input-diagnostic, safety-program, communication, final-element and physical-safe-state evidence.
-5. If coverage is coherent, create the canonical 25A0 learner route and information-separated evaluator handoff; mark READY FOR EXTERNAL/FRESH EVALUATION rather than self-graduating.
-6. Rotate immediately to the next named safety-course module after 25A0 when its release gate is ready.
+1. Preserve the 2520–25A0 information-separated competency gates; do not contaminate them with learner-readable hidden solutions.
+2. Continue 25B0 with a machine-neutral fault-injection matrix across power, wiring, sensor, logic, communication, final-element and physical-state faults.
+3. Add latent-fault and common-cause examples demonstrating limits of sequential single-fault tests.
+4. Build the safe test-selection hierarchy from authoritative source/static reasoning through low-energy/isolated tests; do not run machine tests merely for activity.
+5. Add adversarial cases for frozen plausible feedback, welded output plus misleading feedback, stuck valve, corrupted parameters and network timeout.
+6. Freeze executable compute only if a concrete unresolved question survives source/engineering analysis; if so use `[self-hosted, openpressbrake]` only.
 
-Newest precise checkpoint: `checkpoints/2026-09-23T1349Z-safety-25A0-integration-next.md`.
+Newest precise checkpoint: `checkpoints/2026-09-23T1448Z-safety-25B0-failure-analysis-next.md`.
 
 ## Laboratory compute checkpoint
 

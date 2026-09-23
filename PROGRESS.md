@@ -38,11 +38,11 @@ The repeatable safety-design methodology covers:
 
 **2590 — Guards, interlocks, presence sensing, and two-hand controls** remains READY FOR EXTERNAL/FRESH EVALUATION with its completed syllabus audit, canonical learner route and no-solution handoff. Application-specific stopping behavior, safety distance and integrity targets remain UNKNOWN until evidence exists.
 
-**25A0 — Safety PLCs and programmable safety** is now READY FOR EXTERNAL/FRESH EVALUATION. `research/25A0_LIFECYCLE_CHANGE_CONTROL_AND_RELEASE_GATE_2026-09-23.md` closes the lifecycle/change-control gap, adds configuration/signature/replacement/revalidation reasoning, a five-layer evidence-separation exercise, syllabus audit and canonical learner route. `evaluation/25A0_INFORMATION_SEPARATED_COMPETENCY_HANDOFF.md` is the no-solution fresh-evaluation contract. It is not self-graduated.
+**25A0 — Safety PLCs and programmable safety** is READY FOR EXTERNAL/FRESH EVALUATION. `research/25A0_LIFECYCLE_CHANGE_CONTROL_AND_RELEASE_GATE_2026-09-23.md` closes lifecycle/change-control, configuration/signature/replacement/revalidation and evidence-separation coverage. `evaluation/25A0_INFORMATION_SEPARATED_COMPETENCY_HANDOFF.md` is the no-solution fresh-evaluation contract. It is not self-graduated.
 
-25A0 freezes include: **SAFETY PLC INTERNAL DIAGNOSTICS != COMPLETE SAFETY FUNCTION VALIDATED**, **TEST PULSE PRESENT != EVERY WIRING FAULT DETECTED**, **TEST-PULSE DIAGNOSTIC != PHYSICAL SAFE-STATE PROOF**, **SAFE OUTPUT OFF != FINAL ELEMENT PHYSICALLY SAFE**, **TWO VALID INPUT BITS != TWO INDEPENDENT PHYSICAL SAFETY CHANNELS**, **BLACK-CHANNEL SAFETY != SAFETY-RATED ETHERNET**, **SAFETY TELEGRAM ACCEPTED != PHYSICAL SAFE STATE PROVED**, **SAFETY PROGRAM REVIEW PASS != MACHINE SAFETY VALIDATION PASS**, **F-SW SIGNATURE UNCHANGED != COMPLETE SAFETY FUNCTION UNCHANGED**, and **PARAMETER-ONLY CHANGE != NON-SAFETY CHANGE**.
+**25B0 — Failure analysis and fault injection** is the active branch. `research/25B0_FAILURE_ANALYSIS_ENTRY_2026-09-23.md` defines the SRS-to-fault-to-evidence chain, FMEA/FMEDA/fault-tree roles and question-driven injection rule. `research/25B0_FAULT_INJECTION_MATRIX_2026-09-23.md` now spans power, wiring, sensor, logic, configuration, communication, output, final-element and physical-state faults; demonstrates latent-fault and CCF failures missed by naive single-fault testing; defines the source/static/low-energy/isolated/remote-machine test hierarchy; and supplies adversarial frozen-feedback, welded-contactor, stuck-valve, corrupted-parameter and network-timeout cases. No executable lab is justified yet.
 
-**25B0 — Failure analysis and fault injection** is the active branch. `research/25B0_FAILURE_ANALYSIS_ENTRY_2026-09-23.md` defines the SRS-to-fault-to-evidence chain; separates FMEA/FMEDA/fault-tree roles; enumerates single, latent, CCF, power, wiring, final-element, feedback, software, network and configuration fault classes; defines a guarded-spindle fault-tree example; and imposes a question-driven fault-injection rule. No executable lab is justified yet.
+25B0 freezes include **FAULT INJECTION COUNT != DIAGNOSTIC COVERAGE**, **FAULT DETECTED != PHYSICAL SAFE STATE ACHIEVED**, **SINGLE-FAULT TEST PASS != COMMON-CAUSE RESILIENCE PROVED**, **SOFTWARE-INJECTED FAULT != PHYSICAL FAILURE EQUIVALENCE PROVED**, **FIRST FAULT TOLERATED != FIRST FAULT SAFELY DIAGNOSED**, and **TWO SINGLE-CHANNEL TESTS PASS != COMMON-CAUSE PATH TESTED**.
 
 Core earlier freezes remain in force, especially: **VERIFIED DESIGN != VALIDATED MACHINE SAFETY FUNCTION**, **CATEGORY / ARCHITECTURE != ACHIEVED PL OR SIL**, **CERTIFIED COMPONENT CAPABILITY != COMPLETE SAFETY-FUNCTION INTEGRITY**, **DIAGNOSTIC COVERAGE CLAIM != PHYSICAL SAFE-STATE PROOF**, **DEVICE RELEASED != SAFETY FUNCTION RESET/REARMED != MACHINE START AUTHORIZED**, and **ORDINARY LINUXCNC/FPGA DIAGNOSTICS != PERSONNEL-SAFETY AUTHORITY**.
 
@@ -53,11 +53,11 @@ Durable foundation includes `hardware/BLOCK_SPEC_TEMPLATE.md`, `hardware/4000-bl
 ## Exact next work
 
 1. Preserve the 2520–25A0 information-separated competency gates; do not contaminate them with learner-readable hidden solutions.
-2. Continue 25B0 with a machine-neutral fault-injection matrix across power, wiring, sensor, logic, communication, final-element and physical-state faults.
-3. Add latent-fault and common-cause examples demonstrating limits of sequential single-fault tests.
-4. Build the safe test-selection hierarchy from authoritative source/static reasoning through low-energy/isolated tests; do not run machine tests merely for activity.
-5. Add adversarial cases for frozen plausible feedback, welded output plus misleading feedback, stuck valve, corrupted parameters and network timeout.
-6. Freeze executable compute only if a concrete unresolved question survives source/engineering analysis; if so use `[self-hosted, openpressbrake]` only.
+2. Turn the 25B0 adversarial cases into an information-separated competency exercise.
+3. Strengthen quantitative boundaries: when FMEDA/diagnostic-coverage arithmetic is justified versus when absent source data requires qualitative fault analysis.
+4. Add proof-test/latent-fault interval reasoning without inventing application intervals or failure rates.
+5. Audit 25B0 syllabus coverage and fill only genuine learner-facing gaps.
+6. Freeze executable compute only if a concrete unresolved implementation question survives authoritative source/engineering analysis; use `[self-hosted, openpressbrake]` only.
 
 Newest precise checkpoint: `checkpoints/2026-09-23T1448Z-safety-25B0-failure-analysis-next.md`.
 

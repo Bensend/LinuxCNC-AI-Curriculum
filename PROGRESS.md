@@ -24,7 +24,7 @@ The repeatable safety-design methodology covers:
 
 `machine/lifecycle boundary -> hazardous event -> risk-reduction hierarchy -> physical safe-state proposition -> safety-function/SRS derivation -> composition/allocation -> fault analysis/diagnostic design -> architecture/dependency/CCF allocation -> integrity-method selection/target allocation -> verification/validation/physical proof -> commissioning/release -> maintenance/change control/revalidation`
 
-2520 through 25C0 external information-separated competency execution remain OPEN and branch-local; do not self-score or contaminate them.
+2520 through 25D0 external information-separated competency execution remain OPEN and branch-local; do not self-score or contaminate them.
 
 **2540 — Relays, contactors, and the real meaning of a “safety relay”** remains READY FOR EXTERNAL/FRESH EVALUATION with its existing learner route and no-solution handoff.
 
@@ -42,11 +42,13 @@ The repeatable safety-design methodology covers:
 
 **25B0 — Failure analysis and fault injection** remains READY FOR EXTERNAL/FRESH EVALUATION with its quantitative/DC/proof-test boundary, canonical learner route and no-solution evaluator contract. Percentage of hand-selected injections is not DCavg and missing quantitative inputs remain UNKNOWN.
 
-**25C0 — Designing for humans who will defeat safeguards** is READY FOR EXTERNAL/FRESH EVALUATION, not self-graduated. Reset/restart/visibility/setup evidence, canonical learner route and no-solution external gate are durable.
+**25C0 — Designing for humans who will defeat safeguards** remains READY FOR EXTERNAL/FRESH EVALUATION, not self-graduated. Reset/restart/visibility/setup evidence, canonical learner route and no-solution external gate are durable.
 
-**25D0 — Low-cost safety architectures** is the active branch. `research/25D0_LOW_COST_ARCHITECTURES_ENTRY_2026-09-23.md` defines the comparison contract and Tier A-E ladder. `research/25D0_TIER_ABC_FAULT_COMPARISON_2026-09-23.md` compares Tier A single-path, Tier B dual-channel safety-module and Tier C redundant-final-element + EDM architectures. `research/25D0_VFD_STO_AND_FLUID_POWER_COMPARISON_2026-09-23.md` now completes the requested drive comparison and retains Tier E as a materially necessary fluid-power competency. ABB/Rockwell evidence bounds integrated STO to prevention of drive-generated torque under stated assumptions, not standstill/electrical isolation/stored-energy discharge. Tier E explicitly separates supply isolation, dump/decompression and load holding/restraint without inventing machine-specific hydraulic truth. Current source work still does not justify comparable public dollar pricing, so cost remains expressed as named proposition/failure path bought rather than fabricated figures.
+**25D0 — Low-cost safety architectures** is READY FOR EXTERNAL/FRESH EVALUATION, not self-graduated. The syllabus audit found one real gap: a dedicated low-cost guard-interlock reference comparison. `research/25D0_GUARD_INTERLOCK_LOW_COST_COMPARISON_2026-09-23.md` now closes it while preserving guard-closed/interlocked/locked versus dangerous-state-ended distinctions. `research/25D0_COVERAGE_AUDIT_AND_LEARNER_ROUTE_2026-09-23.md` is the canonical route/release gate and `evaluation/25D0_INFORMATION_SEPARATED_COMPETENCY_HANDOFF.md` is the no-solution external evaluator contract. Actual dollar pricing remains unfrozen absent traceable like-for-like current sources.
 
-Core freezes remain in force, especially: **VERIFIED DESIGN != VALIDATED MACHINE SAFETY FUNCTION**, **FAULT DETECTED != PHYSICAL SAFE STATE ACHIEVED**, **LOW COST != LOW RIGOR**, **MORE COMPONENTS != MORE SAFETY**, **EDM HEALTHY != PHYSICAL SAFE STATE PROVED**, **SAFETY RELAY OUTPUT OFF != FINAL ENERGY PATH OPEN PROVED**, **DUAL CHANNEL INPUT != REDUNDANT FINAL ELEMENT**, **STO ACTIVE != MOTOR STANDSTILL PROVED**, **STO ACTIVE != ELECTRICAL ISOLATION**, **SUPPLY ISOLATED != DOWNSTREAM PRESSURE EXHAUSTED**, **DUMP COMMANDED != PRESSURE SAFE PROVED**, **COMPONENT PL/SIL CLAIM != MACHINE SAFETY FUNCTION PL/SIL CLAIM**, and **ORDINARY LINUXCNC/FPGA DIAGNOSTICS != PERSONNEL-SAFETY AUTHORITY**.
+**25E0 — Validation, commissioning, and proof testing** is now the active branch. `research/25E0_VALIDATION_COMMISSIONING_ENTRY_2026-09-23.md` establishes the canonical syllabus entry: verification versus validation versus commissioning; SRS-derived test traceability; commissioning evidence bundles; physical stopping-time evidence; proof-test purpose; change/revalidation triggers; safe test escalation; and the ordinary LinuxCNC/FPGA evidence boundary. Earlier 25E0 muting/override/intentional-exception artifacts are retained as specialist validation/adversarial evidence rather than allowed to replace the core validation syllabus.
+
+Core freezes remain in force, especially: **VERIFIED DESIGN != VALIDATED MACHINE SAFETY FUNCTION**, **FAULT DETECTED != PHYSICAL SAFE STATE ACHIEVED**, **LOW COST != LOW RIGOR**, **MORE COMPONENTS != MORE SAFETY**, **EDM HEALTHY != PHYSICAL SAFE STATE PROVED**, **SAFETY RELAY OUTPUT OFF != FINAL ENERGY PATH OPEN PROVED**, **DUAL CHANNEL INPUT != REDUNDANT FINAL ELEMENT**, **STO ACTIVE != MOTOR STANDSTILL PROVED**, **STO ACTIVE != ELECTRICAL ISOLATION**, **SUPPLY ISOLATED != DOWNSTREAM PRESSURE EXHAUSTED**, **DUMP COMMANDED != PRESSURE SAFE PROVED**, **GUARD CLOSED != DANGEROUS STATE ENDED**, **COMPONENT PL/SIL CLAIM != MACHINE SAFETY FUNCTION PL/SIL CLAIM**, **UNCHANGED SAFETY PROGRAM != UNCHANGED VALIDATED SAFETY FUNCTION**, and **ORDINARY LINUXCNC/FPGA DIAGNOSTICS != PERSONNEL-SAFETY AUTHORITY**.
 
 ## 4000 foundation/core
 
@@ -54,15 +56,15 @@ Durable foundation includes `hardware/BLOCK_SPEC_TEMPLATE.md`, `hardware/4000-bl
 
 ## Exact next work
 
-1. Preserve the 2520–25C0 information-separated competency gates; do not contaminate them.
-2. Audit 25D0 line-by-line against its current safety-course syllabus and competency requirements.
-3. Fill only a genuine learner-facing gap; otherwise create the canonical learner route/release gate and separate no-solution information-separated evaluator handoff.
-4. Mark 25D0 READY FOR EXTERNAL/FRESH EVALUATION rather than self-graduating if the audit is coherent.
-5. Keep all physical propositions bounded: STO is not standstill/isolation; external switching is not stored-energy proof; fluid supply isolation is not decompression/load holding; maintenance isolation remains separately justified.
-6. Add actual cost figures only if traceable like-for-like current sources exist; otherwise preserve cost classes and explain what each increment buys.
+1. Preserve the 2520–25D0 information-separated competency gates; do not contaminate them.
+2. Continue 25E0 from `research/25E0_VALIDATION_COMMISSIONING_ENTRY_2026-09-23.md`.
+3. Build an SRS-to-validation matrix spanning E-stop, guard/interlock, STO/coast, fluid-power safe state and reset/restart; tie every test to a physical proposition and acceptance evidence.
+4. Add adversarial commissioning cases where command/status bits pass while physical validation fails.
+5. Reconcile the existing 25E0 exceptional-mode/muting/override artifacts into the canonical validation syllabus and production-return/change-control path without duplicating them.
+6. Strengthen stopping-time measurement, periodic proof-test and revalidation-trigger reasoning from authoritative evidence; do not invent machine-specific intervals, thresholds or integrity claims.
 7. Freeze executable compute only if a concrete unresolved implementation question survives authoritative evidence; use `[self-hosted, openpressbrake]` only.
 
-Newest precise checkpoint: `checkpoints/2026-09-23T1836Z-safety-25D0-audit-next.md`.
+Newest precise checkpoint: `checkpoints/2026-09-23T1948Z-safety-25E0-validation-next.md`.
 
 ## Laboratory compute checkpoint
 

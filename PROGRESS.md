@@ -34,9 +34,9 @@ The repeatable safety-design methodology covers:
 
 **2570 — Drives, STO, braking, and hazardous motion** is READY FOR EXTERNAL/FRESH EVALUATION. `safety-course/2570_ENTRY_MAP_AND_RELEASE_GATE_2026-09-23.md` confirms coverage of drive enable/STO, SS1/SS2/SOS, braking/holding, inertia/coast, gravity/external forces, ordinary-drive fallback, stored energy, reset/restart, isolation, LinuxCNC authority boundary and validation. `evaluation/2570_INFORMATION_SEPARATED_COMPETENCY_HANDOFF.md` preserves a no-solution external evaluation path.
 
-**2580 — Hydraulic and pneumatic safety** is now the active branch. `safety-course/2580_HYDRAULIC_PNEUMATIC_SAFETY_SOURCE_PREP_2026-09-23.md` establishes the first physical-proposition map for pump shutdown, directional commands, monitored valve position, supply shutoff, dump/decompression, load holding, pressure sensing and mechanical restraint. Manufacturer evidence anchors hydraulic area shutoff, monitored press-control integration and hose-failure/load-holding architectures without transferring component claims to complete-machine claims.
+**2580 — Hydraulic and pneumatic safety** is the active branch. `safety-course/2580_HYDRAULIC_PNEUMATIC_SAFETY_SOURCE_PREP_2026-09-23.md` established the initial physical-proposition map. `safety-course/2580_FLUID_POWER_FAULT_TREE_AND_PNEUMATIC_ANALOGUE_2026-09-23.md` now works backward from `hazardous closing/descent prevented`, explicitly separates directional blocking, supply isolation, decompression and load holding, and adds stuck-spool, leakage/drift, accumulator/trapped-volume, hose/fitting, cylinder/seal, diagnostic disagreement and common-hydraulic-path branches. It also adds the pneumatic safe-exhaust/repressurization analogue using current Festo and SMC manufacturer evidence.
 
-2580 freezes include: **PUMP OFF != HYDRAULIC ENERGY GONE**, **VALVE COMMANDED SAFE != VALVE PHYSICALLY SAFE**, **VALVE POSITION SAFE != DOWNSTREAM PRESSURE PROVED SAFE**, **SUPPLY SHUTOFF != TRAPPED ENERGY EXHAUSTED**, **DUMP COMMANDED != RESIDUAL PRESSURE PROVED SAFE**, **DIRECTIONAL NEUTRAL != GRAVITY LOAD HELD**, **PRESSURE LOW AT ONE SENSOR != ALL HAZARDOUS VOLUMES DE-ENERGIZED**, **ELECTRICAL STOP != HYDRAULIC/MECHANICAL SAFE STATE**, and **FUNCTIONAL FLUID-POWER SAFE STATE != MAINTENANCE ENERGY ISOLATION**.
+2580 freezes now include: **PUMP OFF != HYDRAULIC ENERGY GONE**, **VALVE COMMANDED SAFE != VALVE PHYSICALLY SAFE**, **VALVE POSITION SAFE != DOWNSTREAM PRESSURE PROVED SAFE**, **SUPPLY SHUTOFF != TRAPPED ENERGY EXHAUSTED**, **DUMP COMMANDED != RESIDUAL PRESSURE PROVED SAFE**, **DIRECTIONAL NEUTRAL != GRAVITY LOAD HELD**, **PRESSURE LOW AT ONE SENSOR != ALL HAZARDOUS VOLUMES DE-ENERGIZED**, **LOSS OF PUMP/ELECTRIC POWER != LOSS OF ACCUMULATOR ENERGY**, **REDUNDANT ELECTRICAL CHANNELS != REDUNDANT HYDRAULIC FINAL ELEMENTS**, **SAFE EXHAUST VALVE OPEN != EVERY DOWNSTREAM VOLUME PROVED DEPRESSURIZED**, **PNEUMATIC SUPPLY EXHAUSTED != GRAVITY LOAD RESTRAINED**, **SAFETY RESET != REPRESSURIZATION != MOTION START AUTHORIZATION**, and **FUNCTIONAL FLUID-POWER SAFE STATE != MAINTENANCE ENERGY ISOLATION**.
 
 Core earlier freezes remain in force, especially: **VERIFIED DESIGN != VALIDATED MACHINE SAFETY FUNCTION**, **CATEGORY / ARCHITECTURE != ACHIEVED PL OR SIL**, **CERTIFIED COMPONENT CAPABILITY != COMPLETE SAFETY-FUNCTION INTEGRITY**, **DIAGNOSTIC COVERAGE CLAIM != PHYSICAL SAFE-STATE PROOF**, **DEVICE RELEASED != SAFETY FUNCTION RESET/REARMED != MACHINE START AUTHORIZED**, and **ORDINARY LINUXCNC/FPGA DIAGNOSTICS != PERSONNEL-SAFETY AUTHORITY**.
 
@@ -47,14 +47,14 @@ Durable foundation includes `hardware/BLOCK_SPEC_TEMPLATE.md`, `hardware/4000-bl
 ## Exact next work
 
 1. Preserve the 2520–2570 information-separated competency gates; do not contaminate them with learner-readable hidden solutions.
-2. Build the 2580 generic hydraulic press/vertical-axis fault tree backward from `hazardous closing/descent prevented`.
-3. Distinguish blocked-center, shutoff, dump/decompression and load-holding functions and add accumulator/trapped-volume plus hose/cylinder failure branches.
-4. Add the pneumatic analogue: safe exhaust, trapped downstream volume, gravity loads and restart/repressurization.
-5. Explicitly classify which risk reductions can be electrical and which require fluid-power or mechanical measures.
+2. Build the 2580 adversarial assessment around a mixed hydraulic/pneumatic machine with gravity load, accumulator/trapped energy, monitored valves, hose/cylinder failure and maintenance access.
+3. Require the learner to state, for each diagnostic witness, exactly what it proves and what physical proposition remains unproved.
+4. Audit 2580 syllabus coverage for stored energy, gravity loads, redundant/monitored valves, accumulators/trapped pressure, hose/cylinder failures, maintenance restraint, safe exhaust and repressurization/restart human factors.
+5. If coverage is coherent, create the concise 2580 learner route and information-separated evaluator handoff, then rotate to the next named safety module.
 6. Keep machine-specific hydraulic truth tables, pressure thresholds, stopping times, valve diagnostic coverage, PL/SIL and load capacity UNKNOWN unless applicable evidence exists.
 7. Keep ordinary LinuxCNC/FPGA control, safety-related control, diagnostics/monitoring and physical energy-removal mechanisms explicitly separated.
 
-Newest precise checkpoint: `checkpoints/2026-09-23T0855Z-safety-2580-fault-tree-next.md`.
+Newest precise checkpoint: `checkpoints/2026-09-23T0952Z-safety-2580-assessment-next.md`.
 
 ## Laboratory compute checkpoint
 

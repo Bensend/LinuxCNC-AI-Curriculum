@@ -4,86 +4,88 @@ Date: 2026-09-23
 
 ## Lane status
 
-Independent board-design curriculum lane remains active alongside the separate safety curriculum. Durable lessons BD01 through BD54 are present. This checkpoint is board-design authority only and does not alter safety-course progress authority.
+Independent board-design curriculum lane remains active alongside the separate safety curriculum. Durable lessons BD01 through BD55 are present. This checkpoint is board-design authority only and does not alter safety-course progress authority.
 
-New this run: `BD54_SEMANTIC_DEPENDENCY_COVERAGE_MUTATION_TESTING_AND_VALIDATOR_ADEQUACY.md`.
+New this run: `BD55_VALIDATOR_EVIDENCE_PROVENANCE_EXECUTION_IDENTITY_AND_REGRESSION_RESULT_PROMOTION.md`.
 
-BD54 teaches:
+BD55 teaches:
 
-`semantic rules -> validator claims -> targeted mutations -> expected detection -> undetected mutation analysis -> dependency-coverage map -> validator improvement -> adequacy gate`
+`validator source + claim set + mutation corpus + exact execution environment -> pinned result identity -> result-to-claim mapping -> stale-result detection -> promotion gate -> release evidence`
 
-## BD54 hard student-material audit
+## BD55 hard student-material audit
 
-Every repository file named to students as finished material by BD54 was opened and inspected in current form during this run.
+Every repository file named to students as finished material by BD55 was opened and inspected in current form during this run.
 
 `VERIFIED_FOR_LESSON` for bounded claims used:
 
 - Curriculum `README.md`
-- Curriculum `hardware/4000-board-design/BD53_SEMANTIC_MIGRATION_VERIFICATION_GOLDEN_CORPORA_AND_NEGATIVE_COMPATIBILITY_TESTS.md`
+- Curriculum `hardware/4000-board-design/BD54_SEMANTIC_DEPENDENCY_COVERAGE_MUTATION_TESTING_AND_VALIDATOR_ADEQUACY.md`
 - Curriculum `hardware/4000-board-design/CHECKPOINT.md` as it existed when work was selected
 - OpenPressBrake `hardware/blocks/STATUS_RULES.md`
 - OpenPressBrake `hardware/blocks/BLOCK_ADAPTER_INTEGRATION_RULES.md`
-- OpenPressBrake `hardware/blocks/safety_interface/REV1_STRUCTURAL_COMPOSITION_CONTRACT.yaml`
-- OpenPressBrake `hardware/blocks/safety_interface/STATUS_CHECKLIST.md` for its bounded current status/open-gate claims
+- OpenPressBrake `hardware/blocks/differential_encoder/STATUS_CHECKLIST.md`
+- OpenPressBrake `hardware/blocks/differential_encoder/integration/REV1_BOARD_INTEGRATION_HANDOFF.md`
+- OpenPressBrake `hardware/blocks/differential_encoder/integration/rev1_litexcnc_encoder_binding.json`
+- OpenPressBrake `hardware/blocks/differential_encoder/integration/validate_rev1_litexcnc_encoder_binding.py` as validator source, not execution evidence
+- OpenPressBrake `.github/workflows/rev1-board-integration.yml` for declared self-hosted workflow intent, not proof of a particular execution
+- GitHub Actions run metadata for OpenPressBrake head `5a3d7af6a58f0d494537212592302a3171cb6018`, bounded to the fact that the Differential Encoder Block Simulation workflow completed successfully for that exact head SHA
 
-The safety-interface block itself is not presented as schematic-ready, verified, safety-rated, or Rev-1 released. Its current checklist remains `BEHAVIORAL ONLY — NOT SCHEMATIC-READY` and retains physical-machine/no-bypass and generic additional-handshake work as open.
+The encoder block remains `SIMULATION-READY`; termination selection, protected field +5-V supply, cable/reflection work, abnormal-condition/transient qualification, schematic visual review, PCB integration, final cost, and Rev-1 release gates remain open.
 
-BD54 itself was re-opened from current main after commit.
+BD55 itself was re-opened from current main after commit.
 
-## Rules frozen by BD54
+## Rules frozen by BD55
 
-- green current-tree validation is not validator adequacy;
-- rule existence, check-source existence, authorized execution, and representative fault detection are separate evidence states;
-- a rejected mutant proves little unless it is rejected for the intended semantic reason;
-- semantic mutations should remain syntactically valid while violating one named engineering meaning;
-- engineering dependency coverage is not equivalent to validator source-line coverage;
-- every machine-checkable “must not” rule should have a representative negative mutation;
-- surviving valid mutants are engineering findings and require classification;
-- authority/provenance mutations matter even when electrical values are unchanged;
-- `VERIFY_AT_MACHINE` must not become a plausible default merely to close generation;
-- reusable-block mutation ownership stays separate from board-integration mutation ownership;
-- board-specific composition failures do not justify machine-specific reusable primitives;
-- cross-block FPGA/power/bus/connector/generation/HAL consistency needs board-level mutation coverage;
-- validator adequacy is scoped to an explicit claim set, never blanket qualification;
-- ordinary LinuxCNC/FPGA validation cannot manufacture independent personnel-safety authority;
-- executable adequacy evidence, when required, uses only `[self-hosted, openpressbrake]`.
+- green workflow status is not identified engineering evidence;
+- workflow declaration, run creation, authorized job execution, target-check execution, expected diagnostics, captured result, and promoted result are separate states;
+- validator evidence identity includes exact source, claim set, corpus, inputs, dependencies, configuration, environment, execution, diagnostics, and outputs;
+- promote bounded semantic claims, not whole runs;
+- promoted evidence records must include negative scope — what they do not prove;
+- unchanged validator source does not keep evidence current when relevant input authority changes;
+- a newer commit does not automatically stale unrelated evidence; invalidation follows semantic dependencies;
+- partial staleness is a first-class state;
+- unchanged generated bytes are not current release evidence when their supporting evidence/configuration lock is stale;
+- executable OpenPressBrake engineering evidence must use the authorized `[self-hosted, openpressbrake]` environment;
+- board-level evidence must not silently promote reusable-block qualification, and reusable-block evidence must not prove board-specific mapping;
+- unresolved physical facts remain `BLOCKED_UNKNOWN`/`VERIFY_AT_MACHINE` rather than receiving defaults;
+- ordinary controller validation cannot acquire personnel-safety authority through evidence promotion.
 
 ## Worked-example stress test
 
-Current OpenPressBrake `safety_interface/REV1_STRUCTURAL_COMPOSITION_CONTRACT.yaml` publishes a drawing-derived non-safety Rev1 composition: exactly seven protected Pilz-status inputs consuming `digital_input_24v`, six protected operational outputs consuming `digital_output_24v`, seven FPGA inputs, six FPGA outputs, zero direct 24-V field-to-FPGA connections, preserved L7/L07 switched-domain ownership, no L07-to-L06 bridge, wire 75 outside ordinary FPGA command authority, wire 63 outside ordinary OpenPressBrake logic, and no personnel-safety credit assigned to the composition.
+Current OpenPressBrake differential-encoder authority provides a useful layered example. The reusable primitive remains one AM26LV32E A/B/Z receiver. Board integration separately owns installed quantity, FPGA allocation, connector mapping, field-power provisioning, termination selection, and machine assignment. The current machine-readable binding reserves six logical LiteX-CNC encoder instances and pins each A/B/Z semantic signal to the current Rev29 package authority while retaining termination selection as `VERIFY_AT_MACHINE` and safety credit as `none`.
 
-BD54 turns those declarations into a mutation plan rather than pretending declaration equals enforcement. Representative future mutations include count drift, aggregate-resource mismatch, direct 24-V FPGA connection, L7/L07-to-L6/L06 domain substitution, removal of the prohibited bridge rule, wire-75 authority escalation, wire-63 ordinary-logic routing, safety-authority manufacture, and replacement of `VERIFY_AT_MACHINE` items with guessed confirmation.
+The current validator source checks reference/package-plan drift, primitive scope, six-instance A/B/Z mapping, package collisions, termination ownership, and no safety credit. The whole-board workflow source declares `[self-hosted, openpressbrake]` and invokes a differential-encoder board-allocation validator. The status checklist separately records historical CI evidence and open release gates.
 
-The board-specific seven/six population remains board composition. It does not redefine the reusable digital-input or digital-output primitive channel count.
+Current GitHub Actions metadata also shows a successful `Differential Encoder Block Simulation` run at exact OpenPressBrake head `5a3d7af6a58f0d494537212592302a3171cb6018`. BD55 deliberately does not convert that run into whole-board integration, mutation-adequacy, synthesis/timing, or release evidence without exact job/step/diagnostic-to-claim reconciliation.
 
 ## Catalog stress-test result
 
-The hard audit exposed a concrete infrastructure gap: the Rev1 structural composition contract states strong fail-closed invariants, but no named validator/mutation-regression evidence was presented alongside it during this run demonstrating automated enforcement of those invariants.
+The encoder artifacts preserve substantial provenance, but the evidence needed to answer “which exact execution supports which exact semantic claims right now?” is distributed across status prose, machine-readable contracts, validator source, workflow source, and run metadata.
 
-Classification: **ENGINEERING_REVIEW_NEEDED** for automated enforcement/adequacy infrastructure, not for the bounded semantic claims in the inspected contract.
+Classification: **ENGINEERING_REVIEW_NEEDED** for a normalized validator-evidence manifest/promotion layer.
 
-Required future catalog/tooling infrastructure includes stable claim IDs, claim-to-validator mapping, well-formed negative mutations, expected diagnostic identities, exact source/execution provenance, dependency/consumer coverage, and a distinction between validator-source presence and authorized execution evidence.
+Required future infrastructure includes stable claim IDs; validator/corpus/input digests; exact workflow/run/job/step identity; authorized runner/toolchain identity; expected diagnostic IDs; result-to-claim and negative-scope mapping; reverse-dependency staleness rules; partial-staleness support; promotion authority/state; historical/service retention; and release gates that reject stale or unpromoted evidence.
 
-OpenPressBrake remained read-only because current main is actively reconciling Rev1 safety-interface composition. No active engineering artifact was overwritten.
+OpenPressBrake remained read-only because current main is actively advancing encoder/whole-board integration. No active engineering artifact was overwritten.
 
 ## Current repository reconciliation
 
-At run start the board-design lane ended at BD53. Curriculum main also contained concurrent non-board-design work; it was preserved. OpenPressBrake current main was `0dc43ab1522dec023f70c5af8e0f7c567969505e` (`safety interface: reconcile Rev1 composition checkpoint`).
+At run start the board-design lane ended at BD54. Curriculum main also contained concurrent safety-course work; it was preserved. OpenPressBrake current main was `5a3d7af6a58f0d494537212592302a3171cb6018` (`encoder: publish Rev1 board integration handoff`).
 
-BD54 was committed as `db78029ac54b39978f64bbd96ab4ab3de3697a16` and re-opened from current main. Immediately before this checkpoint write, curriculum main was that BD54 commit and OpenPressBrake remained at `0dc43ab1522dec023f70c5af8e0f7c567969505e`. OpenPressBrake stayed read-only; no active engineering artifact was overwritten.
+BD55 was committed as `313d88b7e9a21398e9cda315082da8a4c0aec73c` and re-opened from current main. Immediately before this checkpoint write, curriculum main was that BD55 commit and OpenPressBrake remained at `5a3d7af6a58f0d494537212592302a3171cb6018`. OpenPressBrake stayed read-only; no active engineering artifact was overwritten.
 
 ## Next exact work
 
-Build BD55 on **validator evidence provenance, execution identity, and regression-result promotion**:
+Build BD56 on **evidence dependency graphs, selective invalidation, and minimum-safe revalidation**:
 
-`validator source + claim set + mutation corpus + exact execution environment -> pinned result identity -> result-to-claim mapping -> stale-result detection -> promotion gate -> release evidence`
+`promoted evidence graph -> semantic change -> affected-claim traversal -> preserved evidence -> stale evidence -> minimum justified rerun set -> downstream regeneration -> promotion recovery`
 
-Stress the distinction between validator source existing, workflow configuration existing, a run occurring on `[self-hosted, openpressbrake]`, the run testing the intended source/claim/corpus revisions, the diagnostics proving intended semantic detection, and the resulting evidence remaining applicable after semantic/dependency changes.
+Stress changes that alter one board mapping without changing a reusable primitive, changes that alter a primitive contract without touching every consumer file, and changes whose textual diff is small but whose evidence blast radius is large.
 
 ## Compute
 
-No simulation, synthesis, place-and-route, timing run, mutation executable, or other executable engineering verification was justified for BD54. The lesson creates a mutation/coverage methodology and a concrete mutation plan only. No GitHub-hosted runner was used.
+No simulation, synthesis, place-and-route, timing run, mutation executable, or other executable engineering verification was required for BD55. Existing workflow/run metadata was inspected as provenance evidence only. No GitHub-hosted compute was initiated.
 
 ## Safety boundary
 
-BD54 teaches validator adequacy for ordinary board-design and composition authority. It does not establish PL/SIL/category, stopping performance, final-element validation, or independent personnel-safety authority. The worked example explicitly mutation-tests against accidental safety-authority escalation rather than treating ordinary controller checks as safety validation.
+BD55 teaches evidence identity and promotion for ordinary board-design/controller authority. It does not establish PL/SIL/category, stopping performance, independent safety diagnostic coverage, final-element validation, or personnel-safety authority. A successful ordinary-controller run on the authorized local runner still receives zero personnel-safety credit unless a separate safety-rated design and validation explicitly supports such a claim.

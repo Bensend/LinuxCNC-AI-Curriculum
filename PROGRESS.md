@@ -24,7 +24,7 @@ The repeatable safety-design methodology covers:
 
 `machine/lifecycle boundary -> hazardous event -> risk-reduction hierarchy -> physical safe-state proposition -> safety-function/SRS derivation -> composition/allocation -> fault analysis/diagnostic design -> architecture/dependency/CCF allocation -> integrity-method selection/target allocation -> verification/validation/physical proof -> commissioning/release -> maintenance/change control/revalidation`
 
-2520 through 25D0 external information-separated competency execution remain OPEN and branch-local; do not self-score or contaminate them.
+2520 through 25E0 external information-separated competency execution remain OPEN and branch-local; do not self-score or contaminate them.
 
 **2540 — Relays, contactors, and the real meaning of a “safety relay”** remains READY FOR EXTERNAL/FRESH EVALUATION with its existing learner route and no-solution handoff.
 
@@ -44,9 +44,11 @@ The repeatable safety-design methodology covers:
 
 **25C0 — Designing for humans who will defeat safeguards** remains READY FOR EXTERNAL/FRESH EVALUATION, not self-graduated. Reset/restart/visibility/setup evidence, canonical learner route and no-solution external gate are durable.
 
-**25D0 — Low-cost safety architectures** is READY FOR EXTERNAL/FRESH EVALUATION, not self-graduated. Its low-cost guard-interlock gap is closed; canonical learner route and information-separated evaluator contract are durable. Actual dollar pricing remains unfrozen absent traceable like-for-like current sources.
+**25D0 — Low-cost safety architectures** remains READY FOR EXTERNAL/FRESH EVALUATION, not self-graduated. Actual dollar pricing remains unfrozen absent traceable like-for-like current sources.
 
-**25E0 — Validation, commissioning, and proof testing** is the active branch. `research/25E0_VALIDATION_COMMISSIONING_ENTRY_2026-09-23.md` remains the canonical syllabus entry. `research/25E0_SRS_VALIDATION_MATRIX_AND_ADVERSARIAL_COMMISSIONING_2026-09-23.md` now adds an SRS-to-validation matrix spanning E-stop, guard/interlock, STO/coast, fluid-power safe state and reset/restart; five adversarial commissioning cases where software/status evidence can pass while the physical proposition fails; lifecycle stopping-time/revalidation reasoning; proof-test interval boundaries; and reconciliation rules for exceptional-mode/muting/override evidence. SICK stop-time guidance supports physical remeasurement before initial commissioning and after significant or expected usage-related changes such as brake wear. No universal stopping margin, proof-test interval or machine integrity claim is frozen.
+**25E0 — Validation, commissioning, and proof testing** is READY FOR EXTERNAL/FRESH EVALUATION, not self-graduated. `research/25E0_COVERAGE_AUDIT_AND_LEARNER_ROUTE_2026-09-23.md` records the line-by-line syllabus audit and canonical learner route. `evaluation/25E0_EXTERNAL_EVALUATOR_HANDOFF_2026-09-23.md` is the no-solution information-separated competency handoff. Existing canonical artifacts cover SRS-derived validation, restart/power-restoration tests, stopping-time measurement/revalidation, latent-failure proof testing, configuration/version control, exceptional-mode restoration and ordinary-controller authority boundaries. Machine-specific thresholds and intervals remain UNKNOWN absent evidence.
+
+**25F0 — Machine safety capstones** is the active branch. `research/25F0_MACHINE_SAFETY_CAPSTONE_CONTRACT_2026-09-23.md` defines the cross-machine capstone package and preserves machine-specific differences. The first baseline capstone is mill/VMC; press-brake depth follows after the transferable template is proven, without inventing hydraulic truth tables, stopping distances, pressure thresholds or integrity targets.
 
 Core freezes remain in force, especially: **VERIFIED DESIGN != VALIDATED MACHINE SAFETY FUNCTION**, **FAULT DETECTED != PHYSICAL SAFE STATE ACHIEVED**, **LOW COST != LOW RIGOR**, **MORE COMPONENTS != MORE SAFETY**, **EDM HEALTHY != PHYSICAL SAFE STATE PROVED**, **SAFETY RELAY OUTPUT OFF != FINAL ENERGY PATH OPEN PROVED**, **DUAL CHANNEL INPUT != REDUNDANT FINAL ELEMENT**, **STO ACTIVE != MOTOR STANDSTILL PROVED**, **STO ACTIVE != ELECTRICAL ISOLATION**, **SUPPLY ISOLATED != DOWNSTREAM PRESSURE EXHAUSTED**, **DUMP COMMANDED != PRESSURE SAFE PROVED**, **GUARD CLOSED != DANGEROUS STATE ENDED**, **COMPONENT PL/SIL CLAIM != MACHINE SAFETY FUNCTION PL/SIL CLAIM**, **UNCHANGED SAFETY PROGRAM != UNCHANGED VALIDATED SAFETY FUNCTION**, **STOPPING TIME ON COMMISSIONING DAY != STOPPING TIME PROVED FOR ALL FUTURE MACHINE STATES**, **STATUS BIT TIMING != PHYSICAL CESSATION TIMING**, **RETURN TO NORMAL SOFTWARE STATE != PRODUCTION SAFEGUARDS PHYSICALLY RESTORED**, and **ORDINARY LINUXCNC/FPGA DIAGNOSTICS != PERSONNEL-SAFETY AUTHORITY**.
 
@@ -56,14 +58,15 @@ Durable foundation includes `hardware/BLOCK_SPEC_TEMPLATE.md`, `hardware/4000-bl
 
 ## Exact next work
 
-1. Preserve the 2520–25D0 information-separated competency gates; do not contaminate them.
-2. Perform the 25E0 line-by-line syllabus/competency audit.
-3. Inspect existing exceptional-mode/muting/override artifacts by exact filename and link them into the canonical route rather than duplicating their solution content.
-4. If the audit finds a genuine learner-facing gap, fill only that gap; otherwise create the canonical 25E0 learner route/release gate and separate information-separated no-solution evaluator handoff.
-5. Keep stopping limits, proof-test intervals, quantitative integrity claims and machine-specific physical thresholds UNKNOWN until justified evidence exists.
-6. Freeze executable compute only if a concrete unresolved implementation question survives authoritative evidence; use `[self-hosted, openpressbrake]` only.
+1. Preserve the 2520–25E0 information-separated competency gates; do not contaminate them.
+2. Continue 25F0 with the mill/VMC capstone hazard/energy boundary and SRS skeleton.
+3. Ground guard-access, spindle/motion cessation and stored-energy propositions in authoritative manufacturer/standards evidence.
+4. Explicitly allocate ordinary LinuxCNC/FPGA control, diagnostics, independent safety-related control and physical final elements.
+5. Include production, setup, clearing, cleaning and maintenance defeat incentives in the human-factors pass.
+6. Keep stopping limits, proof-test intervals, quantitative integrity claims and machine-specific physical thresholds UNKNOWN until justified evidence exists.
+7. Freeze executable compute only if a concrete unresolved implementation question survives authoritative evidence; use `[self-hosted, openpressbrake]` only.
 
-Newest precise checkpoint: `checkpoints/2026-09-23T2049Z-safety-25E0-audit-next.md`.
+Newest precise checkpoint: `checkpoints/2026-09-23T2150Z-safety-25F0-mill-capstone-next.md`.
 
 ## Laboratory compute checkpoint
 

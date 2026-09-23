@@ -24,7 +24,7 @@ The repeatable safety-design methodology covers:
 
 `machine/lifecycle boundary -> hazardous event -> risk-reduction hierarchy -> physical safe-state proposition -> safety-function/SRS derivation -> composition/allocation -> fault analysis/diagnostic design -> architecture/dependency/CCF allocation -> integrity-method selection/target allocation -> verification/validation/physical proof -> commissioning/release -> maintenance/change control/revalidation`
 
-2520 through 25A0 external information-separated competency execution remain OPEN and branch-local; do not self-score or contaminate them.
+2520 through 25B0 external information-separated competency execution remain OPEN and branch-local; do not self-score or contaminate them.
 
 **2540 — Relays, contactors, and the real meaning of a “safety relay”** remains READY FOR EXTERNAL/FRESH EVALUATION with its existing learner route and no-solution handoff.
 
@@ -38,13 +38,13 @@ The repeatable safety-design methodology covers:
 
 **2590 — Guards, interlocks, presence sensing, and two-hand controls** remains READY FOR EXTERNAL/FRESH EVALUATION with its completed syllabus audit, canonical learner route and no-solution handoff. Application-specific stopping behavior, safety distance and integrity targets remain UNKNOWN until evidence exists.
 
-**25A0 — Safety PLCs and programmable safety** is READY FOR EXTERNAL/FRESH EVALUATION. `research/25A0_LIFECYCLE_CHANGE_CONTROL_AND_RELEASE_GATE_2026-09-23.md` closes lifecycle/change-control, configuration/signature/replacement/revalidation and evidence-separation coverage. `evaluation/25A0_INFORMATION_SEPARATED_COMPETENCY_HANDOFF.md` is the no-solution fresh-evaluation contract. It is not self-graduated.
+**25A0 — Safety PLCs and programmable safety** remains READY FOR EXTERNAL/FRESH EVALUATION with lifecycle/change-control coverage, canonical learner route and no-solution handoff. It is not self-graduated.
 
-**25B0 — Failure analysis and fault injection** is the active branch. `research/25B0_FAILURE_ANALYSIS_ENTRY_2026-09-23.md` defines the SRS-to-fault-to-evidence chain, FMEA/FMEDA/fault-tree roles and question-driven injection rule. `research/25B0_FAULT_INJECTION_MATRIX_2026-09-23.md` now spans power, wiring, sensor, logic, configuration, communication, output, final-element and physical-state faults; demonstrates latent-fault and CCF failures missed by naive single-fault testing; defines the source/static/low-energy/isolated/remote-machine test hierarchy; and supplies adversarial frozen-feedback, welded-contactor, stuck-valve, corrupted-parameter and network-timeout cases. No executable lab is justified yet.
+**25B0 — Failure analysis and fault injection** is now READY FOR EXTERNAL/FRESH EVALUATION, not self-graduated. `research/25B0_QUANTITATIVE_BOUNDARIES_AND_PROOF_TESTS_2026-09-23.md` closes the quantitative/DC/proof-test boundary: percentage of hand-selected injections is not DCavg; quantitative reliability arithmetic requires defensible failure, operating-cycle, diagnostic, proof-test and CCF inputs; missing inputs remain UNKNOWN rather than guessed. `research/25B0_COVERAGE_AUDIT_AND_LEARNER_ROUTE_2026-09-23.md` found no material syllabus gap and defines the canonical route. `evaluation/25B0_INFORMATION_SEPARATED_COMPETENCY_HANDOFF.md` is the no-solution evaluator contract. No executable lab is justified by the current questions.
 
-25B0 freezes include **FAULT INJECTION COUNT != DIAGNOSTIC COVERAGE**, **FAULT DETECTED != PHYSICAL SAFE STATE ACHIEVED**, **SINGLE-FAULT TEST PASS != COMMON-CAUSE RESILIENCE PROVED**, **SOFTWARE-INJECTED FAULT != PHYSICAL FAILURE EQUIVALENCE PROVED**, **FIRST FAULT TOLERATED != FIRST FAULT SAFELY DIAGNOSED**, and **TWO SINGLE-CHANNEL TESTS PASS != COMMON-CAUSE PATH TESTED**.
+**25C0 — Designing for humans who will defeat safeguards** is the active branch. `research/25C0_HUMAN_FACTORS_ENTRY_2026-09-23.md` defines a defeat-pressure model, human-factors review table and anti-defeat design sequence grounded in ISO 14119-oriented manufacturer guidance. It freezes the distinction between defeat resistance and low defeat incentive and treats nuisance trips, visibility, diagnostics, setup/recovery, reset placement and easy guard restoration as engineering inputs.
 
-Core earlier freezes remain in force, especially: **VERIFIED DESIGN != VALIDATED MACHINE SAFETY FUNCTION**, **CATEGORY / ARCHITECTURE != ACHIEVED PL OR SIL**, **CERTIFIED COMPONENT CAPABILITY != COMPLETE SAFETY-FUNCTION INTEGRITY**, **DIAGNOSTIC COVERAGE CLAIM != PHYSICAL SAFE-STATE PROOF**, **DEVICE RELEASED != SAFETY FUNCTION RESET/REARMED != MACHINE START AUTHORIZED**, and **ORDINARY LINUXCNC/FPGA DIAGNOSTICS != PERSONNEL-SAFETY AUTHORITY**.
+Core freezes remain in force, especially: **VERIFIED DESIGN != VALIDATED MACHINE SAFETY FUNCTION**, **FAULT DETECTED != PHYSICAL SAFE STATE ACHIEVED**, **PERCENT OF TEST CASES DETECTED != DIAGNOSTIC COVERAGE**, **ROUTINE MAINTENANCE != PROOF TEST UNLESS IT DETECTS THE ASSUMED LATENT FAILURES**, **HIGH-CODING INTERLOCK != LOW DEFEAT INCENTIVE**, **DIFFICULT TO BYPASS != CONVENIENT TO USE CORRECTLY**, and **ORDINARY LINUXCNC/FPGA DIAGNOSTICS != PERSONNEL-SAFETY AUTHORITY**.
 
 ## 4000 foundation/core
 
@@ -52,14 +52,14 @@ Durable foundation includes `hardware/BLOCK_SPEC_TEMPLATE.md`, `hardware/4000-bl
 
 ## Exact next work
 
-1. Preserve the 2520–25A0 information-separated competency gates; do not contaminate them with learner-readable hidden solutions.
-2. Turn the 25B0 adversarial cases into an information-separated competency exercise.
-3. Strengthen quantitative boundaries: when FMEDA/diagnostic-coverage arithmetic is justified versus when absent source data requires qualitative fault analysis.
-4. Add proof-test/latent-fault interval reasoning without inventing application intervals or failure rates.
-5. Audit 25B0 syllabus coverage and fill only genuine learner-facing gaps.
+1. Preserve the 2520–25B0 information-separated competency gates; do not contaminate them with learner-readable hidden solutions.
+2. Continue 25C0 by turning the entry model into the required machine-playbook human-factors review checklist.
+3. Add adversarial cases for nuisance-trip pressure, blind reset, maintenance guard removal, setup-mode abuse, poor diagnostics and production pressure.
+4. Trace authoritative evidence for reset visibility, unexpected restart prevention, setup/recovery modes and foreseeable defeat; distinguish standard/manufacturer guidance from inference.
+5. Audit 25C0 against `SAFETY_COURSE_RESEARCH.md`; fill only genuine learner-facing gaps.
 6. Freeze executable compute only if a concrete unresolved implementation question survives authoritative source/engineering analysis; use `[self-hosted, openpressbrake]` only.
 
-Newest precise checkpoint: `checkpoints/2026-09-23T1448Z-safety-25B0-failure-analysis-next.md`.
+Newest precise checkpoint: `checkpoints/2026-09-23T1551Z-safety-25C0-human-factors-next.md`.
 
 ## Laboratory compute checkpoint
 

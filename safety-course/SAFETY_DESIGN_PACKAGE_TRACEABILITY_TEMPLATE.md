@@ -5,6 +5,14 @@ Applies: 2520 through 25F0
 
 This package is cumulative. Do not restart it at each course. Preserve stable IDs and provenance. If an upstream item changes, review and mark dependent downstream items STALE until re-verified/revalidated.
 
+## Route-continuity invariant
+
+Every 2520–25F0 learner route operates on this same cumulative package. On entry to each course, review the current upstream IDs, provenance, status, residual risks and UNKNOWNs. New course work must declare dependencies on those IDs rather than silently copying assumptions into unlinked prose. Before handoff, run the stale-dependency check.
+
+A local module worksheet is not sufficient if its claims cannot be traced through this package. `UNKNOWN`, `RETIRED`, `STALE`, residual-risk and operational-restriction state persist until explicitly closed with evidence; omission in a later module does not close them.
+
+If a human-factors change, architecture choice, machine-transfer assumption, requirement edit, boundary change or new energy/hazard materially changes an upstream item, create a `CHG` record and review affected dependents before crediting old evidence.
+
 ## Claim/provenance labels
 
 Use only: `SOURCE-CONFIRMED`, `DOC-CONFIRMED`, `TEST-CONFIRMED`, `COMMUNITY-REPORTED`, `INFERENCE`, `UNKNOWN`.
@@ -138,7 +146,15 @@ If a basic safe-to-operate proposition is not established, do not expose people 
 | 25E0 | VAL, PT, CHG and commissioning evidence | SRS/PHY/ARC/DEP/HF |
 | 25F0 | machine-transfer deltas across all fields | complete package; retain machine-specific UNKNOWNs |
 
-## 15. Release checklist
+Detailed route-to-package audit: `research/SAFETY_COURSE_ROUTE_TO_TRACEABILITY_PACKAGE_AUDIT_2026-09-24.md`.
+
+## 15. Evaluator package boundary
+
+For an information-separated evaluation, the evaluator may receive the learner's submitted package and learner-visible source/evidence context. The evaluator must not reveal hidden expected architecture, preferred fault tree, scoring key, machine-specific hidden answer or sealed benchmark resolution before learner commitment.
+
+Evaluation should include whether the learner preserved traceability, handled dependencies/stale evidence correctly, used evidence appropriate to physical propositions, retained UNKNOWNs/residual restrictions and preserved the normal-control / diagnostics / independent-safety / physical-final-element authority boundary.
+
+## 16. Release checklist
 
 Before a learner package is eligible for fresh evaluation:
 

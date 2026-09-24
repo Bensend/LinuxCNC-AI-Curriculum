@@ -1,51 +1,43 @@
 # Board-Design Curriculum Checkpoint
 
-Current durable lesson: **BD73 — Whole-Board Kitchen-Sink Release Review and Evidence Closure**
+Current durable lesson: **BD74 — Release-Graph Dependency/Staleness Propagation and Change-Control Regression Planning**
 
-Curriculum lesson commit: `bdbe23aa4c3ec1f2fadc54d6e4a97b31e5011628`.
+Curriculum lesson commit: `3e7d4bd429941e834f57f84cd7611b2dffafac1e`.
 
-OpenPressBrake engineering source inspected for BD73: `d7b621e34ceec693a72fa75e2096af2c1bf8ef62`.
+OpenPressBrake engineering source inspected for BD74: `86915569066300908b0cfdc6e67739d0f8388fb9`.
 
-## Verified student-facing sources for BD73
+## Verified student-facing sources for BD74
 
-- `hardware/blocks/STATUS_RULES.md` — VERIFIED_FOR_LESSON for maturity, truthfulness, baseline/qualification separation, and maintenance/regression obligations.
-- `hardware/REV1_BOARD_INTEGRATION.yaml` — VERIFIED_FOR_LESSON for current board-level allocation, power domains, output authority, safe states, and explicit release gates; not evidence that those gates are closed.
-- `hardware/REV1_CONNECTOR_MAP.yaml` — VERIFIED_FOR_LESSON for electrical pinout authority and explicit unresolved mechanical/harness facts.
-- `hardware/blocks/fpga_core_ecp5_25/integration/retrofit_resource_map.yaml` — VERIFIED_FOR_LESSON for current static GPIO/shared-resource accounting and explicit open local synthesis/place-route/timing gates.
-- `hardware/blocks/analog_output/manifest.yaml` — VERIFIED_FOR_LESSON for reusable analog-output capability, required diagnostics, default/rearm behavior, electrical limits, and open qualification items.
-- `hardware/blocks/analog_output/integration/REV1_RESOURCE_CONTRACT.yaml` — VERIFIED_FOR_LESSON for the current first-machine command overlay and fail-closed unresolved diagnostic binding.
-- `board-design/BD72_QUALIFICATION_EVIDENCE_TRACEABILITY_RELEASE_PROMOTION.md` — VERIFIED_FOR_LESSON as the prerequisite evidence/traceability method.
-- `board-design/BD73_WHOLE_BOARD_KITCHEN_SINK_RELEASE_REVIEW.md` — VERIFIED_FOR_LESSON after post-commit re-open.
+- `hardware/blocks/STATUS_RULES.md` — VERIFIED_FOR_LESSON for material-change maintenance/regression obligations and qualification truthfulness.
+- `hardware/blocks/analog_output/STATUS_CHECKLIST.md` — VERIFIED_FOR_LESSON for current maturity, machine-profile correction, open qualification gates, and readiness limits.
+- `hardware/blocks/analog_output/integration/REV1_COMMAND_PROFILE_OVERLAY.yaml` — VERIFIED_FOR_LESSON for the first-machine 0..10-V T4 overlay, separate B5/B6 direction ownership, independent B4 safety ownership, and CONFIGURATION_PENDING state.
+- `hardware/blocks/analog_output/integration/REV1_RESOURCE_CONTRACT.yaml` — VERIFIED_FOR_LESSON for current resource ownership and fail-closed unresolved DAC_FAULT/TPS26611_SGOOD binding.
+- `hardware/REV1_BOARD_INTEGRATION.yaml` — VERIFIED_FOR_LESSON for current board integration authority and the still-stale `x_axis_analog.range_v: [-10, 10]` downstream field.
+- `board-design/BD73_WHOLE_BOARD_KITCHEN_SINK_RELEASE_REVIEW.md` — VERIFIED_FOR_LESSON as prerequisite contradiction/gate-register method.
+- `board-design/BD74_RELEASE_GRAPH_STALENESS_CHANGE_CONTROL_REGRESSION.md` — VERIFIED_FOR_LESSON after creation and current-main re-read.
 
 ## Closure result
 
-BD73 freezes the rule that **LOCALLY PLAUSIBLE + LOCALLY PLAUSIBLE does not imply GLOBALLY CONSISTENT** and requires release review to search actively for contradictions rather than merely aggregate passing statuses.
+BD74 freezes two rules: **A PASS BELONGS TO A CLAIM, SUBJECT REVISION, ENVELOPE, AND DEPENDENCY SET — NOT TO A FILENAME**, and **CHANGE PROPAGATION MUST BE TRANSITIVE, BUT REGRESSION MUST BE JUSTIFIED**.
 
-The whole-board method now joins machine requirement, connection block, reusable block, electrical implementation, board allocation, FPGA/firmware resource, HAL/runtime meaning, commissioning observation and qualification claim. It separately traces source/protection/load/normal return/fault return/enable-default authority/diagnostic for power and authority paths.
+The lesson defines a typed release graph spanning requirements, reusable blocks, board-specific connections/overlays, FPGA/shared resources, power, CAD, firmware/HAL, physical-machine facts, tests, evidence, claims, and safety-authority boundaries. Material changes propagate staleness through explicit semantic dependencies. Unrelated evidence may remain current only when the isolation boundary is reviewed and recorded.
 
-The current OpenPressBrake audit produced four bounded findings:
+The current analog-output command-profile correction remains the primary adversarial example. The reusable primitive remains validly bipolar, while current first-machine authority restricts Commander SK T4 to 0..10 V until installed configuration evidence authorizes otherwise. The downstream board integration authority still carries `[-10,10]`. Therefore board/runtime scaling, command regression and commissioning evidence are review/staleness targets; generic bipolar electrical evidence does not automatically become stale when its hardware/envelope did not change.
 
-1. **SCOPE_OVERLAY_NOT_PROPAGATED:** the reusable analog block validly supports ±10 V, but the current first-machine Commander SK contract authorizes only the standard 0..10-V T4 profile until installed configuration evidence proves otherwise. `REV1_BOARD_INTEGRATION.yaml` still describes `x_axis_analog.range_v` as `[-10, 10]`; board/runtime authority must consume the narrower machine overlay rather than narrowing the reusable primitive.
-2. **UNRESOLVED_BINDING:** the analog manifest requires both `DAC_FAULT` and `TPS26611_SGOOD`, while the newest resource contract correctly refuses to guess their controller binding. The FPGA map includes `DAC_FAULT` in shared converter control but does not prove the complete binding for both required diagnostics. Final diagnostic resource closure remains open.
-3. **QUALIFICATION_GAP:** static FPGA GPIO fit passes at 123 unique runtime GPIO of 191 conservatively available, but actual LiteX-CNC synthesis/place-route/resource/timing remain explicitly open for the self-hosted panel runner.
-4. **PHYSICAL_GATE_OPEN:** legacy connector mechanical identity/coordinates and several harness facts remain VERIFY_AT_MACHINE and are explicit pre-PCB gates.
-
-The inspected evidence therefore does not support calling the current OpenPressBrake board production-proven.
+The unresolved DAC_FAULT/TPS26611_SGOOD route supplies the second example. It remains explicitly unresolved and must not be counted as zero. When engineering closes that route, the closure itself is a material RESOURCE_BINDING_CHANGE that triggers review of FPGA allocation, electrical pin/bank compatibility, schematic connectivity, shared-resource ownership, firmware/HAL semantics, diagnostic power validity, fault injection and dependent release claims.
 
 ## Catalog stress-test finding
 
-The catalog needs a machine-readable whole-board release graph joining stable semantic IDs across reusable blocks, board connections, FPGA/shared resources, power/returns, output authority/freshness, generated CAD, firmware/HAL binding, commissioning evidence, qualification claims and staleness.
+The catalog still lacks a machine-readable dependency/release graph with stable semantic IDs, typed dependency edges, subject revisions, envelopes, unresolved states, evidence/claim IDs, change events, staleness reasons, regression records and release effects. This prevents mechanical reverse lookup of “where used” and automatic stale-evidence propagation after a material engineering change.
 
-A future validator should detect missing semantic owners/routes, stale downstream assumptions after overlays change, unresolved resources accidentally counted as zero, evidence made stale by dependency changes, shared resources double-counted or missing consumers, open VERIFY_AT_MACHINE release gates, and ordinary-control paths incorrectly credited with independent safety authority.
+OpenPressBrake remained read-only because current main is actively advancing board/block engineering. No simulation, synthesis, place-and-route, timing, regression, or other executable verification was required; no hosted compute was used.
 
-OpenPressBrake remained read-only because current main is actively advancing analog-output resource closure. No simulation, synthesis, place-and-route, timing, regression or other executable verification was required; no hosted compute was used.
-
-Both repositories were re-read on current main immediately before the BD73 lesson commit. Curriculum main was `dbfaffdbdb4a94654a1b33d0564702b73765b7d6`; OpenPressBrake main was `d7b621e34ceec693a72fa75e2096af2c1bf8ef62`.
+Both repositories were re-read on current main immediately before checkpointing. Curriculum main was `3e7d4bd429941e834f57f84cd7611b2dffafac1e`; OpenPressBrake main was `86915569066300908b0cfdc6e67739d0f8388fb9`.
 
 ## Next run
 
-Develop **BD74 — Release-Graph Dependency/Staleness Propagation and Change-Control Regression Planning**:
+Develop **BD75 — Controlled Engineering Change, Review Ownership, Baseline Supersession, and Auditable Release History**:
 
-`whole-board gate register + stable semantic IDs + dependency edges -> upstream engineering change -> affected-claim discovery -> stale evidence propagation -> minimum justified regression set -> re-review -> release-baseline update`
+`accepted release graph + change event -> impact owner assignment -> proposed engineering change -> affected evidence/regression plan -> review/approval -> regression evidence attachment -> old-baseline supersession -> new immutable release baseline -> auditable history`
 
-Re-open every student-facing source on current main. Teach how a component, machine overlay, connector, power domain, FPGA resource, firmware semantic, or physical-machine fact change propagates through the board without either rerunning everything blindly or leaving stale evidence credited. Use the current analog-output command-envelope/diagnostic-binding findings as candidate examples only if current OpenPressBrake main has not superseded them. Keep reusable block definitions separate from board-specific connection/overlay facts, preserve the independent safety boundary, and do not claim production proof without evidence.
+Re-open every student-facing source on current main. Teach that change approval is not technical evidence, that old baselines remain historically traceable rather than silently rewritten, and that reusable-block changes versus board-specific overlays have different blast radii. Include rollback/supersession semantics, ownership for unresolved physical-machine facts, and preservation of the independent personnel-safety boundary. Keep OpenPressBrake read-only if active engineering overlaps.

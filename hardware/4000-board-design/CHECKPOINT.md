@@ -1,87 +1,85 @@
 # 4000 Board-Design Curriculum Checkpoint
 
-Date: 2026-09-23
+Date: 2026-09-24
 
 ## Lane status
 
-Independent board-design curriculum lane remains active alongside the separate safety curriculum. Durable lessons BD01 through BD60 are present. This checkpoint is board-design authority only and does not alter safety-course progress authority.
+Independent board-design curriculum lane remains active alongside the separate safety curriculum. Durable lessons BD01 through BD61 are present. This checkpoint is board-design authority only and does not alter safety-course progress authority.
 
-New this run: `BD60_RELEASE_MANIFEST_CLOSURE_CANDIDATE_COMPLETENESS_AND_CROSS_DOMAIN_PROMOTION_GATES.md`.
+New this run: `BD61_CONNECTION_BLOCK_COMPLETENESS_SEMANTIC_ENDPOINT_IDENTITY_AND_HARNESS_CLOSURE.md`.
 
-BD60 teaches:
+BD61 teaches:
 
-`required board claims -> claim coverage matrix -> block/connection/resource/evidence locks -> generated electrical + FPGA + LinuxCNC/HAL artifacts -> unresolved-fact closure -> cross-domain consistency gate -> candidate completeness decision -> release handoff`
+`machine endpoint -> board connection requirement -> connector family/pin -> signal/power/return semantics -> reusable block endpoint -> FPGA/logical endpoint -> physical placement/silkscreen -> harness destination -> verification -> release-consumable connection contract`
 
-## BD60 hard student-material audit
+## BD61 hard student-material audit
 
-Every repository file named to students as finished material by BD60 was opened and inspected in current form during this run.
+Every repository file named to students as finished material by BD61 was opened and inspected in current form during this run.
 
 `VERIFIED_FOR_LESSON` for bounded claims used:
 
 - Curriculum `README.md`
 - Curriculum `WORK_SELECTION_POLICY.md`
-- Curriculum `hardware/4000-board-design/BD59_EVIDENCE_CONSUMPTION_LOCKS_RELEASE_MANIFESTS_AND_STALE_PROOF_REJECTION.md`
+- Curriculum `hardware/4000-board-design/BD60_RELEASE_MANIFEST_CLOSURE_CANDIDATE_COMPLETENESS_AND_CROSS_DOMAIN_PROMOTION_GATES.md`
 - Curriculum `hardware/4000-board-design/CHECKPOINT.md` as it existed when work was selected
 - OpenPressBrake `hardware/blocks/STATUS_RULES.md`
 - OpenPressBrake `hardware/blocks/BLOCK_ADAPTER_INTEGRATION_RULES.md`
-- OpenPressBrake `hardware/blocks/relay_contactor_driver/integration/REV1_RESOURCE_CONTRACT.yaml`
-- OpenPressBrake `hardware/blocks/relay_contactor_driver/manifest.yaml`
+- OpenPressBrake `hardware/blocks/differential_encoder/manifest.yaml`
+- OpenPressBrake `hardware/blocks/differential_encoder/integration/REV1_RESOURCE_CONTRACT.yaml`
+- OpenPressBrake `hardware/blocks/differential_encoder/STATUS_CHECKLIST.md`
 
-`ENGINEERING_REVIEW_NEEDED` as complete current-status/evidence-discovery authority:
+BD61 itself was re-opened from current main after commit.
 
-- OpenPressBrake `hardware/blocks/relay_contactor_driver/STATUS_CHECKLIST.md` — its `Evidence currently present` list does not name the already-current `integration/REV1_RESOURCE_CONTRACT.yaml`. Its bounded status and engineering claims remain useful, but complete current evidence discovery cannot be proven from the status surface alone. This is status/evidence-index drift under `STATUS_RULES.md` maintenance expectations.
+## Rules frozen by BD61
 
-BD60 itself was re-opened from current main after commit.
-
-## Rules frozen by BD60
-
-- release completeness is a conjunction over required semantic claims, not the average maturity of component blocks;
-- all reusable blocks usable does not imply the board candidate is release-complete;
-- ERC success, synthesis success, HAL load success, or a device rating cannot substitute for cross-domain closure;
-- every required claim must have a stable identity, owner domain, current authority/evidence lock, consumer set, negative scope, dependencies, and closure state;
-- release-satisfying states are `CLOSED_CURRENT`, justified `CLOSED_CURRENT_NARROWED`, and justified `NOT_REQUIRED`; unresolved, missing, conflicting, stale, or superseded claims fail closed;
-- complete field-I/O closure traces machine semantic through HAL, FPGA logical/physical resources, electrical block, board connection, connector/harness/load, return path, and source/protection;
-- reusable blocks own generic electrical function/contracts while board-specific connection blocks own connector/pins, location, labels, harness destination, and board mappings;
-- component/device ceilings must not be promoted into board channel ratings without the complete current-path/thermal/protection/load envelope;
-- unlike rail currents must not be naively summed across power-conversion boundaries;
-- generated electrical, FPGA, and LinuxCNC/HAL consumers must agree on the same semantic identities and exact current authority;
-- promotion must recheck claim-relevant dependency heads immediately before release; and
-- ordinary LinuxCNC/FPGA controller closure receives zero personnel-safety credit without separate safety-rated authority.
+- a reusable block contract does not define a board connection;
+- reusable blocks own generic electrical function/contracts, while board-specific connection blocks own connector/pins, placement, labels, harness destination, machine mapping, and board-specific resource bindings;
+- every connection needs a stable semantic endpoint identity that survives schematic, PCB, FPGA, firmware/HAL, harness, commissioning, and release representations;
+- a signal without its return/reference is not a complete electrical connection;
+- connection contracts must state power, return, shield/chassis, default/de-energized, enable, protection, and partial-power dependencies when relevant;
+- a connection block may map compatible interfaces but must not secretly contain unqualified transformation circuitry;
+- real translation/isolation/conditioning/protection belongs in a reusable adapter/interface block when it is an independently meaningful electrical function;
+- FPGA connection closure includes both physical I/O allocation and required logical-function allocation; counting GPIO alone is insufficient;
+- physical connector family, footprint, mating hardware, pinout, placement, silkscreen, harness destination, and installed-machine facts are evidence-bearing release facts rather than convenient assumptions;
+- unsupported machine facts remain `VERIFY_AT_MACHINE`/`TBD` and fail closed when required by the release claim; and
+- ordinary LinuxCNC/FPGA controller connections receive zero personnel-safety credit without separate safety-rated authority.
 
 ## Worked-example stress test
 
-Current OpenPressBrake `relay_contactor_driver/integration/REV1_RESOURCE_CONTRACT.yaml` correctly keeps one protected 24-V external coil per reusable primitive and separates generic block resources from board configuration. Per instance it publishes one FPGA `COIL_COMMAND`, diagnostic inputs as declared by the manifest/frozen netlist, a conservative 4.2-mA `LOGIC_3V3` source allocation, and field-electronics overhead separately from external coil current.
+Current OpenPressBrake `differential_encoder` remains a good reusable primitive: one encoder per instance, A/Abar/B/Bbar/Z/Zbar field inputs, A/B/Z 3.3-V logic outputs, explicit terminated/unterminated variants, connector-edge protection to `CHASSIS_PE`, and board-owned optional encoder field power.
 
-Most importantly, its 2.4-A IPS1025H value is explicitly a semiconductor device ceiling, not a released OpenPressBrake board/connector channel rating. Release rating is constrained by the complete path: device electrical/thermal envelope, PCB copper/vias, connector/contact/wire, branch protection, shared 24-V source/distribution, ambient/enclosure, simultaneous channels, and repetitive inductive-demagnetization assumptions.
+Its current `integration/REV1_RESOURCE_CONTRACT.yaml` now explicitly requires one LiteX-CNC encoder function instance for every populated primitive in addition to three FPGA inputs. LUT/register counts remain unresolved until target synthesis or authoritative accounting; they were not invented for the lesson.
 
-Current `manifest.yaml` agrees and still leaves the published controller continuous-current value, connector rating, copper geometry, simultaneous-load qualification, branch coordination, field return, output-short, inductive-turnoff, and repeated-cycle thermal evidence open. A hypothetical board with current reusable block evidence plus valid FPGA/HAL mappings therefore still fails release closure if its installed coil facts, connector/current path, simultaneity, or protection remain unresolved.
+The same contract deliberately leaves physical connector/pin mapping, installed encoder type, cable topology/termination, field voltage/current/startup demand, return arrangement, existing machine protection, and final machine wire mapping as board/machine obligations. The status checklist independently keeps termination selection, protected encoder field-supply implementation, cable/reflection qualification, PCB integration, and release gates open.
 
-The adversarial finding is that the authoritative relay-driver status checklist does not yet name the new resource contract in its evidence list. This repeats the evidence-index drift class exposed by BD59 and reinforces the need for machine-readable claim closure rather than heuristic evidence discovery.
+Therefore the reusable encoder/resource contract is useful evidence but is not itself a complete board connection contract. BD61's example schema intentionally remains `BLOCKED_UNKNOWN` rather than fabricating connector facts.
 
 ## Catalog stress-test result
 
-Classification: **ENGINEERING_REVIEW_NEEDED** for board-level closure infrastructure joining stable claim IDs, reusable block/adapter authority, board-specific connection blocks, power/return resources, FPGA allocation, generated schematic/PCB/BOM, LinuxCNC/HAL mapping, physical-machine facts, evidence locks, cross-domain consistency, reverse Show Where Used, and race-safe candidate promotion.
+Classification: **ENGINEERING_REVIEW_NEEDED** for first-class board connection-contract infrastructure joining stable machine endpoint IDs to connector/pin/physical placement/silkscreen, reusable block endpoints, power/return/shield ownership, FPGA physical and logical resources, harness destination, assembly variant, commissioning evidence, and unresolved physical facts.
 
-OpenPressBrake remained read-only because the relay-driver integration/resource-contract area had just advanced on current main. The evidence-index drift was recorded rather than racing active engineering work.
+This is a board-integration infrastructure gap, not a reason to contaminate the reusable encoder primitive with OpenPressBrake-specific connector or harness assumptions.
+
+OpenPressBrake remained read-only because current main had just advanced the differential-encoder resource contract. No active engineering files were overwritten.
 
 ## Current repository reconciliation
 
-At run start the board-design lane ended at BD59. Curriculum main also contained concurrent non-board-design curriculum work and was preserved. OpenPressBrake had advanced from the prior RS-485 handoff through DAC power work to the current relay/contactor-driver machine-readable resource handoff.
+At run start the durable board-design lane ended at BD60 despite newer chat summaries describing later BD numbers; repository artifacts were treated as authoritative. Concurrent safety-curriculum work on curriculum main was preserved.
 
-BD60 was committed as `8765c26a7adad4f2141dbabc49587c30d2c00383` and re-opened from current main. Immediately before this checkpoint write, curriculum main was that BD60 commit and OpenPressBrake main was `62b74e77b265cf2ab60861890d066e0622c6391c` (`relay driver: publish machine-readable Rev1 resource contract`). OpenPressBrake stayed read-only.
+BD61 was committed as `33b593a1db71fd1ccbc4bd6eeb0a407f2b880deb` and re-opened from current main. Immediately before this checkpoint write, curriculum main was that BD61 commit and OpenPressBrake main was `4845ab6ab2355b677fd54f8cdf2f028180fd10d2` (`encoder: close LiteX-CNC logic instance resource contract`). OpenPressBrake stayed read-only.
 
 ## Next exact work
 
-Build BD61 on **connection-block completeness, semantic endpoint identity, and harness closure**:
+Build BD62 on **connection-contract aggregation, connector-panel allocation, and collision checking**:
 
-`machine endpoint -> board connection requirement -> connector family/pin -> signal/power/return semantics -> FPGA/logical endpoint -> physical placement/silkscreen -> harness destination -> verification -> release-consumable connection contract`
+`qualified connection contracts -> connector population/placement plan -> pin/contact/current aggregation -> shared field-power/return/shield resources -> FPGA/function bindings -> mechanical/label/access collisions -> harness-service review -> machine-readable board connector manifest -> whole-board consistency gate`
 
-Stress the distinction between a reusable electrical block and the board-specific connection mold. Require a connection contract to be complete enough that schematic generation, PCB placement, FPGA/HAL mapping, harness documentation, commissioning, and release closure can consume it without unwritten machine knowledge. Treat any missing pin, return, enable/default, location, label, destination, current/voltage class, or unresolved machine fact as an explicit closure defect rather than leaking it into the reusable block.
+Stress that individually correct connection blocks can still conflict at board level through connector density, contact/current limits, duplicated pins/resources, shared field-power/return capacity, shield/chassis topology, inaccessible placement, ambiguous labels, mating-clearance constraints, or FPGA-function collisions. Preserve physical machine and harness facts as `VERIFY_AT_MACHINE` until evidence exists.
 
 ## Compute
 
-No simulation, synthesis, place-and-route, timing run, or other executable engineering verification was required for BD60. No GitHub-hosted compute was initiated.
+No simulation, synthesis, place-and-route, timing run, or other executable engineering verification was required for BD61. No GitHub-hosted compute was initiated. Future target synthesis/resource checks, when justified, must use `[self-hosted, openpressbrake]` only.
 
 ## Safety boundary
 
-BD60 teaches complete-controller release closure for ordinary board-design/controller authority. It does not establish PL/SIL/category, stopping performance, independent safety diagnostic coverage, final-element validation, or personnel-safety authority. Ordinary LinuxCNC/FPGA watchdogs, inhibits, diagnostics, STO interfaces, and status monitoring remain zero-credit for personnel safety unless separate safety-rated design and validation explicitly establishes otherwise.
+BD61 teaches board-specific connection closure for ordinary controller authority. It does not establish PL/SIL/category, stopping performance, independent safety diagnostic coverage, final-element validation, or personnel-safety authority. Encoder feedback, LinuxCNC/FPGA mappings, watchdogs, inhibits, STO interfaces, and status monitoring remain zero-credit for personnel safety unless separate safety-rated design and validation explicitly establishes otherwise.

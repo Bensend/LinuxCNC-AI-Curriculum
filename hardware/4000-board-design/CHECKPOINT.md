@@ -4,88 +4,88 @@ Date: 2026-09-24
 
 ## Lane status
 
-Independent board-design curriculum lane remains active alongside the separate safety curriculum. Durable lessons BD01 through BD62 are present. This checkpoint is board-design authority only and does not alter safety-course progress authority.
+Independent board-design curriculum lane remains active alongside the separate safety curriculum. Durable lessons BD01 through BD63 are present. This checkpoint is board-design authority only and does not alter safety-course progress authority.
 
-New this run: `BD62_CONNECTION_CONTRACT_AGGREGATION_CONNECTOR_PANEL_ALLOCATION_AND_COLLISION_CHECKING.md`.
+New this run: `BD63_BOARD_WIDE_POWER_DOMAIN_RETURN_CURRENT_SHIELD_CHASSIS_AND_FAULT_CONTAINMENT_CLOSURE.md`.
 
-BD62 teaches:
+BD63 teaches:
 
-`qualified connection contracts -> connector population/placement plan -> pin/contact/current aggregation -> shared field-power/return/shield resources -> FPGA/function bindings -> mechanical/label/access collisions -> harness-service review -> machine-readable board connector manifest -> whole-board consistency gate`
+`connector manifest + block power contracts -> source/protection tree -> per-domain load/current ledger -> startup/inrush/simultaneity -> return-current tracing -> shield/chassis bonds -> partial-power/backfeed states -> fault containment -> machine-readable power/ground manifest -> whole-board release gate`
 
-## BD62 hard student-material audit
+## BD63 hard student-material audit
 
-Every repository file named to students as finished material by BD62 was opened and inspected in current form during this run.
+Every repository file named to students as finished material by BD63 was opened and inspected in current form during this run.
 
 `VERIFIED_FOR_LESSON` for bounded claims used:
 
 - Curriculum `README.md`
 - Curriculum `WORK_SELECTION_POLICY.md`
-- Curriculum `hardware/4000-board-design/BD61_CONNECTION_BLOCK_COMPLETENESS_SEMANTIC_ENDPOINT_IDENTITY_AND_HARNESS_CLOSURE.md`
+- Curriculum `hardware/4000-board-design/BD62_CONNECTION_CONTRACT_AGGREGATION_CONNECTOR_PANEL_ALLOCATION_AND_COLLISION_CHECKING.md`
 - Curriculum `hardware/4000-board-design/CHECKPOINT.md` as it existed when work was selected
 - OpenPressBrake `hardware/blocks/STATUS_RULES.md`
 - OpenPressBrake `hardware/blocks/BLOCK_ADAPTER_INTEGRATION_RULES.md`
-- OpenPressBrake `hardware/blocks/lvdt_input/manifest.yaml`
-- OpenPressBrake `hardware/blocks/lvdt_input/integration/REV1_RESOURCE_CONTRACT.yaml`
-- OpenPressBrake `hardware/blocks/lvdt_input/STATUS_CHECKLIST.md`
+- OpenPressBrake `hardware/blocks/modbus_rtu_rs485/manifest.yaml`
+- OpenPressBrake `hardware/blocks/modbus_rtu_rs485/REV1_3V3_POWER_HANDOFF.yaml`
+- OpenPressBrake `hardware/blocks/modbus_rtu_rs485/REV1_RESOURCE_CONTRACT.yaml`
+- OpenPressBrake `hardware/blocks/modbus_rtu_rs485/STATUS_CHECKLIST.md`
+- OpenPressBrake `hardware/integration/REV1_RS485_POPULATION_POWER_AUTHORITY_REV1.yaml`
 
 `ENGINEERING_REVIEW_NEEDED` as a complete evidence-discovery surface:
 
-- OpenPressBrake `hardware/blocks/lvdt_input/STATUS_CHECKLIST.md` — bounded status claims are useful and current, but its `Evidence currently present` list does not name the newly current `integration/REV1_RESOURCE_CONTRACT.yaml`. This is status/evidence-index drift, not proof that the resource contract is invalid.
+- OpenPressBrake `hardware/blocks/modbus_rtu_rs485/STATUS_CHECKLIST.md` — its status text correctly relies on the published reusable 3V3 power contract, but its `Evidence currently present` list names `manifest.yaml` without enumerating the current `REV1_RESOURCE_CONTRACT.yaml` and `REV1_3V3_POWER_HANDOFF.yaml`. This is evidence-index drift, not evidence that those contracts are invalid.
 
-BD62 itself was re-opened from current main after commit.
+BD63 itself was re-opened from current main after commit.
 
-## Rules frozen by BD62
+## Rules frozen by BD63
 
-- individually valid connection contracts do not prove a valid connector panel;
-- aggregate board allocation is a separate engineering layer from reusable block definition and per-instance connection definition;
-- duplicate physical pins, semantic endpoints, FPGA resources, ADC/DAC channels, logical-function instances, and shared-resource claims fail closed;
-- contact/device current ratings do not substitute for complete source/protection/copper/connector/harness/thermal/simultaneity closure;
-- power and return aggregation must preserve domain identity and trace source-to-load-to-return paths;
-- unlike rail currents must not be naively summed across conversion boundaries;
-- FPGA aggregation includes package/bank/electrical constraints plus logical-function and shared-bus/peripheral capacity;
-- connector allocation includes mating body, insertion/removal direction, latch/screw access, cable bend/strain relief, enclosure interfaces, labels, and service space, not merely PCB footprint area;
-- unsupported physical-machine and harness facts remain `VERIFY_AT_MACHINE`/`TBD` and cannot be guessed to make the panel fit;
-- reusable shared resources are instantiated at board scale rather than duplicated inside machine-count variants; and
-- ordinary LinuxCNC/FPGA connector completeness receives zero personnel-safety credit without separate safety-rated authority.
+- individually protected blocks do not prove a valid whole-board power architecture;
+- power closure is a source-to-load-to-return graph, not a flat current sum;
+- every conversion boundary is accounted exactly once using the owning converter's justified envelope;
+- steady, startup/inrush, transient, fault, and decoupling demands are different evidence classes and must not substitute for one another;
+- simultaneity assumptions are explicit engineering dependencies, not hidden convenience factors;
+- every normal and credible-fault current needs an intended return path;
+- logic return, sensor/analog return, field/actuator return, communication COM, shield/chassis, and protective earth remain distinct until explicit grounding authority joins them;
+- partial-power and remote-powered/local-unpowered states require backfeed review;
+- fault ratings and TVS currents are not ordinary rail-load proxies;
+- unsupported installed-machine current, grounding, shield, topology, and isolation facts remain `VERIFY_AT_MACHINE`; and
+- ordinary power integrity/fault containment receives zero personnel-safety credit without separate safety-rated authority.
 
 ## Worked-example stress test
 
-Current OpenPressBrake `lvdt_input` is historically named but its current Rev-1 contract is a powered three-wire 0–12 V valve-position feedback primitive. Per instance it requires `SENSOR_24V`, `SENSOR_RETURN`, `POSITION_0_12V`, one ADS7953 channel, and no direct FPGA GPIO.
+Current OpenPressBrake `modbus_rtu_rs485` provides a strong reusable power handoff for its selected nonisolated THVD1450 physical port: maximum operating `3V3` supply current is 3.0 mA per populated port and local decoupling is 0.1 uF per port. Optional 120-ohm A/B termination is a differential bus load, not a 3V3 rail load in this no-external-bias baseline. TVS transient current and bus-fault ratings are explicitly excluded as ordinary power-load proxies.
 
-Its newly current `integration/REV1_RESOURCE_CONTRACT.yaml` publishes three field connector positions, one protected sensor-power branch, and one ADS7953 channel per primitive. It records two first-machine instances as configuration only, not reusable primitive scope. Therefore first-machine aggregation implies six field positions, two protected sensor-power branches, and two ADC channels before any connector family or physical packing is accepted.
+Current board integration scales those values by `N_RS485_POP` but correctly leaves the actual Rev1 populated-port count at `VERIFY_AT_MACHINE`; reserved capability cannot become a fabricated fixed power subtotal. The same authority leaves `RS485_COM`, shield/chassis convention, ground-potential difference, topology/termination, and whether galvanic isolation is required unresolved until machine evidence exists.
 
-The same authority refuses to invent installed sensor current, valid endpoint, source impedance, return arrangement, or cable/shield facts. The manifest keeps connector current rating and installed wire range parameterized. The status checklist keeps sensor-power branch protection, board integration, CAD/ERC/DRC, bench validation, and human release review open.
-
-BD62 therefore demonstrates truthful aggregate requirements while intentionally refusing to claim that a particular connector family, contact rating, branch fuse/current limit, wire gauge, or enclosure placement is accepted.
+The block also retains local-unpowered/remote-powered behavior as an open qualification item. Therefore the current source-current handoff is useful for board aggregation without implying that return/shield or partial-power qualification is complete.
 
 ## Catalog stress-test result
 
-Classification: **ENGINEERING_REVIEW_NEEDED** for a first-class machine-readable board connector manifest that aggregates all connection contracts and mechanically checks uniqueness/capacity/collisions across physical pins, semantic IDs, electrical classes, field power/returns/shields, shared resources, FPGA/logical functions, placement/access, harness destinations, and unresolved machine facts.
+Classification: **ENGINEERING_REVIEW_NEEDED** for a first-class machine-readable board power/ground manifest joining reusable block power handoffs to source/converter/protection ownership, steady/startup/inrush/capacitance demands, simultaneity, return-current paths, shield/chassis/PE bonds, partial-power cases, fault-containment boundaries, evidence revisions, and unresolved machine facts.
 
-This is board-integration infrastructure, not a reason to turn the reusable `lvdt_input` primitive into a fixed two-channel/six-terminal machine-specific block.
+This is board-integration infrastructure, not a reason to move regulator, connector, grounding, shield, or machine-network facts into the reusable RS-485 primitive.
 
-A secondary defect is the `lvdt_input` status/evidence-index drift described above. OpenPressBrake remained read-only because current main had just advanced this block's Rev1 resource contract; the curriculum records the defect rather than racing active engineering work.
+OpenPressBrake remained read-only because current main is actively advancing safety-interface and power-aggregation engineering. No active engineering files were overwritten.
 
 ## Current repository reconciliation
 
-At run start the durable board-design lane ended at BD61. Concurrent safety-curriculum work had advanced curriculum main after the BD61 checkpoint and was preserved.
+At run start the durable board-design lane ended at BD62. Concurrent safety-curriculum work had advanced curriculum main and was preserved.
 
-Immediately before BD62 was written, curriculum main was `62e9a1baa3606f33edeb242db3c254b7f0f34972` and OpenPressBrake main was `180331961cce34e952d852cdae0a36a2d271b99a` (`lvdt input: publish Rev1 board resource contract`). OpenPressBrake stayed read-only.
+Immediately before BD63 was written, curriculum main was `457a290d5940204a06d8314cd2d6b0ec34f99033` and OpenPressBrake main was `6ff42eef0b8ec826a06705b787754fe481f0f1da`. OpenPressBrake stayed read-only.
 
-BD62 was committed as `201e2f07ce2f1b0fd3dc2977e7e8ce48cddead4f` and re-opened from current main before this checkpoint update.
+BD63 was committed as `1b77a5eeeaba1a47ad06ca06c71e68d4bc68eed2` and re-opened from current main before this checkpoint update.
 
 ## Next exact work
 
-Build BD63 on **board-wide power-domain, return-current, shield/chassis, and fault-containment closure**:
+Build BD64 on **startup/default/de-energized sequencing, power-validity, watchdog/output-authority, and partial-power state-machine closure**:
 
-`connector manifest + block power contracts -> source/protection tree -> per-domain load/current ledger -> startup/inrush/simultaneity -> return-current tracing -> shield/chassis bonds -> partial-power/backfeed states -> fault containment -> machine-readable power/ground manifest -> whole-board release gate`
+`power/ground manifest -> rail-validity dependencies -> reset/configuration states -> output default authority -> enable/permissive chain -> watchdog/freshness -> partial-power transitions -> deterministic de-energization -> recovery/re-arm -> machine-readable startup/authority state model -> whole-board transition gate`
 
-Stress that individually protected blocks can still fail as a board through shared-source limits, return coupling, wrong bond topology, startup/inrush, back-power paths, or fault propagation. Do not infer installed-machine current, grounding, shielding, or transient facts.
+Stress that static power closure does not prove deterministic behavior during power-up, reset, FPGA configuration, communications loss, brownout, watchdog expiry, or recovery. Preserve the independent personnel-safety boundary.
 
 ## Compute
 
-No simulation, synthesis, place-and-route, timing run, or other executable engineering verification was required for BD62. No GitHub-hosted compute was initiated. Future target executable checks, when justified, must use `[self-hosted, openpressbrake]` only.
+No simulation, synthesis, place-and-route, timing run, or other executable engineering verification was required for BD63. No GitHub-hosted compute was initiated. Future target executable checks, when justified, must use `[self-hosted, openpressbrake]` only.
 
 ## Safety boundary
 
-BD62 teaches aggregate connector/resource closure for ordinary controller authority. It does not establish PL/SIL/category, stopping performance, independent safety diagnostic coverage, final-element validation, or personnel-safety authority. LinuxCNC/FPGA feedback, watchdogs, inhibits, STO interfaces, status monitoring, and collision-free ordinary wiring remain zero-credit for personnel safety unless separate safety-rated design and validation explicitly establishes otherwise.
+BD63 teaches ordinary controller-board power integrity, return-current discipline, partial-power review, and fault containment. It does not establish PL/SIL/category, safety-rated power interruption, stopping performance, independent safety diagnostic coverage, or final-element validation. LinuxCNC/FPGA watchdogs, inhibits, communications, power-good logic, and ordinary fault containment remain zero-credit for personnel safety unless separate safety-rated design and validation explicitly establishes otherwise.

@@ -1,46 +1,47 @@
 # Board-Design Curriculum Checkpoint
 
-Current durable lesson: **BD70 — LinuxCNC/HAL Semantic Binding, Command Freshness, and Diagnostic Truthfulness**
+Current durable lesson: **BD71 — Bench Bring-Up as Evidence: Semantic I/O Checkout, Fault Injection, and Commissioning Records**
 
-Curriculum lesson commit: `f794463b94b24517d3030e7f2e6c80daa741d64d`.
+Curriculum lesson commit: `2e3459f261638759b8b0cd87f414ede6cd22555d`.
 
-OpenPressBrake engineering source inspected for BD70: `15bb483b01e85540355d9709534bb703d8888540`.
+OpenPressBrake engineering source inspected for BD71: `102a4065e577da37f1a8873184ed11923a2b23cb`.
 
-## Verified student-facing sources for BD70
+## Verified student-facing sources for BD71
 
-- `hardware/blocks/fpga_core_ecp5_25/integration/retrofit_resource_map.yaml` — VERIFIED_FOR_LESSON for current FPGA resource ownership, rebased shared-resource accounting, watchdog/status reservations, and the external hardware-output-enable boundary.
-- `hardware/blocks/fpga_core_ecp5_25/integration/rev32_openpressbrake_litexcnc_binding.json` — VERIFIED_FOR_LESSON for current LiteX-CNC binding/provenance rules and explicit MAX22216 rebase/open production-engine item; not proof of exact runtime HAL names or complete proportional runtime behavior.
-- `hardware/blocks/fpga_core_ecp5_25/integration/rev31_litexcnc_rev1_proven_modules.json` — VERIFIED_FOR_LESSON only as bounded historical/proven GPIO/encoder/stepgen module provenance; DEPRECATED_OR_SUPERSEDED as current proportional-output runtime authority.
-- `hardware/blocks/fpga_core_ecp5_25/STATUS_CHECKLIST.md` — ENGINEERING_REVIEW_NEEDED as a completely current resource summary because human-readable resource counts retain pre-MAX22216 figures while the current resource map publishes the rebased unique GPIO totals; usable only for bounded open-gate/safety-boundary teaching where consistent with current authority.
-- `board-design/BD69_FPGA_HOST_WATCHDOG_GLOBAL_ENABLE_STALE_COMMAND_CONTAINMENT.md` — VERIFIED_FOR_LESSON as the prerequisite authority/freshness method.
-- `board-design/BD70_LINUXCNC_HAL_SEMANTIC_BINDING_FRESHNESS_DIAGNOSTIC_TRUTH.md` — VERIFIED_FOR_LESSON after post-commit re-open.
+- `hardware/REV1_BOARD_INTEGRATION.yaml` — VERIFIED_FOR_LESSON for current machine-specific ordinary-control I/O assignments, domain separation, output-enable qualifiers, safe states, retained safety ownership and explicit release gates; not evidence of completed physical commissioning.
+- `hardware/REV1_CONNECTOR_MAP.yaml` — VERIFIED_FOR_LESSON for frozen electrical pinout intent and explicit unresolved mechanical facts; physical connector manufacturer/series/footprint/mating condition/coordinates remain VERIFY_AT_MACHINE/TBD.
+- `hardware/blocks/digital_input_24v/manifest.yaml` — VERIFIED_FOR_LESSON for the reusable ISO1212 input semantic/electrical/resource contract and its declared open/TBD items.
+- `hardware/blocks/digital_input_24v/STATUS_CHECKLIST.md` — VERIFIED_FOR_LESSON for the current SIMULATION-READY maturity boundary and open release gates; not schematic-ready or Rev-1-ready evidence.
+- `hardware/blocks/STATUS_RULES.md` — VERIFIED_FOR_LESSON for maturity/status truthfulness and the separation between integration baseline and full qualification.
+- `board-design/BD70_LINUXCNC_HAL_SEMANTIC_BINDING_FRESHNESS_DIAGNOSTIC_TRUTH.md` — VERIFIED_FOR_LESSON as the prerequisite semantic/freshness method.
+- `board-design/BD71_BENCH_BRINGUP_EVIDENCE_FAULT_INJECTION_COMMISSIONING.md` — VERIFIED_FOR_LESSON after post-commit re-open.
 
 ## Closure result
 
-BD70 freezes the rule that **a name match is not semantic proof**. Board integration must separately reconcile machine intent, board connection endpoint, reusable block interface, FPGA physical resource, firmware module, transport/session validity, exact HAL object, application binding and physical observation.
+BD71 freezes the rule that **a successful actuation is not commissioning evidence unless the expected inactive, invalid, faulted and recovery states were also tested**.
 
-No exact LinuxCNC HAL pin spelling is asserted from an FPGA resource name. Exact HAL names require current generated/runtime or driver-source evidence; otherwise the lesson requires `TBD_FROM_GENERATED_RUNTIME`.
+Bring-up now uses a staged evidence ladder: unpowered inspection/domain checks, core-power checkout, field-interface observation with outputs inhibited, inhibited-output command tests, bounded staged output energization, ordinary-control fault/recovery injection, and only then machine commissioning when machine prerequisites are closed.
 
-The current OpenPressBrake LiteX-CNC binding provides a useful subset-validity example. The older proven module configuration remains valid provenance for bounded GPIO/encoder/stepgen structure, but its discrete proportional PWM/enable/fault model is superseded by the current MAX22216/shared-SPI rebase. The current binding explicitly removes/transforms that obsolete subset and still leaves the production MAX22216 transaction/register engine open.
+The OpenPressBrake digital-input path is a bounded worked example. The ISO1212 reusable contract is rich enough to define field input/return, logic output, protection envelope and resource demand, while the board contract assigns actual machine semantics. A runtime bit change alone does not prove the field connector, polarity, electrical envelope or invalid-state behavior.
 
-BD70 also carries BD69 freshness into HAL semantics: transport connected, watchdog healthy, output qualification present and command fresh are distinct facts. Diagnostics may claim only what their observation point and valid power/freshness domain actually prove.
+For energy-producing outputs, BD71 requires proving the negative case first. The current board contract's proportional-output qualifier is the hardware conjunction of PILZ_VALVE_ENABLE, WATCHDOG_OK, FPGA_CONFIGURED and CORE_POWER_GOOD; a software-only path is forbidden. Bring-up must demonstrate output inactivity with permission denied before energized actuation is allowed. This ordinary-control test receives no personnel-safety credit.
+
+BD71 also carries command freshness into physical commissioning: after a watchdog, reset, transport, power or explicit-inhibit event invalidates the command epoch, restoration of the prerequisite alone must not be treated as evidence that an old active command is valid again. If recovery semantics are not defined, classify the test BLOCKED_BY_CONTRACT rather than passing by observation.
 
 ## Catalog stress-test finding
 
-The catalog needs a machine-readable semantic-binding manifest joining stable semantic IDs across connection definition, reusable block, FPGA physical resource, firmware module, generated runtime/HAL object, authority class, freshness dependency, diagnostic claim and evidence revision. It should reconcile against the actual generated/runtime namespace rather than depend on hand-written names.
+The reusable catalog needs a common machine-readable commissioning contract. Static electrical/resource contracts do not currently join semantic IDs to safe bench stages, stimulus/reference definitions, observation points, power-validity dependencies, default/inhibit expectations, required bounded fault injections, freshness-invalidating events, recovery prerequisites and evidence/promotion records.
 
-Provenance artifacts also need subset validity. A historical file can remain authoritative for one semantic subset while being superseded for another after a hardware rebase.
+The current `digital_input_24v` manifest and checklist illustrate the gap truthfully: they provide strong electrical/resource evidence and remain SIMULATION-READY, but they are not a complete bench-commissioning procedure. The curriculum does not invent missing qualification evidence.
 
-The FPGA status checklist contains pre-rebase resource totals while the current resource map reports the MAX22216/shared-SPI rebased totals. Treat the checklist as ENGINEERING_REVIEW_NEEDED for complete current resource-summary use; do not propagate stale totals into board decisions.
+OpenPressBrake remained read-only because current main is actively advancing block resource/power closure. No simulation, synthesis, place-and-route, timing, regression or other executable verification was required for this lesson; no hosted compute was used.
 
-OpenPressBrake remained read-only because current main is actively advancing independent block resource contracts. No simulation, synthesis, timing, place-and-route or other executable verification was required; no hosted compute was used.
-
-Both repositories were re-read on current main after the BD70 lesson commit and before this checkpoint update. Curriculum main contained `f794463b94b24517d3030e7f2e6c80daa741d64d`; OpenPressBrake main remained `15bb483b01e85540355d9709534bb703d8888540`.
+Both repositories were re-read on current main after the BD71 lesson commit and before this checkpoint update. Curriculum main contained `2e3459f261638759b8b0cd87f414ede6cd22555d`; OpenPressBrake main remained `102a4065e577da37f1a8873184ed11923a2b23cb`.
 
 ## Next run
 
-Develop **BD71 — Bench Bring-Up as Evidence: Semantic I/O Checkout, Fault Injection, and Commissioning Records**:
+Develop **BD72 — Qualification Evidence Packages, Traceability, and Release Promotion**:
 
-`accepted semantic binding -> powered-domain checkout -> known input stimuli -> inhibited output observation -> staged output energization -> fault/inhibit injection -> freshness/recovery test -> evidence record -> commissioning gate`.
+`commissioning evidence -> requirement/evidence traceability -> unresolved-fact disposition -> block-versus-board qualification boundary -> regression obligations -> release review -> qualified baseline without overclaiming`.
 
-Re-open every student-facing source on current main. Do not invent machine wiring, HAL names, test voltages/currents, watchdog timing, actuator behavior or safety-integrity claims. Keep outputs inhibited until the applicable electrical path and machine facts are verified. Preserve `VERIFY_AT_MACHINE/TBD` facts and do not claim the current OpenPressBrake board is production-proven.
+Re-open every student-facing source on current main. Build a traceability method that distinguishes calculation, datasheet, simulation, automated integration, bench, machine and human-review evidence. Do not let one passing artifact promote unrelated claims. Preserve VERIFY_AT_MACHINE/TBD facts and do not call the current OpenPressBrake board production-proven without the required evidence.

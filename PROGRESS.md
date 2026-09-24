@@ -32,6 +32,8 @@ The repeatable safety-design methodology covers:
 
 The package now explicitly requires each module to consume current upstream IDs/provenance/status/UNKNOWNs, declare dependencies, preserve stale/residual state and run a stale-dependency check before handoff. Human-factor redesign, architecture change, machine-transfer assumption, requirement edit, boundary change or new energy/hazard can create a `CHG` event and invalidate downstream evidence until reviewed/revalidated.
 
+**Reusable safety implementation contracts:** `hardware/SAFETY_BLOCK_INTERFACE_CONTRACTS.md` now defines the safety-input family, independent core safety controller, safety-output/final-element family and FPGA-to-safety interface. Each contract requires `SRS/PHY/AUTH/DEP/ARC/VAL` linkage, fail-safe defaults, dependency/CCF declaration, physical-witness discipline, explicit non-authority for ordinary LinuxCNC/FPGA paths, service/programming boundary analysis and a schematic-freeze gate. This is a curriculum engineering contract, not a machine-specific certified design.
+
 Core freezes remain in force, especially: **VERIFIED DESIGN != VALIDATED MACHINE SAFETY FUNCTION**, **FAULT DETECTED != PHYSICAL SAFE STATE ACHIEVED**, **LOW COST != LOW RIGOR**, **EDM HEALTHY != PHYSICAL SAFE STATE PROVED**, **SAFETY RELAY OUTPUT OFF != FINAL ENERGY PATH OPEN PROVED**, **DUAL CHANNEL INPUT != REDUNDANT FINAL ELEMENT**, **STO ACTIVE != MOTOR STANDSTILL PROVED**, **STO ACTIVE != ELECTRICAL ISOLATION**, **SUPPLY ISOLATED != DOWNSTREAM PRESSURE EXHAUSTED**, **DUMP COMMANDED != PRESSURE SAFE PROVED**, **GUARD CLOSED != DANGEROUS STATE ENDED**, **COMPONENT PL/SIL CLAIM != MACHINE SAFETY FUNCTION PL/SIL CLAIM**, **ORDINARY LINUXCNC/FPGA DIAGNOSTICS != PERSONNEL-SAFETY AUTHORITY**, **PRODUCTION INTERLOCK != MAINTENANCE ENERGY ISOLATION**, **PERIMETER GATE CLOSED != SAFEGUARDED SPACE KNOWN EMPTY**, **PUMP OFF != RAM/BEAM SAFE STATE PROVED**, **VALVE POSITION EXPECTED != RAM SAFE STATE PROVED**, **SERVO PUMP ZERO COMMAND != HYDRAULIC SAFETY FUNCTION PROVED**, and **LINUXCNC DISABLED != PLASMA POWER MAINTENANCE ISOLATION**.
 
 ## 4000 foundation/core
@@ -41,14 +43,14 @@ Durable foundation includes `hardware/BLOCK_SPEC_TEMPLATE.md`, `hardware/4000-bl
 ## Exact next work
 
 1. Preserve the 2520–25F0 information-separated competency gates; do not self-score or expose evaluator-only expected answers before learner commitment.
-2. Continue the highest-value unblocked safety-related 4000 branch: convert the independent-safety boundary into reusable interface contracts for the safety-input family, independent core safety controller, safety-output/final-element family and FPGA-to-safety interface.
-3. Make each block/interface declare the Safety Design Package IDs it implements/observes (`SRS`, `PHY`, `AUTH`, `DEP`, `ARC`, `VAL`) and its authority boundary.
-4. Build dependency/CCF and fail-safe-default requirements into those contracts before schematic implementation; keep normal LinuxCNC/FPGA command/diagnostic paths non-authoritative for personnel safety unless separately justified.
-5. Preserve practical human factors: safe wiring, setup, replacement, diagnostics and guard restoration should be easier than bypass where practical.
+2. Audit `hardware/SAFETY_BLOCK_INTERFACE_CONTRACTS.md` against the existing safety-course modules and professional source set, then create concrete per-family block-spec templates/instances only where the source evidence supports the electrical semantics.
+3. First deepen `SI-DRY2`, `SI-OSSD2` and the FPGA-to-safety hard-inhibit/service boundary: identify what is common contract versus device-specific implementation, and keep test-pulse/OSSD electrical behavior source-dependent rather than invented.
+4. Trace dependency/CCF paths across input supply, controller supply, final-element supply/pilot energy, connectors and service/programming paths before schematic implementation.
+5. Keep safe wiring, diagnostics, replacement and guard restoration easier than bypass where practical.
 6. Keep machine-specific hydraulic truth tables, valve fail states, stopping limits/distances, pressure thresholds, safe-speed values, process/fume/fire acceptance values, proof-test intervals and PL/SIL/integrity targets UNKNOWN until justified by machine/product/site evidence.
 7. Freeze executable compute only if a concrete unresolved implementation question survives authoritative evidence; use `[self-hosted, openpressbrake]` only.
 
-Newest precise checkpoint: `checkpoints/2026-09-24T0536Z-safety-release-ready-interface-contracts-next.md`.
+Newest precise checkpoint: `checkpoints/2026-09-24T0636Z-safety-interface-contracts-source-audit-next.md`.
 
 ## Laboratory compute checkpoint
 

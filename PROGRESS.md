@@ -47,7 +47,7 @@ Durable foundation includes `hardware/BLOCK_SPEC_TEMPLATE.md`, `hardware/4000-bl
 7. Keep hydraulic truth tables, valve fail states, stopping limits/distances, pressure thresholds, safe-speed values, proof-test intervals and PL/SIL/integrity targets UNKNOWN until justified by machine/product evidence.
 8. Freeze executable compute only if a concrete unresolved implementation question survives authoritative evidence; use `[self-hosted, openpressbrake]` only.
 
-Newest precise checkpoint: `checkpoints/2026-09-24T0150Z-safety-25F0-press-brake-fault-matrix-next.md`.
+Newest precise checkpoint: `checkpoints/2026-09-24T0138Z-safety-25F0-press-brake-fault-matrix-next.md`.
 
 ## Laboratory compute checkpoint
 

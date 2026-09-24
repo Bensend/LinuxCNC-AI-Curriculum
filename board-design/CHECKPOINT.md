@@ -1,43 +1,46 @@
 # Board-Design Curriculum Checkpoint
 
-Current durable lesson: **BD69 — FPGA/Host Watchdog, Global-Enable, and Stale-Command Containment**
+Current durable lesson: **BD70 — LinuxCNC/HAL Semantic Binding, Command Freshness, and Diagnostic Truthfulness**
 
-Curriculum lesson commit: `4ffd6743374c0290470bb6041d0d10382bd51123`.
+Curriculum lesson commit: `f794463b94b24517d3030e7f2e6c80daa741d64d`.
 
-OpenPressBrake engineering source inspected for BD69: `42eb89f170f1faedc38ef943ccb1329272c16982`.
+OpenPressBrake engineering source inspected for BD70: `15bb483b01e85540355d9709534bb703d8888540`.
 
-## Verified student-facing sources for BD69
+## Verified student-facing sources for BD70
 
-- `docs/BOARD_INTEGRATION_SPEC.md` — VERIFIED_FOR_LESSON for current ordinary-control architecture, independent watchdog/output-qualifier requirement, safe-state rules and explicit separation from retained Pilz safety authority.
-- `hardware/REV1_BOARD_INTEGRATION.yaml` — VERIFIED_FOR_LESSON for the machine-specific `PILZ_VALVE_ENABLE + WATCHDOG_OK + FPGA_CONFIGURED + CORE_POWER_GOOD -> PROP_OUTPUT_STAGE_ENABLE` hardware qualifier contract, software-only-path prohibition and safe-state declarations.
-- `hardware/blocks/fpga_core_ecp5_25/integration/retrofit_resource_map.yaml` — VERIFIED_FOR_LESSON for current FPGA watchdog/status resource ownership and the explicit rule that `HARDWARE_OUTPUT_ENABLE` is a board-level fail-low permission fanout rather than an FPGA proportional-command resource.
-- `hardware/blocks/fpga_core_ecp5_25/STATUS_CHECKLIST.md` — VERIFIED_FOR_LESSON for current maturity/open gates and safety boundary; it is not evidence that watchdog/global-enable electrical or application qualification is complete.
-- `board-design/BD69_FPGA_HOST_WATCHDOG_GLOBAL_ENABLE_STALE_COMMAND_CONTAINMENT.md` — VERIFIED_FOR_LESSON after post-commit re-open.
+- `hardware/blocks/fpga_core_ecp5_25/integration/retrofit_resource_map.yaml` — VERIFIED_FOR_LESSON for current FPGA resource ownership, rebased shared-resource accounting, watchdog/status reservations, and the external hardware-output-enable boundary.
+- `hardware/blocks/fpga_core_ecp5_25/integration/rev32_openpressbrake_litexcnc_binding.json` — VERIFIED_FOR_LESSON for current LiteX-CNC binding/provenance rules and explicit MAX22216 rebase/open production-engine item; not proof of exact runtime HAL names or complete proportional runtime behavior.
+- `hardware/blocks/fpga_core_ecp5_25/integration/rev31_litexcnc_rev1_proven_modules.json` — VERIFIED_FOR_LESSON only as bounded historical/proven GPIO/encoder/stepgen module provenance; DEPRECATED_OR_SUPERSEDED as current proportional-output runtime authority.
+- `hardware/blocks/fpga_core_ecp5_25/STATUS_CHECKLIST.md` — ENGINEERING_REVIEW_NEEDED as a completely current resource summary because human-readable resource counts retain pre-MAX22216 figures while the current resource map publishes the rebased unique GPIO totals; usable only for bounded open-gate/safety-boundary teaching where consistent with current authority.
+- `board-design/BD69_FPGA_HOST_WATCHDOG_GLOBAL_ENABLE_STALE_COMMAND_CONTAINMENT.md` — VERIFIED_FOR_LESSON as the prerequisite authority/freshness method.
+- `board-design/BD70_LINUXCNC_HAL_SEMANTIC_BINDING_FRESHNESS_DIAGNOSTIC_TRUTH.md` — VERIFIED_FOR_LESSON after post-commit re-open.
 
 ## Closure result
 
-BD69 freezes the rule that **authority is a chain, not one Boolean**. Board integration must separately account for command authority, command freshness, watchdog authority, independent electrical output qualification, field-power authority and independent personnel-safety authority.
+BD70 freezes the rule that **a name match is not semantic proof**. Board integration must separately reconcile machine intent, board connection endpoint, reusable block interface, FPGA physical resource, firmware module, transport/session validity, exact HAL object, application binding and physical observation.
 
-The current OpenPressBrake machine integration is a bounded positive example: proportional output permission is a direct hardware result of `PILZ_VALVE_ENABLE`, `WATCHDOG_OK`, `FPGA_CONFIGURED` and `CORE_POWER_GOOD`, and a software-only enable path is forbidden. The FPGA resource map separately reserves `WATCHDOG_KICK`, `FPGA_RESET_STATUS`, `POWER_GOOD_IN` and `GLOBAL_OUTPUT_ENABLE_STATUS`; hardware output enable is explicitly outside FPGA proportional-command ownership.
+No exact LinuxCNC HAL pin spelling is asserted from an FPGA resource name. Exact HAL names require current generated/runtime or driver-source evidence; otherwise the lesson requires `TBD_FROM_GENERATED_RUNTIME`.
 
-The FPGA status checklist further records that LiteX-CNC owns the runtime watchdog while the external hardware output gate remains independent containment, and that the FPGA observes global-enable status rather than owning the global-enable command. This ordinary process-control containment receives no personnel-safety credit.
+The current OpenPressBrake LiteX-CNC binding provides a useful subset-validity example. The older proven module configuration remains valid provenance for bounded GPIO/encoder/stepgen structure, but its discrete proportional PWM/enable/fault model is superseded by the current MAX22216/shared-SPI rebase. The current binding explicitly removes/transforms that obsolete subset and still leaves the production MAX22216 transaction/register engine open.
 
-BD69 adds a command-freshness/control-epoch requirement: after host/comms loss, watchdog timeout, FPGA reset, brownout, configuration restart or explicit global inhibit, pre-event motion commands are stale. Reappearance of field power or a global qualifier must not by itself resurrect those commands.
+BD70 also carries BD69 freshness into HAL semantics: transport connected, watchdog healthy, output qualification present and command fresh are distinct facts. Diagnostics may claim only what their observation point and valid power/freshness domain actually prove.
 
 ## Catalog stress-test finding
 
-The current catalog has the correct high-level watchdog/global-enable separation but still lacks a release-consumable machine-readable transition/freshness contract. That contract should publish watchdog kick ownership and what progress a kick proves, timeout evidence, global-enable ownership/fanout, electrical defaults and partial-power behavior, freshness-invalidating events, stale-command clearing/epoch rules, recovery prerequisites, diagnostic power dependencies and accepted process-control loss interval.
+The catalog needs a machine-readable semantic-binding manifest joining stable semantic IDs across connection definition, reusable block, FPGA physical resource, firmware module, generated runtime/HAL object, authority class, freshness dependency, diagnostic claim and evidence revision. It should reconcile against the actual generated/runtime namespace rather than depend on hand-written names.
 
-The current FPGA checklist itself leaves manufacturer timing/voltage/temperature, downstream fanout/unpowered-input behavior and machine/application acceptance of the final process-control loss interval open. Complete watchdog/global-enable qualification therefore remains **ENGINEERING_REVIEW_NEEDED**, not production-proven.
+Provenance artifacts also need subset validity. A historical file can remain authoritative for one semantic subset while being superseded for another after a hardware rebase.
 
-OpenPressBrake remained read-only. Current main was independently advancing motor-drive package/resource reconciliation, outside the lesson's bounded watchdog audit. No simulation, synthesis, timing, place-and-route or other executable verification was required; no hosted compute was used.
+The FPGA status checklist contains pre-rebase resource totals while the current resource map reports the MAX22216/shared-SPI rebased totals. Treat the checklist as ENGINEERING_REVIEW_NEEDED for complete current resource-summary use; do not propagate stale totals into board decisions.
 
-Both repositories were re-read on current main before this checkpoint update. Curriculum main contained the BD69 lesson commit; OpenPressBrake main remained `42eb89f170f1faedc38ef943ccb1329272c16982`.
+OpenPressBrake remained read-only because current main is actively advancing independent block resource contracts. No simulation, synthesis, timing, place-and-route or other executable verification was required; no hosted compute was used.
+
+Both repositories were re-read on current main after the BD70 lesson commit and before this checkpoint update. Curriculum main contained `f794463b94b24517d3030e7f2e6c80daa741d64d`; OpenPressBrake main remained `15bb483b01e85540355d9709534bb703d8888540`.
 
 ## Next run
 
-Develop **BD70 — LinuxCNC/HAL Semantic Binding, Command Freshness, and Diagnostic Truthfulness**:
+Develop **BD71 — Bench Bring-Up as Evidence: Semantic I/O Checkout, Fault Injection, and Commissioning Records**:
 
-`accepted authority chain -> FPGA semantic resources -> transport/session state -> HAL pins/signals -> command/feedback/fault ownership -> freshness/recovery semantics -> diagnostic truth table -> bench-observable acceptance contract`.
+`accepted semantic binding -> powered-domain checkout -> known input stimuli -> inhibited output observation -> staged output energization -> fault/inhibit injection -> freshness/recovery test -> evidence record -> commissioning gate`.
 
-Re-open every student-facing source on current main. Prefer current LiteX-CNC/OpenPressBrake binding artifacts that can prove semantic ownership. Do not invent HAL names, watchdog timeout values, transport guarantees, reset behavior, machine timing or safety-integrity claims. Preserve `VERIFY_AT_MACHINE/TBD` facts and do not claim the current OpenPressBrake board is production-proven.
+Re-open every student-facing source on current main. Do not invent machine wiring, HAL names, test voltages/currents, watchdog timing, actuator behavior or safety-integrity claims. Keep outputs inhibited until the applicable electrical path and machine facts are verified. Preserve `VERIFY_AT_MACHINE/TBD` facts and do not claim the current OpenPressBrake board is production-proven.

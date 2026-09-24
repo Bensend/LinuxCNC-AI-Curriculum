@@ -42,6 +42,16 @@ Record selected-device evidence, not generic curriculum values:
 | connector/pin behavior | | | | |
 | environmental limits | | | | |
 
+### Cross-product compatibility gate
+
+When the chain uses separately selected products/families, record evidence for each interface, not merely each component in isolation:
+
+| Producer -> receiver | Electrical compatibility | Pulse/filter/diagnostic interaction | startup/reset interaction | manufacturer application restriction | Evidence | Blocking unknown? |
+|---|---|---|---|---|---|---|
+| | | | | | | |
+
+Matching nominal voltage, connector type or logical signal name is not sufficient compatibility evidence. Unresolved behavior that can alter detection, fail-safe state, diagnostics, reset/rearm or output authority is **SCHEMATIC-BLOCKING**.
+
 ## D. State and restart/rearm semantics
 
 Describe separately:
@@ -82,13 +92,16 @@ Draw or describe the exact path from energy source to hazardous motion/process a
 
 For every feedback/witness:
 
-| Witness | What it proves | What it does NOT prove | Shared dependency | Required physical witness |
-|---|---|---|---|---|
-| | | | | |
+| Witness | Physical/electrical target observed | Relationship to target | What it proves | What it does NOT prove | Shared dependency | Required physical witness |
+|---|---|---|---|---|---|---|
+| | | | | | | |
+
+A feedback signal is not independent evidence merely because its electrical value is plausible. Name the actual target and the mechanical/electrical relationship that makes the signal evidence of that target.
 
 Required checks:
 - `MATCHING COMMAND/FEEDBACK != INDEPENDENT PHYSICAL WITNESS`.
 - `FINAL-ELEMENT FEEDBACK HEALTHY != COMMON DEPENDENCY ABSENT`.
+- `EDM SATISFIED != HAZARDOUS ENERGY ABSENT`.
 - HMI/LinuxCNC status is not personnel-safety authority.
 
 ## G. Dependency / CCF attack
@@ -163,7 +176,7 @@ List component certifications/PL/SIL/category claims only as component evidence.
 
 For every UNKNOWN classify:
 
-- **SCHEMATIC-BLOCKING** — could change pin/interface compatibility, fail-safe state, diagnostic behavior, reset/rearm behavior, energy-path authority or a safety-critical dependency;
+- **SCHEMATIC-BLOCKING** — could change pin/interface compatibility, cross-product compatibility, fail-safe state, diagnostic behavior, reset/rearm behavior, energy-path authority or a safety-critical dependency;
 - **MACHINE-VALIDATION-BLOCKING** — schematic can be drawn but machine validation/release cannot proceed;
 - **SAFELY DEFERRABLE** — rationale proves it cannot invalidate current capture decisions or safety boundary.
 

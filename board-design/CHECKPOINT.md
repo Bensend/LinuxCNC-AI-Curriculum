@@ -1,40 +1,43 @@
 # Board-Design Curriculum Checkpoint
 
-Current durable lesson: **BD68 — Startup/Shutdown Sequencing, Brownout, and Output-Authority Reconciliation**
+Current durable lesson: **BD69 — FPGA/Host Watchdog, Global-Enable, and Stale-Command Containment**
 
-Curriculum lesson commit: `7ae7ee7fd08fa314df60197184a01f357c456021`.
+Curriculum lesson commit: `4ffd6743374c0290470bb6041d0d10382bd51123`.
 
-OpenPressBrake engineering source inspected for BD68: `83f07de87e300f0fb87bbaf81f79e72e5275ea8b`.
+OpenPressBrake engineering source inspected for BD69: `42eb89f170f1faedc38ef943ccb1329272c16982`.
 
-## Verified student-facing sources for BD68
+## Verified student-facing sources for BD69
 
-- `hardware/blocks/STATUS_RULES.md` — VERIFIED_FOR_LESSON for status truthfulness, integration/qualification distinction and maintenance requirements.
-- `hardware/blocks/machine_power/REFERENCE_REBASE.md` — VERIFIED_FOR_LESSON for current Rev23 machine-power source/control authority, TPS26633 static modes, fault output and open startup gates.
-- `hardware/blocks/machine_power/STATUS_CHECKLIST.md` — ENGINEERING_REVIEW_NEEDED as a complete current status/evidence index because it still identifies Rev17; VERIFIED_FOR_LESSON only for bounded unresolved ILIM/dVdT/startup/FPGA-power/release gates consistent with current authority.
-- `hardware/blocks/digital_output_24v/design/REV1_ISOLATED_INTERFACE_CONTRACT.md` — VERIFIED_FOR_LESSON for frozen isolated-output topology, separated L7/L07 domain and deterministic field-side OFF authority; not evidence of schematic-ready or production-qualified hardware.
-- `hardware/blocks/digital_output_24v/STATUS_CHECKLIST.md` — VERIFIED_FOR_LESSON for current maturity/open gates and safety boundary.
-- `board-design/BD67_WHOLE_BOARD_POWER_RETURN_FAULT_CONTAINMENT.md` — VERIFIED_FOR_LESSON as prerequisite power/return/fault-containment method.
+- `docs/BOARD_INTEGRATION_SPEC.md` — VERIFIED_FOR_LESSON for current ordinary-control architecture, independent watchdog/output-qualifier requirement, safe-state rules and explicit separation from retained Pilz safety authority.
+- `hardware/REV1_BOARD_INTEGRATION.yaml` — VERIFIED_FOR_LESSON for the machine-specific `PILZ_VALVE_ENABLE + WATCHDOG_OK + FPGA_CONFIGURED + CORE_POWER_GOOD -> PROP_OUTPUT_STAGE_ENABLE` hardware qualifier contract, software-only-path prohibition and safe-state declarations.
+- `hardware/blocks/fpga_core_ecp5_25/integration/retrofit_resource_map.yaml` — VERIFIED_FOR_LESSON for current FPGA watchdog/status resource ownership and the explicit rule that `HARDWARE_OUTPUT_ENABLE` is a board-level fail-low permission fanout rather than an FPGA proportional-command resource.
+- `hardware/blocks/fpga_core_ecp5_25/STATUS_CHECKLIST.md` — VERIFIED_FOR_LESSON for current maturity/open gates and safety boundary; it is not evidence that watchdog/global-enable electrical or application qualification is complete.
+- `board-design/BD69_FPGA_HOST_WATCHDOG_GLOBAL_ENABLE_STALE_COMMAND_CONTAINMENT.md` — VERIFIED_FOR_LESSON after post-commit re-open.
 
 ## Closure result
 
-BD68 freezes the rule `A SAFE STEADY STATE DOES NOT PROVE A SAFE TRANSITION`. Board integration must distinguish command authority, actuator-facing electrical default authority, field-power authority and independent safety authority across no-power, partial-power, reset, host-loss, brownout, shutdown and recovery states.
+BD69 freezes the rule that **authority is a chain, not one Boolean**. Board integration must separately account for command authority, command freshness, watchdog authority, independent electrical output qualification, field-power authority and independent personnel-safety authority.
 
-The current Rev1 isolated digital-output contract provides a bounded positive example: `FPGA OUTPUT_COMMAND_L -> STISO621 -> OUTPUT_COMMAND_P -> IPS1025H`, with the IPS1025H field-side input pull-down retained as final deterministic ordinary OFF authority. Loss of FPGA command, logic-side 3.3 V, field-side isolation supply or switched L7 field power must leave the output OFF. This ordinary controller behavior receives no personnel-safety credit.
+The current OpenPressBrake machine integration is a bounded positive example: proportional output permission is a direct hardware result of `PILZ_VALVE_ENABLE`, `WATCHDOG_OK`, `FPGA_CONFIGURED` and `CORE_POWER_GOOD`, and a software-only enable path is forbidden. The FPGA resource map separately reserves `WATCHDOG_KICK`, `FPGA_RESET_STATUS`, `POWER_GOOD_IN` and `GLOBAL_OUTPUT_ENABLE_STATUS`; hardware output enable is explicitly outside FPGA proportional-command ownership.
 
-Current machine-power authority also demonstrates why fault indication is not fault containment: `LOGIC_POWER_FAULT_N` is an open-drain diagnostic pulled to `3V3_CORE` and observed by FPGA logic, while TPS26633 UVLO/latch behavior exists independently of software observation. The 134.56-mA known 5-V continuous subtotal does not close startup; remaining direct loads and startup/inrush still block TPS26633 ILIM/dVdT freeze.
+The FPGA status checklist further records that LiteX-CNC owns the runtime watchdog while the external hardware output gate remains independent containment, and that the FPGA observes global-enable status rather than owning the global-enable command. This ordinary process-control containment receives no personnel-safety credit.
+
+BD69 adds a command-freshness/control-epoch requirement: after host/comms loss, watchdog timeout, FPGA reset, brownout, configuration restart or explicit global inhibit, pre-event motion commands are stale. Reappearance of field power or a global qualifier must not by itself resurrect those commands.
 
 ## Catalog stress-test finding
 
-Reusable resources need a machine-readable transition contract in addition to steady-state electrical/resource data: default bias authority, power dependencies, partial-power assumptions, startup/inrush/effective capacitance, reset/enable dependencies, watchdog/inhibit semantics, fault-indication power dependency, shutdown/stored-energy behavior and unresolved machine facts. Without this, board-level sequencing still depends on unwritten knowledge.
+The current catalog has the correct high-level watchdog/global-enable separation but still lacks a release-consumable machine-readable transition/freshness contract. That contract should publish watchdog kick ownership and what progress a kick proves, timeout evidence, global-enable ownership/fanout, electrical defaults and partial-power behavior, freshness-invalidating events, stale-command clearing/epoch rules, recovery prerequisites, diagnostic power dependencies and accepted process-control loss interval.
 
-The machine-power status checklist remains stale relative to Rev23 and is ENGINEERING_REVIEW_NEEDED as a complete evidence index. OpenPressBrake remained read-only because current main is actively advancing resource contracts.
+The current FPGA checklist itself leaves manufacturer timing/voltage/temperature, downstream fanout/unpowered-input behavior and machine/application acceptance of the final process-control loss interval open. Complete watchdog/global-enable qualification therefore remains **ENGINEERING_REVIEW_NEEDED**, not production-proven.
 
-OpenPressBrake main was re-read at `83f07de87e300f0fb87bbaf81f79e72e5275ea8b` immediately before checkpointing. Curriculum main was re-read after the BD68 lesson commit. No simulation, synthesis, timing, place-and-route or other executable verification was required; no hosted compute was used.
+OpenPressBrake remained read-only. Current main was independently advancing motor-drive package/resource reconciliation, outside the lesson's bounded watchdog audit. No simulation, synthesis, timing, place-and-route or other executable verification was required; no hosted compute was used.
+
+Both repositories were re-read on current main before this checkpoint update. Curriculum main contained the BD69 lesson commit; OpenPressBrake main remained `42eb89f170f1faedc38ef943ccb1329272c16982`.
 
 ## Next run
 
-Develop **BD69 — FPGA/Host Watchdog, Global-Enable, and Stale-Command Containment**:
+Develop **BD70 — LinuxCNC/HAL Semantic Binding, Command Freshness, and Diagnostic Truthfulness**:
 
-`transition-closed output paths -> watchdog authority chain -> host/FPGA failure classes -> stale-command containment -> global-enable fanout -> LinuxCNC/HAL state mapping -> fault/recovery semantics -> verification matrix -> integration acceptance`.
+`accepted authority chain -> FPGA semantic resources -> transport/session state -> HAL pins/signals -> command/feedback/fault ownership -> freshness/recovery semantics -> diagnostic truth table -> bench-observable acceptance contract`.
 
-Re-open every student-facing source on current main. Do not invent watchdog timeout values, FPGA reset behavior, machine timing, or safety-integrity claims. Preserve `VERIFY_AT_MACHINE/TBD` facts and do not claim the current OpenPressBrake board is production-proven.
+Re-open every student-facing source on current main. Prefer current LiteX-CNC/OpenPressBrake binding artifacts that can prove semantic ownership. Do not invent HAL names, watchdog timeout values, transport guarantees, reset behavior, machine timing or safety-integrity claims. Preserve `VERIFY_AT_MACHINE/TBD` facts and do not claim the current OpenPressBrake board is production-proven.

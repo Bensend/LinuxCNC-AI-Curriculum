@@ -12,3 +12,5 @@ These findings strengthen the existing production-safeguard versus maintenance-i
 No lab is justified: the open question was resolved by authoritative documentation rather than executable behavior. No GitHub-hosted compute was used.
 
 Next work: propagate the maintenance-isolation fields into the selected safety-block qualification worksheet when repository mutation permits, preserving actual isolating mechanism, residual-energy disposition, verification witness, and continued verification for credible reaccumulation paths.
+
+Repository mutation note: direct updates to the selected-block worksheet and PROGRESS.md were attempted after this checkpoint and rejected by connector safety controls. This checkpoint is therefore the durable handoff; retry those narrow propagations next session rather than reconstructing the evidence.

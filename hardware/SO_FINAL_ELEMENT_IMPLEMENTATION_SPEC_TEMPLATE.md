@@ -6,9 +6,26 @@ Status: reusable curriculum engineering template; instantiate by final-element c
 
 Record instance ID, final-element class, selected product, `SRS-*`, required `PHY-*`, `AUTH-*`, `DEP-*`, `ARC-*`, `VAL-*`, `CHG-*`, current UNKNOWNs, commanded safety action and the exact hazardous-energy path affected.
 
+### Mandatory final-element witness record
+
+Keep these eight fields together as one auditable record; do not distribute them only across prose:
+
+| Field | Required record | Package linkage |
+|---|---|---|
+| commanded safety action | Exact safety action demanded at this output boundary. | SRS, AUTH |
+| physical final element | Exact contactor, drive safety function, valve/dump element, brake/restraint or other physical element affected. | AUTH, ARC |
+| feedback target | Sensor/feedback and the exact physical/electrical target it observes. | PHY, VAL |
+| legitimate proposition | What that feedback can prove, and explicit non-claims. | PHY, SRS, VAL |
+| shared dependencies / CCF | Power, reference, pilot/supply, connector, mechanism, sensor target, controller resource and other common paths capable of producing plausible-but-wrong evidence. | DEP, ARC, VAL |
+| residual hazardous energy | Energy/motion/pressure/gravity/stored-energy/alternate paths that can remain after the final element reaches its expected state. | PHY, SRS, ARC |
+| machine-level physical witness | Independent physical evidence required to validate the machine-level proposition. | PHY, VAL |
+| maintenance isolation / blocking | Boundary between the production safety function and lockable isolation, depressurization, blocking or restraint required for maintenance. | SRS, AUTH, ARC, VAL |
+
+A material change to any field SHALL create/review a `CHG-*` record and mark affected downstream evidence `STALE` until re-verified/revalidated.
+
 ## 2. Class-specific evidence
 
-Choose one or define another justified class:
+Choose one or define another justified class.
 
 ### A. Relay / contactor
 Record coil/output interface, contact arrangement, de-energized behavior, positively guided/mirror feedback if applicable, contact ratings/application constraints, welded/stuck fault handling and EDM semantics.
@@ -64,6 +81,19 @@ Provide clear state/fault diagnostics without requiring safeguard defeat; keyed 
 ## 9. Validation matrix
 
 Validate normal demand/rearm, each relevant single fault, feedback disagreement, loss/restoration of each shared supply/pilot source, stuck/welded element, service override restoration, and the required physical witness. Include a plausible-but-wrong feedback test and a common-dependency test whenever physically credible. Where stopping distance/time, pressure, gravity restraint or holding force is part of `PHY-*`, use machine-specific measured/calculated acceptance criteria; do not invent generic values.
+
+### Required contradiction case
+
+Include at least one case in which final-element feedback is electrically healthy/expected while the independent machine-level physical witness required by `PHY-*` contradicts the claimed safe state.
+
+Expected reasoning:
+1. retain credit only for the narrow proposition actually supported by the final-element feedback;
+2. mark the broader `PHY-*` proposition **NOT ESTABLISHED**;
+3. do not permit rearm/release from controller status alone;
+4. open/retain the discrepancy through the applicable `VAL-*`, `DEP-*`, `UNK-*` and, after a material change, `CHG-*` records;
+5. keep people outside the hazard during experimental diagnosis when the minimum safe-to-operate proposition is not established.
+
+For hydraulics, a valve-position indication may support a valve-position proposition; it does not by itself prove pressure decay, ram/beam standstill or restraint. Exact pressure/motion acceptance criteria remain machine-specific or UNKNOWN until justified.
 
 ## 10. Freeze gate
 

@@ -88,6 +88,36 @@ Draw or describe the exact path from energy source to hazardous motion/process a
 - gravity/external-force/stored-energy path:
 - production safeguard vs maintenance-isolation boundary:
 
+## E1. Maintenance energy-control continuity gate
+
+Complete this section when servicing can expose people to hazardous energy. This is a separate proposition from the production safety function.
+
+| Required record | Evidence / linked package IDs | Status / UNKNOWN |
+|---|---|---|
+| hazardous-energy source(s) and `ENE-*` | | |
+| actual energy-isolating device(s) used for servicing | | |
+| lockout/restraint/personal-control method | | |
+| residual/stored-energy disposition after isolation | | |
+| initial physical verification before work | | |
+| credible reaccumulation/re-energization path | | |
+| continued-verification method and basis when reaccumulation is credible | | |
+| group/crew coordination and each exposed worker's personal-control proposition, when applicable | | |
+| shift/personnel-change continuity and incoming-worker verification opportunity, when applicable | | |
+| bounded test/positioning re-energization sequence, when necessary | | |
+| re-isolation/reapplication of energy control before servicing resumes | | |
+| safeguard restoration and final release witness | | |
+
+Required checks:
+- `PRODUCTION INTERLOCK != MAINTENANCE ENERGY ISOLATION`.
+- `INITIAL ISOLATION VERIFIED != HAZARDOUS REACCUMULATION IMPOSSIBLE`.
+- `GROUP COORDINATOR CONTROL != EACH EXPOSED WORKER'S PERSONAL ENERGY-CONTROL PROTECTION`.
+- `PREVIOUS SHIFT VERIFIED ISOLATION != INCOMING SHIFT HAS VERIFIED ISOLATION`.
+- `TEMPORARY REENERGIZATION FOR TEST/POSITIONING != SERVICING MAY CONTINUE ENERGIZED`.
+- `AUTHORIZED OVERRIDE != SAFEGUARD NO LONGER REQUIRED`.
+- `BYPASS PERMISSION != ALTERNATE PROTECTION PROVED`.
+
+If the selected block is only a production safety element, say so explicitly. Do not credit its inhibit, status, EDM, valve-position indication, STO state, or LinuxCNC/FPGA state as proof of maintenance isolation unless the exact physical proposition and application evidence justify that claim.
+
 ## F. Witness proposition
 
 For every feedback/witness:
@@ -164,7 +194,8 @@ Name concrete tests and witnesses for:
 - common-dependency fault;
 - final-element failure;
 - gravity/external/stored-energy case where relevant;
-- service/maintenance transition and restoration.
+- service/maintenance transition and restoration;
+- final-element feedback healthy/expected while an independent machine-level physical witness contradicts the claimed safe state. Retain only the narrow proposition actually proved by the feedback; mark the broader `PHY-*` proposition not established and block rearm/release until resolved.
 
 Machine-specific stopping distance/time, pressure, holding force, safe speed, diagnostic coverage, proof-test interval and PL/SIL/integrity targets remain UNKNOWN until justified by machine/product/site evidence.
 

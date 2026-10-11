@@ -51,6 +51,8 @@ Never recycle an ID after deletion; mark it RETIRED with rationale.
 
 Before transferring a safety rule or numeric criterion between machine types, verify its actual scope. **OSHA 29 CFR 1910.217(a)(5) expressly excludes press brakes** from that mechanical-power-press section; OSHA 1910.212 addresses general machine guarding and OSHA's press-brake interpretation identifies 1910.212(a)(3)(ii). Thus 1910.217 PSDI clauses may be useful hazard analogies but must not be represented as binding press-brake clauses. Evidence: https://www.osha.gov/laws-regs/regulations/standardnumber/1910/1910.217 ; https://www.osha.gov/laws-regs/regulations/standardnumber/1910/1910.212 ; https://www.osha.gov/laws-regs/standardinterpretations/1986-05-27 . Record product instructions separately from legal requirements; do not infer uninspected consensus-standard provisions.
 
+**2026 press-brake scope update:** ISO 6909:2026 was published 2026-05-29. Its official abstract defines included/excluded drive and machine types and states non-applicability to press brakes manufactured before publication. This is a DOC-CONFIRMED scope finding, not an inspected technical-clause or legal-applicability conclusion. Preserve the machine-specific applicability decision as BND/UNK evidence. Source: https://www.iso.org/standard/83403.html ; audit: `research/ISO_6909_PUBLIC_SCOPE_NOTE_2026-10-11.md`.
+
 ## 2. Hazardous-energy register
 
 | ID | Energy source | Stored/generated/transmitted how | Isolation/control point | Residual/stored-energy concern | Related hazards | Provenance |

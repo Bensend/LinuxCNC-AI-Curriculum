@@ -44,6 +44,13 @@ Never recycle an ID after deletion; mark it RETIRED with rationale.
 | ID | Machine/system included | Lifecycle/mode | People/exposure | Interfaces excluded or external | Provenance | Status |
 |---|---|---|---|---|---|---|
 
+## 1A. Standards and manufacturer-instruction applicability
+
+| BND/UNK ID | Machine class and jurisdiction | Regulation/standard and exact edition | Applies to this machine/task? Basis | Manufacturer product/manual revision | What the cited source does NOT establish | Status |
+|---|---|---|---|---|---|---|
+
+Before transferring a safety rule or numeric criterion between machine types, verify its actual scope. **OSHA 29 CFR 1910.217(a)(5) expressly excludes press brakes** from that mechanical-power-press section; OSHA 1910.212 addresses general machine guarding and OSHA's press-brake interpretation identifies 1910.212(a)(3)(ii). Thus 1910.217 PSDI clauses may be useful hazard analogies but must not be represented as binding press-brake clauses. Evidence: https://www.osha.gov/laws-regs/regulations/standardnumber/1910/1910.217 ; https://www.osha.gov/laws-regs/regulations/standardnumber/1910/1910.212 ; https://www.osha.gov/laws-regs/standardinterpretations/1986-05-27 . Record product instructions separately from legal requirements; do not infer uninspected consensus-standard provisions.
+
 ## 2. Hazardous-energy register
 
 | ID | Energy source | Stored/generated/transmitted how | Isolation/control point | Residual/stored-energy concern | Related hazards | Provenance |
@@ -116,6 +123,22 @@ If an interval lacks a justified basis, record `UNKNOWN`; do not invent a calend
 When servicing can expose people to hazardous energy, link the production safety-function evidence to the separate maintenance energy-control record. Preserve the chain from hazardous-energy source and actual isolating mechanism through residual/stored-energy disposition, verification, any credible reaccumulation, any bounded test/positioning transition, re-isolation, personnel/shift handoff where applicable, and final restoration/release evidence.
 
 Do not treat a production interlock, controller inhibit, feedback indication, previous-shift verification, or group coordinator status as a substitute for the narrower physical/personnel-control proposition it does not prove. Carry relevant ENE/SRS/PHY/AUTH/DEP/ARC/HF/VAL/PT/CHG/UNK IDs and mark affected evidence STALE after a material change until reviewed.
+
+## 11B. Whole-body-access and reset/restart continuity
+
+For machines large enough to enter, retain one linked record from access geometry to restart authorization. A cleared entry field, closed gate, available escape release, successful reset, and proof that no person remains exposed are **distinct propositions**.
+
+| Linked package IDs | Required machine-specific evidence | Status / UNKNOWN |
+|---|---|---|
+| BND/HAZ | Entry/egress paths, blind spaces, persons/tasks/modes, credible person remaining inside after entry field clears | |
+| SF/PHY | Actual protection/occupancy proposition; what guard-closed, field-clear and controller indications do not prove | |
+| SRS | Independent protective demand, deliberate reset, separate ordinary start, retained start, power loss/restoration and reset-fault behavior | |
+| AUTH/ARC | Safety-related decision owner, final energy-removal/holding elements, normal LinuxCNC/FPGA role | |
+| DEP/HF | Reset visibility/location, sensing blind zones, escape, personal restart prevention, common dependencies and foreseeable bypass pressure | |
+| VAL/PT | Trapped-person/field-clear contradiction, guard restoration, reset with incomplete visibility, retained start, power restoration and independent physical witness | |
+| UNK/RR/CHG | Unmeasured geometry/coverage, unresolved manufacturer instructions, operational restriction and stale downstream evidence | |
+
+SICK S300 instructions distinguish scanner reset/OSSD restoration from the external restart interlock and require an outside reset location with full view for the documented application (S300 8010948/ZD09/2024-09-12, https://www.sick.com/media/docs/3/13/613/Operating_instructions_S300_Safety_laser_scanner_en_IM0017613.PDF). This is **product/application-specific DOC-CONFIRMED** evidence, not generic proof of occupancy or a universal machine requirement. An adversarial `VAL-*` shall consider a person remaining inside after the initiating field clears, with an ordinary start request retained; guard/field restoration or reset alone must not receive credit for an unproved physical proposition. If minimum protection is not established, block exposed-person operation and limit experiments to isolated/remote conditions.
 
 ## 12. Change and revalidation ledger
 

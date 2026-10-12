@@ -77,6 +77,14 @@ Required checks:
 - `RESET DEVICE ACCESSIBLE != SAFEGUARDED SPACE CLEAR PROVED`.
 - `POWER RESTORED != REARM ELIGIBLE`.
 
+## D1. Conditional whole-body-access, scanner signal, and restart-authority gate
+
+Required when a person can pass the entry sensing plane or remain inside a safeguarded space. Record `BND/HAZ` entry/egress and blind-space geometry, `SF/PHY` occupancy/protection propositions, `SRS/AUTH` independent restart-inhibit owner, `ARC/DEP` exact scanner case/field/receiver mapping and common dependencies, `HF` visibility/escape/defeat incentives, `VAL/PT` trapped-person and retained-start contradictions, and `UNK/RR/CHG` unresolved restrictions and stale evidence. A field-clear, guard-closed, or reset-accepted status cannot prove the area is empty or authorize an ordinary cycle start.
+
+For selected SICK S300 applications, verify the exact manual edition, whether local OSSDs are used, whether the downstream controller reads EFI OSSD status or protective-field status, allocation of each field, monitoring-case selection, scanner location/configuration-carrier identity, and who implements the downstream restart interlock. S300 8010948/ZD76/2025-08-19 documents hazards from inactive local OSSDs/EFI status, unallocated fields, downstream interlock ownership, monitoring-case switching, and incorrect system-plug connection. These are product-specific DOC-CONFIRMED constraints; selected-machine physical coverage and safe response remain UNKNOWN until verified.
+
+Adversarial `VAL` cases: field clear while a person remains inside; wrong-but-valid monitoring case; wrong EFI bit or unallocated field; held ordinary start after reset; replacement with mismatched configuration; and healthy controller/valve feedback contradicted by physical motion/pressure evidence. Do not operate with people exposed when the minimum protection proposition is unestablished. See `safety-course/SAFETY_DESIGN_PACKAGE_TRACEABILITY_TEMPLATE.md` §11B and the manufacturer's exact revision.
+
 ## E. Hazardous-energy path
 
 Draw or describe the exact path from energy source to hazardous motion/process and identify what this block can interrupt, inhibit, hold, exhaust or monitor.

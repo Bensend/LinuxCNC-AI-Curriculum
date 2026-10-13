@@ -1,16 +1,12 @@
 name: PB-DXF-001 metadata importer fixture
+# Manual, question-driven execution only. No hosted-runner fallback.
 on:
-  push:
-    branches: [main]
-    paths:
-      - 'lab-jobs/085-pb-dxf-001-metadata-import-fixture.py'
-      - '.github/workflows/pb-dxf-001.yml'
   workflow_dispatch:
 permissions:
   contents: read
 jobs:
   fixture:
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, openpressbrake]
     timeout-minutes: 5
     steps:
       - uses: actions/checkout@v4

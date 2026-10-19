@@ -1,0 +1,5 @@
+# 4400 HALUI remote-start source checkpoint
+
+Session started 2026-10-19T09:31:46Z. Active 4000 safety priority, closed 1000–3000 and blind gates unchanged.
+
+Pinned LinuxCNC 2.9 commit a33293f46575c809e082e0806e79ab996f982513: src/emc/usr_intf/halui.cc check_bit_changed lines 1591–1598 returns nonzero only on new TRUE; program.run lines 1698–1699 submits RUN, and estop.reset lines 1662–1663 submits internal Task reset. sendProgramRun lines 1128–1142 checks program file, requests AUTO and sends NML; Task acceptance and physical movement are separate. Official LinuxCNC Halui Examples Remote Start connects held remote button and mode.is-auto through and2 to program.run. Mode becoming AUTO while button remains held can create a fresh HAL edge without a new operator press (INFERENCE). LinuxCNC internal estop reset is not independent safety reset. Detailed source study staged for publication; no lab or Actions. Selected-machine HAL wiring, safety rearm, output chain, stopping and holding witnesses UNKNOWN. Next: publish detailed audit; trace selected machine or rotate to open 4400 safety branch. Never use GitHub-hosted compute.

@@ -1,0 +1,5 @@
+# 4400 source-scope continuation
+
+Session started 2026-10-19T04:36:22Z UTC. Main remains on the 4000 safety priority; 1000/2000/3000 closed, 2520–25F0 external evaluation open. The manufacturer HBH product, catalog and operating-instructions surfaces conflict on holding and selected-device safety credentials. The 2024 catalog's routine-production intended-use statement must not be treated as a maintenance-access exemption. OSHA 1910.147's minor-servicing exception requires effective alternative protection as well as qualifying task conditions. Selected machine physical evidence remains unknown.
+
+Detailed research and learner exercise were prepared in a local review bundle. Their publication and canonical progress/log updates are pending authorized access. Do not dispatch GitHub-hosted jobs or unqualified panel-PC jobs. Next: reconcile reviewed files with main under exact SHA preconditions, verify selected-machine energy/isolation evidence, then rotate to another useful safety branch if source-limited. No machine testing performed.

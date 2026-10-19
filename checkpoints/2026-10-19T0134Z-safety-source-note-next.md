@@ -1,0 +1,3 @@
+# Safety curriculum source checkpoint — 2026-10-19
+
+Read START_HERE and current governance. 4400 safety remains primary. OSHA's 2005-04-22 and 2006-12-28 interpretations distinguish guarded inch/positioning from maintenance energy control; 1997 CPL 02-01-025 explicitly addresses press brakes. Scope and machine-specific physical evidence remain unresolved. No tests or Actions dispatched. Existing SO final-element template and qualification worksheet already contain all eight witness fields; avoid duplicating them. Next: integrate source analysis into existing Safety Design Package, obtain selected-machine evidence, preserve external evaluator separation. Session start 2026-10-19T01:34:00Z.

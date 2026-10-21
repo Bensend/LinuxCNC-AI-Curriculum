@@ -1,0 +1,13 @@
+# 4400 — Press-brake secondary pinch and foot-control scope (2026-10-21)
+
+**DOC-CONFIRMED:** OSHA's powered-press-brake eTool identifies an additional pinch between a rising workpiece and the slide front face, moving stock/whip, and accidental foot-pedal cycling: https://www.osha.gov/etools/machine-guarding/presses/powered-press-brakes . Die-line optical protection alone does not prove protection against these distinct swept-volume hazards.
+
+**DOC-CONFIRMED:** 29 CFR 1910.217(a)(5) explicitly excludes press brakes: https://www.osha.gov/laws-regs/regulations/standardnumber/1910/1910.217 . Do not misquote its pedal-construction clauses as directly applicable press-brake law. The applicable guarding analysis instead requires the actual machine, 1910.212, selected product instructions, current machine-specific standards and risk assessment.
+
+**DOC-CONFIRMED:** Fiessler AKAS LC-II M/F 2024 U.S. manual §6.2 calls for a three-position safety foot switch in its foot-operated-fast-motion integration and §3.4 documents E1 inactive in box mode: https://www.fiessler.de/default-wAssets/docs/download/AKAS-LC/bdh-akas-lcii-m-f-usa-doc1281.pdf . This is not evidence of the installed pedal, independent Pilz qualification, or equivalence to a hand-held enabling device.
+
+**SOURCE-CONFIRMED, drawing-derived only:** OpenPressBrake public Rev1 configuration identifies CNC mute request wire 44 to Pilz A2 I2, but not the installed Pilz program or pedal circuit: https://github.com/Bensend/OpenPressBrake/blob/92cf5424be90f45f664ba2652dc725b38e1895f9/hardware/REV1_MACHINE_CONFIG.yaml .
+
+**INFERENCE / next evidence gate:** qualify *each bend* independently for die nip, part swept volume, slide-face secondary pinch, operator/helper exposure, foot-pedal accidental demand, guarding/fixtures, and optical mode transition. Do not reuse Bend 1's optical clearance for Bend 2. Keep safety authority in independent qualified hardware and prove the physical stop/hold proposition; ordinary LinuxCNC/FPGA may provide visualization, diagnostics and stale-demand cancellation only.
+
+**UNKNOWN:** selected part geometry, pedal model, Pilz program, AKAS installation, hydraulic stop/hold, safety performance targets, stop distances and test results. No tests or GitHub-hosted compute; no personnel-exposed operation authorized. Detailed proposed worksheet, adversarial cases and checkpoint are retained in the cumulative review package pending authorized publication.

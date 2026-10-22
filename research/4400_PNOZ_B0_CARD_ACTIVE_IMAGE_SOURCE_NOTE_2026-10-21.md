@@ -1,6 +1,6 @@
 # 4400 Pilz PNOZ m B0 project-identity and chip-card ambiguity (2026-10-21)
 
-Evidence class: **DOC-CONFIRMED** for the specified product manual; installed ERMAK controller **UNKNOWN**. No controller contact, simulation, physical testing, or commissioning.
+Evidence class: **DOC-CONFIRMED** for the specified product manual; selected-machine controller **UNKNOWN**. No controller contact, simulation, physical testing, or commissioning.
 
 Manufacturer: Pilz, *PNOZ m B0 Operating Manual 1002660-EN-13*, https://www.pilz.com/download/open/PNOZ_m_B0_Operating_Manual_1002660-EN-13.pdf .
 

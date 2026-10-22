@@ -73,3 +73,5 @@ Newest precise checkpoint: `checkpoints/2026-09-24T1241Z-safety-hydraulic-witnes
 ## Global next-work rule
 
 Continue safety-course professional implementation tracing and repeatable safety-design methodology. Prefer authoritative professional schematics, manufacturer safety documentation and standard engineering before simulation. Do not use GitHub-hosted runners for curriculum compute; when a concrete unresolved question justifies compute, target the self-hosted runner `[self-hosted, openpressbrake]` only.
+
+2026-10-22 10:33 UTC — 4400 safety documentary research: traced OSHA 1910.147(f)(1) temporary test/position and re-isolation sequence, stored-energy reaccumulation, group lock/shift continuity and ISO 14118:2017 public scope. Prepared generic maintenance/test transaction, cross-machine failure analysis, technician card and evidence worksheet; no machine tests or GitHub-hosted compute. Publication remains blocked by normal GitHub safety checks; staged artifacts are not committed. 2520–25F0 external/fresh gates remain OPEN.

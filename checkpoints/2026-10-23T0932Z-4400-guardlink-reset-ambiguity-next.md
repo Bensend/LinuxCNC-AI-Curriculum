@@ -33,3 +33,5 @@ No GitHub-hosted Actions dispatch, simulation, build, synthesis or test. No self
 6. Record each session's actual UTC end and elapsed in canonical `LESSON_LOG.md` using complete-file SHA-guarded append; never overwrite from partial fetch. Keep recurring curriculum enabled.
 
 **Evidence status:** documentary source-confirmed claims only; selected machine `VAL/PT` NOT RUN. No course graduation or safety certification claimed.
+
+**Post-checkpoint integration:** cumulative `safety-course/SAFETY_DESIGN_PACKAGE_TRACEABILITY_TEMPLATE.md` §11D now carries selected-device reset-unit conflict, diagnostic-set quality, authority, physical-witness and CHG/HF gates. Continue source-review of pending detailed GuardLink/HMI research; do not create another duplicate reset template.

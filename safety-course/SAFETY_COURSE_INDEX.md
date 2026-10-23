@@ -181,3 +181,8 @@ Read the [manufacturer-source serial diagnostic investigation](../research/4400_
 ### 2026-10-23T14:43Z — Overrun text and secondary press-brake hazards
 
 The exact original archived [AKAS-5M 13/11-mm overrun text conflict and non-laser hazards study](../research/4400_AKAS_OVERTRAVEL_TEXT_CONFLICT_AND_SECONDARY_HAZARD_SCOPE_2026-10-23.md) is now on main (Git blob `ff7709e6792192780df099f88443a9bc4c1b45b9`). Fiessler 2024 pp. 5/14 give differing numeric statements; actual selected setting, acceptance quantifier, physical stop and independent sheet-sweep/ejection/foot-control hazards remain open. See cumulative Safety Design Package §11O; no numerical limit is approved by this source release.
+
+
+### 2026-10-23T14:48Z — Selected overrun setting and monitor freshness
+
+The exact archived [AKAS-5M DIP-selected overrun and automatic-retest source adjudication](../research/4400_AKAS5M_SELECTED_SETTING_OVERRUN_AND_RETEST_2026-10-23.md) is now on main (original Git blob `5e0b14b723308ed86ca2090834a248e4d3071d71`). Manufacturer pp. 25–26 tie the test to the selected receiver-support DIP setting and documented periodic retest, but pp. 5/14 quantifier and equality ambiguity remains. Separate selected setting, fresh monitor execution, physical machine stop/hold, and cancellation of setup muting. No physical acceptance.

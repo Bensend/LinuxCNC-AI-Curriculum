@@ -325,3 +325,8 @@ Published `research/4400_AKAS5M_SELECTED_SETTING_OVERRUN_AND_RETEST_2026-10-23.m
 ### 2026-10-23T14:49Z exact HAWE accumulator family source release
 
 Published `research/4400_HAWE_ACCUMULATOR_FAMILY_EXCEPTION_AND_PRESSURE_ZONE_WITNESS_2026-10-22.md` to `main`; independently fetched exact original ZIP Git blob **`b690bcb1d0f11cf6aacae0fa5f23ed060e258e43`**. Manufacturer HAWE D 7969 (06-2022 rev 1.10 p.31) versus D 7571 (03-2024 rev 1.1 pp.11,18) directly rechecked in original PDFs: dedicated accumulator valve language differs by family; both still require fluid-side service pressure-release consideration. Product-family exception is not machine-level stop/hold, maintenance isolation or universal legal interpretation. Cumulative Safety Design Package §11P added. **Original archive 16/85 pending**, superseding 17/85, absent concurrent publication. No hosted/local lab compute, physical test or blind score.
+
+
+### 2026-10-23T14:51Z exact EUCHNER temporal guard-release source release
+
+Published `research/4400_NORMAL_UNLOCK_VS_ESCAPE_RELEASE_TEMPORAL_PROOF_2026-10-22.md` on `main`; initial transcription had a two-character formatting mismatch, corrected by a SHA-guarded update, then exact original Git blob **`95070fff954dca5add555bcbd93e8e35ab915edc`** verified. EUCHNER original manual 2124217-08-06/21 directly reviewed: CTP-L escape release physically unlocks and produces FO OFF stop demand, which is not evidence that stopping preceded opening. Normal access, inside escape and maintenance energy isolation require different physical propositions. Cumulative Safety Design Package §11Q added. **Original archive 15/85 pending**, superseding 16/85, absent concurrent release. No physical test or hosted/local lab compute.

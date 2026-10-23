@@ -44,3 +44,6 @@ Remaining original archive research paths, verify absent before each write and p
 3. Develop low-friction guard/test-point/lockout access that is easier to use than defeat. Explicitly separate P protective response, M maintenance energy control and R fresh restart; retain `CHG` invalidation on substitutions.
 4. Preserve 2520–25F0 external/fresh evaluator separation and close no gate without independent evidence.
 5. At session end append actual UTC end/elapsed/overlap in `LESSON_LOG.md` with a complete-file SHA-guarded update. Keep hourly curriculum automation enabled.
+
+
+**Final repository reconciliation:** all six exact published archive files were independently re-fetched from `main` and matched original Git blobs (6/6). The six pending paths listed above were individually checked against current `main` and returned 404 (6/6 ABSENT), rather than inferred only from the publication ledger. The historical 2026-10-22 safety-course route-regression audit remains intentionally unpublished because it describes superseded index SHA and an obsolete write blocker; publish only with clear historical labeling and current navigation validation. This is a branch-local documentation decision, not a curriculum stop. No new authoritative runner runtime or physical safety test.

@@ -423,3 +423,6 @@ Added original `research/4400_PERSONNEL_KEY_WHOLE_BODY_ACCESS_VS_LOTO_SOURCE_AUD
 
 
 **2026-10-23T22:37Z further new original source research, NOT archive release:** `research/4400_PROFORM_OPTIONAL_MUTING_ADI_PLUG_FOOTSWITCH_AND_HYDRAULIC_ADDON_AUDIT_2026-10-23.md` published from Cincinnati 2014 OEM options/muting/ADI/auxiliary-energy text; original historical exact-source backlog remains **6/85 pending**. No live machine/plug test or compute.
+
+
+**2026-10-23T22:39Z independent TRUMPF OEM original source work, NOT archived release:** `research/4400_TRUMPF_B35_SIDE_DOOR_ASYMMETRY_MUTE_REMOTE_SUPPORT_AND_DISASSEMBLY_AUDIT_2026-10-23.md` and `safety-course/4400_TRUMPF_B35_ACCESS_REMOTE_DIAGNOSTIC_AND_DISASSEMBLY_FIELD_CARD_2026-10-23.md` published from TRUMPF B1161en 2023-05-01. Exact historical archive still **6/85 pending**, no selected physical tests or compute.

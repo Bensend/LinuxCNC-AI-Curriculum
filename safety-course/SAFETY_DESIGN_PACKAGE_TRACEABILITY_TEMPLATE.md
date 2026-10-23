@@ -182,6 +182,8 @@ For a new, moved or replaced guard, the physical device's presence, successful d
 
 A displayed green status, cleared fault, reset accepted or safety output OFF **cannot** establish physical safe state. The 440R-ENETR manual p. 75 explicitly identifies the interface as **non-safety-rated**; the distinct 432ES safety path requires its own selected controller and validation. See learner cards `4400_GUARDLINK_AUTHORITY_AND_RESET_ARCHITECTURE_CARD_2026-10-23.md` and `4400_GUARDLINK_FAULT_RECOVERY_CHANGE_CONTROL_WORKSHEET_2026-10-23.md`. No selected-machine physical proof or personnel-exposed operation is authorized.
 
+**432ES diagnostic provenance supplement:** Rockwell 432ES-UM001E Table 6 calls `Ch0.Status` a SIL3/PLe safety bit in its documented 432ES architecture; `DeviceTripAddress` is the **first** cause of the last operational-to-safe transition, `Uncertain` marks questionable data, and `TerminatorFault` explicitly does not detect a missing terminator. The manufacturer Safety Device Library's fault rows 2–4 are historical, not live fault count. These facts cannot be transferred to the non-safety-rated 440R-ENETR or treated as physical machine proof. See `research/4400_432ES_FIRST_TRIP_UNCERTAIN_HISTORICAL_FAULT_TAG_SCOPE_2026-10-23.md` and `safety-course/4400_432ES_FIRST_EVENT_STALE_DIAGNOSTICS_TECHNICIAN_EXERCISE_2026-10-23.md`. Exact selected firmware and live `VAL/PT` remain UNKNOWN/NOT RUN.
+
 ## 12. Change and revalidation ledger
 
 | CHG ID | Changed item | Reason | Upstream IDs affected | Dependents marked STALE | Required review/retest | Closure evidence | Status |

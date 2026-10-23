@@ -12,8 +12,10 @@ Status: **partial authorized publication to main**, not a machine validation or 
 | `research/4400_AKAS5M_VS_LC5M_VARIANT_TRANSFER_TRAP_2026-10-23.md` | `84018db7e175b683b46dba884fd7a4b7f878eae4` | Published, exact |
 | `research/4400_GUARD_RELEASE_STOP_REQUEST_VS_PHYSICAL_EGRESS_2026-10-22.md` | `fba07cf9ff398a7425aafec60a3ad97b615586dc` | Published, exact |
 | `safety-course/4400_GUARD_RELEASE_PROPOSITION_AND_MAINTENANCE_TECHNICIAN_EXERCISE_2026-10-22.md` | `0a28ff863dfb4d152fc79a9319b1903d042eb22a` | Published, exact |
+| `research/4400_432ES_APPENDED_NODE_INACTIVE_SAFETY_FUNCTION_SOURCE_TRACE_2026-10-23.md` | `9af734c064cc11ed8fcdaee78c55392b582dcb23` | Published, exact; Rockwell 432ES-UM001E-EN-P pp. 49, 51, 58 |
+| `safety-course/4400_GUARDLINK_NODE_CHANGE_PHYSICAL_PROOF_TECHNICIAN_CARD_2026-10-23.md` | `3bfb2f158843ddcade042ea703d97ca4df087ce2` | Published, exact; all physical validation NOT RUN |
 
-**79 of the 85 archived candidates remain pending**, assuming no unrelated concurrent publication. This is an archive-relative count, not a claim that every pending item has been checked against all of main. Preserve the ZIP and its manifest; review each candidate's links, provenance, current product edition, and existing main destination before publication. Do not overwrite existing files blindly.
+**77 of the 85 archived candidates remain pending**, assuming no unrelated concurrent publication. This is an archive-relative count, not a claim that every pending item has been checked against all of main. Preserve the ZIP and its manifest; review each candidate's links, provenance, current product edition, and existing main destination before publication. Do not overwrite existing files blindly.
 
 ## New material outside the archived 85
 
@@ -30,3 +32,7 @@ Status: **partial authorized publication to main**, not a machine validation or 
 ## Safety and competency boundary
 
 2520–25F0 external/fresh evaluation gates remain OPEN. Source/documentary claims are not selected-machine physical proof. Stopping/holding, guard-zone coverage, selected controller program, hydraulic truth table, response limits, integrity targets and residual-energy disposition remain UNKNOWN/NOT RUN. Do not operate hazardous machinery with people exposed absent the minimum proven protection.
+
+## 2026-10-23 08:31 UTC continuation
+
+Published the manufacturer-traced 432ES appended-node failure path and its causal physical-proof technician card with exact original Git blob SHA verification. Reviewed the official Rockwell 432ES-UM001E June 2025 manual and retained the distinction between online topology-change capability and mandatory safety-function revalidation. Integrated section 11C into the cumulative Safety Design Package and linked the pair from learner navigation. No machine test, lab simulation, or hosted Actions compute; self-hosted append job `39919548510` remained QUEUED at the time of this review. Archive-relative pending count is 77; external 2520–25F0 competency gates remain open. Do not treat this documentation as a validated installed guard.

@@ -99,3 +99,17 @@ Exact archived `research/4400_HYDAC_DSV10_LOW_COST_SHUTOFF_DRAIN_SOURCE_SCOPE.md
 ### Further physical-witness release, same session
 
 Exact archive blob `d18eca1d41eab822efbe8a9f042e3f6bfb5de638`: `safety-course/4400_PRESSURE_ZONE_PHYSICAL_WITNESS_TRACEABILITY_WORKSHEET.md`, fetched and verified on main. This supplement maps accumulator/port/gauge/pressure-zone and independent physical witness to existing eight-field SO contract without duplicating the contract. **61/85** original archive candidates pending; all selected-machine validation NOT RUN.
+
+
+### 2026-10-23T10:39Z safety-source release
+
+Four additional archived learner-visible candidates were published to main and individually fetched for **exact original Git blob** comparison:
+
+| Path | Verified blob |
+|---|---|
+| `safety-course/4400_EUCHNER_LOCK_SUBSTITUTION_ADVERSARIAL_2026-10-22.md` | `7f2ba171b2251918264e7a4a33b4aa0dcf36dbc3` |
+| `safety-course/4400_LOCKABLE_ISOLATOR_TAGOUT_RETROFIT_TECHNICIAN_CARD_2026-10-22.md` | `9cb0588f8f73a8ce74b27a515d570e3f7763ee16` |
+| `safety-course/4400_OVERTRAVEL_SOURCE_CONFLICT_AND_WORKPIECE_SWEEP_CASE_2026-10-23.md` | `9d926e12330af482a52cc75aca2f172ae19639ec` |
+| `research/4400_EUCHNER_PROCESS_LOCK_VS_SAFETY_LOCK_MONITORING_2026-10-22.md` | `35dc23d3eea0518cdeccc66920a986cf94979e4c` |
+
+**57/85 original archive candidates remain unpublished**, assuming no concurrent release; this count supersedes the older 61/85 headings above. The EUCHNER product-specific claims were cross-checked against current official order-136595 and order-123375 product records (I1 process-locking only, L1 safe lock-monitoring characteristic, different M12/M23 connectors). The OSHA 1910.147 regulatory text was rechecked for isolation, stored energy, test/positioning, group worker protection and restoration. A separate new non-archive source trace was committed: `research/4400_OSHA_LOTO_TEST_POSITION_REISOLATION_STATE_MACHINE_2026-10-23.md`. No physical tests, simulations, or hosted compute; 2520–25F0 external gates remain OPEN.

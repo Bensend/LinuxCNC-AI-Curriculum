@@ -297,3 +297,9 @@ This is an **evidence-architecture supplement**, not a numerical safety rating, 
 | `HF/UNK/RR` continuity | Accessible post-download checklist, retained project provenance, changed-CRC explanation and safe operational restriction | OPEN |
 
 A matching CRC is **transfer evidence**, not a replacement for selected-machine functional validation. An unexpected CRC mismatch, configuration change, project rename or firmware-version transfer requires a documented review; do not assume every CRC change proves a safety defect or every match proves safety. Do not credit ordinary LinuxCNC software as independent personnel-safety authority.
+
+## 11I. Lockable OPEN is not isolation — current SAF catalog correction
+
+**DOC-CONFIRMED:** HYDAC *SAF/DSV EN 3551.25/05.24*, §4 printed pp.171–172, states the main shut-off `L` lock option can be padlocked in **OPEN or CLOSED** position; `LPI` and `LPM` add position monitoring, while `LS` locks the **pressure-release** valve. This updates the earlier August 2003 historical-only evidence scope without establishing any installed circuit. See [May 2024 source comparison](../research/4400_HYDAC_2024_SAF_LOCK_OPEN_CLOSED_OPTION_CURRENT_SCOPE_2026-10-23.md).
+
+`PHY/VAL/PT` must distinguish: (a) padlock physically present, (b) selected shut-off actually CLOSED, (c) correct flow/pressure path isolated, (d) relevant trapped energy and reaccumulation controlled, (e) gravity-loaded member restrained, and (f) task-specific isolation independently verified. All selected-machine results **UNKNOWN/NOT RUN**. Provide unambiguous lock-position labeling and accessible verification points so safe maintenance is easier than locking the wrong position or bypassing a guard. `CHG` must invalidate dependent evidence after any model/option/port/handle/indicator change.

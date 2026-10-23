@@ -52,6 +52,10 @@ When the chain uses separately selected products/families, record evidence for e
 
 Matching nominal voltage, connector type or logical signal name is not sufficient compatibility evidence. Unresolved behavior that can alter detection, fail-safe state, diagnostics, reset/rearm or output authority is **SCHEMATIC-BLOCKING**.
 
+### Pulse-parameter direction and target gate
+
+A numeric pulse tolerance is **not transferable between ports**. For each safety-related signal, record separately (a) who generates the pulse, (b) whether it is an OSSD output test pulse, a safe-controller output pulse driving a solenoid, or a supply interruption, (c) the exact receiver/target and its documented behavior, and (d) the safety-controller input filter and fault-detection configuration. A matching `5 ms` number or 24 V supply does not establish compatibility. In the documented EUCHNER CTP-I.-AP (2126290-08-07/24 §10.9) and CTP-L.-AP (2124217-08-06/21 §10.10) examples, `5 ms` is specified for **solenoid-control output pulses** and separately for UB supply dips; the FO1A/FO1B receiver must instead meet its own pulsed-OSSD requirements and selected switch data. See `research/4400_CTP_SAFE_RECEIVER_VS_SOLENOID_PULSE_INTERFACE_NOTE_2026-10-22.md`. These are DOC-CONFIRMED device-family examples, not a selected schematic or safety-response limit. If the producer/receiver pairing cannot be evidenced, retain **SCHEMATIC-BLOCKING** status.
+
 ## D. State and restart/rearm semantics
 
 Describe separately:

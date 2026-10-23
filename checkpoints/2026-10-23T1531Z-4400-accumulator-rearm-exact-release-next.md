@@ -6,7 +6,7 @@
 
 Session UTC start recorded before work: **2026-10-23T15:31:10Z**.
 
-Five original archived research files published to `main` and independently fetched; exact original Git blob equality:
+Six original archived research files published to `main` and independently fetched; exact original Git blob equality:
 
 1. `research/4400_ACCUMULATOR_DUAL_ROLE_SAFE_CYCLE_VS_ISOLATION_2026-10-22.md` — `737131a69b48393b3a6118e6052ddabd2b0b26c7`. Parker 2016 bladder-accumulator intended protective-cycle use, OSHA stored energy and isolation, selected circuit UNKNOWN.
 2. `research/4400_LINUXCNC_ESTOP_LATCH_FIRST_SCAN_RESET_AUTHORITY_2026-10-22.md` — `06ab264878abdd4920af7ab78707b06767ce9e20`. Independent pinned `LinuxCNC/linuxcnc` v2.9.10 source fetch confirmed `estop_latch.comp` `e95fabd323f3c7ccbc8a18146ddd93d6f7d70e20`, `halcompile.g` `ed605845e745a1d0be474fcf05e9746191cb2984`, and plasma simulation `estop.hal` `9dd7ea33506a46dd3d637483e615afc7c0687afb`. Software first-call reset-high counterexample SOURCE-CONFIRMED; not personnel-safety authority.
@@ -17,12 +17,13 @@ Five original archived research files published to `main` and independently fetc
 
 5. `research/4400_HYDAC_SAF_GAUGE_TOPOLOGY_ZERO_READING_PHYSICAL_WITNESS_2026-10-22.md` — `4e34a51de7cfa6b9929613e60ea48c40e0647b42`. HYDAC 2011 fluid-side zero versus gas precharge and exact SAF catalog model-code ambiguity; selected port/ram topology UNKNOWN.
 
-New original learner research: `research/4400_ACCUMULATOR_PROTECTIVE_CYCLE_REACCUMULATION_WITNESS_CONTRACT_2026-10-23.md` — separates P protective response, M maintenance isolation/reaccumulation, R fresh restart and physical witness independence. Cumulative Safety Design Package §§11U–11Y and learner index updated. Publication ledger and `PROGRESS.md` updated. Original ZIP `LinuxCNC_4400_20261023T064104Z_SAFETY_MODE_AUTHORITY_CONSOLIDATED_PUBLICATION_STAGED.zip` manifest 85/85 SHA-256 and size PASS; ZIP CRC PASS. **Original archive 7/85 candidates pending**, reduced from 12; all 7 are research files (no remaining safety-course candidates).
+6. `research/4400_EUCHNER_CTP_I1_L1_MANUAL_OUTPUT_SEMANTICS_2026-10-22.md` — `3f2ecca5498833e2a6df005c16eb172feb168d8c`. Official EUCHNER CTP-I1 versus L1 closed/unlocked FO ON/OFF semantics, not selected-machine guard qualification.
+
+New original learner research: `research/4400_ACCUMULATOR_PROTECTIVE_CYCLE_REACCUMULATION_WITNESS_CONTRACT_2026-10-23.md` — separates P protective response, M maintenance isolation/reaccumulation, R fresh restart and physical witness independence. Cumulative Safety Design Package §§11U–11Z and learner index updated. Publication ledger and `PROGRESS.md` updated. Original ZIP `LinuxCNC_4400_20261023T064104Z_SAFETY_MODE_AUTHORITY_CONSOLIDATED_PUBLICATION_STAGED.zip` manifest 85/85 SHA-256 and size PASS; ZIP CRC PASS. **Original archive 6/85 candidates pending**, reduced from 12; all 6 are research files (no remaining safety-course candidates).
 
 Remaining original archive research paths, verify absent before each write and preserve exact bytes:
 - `research/4400_AKAS5M_MUTING_SLOW_SPEED_SAFETY_AUTHORITY_2026-10-23.md`
 - `research/4400_CROSS_DOMAIN_SAFETY_PROPOSITION_CONTRADICTION_AUDIT_2026-10-22.md`
-- `research/4400_EUCHNER_CTP_I1_L1_MANUAL_OUTPUT_SEMANTICS_2026-10-22.md`
 - `research/4400_GUARD_LOCKING_POWER_LOSS_ESCAPE_RELEASE_AUTHORITY_2026-10-22.md`
 - `research/4400_LOCKABLE_ISOLATION_TAGOUT_RETROFIT_EVIDENCE_2026-10-22.md`
 - `research/4400_PILZ_GUARD_MOUNTING_ESCAPE_MECHANICS_2026-10-22.md`
@@ -40,7 +41,7 @@ Remaining original archive research paths, verify absent before each write and p
 
 ## Next work
 
-1. Continue the **7** remaining archived research files, source-review each against official manufacturer/pinned-source edition, verify Git blob exactly after publication and update the ledger. The 2026-10-22 historical route regression file contains superseded main SHA and a stale publication blocker: publish only with an explicit historical label and current route cross-check, or preserve it as historical staged evidence.
+1. Continue the **6** remaining archived research files, source-review each against official manufacturer/pinned-source edition, verify Git blob exactly after publication and update the ledger. The 2026-10-22 historical route regression file contains superseded main SHA and a stale publication blocker: publish only with an explicit historical label and current route cross-check, or preserve it as historical staged evidence.
 2. Prioritize selected-machine physical intake and independent witness mapping: exact hydraulic diagram, accumulator/valve/gauge variants, load/gravity restraint, guard escape and accessible protected service test points. No made-up pressure limits, stopping distances, hydraulic truth table, PL/SIL or diagnostic coverage.
 3. Develop low-friction guard/test-point/lockout access that is easier to use than defeat. Explicitly separate P protective response, M maintenance energy control and R fresh restart; retain `CHG` invalidation on substitutions.
 4. Preserve 2520–25F0 external/fresh evaluator separation and close no gate without independent evidence.

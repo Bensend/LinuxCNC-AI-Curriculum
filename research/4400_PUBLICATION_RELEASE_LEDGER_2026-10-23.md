@@ -19,8 +19,9 @@ Status: **partial authorized publication to main**, not a machine validation or 
 | `research/4400_HYDAC_SAF_EXACT_CATALOG_SELECTED_BLOCK_GATE.md` | `773800d6fe8eacb481eb0939aa9ee3245ebda2ed` | Published, exact; current manufacturer catalog verified |
 | `safety-course/4400_HYDAC_SAF_GAUGE_ZERO_TECHNICIAN_ADVERSARIAL_EXERCISE.md` | `f9e09db05560cbfe47603de4182cc61f1a47d86e` | Published, exact; learner-visible non-blind exercise |
 | `safety-course/4400_GUARDLINK_DIAGNOSTIC_DECODER_ADVERSARIAL_WORKSHEET_2026-10-23.md` | `2de5ab3a3591551cfe01a5261729e61b81658e4a` | Published, exact; official 440R-UM009E Feb 2026 Table 5 verified |
+| `safety-course/4400_GUARD_DEFEAT_INCENTIVE_DESIGN_REVIEW_2026-10-22.md` | `6f5f3f144c8eb263181a1a9db41c556d12d593b6` | Published, exact; IFA/DGUV MaSeM official sources checked |
 
-**72 of the 85 archived candidates remain pending**, assuming no unrelated concurrent publication. This is an archive-relative count, not a claim that every pending item has been checked against all of main. Preserve the ZIP and its manifest; review each candidate's links, provenance, current product edition, and existing main destination before publication. Do not overwrite existing files blindly.
+**71 of the 85 archived candidates remain pending**, assuming no unrelated concurrent publication. This is an archive-relative count, not a claim that every pending item has been checked against all of main. Preserve the ZIP and its manifest; review each candidate's links, provenance, current product edition, and existing main destination before publication. Do not overwrite existing files blindly.
 
 ## New material outside the archived 85
 
@@ -53,3 +54,7 @@ Published exact SHA-matched HYDAC SAF selected-catalog qualification note and ze
 ### GuardLink diagnostic-data validity — same session
 
 Published one more exact SHA-matched learner worksheet on 440R-ENETR bitfield ambiguity (13th of 85 archived files now published). Independently added `research/4400_440R_ENETR_2026_TABLE5_DIAGNOSTIC_QUALITY_GATE_2026-10-23.md` using direct original Rockwell 440R-UM009E-EN-P February 2026 Table 5/6 inspection, not an archived candidate. Integrated a diagnostic-source freshness/event-versus-state gate into the cumulative Safety Design Package. **72/85** original candidates remain pending. No installed-machine or physical validation evidence.
+
+### Human-factors branch — same session
+
+Published exact SHA-matched IFA/DGUV MaSeM guard-defeat incentive field exercise. Official IFA sources were checked for task/mode/benefit assessment and the ergonomic/fault-remediation drivers of defeat. Added observed-workflow and safeguard-restoration requirements to the cumulative `HF` template and linked the worksheet from learner navigation. No site task times, user feedback or risk-reduction performance was fabricated. **71/85** original archived candidates remain pending; no physical machine tests or hosted compute.

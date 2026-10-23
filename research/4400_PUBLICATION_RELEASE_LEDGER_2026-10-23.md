@@ -277,3 +277,6 @@ Two **new original** files, not members of the 85-file staged archive, were publ
 - `safety-course/4400_SELECTED_MACHINE_PHYSICAL_WITNESS_INTAKE_AND_RELEASE_GATE_2026-10-23.md` — Git blob `4910585ec8384533ec3334f13570cdf7c0ae23b4`.
 
 **Original archive backlog remains 24/85**, not 22/85; no previously staged archive member was published this session. The new artifacts reconcile OSHA's 2003/2004 press-brake laser interpretation and supply a ten-artifact as-built physical-proof intake and release gate. All machine physical `VAL/PT` **NOT RUN**; no new blind score, local lab compute or hosted Actions compute.
+
+
+**Same-session non-archive follow-on (13:46Z):** `safety-course/4400_TEMPORARY_REENERGIZATION_LOTO_TESTING_AND_FRESH_RESTART_2026-10-23.md` committed on `main` as new original technician material, source-grounded in OSHA 1910.147(f)(1)/(e)/(d)/(f)(3) and Appendix A; not an original archive member. Cumulative package §11N and learner index updated. **Original archive backlog unchanged: 24/85**; physical `VAL/PT` NOT RUN.

@@ -37,3 +37,8 @@ All selected-machine `IN-01..10` and independent `PHY-STOP/HOLD/ACCESS/ESCAPE/EN
 ## Reproduction
 
 Read `main` recursive Git tree through the GitHub API and the exact current `safety-course/SAFETY_COURSE_INDEX.md` blob. Parse Markdown inline relative links, resolve them against the index directory and compare normalized paths against tree entries. Record the commit/tree response SHA, index blob SHA, link count, absent paths and any truncated-tree condition. This method intentionally excludes external URLs, fragment IDs and implicit references; a broader navigation audit would need to extend the parser and independently verify those categories.
+
+
+## Follow-up route verification after the CKS source link (same session)
+
+After adding the exact EUCHNER CKS evaluator-mode link to the learner index, repeated the **same** read-only full-tree comparison. The new `main` tree response reported `sha=29fc02af9b99e62eacf1dca373570971da38e4ce`, **4,082 entries**, `truncated=false`; index blob `020321f7080b7c3c29039491373e89ea0e4d0ceb`. **78 distinct relative links; 78 present; zero missing.** The original 77/77 result remains a correct prior snapshot, not the latest result. All six archive candidates remain absent and unlinked.

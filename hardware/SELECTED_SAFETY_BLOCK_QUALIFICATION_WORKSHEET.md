@@ -146,6 +146,12 @@ Required checks:
 - `EDM SATISFIED != HAZARDOUS ENERGY ABSENT`.
 - HMI/LinuxCNC status is not personnel-safety authority.
 
+### Hydraulic pressure-zone witness qualification (when applicable)
+
+For every pressure gauge/transducer/test port, identify the **exact hydraulic volume it observes** from the selected as-built schematic. Record port/tap location, isolation/check-valve boundaries, gauge calibration/availability, blocked-tap failure, accumulator gas-side energy, separate cylinder/pilot chambers and gravity/external-load holding. A reading of zero at one port establishes at most the narrow instrument/port proposition; it does **not** establish pressure absence elsewhere, standstill, load restraint or safe line disconnection. Cross-check any plausible pressure or valve feedback with a separately justified physical `PHY/VAL` witness and a maintenance isolation/reaccumulation plan.
+
+The HYDAC SAF catalog example `SAF20E12Y1T330A` (part 2120394) demonstrates why a family label and optional gauge are insufficient for a selected-machine safety claim; see `research/4400_HYDAC_SAF_EXACT_CATALOG_SELECTED_BLOCK_GATE.md` and `safety-course/4400_HYDAC_SAF_GAUGE_ZERO_TECHNICIAN_ADVERSARIAL_EXERCISE.md`. This is DOC-CONFIRMED product catalog identity plus INFERENCE about proof boundaries, **not** a frozen hydraulic truth table or personnel-exposed validation.
+
 ## G. Dependency / CCF attack
 
 For each item, record whether independent, shared, or UNKNOWN and the consequence of failure:

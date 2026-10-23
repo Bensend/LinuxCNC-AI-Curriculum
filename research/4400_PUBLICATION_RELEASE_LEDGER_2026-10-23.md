@@ -152,3 +152,12 @@ Two further original archive candidates published and exact Git blobs verified:
 New non-archive official manufacturer source trace: `research/4400_HAWE_SAKB_FIVE_MONITORED_VALVES_VS_NSV_SOURCE_SCOPE_2026-10-23.md`, directly comparing D 6335 (2025) enumerated two proportional, two holding and one 4/2 monitored positions against the separate NSV family. Manufacturer D 7969/D 7571 and OSHA 1910.147 also rechecked for accumulator energy and isolation. **51/85 archive candidates pending**, assuming no concurrent changes; no hydraulic truth table or machine test inferred.
 
 **Non-archive Pilz manufacturer source follow-up:** `research/4400_PILZ_PSENML_MOUNTING_FZH_ESCAPE_1004710_EN10_2026-10-23.md` pins official 1004710-EN-10 p.42, 79, 83–85 and prevents transfer of direct-mount force figures to a bracket/handle installation. **51/85** original archive candidates pending unchanged.
+
+### 2026-10-23T10:50Z access-ordering and guard-chain proof release
+
+Two further exact archive blobs published and verified:
+
+- `safety-course/4400_ACCESS_RELEASE_ORDERING_PROOF_TECHNICIAN_WORKSHEET_2026-10-22.md` — `0dd07a94e9bb1914d2404ab9ad5350c4dd99c613`.
+- `safety-course/4400_GUARD_CHAIN_QUALIFICATION_AND_CHANGE_CONTROL_WORKSHEET_2026-10-22.md` — `3796844472e74ff3f9f0196fdeffa875b829c54c`.
+
+Both remain learner-visible NOT RUN and preserve external blind-evaluation separation. **49/85 original archive candidates pending**, assuming no concurrent changes. Stop-request versus completed stop, normal access versus inside escape, guard series fault masking and physical causal verification remain distinct propositions.

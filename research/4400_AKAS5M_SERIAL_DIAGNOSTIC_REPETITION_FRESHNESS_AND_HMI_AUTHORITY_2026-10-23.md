@@ -18,6 +18,21 @@ Can an ordinary LinuxCNC/HMI application treat a serial diagnostic message from 
 4. **An additional safety controller is part of the documented integration.** The manual's p. 26 section is explicitly headed as operation with an additional safety PLC. Its pp. 25 and 29–30 describe safety-related speed/position/blanking supervision and require further strokes to be prevented when specified comparisons fail. **DOC-CONFIRMED.**
 5. **Tool and mode changes are safety-relevant.** Printed p. 30 says tool or sheet-thickness changes alter the position value; it describes a parameter-change notification and independent comparison in the safety controller. Printed pp. 4–5 require inspection after tool changes and distinguish protection limits. **DOC-CONFIRMED.**
 
+## Visually checked manufacturer diagnostic examples (printed pp. 33–34)
+
+The printed tables were inspected **as page images**, because flattened PDF text can misassociate a numeric code with an adjacent column. These are **DOC-CONFIRMED for document 1581**, not a tested decoder for another firmware:
+
+| Decimal byte | Manufacturer table's meaning | Appropriate ordinary-HMI interpretation |
+|---:|---|---|
+| 195 | Box-bending function selected | Selected mode; **not** proof that front protective elements remain active |
+| 215 | Muting; indirect protection by slow closing | Explicit `MUTING / DIRECT FIELD PROTECTION NOT ACTIVE`, never generic green `LASER SAFE` |
+| 231 | Protective field interrupted during closing | Historical diagnostic event; actual stop/hold still separately witnessed |
+| 146 warning / 145 interlock error | Safety-point sequence error: SP controlled before SSP | Record warning versus latched error distinctly; verify selected controller and wiring |
+| 106 warning / 105 interlock error | Fast/slow signals faulty in stop state; SGS and SGO not equivalent | Distinguish ordinary speed command from independently monitored switching |
+| 201 interlock error | Unequal slow-speed connections without prior warning | Do not assume every interlock has a preceding warning event |
+
+Printed p. 34 explicitly permits some interlock errors **without prior warning**, and describes voltage reset as the way to cancel an interlocked status. That reset instruction is **not** a machine-level permission to restart motion; independent reset, cleared hazards and fresh ordinary start remain separate. The tables also contain a foot-pedal input short-circuit example, demonstrating why a readable code can aid maintenance without taking safety authority. **DOC-CONFIRMED source, INFERENCE HMI policy.**
+
 ## Diagnostic pipeline and the missing timing proof
 
 `AKAS physical/receiver state -> serial message creation -> repeated RS-232 frames -> host serial receive/validation -> ordinary HMI tag -> operator display`

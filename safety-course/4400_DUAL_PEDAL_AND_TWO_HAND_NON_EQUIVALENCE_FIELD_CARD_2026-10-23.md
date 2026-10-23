@@ -25,6 +25,8 @@ A hydraulic press brake has two guarded foot switches and a Fiessler FMSC-FP sel
 
 Do **not** write an invented hydraulic valve truth table, PL/SIL, stopping distance, or diagnostic interval.
 
+**Manufacturer-product discriminator:** Fiessler's 2025-10-15 FMSC brochure lists **FMSC-FP** for foot-pedal selection (printed p. 5) and a **different FMSC-THC** device for Type III-C two-hand control (printed p. 8). Do not infer that selecting AND on FP invokes the THC behavior. The FP brochure also has an inconsistent `foot pedal 3` bullet; record it as a document ambiguity rather than guessing a third input. Source: https://www.fiessler.de/default-wAssets/docs/download/FMSC-Schaltgeraete/prd-fmsc-switching-device-engl-doc1872-comp.pdf
+
 ## Four ordered challenges
 
 1. **Steady-state AND:** pedal A is held before B is pressed. Identify whether the installed safety logic tests a fresh transition, simultaneity, release-before-reinitiation or only input levels. Do not borrow two-hand behavior from ISO 13851 without evidence for the installed pedal interface.

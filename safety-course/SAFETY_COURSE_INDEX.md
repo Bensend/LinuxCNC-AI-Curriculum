@@ -151,3 +151,8 @@ The [temporary maintenance-test reenergization technician module](4400_TEMPORARY
 ### 2026-10-23T13:49Z — HAWE general manual versus selected-machine evidence
 
 The exact archived [HAWE B 5488 general manual scope audit](../research/4400_HAWE_B5488_GENERAL_MANUAL_SCOPE_AND_VERIFICATION_2026-10-22.md) is now on `main` (original/post-write Git blob `76f988b239248a959716b5cca9ee37b37dd1cf91`). Manufacturer B 5488 10-2024 rev 3.1 is a **general** manual requiring product-specific and machine-specific instructions; its multi-instrument commissioning discussion and inspection examples do not establish a press brake's physical stop/hold, pressure-zone map, test intervals or safe access. All selected-machine `VAL/PT` remain NOT RUN.
+
+
+### 2026-10-23T13:51Z — CTP manual release and actual escape
+
+Exact archived [EUCHNER CTP manual-release observability and access-authority audit](../research/4400_CTP_MANUAL_RELEASE_OBSERVABILITY_AND_ACCESS_AUTHORITY_2026-10-22.md) is now published (original/post-write Git blob `cee68b88f26df00f30b41c3d360f5fc5cc72896c`). For the cited CTP-L manual, FO and OL go OFF on documented manual release while OD may be **undefined**; this does not establish physical gate opening, inside egress or machine stop/hold. CTP-I process locking cannot be substituted for personnel-protective CTP-L lock monitoring. Verify exact product, mechanical release under load, independent safe state and restart on the installed machine; `VAL/PT` NOT RUN.

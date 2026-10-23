@@ -280,3 +280,8 @@ Two **new original** files, not members of the 85-file staged archive, were publ
 
 
 **Same-session non-archive follow-on (13:46Z):** `safety-course/4400_TEMPORARY_REENERGIZATION_LOTO_TESTING_AND_FRESH_RESTART_2026-10-23.md` committed on `main` as new original technician material, source-grounded in OSHA 1910.147(f)(1)/(e)/(d)/(f)(3) and Appendix A; not an original archive member. Cumulative package §11N and learner index updated. **Original archive backlog unchanged: 24/85**; physical `VAL/PT` NOT RUN.
+
+
+### 2026-10-23T13:49Z exact HAWE archive release
+
+Original consolidated ZIP `research/4400_HAWE_B5488_GENERAL_MANUAL_SCOPE_AND_VERIFICATION_2026-10-22.md` published on `main`, independently fetched and **Git blob SHA `76f988b239248a959716b5cca9ee37b37dd1cf91` matched the original ZIP exactly**. Source: manufacturer HAWE B 5488 10-2024 rev 3.1, https://productfinder.hawe.com/downloads/B5488-en.pdf ; general instructions do not substitute for product-specific instructions or selected-machine `VAL/PT`. Archive manifest rechecked locally **96/96 SHA-256 PASS**. **Original archive pending now 23/85**, superseding the earlier 24/85 count. This is documentary/source release, not machine acceptance. Three separate new non-archive originals remain outside the archive count.

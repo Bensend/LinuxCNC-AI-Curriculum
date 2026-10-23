@@ -8,6 +8,8 @@ A hydraulic press brake has two guarded foot switches and a Fiessler FMSC-FP sel
 
 **Assignment:** decide exactly which proposition the selector supports, what is unproven, what safety-related controller/final-element behavior must be separately established, and what the team should do before people are exposed.
 
+**Catalog-identity trap:** Fiessler's FE-FS2 *two-pedal assembly* can contain one pedal half for a mode/function such as box bending/opening and another for hazardous-motion control; this is not automatically two operators. FMSC-FP instead supports connecting a second foot switch with 1/2/OR/AND selection. First identify whether the machine has two pedal halves, two independent foot-switch stations, one operator, or multiple operators. Do not infer personnel count from the number of pedals. Record the exact model and each pedal's function.
+
 ## Fill in the evidence chain
 
 | Link | Exact selected evidence (or UNKNOWN) | Proven proposition | Not proven / residual risk |

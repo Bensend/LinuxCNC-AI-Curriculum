@@ -12,7 +12,7 @@ Session start UTC: **2026-10-23T08:31:58Z**. Previous known completed session en
 6. `hardware/SELECTED_SAFETY_BLOCK_QUALIFICATION_WORKSHEET.md` now separates OSSD output-test pulse, solenoid-control pulse, and UB supply interruption parameters.
 7. `safety-course/SAFETY_COURSE_INDEX.md`, `PROGRESS.md` and `research/4400_PUBLICATION_RELEASE_LEDGER_2026-10-23.md` updated.
 
-**Archive-relative pending publication: 75 of 85** original staged learner-visible candidates, assuming no concurrent publication. Do not bulk overwrite; inspect each destination and manufacturer edition, preserve exact blob identity and provenance. Original consolidated archive: `LinuxCNC_4400_20261023T064104Z_SAFETY_MODE_AUTHORITY_CONSOLIDATED_PUBLICATION_STAGED.zip` (conversation artifact, not a repo file).
+**Archive-relative pending publication: 73 of 85** original staged learner-visible candidates, assuming no concurrent publication. Do not bulk overwrite; inspect each destination and manufacturer edition, preserve exact blob identity and provenance. Original consolidated archive: `LinuxCNC_4400_20261023T064104Z_SAFETY_MODE_AUTHORITY_CONSOLIDATED_PUBLICATION_STAGED.zip` (conversation artifact, not a repo file).
 
 ## Source/evidence boundary
 
@@ -24,10 +24,20 @@ Session start UTC: **2026-10-23T08:31:58Z**. Previous known completed session en
 ## Exact next-work order
 
 1. Check `LESSON_LOG.md` and immutable `timing-queue/*.row` for this session's timing. Never overwrite the occupied `TIMING_APPEND_REQUEST.txt` or a partial log fetch. Previous self-hosted append job `39919548510` / `120301190483` was still QUEUED at this session's first check; re-check authoritative status before adding any LAB_COMPUTE_LOG entry. It is **not** a simulation/test job and queued time is not compute.
-2. Continue reviewing/publishing the **75** archived candidates in coherent, source-confirmed groups. Prioritize guard diagnostic fault masking and exact reset/rearm ownership or hydraulic physical-witness contradiction, rather than manufacturing more 3000 work. Verify destination absent, original Git blob SHA, source links and edition before committing.
+2. Continue reviewing/publishing the **73** archived candidates in coherent, source-confirmed groups. Prioritize guard diagnostic fault masking and exact reset/rearm ownership or hydraulic physical-witness contradiction, rather than manufacturing more 3000 work. Verify destination absent, original Git blob SHA, source links and edition before committing.
 3. Where useful, integrate reviewed material into cumulative `BND/ENE/HAZ/SF/PHY/SRS/AUTH/DEP/HF/ARC/VAL/PT/CHG/RR/UNK` package fields. Avoid duplicating the existing eight-field SO final-element witness contract.
 4. For actual installed hardware, demand independently measured machine stopping/holding/access/energy proof; a manufacturer's sample state table or controller status cannot substitute. If basic minimum safe-to-operate protection is unproved, no people may be exposed; isolated/remote experimental work only with residual risks controlled.
 5. Maintain information separation: 2520–25F0 fresh/external competency gates OPEN. Do not self-score sealed answers or claim graduation.
 6. No GitHub-hosted Actions compute. Only a concrete unresolved executable question justifies a bounded self-hosted workflow on `[self-hosted, openpressbrake]`; source/documentation study should continue otherwise.
 
 Session end/elapsed to be recorded in `LESSON_LOG.md` immediately before finishing via safe full-file append or immutable request. No authoritative new lab runtime was observed.
+
+## Same-session hydraulic branch addendum — 2026-10-23
+
+Further exact archived Git blob SHA releases:
+- `research/4400_HYDAC_SAF_EXACT_CATALOG_SELECTED_BLOCK_GATE.md` — `773800d6fe8eacb481eb0939aa9ee3245ebda2ed`.
+- `safety-course/4400_HYDAC_SAF_GAUGE_ZERO_TECHNICIAN_ADVERSARIAL_EXERCISE.md` — `f9e09db05560cbfe47603de4182cc61f1a47d86e`.
+
+Official HYDAC part 2120394 catalog verified (DOC-CONFIRMED) the normally-open WSM06020Y solenoid bleed option, optional gauge, and the 2SV5/WSM replacement coil incompatibility. The selected-block worksheet now requires exact pressure-zone/tap mapping, separate physical load-holding witness and replacement `CHG` review. None of these catalog observations establishes installed hydraulic response or a maintenance-safe state. Source: https://catalog.hydac.com/en-us/item/safety-and-shut-off-blocks/type-saf-safety---shut-off-blocks/2120394 .
+
+**Revised next priority:** publish the remaining **73** source-checked archived candidates in coherent groups; highest value includes GuardLink diagnostic event-versus-current-state and independent physical final-element witness, then safe maintenance isolation and reaccumulation. Preserve external evaluator separation, avoid redundant eight-field SO witness template, and do not use hosted runners. No selected-machine tests or authoritative new compute runtime.

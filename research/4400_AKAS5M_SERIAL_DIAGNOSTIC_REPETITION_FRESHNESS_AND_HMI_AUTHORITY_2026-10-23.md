@@ -36,7 +36,7 @@ A LinuxCNC-facing diagnostics adapter should expose separately:
 | `frame_received_utc / accepted_utc` | Distinguishes transport observation from application acceptance | Never synthesize timestamps |
 | `raw_frame / decoder_revision` | Preserves provenance for offline analysis | Decode failure -> `UNKNOWN` |
 | `message_category / message_code` | Status, warning, interlock, or unrecognized | Unrecognized -> `UNKNOWN` |
-| `transport_health / age / sequence_epoch` | Reveals disconnected, late or replayed observations | Stale -> `STALE`, not `OK` |
+| `transport_health / age / host_session_epoch` | Host-assigned session epoch and age reveal disconnected, late or replayed observations; the manual does not specify a device sequence counter | Stale -> `STALE`, not `OK` |
 | `machine_protection_status` | **Not derivable from serial alone** | Always requires separate safety/physical qualification |
 
 An ordinary HMI may say `AKAS diagnostic message received` or `AKAS diagnostic stale`. It must not turn that into `hands protected`, `ram held`, `maintenance isolated`, or `safe to restart`.

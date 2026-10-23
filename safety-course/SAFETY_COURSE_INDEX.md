@@ -146,3 +146,8 @@ Before physical commissioning, use the new [selected-machine physical witness in
 ### 2026-10-23T13:46Z — Temporary LOTO testing and restoration
 
 The [temporary maintenance-test reenergization technician module](4400_TEMPORARY_REENERGIZATION_LOTO_TESTING_AND_FRESH_RESTART_2026-10-23.md) source-traces OSHA 1910.147(f)(1), (e), (d)(5)–(6), (f)(3) and Appendix A. It separates isolated maintenance, employee clearance, authorized remote/isolated test, **return to personal isolation**, and final production rearm. Safety reset and LinuxCNC Ready are not maintenance energy-control authority. The cumulative package §11N preserves distinct transition/worker/energy witnesses. **No actual test, maintenance release or personnel-exposed operation authorized.**
+
+
+### 2026-10-23T13:49Z — HAWE general manual versus selected-machine evidence
+
+The exact archived [HAWE B 5488 general manual scope audit](../research/4400_HAWE_B5488_GENERAL_MANUAL_SCOPE_AND_VERIFICATION_2026-10-22.md) is now on `main` (original/post-write Git blob `76f988b239248a959716b5cca9ee37b37dd1cf91`). Manufacturer B 5488 10-2024 rev 3.1 is a **general** manual requiring product-specific and machine-specific instructions; its multi-instrument commissioning discussion and inspection examples do not establish a press brake's physical stop/hold, pressure-zone map, test intervals or safe access. All selected-machine `VAL/PT` remain NOT RUN.

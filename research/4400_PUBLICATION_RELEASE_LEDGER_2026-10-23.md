@@ -396,3 +396,6 @@ Added original `research/4400_PERSONNEL_KEY_WHOLE_BODY_ACCESS_VS_LOTO_SOURCE_AUD
 
 
 **Further original product research at 17:43Z:** `research/4400_ROCKWELL_440T_ROTARY_PHYSICAL_ISOLATOR_VS_CONTROL_KEY_2026-10-23.md` is new documentary research, **not** an original ZIP candidate. Backlog remains **6/85 pending**. Rockwell exact 440T-MRPSE110F cut sheet and 440T-IN027 instructions reviewed; no selected-machine physical isolation validation.
+
+
+**Further 17:44Z original source comparison:** `research/4400_TRAPPED_KEY_TIMED_RELEASE_VS_SENSED_STOP_MOTION_2026-10-23.md` added after review of Rockwell 440T ETU, SMU and CU2 manuals. Not a historical archive release; original archive backlog remains **6/85**. No selected-machine stop-time, sensor/final-element validation or compute.

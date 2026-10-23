@@ -12,7 +12,7 @@
 
 ## Current hard evidence boundaries
 
-- **Original consolidated publication archive:** **6/85 still pending**. Six paths in current route audit absent from main; exact original ZIP/manifest bytes not available in this invocation. No new original text was mislabeled as byte-identical historical publication.
+- **Original consolidated publication archive:** **6/85 still pending**. Six paths in current route audit absent from main; exact original ZIP/manifest bytes not available in this invocation. Explicit current-turn Library/conversation filename search and a broader `LinuxCNC 4400 safety publication` search both returned zero matches; no staged ZIP found under `/mnt/data` either. This is an access limit, not proof the archive no longer exists. No new original text was mislabeled as byte-identical historical publication.
 - **Selected machine:** `IN-01..10 UNKNOWN`; `PHY-STOP/HOLD/ACCESS/ESCAPE/ENERGY/RESTART UNKNOWN`; `VAL/PT NOT RUN`; `G0/G1 HOLD`, `G2 NOT RUN`, `G3/G4 NOT AUTHORIZED`, `G5 HOLD`. No personnel-exposed hazardous operation permitted without independently demonstrated minimum safety. Remote/isolated experimentation only after hazard/exclusion approval.
 - **External evaluation:** 2520–25F0 independent/fresh gates OPEN; blind score log unchanged.
 - **Compute:** GitHub-hosted Actions minutes **zero**; local lab **zero**; simulations **zero**; physical tests **zero**. Existing self-hosted-only lesson-log workflow run `39919548510` job `120301190483` was **QUEUED** when checked; no authoritative job runtime; `LAB_COMPUTE_LOG.md` unchanged. No new compute workflow dispatched.

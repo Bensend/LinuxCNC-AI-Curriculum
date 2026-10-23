@@ -26,7 +26,7 @@ Status: **partial authorized publication to main**, not a machine validation or 
 | `safety-course/4400_GUARD_EGRESS_DEPENDENCY_CHANGE_WORKSHEET_2026-10-22.md` | `d1c812b1303220d290cfdc84e2aa073c66998e5f` | Published, exact; linked to already published manual-release source |
 | `research/4400_HYDAC_SAF_MANUAL_AUTO_BLEED_OPTIONAL_GAUGE_VARIANT_AUDIT_2026-10-22.md` | `e43ddbdd67d0189f2d2d3c325b18e2db3f3fc2bb` | Published, exact; HYDAC 2076241/2120394 catalog contrast checked |
 
-**63 of the 85 archived candidates remain pending**, assuming no unrelated concurrent publication. This is an archive-relative count, not a claim that every pending item has been checked against all of main. Preserve the ZIP and its manifest; review each candidate's links, provenance, current product edition, and existing main destination before publication. Do not overwrite existing files blindly.
+**62 of the 85 archived candidates remain pending**, assuming no unrelated concurrent publication. This is an archive-relative count, not a claim that every pending item has been checked against all of main. Preserve the ZIP and its manifest; review each candidate's links, provenance, current product edition, and existing main destination before publication. Do not overwrite existing files blindly.
 
 ## New material outside the archived 85
 
@@ -90,4 +90,8 @@ Three additional exact original archive Git blobs were committed and independent
 | `safety-course/4400_GUARDLINK_FAULT_RECOVERY_CHANGE_CONTROL_WORKSHEET_2026-10-23.md` | `42d88d3f5dc5580b06ffe82e9798e92d431f6750` | Published exact |
 | `safety-course/4400_GUARDLINK_RESET_AND_REPLACEMENT_TECHNICIAN_CARD_2026-10-23.md` | `3ad0a1f54035834d92a9d0396502a311131f9d11` | Published exact |
 
-**Archive-relative pending: 63/85**, assuming no concurrent publication. New non-archive `research/4400_ENETR_RESET_UNITS_AND_DIAGNOSTIC_XOR_CONFLICT_2026-10-23.md` uses visually inspected manufacturer 2026 pp. 39 and 44 and keeps the units/XOR discrepancies UNKNOWN for actual selected firmware. No machine tests or hosted Actions compute.
+**Archive-relative pending: 62/85**, assuming no concurrent publication. New non-archive `research/4400_ENETR_RESET_UNITS_AND_DIAGNOSTIC_XOR_CONFLICT_2026-10-23.md` uses visually inspected manufacturer 2026 pp. 39 and 44 and keeps the units/XOR discrepancies UNKNOWN for actual selected firmware. No machine tests or hosted Actions compute.
+
+### 2026-10-23T09:32Z hydraulic cross-branch publication
+
+Exact archived `research/4400_HYDAC_DSV10_LOW_COST_SHUTOFF_DRAIN_SOURCE_SCOPE.md` Git blob **`c2b819fed1052a3c2276bda3741da16d036d3631`** published and verified against original archive. Original HYDAC `E 3.551.17/08.03` printed p. 10 documents negative P/S/T switching overlap and distinct DSV10 M/EY/EZ variants; current-machine applicability remains UNKNOWN. New non-archive technician worksheet: `safety-course/4400_DSV10_COMBINED_ISOLATION_NEGATIVE_OVERLAP_FIELD_EXERCISE_2026-10-23.md`. **62/85 archive candidates remain pending**, assuming no concurrent changes; no physical validation or hosted compute.

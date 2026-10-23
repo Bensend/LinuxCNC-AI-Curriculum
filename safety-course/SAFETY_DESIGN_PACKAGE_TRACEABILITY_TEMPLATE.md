@@ -284,3 +284,16 @@ Before a learner package is eligible for fresh evaluation:
 | `HF/CHG/UNK/RR` | Make isolation/test points accessible, label measured zones, re-install guards easily, invalidate evidence after powered tests or design changes. | Preserve contradiction, STALE dependencies and exposed-person restriction. |
 
 This is an **evidence-architecture supplement**, not a numerical safety rating, a selected machine circuit, or a performed physical test. A claimed safe state contradicted by independent actual motion must not be rescued by a green diagnostic indication.
+
+## 11H. Safety-controller configuration transfer versus installed function (Pilz PNOZ s30 example)
+
+**DOC-CONFIRMED:** Pilz PNOZ s30 manual 1001715-EN-24 §§8.5–10 documents CRC comparison after chip-card/USB configuration transfers, warns that USB download overwrites existing data, describes project-name and older-device-version effects on CRC, and requires safety-device function checks after configuration changes/downloads. See [source audit](../research/4400_PILZ_PNOZS30_CONFIG_CRC_TRANSFER_VS_FUNCTION_TEST_2026-10-23.md).
+
+| Change-control proof | Required selected-machine evidence | Status |
+|---|---|---|
+| `CHG/ARC` identity | Full device order/version, project identity, selected parameter set, download route, original and installed CRC | UNKNOWN |
+| `SRS/AUTH/DEP` appropriateness | Application-specific sensor/mechanical coupling, selected function, reset/auto-start semantics, outputs/final elements | UNKNOWN |
+| `VAL/PT` behavior | Qualified fault, stop/hold, guard-unlock and rearm verification with independent physical witnesses | NOT RUN |
+| `HF/UNK/RR` continuity | Accessible post-download checklist, retained project provenance, changed-CRC explanation and safe operational restriction | OPEN |
+
+A matching CRC is **transfer evidence**, not a replacement for selected-machine functional validation. An unexpected CRC mismatch, configuration change, project rename or firmware-version transfer requires a documented review; do not assume every CRC change proves a safety defect or every match proves safety. Do not credit ordinary LinuxCNC software as independent personnel-safety authority.

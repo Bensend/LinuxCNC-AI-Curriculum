@@ -59,3 +59,11 @@ A second read of Fiessler's same product page distinguishes **FE-FS2 two-pedal f
 **INFERENCE:** counting two pedals does not establish that two *people* participate, that both halves are hazardous-motion commands, or that either device is a two-hand control. The installation must distinguish `pedal count`, `physical operator stations`, `number of exposed people`, `function selected by each pedal`, and `credited protective functions` as separate BND/HAZ/AUTH facts. The selected FMSC-FP circuit and exact FE-FS1/FE-FS2 catalog/manual remain UNKNOWN.
 
 Source: https://www.fiessler.de/en/products/safety-products/safety-footpedals/safety-foot-pedals-fe-fs.php (FE-FS2 and FMSC-FP sections). This source refinement strengthens, rather than changes, the earlier non-equivalence conclusion.
+
+## Direct manufacturer cross-product proof: FMSC-FP versus FMSC-THC
+
+**DOC-CONFIRMED — stronger than the initial abstract-level inference.** Fiessler's own switching-device brochure `PRD_FMSC_switching-device___engl_doc1872` (dated **2025-10-15**) distinguishes **FMSC-FP foot-pedal evaluation** (printed p. 5) from **FMSC-THC two-hand control** (printed p. 8). The type overview (pp. 3–4) assigns these different functions to different variants. The THC page explicitly identifies **Type III-C according to DIN EN ISO 13851** and describes two push-buttons operated within a tolerance time. The FP page instead documents four foot-pedal selection modes, monitored relays and separate selector/pedal error and restart-request outputs. This directly establishes that the manufacturer's **FP AND mode is not described as its THC function**; it does *not* establish every internal FP diagnostic or release-history detail.
+
+**DOC-CONFIRMED text discrepancy:** FP printed p. 5 says `only foot pedal 3` in one bullet, but elsewhere the same page describes `foot switch 1 OR 2`, `1 AND 2` and connecting two foot switches. Treat the isolated `3` as a documentation conflict pending exact wiring/manufacturer confirmation, **not** an authorization to assign an uninspected terminal or third operator.
+
+Source: https://www.fiessler.de/default-wAssets/docs/download/FMSC-Schaltgeraete/prd-fmsc-switching-device-engl-doc1872-comp.pdf (printed pp. 3–5 and 8, publication date p. 12). Do not transfer the brochure's family-level SIL/PL claims to a selected machine safety function.

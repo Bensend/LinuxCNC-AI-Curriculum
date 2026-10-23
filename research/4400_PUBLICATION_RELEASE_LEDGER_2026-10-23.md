@@ -209,3 +209,18 @@ Original archive `research/4400_HYDAC_SAF_PROTECTIVE_STOP_VS_AUTO_BLEED_ADVERSAR
 ### 2026-10-23T11:48Z pressure-test-point anti-bypass human-factors release
 
 `research/4400_SAF_TEST_POINT_HUMAN_FACTORS_DESIGN_REVIEW.md` published byte-exactly and independently fetched with original Git blob **`7fd40e6f736eec407640a8c268e91646c77c417c`**. **39/85 original archive candidates remain pending**, superseding 40/85 (archive-relative; concurrent publication unverified). The source-based design review prioritizes zone-labeled, externally observable pressure/holding evidence and easy guard restoration; redesign candidates are INFERENCE, no physical validation.
+
+
+### 2026-10-23T12:39Z GuardLink source release — five exact archive members
+
+Re-read `START_HERE.md`, current governance and the 11:42Z checkpoint before publication. Locally rechecked the consolidated ZIP: archive integrity passed, **96/96 SHA-256 entries matched**. Before creation, each destination was confirmed absent on `main`; after creation, each Git blob was fetched independently and matched its original archive member byte-exactly.
+
+| Exact original candidate | Original and post-publication Git blob | Status |
+|---|---|---|
+| `safety-course/4400_MODE_DEPENDENT_ACCEPTANCE_TECHNICIAN_WORKSHEET_2026-10-23.md` | `bc768bccd8c9644778968439e2328c1a0421d30d` | PUBLISHED EXACT |
+| `safety-course/4400_OVERRUN_FRESHNESS_SELECTED_SETTING_TECHNICIAN_CARD_2026-10-23.md` | `0044a358f58bf01c797fe4a1469592ce7c172ded` | PUBLISHED EXACT |
+| `research/4400_HMI_GUARD_DIAGNOSTIC_EVENT_VS_SAFETY_STATE_CONTRACT_2026-10-23.md` | `c53304c2b50d2f2a6be806f344d0d59ed43f72b8` | PUBLISHED EXACT |
+| `research/4400_ENETR_DIAGNOSTIC_TAG_BITMASK_AND_DOCUMENT_CONFLICT_AUDIT_2026-10-23.md` | `59ad64b5eb1ee202cbbe88a7bf4676384315c9dc` | PUBLISHED EXACT |
+| `research/4400_GUARDLINK_RESET_FAULT_RECOVERY_AND_SAFETY_AUTHORITY_2026-10-23.md` | `1fbed3b653127a13010eca071f878ece38e61a7d` | PUBLISHED EXACT |
+
+**Original consolidated archive pending: 34/85**, superseding the prior 39/85 count, assuming no unrelated concurrent publication. This is archive-relative, not an exhaustive live-tree count. New **non-archive** `research/4400_GUARDLINK_DIAGNOSTIC_EVENT_EPOCH_FRESHNESS_AND_RELEASE_GATE_2026-10-23.md` advances ordinary-HMI freshness/first-event state design without assigning it personnel-safety authority. Cumulative package §11K and learner index updated. All selected-machine `VAL/PT` remain **NOT RUN**, external 2520–25F0 evaluation gates OPEN. No physical tests or laboratory compute; no GitHub-hosted runner dispatched. Self-hosted lesson-log job 120301190483 of run 39919548510 remains QUEUED without authoritative runtime.

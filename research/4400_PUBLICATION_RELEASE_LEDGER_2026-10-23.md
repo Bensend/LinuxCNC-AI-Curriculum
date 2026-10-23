@@ -393,3 +393,6 @@ Added original `research/4400_PERSONNEL_KEY_WHOLE_BODY_ACCESS_VS_LOTO_SOURCE_AUD
 
 
 **Further 17:41Z original evidence, not an archive decrement:** published `research/4400_EUCHNER_CKS_UNICODE_MULTICODE_PERSONNEL_KEY_GATE_2026-10-23.md` from exact EUCHNER 2113903-06-09/19 manual and current 158081 product page, and `research/4400_CURRENT_SAFETY_INDEX_LINK_INTEGRITY_AUDIT_2026-10-23.md` from complete main tree. **77/77** index relative links resolved at the recorded snapshot; six historical archive candidates still absent and not referenced by those index links. No old ZIP path was silently reconstructed or published. Original backlog **6/85 pending**.
+
+
+**Further original product research at 17:43Z:** `research/4400_ROCKWELL_440T_ROTARY_PHYSICAL_ISOLATOR_VS_CONTROL_KEY_2026-10-23.md` is new documentary research, **not** an original ZIP candidate. Backlog remains **6/85 pending**. Rockwell exact 440T-MRPSE110F cut sheet and 440T-IN027 instructions reviewed; no selected-machine physical isolation validation.

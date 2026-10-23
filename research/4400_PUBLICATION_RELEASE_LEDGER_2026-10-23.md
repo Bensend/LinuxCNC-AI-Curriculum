@@ -263,3 +263,8 @@ Two further original archive members independently fetched and Git-blob verified
 | `safety-course/4400_THREE_POSITION_PEDAL_RESTART_AND_OVERTRAVEL_TECHNICIAN_CARD_2026-10-23.md` | `a3a2521da16df18f80b4799d6a5ada079ccefaef` | PUBLISHED EXACT |
 
 **Original archive pending: 25/85**, superseding 27/85. These learner-facing exercises distinguish OR versus AND operator authorization, pedal overtravel safety demand, independent physical stop/hold, reset, fresh start and maintenance isolation. Manufacturer document ambiguities remain labeled, and no selected-machine `VAL/PT` or external blind evaluation was performed. Session cumulative **14 original archive members** published exact, plus **one new source-grounded HMI epoch/freshness research note**. All physical machine evidence NOT RUN; zero GitHub-hosted compute.
+
+
+### 2026-10-23T12:52Z safe mode selector versus enabling-device source release
+
+Original archive `research/4400_SAFE_MODE_SELECTOR_VS_THREE_POSITION_ENABLING_DEVICE_SOURCE_TRACE_2026-10-23.md` published exact, post-write Git blob **`c34dbbbba6368997440d65a2fa2bd4b9fa2e5be2`** matched original. Pilz mode selector guidance and PITenable, Rockwell 440J and Fiessler FMSC-FP are compared without confusing ordinary mode selection, three-position enabling, E-stop, selected safe speed or physical stop. **Original archive pending: 24/85**, superseding 25/85. Session cumulative **15 exact original archive releases** and one new GuardLink/HMI source-grounded architecture note; no selected-machine physical `VAL/PT`, external score or compute.

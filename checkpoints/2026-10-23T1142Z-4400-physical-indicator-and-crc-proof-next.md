@@ -29,3 +29,5 @@
 **Safety restriction:** no documentary evidence authorizes personnel-exposed hazardous operation. Isolated/remote experimental operation requires people outside the danger zone and explicit residual-risk controls.
 
 **Same-session update (2026-10-23T11:44Z):** one further original archived cross-machine guard-lock/standstill card was published exact (`774cfb232c78065d9c6a279ae1f06729bcc3e930`). Current original archive backlog is **43/85**, superseding the earlier 44/85 figure in this checkpoint. See publication ledger. Priority remains the two unpublished GuardLink research notes and physical safety authority evidence.
+
+**Same-session update (2026-10-23T11:46Z):** two additional exact archive releases: HYDAC/HAWE protective-cycle energy versus auto-bleed (`09d16c92b5117226f55e474cc613a2c68ad0c401`) and EUCHNER guard-lock output versus physical safe-state transfer (`91b6642deb380c0ab04d7ee2bd060d5e9a9783a6`). **41/85** original archive candidates now remain (supersedes prior 43/85 and 44/85). Highest priority next remains the two missing GuardLink/HMI source investigations, then selected-machine physical proof.

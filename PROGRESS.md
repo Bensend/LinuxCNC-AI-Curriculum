@@ -261,3 +261,6 @@ No physical `VAL/PT`, no external score, no simulation, no local laboratory comp
 
 
 **2026-10-23T17:44Z — timed versus sensed guard key release:** Reviewed Rockwell 440T electronic timed-delay product/selected cut sheet, 440T stopped-motion family, `440T-IN035A-EN-P` (2018) and historical `CU2-IN001`. Published `research/4400_TRAPPED_KEY_TIMED_RELEASE_VS_SENSED_STOP_MOTION_2026-10-23.md`; source distinguishes elapsed-time release from sensed shaft standstill **plus possible delay**, and both from physical machine safe-state proof. Integrated cumulative package §11AF, index and technician challenge. No selected stop times/sensor mounting, physical `VAL/PT` or compute.
+
+
+**Active next-work checkpoint as of 2026-10-23T17:37Z session:** `checkpoints/2026-10-23T1737Z-4400-personnel-key-cks-release-authority-next.md`. Final source-add route audit **80/80 relative index paths present**, main tree untruncated, all six historical archive candidates still absent/unlinked. This supersedes older safety checkpoint routing; 1000/2000/F02/3000 graduation preserved. No new physical `VAL/PT` or lab compute.

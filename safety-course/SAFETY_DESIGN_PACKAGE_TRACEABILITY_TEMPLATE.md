@@ -142,6 +142,21 @@ For machines large enough to enter, retain one linked record from access geometr
 
 SICK S300 instructions distinguish scanner reset/OSSD restoration from the external restart interlock and require an outside reset location with full view for the documented application (S300 8010948/ZD09/2024-09-12, https://www.sick.com/media/docs/3/13/613/Operating_instructions_S300_Safety_laser_scanner_en_IM0017613.PDF). This is **product/application-specific DOC-CONFIRMED** evidence, not generic proof of occupancy or a universal machine requirement. An adversarial `VAL-*` shall consider a person remaining inside after the initiating field clears, with an ordinary start request retained; guard/field restoration or reset alone must not receive credit for an unproved physical proposition. If minimum protection is not established, block exposed-person operation and limit experiments to isolated/remote conditions.
 
+## 11C. Guard-topology change causal-proof continuity
+
+For a new, moved or replaced guard, the physical device's presence, successful discovery, node count, displayed channel status and a stopped machine are **not individually proof** that the guard participates in the required protective function. The 432ES-IG3 manufacturer documents an append-node sequence that, if not followed, can leave an added device inactive; see `research/4400_432ES_APPENDED_NODE_INACTIVE_SAFETY_FUNCTION_SOURCE_TRACE_2026-10-23.md` and the learner `4400_GUARDLINK_NODE_CHANGE_PHYSICAL_PROOF_TECHNICIAN_CARD_2026-10-23.md`. This is a **product/revision-specific DOC-CONFIRMED example**, not a generic protocol procedure or physical test result.
+
+| Linked IDs | Change-control / causal-proof obligation | Status |
+|---|---|---|
+| `CHG/DEP/ARC` | Capture as-built guard→node→channel→safety program→zone mapping, terminator/cable, catalog/firmware and any reused tags; mark dependent evidence STALE. | UNKNOWN |
+| `BND/HAZ/SF/SRS/PHY` | Specify which person/exposure/mode is protected and the distinct required controller and physical safe-state propositions. | UNKNOWN |
+| `AUTH` | Identify independent safety controller, output and final elements; normal LinuxCNC/FPGA/HMI remains diagnostic/request-only. | UNKNOWN |
+| `VAL-input` | In an approved isolated/low-energy test, record other active protective demands and demonstrate the **new guard's causal** safety demand, not merely `guard open` coinciding with `output OFF`. | NOT RUN |
+| `VAL-physical/PT` | Separately witness actual selected-machine stopping/holding/access/energy response, fault recovery, power restoration, deliberate rearm and separate fresh ordinary start. | NOT RUN |
+| `HF/UNK/RR` | Review alignment, maintenance access, visible fault localization, bypass incentives, unresolved machine-specific limits and operational restrictions. | OPEN |
+
+**Masking counterexample:** Guard B is already open and the safety output is already OFF; opening newly installed guard A leaves the output OFF. That observation cannot prove A participates. Do not defeat B to manufacture a favorable result. If an unmasked causal test cannot be performed safely, mark the proof BLOCKED and withhold personnel-exposed operation. Configuration capability (including manufacturer-permitted online changes) does not waive physical revalidation or maintenance isolation requirements. No safety integrity level, hydraulic truth table, stop distance or machine release is inferred from this example.
+
 ## 12. Change and revalidation ledger
 
 | CHG ID | Changed item | Reason | Upstream IDs affected | Dependents marked STALE | Required review/retest | Closure evidence | Status |

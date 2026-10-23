@@ -39,3 +39,9 @@ Sketch a service/production interface with visible reasons for hold, simple faul
 ## Pass boundary
 
 Pass the open-book lesson when the learner correctly explains all five cases and refuses to authorize personnel exposure without selected-machine physical evidence. This is a *teaching check only*, not an independent blind evaluation, functional-safety validation, physical test, or equipment release. No selected machine IN-01..10/VAL/PT was supplied.
+
+## Additional paper case — energized brake test interrupts maintenance
+
+A technician has applied a personal maintenance lock, then proposes to remove it temporarily and run an S120 brake test while a second worker remains beside the gravity axis. State why the Siemens SBT sequence involves active energy and what OSHA 1910.147(f)(1) requires *when the covered servicing task requires temporary reenergization*. Explain why another worker's personal lock is not yours to remove, why a selected secondary restraint/exclusion is necessary, and why the machine must return to isolation before further servicing. This is a **paper exercise**, not a live procedure. Do not choose a test torque or enter the danger zone.
+
+**Open-book answer:** SBT opens/closes the brake and applies controlled test torque with drive pulses enabled; it is not passive. Under applicable OSHA 1910.147(f)(1), authorized clearing, removal of people, appropriate lock removal, bounded test and reapplication of energy control are required. Group-worker authority and selected-machine physical restraint cannot be inferred from a drive diagnostic. No personnel-exposed test is authorized by this exercise.

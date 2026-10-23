@@ -12,7 +12,7 @@ Session start UTC: **2026-10-23T08:31:58Z**. Previous known completed session en
 6. `hardware/SELECTED_SAFETY_BLOCK_QUALIFICATION_WORKSHEET.md` now separates OSSD output-test pulse, solenoid-control pulse, and UB supply interruption parameters.
 7. `safety-course/SAFETY_COURSE_INDEX.md`, `PROGRESS.md` and `research/4400_PUBLICATION_RELEASE_LEDGER_2026-10-23.md` updated.
 
-**Archive-relative pending publication: 67 of 85** original staged learner-visible candidates, assuming no concurrent publication. Do not bulk overwrite; inspect each destination and manufacturer edition, preserve exact blob identity and provenance. Original consolidated archive: `LinuxCNC_4400_20261023T064104Z_SAFETY_MODE_AUTHORITY_CONSOLIDATED_PUBLICATION_STAGED.zip` (conversation artifact, not a repo file).
+**Archive-relative pending publication: 66 of 85** original staged learner-visible candidates, assuming no concurrent publication. Do not bulk overwrite; inspect each destination and manufacturer edition, preserve exact blob identity and provenance. Original consolidated archive: `LinuxCNC_4400_20261023T064104Z_SAFETY_MODE_AUTHORITY_CONSOLIDATED_PUBLICATION_STAGED.zip` (conversation artifact, not a repo file).
 
 ## Source/evidence boundary
 
@@ -40,7 +40,7 @@ Further exact archived Git blob SHA releases:
 
 Official HYDAC part 2120394 catalog verified (DOC-CONFIRMED) the normally-open WSM06020Y solenoid bleed option, optional gauge, and the 2SV5/WSM replacement coil incompatibility. The selected-block worksheet now requires exact pressure-zone/tap mapping, separate physical load-holding witness and replacement `CHG` review. None of these catalog observations establishes installed hydraulic response or a maintenance-safe state. Source: https://catalog.hydac.com/en-us/item/safety-and-shut-off-blocks/type-saf-safety---shut-off-blocks/2120394 .
 
-**Revised next priority:** publish the remaining **67** source-checked archived candidates in coherent groups; highest value includes GuardLink diagnostic event-versus-current-state and independent physical final-element witness, then safe maintenance isolation and reaccumulation. Preserve external evaluator separation, avoid redundant eight-field SO witness template, and do not use hosted runners. No selected-machine tests or authoritative new compute runtime.
+**Revised next priority:** publish the remaining **66** source-checked archived candidates in coherent groups; highest value includes GuardLink diagnostic event-versus-current-state and independent physical final-element witness, then safe maintenance isolation and reaccumulation. Preserve external evaluator separation, avoid redundant eight-field SO witness template, and do not use hosted runners. No selected-machine tests or authoritative new compute runtime.
 
 ## Same-session ENETR diagnostic branch addendum — 2026-10-23
 
@@ -75,3 +75,9 @@ Official ISO 14119:2024 and ISO/TR 24119:2015 catalog pages and the Schmersal 20
 One exact archived Git blob release: `safety-course/4400_GUARD_EGRESS_DEPENDENCY_CHANGE_WORKSHEET_2026-10-22.md` — `d1c812b1303220d290cfdc84e2aa073c66998e5f`. Linked to already published EUCHNER `research/4400_GUARD_RELEASE_STOP_REQUEST_VS_PHYSICAL_EGRESS_2026-10-22.md`. Cumulative Safety Design Package and index now require distinct release command, physical door opening/escape, independent machine stopping/holding and maintenance isolation propositions. No physical escape/stop test was performed.
 
 **Revised pending backlog: 67/85** original archive candidates. Maintain current safety-course priority and 2520–25F0 external gate separation. Next high-value source group: GuardLink reset/fault recovery and physical final-element witness, or hydraulic maintenance energy reaccumulation. No GitHub-hosted compute.
+
+## Same-session SAF catalog variant addendum — 2026-10-23
+
+One exact archived Git blob release: `research/4400_HYDAC_SAF_MANUAL_AUTO_BLEED_OPTIONAL_GAUGE_VARIANT_AUDIT_2026-10-22.md` — `e43ddbdd67d0189f2d2d3c325b18e2db3f3fc2bb`. HYDAC manufacturer catalog part 2076241 (`SAF20M16-N350C S60`, manual discharge) and part 2120394 (`SAF20E12Y1T330A`, solenoid/manual discharge) inspected directly. The manual model's generic `Valve Type: Solenoid` field is contradictory/ambiguous, not proof of an installed automatic bleed. Selected-block qualification and course navigation now require exact SKU/options, gauge/ports and independent physical witness before freeze. No installed-machine hydraulic truth table or pressure decay established.
+
+**Revised pending backlog: 66/85** original archive candidates. Continue source-first safety course; prioritize physical final-element witness, maintenance reaccumulation, guard diagnostics and restart/occupancy. No GitHub-hosted compute.

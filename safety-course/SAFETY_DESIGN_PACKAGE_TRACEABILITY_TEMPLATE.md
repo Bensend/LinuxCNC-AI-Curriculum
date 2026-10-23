@@ -327,3 +327,18 @@ For `SRS/PHY/AUTH/DEP`, explicitly resolve which hazardous event is prevented, w
 **INFERENCE (ordinary diagnostic contract):** retain raw tags, source/firmware, timestamp, validity, event epoch and physical zone mapping. Display `UNKNOWN` rather than an inherited green state when `Active=0`, data are stale, or `DeviceFault` bit mapping is unresolved. Manufacturer's February 2026 `DeviceFault=6` example and reset-duration units are internally inconsistent; do not silently normalize either. A link becoming Operational or a fault reset completing is not a machine-safe-state or fresh-start proof.
 
 **No selected-machine validation:** no machine `VAL/PT`, PL/SIL, stopping distance, pressure threshold or hydraulic truth table has been established. Where minimum safe-to-operate protection is unproved, do not operate with people exposed. Any necessary experiments must be isolated/remote, with people outside the danger zone and residual risk stated.
+
+
+## 11L. AKFR valve and pressure sensor target versus actual hydraulic hazard
+
+**DOC-CONFIRMED:** Fiessler's historical AKAS-F + AKFR original German document 1257 (2010-04-01) and English internal document 1264 (2010-07-16; hosted filename contains `doc1268`) both describe **valve-position indicators AND pressure sensors** feeding AKAS-F through AKFR, and five potential-free normally open release contacts. The German text calls the released loads valve controls; the English translation calls them contactor controls; both example diagrams label valve release. This conflict is preserved, not silently corrected. See [original-language audit](../research/4400_AKFR_PRESSURE_AND_VALVE_WITNESS_SOURCE_AUDIT_2026-10-23.md) and [sensor-target technician exercise](4400_AKFR_SENSOR_TARGET_AND_PHYSICAL_WITNESS_TECHNICIAN_EXERCISE_2026-10-23.md).
+
+| Trace IDs | Required selected-machine proof | Status |
+|---|---|---|
+| `BND/ENE/HAZ` | Exact AKAS-F/AKFR variant, machine mode, gravity load, all relevant trapped pressure volumes and access geometry | UNKNOWN |
+| `AUTH/ARC/DEP` | Each of five contacts mapped to its actual load, valve state targets, pressure tap zones, shared pilot/common power and final-element dependencies | UNKNOWN |
+| `SRS/PHY` | Distinct protective stop, beam/load holding, residual pressure disposition, guard/escape and maintenance isolation | NOT ESTABLISHED |
+| `VAL/PT` | Qualified independent beam motion/holding and pressure-zone witnesses; negative evidence after feedback contradiction; maintenance restraint/isolation | NOT RUN |
+| `HF/CHG/UNK/RR` | Clear sensor-target labeling, accessible safe test points, simple guard reinstallation, revalidation after variant/contact/port changes | OPEN |
+
+**INFERENCE:** five electrical release contacts do not prove five independent hydraulic stopping paths, and one pressure sensor does not prove every cylinder chamber/accumulator is depressurized. A valid physical motion witness contradicting a claimed stopped/held state must block acceptance regardless of healthy status bits. Do not transfer this **2010 AKAS-F/AKFR** contract to **2024 AKAS-5M/LC-5M M variants** without exact source evidence. No selected-machine PL/SIL, pressure limit, stopping distance, valve truth table or `VAL/PT` is established.

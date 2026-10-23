@@ -236,3 +236,18 @@ Two more exact archive members published, original/post-write Git blob SHA indep
 | `safety-course/4400_AKFR_SENSOR_TARGET_AND_PHYSICAL_WITNESS_TECHNICIAN_EXERCISE_2026-10-23.md` | `30ec8a5f67d9a4abfcdfbaf76b2cab6ac94a822c` | PUBLISHED EXACT |
 
 **Original archive pending: 32/85**, superseding 34/85, subject to concurrent updates. Fiessler original German `doc1257` and English internal `doc1264` (hosted filename `doc1268`) were independently re-opened from the manufacturer site; both document valve-position **and** pressure-sensor inputs, but disagree on downstream "valve" versus "contactor" wording. The English diagram says "Valve release." Cumulative Safety Design Package §11L and index updated. All selected-machine `VAL/PT` NOT RUN; no machine hydraulic truth table, PL/SIL or maintenance-entry proof inferred. No compute dispatched.
+
+
+### 2026-10-23T12:48Z Physical access, stop/hold and maintenance energy release
+
+Five more original archive members were independently fetched after publication and matched exact original Git blobs:
+
+| Candidate | Original/post-write Git blob | Status |
+|---|---|---|
+| `safety-course/4400_CROSS_BOUNDARY_CONTRADICTION_COMMISSIONING_CARD_2026-10-22.md` | `ff7192cd376801a9dfbad49ac368f19e5547d9be` | PUBLISHED EXACT |
+| `safety-course/4400_GUARD_LOCK_SEMANTICS_VS_PHYSICAL_RELEASE_2026-10-22.md` | `f2a5e9bd7366a574d1d50abfb52fd09c00012a13` | PUBLISHED EXACT |
+| `safety-course/4400_HYDRAULIC_PHYSICAL_WITNESS_WORKED_PACKAGE_2026-10-22.md` | `33fe8f8b7dcd9afd26a339d354ebce96aa939034` | PUBLISHED EXACT |
+| `safety-course/4400_ACCUMULATOR_SAFE_CYCLE_TO_MAINTENANCE_TRANSITION_EXERCISE_2026-10-22.md` | `784dd5f032f27a698195c723dcb8ecddf997114c` | PUBLISHED EXACT |
+| `safety-course/4400_ACCESS_RELEASE_ENERGY_WITNESS_COMPOSITION_WORKSHEET_2026-10-22.md` | `fe1bb8b7e70124e7928310bf40de67dc49edefe5` | PUBLISHED EXACT |
+
+**Original archive pending: 27/85**, superseding 32/85. These learner-visible documents separate ordinary LinuxCNC E-stop, safety controller demand, valve/guard feedback, actual beam/pressure/escape/occupancy, protective-cycle accumulator energy, maintenance LOTO and fresh start. They are educational/INFERENCE or DOC-CONFIRMED examples, **not** selected-machine physical `VAL/PT` or external blind scores. No test/simulation/hosted compute.

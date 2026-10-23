@@ -221,3 +221,8 @@ The exact original archived [accumulator dual-role source study](../research/440
 ### 2026-10-23T15:36Z — Pinned LinuxCNC software reset startup counterexample
 
 The exact archived [LinuxCNC v2.9.10 `estop_latch` first-scan source trace](../research/4400_LINUXCNC_ESTOP_LATCH_FIRST_SCAN_RESET_AUTHORITY_2026-10-22.md) is now on main (original Git blob `06ab264878abdd4920af7ab78707b06767ce9e20`). The component's zero-initialized edge history permits an already-high reset input to count as an initial software edge; it is not a deliberate human safety rearm. Source, generator and simulation HAL example were re-fetched at the pinned upstream tag. Design package §11V preserves independent safety reset, physical stop/hold and fresh ordinary start. No software simulation, physical test or external evaluation was performed.
+
+
+### 2026-10-23T15:38Z — Lockable energy isolation and anti-bypass retrofit design
+
+Read the exact archived [lockable isolator, tagout equivalence and retrofit maintenance access source audit](../research/4400_LOCKABLE_ISOLATION_TAGOUT_RETROFIT_EVIDENCE_2026-10-22.md) (original Git blob `a902445214ac5adebbcacda1839215adb1ee3379`). OSHA 1910.147 distinguishes actual energy-isolating devices from control-circuit E-stops, and Siemens/Schneider catalog examples distinguish a padlockable operating accessory from a selected installed isolator. Cumulative design package §11W records backfeeds, stored energy, worker-specific lockout and easy-to-use guarded isolation. No selected-machine legal determination or physical `VAL/PT` was performed.

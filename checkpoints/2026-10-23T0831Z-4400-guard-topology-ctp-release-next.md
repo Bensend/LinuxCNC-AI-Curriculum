@@ -12,7 +12,7 @@ Session start UTC: **2026-10-23T08:31:58Z**. Previous known completed session en
 6. `hardware/SELECTED_SAFETY_BLOCK_QUALIFICATION_WORKSHEET.md` now separates OSSD output-test pulse, solenoid-control pulse, and UB supply interruption parameters.
 7. `safety-course/SAFETY_COURSE_INDEX.md`, `PROGRESS.md` and `research/4400_PUBLICATION_RELEASE_LEDGER_2026-10-23.md` updated.
 
-**Archive-relative pending publication: 71 of 85** original staged learner-visible candidates, assuming no concurrent publication. Do not bulk overwrite; inspect each destination and manufacturer edition, preserve exact blob identity and provenance. Original consolidated archive: `LinuxCNC_4400_20261023T064104Z_SAFETY_MODE_AUTHORITY_CONSOLIDATED_PUBLICATION_STAGED.zip` (conversation artifact, not a repo file).
+**Archive-relative pending publication: 70 of 85** original staged learner-visible candidates, assuming no concurrent publication. Do not bulk overwrite; inspect each destination and manufacturer edition, preserve exact blob identity and provenance. Original consolidated archive: `LinuxCNC_4400_20261023T064104Z_SAFETY_MODE_AUTHORITY_CONSOLIDATED_PUBLICATION_STAGED.zip` (conversation artifact, not a repo file).
 
 ## Source/evidence boundary
 
@@ -40,7 +40,7 @@ Further exact archived Git blob SHA releases:
 
 Official HYDAC part 2120394 catalog verified (DOC-CONFIRMED) the normally-open WSM06020Y solenoid bleed option, optional gauge, and the 2SV5/WSM replacement coil incompatibility. The selected-block worksheet now requires exact pressure-zone/tap mapping, separate physical load-holding witness and replacement `CHG` review. None of these catalog observations establishes installed hydraulic response or a maintenance-safe state. Source: https://catalog.hydac.com/en-us/item/safety-and-shut-off-blocks/type-saf-safety---shut-off-blocks/2120394 .
 
-**Revised next priority:** publish the remaining **71** source-checked archived candidates in coherent groups; highest value includes GuardLink diagnostic event-versus-current-state and independent physical final-element witness, then safe maintenance isolation and reaccumulation. Preserve external evaluator separation, avoid redundant eight-field SO witness template, and do not use hosted runners. No selected-machine tests or authoritative new compute runtime.
+**Revised next priority:** publish the remaining **70** source-checked archived candidates in coherent groups; highest value includes GuardLink diagnostic event-versus-current-state and independent physical final-element witness, then safe maintenance isolation and reaccumulation. Preserve external evaluator separation, avoid redundant eight-field SO witness template, and do not use hosted runners. No selected-machine tests or authoritative new compute runtime.
 
 ## Same-session ENETR diagnostic branch addendum — 2026-10-23
 
@@ -53,3 +53,9 @@ One additional exact archived Git blob release: `safety-course/4400_GUARDLINK_DI
 One further exact archived Git blob release: `safety-course/4400_GUARD_DEFEAT_INCENTIVE_DESIGN_REVIEW_2026-10-22.md` — `6f5f3f144c8eb263181a1a9db41c556d12d593b6`. Official IFA/DGUV MaSeM and bypass-incentive research were inspected. The cumulative `HF` section now requires observed work/task friction and human feedback, not fabricated time savings; usability changes must retain independent physical safety-function proof and create `CHG`/STALE dependencies. The lesson is learner-facing and NOT RUN; no on-site assessment occurred.
 
 **Revised pending backlog: 71/85** original archived candidates. Continue exact source-checked publication and targeted 4400 safety architecture work; avoid duplicate CTP I1/L1 material. Keep 2520–25F0 external/fresh gates open, no invented machine limits, no hosted compute, and no personnel-exposed machine testing.
+
+## Same-session manual hydraulic isolation addendum — 2026-10-23
+
+One further exact archived Git blob release: `research/4400_ROSS_HLOX_MANUAL_ISOLATION_VS_RAM_PROOF_SOURCE_NOTE_2026-10-22.md` — `7a5556fa6a1b302ca004ce52958a0a6532a3eb1e`. Manufacturer ROSS H L-O-X product-family landing/series pages were inspected. DOC-CONFIRMED: padlockable manual OFF, optional pressure indicator, separate T1/T2 paths; manufacturer distinguishes maintenance isolation from automatic E-stop. INFERENCE: one port gauge or OFF signal cannot prove every trapped volume, ram restraint or absence of gravity hazards. UNKNOWN: exact selected hydraulic schematic, installation, physical witness, original PDF content not fully parsed. The cumulative package §11A and learner index now link this boundary.
+
+**Revised pending backlog: 70/85** original archived candidates. Highest-value next research: 432ES/440R exact diagnostic semantic-contract comparison; hydraulic energy-reaccumulation and selected final-element witness; guard series fault masking. Keep external/fresh gates OPEN, no invented physical safety facts, and no hosted Actions compute.

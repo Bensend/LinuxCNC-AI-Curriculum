@@ -300,3 +300,8 @@ Published original archived `research/4400_FIESSLER_THREE_POSITION_PEDAL_RELEASE
 ### 2026-10-23T13:53Z exact AKAS inspection versus machine acceptance archive release
 
 Published original archived `research/4400_AKAS_DEVICE_INSPECTION_VS_MACHINE_SAFETY_ACCEPTANCE_2026-10-23.md` on `main`; independently fetched Git blob **`18e2955280b38a688b8f04c5a683b0d924e96d68`** matched original ZIP exactly. Fiessler AKAS-5M manufacturer document 1581 (2024-02-15) explicitly distinguishes device inspection from complete machine safety acceptance. Muting, box mode, actual speed, physical stopping/holding and reset remain selected-machine obligations. **Original archive pending now 20/85**, superseding 21/85. Session cumulative **four exact archived releases plus three new original safety artifacts**; no physical `VAL/PT`, external score or lab compute.
+
+
+### 2026-10-23T13:54Z exact pressure-witness counterexample archive release
+
+Published original archived `research/4400_PRESSURE_WITNESS_LOGICAL_COUNTEREXAMPLES_AND_CHANGE_IMPACT.md` on `main`; independently fetched Git blob **`06cd199700d353a9e9f55197873bcfab0e46f558`** matched original ZIP exactly. Distinguishes SAF S-side gauge, isolated P-side volume, accumulator gas precharge, gravity restraint and maintenance isolation; change impact on tap/valve/plumbing requires evidence invalidation. No hydraulic truth table or physical validation. **Original archive pending now 19/85**, superseding 20/85. Session cumulative **five exact archived releases plus three new original safety artifacts**, no physical `VAL/PT`, blind score or compute.

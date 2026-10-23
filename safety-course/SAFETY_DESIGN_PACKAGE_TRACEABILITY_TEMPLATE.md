@@ -359,3 +359,12 @@ For `SRS/PHY/AUTH/DEP`, explicitly resolve which hazardous event is prevented, w
 | `HF/UNK/RR` | Easy guard reinstatement, practical fault localization, accessible safe test points and explicitly unresolved residual risk | OPEN |
 
 **Release state:** documentary intake G0 **HOLD**; isolated/remote test permission G1 **HOLD**; physical validation G2 **NOT RUN**; personnel-exposed operation G3 **NOT AUTHORIZED**; maintenance entry G4 **NOT AUTHORIZED**. No PL/SIL, stop distance/time, pressure threshold or machine hydraulic truth table is inferred. Source evidence is not `TEST-CONFIRMED` selected-machine proof.
+
+
+## 11N. Temporary maintenance-test energization is a separate safety transition (2026-10-23)
+
+**DOC-CONFIRMED:** OSHA 1910.147(f)(1) permits temporary LOTO removal for testing/positioning only through its specified sequence: clear tools/materials, remove employees from the area, authorized lock/tag removal, test/position, then deenergize and **reapply energy control** before further servicing. OSHA 1910.147(e) separately governs final release, employee clearance/notification and lock ownership. See [technician transition exercise](4400_TEMPORARY_REENERGIZATION_LOTO_TESTING_AND_FRESH_RESTART_2026-10-23.md).
+
+**INFERENCE traceability addition:** record `M0` isolated maintenance, `T0` pretest personnel clearance, `T1` approved remote/isolated test, `M1` re-isolated maintenance and `P0` separate production return. Each transition must preserve `BND/ENE/HAZ` exposure, `AUTH` personal lock ownership, `PHY` stored energy and gravity restraint, `VAL/PT` independent witnesses, `HF` reinstallation usability, and `CHG` stale-evidence review. LinuxCNC ordinary start, HMI ready, safety reset and maintenance LOTO release are **different authorities**. This does not authorize temporary energization of any unqualified machine.
+
+All selected-machine test plans and physical `VAL/PT` remain **NOT RUN**; `G0–G5` from §11M remain HOLD/NOT AUTHORIZED until actual evidence exists.

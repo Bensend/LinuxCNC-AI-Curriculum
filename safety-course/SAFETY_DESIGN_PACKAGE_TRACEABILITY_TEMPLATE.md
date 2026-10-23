@@ -113,6 +113,8 @@ Keep stopping, isolation, stored-energy discharge, load holding/restraint and ac
 
 Use `NOT RUN`, `PASS`, `FAIL`, `BLOCKED`, or `STALE` for execution status. A software/status indication cannot substitute for the physical witness unless the SRS proposition is specifically about that indication.
 
+**Diagnostic-source validity gate:** if a `VAL` or HMI evidence item relies on a device/event tag, record exact product/firmware/manual, whether it is live state or first/historical event, data validity/age, interface mode, raw value and physical zone mapping. A field that defaults to zero when a channel is inactive cannot be decoded as a live guard-state bitmap. Manufacturer example: Rockwell 440R-ENETR Series B `440R-UM009E-EN-P` (February 2026), Table 5: `Active=0` forces other GuardLink tags to zero and `DeviceFault=6` has an unresolved bit-mapping interpretation relative to `DeviceTrip`. See `research/4400_440R_ENETR_2026_TABLE5_DIAGNOSTIC_QUALITY_GATE_2026-10-23.md` and `safety-course/4400_GUARDLINK_DIAGNOSTIC_DECODER_ADVERSARIAL_WORKSHEET_2026-10-23.md`. These are DOC-CONFIRMED documentary distinctions plus INFERENCE for display design, **not** machine safe-state evidence.
+
 ## 11. Commissioning / proof test / inspection
 
 | PT ID | SRS/VAL IDs | Latent failure sought | Method | Interval/trigger and basis | Acceptance | Evidence | Status |

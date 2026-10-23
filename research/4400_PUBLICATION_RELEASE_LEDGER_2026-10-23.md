@@ -205,3 +205,7 @@ Original archive `research/4400_HYDAC_SAF_PROTECTIVE_STOP_VS_AUTO_BLEED_ADVERSAR
 ### 2026-10-23T11:47Z physical egress field witness release
 
 `safety-course/4400_GUARD_EGRESS_FIELD_WITNESS_AND_CHANGE_CONTROL_CARD_2026-10-22.md` published byte-exactly and independently fetched with original Git blob **`ebbc7482bac6da6ed5f477fa1ae9b29465cefad2`**. **40/85 original archive candidates remain pending**, superseding 41/85 (archive-relative; concurrent publication unverified). The worksheet separates normal production access, inside escape and maintenance isolation and keeps physical `VAL/PT` NOT RUN.
+
+### 2026-10-23T11:48Z pressure-test-point anti-bypass human-factors release
+
+`research/4400_SAF_TEST_POINT_HUMAN_FACTORS_DESIGN_REVIEW.md` published byte-exactly and independently fetched with original Git blob **`7fd40e6f736eec407640a8c268e91646c77c417c`**. **39/85 original archive candidates remain pending**, superseding 40/85 (archive-relative; concurrent publication unverified). The source-based design review prioritizes zone-labeled, externally observable pressure/holding evidence and easy guard restoration; redesign candidates are INFERENCE, no physical validation.

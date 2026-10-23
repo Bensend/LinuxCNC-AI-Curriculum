@@ -12,7 +12,7 @@ Session start UTC: **2026-10-23T08:31:58Z**. Previous known completed session en
 6. `hardware/SELECTED_SAFETY_BLOCK_QUALIFICATION_WORKSHEET.md` now separates OSSD output-test pulse, solenoid-control pulse, and UB supply interruption parameters.
 7. `safety-course/SAFETY_COURSE_INDEX.md`, `PROGRESS.md` and `research/4400_PUBLICATION_RELEASE_LEDGER_2026-10-23.md` updated.
 
-**Archive-relative pending publication: 70 of 85** original staged learner-visible candidates, assuming no concurrent publication. Do not bulk overwrite; inspect each destination and manufacturer edition, preserve exact blob identity and provenance. Original consolidated archive: `LinuxCNC_4400_20261023T064104Z_SAFETY_MODE_AUTHORITY_CONSOLIDATED_PUBLICATION_STAGED.zip` (conversation artifact, not a repo file).
+**Archive-relative pending publication: 68 of 85** original staged learner-visible candidates, assuming no concurrent publication. Do not bulk overwrite; inspect each destination and manufacturer edition, preserve exact blob identity and provenance. Original consolidated archive: `LinuxCNC_4400_20261023T064104Z_SAFETY_MODE_AUTHORITY_CONSOLIDATED_PUBLICATION_STAGED.zip` (conversation artifact, not a repo file).
 
 ## Source/evidence boundary
 
@@ -40,7 +40,7 @@ Further exact archived Git blob SHA releases:
 
 Official HYDAC part 2120394 catalog verified (DOC-CONFIRMED) the normally-open WSM06020Y solenoid bleed option, optional gauge, and the 2SV5/WSM replacement coil incompatibility. The selected-block worksheet now requires exact pressure-zone/tap mapping, separate physical load-holding witness and replacement `CHG` review. None of these catalog observations establishes installed hydraulic response or a maintenance-safe state. Source: https://catalog.hydac.com/en-us/item/safety-and-shut-off-blocks/type-saf-safety---shut-off-blocks/2120394 .
 
-**Revised next priority:** publish the remaining **70** source-checked archived candidates in coherent groups; highest value includes GuardLink diagnostic event-versus-current-state and independent physical final-element witness, then safe maintenance isolation and reaccumulation. Preserve external evaluator separation, avoid redundant eight-field SO witness template, and do not use hosted runners. No selected-machine tests or authoritative new compute runtime.
+**Revised next priority:** publish the remaining **68** source-checked archived candidates in coherent groups; highest value includes GuardLink diagnostic event-versus-current-state and independent physical final-element witness, then safe maintenance isolation and reaccumulation. Preserve external evaluator separation, avoid redundant eight-field SO witness template, and do not use hosted runners. No selected-machine tests or authoritative new compute runtime.
 
 ## Same-session ENETR diagnostic branch addendum — 2026-10-23
 
@@ -59,3 +59,13 @@ One further exact archived Git blob release: `safety-course/4400_GUARD_DEFEAT_IN
 One further exact archived Git blob release: `research/4400_ROSS_HLOX_MANUAL_ISOLATION_VS_RAM_PROOF_SOURCE_NOTE_2026-10-22.md` — `7a5556fa6a1b302ca004ce52958a0a6532a3eb1e`. Manufacturer ROSS H L-O-X product-family landing/series pages were inspected. DOC-CONFIRMED: padlockable manual OFF, optional pressure indicator, separate T1/T2 paths; manufacturer distinguishes maintenance isolation from automatic E-stop. INFERENCE: one port gauge or OFF signal cannot prove every trapped volume, ram restraint or absence of gravity hazards. UNKNOWN: exact selected hydraulic schematic, installation, physical witness, original PDF content not fully parsed. The cumulative package §11A and learner index now link this boundary.
 
 **Revised pending backlog: 70/85** original archived candidates. Highest-value next research: 432ES/440R exact diagnostic semantic-contract comparison; hydraulic energy-reaccumulation and selected final-element witness; guard series fault masking. Keep external/fresh gates OPEN, no invented physical safety facts, and no hosted Actions compute.
+
+## Same-session ISO 14119 series-fault branch addendum — 2026-10-23
+
+Two exact archived Git blob releases:
+- `research/4400_ISO14119_2024_SERIES_FAULT_MASKING_EDITION_AND_LOGIC_2026-10-23.md` — `453fd9a01d1d15fda6fb451cc4e7293cb3082327`.
+- `safety-course/4400_GUARD_SERIES_ORDERED_FAULT_MASKING_FIELD_EXERCISE_2026-10-23.md` — `cbbcf5da08e2c2904fa2c301108c21e08606699f`.
+
+Official ISO 14119:2024 and ISO/TR 24119:2015 catalog pages and the Schmersal 2025 interpretation were inspected. Current-edition Annex J route recorded; no licensed standard clause text reproduced. Settled-state Boolean counterexample `R1=A1&B1, R2=A2&B2` demonstrates opening-order-dependent contact-fault masking without asserting a selected receiver's internal fault latch, pulse detection or DCavg/PL. Cumulative Safety Design Package §11C and course navigation updated. No simulation was needed.
+
+**Revised pending backlog: 68/85** original archive candidates. Continue 4400 safety source publication and exact physical-witness/restart authority work; no personnel-exposed hazardous operation without independent machine proof.

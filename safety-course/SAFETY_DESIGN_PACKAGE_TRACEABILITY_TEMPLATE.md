@@ -309,3 +309,21 @@ A matching CRC is **transfer evidence**, not a replacement for selected-machine 
 See [HYDAC SAF/HAWE D 7571 source-based adversarial review](../research/4400_HYDAC_SAF_PROTECTIVE_STOP_VS_AUTO_BLEED_ADVERSARIAL_REVIEW.md). **DOC-CONFIRMED:** product families can provide manual or automatic accumulator discharge, and some accumulators can support an emergency protective action. **INFERENCE:** blindly de-energizing every valve to discharge pressure may conflict with a selected machine's required load-holding or protective cycle. This is **not** an as-built hydraulic truth table.
 
 For `SRS/PHY/AUTH/DEP`, explicitly resolve which hazardous event is prevented, whether stored energy is required to complete the protective action, which independent safety-related authority controls it, what physical final elements and load restraints exist, and how loss of power/pump/pilot/feedback affects the response. `VAL/PT` remain **NOT RUN** until selected-machine schematics, instrumentation, safe remote validation and acceptance criteria exist. Production protective stopping and maintenance LOTO must have distinct evidence; all unresolved machine facts remain `UNK/RR`.
+
+
+## 11K. GuardLink diagnostic epochs, reset scope and physical release authority
+
+**DOC-CONFIRMED, product-specific:** Rockwell `440R-UM009E-EN-P` (February 2026) documents 440R-ENETR Series B as **not safety-rated**; its `Reset1`, `FaultReset`, per-tap `FaultResetCmd`, and `UnlockCmd/LockCmd` have different effects. `GLINK-AT001A-EN-P` (July 2023) separately documents the 432ES-IG3 CIP Safety architecture. The 432ES `DeviceTripAddress` is a first-event address, whereas ENETR `DeviceTrip` is documented as a node bitmap. Their semantics must not be exchanged. Sources: [reset/fault recovery](../research/4400_GUARDLINK_RESET_FAULT_RECOVERY_AND_SAFETY_AUTHORITY_2026-10-23.md), [ENETR tag conflict audit](../research/4400_ENETR_DIAGNOSTIC_TAG_BITMASK_AND_DOCUMENT_CONFLICT_AUDIT_2026-10-23.md), [432ES HMI state/event contract](../research/4400_HMI_GUARD_DIAGNOSTIC_EVENT_VS_SAFETY_STATE_CONTRACT_2026-10-23.md), and [event epoch/freshness follow-up](../research/4400_GUARDLINK_DIAGNOSTIC_EVENT_EPOCH_FRESHNESS_AND_RELEASE_GATE_2026-10-23.md).
+
+| Trace IDs | Separate proof obligations | Current status |
+|---|---|---|
+| `BND/HAZ/ENE/SF` | Exact guard/zone/person exposure, selected protective function and energy path | UNKNOWN |
+| `AUTH/ARC` | Selected safety-related decision path and physical final elements; ordinary LinuxCNC/HMI diagnostic requests are not personnel-safety authority | UNKNOWN |
+| `DEP/CHG` | Product/firmware/AOP, tap type/count, terminator, physical slot/zone mapping, replacement and event epoch | UNKNOWN / change requires revalidation |
+| `SRS/PHY` | Stop, hold, guard access/escape, maintenance isolation and fresh restart are different propositions | NOT ESTABLISHED |
+| `VAL/PT` | Cause-and-effect test of each guard, additional trip after first event, stale network, device reset, retained start, output/final-element and physical witness | NOT RUN |
+| `HF/UNK/RR` | Diagnose per guard without nuisance-trip bypass pressure; expose stale/unknown status and simple repair/reinstallation route | OPEN |
+
+**INFERENCE (ordinary diagnostic contract):** retain raw tags, source/firmware, timestamp, validity, event epoch and physical zone mapping. Display `UNKNOWN` rather than an inherited green state when `Active=0`, data are stale, or `DeviceFault` bit mapping is unresolved. Manufacturer's February 2026 `DeviceFault=6` example and reset-duration units are internally inconsistent; do not silently normalize either. A link becoming Operational or a fault reset completing is not a machine-safe-state or fresh-start proof.
+
+**No selected-machine validation:** no machine `VAL/PT`, PL/SIL, stopping distance, pressure threshold or hydraulic truth table has been established. Where minimum safe-to-operate protection is unproved, do not operate with people exposed. Any necessary experiments must be isolated/remote, with people outside the danger zone and residual risk stated.

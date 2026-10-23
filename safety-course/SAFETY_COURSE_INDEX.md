@@ -156,3 +156,8 @@ The exact archived [HAWE B 5488 general manual scope audit](../research/4400_HAW
 ### 2026-10-23T13:51Z — CTP manual release and actual escape
 
 Exact archived [EUCHNER CTP manual-release observability and access-authority audit](../research/4400_CTP_MANUAL_RELEASE_OBSERVABILITY_AND_ACCESS_AUTHORITY_2026-10-22.md) is now published (original/post-write Git blob `cee68b88f26df00f30b41c3d360f5fc5cc72896c`). For the cited CTP-L manual, FO and OL go OFF on documented manual release while OD may be **undefined**; this does not establish physical gate opening, inside egress or machine stop/hold. CTP-I process locking cannot be substituted for personnel-protective CTP-L lock monitoring. Verify exact product, mechanical release under load, independent safe state and restart on the installed machine; `VAL/PT` NOT RUN.
+
+
+### 2026-10-23T13:52Z — Three-position pedal manufacturer-source audit
+
+The exact archived [Fiessler FE-FS overtravel and FMSC-FP mode/restart source audit](../research/4400_FIESSLER_THREE_POSITION_PEDAL_RELEASE_RESTART_SOURCE_AUDIT_2026-10-23.md) is now on `main` (original/published Git blob `e5a2b9e5b2b51b1dbe06825e3482b8557690b054`). The catalogue's prose conflicts with its safety-contact diagrams; the current official Fiessler product page confirms **overtravel initiates a stop**, not hazardous motion. Selected single/double pedal contact arrangements, FMSC-FP OR/AND selection, restart request and actual fresh-start/physical stop must be validated separately. The documented model-specific pressure point force is not a universal design limit. No selected-machine `VAL/PT`, achieved PL/SIL or operator-protection conclusion.

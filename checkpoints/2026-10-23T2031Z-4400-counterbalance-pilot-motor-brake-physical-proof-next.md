@@ -26,3 +26,7 @@
 6. Before ending each session, append UTC end, actual elapsed minutes and known-overlap status to canonical LESSON_LOG with complete-file SHA guard, verify write and commit. Keep recurring curriculum enabled.
 
 **Information-gain stop:** The component mechanism is documentarily resolved. No lab is justified without selected-machine topology and independently qualified safety plan. Rotate to another open safety branch rather than idle.
+
+## Same-session high-value safety source rotation
+
+Directly opened Parker's 2024 MSG11-5715-697/UK TDP/TEP manual and official TDP product page; published `research/4400_PARKER_TDP_TEP_FAILSAFE_PILOT_AND_D3DW_MANUAL_SCOPE_TRAP_2026-10-23.md`. The product page's “fail safe” claim and pilot-required-for-closure wording need exact configuration reconciliation. The manual distinguishes TDP from TEP's extra shut-off and includes later **D3DW** spring-return paragraphs that must **not** be attributed to TDP merely because of the PDF title. Technician card expanded to nine cases; cumulative package §11AN, index, ledger and progress updated. Selected machine still UNKNOWN, no physical tests or hosted/local compute. Next: exact selected valve/brake/energy topology, independent physical witness, and manufacturer source scope on another unblocked 4400 branch if selected evidence unavailable.

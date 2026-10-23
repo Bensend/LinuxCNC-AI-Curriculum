@@ -99,6 +99,8 @@ Include shared power, reference, wiring/connector, pilot pressure, hydraulic sup
 
 Inconvenience that predictably encourages defeat is a design input, not an excuse to blame the operator.
 
+**Task-based defeat-incentive evidence:** for common safeguarded work (load/unload, nuisance-trip recovery, setup/jam clearing, and guard maintenance), document the legitimate workflow, visibility, observed time/friction, operator/maintainer feedback and the concrete incentive to bypass. Propose captive hardware, repeatable alignment, accessible diagnostics, approved setup access and convenient safe restoration **without reducing the independently required protective function**. If the work has not been observed, record `UNKNOWN` rather than inventing time savings. Link any redesign to `CHG/DEP/SRS/PHY/VAL` and mark dependent evidence STALE until revalidated. Official IFA/DGUV MaSeM methodology is DOC-CONFIRMED for task/mode/benefit assessment; no site assessment is implied. Learner worksheet: `4400_GUARD_DEFEAT_INCENTIVE_DESIGN_REVIEW_2026-10-22.md`.
+
 ## 9. Architecture decisions
 
 | ARC ID | SRS IDs | Selected architecture | Rejected alternative | Failure paths addressed | Remaining dependencies/UNKNOWNs | Source/provenance | Status |

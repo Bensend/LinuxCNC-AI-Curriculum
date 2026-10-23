@@ -201,3 +201,8 @@ The exact archived [EUCHNER CTP-L normal-unlock versus inside-escape source stud
 ### 2026-10-23T14:54Z — Qualitative hydraulic energy fault-tree review
 
 The exact archived [three-top-event hydraulic fault tree and common-cause review](../research/4400_HYDRAULIC_ENERGY_FAULT_TREE_QUALITATIVE_2026-10-22.md) is now on main (Git blob `5d1c6cb200af8cb1cbe6ee3864caec60b5c5c8de`). Separate hazardous motion, service pressure release and restart; do not mistake electrical channel count, a valve-position sensor or one pressure tap for independent hydraulic/gravity proof. HAWE SAKB/NSV are manufacturer examples, not an as-built machine truth table. Cumulative Safety Design Package §11R; selected physical `VAL/PT` NOT RUN.
+
+
+### 2026-10-23T14:57Z — SAKB manifold monitoring versus NSV physical witness
+
+The exact archived [HAWE SAKB S-variant monitored-valve and NSV suffix/pressure-witness source audit](../research/4400_SAKB_MONITORING_COVERAGE_NSV_WITNESS_2026-10-22.md) is on main (Git blob `2864efe988192ed293bfe33d4e56229997f2d65b`). Manufacturer documents five monitored manifold valves, not independent proof of NSV state, ram restraint, isolated pressure or maintenance release. Cumulative Safety Design Package §11S; physical `VAL/PT` NOT RUN.

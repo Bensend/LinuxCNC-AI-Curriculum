@@ -268,3 +268,19 @@ Before a learner package is eligible for fresh evaluation:
 **DOC-CONFIRMED maintenance boundary:** OSHA 29 CFR 1910.147(b), (d), (e), (f) distinguishes physical energy isolation, stored energy and reaccumulation, worker protection, temporary powered positioning and restoration from production E-stop or HMI reset. A powered test invalidates the previously verified isolation state for subsequent service; re-isolate and re-verify. See `research/4400_OSHA_LOTO_TEST_POSITION_REISOLATION_STATE_MACHINE_2026-10-23.md` and learner `4400_LOCKABLE_ISOLATOR_TAGOUT_RETROFIT_TECHNICIAN_CARD_2026-10-22.md`. Exact applicability, installed hydraulic topology, gravity restraint and machine validation remain UNKNOWN/NOT RUN.
 
 **Secondary hazard:** a front AKAS laser/device test cannot independently prove sheet-sweep, frame pinch or ejection hazards controlled. Use `4400_OVERTRAVEL_SOURCE_CONFLICT_AND_WORKPIECE_SWEEP_CASE_2026-10-23.md` for an unexecuted multi-hazard validation design; the manufacturer 11/13 mm statements are not generic acceptance limits.
+
+## 11G. Indicator-versus-verification boundary — 2026-10-23
+
+**DOC-CONFIRMED:** OSHA's December 12, 2012 interpretation states that the *described* redundant LED disconnect indicator cannot replace 29 CFR 1910.147(d)(6) verification of isolation/deenergization; properly installed and maintained it may only supplement indication of disconnect-open position. OSHA 1910.147(d)(5–6) separately requires stored-energy disposition, reaccumulation attention and verification before service; (f)(1) requires renewed energy controls after necessary temporary powered positioning. See [original source audit](../research/4400_OSHA_LED_INDICATION_VS_PHYSICAL_ISOLATION_AND_GUARDLINK_EVENT_2026-10-23.md) and [open-book technician exercise](4400_THREE_INDICATORS_ZERO_ISOLATION_PROOF_TECHNICIAN_EXERCISE_2026-10-23.md).
+
+**DOC-CONFIRMED:** Rockwell 432ES-UM001E-EN-P (June 2025), p.64 distinguishes first-transition `DeviceTripAddress`, last-transition `TripTimestamp` and `Uncertain` data validity. An event tag is not a complete current guard/occupancy state and cannot prove hydraulic/mechanical isolation.
+
+| Trace IDs | Physical/authority proposition | Evidence and operational gate |
+|---|---|---|
+| `BND/ENE/HAZ` | List every selected electrical feed, trapped hydraulic volume, gravity load and hazard boundary. | Installed circuit/schematic and task; **UNKNOWN** without them. |
+| `SF/PHY/SRS` | Separate protective stop, safe access, load restraint and maintenance isolation. | No single HMI/LED/gauge/first-trip field substitutes for all. |
+| `AUTH/ARC/DEP` | Identify normal controller, safety controller, final element and physical isolator separately. | Selected device/firmware, wiring, independent safety path and physical dependency. |
+| `VAL/PT` | Establish task-specific physical isolation, reaccumulation checks, stop/hold and escape with qualified witnesses. | **NOT RUN**; machine acceptance blocked until appropriate proof. |
+| `HF/CHG/UNK/RR` | Make isolation/test points accessible, label measured zones, re-install guards easily, invalidate evidence after powered tests or design changes. | Preserve contradiction, STALE dependencies and exposed-person restriction. |
+
+This is an **evidence-architecture supplement**, not a numerical safety rating, a selected machine circuit, or a performed physical test. A claimed safe state contradicted by independent actual motion must not be rescued by a green diagnostic indication.

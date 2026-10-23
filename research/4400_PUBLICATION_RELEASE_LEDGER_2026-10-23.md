@@ -161,3 +161,5 @@ Two further exact archive blobs published and verified:
 - `safety-course/4400_GUARD_CHAIN_QUALIFICATION_AND_CHANGE_CONTROL_WORKSHEET_2026-10-22.md` — `3796844472e74ff3f9f0196fdeffa875b829c54c`.
 
 Both remain learner-visible NOT RUN and preserve external blind-evaluation separation. **49/85 original archive candidates pending**, assuming no concurrent changes. Stop-request versus completed stop, normal access versus inside escape, guard series fault masking and physical causal verification remain distinct propositions.
+
+**Additional exact archived guard-series release:** `safety-course/4400_GUARD_SERIES_FAULT_MASKING_TECHNICIAN_FIELD_CARD_2026-10-22.md` Git blob `7c5b73bb2e94b4adfbe9b35bd63da56e62f32b92` fetched and matched. This card separates series-contact fault masking from ordinary LinuxCNC gate-specific diagnostics and a 432ES first-event address. **48/85** original archive candidates remain pending, assuming no concurrent change.

@@ -179,3 +179,13 @@ Three more **original consolidated archive candidates** were published to `main`
 **Original consolidated archive pending: 45/85**, down from the previous checkpoint's 48/85, subject to any concurrent publication outside this ledger. This count is **archive-relative**, not a full current Git-tree reconciliation. Existing published GuardLink cards were not duplicated. The still-unpublished higher-priority `research/4400_GUARDLINK_RESET_FAULT_RECOVERY_AND_SAFETY_AUTHORITY_2026-10-23.md` and `research/4400_HMI_GUARD_DIAGNOSTIC_EVENT_VS_SAFETY_STATE_CONTRACT_2026-10-23.md` remain publication priorities.
 
 **New non-archive research/training:** `research/4400_OSHA_LED_INDICATION_VS_PHYSICAL_ISOLATION_AND_GUARDLINK_EVENT_2026-10-23.md` and `safety-course/4400_THREE_INDICATORS_ZERO_ISOLATION_PROOF_TECHNICIAN_EXERCISE_2026-10-23.md`. Source scope: official OSHA 1910.147 and 2012-12-12 LED interpretation, OSHA Appendix A and Rockwell 432ES-UM001E-EN-P p.64. These do **not** affect the 45/85 archive count. No hardware validation, simulator, hosted compute, external score or selected-machine safety acceptance.
+
+### 2026-10-23T11:41Z current-edition HYDAC corroboration
+
+One further original archive member published byte-exactly and fetched back with the original Git blob SHA:
+
+| Candidate | Verified original/published Git blob | Status |
+|---|---|---|
+| `research/4400_HYDAC_HISTORICAL_LOCKABLE_SHUTOFF_POSITION_WITNESS_2026-10-22.md` | `def6af2adaac3fe613b90674633599b4929a814c` | **PUBLISHED EXACT** |
+
+**Original consolidated archive pending: 44/85**, down from 45/85 above, subject to concurrent publication. New **non-archive** `research/4400_HYDAC_2024_SAF_LOCK_OPEN_CLOSED_OPTION_CURRENT_SCOPE_2026-10-23.md` checks manufacturer **EN 3551.25/05.24**, §4 pp.171–172, directly confirming that `L`/`LPI`/`LPM` lockable shut-off options may be locked OPEN or CLOSED and that `LS` refers to pressure-release locking. This narrows the historical-only uncertainty but does not validate a selected hydraulic system or change the archive count. New non-archive Pilz `research/4400_PILZ_PNOZS30_CONFIG_CRC_TRANSFER_VS_FUNCTION_TEST_2026-10-23.md` independently confirms CRC identity is not functional commissioning. No laboratory compute, hosted runner, physical test, external blind score or machine release.

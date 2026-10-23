@@ -150,3 +150,5 @@ Two further original archive candidates published and exact Git blobs verified:
 - `safety-course/4400_HYDRAULIC_COVERAGE_TECHNICIAN_CARD_2026-10-22.md` — `51c82b94dc84f859995cac656fbbf300ef6d9545`.
 
 New non-archive official manufacturer source trace: `research/4400_HAWE_SAKB_FIVE_MONITORED_VALVES_VS_NSV_SOURCE_SCOPE_2026-10-23.md`, directly comparing D 6335 (2025) enumerated two proportional, two holding and one 4/2 monitored positions against the separate NSV family. Manufacturer D 7969/D 7571 and OSHA 1910.147 also rechecked for accumulator energy and isolation. **51/85 archive candidates pending**, assuming no concurrent changes; no hydraulic truth table or machine test inferred.
+
+**Non-archive Pilz manufacturer source follow-up:** `research/4400_PILZ_PSENML_MOUNTING_FZH_ESCAPE_1004710_EN10_2026-10-23.md` pins official 1004710-EN-10 p.42, 79, 83–85 and prevents transfer of direct-mount force figures to a bracket/handle installation. **51/85** original archive candidates pending unchanged.

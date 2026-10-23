@@ -130,6 +130,8 @@ When servicing can expose people to hazardous energy, link the production safety
 
 Do not treat a production interlock, controller inhibit, feedback indication, previous-shift verification, or group coordinator status as a substitute for the narrower physical/personnel-control proposition it does not prove. Carry relevant ENE/SRS/PHY/AUTH/DEP/ARC/HF/VAL/PT/CHG/UNK IDs and mark affected evidence STALE after a material change until reviewed.
 
+**Manual hydraulic isolation versus dynamic safety stopping:** manufacturer-documented ROSS H L-O-X manual lockout valves illustrate a padlockable OFF state, optional A-port pressure indication and separate downstream-bleed/pump-bypass connections. These are DOC-CONFIRMED product-family functions, **not** proof of every cylinder chamber, accumulator, pilot line or gravity-loaded ram state. An optional OFF limit switch or one zero gauge is not a substitute for independent physical restraint/pressure-zone verification. A manual padlocked isolator is not an automatically actuated E-stop final element. See `research/4400_ROSS_HLOX_MANUAL_ISOLATION_VS_RAM_PROOF_SOURCE_NOTE_2026-10-22.md`; the selected hydraulic truth table and actual maintenance release remain UNKNOWN.
+
 ## 11B. Whole-body-access and reset/restart continuity
 
 For machines large enough to enter, retain one linked record from access geometry to restart authorization. A cleared entry field, closed gate, available escape release, successful reset, and proof that no person remains exposed are **distinct propositions**.

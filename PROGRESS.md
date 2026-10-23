@@ -258,3 +258,6 @@ No physical `VAL/PT`, no external score, no simulation, no local laboratory comp
 
 
 **2026-10-23T17:43Z — keyed physical isolator contrast:** Reviewed Rockwell exact 440T-MRPSE110F product cut sheet, 440T-IN027 installation instructions and current 440T rotary family description; published `research/4400_ROCKWELL_440T_ROTARY_PHYSICAL_ISOLATOR_VS_CONTROL_KEY_2026-10-23.md`. This closes the false dichotomy “all keyed devices are mere control switches” while preserving that only a selected correctly installed physical isolator can establish a *particular* energy-path proposition. CKS/CES electronic key outputs are different. Integrated design package §11AE and index. No as-built electrical/hydraulic mapping or physical tests; all release gates unchanged.
+
+
+**2026-10-23T17:44Z — timed versus sensed guard key release:** Reviewed Rockwell 440T electronic timed-delay product/selected cut sheet, 440T stopped-motion family, `440T-IN035A-EN-P` (2018) and historical `CU2-IN001`. Published `research/4400_TRAPPED_KEY_TIMED_RELEASE_VS_SENSED_STOP_MOTION_2026-10-23.md`; source distinguishes elapsed-time release from sensed shaft standstill **plus possible delay**, and both from physical machine safe-state proof. Integrated cumulative package §11AF, index and technician challenge. No selected stop times/sensor mounting, physical `VAL/PT` or compute.

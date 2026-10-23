@@ -285,3 +285,8 @@ Two **new original** files, not members of the 85-file staged archive, were publ
 ### 2026-10-23T13:49Z exact HAWE archive release
 
 Original consolidated ZIP `research/4400_HAWE_B5488_GENERAL_MANUAL_SCOPE_AND_VERIFICATION_2026-10-22.md` published on `main`, independently fetched and **Git blob SHA `76f988b239248a959716b5cca9ee37b37dd1cf91` matched the original ZIP exactly**. Source: manufacturer HAWE B 5488 10-2024 rev 3.1, https://productfinder.hawe.com/downloads/B5488-en.pdf ; general instructions do not substitute for product-specific instructions or selected-machine `VAL/PT`. Archive manifest rechecked locally **96/96 SHA-256 PASS**. **Original archive pending now 23/85**, superseding the earlier 24/85 count. This is documentary/source release, not machine acceptance. Three separate new non-archive originals remain outside the archive count.
+
+
+### 2026-10-23T13:51Z exact EUCHNER CTP manual-release archive release
+
+Published original archived `research/4400_CTP_MANUAL_RELEASE_OBSERVABILITY_AND_ACCESS_AUTHORITY_2026-10-22.md` on `main`. Independently fetched Git blob **`cee68b88f26df00f30b41c3d360f5fc5cc72896c`** matched original ZIP exactly. EUCHNER CTP-L 2124217-08-06/21 manual-release FO/OL/OD and inside escape scope retained, CTP-I 2126290-08-07/24 process-protection distinction source-checked against official manufacturer product page. No selected-machine guard/physical test. **Original archive pending 22/85**, superseding 23/85; cumulative session two exact archived releases + three new non-archive originals.

@@ -161,3 +161,8 @@ Exact archived [EUCHNER CTP manual-release observability and access-authority au
 ### 2026-10-23T13:52Z — Three-position pedal manufacturer-source audit
 
 The exact archived [Fiessler FE-FS overtravel and FMSC-FP mode/restart source audit](../research/4400_FIESSLER_THREE_POSITION_PEDAL_RELEASE_RESTART_SOURCE_AUDIT_2026-10-23.md) is now on `main` (original/published Git blob `e5a2b9e5b2b51b1dbe06825e3482b8557690b054`). The catalogue's prose conflicts with its safety-contact diagrams; the current official Fiessler product page confirms **overtravel initiates a stop**, not hazardous motion. Selected single/double pedal contact arrangements, FMSC-FP OR/AND selection, restart request and actual fresh-start/physical stop must be validated separately. The documented model-specific pressure point force is not a universal design limit. No selected-machine `VAL/PT`, achieved PL/SIL or operator-protection conclusion.
+
+
+### 2026-10-23T13:53Z — AKAS device check versus machine acceptance
+
+The exact archived [Fiessler AKAS-5M inspection versus complete-machine safety acceptance study](../research/4400_AKAS_DEVICE_INSPECTION_VS_MACHINE_SAFETY_ACCEPTANCE_2026-10-23.md) is now on `main` (original/published Git blob `18e2955280b38a688b8f04c5a683b0d924e96d68`). Its cited 2024 manufacturer inspection sheet explicitly distinguishes the device's functional inspection from machine-level safety inspection. Tool/muting/box mode, independent speed, final element, physical stop/hold, workpiece hazards and reset require separate `SRS/PHY/VAL/PT` evidence. This is **DOC-CONFIRMED** manufacturer scope, not a passed machine validation.

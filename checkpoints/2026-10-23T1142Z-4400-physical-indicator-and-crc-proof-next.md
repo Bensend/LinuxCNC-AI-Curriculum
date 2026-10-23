@@ -27,3 +27,5 @@
 6. **Session close:** immediately before ending, record UTC end, actual elapsed minutes and overlap in `LESSON_LOG.md` via full fetch + SHA guard and commit. Keep hourly curriculum automation enabled while substantive work remains.
 
 **Safety restriction:** no documentary evidence authorizes personnel-exposed hazardous operation. Isolated/remote experimental operation requires people outside the danger zone and explicit residual-risk controls.
+
+**Same-session update (2026-10-23T11:44Z):** one further original archived cross-machine guard-lock/standstill card was published exact (`774cfb232c78065d9c6a279ae1f06729bcc3e930`). Current original archive backlog is **43/85**, superseding the earlier 44/85 figure in this checkpoint. See publication ledger. Priority remains the two unpublished GuardLink research notes and physical safety authority evidence.

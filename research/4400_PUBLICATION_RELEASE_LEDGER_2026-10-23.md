@@ -251,3 +251,15 @@ Five more original archive members were independently fetched after publication 
 | `safety-course/4400_ACCESS_RELEASE_ENERGY_WITNESS_COMPOSITION_WORKSHEET_2026-10-22.md` | `fe1bb8b7e70124e7928310bf40de67dc49edefe5` | PUBLISHED EXACT |
 
 **Original archive pending: 27/85**, superseding 32/85. These learner-visible documents separate ordinary LinuxCNC E-stop, safety controller demand, valve/guard feedback, actual beam/pressure/escape/occupancy, protective-cycle accumulator energy, maintenance LOTO and fresh start. They are educational/INFERENCE or DOC-CONFIRMED examples, **not** selected-machine physical `VAL/PT` or external blind scores. No test/simulation/hosted compute.
+
+
+### 2026-10-23T12:50Z mode selector and three-position pedal release
+
+Two further original archive members independently fetched and Git-blob verified:
+
+| Candidate | Original/post-write Git blob | Status |
+|---|---|---|
+| `safety-course/4400_MODE_SELECTOR_RESTART_AUTHORITY_CROSS_MACHINE_WORKSHEET_2026-10-23.md` | `bc3a7f69cb40ed6a09d5eb0e87d28bfba509437f` | PUBLISHED EXACT |
+| `safety-course/4400_THREE_POSITION_PEDAL_RESTART_AND_OVERTRAVEL_TECHNICIAN_CARD_2026-10-23.md` | `a3a2521da16df18f80b4799d6a5ada079ccefaef` | PUBLISHED EXACT |
+
+**Original archive pending: 25/85**, superseding 27/85. These learner-facing exercises distinguish OR versus AND operator authorization, pedal overtravel safety demand, independent physical stop/hold, reset, fresh start and maintenance isolation. Manufacturer document ambiguities remain labeled, and no selected-machine `VAL/PT` or external blind evaluation was performed. Session cumulative **14 original archive members** published exact, plus **one new source-grounded HMI epoch/freshness research note**. All physical machine evidence NOT RUN; zero GitHub-hosted compute.

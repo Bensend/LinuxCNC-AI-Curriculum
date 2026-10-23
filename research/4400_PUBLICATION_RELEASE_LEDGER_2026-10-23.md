@@ -197,3 +197,7 @@ One further original archive member published byte-exactly and fetched back with
 ### 2026-10-23T11:45Z protective-cycle energy versus automatic bleed release
 
 Original archive `research/4400_HYDAC_SAF_PROTECTIVE_STOP_VS_AUTO_BLEED_ADVERSARIAL_REVIEW.md` published to `main` and independently fetched: original/published Git blob **`09d16c92b5117226f55e474cc613a2c68ad0c401`**. **42/85 original archive candidates remain pending** (supersedes 43/85; archive-relative and concurrent changes unverified). Qualitative HYDAC/HAWE fault tree preserves that accumulator pressure may be both hazardous stored energy and intentionally required for a selected protective action. This is NOT a machine hydraulic truth table, stop/hold test, or physical validation. The cumulative Safety Design Package §11J and learner index now link this source.
+
+### 2026-10-23T11:46Z EUCHNER cross-machine output-semantics release
+
+`safety-course/4400_GUARD_LOCKING_CROSS_MACHINE_TRANSFER_AND_PROOF_PLAN_2026-10-22.md` published byte-exactly and independently fetched with original Git blob **`91b6642deb380c0ab04d7ee2bd060d5e9a9783a6`**. **41/85 original archive candidates remain pending**, superseding 42/85 (archive-relative; concurrent publication unverified). The card contrasts EUCHNER I1 versus L1 closed/unlocked FO semantics and separate physical safe-state evidence across machine classes; no selected machine validated.

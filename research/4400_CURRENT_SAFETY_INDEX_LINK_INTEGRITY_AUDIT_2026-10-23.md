@@ -47,3 +47,8 @@ After adding the exact EUCHNER CKS evaluator-mode link to the learner index, rep
 ## Final in-session route check after 440T ETU/SMU source addition
 
 Read-only full-tree response at `main`: `sha=9ea83611d05aae9346ef9d6ee65a4a58b5bf846a`, **4,084 entries**, `truncated=false`. Learner index blob `daade860ab8fddfb79cc1d4eb3229b4f4a0dfab8`. **80 distinct relative links, 80 present, 0 missing.** The earlier 77/77 and 78/78 are revision-scoped snapshots; none is a claim about external links, anchors, or unpublished ZIP candidates.
+
+
+## 2026-10-23T18:35Z — new stopped-motion source and field-card routes
+
+After publishing two new original stopped-motion learner routes and the original Pilz auto-reenable source route, repeated the complete **read-only** GitHub main-tree/index comparison. Tree response `sha=6977b311a06aa4d3922b15639cccf6270df80121`, `truncated=false`, **4,088 entries**; index blob `4b6fad00aaf11d0659f4836d2a14de6d4abfd0a6`. **83 distinct relative Markdown links / 83 present / zero missing**. This supersedes the previous 80/80 snapshot for current navigation. Still excludes anchors, external URLs, implicit references, source correctness and physical validation. The six original historical archive candidates remain separately pending; new original research does not count as exact archived publication.

@@ -238,3 +238,18 @@ Before a learner package is eligible for fresh evaluation:
 - residual risks and UNKNOWNs remain visible;
 - normal control, diagnostics, independent safety control and physical final elements remain explicitly separated;
 - any unmet minimum safe-to-operate proposition produces an operational restriction rather than optimistic inference.
+
+## 11E. Component-substitution and maintenance-reverification gate (4400)
+
+**DOC-CONFIRMED product-family example:** EUCHNER CTP-I1 order 136595 explicitly provides **process-protection locking without safe guard-lock monitoring**, while CTP-L1 order 123375 documents a distinct guard-lock-monitoring characteristic. The published FZh value alone cannot substitute for a required safety function; the former uses M12 8-pin, the latter M23 19-pin. See `research/4400_EUCHNER_PROCESS_LOCK_VS_SAFETY_LOCK_MONITORING_2026-10-22.md` and learner `4400_EUCHNER_LOCK_SUBSTITUTION_ADVERSARIAL_2026-10-22.md`. Product claims are not selected-machine wiring, PL/SIL or physical acceptance.
+
+| Linked IDs | Required evidence after guard-lock component replacement | Status |
+|---|---|---|
+| `SRS/PHY/AUTH` | Required **guard-position**, **guard-lock**, **safe-unlock** and independent machine stop/hold propositions separately; identify each safety authority owner. | UNKNOWN |
+| `ARC/DEP/CHG` | Exact catalog and manual, connector/pin mapping, supply, mechanical actuator, lock-force application, controller/feedback dependencies; mark downstream proof STALE. | OPEN |
+| `VAL/PT` | Causally witness new guard/lock participation and physical safe access, stopping/holding and escape without exposing people; no green `OL` or equal force shortcut. | NOT RUN |
+| `HF/UNK/RR` | Convenient non-defeatable replacement/alignment, safe release and restoration workflow, unresolved risks and no exposed-person operation until minimum proof. | OPEN |
+
+**DOC-CONFIRMED maintenance boundary:** OSHA 29 CFR 1910.147(b), (d), (e), (f) distinguishes physical energy isolation, stored energy and reaccumulation, worker protection, temporary powered positioning and restoration from production E-stop or HMI reset. A powered test invalidates the previously verified isolation state for subsequent service; re-isolate and re-verify. See `research/4400_OSHA_LOTO_TEST_POSITION_REISOLATION_STATE_MACHINE_2026-10-23.md` and learner `4400_LOCKABLE_ISOLATOR_TAGOUT_RETROFIT_TECHNICIAN_CARD_2026-10-22.md`. Exact applicability, installed hydraulic topology, gravity restraint and machine validation remain UNKNOWN/NOT RUN.
+
+**Secondary hazard:** a front AKAS laser/device test cannot independently prove sheet-sweep, frame pinch or ejection hazards controlled. Use `4400_OVERTRAVEL_SOURCE_CONFLICT_AND_WORKPIECE_SWEEP_CASE_2026-10-23.md` for an unexecuted multi-hazard validation design; the manufacturer 11/13 mm statements are not generic acceptance limits.

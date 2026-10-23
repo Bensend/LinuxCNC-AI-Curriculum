@@ -176,3 +176,8 @@ The exact archived [HYDAC pressure/gas/gravity witness counterexamples and chang
 ### 2026-10-23T14:37Z — AKAS-5M serial diagnostic freshness versus physical safety
 
 Read the [manufacturer-source serial diagnostic investigation](../research/4400_AKAS5M_SERIAL_DIAGNOSTIC_REPETITION_FRESHNESS_AND_HMI_AUTHORITY_2026-10-23.md), then complete the [cross-machine stale-green technician card](4400_SERIAL_DIAGNOSTIC_STALE_GREEN_CROSS_MACHINE_TECHNICIAN_CARD_2026-10-23.md). Fiessler document 1581 (2024-02-15), printed p. 32, documents RS-232 repeated messages, even parity and three-message receiver acceptance; this does **not** establish a host-side maximum data age or safety authority. Separate ordinary HMI transport freshness, safety controller authority, physical stop/hold and maintenance isolation. No physical `VAL/PT`, blind score or compute. External 2520–25F0 gates OPEN.
+
+
+### 2026-10-23T14:43Z — Overrun text and secondary press-brake hazards
+
+The exact original archived [AKAS-5M 13/11-mm overrun text conflict and non-laser hazards study](../research/4400_AKAS_OVERTRAVEL_TEXT_CONFLICT_AND_SECONDARY_HAZARD_SCOPE_2026-10-23.md) is now on main (Git blob `ff7709e6792192780df099f88443a9bc4c1b45b9`). Fiessler 2024 pp. 5/14 give differing numeric statements; actual selected setting, acceptance quantifier, physical stop and independent sheet-sweep/ejection/foot-control hazards remain open. See cumulative Safety Design Package §11O; no numerical limit is approved by this source release.

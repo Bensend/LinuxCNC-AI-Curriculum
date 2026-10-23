@@ -186,3 +186,8 @@ The exact original archived [AKAS-5M 13/11-mm overrun text conflict and non-lase
 ### 2026-10-23T14:48Z — Selected overrun setting and monitor freshness
 
 The exact archived [AKAS-5M DIP-selected overrun and automatic-retest source adjudication](../research/4400_AKAS5M_SELECTED_SETTING_OVERRUN_AND_RETEST_2026-10-23.md) is now on main (original Git blob `5e0b14b723308ed86ca2090834a248e4d3071d71`). Manufacturer pp. 25–26 tie the test to the selected receiver-support DIP setting and documented periodic retest, but pp. 5/14 quantifier and equality ambiguity remains. Separate selected setting, fresh monitor execution, physical machine stop/hold, and cancellation of setup muting. No physical acceptance.
+
+
+### 2026-10-23T14:49Z — Accumulator product-family exception and pressure zones
+
+Read the exact archived [HAWE D 7969 versus D 7571 accumulator-family source comparison and pressure-zone witness study](../research/4400_HAWE_ACCUMULATOR_FAMILY_EXCEPTION_AND_PRESSURE_ZONE_WITNESS_2026-10-22.md) (Git blob `b690bcb1d0f11cf6aacae0fa5f23ed060e258e43`). The miniature family has a manufacturer-scoped separate-valve exception; this cannot be generalized to other accumulators, substituted for a selected circuit's pressure-zone map, or used as maintenance isolation/ram restraint. Cumulative Safety Design Package §11P; all physical `VAL/PT` NOT RUN.

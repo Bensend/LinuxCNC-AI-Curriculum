@@ -33,3 +33,11 @@ UNKNOWN: installed FMSC-FP variant/manual, selected wiring, safety-controller im
 ## State and overlap
 
 Latest previous known session ended 2026-10-23T06:55:21Z; this session began 2026-10-23T07:34:43Z, 39m22s later. No overlap with that known session; external concurrency not independently verified. End time/elapsed belong in immutable timing request written immediately before session end.
+
+## Session continuation addendum — 2026-10-23 07:47 UTC
+
+Authorized GitHub writes now work. Six archived candidate files were published with exact original Git blob SHA verification; **79/85 staged candidates remain pending**. See `research/4400_PUBLICATION_RELEASE_LEDGER_2026-10-23.md` for exact names and hashes. The new FP-vs-two-hand study now also contains direct Fiessler FMSC-FP vs FMSC-THC manufacturer brochure evidence (2025-10-15, printed pp. 3–5 and 8); note the brochure's conflicting `foot pedal 3` bullet. This is DOC-CONFIRMED family documentation, not selected-machine wiring/PL/stop proof.
+
+The immutable timing-queue workflow update is committed and run `39919548510`, job `120301190483`, was observed **queued on self-hosted labels**; no job completion or canonical append is yet verified. If still queued, do not replace legacy `TIMING_APPEND_REQUEST.txt`. Preserve this session's exact end timestamp in its own immutable queue file, and verify the eventual self-hosted append.
+
+**Highest-value next action:** reconcile and publish another coherent subset of the remaining 79 archived files using exact SHA and link checks, especially the GuardLink topology-change physical-proof pair, without treating a source-based proof plan as an executed physical validation. The 2520–25F0 external/fresh gates remain open. No GitHub-hosted compute.

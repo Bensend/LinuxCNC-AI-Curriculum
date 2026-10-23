@@ -320,3 +320,8 @@ Published `research/4400_AKAS_OVERTRAVEL_TEXT_CONFLICT_AND_SECONDARY_HAZARD_SCOP
 ### 2026-10-23T14:48Z exact selected-setting overrun/retest archive release
 
 Published `research/4400_AKAS5M_SELECTED_SETTING_OVERRUN_AND_RETEST_2026-10-23.md` on `main`, independently fetched and verified Git blob **`5e0b14b723308ed86ca2090834a248e4d3071d71`** equal to original ZIP. Fiessler AKAS-5M 2024 pp. 14, 25–26 establish selected DIP/table-dependent overrun monitoring and the documented power-restoration/30-hour retest arrangement, while pp. 5/14 still contain unresolved prose/quantifier/equality differences. No universal 11/13 mm acceptance criterion, no machine-specific numeric proof. **Original archive 17/85 pending**, superseding 18/85, absent unobserved concurrent release. No hosted/local lab compute or physical tests.
+
+
+### 2026-10-23T14:49Z exact HAWE accumulator family source release
+
+Published `research/4400_HAWE_ACCUMULATOR_FAMILY_EXCEPTION_AND_PRESSURE_ZONE_WITNESS_2026-10-22.md` to `main`; independently fetched exact original ZIP Git blob **`b690bcb1d0f11cf6aacae0fa5f23ed060e258e43`**. Manufacturer HAWE D 7969 (06-2022 rev 1.10 p.31) versus D 7571 (03-2024 rev 1.1 pp.11,18) directly rechecked in original PDFs: dedicated accumulator valve language differs by family; both still require fluid-side service pressure-release consideration. Product-family exception is not machine-level stop/hold, maintenance isolation or universal legal interpretation. Cumulative Safety Design Package §11P added. **Original archive 16/85 pending**, superseding 17/85, absent concurrent publication. No hosted/local lab compute, physical test or blind score.

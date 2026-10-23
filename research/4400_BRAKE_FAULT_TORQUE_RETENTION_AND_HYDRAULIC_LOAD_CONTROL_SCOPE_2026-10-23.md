@@ -80,3 +80,13 @@ For commissioning, create an *as-built* worksheet with actual brake/valve model 
 - **External:** 2520–25F0 information-separated competency evaluations remain OPEN.
 - **Archive:** Original 85-document consolidated release remains 6 pending; this is new original work, not one of the six historical files.
 - **Next:** Complete selected-machine IN-01..10 and physical PHY-STOP/HOLD/ENERGY/RESTART, then derive product-specific validation; alternatively source-trace a different unblocked 4400 physical safety question without manufacturing numerical acceptance criteria.
+
+## Follow-on source reconciliation — energized brake test during servicing
+
+**DOC-CONFIRMED, OSHA 29 CFR 1910.147(f)(1):** When covered servicing/maintenance requires temporary removal of lockout/tagout devices to energize a machine for testing or positioning, the regulation specifies clearing tools/materials, removing employees from the machine area, authorized removal of lockout devices, energizing only for testing/positioning, and deenergizing/reapplying energy controls before continuing servicing. Official text: https://www.osha.gov/laws-regs/regulations/standardnumber/1910/1910.147 . Applicability must be determined for the actual task and jurisdiction; this is not a substitute for a site energy-control program.
+
+**DOC-CONFIRMED, Siemens S120 FW5.2 §4.2.12 pp. 144–147:** SBT selection requires enabled drive pulses and initially open brakes to determine static suspended load, then commands brake closure and test torque; exit has an ordered withdrawal sequence. It is therefore not a passive sensor read. A drive brake-test screen is **not** permission to leave a technician in the hazard zone or to remove a coworker's personal lock.
+
+**INFERENCE / design contract:** Treat an energized brake proof during maintenance as a distinct controlled transition with an authorized worker, cleared/excluded people, actual physical support/guarding, exact test function and protected recovery to isolated servicing. If the actual machine cannot safely support the load through a test failure, do not conduct personnel-exposed testing. An automatically scheduled SBT during production is a different lifecycle context; do not mechanically apply the servicing-specific LOTO sequence to routine production or use production safety settings to bypass LOTO.
+
+**UNKNOWN:** Exact selected machine task applicability, local procedure, brake test torque/position tolerance, secondary restraint and ability to safely abort. No test executed.

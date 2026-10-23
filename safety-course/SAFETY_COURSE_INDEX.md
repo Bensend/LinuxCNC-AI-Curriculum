@@ -196,3 +196,8 @@ Read the exact archived [HAWE D 7969 versus D 7571 accumulator-family source com
 ### 2026-10-23T14:51Z — Normal access, inside escape and maintenance temporal proof
 
 The exact archived [EUCHNER CTP-L normal-unlock versus inside-escape source study](../research/4400_NORMAL_UNLOCK_VS_ESCAPE_RELEASE_TEMPORAL_PROOF_2026-10-22.md) is on main (original Git blob `95070fff954dca5add555bcbd93e8e35ab915edc`). Inside escape physically unlocks and generates an FO OFF stop demand; it does not prove stop completion before opening. Treat normal access, escape and maintenance isolation as distinct physical propositions. Cumulative Safety Design Package §11Q; all selected-machine physical `VAL/PT` NOT RUN.
+
+
+### 2026-10-23T14:54Z — Qualitative hydraulic energy fault-tree review
+
+The exact archived [three-top-event hydraulic fault tree and common-cause review](../research/4400_HYDRAULIC_ENERGY_FAULT_TREE_QUALITATIVE_2026-10-22.md) is now on main (Git blob `5d1c6cb200af8cb1cbe6ee3864caec60b5c5c8de`). Separate hazardous motion, service pressure release and restart; do not mistake electrical channel count, a valve-position sensor or one pressure tap for independent hydraulic/gravity proof. HAWE SAKB/NSV are manufacturer examples, not an as-built machine truth table. Cumulative Safety Design Package §11R; selected physical `VAL/PT` NOT RUN.

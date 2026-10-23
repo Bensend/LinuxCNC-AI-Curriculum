@@ -226,3 +226,8 @@ The exact archived [LinuxCNC v2.9.10 `estop_latch` first-scan source trace](../r
 ### 2026-10-23T15:38Z — Lockable energy isolation and anti-bypass retrofit design
 
 Read the exact archived [lockable isolator, tagout equivalence and retrofit maintenance access source audit](../research/4400_LOCKABLE_ISOLATION_TAGOUT_RETROFIT_EVIDENCE_2026-10-22.md) (original Git blob `a902445214ac5adebbcacda1839215adb1ee3379`). OSHA 1910.147 distinguishes actual energy-isolating devices from control-circuit E-stops, and Siemens/Schneider catalog examples distinguish a padlockable operating accessory from a selected installed isolator. Cumulative design package §11W records backfeeds, stored energy, worker-specific lockout and easy-to-use guarded isolation. No selected-machine legal determination or physical `VAL/PT` was performed.
+
+
+### 2026-10-23T15:41Z — Standstill threshold is not held load
+
+The exact archived [Pilz PNOZ s30 standstill-gated guard release and sensor diagnostics study](../research/4400_SAFE_STANDSTILL_UNLOCK_PNOZ_S30_SENSOR_DIAGNOSTIC_SCOPE_2026-10-22.md) is published (original Git blob `3c0646e98b35b1ef6493ae62b7992420bb3851ad`). The manufacturer manual documents a low-frequency plausibility-check cut-off, broken-select-conductor parameter selection, and different 2 Hz versus 100 Hz basic configuration defaults. These are input frequencies, not machine-specific safe speed, stop distance or proof of hydraulic load holding. Design package §11X records selected sensor coupling and physical witness obligations; no `VAL/PT` performed.

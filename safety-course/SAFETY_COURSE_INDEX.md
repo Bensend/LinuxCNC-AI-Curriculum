@@ -294,3 +294,8 @@ For a **second independent commercial press-brake safety architecture**, study t
 
 
 For **remote diagnostics and a future web HMI without remote personnel-safety authority**, use the [4400 remote-support / web-UI authority contract](4400_REMOTE_SUPPORT_WEB_UI_AUTHORITY_AND_INDEPENDENT_SAFETY_CONTRACT_2026-10-23.md). It cites NIST SP 800-82r3 (2023 final) and TRUMPF B35's OEM remote-service warning, and proposes a deliberately small R&D design: local safety reset and deliberate start, remote diagnostics read-only by default, staged settings, visible bounded sessions, and independent physical safety even when offline. `REM-01..08` are paper-only and NOT RUN.
+
+
+### 4400 pinned LinuxCNC 2.9.10 remote-command source trace (2026-10-23)
+
+Study the [v2.9.10 `linuxcncrsh` socket/enable/ESTOP/MDI/RUN/stale-status source audit](../research/4400_LINUXCNCRSH_2910_REMOTE_COMMAND_AUTHORITY_AND_STALE_STATUS_SOURCE_TRACE_2026-10-23.md) and [eight-case open-book technician card](4400_LINUXCNCRSH_REMOTE_COMMAND_STALE_STATE_AND_REARM_FIELD_CARD_2026-10-23.md). The pinned Git blob establishes that a normal network UI can request software E-stop reset and motion, `GET` may read stale Task status, and a TCP disconnect does not by itself prove a protective stop. The session password, software enable gate and command ACK are **not** independent personnel-safety authority or physical stopping/holding evidence. Proposed read-only exporter is INFERENCE; `NET-01..08 NOT RUN`; selected `PHY/VAL/PT` UNKNOWN/NOT RUN.

@@ -134,3 +134,10 @@ Read the [cross-machine mode-selector and restart worksheet](4400_MODE_SELECTOR_
 ### 2026-10-23T12:52Z enabling-device source audit
 
 Read the [manufacturer source comparison of safety-related mode selection, three-position enabling and separate E-stop](../research/4400_SAFE_MODE_SELECTOR_VS_THREE_POSITION_ENABLING_DEVICE_SOURCE_TRACE_2026-10-23.md) alongside the two new pedal/mode worksheets above. Pilz PITenable, Rockwell 440J and Fiessler FMSC-FP are **different products and safety functions**. Ordinary LinuxCNC setup mode cannot certify safe speed, occupancy, physical standstill or an E-stop; no selected-machine validation has occurred.
+
+
+### 2026-10-23T13:40Z — OSHA interpretation reversal and actual-machine qualification
+
+For **press-brake laser-guard applicability versus machine acceptance**, read the [2003/2004 OSHA interpretation reconciliation](../research/4400_OSHA_2003_2004_PRESS_BRAKE_LASER_GUARD_REVERSAL_AND_PHYSICAL_PROOF_2026-10-23.md). The later interpretation rescinds a categorical prohibition but does **not** certify the device, installed safeguarding, or measured stopping performance. Press brakes are not governed by mechanical-power-press `1910.217` solely because a general press stop-distance eTool describes it.
+
+Before physical commissioning, use the new [selected-machine physical witness intake and release gate](4400_SELECTED_MACHINE_PHYSICAL_WITNESS_INTAKE_AND_RELEASE_GATE_2026-10-23.md) and cumulative Safety Design Package §11M. Collect ten as-built input artifacts, keep stop/hold/guard access/inside escape/maintenance isolation/fresh restart independent, and withhold physical `VAL/PT` acceptance until independent evidence exists. These are **DOC-CONFIRMED** regulatory source facts and **INFERENCE** generic qualification methods, **not TEST-CONFIRMED** machine performance. No personnel-exposed operation is authorized; 2520–25F0 external evaluations remain OPEN.

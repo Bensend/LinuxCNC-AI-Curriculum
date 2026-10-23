@@ -211,3 +211,8 @@ The exact archived [HAWE SAKB S-variant monitored-valve and NSV suffix/pressure-
 ### 2026-10-23T14:59Z — Diagnostic cascade versus safety outputs
 
 The exact archived [Rockwell GuardLink versus Pilz SDD safety/diagnostic authority comparison](../research/4400_VENDOR_DIAGNOSTIC_CASCADE_GUARDLINK_SDD_BOUNDARY_2026-10-22.md) is on main (Git blob `be62e46bfffa9401274f8f7fdb8c9714487b3c47`). Pilz's product page explicitly marks diagnostic reaction time as not safety-related; the selected safety receiver, outputs, final elements and physical witness must be qualified separately. Cumulative Safety Design Package §11T; physical `VAL/PT` NOT RUN.
+
+
+### 2026-10-23T15:31Z — Accumulator protective-cycle versus maintenance isolation
+
+The exact original archived [accumulator dual-role source study](../research/4400_ACCUMULATOR_DUAL_ROLE_SAFE_CYCLE_VS_ISOLATION_2026-10-22.md) is now published on main (verified original Git blob `737131a69b48393b3a6118e6052ddabd2b0b26c7`). Follow it with the new [protective-cycle, reaccumulation and independent witness contract](../research/4400_ACCUMULATOR_PROTECTIVE_CYCLE_REACCUMULATION_WITNESS_CONTRACT_2026-10-23.md). Parker describes retained hydraulic energy for a fail-safe cycle as a possible application; OSHA 1910.147(d)(5)–(6) separately requires stored-energy control, verification and continued verification where reaccumulation is possible. Cumulative design package §11U separates protective response, maintenance isolation and fresh restart. No selected-machine physical `VAL/PT` or external safety evaluation has been executed.

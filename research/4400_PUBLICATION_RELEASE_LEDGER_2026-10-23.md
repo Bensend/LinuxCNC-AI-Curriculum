@@ -290,3 +290,8 @@ Original consolidated ZIP `research/4400_HAWE_B5488_GENERAL_MANUAL_SCOPE_AND_VER
 ### 2026-10-23T13:51Z exact EUCHNER CTP manual-release archive release
 
 Published original archived `research/4400_CTP_MANUAL_RELEASE_OBSERVABILITY_AND_ACCESS_AUTHORITY_2026-10-22.md` on `main`. Independently fetched Git blob **`cee68b88f26df00f30b41c3d360f5fc5cc72896c`** matched original ZIP exactly. EUCHNER CTP-L 2124217-08-06/21 manual-release FO/OL/OD and inside escape scope retained, CTP-I 2126290-08-07/24 process-protection distinction source-checked against official manufacturer product page. No selected-machine guard/physical test. **Original archive pending 22/85**, superseding 23/85; cumulative session two exact archived releases + three new non-archive originals.
+
+
+### 2026-10-23T13:52Z exact Fiessler three-position pedal source release
+
+Published original archived `research/4400_FIESSLER_THREE_POSITION_PEDAL_RELEASE_RESTART_SOURCE_AUDIT_2026-10-23.md` on `main`; independently fetched Git blob **`e5a2b9e5b2b51b1dbe06825e3482b8557690b054`** matched original ZIP exactly. Current Fiessler official FE-FS product page confirms overtravel stops motion and full release is required before restart, resolving the catalogue prose-vs-diagram conflict at documentary level only. FMSC-FP OR/AND and reset-request diagnostic remain selected-machine validation obligations. **Original archive pending now 21/85**, superseding 22/85. Session cumulative **three exact archived releases plus three new non-archive original safety documents**; no physical `VAL/PT`, external score or lab compute.

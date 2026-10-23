@@ -305,3 +305,8 @@ Published original archived `research/4400_AKAS_DEVICE_INSPECTION_VS_MACHINE_SAF
 ### 2026-10-23T13:54Z exact pressure-witness counterexample archive release
 
 Published original archived `research/4400_PRESSURE_WITNESS_LOGICAL_COUNTEREXAMPLES_AND_CHANGE_IMPACT.md` on `main`; independently fetched Git blob **`06cd199700d353a9e9f55197873bcfab0e46f558`** matched original ZIP exactly. Distinguishes SAF S-side gauge, isolated P-side volume, accumulator gas precharge, gravity restraint and maintenance isolation; change impact on tap/valve/plumbing requires evidence invalidation. No hydraulic truth table or physical validation. **Original archive pending now 19/85**, superseding 20/85. Session cumulative **five exact archived releases plus three new original safety artifacts**, no physical `VAL/PT`, blind score or compute.
+
+
+### 2026-10-23T14:37Z original non-archive diagnostic source continuation
+
+Committed `research/4400_AKAS5M_SERIAL_DIAGNOSTIC_REPETITION_FRESHNESS_AND_HMI_AUTHORITY_2026-10-23.md` and `safety-course/4400_SERIAL_DIAGNOSTIC_STALE_GREEN_CROSS_MACHINE_TECHNICIAN_CARD_2026-10-23.md` as **new original learner-visible work**, not as exact releases from the original 85-file archive. Fiessler AKAS-5M 2024 document 1581 pp. 3–5, 25–26 and 29–34 directly inspected; serial RS-232 status repetition is a diagnostic interface, not independent physical stopping/holding or maintenance isolation. Prior published backlog baseline **19/85 pending** is carried forward without a claimed decrement; re-evaluate main/manifest for concurrent releases. No hosted/local compute, physical test or external blind score. No exposed-person machine release.

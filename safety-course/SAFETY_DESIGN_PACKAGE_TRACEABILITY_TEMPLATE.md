@@ -342,3 +342,20 @@ For `SRS/PHY/AUTH/DEP`, explicitly resolve which hazardous event is prevented, w
 | `HF/CHG/UNK/RR` | Clear sensor-target labeling, accessible safe test points, simple guard reinstallation, revalidation after variant/contact/port changes | OPEN |
 
 **INFERENCE:** five electrical release contacts do not prove five independent hydraulic stopping paths, and one pressure sensor does not prove every cylinder chamber/accumulator is depressurized. A valid physical motion witness contradicting a claimed stopped/held state must block acceptance regardless of healthy status bits. Do not transfer this **2010 AKAS-F/AKFR** contract to **2024 AKAS-5M/LC-5M M variants** without exact source evidence. No selected-machine PL/SIL, pressure limit, stopping distance, valve truth table or `VAL/PT` is established.
+
+
+## 11M. Historical press-brake laser-guard interpretation and selected-machine release gate (2026-10-23)
+
+**DOC-CONFIRMED source correction:** OSHA's February 11, 2004 interpretation rescinded its March 2003 categorical objection to laser guarding on hydraulic press brakes, **without** approving a particular device or installation. OSHA's archived March 25, 2004 follow-up emphasizes effective and reliable protection on the specific machine, including stopping before body contact; 29 CFR 1910.212 remains the machine-guarding framework. Do not misapply mechanical-power-press 1910.217 stopping-distance formulas to press brakes merely because an OSHA eTool shows them. See [historical interpretation and causal proof study](../research/4400_OSHA_2003_2004_PRESS_BRAKE_LASER_GUARD_REVERSAL_AND_PHYSICAL_PROOF_2026-10-23.md). Exact standards edition/application must be resolved for each machine.
+
+**INFERENCE practical release gate:** use [selected-machine physical witness intake](4400_SELECTED_MACHINE_PHYSICAL_WITNESS_INTAKE_AND_RELEASE_GATE_2026-10-23.md) before designing remote/isolated `VAL/PT`. Intake `IN-01..10` must cover as-built identity, task/exposure, electrical/safety and hydraulic schematics, sensing geometry/modes, `SF/SRS/PHY` criteria, independent instruments, remote exclusion plan, human-factors usability and change-controlled revision identity.
+
+| Stable family | Physical proof obligation | Status in generic curriculum |
+|---|---|---|
+| `BND/ENE/HAZ` | All operator, setup, maintenance and bystander exposures; gravity, hydraulic trapped volumes and secondary sheet/backgauge hazards | UNKNOWN |
+| `SF/SRS/AUTH/ARC` | Independent safety decision and selected final elements; LinuxCNC/HMI/normal FPGA only ordinary control and diagnostics | NOT SELECTED |
+| `PHY/VAL/PT` | Independent stop, hold, access, escape, energy isolation and fresh restart; each must have its own falsifiable witness | NOT RUN |
+| `DEP/CHG` | Shared pilot/power/receiver dependencies and invalidation on tooling, firmware, guard, valve or pressure-zone change | OPEN |
+| `HF/UNK/RR` | Easy guard reinstatement, practical fault localization, accessible safe test points and explicitly unresolved residual risk | OPEN |
+
+**Release state:** documentary intake G0 **HOLD**; isolated/remote test permission G1 **HOLD**; physical validation G2 **NOT RUN**; personnel-exposed operation G3 **NOT AUTHORIZED**; maintenance entry G4 **NOT AUTHORIZED**. No PL/SIL, stop distance/time, pressure threshold or machine hydraulic truth table is inferred. Source evidence is not `TEST-CONFIRMED` selected-machine proof.

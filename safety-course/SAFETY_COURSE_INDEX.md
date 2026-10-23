@@ -77,3 +77,5 @@ Further 4400 transfer exercises: [stale proof across press brake, mill, lathe, p
 Pinned-source companion for the software reset timelines: [LinuxCNC v2.9.10 `estop_latch.comp` and `halcompile.g` first-scan audit](../research/4400_LINUXCNC_2_9_10_ESTOP_LATCH_FIRST_SCAN_SOURCE_AUDIT_2026-10-23.md), including upstream Git blob IDs and zero-initialized `old_reset`. SOURCE-CONFIRMED software logic does not authorize machine rearm.
 
 Guard/escape technician practice: [guard locking, inside escape and reset/restart distinctions](4400_GUARD_LOCK_ESCAPE_RELEASE_TECHNICIAN_CARD_2026-10-22.md) and [Pilz bracket, cable-route and actual egress qualification](4400_GUARD_MOUNTING_ESCAPE_FIELD_QUALIFICATION_2026-10-22.md). A locked indication does not prove an unobstructed escape path, a qualified mounting force, actual machine stop/hold or maintenance isolation.
+
+Manufacturer source companion: [Schmersal AZM300Z/B unlock-versus-guard-open output semantics and Pilz PSEN ml escape-cable routing](../research/4400_SCHMERSAL_AZM300Z_B_AND_PILZ_ESCAPE_CABLE_SOURCE_2026-10-23.md). Product-specific documentary evidence, not installed-machine stop/hold or physical egress validation.

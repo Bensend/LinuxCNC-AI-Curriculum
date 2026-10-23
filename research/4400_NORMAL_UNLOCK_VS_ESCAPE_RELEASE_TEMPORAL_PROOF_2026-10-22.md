@@ -29,7 +29,7 @@ Therefore preserve **both** propositions: `(i) person can operate release and ph
 
 ### C. Maintenance access (person exposed to stored energy)
 
-An emergency escape release, normal guard unlock, stopped spindle, E-stop and ordinary LinuxCNC inhibit are **not** substitutes for energy isolation. Record physical isolation points, stored-energy discharge or secure restraint, each exposed worker's applicable personal control, reaccumulation risk, and independent verification before servicing. A press brake may retain accumulator gas/fluid pressure, trapped cylinder chambers and a gravity-loaded beam after pump stop. Whether a particular isolator/discharge/holding arrangement controls those hazards is `UNKNOWN` without the actual circuit and physical evidence. See [OSHA 29 CFR 1910.147](https://www.osha.gov/laws-regs/regulations/standardnumber/1910/1910.147) for covered servicing requirements.
+An emergency escape release, normal guard unlock, stopped spindle, E-stop and ordinary LinuxCNC inhibit are **not** substitutes for energy isolation. Record physical isolation points, stored-energy discharge or secure restraint, each exposed worker's applicable personal control, reaccumulation risk, and independent verification before servicing. A press brake may retain accumulator gas/fluid pressure, trapped cylinder chambers and a gravity-loaded beam after pump stop. Whether a particular isolator/discharge/holding arrangement controls those hazards is **UNKNOWN** without the actual circuit and physical evidence. See [OSHA 29 CFR 1910.147](https://www.osha.gov/laws-regs/regulations/standardnumber/1910/1910.147) for covered servicing requirements.
 
 ## Adversarial ordering analysis
 

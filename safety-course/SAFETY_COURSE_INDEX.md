@@ -216,3 +216,8 @@ The exact archived [Rockwell GuardLink versus Pilz SDD safety/diagnostic authori
 ### 2026-10-23T15:31Z — Accumulator protective-cycle versus maintenance isolation
 
 The exact original archived [accumulator dual-role source study](../research/4400_ACCUMULATOR_DUAL_ROLE_SAFE_CYCLE_VS_ISOLATION_2026-10-22.md) is now published on main (verified original Git blob `737131a69b48393b3a6118e6052ddabd2b0b26c7`). Follow it with the new [protective-cycle, reaccumulation and independent witness contract](../research/4400_ACCUMULATOR_PROTECTIVE_CYCLE_REACCUMULATION_WITNESS_CONTRACT_2026-10-23.md). Parker describes retained hydraulic energy for a fail-safe cycle as a possible application; OSHA 1910.147(d)(5)–(6) separately requires stored-energy control, verification and continued verification where reaccumulation is possible. Cumulative design package §11U separates protective response, maintenance isolation and fresh restart. No selected-machine physical `VAL/PT` or external safety evaluation has been executed.
+
+
+### 2026-10-23T15:36Z — Pinned LinuxCNC software reset startup counterexample
+
+The exact archived [LinuxCNC v2.9.10 `estop_latch` first-scan source trace](../research/4400_LINUXCNC_ESTOP_LATCH_FIRST_SCAN_RESET_AUTHORITY_2026-10-22.md) is now on main (original Git blob `06ab264878abdd4920af7ab78707b06767ce9e20`). The component's zero-initialized edge history permits an already-high reset input to count as an initial software edge; it is not a deliberate human safety rearm. Source, generator and simulation HAL example were re-fetched at the pinned upstream tag. Design package §11V preserves independent safety reset, physical stop/hold and fresh ordinary start. No software simulation, physical test or external evaluation was performed.

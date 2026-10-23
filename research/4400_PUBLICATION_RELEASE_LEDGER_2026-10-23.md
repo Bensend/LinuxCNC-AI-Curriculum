@@ -26,7 +26,7 @@ Status: **partial authorized publication to main**, not a machine validation or 
 | `safety-course/4400_GUARD_EGRESS_DEPENDENCY_CHANGE_WORKSHEET_2026-10-22.md` | `d1c812b1303220d290cfdc84e2aa073c66998e5f` | Published, exact; linked to already published manual-release source |
 | `research/4400_HYDAC_SAF_MANUAL_AUTO_BLEED_OPTIONAL_GAUGE_VARIANT_AUDIT_2026-10-22.md` | `e43ddbdd67d0189f2d2d3c325b18e2db3f3fc2bb` | Published, exact; HYDAC 2076241/2120394 catalog contrast checked |
 
-**66 of the 85 archived candidates remain pending**, assuming no unrelated concurrent publication. This is an archive-relative count, not a claim that every pending item has been checked against all of main. Preserve the ZIP and its manifest; review each candidate's links, provenance, current product edition, and existing main destination before publication. Do not overwrite existing files blindly.
+**63 of the 85 archived candidates remain pending**, assuming no unrelated concurrent publication. This is an archive-relative count, not a claim that every pending item has been checked against all of main. Preserve the ZIP and its manifest; review each candidate's links, provenance, current product edition, and existing main destination before publication. Do not overwrite existing files blindly.
 
 ## New material outside the archived 85
 
@@ -79,3 +79,15 @@ Published exact SHA-matched mechanical escape/egress change worksheet, linked to
 ### SAF option/substitution ambiguity — same session
 
 Published exact SHA-matched HYDAC SAF `M` manual versus `E` solenoid/manual bleed variant audit. Direct catalog checks confirmed part 2076241's manual-discharge code alongside its misleading generic `Valve Type: Solenoid` field, contrasted with 2120394's solenoid/manual model. Selected-block worksheet and learner index now require exact option/port/witness evidence before schematic or personnel-exposed release. **66/85** original archived candidates remain pending.
+
+### 2026-10-23T09:32Z source-checked GuardLink reset/replacement release
+
+Three additional exact original archive Git blobs were committed and independently fetched/verified on main:
+
+| Candidate | Verified blob SHA | Status |
+|---|---|---|
+| `safety-course/4400_GUARDLINK_AUTHORITY_AND_RESET_ARCHITECTURE_CARD_2026-10-23.md` | `428387a52841c1da9f387d297b799fb6990eabde` | Published exact |
+| `safety-course/4400_GUARDLINK_FAULT_RECOVERY_CHANGE_CONTROL_WORKSHEET_2026-10-23.md` | `42d88d3f5dc5580b06ffe82e9798e92d431f6750` | Published exact |
+| `safety-course/4400_GUARDLINK_RESET_AND_REPLACEMENT_TECHNICIAN_CARD_2026-10-23.md` | `3ad0a1f54035834d92a9d0396502a311131f9d11` | Published exact |
+
+**Archive-relative pending: 63/85**, assuming no concurrent publication. New non-archive `research/4400_ENETR_RESET_UNITS_AND_DIAGNOSTIC_XOR_CONFLICT_2026-10-23.md` uses visually inspected manufacturer 2026 pp. 39 and 44 and keeps the units/XOR discrepancies UNKNOWN for actual selected firmware. No machine tests or hosted Actions compute.

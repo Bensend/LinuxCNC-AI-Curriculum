@@ -124,3 +124,8 @@ For the historical **AKAS-F + AKFR** interface (not the AKAS-5M/LC-5M M-variant)
 ### 2026-10-23T12:49Z Physical witness and maintenance transition exercises
 
 The new [cross-boundary contradiction card](4400_CROSS_BOUNDARY_CONTRADICTION_COMMISSIONING_CARD_2026-10-22.md), [guard-lock semantics versus access release](4400_GUARD_LOCK_SEMANTICS_VS_PHYSICAL_RELEASE_2026-10-22.md), [worked hydraulic SRS/PHY/VAL package](4400_HYDRAULIC_PHYSICAL_WITNESS_WORKED_PACKAGE_2026-10-22.md), [accumulator protective-cycle-to-LOTO transition](4400_ACCUMULATOR_SAFE_CYCLE_TO_MAINTENANCE_TRANSITION_EXERCISE_2026-10-22.md), and [guard/valve/accumulator eight-field composition worksheet](4400_ACCESS_RELEASE_ENERGY_WITNESS_COMPOSITION_WORKSHEET_2026-10-22.md) are now published. Each is a learner-visible documentary exercise with selected-machine `VAL/PT` **NOT RUN**. Keep stop/hold, pressure-zone evidence, inside escape, fresh restart and maintenance isolation independent; no single HMI flag or gauge proves all of them.
+
+
+### 2026-10-23T12:50Z mode selector, foot-pedal overtravel and fresh restart
+
+Read the [cross-machine mode-selector and restart worksheet](4400_MODE_SELECTOR_RESTART_AUTHORITY_CROSS_MACHINE_WORKSHEET_2026-10-23.md) and [three-position foot-pedal overtravel/restart technician card](4400_THREE_POSITION_PEDAL_RESTART_AND_OVERTRAVEL_TECHNICIAN_CARD_2026-10-23.md). Fiessler FMSC-FP permits selected pedal 1, pedal 2, OR and AND arrangements; OR is not interchangeable with a required two-operator AND function. Pedal overtravel, reset acceptance, final-element action, physical stop/hold and fresh ordinary start are separate claims. These are learner-visible exercises, not a selected machine's validated safety function or blind evaluator score.

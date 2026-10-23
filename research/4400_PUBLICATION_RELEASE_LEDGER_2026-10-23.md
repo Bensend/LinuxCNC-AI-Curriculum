@@ -340,3 +340,8 @@ Published `research/4400_HYDRAULIC_ENERGY_FAULT_TREE_QUALITATIVE_2026-10-22.md`;
 ### 2026-10-23T14:57Z exact HAWE SAKB/NSV monitoring coverage source release
 
 Published `research/4400_SAKB_MONITORING_COVERAGE_NSV_WITNESS_2026-10-22.md`; independently fetched exact original Git blob **`2864efe988192ed293bfe33d4e56229997f2d65b`**. HAWE D 6335 2025 p.9 five monitored S-version manifold valve positions and D 6368 2026 NSV seal/L-suffix and nominal pilot guidance directly checked in original manufacturer PDFs. Monitoring does not establish pressure zones, NSV state, physical ram restraint or maintenance isolation. Cumulative Safety Design Package §11S added. **Original archive 13/85 pending**, superseding 14/85, assuming no concurrent release. No hosted/local laboratory compute, physical test or blind score.
+
+
+### 2026-10-23T14:59Z exact GuardLink/Pilz SDD diagnostic cascade archive release
+
+Published `research/4400_VENDOR_DIAGNOSTIC_CASCADE_GUARDLINK_SDD_BOUNDARY_2026-10-22.md`; independently fetched exact original Git blob **`be62e46bfffa9401274f8f7fdb8c9714487b3c47`**. Rockwell GuardLink and Pilz SDD current official product pages rechecked; Pilz expressly marks its diagnostic reaction time not safety-related, and the 16-sensor configuration is product-specific. Safety outputs, ordinary network diagnostics and physical machine witnesses remain separate. Cumulative Safety Design Package §11T added. **Original archive 12/85 pending**, superseding 13/85, assuming no concurrent release. No physical test or hosted/local laboratory compute.

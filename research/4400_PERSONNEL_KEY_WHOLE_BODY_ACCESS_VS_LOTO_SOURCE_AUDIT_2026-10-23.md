@@ -50,3 +50,8 @@ Create `BND/HAZ` for every entrance and maintenance task; `SRS` for stop, releas
 **Current state: UNKNOWN / NOT RUN.** No selected guard, key count, whole-body geometry, hydraulic diagram, stopping/holding measurement, LOTO program, individual-key ownership, or fresh-start validation is available. `G0/G1 HOLD`, `G2 NOT RUN`, `G3/G4 NOT AUTHORIZED`, `G5 HOLD`. If minimum protection is not established, do not operate with people exposed. Any experimental operation requires approved isolated/remote exclusion and explicit residual-risk review.
 
 **No lab justified:** manufacturer and regulatory documentation resolve the role distinction. Only an exact selected device's unresolved release/diagnostic behavior after full manual review could justify a bounded, isolated bench test on `[self-hosted, openpressbrake]`; no GitHub-hosted compute.
+
+
+### Exact CKS evaluator-mode restriction found on deeper manual review
+
+**DOC-CONFIRMED** — EUCHNER `2113903-06-09/19` CKS-A-L1B-SC operating instructions and the exact order-158081 product page restrict use as a *lockout mechanism* to a **unicode** CES evaluator; the manufacturer expressly prohibits using the CKS as a lockout bar with **multicode** evaluation. Full withdrawal of the key is required to switch off the selected CES outputs, and the manufacturer requires functional checks after setup, replacement and faults. The exact evaluator manual must also be consulted. See [the selected-evaluator source gate](4400_EUCHNER_CKS_UNICODE_MULTICODE_PERSONNEL_KEY_GATE_2026-10-23.md). **Manufacturer “lockout mechanism” does not equal OSHA maintenance energy isolation.** The high-level CKS family PL capability is not a blanket compatibility claim.

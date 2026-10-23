@@ -69,3 +69,5 @@ For pressure-zone traceability across `BND/ENE/ARC/DEP/SRS/PHY/AUTH/VAL/PT/CHG/R
 These are learner-visible documentary exercises, **not** hidden evaluator answers or selected-machine acceptance evidence. All physical `VAL/PT` remain NOT RUN.
 
 For **432ES GuardLink HMI quality**, use [the 432ES first-trip/uncertain/historical-fault manufacturer trace](../research/4400_432ES_FIRST_TRIP_UNCERTAIN_HISTORICAL_FAULT_TAG_SCOPE_2026-10-23.md). Its `Ch0.Status` is a manufacturer-described safety bit for the selected 432ES CIP Safety path, while `DeviceTripAddress` is first-event evidence, `Uncertain` flags questionable data, and Safety Device Library fault rows 2–4 are historical. None of these tags proves a physical ram stop, safe access, or occupancy; ordinary LinuxCNC/HMI remains outside personnel-safety authority.
+
+Open-book practice: [432ES first-event versus stale diagnostics technician exercise](4400_432ES_FIRST_EVENT_STALE_DIAGNOSTICS_TECHNICIAN_EXERCISE_2026-10-23.md). No live fault injection; separate HMI diagnostics from independent safety authority and actual physical stop/hold.

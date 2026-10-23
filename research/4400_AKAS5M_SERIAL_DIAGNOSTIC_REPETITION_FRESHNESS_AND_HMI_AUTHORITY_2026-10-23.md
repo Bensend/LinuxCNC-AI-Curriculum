@@ -18,6 +18,22 @@ Can an ordinary LinuxCNC/HMI application treat a serial diagnostic message from 
 4. **An additional safety controller is part of the documented integration.** The manual's p. 26 section is explicitly headed as operation with an additional safety PLC. Its pp. 25 and 29–30 describe safety-related speed/position/blanking supervision and require further strokes to be prevented when specified comparisons fail. **DOC-CONFIRMED.**
 5. **Tool and mode changes are safety-relevant.** Printed p. 30 says tool or sheet-thickness changes alter the position value; it describes a parameter-change notification and independent comparison in the safety controller. Printed pp. 4–5 require inspection after tool changes and distinguish protection limits. **DOC-CONFIRMED.**
 
+## Connector-level boundary from the manufacturer's actual wiring table (printed p. 26)
+
+Visual inspection of the manufacturer's **AKAS-5M** receiver-terminal table establishes a particularly clear separation:
+
+| Receiver terminal | Manufacturer designation | Documented role | Safety interpretation |
+|---|---|---|---|
+| `12h` | `RS 232 GND` | Serial diagnostic ground | No stop/hold authority |
+| `13h` | `RS 232 out` | Serial state/error message output | Ordinary diagnostics, not a safety output |
+| `7v` and `8v` | `OSSD1` and `OSSD2` | Safety outputs for closing-stroke release | Require selected independent safety PLC/final-element integration |
+| `1v` and `2v` | `SGO` and `SGS` | Equivalent slow-speed-position inputs | Safety PLC monitors their selected wiring and short-circuit paths |
+| `4h` and `5h` | `FUS` and `FUO` | Foot-command/start-stop inputs | Not interchangeable with an HMI start bit |
+
+The manufacturer's heading on this page expressly limits the shown AKAS-5M integration to **operation with an additional safety PLC**. The same page describes the PLC evaluating OSSD signals and the overrun test after voltage reset, repeated within the documented interval. This is **DOC-CONFIRMED connector evidence**, not a wiring design for a different variant or a machine acceptance.
+
+**INFERENCE:** a diagnostic adapter connected to `13h` must not be wired or represented as though it is the OSSD safety path at `7v/8v`. Similarly, reading the SGO/SGS input state via diagnostics cannot replace the independent safety PLC's required supervision or physical proof that the press changed to slow speed.
+
 ## Visually checked manufacturer diagnostic examples (printed pp. 33–34)
 
 The printed tables were inspected **as page images**, because flattened PDF text can misassociate a numeric code with an adjacent column. These are **DOC-CONFIRMED for document 1581**, not a tested decoder for another firmware:

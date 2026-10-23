@@ -184,6 +184,19 @@ A displayed green status, cleared fault, reset accepted or safety output OFF **c
 
 **432ES diagnostic provenance supplement:** Rockwell 432ES-UM001E Table 6 calls `Ch0.Status` a SIL3/PLe safety bit in its documented 432ES architecture; `DeviceTripAddress` is the **first** cause of the last operational-to-safe transition, `Uncertain` marks questionable data, and `TerminatorFault` explicitly does not detect a missing terminator. The manufacturer Safety Device Library's fault rows 2–4 are historical, not live fault count. These facts cannot be transferred to the non-safety-rated 440R-ENETR or treated as physical machine proof. See `research/4400_432ES_FIRST_TRIP_UNCERTAIN_HISTORICAL_FAULT_TAG_SCOPE_2026-10-23.md` and `safety-course/4400_432ES_FIRST_EVENT_STALE_DIAGNOSTICS_TECHNICIAN_EXERCISE_2026-10-23.md`. Exact selected firmware and live `VAL/PT` remain UNKNOWN/NOT RUN.
 
+## 11F. Hydraulic feedback-coverage and pressure-zone witness (4400)
+
+**Manufacturer scope example:** HAWE D 6335 (2025) SAKB S version enumerates position monitoring on **two proportional directional valves, two holding valves and one 4/2-way valve**. The SAKB product family also includes two separate NSV suction/anti-cavitation valves, whose monitoring must be qualified from the selected NSV variant and its own wiring/feedback. The five-position list is **not** proof that the separate NSVs are monitored, and absence from that list is not proof they are never monitored. See `research/4400_HAWE_SAKB_FIVE_MONITORED_VALVES_VS_NSV_SOURCE_SCOPE_2026-10-23.md` and learner `4400_HYDRAULIC_COVERAGE_TECHNICIAN_CARD_2026-10-22.md`.
+
+| Linked IDs | Machine-specific obligation | Status |
+|---|---|---|
+| `ARC/DEP` | Exact manifold S option, both NSV suffixes, sensors, feedback destinations, pilot pressure, hydraulic ports and shared dependencies | UNKNOWN |
+| `PHY/SRS` | Distinguish valve-position feedback, actual physical ram/beam holding, pressure-zone state, gravity restraint and maintenance isolation | UNKNOWN |
+| `VAL/PT` | Identify each gauge tap/volume, test only under qualified isolated procedures, independently witness load restraint and contradictions | NOT RUN |
+| `CHG/HF` | Moved gauge, valve replacement or test-port redesign invalidates dependent evidence; make authorized pressure checks accessible without defeating guards | OPEN |
+
+**Accumulator transfer:** HAWE D 7969 versus D 7571 families and OSHA 1910.147 require selected product and system energy-control review, not an assumption that `PUMP OFF`, `SAFE VALVE OK` or one `PRESSURE=0` tag proves all gas/fluid/trapped/load energy safe. See `4400_ACCUMULATOR_FAMILY_PRESSURE_ZONE_TECHNICIAN_EXERCISE_2026-10-22.md`. A contradictory independent beam-motion or pressure witness blocks the broader safe-state claim and rearm. Do not invent hydraulic truth tables, leakage rates, pressure limits or PL/SIL.
+
 ## 12. Change and revalidation ledger
 
 | CHG ID | Changed item | Reason | Upstream IDs affected | Dependents marked STALE | Required review/retest | Closure evidence | Status |

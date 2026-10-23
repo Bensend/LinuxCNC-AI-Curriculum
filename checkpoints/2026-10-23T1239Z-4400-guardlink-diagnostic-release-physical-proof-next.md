@@ -21,3 +21,10 @@
 6. **Close:** immediately before ending append exact UTC end, actual elapsed and overlap status to `LESSON_LOG.md` via complete-file SHA-guarded update. Keep recurring curriculum enabled.
 
 **No personnel-exposed hazardous operation authorized.** Machine physical `VAL/PT` are **NOT RUN**. If minimum protection is unproved, experimental work requires isolated/remote operation with people outside the danger zone and explicit residual-risk controls.
+
+
+## Same-session 12:46Z AKFR source continuation — supersedes 34/85 count
+
+Two more exact archived members published and fetched: `research/4400_AKFR_PRESSURE_AND_VALVE_WITNESS_SOURCE_AUDIT_2026-10-23.md` (Git blob `1d4fb76908766bcd56ba297d9a4a3881204bd29a`) and `safety-course/4400_AKFR_SENSOR_TARGET_AND_PHYSICAL_WITNESS_TECHNICIAN_EXERCISE_2026-10-23.md` (`30ec8a5f67d9a4abfcdfbaf76b2cab6ac94a822c`). **Original consolidated archive pending 32/85**. Re-opened Fiessler original German internal doc 1257 and English internal doc 1264 (hosted filename doc1268); both mention valve-position **and** pressure sensors. German says valve controls, English says contactor controls, both example drawings label valve release. This is an unresolved exact-load/translation issue requiring selected-machine wiring, not a license to invent a hydraulic truth table. Safety Design Package §11L, course index, progress and ledger updated.
+
+**Refined next:** prioritize physical stop/hold/pressure-zone and maintenance-isolation qualification worksheets from remaining archive, particularly `safety-course/4400_CROSS_BOUNDARY_CONTRADICTION_COMMISSIONING_CARD_2026-10-22.md`, `safety-course/4400_HYDRAULIC_PHYSICAL_WITNESS_WORKED_PACKAGE_2026-10-22.md`, and `safety-course/4400_GUARD_LOCK_SEMANTICS_VS_PHYSICAL_RELEASE_2026-10-22.md`. No selected-machine physical `VAL/PT` or external score. Do not run hosted compute. Session final end/elapsed/overlap still to be appended immediately before exit to canonical `LESSON_LOG.md`.

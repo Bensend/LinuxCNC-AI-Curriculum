@@ -30,3 +30,8 @@ A small LinuxCNC-supervised automated cell has two gates. A technician removes a
 | `VAL/PT/CHG` | Qualified plan, negative cases, changes/stale evidence | | |
 
 **Release disposition:** with no selected-machine `IN-01..10` and no physical witnesses, the correct decision is `HOLD / NOT AUTHORIZED` for personnel-exposed hazardous operation and maintenance entry. This is a written engineering challenge only; do not test entrapment, defeat interlocks, or energize hazardous machinery to answer it.
+
+
+## Exact CKS substitution trap (additional open-book question)
+
+11. A technician replaces the CKS-A-L1B-SC evaluation unit with a CES unit set to **multicode**, retaining the same adapter and key. The HMI still shows a recognized key. Consult [EUCHNER's exact 2019 operating-instructions audit](../research/4400_EUCHNER_CKS_UNICODE_MULTICODE_PERSONNEL_KEY_GATE_2026-10-23.md). Explain why the selected retained-key inhibit claim is no longer supported; identify the evaluator coding/teach-in and output evidence needed for requalification. Distinguish the manufacturer's “lockout mechanism” from an OSHA energy-isolating device. Do **not** claim an actual measured failure or perform a hazardous live test.

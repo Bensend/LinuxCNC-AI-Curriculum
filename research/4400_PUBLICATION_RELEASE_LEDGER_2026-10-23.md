@@ -128,3 +128,5 @@ Two more original archive candidates published with exact post-write Git blob ve
 | `safety-course/4400_ESTOP_SOFTWARE_STATE_VS_PHYSICAL_PROPOSITION_WORKSHEET_2026-10-22.md` | `a6d7858f4fb0edc3f742ee2916bbf6660cb4cb5e` |
 
 **55/85 original archive candidates now pending**, assuming no concurrent changes; previous 57/85 count above is superseded. LinuxCNC 2.9 manual confirms ordinary `estop_latch` reset-edge behavior, but pinned first-scan initialization and actual physical behavior are distinct. No simulation, physical tests or hosted compute.
+
+**Non-archive pinned source audit:** `research/4400_LINUXCNC_2_9_10_ESTOP_LATCH_FIRST_SCAN_SOURCE_AUDIT_2026-10-23.md` ties the newly published software-latch worksheet to exact upstream v2.9.10 `estop_latch.comp` and `halcompile.g` Git blobs. Archive pending remains **55/85**; source reasoning only, no lab.

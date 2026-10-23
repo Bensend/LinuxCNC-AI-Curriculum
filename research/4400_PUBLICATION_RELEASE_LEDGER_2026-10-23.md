@@ -24,8 +24,9 @@ Status: **partial authorized publication to main**, not a machine validation or 
 | `research/4400_ISO14119_2024_SERIES_FAULT_MASKING_EDITION_AND_LOGIC_2026-10-23.md` | `453fd9a01d1d15fda6fb451cc4e7293cb3082327` | Published, exact; ISO catalog and Schmersal 2025 guide checked |
 | `safety-course/4400_GUARD_SERIES_ORDERED_FAULT_MASKING_FIELD_EXERCISE_2026-10-23.md` | `cbbcf5da08e2c2904fa2c301108c21e08606699f` | Published, exact; open-book Boolean counterexample |
 | `safety-course/4400_GUARD_EGRESS_DEPENDENCY_CHANGE_WORKSHEET_2026-10-22.md` | `d1c812b1303220d290cfdc84e2aa073c66998e5f` | Published, exact; linked to already published manual-release source |
+| `research/4400_HYDAC_SAF_MANUAL_AUTO_BLEED_OPTIONAL_GAUGE_VARIANT_AUDIT_2026-10-22.md` | `e43ddbdd67d0189f2d2d3c325b18e2db3f3fc2bb` | Published, exact; HYDAC 2076241/2120394 catalog contrast checked |
 
-**67 of the 85 archived candidates remain pending**, assuming no unrelated concurrent publication. This is an archive-relative count, not a claim that every pending item has been checked against all of main. Preserve the ZIP and its manifest; review each candidate's links, provenance, current product edition, and existing main destination before publication. Do not overwrite existing files blindly.
+**66 of the 85 archived candidates remain pending**, assuming no unrelated concurrent publication. This is an archive-relative count, not a claim that every pending item has been checked against all of main. Preserve the ZIP and its manifest; review each candidate's links, provenance, current product edition, and existing main destination before publication. Do not overwrite existing files blindly.
 
 ## New material outside the archived 85
 
@@ -74,3 +75,7 @@ Published exact SHA-matched current-edition ISO 14119:2024 Annex J bridge and or
 ### Guard egress physical-witness branch — same session
 
 Published exact SHA-matched mechanical escape/egress change worksheet, linked to already published `research/4400_GUARD_RELEASE_STOP_REQUEST_VS_PHYSICAL_EGRESS_2026-10-22.md`. The cumulative Safety Design Package and learner index now require distinct guard release, physical door opening/egress, independent stopping/holding and maintenance isolation propositions. No live trapped-person test or physical release was conducted. **67/85** original archived candidates remain pending.
+
+### SAF option/substitution ambiguity — same session
+
+Published exact SHA-matched HYDAC SAF `M` manual versus `E` solenoid/manual bleed variant audit. Direct catalog checks confirmed part 2076241's manual-discharge code alongside its misleading generic `Valve Type: Solenoid` field, contrasted with 2120394's solenoid/manual model. Selected-block worksheet and learner index now require exact option/port/witness evidence before schematic or personnel-exposed release. **66/85** original archived candidates remain pending.

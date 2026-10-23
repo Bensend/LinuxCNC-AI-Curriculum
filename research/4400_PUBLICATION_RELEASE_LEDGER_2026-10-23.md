@@ -399,3 +399,6 @@ Added original `research/4400_PERSONNEL_KEY_WHOLE_BODY_ACCESS_VS_LOTO_SOURCE_AUD
 
 
 **Further 17:44Z original source comparison:** `research/4400_TRAPPED_KEY_TIMED_RELEASE_VS_SENSED_STOP_MOTION_2026-10-23.md` added after review of Rockwell 440T ETU, SMU and CU2 manuals. Not a historical archive release; original archive backlog remains **6/85**. No selected-machine stop-time, sensor/final-element validation or compute.
+
+
+**2026-10-23T18:35Z original documentary continuation (NOT archived release):** Published `research/4400_STOP_MOTION_SENSOR_COVERAGE_FAULT_AND_COUPLING_SOURCE_AUDIT_2026-10-23.md` and `safety-course/4400_STOP_MOTION_FALSE_STANDSTILL_TECHNICIAN_DIAGNOSTIC_FIELD_CARD_2026-10-23.md` from independently inspected Rockwell CU2/440T, Pilz PNOZ s30 and Schmersal FWS manufacturer sources. These are newly authored documents; **no original consolidated ZIP candidate was recovered, renamed, reconstructed or counted as an exact historical release**. Archive backlog remains **6/85 pending**. No selected-machine physical `VAL/PT`, external blind evaluation or laboratory compute.

@@ -218,3 +218,6 @@ No physical `VAL/PT`, no external score, no simulation, no local laboratory comp
 
 
 **2026-10-23T14:59Z — exact GuardLink versus Pilz SDD source:** Published `research/4400_VENDOR_DIAGNOSTIC_CASCADE_GUARDLINK_SDD_BOUNDARY_2026-10-22.md`, independently fetched exact original Git blob `be62e46bfffa9401274f8f7fdb8c9714487b3c47`. Rockwell/Pilz current official pages rechecked; Pilz labels SDD diagnostic reaction time non-safety-related. §11T added to cumulative package; preserve selected safety relay/output and independent physical witness distinct from Ethernet/HMI status. **Original archive 12/85 pending**, seven exact archive releases this session; 2520–25F0 gates OPEN; no physical `VAL/PT`, external score or hosted/local lab compute.
+
+
+**Latest active checkpoint (2026-10-23T14:52Z):** `checkpoints/2026-10-23T1452Z-4400-safety-source-release-physical-witness-next.md` supersedes the older 14:37Z rolling checkpoint and its intermediate backlog counts. Seven exact archived releases verified, **12/85** pending; two new original learner artifacts; cumulative Safety Design Package §§11O–11T. Continue source publication and selected-machine physical witness gate; no hosted Actions, no physical test, no external score.

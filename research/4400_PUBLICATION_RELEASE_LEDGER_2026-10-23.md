@@ -21,8 +21,10 @@ Status: **partial authorized publication to main**, not a machine validation or 
 | `safety-course/4400_GUARDLINK_DIAGNOSTIC_DECODER_ADVERSARIAL_WORKSHEET_2026-10-23.md` | `2de5ab3a3591551cfe01a5261729e61b81658e4a` | Published, exact; official 440R-UM009E Feb 2026 Table 5 verified |
 | `safety-course/4400_GUARD_DEFEAT_INCENTIVE_DESIGN_REVIEW_2026-10-22.md` | `6f5f3f144c8eb263181a1a9db41c556d12d593b6` | Published, exact; IFA/DGUV MaSeM official sources checked |
 | `research/4400_ROSS_HLOX_MANUAL_ISOLATION_VS_RAM_PROOF_SOURCE_NOTE_2026-10-22.md` | `7a5556fa6a1b302ca004ce52958a0a6532a3eb1e` | Published, exact; ROSS H L-O-X manufacturer product pages verified |
+| `research/4400_ISO14119_2024_SERIES_FAULT_MASKING_EDITION_AND_LOGIC_2026-10-23.md` | `453fd9a01d1d15fda6fb451cc4e7293cb3082327` | Published, exact; ISO catalog and Schmersal 2025 guide checked |
+| `safety-course/4400_GUARD_SERIES_ORDERED_FAULT_MASKING_FIELD_EXERCISE_2026-10-23.md` | `cbbcf5da08e2c2904fa2c301108c21e08606699f` | Published, exact; open-book Boolean counterexample |
 
-**70 of the 85 archived candidates remain pending**, assuming no unrelated concurrent publication. This is an archive-relative count, not a claim that every pending item has been checked against all of main. Preserve the ZIP and its manifest; review each candidate's links, provenance, current product edition, and existing main destination before publication. Do not overwrite existing files blindly.
+**68 of the 85 archived candidates remain pending**, assuming no unrelated concurrent publication. This is an archive-relative count, not a claim that every pending item has been checked against all of main. Preserve the ZIP and its manifest; review each candidate's links, provenance, current product edition, and existing main destination before publication. Do not overwrite existing files blindly.
 
 ## New material outside the archived 85
 
@@ -63,3 +65,7 @@ Published exact SHA-matched IFA/DGUV MaSeM guard-defeat incentive field exercise
 ### Manual hydraulic isolation branch — same session
 
 Published exact SHA-matched ROSS H L-O-X maintenance-isolation source note; manufacturer landing/series pages verified, original downloadable PDF not independently parsed. Linked the narrow maintenance isolation versus dynamic stop and suspended-ram physical-witness distinction in the cumulative Safety Design Package and learner index. No selected circuit, hydraulic truth table, physical stopping/holding, or maintenance release verified. **70/85** original archived candidates remain pending.
+
+### ISO 14119:2024 series fault-masking branch — same session
+
+Published exact SHA-matched current-edition ISO 14119:2024 Annex J bridge and ordered-guard Boolean field exercise. Checked ISO 14119:2024 and ISO/TR 24119:2015 official catalogs plus Schmersal's 2025 manufacturer guide; do not infer licensed clause text or a numeric diagnostic coverage. Integrated the receiver-specific fault masking unknowns into cumulative section 11C and learner navigation. **68/85** original archive candidates remain pending; no test or safety calculation performed.

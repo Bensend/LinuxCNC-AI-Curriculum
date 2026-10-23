@@ -236,3 +236,8 @@ The exact archived [Pilz PNOZ s30 standstill-gated guard release and sensor diag
 ### 2026-10-23T15:43Z — HYDAC fluid-side gauge zero versus trapped energy
 
 The exact archived [HYDAC SAF fluid/gas pressure-zone and zero-gauge source audit](../research/4400_HYDAC_SAF_GAUGE_TOPOLOGY_ZERO_READING_PHYSICAL_WITNESS_2026-10-22.md) is published (Git blob `4e34a51de7cfa6b9929613e60ea48c40e0647b42`). HYDAC's own 2011 precharge check intentionally produces a fluid-side gauge reading of zero while gas precharge remains; current catalog part 2205492 has inconsistent generic solenoid/manual fields. The selected machine's S/P/T/gas/actuator/ram topology must be independently witnessed; §11Y and the selected physical intake remain HOLD/NOT RUN.
+
+
+### 2026-10-23T15:44Z — EUCHNER process-lock versus safety-lock output semantics
+
+The exact archived [CTP-I1 versus CTP-L1 manufacturer switching-state comparison](../research/4400_EUCHNER_CTP_I1_L1_MANUAL_OUTPUT_SEMANTICS_2026-10-22.md) is published (original Git blob `3f2ecca5498833e2a6df005c16eb172feb168d8c`). EUCHNER's official tables show FO1A/FO1B **ON** for CTP-I closed/unlocked but **OFF** for CTP-L closed/unlocked; equal-looking outputs do not monitor the same physical proposition. Design package §11Z preserves change-control invalidation, physical stop/hold, escape and independent rearm requirements. No machine-specific receiver/guard compatibility or physical `VAL/PT` has been proven.

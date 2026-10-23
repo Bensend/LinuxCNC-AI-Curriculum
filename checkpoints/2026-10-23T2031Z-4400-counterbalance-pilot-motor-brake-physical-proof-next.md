@@ -1,0 +1,28 @@
+# 4400 safety continuation checkpoint — 2026-10-23T20:31Z
+
+**Current-state authority:** Supersedes `checkpoints/2026-10-23T1936Z-4400-brake-torque-hydraulic-override-next.md`. Follow START_HERE, MASTER_MISSION, LEVEL_ORDER, CURRICULUM, WORK_SELECTION_POLICY, PROGRESS, safety-course index and independent evaluation rules. 1000/2000/F02/3000 remain GRADUATED/CLOSED. Primary active priority: 2500 safety and 4400 implementation boundary; routine controller-board development belongs to separate automation. Session start timestamp captured **2026-10-23T20:31:25.223Z** before substantive work. Canonical LESSON_LOG must be SHA-guardedly appended with UTC end, elapsed and overlap immediately before exit.
+
+## New original durable source and teaching work
+
+- `research/4400_COUNTERBALANCE_PILOT_THERMAL_RELIEF_AND_MOTOR_BRAKE_BOUNDARY_2026-10-23.md`: Sun June 2023 indexed manufacturer technical tip and directly inspected Parker HY15-3502/US and HY08-4005-M11. Separates non-modulating PO-check from modulating counterbalance, pilot/load/thermal-relief/override, retained cylinder pressure and hydraulic motor internal leakage. Follow-on direct Parker LM5 source shows **motor counterbalance can begin opening before brake releases** in its catalog example; **equal-area motor-brake variant has no thermal relief**, rejecting the overgeneralization that all counterbalance valves have relief. Product-specific scope; Parker example numbers never used as machine setpoints.
+- `safety-course/4400_PILOT_THERMAL_RELIEF_AND_MOTOR_BRAKE_TECHNICIAN_CARD_2026-10-23.md`: eight open-book adversarial field scenarios; paper only, not sealed/blind and not machine fault-injection instructions.
+- Cumulative `safety-course/SAFETY_DESIGN_PACKAGE_TRACEABILITY_TEMPLATE.md` §§11AL–11AM; course index, `PROGRESS.md` and original-archive publication ledger updated. Current course index relative Markdown paths independently checked **88/88 resolve** in main tree.
+
+## Exact evidence and release boundaries
+
+- **SOURCE-CONFIRMED:** no new LinuxCNC code source trace this session. **DOC-CONFIRMED:** Parker official catalog/manufacturer manual directly opened; Sun June 2023 PDF indexed text was visible, but direct retrieval returned HTTP 403 (recheck before quoting exact pagination). Larger Parker 2026 catalog indexed but too large to open, so not counted as directly inspected. **INFERENCE:** potential retained pilot pressure, hose/valve placement, pressure-zone misread, brake timing failure paths. **UNKNOWN:** any actual OpenPressBrake selected valve, cylinder/motor/brake, pilot/port topology, physical load witness, pressure thresholds, stop/hold/escape/isolation/restart facts. **TEST-CONFIRMED:** none.
+- **Historical archive:** six of the 85 exact original ZIP candidates remain unavailable; new original docs are **not** exact historical releases, and no reconstructed bytes were presented as such.
+- **Selected-machine gate:** IN-01..10 UNKNOWN; PHY-STOP/HOLD/ACCESS/ESCAPE/ENERGY/RESTART UNKNOWN; VAL/PT NOT RUN; G0/G1 HOLD, G2 NOT RUN, G3/G4 NOT AUTHORIZED, G5 HOLD. No personnel-exposed hazardous operation. Any future experiment must be isolated/remote with people outside danger zone and explicit residual-risk controls.
+- **Independent evaluation:** 2520–25F0 external/fresh information-separated gates OPEN; no hidden answers inspected or self-scoring.
+- **Compute:** zero GitHub-hosted Actions minutes, zero self-hosted lab minutes, zero physical tests and no simulation. Self-hosted-only log workflow run 39919548510/job 120301190483 freshly observed QUEUED; no authoritative runtime, so LAB_COMPUTE_LOG unchanged. No runner dispatched.
+
+## Precise next work
+
+1. Obtain **as-built selected-machine** IN-01..10 packet if available: cylinder vs motor load, brake, exact valve and order code, port P1/P2/P3, override, pilot isolation/drain, relief, accumulator, hose placement, pressure zones, load restraint, guarded access/escape and fresh rearm. Without it, do not invent machine facts or commission tests.
+2. Continue high-value independent safety source branch: manufacturer documentation on **mechanical brake engagement feedback versus actual load coupling**, brake wear/release sequencing, and emergency gravity-load retention under power loss. Avoid repeating the Rockwell SBC/Parker source summaries; seek new exact selected-device and independent load-path evidence.
+3. If this branch is source-exhausted, rotate to **hydraulic maintenance service-zone verification**, including trapped pilot pressure, accessible qualified pressure test points and ergonomic return-to-service without defeating guards. Keep ordinary LinuxCNC/FPGA diagnostics outside personnel-safety authority.
+4. Recover six historical archived documents only with original ZIP/manifest bytes and verify exact SHA before calling them historical publications.
+5. Preserve 2520–25F0 external evaluation gate; no blind contamination. No GitHub-hosted compute. Local [self-hosted, openpressbrake] only for a frozen, question-driven, bounded experiment when runner access is confirmed and physical test conditions are safe.
+6. Before ending each session, append UTC end, actual elapsed minutes and known-overlap status to canonical LESSON_LOG with complete-file SHA guard, verify write and commit. Keep recurring curriculum enabled.
+
+**Information-gain stop:** The component mechanism is documentarily resolved. No lab is justified without selected-machine topology and independently qualified safety plan. Rotate to another open safety branch rather than idle.

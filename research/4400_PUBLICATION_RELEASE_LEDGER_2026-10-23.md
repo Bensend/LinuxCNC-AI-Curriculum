@@ -130,3 +130,12 @@ Two more original archive candidates published with exact post-write Git blob ve
 **55/85 original archive candidates now pending**, assuming no concurrent changes; previous 57/85 count above is superseded. LinuxCNC 2.9 manual confirms ordinary `estop_latch` reset-edge behavior, but pinned first-scan initialization and actual physical behavior are distinct. No simulation, physical tests or hosted compute.
 
 **Non-archive pinned source audit:** `research/4400_LINUXCNC_2_9_10_ESTOP_LATCH_FIRST_SCAN_SOURCE_AUDIT_2026-10-23.md` ties the newly published software-latch worksheet to exact upstream v2.9.10 `estop_latch.comp` and `halcompile.g` Git blobs. Archive pending remains **55/85**; source reasoning only, no lab.
+
+### 2026-10-23T10:47Z guard escape and bracket change-control release
+
+Two further exact original archive blobs verified after publication:
+
+- `safety-course/4400_GUARD_LOCK_ESCAPE_RELEASE_TECHNICIAN_CARD_2026-10-22.md` — `45a1cbab87f12fc6c770721d930b14ab7ca1646d`.
+- `safety-course/4400_GUARD_MOUNTING_ESCAPE_FIELD_QUALIFICATION_2026-10-22.md` — `dc3cf11617a9ee9314823e361fcf29d0b805a15b`.
+
+Official Schmersal AZM300 operating instructions distinguish AZM300Z safety-output withdrawal on unlock from AZM300B on guard opening. Pilz manufacturer accessory information cautions that bending escape-release push/pull cables can impair function and service life; bracket geometry, physical egress and selected force data remain machine-specific. **53/85 original archive candidates pending** (supersedes prior 55/85), assuming no concurrent publication. No machine testing, PL/SIL claim or hosted compute.

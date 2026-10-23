@@ -206,3 +206,8 @@ The exact archived [three-top-event hydraulic fault tree and common-cause review
 ### 2026-10-23T14:57Z — SAKB manifold monitoring versus NSV physical witness
 
 The exact archived [HAWE SAKB S-variant monitored-valve and NSV suffix/pressure-witness source audit](../research/4400_SAKB_MONITORING_COVERAGE_NSV_WITNESS_2026-10-22.md) is on main (Git blob `2864efe988192ed293bfe33d4e56229997f2d65b`). Manufacturer documents five monitored manifold valves, not independent proof of NSV state, ram restraint, isolated pressure or maintenance release. Cumulative Safety Design Package §11S; physical `VAL/PT` NOT RUN.
+
+
+### 2026-10-23T14:59Z — Diagnostic cascade versus safety outputs
+
+The exact archived [Rockwell GuardLink versus Pilz SDD safety/diagnostic authority comparison](../research/4400_VENDOR_DIAGNOSTIC_CASCADE_GUARDLINK_SDD_BOUNDARY_2026-10-22.md) is on main (Git blob `be62e46bfffa9401274f8f7fdb8c9714487b3c47`). Pilz's product page explicitly marks diagnostic reaction time as not safety-related; the selected safety receiver, outputs, final elements and physical witness must be qualified separately. Cumulative Safety Design Package §11T; physical `VAL/PT` NOT RUN.

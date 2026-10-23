@@ -253,3 +253,6 @@ For **whole-body access, multi-person personnel keys and the boundary with maint
 
 
 **Exact coded-key qualification trap:** The EUCHNER CKS-A-L1B-SC 2019 manual restricts lockout-*mechanism* use to **unicode** CES evaluation; the current product page explicitly prohibits that role with **multicode** evaluation. Read [the exact-evaluator source gate](../research/4400_EUCHNER_CKS_UNICODE_MULTICODE_PERSONNEL_KEY_GATE_2026-10-23.md) before using a generic CKS family PL claim. The manufacturer term is not proof of OSHA maintenance energy isolation. The whole-body entry field card includes the new substitution challenge; no selected-machine validation.
+
+
+For the **keyed-control versus physical-isolator distinction**, read [Rockwell's exact 440T rotary product/installation source comparison](../research/4400_ROCKWELL_440T_ROTARY_PHYSICAL_ISOLATOR_VS_CONTROL_KEY_2026-10-23.md). Some keyed rotary devices directly interrupt selected electrical conductors; a CKS/CES key reader changes safety outputs. Neither device's label proves the as-built power path, all stored energy, group-worker maintenance LOTO or physical stop/hold. The exact 440T-MRPSE110F is 20 A in the inspected cut sheet, not the family's maximum 100 A. No selected-machine energy map or physical validation exists.

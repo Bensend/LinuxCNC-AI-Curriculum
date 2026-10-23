@@ -36,3 +36,10 @@ Existing self-hosted-only Append Lesson Log workflow run **39919548510** was che
 5. Keep external evaluations sealed and the recurring curriculum enabled. Immediately before end, append UTC end, actual elapsed minutes and overlap to canonical `LESSON_LOG.md` via complete-file SHA-guarded update, then verify.
 
 **Evidence classes:** manufacturer behavior DOC-CONFIRMED at stated editions; safety event allocation INFERENCE; selected machine and physical outcomes UNKNOWN/NOT RUN; TEST-CONFIRMED none.
+
+
+## Additional branch rotation within this session — Fiessler muting (16:44Z)
+
+The guard-power-loss branch reached a coherent documentary handoff, so work continued into the next open 4400 source gap rather than ending. Directly inspected Fiessler AKAS-5M official 2024-02-15 document 1581, printed pp. 4–5, 11 and 24–26. Published new original `safety-course/4400_AKAS_MUTING_LOSS_OF_COVERAGE_MINIMUM_FUNCTION_CONTRACT_2026-10-23.md`, commit `68bddc242deeade20f0fb284db96c615e6d3b992`. This documents replacement-protection requirements when the front laser field is muted, distinguishes commanded from independently assured actual slow motion, and retains the selected-machine physical witness HOLD. Updated learner index, cumulative design package §11AB, publication ledger and PROGRESS. This is **not** an exact publication of the pending archive's AKAS muting research, so six archive candidates still remain. No machine testing or compute was performed.
+
+**Short-session continuation check:** at least six unblocked documentary source candidates remain; two distinct substantive safety research branches were advanced in this invocation (guard-lock power loss and AKAS muting). The remaining exact archival publication/reconciliation and physical intake are preserved for the next scheduled session; there is no terminal information-gain stop or automation completion.

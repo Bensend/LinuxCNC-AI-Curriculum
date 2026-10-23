@@ -117,3 +117,14 @@ Four additional archived learner-visible candidates were published to main and i
 **New non-archive research after the 57/85 release:** `research/4400_432ES_FIRST_TRIP_UNCERTAIN_HISTORICAL_FAULT_TAG_SCOPE_2026-10-23.md` (manufacturer-indexed 432ES-UM001E Table 6 and DEVICE-RM500G Chapter 19). This does **not** change the 57/85 original-archive pending count. Self-hosted-only log workflow run `39919548510` was still QUEUED on recheck, not authoritative runtime. No hosted runner or laboratory test dispatched.
 
 **Additional non-archive learner exercise:** `safety-course/4400_432ES_FIRST_EVENT_STALE_DIAGNOSTICS_TECHNICIAN_EXERCISE_2026-10-23.md`; not one of the original 85 archive candidates and therefore no change to the **57/85** remaining count.
+
+### 2026-10-23T10:45Z cross-machine proof and LinuxCNC software-latch release
+
+Two more original archive candidates published with exact post-write Git blob verification:
+
+| Path | Verified original Git blob |
+|---|---|
+| `safety-course/4400_STALE_PROOF_CROSS_MACHINE_TRANSFER_2026-10-23.md` | `a2c255f3f3934d19e56a47b28da652add7f8f28c` |
+| `safety-course/4400_ESTOP_SOFTWARE_STATE_VS_PHYSICAL_PROPOSITION_WORKSHEET_2026-10-22.md` | `a6d7858f4fb0edc3f742ee2916bbf6660cb4cb5e` |
+
+**55/85 original archive candidates now pending**, assuming no concurrent changes; previous 57/85 count above is superseded. LinuxCNC 2.9 manual confirms ordinary `estop_latch` reset-edge behavior, but pinned first-scan initialization and actual physical behavior are distinct. No simulation, physical tests or hosted compute.

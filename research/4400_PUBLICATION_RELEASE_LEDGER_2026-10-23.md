@@ -429,3 +429,8 @@ Added original `research/4400_PERSONNEL_KEY_WHOLE_BODY_ACCESS_VS_LOTO_SOURCE_AUD
 
 
 **2026-10-23T22:41Z new original safety/web-UI research, NOT historical archive release:** `safety-course/4400_REMOTE_SUPPORT_WEB_UI_AUTHORITY_AND_INDEPENDENT_SAFETY_CONTRACT_2026-10-23.md` from NIST SP 800-82r3 and TRUMPF B35 official documents. Original exact archive still **6/85 pending**; no tests, hosted/local compute or external scores.
+
+
+### 2026-10-23T23:32Z — New original source trace, not historical archive recovery
+
+Added original `research/4400_LINUXCNCRSH_2910_REMOTE_COMMAND_AUTHORITY_AND_STALE_STATUS_SOURCE_TRACE_2026-10-23.md` and `safety-course/4400_LINUXCNCRSH_REMOTE_COMMAND_STALE_STATE_AND_REARM_FIELD_CARD_2026-10-23.md`. Pinned LinuxCNC v2.9.10 source blob `81b387c20f297d43b7fb63ad26fcf4d25ec0aa62` and official 2.9 manual establish normal network command and stale-status limits. These **are not** any of the six missing historical archive candidates: archive remains **6/85 pending exact-byte recovery**. No selected machine test, external competency score or laboratory compute. `NET-01..08 NOT RUN`, independent safety/physical proof UNKNOWN.

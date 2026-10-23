@@ -16,8 +16,10 @@ Status: **partial authorized publication to main**, not a machine validation or 
 | `safety-course/4400_GUARDLINK_NODE_CHANGE_PHYSICAL_PROOF_TECHNICIAN_CARD_2026-10-23.md` | `3bfb2f158843ddcade042ea703d97ca4df087ce2` | Published, exact; all physical validation NOT RUN |
 | `research/4400_CTP_SAFE_RECEIVER_VS_SOLENOID_PULSE_INTERFACE_NOTE_2026-10-22.md` | `0b1b1e7e26160cb90c69515e1fc95f78df89356d` | Published, exact; original EUCHNER manuals rechecked |
 | `safety-course/4400_CTP_STATE_TABLE_REPLACEMENT_ADVERSARIAL_CARD_2026-10-22.md` | `de7597dd01334fadf93d176402fdd9527095b8ba` | Published, exact; learner-visible non-blind card |
+| `research/4400_HYDAC_SAF_EXACT_CATALOG_SELECTED_BLOCK_GATE.md` | `773800d6fe8eacb481eb0939aa9ee3245ebda2ed` | Published, exact; current manufacturer catalog verified |
+| `safety-course/4400_HYDAC_SAF_GAUGE_ZERO_TECHNICIAN_ADVERSARIAL_EXERCISE.md` | `f9e09db05560cbfe47603de4182cc61f1a47d86e` | Published, exact; learner-visible non-blind exercise |
 
-**75 of the 85 archived candidates remain pending**, assuming no unrelated concurrent publication. This is an archive-relative count, not a claim that every pending item has been checked against all of main. Preserve the ZIP and its manifest; review each candidate's links, provenance, current product edition, and existing main destination before publication. Do not overwrite existing files blindly.
+**73 of the 85 archived candidates remain pending**, assuming no unrelated concurrent publication. This is an archive-relative count, not a claim that every pending item has been checked against all of main. Preserve the ZIP and its manifest; review each candidate's links, provenance, current product edition, and existing main destination before publication. Do not overwrite existing files blindly.
 
 ## New material outside the archived 85
 
@@ -42,3 +44,7 @@ Published the manufacturer-traced 432ES appended-node failure path and its causa
 ### Further source-checked release — same session
 
 Published exact SHA-matched CTP I1/L1 replacement and pulse-port scope artifacts; rechecked original EUCHNER 2126290-08-07/24 and 2124217-08-06/21 PDFs. Added a producer/receiver/pulse-direction qualification gate to `hardware/SELECTED_SAFETY_BLOCK_QUALIFICATION_WORKSHEET.md` and linked both from learner navigation. **75/85** original archive candidates remain pending, assuming no unrelated concurrent publication. These are documentary training artifacts; no physical acceptance test or selected-device compatibility proof was performed.
+
+### Hydraulic witness branch — same session
+
+Published exact SHA-matched HYDAC SAF selected-catalog qualification note and zero-gauge adversarial technician exercise. Rechecked the manufacturer's part 2120394 catalog: model `SAF20E12Y1T330A`, normally-open WSM06020Y bleed variant, optional gauge and explicit incompatibility of legacy 2SV5 versus WSM coil kits. Added pressure-port/zone mapping and coil-replacement change-control cautions to the selected-block worksheet, and linked the lesson from safety navigation. No hydraulic circuit was energized or measured. **73/85** original archive candidates remain pending; all selected-machine physical safe-state propositions remain UNKNOWN/NOT RUN.

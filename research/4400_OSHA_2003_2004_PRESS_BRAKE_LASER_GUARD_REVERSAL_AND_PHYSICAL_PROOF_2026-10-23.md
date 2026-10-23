@@ -49,3 +49,10 @@ A press-brake laser can be correctly wired and pass its own internal self-test y
 - **Operational restriction:** no personnel-exposed hazardous operation while minimum protective function is unproved; isolated/remote investigation only, with people outside the hazard zone and residual risk reviewed.
 
 Cross-reference `safety-course/SAFETY_DESIGN_PACKAGE_TRACEABILITY_TEMPLATE.md` (stable `BND/ENE/HAZ/SF/PHY/SRS/AUTH/DEP/ARC/VAL/PT/HF/CHG/UNK/RR` IDs) and `safety-course/4400_HYDRAULIC_PHYSICAL_WITNESS_WORKED_PACKAGE_2026-10-22.md`. This note adds **historical source reconciliation and explicit safeguard-category-versus-physical-proof distinction**, not another fictional circuit.
+
+
+## Secondary historical trap: 1986 letter versus 1997 directive
+
+**DOC-CONFIRMED, historical only:** OSHA's May 27, 1986 press-brake interpretation (https://www.osha.gov/laws-regs/standardinterpretations/1986-05-27) contains an older *six-inch* safe-distance discussion. Its page explicitly records a September 26, 2002 editorial deletion of text that no longer reflected policy and points to the February 14, 1997 press-brake directive. The 1997 CPL 02-01-025 (https://www.osha.gov/enforcement/directives/cpl-02-01-025) describes a *four-inch* lower bound only within its conditional **safe-distance-in-lieu-of-guard** enforcement guidance, after the employer demonstrates that physical guarding/devices are infeasible and other listed conditions are satisfied. Neither historical number is a substitute for a current selected-machine `SRS/PHY/VAL` determination, a presence-sensing stopping-distance calculation, or evidence that a guard prevents contact. **Do not choose whichever old number appears more convenient.**
+
+**Reason for recording:** An AI learner reading search snippets could combine the 1986 distance, 1997 exception, 2003 objection, and 2004 laser-guard acceptance into a fictitious single current rule. Keep the documents' dates, application scope, amendments and inspection status attached to each claim. The source study makes no legal determination about a specific 2026 installation.

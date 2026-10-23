@@ -18,8 +18,9 @@ Status: **partial authorized publication to main**, not a machine validation or 
 | `safety-course/4400_CTP_STATE_TABLE_REPLACEMENT_ADVERSARIAL_CARD_2026-10-22.md` | `de7597dd01334fadf93d176402fdd9527095b8ba` | Published, exact; learner-visible non-blind card |
 | `research/4400_HYDAC_SAF_EXACT_CATALOG_SELECTED_BLOCK_GATE.md` | `773800d6fe8eacb481eb0939aa9ee3245ebda2ed` | Published, exact; current manufacturer catalog verified |
 | `safety-course/4400_HYDAC_SAF_GAUGE_ZERO_TECHNICIAN_ADVERSARIAL_EXERCISE.md` | `f9e09db05560cbfe47603de4182cc61f1a47d86e` | Published, exact; learner-visible non-blind exercise |
+| `safety-course/4400_GUARDLINK_DIAGNOSTIC_DECODER_ADVERSARIAL_WORKSHEET_2026-10-23.md` | `2de5ab3a3591551cfe01a5261729e61b81658e4a` | Published, exact; official 440R-UM009E Feb 2026 Table 5 verified |
 
-**73 of the 85 archived candidates remain pending**, assuming no unrelated concurrent publication. This is an archive-relative count, not a claim that every pending item has been checked against all of main. Preserve the ZIP and its manifest; review each candidate's links, provenance, current product edition, and existing main destination before publication. Do not overwrite existing files blindly.
+**72 of the 85 archived candidates remain pending**, assuming no unrelated concurrent publication. This is an archive-relative count, not a claim that every pending item has been checked against all of main. Preserve the ZIP and its manifest; review each candidate's links, provenance, current product edition, and existing main destination before publication. Do not overwrite existing files blindly.
 
 ## New material outside the archived 85
 
@@ -48,3 +49,7 @@ Published exact SHA-matched CTP I1/L1 replacement and pulse-port scope artifacts
 ### Hydraulic witness branch — same session
 
 Published exact SHA-matched HYDAC SAF selected-catalog qualification note and zero-gauge adversarial technician exercise. Rechecked the manufacturer's part 2120394 catalog: model `SAF20E12Y1T330A`, normally-open WSM06020Y bleed variant, optional gauge and explicit incompatibility of legacy 2SV5 versus WSM coil kits. Added pressure-port/zone mapping and coil-replacement change-control cautions to the selected-block worksheet, and linked the lesson from safety navigation. No hydraulic circuit was energized or measured. **73/85** original archive candidates remain pending; all selected-machine physical safe-state propositions remain UNKNOWN/NOT RUN.
+
+### GuardLink diagnostic-data validity — same session
+
+Published one more exact SHA-matched learner worksheet on 440R-ENETR bitfield ambiguity (13th of 85 archived files now published). Independently added `research/4400_440R_ENETR_2026_TABLE5_DIAGNOSTIC_QUALITY_GATE_2026-10-23.md` using direct original Rockwell 440R-UM009E-EN-P February 2026 Table 5/6 inspection, not an archived candidate. Integrated a diagnostic-source freshness/event-versus-state gate into the cumulative Safety Design Package. **72/85** original candidates remain pending. No installed-machine or physical validation evidence.

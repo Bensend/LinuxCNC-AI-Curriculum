@@ -191,3 +191,8 @@ The exact archived [AKAS-5M DIP-selected overrun and automatic-retest source adj
 ### 2026-10-23T14:49Z — Accumulator product-family exception and pressure zones
 
 Read the exact archived [HAWE D 7969 versus D 7571 accumulator-family source comparison and pressure-zone witness study](../research/4400_HAWE_ACCUMULATOR_FAMILY_EXCEPTION_AND_PRESSURE_ZONE_WITNESS_2026-10-22.md) (Git blob `b690bcb1d0f11cf6aacae0fa5f23ed060e258e43`). The miniature family has a manufacturer-scoped separate-valve exception; this cannot be generalized to other accumulators, substituted for a selected circuit's pressure-zone map, or used as maintenance isolation/ram restraint. Cumulative Safety Design Package §11P; all physical `VAL/PT` NOT RUN.
+
+
+### 2026-10-23T14:51Z — Normal access, inside escape and maintenance temporal proof
+
+The exact archived [EUCHNER CTP-L normal-unlock versus inside-escape source study](../research/4400_NORMAL_UNLOCK_VS_ESCAPE_RELEASE_TEMPORAL_PROOF_2026-10-22.md) is on main (original Git blob `95070fff954dca5add555bcbd93e8e35ab915edc`). Inside escape physically unlocks and generates an FO OFF stop demand; it does not prove stop completion before opening. Treat normal access, escape and maintenance isolation as distinct physical propositions. Cumulative Safety Design Package §11Q; all selected-machine physical `VAL/PT` NOT RUN.

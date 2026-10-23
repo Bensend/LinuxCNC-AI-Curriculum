@@ -385,3 +385,8 @@ Published **two new original** 4400 documents: `research/4400_GUARD_POWER_LOSS_E
 ### 2026-10-23T16:44Z Fiessler muting source deepening (non-archive)
 
 New original `safety-course/4400_AKAS_MUTING_LOSS_OF_COVERAGE_MINIMUM_FUNCTION_CONTRACT_2026-10-23.md` published from direct review of Fiessler AKAS-5M doc 1581 (2024-02-15) pp. 4–5, 11, 24–26. Source explicitly warns of front-field muting/finger blind region; the contract separates independent slow/position verification, alternative protection, final elements and fresh rearm. **This is not the pending exact archive `research/4400_AKAS5M_MUTING_SLOW_SPEED_SAFETY_AUTHORITY_2026-10-23.md`; original archive backlog remains 6/85**. No machine `VAL/PT`, external score or hosted/local compute.
+
+
+### 2026-10-23T17:37Z — new source work, not an archived release
+
+Added original `research/4400_PERSONNEL_KEY_WHOLE_BODY_ACCESS_VS_LOTO_SOURCE_AUDIT_2026-10-23.md` and `safety-course/4400_PERSONNEL_KEY_MULTIPERSON_ENTRY_LOTO_ADVERSARIAL_FIELD_CARD_2026-10-23.md` to main. Manufacturer/ISO public-scope/OSHA indexed source checks are recorded in the audit. The original consolidated ZIP bytes were not available through the connected file surfaces in this invocation, so no pending archive file was recreated, called an exact release or counted as published. **Six of 85 original candidates remain pending** until the exact bytes and provenance can be reviewed. All physical `VAL/PT` and external competency gates remain open; GitHub-hosted compute 0.

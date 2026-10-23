@@ -1,0 +1,28 @@
+# 4400 safety continuation checkpoint — 2026-10-23T1835Z
+
+**Active:** 2500 safety course / 4000–4400 safety design. This supersedes `checkpoints/2026-10-23T1737Z-4400-personnel-key-cks-release-authority-next.md` and historical 3300/hardware prompts. 1000, 2000, F02 and 3000 remain GRADUATED/CLOSED. **Session start recorded before substantive work: 2026-10-23T18:35:41Z UTC.** Canonical end/elapsed/overlap to be appended immediately before exit.
+
+## Durable new source and teaching work
+
+1. `research/4400_STOP_MOTION_SENSOR_COVERAGE_FAULT_AND_COUPLING_SOURCE_AUDIT_2026-10-23.md` — exact manufacturer documentary contrast: Rockwell CU2-IN001 Issue 1, Rockwell 440T-IN035A-EN-P (April 2018), Pilz PNOZ s30 1001715-EN-24, Schmersal FWS 1206 archived product/ISD. Key finding: historical CU2 “fail-safe/cross-monitored” output/timer statement does not supply exact missing-sensor truth table; two sensors observing a mechanically uncoupled shaft do not prove downstream load stop; Pilz explicitly warns of encoder slip/shear-pin and has a configurable low-frequency plausibility-check cut-off. Schmersal product-specific wire-break/frequency diagnostics are not transferable to CU2; full FWS operating-manual direct URL redirected.
+2. `safety-course/4400_STOP_MOTION_FALSE_STANDSTILL_TECHNICIAN_DIAGNOSTIC_FIELD_CARD_2026-10-23.md` — open-book five-case technician exercise: common sensor supply, broken coupling, creeping hydraulic ram, low-speed plausibility gap and bypass incentives. Not a sealed blind challenge or physical test.
+3. `research/4400_PNOZ_S30_AUTOMATIC_OUTPUT_REENABLE_VS_FRESH_MACHINE_RESTART_2026-10-23.md` — manufacturer manual §7.7 explicitly warns of unexpected restart on automatic output reenable and requires external prevention; basic configurations use automatic output start; per-output monitored-edge modes and older-device version-transfer hazards are separately documented. Neither monitor reset nor safety output closure is a fresh LinuxCNC production start.
+4. Cumulative `safety-course/SAFETY_DESIGN_PACKAGE_TRACEABILITY_TEMPLATE.md` §§11AG–11AH, learner `safety-course/SAFETY_COURSE_INDEX.md`, `PROGRESS.md`, and `research/4400_PUBLICATION_RELEASE_LEDGER_2026-10-23.md` updated.
+5. Read-only complete main-tree index audit: **83/83 unique relative links present**, zero missing, `truncated=false`, tree snapshot `6977b311a06aa4d3922b15639cccf6270df80121`, index blob `4b6fad00aaf11d0659f4836d2a14de6d4abfd0a6`. `research/4400_CURRENT_SAFETY_INDEX_LINK_INTEGRITY_AUDIT_2026-10-23.md` updated with revision-scoped result. External URL/anchors not audited.
+
+## Current hard evidence boundaries
+
+- **Original consolidated publication archive:** **6/85 still pending**. Six paths in current route audit absent from main; exact original ZIP/manifest bytes not available in this invocation. No new original text was mislabeled as byte-identical historical publication.
+- **Selected machine:** `IN-01..10 UNKNOWN`; `PHY-STOP/HOLD/ACCESS/ESCAPE/ENERGY/RESTART UNKNOWN`; `VAL/PT NOT RUN`; `G0/G1 HOLD`, `G2 NOT RUN`, `G3/G4 NOT AUTHORIZED`, `G5 HOLD`. No personnel-exposed hazardous operation permitted without independently demonstrated minimum safety. Remote/isolated experimentation only after hazard/exclusion approval.
+- **External evaluation:** 2520–25F0 independent/fresh gates OPEN; blind score log unchanged.
+- **Compute:** GitHub-hosted Actions minutes **zero**; local lab **zero**; simulations **zero**; physical tests **zero**. Existing self-hosted-only lesson-log workflow run `39919548510` job `120301190483` was **QUEUED** when checked; no authoritative job runtime; `LAB_COMPUTE_LOG.md` unchanged. No new compute workflow dispatched.
+
+## Next high-information-gain work
+
+1. Briefly recheck latest main state and external gate. If the original six ZIP candidates become accessible, validate manifest, SHA-256, original Git blobs, editions and current route claims before exact publication. Do not reconstruct an archive file from adjacent new research.
+2. For a selected machine, obtain exact `IN-01..10`: as-built sensor/shaft/coupling-to-hazard map, stop/hold final elements, guard/key device and coding, monitor output start mode/feedback wiring, hydraulic zones and gravity energy, inside escape, maintenance isolation and fresh rearm. Physical `VAL/PT` only after approved test safety arrangement.
+3. If selected machine data is still absent, **rotate documentary work** to a different unblocked safety module rather than inventing CU2 fault behavior: e.g., source-check manufacturer brake-monitor/contactor feedback and loss-of-power restart recovery for a *selected product*, comparing a lathe spindle/chuck with a press-brake ram and documenting mechanical common causes. Stop at source limits and avoid duplicating this sensor/coupling study.
+4. Keep operator convenience/defeat resistance first-class: visible reason for delayed release, practical recovery after power loss, physically usable inside escape, and one-person maintenance lockout authority distinct from production trapped keys. Never allow normal LinuxCNC/FPGA to unilaterally grant personnel safety release.
+5. No GitHub-hosted compute. A bounded question-driven lab may run only with confirmed `[self-hosted, openpressbrake]` access, with no personnel exposure; otherwise continue documentation and record runner-access blocker.
+
+**Close requirement:** Immediately before ending, append accurate UTC end/elapsed/overlap to canonical `LESSON_LOG.md` via a complete-file SHA-guarded update or the immutable `timing-queue` safe append mechanism, verify status, and commit. Preserve this checkpoint as next-work authority.

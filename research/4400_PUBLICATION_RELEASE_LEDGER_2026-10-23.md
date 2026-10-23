@@ -165,3 +165,17 @@ Both remain learner-visible NOT RUN and preserve external blind-evaluation separ
 **Additional exact archived guard-series release:** `safety-course/4400_GUARD_SERIES_FAULT_MASKING_TECHNICIAN_FIELD_CARD_2026-10-22.md` Git blob `7c5b73bb2e94b4adfbe9b35bd63da56e62f32b92` fetched and matched. This card separates series-contact fault masking from ordinary LinuxCNC gate-specific diagnostics and a 432ES first-event address. **48/85** original archive candidates remain pending, assuming no concurrent change.
 
 **Session-integrity cross-check:** all **13/13** archived candidates published in this session independently matched the consolidated archive's SHA-256 manifest locally, in addition to each post-write Git blob match on `main`. This is file-publication integrity evidence only, not a machine test, simulator result or external competency score.
+
+### 2026-10-23T11:35Z guard-release / standstill / AKAS mode proof release
+
+Three more **original consolidated archive candidates** were published to `main`. Each post-write Git blob was independently fetched and compared against the original ZIP member's Git blob; the archive's 96/96 declared SHA-256 manifest entries also verified locally before release.
+
+| Exact archive candidate | Original and published Git blob | Status |
+|---|---|---|
+| `safety-course/4400_GUARD_RELEASE_TRACEABILITY_CHANGE_WORKSHEET_2026-10-22.md` | `10b4d9b0822f9d1c0ab782a9d294dcbc9c3c854c` | **PUBLISHED EXACT** |
+| `safety-course/4400_STANDSTILL_GATE_ADVERSARIAL_QUALIFICATION_2026-10-22.md` | `5b2a0acee7de9e96a66294f46686b295047e9e54` | **PUBLISHED EXACT** |
+| `safety-course/4400_AKAS_MUTING_MODE_CHANGE_TECHNICIAN_PROOF_CARD_2026-10-23.md` | `0b715b5a34a0f9454038138de3d8fddc86538b8e` | **PUBLISHED EXACT** |
+
+**Original consolidated archive pending: 45/85**, down from the previous checkpoint's 48/85, subject to any concurrent publication outside this ledger. This count is **archive-relative**, not a full current Git-tree reconciliation. Existing published GuardLink cards were not duplicated. The still-unpublished higher-priority `research/4400_GUARDLINK_RESET_FAULT_RECOVERY_AND_SAFETY_AUTHORITY_2026-10-23.md` and `research/4400_HMI_GUARD_DIAGNOSTIC_EVENT_VS_SAFETY_STATE_CONTRACT_2026-10-23.md` remain publication priorities.
+
+**New non-archive research/training:** `research/4400_OSHA_LED_INDICATION_VS_PHYSICAL_ISOLATION_AND_GUARDLINK_EVENT_2026-10-23.md` and `safety-course/4400_THREE_INDICATORS_ZERO_ISOLATION_PROOF_TECHNICIAN_EXERCISE_2026-10-23.md`. Source scope: official OSHA 1910.147 and 2012-12-12 LED interpretation, OSHA Appendix A and Rockwell 432ES-UM001E-EN-P p.64. These do **not** affect the 45/85 archive count. No hardware validation, simulator, hosted compute, external score or selected-machine safety acceptance.

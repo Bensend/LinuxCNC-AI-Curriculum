@@ -231,3 +231,8 @@ Read the exact archived [lockable isolator, tagout equivalence and retrofit main
 ### 2026-10-23T15:41Z — Standstill threshold is not held load
 
 The exact archived [Pilz PNOZ s30 standstill-gated guard release and sensor diagnostics study](../research/4400_SAFE_STANDSTILL_UNLOCK_PNOZ_S30_SENSOR_DIAGNOSTIC_SCOPE_2026-10-22.md) is published (original Git blob `3c0646e98b35b1ef6493ae62b7992420bb3851ad`). The manufacturer manual documents a low-frequency plausibility-check cut-off, broken-select-conductor parameter selection, and different 2 Hz versus 100 Hz basic configuration defaults. These are input frequencies, not machine-specific safe speed, stop distance or proof of hydraulic load holding. Design package §11X records selected sensor coupling and physical witness obligations; no `VAL/PT` performed.
+
+
+### 2026-10-23T15:43Z — HYDAC fluid-side gauge zero versus trapped energy
+
+The exact archived [HYDAC SAF fluid/gas pressure-zone and zero-gauge source audit](../research/4400_HYDAC_SAF_GAUGE_TOPOLOGY_ZERO_READING_PHYSICAL_WITNESS_2026-10-22.md) is published (Git blob `4e34a51de7cfa6b9929613e60ea48c40e0647b42`). HYDAC's own 2011 precharge check intentionally produces a fluid-side gauge reading of zero while gas precharge remains; current catalog part 2205492 has inconsistent generic solenoid/manual fields. The selected machine's S/P/T/gas/actuator/ram topology must be independently witnessed; §11Y and the selected physical intake remain HOLD/NOT RUN.

@@ -50,3 +50,7 @@ Ordinary LinuxCNC, HAL, normal FPGA control, PC software and ordinary communicat
 ## Evidence discipline
 
 Use `SOURCE-CONFIRMED`, `DOC-CONFIRMED`, `TEST-CONFIRMED`, `COMMUNITY-REPORTED`, `INFERENCE`, and `UNKNOWN`. Machine-specific stopping times/distances, hydraulic/pneumatic truth, required PL/SIL, diagnostic coverage, reliability values and physical safe-state facts remain `UNKNOWN` until supported by the appropriate design-specific evidence.
+
+### GuardLink reset/rearm, diagnostic conflicts and replacement (4400)
+
+For the **separate authority of DG safety relay, non-safety-rated ENETR diagnostics and 432ES CIP Safety architecture**, read `4400_GUARDLINK_AUTHORITY_AND_RESET_ARCHITECTURE_CARD_2026-10-23.md`. Use `4400_GUARDLINK_FAULT_RECOVERY_CHANGE_CONTROL_WORKSHEET_2026-10-23.md` and `4400_GUARDLINK_RESET_AND_REPLACEMENT_TECHNICIAN_CARD_2026-10-23.md` for change-control and adversarial commissioning cases. Original manufacturer 2026 ENETR Table 2 versus Table 6 reset units and Table 5 diagnostic-XOR ambiguity are documented in `../research/4400_ENETR_RESET_UNITS_AND_DIAGNOSTIC_XOR_CONFLICT_2026-10-23.md`. **Manufacturer printed contradiction is not a selected firmware fact**; all actual `VAL/PT` remain NOT RUN, and normal LinuxCNC/HMI never owns personnel-safety decisions.

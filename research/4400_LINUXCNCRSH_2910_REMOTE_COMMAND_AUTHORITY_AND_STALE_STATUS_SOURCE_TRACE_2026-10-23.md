@@ -52,3 +52,12 @@ Can a remote LinuxCNC UI be safely treated as a read-only diagnostic channel or 
 
 ## Transfer question for the learner
 A remote screen shows `GET ESTOP OFF`, the browser has reconnected, and the operator sees `SET MACHINE ACK`. Identify **three independent propositions** still unproved, the source paths explaining why, and the lowest-friction way to make the interface useful without making it a safety authority. See [technician card](../safety-course/4400_LINUXCNCRSH_REMOTE_COMMAND_STALE_STATE_AND_REARM_FIELD_CARD_2026-10-23.md).
+
+## Deeper v2.9.10 call-flow verification — Task/NML is still normal control
+
+Additional **SOURCE-CONFIRMED** pinned blobs:
+- `src/emc/usr_intf/shcom.cc` blob `28eb924291788f64effd4fd9376220d23dc3c1c2`, [tag source](https://github.com/LinuxCNC/linuxcnc/blob/v2.9.10/src/emc/usr_intf/shcom.cc): `sendEstopReset()` lines 455–468 constructs `EMC_TASK_SET_STATE` with `EMC_TASK_STATE_ESTOP_RESET` and calls `emcCommandSend()`; `sendMachineOn()` lines 470–483 similarly sends `EMC_TASK_STATE_ON`. The optional wait distinguishes message received versus done; neither is a physical ram/guard witness.
+- `src/emc/task/emctaskmain.cc` blob `7292a172023a5b42b023447c2458cb766c93fc9b`, [tag source](https://github.com/LinuxCNC/linuxcnc/blob/v2.9.10/src/emc/task/emctaskmain.cc), lines 2173–2176: `EMC_TASK_SET_STATE_TYPE` dispatches to `emcTaskSetState(state_msg->state)`.
+- `src/emc/task/emctask.cc` blob `ef96ceb4de247a96a1ff64309850383864d05179`, [tag source](https://github.com/LinuxCNC/linuxcnc/blob/v2.9.10/src/emc/task/emctask.cc), lines 309–375: `EMC_TASK_STATE_ESTOP_RESET` calls `emcAuxEstopOff()` and Task/IO abort/cleanup; `EMC_TASK_STATE_ON` enables trajectory/joints. `determineState()` lines 405–430 derives software Task state from IO auxiliary estop and trajectory enable, **not from a comprehensive physical stopping/holding/guard/isolation proof**.
+
+**Actual path:** remote TCP text command → `commandSet()` → `setEStop()/setMachine()` → `sendEstopReset()/sendMachineOn()` → NML `EMC_TASK_SET_STATE` → Task dispatcher → `emcTaskSetState()` → normal LinuxCNC IO/motion state requests. This proves the software command chain without assuming any particular machine's wiring or final-element reaction. **No physical safety performance or machine-level restart authorization follows from this source chain.**

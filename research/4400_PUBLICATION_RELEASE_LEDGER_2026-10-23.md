@@ -193,3 +193,7 @@ One further original archive member published byte-exactly and fetched back with
 ### 2026-10-23T11:44Z additional cross-machine transfer release
 
 `safety-course/4400_GUARD_LOCK_STANDSTILL_CROSS_MACHINE_TRANSFER_2026-10-22.md` published byte-exactly from the original archive; independently fetched Git blob **`774cfb232c78065d9c6a279ae1f06729bcc3e930`** matches the archive member. **43/85 original archive candidates remain pending**, superseding 44/85 above (archive-relative; concurrent publication unverified). This learner-facing card transfers hazard-boundary reasoning across mill/VMC, lathe, press brake, plasma/laser, robot and feeder classes without transferring machine-specific safety thresholds. No physical test, new lab runtime or external score.
+
+### 2026-10-23T11:45Z protective-cycle energy versus automatic bleed release
+
+Original archive `research/4400_HYDAC_SAF_PROTECTIVE_STOP_VS_AUTO_BLEED_ADVERSARIAL_REVIEW.md` published to `main` and independently fetched: original/published Git blob **`09d16c92b5117226f55e474cc613a2c68ad0c401`**. **42/85 original archive candidates remain pending** (supersedes 43/85; archive-relative and concurrent changes unverified). Qualitative HYDAC/HAWE fault tree preserves that accumulator pressure may be both hazardous stored energy and intentionally required for a selected protective action. This is NOT a machine hydraulic truth table, stop/hold test, or physical validation. The cumulative Safety Design Package §11J and learner index now link this source.

@@ -166,3 +166,8 @@ The exact archived [Fiessler FE-FS overtravel and FMSC-FP mode/restart source au
 ### 2026-10-23T13:53Z — AKAS device check versus machine acceptance
 
 The exact archived [Fiessler AKAS-5M inspection versus complete-machine safety acceptance study](../research/4400_AKAS_DEVICE_INSPECTION_VS_MACHINE_SAFETY_ACCEPTANCE_2026-10-23.md) is now on `main` (original/published Git blob `18e2955280b38a688b8f04c5a683b0d924e96d68`). Its cited 2024 manufacturer inspection sheet explicitly distinguishes the device's functional inspection from machine-level safety inspection. Tool/muting/box mode, independent speed, final element, physical stop/hold, workpiece hazards and reset require separate `SRS/PHY/VAL/PT` evidence. This is **DOC-CONFIRMED** manufacturer scope, not a passed machine validation.
+
+
+### 2026-10-23T13:54Z — Pressure-witness counterexamples
+
+The exact archived [HYDAC pressure/gas/gravity witness counterexamples and change-impact study](../research/4400_PRESSURE_WITNESS_LOGICAL_COUNTEREXAMPLES_AND_CHANGE_IMPACT.md) is now published (original/published Git blob `06cd199700d353a9e9f55197873bcfab0e46f558`). A calibrated zero gauge at one SAF S-side tap does not establish isolated P-side pressure, accumulator gas precharge, ram holding or maintenance release. Changes to tap position, isolation valve, gauge plumbing or part suffix invalidate dependent `DEP/PHY/VAL/PT` evidence. This is manufacturer-backed logic, **not** a selected-machine hydraulic truth table or physical test.

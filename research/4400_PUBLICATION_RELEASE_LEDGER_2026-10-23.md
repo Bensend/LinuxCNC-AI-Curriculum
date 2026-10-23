@@ -201,3 +201,7 @@ Original archive `research/4400_HYDAC_SAF_PROTECTIVE_STOP_VS_AUTO_BLEED_ADVERSAR
 ### 2026-10-23T11:46Z EUCHNER cross-machine output-semantics release
 
 `safety-course/4400_GUARD_LOCKING_CROSS_MACHINE_TRANSFER_AND_PROOF_PLAN_2026-10-22.md` published byte-exactly and independently fetched with original Git blob **`91b6642deb380c0ab04d7ee2bd060d5e9a9783a6`**. **41/85 original archive candidates remain pending**, superseding 42/85 (archive-relative; concurrent publication unverified). The card contrasts EUCHNER I1 versus L1 closed/unlocked FO semantics and separate physical safe-state evidence across machine classes; no selected machine validated.
+
+### 2026-10-23T11:47Z physical egress field witness release
+
+`safety-course/4400_GUARD_EGRESS_FIELD_WITNESS_AND_CHANGE_CONTROL_CARD_2026-10-22.md` published byte-exactly and independently fetched with original Git blob **`ebbc7482bac6da6ed5f477fa1ae9b29465cefad2`**. **40/85 original archive candidates remain pending**, superseding 41/85 (archive-relative; concurrent publication unverified). The worksheet separates normal production access, inside escape and maintenance isolation and keeps physical `VAL/PT` NOT RUN.

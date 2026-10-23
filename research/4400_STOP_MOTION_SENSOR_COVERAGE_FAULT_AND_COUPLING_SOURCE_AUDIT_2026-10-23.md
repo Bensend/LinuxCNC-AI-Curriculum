@@ -57,3 +57,14 @@ For `SRS-RELEASE`, record exact device/order/firmware/manual, sensor model and s
 - **UNKNOWN:** exact selected CU2 fault table, selected device configuration and manual edition, sensor-to-hazard coupling, actual stop/hold response, mechanical escape, hydraulic energy, PL/SIL calculation and independent commissioning witnesses.
 - **Information-gain stop:** documentary review can establish *which* faults must be qualified, but cannot prove a selected machine's physical safety. A future low-energy bounded bench test must answer one explicit selected-device fault question with an independently approved exclusion arrangement and, if computational work is justified, use only `[self-hosted, openpressbrake]`; no GitHub-hosted compute.
 - **Release status unchanged:** `IN-01..10 UNKNOWN`, `VAL/PT NOT RUN`, `G0/G1 HOLD`, `G2 NOT RUN`, `G3/G4 NOT AUTHORIZED`, `G5 HOLD`. External 2520–25F0 evaluation remains OPEN.
+
+
+## Adversarial evidence-quality review (same session)
+
+Three plausible overclaims were challenged against the actual manufacturer text:
+
+1. **“Below Pilz's plausibility cut-off, the safety output necessarily closes.” — REJECTED.** The manual says the **plausibility check is no longer performed** below the selected cut-off. That is a statement about one diagnostic function, not a complete truth table for output energization, other fault handling or restart. The correct `UNKNOWN` is whether a selected configuration's *overall* detection and final-element architecture is adequate at the hazardous machine's lowest relevant speed.
+2. **“CU2's two sensors detect every missing-pulse or common-power failure.” — NOT ESTABLISHED.** CU2-IN001 describes a two-sensor installation and cross-monitored timer/output circuits; the reviewed single-page manual does not provide the asserted complete sensor-fault behavior. The appropriate proof is exact selected hardware documentation plus controlled, non-exposed fault qualification, not a fabricated fault result.
+3. **“PNOZ's automatic start makes the machine start by itself.” — TOO BROAD.** The product can automatically **reenable its assigned output** under the documented conditions, and §7.7 warns that external measures must prevent unexpected restart. Whether actual hazardous motion occurs depends on the downstream safety final elements and ordinary controller's retained-demand behavior. [Separate exact start-mode source trace](4400_PNOZ_S30_AUTOMATIC_OUTPUT_REENABLE_VS_FRESH_MACHINE_RESTART_2026-10-23.md).
+
+**Disposition:** the existing audit and field card are valid as *conditional engineering requirements*, not physical failure verdicts. These three negative conclusions must remain visible in later source transfer and external evaluation. No machine-level PL/SIL, stop distance, pressure, or acceptance criterion was created by the review.

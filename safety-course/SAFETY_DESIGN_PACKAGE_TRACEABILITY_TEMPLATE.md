@@ -487,3 +487,10 @@ A monitored valve position is not a measured load stop; a low gauge is not every
 **Frozen non-equivalences:** `PERSONNEL KEY RETAINED != ALL ENERGY ISOLATED`; `ALL KEYS RETURNED != SPACE KNOWN EMPTY`; `KEY-OPERATED CONTROL SWITCH != LOCKABLE ENERGY ISOLATOR`; `INTERLOCK RESET ENABLED != PHYSICAL SAFE STATE OR FRESH START`. No generic key-release-on-command/time when stopping/holding is unknown. For whole-body access, consider an individually retained key per entrant and an independently reviewed occupancy/exit process, not a universal numeric key rule. The [field exercise](4400_PERSONNEL_KEY_MULTIPERSON_ENTRY_LOTO_ADVERSARIAL_FIELD_CARD_2026-10-23.md) tests the two-worker shared-key failure.
 
 **Selected-machine gate remains unchanged:** `IN-01..10 UNKNOWN`, `PHY-STOP/HOLD/ACCESS/ESCAPE/ENERGY/RESTART UNKNOWN`, `VAL/PT NOT RUN`, `G0/G1 HOLD`, `G2 NOT RUN`, `G3/G4 NOT AUTHORIZED`, `G5 HOLD`. No physical test, PL/SIL claim, legal site determination or operating release.
+
+
+## 11AD. Coded personnel-key evaluator mode is safety-function-specific (2026-10-23)
+
+**DOC-CONFIRMED, EUCHNER 2113903-06-09/19, English pp. 3–4 and current order 158081 page:** CKS-A-L1B-SC as a personnel lockout-*mechanism* requires a **unicode** CES evaluation unit; the manufacturer explicitly disallows the same role with **multicode** evaluation. Complete key withdrawal changes CES outputs; the LED is a key-recognition indication, not a physical machine witness. Manufacturer setup/after-fault checks require a non-exposed danger area. [Exact manual/evaluator-mode research](../research/4400_EUCHNER_CKS_UNICODE_MULTICODE_PERSONNEL_KEY_GATE_2026-10-23.md).
+
+**SRS/ARC/DEP/CHG gate:** record exact CKS adapter, CES evaluator, coding mode, learned key(s), cable/installation variant, fault/replacement behavior and revalidation of selected `AUTH/PHY/VAL/PT`. A multicode substitution or unknown coding mode is **HOLD/STALE**, not an accepted generic key inhibit. Manufacturer “lockout mechanism” is not proof of OSHA 1910.147 energy isolation. No selected physical `VAL/PT` or personnel-exposed release.

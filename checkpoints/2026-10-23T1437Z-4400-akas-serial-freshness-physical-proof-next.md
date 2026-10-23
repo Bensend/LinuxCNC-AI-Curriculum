@@ -25,3 +25,13 @@ Ordinary LinuxCNC/HAL/FPGA and HMI can control/log/diagnose but are not automati
 6. Immediately before ending this session, append UTC end, elapsed minutes and overlap to canonical `LESSON_LOG.md` using a complete-file SHA-guarded update. Keep hourly automation enabled.
 
 **Evidence labels:** manufacturer serial semantics `DOC-CONFIRMED`; diagnostic contract `INFERENCE`; selected machine `UNKNOWN`; physical `TEST-CONFIRMED` none.
+
+
+## Same-session 14:43Z publication and code-table continuation (supersedes 19/85 baseline)
+
+- Visually inspected manufacturer document 1581 printed pp. 33–34: serial diagnostic examples 195 box mode, 215 muting, 231 interrupted field, 146/145 safety-point sequence warning/error, 106/105 unequal fast/slow signals, 201 interlock without prior warning. Added these source-confirmed examples and the host-session freshness distinction to the original research. None is physical safe-state proof.
+- Published exact original archive `research/4400_AKAS_OVERTRAVEL_TEXT_CONFLICT_AND_SECONDARY_HAZARD_SCOPE_2026-10-23.md`, independently fetched Git blob `ff7709e6792192780df099f88443a9bc4c1b45b9` matching the source ZIP. Original archive **18/85 pending**, superseding earlier 19/85 (assuming no unobserved concurrent release).
+- Integrated §11O into cumulative Safety Design Package; index, ledger and progress updated. Manufacturer pp. 5 and 14 numeric discrepancy remains unresolved for actual selected setting; no numeric acceptance criterion approved. OSHA eTool link in archived source was not freshly accessible (403); do not claim it was reverified this session.
+- Self-hosted-only log job `39919548510` / `120301190483` rechecked **QUEUED**, no authoritative runtime; `LAB_COMPUTE_LOG.md` unchanged. GitHub-hosted Actions compute 0, local lab compute 0, physical tests 0, external score 0.
+
+**Exact next:** reconcile pending original archive against main, source-review `research/4400_NORMAL_UNLOCK_VS_ESCAPE_RELEASE_TEMPORAL_PROOF_2026-10-22.md`, `research/4400_AKAS5M_SELECTED_SETTING_OVERRUN_AND_RETEST_2026-10-23.md` and `research/4400_HAWE_ACCUMULATOR_FAMILY_EXCEPTION_AND_PRESSURE_ZONE_WITNESS_2026-10-22.md` before any exact release. Priority remains selected-machine intake `IN-01..10` and independent physical stop/hold/escape/isolation/restart evidence. Do not authorize personnel exposure or manufacture test numbers. End this session with safe SHA-guarded canonical lesson-log append.

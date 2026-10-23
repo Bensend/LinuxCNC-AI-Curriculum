@@ -256,3 +256,6 @@ For **whole-body access, multi-person personnel keys and the boundary with maint
 
 
 For the **keyed-control versus physical-isolator distinction**, read [Rockwell's exact 440T rotary product/installation source comparison](../research/4400_ROCKWELL_440T_ROTARY_PHYSICAL_ISOLATOR_VS_CONTROL_KEY_2026-10-23.md). Some keyed rotary devices directly interrupt selected electrical conductors; a CKS/CES key reader changes safety outputs. Neither device's label proves the as-built power path, all stored energy, group-worker maintenance LOTO or physical stop/hold. The exact 440T-MRPSE110F is 20 A in the inspected cut sheet, not the family's maximum 100 A. No selected-machine energy map or physical validation exists.
+
+
+For **guard key release after stopping**, read [the exact Rockwell 440T ETU versus SMU/CU2 source comparison](../research/4400_TRAPPED_KEY_TIMED_RELEASE_VS_SENSED_STOP_MOTION_2026-10-23.md). A timer measures elapsed time; a stopped-motion detector observes its selected shaft/sensor and may add a delay. Neither proves all axes, downstream load holding or hydraulic gravity restraint without a selected-machine physical witness. The ordinary LinuxCNC stop command and HMI “key free” indicator are not release authority.

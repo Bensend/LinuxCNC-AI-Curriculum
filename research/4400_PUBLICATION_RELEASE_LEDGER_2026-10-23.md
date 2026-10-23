@@ -224,3 +224,15 @@ Re-read `START_HERE.md`, current governance and the 11:42Z checkpoint before pub
 | `research/4400_GUARDLINK_RESET_FAULT_RECOVERY_AND_SAFETY_AUTHORITY_2026-10-23.md` | `1fbed3b653127a13010eca071f878ece38e61a7d` | PUBLISHED EXACT |
 
 **Original consolidated archive pending: 34/85**, superseding the prior 39/85 count, assuming no unrelated concurrent publication. This is archive-relative, not an exhaustive live-tree count. New **non-archive** `research/4400_GUARDLINK_DIAGNOSTIC_EVENT_EPOCH_FRESHNESS_AND_RELEASE_GATE_2026-10-23.md` advances ordinary-HMI freshness/first-event state design without assigning it personnel-safety authority. Cumulative package §11K and learner index updated. All selected-machine `VAL/PT` remain **NOT RUN**, external 2520–25F0 evaluation gates OPEN. No physical tests or laboratory compute; no GitHub-hosted runner dispatched. Self-hosted lesson-log job 120301190483 of run 39919548510 remains QUEUED without authoritative runtime.
+
+
+### 2026-10-23T12:46Z AKFR pressure/valve physical-witness release
+
+Two more exact archive members published, original/post-write Git blob SHA independently matched:
+
+| Candidate | Exact original and published blob | Status |
+|---|---|---|
+| `research/4400_AKFR_PRESSURE_AND_VALVE_WITNESS_SOURCE_AUDIT_2026-10-23.md` | `1d4fb76908766bcd56ba297d9a4a3881204bd29a` | PUBLISHED EXACT |
+| `safety-course/4400_AKFR_SENSOR_TARGET_AND_PHYSICAL_WITNESS_TECHNICIAN_EXERCISE_2026-10-23.md` | `30ec8a5f67d9a4abfcdfbaf76b2cab6ac94a822c` | PUBLISHED EXACT |
+
+**Original archive pending: 32/85**, superseding 34/85, subject to concurrent updates. Fiessler original German `doc1257` and English internal `doc1264` (hosted filename `doc1268`) were independently re-opened from the manufacturer site; both document valve-position **and** pressure-sensor inputs, but disagree on downstream "valve" versus "contactor" wording. The English diagram says "Valve release." Cumulative Safety Design Package §11L and index updated. All selected-machine `VAL/PT` NOT RUN; no machine hydraulic truth table, PL/SIL or maintenance-entry proof inferred. No compute dispatched.

@@ -35,3 +35,8 @@ A small LinuxCNC-supervised automated cell has two gates. A technician removes a
 ## Exact CKS substitution trap (additional open-book question)
 
 11. A technician replaces the CKS-A-L1B-SC evaluation unit with a CES unit set to **multicode**, retaining the same adapter and key. The HMI still shows a recognized key. Consult [EUCHNER's exact 2019 operating-instructions audit](../research/4400_EUCHNER_CKS_UNICODE_MULTICODE_PERSONNEL_KEY_GATE_2026-10-23.md). Explain why the selected retained-key inhibit claim is no longer supported; identify the evaluator coding/teach-in and output evidence needed for requalification. Distinguish the manufacturer's “lockout mechanism” from an OSHA energy-isolating device. Do **not** claim an actual measured failure or perform a hazardous live test.
+
+
+## Release-timing and monitored-motion challenge
+
+12. Compare a Rockwell 440T **ETU** timed release with an **SMU/CU2** monitored-shaft release using [the exact source note](../research/4400_TRAPPED_KEY_TIMED_RELEASE_VS_SENSED_STOP_MOTION_2026-10-23.md). Construct two failure paths: worn brake exceeds a timer's assumption; a stopped monitored motor shaft conceals a still-moving downstream gravity load. For each, identify the independent physical witness and release gate that remains `HOLD`. Do not invent delay, speed, stopping-distance or safety-integrity values.

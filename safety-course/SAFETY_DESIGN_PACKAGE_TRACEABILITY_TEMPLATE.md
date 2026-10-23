@@ -167,6 +167,21 @@ For a new, moved or replaced guard, the physical device's presence, successful d
 
 **Guard egress mechanical qualification:** where a guard lock/inside escape is selected, independently witness guard retained under required load, release actuation, actual door opening, unobstructed exit, and separately proven machine stopping/holding. A low OSSD, healthy lock signal, or valid catalog holding-force figure cannot establish a physically passable escape path. Treat changed brackets, hinges, actuator, cabling, access geometry and release route as `CHG/DEP` invalidating relevant `VAL/PT`. Use `safety-course/4400_GUARD_EGRESS_DEPENDENCY_CHANGE_WORKSHEET_2026-10-22.md` with `research/4400_GUARD_RELEASE_STOP_REQUEST_VS_PHYSICAL_EGRESS_2026-10-22.md`. Do not test a trapped-person case with anyone exposed to live hazards.
 
+## 11D. Guard diagnostic/reset data-quality and physical-rearm contract (4400)
+
+**Manufacturer-specific documentary example, not a selected-machine SRS:** Rockwell 440R-UM009E-EN-P (February 2026) printed Table 2 p. 39 gives `Reset1` a 0.25–3 s pulse, while Table 6 p. 44 prints 250–3000 **s** for reset-held diagnostic 03. The unit labels conflict; preserve as `UNK`, not an automatic reset setting. Table 5 p. 43 describes `DeviceTrip` operational-node bitmap and suggests XOR with `DeviceCount` for all diagnostics, but a trip need not mean a diagnostic fault. Do not treat XOR as a validated all-faults decoder. Source audit: `research/4400_ENETR_RESET_UNITS_AND_DIAGNOSTIC_XOR_CONFLICT_2026-10-23.md`.
+
+| Package ID | Required qualification | Release status |
+|---|---|---|
+| `ARC/DEP` | Record selected 440R-ENETR Series B versus 432ES CIP Safety architecture, exact relay/tap/firmware/AOP, supply, topology, reset and feedback dependencies. | UNKNOWN |
+| `AUTH/SRS` | Keep non-safety ENETR/HMI command and diagnostic roles separate from independent safety rearm; distinguish relay reset, relay/tap power-cycle, lock request and fresh ordinary start. | UNKNOWN |
+| `SRS/UNK` | Resolve reset duration against selected relay manufacturer instructions; do not implement conflicting p. 44 literal seconds or assume monitored-reset semantics for all configurations. | OPEN |
+| `DEP/VAL` | Distinguish link mode, data age/quality, per-node live state, first-trip event, historical fault, trip bitmap and confirmed fault bitmap. Zeroed inactive data is not healthy. | NOT RUN |
+| `PHY/VAL/PT` | Witness independent final-element and physical stop/hold, guard/occupancy, energy isolation, power recovery and absence of retained-start restart. | NOT RUN |
+| `CHG/HF` | After tap/firmware/guard replacement, invalidate dependent proof; show precise per-device fault and easy safe restoration instead of one-click indiscriminate fault reset. | OPEN |
+
+A displayed green status, cleared fault, reset accepted or safety output OFF **cannot** establish physical safe state. The 440R-ENETR manual p. 75 explicitly identifies the interface as **non-safety-rated**; the distinct 432ES safety path requires its own selected controller and validation. See learner cards `4400_GUARDLINK_AUTHORITY_AND_RESET_ARCHITECTURE_CARD_2026-10-23.md` and `4400_GUARDLINK_FAULT_RECOVERY_CHANGE_CONTROL_WORKSHEET_2026-10-23.md`. No selected-machine physical proof or personnel-exposed operation is authorized.
+
 ## 12. Change and revalidation ledger
 
 | CHG ID | Changed item | Reason | Upstream IDs affected | Dependents marked STALE | Required review/retest | Closure evidence | Status |

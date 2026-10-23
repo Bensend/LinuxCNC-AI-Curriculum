@@ -33,6 +33,8 @@ For **maintenance hydraulic isolation versus production stopping**, use `../rese
 
 For **series-wired guard contact fault masking and current standard edition**, use `../research/4400_ISO14119_2024_SERIES_FAULT_MASKING_EDITION_AND_LOGIC_2026-10-23.md` and `4400_GUARD_SERIES_ORDERED_FAULT_MASKING_FIELD_EXERCISE_2026-10-23.md`. The two-guard Boolean counterexample demonstrates order-dependent masking at shared receiver inputs without pretending to know a particular safety relay's fault memory. ISO 14119:2024 Annex J is the current-edition review route, with ISO/TR 24119:2015 retained as historical scope; selected DCavg/PL and physical machine proof remain UNKNOWN.
 
+For **physical guard escape and mechanical dependency changes**, use `4400_GUARD_EGRESS_DEPENDENCY_CHANGE_WORKSHEET_2026-10-22.md` with `../research/4400_GUARD_RELEASE_STOP_REQUEST_VS_PHYSICAL_EGRESS_2026-10-22.md`. Distinguish an electrical stop demand from a passable escape route and physically stopped/held machine; changes to brackets, hinges, geometry or release access invalidate affected evidence. No live trapped-person test is authorized.
+
 ## Information-separated competency status
 
 2520–2580 have learner-facing methodology and entry routes; 2520–25F0 external/fresh competency execution gates remain OPEN unless separately supported by independent evaluator records. READY FOR EXTERNAL/FRESH EVALUATION is not graduation. Do not self-score or expose hidden evaluator solutions before learner precommitment.

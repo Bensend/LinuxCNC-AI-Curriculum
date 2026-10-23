@@ -268,3 +268,12 @@ Two further original archive members independently fetched and Git-blob verified
 ### 2026-10-23T12:52Z safe mode selector versus enabling-device source release
 
 Original archive `research/4400_SAFE_MODE_SELECTOR_VS_THREE_POSITION_ENABLING_DEVICE_SOURCE_TRACE_2026-10-23.md` published exact, post-write Git blob **`c34dbbbba6368997440d65a2fa2bd4b9fa2e5be2`** matched original. Pilz mode selector guidance and PITenable, Rockwell 440J and Fiessler FMSC-FP are compared without confusing ordinary mode selection, three-position enabling, E-stop, selected safe speed or physical stop. **Original archive pending: 24/85**, superseding 25/85. Session cumulative **15 exact original archive releases** and one new GuardLink/HMI source-grounded architecture note; no selected-machine physical `VAL/PT`, external score or compute.
+
+
+### 2026-10-23T13:40Z non-archive safety engineering addition
+
+Two **new original** files, not members of the 85-file staged archive, were published and independently fetched from `main`:
+- `research/4400_OSHA_2003_2004_PRESS_BRAKE_LASER_GUARD_REVERSAL_AND_PHYSICAL_PROOF_2026-10-23.md` — current Git blob `5384904c79b8128afab004f733be0fa1d88c6d1c` after 1986/1997 source-scope addendum.
+- `safety-course/4400_SELECTED_MACHINE_PHYSICAL_WITNESS_INTAKE_AND_RELEASE_GATE_2026-10-23.md` — Git blob `4910585ec8384533ec3334f13570cdf7c0ae23b4`.
+
+**Original archive backlog remains 24/85**, not 22/85; no previously staged archive member was published this session. The new artifacts reconcile OSHA's 2003/2004 press-brake laser interpretation and supply a ten-artifact as-built physical-proof intake and release gate. All machine physical `VAL/PT` **NOT RUN**; no new blind score, local lab compute or hosted Actions compute.

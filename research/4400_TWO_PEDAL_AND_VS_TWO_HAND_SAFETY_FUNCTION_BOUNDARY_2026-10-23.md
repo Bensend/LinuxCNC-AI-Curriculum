@@ -51,3 +51,11 @@ For a selected machine, open or revise `BND-*` (operator count/modes), `HAZ-*` (
 No physical tests, simulation, or self-hosted compute were justified: the logical non-equivalence is resolved from manufacturer/standard scope and hazard documentation. Do not infer machine-specific hydraulic truth tables, safety PL/SIL, stopping limits, or foot-pedal circuit diagnostics. If the machine cannot establish its basic protective function, no exposed-person hazardous operation; any necessary experimental operation must be isolated/remote with people outside the danger zone.
 
 Next: incorporate this distinction into the 4400 mode-selection technician worksheet and cumulative Safety Design Package without duplicating the existing two-hand course; review selected Fiessler wiring/manual and actual installed safety program only if authoritative evidence becomes available.
+
+## Manufacturer model distinction — one station with two pedal halves is not necessarily two operators
+
+A second read of Fiessler's same product page distinguishes **FE-FS2 two-pedal foot-switch assemblies** from the **FMSC-FP interface that can connect a second foot switch**. For FE-FS2, the manufacturer describes one pedal half as a two-stage function selector (for example box bending/opening) and the other as a three-position overtravel hazardous-motion control; exact halves and contact sets vary by catalog number. Some listed variants have both pedal halves equipped with three-position modules. **DOC-CONFIRMED** for the listed product families, not a selected installation.
+
+**INFERENCE:** counting two pedals does not establish that two *people* participate, that both halves are hazardous-motion commands, or that either device is a two-hand control. The installation must distinguish `pedal count`, `physical operator stations`, `number of exposed people`, `function selected by each pedal`, and `credited protective functions` as separate BND/HAZ/AUTH facts. The selected FMSC-FP circuit and exact FE-FS1/FE-FS2 catalog/manual remain UNKNOWN.
+
+Source: https://www.fiessler.de/en/products/safety-products/safety-footpedals/safety-foot-pedals-fe-fs.php (FE-FS2 and FMSC-FP sections). This source refinement strengthens, rather than changes, the earlier non-equivalence conclusion.

@@ -42,3 +42,8 @@ Read `main` recursive Git tree through the GitHub API and the exact current `saf
 ## Follow-up route verification after the CKS source link (same session)
 
 After adding the exact EUCHNER CKS evaluator-mode link to the learner index, repeated the **same** read-only full-tree comparison. The new `main` tree response reported `sha=29fc02af9b99e62eacf1dca373570971da38e4ce`, **4,082 entries**, `truncated=false`; index blob `020321f7080b7c3c29039491373e89ea0e4d0ceb`. **78 distinct relative links; 78 present; zero missing.** The original 77/77 result remains a correct prior snapshot, not the latest result. All six archive candidates remain absent and unlinked.
+
+
+## Final in-session route check after 440T ETU/SMU source addition
+
+Read-only full-tree response at `main`: `sha=9ea83611d05aae9346ef9d6ee65a4a58b5bf846a`, **4,084 entries**, `truncated=false`. Learner index blob `daade860ab8fddfb79cc1d4eb3229b4f4a0dfab8`. **80 distinct relative links, 80 present, 0 missing.** The earlier 77/77 and 78/78 are revision-scoped snapshots; none is a claim about external links, anchors, or unpublished ZIP candidates.

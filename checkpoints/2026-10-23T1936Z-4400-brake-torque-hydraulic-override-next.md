@@ -26,3 +26,7 @@
 5. No hosted compute. Local [self-hosted, openpressbrake] only if a specific unresolved question justifies a bounded test and runner access is confirmed; no fallback.
 
 **Close:** Immediately before exit, append UTC end time, elapsed minutes and known-overlap status to LESSON_LOG using complete-file SHA-guarded update (or safe immutable append mechanism), verify commit, preserve recurring automation.
+
+## Same-session follow-on after initial checkpoint
+
+Manufacturer/official regulatory cross-check added to the first research document and technician card: Siemens S120 SBT intentionally energizes motor/brake with a defined selection/exit sequence; official OSHA 29 CFR 1910.147(f)(1) governs temporary test energization in covered maintenance circumstances. Cumulative design package §11AK and PROGRESS updated. This is a paper-only distinction between routine production testing and authorized maintenance reenergization, **not** an energized test authorization. No new compute or physical evidence. Preserve all next-work and historical archive gates above.

@@ -129,3 +129,8 @@ The new [cross-boundary contradiction card](4400_CROSS_BOUNDARY_CONTRADICTION_CO
 ### 2026-10-23T12:50Z mode selector, foot-pedal overtravel and fresh restart
 
 Read the [cross-machine mode-selector and restart worksheet](4400_MODE_SELECTOR_RESTART_AUTHORITY_CROSS_MACHINE_WORKSHEET_2026-10-23.md) and [three-position foot-pedal overtravel/restart technician card](4400_THREE_POSITION_PEDAL_RESTART_AND_OVERTRAVEL_TECHNICIAN_CARD_2026-10-23.md). Fiessler FMSC-FP permits selected pedal 1, pedal 2, OR and AND arrangements; OR is not interchangeable with a required two-operator AND function. Pedal overtravel, reset acceptance, final-element action, physical stop/hold and fresh ordinary start are separate claims. These are learner-visible exercises, not a selected machine's validated safety function or blind evaluator score.
+
+
+### 2026-10-23T12:52Z enabling-device source audit
+
+Read the [manufacturer source comparison of safety-related mode selection, three-position enabling and separate E-stop](../research/4400_SAFE_MODE_SELECTOR_VS_THREE_POSITION_ENABLING_DEVICE_SOURCE_TRACE_2026-10-23.md) alongside the two new pedal/mode worksheets above. Pilz PITenable, Rockwell 440J and Fiessler FMSC-FP are **different products and safety functions**. Ordinary LinuxCNC setup mode cannot certify safe speed, occupancy, physical standstill or an E-stop; no selected-machine validation has occurred.

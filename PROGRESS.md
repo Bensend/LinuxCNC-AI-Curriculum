@@ -54,7 +54,9 @@ Core freezes remain in force, especially: **VERIFIED DESIGN != VALIDATED MACHINE
 
 Durable foundation includes `hardware/BLOCK_SPEC_TEMPLATE.md`, `hardware/4000-block-map.md`, Colorlight core research/copy-adapt contract, firmware/watchdog comparisons and LiteX-CNC output audit. Routine board development is secondary to the active safety course in this automation.
 
-## Exact next work
+## Historical 2026-09-24 exact next work (superseded by latest 4400 checkpoint)
+
+**Do not use this historical list as the active priority.** The current 4400 safety continuation checkpoint below supersedes it; the 1000–3000 levels remain closed and routine board development belongs to its separate automation.
 
 1. Preserve the 2520–25F0 information-separated competency gates; do not self-score or expose evaluator-only expected answers before learner commitment.
 2. Locate the actual safety-output implementation-spec template filename and reconcile the eight-field final-element witness contract from `FINAL_ELEMENT_WITNESS_MATRIX_2026-09-24.md` into it; update `SELECTED_SAFETY_BLOCK_QUALIFICATION_WORKSHEET.md` if any field is absent.
@@ -64,7 +66,7 @@ Durable foundation includes `hardware/BLOCK_SPEC_TEMPLATE.md`, `hardware/4000-bl
 6. Freeze a bounded bench lab only if a concrete selected-interface uncertainty remains after documentation. If justified, use `[self-hosted, openpressbrake]` only; otherwise continue source/design work.
 7. Keep generic safety schematics NOT FROZEN and machine-specific hydraulic truth tables, valve fail states, stopping limits/distances, pressure thresholds, safe-speed values, process/fume/fire acceptance values, proof-test intervals and PL/SIL/integrity targets UNKNOWN until justified.
 
-Newest precise checkpoint: `checkpoints/2026-09-24T1241Z-safety-hydraulic-witness-next.md`.
+Historical checkpoint (2026-09-24; superseded): `checkpoints/2026-09-24T1241Z-safety-hydraulic-witness-next.md`.
 
 ## Laboratory compute checkpoint
 
@@ -251,3 +253,5 @@ No physical `VAL/PT`, no external score, no simulation, no local laboratory comp
 
 
 **2026-10-23T17:41Z — exact EUCHNER CKS manual finding and live route audit:** EUCHNER CKS-A-L1B-SC official `2113903-06-09/19` instructions and current order 158081 page **prohibit** multicode evaluation for the key-as-lockout-mechanism role; unicode evaluator and full withdrawal are required at the documented product scope. Added `research/4400_EUCHNER_CKS_UNICODE_MULTICODE_PERSONNEL_KEY_GATE_2026-10-23.md`, integrated original personnel-key study, technician challenge, index and cumulative package §11AD. Separately read the complete untruncated GitHub main tree (4,080 entries) and learner index blob; **77/77 distinct relative index links resolve**, all six original archive candidates absent and not linked. Recorded `research/4400_CURRENT_SAFETY_INDEX_LINK_INTEGRITY_AUDIT_2026-10-23.md`; the older staged route-regression audit remains historical, not a current publication. No original ZIP bytes available this invocation; original backlog **6/85 pending**, no exact releases. All physical `VAL/PT NOT RUN`; external 2520–25F0 gates OPEN; no hosted/local laboratory compute.
+
+**2026-10-23T17:42Z current route recheck:** 78/78 relative learner-index paths exist on complete main tree, zero broken; see `research/4400_CURRENT_SAFETY_INDEX_LINK_INTEGRITY_AUDIT_2026-10-23.md`. Existing self-hosted-only append workflow run 39919548510 / job 120301190483 freshly queried: **QUEUED** with labels `[self-hosted, openpressbrake]`, no completed job/runtime. No new laboratory compute record.

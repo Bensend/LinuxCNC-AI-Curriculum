@@ -1,0 +1,23 @@
+# 4400 safety checkpoint — 2026-10-23T12:39Z session
+
+**Current active priority:** LinuxCNC/OpenPressBrake SAFETY COURSE and 4000-series safety architecture. 1000/2000 **GRADUATED/CLOSED**, F02 graduated, completed 3000 preserved; 2520–25F0 information-separated evaluations OPEN. Do not resume old 3300 work or routine controller-board design.
+
+## Durable session work
+
+- UTC session start recorded before substantive work: **2026-10-23T12:39:59Z**.
+- Original consolidated archive `LinuxCNC_4400_20261023T064104Z_SAFETY_MODE_AUTHORITY_CONSOLIDATED_PUBLICATION_STAGED.zip`: integrity OK and **96/96 SHA-256** verified locally. Five candidate documents published to `main`, independently fetched, each matching its original Git blob exactly. Details and hashes in `research/4400_PUBLICATION_RELEASE_LEDGER_2026-10-23.md`. Archive-relative backlog **34/85**, down from 39/85; check for concurrent publication before each new write.
+- Three priority GuardLink manufacturer-source notes now on `main`: `research/4400_GUARDLINK_RESET_FAULT_RECOVERY_AND_SAFETY_AUTHORITY_2026-10-23.md`, `research/4400_ENETR_DIAGNOSTIC_TAG_BITMASK_AND_DOCUMENT_CONFLICT_AUDIT_2026-10-23.md`, `research/4400_HMI_GUARD_DIAGNOSTIC_EVENT_VS_SAFETY_STATE_CONTRACT_2026-10-23.md`.
+- Two exact Fiessler technician cards also published: `safety-course/4400_MODE_DEPENDENT_ACCEPTANCE_TECHNICIAN_WORKSHEET_2026-10-23.md`, `safety-course/4400_OVERRUN_FRESHNESS_SELECTED_SETTING_TECHNICIAN_CARD_2026-10-23.md`.
+- New original `research/4400_GUARDLINK_DIAGNOSTIC_EVENT_EPOCH_FRESHNESS_AND_RELEASE_GATE_2026-10-23.md` proposes an ordinary-HMI diagnostic freshness/epoch contract without moving safety authority into LinuxCNC. Integrated cumulative Safety Design Package **§11K**, safety index and `PROGRESS.md`.
+- Sources re-opened: Rockwell GLINK-AT001A (July 2023) and 440R-UM009E (February 2026). **DOC-CONFIRMED** family/command/tag scope; **INFERENCE** ordinary HMI event-epoch proposal; selected firmware/AOP/zone mapping **UNKNOWN**; no TEST-CONFIRMED physical safety claim.
+
+## Exact next work
+
+1. **Advance independent physical proof** rather than creating another diagnostic summary. Build a traceable selected-machine `BND/ENE/HAZ/SF/PHY/SRS/AUTH/DEP/ARC/VAL/PT/HF/CHG/UNK/RR` plan for guard entry, stop/hold, trapped hydraulic pressure, gravity restraint, inside escape, deliberate reset and fresh ordinary start. A green HMI or GuardLink Operational state cannot close physical `PHY` evidence. If as-built machine data are unavailable, preserve UNKNOWN and create a reusable technician/qualification decision procedure, not a fabricated truth table.
+2. **Continue remaining reviewed original archive** without duplicates: prioritize `research/4400_AKFR_PRESSURE_AND_VALVE_WITNESS_SOURCE_AUDIT_2026-10-23.md`, `safety-course/4400_AKFR_SENSOR_TARGET_AND_PHYSICAL_WITNESS_TECHNICIAN_EXERCISE_2026-10-23.md`, `safety-course/4400_CROSS_BOUNDARY_CONTRADICTION_COMMISSIONING_CARD_2026-10-22.md`, `safety-course/4400_HYDRAULIC_PHYSICAL_WITNESS_WORKED_PACKAGE_2026-10-22.md`, and `safety-course/4400_GUARD_LOCK_SEMANTICS_VS_PHYSICAL_RELEASE_2026-10-22.md`. Before create, check current `main`, source provenance and original Git blob; after create, verify exact match and update release ledger.
+3. **Resolve only actionable manufacturer ambiguities:** Rockwell ENETR 2026 `DeviceFault=6` node mapping, reset-duration conflict, `DeviceDiagnostic` version change and 432ES first-event/current-state semantics. Seek manufacturer clarification or selected bench identity; do not hard-code guesses or run labs without a concrete unresolved question.
+4. **Human factors:** per-device fault localization and simple guard restoration, accessible/zone-labeled test points, independent lock/escape, no convenience `Reset All` that erases provenance or auto-rearms; prevent retained ordinary start after safety recovery. Treat replacement as `CHG` invalidating dependent `VAL/PT`.
+5. **External and compute:** 2520–25F0 blind/fresh evaluations remain information-separated and OPEN; do not self-score. Only justified self-hosted `[self-hosted, openpressbrake]` compute; no GitHub-hosted runner. Existing lesson-log run `39919548510` job `120301190483` remains QUEUED at 12:44Z; no authoritative runtime and `LAB_COMPUTE_LOG.md` unchanged.
+6. **Close:** immediately before ending append exact UTC end, actual elapsed and overlap status to `LESSON_LOG.md` via complete-file SHA-guarded update. Keep recurring curriculum enabled.
+
+**No personnel-exposed hazardous operation authorized.** Machine physical `VAL/PT` are **NOT RUN**. If minimum protection is unproved, experimental work requires isolated/remote operation with people outside the danger zone and explicit residual-risk controls.

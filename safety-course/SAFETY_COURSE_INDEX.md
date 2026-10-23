@@ -171,3 +171,8 @@ The exact archived [Fiessler AKAS-5M inspection versus complete-machine safety a
 ### 2026-10-23T13:54Z — Pressure-witness counterexamples
 
 The exact archived [HYDAC pressure/gas/gravity witness counterexamples and change-impact study](../research/4400_PRESSURE_WITNESS_LOGICAL_COUNTEREXAMPLES_AND_CHANGE_IMPACT.md) is now published (original/published Git blob `06cd199700d353a9e9f55197873bcfab0e46f558`). A calibrated zero gauge at one SAF S-side tap does not establish isolated P-side pressure, accumulator gas precharge, ram holding or maintenance release. Changes to tap position, isolation valve, gauge plumbing or part suffix invalidate dependent `DEP/PHY/VAL/PT` evidence. This is manufacturer-backed logic, **not** a selected-machine hydraulic truth table or physical test.
+
+
+### 2026-10-23T14:37Z — AKAS-5M serial diagnostic freshness versus physical safety
+
+Read the [manufacturer-source serial diagnostic investigation](../research/4400_AKAS5M_SERIAL_DIAGNOSTIC_REPETITION_FRESHNESS_AND_HMI_AUTHORITY_2026-10-23.md), then complete the [cross-machine stale-green technician card](4400_SERIAL_DIAGNOSTIC_STALE_GREEN_CROSS_MACHINE_TECHNICIAN_CARD_2026-10-23.md). Fiessler document 1581 (2024-02-15), printed p. 32, documents RS-232 repeated messages, even parity and three-message receiver acceptance; this does **not** establish a host-side maximum data age or safety authority. Separate ordinary HMI transport freshness, safety controller authority, physical stop/hold and maintenance isolation. No physical `VAL/PT`, blind score or compute. External 2520–25F0 gates OPEN.

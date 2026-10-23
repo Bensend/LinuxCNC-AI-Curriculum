@@ -23,8 +23,9 @@ Status: **partial authorized publication to main**, not a machine validation or 
 | `research/4400_ROSS_HLOX_MANUAL_ISOLATION_VS_RAM_PROOF_SOURCE_NOTE_2026-10-22.md` | `7a5556fa6a1b302ca004ce52958a0a6532a3eb1e` | Published, exact; ROSS H L-O-X manufacturer product pages verified |
 | `research/4400_ISO14119_2024_SERIES_FAULT_MASKING_EDITION_AND_LOGIC_2026-10-23.md` | `453fd9a01d1d15fda6fb451cc4e7293cb3082327` | Published, exact; ISO catalog and Schmersal 2025 guide checked |
 | `safety-course/4400_GUARD_SERIES_ORDERED_FAULT_MASKING_FIELD_EXERCISE_2026-10-23.md` | `cbbcf5da08e2c2904fa2c301108c21e08606699f` | Published, exact; open-book Boolean counterexample |
+| `safety-course/4400_GUARD_EGRESS_DEPENDENCY_CHANGE_WORKSHEET_2026-10-22.md` | `d1c812b1303220d290cfdc84e2aa073c66998e5f` | Published, exact; linked to already published manual-release source |
 
-**68 of the 85 archived candidates remain pending**, assuming no unrelated concurrent publication. This is an archive-relative count, not a claim that every pending item has been checked against all of main. Preserve the ZIP and its manifest; review each candidate's links, provenance, current product edition, and existing main destination before publication. Do not overwrite existing files blindly.
+**67 of the 85 archived candidates remain pending**, assuming no unrelated concurrent publication. This is an archive-relative count, not a claim that every pending item has been checked against all of main. Preserve the ZIP and its manifest; review each candidate's links, provenance, current product edition, and existing main destination before publication. Do not overwrite existing files blindly.
 
 ## New material outside the archived 85
 
@@ -69,3 +70,7 @@ Published exact SHA-matched ROSS H L-O-X maintenance-isolation source note; manu
 ### ISO 14119:2024 series fault-masking branch — same session
 
 Published exact SHA-matched current-edition ISO 14119:2024 Annex J bridge and ordered-guard Boolean field exercise. Checked ISO 14119:2024 and ISO/TR 24119:2015 official catalogs plus Schmersal's 2025 manufacturer guide; do not infer licensed clause text or a numeric diagnostic coverage. Integrated the receiver-specific fault masking unknowns into cumulative section 11C and learner navigation. **68/85** original archive candidates remain pending; no test or safety calculation performed.
+
+### Guard egress physical-witness branch — same session
+
+Published exact SHA-matched mechanical escape/egress change worksheet, linked to already published `research/4400_GUARD_RELEASE_STOP_REQUEST_VS_PHYSICAL_EGRESS_2026-10-22.md`. The cumulative Safety Design Package and learner index now require distinct guard release, physical door opening/egress, independent stopping/holding and maintenance isolation propositions. No live trapped-person test or physical release was conducted. **67/85** original archived candidates remain pending.

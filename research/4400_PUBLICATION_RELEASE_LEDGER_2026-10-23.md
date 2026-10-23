@@ -330,3 +330,8 @@ Published `research/4400_HAWE_ACCUMULATOR_FAMILY_EXCEPTION_AND_PRESSURE_ZONE_WIT
 ### 2026-10-23T14:51Z exact EUCHNER temporal guard-release source release
 
 Published `research/4400_NORMAL_UNLOCK_VS_ESCAPE_RELEASE_TEMPORAL_PROOF_2026-10-22.md` on `main`; initial transcription had a two-character formatting mismatch, corrected by a SHA-guarded update, then exact original Git blob **`95070fff954dca5add555bcbd93e8e35ab915edc`** verified. EUCHNER original manual 2124217-08-06/21 directly reviewed: CTP-L escape release physically unlocks and produces FO OFF stop demand, which is not evidence that stopping preceded opening. Normal access, inside escape and maintenance energy isolation require different physical propositions. Cumulative Safety Design Package §11Q added. **Original archive 15/85 pending**, superseding 16/85, absent concurrent release. No physical test or hosted/local lab compute.
+
+
+### 2026-10-23T14:54Z exact qualitative hydraulic fault-tree archive release
+
+Published `research/4400_HYDRAULIC_ENERGY_FAULT_TREE_QUALITATIVE_2026-10-22.md`; independently fetched Git blob **`5d1c6cb200af8cb1cbe6ee3864caec60b5c5c8de`** matched original ZIP. HAWE SAKB D 6335 (2025) and NSV D 6368 (2026) manufacturer PDFs directly rechecked for version/scope; the source's three top events and four CCF candidates remain qualitative `INFERENCE`, not selected-machine Boolean cut sets or PL/SIL. OSHA 1910.147 link retained from archived research; fresh OSHA access 403. Cumulative Safety Design Package §11R added. **Original archive 14/85 pending**, superseding 15/85. No hosted/local lab compute, physical test or blind score.

@@ -417,3 +417,6 @@ Added original `research/4400_PERSONNEL_KEY_WHOLE_BODY_ACCESS_VS_LOTO_SOURCE_AUD
 
 
 **2026-10-23T21:37Z original safety source correction (NOT exact archive publication):** Added `research/4400_PRESS_BRAKE_OSHA_SCOPE_SAFE_DISTANCE_AND_MAINTENANCE_TRANSFER_AUDIT_2026-10-23.md` and `safety-course/4400_PRESS_BRAKE_GUARDING_SCOPE_AND_SERVICE_ZONE_FIELD_CARD_2026-10-23.md` based on official OSHA 1910.217(a)(5), 1910.212 press-brake interpretations, dated 1986/1997 safe-distance sources and 1910.147 residual-energy requirements. Original 85-document archive remains **6/85 exact candidates unavailable**; these two are new original work. No selected-machine validation, physical tests, blind scores or hosted/local lab compute.
+
+
+**2026-10-23T22:32Z original OEM research, NOT an archived release:** published `research/4400_CINCINNATI_PROFORM_RAM_RESTRAINT_LOTO_RESCUE_MANUAL_ERRATA_AUDIT_2026-10-23.md` and `safety-course/4400_RAM_SUPPORT_LOTO_AND_POWER_LOSS_RESCUE_TECHNICIAN_CARD_2026-10-23.md` using Cincinnati EM-560 N-06-14 and Haas 2026 HPB manufacturer manuals. The six missing exact original archive files remain **6/85 pending**; no reconstructed historical publication, physical test, external evaluation or laboratory compute.

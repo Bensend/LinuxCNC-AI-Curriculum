@@ -280,3 +280,8 @@ For a **manufacturer-manual scope trap**, read [the Parker TDP/TEP versus D3DW p
 ### 4400 OSHA press-brake applicability and service-zone transfer (2026-10-23)
 
 Use the [official-source applicability reconciliation](../research/4400_PRESS_BRAKE_OSHA_SCOPE_SAFE_DISTANCE_AND_MAINTENANCE_TRANSFER_AUDIT_2026-10-23.md) and [technician field card](4400_PRESS_BRAKE_GUARDING_SCOPE_AND_SERVICE_ZONE_FIELD_CARD_2026-10-23.md) to distinguish the 1910.217 press-brake exclusion from 1910.212 guarding, dated OSHA safe-distance exceptions from protective-device placement, and production stopping from 1910.147 maintenance energy isolation. Do **not** use a historical four- or six-inch figure as a universal design acceptance criterion. Selected-machine physical proof remains UNKNOWN/NOT RUN.
+
+
+### 4400 OEM press-brake maintenance and rescue transfer (2026-10-23)
+
+Read the [Cincinnati PROFORM+ ram support / LOTO / power-loss rescue / manual-reference audit](../research/4400_CINCINNATI_PROFORM_RAM_RESTRAINT_LOTO_RESCUE_MANUAL_ERRATA_AUDIT_2026-10-23.md), then work the [ram support, isolation and rescue technician card](4400_RAM_SUPPORT_LOTO_AND_POWER_LOSS_RESCUE_TECHNICIAN_CARD_2026-10-23.md). The official 2014 Cincinnati manual provides a concrete example of ram support, isolated energy and no-power rescue but contains conflicting figure item references. The 2026 Haas public manual provides a differently scoped comparison. **Neither OEM's settings or POWER OFF instruction transfers to an unverified OpenPressBrake.** All physical `VAL/PT` remain NOT RUN; no person-exposed operation authorized.

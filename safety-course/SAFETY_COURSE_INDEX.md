@@ -58,3 +58,12 @@ For the **separate authority of DG safety relay, non-safety-rated ENETR diagnost
 For a **historical compact hydraulic shut-off/discharge example**, read `../research/4400_HYDAC_DSV10_LOW_COST_SHUTOFF_DRAIN_SOURCE_SCOPE.md` and complete `4400_DSV10_COMBINED_ISOLATION_NEGATIVE_OVERLAP_FIELD_EXERCISE_2026-10-23.md`. HYDAC's 2003 brochure documents a brief P/S/T interconnection during manual changeover. This is not evidence of current product suitability, safe load holding or downstream depressurization. Preserve exact selected hydraulic topology and independent physical witnesses as UNKNOWN/NOT RUN.
 
 For pressure-zone traceability across `BND/ENE/ARC/DEP/SRS/PHY/AUTH/VAL/PT/CHG/RR`, use `4400_PRESSURE_ZONE_PHYSICAL_WITNESS_TRACEABILITY_WORKSHEET.md` as a conditional supplement to the existing eight-field SO final-element specification. It is a blank qualification card, not machine proof.
+
+
+### 4400 safety transfer — process locking, maintenance isolation, and workpiece sweep (2026-10-23)
+
+- [EUCHNER I1 process-lock versus L1 safety-lock source comparison](../research/4400_EUCHNER_PROCESS_LOCK_VS_SAFETY_LOCK_MONITORING_2026-10-22.md) and [substitution adversarial exercise](4400_EUCHNER_LOCK_SUBSTITUTION_ADVERSARIAL_2026-10-22.md): equal holding-force numbers, RFID and a green `OL` diagnostic do **not** transfer safety-rated guard-lock monitoring. Order 136595 M12 8-pin versus order 123375 M23 19-pin are not plug-compatible assumptions.
+- [OSHA maintenance energy-control/test-position source trace](../research/4400_OSHA_LOTO_TEST_POSITION_REISOLATION_STATE_MACHINE_2026-10-23.md) and [lockable-isolator retrofit technician exercise](4400_LOCKABLE_ISOLATOR_TAGOUT_RETROFIT_TECHNICIAN_CARD_2026-10-22.md): E-stop/control-circuit devices are not maintenance isolators; after a necessary powered positioning test, isolate and verify again.
+- [AKAS overrun-text conflict and moving-workpiece sweep exercise](4400_OVERTRAVEL_SOURCE_CONFLICT_AND_WORKPIECE_SWEEP_CASE_2026-10-23.md): no unqualified 11/13 mm acceptance limit and no transfer from laser test to sheet-sweep/secondary hazards.
+
+These are learner-visible documentary exercises, **not** hidden evaluator answers or selected-machine acceptance evidence. All physical `VAL/PT` remain NOT RUN.

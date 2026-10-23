@@ -70,3 +70,10 @@ Published exact archived `research/4400_HYDRAULIC_ENERGY_FAULT_TREE_QUALITATIVE_
 Published exact archived `research/4400_SAKB_MONITORING_COVERAGE_NSV_WITNESS_2026-10-22.md`, independently fetched Git blob `2864efe988192ed293bfe33d4e56229997f2d65b`. HAWE D 6335 2025 and D 6368 2026 original manufacturer PDFs source checked; five S-version monitored manifold valves do not prove NSV, pressure-zone, physical holding or maintenance safety. Cumulative §11S, index, progress and ledger updated. **Original archive 13/85 pending**, superseding all previous 14–19 counts. Session cumulative **six exact archived research releases plus two new original learner documents**; no hosted/local lab compute, physical tests or blind scores.
 
 **Next:** reconcile remaining 13 against current main; highest-value pending safety source should resolve actual independent stopping/holding/energy-isolation/guard-restart questions, not ordinary 3000 work. Continue source review if machine-specific inputs are unavailable; keep external evaluation open and separate. Append actual UTC end/duration to canonical log before exit.
+
+
+## Same-session 14:59Z GuardLink/Pilz diagnostic source release — latest state
+
+Published exact archived `research/4400_VENDOR_DIAGNOSTIC_CASCADE_GUARDLINK_SDD_BOUNDARY_2026-10-22.md`, verified original Git blob `be62e46bfffa9401274f8f7fdb8c9714487b3c47`. Rockwell/Pilz current official pages rechecked; Pilz SDD diagnostic reaction-time statement is explicitly not safety-related. Cumulative Safety Design Package §11T, index, progress and ledger updated. **Original archive 12/85 pending**, superseding earlier counts. Session cumulative **seven exact archived releases + two new original learner documents**, no physical test, lab compute or external score.
+
+**Next:** source-review remaining 12 unique archive candidates against main (not older checkpoint count); prioritize hydraulic energy isolation and selected guard/fault-restart proof, and preserve physical `IN-01..10`/independent `VAL/PT` restrictions. No hosted Actions runner. Append actual UTC lesson timing before exit and keep automation enabled.

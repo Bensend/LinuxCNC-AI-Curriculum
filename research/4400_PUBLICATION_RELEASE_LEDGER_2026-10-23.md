@@ -139,3 +139,5 @@ Two further exact original archive blobs verified after publication:
 - `safety-course/4400_GUARD_MOUNTING_ESCAPE_FIELD_QUALIFICATION_2026-10-22.md` — `dc3cf11617a9ee9314823e361fcf29d0b805a15b`.
 
 Official Schmersal AZM300 operating instructions distinguish AZM300Z safety-output withdrawal on unlock from AZM300B on guard opening. Pilz manufacturer accessory information cautions that bending escape-release push/pull cables can impair function and service life; bracket geometry, physical egress and selected force data remain machine-specific. **53/85 original archive candidates pending** (supersedes prior 55/85), assuming no concurrent publication. No machine testing, PL/SIL claim or hosted compute.
+
+**Non-archive source companion:** `research/4400_SCHMERSAL_AZM300Z_B_AND_PILZ_ESCAPE_CABLE_SOURCE_2026-10-23.md` adds direct official manufacturer output/cable evidence to the two published escape exercises. It does not alter **53/85** archive pending.

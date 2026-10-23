@@ -420,3 +420,6 @@ Added original `research/4400_PERSONNEL_KEY_WHOLE_BODY_ACCESS_VS_LOTO_SOURCE_AUD
 
 
 **2026-10-23T22:32Z original OEM research, NOT an archived release:** published `research/4400_CINCINNATI_PROFORM_RAM_RESTRAINT_LOTO_RESCUE_MANUAL_ERRATA_AUDIT_2026-10-23.md` and `safety-course/4400_RAM_SUPPORT_LOTO_AND_POWER_LOSS_RESCUE_TECHNICIAN_CARD_2026-10-23.md` using Cincinnati EM-560 N-06-14 and Haas 2026 HPB manufacturer manuals. The six missing exact original archive files remain **6/85 pending**; no reconstructed historical publication, physical test, external evaluation or laboratory compute.
+
+
+**2026-10-23T22:37Z further new original source research, NOT archive release:** `research/4400_PROFORM_OPTIONAL_MUTING_ADI_PLUG_FOOTSWITCH_AND_HYDRAULIC_ADDON_AUDIT_2026-10-23.md` published from Cincinnati 2014 OEM options/muting/ADI/auxiliary-energy text; original historical exact-source backlog remains **6/85 pending**. No live machine/plug test or compute.

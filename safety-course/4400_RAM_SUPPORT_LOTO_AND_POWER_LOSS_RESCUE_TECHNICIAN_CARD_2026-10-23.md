@@ -27,3 +27,16 @@ For any two cases, fill in **(a)** hazard and exposure; **(b)** exact source and
 
 ## Practical minimum release rule
 Do not operate with people exposed if physical stop/hold/energy/access/escape/restart safety requirements are unproven. Isolated/remote experimental operation requires its own risk review and people outside the hazard zone. Selected-machine `IN-01..10` and all `PHY-*` remain UNKNOWN; `VAL/PT` NOT RUN. No pressure, support, stop-time or PL/SIL value is supplied here.
+
+
+## OEM option and mode-change follow-on (open-book, paper only)
+
+| Case | New scenario | Correct discriminator |
+|---|---|---|
+| 13 | “A red GUARD OFF lamp means the ram is now safe for a helper.” | **REJECT.** It reports muting; require separately qualified alternative protection and actual physical stop/safe-motion/access evidence. |
+| 14 | “Two selected footswitches guarantee both operators are out of danger.” | **REJECT.** Step-selectable pedal logic is not two-hand safeguarding or personnel detection. |
+| 15 | “An OEM default ADI plug must be safe to substitute for our connected third-party device.” | **UNKNOWN/DO NOT SUBSTITUTE.** Need exact installed wiring, pinout, safety-function allocation and approved configuration. No claim that the plug inherently bypasses safety. |
+| 16 | “Main ram circuit isolated means die clamps and Auto Crown cannot contain energy.” | **REJECT.** Installed hydraulic options require separate energy-zone and mechanical load-path inventory. |
+| 17 | “The manual lists optional rear guarding, therefore it is present on this serial number.” | **REJECT.** Verify installed guards and accessible rear/side/helper zones. |
+
+Read [OEM options source audit](../research/4400_PROFORM_OPTIONAL_MUTING_ADI_PLUG_FOOTSWITCH_AND_HYDRAULIC_ADDON_AUDIT_2026-10-23.md). These are learner-visible non-blind exercises; no physical testing, no evaluator scoring and no safety authorization.

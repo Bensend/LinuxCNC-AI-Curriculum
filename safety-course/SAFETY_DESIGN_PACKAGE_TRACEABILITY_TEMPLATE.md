@@ -772,3 +772,6 @@ Trace `BND-REAR → HAZ-BACKGAUGE/ENTRAPMENT → SF-ACCESS/STOP/RESTART → ARC-
 
 
 **11CC pinned-source upgrade (same session):** At LinuxCNC **v2.7.15**, control.c lines 397–427 zeroes net_feed_scale for feed_inhibit and command.c lines 655–695/722–754 rejects new JOG_CONT/JOG_INCR when net_feed_scale < 0.0001. At **master commit 062dc7c097693bb68e76192516cd92878dd5ecdf**, control.c lines 428–490 retains feed-scale logic, but command.c lines 837–858/908–920 instead gates new jog commands on jog_inhibit. **SOURCE-CONFIRMED command acceptance divergence**, no runtime/physical stopping evidence. Upgrade claim classification from DOC-only discrepancy, but do not infer an exact change commit or safety-rated stop. See [pinned-source audit](../research/4400_LINUXCNC_FEED_INHIBIT_JOG_DOCUMENTATION_VERSION_DRIFT_2026-10-24.md).
+
+
+**11CC joint-wheel exception to simplistic wording:** At pinned master 062dc7c..., control.c lines 1125–1185 separately checks net_feed_scale for joint jogwheel counts, even though command.c keyboard/halui JOG_CONT/INCR checks jog_inhibit. The current manual's "not jogs" sentence is insufficient to generalize to every jog path. **SOURCE-CONFIRMED separate code paths, runtime effect of feed_inhibit through enables mask UNKNOWN**. Preserve ordinary/safety authority separation.

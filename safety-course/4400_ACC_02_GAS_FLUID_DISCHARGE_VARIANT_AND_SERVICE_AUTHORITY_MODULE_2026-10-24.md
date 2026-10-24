@@ -9,7 +9,7 @@ A fresh AI engineer can separate: (1) controlled protective-cycle energy; (2) fl
 
 ## Sources and confidence
 - [Original Parker PVSI-01 audit](../research/4400_PARKER_PVSI_GAS_FLUID_RESIDUAL_ENERGY_DISASSEMBLY_OEM_AUDIT_2026-10-24.md): **DOC-CONFIRMED, original PDF directly inspected**, printed pp. 3–5. Distinct fluid drain and gas precharge service; resistance during disassembly is a stop sign.
-- [HYDAC SAF catalog-variant audit](../research/4400_HYDAC_SAF_Y_Z_BLEED_VARIANT_AND_PHYSICAL_WITNESS_AUDIT_2026-10-24.md): **DOC-CONFIRMED from official indexed catalog and part page, full PDF NOT directly opened**; Y normally open vs Z normally closed; M manual vs E solenoid+manual. Do not extrapolate any selected machine state.
+- [HYDAC SAF catalog-variant audit](../research/4400_HYDAC_SAF_Y_Z_BLEED_VARIANT_AND_PHYSICAL_WITNESS_AUDIT_2026-10-24.md): **DOC-CONFIRMED from directly inspected older HYDAC 2003 original PDF plus official 2024 indexed catalog and part page (2024 full PDF NOT directly opened)**; Y normally open vs Z normally closed; M manual vs E solenoid+manual; older 2SV5E2 versus newer WSM06020 subassembly identity must not be conflated. Do not extrapolate any selected machine state.
 - [OSHA 1910.147](https://www.osha.gov/laws-regs/regulations/standardnumber/1910/1910.147) (d)(5)–(6): stored energy rendered safe; continued verification when hazardous reaccumulation is possible; authorized worker verifies isolation. **DOC-CONFIRMED** regulatory text, not an installed-circuit design.
 
 ## Six propositions that require different evidence
@@ -47,3 +47,6 @@ Complete [18 non-blind paper cases](4400_ACCUMULATOR_GAS_FLUID_SAF_VARIANT_TECHN
 **UNKNOWN:** OpenPressBrake actual accumulator presence, vessel type, Y1/Y2 fluid zone map, bleed-valve variant, gas charge, safe stop/hold, release, safety integrity, guard/escape and fresh restart. **G0/G1 HOLD; G2 NOT RUN; G3/G4 NOT AUTHORIZED; G5 HOLD.** This module is NOT GRADUATED. If there is no selected accumulator, document that from qualified inventory, but do not waive the machine's independent physical stop/hold obligations.
 
 **Next:** selected-machine as-built packet and independent fresh evaluator; if unavailable, rotate to another source-supported 4400 safety gap. No synthetic lab or GitHub-hosted compute justified.
+
+## Same-session cross-revision source addition
+Direct original HYDAC **E 3.551.17/08.03**, PDF pp. 3, 5, 9–10, documents an **E-to-M blanking-plug conversion**, and distinct SAF/DSV hardware. This makes a credible field-change failure path: the safety controller can continue energizing a disconnected output after automatic discharge was physically removed. A good software configuration or 'valve command' cannot resolve that contradiction. Mark the as-built `ARC/DEP/SRS/VAL/PT` evidence STALE and hold release until qualified selected-machine verification. Do not infer that 2003 spare parts fit 2024 WSM variants.

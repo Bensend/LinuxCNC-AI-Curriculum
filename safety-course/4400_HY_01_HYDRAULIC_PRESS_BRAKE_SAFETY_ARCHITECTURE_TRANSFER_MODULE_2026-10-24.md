@@ -166,3 +166,8 @@ Answers must cite source, claim classification, remaining UNKNOWN and safe dispo
 ## Handoff / graduation decision
 
 **Status: source-reading only, NOT GRADUATED.** Official manufacturer documentation and failure paths are substantial; no new LinuxCNC source trace or runtime test was necessary for this documentary question. The independent fresh-AI handoff, predictions and selected physical validation have **not** occurred. Do not claim 2520–25F0 graduation or machine safety certification. No GitHub-hosted Actions compute, self-hosted simulation, or physical experiment is justified by this lesson alone. **No personnel-exposed hazardous operation** until independently proven minimum safeguards; experimental work must be remote/isolated with all people outside danger zones and residual risk documented.
+
+
+## Fresh-AI handoff contract prepared (2026-10-24)
+
+The separate [novel two-concept OEM variant transfer handoff](../evaluation/4400_HY_01_FRESH_HANDOFF_CONTRACT_2026-10-24.md) provides an **unscored learner-visible assignment** with a blank evidence matrix and explicit information separation. **Prepared is not performed:** evaluator result `NOT RUN`, module `NOT GRADUATED`, selected machine `PHY/VAL/PT UNKNOWN/NOT RUN`.

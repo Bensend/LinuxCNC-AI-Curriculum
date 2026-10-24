@@ -330,3 +330,6 @@ Read the [D 6335 / D 6368 original OEM source audit](../research/4400_HAWE_SAKB_
 ### 4400-HY-01 — hydraulic press-brake safety source-to-architecture lesson (2026-10-24)
 
 The [complete 4000-level teaching module](4400_HY_01_HYDRAULIC_PRESS_BRAKE_SAFETY_ARCHITECTURE_TRANSFER_MODULE_2026-10-24.md) synthesizes the Bosch IH04/IH04E, HAWE ePRAX, and HAWE SAKB/NSV source audits into a practical hazard/energy/control/physical-witness curriculum. Includes manufacturer-edition matrix, `BND/ENE/PHY/AUTH/DEP` reasoning, three paper learning activities, human-factors redesign, failure paths, adversarial questions, and **predeclared OPEN** prediction/handoff gates. **SOURCE-READING / NOT GRADUATED**; no blind score, physical machine test or safety release.
+
+
+**4400-HY-01 fresh handoff prepared:** [independent, novel two-concept source-transfer assignment](../evaluation/4400_HY_01_FRESH_HANDOFF_CONTRACT_2026-10-24.md). No solution key or score included; **NOT RUN / NOT GRADUATED**. This does not alter 2520–25F0 external gates.

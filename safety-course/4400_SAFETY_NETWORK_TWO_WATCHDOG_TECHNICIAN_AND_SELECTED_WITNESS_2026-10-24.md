@@ -34,3 +34,13 @@ For each case provide: (a) which of normal control, ordinary bus, certified safe
 **Stop condition:** if a final element cannot demonstrably stop and hold the hazardous load, or a guard/occupancy boundary is unknown, **no personnel-exposed operation**. Isolated remote experiments are only possible with a separately approved risk assessment and exclusion; do not use this worksheet as permission.
 
 **Evidence classes:** manufacturer documentation = DOC-CONFIRMED for exact version; inspected code = SOURCE-CONFIRMED only at pinned commit; observed independent qualified test = TEST-CONFIRMED with raw evidence; unverified installed behavior = UNKNOWN. No scores or tests are recorded by this worksheet.
+
+## NET-02 extension — six additional PAPER sensor-truth cases (total 18)
+13. An SC-capable temperature channel reports a plausible constant value while a separate calibrated physical witness shows heating.
+14. Two Y-axis 'independent' position signals actually share one encoder through a software fanout.
+15. SC safety address and CRC match, but the two physical transducer leads are swapped between Y1 and Y2.
+16. Two sensors agree during a common 24 V supply brownout; one ordinary LinuxCNC display also agrees.
+17. A maintainer replaces an SC terminal with a visually similar ordinary EtherCAT analog input and attempts to preserve the old safety claim.
+18. A team interprets 'typical PL d' in a vendor product overview as proof of the entire press brake's PL d without assessing sensor voting, output final elements or gravity hold.
+
+For each answer with **actual independent sensor evidence** rather than CRC-only evidence. The manufacturer-indexed application-guide statement on single-channel-only use remains lower-strength than a directly inspected full original manual. These remain non-blind PAPER prompts, not scores or physical tests.

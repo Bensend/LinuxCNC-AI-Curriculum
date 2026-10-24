@@ -325,3 +325,8 @@ Use the [manufacturer-hosted HAWE B 6340 source trace](../research/4400_HAWE_EPR
 ### 4400 HAWE SAKB/NSV seal suffix and A/B port reversal (2026-10-24)
 
 Read the [D 6335 / D 6368 original OEM source audit](../research/4400_HAWE_SAKB_NSV_SEAL_SUFFIX_PORT_REVERSAL_SOURCE_AUDIT_2026-10-24.md) and [ten-case technician card](4400_HAWE_SAKB_NSV_SUFFIX_PORT_REVERSAL_TECHNICIAN_CARD_2026-10-24.md). **DOC-CONFIRMED:** SAKB `S` monitors five specified central-block valves, not automatically the two separate NSVs; NSV `L` means **without seal / with leakage flow**; NSV `050` versus `060` reverses A/B pressure/suction assignment; NSV is normally open and requires pilot pressure to close, unlike the different ePRAX integrated normally-closed family. Never infer ram holding, port pressure zone or safe state from a name, letter, HMI bit or generic diagram. `NS-01..10`, `NS-F01..10` paper-only, selected `IN/PHY/VAL/PT UNKNOWN/NOT RUN`.
+
+
+### 4400-HY-01 — hydraulic press-brake safety source-to-architecture lesson (2026-10-24)
+
+The [complete 4000-level teaching module](4400_HY_01_HYDRAULIC_PRESS_BRAKE_SAFETY_ARCHITECTURE_TRANSFER_MODULE_2026-10-24.md) synthesizes the Bosch IH04/IH04E, HAWE ePRAX, and HAWE SAKB/NSV source audits into a practical hazard/energy/control/physical-witness curriculum. Includes manufacturer-edition matrix, `BND/ENE/PHY/AUTH/DEP` reasoning, three paper learning activities, human-factors redesign, failure paths, adversarial questions, and **predeclared OPEN** prediction/handoff gates. **SOURCE-READING / NOT GRADUATED**; no blind score, physical machine test or safety release.

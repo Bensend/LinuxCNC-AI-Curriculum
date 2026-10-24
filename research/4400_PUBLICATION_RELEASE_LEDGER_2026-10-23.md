@@ -454,3 +454,6 @@ Original [2024 edition/physical-proposition source reconciliation](../research/4
 
 
 **2026-10-24 original HAWE D 6335/D 6368 source research (NOT archive restoration):** added `research/4400_HAWE_SAKB_NSV_SEAL_SUFFIX_PORT_REVERSAL_SOURCE_AUDIT_2026-10-24.md` and `safety-course/4400_HAWE_SAKB_NSV_SUFFIX_PORT_REVERSAL_TECHNICIAN_CARD_2026-10-24.md`; manufacturer-hosted originals establish `L` leakage suffix, `050/060` A/B port reversal, normally-open pilot-to-close NSV and monitoring-scope limits. Exact historical archive **6/85 pending**; no physical test/compute/external score.
+
+
+**2026-10-24 4400-HY-01 original teaching synthesis (NOT historical archive):** `safety-course/4400_HY_01_HYDRAULIC_PRESS_BRAKE_SAFETY_ARCHITECTURE_TRANSFER_MODULE_2026-10-24.md` consolidates Bosch/HAWE source distinctions and open future fresh evaluation. Not a blind score or machine release; historical archive **6/85 pending**.

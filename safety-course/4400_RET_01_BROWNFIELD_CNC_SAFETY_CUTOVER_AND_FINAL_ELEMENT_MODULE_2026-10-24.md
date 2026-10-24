@@ -52,7 +52,7 @@ A green HMI/PLC/FPGA status can be useful information, but is not a substitute f
 
 **D — Adversarial review.** Work 30 cases from the three cards. The correct action is often **HOLD** and a precise missing-evidence request, not a guessed fix.
 
-**E — Fresh handoff (NOT YET RUN).** Give an independent AI a *new* mixed-mill/press-cell scenario: a replacement CNC is connected to a retained safety PLC, a standard auxiliary output is labeled SAFE, a DC contactor suppressor changes, and the safety reset coincides with a retained cycle request. Require a function-by-function source-qualified hazard trace and a safe documentary verification plan without numerical invention. Do not supply a model answer in the handoff; have a separate evaluator score evidence classes, wrong-model transfer, final-element authority and physical/LOTO boundaries.
+**E — Fresh handoff (NOT YET RUN).** See the prepared [independent 4400-RET-01 source-transfer handoff](../evaluation/4400_RET_01_FRESH_SOURCE_TRANSFER_HANDOFF_2026-10-24.md); no learner submission, independent evaluator, score or graduation exists.  Give an independent AI a *new* mixed-mill/press-cell scenario: a replacement CNC is connected to a retained safety PLC, a standard auxiliary output is labeled SAFE, a DC contactor suppressor changes, and the safety reset coincides with a retained cycle request. Require a function-by-function source-qualified hazard trace and a safe documentary verification plan without numerical invention. Do not supply a model answer in the handoff; have a separate evaluator score evidence classes, wrong-model transfer, final-element authority and physical/LOTO boundaries.
 
 ## Prediction check — OPEN, not post-hoc evidence
 

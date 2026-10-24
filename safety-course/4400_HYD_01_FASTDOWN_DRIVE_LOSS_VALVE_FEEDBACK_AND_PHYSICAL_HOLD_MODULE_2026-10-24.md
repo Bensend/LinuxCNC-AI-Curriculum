@@ -57,3 +57,6 @@ Make **Stop not proven** the default UI state until actual evidence exists. Prov
 
 ## Next justified work
 Exact selected-machine safety PLC, valves, line-scale and drive-status ownership, Y1/Y2 stop/hold, residual-pressure and service support; independent fresh evaluator. If unavailable, rotate to another open 4400 safety branch. No source question here currently justifies a synthetic lab or hosted compute.
+
+## Same-session extension: flow-triggered hose rupture versus physical holding
+The [original HAWE LB D 6990 audit](../research/4400_HAWE_LB_LINE_RUPTURE_FLOW_THRESHOLD_ORIFICE_SURGE_SOURCE_AUDIT_2026-10-24.md) shows a separate safety component family that trips at a flow threshold, with variants allowing restricted bypass flow. It can nuisance-trip during decompression surges. The [12 additional PAPER scenarios](4400_LINE_RUPTURE_THRESHOLD_LEAK_AND_NUISANCE_TRIP_TECHNICIAN_CARD_2026-10-24.md) test why 'hose-burst valve installed' cannot replace selected-machine proof of slow-leak control, protected segment, sustained gravity holding or maintenance isolation. **Not asserted installed** on HAWE ePRAX or OpenPressBrake. Selected conditional IN-04ad UNKNOWN; physical/evaluator NOT RUN.

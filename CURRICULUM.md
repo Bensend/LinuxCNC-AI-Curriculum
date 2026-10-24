@@ -232,3 +232,8 @@ Source-reading branches, **NOT GRADUATED**: [OEM cable-pull E-stop tension warni
 ### 2026-10-24 4400 safety: MAT-01 floor presence sensing and reset
 
 [4400-MAT-01 source-reading module](safety-course/4400_MAT_01_FLOOR_OCCUPANCY_SAFETY_FUNCTION_MODULE_2026-10-24.md) traces Rockwell MatGuard and Schmersal SMS4/5 exact sensor/trim/controller variants, detection-population limits, effective floor/joint coverage, auto/manual reset and final-element/physical stop distinctions. **NOT GRADUATED**: 14 paper cases and blank selected-machine worksheet are not physical proof or fresh external evaluation. Conditional `IN-04p UNKNOWN`; 2520–25F0 external gates OPEN. Normal LinuxCNC/FPGA never receives personnel-safety authority.
+
+
+### 2026-10-24 4400 safety: S3000 optical/service calibration branch
+
+[2026 SICK S3000 original optical shadow/front-screen replacement audit](research/4400_SICK_S3000_OPTICAL_SHADOW_FRONT_SCREEN_REPLACEMENT_CALIBRATION_AUDIT_2026-10-24.md) and [12-case technician practice](safety-course/4400_S3000_OPTICAL_SHADOW_SCREEN_SERVICE_TECHNICIAN_CARD_2026-10-24.md) deepen 4400-ESPE-01 with shadow/reflective surface/transparent-cover detection limits and mandatory new-screen optical calibration despite saved system-plug configuration. **SOURCE-READING / NOT GRADUATED**, conditional selected `IN-04q UNKNOWN`; no selected scanner or physical stop/hold proof. This is separate from the existing EFI field semantics and does not shift safety authority into LinuxCNC/FPGA.

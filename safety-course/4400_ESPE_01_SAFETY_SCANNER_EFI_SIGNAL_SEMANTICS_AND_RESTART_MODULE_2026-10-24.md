@@ -92,3 +92,8 @@ Collect exact installed rear-access/guard design and safety-controller signal tr
 ## Additional documentary discriminator — field switching before exposure
 
 Original SICK S3000 8009942/ZE09/2026-09-09 **§4.3.3 pp.39–40** requires advancing monitoring-case switching when input delay, external EFI control inputs or external OSSDs add delay; if deterministic timing cannot be guaranteed, protective-field overlap or temporary simultaneous monitoring is described. **§7.8.2 pp.97–98** documents complementary dual-channel sampling versus 1-of-n sampling and invalid-state errors. **§7.13.1 p.111** requires the case-switching control to meet the required safety level. **DOC-CONFIRMED for this product**, but no SICK timing number is an OpenPressBrake stop-time or field-overlap acceptance. A student must distinguish `field selection`, `field evaluation`, `restart authority`, and `physical stopping` as four different proof obligations.
+
+
+## 2026-10-24 optical/service continuation (not graduation)
+
+A correct EFI/OSSD protective-field signal path does **not** establish optical coverage. Read the [original SICK S3000 2026 optical shadow/front-screen calibration audit](../research/4400_SICK_S3000_OPTICAL_SHADOW_FRONT_SCREEN_REPLACEMENT_CALIBRATION_AUDIT_2026-10-24.md) and [12-case paper technician card](4400_S3000_OPTICAL_SHADOW_SCREEN_SERVICE_TECHNICIAN_CARD_2026-10-24.md). Obstacles and highly reflective objects can leave unmonitored areas; improvised clear covers may circumvent contamination detection. **Front-screen replacement requires optical calibration** even with saved system-plug configuration. This extension remains documentary only: no selected scanner, physical stop/hold or fresh independent competency score; ESPE-01 NOT GRADUATED.

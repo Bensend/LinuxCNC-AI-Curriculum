@@ -25,3 +25,10 @@ No GitHub-hosted runners used; **0 hosted Actions minutes**, **0 local laborator
 5. Immediately before end, record UTC end/elapsed/overlap in full `LESSON_LOG.md` by SHA-safe append and verify. Keep hourly curriculum enabled.
 
 Prior canonical session ended **2026-10-24T03:39:25.871Z**; current began **04:33:23.391Z** (about **53.96 minutes later**); no known overlap at session start. External concurrent activity not independently proven.
+
+
+## Same-session high-consequence source conflict — updated priority
+
+A second original manufacturer trace exposed **opposite closing-flow directions for the same HYDAC 710028 / RBE-R1/2-X-75**: US official online catalogue **2→1** versus HYDAC International **EN 5.174.14/10.21** original illustrated PDF pp. 1–2 **1→2**. See [dedicated source-conflict audit](../research/4400_HYDAC_RBE_710028_OPPOSITE_PORT_DIRECTION_OEM_CONFLICT_2026-10-24.md). **DOC-CONFIRMED** contradiction of published text, **UNKNOWN** selected physical part behavior. This supersedes any assumption that the first fuse audit's 2→1 US statement is a universal RBE direction. Source audit, technician `HB-11`, `IN-04d`, index, design package **§11BE**, ledger and PROGRESS corrected. If 710028 is actually selected, **manufacturer written clarification tied to part/batch and cylinder port map is a blocking requirement before any protective-direction claim or physical validation plan**. Do not perform an improvised line-open test.
+
+**Additional next-work question:** seek HYDAC official engineering erratum/revision history for 710028 or exact installed part evidence. If unavailable, mark this source branch `UNKNOWN/HOLD` and rotate to other genuinely new safety research; do not repeatedly search without new leads. No `TEST-CONFIRMED` result or selected-machine release.

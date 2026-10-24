@@ -43,3 +43,6 @@ Complete [18 paper technician cases](4400_SETUP_MODE_SLS_ENABLE_AND_RESTART_TECH
 
 ## Higher-level queue
 Trace LinuxCNC versioned jog/feed-inhibit behavior at exact commits only if selected software revision and question justify it. Obtain exact OEM current manuals/configuration if a real SLS device is selected. Neither uncertainty may be silently promoted to a claim that the selected machine is safe.
+
+
+**Source-depth caution:** Pinned master joint wheel-jog code in control.c lines 1125–1185 checks net_feed_scale, unlike keyboard/halui EMCMOT_JOG_CONT/INCR command.c checks of jog_inhibit. A universal "feed-inhibit never affects jogs" claim would overread the current manual. Which wheel state yields net_feed_scale zero requires further enables-mask tracing; no runtime evidence. See linked source audit.

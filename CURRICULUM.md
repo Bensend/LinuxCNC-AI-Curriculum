@@ -227,3 +227,8 @@ Additional 4400 safety source branch: [CIP Safety connection reaction time versu
 ### 2026-10-24 4400 safety: cable-pull and tactile contact protection
 
 Source-reading branches, **NOT GRADUATED**: [OEM cable-pull E-stop tension warning, GuardLink standard-data and full-span reset audit](research/4400_CABLE_PULL_ESTOP_TENSION_MARGIN_GUARDLINK_STANDARD_TAG_SOURCE_AUDIT_2026-10-24.md) and [ISO/Schmersal/Mayser/ASO tactile-edge sensor physics, contact overtravel and auto-reset audit](research/4400_TACTILE_SAFETY_EDGE_SENSOR_PRINCIPLE_AUTORESET_AND_OVERRUN_SOURCE_AUDIT_2026-10-24.md). These extend the 2530/2590/25C0/4400 independent-safety boundary to conveyors, feeders, CNC gantries and automated cells. Conditional selected-machine intake `IN-04n/o` remains UNKNOWN, no installed-device assertion or physical proof. [Fresh independent cross-device handoff](evaluation/4400_CABLE_PULL_TACTILE_EDGE_FRESH_SOURCE_TRANSFER_HANDOFF_2026-10-24.md) PREPARED/NOT SCORED. Normal LinuxCNC/FPGA remains outside personnel-safety authority.
+
+
+### 2026-10-24 4400 safety: MAT-01 floor presence sensing and reset
+
+[4400-MAT-01 source-reading module](safety-course/4400_MAT_01_FLOOR_OCCUPANCY_SAFETY_FUNCTION_MODULE_2026-10-24.md) traces Rockwell MatGuard and Schmersal SMS4/5 exact sensor/trim/controller variants, detection-population limits, effective floor/joint coverage, auto/manual reset and final-element/physical stop distinctions. **NOT GRADUATED**: 14 paper cases and blank selected-machine worksheet are not physical proof or fresh external evaluation. Conditional `IN-04p UNKNOWN`; 2520–25F0 external gates OPEN. Normal LinuxCNC/FPGA never receives personnel-safety authority.

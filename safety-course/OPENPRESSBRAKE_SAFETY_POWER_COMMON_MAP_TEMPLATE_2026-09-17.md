@@ -124,3 +124,22 @@ The board-design lane should fill this template from the actual schematic/netlis
 - SICK, *UE4457 IP67 Safety Remote I/Os and Safety Remote Controller for DeviceNet Safety*, power-supply installation section; warning concerning external 24-V short/backfeed to switched output supply.
 - SICK, *T4000 Standard Operating Instructions*, 2024-10-02, dual-channel/isolated safety-output connection guidance.
 - Pilz, *PNOZ 16S Operating Manual*, 1003518-EN-12, feedback-loop/start-loop short-circuit limitation and protected/separate-installation guidance.
+
+
+## G. Exact reset-input edge and actuator-feedback capture (2026-10-24 source upgrade)
+
+The [Rockwell MSR142RTP reset/power-up source audit](../research/4400_MSR142_RESET_EDGE_POWERUP_FEEDBACK_WIRING_SOURCE_AUDIT_2026-10-24.md) supplies a concrete counterexample to a generic “manual reset” label. The OEM's **T** mode does not monitor the S33–S34 edge and can reenable immediately at power-up if safety/reset inputs close together; **R** monitors a transition, with **440R-xxxxxM** requiring button release. This is **DOC-CONFIRMED only for that product/edition**, not evidence that OpenPressBrake uses it.
+
+| Required selected-device record | As-built evidence required | Current state |
+|---|---|---|
+| Manufacturer, full catalog suffix, revision and installed mode | Nameplate, dated manufacturer instructions, photo, drawing reference | UNKNOWN |
+| Reset terminals and actual input topology | Signed terminal-to-terminal schematic, pushbutton NC/NO behavior, jumpers, protected routing | UNKNOWN |
+| Does selected mode monitor an edge? Which edge? | OEM manual clause plus verified configuration and circuit; no label-only inference | UNKNOWN |
+| Reset held/shorted/maintained across power recovery | Qualified isolated/remote commissioning plan, fresh physical evidence when authorized | NOT RUN |
+| Controlled actuators and EDM/feedback contacts | Actual NC contact identity, wiring, monitored faults and what the contact **cannot** observe | UNKNOWN |
+| Input-channel topology and diagnostic scope | Four-wire vs other arrangements; cross-loop/fault coverage per selected OEM and installation | UNKNOWN |
+| Field supply vs safety logic supply vs normal CNC supply | Actual common/return/coil and power-loss ordering; backfeed possibilities | UNKNOWN |
+| Separate fresh local production START after safety reset | Independent safety function/restart SRS and normal command freshness evidence | UNKNOWN |
+| Actual beam stop/hold and maintenance energy state | Qualified independent `PHY-STOP/HOLD/ENERGY`, `VAL/PT` after intake | NOT RUN |
+
+**Change control:** a relay model/suffix, reset link, input-channel topology, EDM contact, supply common or PLC reset source change invalidates dependent `BND/DEP/SRS/ARC/VAL/PT` evidence until independently reviewed. Do not copy a component's PL/SIL or proof-test assumptions to the machine. Avoid a reset control that is inconvenient enough to invite permanent bridging; provide accessible, visible, intentional operation without allowing reset itself to command hazardous motion.

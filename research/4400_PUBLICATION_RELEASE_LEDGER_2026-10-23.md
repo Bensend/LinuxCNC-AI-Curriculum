@@ -483,3 +483,8 @@ Published `research/4400_HOSE_BURST_VELOCITY_FUSE_FLOW_WINDOW_AND_UNSAFE_TEST_TR
 ### 2026-10-24 original sheet-follower/workpiece safety source investigation — NOT historical archive release
 
 Published new original `research/4400_PRESS_BRAKE_SHEET_WHIP_UP_AND_INDEPENDENT_FOLLOWER_SAFETY_BOUNDARY_2026-10-24.md` and `safety-course/4400_SHEET_FOLLOWER_WORKPIECE_WHIP_UP_AND_STOP_COVERAGE_TECHNICIAN_CARD_2026-10-24.md`. Original Oregon OSHA 2980.pdf p.33, AMADA February 2016 p.7, Fab Supply and ENUTRON product pages, and SHENCHONG 2022 separate follower scale/PLC/learning instructions inspected. New independent follower safety-authority/physical-witness questions and 15 paper cases, not machine validation or blind score. Cincinnati BASEFORM large original PDF could not be inspected; search excerpt not promoted to DOC-CONFIRMED. Historical exact archive **6/85 pending**. No hosted/local lab compute, physical test or machine safety release.
+
+
+### 2026-10-24 original tool-retention versus clamping source branch — NOT historical archive release
+
+Published new original `research/4400_PRESS_BRAKE_TOOL_RETENTION_MAGLOCK_SAFETY_CLICK_AND_CLAMP_AUTHORITY_2026-10-24.md` and `safety-course/4400_PRESS_BRAKE_TOOL_RETENTION_VS_CLAMPING_AND_FRAGMENT_TECHNICIAN_CARD_2026-10-24.md`. Manufacturer original WILA Safety-Click (12.5 kg product-specific suitability), Mate 2017 Maglock (explicit clamp non-substitution) and AMADA 2016 fly-off prevention die evidence inspected. Twelve paper cases; §11BG and conditional `IN-04f`. No selected machine, physical test, external evaluator or compute; historical exact archive **6/85 pending**.

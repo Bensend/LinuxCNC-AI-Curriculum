@@ -320,3 +320,8 @@ Use the [manufacturer-hosted HAWE B 6340 source trace](../research/4400_HAWE_EPR
 
 
 **HAWE variant check:** the same source audit now reconciles newer [HAWE D 6340 07-2026 product documentation](https://productfinder.hawe.com/downloads/D6340-en.pdf): `S` cylinder-module code supplies valve-position monitoring, **no code** does not; Slow Up `X` is absent, `A/B` are optional accumulator variants. Identify **both** actual Y1/Y2 order codes before crediting feedback or stored-energy assumptions. Additional `HW-F11..13` paper traps.
+
+
+### 4400 HAWE SAKB/NSV seal suffix and A/B port reversal (2026-10-24)
+
+Read the [D 6335 / D 6368 original OEM source audit](../research/4400_HAWE_SAKB_NSV_SEAL_SUFFIX_PORT_REVERSAL_SOURCE_AUDIT_2026-10-24.md) and [ten-case technician card](4400_HAWE_SAKB_NSV_SUFFIX_PORT_REVERSAL_TECHNICIAN_CARD_2026-10-24.md). **DOC-CONFIRMED:** SAKB `S` monitors five specified central-block valves, not automatically the two separate NSVs; NSV `L` means **without seal / with leakage flow**; NSV `050` versus `060` reverses A/B pressure/suction assignment; NSV is normally open and requires pilot pressure to close, unlike the different ePRAX integrated normally-closed family. Never infer ram holding, port pressure zone or safe state from a name, letter, HMI bit or generic diagram. `NS-01..10`, `NS-F01..10` paper-only, selected `IN/PHY/VAL/PT UNKNOWN/NOT RUN`.

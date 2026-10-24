@@ -330,3 +330,6 @@ Resumed latest 00:39Z checkpoint after START_HERE/governance, 2500 index, 2570/2
 
 
 **Same-session cross-family source adversarial review:** HAWE SAKB `S` versus ePRAX modular `S` represent **different** monitored-valve counts/coverage; SAKB separately identifies NSVs while ePRAX integrates anti-cavitation. B 6340's conditional linear-scale/orifice statement cannot be repurposed as permission to omit physical protection based on normal CNC feedback. Updated canonical selected-machine intake `IN-03a/IN-04a/IN-10a` and paper cases `HW-F14..15`; no tests, hardware changes or safety approval.
+
+
+**Same-session HAWE SAKB/NSV source audit:** Published [D 6335 / D 6368 seal-suffix and A/B port-reversal research](research/4400_HAWE_SAKB_NSV_SEAL_SUFFIX_PORT_REVERSAL_SOURCE_AUDIT_2026-10-24.md) and [ten-case technician card](safety-course/4400_HAWE_SAKB_NSV_SUFFIX_PORT_REVERSAL_TECHNICIAN_CARD_2026-10-24.md). **DOC-CONFIRMED**: SAKB `S` enumerates five central monitored valves, but separate NSVs are not thereby covered; NSV `L` lacks seal/has leakage flow; `050` and `060` swap A/B pressure/suction; NSV normally open requires pilot to close; ePRAX integrated normally-closed design is distinct. §11AY and learner index updated. No selected-machine claims, no physical test or compute; `IN/PHY UNKNOWN`, `VAL/PT NOT RUN`.

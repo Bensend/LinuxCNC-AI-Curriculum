@@ -451,3 +451,6 @@ Original [2024 edition/physical-proposition source reconciliation](../research/4
 
 
 **2026-10-24 HAWE D 6340 07-2026 source addendum:** updated original HAWE audit and technician card with OEM `S` vs no valve monitoring and `X` vs `A/B` optional accumulator order-code distinctions. **Not** an archived candidate release; exact historical backlog **6/85**. No physical test/compute.
+
+
+**2026-10-24 original HAWE D 6335/D 6368 source research (NOT archive restoration):** added `research/4400_HAWE_SAKB_NSV_SEAL_SUFFIX_PORT_REVERSAL_SOURCE_AUDIT_2026-10-24.md` and `safety-course/4400_HAWE_SAKB_NSV_SUFFIX_PORT_REVERSAL_TECHNICIAN_CARD_2026-10-24.md`; manufacturer-hosted originals establish `L` leakage suffix, `050/060` A/B port reversal, normally-open pilot-to-close NSV and monitoring-scope limits. Exact historical archive **6/85 pending**; no physical test/compute/external score.

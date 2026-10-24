@@ -630,3 +630,8 @@ The [PROFORM+ option-source audit](../research/4400_PROFORM_OPTIONAL_MUTING_ADI_
 
 
 **11AX cross-family adversarial extension:** HAWE SAKB `S` monitored-valve coverage (D 6335) and ePRAX modular `S` coverage (D 6340) are **not identical**; ePRAX integrates normally-closed anti-cavitation while SAKB documentation separately identifies NSVs. B 6340's conditional safety-linear-scale/orifice design alternative is **not** a permission to remove physical restrictions based on normal CNC position readback. Intake now explicitly requires `IN-04a/IN-03a/IN-10a` complete option/feedback/revision evidence per Y axis. `BND/DEP/ARC/VAL UNKNOWN` until actual installed facts; no exposed release.
+
+
+### 11AY — HAWE SAKB / NSV `L` seal suffix and `050/060` A/B port reversal (2026-10-24)
+
+[Manufacturer D 6335 / D 6368 source audit](../research/4400_HAWE_SAKB_NSV_SEAL_SUFFIX_PORT_REVERSAL_SOURCE_AUDIT_2026-10-24.md) and [paper field card](4400_HAWE_SAKB_NSV_SUFFIX_PORT_REVERSAL_TECHNICIAN_CARD_2026-10-24.md) close a critical `DEP/ENE/ARC` documentation trap. **DOC-CONFIRMED:** SAKB's five monitored valves do not automatically cover separately mounted NSVs; D 6368 `L` explicitly has designed leakage flow, `050` versus `060` swaps A/B pressure/suction ports, and the described NSV basic position is open until pilot pressure closes it. ePRAX's integrated normally-closed anti-cavitation is a **different product family**. `PHY/VAL` must separately witness actual load holding, zone pressure and restraint. `IN-03a/04a/10a` require complete installed codes and drawing revisions. No numeric acceptance, PL/SIL or selected truth table inferred; G0/G1 HOLD, G3/G4 NOT AUTHORIZED.

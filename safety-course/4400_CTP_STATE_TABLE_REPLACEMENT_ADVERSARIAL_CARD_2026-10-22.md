@@ -22,3 +22,6 @@ The replacement is **not approved as equivalent** merely because it mechanically
 ## Human-factors redesign
 
 A spare part must be selected by **safety function and exact approved SKU**, not shape, force headline or connector adapter. Put the approved part/revision and functional acceptance test on the inside of the service panel; use a keyed/controlled spare and easy-access test point. Make the correct replacement quicker than a plausible wrong one. Keep inside escape reachable and outside release controlled without encouraging defeat.
+
+## 2026-10-24 original-manual verification extension
+The [direct original 32-page I.-AP 2126290-08-07/24 and 36-page CTP-AP 2124217-08-06/21 audit](../research/4400_EUCHNER_CTP_I1_L1_L2_LOCK_MONITORING_POWER_LOSS_AND_TEACHIN_OEM_RECONCILIATION_2026-10-24.md) independently verifies the closed-unlocked FO difference and adds **external safety authority for the L1 unlock solenoid**, **L1/I1 spring-lock entrapment versus L2/I2 power-to-lock release on power loss**, and **Unicode vs Multicode/teach-in change control**. The OEM manuals cite 2013 ISO 14119 while the publisher's current edition is 2024; full new normative clauses were not inspected. These are extra service acceptance discriminators, not physical machine proof or a new blind score.

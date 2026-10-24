@@ -478,3 +478,8 @@ Published `research/4400_HOSE_BURST_VELOCITY_FUSE_FLOW_WINDOW_AND_UNSAFE_TEST_TR
 
 
 **2026-10-24 same-session critical original source reconciliation, NOT archive recovery:** Published `research/4400_HYDAC_RBE_710028_OPPOSITE_PORT_DIRECTION_OEM_CONFLICT_2026-10-24.md`. HYDAC US part **710028 RBE-R1/2-X-75** says **2→1** closes; original HYDAC International **EN 5.174.14/10.21** PDF pp. 1–2 lists **the same part 710028** but says **1→2** closes. This is a **DOC-CONFIRMED source conflict**, not a proven product defect or physical result. Corrected earlier flow-fuse audit/card, index and selected `IN-04d` to require official manufacturer reconciliation before any installed-direction safety claim. Historical archive **6/85 exact files pending**; no external evaluator, test or compute.
+
+
+### 2026-10-24 original sheet-follower/workpiece safety source investigation — NOT historical archive release
+
+Published new original `research/4400_PRESS_BRAKE_SHEET_WHIP_UP_AND_INDEPENDENT_FOLLOWER_SAFETY_BOUNDARY_2026-10-24.md` and `safety-course/4400_SHEET_FOLLOWER_WORKPIECE_WHIP_UP_AND_STOP_COVERAGE_TECHNICIAN_CARD_2026-10-24.md`. Original Oregon OSHA 2980.pdf p.33, AMADA February 2016 p.7, Fab Supply and ENUTRON product pages, and SHENCHONG 2022 separate follower scale/PLC/learning instructions inspected. New independent follower safety-authority/physical-witness questions and 15 paper cases, not machine validation or blind score. Cincinnati BASEFORM large original PDF could not be inspected; search excerpt not promoted to DOC-CONFIRMED. Historical exact archive **6/85 pending**. No hosted/local lab compute, physical test or machine safety release.

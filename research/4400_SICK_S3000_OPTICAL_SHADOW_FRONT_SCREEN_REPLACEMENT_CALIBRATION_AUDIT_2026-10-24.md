@@ -1,0 +1,39 @@
+# 4400 SICK S3000 — optical shadow, reflective surface, front-screen calibration and restart-after-service
+**2026-10-24 | Manufacturer-source investigation / NOT selected-machine proof.** This is a new optical/maintenance evidence branch, distinct from the existing S3000 EFI field-allocation/OSSD logic audit. **No scanner installation is asserted for OpenPressBrake.**
+
+## Original source
+SICK AG, *S3000 Safety Laser Scanners*, original operating instructions **8009942/ZE09/2026-09-09**, 172-page manufacturer PDF, https://www.sick.com/media/docs/3/63/863/operating_instructions_s3000_safety_laser_scanner_en_im0011863.pdf . Examined printed pp. **14–15, 67, 103, 123–127, 129–131**. Claims below are **DOC-CONFIRMED for this exact edition and relevant S3000 variants**. Prior separate [EFI/OSSD signal audit](4400_SICK_S3000_EFI_UNALLOCATED_FIELD_CLEAR_AND_OSSD_BIT_INTEGRATION_TRAPS_2026-10-24.md) addresses unallocated protective-field status and unused local OSSDs; do not conflate signal correctness with physical sensing.
+
+## Critical OEM facts
+| ID | Source location | Finding | Failure path / limitation |
+|---|---|---|---|
+| OP-01 | §3.1 printed p.14–15 | Scanner uses rotating mirror and laser pulses, 190° field, selected angular/object resolution; its protective function requires a clear optical path. | A green field-status bit cannot cover behind physical obstacles or outside the configured scan plane. |
+| OP-02 | §3.1 p.15 | OEM forbids obscuring optical path with transparent screens, plexiglass or lenses that circumvent contamination measurement. | A well-meant 'protective dust shield' can invalidate detection. **Do not install one as a workaround.** |
+| OP-03 | §5.1 printed p.67 | OEM warns obstacles create **movement shadows** that the scanner cannot monitor; add other safeguards if shadow is hazardous. | A machine column, stock pallet or fixture can leave occupied space invisible even while the field is reported clear. |
+| OP-04 | §5.1 p.67 | Smoke, fog, vapor, condensation, reflective objects, retroreflectors, sunlight and some strong lights can impair scanning or cause nuisance stops; highly specular objects can blank part of monitored surface in some cases. | Do not promise either always-safe failure or universal failure from these conditions; inspect actual geometry and environment. |
+| OP-05 | §7.11 printed p.103 | Universal I/O outputs for contamination/error/warning/field are **non-safe** and not for safety-related functions. | HMI contamination tag can guide maintenance but cannot serve as sole safety path. |
+| OP-06 | §8.4 printed p.123–124 | When the scanner is exchanged but **the system plug is retained**, it reads saved configuration automatically. OEM says a new qualified-safety-personnel acceptance is not required for this specific exchange **but its monthly check must still be carried out**. If the **system plug is also replaced**, configuration transfer and qualified acceptance are required. | Do not interpret 'same plug' as exemption from all physical verification, or assume a copied configuration proves geometry. |
+| OP-07 | §9.4 printed p.127–130 | **After replacing the optical front screen, calibration to the new screen is mandatory.** Incorrect optical reference can prevent person detection. OEM specifies new clean screen, clean environment, 10–30 °C calibration, no operation during replacement, and calibration after reconnecting saved system-plug configuration. | Restored scanner config/green LED **does not** establish valid new front-screen optical reference. |
+| OP-08 | §9.5 printed p.130–131 | I/O module replacement carries unexpected-start hazard; OEM demands power isolation. Compatibility is asymmetric: **Professional -> Expert** possible, **Expert -> Professional** not upward compatible. | Catalog-family substitution and automatic config restore do not prove exact I/O compatibility or safe machine restart. |
+| OP-09 | §9.2 printed p.125–126 | OEM expects checking protective field at multiple positions and reconciling floor markings/gaps; discrepancies require shutdown and qualified investigation. | One successful test near the scanner does not prove all shadowed corners and mode-dependent fields. |
+
+## Three separate maintenance events
+**(A) Same-type scanner exchange with existing system plug:** OEM documents auto-load and a reduced device-level acceptance obligation, **but requires its periodic check**. The selected machine may require additional change-control or independent physical proof; do not override it with a generic SICK sentence.
+
+**(B) Front-screen replacement:** an optical hardware change requires a new **front-screen calibration** even though the saved configuration loads automatically. A config checksum or valid field shape is not proof of correct contamination optical reference.
+
+**(C) I/O module or system-plug replacement:** check exact variant and compatibility, source configuration and safety I/O mapping; OEM explicitly requires isolation for service and acceptance after a replaced system plug. **Do not** treat an I/O module as interchangeable based on connector fit.
+
+## Adversarial failure sequence (INFERENCE until witnessed)
+A dusty plasma/router/press-brake rear scanner produces nuisance contamination warnings. Maintenance adds a clear protective shield; a shiny pallet creates a shadow; the HMI still reports field clear because the configured scan plane cannot see a person on a raised machine base. Later a scratched front screen is replaced, saved system-plug config loads, and staff skip optical calibration. The apparent successful software restart does not prove the original protective function has survived. Each step is a **separate** change-control and physical-proof obligation, not proof this sequence occurred on a real machine.
+
+## Safer-by-default service architecture
+- Put scanner where front screen can be **cleaned and replaced without awkward disassembly**, while preserving protected sight lines and qualified mounting geometry. Keep OEM-approved cleaning materials and correct spare front screens on hand; never add improvised clear shields.
+- Make service instructions an explicit branching checklist: clean only / front-screen replace / whole scanner swap / system plug swap / I/O variant change. Record **which** acceptance, calibration and periodic checks apply.
+- Design around stock, pallet, guard-post and tooling shadows before installation. If shadows cannot be eliminated, use properly engineered additional guards or occupancy sensing (e.g. a mat **only where its effective floor coverage is proved**); do not simply disable scanner nuisance alarms.
+- Diagnostics can flow to LinuxCNC as **non-safety status** with timestamp, variant and fault origin. Safety PLC and qualified physical final elements independently own protective stopping and restart.
+
+## Evidence and test gate
+`BND/HAZ`: scan plane, standing surfaces, approach/escape paths, material/tool configurations and operating modes UNKNOWN. `ARC/DEP`: exact S3000 sensor head, I/O module, system plug, firmware, optical front-screen revision, safety field/OSSD/EFI routing and final elements UNKNOWN. `PHY/VAL/PT`: actual physical stop/hold, gaps/shadows, contamination response, reset/restart and calibration witness **NOT RUN**. `CHG`: optical cover, screen, module, plug, reflective material, fixtures, floor, guard or motion change triggers appropriate revalidation.
+
+No live human-in-hazard test, intentional optical defeat, unqualified front-screen calibration, or guessed stop distance is authorized. Qualified isolated/remote validation must keep people outside the danger zone and separately establish actual hydraulic/gravity safe state. **G0/G1 HOLD; G3/G4 NOT AUTHORIZED.** This is source-based transferable knowledge, not proof of selected-machine safety.

@@ -38,3 +38,14 @@ A maintainer orders an apparently equivalent SAF block with the same nominal por
 **DOC-CONFIRMED (manufacturer-indexed, limited access):** exact catalog family options, part 2206132 listed features. **INFERENCE:** fault propagation and change-control consequence. **UNKNOWN:** exact selected block, return pressure, valve fault tolerance, safety performance, cylinder holding and physical stop. **TEST-CONFIRMED:** none. **SOURCE-CONFIRMED LinuxCNC:** none. This is not a certification of any HYDAC part or evidence of its installation on OpenPressBrake.
 
 A source-availability stop is local: full 2024 HYDAC PDF could not be directly opened; the separately and directly inspected Parker service PDF provides independent, complementary gas/fluid service evidence.
+
+## Independent direct original OEM cross-revision check (same session)
+**DOC-CONFIRMED directly inspected:** HYDAC Australia-hosted original *Safety and Shut-off Block SAF/DSV*, **E 3.551.17/08.03** (2003 edition), 21-page manufacturer PDF: https://www.hydac.com.au/pub/media/Ourcompanies/s/a/safetyvalveblocks.pdf . This older edition is not a substitute for the current selected part manual.
+
+- PDF p. 3 (index 2), §1.2–1.5: distinct pressure relief, main shutoff, manual pressure release and **optional** solenoid pressure-release path; identifies S accumulator, P pump, T tank, M1 test gauge and M2 gauge connections for this edition.
+- PDF p. 5 (index 4), §2: **M = manual discharge; E = solenoid + manual; Y = open when de-energised (2SV5E2Y); Z = closed when de-energised (2SV5E2Z)**. This independently corroborates the *semantic* Y/Z difference from the 2024 manufacturer-indexed catalog, but the older valve hardware identifier **2SV5E2** is **not** the 2024 indexed **WSM06020** identifier. Do not assume coil/plug or service-parts interchangeability across editions.
+- PDF p. 9 (index 8), §4: the spare-parts table explicitly identifies a blanking-plug assembly **converting E to M**. This is a concrete maintenance modification that can remove automatic discharge even when the same external block remains installed.
+- PDF p. 10 (index 9), §5.1: DSV10 is a **different three-way safety-block family** with M, EY and EZ models. Do not silently transfer a DSV valve or truth table to an SAF manifold.
+- Manufacturer document includes pressure/flow/switching information under **2003 edition-specific conditions**; no numbers are copied into a selected-machine SRS.
+
+**Cross-edition conflict/limit:** 2003 PDF directly inspected, 2024 catalog only indexed (403 on direct open). The functional Y/Z coding aligns; the named valve subassembly differs. Exact current installed model, OEM revision and service kit are **UNKNOWN**. Treat substitution as `CHG` and require renewed physical validation, not a parts-store equivalence assumption.

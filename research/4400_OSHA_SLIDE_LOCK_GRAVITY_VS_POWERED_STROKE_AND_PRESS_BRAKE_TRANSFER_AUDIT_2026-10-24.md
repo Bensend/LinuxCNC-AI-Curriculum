@@ -43,3 +43,6 @@ What does a positively engaged mechanical slide lock actually protect, and what 
 
 ## Study-method finding
 Record four separate propositions for each support: **(a) indicated engaged; (b) physically engaged; (c) structurally capable for the justified load case; (d) hazardous powered energy separately isolated**. None follows automatically from another. Treat missing evidence as UNKNOWN, not a PASS.
+
+## Original-directive internal cross-reference anomaly
+**DOC-CONFIRMED (direct original text):** Appendix §3.5.1 says initial testing should hold the maximum anticipated load "as defined in section 3.1"; but Appendix §3.1 is **Control Reliability**, while **§3.2** defines **Maximum Anticipated Load**. This appears to be an internal section-number error in the published directive. Preserve the verbatim location and reconcile meaning using the immediately adjacent definitions; do **not** silently rewrite the source or derive a test load from the mistaken reference. Any selected-machine acceptance criterion still requires qualified OEM/design evidence. This is a useful fresh-learner test of source-reading fidelity, not a reason to discard the rest of the directive.

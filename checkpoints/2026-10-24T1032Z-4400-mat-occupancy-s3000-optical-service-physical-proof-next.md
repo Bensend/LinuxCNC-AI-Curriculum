@@ -32,3 +32,7 @@ No workflow dispatched. GitHub-hosted compute **0**, local self-hosted lab **0**
 5. Immediately before session end, append UTC end, elapsed minutes and overlap to the **complete** `LESSON_LOG.md` with SHA-guarded safe append; verify persisted row. Do not use truncated content.
 
 **Short-session continuation:** after MAT-01 source and integration reached documentary information-gain stop, rotated to distinct S3000 optical/maintenance source and technician transfer; six original artifacts plus integration represent substantive two-branch work. No redundant simulation warranted.
+
+## Independent publication integrity check
+
+All **six** new original documents and this checkpoint independently re-fetched from main by path and blob SHA. Complete untruncated Git tree at 0680a4adbd52250b8c423a4c55a8d655df7bb84a: **4,191 entries**. Safety-course index parsed: **163 relative links, 161 distinct targets, zero missing**. This is repository link integrity, **not** physical machine validation or independent learning assessment.

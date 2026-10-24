@@ -351,3 +351,5 @@ Read the [Festo MS6-SV-E/D and ROSS DM1/DM2 Series C source-scope audit](../rese
 
 
 **Vertical pneumatic axis counterexample:** [Festo manufacturer page 49/52/56 source reconciliation](../research/4400_VERTICAL_PNEUMATIC_HOLD_VS_EXHAUST_FESTO_SOURCE_RECONCILIATION_2026-10-24.md) demonstrates that some qualified vertical-axis stopping/holding concepts **retain compressed air intentionally** and require standstill-before-clamp, while Festo explicitly warns that a clamping/end lock alone is not a complete safety solution. **DOC-CONFIRMED for those exact OEM examples**, not selected OpenPressBrake hardware. Separate protective stop/hold from maintenance isolation and gravity restraint; all selected physical witnesses UNKNOWN/NOT RUN.
+
+**Prerequisite distinction:** 2580's existing [fluid-power fault-tree and pneumatic analogue](2580_FLUID_POWER_FAULT_TREE_AND_PNEUMATIC_ANALOGUE_2026-09-23.md) already teaches the generic energy propositions and is READY FOR EXTERNAL/FRESH EVALUATION. These 4400 Festo/ROSS investigations add **manufacturer-specific application and diagnostic allocation evidence**, not a duplicate 2580 module or an external score.

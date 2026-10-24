@@ -66,3 +66,7 @@ A single 'Reset Everything' control is a predictable bypass hazard if it clears 
 | Source-level LinuxCNC normal command retention under power return | Unneeded for safety authorization | May inform diagnostics but cannot prove safety | LOW | Does not justify compute now |
 
 **Counterfactual:** If any unknown selected reset or hydraulic detail differs from expectation, the physical safety conclusion changes. Thus the module is **NOT GRADUATED** and selected operation is **NOT AUTHORIZED**. The general distinction between normal control, independent safety logic and physical energy control is supported by the original OEM sources.
+
+
+## Source-confirmed LinuxCNC internal E-stop reset boundary (pinned revision)
+The [pinned `062dc7c` HALUI→NML→Task→IOControl source trace](../research/4400_LINUXCNC_INTERNAL_ESTOP_RESET_HALUI_NML_IOCONTROL_SOURCE_TRACE_2026-10-24.md) is **SOURCE-CONFIRMED**, not physical validation. A rising `halui.estop.reset` sends an `EMC_TASK_SET_STATE::ESTOP_RESET` NML request; Task's `emcAuxEstopOff()` sets normal HAL `iocontrol.0.user-enable-out` and `user-request-enable` high. A **separate** `EMC_TASK_STATE::ON` path calls `emcTrajEnable()`. The names `estop` and `enable` do not confer safety integrity: these are userspace/Task normal-control signals, not independent contactor/valve/ram physical witnesses. Do not wire them as sole personnel-safety authority. No LinuxCNC program-autorestart claim is made; that question requires separate evidence.

@@ -69,3 +69,7 @@ An independent fresh evaluator should present a **different** controller and rec
 | Personnel-exposed operation / maintenance entry | **NOT AUTHORIZED** |
 
 **Next evidence:** selected as-built safety supply/0 V/FE/PE, exact safety output and diagnostic configuration, physical Y1/Y2/guard/final-element evidence, independent fresh-AI transfer. Do not perform energized wire-disconnect fault injection. If selected evidence is unavailable, rotate to another open 4400 safety source gap without reopening graduated 3000 tracks.
+
+## Information-separated handoff prepared (2026-10-24)
+
+[4400-PWR-01 fresh independent transfer assignment](../evaluation/4400_PWR_01_FRESH_INFORMATION_SEPARATED_HANDOFF_2026-10-24.md) is **PREPARED / NOT ADMINISTERED / NOT SCORED**. The evaluator must select an unfamiliar real OEM source privately, preserve learner precommit and contamination separation, and score only after evidence reveal. No hidden key is stored in this learner-facing repository and no graduation or physical validation is implied.

@@ -296,3 +296,6 @@ Source-reading branches, **NOT GRADUATED**: [OEM cable-pull E-stop tension warni
 
 
 **4400-RAD-03 same-session original-manual edition comparison:** [R15 v09/v11 manufacturer audit](research/4400_TELE_RADIO_R15_V09_V11_VERSION_SCOPE_AND_POWER_CYCLE_AUDIT_2026-10-24.md) and [8 PAPER transfer cases](safety-course/4400_RADIO_MANUAL_VERSION_AND_PAIRING_CHANGE_TECHNICIAN_CARD_2026-10-24.md). v11 safety-function list adds T29-12 versus v09 T19-02; both SW0014-14v24+ and both cancel PLd STOP in discontinuous mode 5; v11 power-cycle after PLd->non-PLd change. Exact pair, certification, selected wiring and physical STOP still UNKNOWN. §11CU, IN-04ag UNKNOWN, no compute or external score.
+
+
+**RAD-01 engineering verification extension:** [Staged qualified radio safety commissioning/fault review plan](safety-course/4400_RADIO_PENDANT_STAGED_COMMISSIONING_AND_FAULT_REVIEW_PLAN_2026-10-24.md) with 14 fault conditions and separate OEM readback, deenergized chain inspection, nonhazardous terminal proof, protected actual stop/hold, change control and fresh-start gates. Paper only; no physical test, selected radio system, external score or compute. §11CV, IN-04ag UNKNOWN.

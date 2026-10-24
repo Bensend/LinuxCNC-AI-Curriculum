@@ -27,3 +27,5 @@
 10. `UF-10` Remote HMI reads scanner diagnostic green after power restoration; require independent physical zone inspection, local reset and separate new start.
 
 For each: record `BND → HAZ → SF → ARC → DEP → PHY → VAL/PT`, exact manufacturer edition, **which signal is consumed**, interlock location, output/final element, physical witness and UNKNOWNs. `UF-01..10 PAPER ONLY`. No self-scored external evaluation, no scanner numerical transfer, no selected-machine test. Do not operate with people exposed absent a demonstrated minimum safety threshold.
+
+**Additional paper adversarial cases (source §4.3.3 / §7.8.2):** `UF-11` A mode changes to a different protective field after the moving hazard already reaches the new region; identify missing case-switch timing/overlap proof. `UF-12` A complementary input pair reads 1/1 after a wiring change; identify invalid-state fault semantics rather than treating it as 'mode enabled'. `UF-13` A 1-of-n selector reads all zero after cable disconnection; manufacturer defines this as an error, not an intentionally permissive mode. These are **paper-only**, no physical fault injection. Total `UF-01..13`.

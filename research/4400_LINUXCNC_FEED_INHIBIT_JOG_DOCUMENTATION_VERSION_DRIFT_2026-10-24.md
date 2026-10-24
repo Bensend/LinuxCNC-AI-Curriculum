@@ -1,5 +1,5 @@
 # 4400 — LinuxCNC feed-inhibit versus jogging: documented version drift, not a safety function
-**2026-10-24 | DOC-CONFIRMED conflicting versioned documentation; SOURCE/TEST NOT CONFIRMED**
+**2026-10-24 | DOC-CONFIRMED versioned documentation; SOURCE-CONFIRMED pinned new-jog command-gating divergence; TEST NOT RUN**
 
 ## Question
 Would a LinuxCNC feed-inhibit HAL pin reliably stop all jog motion during guard-open setup? The official manual pages **disagree across version surfaces**. Neither interpretation creates a personnel-safety function.
@@ -20,7 +20,7 @@ Would a LinuxCNC feed-inhibit HAL pin reliably stop all jog motion during guard-
 | Current motion.jog-stop | Requests stop of active jog following configured acceleration | DOC-CONFIRMED |
 | Current motion.jog-stop-immediate | Requests immediate stop of active jog | DOC-CONFIRMED; physical stop distance NOT established |
 | HALUI jog pins | Provide ordinary joint/axis jog requests and speed scaling | DOC-CONFIRMED |
-| Whether behavior changed at a specific LinuxCNC commit | **UNKNOWN**; no source diff or executable experiment this session | NOT SOURCE/TEST CONFIRMED |
+| Whether behavior changed at a specific LinuxCNC commit | **SOURCE-CONFIRMED** for two pinned command acceptance paths; exact first-changing commit UNKNOWN | TEST NOT RUN |
 
 ## Why this matters
 An integrator copying a 2.7 HAL example into a current LinuxCNC build could incorrectly assume feed-inhibit also suppresses a jog pendant. The discrepancy could be a real behavior change, documentation correction or other version-dependent condition. **Do not silently choose one explanation.** Check the installed LinuxCNC revision and trace/test the actual behavior **without exposure**.
@@ -32,3 +32,11 @@ At the actual selected LinuxCNC commit, inspect motmod motion command processing
 
 ## Practical design
 The safety controller owns the mode/guard/enabling/overspeed response and independent final elements; LinuxCNC receives permission to issue ordinary jog commands **only as an additional convenience layer**. Mode exit and fault remove permission regardless of stale LinuxCNC command state. No safe speed, physical stopping, gravity holding, PL/SIL, pressure or stop time is asserted.
+
+
+## Pinned source trace (read-only, no runtime)
+**LinuxCNC v2.7.15:** src/emc/motion/control.c lines 397–427 computes net_feed_scale, forcing zero when feed_inhibit is asserted subject to enables mask. src/emc/motion/command.c lines 655–695 in EMCMOT_JOG_CONT rejects a new jog when net_feed_scale < 0.0001; lines 722–754 similarly gate EMCMOT_JOG_INCR. See [v2.7.15 command.c](https://github.com/LinuxCNC/linuxcnc/blob/v2.7.15/src/emc/motion/command.c#L655-L695) and [control.c](https://github.com/LinuxCNC/linuxcnc/blob/v2.7.15/src/emc/motion/control.c#L397-L427). **SOURCE-CONFIRMED** for these command acceptance paths; not proof that an already moving axis physically stops.
+
+**LinuxCNC master pinned commit 062dc7c097693bb68e76192516cd92878dd5ecdf (retrieved 2026-10-24):** src/emc/motion/control.c lines 428–490 still computes net_feed_scale and zeroes it on feed_inhibit; src/emc/motion/command.c lines 837–858 handles EMCMOT_JOG_CONT by checking motion enable and **separate jog_inhibit HAL pin**, with no net_feed_scale gate at that location; EMCMOT_JOG_INCR lines 908–920 likewise checks jog_inhibit. src/emc/motion/motion.c lines 526–529 registers feed_hold, feed_inhibit and jog_inhibit separately. See [pinned command.c](https://github.com/LinuxCNC/linuxcnc/blob/062dc7c097693bb68e76192516cd92878dd5ecdf/src/emc/motion/command.c#L837-L858), [control.c](https://github.com/LinuxCNC/linuxcnc/blob/062dc7c097693bb68e76192516cd92878dd5ecdf/src/emc/motion/control.c#L428-L490), and [motion.c](https://github.com/LinuxCNC/linuxcnc/blob/062dc7c097693bb68e76192516cd92878dd5ecdf/src/emc/motion/motion.c#L524-L529).
+
+**Call flow:** motion.c HAL pin registration -> control.c periodic feed-scale calculation -> command.c jog command acceptance -> free trajectory planner. v2.7.15 gates new JOG_CONT/JOG_INCR on net_feed_scale; pinned master gates on jog_inhibit. **SOURCE-CONFIRMED** command-gating divergence. Exact first-changing commit, all jog entry paths, already-active jog behavior and runtime remain unverified. This retires the vague hypothesis that only manual wording changed, but does not establish any safety-rated stop. No new compute justified.

@@ -43,3 +43,7 @@ Complete [16 paper scenarios](4400_RADIO_PENDANT_LINK_LOSS_OWNERSHIP_AND_REARM_T
 - **G3/G4:** personnel-exposed hazardous commissioning and operation NOT AUTHORIZED.
 - **G5:** independent information-separated transfer evaluation OPEN.
 No invented stop time, distance, integrity rating or valve truth table. Do not claim that any radio system is installed on OpenPressBrake.
+
+
+## Same-session RAD-02 standards-scope and mobile-HMI extension
+Read [official IEC 62745 publisher-scope / FME 2024 industry guideline audit](../research/4400_IEC62745_FME_MOBILE_DEVICE_CABLELESS_SAFETY_AUTHORITY_SCOPE_2026-10-24.md) and complete [10 additional PAPER cases](4400_MOBILE_HMI_VS_CERTIFIED_RADIO_STOP_TECHNICIAN_CARD_2026-10-24.md). IEC 62745:2017 publisher abstract confirms the subject of cableless portable operator stations; the complete licensed normative standard was **not** read. FME's March 2023-status guidance addresses general-purpose phones/tablets, not certified radio pendant integration; its 0.5 s guideline is **not** a universal machine stop-time requirement. The engineering transfer is: **onscreen STOP != certified emergency stop**, **Wi-Fi link != safety authorization**, **link restored != safe fresh motion**, and **radio STOP relay open != gravity load held**. Keep accessible fixed hardwired safety controls and independent physical safeguards; remote HMI read-only by default. This is not a new OpenPressBrake hardware assertion.

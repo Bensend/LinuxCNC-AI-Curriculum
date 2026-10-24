@@ -145,3 +145,11 @@ If the selected machine has any contactor/relay used for protective energy withd
 | `IN-04l` | Exact safety-output module, hardware Step/firmware, Q test-pulse enable/disable, pulse/diagnostic configuration, downstream capacitive or inductive load, suppressor, wiring and cross-circuit exclusion, manufacturer compensating measures and changed physical stop/hold witnesses. [XTIO OEM source audit](../research/4400_SICK_XTIO_DISABLED_TEST_PULSE_ALL_OUTPUTS_DEGRADE_AND_TRANSIENT_HIGH_AUDIT_2026-10-24.md). | **UNKNOWN / NOT RUN** |
 
 These additions do not imply any particular PLC is installed. **Do not energize or intentionally open 0 V/ground on an exposed machine for validation.** G0/G1 remain HOLD and G3/G4 NOT AUTHORIZED until the selected-machine safety/energy evidence is established.
+
+## 2026-10-24 conditional safety-network connection evidence
+
+| Conditional ID | Required as-built evidence (only if a safety fieldbus exists) | Current |
+|---|---|---|
+| `IN-04m` | Exact safety controller/firmware/project, CIP Safety or FSoE connection identity/address, safety I/O owner, CRTL/RPI/multipliers or watchdog, fault response, per-connection/group acknowledgment, restart, qualified safety output/final element, physical stop/hold/access/energy witnesses and change review. See [Rockwell/Beckhoff OEM comparison](../research/4400_CIP_SAFETY_CRTL_VS_FSOE_WATCHDOG_ACK_AND_SIL_UI_TRAP_SOURCE_AUDIT_2026-10-24.md). | **UNKNOWN / NOT RUN** |
+
+This is not evidence that a safety network exists on OpenPressBrake. An ordinary LinuxCNC Ethernet status cannot be substituted for the selected safety connection. Do not perform live hazardous network-disconnect fault injection with people exposed.

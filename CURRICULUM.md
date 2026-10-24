@@ -217,3 +217,7 @@ Every module uses `MODULE_TEMPLATE.md`. A module does not graduate from prose al
 ## Public/Private Boundary
 
 Machine-specific proprietary design information belongs outside this public curriculum. Capstone simulations and 3000-level examples should remain generic or use public community examples so they teach LinuxCNC behavior without publishing private machine drawings or private hardware design details.
+
+### 2026-10-24 4400 safety: PWR-01 electrical common-cause and diagnostics
+
+The [non-graduated 4400-PWR-01 module](safety-course/4400_PWR_01_SAFETY_IO_SUPPLY_RETURN_AND_DIAGNOSTIC_CONFIG_MODULE_2026-10-24.md) traces original SICK lost-0 V, reverse-current false-high, and XTIO output test-pulse configuration hazards. It extends 25A0/25B0 and brownfield 4400-RET-01. Selected-machine physical witnesses, independent fresh-AI transfer and all safety release gates remain open.

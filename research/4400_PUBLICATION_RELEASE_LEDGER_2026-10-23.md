@@ -510,3 +510,6 @@ Published [source/regulatory audit](4400_BROWNFIELD_CNC_RETROFIT_SAFETY_PLC_CUTO
 
 
 **Same-session original integration, NOT historical archive:** [4400-RET-01 non-graduated module](../safety-course/4400_RET_01_BROWNFIELD_CNC_SAFETY_CUTOVER_AND_FINAL_ELEMENT_MODULE_2026-10-24.md) added as **eighth original document** in this session; `CURRICULUM.md` and safety index updated. The source-reading module integrates three audited source branches and 30 paper cases, with fresh independent evaluation and physical safety release explicitly OPEN. Historical archive **6/85 pending**; no compute, machine test, external score or exposed operation.
+
+
+**Same-session 4400-RET-01 fresh evaluation preparation:** [novel independent handoff contract](../evaluation/4400_RET_01_FRESH_SOURCE_TRANSFER_HANDOFF_2026-10-24.md) published as **ninth original document**; not administered, scored or graduated. Original exact archive still **6/85 pending**; no physical tests or hosted/local compute.

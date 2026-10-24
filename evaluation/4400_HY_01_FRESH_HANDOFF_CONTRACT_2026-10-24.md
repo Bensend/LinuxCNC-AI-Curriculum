@@ -29,6 +29,14 @@ This is an **invented assessment packet**. No claim is made that these configura
 5. Give a **human-factors design improvement** that makes correct valve/port identification, guard restoration and rated ram restraint easier than bypass or improvisation. Name the `CHG/VAL/PT` evidence that would become stale after the redesign.
 6. State the **operation restriction** for personnel exposure and how experimental research could proceed only if a qualified isolated/remote plan keeps everyone outside the danger zone.
 
+## Precommitment, independent feedback and contamination controls
+
+If a **fresh** learner/evaluator pair is available, create an immutable learner submission **before** revealing any evaluator outcome. The learner response must include (a) primary diagnosis/prediction, (b) causal mechanism, (c) expected externally checkable observation, (d) source path/page and diagnostic sequence, (e) plausible alternatives, (f) falsifier, (g) confidence **0–100%**, (h) actual solution time, and (i) consulted resources. Preserve the original response; write corrections separately.
+
+The evaluator must independently inspect the cited original OEM edition and distinguish source-confirmed facts from inferences; **do not** use the module authoring assistant's self-assessment as an oracle. For a development-bank attempt, score the five `BLIND_FEEDBACK_PROTOCOL.md` dimensions (prediction, mechanism, efficiency, uncertainty/safety boundary, confidence calibration) **0–2 each**, total **/10**, and record error class. If the learner saw a near-verbatim answer, mark `CONTAMINATED`; if source conflict or invalid oracle prevents fair scoring, mark `EVALUATION_INVALID`. This handoff is **not** a sealed benchmark. A miss requires a distinct novel transfer retest, not the same question repeated with an answer pasted into the module.
+
+No physical machine result is available as an oracle. A paper score can support documentary reasoning competence **only**, never personnel-exposed release, hydraulic design acceptance or a `TEST-CONFIRMED` machine claim.
+
 ## Evidence and scoring record (blank until independent run)
 
 | Gate | Fresh evaluator observation | Evidence URL/artifact | Status |

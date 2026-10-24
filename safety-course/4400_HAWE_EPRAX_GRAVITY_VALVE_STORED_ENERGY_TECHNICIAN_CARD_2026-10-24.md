@@ -37,3 +37,13 @@ A technician can reach a valve connector in seconds but needs 20 minutes to inst
 | HW-F13 | "The 04-2026 operating manual and 07-2026 datasheet must have identical circuits." | **Reject.** Distinct editions; reconcile selected serial/revision and drawing identity before transferring pin/valve claims. |
 
 All `HW-F11..13` remain paper-only, `VAL/PT NOT RUN`.
+
+
+## Cross-family traps
+
+| Case | Misleading claim | Correct answer |
+|---|---|---|
+| HW-F14 | "The HAWE SAKB S monitors five valves, so our HAWE ePRAX S monitors five." | **Reject.** D 6335 SAKB and D 6340 ePRAX have different enumerated coverage; verify exact installed family, variant and all feedback channels. |
+| HW-F15 | "The manual mentions monitored linear scales, so we can remove the factory flow restriction and use ordinary LinuxCNC position feedback." | **Reject.** B 6340's conditional OEM-specific statement is not a general substitute for physical flow limiting or independent safety-rated motion monitoring. No modification without selected-machine safety design and validation. |
+
+`HW-F14..15` are paper-only; no hardware changes or live tests authorized.

@@ -627,3 +627,6 @@ The [PROFORM+ option-source audit](../research/4400_PROFORM_OPTIONAL_MUTING_ADI_
 
 
 **11AX option-code addendum (HAWE D 6340 07-2026):** newer OEM datasheet `https://productfinder.hawe.com/downloads/D6340-en.pdf` explicitly differentiates cylinder-module **`S` monitored-valve** option from **no monitoring**, and Slow Up **`X` absent** from **`A/B` accumulator variants**. `DEP/AUTH/ENE` must be qualified by **actual left/right installed order codes, electrical channels and hydraulic drawings**, not by an example product image or a generic variant circuit. B 6340 04-2026 and D 6340 07-2026 are distinct revisions; reconcile before `ARC/VAL/PT` credit. Selected machine remains UNKNOWN.
+
+
+**11AX cross-family adversarial extension:** HAWE SAKB `S` monitored-valve coverage (D 6335) and ePRAX modular `S` coverage (D 6340) are **not identical**; ePRAX integrates normally-closed anti-cavitation while SAKB documentation separately identifies NSVs. B 6340's conditional safety-linear-scale/orifice design alternative is **not** a permission to remove physical restrictions based on normal CNC position readback. Intake now explicitly requires `IN-04a/IN-03a/IN-10a` complete option/feedback/revision evidence per Y axis. `BND/DEP/ARC/VAL UNKNOWN` until actual installed facts; no exposed release.

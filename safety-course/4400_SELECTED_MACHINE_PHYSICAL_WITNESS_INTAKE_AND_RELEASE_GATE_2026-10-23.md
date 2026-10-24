@@ -72,3 +72,16 @@ Copy this table into the **actual** cumulative Safety Design Package with unique
 | `G5` change/restart | `CHG` impact review, stale evidence revalidated, deliberate reset + fresh ordinary start | HOLD |
 
 **Evidence labels:** `DOC-CONFIRMED` for cited published OSHA material; `INFERENCE` for this generic intake/gating design; selected-machine details `UNKNOWN`; physical `TEST-CONFIRMED` **none**. Do not infer a PL/SIL, stopping time/distance, pressure threshold, DCavg or hydraulic truth table. No simulation is justified while selected-machine intake is missing. No personnel-exposed hazardous operation; if an experiment is necessary, use isolated/remote methods with people outside the danger zone and explicitly documented residual risk.
+
+
+## 2026-10-24 exact hydraulic product-variant intake addendum (Bosch / HAWE)
+
+The [Bosch IH04 versus IH04E audit](../research/4400_BOSCH_IH04_VALVE_FEEDBACK_LEAKAGE_REPLACEMENT_SCOPE_AUDIT_2026-10-24.md) and [HAWE ePRAX B 6340 / D 6340 audit](../research/4400_HAWE_EPRAX_2026_GRAVITY_VALVE_ACCUMULATOR_SAFETY_SOURCE_TRACE_2026-10-24.md) add **three required subfields** to `IN-03/IN-04/IN-10`, to be filled for **each actual Y1 and Y2 side**:
+
+| Subfield | Required as-built evidence | Why absence blocks release |
+|---|---|---|
+| `IN-04a` hydraulic family / option identity | Complete manufacturer, product family, model, **every suffix/option**, serial and drawing/edition for each valve block, anti-cavitation device and optional accumulator; photo plus signed BOM/drawing reconciliation | Similar-looking modules and even the same manufacturer's `S` code can have different monitor coverage; ePRAX `X` vs `A/B` changes stored energy. |
+| `IN-03a` safety feedback / final-element coverage | Actual physical target of **each** valve/linear-scale feedback, safety-related input, safety controller logic ownership and output to final element, with unmonitored paths explicitly identified | Normal analog valve telemetry and an expected switch state cannot prove absence of hydraulic leakage, actual beam holding or independent stop authority. |
+| `IN-10a` revision/change invalidation | Manufacturer manual/datasheet editions and selected assembly drawing identity, last valve/orifice/gauge/drive/sensor replacement and affected reaction-time/stop/hold revalidation evidence | OEM B 6340 04-2026 and D 6340 07-2026 differ in edition; Bosch calls for reaction-time rechecks after safety-valve replacement. Same footprint/letter is not same physical safety proposition. |
+
+This is a **documentation gate**, not a test recipe. `IN-04a/IN-03a/IN-10a UNKNOWN` until actual machine evidence is obtained. Do not perform valve-open, hose-disconnect, or unrestrained-ram experiments to fill the gaps.

@@ -327,3 +327,6 @@ Resumed latest 00:39Z checkpoint after START_HERE/governance, 2500 index, 2570/2
 
 
 **Same-session D 6340 edition/option gate:** Manufacturer-hosted HAWE D 6340 07-2026 product documentation independently shows `S` monitored-valve vs no-monitoring cylinder-module code, and `X` no-Slow-Up vs `A/B` accumulator variants. Added `HW-15..17` and `HW-F11..13` plus §11AX option qualification. Reconcile newer D 6340 against older B 6340 and actual installed Y1/Y2 codes; no machine evidence or numeric safety claim.
+
+
+**Same-session cross-family source adversarial review:** HAWE SAKB `S` versus ePRAX modular `S` represent **different** monitored-valve counts/coverage; SAKB separately identifies NSVs while ePRAX integrates anti-cavitation. B 6340's conditional linear-scale/orifice statement cannot be repurposed as permission to omit physical protection based on normal CNC feedback. Updated canonical selected-machine intake `IN-03a/IN-04a/IN-10a` and paper cases `HW-F14..15`; no tests, hardware changes or safety approval.

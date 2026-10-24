@@ -509,3 +509,6 @@ Integrated cumulative safety package **§§11CA–11CC**, conditional **IN-04v**
 
 
 **Same-session pinned LinuxCNC source deepening (2026-10-24):** After SET-01 documentary work, read actual LinuxCNC/linuxcnc **v2.7.15** and **master commit 062dc7c097693bb68e76192516cd92878dd5ecdf** motion control.c/command.c/motion.c. **SOURCE-CONFIRMED** v2.7.15 control.c feed-inhibit -> net_feed_scale=0 and command.c JOG_CONT/JOG_INCR rejection when scale < 0.0001; current pinned master instead checks separate jog_inhibit in new-jog handlers while control.c still calculates net_feed_scale. The prior DOC-only contradiction is now source-traced at two revisions; first-changing commit and runtime physical stop still UNKNOWN/NOT RUN. Updated [source audit](research/4400_LINUXCNC_FEED_INHIBIT_JOG_DOCUMENTATION_VERSION_DRIFT_2026-10-24.md), SET-01 module, index and design §11CC. No simulation or compute needed; no safety authority inferred.
+
+
+**Same-session jogwheel source exception:** Inspected pinned master control.c lines 1125–1185 and found **joint wheel jog** still checks net_feed_scale, unlike JOG_CONT/INCR command handler. This narrows the documented "feed-inhibit not jogs" interpretation; behavior depends on enables mask and jog type, with no runtime test. Updated source audit, SET-01 case 11, module and cumulative design. No physical/safety claim.

@@ -15,7 +15,7 @@ For each case identify (a) hazard and exposed people; (b) ordinary-control versu
 | SET-08 | SLS trips and drive performs STOP A | Coast is not immediate stop or gravity hold; physical motion and access require validation. |
 | SET-09 | SLS trips and drive performs STOP B | Controlled braking may fail with supply/drive fault; verify configured response, final elements and residual movement. |
 | SET-10 | Siemens encoderless speed estimate after motor switched off | OEM example cannot directly monitor speed after power-off; do not claim stationary shaft or safe load. |
-| SET-11 | LinuxCNC 2.7 manual says feed-inhibit includes jogs | Current manual says not jogs; version-specific conflict requires pinned source/test, neither is safety-rated. |
+| SET-11 | LinuxCNC 2.7 manual says feed-inhibit includes jogs | Current manual says not jogs; pinned master keyboard JOG_CONT/INCR checks jog_inhibit but **joint wheel jog** still checks net_feed_scale. Exact path and enables mask matter; neither is safety-rated. |
 | SET-12 | CNC jog-stop-immediate pin goes TRUE | HAL request is not a proven physical stop distance or safe holding. |
 | SET-13 | Kinetix example resumes normal operation after setup exit | Example not permission for retained AUTO command; demand independent fresh start after verified exit/rearm. |
 | SET-14 | Maintenance under a suspended hydraulic ram with SLS enabled | SLS cannot replace positive restraint, isolation and verified stored-energy control. |

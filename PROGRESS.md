@@ -383,3 +383,6 @@ Integrated **§11BD** in cumulative safety design, conditional `IN-04d` in selec
 
 
 **Same-session critical OEM source conflict (2026-10-24):** Published [HYDAC 710028 opposing port-direction source audit](research/4400_HYDAC_RBE_710028_OPPOSITE_PORT_DIRECTION_OEM_CONFLICT_2026-10-24.md). US HYDAC official 710028 listing describes **2→1** closing, whereas original HYDAC International **EN 5.174.14/10.21** pp. 1–2 identifies the **same 710028** and describes **1→2** closing. Both are `DOC-CONFIRMED` *document statements*; physical truth **UNKNOWN**. Corrected earlier 4400 fuse source/card, added `HB-11`, selected `IN-04d` manufacturer-resolution blocker, index and design package **§11BE**. No machine test, manufacturer clarification, numerical criterion or safety release. This is a substantive source-conflict discovery, not another redundant general safety summary.
+
+
+**Integrity check:** independently fetched the three new original files and latest checkpoint from `main`; complete untruncated Git tree **4,146 entries**, safety-course index **124 relative Markdown links / 122 distinct targets / zero missing**. No compute was triggered by documentation-only writes.

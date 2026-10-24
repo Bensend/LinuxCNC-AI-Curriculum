@@ -457,3 +457,8 @@ Original [2024 edition/physical-proposition source reconciliation](../research/4
 
 
 **2026-10-24 4400-HY-01 original teaching synthesis (NOT historical archive):** `safety-course/4400_HY_01_HYDRAULIC_PRESS_BRAKE_SAFETY_ARCHITECTURE_TRANSFER_MODULE_2026-10-24.md` consolidates Bosch/HAWE source distinctions and open future fresh evaluation. Not a blind score or machine release; historical archive **6/85 pending**.
+
+
+### 2026-10-24T02:35Z new source research outside original archive
+
+Four **new original** files, **not** exact candidates from the original 85-document staged ZIP, were published to main: `research/4400_MSR142_RESET_EDGE_POWERUP_FEEDBACK_WIRING_SOURCE_AUDIT_2026-10-24.md`, `safety-course/4400_RESET_EDGE_POWER_RESTORATION_AND_FEEDBACK_TECHNICIAN_CARD_2026-10-24.md`, `research/4400_HYDRAULIC_PINHOLE_INJECTION_HOSE_FAILURE_ISOLATION_SOURCE_AUDIT_2026-10-24.md`, and `safety-course/4400_HYDRAULIC_PINHOLE_LEAK_AND_PRESSURE_ZONE_TECHNICIAN_CARD_2026-10-24.md`. Original Rockwell 440R-IN089A (2022), Pilz FAQ, Parker 4400-B.1 (2024), HSE FOD 4-2014 / 2024 guidance, and Enerpac manufacturer safety guidance were inspected. Design package §§11BA–11BB, safety index, safety power/common map and selected-machine `IN-04b` were updated. Original archive **6/85 exact bytes still pending**; no physical test, self-hosted/GitHub-hosted compute, numerical machine acceptance or external blind score. These documents are documentary teaching only.

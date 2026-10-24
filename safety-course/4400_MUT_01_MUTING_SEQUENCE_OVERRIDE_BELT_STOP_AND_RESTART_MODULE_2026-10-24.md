@@ -48,3 +48,6 @@ Complete [18 paper cases](4400_MUTING_TIMEOUT_OVERRIDE_HUMAN_ENTRY_TECHNICIAN_CA
 
 ## Higher-level queue
 Compare actual adopted IEC 62046:2026 clauses under lawful access; collect selected-machine as-built sensor/guard/override/final-element evidence. No generic simulation is warranted while source answers the logical question and machine hardware is unknown. Do not promote unknown physical safety into a release claim.
+
+## Further cross-machine architecture evidence (same session)
+[Leuze WITRON SPG and Südzucker five-lane OEM-reported source audit](../research/4400_LEUZE_SPG_MULTILANE_DYNAMIC_FIELD_REAL_INSTALLATION_TRANSFER_AUDIT_2026-10-24.md) shows a **different** manufacturer-qualified pattern: process-PLC signal plus protective field (not PLC-only safety authority), and lane-specific scanner fields where global muting would create an adjacent-lane entry path. The case reports are not independent physical tests. Do not transplant a PLC bit into LinuxCNC/FPGA as a safety bypass; validate actual geometry, field-change timing, independent safety controller and final elements.

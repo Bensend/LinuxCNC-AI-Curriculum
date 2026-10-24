@@ -470,3 +470,8 @@ Added `research/4400_PNEUMATIC_SAFE_EXHAUST_VARIANT_RESET_TRAPPED_VOLUME_SCOPE_A
 
 
 **2026-10-24 same-session vertical-axis OEM rotation:** Published new original `research/4400_VERTICAL_PNEUMATIC_HOLD_VS_EXHAUST_FESTO_SOURCE_RECONCILIATION_2026-10-24.md` from Festo's publicly readable safety engineering guidelines pp. 49/52/56. Separates intentionally retained pressure during a qualified vertical-axis stop/hold from safe-exhaust and maintenance isolation, with explicit clamping-unit non-completeness. Not a historical archive file; **6/85 exact originals still pending**. No selected machine proof, compute, physical test or external score.
+
+
+### 2026-10-24T04:33Z original hose-burst source investigation — NOT an archive restoration
+
+Published `research/4400_HOSE_BURST_VELOCITY_FUSE_FLOW_WINDOW_AND_UNSAFE_TEST_TRANSFER_AUDIT_2026-10-24.md` and `safety-course/4400_HOSE_BURST_FUSE_LOW_FLOW_AND_HAZARDOUS_TEST_TECHNICIAN_CARD_2026-10-24.md`. Inspected original HYDAC RB part 710031, HIDROS VUBA and Winner HB-18A-20 manufacturer pages and OSHA 1910.147. New finding: excess-flow fuse requires a discriminating normal-versus-fault flow window and does not universally detect slow leaks, guarantee continuous holding, serve as a protective E-stop or establish service isolation. Manufacturer's deliberately open-line fault-test description is **not** a safe generic student test. Original historical archive remains **6/85 exact bytes pending**; selected Y1/Y2 as-built, physical `PHY/VAL/PT`, fresh external scores and machine acceptance remain OPEN/UNKNOWN. No hosted or local laboratory compute or physical experiment.

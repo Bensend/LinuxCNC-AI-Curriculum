@@ -397,3 +397,6 @@ Read the [original Rockwell LVSAM-RM003A-EN-P November 2012 §5.3.3–5.3.5 sour
 
 
 **Integrated 4400-RET-01 teaching module:** [Brownfield CNC safety cutover and final-element continuity](4400_RET_01_BROWNFIELD_CNC_SAFETY_CUTOVER_AND_FINAL_ELEMENT_MODULE_2026-10-24.md) combines the three original OEM/regulatory source branches, the 30 paper cases and a blank before/after worksheet. **SOURCE-READING / NOT GRADUATED**; selected machine physical proof, fresh independent transfer evaluation and safety release remain OPEN. No proprietary selected-machine schematics are published.
+
+
+**4400-RET-01 independent handoff prepared:** [novel source-transfer assessment contract](../evaluation/4400_RET_01_FRESH_SOURCE_TRANSFER_HANDOFF_2026-10-24.md). **NOT RUN / NOT SCORED / NOT GRADUATED**. This is not a solution key, external score or physical safety proof.

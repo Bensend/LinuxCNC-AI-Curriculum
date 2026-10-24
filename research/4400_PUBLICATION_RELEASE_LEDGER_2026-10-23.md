@@ -434,3 +434,8 @@ Added original `research/4400_PERSONNEL_KEY_WHOLE_BODY_ACCESS_VS_LOTO_SOURCE_AUD
 ### 2026-10-23T23:32Z — New original source trace, not historical archive recovery
 
 Added original `research/4400_LINUXCNCRSH_2910_REMOTE_COMMAND_AUTHORITY_AND_STALE_STATUS_SOURCE_TRACE_2026-10-23.md` and `safety-course/4400_LINUXCNCRSH_REMOTE_COMMAND_STALE_STATE_AND_REARM_FIELD_CARD_2026-10-23.md`. Pinned LinuxCNC v2.9.10 source blob `81b387c20f297d43b7fb63ad26fcf4d25ec0aa62` and official 2.9 manual establish normal network command and stale-status limits. These **are not** any of the six missing historical archive candidates: archive remains **6/85 pending exact-byte recovery**. No selected machine test, external competency score or laboratory compute. `NET-01..08 NOT RUN`, independent safety/physical proof UNKNOWN.
+
+
+### 2026-10-24T00:34Z — New ISO 13855:2024 scope/stop-time research, NOT historical archive release
+
+Original [2024 edition/physical-proposition source reconciliation](../research/4400_ISO13855_2024_SEPARATION_DISTANCE_SCOPE_STOP_TIME_AND_GRAVITY_EXCEPTION_2026-10-24.md) and [technician exercise](../safety-course/4400_STOP_TIME_PROTECTIVE_DISTANCE_AND_GRAVITY_SCOPE_FIELD_CARD_2026-10-24.md) published using ANSI/ISO publisher scope and preview, SICK US 2021 ANSI B11.19-2019 guidance and Pilz stop-time service description. These are **new original** files, not recovered original-archive bytes; historical exact archive remains **6/85 pending**. No selected-machine physical validation, external blind evaluation, simulation or hosted/local lab compute.

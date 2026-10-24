@@ -1,0 +1,61 @@
+# 4400 — ISO 13855:2024 safeguard separation, stop-time evidence and excluded hazards
+**2026-10-24 | Original source-reconciliation research | 4400 safety | NOT a selected-machine design or a copy of the standard.**
+
+## Concrete question
+Can a measured protective-stop time and a calculated light-curtain distance establish the complete safety of a hydraulic press brake, gravity axis, spindle or robot cell? **No.** The distance argument can address a specified *approach-to-hazard* proposition under a defined stopping response; it does not establish containment of gravity fall, mechanical failure, emissions, trapped energy or occupancy behind a detection plane.
+
+## Authoritative evidence and edition control
+| Evidence ID | Direct source, inspected 2026-10-24 | Narrow claim and class | What it does NOT establish |
+|---|---|---|---|
+| SD-01 | ISO 13855:2024, third edition November 2024, [ANSI publisher scope](https://webstore.ansi.org/standards/iso/ISO138552024) | **DOC-CONFIRMED:** covers positioning/dimensioning ESPE, mats/floors, two-hand and *single* control devices, interlocking guards and safety-related manual controls accessible from inside safeguarded spaces. | No selected machine's permissible distance, PL/SIL or validation. |
+| SD-02 | [ISO 13855:2024 official preview](https://webstore.ansi.org/preview-pages/ISO/preview_ISO%2B13855-2024.pdf), pp. iii–viii (TOC, foreword, introduction) | **DOC-CONFIRMED:** 2024 edition replaces 2010; added/restructured discussion of static/dynamic separation, overall response time, whole-body access, mobile applications, foot-operated single controls, interlocking guards, and annexes on time factors and supplier information. | Table-of-contents titles are not access to the clauses' normative calculations or acceptance criteria. |
+| SD-03 | Same ANSI publisher scope | **DOC-CONFIRMED:** excludes hazards from mechanical-part failures/gravity falls and emissions (ejecta, radiation, arcs, heat, noise, fumes/gases); derived separation distances do not apply to safeguards used *solely* for presence sensing. | Does not say those hazards are acceptable; they require other risk-reduction measures. |
+| SD-04 | [SICK US 2021 ANSI B11.19-2019 explanatory example](https://sickconnect.com/calculate-safety-distance/) | **DOC-CONFIRMED:** published manufacturer example separates device, interface, control, machine and monitoring time, plus reach-through/over/under factors; suggests ten stop-time readings and choosing the larger of observed maximum or mean + 3 standard deviations. | Not a verified ISO 13855:2024 formula, mandatory universal sample plan, machine-specific result or statistically guaranteed upper bound. |
+| SD-05 | [Pilz overrun measurement guidance](https://www.pilz.com/en-US/support/lexicon/articles/231033) and [Pilz service description](https://www.pilz.com/mam/pilz/content/editors_subsidiaries/tg-au/stop_time_measurement_service.pdf) | **DOC-CONFIRMED:** service uses a measurement series of at least ten per *defined hazardous movement*, and Pilz's explanatory example uses the worst of ten; includes controller response and actual mechanical stopping. | Ten repetitions of one axis/mode do not cover every other hazard, fault, load, approach direction or future degradation. |
+
+**Provenance limit:** full ISO 13855:2024 normative clauses and relevant type-C standard are not available in this session. No numerical distance, response-time allowance, approach speed, foot-pedal placement or universal proof-test frequency is derived here. The SICK article's ANSI B11.19-2019 illustration and Pilz service practice are *different sources with different scopes*. Neither is represented as an ISO 2024 requirement. 2024 TOC references foot-operated **single** control devices; that is not proof that a foot pedal is a two-hand protective device.
+
+## Causal argument and physical boundary
+`human approach -> detection zone/actuator -> protective-device response -> safety-related controller response -> final-element action -> actual hazardous movement ends -> access before hazard`
+
+The above chain needs an independently justified, end-to-end time/position witness at the *hazardous movement*, not just an OSSD-off timestamp, relay LED, PLC cycle time, commanded STO, LinuxCNC state, FPGA watchdog or valve spool indicator. The time budget must not silently omit sensing, interface, safety logic, final-element dynamics, inertia, mechanical braking or hydraulic response. **INFERENCE:** a conservative validation plan should identify the event/time origins and each uncertainty contribution before selecting measurement instrumentation.
+
+A second, independent chain is needed for gravity, mechanical fracture and residual energy:
+`gravity / stored pressure / detached load / failed restraint -> hazardous motion despite nominal stop -> independent physical restraint / isolation / verified holding`.
+No amount of additional light-curtain distance establishes a gravity-load holding function after hydraulic disassembly. Conversely, a qualified physical restraint does not prove the reach/approach protection for normal powered motion.
+
+## Coverage and timing traps: adversarial matrix
+| Plausible claim | Missing physical or standards evidence | Disposition |
+|---|---|---|
+| “The light curtain is far enough away because the stop relay is fast.” | Actual final-element-to-load stopping, reaching geometry, total response time and applicable standard edition. | **HOLD** separation-distance acceptance. |
+| “Ten stops passed, therefore both Y1/Y2 and the backgauge are safe.” | Independently defined hazardous movements, both ram ends, mode/load/temperature/wear dependencies, worst-case response and geometry. | **HOLD** unmeasured hazards. |
+| “The mean of ten is small, so the outlier can be discarded.” | Independent reason that reading was instrument-invalid; no post-hoc deletion to improve safety result. | Retain worst credible reading, investigate cause. |
+| “SICK says mean + 3 sigma; Pilz says maximum; either formula is ISO 2024.” | Full normative ISO clause, jurisdiction/type-C selection, chosen documented method. | **UNKNOWN**, no numerical design. |
+| “The laser field protects against a hose rupture or beam fall.” | Standard scope excludes mechanical failure/gravity fall; physical load restraint and failure analysis. | **FAIL** claimed coverage. |
+| “The presence mat is clear, so it is safe to restart.” | Person may be between mat and hazard, inside cell or hidden behind workpiece; independent reset/occupancy and deliberate start. | **HOLD** restart. |
+| “A two-hand pendant can be moved next to the die.” | Publisher scope excludes freely movable devices that can be moved nearer without tools than separation distance. | **HOLD** geometry; redesign placement/retention. |
+| “The controller reports safe speed, so distance automatically decreases.” | Edition-specific dynamic separation method, independent speed/position integrity, failure/reaction timing and qualified installation. | **UNKNOWN**; ordinary LinuxCNC speed is not safety-rated proof. |
+| “The operator routinely walks around the far-away guard.” | Actual route/reach/bypass opportunity and operator workflow. | **HF/CHG** redesign protective geometry and usable setup, never accept predictable defeat as normal. |
+
+## Frozen evidence-intake contract (paper-only; no energized test)
+For each *hazardous movement* and *approach/access route*, create a distinct `SD-CASE` row linked to `HAZ/SF/SRS/PHY/DEP/VAL/PT/HF/CHG`:
+1. machine, mode, revision, tooling/load, environmental envelope and persons/access routes;
+2. hazardous part actually capable of motion (ram left/right, spindle, robot link, feeder, backgauge), gravity/failure/energy sources and which are outside separation-distance scope;
+3. exact guard/ESPE/foot or two-hand device, detection geometry and reach-around/under/over/through routes, including space behind the plane;
+4. independent safety-related response chain, selected parts, fault reactions, reset/occupancy and final elements (not LinuxCNC as safety authority);
+5. separately evidenced maximum end-to-end response and physical stop/hold under selected envelope, with calibrated external sensing, raw time origin, uncertainty, coverage, outliers and instrument provenance;
+6. selected applicable edition/type-C or jurisdictional rule and independently checked method for distance/geometry (no generic value inserted);
+7. independent gravity/pressure/emission/maintenance isolation and escape protections; they are **not** closed by a separation-distance calculation;
+8. negative-path tests, fault changes, future wear/retest triggers and physical-witness evidence; explicit status `UNKNOWN / NOT RUN / FAIL / PASS` with reviewer sign-off.
+
+**Lab decision:** a generic simulation would only reconfirm the algebra of an already documented separation formula, not the unknown physical stop/guard geometry. No simulation or machine test justified. A future test can be frozen only after `IN-01..10`, exact device/edition, external measurement plan and remote/isolated no-exposure permissions are reviewed. No personnel-exposed operation is authorized; unqualified experimental operation must keep people outside the hazard envelope with residual risk documented.
+
+## Machine transfer
+- **Press brake:** two ram ends, sheet movement, guard muting and hydraulic/gravity holding require distinct physical propositions; no numerical stopping or distance assumptions.
+- **Mill/lathe:** spindle coast, chuck/tool ejecta and stored rotation cannot be collapsed into a single light-curtain stop-time result; emissions/ejecta are outside this distance method.
+- **Robot/cell:** whole-body access and space behind a detection plane require inside-presence, escape and fresh-restart arguments independent of approach distance.
+- **Plasma/laser:** cutting arc/radiation/fumes/ejecta require process-specific containment/extraction independent of reach-to-moving-axis distance.
+- **Saw/feeder:** blade run-down, stock ejection and manual reach routes must be distinguished; different motions may require separate measurements.
+
+## Next evidence and information-gain stop
+Full 2024 normative standard and relevant machine type-C requirements are needed before any clause-level formula or numerical acceptance. Selected as-built guard geometry, safety chain and calibrated physical motion evidence are needed for OpenPressBrake. Both remain **UNKNOWN**. External 2520–25F0 blind competency gates remain OPEN; this document is not an evaluator answer key. Historical exact-archive backlog remains **6/85** and is unaffected.

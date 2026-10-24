@@ -445,3 +445,6 @@ Original [2024 edition/physical-proposition source reconciliation](../research/4
 
 
 **2026-10-24T01:37Z original OEM source continuation (NOT an exact archive release):** Added `research/4400_BOSCH_IH04_VALVE_FEEDBACK_LEAKAGE_REPLACEMENT_SCOPE_AUDIT_2026-10-24.md` and `safety-course/4400_HYDRAULIC_VALVE_FEEDBACK_LEAKAGE_SCOPE_TECHNICIAN_CARD_2026-10-24.md` after inspecting Bosch RE 63124-B (08.2021) and RE 63129-MON (09.2022). Normal valve-electronics telemetry, pressure-in-OFF, valve replacement/reaction-time, and die-cushion leakage-limit-scope distinctions; paper-only. **Historical archive remains 6/85 pending**. No machine validation, blind score, physical test or compute.
+
+
+**2026-10-24 same-session new original HAWE source work, NOT exact archive release:** `research/4400_HAWE_EPRAX_2026_GRAVITY_VALVE_ACCUMULATOR_SAFETY_SOURCE_TRACE_2026-10-24.md` and `safety-course/4400_HAWE_EPRAX_GRAVITY_VALVE_STORED_ENERGY_TECHNICIAN_CARD_2026-10-24.md` published from manufacturer-hosted B 6340 04-2026. Exact OEM gravity-assisted fast down, separate safety-valve/linear-scale authority, optional accumulator return energy and conditional orifice design. Historical exact archive **6/85 pending**; no physical test, lab compute or external score.

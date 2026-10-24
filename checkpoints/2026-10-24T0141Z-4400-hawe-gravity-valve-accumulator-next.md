@@ -1,0 +1,17 @@
+# 4400 safety continuation — 2026-10-24T01:37Z Bosch + HAWE OEM hydraulic boundary
+
+**Supersedes** `checkpoints/2026-10-24T0137Z-4400-bosch-hydraulic-physical-witness-next.md`. Same session start **2026-10-24T01:37:48Z UTC**. START_HERE and all required governance, safety index/2570/2580, evaluation and lab compute read; 1000–3000/F02 CLOSED, 2520–25F0 external evaluations OPEN, 4400 safety primary.
+
+## Durable evidence
+
+1. Original [Bosch general IH04 versus IH04E die-cushion audit](../research/4400_BOSCH_IH04_VALVE_FEEDBACK_LEAKAGE_REPLACEMENT_SCOPE_AUDIT_2026-10-24.md) and [paper technician card](../safety-course/4400_HYDRAULIC_VALVE_FEEDBACK_LEAKAGE_SCOPE_TECHNICIAN_CARD_2026-10-24.md). **DOC-CONFIRMED** normal valve electronics cannot own safety shutdown, OFF may retain pressure, valve replacement needs reaction-time checks, valve switches miss leakage, numerical values product-specific. Cumulative §11AW and replacement worksheet updated.
+2. Original [HAWE ePRAX modular B 6340 04-2026 real press-brake OEM trace](../research/4400_HAWE_EPRAX_2026_GRAVITY_VALVE_ACCUMULATOR_SAFETY_SOURCE_TRACE_2026-10-24.md) and [ten-case card](../safety-course/4400_HAWE_EPRAX_GRAVITY_VALVE_STORED_ENERGY_TECHNICIAN_CARD_2026-10-24.md). **DOC-CONFIRMED** gravity-assisted FAST DOWN with normal servo hydraulic throttling, machine safety-related hydraulic valve and beam-speed monitoring, optional Slow Up accumulator return energy, conditional orifices, machine-builder safety authority. Cumulative §11AX.
+3. Both are **different OEM/variant systems**, neither proven installed on OpenPressBrake. ISO 6909:2026 public scope reviewed but full normative clauses unavailable. `IN-01..10/OPT/PHY UNKNOWN`, `VAL/PT NOT RUN`, G0/G1 HOLD, G2 NOT RUN, G3/G4 NOT AUTHORIZED, G5 HOLD. Paper cards are not external blind scores or physical validation. Historical exact archive **6/85 pending**.
+4. Existing self-hosted-only workflow run 39919548510/job 120301190483 freshly QUEUED on `[self-hosted,openpressbrake]`; no authoritative runtime; `LAB_COMPUTE_LOG.md` unchanged. **No GitHub-hosted Actions minutes, self-hosted simulation, physical test or bench lab** consumed.
+
+## Exact next work
+
+- Highest-value selected-machine request: as-built Y1/Y2 circuit and exact safety valves/port maps; independent safety controller, linear-scale safety coupling and actual motion/holding witnesses; gravity, stored pressure/accumulators and mechanical restraint; guards, occupancy, fresh local start. Populate `BND/ENE/PHY/AUTH/DEP/ARC/VAL/PT` only from evidence. **Do not invent** selected hydraulic truth tables, safe speed, stop time/distance, leakage/pressure limits or PL/SIL.
+- If still unavailable, rotate to a **new** manufacturer-specific failure mode not already covered, e.g. measured valve reaction-time/pressure-zone contradiction or protective-device-to-final-element timing, with exact source and testable claim. No lab until source reasoning leaves a real unresolved question. Only `[self-hosted,openpressbrake]` if justified.
+- Preserve six exact historical archive bytes and 2520–25F0 information-separated evaluations. No personnel-exposed hazardous operation absent minimum independent safeguards; R&D operation isolated/remote with people outside hazard zone and residual risk documented.
+- Immediately before ending, append UTC end/actual elapsed/overlap to complete `LESSON_LOG.md` via fresh SHA guard, verify and commit. Previous canonical end **2026-10-24T00:39:16.001Z**. Hourly automation remains enabled.

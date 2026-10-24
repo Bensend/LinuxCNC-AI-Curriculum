@@ -446,3 +446,8 @@ The safety course is not considered drafted merely because the lesson titles exi
 - press-brake safety case study outline ready for integration into the machine-specific curriculum
 - adversarial review identifying where the course accidentally overclaims safety or where a cheaper practical safeguard was overlooked
 - Safety Sandbox reuse decision recorded before any large simulator implementation effort
+
+
+## 2026-10-24 4400 hydraulic follow-on (source-reading, not graduation)
+
+The 2500 safety sequence remains the foundational course and its 2520–25F0 external/fresh gates remain OPEN. The active 4000 hardware/safety follow-on now includes [4400-HY-01](safety-course/4400_HY_01_HYDRAULIC_PRESS_BRAKE_SAFETY_ARCHITECTURE_TRANSFER_MODULE_2026-10-24.md), comparing Bosch IH04/IH04E, HAWE ePRAX and HAWE SAKB/NSV product-specific valve/port/energy/monitoring evidence. This is a **source-reading module only**, not an independent safety certification, machine-specific circuit, fresh competency score or permission for exposed operation. Actual Y1/Y2 hardware intake and independent physical `PHY/VAL/PT` remain UNKNOWN/NOT RUN. Ordinary LinuxCNC/FPGA control remains separate from personnel-safety authority.

@@ -136,3 +136,12 @@ When retaining/replacing any safety PLC, capture its **actual** manufacturer/mod
 ### IN-04j — Contactor coil, suppression, long-line topology and physical dropout (conditional, 2026-10-24)
 
 If the selected machine has any contactor/relay used for protective energy withdrawal, record exact manufacturer/part/coil type (AC, DC, electronic), actual supply and output, coil suppression part/polarity, cable routing/length and relevant capacitance, feedback/mirror contact target, physical final-element witness and affected stop/hold `VAL/PT`. [Rockwell 2012 original source](../research/4400_ROCKWELL_COIL_SUPPRESSION_LONG_CABLE_FALSE_HOLD_RETROFIT_AUDIT_2026-10-24.md) demonstrates DC diode suppression can extend dropout and **specific AC long-cable** topology can hold an otherwise opened coil. Neither mechanism is asserted on OpenPressBrake; no generic numeric delay or mitigation is prescribed. Any suppressor/cable/coil change is a `CHG` review and may stale prior physical validation. `IN-04j UNKNOWN`, G3/G4 NOT AUTHORIZED, no live contactor fault injection authorized.
+
+## 2026-10-24 conditional supply/return and output-test configuration intake
+
+| Conditional ID | As-built evidence required **only if applicable to selected safety system** | Current status |
+|---|---|---|
+| `IN-04k` | Actual safety controller and module/hardware/firmware, all 24 V logic and output supply A1/A2/0 V/FE/PE paths, actuator and sensor returns, shared terminals, shield/serial interface, qualified source/receiver reverse-current/threshold compatibility, common-encoder supply and power dip/reset behavior. SICK [lost-return source audit](../research/4400_SICK_FLEXISOFT_LOST_0V_REVERSE_CURRENT_COMMON_CAUSE_SOURCE_AUDIT_2026-10-24.md) is **not** proof of selected SICK installation. | **UNKNOWN / NOT RUN** |
+| `IN-04l` | Exact safety-output module, hardware Step/firmware, Q test-pulse enable/disable, pulse/diagnostic configuration, downstream capacitive or inductive load, suppressor, wiring and cross-circuit exclusion, manufacturer compensating measures and changed physical stop/hold witnesses. [XTIO OEM source audit](../research/4400_SICK_XTIO_DISABLED_TEST_PULSE_ALL_OUTPUTS_DEGRADE_AND_TRANSIENT_HIGH_AUDIT_2026-10-24.md). | **UNKNOWN / NOT RUN** |
+
+These additions do not imply any particular PLC is installed. **Do not energize or intentionally open 0 V/ground on an exposed machine for validation.** G0/G1 remain HOLD and G3/G4 NOT AUTHORIZED until the selected-machine safety/energy evidence is established.

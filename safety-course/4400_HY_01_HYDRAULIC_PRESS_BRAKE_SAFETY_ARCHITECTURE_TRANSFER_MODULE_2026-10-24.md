@@ -39,9 +39,29 @@ This is a **source-to-architecture reasoning module**, not an instruction to ope
 
 **Classification:** `DOC-CONFIRMED` for cited OEM statements and exact editions. `INFERENCE` for cross-family design lessons. `UNKNOWN` for selected OpenPressBrake components. No `TEST-CONFIRMED` machine safety claims.
 
+## Community / forum pass
+
+No community or forum report was needed to resolve the current **documentary** OEM-variant questions. Community claims have **not** been used as evidence or silently upgraded to `DOC-CONFIRMED`. Later selected-machine user reports must be recorded as `COMMUNITY-REPORTED` until independently checked. This is an explicit scope decision, not a completed community survey.
+
+## Source inventory and symbol depth
+
+| Source / path | Symbols or structures | Role | Depth/status |
+|---|---|---|---|
+| Existing pinned LinuxCNC v2.9.10 `linuxcncrsh` → NML → Task source trace in 4400 research | Remote E-stop reset, machine enable and motion request paths | **Ordinary software command** boundary, not safety authority | Reuse existing source trace; no new source inspection claimed |
+| Existing pinned LinuxCNC `iocontrol` / `estop_latch` source trace | `user-enable-out`, `user-request-enable`, `emc-enable-in` | Ordinary E-stop handshake versus external physical safety proposition | Reuse; no new source inspection claimed |
+| HAWE B 6340 and D 6340 | `QM2..QM5`, `BG2..BG5`, `S`, `X/A/B`, optional Slow Up | OEM-specific safety-related hydraulic valve/feedback/energy variants | Deep **documentary**, not LinuxCNC source code |
+| HAWE D 6335 and D 6368 | SAKB `S`, NSV `L`, `050/060`, `BA/BE` | OEM-specific monitored-valve and port/leakage semantics | Deep documentary |
+| Bosch RE 63124-B and RE 63129-MON | IH04 analog actual-value, valve switches, hydraulic leakage and replacement | Safety authority and physical-witness transfer boundaries | Deep documentary |
+
+**Function/symbol guide decision:** no new LinuxCNC symbol needed deep tracing to answer this module's OEM hydraulic question; the existing pinned source guides are referenced. A new source call flow or source-level test would be fabricated if claimed here. Any new software implementation belongs to a separate bounded module with its own pinned revision and independent verification.
+
+## Experiments / independent verification status
+
+**None performed.** No simulations, test suites, synthesis, machine motion, hydraulic valve actuation or GitHub-hosted/self-hosted compute were needed for the present source-transfer question. Independent checks of the OEM editions and public document statements are **documentary cross-source checks**, not `TEST-CONFIRMED` machine evidence. The novel prediction and fresh-AI handoff remain open below.
+
 ## LinuxCNC source / ordinary-control boundary
 
-Use existing `linuxccncrsh`/NML/Task, `iocontrol`/HAL and `estop_latch` source traces only to show that LinuxCNC can request E-stop reset, motion and output changes. These are **ordinary machine-control state transitions**. The module does **not** assert that LinuxCNC/HAL, a generic FPGA, the motor speed loop, an HMI indication or a remote network command performs a safety-rated hydraulic stop. The selected machine must separately identify the safety-related controller, protective input, final-element drive, valve physical state, independent beam witness, energy-isolation mechanism and deliberate local restart.
+Use existing `linuxcncrsh`/NML/Task, `iocontrol`/HAL and `estop_latch` source traces only to show that LinuxCNC can request E-stop reset, motion and output changes. These are **ordinary machine-control state transitions**. The module does **not** assert that LinuxCNC/HAL, a generic FPGA, the motor speed loop, an HMI indication or a remote network command performs a safety-rated hydraulic stop. The selected machine must separately identify the safety-related controller, protective input, final-element drive, valve physical state, independent beam witness, energy-isolation mechanism and deliberate local restart.
 
 ## End-to-end authority and energy map
 
@@ -125,6 +145,23 @@ Answers must cite source, claim classification, remaining UNKNOWN and safe dispo
 | Qualified physical stop/hold, stored-energy isolation and restart tests | NOT RUN | Person may be exposed to uncontrolled ram/pressure | Selected `PHY/VAL/PT` | **YES for machine release** |
 | Fresh AI source transfer and novel prediction evaluation | NOT RUN | Module competency unproven | External 2520–25F0 process | **YES for module graduation** |
 | Exact six archived historical files | Missing original bytes | Publication fidelity incomplete | Exact archive recovery | Not a safety-function release substitute |
+
+
+
+## Graduation evidence floor and re-promotion status
+
+| Template gate | Current result |
+|---|---|
+| Mechanism/source identification | OEM hydraulic product-family mechanisms documented; existing LinuxCNC ordinary software source boundary reused |
+| Behaviorally significant path | Documented normal drive command versus safety-valve final-element and physical witness paths |
+| Independent verification beyond rereading source | **OPEN**: fresh reviewer/source challenge and selected physical witness not completed |
+| Representative failure path | Source-traced leakage, gravity drive-inactive, NSV suffix/port reversal and accumulator hazards |
+| Predeclared prediction independently checked | **OPEN**; predictions are recorded but not yet tested |
+| Fresh-AI novel handoff | **OPEN**; no score fabricated |
+| Counterfactual safety boundary | Preserved; actual installed machine remains UNKNOWN |
+| External evaluator / physical machine graduation | **NOT MET** |
+
+**Re-promotion test:** no unresolved 1000/2000 prerequisite was moved to 3000/4000 to escape investigation. This 4400 work is independently machine-specific and advanced; existing graduated earlier levels remain closed. Selected-machine physical proof is **blocking for exposed operation**, not something to promote away. Repeated lab failures: none, so no three-attempt disposition required.
 
 ## Handoff / graduation decision
 

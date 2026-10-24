@@ -35,3 +35,8 @@ A second original manufacturer trace exposed **opposite closing-flow directions 
 
 
 **Second documentary discrepancy for same part:** US HYDAC 710028 product page lists closing-flow range **25–120 L/min** while its own model text is `...75LPM`; HYDAC International 2021 PDF lists **12–75 L/min** for `RBE-R1/2`. Added to dedicated audit. Both closing direction **and** setting range require official OEM reconciliation before crediting a selected fuse. Suspected catalogue template reuse is an **INFERENCE**, not a confirmed cause.
+
+
+## Same-session repository integrity verification
+
+Complete untruncated Git tree **4,146 entries**; safety-course index **124 relative Markdown links / 122 distinct targets / zero missing**. Three new original documents and checkpoint independently retrieved from `main` with Git blob SHAs. No simulation/build/test-suite Actions dispatch; no new authoritative runtime; `LAB_COMPUTE_LOG.md` unchanged. This session rotated from the initial hose-burst flow-window research to the stronger same-part OEM contradiction rather than ending at the first documentary information-gain stop.

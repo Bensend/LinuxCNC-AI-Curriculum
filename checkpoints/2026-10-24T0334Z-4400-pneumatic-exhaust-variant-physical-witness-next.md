@@ -22,3 +22,8 @@ OpenPressBrake actual Y1/Y2 hydraulic drawings, safety relay suffix/reset wiring
 5. Immediately before ending, append actual UTC end/elapsed/overlap to complete `LESSON_LOG.md` using SHA-safe append, verify final commit. Keep hourly curriculum enabled.
 
 Previous canonical end **2026-10-24T02:40:17.899Z**; this session began **2026-10-24T03:34:27.998Z**, about **54.17 min** later; no known overlap. External concurrent work not independently established.
+
+
+## Same-session second source branch — Festo vertical pneumatic holding versus exhausting
+
+Added [manufacturer Festo page 49/52/56 source reconciliation](../research/4400_VERTICAL_PNEUMATIC_HOLD_VS_EXHAUST_FESTO_SOURCE_RECONCILIATION_2026-10-24.md). Festo documents an **intentionally pressurised** vertical-axis protective-stop/hold architecture, a distinct dual-chamber retained-pressure arrangement, and the explicit warning that clamping/end locks are **not complete safety solutions**. Thus `PHY-MOTION`, `PHY-HOLD`, `PHY-ENERGY`, `PHY-ACCESS` and `PHY-RESTART` must not be conflated. **DOC-CONFIRMED** for the OEM examples; transfer to OpenPressBrake **UNKNOWN**. No numerical criteria or physical test; optional `IN-04c` remains UNKNOWN. No hosted/local lab compute. Next work selection unchanged: selected Y1/Y2 evidence first, then actual auxiliaries if present, then fresh independent evaluator or another unblocked safety source gap.

@@ -37,3 +37,7 @@ No GitHub-hosted Actions workflows dispatched, no local compute, no simulation, 
 6. Before end append UTC end/actual elapsed/overlap to complete SHA-guarded `LESSON_LOG.md`, verify and commit. Hourly automation remains enabled.
 
 **Safety boundary:** an S300/S3000 manufacturer's configuration warning is not a selected-machine failure report. No personnel-exposed hazardous operation; any experimental work must be isolated/remote with all people outside the hazard zone and residual risks assessed.
+
+## Same-session deeper OEM case-switching source trace
+
+Inspected SICK S3000 2026 §4.3.3 printed pp.39–40, §7.8.2 pp.97–98 and §7.13.1 pp.111–112. **DOC-CONFIRMED:** field-switch timing must account for input delay and external EFI control/OSSD paths; late switching may expose a person already in the new field; OEM discusses overlap or simultaneous monitoring when switching cannot be timed reliably. Complementary dual-channel and 1-of-n mode input schemes have different invalid-state semantics, and the field-selection control itself must meet the required safety level. Updated source audit, integrated module, technician card and §11BI. Added `UF-11..13`; paper cases now **29** (16 S300 + 13 S3000). No product-specific numeric timing transplanted to machine acceptance. The current documentary branch has reached a genuine information-gain stop: selected physical design and independent evaluator evidence, not synthetic simulations, are needed for further safety claims. Other unblocked safety branches remain for subsequent sessions; automation stays active.

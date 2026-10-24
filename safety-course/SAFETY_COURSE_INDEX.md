@@ -508,3 +508,7 @@ Read the [original ePRAX B 6340 rev 1.5 94-page OEM audit](../research/4400_HAWE
 
 ### 4400-RAD-03 — R15 v09/v11 transmitter scope and mode-change edition comparison (2026-10-24)
 [Two directly inspected original R15 manuals compared](../research/4400_TELE_RADIO_R15_V09_V11_VERSION_SCOPE_AND_POWER_CYCLE_AUDIT_2026-10-24.md), [8 PAPER version-transfer cases](4400_RADIO_MANUAL_VERSION_AND_PAIRING_CHANGE_TECHNICIAN_CARD_2026-10-24.md), [RAD-01 integrated module](4400_RAD_01_WIRELESS_PENDANT_STOP_LINK_LOSS_AND_RESTART_MODULE_2026-10-24.md). **DOC-CONFIRMED:** v09 names T19-02, v11 names T19-02/T29-12 in safety-function scope; both specify receiver SW0014-14v24+ and cancel PLd STOP in discontinuous mode 5; v11 explicitly requires receiver power-cycle after PLd-to-non-PLd configuration change. No T29 interchangeability, actual machine wiring, safety output or physical stop/hold inferred. §11CU, conditional IN-04ag UNKNOWN, 8 PAPER cases, no independent score or compute.
+
+
+### 4400-RAD staged physical verification and fault-path review (2026-10-24)
+[Fourteen-condition qualified commissioning/verification design plan](4400_RADIO_PENDANT_STAGED_COMMISSIONING_AND_FAULT_REVIEW_PLAN_2026-10-24.md) links the radio source claims to selected as-built identity, deenergized circuit inspection, independent terminal/final-element witness, protected actual stop/hold and deliberate fresh restart. **PLAN ONLY**; no physical test or acceptance, no selected radio hardware asserted. Cumulative §11CV; IN-04ag UNKNOWN, G0/G1 HOLD, G2 NOT RUN, G3/G4 NOT AUTHORIZED.

@@ -199,3 +199,12 @@ A verification witness is **maintainability-cleared** only when evidence establi
 - current configuration/document applicability.
 
 Otherwise retain `UNKNOWN` or the narrower supported claim. Never upgrade a diagnostic indication into physical-isolation proof simply because the proper physical test point is inconvenient.
+
+
+## 2026-10-24 OEM variant-specific witness identity challenge: HAWE NSV and ePRAX
+
+The [HAWE D 6335 / D 6368 original source audit](../research/4400_HAWE_SAKB_NSV_SEAL_SUFFIX_PORT_REVERSAL_SOURCE_AUDIT_2026-10-24.md) adds an **actual manufacturer example** where a witness can be physically connected to the **wrong pressure zone despite a plausible A/B label**: NSV `050` versus `060` reverses which port is pressure and which is suction/tank. A service test-point card must therefore carry the **complete installed NSV part number, variant, port symbol, drawing revision and physical fluid-volume connection**, not merely `port A` or `gauge at valve`.
+
+The same manufacturer identifies `L` as **without seal / with leakage flow** in the NSV family; a status/pressure witness must not silently assume a leak-tight valve. SAKB `S` monitoring covers its enumerated central valves, not automatically separate NSVs. In contrast, [HAWE ePRAX B 6340 / D 6340](../research/4400_HAWE_EPRAX_2026_GRAVITY_VALVE_ACCUMULATOR_SAFETY_SOURCE_TRACE_2026-10-24.md) uses a different integrated anti-cavitation arrangement, and its `S` monitoring and `X/A/B` accumulator option codes require **complete order-code reconciliation**. No cross-family label is a physical witness.
+
+**Add these audit columns when the device is hydraulic:** `OEM document+edition`, `installed complete model/suffix`, `port function for this exact suffix`, `feedback coverage list`, `seal/leakage option`, `optional stored-energy branch`, `independent physical motion/holding witness`, `maintenance restoration state`. If any critical column is unknown, the pressure/holding proposition is **UNKNOWN — NOT CLEARED**. This is a **paper documentation challenge**; it does not authorize connection of a gauge, opening a port or entering a hazardous ram zone.

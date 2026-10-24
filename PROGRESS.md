@@ -336,3 +336,6 @@ Resumed latest 00:39Z checkpoint after START_HERE/governance, 2500 index, 2570/2
 
 
 **Same-session curriculum synthesis:** Created `4400-HY-01` complete 4000 safety source-reading module from Bosch/HAWE original OEM traces, with explicit authority map, three paper learning activities, ten+ source traps, human-factors redesign, predeclared **OPEN** predictions, adversarial questions and counterfactual promotion gate. **NOT GRADUATED**; fresh external evaluator/handoff, selected-machine `IN/PHY` and `VAL/PT` remain OPEN/UNKNOWN/NOT RUN. No compute or physical tests.
+
+
+**Same-session maintainability integration:** Updated the existing canonical safety test-point/witness audit with **source-confirmed HAWE NSV `050/060` port A/B reversal, `L` leakage option, SAKB/ePRAX `S` monitoring-scope difference and ePRAX `X/A/B` stored-energy options**. Field records must now capture complete installed OEM variant/edition and actual pressure-zone connectivity, not generic `port A`. Paper-only; selected physical witnesses UNKNOWN, no machine test.

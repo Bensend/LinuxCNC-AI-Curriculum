@@ -69,3 +69,8 @@ The HYDAC US page includes a method involving intentionally opening a hydraulic 
 | Any OpenPressBrake fuse exists or is safe | UNKNOWN | No Y1/Y2 as-built | No personnel-exposed release |
 
 **Counterfactual graduation test:** if either source is wrong, the **teaching conclusion remains**: a part number and generic web catalogue do not establish the physical protected direction; require manufacturer clarification and as-built/physical proof. The conflict itself is **not promotable as a resolved design fact**. This audit is documentary research only and does not graduate 4400-HY-01 or close 2520–25F0 external evaluations.
+
+
+## Additional same-part catalogue range discrepancy (independent documentary cross-check)
+
+The US HYDAC **710028** page's `Closing Flow Rate [Min/Max]` fields list **25–120 L/min**, while its own model text says `RBE-R1/2-X-75LPM`. HYDAC International **EN 5.174.14/10.21** p. 2 instead lists **12–75 L/min** for `RBE-R1/2` and **25–150 L/min** for `RBE-R3/4`. This is another **DOC-CONFIRMED mismatch of published catalogue fields**, not an independently measured valve rating. It increases concern that the US page may contain family-level templated data, but **the template-error explanation remains INFERENCE**, not an established root cause. Do not copy the US 120 L/min maximum into a selected 710028 sizing or acceptance worksheet. Written OEM clarification must cover **both port direction and actual trip-setting range** for the exact manufacturing revision.

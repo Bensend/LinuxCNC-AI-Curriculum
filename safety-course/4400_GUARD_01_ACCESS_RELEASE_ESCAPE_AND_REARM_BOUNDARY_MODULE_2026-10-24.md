@@ -31,3 +31,6 @@ A gate that needs an inconvenient tool every normal cycle will invite bypass. Pr
 | Guard opens while ram/load still moves | crush/shear hazard | physical independent stop and load holding, measured where required |
 
 **Selected machine:** IN-04z UNKNOWN; G0/G1 HOLD, G3/G4 NOT AUTHORIZED; no physical validation or independent evaluator score. No personnel-exposed hazardous operation. No local or GitHub-hosted compute justified.
+
+## Original EUCHNER function/edition cross-check (2026-10-24)
+[Direct original CTP-I1/L1/L2 OEM manual reconciliation](../research/4400_EUCHNER_CTP_I1_L1_L2_LOCK_MONITORING_POWER_LOSS_AND_TEACHIN_OEM_RECONCILIATION_2026-10-24.md) confirms that **I1 FO protects guard position while L1 FO protects lock+door**, and that the L1 solenoid's **external control of unlocking** remains a separate safety-function responsibility. Spring-to-lock power loss can trap a person if an open door closes; power-to-lock variants release on supply loss; Unicode replacement requires controlled teach-in. Use exact selected SKU/manual and inside escape; no selected machine inference, physical test or graduation. OEM manuals cite ISO 14119:2013; current 2024 edition scope is publisher-confirmed but normative clauses not inspected.

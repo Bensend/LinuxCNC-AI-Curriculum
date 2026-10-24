@@ -31,3 +31,6 @@
 Challenge any answer that credits an OSSD, green LED, single test-rod point, machine-ready HMI, normal FPGA inhibit, or an unmeasured safety-distance example with **personnel-safety physical proof**. If optical gaps, actual stop/hold, inside occupancy or fresh restart are unverified, **NO personnel-exposed operation**. Any experimental operation requires isolated/remote arrangement with people outside the danger zone and explicit residual-risk review. This paper card is not a physical commissioning procedure.
 
 **Status:** `BL-01..16 PAPER ONLY`, `VAL/PT NOT RUN`, `G0/G1 HOLD`, `G3/G4 NOT AUTHORIZED`, external evaluation NOT RUN/SCORED.
+
+## Additional original-OEM plug-in discriminator (not an additional scored case)
+The original Rockwell 450L-QS001A September 2021 quick start distinguishes **auxiliary OSSD-emulation** pin labels from `OSSD1/OSSD2` and shows product-specific receiver/universal plug-in and automatic-start settings. In BL-11/BL-12, additionally ask whether a swapped plug-in could leave a plausible HMI signal while changing the qualified safety output and restart semantics. Do not assume an auxiliary pin is safety-rated or wire/test an unknown machine. Source: [Rockwell original quick-start addendum](../research/4400_ROCKWELL_450L_BLANKING_OBJECT_MONITORING_CROSS_OEM_TRANSFER_GATE_2026-10-24.md).

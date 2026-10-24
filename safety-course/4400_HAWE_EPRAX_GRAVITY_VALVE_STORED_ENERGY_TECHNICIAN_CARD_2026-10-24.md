@@ -26,3 +26,14 @@ For each case provide (1) exact **OEM/variant/source page**, (2) normal-control 
 A technician can reach a valve connector in seconds but needs 20 minutes to install the ram support and another 20 minutes to find the accumulator service point. Propose a redesign that makes the correct isolation/support/verification routine the easiest action: retained and labeled supports, safe access to test points, legible drawings and fault-state display, short but robust reset sequence, no hidden bypass switches. Record `HF` finding, `CHG` corrective action, `ARC` ownership and `VAL/PT` revalidation. **Do not** invent a 20-minute actual installation time; it is a hypothetical scenario.
 
 **Disposition:** all `HW-F01..10` paper-only; selected `PHY/VAL/PT NOT RUN`, no machine approval.
+
+
+## Additional option-code traps (D 6340 07-2026)
+
+| Case | Misleading statement | Required disposition |
+|---|---|---|
+| HW-F11 | "The manifold looks like the monitored version, so its four valve switches must exist." | **Reject.** D 6340 p. 11 distinguishes cylinder-module `S` monitoring option from a no-monitoring order code. Obtain the actual installed nameplate, wiring and controller evidence. |
+| HW-F12 | "The product brochure shows a Slow Up accumulator, so every ePRAX has one." | **Reject.** D 6340 p. 12 codes `X` for no Slow Up and `A/B` for optional variants. Confirm actual Y1/Y2 installed codes and physical accumulator/energy zones. |
+| HW-F13 | "The 04-2026 operating manual and 07-2026 datasheet must have identical circuits." | **Reject.** Distinct editions; reconcile selected serial/revision and drawing identity before transferring pin/valve claims. |
+
+All `HW-F11..13` remain paper-only, `VAL/PT NOT RUN`.

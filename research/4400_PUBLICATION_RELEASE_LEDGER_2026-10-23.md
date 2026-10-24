@@ -448,3 +448,6 @@ Original [2024 edition/physical-proposition source reconciliation](../research/4
 
 
 **2026-10-24 same-session new original HAWE source work, NOT exact archive release:** `research/4400_HAWE_EPRAX_2026_GRAVITY_VALVE_ACCUMULATOR_SAFETY_SOURCE_TRACE_2026-10-24.md` and `safety-course/4400_HAWE_EPRAX_GRAVITY_VALVE_STORED_ENERGY_TECHNICIAN_CARD_2026-10-24.md` published from manufacturer-hosted B 6340 04-2026. Exact OEM gravity-assisted fast down, separate safety-valve/linear-scale authority, optional accumulator return energy and conditional orifice design. Historical exact archive **6/85 pending**; no physical test, lab compute or external score.
+
+
+**2026-10-24 HAWE D 6340 07-2026 source addendum:** updated original HAWE audit and technician card with OEM `S` vs no valve monitoring and `X` vs `A/B` optional accumulator order-code distinctions. **Not** an archived candidate release; exact historical backlog **6/85**. No physical test/compute.

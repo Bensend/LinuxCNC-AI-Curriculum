@@ -64,3 +64,14 @@ No assertion that OpenPressBrake uses HAWE ePRAX; no inferred selected-machine v
 ## Information-gain conclusion
 
 This source resolves an important **architecture-existence** question: an OEM press-brake servo-hydraulic system can explicitly separate normal drive speed/torque from safety-related monitored hydraulic valves and beam-speed monitoring, while retaining gravity and optional accumulator energy. A simulation is **not justified** merely to re-demonstrate these documented relationships. The open work is selected hardware evidence and physical validation, not software algebra.
+
+
+## Same-session edition and option-code reconciliation — HAWE D 6340 07-2026
+
+A **second manufacturer-hosted primary document** was inspected: HAWE **D 6340 - 07-2026 - 1.4 en**, *Control system for CNC press brakes of type ePRAX modular*, 37-page product documentation generated **2026-07-10**, https://productfinder.hawe.com/downloads/D6340-en.pdf , printed pp. 10–12. This is **newer** than B 6340 04-2026; do not silently treat their drawings and codes as the same revision.
+
+- **HW-15 (DOC-CONFIRMED):** cylinder-module order-code **`S`** denotes valve-position monitoring for two 2/2-way and two 4/2-way valves; the **no-code** option is explicitly **without monitoring**. Therefore a photo showing a similar manifold does **not** establish that the monitored variant is installed. `S` is a **manufacturer-specific option code**, not a safety PL claim.
+- **HW-16 (DOC-CONFIRMED):** Slow Up module coding **`X`** means **without** that option; `A` and `B` identify two available accumulator-module families. A nominal ePRAX label alone cannot establish whether accumulator return energy is present. The manual lists accumulator nominal-volume and pressure coding, but these are **not** pressure/precharge facts about any selected installation.
+- **HW-17 (DOC-CONFIRMED):** left/right cylinder module variant codes are explicitly distinct. `CM`/servo-power-module configurations and optional tool-clamping modules are separate option families; a single side's photo or generic brochure is not a complete as-built safety bill of material.
+
+**Variant qualification gate:** for both Y1 and Y2, capture complete photographed nameplate/order code and revision; reconcile the actual **S/no-monitoring**, **X/A/B Slow Up**, left/right, size, optional tool-clamping and installed drive/controller options against the exact manufacturer's current documents and circuit diagram. Confirm valve-switch channel wiring in the independent safety controller. If any option is UNKNOWN, mark the affected `DEP/ENE/AUTH/VAL` **HOLD**. Do not infer monitored feedback from identical casting appearance or infer absence of accumulators from a schematic of the no-Slow-Up variant. `HW-15..17` are product-catalog evidence, not selected-machine test evidence.

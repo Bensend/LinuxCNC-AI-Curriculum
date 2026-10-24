@@ -221,3 +221,5 @@ Machine-specific proprietary design information belongs outside this public curr
 ### 2026-10-24 4400 safety: PWR-01 electrical common-cause and diagnostics
 
 The [non-graduated 4400-PWR-01 module](safety-course/4400_PWR_01_SAFETY_IO_SUPPLY_RETURN_AND_DIAGNOSTIC_CONFIG_MODULE_2026-10-24.md) traces original SICK lost-0 V, reverse-current false-high, and XTIO output test-pulse configuration hazards. It extends 25A0/25B0 and brownfield 4400-RET-01. Selected-machine physical witnesses, independent fresh-AI transfer and all safety release gates remain open.
+
+Additional 4400 safety source branch: [CIP Safety connection reaction time versus FSoE watchdog/ack and unsupported SIL UI](research/4400_CIP_SAFETY_CRTL_VS_FSOE_WATCHDOG_ACK_AND_SIL_UI_TRAP_SOURCE_AUDIT_2026-10-24.md), with [10-case paper technician card](safety-course/4400_SAFETY_FIELDBUS_TIMEOUT_ACK_AND_FALSE_SIL_TECHNICIAN_CARD_2026-10-24.md). Documentary, not selected machine proof or external evaluation.

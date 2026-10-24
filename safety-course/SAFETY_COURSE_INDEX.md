@@ -333,3 +333,8 @@ The [complete 4000-level teaching module](4400_HY_01_HYDRAULIC_PRESS_BRAKE_SAFET
 
 
 **4400-HY-01 fresh handoff prepared:** [independent, novel two-concept source-transfer assignment](../evaluation/4400_HY_01_FRESH_HANDOFF_CONTRACT_2026-10-24.md). No solution key or score included; **NOT RUN / NOT GRADUATED**. This does not alter 2520–25F0 external gates.
+
+
+### 4400 relay reset-edge and power-restoration scope — Rockwell MSR142RTP (2026-10-24)
+
+Read the [original Rockwell 440R-IN089A-EN-P reset-edge, power-up and Y1–Y2 feedback audit](../research/4400_MSR142_RESET_EDGE_POWERUP_FEEDBACK_WIRING_SOURCE_AUDIT_2026-10-24.md) and complete the [ten-case technician field card](4400_RESET_EDGE_POWER_RESTORATION_AND_FEEDBACK_TECHNICIAN_CARD_2026-10-24.md). **DOC-CONFIRMED:** T-mode reset is **not edge-monitored** and can reenable on power-up with closed inputs; R-mode requires a transition; negative-edge 440R-xxxxxM resets on release. Y1–Y2 actuator feedback and cross-loop monitoring depend on actual installed wiring and **do not** prove a hydraulic load is held. Separate safety reset, fresh production START, physical stop/hold and maintenance isolation. `RE-01..10 PAPER ONLY`, `IN/PHY UNKNOWN`, `VAL/PT NOT RUN`; no selected-machine safety release, test, compute or blind score.

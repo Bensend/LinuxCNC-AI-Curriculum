@@ -8,7 +8,8 @@ A fresh engineer should be able to (1) distinguish monitored fixed blanking, flo
 ## Required reading (in order)
 1. [SICK C4000 original-manual source audit](../research/4400_SICK_C4000_BLANKING_OBJECT_MONITORING_EFFECTIVE_RESOLUTION_AUDIT_2026-10-24.md), then original OEM C4000 8009861/YT64/2016-02-25 §§4.8–4.11 and 7.3.3.
 2. [OSHA press-brake vs mechanical-press scope and late laser detection](../research/4400_OSHA_PRESS_BRAKE_VS_MECHANICAL_PRESS_LIGHT_CURTAIN_SCOPE_AND_LATE_DETECTION_AUDIT_2026-10-24.md), then OSHA 1910.217(a)(5), 1910.212, CPL 02-01-025 and 2004 laser interpretation with stated direct-page retrieval limits.
-3. Existing [4400-ESPE-01 scanner signal semantics](4400_ESPE_01_SAFETY_SCANNER_EFI_SIGNAL_SEMANTICS_AND_RESTART_MODULE_2026-10-24.md) and [ISO 13855:2024 source-scope audit](../research/4400_ISO13855_2024_SEPARATION_DISTANCE_SCOPE_STOP_TIME_AND_GRAVITY_EXCEPTION_2026-10-24.md) to avoid confusing field selection and response time with machine physical stopping.
+3. [Rockwell 450L cross-OEM manufacturer-indexed comparison](../research/4400_ROCKWELL_450L_BLANKING_OBJECT_MONITORING_CROSS_OEM_TRANSFER_GATE_2026-10-24.md). The original large Rockwell PDF could not be opened; use its indexed excerpts as DOC-CONFIRMED only at that narrower provenance, and do not reuse its example as a blind evaluator oracle.
+4. Existing [4400-ESPE-01 scanner signal semantics](4400_ESPE_01_SAFETY_SCANNER_EFI_SIGNAL_SEMANTICS_AND_RESTART_MODULE_2026-10-24.md) and [ISO 13855:2024 source-scope audit](../research/4400_ISO13855_2024_SEPARATION_DISTANCE_SCOPE_STOP_TIME_AND_GRAVITY_EXCEPTION_2026-10-24.md) to avoid confusing field selection and response time with machine physical stopping.
 
 ## Functional chain — NOT an installed circuit
 ```text

@@ -1,0 +1,17 @@
+# 4400 safety continuation — 2026-10-24T01:37Z Bosch hydraulic physical witness
+
+**Supersedes** `checkpoints/2026-10-24T0039Z-4400-physical-stop-time-oem-scope-next.md`. Session start **2026-10-24T01:37:48Z UTC**, recorded before substantive work. START_HERE, MASTER_MISSION, LEVEL_ORDER, CURRICULUM, WORK_SELECTION_POLICY, SOURCE_POLICY, MODULE_TEMPLATE, PROGRESS, safety index, 2570/2580 gates, blind feedback, lab compute and canonical lesson-log state inspected. 1000–3000/F02 GRADUATED/CLOSED; 2520–25F0 external/fresh evaluation OPEN; safety 4400 priority.
+
+## New evidence
+
+- New original [Bosch IH04/IH04E scope and physical-leakage source audit](../research/4400_BOSCH_IH04_VALVE_FEEDBACK_LEAKAGE_REPLACEMENT_SCOPE_AUDIT_2026-10-24.md) and [ten-case open-book technician card](../safety-course/4400_HYDRAULIC_VALVE_FEEDBACK_LEAKAGE_SCOPE_TECHNICIAN_CARD_2026-10-24.md). Original OEM-authored RE 63124-B 08.2021 and RE 63129-MON 09.2022 texts inspected through third-party-hosted copies; OEM direct PDF for IH04E not recovered.
+- **DOC-CONFIRMED:** ordinary valve actual-value electronics not an acceptable safety shutdown signal in documented IH04 context; OFF can retain hydraulic pressure; safety-valve replacement requires reaction-time checks; IH04E valve-limit-switch diagnostics cannot prove absence of cylinder-seal/valve/relief/manifold leakage. Product-specific 5 mm/s and 1 mm/s statements differ in test/machine/fault scope and **must not transfer** to press-brake Y1/Y2. IH04E is lower die cushion, not verified installed beam hardware.
+- ISO 6909:2026 official public scope reviewed; full normative technical clauses not obtained. Design Package §11AW, learner index, replacement worksheet, publication ledger and PROGRESS updated. All paper-only `HF-01..10 NOT RUN`, selected `IN-01..10/OPT/PHY UNKNOWN`, `VAL/PT NOT RUN`, G0/G1 HOLD, G2 NOT RUN, G3/G4 NOT AUTHORIZED, G5 HOLD. No physical tests, simulations, lab compute, external evaluation or machine release.
+- Historical exact archive remains **6/85**; no invented restoration. Self-hosted-only run 39919548510/job 120301190483 checked and **QUEUED** on `[self-hosted,openpressbrake]`, no new authoritative runtime; `LAB_COMPUTE_LOG.md` unchanged. No GitHub-hosted compute.
+
+## Exact next highest-value work
+
+1. Seek as-built selected OpenPressBrake Y1/Y2 hydraulic circuit, valve/manifold nameplates, port/pressure-zone map, valve feedback and independent safety-output wiring, actual physical load-bearing/ram restraint, motion witness, guarding/occupancy and fresh-start authority. Populate `IN-01..10`, `PHY`, `SRS`, `DEP`, `VAL/PT` with provenance; do not infer numeric thresholds or a hydraulic truth table. No person-exposed hazardous operation without independent physical safe-state proof.
+2. If still unavailable, rotate to a **different OEM-specific safety failure** with original manufacturer manual and a falsifiable paper evidence gap; prioritize real fault coverage/maintenance return-to-service over another generic numerical stop-distance treatment.
+3. Preserve 2520–25F0 evaluator information separation and six exact-archive missing files. No lab unless an actual unresolved question requires compute; if so use **only** `[self-hosted, openpressbrake]`, never hosted runners. Current research required no lab.
+4. Immediately before end, append actual UTC end, elapsed minutes and overlap to complete `LESSON_LOG.md` using fresh SHA guard, verify and commit. Prior canonical end **2026-10-24T00:39:16.001Z**. Keep hourly automation enabled.

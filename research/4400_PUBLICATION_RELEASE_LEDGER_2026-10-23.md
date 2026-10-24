@@ -442,3 +442,6 @@ Original [2024 edition/physical-proposition source reconciliation](../research/4
 
 
 **2026-10-24 additional new original OEM source work (NOT archive release):** `research/4400_SSC3000_DOWNSTROKE_DISTANCE_VS_UPSTROKE_BRAKE_MONITOR_SOURCE_TRAP_2026-10-24.md` and `safety-course/4400_STOP_TIME_OUTLIER_AND_BRAKE_MONITOR_SCOPE_TECHNICIAN_CARD_2026-10-24.md` published after inspecting Rockford SSC3000 KSL252 ©2025 printed pp. 69–71. Separated downstroke separation-distance tests from upstroke brake-monitor thresholds and their context-limited high-reading treatment. Historical exact archive remains **6/85**; no selected-machine test, external evaluation or laboratory compute.
+
+
+**2026-10-24T01:37Z original OEM source continuation (NOT an exact archive release):** Added `research/4400_BOSCH_IH04_VALVE_FEEDBACK_LEAKAGE_REPLACEMENT_SCOPE_AUDIT_2026-10-24.md` and `safety-course/4400_HYDRAULIC_VALVE_FEEDBACK_LEAKAGE_SCOPE_TECHNICIAN_CARD_2026-10-24.md` after inspecting Bosch RE 63124-B (08.2021) and RE 63129-MON (09.2022). Normal valve-electronics telemetry, pressure-in-OFF, valve replacement/reaction-time, and die-cushion leakage-limit-scope distinctions; paper-only. **Historical archive remains 6/85 pending**. No machine validation, blind score, physical test or compute.

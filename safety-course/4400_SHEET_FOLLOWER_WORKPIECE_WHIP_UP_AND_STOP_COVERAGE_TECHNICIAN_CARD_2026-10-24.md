@@ -59,3 +59,16 @@ The drawing is an **allocation question**, not a proposed wiring diagram. No saf
 **Practical floor:** if the actual part/ram/follower hazard boundary is not safeguarded, do **not** operate with people exposed. Experimental investigation requires a separately qualified isolated/remote plan with personnel outside the danger zone, physical support and residual risk explicitly reviewed. No hazardous tests are prescribed here.
 
 **External competency:** this is open learner-facing practice, not a sealed benchmark or a scored fresh-AI evaluation. Existing 2520–25F0 and 4400-HY-01 external gates remain open.
+
+
+## Additional real-implementation paper cases — SHENCHONG 2022 follower
+
+Manufacturer original: https://www.shenchong.com/bending-follower-installation-instruction-servo-motor-delta-plc.html . The published setup includes a separate magnetic scale, PLC origin/speed-ratio learning, follower Start Follow mode and a local E-stop; it is **not** permission to repeat its energized setup steps as a student lab.
+
+| ID | Scenario | Required documentary reasoning |
+|---|---|---|
+| WF-13 | Press ram scale is correct, but follower's separate magnetic-scale origin is stale after a tooling change. | Identify which motion agreement is unproven and which change invalidates prior `VAL/PT`; no CNC 'position correct' claim is enough. |
+| WF-14 | Follower-local E-stop works according to its local display; press E-stop integration has no as-built wiring. | Mark reciprocal stop coverage **UNKNOWN**; identify both safety outputs and physical witnesses rather than assuming common authority. |
+| WF-15 | Vendor setup says to bend a sheet, jog the follower and learn a speed ratio. | Reject direct transfer into an unqualified hazardous test; require qualified isolated commissioning with physical supports, all people excluded, safe access and explicit residual risk. |
+
+These are **PAPER ONLY** and do not modify the independent blind-evaluation bank or selected-machine release state.

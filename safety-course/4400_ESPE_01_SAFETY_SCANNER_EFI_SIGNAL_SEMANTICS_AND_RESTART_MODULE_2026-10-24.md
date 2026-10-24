@@ -88,3 +88,7 @@ Work [S300 16-case card](4400_S300_EFI_SIGNAL_SELECTION_RESTART_AND_REAR_ACCESS_
 ## Next work
 
 Collect exact installed rear-access/guard design and safety-controller signal trace, field allocation, reset logic, backgauge STO/brake, independent Y1/Y2 final elements, physical stop/hold/occupancy and maintenance isolation. If absent, continue a new unblocked 4400 safety source gap or arrange a truly independent fresh-AI paper evaluation. No personnel-exposed hazardous operation.
+
+## Additional documentary discriminator — field switching before exposure
+
+Original SICK S3000 8009942/ZE09/2026-09-09 **§4.3.3 pp.39–40** requires advancing monitoring-case switching when input delay, external EFI control inputs or external OSSDs add delay; if deterministic timing cannot be guaranteed, protective-field overlap or temporary simultaneous monitoring is described. **§7.8.2 pp.97–98** documents complementary dual-channel sampling versus 1-of-n sampling and invalid-state errors. **§7.13.1 p.111** requires the case-switching control to meet the required safety level. **DOC-CONFIRMED for this product**, but no SICK timing number is an OpenPressBrake stop-time or field-overlap acceptance. A student must distinguish `field selection`, `field evaluation`, `restart authority`, and `physical stopping` as four different proof obligations.

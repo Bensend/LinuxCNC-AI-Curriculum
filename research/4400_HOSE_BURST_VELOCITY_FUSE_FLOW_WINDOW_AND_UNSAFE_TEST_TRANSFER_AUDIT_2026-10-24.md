@@ -75,3 +75,8 @@ Before any test design: obtain as-built Y1/Y2 cylinder/chamber and hose map; exa
 | Winner setting tolerance and distinct selection guidance | DOC-CONFIRMED | Winner HB-18A-20 product page | HYDAC settings or installed-machine threshold |
 | Small leak may never trip a velocity fuse | INFERENCE | Excess-flow trigger + missing lower fault-flow bound | Actual failure of any selected installed fuse |
 | Selected Y1/Y2 protected against rupture/slow leak | UNKNOWN | No as-built or physical witness | No personnel-exposed release |
+
+
+## 2026-10-24 SAME-SESSION CRITICAL CORRECTION — manufacturer port-direction conflict
+
+**Do not generalize the HYDAC US catalogue's 2→1 closing direction.** Subsequent inspection of **HYDAC International EN 5.174.14/10.21** pp. 1–2 found the **same part number 710028 / RBE-R1/2-X-75** described as closing **1→2**, opposite to HYDAC's US official 710028 product listing (**2→1**). Original PDF cutaway labels protected consumer at port 1. The conflict is **DOC-CONFIRMED between two original manufacturer sources**, while actual installed part behavior is **UNKNOWN**. Read the [dedicated same-part contradiction audit](4400_HYDAC_RBE_710028_OPPOSITE_PORT_DIRECTION_OEM_CONFLICT_2026-10-24.md). The earlier `2→1` discussion is **only** the narrow US online catalogue claim for the identified listing, **not** an installation rule or physical truth. Manufacturer written clarification plus selected part/port evidence is a blocking gate; no line-open experiment.

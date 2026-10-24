@@ -6,7 +6,7 @@
 
 Requires 2520 hazards/SRS, 2530 E-stop, 2540 final elements, 2570 drive STO, 2580 energy isolation, 2590 guarding, 4400-GUARD-01 and 4400-RST-01. Learner must be able to distinguish **ordinary programmed backgauge step**, **safety-related motion inhibition**, **actual physical axis stop**, **guard/occupancy protection**, **maintenance isolation**, and **deliberate fresh start**, while mapping independent press-beam Y1/Y2 hazards.
 
-Read [original manufacturer/source audit](../research/4400_PRESS_BRAKE_BACKGAUGE_STEP_CHANGE_REAR_ACCESS_AND_INDEPENDENT_STOP_OEM_AUDIT_2026-10-24.md) and [technician/witness exercise](4400_BACKGAUGE_PHASE_AND_REAR_ACCESS_TECHNICIAN_WITNESS_2026-10-24.md). The OEM example is TRUMPF B35 **2023-05-01**; it is not an OpenPressBrake configuration.
+Read [original manufacturer/source audit](../research/4400_PRESS_BRAKE_BACKGAUGE_STEP_CHANGE_REAR_ACCESS_AND_INDEPENDENT_STOP_OEM_AUDIT_2026-10-24.md) and [OSHA real stop/cancel return-path audit](../research/4400_OSHA_CABINET_PRESS_STOP_CANCEL_AUTORETURN_ASYMMETRIC_GUARDING_TRANSFER_AUDIT_2026-10-24.md) and [technician/witness exercise](4400_BACKGAUGE_PHASE_AND_REAR_ACCESS_TECHNICIAN_WITNESS_2026-10-24.md). The OEM example is TRUMPF B35 **2023-05-01**; it is not an OpenPressBrake configuration.
 
 ## Distinct hazard boundaries
 

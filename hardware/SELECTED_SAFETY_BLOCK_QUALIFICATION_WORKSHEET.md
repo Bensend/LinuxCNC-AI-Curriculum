@@ -236,3 +236,8 @@ Decision:
 - [ ] READY FOR ENGINEERING SCHEMATIC CAPTURE — not validated/certified/released
 
 Reviewer rationale and evidence gaps:
+
+
+## C2. Conditional safety PLC port-role / diagnostic-pulse substitution gate (2026-10-24)
+
+For every **selected** controller terminal, document `SAFETY_OUTPUT / STANDARD_AUXILIARY / TEST_PULSE / SAFE_INPUT / STANDARD_INPUT`, exact configured function, supply, producer/receiver and physical final-element authority. Do not infer safety capability from a 24 V pin, connector shape, PLC RUN LED, CRC or HMI status. The [Pilz PNOZ m B0 OEM 1002660-EN-13 audit](../research/4400_PILZ_PNOZ_MB0_SAFE_VS_AUX_OUTPUT_TEST_PULSE_CUTOVER_SOURCE_AUDIT_2026-10-24.md) demonstrates model-specific safe `O0..O3` versus auxiliary and test-pulse output classes; printed p.45's 330 µs/5 ms maximum self-test OFF intervals belong to **different** output types and cannot be used as generic receiver tolerance or machine stop time. Capture diagnostic-pulse wire segregation, load/receiver thresholds, coil suppression, external feedback, separate output supply and the OEM-required post-project-change functional check. An unresolved role/compatibility/final-element path is **SCHEMATIC-BLOCKING**; machine physical stop/hold evidence remains **MACHINE-VALIDATION-BLOCKING**. The installed PLC family and all physical witnesses remain UNKNOWN until selected-machine evidence exists.

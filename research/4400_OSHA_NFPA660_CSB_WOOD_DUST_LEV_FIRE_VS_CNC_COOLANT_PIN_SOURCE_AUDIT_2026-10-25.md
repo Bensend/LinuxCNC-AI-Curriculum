@@ -47,3 +47,5 @@ No bench simulation: the question of whether a HAL command measures extraction i
 
 ## DUST-02/03 exact-source continuations
 [2.9 versus development coolant/ESTOP version audit](4400_LINUXCNC_2_9_VS_DEVELOPMENT_COOLANT_REQUEST_AND_ESTOP_VERSION_BOUNDARY_2026-10-25.md) confirms 2.9 uses Task -> `EMC_TOOL_ABORT` -> `ioControl[(_v2)]` for OFF on abort/ESTOP/RESET, while development writes flood HAL directly in Task and also explicitly turns it OFF in the ON branch. No physical collector response inferred. [Donaldson CPC Rev6 and HSE commissioning source audit](4400_DONALDSON_POWERCORE_FILTER_DELTA_P_VENT_AND_SPRINKLER_OEM_AUDIT_2026-10-25.md) adds exact OEM collector vent-discharge and sprinkler-water structural warnings, Delta-P ambiguity and qualified hood commissioning. No numeric site criteria.
+
+**DUST-04 exact interpreter addition:** [M8/M9 remap/queue pinned source trace](4400_LINUXCNC_M8_M9_INTERP_QUEUE_REMAP_VS_PHYSICAL_LEV_READINESS_SOURCE_TRACE_2026-10-25.md) confirms interpreter `settings->flood` and queued canonical requests are not immediate fan/hood capture. No safety timing inferred.

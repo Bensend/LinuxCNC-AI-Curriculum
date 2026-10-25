@@ -23,3 +23,13 @@ Do not build a safety function on assumed M8/M9/E-stop flood-pin timing. A dust 
 
 ## Evidence and next work
 SOURCE-CONFIRMED exact pinned code; DOC-CONFIRMED no new manufacturer claim; TEST-CONFIRMED none; INFERENCE safety consequence; UNKNOWN downstream iocontrol/selected physical truth. If a real selected 2.9 interface requires source-level routing certainty, trace its pinned iocontrol `sendCommand`/`emcIoAbort` implementation; do not invent a universal physical truth table. No simulation or hosted/local compute justified for the source-path comparison. No physical machine test or independent evaluation.
+
+## 2.9 iocontrol downstream source reconciliation (same session)
+The initial source comparison stopped at the Task-to-iocontrol boundary. Subsequent direct source inspection **resolves that specific gap**:
+- `src/emc/task/taskclass.cc:592–600` `Task::emcIoAbort(reason)` creates `EMC_TOOL_ABORT` and calls `sendCommand(&ioAbortMsg)`.
+- `src/emc/iotask/ioControl.cc:868–876` handles `EMC_TOOL_ABORT_TYPE`, sets `emcioStatus.coolant.flood=0` and `iocontrol_data->coolant_flood=0`. It handles flood ON/OFF at lines 1071–1080.
+- `src/emc/iotask/ioControl_v2.cc:1004–1013` likewise clears flood on `EMC_TOOL_ABORT_TYPE`; ON/OFF at lines 1223–1232.
+- `src/emc/task/emctask.cc:315–365` invokes `emcIoAbort` for OFF, ESTOP_RESET and ESTOP, but not the ON branch. Thus the **direct Task flood-off calls differ** from development; 2.9 has an **abort-message-to-iocontrol OFF path** for those three states. A 2.9 ON transition is not shown to turn flood OFF by this state handler.
+- **SOURCE-CONFIRMED for exact pinned code**, not TEST-CONFIRMED runtime or a selected HAL/physical collector. The specific 2.9 iocontrol executable variant and downstream external wiring remain machine/configuration-dependent.
+
+**Corrected inference:** do not say 2.9 never clears flood on E-stop simply because the direct Task call is absent. Trace the `emcIoAbort -> EMC_TOOL_ABORT -> ioControl[(_v2)]` path. The version difference still matters for command routing and ON-state behavior; it does not grant a reliable collector fire/LEV safety function.

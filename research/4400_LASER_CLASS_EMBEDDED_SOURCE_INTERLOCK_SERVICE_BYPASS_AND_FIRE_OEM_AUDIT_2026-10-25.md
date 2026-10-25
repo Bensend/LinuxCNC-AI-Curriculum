@@ -38,3 +38,6 @@ The OEM's published bypass-based troubleshooting is a **real-world source-confir
 
 ## Decision
 **No laser machine operated, no beam emission, no simulation, no GitHub-hosted or local Actions compute, no physical or external test.** This documentary study does not authorize disabling interlocks, opening a laser beam path, aligning optics, or human-exposed operation. Need exact machine/product variant and qualified laser safety review before any physical validation. Cross-machine transfer: independent energy/hazard removal, restoration after service, and optical containment are distinct from normal LinuxCNC outputs. See learner module and no-energy review.
+
+## Same-session pinned-source continuation
+[4400-LASER-02 direct source trace](4400_LINUXCNC_PINNED_M62_M65_DIO_MOTION_QUEUE_VS_LASER_SAFETY_INHIBIT_SOURCE_TRACE_2026-10-25.md) inspects LinuxCNC dev `062dc7c` and 2.9 `a33293f`: M62/M63 -> canonical `now=0` -> motion TP `tpSetDout`; M64/M65 -> `now=1` -> immediate `emcmotDioWrite`. **SOURCE-CONFIRMED** normal output path, not a physical laser safety function. Development branch checks out-of-range DIO at `EMCMOT_SET_DOUT`; the inspected 2.9 case lacks that particular guard, without proving runtime acceptance. No compute or laser test.

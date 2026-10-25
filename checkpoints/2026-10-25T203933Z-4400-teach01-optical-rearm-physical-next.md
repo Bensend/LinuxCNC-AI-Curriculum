@@ -1,0 +1,31 @@
+# 4400 safety continuation — TEACH-01 and OVERRIDE-01 original optical configuration / recovery authority
+**Session UTC start:** 2026-10-25T20:39:33.518Z (local UTC clock captured before substantive work; [durable start marker](2026-10-25T203933Z-session-start-safety.md)). Supersedes [19:31Z ACCESS/ENC/COMM checkpoint](2026-10-25T193118Z-4400-access-enc-physical-evaluator-next.md) for work selection only.
+
+## Governance/current state
+START_HERE read first; MASTER_MISSION, LEVEL_ORDER, WORK_SELECTION_POLICY, CURRICULUM, SOURCE_POLICY, MODULE_TEMPLATE, PROGRESS, independent blind protocol/score log, compute log, safety index, 4400 ESPE-02, selected intake and cumulative safety package reviewed. 1000/2000/F02/3000 **GRADUATED/CLOSED**. Active **4400 safety**; board-design automation owns routine electronics. Selected OpenPressBrake **G0/G1 HOLD, G2 NOT RUN, G3/G4 NOT AUTHORIZED, G5 HOLD**; actual independent Y1/Y2 stop, gravity hold, hydraulic isolation, guarding, service rescue and deliberate restart **UNKNOWN**. Independent 2520–25F0 evaluator and new 4400 handoff **NOT RUN**.
+
+## Eight original artifacts and evidence
+1. [Direct SICK deTec4 HG 2026 / Rockwell Micro 400 2024 teach-in and response-time audit](../research/4400_SICK_DETEC4_2026_TEACH_IN_AUTO_OSSD_AND_ROCKWELL_MICRO400_RESPONSE_TIME_AUDIT_2026-10-25.md)
+2. [TEACH-01 module](../safety-course/4400_TEACH_01_PROTECTIVE_OUTPUT_TEACH_IN_AND_RESPONSE_TIME_CHANGE_MODULE_2026-10-25.md)
+3. [18 public TEACH-01 PAPER cases UNSCORED](../safety-course/4400_TEACH_01_EIGHTEEN_CHANGE_CONTROL_TECHNICIAN_CASES_2026-10-25.md)
+4. [12 blank G0 documentary gates NOT RUN](../safety-course/4400_TEACH_01_TWELVE_GATE_NO_ENERGY_CONFIGURATION_WITNESS_2026-10-25.md)
+5. [Independent fresh TEACH evaluator PREPARED/NOT RUN](../evaluation/4400_TEACH_01_FRESH_CONFIGURATION_REARM_TRANSFER_HANDOFF_2026-10-25.md)
+6. [Direct SICK 2026 muting / Smart Box override and reset-sharing source audit](../research/4400_SICK_2026_MUTING_OVERRIDE_RESET_SHARED_CONTROL_AND_COUNTER_RESET_AUDIT_2026-10-25.md)
+7. [OVERRIDE-01 module](../safety-course/4400_OVERRIDE_01_MUTING_RECOVERY_OUTPUT_REARM_AND_OPERATOR_HUMAN_FACTORS_MODULE_2026-10-25.md)
+8. [12 public OVERRIDE PAPER cases UNSCORED](../safety-course/4400_OVERRIDE_01_TWELVE_REARM_AND_BYPASS_INCENTIVE_PAPER_CASES_2026-10-25.md)
+
+**DOC-CONFIRMED exact OEM:** SICK deTec4 HG **8023856/1SWC/2026-02-05** original https://www.sick.com/media/docs/5/75/275/operating_instructions_detec4_hg_en_im0082275.pdf printed pp.72–80: teach-in accepted -> configuration stored and sensor auto-start; absent restart interlock OSSDs ON; empty-field teach-in can deactivate fixed blanking; hole remains unprotected; effective resolution and size tolerance are distinct. **DOC-CONFIRMED exact OEM:** Rockwell Micro 400 **445L-IN005C-EN-P Jan 2024** original https://literature.rockwellautomation.com/idc/groups/literature/documents/in/445l-in005_-en-p.pdf printed p.5: blanking changes response time as well as resolution, invalidating old distance/label assumptions; cascades/controller delays matter. SICK pp.49–50/68–70: muting/Smart Box override can set OSSD ON, reset/override may share control, extra reset may not be required after exit, consecutive count resets on startup/clean cycle, Smart Box override leaves field unmonitored. These are **NOT** claims of automatic hazardous motion or installed devices.
+
+**SOURCE-CONFIRMED new LinuxCNC:** none. **TEST-CONFIRMED:** none. **COMMUNITY-REPORTED:** none relied on. **INFERENCE:** independent protective configuration/change control, occupancy/access, physical final-element stop/hold and fresh ordinary motion request. **UNKNOWN:** selected machine, installed variant/config, optical geometry, PL/SIL, stop times, hydraulic pressure and evaluator. Existing ESPE-02 and prior 4400 evidence preserved without cross-model equivalence.
+
+## Integration, compute and evaluation
+Updated CURRICULUM, PROGRESS, SAFETY_COURSE_RESEARCH, safety index, selected-machine conditional intake, cumulative safety package **§§11FK–11FL**. **Eight original artifacts; 30 public PAPER cases UNSCORED; 12 G0 documentary gates NOT RUN; fresh evaluator PREPARED/NOT RUN**. No simulation/build/synthesis/benchmark/physical tests, no GitHub Actions dispatch, no new authoritative runtime: **0 hosted / 0 local self-hosted lab minutes**. LAB_COMPUTE_LOG and FEEDBACK_SCORE_LOG unchanged. Previously reported local runner-access blocker not retested because no compute justified; **never** hosted fallback. No personnel-exposed machine operation authorized.
+
+## Exact next-work selection
+1. Qualified private selected OpenPressBrake **G0**: machine ID, all Y1/Y2 independent physical stopping and gravity holding, hydraulic pressure isolation/bleed/rescue, guarding/occupancy, selected safety devices and configuration, fresh reset/restart, stopping/release measurements under authorized qualified plan. Public repository must contain only generic intake/gate status, not proprietary as-built material.
+2. Genuine independent unseen 2520–25F0 / 4400 evaluator results; do not self-score or reveal hidden oracle. Fresh TEACH handoff prepared, not executed.
+3. If both blocked, rotate to highest-value **distinct** open 4400 safety question with inspectable exact OEM or pinned LinuxCNC source. Avoid repeating ESPE-02 blanking and TEACH/OVERRIDE without a new discriminator. Consider protective-zone occupancy after pass-through or monitored bypass restoration only if exact OEM evidence adds something not already covered.
+4. Use bounded `[self-hosted, openpressbrake]` workflow **only** for concrete unresolved executable question. If runner cannot dispatch, record blocker and continue source/documentation; never use GitHub-hosted runners.
+
+## Short-session continuation
+TEACH-01 yielded exact 2026 automatic OSSD-on teach-in and independent 2024 response-time drift evidence. Rather than stop on a completed narrow source question, rotated to distinct SICK original override/reset/counter semantics and human-factors curriculum. Manufacturer documentation resolved both device-level questions; no synthetic lab can validate selected-machine geometry, Y1/Y2 gravity hold or pressure. End UTC, actual elapsed and overlap must be appended safely to complete LESSON_LOG immediately before session ends.

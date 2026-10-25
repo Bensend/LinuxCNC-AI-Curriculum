@@ -1,0 +1,36 @@
+# 4400-ATC-01 — CNC spindle/toolchanger retention versus safety, energy and access
+**4000 Safety | 2026-10-25 | SOURCE-READING / NOT GRADUATED | no lab or physical tests**
+
+## Prerequisites and learning objective
+Requires 2520 hazard/SRS, 2540 final elements, 2570 drive STO, 2580 isolation, 2590 guarding, 4400-BLK-01 mechanical restraint, 4400-PNEUMATIC exhaust/hold research and 4400-CELL-01 whole-body reset. Learner must distinguish **tool clamp position**, **physical retention force**, **pneumatic release**, **arm/pocket capture**, **Z/spindle drive stop**, **guarded access**, **service isolation**, and **deliberate restart**.
+
+Read [direct Haas original OEM source audit](../research/4400_HAAS_TOOL_RELEASE_DRAWBAR_PRECHARGE_SENSOR_AND_TOOL_DROP_OEM_AUDIT_2026-10-25.md) and [14 learner-visible paper scenarios / blank witness](4400_ATC_TOOL_RELEASE_AND_CAPTURE_TECHNICIAN_CARD_2026-10-25.md).
+
+## Documented physical mechanisms
+Haas 40T drawbar troubleshooting **TG0132 Rev A 12/2025** describes spring retention parts, insufficient drawbar clamp force, precharge effects, unexpected release associated with a solenoid-delay fault, and TRP sensor misalignment. Haas SMTC **TG0128 Rev B 08/2025** describes double-arm slide/retainer adjustment, pocket extractor wear, and a failed home sensor/cable leading to a hazardous Z-axis movement. **DOC-CONFIRMED for those OEM examples only**; no claim installed on OpenPressBrake or a LinuxCNC machine.
+
+## Architecture and fault table
+| Normal status or command | Separate physical safety proposition | Failure to analyze |
+|---|---|---|
+| `spindle.0.on=false` or STO | tool retained and no unintended drop | weak springs, bad pull stud, precharge |
+| `tool-clamped=true` | sufficient clamp force and retention under load | position switch misadjusted, force low |
+| `arm-home=true` | arm actually clear of Z travel and tool captured | failed proximity sensor/cable, bad alignment |
+| `TRP-solenoid=false` | no pressure/trapped energy can actuate release | stuck valve, cross-feed, retained air |
+| `guard-closed=true` | no person inside cell or tool-drop zone | walk-through, blind spot, defeat |
+| `reset-accepted=true` | independent physical safe state and fresh new start | queued M6/Z motion, stale commands |
+
+These are **INFERENCE design-review discriminators**, not tested safety logic or approved circuits.
+
+## Design contract (not installed wiring)
+**SF-ATC-RETAIN:** define and validate selected retention force and mechanical capture with OEM tooling and qualified measurements; do not borrow Haas numbers for another taper. **SF-ATC-TRANSFER:** prohibit hazardous release unless the receiving arm/pocket actually supports the tool and personnel are excluded by a validated independent protective function. **SF-ATC-ACCESS:** prevent unexpected Z, spindle, arm, pocket and pneumatic release motion during access. **SF-ATC-SERVICE:** isolate/verify electrical, pneumatic, spring and gravitational energy for the task; E-stop, MDI and software enable are not isolation. **SF-ATC-RESTART:** guard replacement/reset does not execute retained M6/Z movement; require deliberate new start and verified machine readiness.
+
+## Human factors
+Provide accessible inspection of wear and capture status without reaching below a suspended tool, labeled pressure/energy zones, simple reliable guard reinstallation, an unambiguous tool recovery mode with safe access and clear fault messages. Ask maintainers how often they defeat the enclosure to clear jams; treat friction as a design input. Prefer inexpensive proven mechanical containment and OEM-supported parts over complex FPGA inference.
+
+## Cross-machine transfer
+Mills/routers: spindle drawbar and changer arm; lathes: turret/toolholder retention and spindle coast; robot cells: end-effector drop and toolchanger locking; press brakes: die clamping and gravity ram hold (different mechanism); plasma: torch holder release and process energy. Do not transplant Haas toolholder-specific specs or claim equivalence.
+
+## Qualification
+G0/G1 HOLD: selected inventory, as-built mechanism, safety architecture, actual tool mass/retention OEM criteria, zones and independent final elements. G2 paper review only, NOT RUN. G3/G4 protected physical tests NOT AUTHORIZED without qualified plan and people excluded. G5 fresh independent evaluation OPEN. All PAPER cases not blind scores.
+
+**Promotion:** selected spindle variant/force test (UNKNOWN/HIGH, blocks selected-machine graduation); actual safety-rated interlocks and mechanical capture (UNKNOWN/CRITICAL, blocks); air-release and trapped pressure state (UNKNOWN/HIGH, blocks); physical stop/hold/drop/zone witnesses (UNKNOWN/CRITICAL, blocks); novel fresh-AI handoff (UNKNOWN/HIGH, blocks). Counterfactual different physical truth could invalidate safety, so NOT GRADUATED. No LinuxCNC or FPGA personnel-safety authority.

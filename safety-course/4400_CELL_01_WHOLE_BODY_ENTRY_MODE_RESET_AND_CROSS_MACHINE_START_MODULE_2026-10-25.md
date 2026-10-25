@@ -4,7 +4,9 @@
 ## Prerequisites and objective
 Requires 2520 hazard/SRS, 2530 E-stop, 2540 final elements, 2580 isolation, 2590 guarding, 4400-SET-01 setup mode, 4400-RST-01 reset/EDM, 4400-GUARD-01 access and 4400-BG-01 rear access. A fresh learner should explain why **perimeter clear**, **guard closed**, **robot safeguard reset**, **safety-output high**, **actuator physically stopped**, **person absent**, and **deliberate restart** are separate claims.
 
-This module extends the existing [trapped-person/restart-prevention design card](TRAPPED_PERSON_RESTART_PREVENTION_DESIGN_CARD_2026-09-17.md) with exact UR I/O and mode evidence, rather than replacing its general occupancy framework.\n\nRead [UR SW10_15 OEM source audit](../research/4400_UR_SW10_15_SAFEGUARD_AUTO_RESET_MODE_AND_SYSTEM_STOP_HANDOFF_OEM_AUDIT_2026-10-25.md), [ABB/ISO source scope](../research/4400_ABB_RESET_VISIBILITY_ISO10218_2025_CELL_INTEGRATION_SCOPE_AUDIT_2026-10-25.md), and [learner cases / blank witness](4400_CELL_WALKTHROUGH_RESET_MODE_AND_RESTART_TECHNICIAN_CARD_2026-10-25.md).
+This module extends the existing [trapped-person/restart-prevention design card](TRAPPED_PERSON_RESTART_PREVENTION_DESIGN_CARD_2026-09-17.md) with exact UR I/O and mode evidence, rather than replacing its general occupancy framework.
+
+Read [UR SW10_15 OEM source audit](../research/4400_UR_SW10_15_SAFEGUARD_AUTO_RESET_MODE_AND_SYSTEM_STOP_HANDOFF_OEM_AUDIT_2026-10-25.md), [ABB/ISO source scope](../research/4400_ABB_RESET_VISIBILITY_ISO10218_2025_CELL_INTEGRATION_SCOPE_AUDIT_2026-10-25.md), and [learner cases / blank witness](4400_CELL_WALKTHROUGH_RESET_MODE_AND_RESTART_TECHNICIAN_CARD_2026-10-25.md).
 
 ## Hazard boundary
 A person may **walk through** a light curtain or guard opening and stand in an undetected region. Restoring the optical field or closing the gate proves neither vacancy nor permission to move. A protective input configured for **Automatic Mode Safeguard Stop** may have a different manual-mode effect than a general safeguard input. A safety output restored by an upstream E-stop release may rearm a connected machine even without a new human start.

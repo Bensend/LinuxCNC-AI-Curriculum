@@ -32,3 +32,6 @@ Cumulative Safety Design Package §§**11DP–11DT**, conditional selected-machi
 
 ## Short-session continuation
 After DUST-01 OSHA/NFPA/CSB and Task source, continued into DUST-02 **different 2.9 iocontrol architecture**, DUST-03 **original Donaldson/HSE physical capture/vent/structural source**, and DUST-04 **M8/M9 remap/queue** instead of stopping after one document. Remaining questions are site-physical or external-evaluator gated; no synthetic test justified. End may use context-density/coherent-branch-complete exception rather than producing low-value unrelated work.
+
+## Final publication integrity audit
+Untruncated recursive `main` tree **4,350 entries**; safety-course learner index **308 relative Markdown links / 293 distinct targets / zero missing**. All eight original research/module/evaluation/desk artifacts and this checkpoint independently fetched from `main` with nonempty blob SHA. No GitHub-hosted/self-hosted Actions, no new authoritative job runtime, no physical tests or independent evaluation; compute and feedback ledgers deliberately unchanged. The 18 technician cases are PAPER only. This is a non-graduated source/design extension; OpenPressBrake physical safety gates remain open.

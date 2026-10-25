@@ -355,3 +355,7 @@ Read [MON-01 integrated safety lesson](safety-course/4400_MON_01_SAFE_SPEED_MODE
 
 
 **BAR-02 original service extension:** [Haas AD0021 M19 versus physical spindle blocking audit](research/4400_HAAS_AD0021_M19_ORIENTATION_VS_SPINDLE_PHYSICAL_BLOCK_SERVICE_AUDIT_2026-10-25.md). Haas exact 2022 service procedure rejects M19 as a spindle block during liner-adapter work; neither normal orientation status nor a generic servo hold proves maintenance restraint. BAR-01 card now 13 PAPER cases; §11DY, selected service hardware UNKNOWN, no compute.
+
+
+### 4400 safety follow-on — RESCUE-01 (2026-10-25; NON-GRADUATED)
+Press-brake Type-C applicability and entrapment release versus E-stop/guard state: [primary publisher/OEM scope audit](research/4400_PRESS_BRAKE_TYPE_C_SCOPE_AND_TRUBEND_ESTOP_RESCUE_CONFLICT_AUDIT_2026-10-25.md), [module](safety-course/4400_RESCUE_01_ENTRAPMENT_RELEASE_STOP_AUTHORITY_AND_FRESH_REARM_MODULE_2026-10-25.md), [technician cases](safety-course/4400_RESCUE_01_NO_ENERGY_TECHNICIAN_DECISION_AND_WITNESS_CARD_2026-10-25.md) and [no-energy desk review](safety-course/4400_RESCUE_01_12_GATE_NO_ENERGY_DESK_REVIEW_2026-10-25.md). ANSI B11.3 scope differs from B11.2/ISO 16092-1; selected machine rescue with/without power, gravity holding and fresh rearm require independent evidence. Physical VAL/PT and external evaluation OPEN; no hosted/local compute.

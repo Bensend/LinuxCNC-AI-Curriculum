@@ -550,3 +550,6 @@ Original Pilz PNOZ s30 **1001715-EN-24** and SICK Safe Stationary Machine **8020
 
 
 **BAR-01 same-session new safety branch:** [Original Haas 2013 Servo Bar 300 and online newer software-specific bar-feeder source audit](research/4400_HAAS_BAR_FEEDER_LINER_WHIP_DOOR_MODE_VERSION_OEM_AUDIT_2026-10-25.md), [module](safety-course/4400_BAR_01_BAR_WHIP_LINER_AND_FEEDER_DOOR_SCOPE_MODULE_2026-10-25.md), [12 PAPER cases](safety-course/4400_BAR_01_DOOR_LINER_WHIP_TECHNICIAN_CARD_2026-10-25.md). Liner != collet grip; lid open != whole lathe/feed-cell stop; some axes may complete in-process motion under documented 100.23.000.1200+ Haas firmware. No inference that LinuxCNC has same implementation. Conditional IN-04aq UNKNOWN, §§11DW–DX, no selected machine test/evaluator/compute.
+
+
+**BAR-02 physical service restraint:** [Haas AD0021 M19-not-a-block original OEM note](research/4400_HAAS_AD0021_M19_ORIENTATION_VS_SPINDLE_PHYSICAL_BLOCK_SERVICE_AUDIT_2026-10-25.md). Exact manufacturer task rejects spindle orientation as physical blocking; a selected brake/restraint requires separate mechanical and isolation evidence. §11DY, BAR-01 now 13 PAPER cases, no test or selected machine inference.

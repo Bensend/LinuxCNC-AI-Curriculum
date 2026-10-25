@@ -27,3 +27,6 @@ For each: identify active hazards after door opening, independent stop authority
 | Fresh AI competency | information-separated evaluator | NOT SCORED |
 
 Do not energize a machine to complete this card. No invented stop distances, pressure limits, bar speed limits or PL/SIL.
+
+
+**13. Additional BAR-02 paper case:** During liner-adapter service, spindle is oriented and HMI says M19 complete; maintainer proposes using servo holding torque as a physical spindle block. Identify the exact OEM evidence, task-specific restraint and isolation needed, and safe return-to-service check. **PAPER ONLY, NOT RUN/NOT SCORED.**

@@ -23,3 +23,7 @@ Provide accessible correctly sized liner storage and simple change confirmation;
 
 ## Qualification
 Original OEM claims DOC-CONFIRMED for exact manual/software; cross-machine safety architecture INFERENCE; selected installation, PL/SIL, stop/whip criteria and physical witnesses UNKNOWN. No SOURCE-CONFIRMED LinuxCNC feeder implementation, no TEST-CONFIRMED, no external score. G0/G1 HOLD, G2 NOT RUN, G3/G4 NOT AUTHORIZED. If minimum independent protection is absent, do not operate with personnel exposed; isolated/remote only with people outside danger zone and qualified residual-risk plan. This is a new 4400 safety branch, not reopening graduated 3200.
+
+
+## BAR-02 OEM service-restraint source extension
+[Haas AD0021 2022-06-07 M19 versus physical blocking audit](../research/4400_HAAS_AD0021_M19_ORIENTATION_VS_SPINDLE_PHYSICAL_BLOCK_SERVICE_AUDIT_2026-10-25.md): OEM expressly rejects spindle orientation M19 as a mechanical block during liner-adapter service; specified mechanical restraint or selected brake is task/variant dependent. A generic spindle-orient signal cannot prove maintenance isolation or safe holding. **DOC-CONFIRMED exact OEM task; selected machine UNKNOWN.** Do not copy Haas task instructions to another machine.

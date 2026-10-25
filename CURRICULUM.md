@@ -352,3 +352,6 @@ Read [MON-01 integrated safety lesson](safety-course/4400_MON_01_SAFE_SPEED_MODE
 
 
 **BAR-01 distinct same-session safety continuation:** [Original Haas Servo Bar 300 2013 versus current bar-feeder 100.23.000.1200+ safety behavior](research/4400_HAAS_BAR_FEEDER_LINER_WHIP_DOOR_MODE_VERSION_OEM_AUDIT_2026-10-25.md), [BAR-01 non-graduated module](safety-course/4400_BAR_01_BAR_WHIP_LINER_AND_FEEDER_DOOR_SCOPE_MODULE_2026-10-25.md), [12 PAPER scenarios/blank witness](safety-course/4400_BAR_01_DOOR_LINER_WHIP_TECHNICIAN_CARD_2026-10-25.md). OEM documents liner reduces whip but does NOT grip bar; opening feeder door on specified firmware stops trolley but can allow lifter/loader to complete cycle and does not necessarily interrupt lathe cycle. Distinguish exact model/mode/software; no universal door truth table. §§11DW–DX, conditional IN-04aq UNKNOWN, no physical test or compute.
+
+
+**BAR-02 original service extension:** [Haas AD0021 M19 versus physical spindle blocking audit](research/4400_HAAS_AD0021_M19_ORIENTATION_VS_SPINDLE_PHYSICAL_BLOCK_SERVICE_AUDIT_2026-10-25.md). Haas exact 2022 service procedure rejects M19 as a spindle block during liner-adapter work; neither normal orientation status nor a generic servo hold proves maintenance restraint. BAR-01 card now 13 PAPER cases; §11DY, selected service hardware UNKNOWN, no compute.

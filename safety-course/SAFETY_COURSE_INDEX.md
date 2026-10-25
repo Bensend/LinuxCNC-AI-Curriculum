@@ -574,3 +574,6 @@ Read [original RÖHM/Haas/HSE/OSHA + pinned LinuxCNC M62–M65 audit](../researc
 
 ### 4400-BAR-01 — Bar feeder liner, whip and version-dependent door scope (2026-10-25)
 [Original Haas OEM 2013 vs current version-specific source audit](../research/4400_HAAS_BAR_FEEDER_LINER_WHIP_DOOR_MODE_VERSION_OEM_AUDIT_2026-10-25.md), [non-graduated module](4400_BAR_01_BAR_WHIP_LINER_AND_FEEDER_DOOR_SCOPE_MODULE_2026-10-25.md), [12 PAPER scenarios/blank witness](4400_BAR_01_DOOR_LINER_WHIP_TECHNICIAN_CARD_2026-10-25.md). Spindle liner supports but does not grip bar; feeder door opening on specified Haas firmware can leave loader arms moving and lathe cycle running. No selected LinuxCNC or OpenPressBrake feeder assumed; no universal guard truth table. §§11DW–DX, IN-04aq UNKNOWN, no physical test or external score.
+
+
+**BAR-02 service addendum:** [Original Haas AD0021 M19 orientation versus physical restraint audit](../research/4400_HAAS_AD0021_M19_ORIENTATION_VS_SPINDLE_PHYSICAL_BLOCK_SERVICE_AUDIT_2026-10-25.md) supplements BAR-01 with an OEM task where M19 must not substitute for physical blocking. Selected restraint/brake and energy isolation remain UNKNOWN; BAR card now 13 PAPER cases, §11DY.

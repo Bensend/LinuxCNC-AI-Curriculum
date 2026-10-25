@@ -614,3 +614,6 @@ Read the [original Hypertherm 808240/809790/810040 and Flow source audit](../res
 
 ### 4400-CHIP-01 — Chip conveyor scheduled restart, jam reversal and safe cleanout (2026-10-25; NON-GRADUATED)
 [Original Haas/OSHA/HSE audit](../research/4400_HAAS_CHIP_CONVEYOR_PERIODIC_RESTART_REVERSAL_AND_CLEANOUT_OEM_AUDIT_2026-10-25.md), [integrated module](4400_CHIP_01_AUXILIARY_CONVEYOR_RESTART_REVERSAL_AND_SAFE_CLEANOUT_MODULE_2026-10-25.md), [14 PAPER cases and blank witness](4400_CHIP_01_TECHNICIAN_DECISION_CARD_AND_BLANK_WITNESS_2026-10-25.md). Haas Settings 114/115 can automatically restart conveyor, and overload may reverse it; M33/CHIP STOP are ordinary commands. External discharge nip and separate auxiliary energy require physical guarding and isolation; Haas M31/M33 are not automatically LinuxCNC mappings. Selected safety, physical tests and independent score UNKNOWN. No compute.
+
+
+**CHIP-02 pinned controller portability check:** [LinuxCNC 2.9/development M31/M33 unallocated source-document audit](../research/4400_LINUXCNC_PINNED_M31_M33_UNALLOCATED_VS_HAAS_CHIP_CONVEYOR_MCODE_TRANSFER_AUDIT_2026-10-25.md) explicitly separates Haas OEM conveyor commands from stock LinuxCNC and custom remaps; neither a vendor M33 nor a custom M-code is a personnel-safety function. No runtime or physical validation. §11EN.

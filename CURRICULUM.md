@@ -386,3 +386,6 @@ Press-brake Type-C applicability and entrapment release versus E-stop/guard stat
 
 
 **CHIP-01 distinct same-session 4400 safety branch:** [Original Haas/OSHA/HSE conveyor source audit](research/4400_HAAS_CHIP_CONVEYOR_PERIODIC_RESTART_REVERSAL_AND_CLEANOUT_OEM_AUDIT_2026-10-25.md), [module](safety-course/4400_CHIP_01_AUXILIARY_CONVEYOR_RESTART_REVERSAL_AND_SAFE_CLEANOUT_MODULE_2026-10-25.md), [14 PAPER cases](safety-course/4400_CHIP_01_TECHNICIAN_DECISION_CARD_AND_BLANK_WITNESS_2026-10-25.md). Exact Haas settings 114/115 enable periodic restart, jam reversal may occur, M33/CHIP STOP are ordinary controls; CNC door interlock does not prove external discharge coverage. OSHA/HSE independent lockout/guard evidence. **No assumption that Haas M31/M33 are LinuxCNC commands**. §11EM, no selected machine or compute.
+
+
+**CHIP-02 pinned LinuxCNC cross-controller correction:** [2.9 `a33293f` / development `062dc7c` M31/M33 unallocated remap-table audit](research/4400_LINUXCNC_PINNED_M31_M33_UNALLOCATED_VS_HAAS_CHIP_CONVEYOR_MCODE_TRANSFER_AUDIT_2026-10-25.md). Haas M31/M33 vendor semantics cannot be assumed on stock LinuxCNC; custom remaps are ordinary commands, not safety functions. DOC-CONFIRMED pinned repo docs, no parser runtime test. §11EN.

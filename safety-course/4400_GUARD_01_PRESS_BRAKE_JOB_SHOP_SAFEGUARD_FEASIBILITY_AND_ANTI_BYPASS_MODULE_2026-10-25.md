@@ -32,3 +32,7 @@ Use [GUARD-01 technician card](4400_GUARD_01_TECHNICIAN_DECISION_AND_BLANK_SELEC
 
 ## Graduation / promotion
 No independent fresh transfer score, no selected OpenPressBrake physical VAL/PT, no safe-distance calculation, no physical human exposure. Source lesson **NON-GRADUATED**; selected machine G0/G1 HOLD, G2 NOT RUN, G3/G4 NOT AUTHORIZED. Promote selected geometry, safety performance and jurisdiction only to qualified machine-specific intake, **not** as assumed acceptance.
+
+
+## GUARD-02 original manufacturer anti-defeat continuation
+[Original Schmersal ISO 14119:2024 manufacturer interpretation audit](../research/4400_SCHMERSAL_ISO14119_2024_DEFEAT_INCENTIVE_TASK_MATRIX_OEM_AUDIT_2026-10-25.md) supplies a concrete **task × operating mode × bypass incentive** review: better visibility, speed, precision, workpiece flexibility, less effort/travel and easier cleaning are predictable reasons for defeat. **DOC-CONFIRMED** only as Schmersal's guide, **not** a directly inspected full normative ISO clause. [Unpowered mock-up/reinstallation worksheet](4400_GUARD_02_UNPOWERED_DEFEAT_INCENTIVE_AND_GUARD_REINSTALL_WORKSHEET_2026-10-25.md) makes the human-factor claim falsifiable without energizing an unqualified machine. Good mock-up usability does not establish actual safety interlock, stopping, holding or safe restart.

@@ -28,3 +28,6 @@ After MON-01 documentary OEM work, continued into a distinct pinned LinuxCNC imp
 
 ## Source-only adversarial review
 The pinned LinuxCNC at-speed audit now has eight state-transition cases, strict comparison and latched-output semantics, plus `near` OR comparison and all-configured-spindle wait path. MON-01 paper practice expanded to **24 scenarios**; no test or safety release. This resolves the local source question without any lab; remaining questions require selected physical evidence or independent evaluator.
+
+## Same-session MON-04 version check
+[LinuxCNC 2.9 pinned `a33293f` versus development `062dc7c` source comparison](../research/4400_LINUXCNC_2_9_VS_062DC7C_SPINDLE_AT_SPEED_VERSION_STABILITY_2026-10-25.md) SOURCE-CONFIRMED unwired at-speed true and command-ramp readiness proxy in both snapshots. No runtime needed for source comparison, no personnel-safety authority. Session now nine original artifacts and 24 PAPER cases. Physical Y1/Y2 and fresh external evaluator remain OPEN; no compute.

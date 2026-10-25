@@ -45,3 +45,18 @@ Pneumatic press fixtures, pick-and-place cells, conveyors, router gantries and v
 - **INFERENCE:** hypothetical coupling/slip/failure-path transfer.
 - **UNKNOWN:** selected clamp/air circuit, pressure, load, PL/SIL, dynamic force, stop time/distance, maintenance history, mechanical attachment, qualified witness.
 - **Safety:** G0/G1 HOLD, G2 NOT RUN, G3/G4 NOT AUTHORIZED, G5 external evaluation OPEN. No exposed-person hazardous operation or energization permitted by this audit.
+
+## Apparent OEM conflict resolved without a lab — transient stop versus sustained hold
+SMC's application note describes how a 3-position center-closed valve can **initially stop** a pneumatic cylinder by trapping air, but explicitly warns this is **not recommended to maintain** a heavy vertical load. Festo's catalog more categorically states that closing the supply at both ends is **not sufficient safety** for its cited clamping application. These statements address **different propositions** rather than conflicting on a measured machine outcome:
+
+| Time/condition | Possible physical observation | Safety claim that remains unproven |
+|---|---|---|
+| Immediately after valve centers | Cylinder slows/stops transiently | Sustained hold after leakage or changing external force |
+| During prolonged hold | Air trapped, pressure may redistribute/leak | Load remains supported with single fault or long dwell |
+| During commanded release | Clamp opens and actuator resumes motion | Forces are balanced and no lurch/retained command occurs |
+| After repeated dynamic stops | Clamp still seems functional | Wear-dependent overtravel stays within selected hazard distance |
+
+**INFERENCE** from direct Festo and SMC OEM evidence; not a measured universal pneumatic law or a claim about any installed machine. It is a useful no-compute discriminator: the unresolved question is **selected physical system evidence**, not whether a generic center-closed symbol has an aesthetically reassuring neutral position.
+
+## No-energy validation design — do not turn into an energized test
+A qualified integrator first documents selected actuator/rod/coupling/load, safe-state function (arrest versus hold), exact certified component variant, exhaust/valve and pressure paths, fault assumptions, rod surface/bending, guard/escape, force-balance release and physical restraints. Only then specify protected instrumentation for dynamic overtravel and static hold under a separate approved commissioning plan. The present source review does not authorize testing with people in the danger zone, and does not assign acceptance values.

@@ -25,3 +25,6 @@ OSHA powered press-brake eTool and separate hydraulic-press eTool corroborate cl
 
 
 **RESCUE-02 additional original OEM:** [Haas HPB Rev A 08/2026 power-loss/homing/dual-role pedal audit](../research/4400_HAAS_HPB_2026_POWER_LOSS_HOME_POSITION_RESET_AND_PEDAL_ROLE_AUDIT_2026-10-25.md) adds a distinct post-fault hazard: raised-ram power-off may corrupt reference/produce erratic startup motion; UP foot pedal also serves Reset in some contexts. **DOC-CONFIRMED Haas only**, no OpenPressBrake inference. 20 learner PAPER cases total; cumulative §11EA, conditional IN-04ar UNKNOWN, no physical/evaluator/compute. Next selected physical proof and independent fresh evaluation unchanged.
+
+## Final publication/compute verification
+Untruncated recursive main tree **4,369 entries**, safety index **324 relative links / 308 distinct targets / zero missing**. Both original research files, module, 20-case card, no-energy review, evaluator handoff and checkpoint independently fetched with nonempty blob SHAs. Local self-hosted-only job 120301190483 remains canceled-unassigned, runner_id=0, zero steps; **no new authoritative runtime**, LAB_COMPUTE_LOG unchanged. No hosted runner fallback, live machine test or external score. No personnel-exposed operation.

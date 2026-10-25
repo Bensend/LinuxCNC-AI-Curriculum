@@ -32,6 +32,12 @@ Can a designer treat a nominally load-holding hydraulic valve as an unconditiona
 5. **Adversarial scenario:** E screw used for qualified emergency lowering, then omitted from restoration. A later power-off yields a false “valve should hold” assumption. **INFERENCE**, not a measured fault; source confirms restoration instruction, not a tested failure rate or travel.
 6. **Common cause:** both Y1/Y2 circuits might share a pilot, vent, pressure supply, common relief or maintenance practice. Do not infer independence from two nominal valves.
 
+
+## Standards applicability and edition check (official publisher scope, 2026-10-25)
+- **ISO publisher** [ISO 8643:2024, fourth edition (2024-05)](https://www.iso.org/standard/87986.html) expressly limits its lowering-control-device requirements and tests to **hydraulic excavator/backhoe loader boom, intermediate-boom and arm cylinders** for line-failure/rupture scenarios. The OEM 2022 sheet pre-dates the 2024 edition and does not identify an edition. **DOC-CONFIRMED** scope and edition; the full paid normative clauses were **not inspected**. Do not claim the 2022 OEM product was tested to the 2024 revision.
+- **B11 Standards/ANSI publisher** [ANSI B11.3-2022](https://www.b11standards.org/storeitems/b113-2022) and [scope listing](https://www.b11standards.org/b11scopes) identify **power press brakes** as the machine-specific class; B11.2 hydraulic/pneumatic power presses exclude powered press brakes. **DOC-CONFIRMED** public scope only; full paid normative requirements **not inspected**. Exact installation's applicability and acceptance remain a qualified machine-specific task.
+- Therefore an excavator boom-lowering catalog function, even one capable of use in an ISO 8643-designed system, is **not** a press-brake safety-function certificate, independent Y1/Y2 stop/hold proof or authority to omit mechanical support.
+
 ## What the source does NOT establish
 No actual OpenPressBrake hydraulic drawing, installed A-VBC-90/E2 valve, valve orientation, cylinder-side mounting, independent Y1/Y2 chamber map, pilot truth table, pressure threshold, leakage, PL/SIL, stopping distance, rescue plan, secondary restraint, or test result. DX and SX documentation use separate identifiers; no asserted compatibility. **SOURCE-CONFIRMED:** no new LinuxCNC code inspected. **TEST-CONFIRMED:** none. **COMMUNITY-REPORTED:** none. **UNKNOWN:** all selected-machine details.
 

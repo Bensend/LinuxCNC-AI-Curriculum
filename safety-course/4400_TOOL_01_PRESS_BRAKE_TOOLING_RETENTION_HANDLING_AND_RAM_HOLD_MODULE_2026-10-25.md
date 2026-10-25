@@ -54,3 +54,6 @@ Use tool carts at transfer height, labeled per-tool mass/compatibility, protecte
 
 ## Counterfactual and release decision
 If a selected holder's failure state differs from this audit, the module's central separation of retention/clamping/ram/hoist authority remains valid; selected implementation and acceptance **must not** be frozen until exact parts and physical evidence exist. **NON-GRADUATED**, independent evaluation NOT RUN, physical proof NOT RUN. OpenPressBrake G0/G1 HOLD, G2 NOT RUN, G3/G4 NOT AUTHORIZED. No personnel-exposed test authorized. No simulated lab justified for mechanical product facts.
+
+## Exact-part correction / automatic changer transfer (same-session)
+The generic ≤12.5 kg Safety-Click statement **does not resolve an exact 12.5 kg tool**: WILA's classic BIU-026 ATC page uses **<12.5 kg** for its vertical Safety-Click parts. Preserve the product-specific distinction rather than rounding away an OEM boundary. [TOOL-02 ATC source audit](../research/4400_WILA_NS_ATC_GSERIES_INCOMPATIBILITY_SAFETY_CLICK_SENSING_AUDIT_2026-10-25.md) also documents NS ATC versus classic G-Series incompatibility and why process-position feedback is not physical tool-transfer proof. Exact installed part manual remains the authority; no selected-machine qualification follows.

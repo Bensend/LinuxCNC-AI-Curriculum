@@ -55,3 +55,8 @@ Place an **edition- and serial-verified rescue reference** at a safe exterior st
 
 ## Publication discipline
 This audit does not authorize personnel-exposed operation or live entrapment drills. No numeric safe speed, stopping distance, pressure, load, PL/SIL or rescue time has been asserted.
+## Independent regulator-category corroboration (2026-10-25 continuation)
+- OSHA's official [powered press-brake eTool](https://www.osha.gov/etools/machine-guarding/presses/powered-press-brakes) classifies press brakes as a distinct machine family that can have hydraulic, hydra-mechanical or mechanical drives; it specifically identifies workpiece swing and unintended foot-pedal cycling hazards. **DOC-CONFIRMED regulator guidance**, not a Type-C normative acceptance test and not a claim that all brakes share one stop function.
+- OSHA's separate [hydraulic-press eTool](https://www.osha.gov/etools/machine-guarding/presses/hydraulic) describes general hydraulic presses. The distinction reinforces that the actuator technology alone does not select the machine-specific standard or safeguarding method.
+- WorkSafe Victoria's [power-press safety guidance](https://www.worksafe.vic.gov.au/controlling-risks-power-press-machines) identifies independent physical ram chocks for maintenance as an example, along with guarded pedals and interlocks. **DOC-CONFIRMED jurisdiction-specific guidance**, not selected OpenPressBrake chock strength, proof of holding, or an emergency-release instruction.
+- This independent scope cross-check resolves the documentary category question without a simulation. It does **not** resolve installed machine guard geometry, gravity support, qualified rescue path or regulatory adoption.

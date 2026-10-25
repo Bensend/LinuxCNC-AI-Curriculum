@@ -36,3 +36,7 @@ No simulated data, numeric thresholds, stopping distances, dust combustibility o
 14. A collector's explosion vent opens to an outdoor employee walkway. Why is "vent outdoors" insufficient? What exact OEM/location evidence is needed?
 15. A fire sprinkler is added to a collector without a drainage/structural review. Explain the additional hazard identified in the Donaldson CPC Rev6 manual and why the fire retrofit must be reviewed as a coupled system.
 16. An engineer claims LinuxCNC 2.9 ESTOP cannot clear coolant because `emctask.cc` lacks an explicit flood-off call. Trace `emcIoAbort` -> `EMC_TOOL_ABORT` -> `ioControl.cc` and `ioControl_v2.cc`, and explain why source-level output clearing still does not establish a physical fan state.
+
+## Two additional source-specific PAPER cases (18 total, NOT SCORED)
+17. M8 executes and the interpreter `settings->flood` becomes true, but the canonical queue is nonempty. Trace `enqueue_FLOOD_ON` and identify why the operator cannot infer the exact physical fan startup time from this state.
+18. An M8 remap is installed to move a dust shoe. A technician assumes M8 still directly controls the flood HAL pin. Which source/configuration evidence must be inspected and why is neither path sufficient to prove actual hood capture?

@@ -55,3 +55,7 @@ Prefer an **exact-part, legibly labeled** block with clearly mapped S/P/T/M1 por
 - **UNKNOWN:** whether OpenPressBrake even has an accumulator; selected SAF/other block variant, Y1/Y2 circuit, relief/discharge port topology, gauge placement, actual pressures, pilot/holding behavior, PL/SIL, stopping distances, external evaluation, machine safe-state.
 
 **G0/G1 HOLD; G2 NOT RUN; G3/G4 NOT AUTHORIZED; G5 HOLD.** No energized test, physical operation, safety approval, or compute justified by this documentary discriminator. Preserve historical DSV10 work without transferring its negative-overlap fact to SAF.
+
+## Direct visual circuit-diagram check (H4/H5, original PDF pages 3–4)
+
+The HYDAC **H4 schematic was visually inspected**, not merely keyword-searched. It places S on the accumulator connection, P on the system, T on tank, and M1 on the gauge connection; the E circuit shows a **flow-restricting symbol** in the solenoid discharge branch. **DOC-CONFIRMED diagram content**, but neither a selected restriction size nor a guaranteed discharge time is published by that drawing. Consequently **“bleed commanded” != “immediately at zero pressure”**. H5's visually inspected complete example code confirms the **Y/Z operating-function character** and the **L locking-device suffix** are distinct selections. H5 also separates N adjustable relief settings from T factory-set/wire-sealed relief options; neither is a substitute for an independent physical discharge witness. Do not transpose this generic family drawing into an uninspected selected hydraulic circuit.

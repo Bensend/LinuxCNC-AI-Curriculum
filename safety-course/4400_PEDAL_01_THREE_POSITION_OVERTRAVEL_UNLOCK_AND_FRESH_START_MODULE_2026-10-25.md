@@ -60,7 +60,7 @@ This is a **requirements sketch**, not a safety PLC program or universal OEM tra
 ## 5. Failure paths to challenge
 **F1 — Unlock transient:** UEDR mechanical unlock produces an electrical impulse; receiver mistakes it for a new press. Consequence: potential unexpected cycle request. Mitigation concept: independently reviewed fresh-start and unlock-event rejection; do not invent a fixed debounce duration.
 
-**F2 — Retained ordinary command:** a LinuxCNC/HAL signal remains true across safety reset; controller re-enables final elements and old demand drives movement. Requirement: old request cannot initiate a new stroke after reset; verify separate safety inhibit and fresh command.
+**F2 — Retained ordinary command:** a custom LinuxCNC/HAL/FPGA interface or downstream controller retains a motion request across safety reset and could drive movement when final elements re-enable. This is an **INFERENCE scenario**, not a claim about every LinuxCNC UI. The [pinned HALUI source trace](../research/4400_LINUXCNC_PINNED_HALUI_PROGRAM_RUN_EDGE_VS_SAFETY_REARM_SOURCE_TRACE_2026-10-25.md) shows that ordinary `halui.program.run` dispatches on a **0 -> 1 rising edge**, not repeatedly for a continuously held high in the same process. A new unlock pulse can nevertheless generate an ordinary run request; Task acceptance and physical motion remain unproven. Requirement: an old or transient request cannot initiate a new stroke after reset; verify independent safety inhibit and fresh command.
 
 **F3 — Pedal swap:** replacement has same number of terminals and enclosure but different latch/impulse/contact transition. Require exact variant qualification, terminal-state table, control logic and physical proof; reject visual similarity.
 

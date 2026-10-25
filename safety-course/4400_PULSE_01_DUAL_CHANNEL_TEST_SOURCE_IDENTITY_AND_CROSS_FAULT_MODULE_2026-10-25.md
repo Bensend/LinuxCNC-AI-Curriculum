@@ -61,3 +61,6 @@ To graduate, a fresh learner must diagnose a novel exact-part wiring drawing wit
 | Actual physical stop/hold and hydraulic isolation | UNKNOWN | Independent qualified G0/G1 and approved G2 | Yes |
 | Independent novel transfer/evaluator | NOT RUN | Sealed unseen case and independent score | Yes for curriculum graduation |
 | Numerical diagnostic coverage, PL/SIL, stop time | UNKNOWN | Exact design and physical evidence | Never invent |
+
+## Cross-vendor transfer trap: a TO is not universally a load output or universally forbidden
+The inspected **Pilz PNOZ m0p** explicitly prohibits using its test pulse outputs to drive loads. In contrast, the official **Rockwell 5034-IB8S/XT** product page says its test outputs support **muting-lamp outputs** (exact configured mode matters). Neither permits an arbitrary retrofit load or validates an ordinary FPGA output as safety-related. Always inspect the exact OEM terminal role and configuration, rather than transferring either manufacturer's rule to the other.

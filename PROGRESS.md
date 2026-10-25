@@ -723,3 +723,6 @@ Four original WJ-01 artifacts: [direct original Hypertherm/Flow source audit](re
 
 
 **CHIP-02 direct pinned LinuxCNC documentation source correction:** [original 2.9 `a33293f` and development `062dc7c` remap source-document audit](research/4400_LINUXCNC_PINNED_M31_M33_UNALLOCATED_VS_HAAS_CHIP_CONVEYOR_MCODE_TRANSFER_AUDIT_2026-10-25.md) confirms both versions list M31/M33 as unallocated; Haas conveyor M31/M33 are vendor-specific and cannot be treated as LinuxCNC stock commands or safety functions. **DOC-CONFIRMED** pinned repository documentation; **SOURCE-CONFIRMED** no new parser path; **TEST-CONFIRMED** none, custom machine remap UNKNOWN. Eight original artifacts total session, 30 PAPER cases, 12 unexecuted desk gates, §11EN. No hosted/local compute.
+
+
+**WJ-01/CHIP-01/02 publication integrity:** independent re-fetch of all eight original files and active checkpoint yielded nonempty Git blob SHAs. Complete untruncated main tree **4,409 entries**; safety learner index **356 relative Markdown links / 340 distinct targets / zero missing**. This is source/navigation integrity, not physical safety or blind competency proof. No new runtime; local runner blocker unchanged.

@@ -23,3 +23,7 @@ After waterjet OEM facts were source-sufficient, added [Haas/OSHA/HSE conveyor a
 
 ## CHIP-02 pinned LinuxCNC portability correction
 Directly inspected 2.9 `a33293f` and development `062dc7c` `docs/src/remap/remap.adoc` at original blob SHAs. Both list **M31/M33 unallocated**; Haas OEM's conveyor M31/M33 meanings cannot be presumed in LinuxCNC. [Durable source-document audit](../research/4400_LINUXCNC_PINNED_M31_M33_UNALLOCATED_VS_HAAS_CHIP_CONVEYOR_MCODE_TRANSFER_AUDIT_2026-10-25.md). **Eight original artifacts total; 30 PAPER cases; 12 desk gates NOT RUN.** §11EN. No new physical/evaluator/compute. Priorities unchanged.
+
+
+## Publication integrity and evidence stop
+All eight original WJ/CHIP research, module and technician artifacts and this checkpoint independently re-fetched with nonempty Git blob SHAs. Full untruncated main tree **4,409 entries**, safety index **356 links / 340 distinct targets / 0 missing**. This validates publication links only; no machine safety/independent competency proof. Both documentary source paths now information-gain stopped without selected physical equipment or independent evaluator. Future work: qualified G0 and genuine evaluator first, otherwise highest-value distinct 4400 safety branch. No new Actions runtime, no hosted/local compute.

@@ -1,0 +1,21 @@
+# Active 4400 safety checkpoint — 2026-10-25T01:32:24Z MON-01
+**PRIMARY 4400 SAFETY | SOURCE/DOC ONLY | NON-GRADUATED | G0/G1 HOLD / G3/G4 NOT AUTHORIZED**
+
+## Recovery and authority
+Read START_HERE.md, MASTER_MISSION.md, LEVEL_ORDER.md, WORK_SELECTION_POLICY.md, CURRICULUM.md, SOURCE_POLICY.md, MODULE_TEMPLATE.md, PROGRESS.md, SAFETY_COURSE_RESEARCH.md, safety-course/SAFETY_COURSE_INDEX.md, cumulative Safety Design Package, selected-machine intake, evaluation/BLIND_FEEDBACK_PROTOCOL.md, FEEDBACK_SCORE_LOG.md, LAB_COMPUTE_LOG.md, LESSON_LOG.md. This checkpoint supersedes 2026-10-25T003957Z CELL-01/ATC-02 as **next-work selection**, not as historical evidence. Closed 1000/2000/F02/3000 graduation remains preserved.
+
+## Durable original work
+- [Pilz PNOZ s30 original 1001715-EN-24 parameter-set/diagnostic/output audit](../research/4400_PILZ_PNOZS30_PARAMETER_SET_SELECTION_DIAGNOSTIC_BYPASS_AND_OUTPUT_SCOPE_AUDIT_2026-10-25.md): **DOC-CONFIRMED** 1-of-4 vs All 16 integrity distinction; broken select wire can choose another valid set; optional diagnostic bypass and error-acknowledgment; safety relay vs ordinary semiconductor outputs; delay increases reaction time.
+- [SICK Safe Stationary Machine 8020304/2017-07-26 original example audit](../research/4400_SICK_STATIONARY_MACHINE_TWO_ENCODER_CCF_SPEED_RAMP_AND_RESTART_OEM_AUDIT_2026-10-25.md): **DOC-CONFIRMED** dual non-safe encoder mechanical independence, alternative single safety encoder mapping, actual monitored stop ramp, conditional integrator requirements and example scope.
+- [4400-MON-01 integrated module](../safety-course/4400_MON_01_SAFE_SPEED_MODE_SELECTION_ENCODER_CCF_AND_PHYSICAL_STOP_MODULE_2026-10-25.md), [16 PAPER cases/blank witness](../safety-course/4400_SAFE_SPEED_SELECTOR_SENSOR_INDEPENDENCE_TECHNICIAN_CARD_2026-10-25.md), [fresh external evaluator assignment](../evaluation/4400_MON_01_FRESH_MODE_SENSOR_CCF_TRANSFER_HANDOFF_2026-10-25.md) PREPARED/NOT RUN/NOT SCORED.
+- Cumulative Safety Design Package §§11DF–11DG and conditional selected-machine IN-04al UNKNOWN. Earlier PNOZ sensor/standstill, automatic restart and CRC audits preserved, not replaced.
+
+## Highest-value next work
+1. **Qualified restricted OpenPressBrake as-built and protected physical witness**: independent Y1/Y2 stopping and gravity load holding, hydraulic energy zones, rear/backgauge guarding, selected safety/final-element authority and deliberate fresh restart. No private drawings copied into public curriculum. If no selected safe-speed monitor exists, mark MON-specific conditional N/A with evidence; Y1/Y2 requirements still open.
+2. **Independent fresh evaluator**: 2520–25F0 and/or 4400 MON/CELL/ATC, information separated. Do not self-score learner cases or reveal hidden oracle.
+3. **If gates still blocked**: choose a distinct high-value 4400 safety source/failure branch after checking index for duplication. Do not manufacture 3000 specialization work or redundant SLS research.
+4. **Compute**: local self-hosted [self-hosted, openpressbrake] only if a concrete unresolved question justifies a bounded lab. Last observed run 39919548510/job 120301190483 canceled unassigned (runner_id 0, no steps), a runner-access blocker. Never dispatch hosted runner or count queue envelope as compute. No new authoritative runtime -> LAB_COMPUTE_LOG unchanged.
+5. At session close: record actual UTC end, elapsed, overlap status in complete LESSON_LOG.md using current blob SHA and commit.
+
+## Safety and evidence gate
+**SOURCE-CONFIRMED:** prior pinned LinuxCNC M6 normal handshake only, no new LinuxCNC source trace in MON-01. **DOC-CONFIRMED:** exact Pilz/SICK OEM manuals. **TEST-CONFIRMED:** none. **COMMUNITY-REPORTED:** none. **INFERENCE:** failure-path/cross-machine transfer. **UNKNOWN:** selected hardware, actual physical stop/hold, hydraulic truth, reaction, stopping distance, PL/SIL, independent evaluator. G0/G1 HOLD, G2 NOT RUN, G3/G4 NOT AUTHORIZED, G5 OPEN. No personnel-exposed hazardous operation; any experimental operation requires isolated/remote people-excluded plan with residual risks documented.

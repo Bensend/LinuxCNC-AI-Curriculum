@@ -28,3 +28,5 @@ Cumulative Safety Design Package §§11EH–11EJ; index, CURRICULUM, research pl
 
 ## Timing pending final log
 Start UTC **2026-10-25T08:31:47.976Z**. Previous completed session ended **2026-10-25T07:48:27.698Z**, hence no known overlap at start. Actual end and elapsed will be recorded in LESSON_LOG.md.
+
+**Publication integrity:** complete untruncated main tree **4,396 entries**; safety-course index **345 relative Markdown links / 329 distinct targets / 0 missing**. Six original LASER-01/02 artifacts independently fetched from main with nonempty blob SHAs, all six linked from index. This is a navigation/source integrity check, not a physical or blind competency validation. No new compute.

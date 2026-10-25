@@ -23,6 +23,12 @@ Does a green filter-condition switch or a filter installed upstream of hydraulic
 | HYDAC catalog typically positions warning before bypass cracking and advises timely element change | HYDAC part 303165 original product page | DOC-CONFIRMED for that family; not an installed-machine setting or guaranteed remaining time |
 | Contamination may jam a directional valve | Parker CF/RF service chart, original PDF printed p. 7 visually inspected | DOC-CONFIRMED exact chart; precise selected valve, probability and physical failure direction UNKNOWN |
 
+
+## Direct hydraulic valve OEM corroboration — ordinary coil OFF does not guarantee zero flow
+**Parker Hannifin Hydraulic Valve Division**, [Series 6 MMV-IPC, Bulletin 2403-M1/USA, effective 1997-01-06](https://www.parker.com/content/dam/Parker-com/Literature/Hydraulic-Valve-Division/hydraulicvalve/Service-Installation/Mobile/Bul-2403-M1-6-Mobile-Mtn-Cntrl-Vlv.pdf), original PDF p. 13 (printed p. 10), *Trouble-Shooting* explicitly lists **“Flow continues after coils de-energized”** with **main spool sticking** and contaminants wedged between spool and body lands as the described cause. The preceding printed p. 9 describes load oscillation/air and differing control/pilot fault causes. **DOC-CONFIRMED** for this **1997 mobile proportional directional valve**, not a selected press-brake valve, a safety-rated final element or a quantitative likelihood. The OEM's maintenance suggestions are **not authorized procedures** for a learner to manipulate live hydraulic components.
+
+**Safety implication (INFERENCE):** removing ordinary LinuxCNC/FPGA coil command, even when a controller output and HMI report zero, cannot by itself prove hydraulic flow has ceased or a gravity load is independently restrained. The selected circuit must separately prove physical stop/hold, safe fault behavior and pressure/gravity energy control. This original OEM corroboration strengthens the fault boundary; it does **not** establish that any OpenPressBrake valve sticks or that contamination from its filter is the cause.
+
 ## Causal safety boundary
 **INFERENCE:** filter bypass or service neglect may be a common-cause contributor to multiple downstream hydraulic valve faults. This is **not** proof that a particular press-brake holding valve will stick open, nor a calculated diagnostic coverage or failure probability. Ordinary LinuxCNC oil-temperature/filter HMI alarms are maintenance diagnostics unless a separately qualified safety function, sensor path, diagnostic coverage and physical final element are established.
 

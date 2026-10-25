@@ -5,7 +5,7 @@
 If a safety-rated output reports a wiring fault, is its connected load necessarily de-energized? **Pre-source prediction:** a conductor shorted to the positive supply can energize a load independently of the output transistor; a diagnostic flag may detect but cannot physically interrupt that external bypass path. **INFERENCE before source review**; now supported in a specific manufacturer's documented application.
 
 ## Directly inspected manufacturer evidence
-**Rockwell Automation, PointMax 5034-OB8S/5034-OB8SXT, "Wiring Diagrams for Safety Mode and Safety Pulse Mode"**, official online manual, accessed 2026-10-25: https://www.rockwellautomation.com/en-fi/docs/technical/i-o/current/pointmax-i-o-modules-details-ditamap/digital---safety-i-o-modules/5034-ob8s-ob8sxt-details/safety-application-suitability-levels-output/5034-ob8s-ob8sxt-wiring-diagrams.html
+**Rockwell Automation, PointMax 5034-OB8S/5034-OB8SXT, "Wiring Diagrams for Safety Mode and Safety Pulse Mode"**, official online manual, accessed 2026-10-25: https://www.rockwellautomation.com/en-fi/docs/technical/i-o/current/5034-pointmax/_online/pointmax-i-o-modules-details-ditamap/digital---safety-i-o-modules/5034-ob8s-ob8sxt-details/safety-application-suitability-levels-output/5034-ob8s-ob8sxt-wiring-diagrams.html
 
 The OEM's IMPORTANT notice says that when an external wire cross-circuit connects **SA+** to **SO_n**, **the load can no longer shut down**, even though the module detects the fault and sets a fault bit showing the channel cannot reach Safe State until the fault is cleared. This is an unusually explicit **DOC-CONFIRMED** counterexample to equating a safety-module fault LED or requested OFF with physical safe state.
 

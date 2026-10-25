@@ -44,3 +44,6 @@ Repository `LinuxCNC/linuxcnc`, exact commit **062dc7c097693bb68e76192516cd92878
 
 ## Decision
 No bench simulation: the question of whether a HAL command measures extraction is resolved by direct source; the remaining collector/fire/capture questions need a qualified *selected installation* and measured physical evidence. No hosted/local Actions dispatched. Preserve the 3400 normal-control findings and 2500 safety-method graduation state.
+
+## DUST-02/03 exact-source continuations
+[2.9 versus development coolant/ESTOP version audit](4400_LINUXCNC_2_9_VS_DEVELOPMENT_COOLANT_REQUEST_AND_ESTOP_VERSION_BOUNDARY_2026-10-25.md) confirms 2.9 uses Task -> `EMC_TOOL_ABORT` -> `ioControl[(_v2)]` for OFF on abort/ESTOP/RESET, while development writes flood HAL directly in Task and also explicitly turns it OFF in the ON branch. No physical collector response inferred. [Donaldson CPC Rev6 and HSE commissioning source audit](4400_DONALDSON_POWERCORE_FILTER_DELTA_P_VENT_AND_SPRINKLER_OEM_AUDIT_2026-10-25.md) adds exact OEM collector vent-discharge and sprinkler-water structural warnings, Delta-P ambiguity and qualified hood commissioning. No numeric site criteria.

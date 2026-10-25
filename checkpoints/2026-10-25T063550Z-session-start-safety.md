@@ -1,0 +1,3 @@
+# 2026-10-25 06:35:50.036Z — 4400 safety session start
+
+UTC start captured before substantive work: **2026-10-25T06:35:50.036Z**. Read `START_HERE.md` first; repository governance, progress, current RESCUE-01 checkpoint, safety modules and evaluation/compute state govern this session. 1000/2000/F02/3000 remain GRADUATED/CLOSED; safety/4000 primary. No hosted compute authorized; local `[self-hosted, openpressbrake]` only if question-driven and dispatchable. Selected OpenPressBrake physical stop/hold/isolation/guard/rearm remains UNKNOWN. Final actual UTC elapsed/overlap to be appended safely to `LESSON_LOG.md` immediately before ending.

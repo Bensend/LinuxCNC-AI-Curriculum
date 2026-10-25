@@ -15,3 +15,7 @@ Four original artifacts: [original Hypertherm/Flow OEM audit](../research/4400_H
 
 ## Evaluation/verification boundary
 All 16 practice cases and 12 desk gates unexecuted/unscored. No selected waterjet is asserted installed on OpenPressBrake. No PL/SIL, hydraulic truth table, bleed time or stopping distance invented. No physical test, independent evaluation or people-exposed release.
+
+
+## Same-session distinct source rotation — 4400-CHIP-01
+After waterjet OEM facts were source-sufficient, added [Haas/OSHA/HSE conveyor audit](../research/4400_HAAS_CHIP_CONVEYOR_PERIODIC_RESTART_REVERSAL_AND_CLEANOUT_OEM_AUDIT_2026-10-25.md), [CHIP-01 module](../safety-course/4400_CHIP_01_AUXILIARY_CONVEYOR_RESTART_REVERSAL_AND_SAFE_CLEANOUT_MODULE_2026-10-25.md) and [14 PAPER cases](../safety-course/4400_CHIP_01_TECHNICIAN_DECISION_CARD_AND_BLANK_WITNESS_2026-10-25.md). OEM documents intermittent automatic restart, jam reversal and ordinary stop; OSHA/HSE document independent maintenance isolation and guarding. **Seven original artifacts, 30 PAPER cases, 12 unexecuted desk gates total session.** §11EM. No selected conveyor on OpenPressBrake, no new runtime/physical/evaluator. Next remains qualified G0 or independent evaluation, otherwise new distinct safety source gap.

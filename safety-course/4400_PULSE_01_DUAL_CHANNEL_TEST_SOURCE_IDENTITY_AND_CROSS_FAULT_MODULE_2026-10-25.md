@@ -64,3 +64,6 @@ To graduate, a fresh learner must diagnose a novel exact-part wiring drawing wit
 
 ## Cross-vendor transfer trap: a TO is not universally a load output or universally forbidden
 The inspected **Pilz PNOZ m0p** explicitly prohibits using its test pulse outputs to drive loads. In contrast, the official **Rockwell 5034-IB8S/XT** product page says its test outputs support **muting-lamp outputs** (exact configured mode matters). Neither permits an arbitrary retrofit load or validates an ordinary FPGA output as safety-related. Always inspect the exact OEM terminal role and configuration, rather than transferring either manufacturer's rule to the other.
+
+## OEM-confirmed test-source auto-recovery boundary
+Rockwell's exact 5034 safety-input manual states a test output shut off for overload/short-to-ground **restarts in its commanded state when the fault is removed**, with its diagnostic fault clearing. That is a **TO recovery behavior**, **not** permission for machine motion. A design must ensure restoration of input testing does not itself rearm a hazardous cycle; verify exact receiver configuration and independent fresh-start logic. See the companion source audit for the direct OEM link.

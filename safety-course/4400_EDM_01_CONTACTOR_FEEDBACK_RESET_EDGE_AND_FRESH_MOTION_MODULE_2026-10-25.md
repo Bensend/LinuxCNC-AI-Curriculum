@@ -63,3 +63,7 @@ A replacement light curtain has a green output, a LinuxCNC UI shows “Cycle Rea
 | Device replacement behavior | exact installed variant and validated config diff | loss of diagnostic/rearm coverage | HIGH | YES if changed |
 
 **Counterfactual test:** if actual machine uses different safety components, the generic *separation of authorities* remains valid, but any claimed selected-machine protection would fail. Therefore no machine release is asserted or promotable without physical evidence.
+
+
+## MIRROR-01 correction to the phrase “forcibly guided feedback”
+A **power contactor's IEC 60947-4-1 mirror NC** and a **relay's IEC 60947-5-1 mechanically linked auxiliary NO/NC** are not interchangeable claims. The exact contactor/auxiliary combination matters: Schneider documents TeSys K 0601 versus 0610 mirror differences and recommends an integral base NC over removable front auxiliaries where suitable. Do not substitute a generic NC for the required main-pole mirror witness. See [exact-part original manufacturer audit](../research/4400_SCHNEIDER_SIEMENS_MIRROR_NC_VS_GUIDED_AUX_EDM_VARIANT_SOURCE_AUDIT_2026-10-25.md) and [12 replacement cases](4400_MIRROR_01_TWELVE_REPLACEMENT_AND_EDM_FAULT_CASES_2026-10-25.md). **DOC-CONFIRMED** Schneider; exact selected machine and physical stop/hold **UNKNOWN**. This correction sharpens, rather than certifies, the earlier generic EDM teaching.

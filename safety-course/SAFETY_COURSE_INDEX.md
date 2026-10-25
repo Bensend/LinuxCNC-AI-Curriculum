@@ -677,3 +677,6 @@ Read [original UL/OSHA source audit](../research/4400_UL_OSHA_MACHINE_PANEL_MULT
 
 ### 4400-REINT-01 — F-I/O short supply dip versus detected communication fault (2026-10-25; NON-GRADUATED)
 [Direct Siemens V20/V21 original-source audit](../research/4400_SIEMENS_V20_FIO_SHORT_POWER_LOSS_AUTO_REINTEGRATION_VS_COMM_FAULT_ACK_AUDIT_2026-10-25.md) and [12 PAPER technician scenarios](4400_REINT_01_TWELVE_POWER_DIP_COMM_FAULT_AND_FRESH_START_PAPER_CASES_2026-10-25.md). **DOC-CONFIRMED Siemens V20 S012:** short F-I/O supply loss under assigned F-monitoring time can cause automatic reintegration despite manual ACK_NEC/channel acknowledgment setting; longer loss becomes detected communication error with distinct passivation/acknowledgment. **UNKNOWN** installed machine, actual monitoring times, Y1/Y2 stop/hold or fresh motion; PAPER cases UNSCORED, no physical test, no compute. G0/G1 HOLD.
+
+
+**CONFIG/REINT cross-layer adversarial review:** [Seven no-energy release gates and four OEM counterexamples](4400_CONFIG_REINT_CROSS_LAYER_ADVERSARIAL_RELEASE_REVIEW_2026-10-25.md) show why signed + connected + acknowledged + HMI READY does not prove physical Y1/Y2 safe state. PAPER review NOT RUN; selected machine UNKNOWN; G0/G1 HOLD.

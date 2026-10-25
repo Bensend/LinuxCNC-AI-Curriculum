@@ -33,3 +33,7 @@ Recursive `main` tree **4316 entries, truncated=false**; learner index **273 rel
 
 ## Same-session pinned LinuxCNC ATC-02 source continuation
 [Exact `062dc7c` Task M6/IO control source trace](../research/4400_LINUXCNC_PINNED_M6_IOCONTROL_TOOL_CHANGED_ACK_VS_PHYSICAL_RETENTION_SOURCE_TRACE_2026-10-25.md): `tool-change && tool-changed` Boolean handshake -> `RCS_STATUS::DONE` and `tool_number`; shipped `core_sim.hal` loops request to acknowledgment. **SOURCE-CONFIRMED**, not TEST-CONFIRMED and not mechanical tool retention. §11DE, existing IN-04ak UNKNOWN. Session now nine original artifacts / 30 PAPER cases; no machine physical or fresh external evaluation. Next: qualified selected-machine safety evidence and fresh evaluator; local runner access blocker remains.
+
+
+## Final publication integrity
+After ATC-02 source integration, recursive `main` tree **4317 entries, truncated=false**; safety index **274 relative Markdown links / 266 distinct targets / zero missing**. All nine new original files independently fetched with nonempty blob SHAs; latest LinuxCNC source trace blob `bdce5222d12810863c24886cb807602da9c27780`. No historical artifacts renamed or deleted. No new lab runtime. This checkpoint remains active pending qualified selected-machine physical evidence or information-separated evaluation; if those unavailable, select next **distinct** safety branch, not a redundant summary.

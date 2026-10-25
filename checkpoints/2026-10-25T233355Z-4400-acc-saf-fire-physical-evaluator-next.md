@@ -6,7 +6,7 @@
 
 START_HERE, MASTER_MISSION, LEVEL_ORDER, WORK_SELECTION_POLICY, CURRICULUM, SOURCE_POLICY, MODULE_TEMPLATE, PROGRESS, safety research/index/cumulative package, blind protocol/score and compute ledger read. **1000/2000/F02/3000 GRADUATED/CLOSED. Active 4400 safety.** Separate OpenPressBrake Board Design automation owns routine controller hardware. **G0/G1 HOLD, G2 NOT RUN, G3/G4 NOT AUTHORIZED, G5 HOLD.** No personnel-exposed machine operation.
 
-## Nine original artifacts; three source discriminators
+## Ten original artifacts; three source discriminators and one cross-lifecycle architecture synthesis
 
 1. [HYDAC SAF 4.21 / Parker BA exact variant and dual-energy original-source audit](../research/4400_HYDAC_SAF_2021_VARIANT_DEENERGIZED_BLEED_AND_PARKER_DUAL_ENERGY_AUDIT_2026-10-25.md)
 2. [ACC-SAF-01 learner module](../safety-course/4400_ACC_SAF_01_EXACT_BLEED_POLARITY_FLUID_GAS_AND_RAM_HOLD_MODULE_2026-10-25.md)
@@ -17,6 +17,7 @@ START_HERE, MASTER_MISSION, LEVEL_ORDER, WORK_SELECTION_POLICY, CURRICULUM, SOUR
 7. [8 public fire/gas/holding PAPER cases UNSCORED](../safety-course/4400_ACC_FIRE_01_EIGHT_FIRE_GAS_VENT_AND_HOLD_PAPER_CASES_2026-10-25.md)
 8. [ISO 4413:2010 indexed-preview vent-or-isolate / Parker BA / EU PED scope audit](../research/4400_ISO4413_2010_ACCUMULATOR_VENT_OR_ISOLATE_EXCEPTION_PED_SCOPE_AUDIT_2026-10-25.md)
 9. [10 public shutdown/isolation/exception PAPER cases UNSCORED](../safety-course/4400_ACC_NORM_01_TEN_SHUTDOWN_ISOLATION_EXCEPTION_PAPER_CASES_2026-10-25.md)
+10. [Eight-state accumulator lifecycle energy/authority matrix PAPER ONLY](../safety-course/4400_ACC_01_EIGHT_LIFECYCLE_ENERGY_AUTHORITY_AND_SAFE_STATE_MATRIX_2026-10-25.md)
 
 **DOC-CONFIRMED direct original manufacturer:** HYDAC 4.21 H2–H5, including visually inspected H4/H5 schematic/model code; M manual vs E automatic/manual, E/Y normally-open vs E/Z normally-closed, optional gauge and lockable L, separate relief vs bleed, flow-restricting symbol with **no discharge-time specification**, thermal fuse cap vs GMP6 gas vent. Parker HY10-2300-M1 BA hydraulic discharge and separate gas pressure/service. HYDAC later full catalog direct-open 403/indexed-only; no full-text claim. **ACC-NORM-01:** ISO publisher scope/status confirmed, but §5.4.3.2 vent-or-isolate and retained-pressure exception **search-indexed preview only**, direct iTeh 502 and full licensed standard NOT inspected; official EU-OSHA confirms PED scope, EUR-Lex direct blocked. Parker BA-specific auto-discharge is not universal machine stop authority. **SOURCE-CONFIRMED new LinuxCNC:** none; **TEST-CONFIRMED:** none; **COMMUNITY-REPORTED:** none relied upon. **INFERENCE:** variant substitution, blocked-return/zone common cause and conditional loss of stored protective energy under fire. **UNKNOWN:** whether OpenPressBrake even contains an accumulator or thermal fuse, selected circuit, Y1/Y2 physical stop/hold, pressure/gas zones, guarding, PL/SIL, actual fire reaction and independent evaluation.
 

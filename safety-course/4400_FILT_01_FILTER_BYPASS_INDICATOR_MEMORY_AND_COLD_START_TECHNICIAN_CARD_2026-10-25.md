@@ -9,6 +9,8 @@ A filter bypass may preserve flow while admitting unfiltered fluid downstream. A
 
 **Human factors:** make filter service possible from an isolated, supported, depressurized and accessible service zone. Put a maintenance-history latch/log and filter part/revision where technicians can see it. Do not make nuisance-alarm defeat the fastest way to finish setup: use properly sized OEM-approved filtration, clear cold-start state, and sensible diagnostics. Keep the independent stop/hold safety boundary separate.
 
+**Additional OEM failure-path corroboration:** Parker's original Series 6 MMV-IPC 1997 troubleshooting chart explicitly records continued flow after solenoid coils are de-energized due to a sticking main spool/contamination (exact source in linked audit). **DOC-CONFIRMED for that ordinary mobile valve only**. It demonstrates why a LinuxCNC/HAL coil-off indication cannot independently establish physical no-flow, but it is **not** evidence that an installed OpenPressBrake valve has this failure. Do not troubleshoot by actuating manual overrides in this curriculum.
+
 ## Fourteen unscored PAPER decisions
 For each, record (a) exact source claim, (b) what the indicator actually witnesses, (c) unsafe assumption, (d) missing as-built/physical evidence, (e) safe HOLD/maintenance action, (f) low-friction redesign.
 1. Electric ΔP alarm clears when the pump stops; technician concludes the element cleaned itself.

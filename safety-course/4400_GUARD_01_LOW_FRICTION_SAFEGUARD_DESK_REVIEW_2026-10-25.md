@@ -22,3 +22,7 @@ Review each gate with the operator, maintainer, qualified safety designer and in
 - **Source evidence:** original 1997 OSHA directive (https://www.labor.nc.gov/osh/osh-enforcement-procedures/cpl-02-01-025-cpl-2-125-guidelines-point-operation-guarding-power-press-brakes/open) §§D–J, O, and 1910.212/1910.147. Historical conditional safe-distance figures are not selected machine criteria.
 - **Required outputs:** one task-by-zone matrix, physical-guard feasibility decision with alternatives considered, three bypass-incentive redesigns, versioned selected drawings, SRS-to-final-element map, qualified independent physical VAL/PT plan, signed review. All **NOT PROVIDED** in this generic template.
 - **Blocking result:** G0/G1 HOLD, G2 NOT RUN, G3/G4 NOT AUTHORIZED. No people-exposed testing; remote/isolated work requires separately qualified containment and personnel exclusion. No LinuxCNC/ordinary FPGA safety authority.
+
+
+## Manufacturer-informed usability follow-up (no machine test)
+Use [GUARD-02 task/mode matrix](4400_GUARD_02_UNPOWERED_DEFEAT_INCENTIVE_AND_GUARD_REINSTALL_WORKSHEET_2026-10-25.md) before treating gates 08–09 as complete. [Original Schmersal ISO 14119 guide](../research/4400_SCHMERSAL_ISO14119_2024_DEFEAT_INCENTIVE_TASK_MATRIX_OEM_AUDIT_2026-10-25.md) gives manufacturer-specific examples of minimizing bypass incentives by design/alternative modes; OSHA eTool corroborates interference encourages disregard. A tabletop mock-up can document usability only; **do not** mark safety validation PASS from a successful guard reinstall.

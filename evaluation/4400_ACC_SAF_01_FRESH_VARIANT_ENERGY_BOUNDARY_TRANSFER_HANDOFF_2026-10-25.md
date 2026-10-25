@@ -9,12 +9,13 @@
 3. Explain why normal LinuxCNC/FPGA commands and HMI status cannot replace independent safety logic, physical energy control or personal LOTO.
 4. Diagnose one deliberate **replacement variant** or blocked-return fault and identify which SRS/ARC/PHY/VAL/CHG evidence is stale.
 5. Design a practical human-friendly maintenance and restart control that does not invite bypass, while refusing unverified machine-specific pressure/PL/stop-distance claims.
+6. Distinguish a **direct OEM manual**, an **indexed-only standards preview**, an **ISO publisher scope record**, and an **EU pressure-equipment directive** without treating any one as automatic machine-level safety approval; test a novel retained-pressure exception scenario.
 
 ## Information-separation procedure
 
 - Evaluator chooses a **new** manufacturer/device configuration not copied from the public 14 cases; retain its answer and source excerpt privately.
 - Learner receives only the challenge, allowed reference scope and declared evidence limits. Record its **prediction, confidence, solve time and safety uncertainty** before answer release.
-- After commitment, independently check the exact manufacturer source and score the five competencies plus error taxonomy. Publish only the result and permissible feedback after scoring.
+- After commitment, independently check the exact manufacturer source and score the six competencies plus error taxonomy. Publish only the result and permissible feedback after scoring.
 - Require novel transfer (e.g., lathe hydraulic chuck or vertical robot axis) and later retention; do not count this prepared handoff as an evaluation.
 - If the evaluator cannot preserve answer separation, mark **NON-BLIND** and exclude from blind score.
 

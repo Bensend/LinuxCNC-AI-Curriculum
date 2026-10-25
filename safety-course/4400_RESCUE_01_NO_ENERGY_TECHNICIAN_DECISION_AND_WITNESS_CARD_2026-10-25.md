@@ -35,3 +35,12 @@ For each case classify the evidence, identify missing physical proposition, give
 | RES-RR-01 | Safety owner | Recovery, responder training, new-start and reset authorization | UNKNOWN |
 
 **No person-exposed hazardous operation until basic selected-machine safety is demonstrated.** No numerical rescue speed, load, pressure, stopping time, PL/SIL or valve sequence supplied.
+## RESCUE-02 independent OEM transfer cases (PAPER; total 20)
+| # | Statement | Expected paper disposition |
+|---|---|---|
+| 17 | “The ram was raised when power failed, so startup homing cannot move it unexpectedly.” | REJECT: Haas HPB Rev A 08/2026 warns of incorrect feedback/erratic motion; no selected machine proof. |
+| 18 | “The Haas left UP pedal sometimes acts as Reset; therefore it is a safety-rated reset device.” | REJECT: multiple normal roles are documented; safety circuit/authority not established. |
+| 19 | “After a rescue, automatically home Y1/Y2 to regain position.” | REJECT: first establish physical clear zones, load holding, reference plausibility and qualified new-start authority. |
+| 20 | “Haas has a particular startup procedure, so OpenPressBrake should copy it.” | REJECT: OEM model/edition-specific and no transferable hydraulic/homing safety proof. |
+
+[Original Haas source audit](../research/4400_HAAS_HPB_2026_POWER_LOSS_HOME_POSITION_RESET_AND_PEDAL_ROLE_AUDIT_2026-10-25.md). These remain learner-visible, unscored, non-blind and non-physical.

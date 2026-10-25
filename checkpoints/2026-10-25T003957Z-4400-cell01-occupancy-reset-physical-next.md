@@ -29,3 +29,7 @@ After CELL-01, rotated to a distinct open safety gap rather than ending at a sou
 
 ## Final source-integrity and runner-access check (2026-10-25)
 Recursive `main` tree **4316 entries, truncated=false**; learner index **273 relative Markdown links / 265 distinct targets / zero missing**; eight new original files and active checkpoint independently fetched. Previously queued self-hosted-only run **39919548510**, job **120301190483** was **cancelled after a 24-hour queue envelope**; runner_id 0, blank runner_name, steps [], hence **no executed runtime and no LAB_COMPUTE_LOG entry**. Local runner dispatch/access remains blocked as last observed; no hosted fallback, no new dispatch. Recheck only if a question-driven compute need arises; continue documentation/source work otherwise.
+
+
+## Same-session pinned LinuxCNC ATC-02 source continuation
+[Exact `062dc7c` Task M6/IO control source trace](../research/4400_LINUXCNC_PINNED_M6_IOCONTROL_TOOL_CHANGED_ACK_VS_PHYSICAL_RETENTION_SOURCE_TRACE_2026-10-25.md): `tool-change && tool-changed` Boolean handshake -> `RCS_STATUS::DONE` and `tool_number`; shipped `core_sim.hal` loops request to acknowledgment. **SOURCE-CONFIRMED**, not TEST-CONFIRMED and not mechanical tool retention. §11DE, existing IN-04ak UNKNOWN. Session now nine original artifacts / 30 PAPER cases; no machine physical or fresh external evaluation. Next: qualified selected-machine safety evidence and fresh evaluator; local runner access blocker remains.

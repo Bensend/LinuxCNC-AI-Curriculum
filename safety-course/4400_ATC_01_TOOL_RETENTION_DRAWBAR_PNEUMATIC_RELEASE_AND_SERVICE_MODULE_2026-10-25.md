@@ -4,6 +4,8 @@
 ## Prerequisites and learning objective
 Requires 2520 hazard/SRS, 2540 final elements, 2570 drive STO, 2580 isolation, 2590 guarding, 4400-BLK-01 mechanical restraint, 4400-PNEUMATIC exhaust/hold research and 4400-CELL-01 whole-body reset. Learner must distinguish **tool clamp position**, **physical retention force**, **pneumatic release**, **arm/pocket capture**, **Z/spindle drive stop**, **guarded access**, **service isolation**, and **deliberate restart**.
 
+Also inspect the [pinned LinuxCNC M6/iocontrol ordinary acknowledgment source trace](../research/4400_LINUXCNC_PINNED_M6_IOCONTROL_TOOL_CHANGED_ACK_VS_PHYSICAL_RETENTION_SOURCE_TRACE_2026-10-25.md): stock `tool-changed` Boolean acknowledgment drives Task completion, not a measured mechanical force or independent safety verdict.
+
 Read [direct Haas original OEM source audit](../research/4400_HAAS_TOOL_RELEASE_DRAWBAR_PRECHARGE_SENSOR_AND_TOOL_DROP_OEM_AUDIT_2026-10-25.md) and [14 learner-visible paper scenarios / blank witness](4400_ATC_TOOL_RELEASE_AND_CAPTURE_TECHNICIAN_CARD_2026-10-25.md).
 
 ## Documented physical mechanisms

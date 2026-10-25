@@ -30,3 +30,9 @@ For each scenario require: hazard boundary; command/feedback/physical distinctio
 | DUST-CCF-08 | Shared collector failure/stop cannot silently endanger other machines | UNKNOWN | NOT RUN | — | OPEN |
 
 No simulated data, numeric thresholds, stopping distances, dust combustibility or installed protection is supplied. If a selected machine does not have combustible dust, a qualified inventory can mark dust-specific requirements N/A; ordinary machine stopping/guarding/energy isolation still require separate proof. Do not run hazardous tests with people exposed. Use isolated/remote protected methods only under qualified approved test plan.
+
+## Four additional source-specific PAPER cases (16 total, still NOT SCORED)
+13. A filter Delta-P gauge suddenly drops. The operator calls this "excellent airflow." Using Donaldson's original explanation, name two physically different explanations and an independent hood-level discriminator.
+14. A collector's explosion vent opens to an outdoor employee walkway. Why is "vent outdoors" insufficient? What exact OEM/location evidence is needed?
+15. A fire sprinkler is added to a collector without a drainage/structural review. Explain the additional hazard identified in the Donaldson CPC Rev6 manual and why the fire retrofit must be reviewed as a coupled system.
+16. An engineer claims LinuxCNC 2.9 ESTOP cannot clear coolant because `emctask.cc` lacks an explicit flood-off call. Trace `emcIoAbort` -> `EMC_TOOL_ABORT` -> `ioControl.cc` and `ioControl_v2.cc`, and explain why source-level output clearing still does not establish a physical fan state.

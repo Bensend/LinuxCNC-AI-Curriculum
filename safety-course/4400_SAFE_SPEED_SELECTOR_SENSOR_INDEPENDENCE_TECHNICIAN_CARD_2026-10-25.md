@@ -36,3 +36,11 @@ For each: identify which proposition fails (normal command / safety monitor / fi
 | MON-10 | Independent qualified evaluation, residual risk and commissioning approval | | UNKNOWN |
 
 **Safety gate:** G0/G1 HOLD; G2 paper review only; G3/G4 physical tests NOT AUTHORIZED. Never create a hazardous fault to fill this sheet without approved selected-machine plan and isolated/excluded people. If basic stop/hold/guard/restart threshold cannot be met, do not operate with personnel exposed. Preserve private machine drawings outside this public repository.
+
+## Four additional pinned-source transfer cases — PAPER ONLY
+17. A LinuxCNC spindle at-speed input is unwired and the next feed begins. Trace the pinned default and explain why this is ordinary sequencing, not physical speed proof.
+18. A HAL spindle soft-start example compares commanded speed with the **ramped command** using `near`; the motor is stalled. Identify the missing measurement and separate safety claim.
+19. A lathe HAL example uses encoder-derived speed, but the encoder coupling shears. Which evidence is better than command-ramp comparison, and which independent safety proposition still fails?
+20. A `spindle_monitor.comp` output sets at-speed in state 1, then asserts underspeed in state 2. Read the exact pinned code and predict whether at-speed is cleared immediately. Do not treat this as a selected VFD or physical test.
+
+These bring learner-visible cases to **20 PAPER ONLY**, not 20 blind scores.

@@ -340,3 +340,7 @@ The [Pilz/OMRON/SICK original source audit](../research/4400_PILZ_OMRON_SICK_EDM
 
 ### ENC-01 conditional coupling/diagnostic intake (2026-10-25; UNKNOWN)
 Qualify selected motor/encoder-to-hazard mechanical coupling and whether any slip/breakage fault exclusion is actually justified. Identify any motion-dependent diagnostics and how they are exercised under a separately authorized safe test plan; do **not** copy Rockwell's product-specific six-month instruction as universal or energize the machine to satisfy it. Record sensor1/2 role, shared common causes, independent physical ram holding, pressure, guards, fresh rearm and [source audit](../research/4400_KINETIX_SINGLE_ENCODER_SIL_CLAIM_COUPLING_EXCLUSION_AND_MOTION_DEPENDENT_DIAGNOSTICS_AUDIT_2026-10-25.md). G0/G1 HOLD; no selected PL/SIL inferred.
+
+
+### COMM-01 conditional commissioning-mode intake (2026-10-25; UNKNOWN)
+Document exact safety-option mode and whether any **Disabled/commissioning** configuration disables protection while leaving motor power available. Trace independent final energy removal, people-exclusion during any qualified isolated commissioning, configuration restore/revalidation and fresh restart. [Exact Rockwell 2013 source](../research/4400_ROCKWELL_KINETIX_DISABLED_MODE_SAFE_OUTPUTS_MOTION_POWER_ENABLED_SOURCE_AUDIT_2026-10-25.md) is **an example**, not evidence of installed OpenPressBrake equipment. G0/G1 HOLD; no personnel-exposed operation.

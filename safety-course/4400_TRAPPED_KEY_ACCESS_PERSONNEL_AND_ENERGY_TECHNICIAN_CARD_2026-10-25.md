@@ -35,3 +35,13 @@ For each, name the precise key/sensor proposition, a credible defeat or common-c
 | TK-09 | Qualified protected validation plan and observed result; independent evaluator score | NOT RUN |
 
 If inventory proves no trapped-key/BEMF system, record **N/A with evidence**, not assumed absence. Even if N/A, independent OpenPressBrake Y1/Y2 stop/hold, hydraulic isolation, rear guarding and deliberate restart remain OPEN. G0/G1 HOLD; G3/G4 NOT AUTHORIZED. No physical fault injection or people-exposed operation.
+
+## TK-03 six original-OEM variant transfer cases — PAPER ONLY
+17. A Fortress PTU lock is replaced with a PTL device because the handle and connector fit; predict power-loss guard behavior and required evidence.
+18. An unmonitored-solenoid NC actuator/key circuit remains closed after unlocking; why can a PLC/relay's "guard closed" bit mislead?
+19. An SR escape release opens NC head contacts, but the replacement SE variant opens NC solenoid contacts; identify the terminal truth table to revalidate.
+20. A LOK body takes repeated door impact because no separate guard stop is installed; explain the manufacturer warning and inexpensive remedy.
+21. A technician leaves the auxiliary release tool installed for convenient entry; distinguish controlled recovery from foreseeable defeat.
+22. The LOK part advertises up to PLe/Cat4; the team proposes removing the main isolator and hydraulic ram restraint. Explain why the OEM explicitly forbids the inferred substitution.
+
+**Total 22 learner-visible PAPER cases.** None is a blind score, qualified machine test or safety authorization.

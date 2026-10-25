@@ -27,3 +27,6 @@ A CNC wait-for-spindle-ready condition is an ordinary scheduling convenience. Ev
 
 ## Claim classification
 SOURCE-CONFIRMED: exact pinned 2.9/development file comparisons. DOC-CONFIRMED: official examples as shipped. TEST-CONFIRMED none; COMMUNITY-REPORTED none; INFERENCE safety implications; UNKNOWN selected wiring and physical performance. No compute or physical test; G0/G1 HOLD, G3/G4 NOT AUTHORIZED.
+
+## Additional pinned trajectory-planner cross-check
+Stable 2.9 `src/emc/tp/tp.c` blob `5768d6e6880569f72156ed9a761b5eee531c9fcf`, **lines 2819–2827 and 2897–2903**, iterates `s=0..numSpindles-1` and returns `TP_ERR_WAITING` if a configured spindle's `at_speed` is false. Development `tp.c` blob `2b4024c9ab131f708cc22760300231878c9b0fdc`, **lines 3467–3476 and 3549–3563**, retains the same configured-spindle wait pattern. Stable 2.9 `command.c` blob `f6f92c9f8f41f9dc4929a2699f27ff76c07a6b15`, **lines 1690–1692**, explicitly comments that at-speed defaults true when unwired. **SOURCE-CONFIRMED at these snapshots**, not proof of a safety-related stop; a false ordinary at-speed may hold feed scheduling, and an unwired true may allow it. Selected application and actual machine state UNKNOWN.

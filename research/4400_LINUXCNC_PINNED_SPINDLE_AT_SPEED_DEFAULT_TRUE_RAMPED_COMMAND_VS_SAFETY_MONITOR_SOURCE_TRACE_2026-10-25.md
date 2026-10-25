@@ -39,3 +39,25 @@ The [MON-01 module](../safety-course/4400_MON_01_SAFE_SPEED_MODE_SELECTION_ENCOD
 
 ## Evidence ledger and limitations
 **SOURCE-CONFIRMED** only at pinned LinuxCNC revision and exact cited files. **DOC-CONFIRMED** shipped example prose/config, not external machine performance. **TEST-CONFIRMED** none. **COMMUNITY-REPORTED** none. **INFERENCE** stalled/coasting counterfactual and cross-machine transfer. **UNKNOWN** selected HAL wiring, actual sensors, physical speed, PL/SIL, reaction/stopping distance, Y1/Y2 hold and restart. No simulation/build/test; G0/G1 HOLD, G3/G4 NOT AUTHORIZED, no people-exposed operation.
+
+## Same-session source-only adversarial state-table pass (not a lab)
+Pinned `src/hal/components/spindle_monitor.comp` implements the following transition table. This is a **manual static source derivation**, not a simulated or physical test.
+
+| Initial `level` | Inputs / predicate | Immediate source effect | Next-call caveat |
+|---|---|---|---|
+| 0 | any, spindle off | `at_speed=0`, `underspeed=0` | remains idle |
+| 0 | spindle on | clears both, sets `level=1` | no at-speed evaluation until next call |
+| 1 | spindle off | sets `level=0`, returns | output clearing waits for subsequent level-0 invocation |
+| 1 | spindle on, `abs(command-feedback) < threshold` | sets `level=2`, `at_speed=1`, returns | does not independently validate feedback source |
+| 1 | spindle on, predicate false | stays at level 1 | no at-speed asserted by this branch |
+| 2 | spindle on, `command-feedback > threshold` | sets `underspeed=1` | **does not clear** previously asserted `at_speed` |
+| 2 | spindle on, predicate false | stays at level 2 | **does not clear** previously asserted `underspeed` |
+| 2 | spindle off | sets `level=0`, returns | output clearing waits for next level-0 invocation |
+
+**SOURCE-CONFIRMED:** both speed comparisons are strict inequalities (`<` for readiness, `>` for underspeed); source does not implement an over-speed latch in this component. This is **not** a certified speed-monitoring function. Threshold units/configuration and selected HAL wiring remain application-specific.
+
+Pinned `near.comp` implements `(scale>1 && ratio-within-scale) OR (abs difference<=difference)`; a `near` true value proves only numerical proximity of **whatever** signals the HAL integrator wired. The shipped soft-start example wires two command-side values, whereas the lathe example wires an encoder-derived estimate.
+
+Pinned `tp.c` at lines 3467–3476 and 3549–3563 iterates over `numSpindles` in its at-speed wait paths. An unexpected false on a configured spindle can therefore hold a normal trajectory segment, but this remains ordinary sequencing rather than a safety response.
+
+**Source-only review verdict:** no unresolved source-behavior question here requires a lab; do not dispatch a test just to re-prove obvious branches. A real machine's sensor provenance, timing, physical stop and safety chain remain UNKNOWN and require qualified selected evidence.

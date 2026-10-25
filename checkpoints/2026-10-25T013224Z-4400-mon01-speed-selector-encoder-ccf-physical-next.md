@@ -25,3 +25,6 @@ After MON-01 documentary OEM work, continued into a distinct pinned LinuxCNC imp
 
 ## Same-session MON-03 practical continuation and source limit
 [Rockwell MSR57P manufacturer-indexed SLS-reset-during-delay evidence limit](../research/4400_ROCKWELL_MSR57P_SLS_RESET_DURING_DELAY_INDEXED_SOURCE_LIMIT_2026-10-25.md) and [15-gate no-energy configuration change-control audit](../safety-course/4400_MON_01_SAFE_SPEED_CHANGE_CONTROL_DESK_AUDIT_2026-10-25.md) published. Full original Rockwell PDF reader-size blocked; page-80 official indexed excerpt only, not final selected-device approval. §11DI; session total **eight original artifacts / 20 PAPER cases**. Actual selected physical Y1/Y2 stop/hold, guard, hydraulic energy and fresh start still UNKNOWN; no lab or physical test. Do not dispatch GitHub-hosted compute.
+
+## Source-only adversarial review
+The pinned LinuxCNC at-speed audit now has eight state-transition cases, strict comparison and latched-output semantics, plus `near` OR comparison and all-configured-spindle wait path. MON-01 paper practice expanded to **24 scenarios**; no test or safety release. This resolves the local source question without any lab; remaining questions require selected physical evidence or independent evaluator.

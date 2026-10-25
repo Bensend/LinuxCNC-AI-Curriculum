@@ -44,3 +44,11 @@ For each: identify which proposition fails (normal command / safety monitor / fi
 20. A `spindle_monitor.comp` output sets at-speed in state 1, then asserts underspeed in state 2. Read the exact pinned code and predict whether at-speed is cleared immediately. Do not treat this as a selected VFD or physical test.
 
 These bring learner-visible cases to **20 PAPER ONLY**, not 20 blind scores.
+
+## Four pinned-component truth-table cases — PAPER ONLY
+21. `spindle_monitor` is at level 1 with `abs(command-feedback)` exactly equal to `threshold`. Predict readiness from strict comparison.
+22. `spindle_monitor` is at level 2, `underspeed` previously asserted, then feedback recovers. Does this source branch clear `underspeed`?
+23. `spindle_monitor` transitions level 2→0 when spindle turns off. Are the two outputs cleared in that same function invocation or the next level-0 invocation?
+24. `near` compares two command-derived signals with `scale>1` and an absolute difference allowance. Explain why `near.out` cannot establish actual measured speed or safe standstill even when true.
+
+**Total 24 learner-visible PAPER cases**; no blind/external grading or runtime result.

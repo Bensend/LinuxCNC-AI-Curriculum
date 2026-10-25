@@ -1,0 +1,21 @@
+# 4400-BAR-01 — Original Haas bar-feeder liner, whip and door-mode safety audit
+**2026-10-25 | original OEM sources | DOC-CONFIRMED within exact editions | NON-GRADUATED**
+
+## New safety question
+Does a bar-feeder door-open indication prove that the lathe spindle has stopped, the loader's other actuators are stationary, and bar stock cannot whip? **No.** OEM documented behavior differs by mode and software version; actual machine safety requires separate selected-machine proof.
+
+## Directly inspected manufacturer evidence
+1. **Haas Servo Bar 300 Operator's Manual Supplement 96-0013 Rev BC, December 2013**, original 84-page PDF https://www.haascnc.com/content/dam/haascnc/en/service/manual/supplement/english---barfeeder-operator%27s-manual-supplement---2013.pdf , PDF pp.16–18 / printed Safety pp.1–3. **DOC-CONFIRMED for Servo Bar 300 2013:** feeder is lathe-controlled and may start automatically; incorrect feeder/liner setup can eject rotating parts with lethal force; liner size and speed/material limits matter; exposed bars and attached devices on rotating union create severe hazards; setup/run modes have different access expectations. This historical manual does not establish current Haas firmware behavior.
+2. **Haas Bar Feeder online safety supplement**, https://www.haascnc.com/service/online-operator-s-manuals/haas-bar-feeder---operator-s-manual-supplement/bf---safety.html , section 3.4. **DOC-CONFIRMED for listed Haas machines with software 100.23.000.1200 and higher:** opening the bar-feeder door halts trolley motion while lifter arms and bar loader may complete an in-process cycle to the next position; the door opening does not interrupt the lathe cycle unless bar-feeder motion is commanded (example G105). Door closure plus Cycle Start resumes. This is a critical *scope distinction*, not permission for a person to enter an exposed hazard.
+3. **Haas Bar Feeder online operation supplement**, https://www.haascnc.com/service/online-operator-s-manuals/haas-bar-feeder---operator-s-manual-supplement/bf---operation.html , sections 6.3–6.5. **DOC-CONFIRMED:** spindle liners support and reduce vibration/bar whip but **do not grip bar stock**; collet/drawtube retains the bar. Liner size, bar straightness, protrusion, minimum clamping remnant and feed-tray alignment are separate concerns. Specific dimensions apply to this OEM setup, not a universal rule.
+4. **Haas Bar Feeder V2 product documentation**, https://www.haascnc.com/machines/lathes/haas-bar-feeder-v2.html . **DOC-CONFIRMED:** small flexible bars can whip even at relatively low speed; the OEM has a dedicated extended-liner/support option. Product numbers and limits are variant-specific, not universal.
+
+## Engineering implications — INFERENCE, NOT tested
+A. Feeder lid switch may limit one axis but not all feeder actuators, spindle or lathe program; protective-zone mapping must identify every moving element and exact firmware.
+B. Liner OK is not collet grip OK; a physical liner can reduce whip while failing to prevent an unclamped bar from moving.
+C. A green chuck clamp status is not bar support/whip containment; an unsupported rear extension creates a distinct hazard.
+D. A normal CNC G-code request (including a feeder-specific command) cannot be used as personnel-safety stop authority. No LinuxCNC bar-feeder safety path is inferred from Haas behavior.
+E. Recovery after door closure requires independent fresh-start logic appropriate to the selected system; a software Cycle Start instruction is not a complete safety case.
+
+## Open selected-machine evidence
+Exact feeder/lathe model, firmware, door sensors, trolley/lifter/loader actuators, independent safety function, spindle liner/collet, bar diameter/length/material, physical rear enclosure, restart logic, energy isolation, measured stop and guarding performance are UNKNOWN. No equipment from these manuals is asserted installed on OpenPressBrake. No test, simulation or external evaluation was run; no universal stop time, RPM, safe distance or PL/SIL is inferred. If protection cannot be established, no personnel-exposed operation; isolated/remote experimental work only under a qualified plan.

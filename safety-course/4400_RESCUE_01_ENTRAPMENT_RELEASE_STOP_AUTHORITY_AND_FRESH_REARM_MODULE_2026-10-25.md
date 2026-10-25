@@ -36,3 +36,20 @@ Use [16-case technician card](4400_RESCUE_01_NO_ENERGY_TECHNICIAN_DECISION_AND_W
 
 ## Open questions / promotion
 Actual OpenPressBrake rescue with/without power, hydraulic release direction, independent load restraint, required performance level, guard/UP state machine, egress and selected numerical criteria **UNKNOWN** and block selected-machine authorization. They cannot be promoted away to certify this machine. Curriculum source lesson remains NON-GRADUATED pending fresh independent transfer and selected evidence where applicable.
+## Abstract rescue/rearm state model — **not** safety-controller code
+The following is a **requirements-review model**, not an executable sequence, PLC state table, hydraulic truth table or authorization to move. Physical safety authority, occupancy checks, and load/energy verification must be assigned to selected qualified functions before implementing any transition.
+
+| Abstract state | Entry evidence / owner | Forbidden shortcut |
+|---|---|---|
+| OPERATING | Independently authorized operating envelope, correct guarding and deliberate start | Assume CNC motion-enable is personnel safety. |
+| STOP_DEMANDED | E-stop/guard/protective event recognized by actual safety function | Treat the demand bit as proof of physical stopping. |
+| STOPPED_AND_HELD? | Independent STOP **and** gravity HOLD witnesses, or mark UNKNOWN | Conflate motor-off, zero velocity command or one valve contact with holding. |
+| ENTRAPMENT_REPORTED | Responder initiates site emergency protocol, calls emergency assistance as appropriate, prevents secondary exposure | Clear E-stop or reclose guards merely to recover ordinary UP. |
+| RESCUE_AUTHORITY_REVIEW | Qualified team evaluates machine-specific power-present/absent method, load/pressure/people boundaries | Invent valve opening, ram lifting or guard bypass. |
+| RESCUE_COMPLETED_AND_STABILIZED | Injured person safely transferred to responders; machine secured and all secondary hazards controlled | Treat release as machine-ready. |
+| ISOLATED_REPAIR_AND_INVESTIGATION | Authorized energy-control, physical load restraint, documented incident/fault and corrective action | Skip isolation because ram is visibly stationary. |
+| SAFETY_REVALIDATED | Qualified independent verification of affected safeguards, reset path, configuration and physical stop/hold | Accept HMI “ready” or a green network bit. |
+| READY_NO_MOTION | Safety system deliberately reset/rearmed with no retained motion demand | Reset automatically resumes unfinished cycle. |
+| NEW_START_AUTHORIZED | People clear, guards restored, separate deliberate start and approved operating mode | Treat reset/rearm as start. |
+
+**Adversarial invariant:** from STOP_DEMANDED or ENTRAPMENT_REPORTED there is **no automatic edge to OPERATING**, and no generic edge to UP-motion. If a design relies on such an edge, it is not ready for people-exposed operation. Rescue motion, if necessary, is a separate engineered and independently reviewed function, not an implicit exception in ordinary LinuxCNC. The correct physical method remains UNKNOWN for the selected OpenPressBrake machine.

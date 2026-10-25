@@ -29,3 +29,6 @@ Updated CURRICULUM, PROGRESS, SAFETY_COURSE_RESEARCH, safety index, selected-mac
 
 ## Short-session continuation
 TEACH-01 yielded exact 2026 automatic OSSD-on teach-in and independent 2024 response-time drift evidence. Rather than stop on a completed narrow source question, rotated to distinct SICK original override/reset/counter semantics and human-factors curriculum. Manufacturer documentation resolved both device-level questions; no synthetic lab can validate selected-machine geometry, Y1/Y2 gravity hold or pressure. End UTC, actual elapsed and overlap must be appended safely to complete LESSON_LOG immediately before session ends.
+
+## Final publication verification
+All eight originals and this checkpoint independently fetched from main. Safety index **438 Markdown links / 421 distinct targets** (regex count, not full historical link-existence audit); all eight new links present. No new physical, evaluator or compute evidence.

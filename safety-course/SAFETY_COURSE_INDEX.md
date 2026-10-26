@@ -737,3 +737,7 @@ Read [original UL/OSHA source audit](../research/4400_UL_OSHA_MACHINE_PANEL_MULT
 
 ### 4400-HALRMT-01 — Optional remote HAL configuration is not safety authority (2026-10-26; NON-GRADUATED)
 [Pinned source/official-manual audit](../research/4400_LINUXCNC_HALRMT_REMOTE_TOPOLOGY_CHANGE_AUTHORITY_AND_PHYSICAL_SAFETY_BOUNDARY_2026-10-26.md) and [8 public PAPER cases UNSCORED](4400_HALRMT_01_EIGHT_REMOTE_SERVICE_CHANGE_CONTROL_PAPER_CASES_2026-10-26.md). Optional `halrmt` has HELLO/ENABLE access tiers and normal HAL edit functions; source **does not** establish service running on selected machine, security adequacy, safety performance, physical stop/hold or permission to restart. No network probe or compute; G0/G1 HOLD.
+
+
+### 4400-HAL-SNAPSHOT-01 — `save all` omits disconnected input values; `allu` includes them (2026-10-26; NON-GRADUATED)
+[Two-revision source audit](../research/4400_LINUXCNC_HAL_SAVE_ALL_VS_ALLU_UNCONNECTED_INPUT_RESTORATION_AUDIT_2026-10-26.md) and [8 public PAPER cases UNSCORED](4400_HAL_SNAPSHOT_01_EIGHT_RESTORE_FIDELITY_PAPER_CASES_2026-10-26.md). **SOURCE-CONFIRMED/DOC-CONFIRMED** `do_save_cmd` stable/development serializes unconnected input dummy values only in `allu`; neither snapshot proves installed sensor health or machine safety. This distinct change-control extension brings the 01:40Z session to **11 original artifacts / 36 public PAPER cases UNSCORED / 12 desk gates NOT RUN / external evaluator NOT RUN / 0 hosted or local compute**. G0/G1 HOLD.

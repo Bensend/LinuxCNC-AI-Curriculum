@@ -1,0 +1,6 @@
+# 4400-LEAK-01 — Information-separated external evaluator handoff
+**2026-10-26 | PREPARED / NOT RUN | Not a scored competency claim**
+
+Independent evaluator: construct a **new** controller/output/receiver/suppressor failure scenario with exact OEM provenance **not copied from the public twelve cases**. Keep expected result and scoring key outside learner-readable repository. Supply only the initial symptoms and allowed references to the learner. Obtain immutable precommitment: diagnosis, mechanism, expected observable outcome, competing hypotheses, falsifier, confidence, solution time and resources. Then reveal authoritative source/oracle, score 0–10 under `evaluation/BLIND_FEEDBACK_PROTOCOL.md`, classify errors, correct only transferable weakness, and later use different-surface transfer/retention challenges. Include an explicit safety boundary: normal command OFF, leakage, independent final elements, physical load holding, deliberate restart. A scenario is INVALID if it asks for a hazardous energized bypass or pretends generic current thresholds.
+
+**No hidden answer or expected machine outcome is present here.** No independent evaluator has accepted this handoff, no attempt has been precommitted, no score is recorded. Keep 2520–25F0 external gates and G0/G1 HOLD unchanged.

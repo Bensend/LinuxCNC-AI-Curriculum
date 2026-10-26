@@ -5,7 +5,7 @@
 1. **Spring ruptures:** A named ENDO EWF spring breaks, the drum/rope are intact and the tool is suspended. Which mechanism is documented, and which unverified conditions prevent a machine-level safe claim?
 2. **Top hook shears:** The main overhead hanger fails while the balancer body, rope and tool remain attached. Which separately anchored mechanism is described, and why would a backup attached to the same hanger be weak?
 3. **Tool rope parts:** A wire-rope termination fails below the drum. Why can neither the internal spring-rupture pin nor the upper auxiliary chain automatically establish tool retention?
-4. **Marketing label:** A catalog says "fall arrest." Contrast ENDO's spring-rupture description with CMCO/Yale YBA's explicit rope-break claim. What exact model/manual evidence is required before substituting?
+4. **Marketing label:** A catalog says "fall arrest." Contrast ENDO's spring-rupture description with CMCO/Yale YBA's rope-whip arrest after a break. Does locking a broken rope prove the detached tool stays up? What exact model/manual evidence is required?
 5. **Translation conflict:** The ENDO manual both describes spring-rupture fall arrest and cautions that the device is not designed to prevent tools falling. State the narrow defensible conclusion and how to resolve the conflict without pretending it vanished.
 6. **Wrong weight:** A technician engages the drum lock, removes a tool and installs a heavier one. Which documented restriction and release hazard applies? Why is a maintenance lock not necessarily personal LOTO?
 7. **Unloaded cable:** A worker pulls an unloaded balancer rope and lets go. Identify the stored mechanical-energy hazard independent of LinuxCNC or E-stop.

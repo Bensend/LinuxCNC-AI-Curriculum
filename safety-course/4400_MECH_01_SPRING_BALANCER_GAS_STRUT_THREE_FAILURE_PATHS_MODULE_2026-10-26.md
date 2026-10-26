@@ -14,7 +14,7 @@ Read the two original-source audits: [ENDO spring balancer](../research/4400_END
 | **Secondary upper suspension** | ENDO auxiliary chain/rope to separate hanger | Failed upper hook or primary overhead hanger | Broken lower tool cable, termination or hook |
 | **Positive supported-load lock** | Engineered gas-spring shroud/cover stay or appropriately designed fixture | Loss of gas spring support *if lock engages and load path survives* | Failed common pivot, broken cover hinge or under-rated bracket |
 
-A similarly named **Yale YBA** spring balancer additionally describes rope-break/dislodged-weight arrest. Do not transfer its feature to ENDO or assume a component rating establishes assembled-machine safety.
+A similarly named **Yale YBA** spring balancer describes **rope-whip suppression** when the rope, bottom hook or suspended weight detaches. This is not proof that the *detached tool* stays suspended. Do not transfer its feature to ENDO or confuse rope-whip arrest with load retention.
 
 ## Four-layer authority map
 1. **Ordinary LinuxCNC / FPGA control:** requests cover actuator, balancer positioning or normal axis motion; cannot guarantee personnel safety.

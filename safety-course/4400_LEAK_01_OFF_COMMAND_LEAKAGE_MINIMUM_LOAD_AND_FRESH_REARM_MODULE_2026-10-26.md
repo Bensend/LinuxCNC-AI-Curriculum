@@ -36,3 +36,7 @@ A press brake requires independent ram hold and hydraulic energy boundaries; a m
 **Adversarial check (PUBLIC / UNSCORED):** 'The PLC output LED is OFF, the relay contact is open, and the HMI says stopped; therefore the ram cannot move.' Identify at least three unproven propositions, two exact OEM data sheets required, and the G0 hold. Never answer with a live bypass experiment.
 
 **Status:** SOURCE-CONFIRMED new LinuxCNC none; DOC-CONFIRMED exact OEM only; INFERENCE architecture; TEST-CONFIRMED none; UNKNOWN selected machine. External evaluator NOT RUN, G0/G1 HOLD.
+
+
+## Source-level twist: command-acknowledgment is not a final-element witness
+The same IntelliVAC June 2013 manual's printed **p. 5-2** says its *Contactor Status* output relay can close during a **200 ms CLOSE-command interval**, or when the contactor is closed. A naive controller/HMI could treat a contactor-status assertion as physical proof before a final-element state has been independently established. This is **DOC-CONFIRMED for that interface**; do not infer that all contactor auxiliary contacts behave this way. Table 1.A also specifies **maximum OFF-state command-input current at stated test conditions** (900 µA at 30 V DC; 700 µA at 20 V AC), not a generic allowable leakage for all hardware. A qualified reviewer must compare exact variant/test conditions rather than borrow either number for OpenPressBrake.

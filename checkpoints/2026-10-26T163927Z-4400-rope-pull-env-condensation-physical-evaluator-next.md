@@ -42,3 +42,12 @@ Read `START_HERE.md` first; mission, `LEVEL_ORDER.md`, `WORK_SELECTION_POLICY.md
 ## Short-session continuation check
 
 After ROPE-PULL-01 original OEM audit and field module, source-deepened the exact **standard tag vs safety channel** and **OSSD-only vs mixed-contact series** distinctions, then rotated to a distinct **cabinet condensation/thermal-cycle** manufacturer/regulatory study, then wrote a cross-branch common-cause review. No synthetic lab or repeated 3000 work was manufactured. Both branches now await selected-machine/evaluator evidence.
+
+
+## Later same-session RIG-01 rotation — update to final scope
+
+The curriculum index contained no whole-machine transport/tip-over/foundation branch (earlier WILA rigging concerned **tooling**). Continued with a **third distinct safety branch** rather than generating more 3000 or repeating rope/condensation scenarios:
+- [Original TRUMPF TruBend 2100 OEM quick-start and scoped OSHA forklift/crane audit](../research/4400_RIG_01_TRUMPF_PRESS_BRAKE_DELIVERY_LIFT_FOUNDATION_OSHA_SCOPE_AUDIT_2026-10-26.md).
+- [RIG-01 practical eight public PAPER scenarios UNSCORED and eight documentary gates NOT RUN](../safety-course/4400_RIG_01_PRESS_BRAKE_TRANSPORT_FOUNDATION_AND_PRECOMMISSIONING_FIELD_MODULE_2026-10-26.md).
+
+**DOC-CONFIRMED exact model:** unusual center of gravity, top frame lifting eyelets/armored rollers, complete Installation Manual required; **16,534-lb mass and 8-in direct concrete specification only for TruBend 2100**, not OpenPressBrake. **INFERENCE:** stage-gated qualified transport/floor/utility/guarded precommissioning. **UNKNOWN:** actual machine mass/CG/lift points/anchors, independent Y1/Y2 gravity holding, stop and hydraulic isolation. No lift, rigging calculation, energized/physical test, external evaluation or compute. Cumulative package now **§§11HQ–11HS**. **Final combined count: eight original artifacts; 28 public PAPER scenarios UNSCORED, 26 documentary gates NOT RUN, one external evaluator handoff PREPARED/NOT RUN.** Next priority remains qualified private Stage A A–G and independent evaluation; without it, rotate to another genuinely open safety branch.

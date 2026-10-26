@@ -940,3 +940,5 @@ Read [original WILA/Wilson/OSHA source audit](../research/4400_TOOL_RET_01_WILA_
 **COIL-SUP/SNEAK-CUR integrated failure-path review:** [suppression versus backfeed versus stuck final element](4400_COIL_SUP_SNEAK_CUR_CROSSCUT_PHYSICAL_WITNESS_AND_CHANGE_IMPACT_REVIEW_2026-10-26.md) maps electrical, hydraulic, physical-witness and deliberate-restart propositions. No extra scored challenges, physical validation or compute.
 
 **SNEAK-CUR original OEM addendum:** historical Banner MM-TA-12B/MM2-TA-12B manufacturer catalog explicitly specifies up to 1.2 mA OSSD off-state leakage (including fault cases); this demonstrates why OFF cannot be modeled as ideal zero current. **DOC-CONFIRMED product-specific only; actual coil energization and OpenPressBrake output UNKNOWN.** No new scenarios, tests or compute.
+
+**COIL-SUP standards scope:** official ISO 13855:2024 and ANSI B11.19-2019 (R2024) editions checked; manufacturer Safebook older formulas are educational, not a current machine separation-distance prescription. Normative clauses and physical stop data remain unavailable.

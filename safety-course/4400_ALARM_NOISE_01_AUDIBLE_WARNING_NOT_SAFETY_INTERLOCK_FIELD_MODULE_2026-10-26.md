@@ -34,3 +34,6 @@ Prefer physically guarded hazard boundaries, an independent safety-rated functio
 
 ## Evidence / release
 **DOC-CONFIRMED:** exact OEM/regulatory/research scope in linked audit. **INFERENCE:** design patterns. **SOURCE-CONFIRMED new LinuxCNC:** none. **TEST-CONFIRMED:** none. **UNKNOWN:** installed equipment, worker perception, noise dose, independent Y1/Y2 stop/hold, pressure/guards and PL/SIL. Eight scenarios UNSCORED, ten gates NOT RUN. [Independent unseen evaluator handoff](../evaluation/4400_ALARM_NOISE_01_INDEPENDENT_UNSEEN_PERCEPTION_AND_AUTHORITY_HANDOFF_2026-10-26.md) PREPARED/NOT RUN; no hidden answer or self-score. **G0/G1 HOLD; no personnel-exposed hazardous operation.**
+
+## Adversarial source-scope transfer (no extra scored case)
+Read [GM/Delco 1996 versus OSHA 1999 warning/LOTO scope note](../research/4400_ALARM_NOISE_01_GM_DELCO_WARNING_VS_LOTO_SCOPE_ADVERSARIAL_RECONCILIATION_2026-10-26.md). A real court credited **an entire interlocked-gate and multi-step warning architecture** in a narrow `unexpected` startup decision. That is not proof that a generic buzzer replaces hazardous-energy isolation or guarding. Preserve the original eight public cases UNSCORED and ten desk gates NOT RUN; this is a source-interpretation correction, not an additional competency result.

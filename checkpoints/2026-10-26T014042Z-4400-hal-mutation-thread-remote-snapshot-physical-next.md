@@ -32,3 +32,7 @@ Updated CURRICULUM, PROGRESS, SAFETY_COURSE_RESEARCH, learner index, cumulative 
 5. Before ending each session: record actual UTC end, elapsed minutes and overlap status in complete LESSON_LOG with fresh blob SHA; commit, preserve recurring curriculum.
 
 **G0/G1 HOLD**. If minimum safe-to-operate threshold is unmet, no personnel-exposed operation. Any separately approved experimental operation must be isolated/remote with all people outside hazard zone and residual risk explicitly documented.
+
+
+## Final same-session synthesis extension
+[HAL-SERVICE-01 four-state source-grounded service/change/rearm matrix](../safety-course/4400_HAL_SERVICE_01_FOUR_STATE_CHANGE_CONTROL_AND_REARM_MATRIX_2026-10-26.md) joins HAL unlink, stopped callbacks, optional remote edits and `save all` omissions with separate independent physical safety. **Final 12 original artifacts / 36 public PAPER cases UNSCORED / 12 G0 desk gates NOT RUN / evaluator NOT RUN / 0 GitHub-hosted and local compute.** Safety package §11GD. The precise next-work gates above remain unchanged; selected G0/G1 HOLD.

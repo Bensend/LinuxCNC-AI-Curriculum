@@ -1,0 +1,24 @@
+# 4400 safety continuation — MECH-01 independent mechanical load paths
+
+**UTC start:** 2026-10-26T02:32:38.159Z ([start marker](2026-10-26T023238Z-session-start-safety.md)). Supersedes 01:40Z HAL checkpoint for **work selection only**, not its unresolved physical gates. UTC end/elapsed/overlap must be logged before final commit.
+
+## Governance/current state
+START_HERE first; MASTER_MISSION, LEVEL_ORDER, WORK_SELECTION_POLICY, CURRICULUM, SOURCE_POLICY, MODULE_TEMPLATE, PROGRESS, blind protocol/score, LAB_COMPUTE_LOG, 01:40Z checkpoint, safety index, source plan and selected intake read. 1000/2000/F02/3000 GRADUATED/CLOSED; 4400 safety primary active. External 2520–25F0 competency and 4400 independent evaluator remain NOT RUN. G0/G1 HOLD; G2 NOT RUN; G3/G4 NOT AUTHORIZED; G5 HOLD. No personnel-exposed operation.
+
+## Five new original artifacts
+1. [ENDO/CMCO spring balancer exact failure coverage](../research/4400_ENDO_EWF_ELF_FALL_ARREST_TOP_SUSPENSION_ROPE_AND_DRUM_LOCK_SCOPE_AUDIT_2026-10-26.md).
+2. [Ameritool/Industrial Gas Springs/Newtone independent support source audit](../research/4400_GAS_SPRING_FAILURE_INDEPENDENT_LOCKING_SHROUD_AND_MAINTENANCE_AUDIT_2026-10-26.md).
+3. [MECH-01 practical module](../safety-course/4400_MECH_01_SPRING_BALANCER_GAS_STRUT_THREE_FAILURE_PATHS_MODULE_2026-10-26.md).
+4. [12 public PAPER cases UNSCORED](../safety-course/4400_MECH_01_TWELVE_UNSCORED_MECHANICAL_SUPPORT_CASES_2026-10-26.md).
+5. [Blank selected-machine mechanical witness NOT RUN](../safety-course/4400_MECH_01_BLANK_MECHANICAL_ENERGY_AND_ACCESS_WITNESS_2026-10-26.md).
+
+**DOC-CONFIRMED:** ENDO BMU-0002 2021 §4-3-2 spring-rupture drum pin, §5-2-1 independent upper chain, §6-3 drum lock and cable inspection; CMCO YBA rope-break lock protects against rope whipping and does NOT prove detached-tool retention; Ameritool 2022 warns gas springs not safety parts and requires independent locking when failure risks injury; Newtone locking shroud is manufacturer component concept, not installed machine proof; OSHA 1910.147 stored-energy/isolation scope. **SOURCE-CONFIRMED new LinuxCNC:** none. **TEST-CONFIRMED:** none. **COMMUNITY-REPORTED:** none relied upon. **INFERENCE:** mechanical fault coverage matrix and captive easy-to-use physical restraint. **UNKNOWN:** ENDO manual's contradictory adjacent fall-arrest caution, exact selected mechanism and rating, Y1/Y2 hydraulic/ram/guard physical proof and independent score. No test, simulation, build, synthesis, benchmark or Actions dispatch; **0 hosted / 0 local compute**, LAB_COMPUTE_LOG/FEEDBACK_SCORE_LOG unchanged. Prior local runner blocker not retested (no compute justified), no hosted fallback.
+
+## Precise next work
+1. Qualified private **G0** evidence: machine revision, independent Y1/Y2 stop/hold, trapped hydraulic zones, guards/escape, maintenance and deliberate restart. Only add MECH-01 conditional fields if actual spring/balancer/cover support exists; otherwise qualified N/A. Do not publish proprietary drawings or dangerous test procedures.
+2. Information-separated 2520–25F0 and 4400 evaluator: fresh unseen challenge, learner precommitment before oracle, independent score, transfer/retention. Public practice cases are not scores.
+3. If physical/evaluator gates unchanged, rotate to distinct **4400 safety** mechanism with authoritative original-source information gain, not more 3000 specialization or repetitive synthetic tests. Revisit ENDO ambiguous wording only if manufacturer clarification becomes available; otherwise mark branch source-limited.
+4. No compute unless a concrete unresolved question requires execution; only [self-hosted, openpressbrake] local runner, no hosted fallback. If local dispatch blocked, record blocker and continue documentary work.
+5. Immediately before exit: append UTC end, actual elapsed and overlap to complete LESSON_LOG using fresh SHA; commit and independently verify.
+
+**G0/G1 HOLD.** No personnel-exposed hazardous operation; any separately approved experiment must be isolated/remote with people outside danger zone and residual risk documented.

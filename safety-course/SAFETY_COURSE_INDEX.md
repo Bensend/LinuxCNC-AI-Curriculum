@@ -741,3 +741,7 @@ Read [original UL/OSHA source audit](../research/4400_UL_OSHA_MACHINE_PANEL_MULT
 
 ### 4400-HAL-SNAPSHOT-01 — `save all` omits disconnected input values; `allu` includes them (2026-10-26; NON-GRADUATED)
 [Two-revision source audit](../research/4400_LINUXCNC_HAL_SAVE_ALL_VS_ALLU_UNCONNECTED_INPUT_RESTORATION_AUDIT_2026-10-26.md) and [8 public PAPER cases UNSCORED](4400_HAL_SNAPSHOT_01_EIGHT_RESTORE_FIDELITY_PAPER_CASES_2026-10-26.md). **SOURCE-CONFIRMED/DOC-CONFIRMED** `do_save_cmd` stable/development serializes unconnected input dummy values only in `allu`; neither snapshot proves installed sensor health or machine safety. This distinct change-control extension brings the 01:40Z session to **11 original artifacts / 36 public PAPER cases UNSCORED / 12 desk gates NOT RUN / external evaluator NOT RUN / 0 hosted or local compute**. G0/G1 HOLD.
+
+
+### 4400-HAL-SERVICE-01 — Four-state service-change/rearm synthesis (2026-10-26; NON-GRADUATED)
+[Integrated source-grounded A/B/C/D change-control matrix](4400_HAL_SERVICE_01_FOUR_STATE_CHANGE_CONTROL_AND_REARM_MATRIX_2026-10-26.md) joins unlinked TRUE inputs, stopped callbacks, optional remote edits and incomplete saved snapshots without asserting actual machine motion. **Final session 12 original artifacts / 36 public PAPER cases UNSCORED / 12 documentary gates NOT RUN / independent evaluator NOT RUN / 0 hosted/local compute**. G0/G1 HOLD.

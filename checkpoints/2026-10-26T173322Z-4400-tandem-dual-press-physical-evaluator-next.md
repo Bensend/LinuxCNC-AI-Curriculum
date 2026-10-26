@@ -20,3 +20,7 @@ START_HERE first; mission/level/work selection/source/template/progress; 1000/20
 6. **Session close:** verify published originals/links, append actual UTC end/elapsed/overlap to complete LESSON_LOG via current blob SHA and commit. Keep recurring curriculum enabled.
 
 **No personnel-exposed hazardous operation authorized.**
+
+
+## Later same-session distinct BLACKOUT-01 safety rotation
+After TANDEM-01 source-level product topology reached a selected-machine information-gain stop, rotated to **power-loss visibility and mechanical escape** rather than stopping early. [Original OSHA/EUCHNER/Pilz audit](../research/4400_BLACKOUT_01_OSHA_EUCHNER_EGRESS_LIGHTING_ESCAPE_POWER_LOSS_AUDIT_2026-10-26.md) → [8 public PAPER cases UNSCORED / 8 documentary gates NOT RUN](../safety-course/4400_BLACKOUT_01_VISIBLE_EGRESS_POWER_LOSS_AND_FRESH_RESTART_FIELD_MODULE_2026-10-26.md). OSHA workplace exit-route requirements do not set machine-interior lux/battery duration; EUCHNER selected product can stay spring-locked without power and provides inside tool-free escape distinct from auxiliary service release. **Combined five original engineering artifacts, 20 PUBLIC PAPER cases UNSCORED, 20 documentary gates NOT RUN, one evaluator PREPARED/NOT RUN; no physical/electrical tests, no independent score, zero hosted/local compute.** Selected machine and physical proof UNKNOWN, G0/G1 HOLD. Next priority remains private qualified Stage A A–G and independent evaluator; if unavailable, rotate to a new safety branch next session.

@@ -890,3 +890,7 @@ Read the [visually inspected Rockwell IntelliVAC original manual audit](../resea
 
 ### 4400 TANDEM-01 — two press brakes, one workpiece (2026-10-26)
 Read [original TRUMPF/Accurpress mode-dependent guarding source audit](../research/4400_TANDEM_01_TRUMPF_ACCURPRESS_MODE_DEPENDENT_GUARD_AND_DUAL_RAM_STOP_AUDIT_2026-10-26.md) → [12 UNSCORED public paper cases / 12 NOT-RUN desk gates](4400_TANDEM_01_DUAL_PRESS_MODE_GUARD_STOP_AND_FRESH_START_FIELD_MODULE_2026-10-26.md) → [independent unseen evaluator handoff PREPARED / NOT RUN](../evaluation/4400_TANDEM_01_INDEPENDENT_MODE_SWITCH_AND_SHARED_WORKPIECE_HANDOFF_2026-10-26.md). OEM product descriptions establish that real tandem/stand-alone modes change the physical barrier and protective-device topology, **not** the selected OpenPressBrake design, machine PL/SIL or physical stop/hold. G0/G1 HOLD.
+
+
+### 4400 BLACKOUT-01 — emergency egress visibility, inside escape and power restoration (2026-10-26)
+[OSHA/EUCHNER/Pilz original scoped audit](../research/4400_BLACKOUT_01_OSHA_EUCHNER_EGRESS_LIGHTING_ESCAPE_POWER_LOSS_AUDIT_2026-10-26.md) → [8 UNSCORED public paper cases / 8 NOT-RUN desk gates](4400_BLACKOUT_01_VISIBLE_EGRESS_POWER_LOSS_AND_FRESH_RESTART_FIELD_MODULE_2026-10-26.md). OSHA exit-route lighting is not a universal cell-interior lux specification; spring lock may remain locked without power; inside mechanical escape, visible path, gravity hold and fresh start require separate proof. G0/G1 HOLD.

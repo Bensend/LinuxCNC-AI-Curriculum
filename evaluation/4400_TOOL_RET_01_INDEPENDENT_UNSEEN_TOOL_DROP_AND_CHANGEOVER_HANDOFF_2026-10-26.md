@@ -1,0 +1,10 @@
+# 4400 TOOL-RET-01 — independent unseen tool-retention and safe-changeover handoff
+**PREPARED / NOT RUN | 2026-10-26 | Public evaluator instructions only — NO hidden answers**
+
+The evaluator receives the [OEM/OSHA source audit](../research/4400_TOOL_RET_01_WILA_FORCE_LOCKED_SELF_LOCKING_SAFETY_CLICK_E2M_AND_LOTO_SOURCE_AUDIT_2026-10-26.md), [public twelve-case field module](../safety-course/4400_TOOL_RET_01_TOOL_RETENTION_PRESSURE_LOSS_ROLLOUT_AND_FRESH_RESTART_FIELD_MODULE_2026-10-26.md), the repository `evaluation/BLIND_FEEDBACK_PROTOCOL.md`, and the 2520–25F0 release criteria. The evaluator must **independently create a genuinely unseen source-checkable case**, rather than reusing any TOOL-P scenario or exposing a hidden oracle in a learner-readable repository path.
+
+Candidate competency dimensions: distinguish a stationary ram from a captive tool; correctly interpret product-specific force-locked versus form-locked clamp dependencies; recognize unguarded lateral roll-out and segment/adapter mismatches; separate covered servicing from the narrow minor-servicing exception; allocate normal CNC command, diagnostic monitoring, safety-related authority and physical retention; preserve G0/G1 HOLD without machine-specific evidence.
+
+**Immutable learner precommit before reveal:** predicted hazard/outcome, causal mechanism, discriminating documentary evidence, alternatives and falsifier, exact unknowns, no-exposure action, confidence 0–100%, solution time and resources consulted. **Only then** reveal an independently controlled authoritative oracle, score the five protocol dimensions /10, record any miss, design a novel transfer retest and delayed retention. No self-scoring, no fake test, no answer contamination.
+
+**Current status:** evaluator NOT RUN, 12 public practice cases UNSCORED, 12 documentary gates NOT RUN, no machine validation, no external score. `FEEDBACK_SCORE_LOG.md` must remain unchanged until a real valid external result exists. No hosted/local compute. G0/G1 HOLD.

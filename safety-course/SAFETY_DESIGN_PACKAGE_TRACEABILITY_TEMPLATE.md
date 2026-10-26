@@ -1193,3 +1193,10 @@ SICK p49 control switch outside zone/full view; Rockwell FSBM help requires hold
 
 ### 11GO — Source novelty/selection correction (2026-10-26)
 [Repository evidence reconciliation](../research/4400_HYD_HOLD_PRIOR_EVIDENCE_DUPLICATION_RECONCILIATION_AND_SELECTION_RULE_2026-10-26.md) identifies pre-existing 2026-10-23 Parker HAS N/R manual-override finding. **SOURCE-CONFIRMED repository:** a GitHub code-search zero result missed it. **Method correction:** check full index, recent curriculum and research filenames before selecting a supposedly new mechanism; mark revalidation as such. No physical/test evidence or release claim. G0/G1 HOLD.
+
+
+### 11GP — HYD-BB-BS-01 ROSS block-and-bleed vs block-and-stop scope (2026-10-26)
+[Original HBB/HBH OEM comparison](../research/4400_ROSS_HBB_BLOCK_BLEED_VS_HBH_BLOCK_STOP_MONITORING_AND_LOTO_SCOPE_AUDIT_2026-10-26.md), [10 public PAPER cases](4400_HYD_BB_BS_01_TEN_UNSCORED_BLEED_VS_STOP_PAPER_CASES_2026-10-26.md), [four-function matrix](4400_HYD_BB_BS_01_STOP_HOLD_BLEED_MAINTENANCE_FOUR_FUNCTION_COMPARISON_2026-10-26.md). **DOC:** HBB redundant block-and-bleed warns downstream PO check/counterbalance/closed-center can prevent bleed; intended production-integral tasks, full LOTO for maintenance. HBH redundant externally monitored poppet block-and-stop described for vertical holding; model-specific certifications conditional/pending. **BND/ENE/ARC:** separate supply isolation, downstream vent, load retention, personal energy isolation and deliberate restart; ordinary LinuxCNC/FPGA is not safety authority. **PHY/VAL/PT:** no selected machine test or rating, G0/G1 HOLD.
+
+### 11GQ — Conditional Stage B hydraulic evidence handoff (2026-10-26)
+[Ten-field qualified restricted G0 card](4400_OPENPRESSBRAKE_G0_STAGE_B_HYDRAULIC_ONLY_RESTRICTED_EVIDENCE_CARD_2026-10-26.md) opens only after Stage A establishes hydraulic equipment present; collects Y1/Y2 load/valve/pilot/pressure zones, physical support, maintenance/rescue and independent rearm. **INFERENCE** low-friction progressive disclosure, no missing physical evidence converted to PASS. G0/G1 HOLD.

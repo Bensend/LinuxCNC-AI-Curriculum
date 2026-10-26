@@ -29,3 +29,7 @@ A **redacted status-only** record: artifact IDs and revision hashes (not secrets
 
 ## 2026-10-26 first-contact clarification — progressive disclosure
 **This one-page A–G request is Stage A.** Do **not** ask the shop owner/operator to complete every conditional field in the ~99k-character technical intake before first contact. A qualified reviewer first maps installed components, hazard zones and independent physical safety propositions; only then opens applicable conditional sections as **Stage B**. Mark absent components **N/A only with dated as-built evidence**, not from assumption; missing/contradictory essential Y1/Y2 stop/hold, hydraulic isolation, guarding or restart evidence still means **G0 HOLD**. See [source-based intake usability audit](../research/4400_G0_SELECTED_MACHINE_INTAKE_PROGRESSIVE_DISCLOSURE_HUMAN_FACTORS_AUDIT_2026-10-26.md). This is a collection-sequence improvement, **not** a reduction in safety requirements or permission for live testing.
+
+
+## Conditional Stage B pointer — hydraulic only
+If qualified Stage A confirms hydraulic Y1/Y2 or another relevant hydraulic hazard, use the short [ten-field hydraulic Stage B restricted evidence card](4400_OPENPRESSBRAKE_G0_STAGE_B_HYDRAULIC_ONLY_RESTRICTED_EVIDENCE_CARD_2026-10-26.md). It requests **existing** as-built records only and separates hold, bleed, personal isolation and restart. If hydraulic equipment absent, require dated qualified N/A proof. This is not permission for live testing and does not relax G0/G1 HOLD.

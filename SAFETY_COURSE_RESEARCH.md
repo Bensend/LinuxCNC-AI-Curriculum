@@ -722,3 +722,7 @@ After the 03:32Z hydraulic evidence path reached a source-only information-gain 
 
 
 **Same-session process deliverable:** [one-screen G0 status and owner-role board](safety-course/4400_G0_BOARD_01_ONE_SCREEN_RESTRICTED_EVIDENCE_STATUS_TEMPLATE_2026-10-26.md) implements the prior staged-intake human-factors recommendation. This is a reusable **public empty template**, not an OpenPressBrake inspection or G0 release. A–G UNKNOWN, G0/G1 HOLD.
+
+
+### 2026-10-26T05:36Z — PULSE-01 original OEM input-interface fault boundary
+[PSEN opII4H OSSD self-test versus PNOZ m0p input-test-source source audit](research/4400_PILZ_PSEN_OSSD_300US_VS_PNOZ_TEST_OUTPUT_5MS_SCOPE_AUDIT_2026-10-26.md), [learner module](safety-course/4400_PULSE_01_OSSD_RECEIVER_VS_TEST_SOURCE_MODULE_2026-10-26.md), [8 public PAPER cases UNSCORED](safety-course/4400_PULSE_01_EIGHT_UNSCORED_INTERFACE_PAPER_CASES_2026-10-26.md), [8 documentary gates NOT RUN](safety-course/4400_PULSE_01_EIGHT_GATE_DOCUMENTARY_INTERFACE_COMPATIBILITY_REVIEW_2026-10-26.md), [independent evaluator PREPARED/NOT RUN](evaluation/4400_PULSE_01_INDEPENDENT_UNSEEN_INTERFACE_TRANSFER_HANDOFF_2026-10-26.md). **DOC-CONFIRMED** 300 µs OSSD output pulse compatibility versus 5 ms controller test-source output OFF interval for exact Pilz products, not transferable timing settings; test source not a load driver; coding changes response time. **INFERENCE** qualified safety input needed rather than normal LinuxCNC debounce; **UNKNOWN** installed machine, no physical validation or compute. G0/G1 HOLD.

@@ -80,3 +80,8 @@ These are **documentary readiness gates**, not an instruction to perform hazardo
 Create selected-machine `BND/ENE/HAZ/SF/PHY/SRS/AUTH/DEP/HF/ARC/VAL/PT/CHG/RR/UNK` entries **only when real machine evidence exists**. Before then preserve `UNKNOWN`, `NOT RUN`, `HOLD` and avoid invented PL/SIL, stop distances, pressure limits, cable force, diagnostic coverage, proof-test interval or installation approval. Any cable/anchor/guide/firmware/safety-controller change is a potential `CHG` invalidating affected proof.
 
 **G0/G1 HOLD. G2 NOT RUN. G3/G4 NOT AUTHORIZED. G5 HOLD.** No personnel-exposed hazardous operation.
+
+
+## Source addendum — series wiring and non-safety controller tags
+
+A second inspection of the **same Rockwell Lifeline 5 original manual** found that its 432ES I/O-tree diagnostic tags are explicitly **standard, non-safety-rated** (printed p. 10), even though they describe safety-device operation. The manual's p. 11 **OSSD-only series** example is described as usable in functions up to **PLe**, while its **mixed voltage-free-contact series** example has a stated **PLd maximum depending on installation**. This is an exact OEM architecture distinction, **not** a selected machine PL assignment. Disabled electronic keying is designated for troubleshooting only. An apparently healthy HMI diagnostic or enumerated module must not substitute for a qualified safety-function path. See the [source audit addendum](../research/4400_ROPE_PULL_01_ROCKWELL_SCHNEIDER_CABLE_TENSION_RESET_COVERAGE_OEM_AUDIT_2026-10-26.md). No new PAPER case or gate has been scored or executed.

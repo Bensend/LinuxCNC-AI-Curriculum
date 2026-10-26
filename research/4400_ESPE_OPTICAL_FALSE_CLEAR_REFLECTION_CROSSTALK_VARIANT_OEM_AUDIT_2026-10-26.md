@@ -59,3 +59,14 @@ A second, separate hazard path is `curtain correctly detects intrusion -> indepe
 ## Reopen condition
 
 Exact selected-device type plate, current OEM manual/revision, as-built layout and reflective material inventory, adjacent emitter/mirror layout, safety function/stop/hold architecture, qualified no-exposure test plan and independent physical witnesses. Until then this is a source-grounded teaching example, not an installation design or release.
+
+
+## Same-session source extension — do not merge sensor outputs or 'filter away' safety demand
+
+**DOC-CONFIRMED, Banner SLC4 Rev. E, printed p.19 §4.5.4:** manufacturer **prohibits paralleling OSSD outputs from multiple emitter/receiver pairs or connecting multiple pairs to one single interface device**. This is a distinct *electrical aggregation* hazard from optical crosstalk. Do not extrapolate to all purpose-designed safety-controller multi-input architectures; the safe path is separately evaluated, manufacturer-compatible safety inputs with an explicitly reviewed logic combination, not ad hoc conductor splicing. [Original manual](https://info.bannerengineering.com/cs/groups/public/documents/literature/204371.pdf).
+
+**DOC-CONFIRMED, Rockwell Studio 5000 Logix Designer online help, v38.03, Light Curtain (LC) instruction**, https://www.rockwellautomation.com/en-us/docs/studio-5000-logix-designer/38-03/contents-ditamap/instruction-set/safety-instructions/light-curtain--lc-.html : OSSD diagnostic test pulses can require filtering by a compatible **safety-rated input module or safety-controller instruction**; the manufacturer explicitly states that longer filtering adds to safety reaction time. It distinguishes safety task behavior from normal machine control. This is **not** permission to use a normal LinuxCNC/HAL filter as a personnel-safety function or to arbitrarily suppress persistent protective demand. Exact filter, OSSD pulse and stop-budget values are product/configuration specific; no values selected here.
+
+**DOC-CONFIRMED only from manufacturer-indexed excerpt, NOT direct PDF inspection:** Rockwell 450L-UM001 original manual is approximately 55 MB and could not be directly opened in this research environment; indexed OEM excerpt says beam coding helps avoid adjacent-curtain interference but increases response time. Preserve this as **OEM-indexed, lower inspection confidence** until direct page/edition can be examined. Do not calculate or apply any 450L response time from this excerpt.
+
+**INFERENCE / change control:** a legitimate crosstalk mitigation (beam coding, added input filtering, rearrangement or controller aggregation) can alter sensing geometry, diagnostic behavior, reaction time or restart ownership. Treat it as an upstream `CHG` that reopens optical coverage, independently witnessed physical stop distance and deliberate restart. This is not evidence of installed OpenPressBrake hardware or any validated stopping time.

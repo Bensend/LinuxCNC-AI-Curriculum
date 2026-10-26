@@ -1,0 +1,25 @@
+# 4400 HYD-AIR-01 — aeration is not vapor cavitation, and normal control can become erratic
+**2026-10-26 | documentary source audit / NON-GRADUATED / G0/G1 HOLD**
+
+## Selection and predecessor check
+Full canonical [safety-course index](../safety-course/SAFETY_COURSE_INDEX.md) was directly searched for `cavitation`, `aeration`, `air entrain`, `foaming`, `water hammer` and `suction strainer`: **no indexed dedicated mechanism**. Prior hydraulic FILT-01, ACC-GAS, valve override, pressure zones, hose and load holding remain valid predecessors. **NEW causal mechanism** here is gas/vapor in working fluid and erratic actuation; not another generic "pressure gauge zero" lesson.
+
+## Original manufacturer evidence
+1. **DOC-CONFIRMED direct original OEM article:** [Bosch Rexroth industrial-hydraulics field-engineer article, 2026-08-14 (Hungarian)](https://www.boschrexroth.com/hu/hu/blog/kavitacio/), numbered myths 1–6, especially #1–4 and #5. It explicitly separates **vapor cavitation** (local pressure falls enough to form vapor cavities that collapse) from **aeration** (external air enters fluid, e.g. suction seal, low reservoir level or return design) and from dissolved gas coming out of solution. Noise alone is not a reliable discriminator; low absolute suction pressure, restrictive inlet/filter, cold viscous oil and valve/cylinder local pressure drops matter. This is field guidance, not a selected-machine proof.
+2. **DOC-CONFIRMED direct original OEM manual:** [Parker Helac T20 Service & Repair Manual HY34-1140](https://www.parker.com/content/dam/Parker-com/Literature/Industrial-Cylinder/Helac/PDF-files/Helac_Series_T20_Service_Manual_HY34-1140.pdf), printed p.8 (PDF p.7) troubleshooting: **air in actuator** is listed for **erratic or unresponsive operation** and for failure to maintain a selected position; service section points to a product-specific bleeding procedure. This is a *rotary* actuator, not OpenPressBrake Y1/Y2; its service steps must **not** be applied to another cylinder.
+3. **DOC-CONFIRMED indexed-only OEM corroboration:** [Danfoss Series 45 J Frame service manual AX152886481532en-000306](https://assets.danfoss.com/documents/latest/355717/AX152886481532en-000306.pdf), troubleshooting page 21 indexed: air causes noisy/erratic control, low reservoir fluid can cause cavitation, poor inlet pressure/vacuum gives erratic/low flow, cold viscous fluid can impair control. Direct PDF opening timed out; no page-image inspection claim. Its pump topology is not the selected press-brake pump.
+
+## Fault discrimination and authority
+| Observation | Plausible causes | Evidence required | Unsafe shortcut to reject |
+|---|---|---|---|
+| Noisy pump | vapor cavitation, external air, cold viscosity, mechanical coupling | selected OEM pump/inlet limits, suction seal/level/filter provenance, condition data | "It sounds like gravel, replace pump" |
+| Erratic/lagging actuator | air in fluid/actuator, valve fault, relief setting, load/friction, control | qualified hydraulic schematic, exact OEM troubleshooting, safe isolated inspection | "Increase LinuxCNC PID or raise pressure until smooth" |
+| Quiet after warming | cold-start inlet restriction may remain | qualified cold-start envelope, fluid/viscosity and service history | "Noise went away, no defect" |
+| HMI pressure and command normal | local vapor/gas/valve behavior and retained gravity load remain unproven | independent selected stop/hold/pressure-zone and physical witness | "Pressure gauge and encoder agree, so safe" |
+
+**INFERENCE:** entrained gas can change effective fluid stiffness and normal motion response; pump damage or erratic actuator motion can affect stopping/holding requirements. This is a *hazard hypothesis*, **not** evidence of actual OpenPressBrake ram acceleration, valve fail state, stop time, PL/SIL, pressure, safe velocity or Y1/Y2 gravity hold. Normal LinuxCNC/FPGA feedback/PID may diagnose, but must not acquire independent personnel-safety authority.
+
+## Maintenance and human factors
+Avoid a diagnosis that encourages a technician to crack a pressurized fitting, bleed an elevated cylinder without positive support, reach around guards, raise pressure or defeat an alarm. First isolate all applicable sources, mechanically restrain loads, verify pressure zones and consult exact selected OEM procedures with qualified personnel. Make sight glasses, suction seals, filter service and correct fluid identification accessible without removing point-of-operation protection. Return from service requires deliberate independent safety revalidation and fresh start.
+
+**SOURCE-CONFIRMED new LinuxCNC:** none. **TEST-CONFIRMED:** none. **COMMUNITY-REPORTED:** none relied on. **UNKNOWN:** selected machine pump/actuator, fluid, cavitation/aeration diagnosis, physical stop/hold and independent evaluation. No software simulation can resolve actual hydraulic fluid condition or ram hold; no lab justified. [Field module](../safety-course/4400_HYD_AIR_01_CAVITATION_VS_AERATION_SAFE_SERVICE_FIELD_CARD_2026-10-26.md). **G0/G1 HOLD; no personnel-exposed hazardous operation.**

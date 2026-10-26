@@ -51,3 +51,6 @@ Use manufacturer-approved spacers and nonmagnetic fasteners where specified, fix
 
 ## Transfer and release
 A mill enclosure, lathe chuck guard, robot cell door, plasma hood or press-brake rear guard may have very different motion and stored-energy hazards. This card addresses only *guard sensing*; physical stopping, gravity holding, LOTO, trapped-person protection and deliberate restart must be validated independently. The exact installed equipment is **UNKNOWN**. OEM **DOC-CONFIRMED**, no new LinuxCNC SOURCE-CONFIRMED, TEST-CONFIRMED none, COMMUNITY-REPORTED none, engineering consequences INFERENCE. Eight paper cases UNSCORED, eight gates NOT RUN, external evaluator NOT RUN. **G0/G1 HOLD; no personnel-exposed hazardous operation.** No Actions, tests or compute.
+
+
+**Indicator-polarity trap:** The examined Schmersal BNS 33 **optional LED is documented as illuminated when the guard is open**, and its manual explicitly rejects the LED alone as proof of correct sensor adjustment. A generic 'green/ON means guard closed' assumption is therefore invalid even before considering mounting steel, swarf or safety-controller wiring. Its manufacturer also warns that series-connected sensor architectures may reduce fault detection. Use the exact OEM and selected receiver documentation; do not invent a universal LED polarity or PL claim.

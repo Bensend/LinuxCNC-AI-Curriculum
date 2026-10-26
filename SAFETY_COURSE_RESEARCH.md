@@ -673,3 +673,6 @@ New [OSHA group/shift lockout audit](research/4400_OSHA_GROUP_LOTO_SHIFT_CHANGE_
 
 
 **Same-session HAL-SNAPSHOT-01 source extension (2026-10-26):** [Two-revision `save all` vs `allu` source trace](research/4400_LINUXCNC_HAL_SAVE_ALL_VS_ALLU_UNCONNECTED_INPUT_RESTORATION_AUDIT_2026-10-26.md) and [8 public PAPER cases](safety-course/4400_HAL_SNAPSHOT_01_EIGHT_RESTORE_FIDELITY_PAPER_CASES_2026-10-26.md). **SOURCE-CONFIRMED** `all` omits unconnected input dummy `setp` serialization, `allu` includes it; neither establishes sensor health, physical safe state or restart authorization. **Final 11 original artifacts / 36 public PAPER cases UNSCORED / 12 G0 desk gates NOT RUN / independent evaluator NOT RUN**, no hosted/local compute, G0/G1 HOLD.
+
+
+**HAL-SERVICE-01 final same-session synthesis:** [Four-state service-change and fresh-rearm matrix](safety-course/4400_HAL_SERVICE_01_FOUR_STATE_CHANGE_CONTROL_AND_REARM_MATRIX_2026-10-26.md) integrates source-confirmed HAL unlink, scheduler stop, optional remote edit and snapshot omissions with an independent physical-safety authority and practical low-friction service recovery. **Final 12 original artifacts, 36 public PAPER cases UNSCORED, 12 documentary gates NOT RUN, independent evaluator NOT RUN, 0 hosted/local compute, G0/G1 HOLD.** No selected-machine physical claim.

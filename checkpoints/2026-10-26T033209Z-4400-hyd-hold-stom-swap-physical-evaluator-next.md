@@ -26,3 +26,9 @@ Read START_HERE first; MASTER_MISSION, LEVEL_ORDER, WORK_SELECTION_POLICY, CURRI
 5. Before exit, safe append full LESSON_LOG using fresh blob SHA; record UTC end, elapsed and overlap; commit and verify.
 
 **G0/G1 HOLD.** No personnel-exposed hazardous operation authorized. Experimental work only if separately qualified, isolated/remote with people outside hazard zone and residual risk documented.
+
+
+## Same-session extension: HYD-LOX-01 and source novelty correction
+- [ROSS manual hydraulic L-O-X source audit](../research/4400_ROSS_HYDRAULIC_LOX_T1_T2_BLEED_VS_CYLINDER_HOLD_ISOLATION_SOURCE_AUDIT_2026-10-26.md), [8 more unscored paper cases](../safety-course/4400_HYD_LOX_01_EIGHT_NO_ENERGY_BLEED_VS_HOLD_PAPER_CASES_2026-10-26.md), [hold/bleed matrix](../safety-course/4400_HYD_LOX_01_DUAL_OBJECTIVE_HOLD_AND_DEPRESSURIZE_DECISION_MATRIX_2026-10-26.md). **DOC-CONFIRMED** manual OFF-only lock, T1 downstream bleed, T2 pump bypass, optional Port A, no automatic safety shutoff. **INFERENCE** gravity support and pressure-release conflict. Actual selected circuit UNKNOWN; no physical test.
+- [Novelty correction](../research/4400_HYD_HOLD_PRIOR_EVIDENCE_DUPLICATION_RECONCILIATION_AND_SELECTION_RULE_2026-10-26.md): Parker HAS N/R/manual override was already documented 2026-10-23. The new Parker HAS audit is a reinspection/extension, not a new discovery. Preserve prior source evidence and check index/research filenames before new branch selection.
+- **Final 13 new files (one revalidation and one process correction), 28 PAPER cases UNSCORED, 12 documentary gates NOT RUN, external evaluator NOT RUN, 0 hosted/local compute, G0/G1 HOLD.** This hydraulic source branch now bounded; next qualified private G0 and independent evaluator, else rotate to distinct 4400 safety branch. No Actions dispatch, physical test or machine release. UTC end/elapsed/overlap must still be safely appended immediately before exit.

@@ -35,3 +35,6 @@ For a gravity-loaded axis, a normally closed electrical output, stopped pump, ze
 
 ## Next evidence and no-go
 G0 qualified private intake: as-built Y1/Y2 cylinder/valve model codes, valve physical locations, pilot/drain connections, manual release positions, mechanical supports, maintenance isolation and independent stop/hold witnesses. If missing, mark **UNKNOWN** and retain **G0/G1 HOLD**; do not permit people in the hazard zone. No hosted or local compute used.
+
+## Provenance correction — 2026-10-26
+The Parker HAS N/R/manual-override mechanism was already [DOC-CONFIRMED in this repository on 2026-10-23](4400_PARKER_HAS_LOAD_HOLD_OVERRIDE_CODE_AND_MANIFOLD_ORIENTATION_2026-10-23.md). This document independently rechecks and extends the original OEM evidence (trapped pressure, thermal relief, cross-product synthesis); it **must not** be counted as a new discovery of the N/R mechanism. See [reconciliation and corrected source-selection rule](4400_HYD_HOLD_PRIOR_EVIDENCE_DUPLICATION_RECONCILIATION_AND_SELECTION_RULE_2026-10-26.md). The underlying product facts remain DOC-CONFIRMED; selected-machine status UNKNOWN.

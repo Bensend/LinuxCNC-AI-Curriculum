@@ -1,0 +1,33 @@
+# 4400 safety continuation — HOSE-ROUTE-01 / FLUID-FIRE-01
+
+**Session UTC start:** 2026-10-26T13:54:47.456653451Z, captured before substantive work and [durably recorded](2026-10-26T135447Z-session-start-safety.md). **End/elapsed/overlap:** immediately before ending append to the **complete** LESSON_LOG.md with its then-current blob SHA; do not replace a partial/truncated log.
+
+## Authoritative state and governance
+Read START_HERE first, MASTER_MISSION, LEVEL_ORDER, WORK_SELECTION_POLICY, CURRICULUM, SOURCE_POLICY, MODULE_TEMPLATE, PROGRESS, evaluation BLIND_FEEDBACK_PROTOCOL and FEEDBACK_SCORE_LOG, LAB_COMPUTE_LOG, current 13:07Z optical/magnetic checkpoint, safety index/research and cumulative design package. **1000/2000/F02/3000 GRADUATED/CLOSED.** Active **4000/4400 SAFETY COURSE**, routine controller-board work belongs to a separate automation. **2520–25F0 external information-separated competency OPEN**; do not self-score or reveal hidden keys. **G0/G1 HOLD; G2 NOT RUN; G3/G4 NOT AUTHORIZED; G5 HOLD**. No private as-built Stage A A–G OpenPressBrake evidence has arrived.
+
+## Original artifacts — independently retrieved from main
+1. [HOSE-ROUTE-01 direct Gates 2025 original OEM PDF / OSHA source audit](../research/4400_HOSE_ROUTE_01_GATES_2025_HOSE_ASSEMBLY_ROUTING_CLAMP_TWIST_SERVICE_PROVENANCE_AUDIT_2026-10-26.md).
+2. [HOSE-ROUTE-01 practical serviceability card — 12 public PAPER cases UNSCORED, eight desk gates NOT RUN](../safety-course/4400_HOSE_ROUTE_01_TWELVE_TECHNICIAN_CASES_EIGHT_DOCUMENTARY_GATES_AND_SERVICE_DESIGN_CARD_2026-10-26.md).
+3. [FLUID-FIRE-01 direct HSE RR1210 / Quaker OEM exact-fluid source audit](../research/4400_FLUID_FIRE_01_HSE_MISTS2_FIRE_RESISTANT_HYDRAULIC_FLUID_AND_SEAL_COMPATIBILITY_AUDIT_2026-10-26.md).
+4. [FLUID-FIRE-01 practical aerosol/fire/fluid-conversion card — eight public PAPER cases UNSCORED, eight desk gates NOT RUN](../safety-course/4400_FLUID_FIRE_01_EIGHT_UNSCORED_AEROSOL_IGNITION_FLUID_CHANGE_CASES_AND_GATES_2026-10-26.md).
+
+**Integrity check:** four originals independently fetched nonempty from main and indexed; eight relative Markdown references in originals resolved to **five distinct valid targets**, zero failures. This is not a full-repository link audit. Updated CURRICULUM, PROGRESS, SAFETY_COURSE_RESEARCH, safety learner index and cumulative Safety Design Package **§§11HL–11HM**. Prior 11HJ–11HK and all older evidence preserved.
+
+## Source and novelty discipline
+- **HOSE-ROUTE DOC-CONFIRMED:** Gates *Safe Hydraulics Pocket Guide* ©2025 original 32-page PDF (printed pp. 3, 6, 14–18, 23–26; p. 14 and p. 16 diagrams visually inspected) distinguishes incompatible hose/coupling/crimp, abrasion, oversized clamps, twisting, tight bends, heat, pressure-driven length change and inspection access. Gates generic **three-month stationary inspection suggestion is not a press-brake mandate**. OSHA 1910.147 requires covered servicing energy isolation, residual energy and verification beyond Gates' simplified checklist. **Novelty:** preventing failure by correct routing/maintenance ergonomics, not rediscovering prior 2026-10-24 pinhole and hose-burst or 2026-10-25 load-hold.
+- **FLUID-FIRE DOC-CONFIRMED:** HSE RR1210 original **2024** 66-page research report on diesel oil-mist ignition (2025-09-17 summary page); experimental ignition observed up to facility maximum **4.75 m** under its **specific downward diesel release**, **not** a hydraulic-oil or OpenPressBrake clearance. Fine mist can ignite below bulk flashpoint. Quaker exact **822-300 CM** ester long-term seal exclusions and **419-R** water-glycol no-mixing warning; exact product families not interchangeable. **Novelty:** aerosol/fire consequence and fluid substitution, not duplicate hydraulic leak/injection.
+- **INFERENCE:** ergonomic guard restoration, keyed replacement, fluid conversion invalidates seal/valve/stop/hold evidence and requires change control. **SOURCE-CONFIRMED new LinuxCNC:** none; **TEST-CONFIRMED curriculum:** none; **COMMUNITY-REPORTED:** none used. **UNKNOWN:** actual OpenPressBrake fluid, hose route, Y1/Y2 pressure/stop/hold, fire/ignition controls, guards, PL/SIL and external evaluator.
+- **Total:** four original artifacts, **20 public PAPER cases UNSCORED**, **16 documentary gates NOT RUN**; no independent evaluator performed. No experimental ignition, fluid conversion, energized, pressure or machine test.
+
+## Local-compute rule
+**0 GitHub-hosted runner minutes; 0 local lab compute minutes.** No Actions dispatch, simulation, build, synthesis, benchmark, test suite or physical test. Existing [self-hosted, openpressbrake] runner-access blocker not retested because **no question-driven compute was justified**; never fall back to GitHub-hosted runners. LAB_COMPUTE_LOG and FEEDBACK_SCORE_LOG unchanged because there is no new authoritative runtime or independent score.
+
+## Precise next work
+1. **Primary:** qualified **private** OpenPressBrake Stage A A–G as-built evidence: independent Y1/Y2 physical stop, gravity hold, hydraulic energy/pressure zones and LOTO, guarding/escape, maintenance access and deliberate restart. Conditional Stage B hose-route and fluid/ignition-source details **only after** Stage A establishes relevance; do not publish proprietary drawings.
+2. **Second:** information-separated external/fresh 2520–25F0 and 4400 competency evaluation. Public cases are UNSCORED; never inspect hidden expected results or self-certify.
+3. **If external gates unchanged:** rotate to a **distinct**, high-information-gain 4400 safety source mechanism after checking the complete index and prior research filenames for duplication. Both new branches have coherent source-only information-gain stops without selected machine or evaluator; do not manufacture more paper variants merely to fill time.
+4. Freeze and run a lab **only** for a concrete unresolved question not answerable by authoritative source; dispatch exclusively to local [self-hosted, openpressbrake], and if blocked continue source/documentation without hosted minutes. Independent personnel-safety authority never resides solely in ordinary LinuxCNC or FPGA.
+5. **Release:** G0/G1 HOLD; no personnel-exposed hazardous operation. Isolated/remote experimental operation requires separately qualified control of residual hazards.
+
+## Short-session continuation
+After preventive hose routing source and service module, rotated in the **same invocation** to distinct HSE oil-mist fire and exact-fluid material-compatibility source. Both reached coherent documentary stops. No unsafe tests were necessary. Recurring curriculum remains enabled.

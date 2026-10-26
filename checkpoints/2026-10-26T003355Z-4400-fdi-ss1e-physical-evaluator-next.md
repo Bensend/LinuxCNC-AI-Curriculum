@@ -26,3 +26,6 @@ CURRICULUM, PROGRESS, SAFETY_COURSE_RESEARCH, learner index, cumulative Safety D
 5. Immediately before end: append full LESSON_LOG with actual UTC end, elapsed and overlap using current blob SHA, commit, preserve hourly task.
 
 **G0/G1 HOLD.** If minimum safe-to-operate threshold not met, no personnel-exposed operation. Any experimental operation must be independently authorized, isolated/remote with people excluded and residual risk documented.
+
+## Same-session SS2E-01 extension (information-gain continuation)
+[Original Siemens S210 external SS2E / p9553 / delayed SOS / retained-torque audit](../research/4400_SIEMENS_S210_SS2E_EXTERNAL_DECELERATION_SOS_TORQUE_RETENTION_SOURCE_AUDIT_2026-10-26.md) and [8 additional public PAPER cases UNSCORED](../safety-course/4400_SS2E_01_EIGHT_SOS_EXTERNAL_STOP_AND_MAINTENANCE_PAPER_CASES_2026-10-26.md). **DOC-CONFIRMED** §7.4.5.3 pp.229–231: SS2E has external setpoint authority and no SBR/SAM/standstill monitoring during p9553; subsequent SOS is monitored standstill with torque retained, not SS1E's STO. **Final session 8 originals / 28 PAPER cases UNSCORED / 12 desk gates NOT RUN / evaluator NOT RUN**; cumulative package §11FX, selected intake, index and course plan updated. No compute, physical tests or release. Same physical/evaluator/runner next-work gates above remain active.

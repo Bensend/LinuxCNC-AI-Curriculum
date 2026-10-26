@@ -689,3 +689,6 @@ New [OSHA group/shift lockout audit](research/4400_OSHA_GROUP_LOTO_SHIFT_CHANGE_
 
 
 **SLACK-01 distinct original-source branch:** [Autoquip FLM/FLMC Rev.1 temporary commissioning jumper and FL4M v3.4 mechanical arrest audit](research/4400_AUTOQUIP_SLACK_CHAIN_TEMPORARY_BYPASS_AND_FL4M_MECHANICAL_CAM_SOURCE_AUDIT_2026-10-26.md) plus [practical eight-prompt unscored module](safety-course/4400_SLACK_01_TEMPORARY_SERVICE_BYPASS_PHYSICAL_ARREST_AND_REARM_MODULE_2026-10-26.md). Manufacturer-sanctioned recovery exception is not authorization to leave a bypass; manufacturer specifies removal, and distinct FL4M has physical wedging cams with structural/wear requirements separate from motor switches. **DOC-CONFIRMED OEM, INFERENCE retained-bypass fault; no tests, PL/SIL, selected machine, evaluator or compute.** Final 10 original artifacts / 12 standalone + 8 embedded PAPER prompts UNSCORED; G0/G1 HOLD.
+
+
+**SLACK-01 documentary gate:** [eight-gate temporary-exception return-to-normal worksheet](safety-course/4400_SLACK_01_EIGHT_GATE_TEMPORARY_EXCEPTION_RETURN_TO_NORMAL_DESK_REVIEW_2026-10-26.md) BLANK/NOT RUN, not a bypass/test procedure. Final 11 originals / 12 standalone + 8 embedded PAPER prompts UNSCORED / eight desk gates NOT RUN / external evaluator NOT RUN / G0/G1 HOLD / 0 hosted/local compute.

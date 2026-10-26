@@ -1,0 +1,28 @@
+# 4400 safety continuation — ENABLE-01 and DC-LINK-02 physical/evaluator next
+**UTC start:** 2026-10-26T19:33:15.840Z, durably committed [before research](2026-10-26T193315Z-session-start-safety.md). **End/elapsed/overlap:** final safe-append row in `LESSON_LOG.md` after durable work; prior curriculum ended 2026-10-26T18:43:25.922Z, ~49.83 min before start, no known same-curriculum overlap.
+
+## Governance and unchanged release
+START_HERE first; read MASTER_MISSION, LEVEL_ORDER, WORK_SELECTION_POLICY, CURRICULUM, SOURCE_POLICY, MODULE_TEMPLATE, PROGRESS, blind protocol/score, lab ledger, 18:34Z latest checkpoint, safety syllabus/index and G0 Stage A request. **1000/2000/F02/3000 GRADUATED/CLOSED; 4000/4400 safety active.** No qualified private Stage A A–G OpenPressBrake evidence or independent evaluator result. **G0/G1 HOLD, G2 NOT RUN, G3/G4 NOT AUTHORIZED, G5 HOLD.** No personnel-exposed hazardous operation.
+
+## Six original artifacts; two distinct information-gain branches
+1. [ENABLE-01 exact EUCHNER/IDEC manufacturer audit](../research/4400_ENABLE_01_EUCHNER_IDEC_THREE_POSITION_TEACH_ENABLE_RELEASE_REGRIP_SOURCE_AUDIT_2026-10-26.md): direct EUCHNER doc **2092781-09-07/26**, IDEC HE3B page. **DOC-CONFIRMED exact OEM:** 1 OFF/2 ON/3 OFF, 3→1 no transient enable; **ZSA1 two-stage specifically forbidden in safety circuits**; exact equivalent/antivalent dual-channel receiver and full-release fault recovery; OEM 3-s discrepancy example **not** universal; grip not separate motion start or independent stop/hold.
+2. [ENABLE-01 ten PUBLIC PAPER cases / 12 documentary gates](../safety-course/4400_ENABLE_01_THREE_POSITION_GRIP_PANIC_RELEASE_REGRIP_AND_MODE_FIELD_MODULE_2026-10-26.md): all **UNSCORED / NOT RUN**.
+3. [ENABLE-01 independent unseen evaluator handoff](../evaluation/4400_ENABLE_01_INDEPENDENT_UNSEEN_SETUP_PANIC_REGRIP_HANDOFF_2026-10-26.md): **PREPARED / NOT RUN**, no hidden oracle or score.
+4. [Conditional ENABLE-01 Stage B ten-field restricted evidence card](../safety-course/4400_OPENPRESSBRAKE_G0_STAGE_B_ENABLE_SWITCH_ONLY_RESTRICTED_EVIDENCE_CARD_2026-10-26.md): **10 UNKNOWN**, only if Stage A proves equipment; no private data published.
+5. [DC-LINK-02 Rockwell/OSHA electrical stored-energy audit](../research/4400_DC_LINK_02_STO_DARK_DISPLAY_VS_CAPACITOR_ISOLATION_AND_LOTO_OEM_AUDIT_2026-10-26.md): **DOC-CONFIRMED direct Rockwell PowerFlex 400 22C-SB003A-EN-P** five-minute wait **and** measured zero DC bus; dark LEDs/LCD explicitly insufficient. Rockwell 520 three-minute and ABB five-minute examples **manufacturer-indexed only** (large PDFs blocked), not universal. Siemens indexed STO DC link remains charged; OSHA 1910.147 and 2012 LED-only interpretation direct. **STO ≠ electrical isolation ≠ zero capacitor voltage ≠ gravity hold**.
+6. [DC-LINK-02 eight PUBLIC PAPER cases / eight documentary gates](../safety-course/4400_DC_LINK_02_DARK_HMI_STO_CAPACITOR_LOTO_FIELD_CARD_2026-10-26.md): **UNSCORED / NOT RUN**.
+
+**Totals:** six original artifacts, **18 public PAPER scenarios UNSCORED**, **20 documentary gates NOT RUN**, **10 conditional Stage B fields UNKNOWN**, one evaluator handoff PREPARED/NOT RUN. **SOURCE-CONFIRMED new LinuxCNC:** none; **TEST-CONFIRMED:** none; **COMMUNITY-REPORTED:** none relied on; **INFERENCE:** mode/stale jog/rearm and all-source isolation/ergonomics; **UNKNOWN:** actual selected device, receiver, drive, hydraulic Y1/Y2 stop/hold, guarding, pressure isolation, safe speed, physical test and PL/SIL. No test/compute/evaluator results.
+
+## Index/verification
+Updated `CURRICULUM.md`, `PROGRESS.md`, `SAFETY_COURSE_RESEARCH.md`, `safety-course/SAFETY_COURSE_INDEX.md`, and cumulative `safety-course/SAFETY_DESIGN_PACKAGE_TRACEABILITY_TEMPLATE.md` through **§§11HY–11HZ**. Original first five artifacts independently re-fetched; their four distinct internal link targets resolved. Conditional Stage B card and checkpoint to be re-fetched for verification. **No GitHub-hosted runners or minutes; no local-runner dispatch, physical tests, simulations, builds, synthesis or benchmarks.** LAB_COMPUTE_LOG and FEEDBACK_SCORE_LOG unchanged because no new authoritative runtime or score.
+
+## Precise next work
+1. **Highest priority, qualified private Stage A A–G** selected OpenPressBrake as-built identity/hazards, independent safety controller/final elements, Y1/Y2 stop/hold, hydraulic pressure/energy zones, guarding, maintenance and fresh restart; keep actual drawings/wiring private. Redacted status only in public repository. G0/G1 HOLD until coherent independent evidence.
+2. **Independent unseen 2520–25F0 or ENABLE-01 evaluation** with immutable learner precommit, withheld oracle, independent scoring, novel transfer and delayed retention; no self-scoring or hidden-answer leakage.
+3. **Conditional Stage B** enabling switch only if qualified Stage A confirms actual pendant/teach mode. Drive/DC-link follow-up only if Stage A identifies actual VFD, motor or DC bus; exact OEM version/qualified electrical verification, not generic timing.
+4. Both public OEM source branches now have documentary information-gain stop. Rotate to a **distinct unaddressed 4400 safety module** after novelty scan if external evidence remains unavailable; do not manufacture 3000 work or routine board design.
+5. **Compute:** no compute question frozen. If one later becomes justified, use only self-hosted `[self-hosted, openpressbrake]`; never GitHub-hosted runners. Record actual job runtime only if authoritative.
+6. **Final log:** fetch the complete `LESSON_LOG.md`, safe append using current blob SHA, actual UTC end, elapsed minutes and overlap; commit and verify before ending.
+
+**No personnel-exposed hazardous operation authorized.**

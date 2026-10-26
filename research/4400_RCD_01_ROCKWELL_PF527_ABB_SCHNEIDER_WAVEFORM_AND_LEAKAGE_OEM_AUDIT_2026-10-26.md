@@ -31,3 +31,6 @@ Make the compliant choice easy: label each drive with its **approved RCD/RCM com
 
 ## What is not established
 **SOURCE-CONFIRMED new LinuxCNC:** none. **TEST-CONFIRMED:** none; no energized test or machine witness. **COMMUNITY-REPORTED:** none relied upon. **UNKNOWN:** OpenPressBrake inverter/drive existence and models, site supply, PE, RCD type, actual leakage, wiring rules/applicability, stop/hold response, PL/SIL, and independent evaluation. G0/G1 HOLD; no personnel-exposed hazardous operation. No compute justified; do not dispatch Actions.
+
+## Additional directly inspected ABB discriminator — TEST button scope
+ABB 2022 white paper §6.2 (PDF p.16) describes the front test button as an *internally simulated residual current* that exercises the RCD sensing/tripping mechanism. **DOC-CONFIRMED:** the button checks that internal path under its test conditions. **INFERENCE:** it does not independently measure the actual installation's PE continuity, waveform sensitivity under a smooth-DC fault, fault-loop impedance, selected drive's RCD compatibility or ram holding. Do not substitute a successful button press for any of those independent acceptance witnesses. ABB's suggested periodic button-test interval is specific guidance in an Australia/NZ-oriented paper, not a universal site inspection interval.

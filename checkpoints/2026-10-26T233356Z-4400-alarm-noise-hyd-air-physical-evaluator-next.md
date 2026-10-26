@@ -23,3 +23,6 @@ All seven original files independently retrieved and their **16 relative Markdow
 5. Immediately before ending, append actual UTC end/elapsed/overlap to **full SHA-verified** LESSON_LOG, commit and independently verify. Keep recurring curriculum enabled.
 
 **G0/G1 HOLD; no personnel-exposed hazardous operation.**
+
+## Same-session crosscut addendum
+[ALARM-NOISE × HYD-AIR acoustic masking/diagnostic crosscut](../safety-course/4400_ALARM_NOISE_HYD_AIR_CROSSCUT_NOISE_DIAGNOSTIC_VS_WARNING_PROOF_REVIEW_2026-10-26.md) records a plausible combined hydraulic-noise → normal-control deviation + warning masking pathway, **INFERENCE only**, not measured or a new competency. **Final eight original artifacts**, 14 public paper cases UNSCORED, 18 documentary gates NOT RUN, one evaluator PREPARED/NOT RUN; zero hosted/local compute, G0/G1 HOLD. Original 7-file/16-link integrity check preceded this crosscut; crosscut and checkpoint links require final independent check. End/elapsed/overlap still to be appended in LESSON_LOG immediately before finish.

@@ -913,3 +913,6 @@ Read [original WILA/Wilson/OSHA source audit](../research/4400_TOOL_RET_01_WILA_
 
 ### 4400 DC-LINK-02 — drive STO and dark display do not prove electrical isolation (2026-10-26)
 [Rockwell PowerFlex 400 direct OEM PDF, PowerFlex 520/ABB/Siemens indexed limits and OSHA 1910.147 audit](../research/4400_DC_LINK_02_STO_DARK_DISPLAY_VS_CAPACITOR_ISOLATION_AND_LOTO_OEM_AUDIT_2026-10-26.md) → [8 PUBLIC PAPER cases UNSCORED / 8 desk gates NOT RUN](4400_DC_LINK_02_DARK_HMI_STO_CAPACITOR_LOTO_FIELD_CARD_2026-10-26.md). **DOC-CONFIRMED exact Rockwell 400:** dark LCD/LED not discharge evidence; model-specific five-minute wait **and measured zero** by qualified personnel. Different Rockwell 520 indexed manual gives three minutes; no universal waiting rule. STO ≠ electrical isolation, DC bus zero ≠ gravity-load support. Selected-machine drive/physical witness UNKNOWN; no energized tests, G0/G1 HOLD.
+
+
+**2026-10-26 ENABLE-01 Stage B addendum:** [conditional enabling-device Stage B card](4400_OPENPRESSBRAKE_G0_STAGE_B_ENABLE_SWITCH_ONLY_RESTRICTED_EVIDENCE_CARD_2026-10-26.md) prepared as an **existing-document-only** ten-field restricted intake. All ten fields UNKNOWN; open only after qualified Stage A establishes relevant equipment, N/A only with dated proof. No machine evidence, physical test, evaluator score or compute. G0/G1 HOLD.

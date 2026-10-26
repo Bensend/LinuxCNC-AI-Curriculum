@@ -1,0 +1,42 @@
+# 4400 FLUID-FIRE-01 — Oil-mist ignition, fire-resistant hydraulic fluid and substitution hazards
+
+**2026-10-26 UTC | Documentary research | NON-GRADUATED.** No ignition, pressure, hot-surface, spray or machine tests performed or authorized. Installed OpenPressBrake hydraulic fluid, hose, seals, ignition sources and fire controls **UNKNOWN**.
+
+## Question and novelty check
+
+A hydraulic leak has already been studied in this course as an injection, pressure-zone, hose-burst and gravity-load hazard. **Could the same leak also create an ignitable aerosol, even when bulk-fluid flash point seems reassuring?** If the owner chooses a fire-resistant fluid, **could an unqualified substitution change seal compatibility, hydraulic response and load-holding reliability?** These are distinct *consequence and material-substitution* paths, not a rediscovery of the generic leak hazard.
+
+The safety-course index was searched for oil mist fire, hydraulic fire, fire-resistant hydraulic fluid and fluid compatibility; no dedicated 4400 hydraulic aerosol ignition branch was found as of this session. Prior [HOSE-ROUTE-01](4400_HOSE_ROUTE_01_GATES_2025_HOSE_ASSEMBLY_ROUTING_CLAMP_TWIST_SERVICE_PROVENANCE_AUDIT_2026-10-26.md), [pinhole](4400_HYDRAULIC_PINHOLE_INJECTION_HOSE_FAILURE_ISOLATION_SOURCE_AUDIT_2026-10-24.md) and [HOLD-01](4400_REXROTH_AVBC90_EMERGENCY_SCREW_RELIEF_AND_PARKER_E2_LOAD_HOLD_SOURCE_AUDIT_2026-10-25.md) remain prerequisite, not duplicated.
+
+## Authoritative sources inspected and scope
+
+1. **UK Health and Safety Executive**, Louise O'Sullivan and Andrew Tooke, *Area Classification for Oil Mists (MISTS2): Vertical Ignition Test Report*, **RR1210**, first published **2024**, original 66-page report, https://www.hse.gov.uk/research/assets/docs/rr1210.pdf . Directly inspected original PDF cover, executive summary and introduction (PDF pp. 1, 3–5, 8). **DOC-CONFIRMED report of actual HSE experimental results** (NOT TEST-CONFIRMED by this curriculum): aerosolized high-flashpoint fluids can form flammable atmospheres below their bulk flash point. HSE's **specific diesel, downward-release** test produced ignitions as far as the maximum tested **4.75 m**; the report cautions that extent/propagation varied with location and release conditions. This is **not** a hydraulic-oil or OpenPressBrake hazardous-zone distance, ignition threshold or machine design number. Earlier HSE MISTS results differed among fluids and leak conditions, including some low-pressure ignitions. The report is research evidence, not itself HSE enforcement policy; its DSEAR discussion is UK regulatory context only.
+2. **HSE RR1210 summary page**, updated **2025-09-17**, https://www.hse.gov.uk/research/rrhtm/rr1210.htm . Reconciled against the PDF. Distinguishes oil-mist hazard and actual fluid/leak conditions; the HSE researchers' opinions are not necessarily HSE policy.
+3. **Quaker Houghton**, exact product **QUINTOLUBRIC 822-300 CM**, current manufacturer product description and FAQ, https://store.quakerhoughton.com/quintolubric-822-300-cm-na . **DOC-CONFIRMED exact product:** fire-resistant synthetic ester intended to reduce fire risk; manufacturer says suitable with many elastomers but **not recommended with Butyl, EPR or Neoprene for long-term service**. This is a product-specific compatibility statement, **not** permission to convert an unidentified press-brake system.
+4. **Quaker Houghton**, exact **HOUGHTO-SAFE 419-R** water-glycol manufacturer guidance, published **2025-11-05**, https://store.quakerhoughton.com/blog/houghto-safe-water-glycol-hydraulic-fluid . **DOC-CONFIRMED for named product:** manufacturer warns **do not mix** it with synthetic, mineral or ester-based fluids; specifies flushing/cleaning for conversion. Different from the 822-300 CM ester family. A manufacturer marketing page is not a hydraulic-machine safety validation.
+5. **OSHA 29 CFR 1910.147**, https://www.osha.gov/laws-regs/regulations/standardnumber/1910/1910.147 . **DOC-CONFIRMED:** covered maintenance requires isolation and control of hazardous residual/reaccumulating energy; a change to a fire-resistant fluid does not substitute for isolation, pressure-zone verification or physical load restraint.
+
+## Safety proposition ledger
+
+| ID | Claim / potential failure | Evidence status | Required boundary |
+|---|---|---|---|
+| FF-01 | A high-flashpoint liquid in a tank may still form an ignitable fine mist after a pressure leak | **DOC-CONFIRMED HSE research** for examined fluids/conditions; installed fluid **UNKNOWN** | Evaluate leak/aerosol and ignition exposure, not flash point alone |
+| FF-02 | A diesel downward-mist ignition distance measured in HSE's facility is a press-brake clearance | **FALSE TRANSFER**; HSE's 4.75 m is an experiment-specific maximum tested | No invented machine distance; qualified assessment for selected fluid, geometry, ventilation and ignition sources |
+| FF-03 | A fire-resistant fluid is nonflammable and removes all leak hazards | **UNSUPPORTED**; OEM claims reduced risk, not zero hazard | Retain leak prevention, shielding, fire controls, injection prevention and load holding |
+| FF-04 | Ester fluid compatible with 'most' seals is compatible with all seals | **DOC-CONFIRMED counterexample:** Quaker 822-300 CM excludes named long-term elastomers | Exact seals, hoses, pump, valves and material compatibility review before change |
+| FF-05 | Water-glycol 419-R and synthetic ester can be mixed because both are fire-resistant | **DOC-CONFIRMED manufacturer rejects mixing for 419-R** | Exact-product transition plan, qualified flushing, contamination and function review |
+| FF-06 | Fire-resistant fluid conversion preserves original valve timing, leakage, friction and Y1/Y2 holding | **UNKNOWN**; fluid viscosity and material effects can alter behavior (**INFERENCE**) | Treat conversion as CHG event; independently requalify stop/hold and fluid-power performance |
+| FF-07 | Pump OFF / E-stop removes mist fire or injection hazard immediately | **UNSUPPORTED**; trapped pressurized segments may remain (**prior DOC-CONFIRMED**) | Separate energy isolation, leak exposure, fire/ignition and gravity support |
+| FF-08 | LinuxCNC detects a leak/fire and therefore has personnel-safety authority | **UNSUPPORTED** | Normal software diagnostics only; independent safety function and physical mechanisms where required |
+
+## Practical risk reduction and human factors
+
+Prevent leaks at the source with accessible routing, abrasion guards, compatible assemblies and predictable inspection; keep hose routes away from hot surfaces, arcing equipment and occupied paths. Where a fluid change is justified, make the correct labeled fluid and fill point obvious; maintain controlled spare inventory and clear incompatibility labels. **Avoid making correct service so difficult that operators reuse damaged hoses, bypass covers or top up with the wrong fluid.** These are engineering **INFERENCES** from the source hazards, not manufacturer-approved circuit designs.
+
+Distinguish **normal control** (LinuxCNC/FPGA request and status), **monitoring** (pressure/leak/fire indicators, limited by placement/diagnostics), **independent safety-related control** (qualified stop/guard/fire interface) and **physical energy-removal/retention** (isolation, residual-pressure control, independent mechanical restraint). Stopping an electric motor alone may not extinguish a fire, drain an isolated chamber, or prevent a suspended ram from descending.
+
+## Evidence and limits
+
+**DOC-CONFIRMED:** original HSE RR1210 reported experiments and scoped Quaker manufacturer product compatibility. **SOURCE-CONFIRMED new LinuxCNC:** none. **TEST-CONFIRMED curriculum:** none; HSE tests are external published research, not ours. **COMMUNITY-REPORTED:** none relied upon. **INFERENCE:** risk-control hierarchy and change invalidation. **UNKNOWN:** exact machine fluid/flashpoint, hose/seals, pressure/leak aerosol, ignition sources, fire controls, stop/hold, pressure isolation, PL/SIL and independent evaluator. No numeric ignition distance, threshold, flame propagation or fire rating transfers to OpenPressBrake. **G0/G1 HOLD, G2 NOT RUN, G3/G4 NOT AUTHORIZED, G5 HOLD**. No personnel-exposed hazardous operation.
+
+**Next evidence gain:** qualified private fluid/hoses/seals/ignition-source inventory, exact OEM conversion approval and independent physical stop/hold/fire risk assessment. No experimental spray/ignition lab is justified or authorized.

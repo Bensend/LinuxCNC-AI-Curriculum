@@ -4,7 +4,7 @@
 ## Current governance
 START_HERE first; MASTER_MISSION, LEVEL_ORDER, WORK_SELECTION_POLICY, CURRICULUM, SOURCE_POLICY, MODULE_TEMPLATE, PROGRESS, BLIND_FEEDBACK_PROTOCOL, FEEDBACK_SCORE_LOG and LAB_COMPUTE_LOG reviewed. 1000/2000/F02/3000 GRADUATED/CLOSED; 4400 safety first. Latest prior checkpoint 2026-10-26T10:35:59Z. 2520–25F0 external evaluator OPEN, G0/G1 HOLD, G2 NOT RUN, G3/G4 NOT AUTHORIZED, G5 HOLD. No new private OpenPressBrake Stage A A–G physical evidence. Never infer selected hardware.
 
-## Six new original files — four RCD originals verified from main, IMD pair added
+## Six new original files — independently verified from main
 1. [RCD-01 ABB/Rockwell/Schneider/OSHA exact source audit](../research/4400_RCD_01_ROCKWELL_PF527_ABB_SCHNEIDER_WAVEFORM_AND_LEAKAGE_OEM_AUDIT_2026-10-26.md).
 2. [RCD-01 learner module, six public PAPER cases UNSCORED and eight no-energy desk gates NOT RUN](../safety-course/4400_RCD_01_DC_LEAKAGE_RCD_TYPE_AND_PE_NO_SHORTCUT_FIELD_MODULE_2026-10-26.md).
 3. [RCD-02 ABB/Schneider voltage-dependent trip-power, neutral-loss and FE/PE original audit, with IET scope check](../research/4400_RCD_02_VOLTAGE_DEPENDENT_TRIP_NEUTRAL_LOSS_FUNCTIONAL_EARTH_OEM_AUDIT_2026-10-26.md).
@@ -24,7 +24,7 @@ START_HERE first; MASTER_MISSION, LEVEL_ORDER, WORK_SELECTION_POLICY, CURRICULUM
 - **SOURCE-CONFIRMED new LinuxCNC:** none. **TEST-CONFIRMED:** none. **COMMUNITY-REPORTED:** none relied on. **UNKNOWN:** selected OpenPressBrake drive, RCD, FE/PE, site fault path, leakage, actual machine stop/hold, PL/SIL, electrical safety acceptance, external score.
 
 ## Integration and checks
-Updated CURRICULUM, PROGRESS, SAFETY_COURSE_RESEARCH, learner index and cumulative Safety Design Package **§§11HG–11HH**. Four RCD originals independently fetched nonempty from main and found in index; their six distinct relative links independently resolved. The IMD original pair and its links must also be independently verified before session end. **Six originals, 15 public PAPER cases UNSCORED, 21 no-energy documentary gates NOT RUN, no independent evaluator executed.** This is not a whole-repository link audit.
+Updated CURRICULUM, PROGRESS, SAFETY_COURSE_RESEARCH, learner index and cumulative Safety Design Package **§§11HG–11HH**. All **six originals** independently fetched nonempty from main and found in index; all **seven distinct relative links** inside the originals independently resolved. Checkpoint references all six. **Six originals, 15 public PAPER cases UNSCORED, 21 no-energy documentary gates NOT RUN, no independent evaluator executed.** This is not a whole-repository link audit.
 
 ## Compute / physical release
 **0 GitHub-hosted Actions minutes, 0 local lab compute minutes.** No workflow dispatched, no simulations, builds, synthesis, benchmarks, tests, energized electrical experiments or machine tests. LAB_COMPUTE_LOG and FEEDBACK_SCORE_LOG unchanged because no new authoritative runtime/score. Prior self-hosted runner-access blocker not retested because no compute question justified it. No hosted fallback. **G0/G1 HOLD, no personnel-exposed hazardous operation.**

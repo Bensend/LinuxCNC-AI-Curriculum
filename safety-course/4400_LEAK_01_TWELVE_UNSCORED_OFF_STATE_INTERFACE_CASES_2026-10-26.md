@@ -17,3 +17,6 @@ For each case: identify the hazard, the **exact** missing device evidence, what 
 12. A healthy Ethernet/FPGA/HAL diagnostic and safe PLC output are shown, but no qualified Y1/Y2 stop or hold witness exists. Which gate disposition is defensible?
 
 **Scoring:** none performed. No answer key, expected result or sealed oracle is supplied. A fresh evaluator must create unseen cases independently after learner commitment. No selected-machine evidence or release.
+
+
+**Additional discriminator for cases 8–12 (UNSCORED):** The examined IntelliVAC *Contactor Status* relay can assert for a 200 ms command window before independent physical proof. Ask the learner to distinguish command receipt, output-status assertion, actual contactor auxiliary contact and power-pole state. No actual machine outcome is provided.

@@ -483,3 +483,6 @@ Press-brake Type-C applicability and entrapment release versus E-stop/guard stat
 
 
 **HAL-SNAPSHOT-01 same-session addition:** [pinned `save all` vs `allu` source](research/4400_LINUXCNC_HAL_SAVE_ALL_VS_ALLU_UNCONNECTED_INPUT_RESTORATION_AUDIT_2026-10-26.md), [8 PAPER cases](safety-course/4400_HAL_SNAPSHOT_01_EIGHT_RESTORE_FIDELITY_PAPER_CASES_2026-10-26.md). **SOURCE-CONFIRMED/DOC-CONFIRMED** unconnected HAL_IN/HAL_IO dummy values omitted from `save all` and included in `allu`; no complete machine safety proof from either. **Final session 11 originals / 36 PAPER cases UNSCORED / 12 desk gates NOT RUN / external evaluator NOT RUN / 0 hosted/local compute / G0/G1 HOLD**.
+
+
+**HAL-SERVICE-01 integration:** [Four-state source-to-rearm matrix](safety-course/4400_HAL_SERVICE_01_FOUR_STATE_CHANGE_CONTROL_AND_REARM_MATRIX_2026-10-26.md) unifies four conditional normal-control failure paths and distinct personnel-safety final-element/physical-load witnesses. **Final session 12 original artifacts / 36 public PAPER cases UNSCORED / 12 G0 desk gates NOT RUN / evaluator NOT RUN / 0 hosted/local compute; G0/G1 HOLD**.

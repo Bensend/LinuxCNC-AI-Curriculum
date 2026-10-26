@@ -32,3 +32,6 @@ All three original files independently fetched. Three relative references in ori
 
 ## Short-session continuation check
 This invocation read existing 4400 tooling/robot enabling/E-stop evidence before choosing a distinct security-to-safety mechanism, then completed primary NIST/IEC source tracing, practical transfer module, evaluator handoff, and integration. Further same-source case generation is lower value than independent evidence; useful other safety branches remain available for the next invocation. Recurring curriculum remains enabled.
+
+## Same-session source continuation
+After primary source/curriculum integration, followed a second coherent, unblocked **pinned LinuxCNC source** question instead of ending on generic OT guidance: [direct `halui.cc` HAL input → NML Task request and serial-echo trace](../research/4400_OT_SEC_01_PINNED_LINUXCNC_HALUI_NML_COMMAND_ECHO_VS_PHYSICAL_AUTHORITY_SOURCE_TRACE_2026-10-26.md), commit `c9a5a0a5034177c8db64cb44abf14d4f2eb166f7`, blob `c40e2831e737b3ff8bc4a8b9e750092b5a951379`. **SOURCE-CONFIRMED:** rising-edge machine-on, estop-reset, MDI request path; Task echo does not establish physical safety. **UNKNOWN:** any actual remote interface or selected machine behavior. This is a **fourth original artifact**, not part of the first three-file link count. No tests, compute, evaluation or G0 release.

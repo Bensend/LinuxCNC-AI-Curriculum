@@ -22,3 +22,9 @@ START_HERE first; MASTER_MISSION, LEVEL_ORDER, WORK_SELECTION_POLICY, CURRICULUM
 5. Immediately before exit: append UTC end, actual elapsed and overlap to complete LESSON_LOG using fresh SHA; commit and independently verify.
 
 **G0/G1 HOLD.** No personnel-exposed hazardous operation; any separately approved experiment must be isolated/remote with people outside danger zone and residual risk documented.
+
+
+## Same-session information-gain continuation and process correction
+6. [MECH-REARM-01 OEM six-state mechanical arrest/release review](../safety-course/4400_MECH_REARM_01_SPRING_ARREST_DRUM_LOCK_RELEASE_AND_TOOL_EXCHANGE_STATE_REVIEW_2026-10-26.md): wrong-mass/unloaded release and spring-rupture recovery are **DOC-CONFIRMED** hazards for exact ENDO product, not an installed-machine test.
+7. [G0-HF-01 repository intake progressive-disclosure audit](../research/4400_G0_SELECTED_MACHINE_INTAKE_PROGRESSIVE_DISCLOSURE_HUMAN_FACTORS_AUDIT_2026-10-26.md): measured 98,726-character canonical intake with 91 distinct IN-identifier strings versus existing 4,536-character one-page request; makes first-contact A–G Stage A and qualified installed-component conditional expansion Stage B. **SOURCE-CONFIRMED repository measurement**, overload/bypass effect INFERENCE and unmeasured. Updated first-contact handoff; essential G0 release requirements unchanged.
+**Final seven original artifacts / 12 public PAPER cases UNSCORED / selected physical witness NOT RUN / evaluator NOT RUN / 0 hosted and local compute; G0/G1 HOLD.** Next priority remains qualified restricted selected-machine evidence and independent external evaluation; if blocked, rotate to distinct original-source 4400 safety branch. End/elapsed/overlap must still be appended to LESSON_LOG immediately before exit.

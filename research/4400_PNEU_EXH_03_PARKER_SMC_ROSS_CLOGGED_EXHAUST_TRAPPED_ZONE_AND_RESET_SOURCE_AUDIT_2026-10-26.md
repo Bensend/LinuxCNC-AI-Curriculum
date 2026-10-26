@@ -1,0 +1,31 @@
+# PNEU-EXH-03 — Safety exhaust is a physical flow path, not a valve-output bit
+**4400 safety-course source audit; 2026-10-26; NON-GRADUATED.** New cross-machine branch following COIL-SUP/SNEAK-CUR information-gain stop. Conditional for press-brake pneumatic tooling, mills with air clamps, robots and automation cells; **no pneumatic equipment is established as installed on OpenPressBrake**.
+
+## Original manufacturer sources directly inspected
+1. **Parker Hannifin P33 Modular Safety Exhaust Valve, Installation & Service Instructions 3FA105, Rev A, issued October 2019**, original https://www.parker.com/content/dam/Parker-com/Literature/Literature-Files/pneumatic/Instruction-sheets/FRL/Instruction-Sheet-3FA105_P33-Modular-Exhaust-Valve.pdf , printed p.6 (PDF p.6), warnings 8–11. Manufacturer requires exhaust silencers resistant to clogging with capacity at least that of valve exhaust, warns that contamination reduces flow/increases backpressure. Crucial exact-product warning: P33 family is described as **energy-isolation devices, NOT emergency-stop devices**. Do not transpose the manual's press-clutch advice into a press-brake hydraulic design.
+2. **SMC DXT1215 high-speed pilot-operated solenoid valve, DOC1003125-2 (revision history December 2024)**, original https://www.smcworld.com/upfiles/manual/en-jp/files/DOC1003125.pdf , printed pp.4–5, 10–11. Direct manual: DXT1215 is **not designed as an emergency shutoff/safety valve**; residual voltage through parallel resistor/CR can prevent complete OFF (product-specific <3% rated-voltage guidance); clogged filter/silencer, blocked exhaust and sticky main valve can slow valve/cylinder response. Product-specific electrical limit must not be generalized to other solenoids or safety valves.
+3. **ROSS Controls RSe safety exhaust series**, original manufacturer product page https://www.rosscontrols.com/en/series/1297-rse-series-double-valve , directly examined 2026-10-26. Manufacturer explicitly says its safe exhaust valve **cannot exhaust pressure trapped beyond obstructions such as check valves or closed-center valves**. External PNP spool sensors support selected valve-position diagnostics; they do not prove every downstream volume is exhausted. Product page includes differing shorthand for 3/2 and dual-5/2 configurations; **do not infer a machine-specific truth table** without the exact selected variant/integration guide.
+
+## Evidence ledger
+| Proposition | Label | Scope/limit |
+|---|---|---|
+| Wrong, clogged or undersized exhaust silencer can restrict discharge and create backpressure | DOC-CONFIRMED Parker 3FA105 | Does not establish actual clog or measured discharge on a machine |
+| Residual voltage and obstructed exhaust are independent causes of slow ordinary pneumatic valve response | DOC-CONFIRMED SMC DXT1215 | DXT1215 is explicitly **not** a safety valve; no 3% universal threshold |
+| A safety exhaust valve cannot release gas trapped beyond check/closed-center obstructions | DOC-CONFIRMED ROSS RSe series | Exact selected circuit, downstream zone count and pressure UNKNOWN |
+| Safety output/coil/valve diagnostic may look normal while a physical pressure zone stays hazardous | INFERENCE from OEM mechanisms | Independent zone-specific physical proof required |
+| P33 is an E-stop valve because its title says 'Safety Exhaust' | **FALSE for exact P33 manual** | Manufacturer distinguishes energy isolation from emergency-stop role |
+| Any ROSS family PL/SIL figure proves an OpenPressBrake safety function | **NOT ESTABLISHED** | Selected device, integration, validation and physical safe-state UNKNOWN |
+
+## Failure-path / human-factor review
+- **Silencer packed with oily dust:** exhaust flow restriction can increase the actual physical decay time despite timely safety output and valve actuation. Check correct rated silencer, maintenance accessibility and replacement schedule based on selected operating environment; do not propose removing silencers indiscriminately (noise and other hazards).
+- **Check valve downstream:** even an otherwise correctly acting upstream safe-exhaust valve cannot evacuate a separated trapped volume. Require port/zone map, independent load retention and service isolation/verification at each relevant zone.
+- **Electrical leakage and blocked exhaust together:** two independent causes of delayed response. Diagnose with manufacturer-approved methods; do not assume that replacing a diode or clearing a filter alone validates the entire safety function.
+- **Pressure switch at valve outlet:** a low reading there does not prove pressure on the far side of a closed-center valve or accumulator; place witnesses according to as-built topology, not a generic drawing.
+- **Pneumatic clamp releases on exhaust:** removing pressure may drop tooling/workpiece; a safe pneumatic stop can require separate mechanical holding. Stop and retained safe state are distinct.
+- **Restoration of air supply:** soft-start can mitigate shock in a specific design, but neither a soft-start valve nor auto-resetting valve grants motion authority; require deliberate new-start and protected access.
+- **Easy maintenance:** a clog-resistant OEM-matched silencer, reachable exhaust/filters, captive fasteners, clear zone labeling and a simple lockable isolation/verification path reduce incentive to bypass. Do not make maintenance require reaching into an unguarded energized zone.
+
+## Physical validation decision
+Selected machine pneumatic equipment, valve and silencer model, all exhaust/blocked zones, downstream pressure, discharge time, tool/workpiece support, applicable performance target, exact E-stop/maintenance isolation function, deliberate restart and qualified test results remain **UNKNOWN**. **No bench or machine lab frozen**: authoritative sources resolve the generic failure mechanisms; selected Stage A evidence is missing. Do not invent flow rate, pressure, safety distance, PL/SIL, timing or valve truth. LinuxCNC/HAL/FPGA is ordinary control/diagnostic only.
+
+**No new SOURCE-CONFIRMED LinuxCNC, TEST-CONFIRMED or COMMUNITY-REPORTED evidence.** [Public field module](../safety-course/4400_PNEU_EXH_03_SILENCER_BACKPRESSURE_TRAPPED_ZONE_FIELD_MODULE_2026-10-26.md). **G0/G1 HOLD; G2 NOT RUN; G3/G4 NOT AUTHORIZED; G5 HOLD; no personnel-exposed hazardous operation.**

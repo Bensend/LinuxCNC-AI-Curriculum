@@ -80,3 +80,12 @@ The safe solution should be **easy to keep safe**: clearly marked stock-storage 
 - **Plasma/laser:** bright workpieces, smoke and reflections are plausible optical-environment concerns, but applicability depends on the *actual selected protective device*, not a universal assumption.
 
 **Evidence state:** OEM findings DOC-CONFIRMED; machine effects INFERENCE; LinuxCNC source trace not new; TEST-CONFIRMED none; COMMUNITY-REPORTED none relied on; OpenPressBrake as-built/stop/hold/PL/SIL UNKNOWN. G0/G1 HOLD, G2 NOT RUN, G3/G4 NOT AUTHORIZED, G5 HOLD. No machine test, Actions job or compute justified.
+
+
+## Integration trap discovered during source extension (no extra scored cases)
+
+The Banner SLC4 manual §4.5.4 **prohibits paralleling the OSSDs from separate light-curtain pairs into one input device**. A cost-saving splice is not a valid way to aggregate multiple protected openings. Use separate compatible safety-rated inputs and an independently reviewed safety function, with clear source and wiring provenance. This rule is **exact SLC4 OEM guidance**; do not pretend it proves every possible controller's input topology.
+
+A safety controller may legitimately filter *specified diagnostic test pulses* when its own OEM documentation and safety assessment support it. Rockwell's Studio 5000 safety LC instruction documents such filtering **and explicitly adds filter delay to safety reaction time**. The distinction is between **documented safety-rated pulse compatibility** and **improvised masking of a failed detection/stop demand**. A normal LinuxCNC/HAL input filter does not become personnel-safety-rated because it produces a convenient green HMI. No pulse width, filter duration or stopping-distance number is selected for OpenPressBrake.
+
+**No-energy follow-up:** qualified reviewer separately records (1) each OSSD pair and safety input owner, (2) any optical beam coding/neighbor mitigation, (3) configured safety-rated filter and total response-time evidence, (4) selected final elements and physical stop/hold witnesses, (5) any `CHG` invalidation after modification. Public paper cases and documentary gates above remain **UNSCORED / NOT RUN**.

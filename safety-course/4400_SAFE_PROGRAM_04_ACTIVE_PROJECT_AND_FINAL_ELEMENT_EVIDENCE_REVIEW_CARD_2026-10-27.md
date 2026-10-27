@@ -29,3 +29,6 @@ The qualified reviewer may mark a **documentary identity subcheck** only when ex
 **Sources:** https://www.pilz.com/download/open/PNOZ_m_B0_Operating_Manual_1002660-EN-13.pdf ; https://www.pilz.com/en-INT/support/lexicon/articles/072106 ; third-party transcription https://manualzilla.com/doc/6875583/operating-instructions ; [public Rev1 design](https://github.com/Bensend/OpenPressBrake/blob/main/hardware/REV1_BOARD_INTEGRATION.yaml).
 
 **Disposition:** Existing Stage A/OPB-D01/D02/D03/D06/D08 remain UNKNOWN; no new paper bank, physical test, external evaluator or compute. **G0/G1 HOLD.**
+
+
+**Source-depth diagnostic trap:** The legacy Fiessler FPSC HTML transcription associates the label `F19` with **both** missing output-group supply and possible AKAS receiver-off FUO/FUS backfeed in different passages; the separate annex `0x19` must **not** be assumed equivalent without the original manual. Do not diagnose a selected Pilz controller from a legacy Fiessler fault code. The original Pilz B0 manual separately requires a qualified supply arrangement for safety-system/inputs and powered semiconductor-output domain. An all-green CNC screen cannot substitute for model-specific supply and active-project evidence.

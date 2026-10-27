@@ -30,3 +30,6 @@ No GitHub-hosted or local runner compute; no Actions, simulation, build, synthes
 
 
 **TI reference transfer limitation:** TIDA-01509 Rev A original guide actually implements broken-wire discrimination by **temporarily opening the ISO121x field ground** with extra opto-emulator circuitry. This is **not** authority to interrupt the retained L07/Pilz return. Source audit and existing D06 field card explicitly prohibit copying this demonstration into shared safety wiring. No hardware changes or physical tests; board/safety lane owns any future design-specific solution.
+
+
+**Bounded board-lane question (not safety-circuit redesign):** IPS1025H FLT clamp spec reaches 8 V under its defined test while STISO621 logic input absolute maximum is 7 V; ST's own X-NUCLEO-ISO1A1 schematic uses the direct FLT1→TX2 pattern and a 220-kOhm bias. **No actual input overvoltage is proven**; complete current paths/input protection and final netlist need qualified board-lane review before diagnostics are trusted. Do not run SPICE or physical fault tests without a concrete unresolved question and local self-hosted access. [Research](../research/4400_OPB_L7_L07_ISOLATOR_POWER_LOSS_FAULT_DIAGNOSTIC_POLARITY_SOURCE_AUDIT_2026-10-27.md). G0/G1 HOLD.

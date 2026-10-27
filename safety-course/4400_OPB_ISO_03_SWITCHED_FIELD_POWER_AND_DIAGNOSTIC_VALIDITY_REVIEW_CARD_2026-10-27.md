@@ -35,3 +35,14 @@ This card distills the [exact STISO621/STISO620/IPS1025H and OpenPressBrake sour
 
 
 **Do not copy TI's wire-break demo into L07.** Direct TIDA-01509 Rev A guide (May 2025) shows its added opto-emulator **temporarily opens the ISO121x field-ground path** to elicit a diagnostic pulse. That technique is a reference-board mechanism, **not** proof it is compatible with a retained shared Pilz/11K2 return or other safety wiring. A technician must not interrupt/bridge L07 to “test” status validity; ask for the as-built qualified design and preserve independent safety ownership. [OEM source and transfer-limit audit](../research/4400_OPB_L7_L07_ISOLATOR_POWER_LOSS_FAULT_DIAGNOSTIC_POLARITY_SOURCE_AUDIT_2026-10-27.md).
+
+
+## Human-factors normal-diagnostics display contract — three-valued, **not** a safety PLC design
+| Process supply / source validity | FLT1/FLT2 or Pilz status bits | Honest ordinary HMI meaning | Personnel-safety decision |
+|---|---|---|---|
+| **VALID by independently reviewed normal diagnostic evidence** | Driver fault not asserted | “No *reported ordinary driver fault*” — never “safe ram” | Independent Pilz/AKAS and physical stop/hold/guard still required. |
+| **INVALID / UNKNOWN** (L7/L07 absent, broken wire possible, validity mechanism unresolved, startup transient) | LOW or stale/unknown | “FIELD POWER/STATUS UNAVAILABLE — NOT VERIFIED”; suppress green healthy and auto-resume suggestions. | **HOLD**; no ordinary HMI permission to expose people. |
+| **VALID** | Qualified driver fault asserted | Specific fault class only after FLT1/FLT2 mapping and polarity reconciliation; maintenance workflow with isolation. | Independent safety remains authoritative. |
+| **RESTORING** after 11K2 returns | Held ordinary command, settling inputs | “REARM REQUIRED”; normal output management and fresh operator intent reviewed separately. | Independent safety reset must not by itself initiate hazardous motion. |
+
+This is a **proposed ergonomic information-state model (INFERENCE)** for the ordinary UI, not a verified FPGA implementation, a safety-function truth table, or authorization to modify the safety PLC. The qualified machine team must define actual validity and fault behavior from final wiring, physical proof and risk assessment. Keep maintenance and guard-restoration workflow easy and visibly distinct from mere program Pause/Resume.

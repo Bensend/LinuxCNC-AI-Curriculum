@@ -20,3 +20,6 @@ Use **only after** the [one-page Stage A A–G request](4400_OPENPRESSBRAKE_G0_E
 **Review sequence:** match exact machine revision and Pilz program; review input trust and final-element independence; trace switched returns and hard inhibits; reconcile physical energy and load restraint; review usability; then decide whether G0 documentary readiness can advance. G0 never grants G1/G2 or personnel-exposed operation.
 
 **Status:** G0/G1 HOLD; G2 NOT RUN; G3/G4 NOT AUTHORIZED; G5 HOLD. No machine evidence, independent evaluation or physical validation has been received. See [source audit](../research/4400_OPB_CUTOVER_02_PILZ_MUTE_GATE_POWER_DOMAIN_CROSS_REPOSITORY_SOURCE_AUDIT_2026-10-27.md) and [technician module](4400_OPB_CUTOVER_02_PILZ_MUTE_GATE_POWER_DOMAIN_FIELD_REVIEW_2026-10-27.md).
+
+
+**D04 reviewer clarification (current source precedence):** require current four-prerequisite schema v3, exact physical wire-75 conditioning, a separate diagnostic input, two MAX22216 ENABLE sinks and their local fail-low bias. The earlier five-term `ENABLE_PATH_HEALTHY` prose is superseded; the legacy netlist is quarantined for rendering. [Implementation-source audit](../research/4400_OPB_CUTOVER_02_MAX22216_FOUR_INPUT_GATE_FANOUT_AND_STALE_AUTHORITY_RECONCILIATION_2026-10-27.md). This clarifies D04, **not** a ninth owner intake field or a machine validation result.

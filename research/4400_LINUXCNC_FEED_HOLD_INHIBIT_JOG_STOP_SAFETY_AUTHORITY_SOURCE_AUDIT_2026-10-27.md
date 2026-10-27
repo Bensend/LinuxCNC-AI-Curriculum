@@ -1,0 +1,35 @@
+# 4400-FEED-JOG-01 — LinuxCNC feed hold, feed inhibit and jog stop are different normal-control paths
+
+**Source revisions:** development `c9a5a0a5034177c8db64cb44abf14d4f2eb166f7`; stable comparison `v2.9.10`. **Session:** 2026-10-27T08:32:56.346Z. **Status:** source/documentary safety transfer, NON-GRADUATED; no physical or runtime test.
+
+## Novelty and existing course boundaries
+
+Full [learner index](../safety-course/SAFETY_COURSE_INDEX.md) and [research plan](../SAFETY_COURSE_RESEARCH.md) already cover ordinary E-stop/HAL, M62/M63, M66, M0/M1, press-brake jog/setup, independent safety authority and final-element proof. No dedicated source path there distinguishes **`motion.feed-hold` vs `motion.feed-inhibit` vs `motion.jog-inhibit` vs `motion.jog-stop`**. This adds a source-confirmed mode/command-family discriminator, not a new safety function, PL/SIL claim or public case bank.
+
+## Pinned source and documented semantics
+
+1. [`motion.c` lines 529–535](https://github.com/LinuxCNC/linuxcnc/blob/c9a5a0a5034177c8db64cb44abf14d4f2eb166f7/src/emc/motion/motion.c#L529-L535) exports ordinary HAL input pins `motion.feed-hold`, `motion.feed-inhibit`, `motion.homing-inhibit`, `motion.jog-inhibit`, `motion.jog-stop`, and `motion.jog-stop-immediate`. **SOURCE-CONFIRMED.**
+2. [`control.c` lines 423–495](https://github.com/LinuxCNC/linuxcnc/blob/c9a5a0a5034177c8db64cb44abf14d4f2eb166f7/src/emc/motion/control.c#L423-L495): coordinated feed scaling includes feed-hold only when `FH_ENABLED`; `feed-inhibit` drives scale to zero in the normal feed path. [`interp_convert.cc` lines 4444–4455](https://github.com/LinuxCNC/linuxcnc/blob/c9a5a0a5034177c8db64cb44abf14d4f2eb166f7/src/emc/rs274ngc/interp_convert.cc#L4444-L4455) makes `M53` enable or disable the feed-hold path. [`emccanon.cc` lines 3308–3323](https://github.com/LinuxCNC/linuxcnc/blob/c9a5a0a5034177c8db64cb44abf14d4f2eb166f7/src/emc/task/emccanon.cc#L3308-L3323) queues the setting; [`command.c` lines 1387–1396](https://github.com/LinuxCNC/linuxcnc/blob/c9a5a0a5034177c8db64cb44abf14d4f2eb166f7/src/emc/motion/command.c#L1387-L1396) updates `FH_ENABLED`. **SOURCE-CONFIRMED.**
+3. [`motion.9.adoc` lines 150–172](https://github.com/LinuxCNC/linuxcnc/blob/c9a5a0a5034177c8db64cb44abf14d4f2eb166f7/docs/src/man/man9/motion.9.adoc#L150-L172): both `feed-hold` and `feed-inhibit` apply to **G-code commands, not jogs**. `feed-hold` is gated by `M53 P1`; `M53 P0` disables its effect. `feed-inhibit` ordinarily decelerates a non-spindle-synchronized move, but a spindle-synchronized move is documented to **finish before later moves are inhibited**. **DOC-CONFIRMED** scoped normal-motion behavior, not safe stopping time.
+4. [`motion.9.adoc` lines 202–219](https://github.com/LinuxCNC/linuxcnc/blob/c9a5a0a5034177c8db64cb44abf14d4f2eb166f7/docs/src/man/man9/motion.9.adoc#L202-L219): `jog-inhibit` disallows jogging and reports an error; `jog-stop` stops an **active** jog following associated acceleration; `jog-stop-immediate` stops it immediately. [`command.c` lines 842–845, 910–912, 989–992](https://github.com/LinuxCNC/linuxcnc/blob/c9a5a0a5034177c8db64cb44abf14d4f2eb166f7/src/emc/motion/command.c#L842-L845) rejects new jog commands while jog-inhibit active. [`control.c` lines 607–625](https://github.com/LinuxCNC/linuxcnc/blob/c9a5a0a5034177c8db64cb44abf14d4f2eb166f7/src/emc/motion/control.c#L607-L625) separately handles active jog-stop; its comment warns immediate stop may produce following errors. **SOURCE/DOC-CONFIRMED**; not safety-rated.
+5. [Official M53 reference](https://github.com/LinuxCNC/linuxcnc/blob/c9a5a0a5034177c8db64cb44abf14d4f2eb166f7/docs/src/gcode/m-code.adoc#L401-L413) confirms feed-hold only when enabled. **DOC-CONFIRMED.**
+
+**Stable cross-check:** `v2.9.10` [motion.c lines 473–478](https://github.com/LinuxCNC/linuxcnc/blob/v2.9.10/src/emc/motion/motion.c#L473-L478) exposes the same pin family; [control.c lines 370–421 and 542–548](https://github.com/LinuxCNC/linuxcnc/blob/v2.9.10/src/emc/motion/control.c#L370-L421) has the same examined feed-scaling/jog-stop distinction. The exact stable manpage path was not resolved through connected source retrieval, so no claim of stable manpage line parity is made.
+
+## Hazardous false assumptions and normal-control design implications
+
+| Assumption | What source/documentation actually supports | Consequence if mistaken |
+|---|---|---|
+| 'Feed Hold is asserted, so manual jog cannot move' | Both feed-hold and feed-inhibit are **G-code feed paths, not jogs**. | Operator may initiate a normal jog while assuming the feed hold inhibits it. **INFERENCE**, not observed machine fault. |
+| 'Feed Hold is always active' | `M53 P0` can disable `motion.feed-hold` effect. | An HMI light showing a HIGH pin does not prove commanded feed is inhibited. |
+| 'Feed Inhibit stops every move immediately' | Documented spindle-synchronized move may complete; non-synchronized feed decelerates. | A lathe threading/tapping or analogous synchronized motion cannot use this as a universal personnel-safety stop. |
+| 'Jog Inhibit stops an already active jog' | Source command handler rejects **new** jog requests; a **separate** jog-stop path addresses active jogging. | A retrofit may confuse prevention of initiation with termination of existing motion. Actual behavior requires design-specific validation. |
+| 'Jog Stop Immediate is a safe E-stop' | Ordinary motion implementation warns of possible following errors. | A software command is not independent energy removal, gravity hold, or safety stop validation. |
+
+**Practical OpenPressBrake transfer:** A normal controller may use feed/jog pins to improve setup ergonomics and avoid unintended normal commands. It must not treat them as independent AKAS muting, Y1/Y2 safe speed, safe stop, gravity-load holding or access protection. Actual installed safety PLC, hydraulic valve state and physical motion witnesses remain UNKNOWN. A builder tempted to jumper a sensor because `jog-inhibit` causes nuisance trips needs a usable safe setup mode and independently validated protective device, not a hidden bypass.
+
+## Evidence ledger and no-lab decision
+
+**SOURCE-CONFIRMED** pinned HAL export, M53 enable, feed scaling, new-jog rejection and active-jog stop paths. **DOC-CONFIRMED** G-code-only feed hold/inhibit, spindle-synchronized completion, active jog-stop semantics. **TEST-CONFIRMED none**, **COMMUNITY-REPORTED none**. **INFERENCE** human false-ready/jog risk and any selected-machine consequences. **UNKNOWN** exact OpenPressBrake HAL, mode, controller outputs, independent stop/hold, safety PLC, physical validation, timing and evaluator.
+
+No simulation is needed to rediscover explicit source and official documentation. No GitHub-hosted or local runner compute; no physical test. [Safety traceability package](../safety-course/SAFETY_DESIGN_PACKAGE_TRACEABILITY_TEMPLATE.md) remains the release framework. **G0/G1 HOLD; no personnel-exposed hazardous operation.**

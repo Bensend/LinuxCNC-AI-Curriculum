@@ -33,3 +33,6 @@ No COMMUNITY-REPORTED or TEST-CONFIRMED evidence added. No compute justified; th
 
 ## Next
 Use [HYD-INT-01 technician worksheet](../safety-course/4400_HYD_INT_01_TRAPPED_RETURN_PRESSURE_AND_SAFE_STOP_FIELD_MODULE_2026-10-27.md) and [HYD-INT/HYD-CUSH architecture review](../safety-course/4400_HYD_INT_CUSH_01_02_STOP_HOLD_LOCAL_PRESSURE_CHANGE_REVIEW_2026-10-27.md). Qualified private Stage A and independent evaluator still required.
+
+## Current standards-scope cross-check (2026-10-27)
+**ISO official catalogue directly checked:** ISO 4413:2010, edition 3, *Hydraulic fluid power — General rules and safety requirements for systems and their components*, is **published/current** and last confirmed in 2021; official scope includes machinery hydraulic system design, construction, modification, assembly, installation, adjustment, operation and maintenance. https://www.iso.org/standard/44781.html . **DOC-CONFIRMED only for title, edition, status and abstract scope.** The paid normative clauses were **not** inspected; do not invent an ISO 4413 valve arrangement, pressure factor, proof-test rule or required component from the abstract. The parallel pneumatic ISO 4414:2010 remains current, but is not a substitute for hydraulic requirements. Exact jurisdiction and machine applicability remain a qualified Stage A question.

@@ -26,3 +26,5 @@ Updated [CURRICULUM](../CURRICULUM.md), [PROGRESS](../PROGRESS.md), [SAFETY_COUR
 4. Compute only for a frozen unresolved question on `[self-hosted, openpressbrake]`, never hosted. No simulation merely to spend time. Append complete `LESSON_LOG.md` safely with verified current blob SHA and actual UTC end/elapsed/overlap immediately before exit.
 
 **Release:** **G0/G1 HOLD, G2 NOT RUN, G3/G4 NOT AUTHORIZED, G5 HOLD. No personnel-exposed hazardous operation.** Keep recurring curriculum enabled.
+
+**Late same-session source deepening:** [Pinned coolant source audit](../research/4400_MWF_LINUXCNC_PINNED_M7_M8_M9_COOLANT_HAL_OUTPUT_VS_EXPOSURE_SOURCE_TRACE_2026-10-27.md) additionally inspected `Task::emcIoAbort()` (`taskclass.cc:386–401`), `emcAuxEstopOn()` (404–410), `emcTaskSetState()` (`emctask.cc:324–372`) and `emctaskmain.cc:3599–3621`. **SOURCE-CONFIRMED:** Task abort/E-stop-related paths clear ordinary coolant HAL pins. **INFERENCE:** a reused M8→LEV/circulation output may be requested OFF while aerosol persists; actual fire/energy and hygiene policy remains machine-specific. Updated crosscut and five canonical files; no physical or runtime test.

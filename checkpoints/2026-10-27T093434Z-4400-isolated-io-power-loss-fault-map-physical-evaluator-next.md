@@ -21,3 +21,6 @@ No GitHub-hosted or local runner compute; no Actions, simulation, build, synthes
 
 
 **Power-return adversarial continuation:** Source-grounded **INFERENCE** that a still-HIGH ordinary FPGA command can resume propagation through STISO621 after switched field power returns; component does not impose a new-edge requirement. Actual FPGA state, Pilz safety program, fresh-start interlock and physical machine behavior UNKNOWN. Updated existing restricted OPB-D08 subcheck and reviewer card; no new exercise bank, test, evaluator or compute. Future qualified evidence must distinguish **OFF while L7 absent** from **safe rearm when L7 returns**.
+
+
+**Input-side OEM addition:** TI ISO1212 SLLSEY7 Rev G Table 7-2 says an **open field input** gives LOW while receiver logic is powered. TI TIDA-01509 broken-wire detection requires additional circuitry; public OpenPressBrake DI `INPUT_VALID` is optional and no installed rail-valid/wire-break source is proven. All-LOW Pilz status plus all-LOW FLT1/FLT2 is **not** a qualified safe-state witness. Source audit, field card and existing restricted OPB-D06 request updated; no test or compute. G0/G1 HOLD.

@@ -84,3 +84,14 @@ At the **same** upstream commit `07aa2ba191198003000d2acc52e629f8eb377026`, [`in
 
 ### M9 is not a generic TSC/TAB output-kill (predecessor integration)
 The already published [AIR-CLEAN-01 pinned M62/M63 source trace](4400_AIR_CLEAN_01_LINUXCNC_PINNED_M62_M63_QUEUED_AIR_OUTPUT_SOURCE_TRACE_2026-10-27.md) established that `motion.digital-out-NN` uses a separate trajectory-planner output path; a queued M63 OFF requires a later motion to apply in the documented path. The present pinned `interp_convert.cc` independently shows M9 enqueues **mist and flood** OFF, **not every arbitrary motion DIO**. Therefore, for a *hypothetical* TSC/TAB retrofit implemented on M62/M63/M64/M65, an M9 or stock M6 is **not by itself** evidence that the auxiliary output is OFF; an M63 queued immediately before program end may also lack its applying motion. **INFERENCE** for a selected retrofit until the actual remap/HAL/Task-abort/valve path is traced. Reuse AIR-CLEAN-01 source evidence; do not duplicate its tests or imply a real machine stayed energized.
+
+### Cross-controller M-code migration contract — no syntax-only acceptance
+| Code / event | Haas TSC/TAB published meaning | Stock LinuxCNC published/pinned meaning | Retrofit evidence gate |
+|---|---|---|---|
+| M73 | TAB ON (TG0145 Rev C) | Save/autorestore modal state; upstream M73 fixture and `leave_context` confirm that mechanism | **Semantic collision:** never reuse OEM line unchanged; explicit selected mapping and observed normal output required |
+| M74 | TAB OFF (TG0145 Rev C) | Not listed as stock TAB command in stable M-code reference | Do not assume TAB OFF; verify selected remap or explicit command |
+| M88 / M89 | HPC/TSC pump ON / OFF (AD0086) | Not stock coolant codes | Explicit selected normal-output sequence and physical pump/bleed verification |
+| M6 | OEM tool-change sequence is model/version dependent | Stock `convert_tool_change` does not issue mist/flood OFF; M6 documentation says coolant persists unless M9 | Validate tool-change/guard/purge sequence; no implicit energy isolation |
+| M9 | Do not assume equivalence to OEM TSC OFF | Turns standard mist/flood outputs OFF | Separate TSC/TAB DIO may remain; map every output and physical zone |
+| M63 | Not the Haas TAB OFF command | Motion-synchronized digital output OFF **queued** until later motion | If used for a separate TSC/TAB valve, prove actual application and safe physical state; see AIR-CLEAN-01 |
+All rows concern **normal process control**. They are not a personnel-safety function, a pressure-zero witness or a qualified live test.

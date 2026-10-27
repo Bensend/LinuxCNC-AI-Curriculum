@@ -29,3 +29,14 @@ Identify the machine and selected TSC/TAB option; trace pump electrical feed, ai
 **Pinned source cross-check:** At LinuxCNC commit `07aa2ba191198003000d2acc52e629f8eb377026`, the [stock `convert_tool_change` path](https://github.com/LinuxCNC/linuxcnc/blob/07aa2ba191198003000d2acc52e629f8eb377026/src/emc/rs274ngc/interp_convert.cc) does not enqueue coolant OFF; the separate M9 path does. This is **SOURCE-CONFIRMED** for the non-remapped interpreter, not every retrofit. Treat the Haas M73/TAB versus LinuxCNC M73/modal-save collision as a required program-port review; do not assume M6 purges TSC.
 
 **Retrofitter trap:** Stock LinuxCNC M9 controls mist/flood, **not necessarily a separate TSC/TAB motion digital output**. If a retrofit maps air/coolant to M62/M63, the existing [AIR-CLEAN-01 source trace](../research/4400_AIR_CLEAN_01_LINUXCNC_PINNED_M62_M63_QUEUED_AIR_OUTPUT_SOURCE_TRACE_2026-10-27.md) shows M63 OFF is queued until subsequent motion; program-end with no motion does not prove that normal output changed. Trace the actual HAL/remap, independent protective authority and physical isolation; never infer the valve state from M9, M6 or a queued OFF command.
+
+### Cross-controller M-code migration contract — no syntax-only acceptance
+| Code / event | Haas TSC/TAB published meaning | Stock LinuxCNC published/pinned meaning | Retrofit evidence gate |
+|---|---|---|---|
+| M73 | TAB ON (TG0145 Rev C) | Save/autorestore modal state; upstream M73 fixture and `leave_context` confirm that mechanism | **Semantic collision:** never reuse OEM line unchanged; explicit selected mapping and observed normal output required |
+| M74 | TAB OFF (TG0145 Rev C) | Not listed as stock TAB command in stable M-code reference | Do not assume TAB OFF; verify selected remap or explicit command |
+| M88 / M89 | HPC/TSC pump ON / OFF (AD0086) | Not stock coolant codes | Explicit selected normal-output sequence and physical pump/bleed verification |
+| M6 | OEM tool-change sequence is model/version dependent | Stock `convert_tool_change` does not issue mist/flood OFF; M6 documentation says coolant persists unless M9 | Validate tool-change/guard/purge sequence; no implicit energy isolation |
+| M9 | Do not assume equivalence to OEM TSC OFF | Turns standard mist/flood outputs OFF | Separate TSC/TAB DIO may remain; map every output and physical zone |
+| M63 | Not the Haas TAB OFF command | Motion-synchronized digital output OFF **queued** until later motion | If used for a separate TSC/TAB valve, prove actual application and safe physical state; see AIR-CLEAN-01 |
+All rows concern **normal process control**. They are not a personnel-safety function, a pressure-zero witness or a qualified live test.

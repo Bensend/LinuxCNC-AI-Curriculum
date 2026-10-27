@@ -17,3 +17,5 @@ Read START_HERE and required governance; 1000/2000/F02/3000 CLOSED. Latest prede
 **Compute:** no GitHub Actions or local runner jobs, simulation, synthesis, build, physical test or independent evaluation; hosted 0 min, local 0 min. LAB_COMPUTE_LOG unchanged. G0/G1 HOLD; no personnel-exposed hazardous operation.
 
 **Same-session OEM catalogue precision:** Pilz current download catalogue explicitly lists **10.14.5 LTS** and **11.7.0**; the FAQ warns legacy v10 licensing may be required even though v11 Basic is free. These version labels are not a substitute for installed-model/firmware/project compatibility. Source-depth appended to original research; no extra evaluation or compute.
+
+**B1 conditional source-depth:** a third-party-hosted older Pilz B1 manual reports multiple stored projects, active-versus-history distinction and overall/safe/without-Level-3 checksum categories; original Pilz catalogue lists newer B1 manual 1003790-09. Preserve **COMMUNITY-REPORTED** provenance and edition uncertainty; do not infer B1 installed or use activation/reset controls for inspection. Existing D01 updated, no new intake or physical safety evidence.

@@ -14,3 +14,7 @@
 
 ## Compute, validation and session close
 No GitHub-hosted compute, local self-hosted compute, workflows, simulations, builds, physical tests, new authoritative runtime or evaluator score. **0 hosted / 0 local minutes**, LAB_COMPUTE_LOG unchanged. All claims DOC-CONFIRMED or SOURCE-CONFIRMED for inspected OEM/LinuxCNC documents, with conditional consequences INFERENCE and selected machine UNKNOWN. Original internal relative links to be checked before session end. LESSON_LOG safe SHA append to record actual UTC end and elapsed immediately before finishing; prior session ended 2026-10-27T21:35:02Z, this start 58m45.416s later; no known same-curriculum overlap, other automation overlap UNKNOWN.
+
+**Cross-machine synthesis:** [Safety Design Package §11JT](../safety-course/SAFETY_DESIGN_PACKAGE_TRACEABILITY_TEMPLATE.md) now compares a TSC pressure sensor's valid tap, an APC rack switch's premature mechanical trip, and a legitimately absent-option E-stop jumper. All three show why a proxy/green bit cannot be substituted for physical-state and independent safety witnesses.
+
+**Source-access limit:** the old 2005 Haas horizontal service PDF was found in search-indexed form but direct full-file access failed due to file size/network access; do not use the indexed E-stop/partial-index narrative as DOC-CONFIRMED or as an installed hydraulic truth. New 2025/2026 HTML OEM sources were directly inspected instead.

@@ -1042,3 +1042,6 @@ Read the [direct original Fiessler 2019 AMS3/F and public OpenPressBrake ATEK so
 
 
 **FEED-JOG source/predecessor caution:** [SET-01 prior source audit](../research/4400_LINUXCNC_FEED_INHIBIT_JOG_DOCUMENTATION_VERSION_DRIFT_2026-10-24.md) already found the joint wheel-jog exception; [reconciliation](../research/4400_FEED_JOG_01_PREDECESSOR_AND_WHEEL_JOG_SOURCE_CORRECTION_2026-10-27.md) corrects this session's novelty claim. The manual's G-code-only note cannot be generalized to every wheel jog; a wheel-jog feed-scale gate cannot be generalized to keyboard jog or safety stop. `motion.homing-inhibit` rejects homing initiation but is not an active homing protective stop. No physical test/evaluator, G0/G1 HOLD.
+
+
+**COMPOSE-02 applied safety review:** [M66 wait + M0/M1 pause + M53/feed/jog false-safe-access timeline](4400_NORMAL_SEQUENCE_WAIT_PAUSE_JOG_FALSE_SAFE_ACCESS_COMPOSITION_REVIEW_2026-10-27.md) keeps normal sequencing, HMI diagnostics, independent safety logic and physical final elements separate. [TP source depth](../research/4400_LINUXCNC_FEED_HOLD_INHIBIT_JOG_STOP_SAFETY_AUTHORITY_SOURCE_AUDIT_2026-10-27.md) confirms the documented spindle-synchronized feed-inhibit exception at code level. No actual OpenPressBrake failure, physical test, scored evaluation or machine release; G0/G1 HOLD.

@@ -1,0 +1,6 @@
+# 4400 CYL-STRUCT-03 — independent unseen structural-load evaluator
+**PREPARED / NOT RUN**, 2026-10-27. Public evaluator protocol only; no hidden answers or learner precommitment here.
+
+Evaluator privately select a novel nonproprietary cylinder geometry and mounting/load configuration supported by an OEM column-strength method. Supply only bounded scenario and permitted resources; withhold the solution and physical design details until the learner's immutable precommitment. Avoid using the Enerpac portable 80% rule as a universal design answer. Ask the learner to identify pressure-versus-column/side-load hazards, mounting and asymmetric-load dependencies, safe physical stop/hold, falsifiers, alternatives, confidence, elapsed time and sources consulted.
+
+After precommit, independently score prediction, mechanism, diagnostic efficiency, safety/uncertainty and confidence calibration 0–2 each (/10). Record contamination and oracle validity. Retest a miss on a distinct mount/load case, then delayed retention. No self-score or test by deliberately overloading/buckling a real cylinder. Qualified private OpenPressBrake Stage A A–G, independent Y1/Y2 stop/hold, mechanical load support, guarding, hydraulic isolation and fresh restart remain mandatory before personnel exposure. **G0/G1 HOLD**.

@@ -38,7 +38,7 @@ For each, identify `BND/HAZ/SF/PHY/AUTH/DEP/HF/VAL/CHG/UNK`, name the unsafe inf
 | ABR-G09 | Independent qualified validation plan and safe startup/inspection method; no ad hoc wheel burst/overspeed tests. | NOT RUN |
 | ABR-G10 | `CHG` review of wheel type/diameter, drive, speed, spindle, guard, flange, enclosure, maintenance and occupancy; affected `VAL/PT` marked stale. | NOT RUN |
 
-**Regulatory-scope trap:** OSHA §1910.215(a)(4) work-rest **1/8-inch** applies to specified **offhand grinding** machines; the adjustable upper tongue **1/4-inch** provision is also machine/guard-type specific. These numbers are **not** universal wheel-clearance settings for all CNC grinders. Source direct OSHA opening was 403, official indexed text available; exact applicability and current local law require verification. HSE HSG17 is UK guidance, not automatically a US legal mandate.
+**Regulatory-scope trap:** OSHA §1910.215(a)(4) work-rest **1/8-inch** applies to specified **offhand grinding** machines; the adjustable upper tongue **1/4-inch** provision is also machine/guard-type specific. These numbers are **not** universal wheel-clearance settings for all CNC grinders. The OSHA-hosted page returned 403, but **direct eCFR 29 CFR 1910.215** was read, up to date 2026-10-23: https://www.ecfr.gov/current/title-29/subtitle-B/chapter-XVII/part-1910/subpart-O/section-1910.215 . §(a)(4) offhand work rest, §(b)(9) specific tongue guard and §(d)(1)(i) organic-bond ring-test caveat are directly confirmed; exact selected machine applicability and local law still require verification. HSE HSG17 is UK guidance, not automatically a US legal mandate.
 
 ## Low-defeat design and independent safety boundary
 

@@ -1648,3 +1648,15 @@ Two newly inspected, **different** OEM systems expose the same architectural mis
 | Hardware permit | Both MAX22216 ENABLE LOW means full machine safety | Validate wire-75 conditioning and both ordinary sinks separately; independent Pilz/AKAS, 11K2, hydraulic final elements and actual Y1/Y2 stop/hold/pressure/guard/restart remain required | Machine G0/G1 HOLD |
 
 The ADI datasheet's IC-level enable/disable timing is **not** press-brake stopping time. A normal diagnostic fault or cleared register is never a physical ram/energy witness. This is a documentary source-depth improvement; no board, machine, hydraulic, evaluator or lab validation, no PL/SIL claim and no GitHub-hosted/local compute.
+
+
+## 11JV. 4400-STD-6909-01 — standards identity is a design input, not a physical safety witness (2026-10-27)
+[Original ISO/EN ISO 6909:2026 publisher scope and legacy-machine audit](../research/4400_PRESS_BRAKE_ISO6909_2026_TYPE_C_PUBLICATION_SCOPE_AND_LEGACY_RETROFIT_GATE_2026-10-27.md) corrects the RESCUE-01 edition inventory. **DOC-CONFIRMED:** ISO 6909:2026 published May 29, 2026, specific to hydraulic/servo press brakes; EN adoption and EU 2026/2015 listing exist. Its abstract excludes pre-publication manufactured press brakes and the safety of automatic loading/unloading equipment. ISO 16092-1 explicitly excludes press brakes, so hydraulic-press Part 3 is not an automatic substitute. The exact selected standard edition, date/jurisdiction/retrofit scope, paid normative clauses and physical stop/hold/guard/rearm acceptance are **UNKNOWN**.
+
+| Gate | Incorrect shortcut | Required existing evidence | State |
+|---|---|---|---|
+| Machine/edition identity | `hydraulic` implies ISO 16092-3, or 2026 ISO edition applies to all old brakes | Stage A A/F qualified machine technology, manufacturing/retrofit date, jurisdiction, ANSI B11.3/ISO 6909/EN 12622 selection and rationale | UNKNOWN |
+| Boundary with automated loading | `press-brake Type-C` covers robot/loading cell safety automatically | Separate integration/occupancy/guard/restart assessment; standard's published exclusion respected | UNKNOWN/N/A only with proof |
+| Normative and physical validation | Title/abstract/harmonised citation proves safe Y1/Y2 stop/hold | Licensed applicable clauses + selected safety program + independent physical final-element and stop/hold/energy/guard/restart witnesses | NOT RUN |
+
+**No retroactive certification, legal adoption assumption, numeric safety requirement or machine release.** G0/G1 HOLD, independent evaluator OPEN, 0 hosted/local compute.

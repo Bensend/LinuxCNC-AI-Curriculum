@@ -13,7 +13,7 @@
 | To energize an **external ordinary 24-V relay/contactor coil** | `relay_contactor_driver` `COIL_24V/COIL_RETURN` (currently **SIMULATION-READY**, not released) | Not the external contact, contact feedback, safety stop or proof of load holding. |
 | A protective stop, hydraulic load hold, safety reset or guarded access | **Retained independent Pilz/AKAS and actual safety final elements**, with wire-75 hardware and wire-63 drive paths preserved | Not assignable to ordinary FPGA output or watchdog. |
 
-The latest `relay_contactor_driver/REV1_RESOURCE_CONTRACT.yaml` (OpenPressBrake commit `92cf5424be90f45f664ba2652dc725b38e1895f9`) uses **three FPGA GPIO per instance**, but the two field terminals carry **coil power**, not contact COM/NO/NC. Neither the new contract nor the inspected Rev 1 machine mapping assigns that reusable primitive to the press brake's eight ordinary DO.
+The **2026-09-24** `relay_contactor_driver/REV1_RESOURCE_CONTRACT.yaml` (OpenPressBrake commit `92cf5424be90f45f664ba2652dc725b38e1895f9`) uses **three FPGA GPIO per instance**, but the two field terminals carry **coil power**, not contact COM/NO/NC. Neither the resource contract nor the inspected Rev 1 machine mapping assigns that reusable primitive to the press brake's eight ordinary DO.
 
 ## Five-minute documentary review (no live testing)
 

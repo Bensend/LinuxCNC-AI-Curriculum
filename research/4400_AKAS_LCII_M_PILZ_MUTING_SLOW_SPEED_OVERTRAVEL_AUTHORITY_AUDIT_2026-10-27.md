@@ -1,0 +1,54 @@
+# 4400-AKAS-M-01 — Fiessler LC-II M safety-PLC boundary, qualified muting and overrun witness
+
+**2026-10-27 | original manufacturer-document/source reconciliation | NOT GRADUATED; no as-built inspection, PLC export, physical test or safety release.**
+
+## Specific question and predecessor comparison
+
+[OPB-CUTOVER-02](4400_OPB_CUTOVER_02_PILZ_MUTE_GATE_POWER_DOMAIN_CROSS_REPOSITORY_SOURCE_AUDIT_2026-10-27.md) established that the published Rev 1 replacement sends a normal **MUTE COMMAND** to the retained Pilz, while the legacy AKAS mute path is outside ordinary board ownership. [The existing Stage B card](../safety-course/4400_OPB_CUTOVER_02_RESTRICTED_HANDSHAKE_AND_POWER_DELTA_CARD_2026-10-27.md) already asks whether the actual safety program qualifies that command. This investigation does **not** rediscover that principle. Its incremental evidence is the *exact manufacturer LC-II M versus LC-II F division of authority*, safe speed/position signal origins, short-circuit monitoring and periodic overrun-test requirement, plus a trap caused by treating the generic Pilz conveyor-muting example as the installed press-brake function.
+
+A direct semantic check of the complete canonical safety index and research plan found prior AKAS variant, optical blanking, Pilz muting and G0 source audits, but no recorded **FUS/FUO, SGS/SGO/SP** LC-II M input-to-OSSD manufacturer trace. This is **new exact variant evidence**, not a new generic safety mechanism or scored competency.
+
+## Evidence and revision scope
+
+| Source | Classification | Narrowly supported claim |
+|---|---|---|
+| [Fiessler official current AKAS LC product page](https://www.fiessler.de/en/products/safety-products/press-brakes/press-brake-protection-akas-lc.php), consulted 2026-10-27 | DOC-CONFIRMED | The **M** variant requires an external safety PLC, unlike the **F** variant with safety control integrated in the receiver. Product family and accessories are variant-dependent. |
+| Fiessler-authored **AKAS LC-II M/F Operating Instructions**, document 995, **1 December 2011**, [p. 23](https://www.manualslib.com/manual/1913069/Fiessler-Akas-Lc-Ii-M.html?page=23), [p. 24](https://www.manualslib.com/manual/1913069/Fiessler-Akas-Lc-Ii-M.html?page=24), [p. 21](https://www.manualslib.com/manual/1913069/Fiessler-Akas-Lc-Ii-M.html?page=21), mirrored by ManualsLib | DOC-CONFIRMED for **this manual edition only** | M-specific PLC, signals, short-circuit supervision, muting/speed and overrun-test responsibilities described below. The 2011 manual is manufacturer-authored but hosted by a third party; the official site also indexes an apparently newer document 995 (7 February 2014). **Do not claim revision equivalence without the installed manual.** |
+| [Pilz PNOZmulti Special Applications 1002337-EN-02](https://downloads.pilz.nl/downloads/PNOZMulti/PNOZmulti_Spec_Applic_Op_Man_1002337-EN-02.pdf), chapter 2 pp. 2-2 through 2-7 | DOC-CONFIRMED for a *different generic muting application* | Describes sensor-sequenced conveyor AOPD muting, reset, override, monitoring time and safe conditions during mute. It does **not** identify the installed Pilz function block or supply a press-brake-specific mute truth table. |
+| [OpenPressBrake Rev 1 endpoint audit](https://github.com/Bensend/OpenPressBrake/blob/main/docs/REV1_DNC_PVR_ENDPOINT_AUDIT.md), Git blob `717e7a07ab2d170b7727bb19c06734f5b31f83aa`; [machine config](https://github.com/Bensend/OpenPressBrake/blob/main/hardware/REV1_MACHINE_CONFIG.yaml), blob `deecc689a7d2b2cdad2061456583601a36b09337` | SOURCE-CONFIRMED published design, **not installed truth** | CNC→Pilz wire 44 labeled MUTE; wire 402 AKAS mute and Pilz-owned valve/safety paths outside ordinary board; legacy drawing `16-Akas LC II M.pdf` is present in the project but its pages were not independently parsed here. Actual installed AKAS model, revisions and PLC application are UNKNOWN. |
+
+## Exact LC-II M manufacturer responsibilities — no automatic machine transfer
+
+1. **M versus F:** page 24 explicitly assigns other safety monitoring to an *external* safety PLC for **LC-II M**; the **F** variant includes additional safety-control functions. Never import F-only HEX-switch, contactor/EDM or automatic test arrangements into an M design without its exact selected documentation.
+2. **Safe closing request:** in the 2011 LC-II M example, the safety PLC supplies safe closing-movement signals **FUS/FUO** and safe slow-speed/position signals **SGS/SGO/SP**. The manual calls for short-circuit monitoring of those signal lines by the safety PLC. **OSSD1/OSSD2** return to the safety PLC, which must evaluate loss of release and stop closing. These are functional relationships, not evidence of the OpenPressBrake program or physical hydraulic stop.
+3. **Muting qualification:** page 23 says the muting signal must not be issued when relevant switching elements malfunction, giving contactor non-release and failure to transition from fast to working motion as examples. It cites contactor-position monitoring, pressure switch or AMS as *possible* sources. In its specified mode it requires a reliably established slow closing condition when muting is asserted. It does **not** establish that OpenPressBrake uses any one listed source or that the normal CNC output alone may assert a safe mute.
+4. **Overrun proof:** pages 21/24 describe an automatic overrun check after voltage reset and repeated within 30 h when machine control owns it for the **M** variant; the 2011 manual's LC-II M example uses a 10 mm overrun bound and a slow-speed criterion below 10 mm/s. **These are manual/variant values, not measured stopping distance, approved settings, or generic design limits for the selected machine.** The same p. 21 contains a different **24-hour** statement in an F-family example. Never silently copy the F interval into the M acceptance record.
+5. **Setup/exception:** page 23 requires special setup muting to be cancelled on exit from setup and fast closing to be reliably excluded when the protective function is suspended. A held ordinary setup bit or reset cannot be the sole independent safety evidence.
+6. **Two unrelated meanings of muting:** the Pilz manual's sequential/parallel/cross muting concerns conveyor material-flow sensor geometry and explicitly requires alternate safe conditions during muting. A signal named `CTRL_MUTE_COMMAND` does **not** prove that this Pilz block is present, that its sensor/time rules apply, or that AKAS LC-II M receives the command directly.
+
+## Information-flow and failure-path review (conditional, not a PLC proof)
+
+Treat the six ordinary CNC→Pilz inputs as **untrusted requests** until the actual signed PLC application demonstrates otherwise. For each hazard/mode, an independent reviewer must show that an arbitrary stuck-high, stuck-low, simultaneous, stale, replayed or reset-edge sequence on these inputs **cannot remove a required protection** outside an independently qualified, bounded exception. Muting is not universally prohibited; it is a *controlled exception* whose alternative physical protection and safe speed/position evidence must be demonstrated.
+
+The minimal source graph to reconcile is:
+
+```
+normal LinuxCNC/FPGA -> CNC MUTE (wire 44) -> Pilz input I2
+actual guard/AKAS sensors + independently qualified speed/position
+                         -> actual safety-PLC logic (UNKNOWN)
+                         -> AKAS LC-II M FUS/FUO, SGS/SGO/SP (if this exact variant)
+AKAS LC-II M OSSD1/OSSD2 -> safety PLC -> retained final elements
+normal diagnostics/HMI  <- safety PLC status (not physical proof)
+```
+
+The arrow from Pilz to AKAS is a **candidate investigation path**, not an asserted installed wire map. The separate source-documented wire 402 must be traced from the actual electrical drawing and PLC program; do **not** equate it to wire 44 by matching the word “mute.” The as-built AKAS input variant, PLC internal block, safety speed/position sensors, fault response and physical final-element actions remain **UNKNOWN**.
+
+A reviewer should distinguish (a) no protection demand, (b) demand during fast approach, (c) a verified safe slow/position exception, (d) speed or position disagreement, (e) guard intrusion, (f) power-loss/recovery, (g) setup exit, and (h) overrun-test invalid/expired. These are **documentary classification categories**, not eight new laboratory tests. No energized fault injection is authorized.
+
+## Practical, low-friction implementation / G0 delta
+
+Reuse [Stage A A–G](../safety-course/4400_OPENPRESSBRAKE_G0_EVIDENCE_REQUEST_ONE_PAGE_2026-10-25.md) and existing [OPB-D02](../safety-course/4400_OPB_CUTOVER_02_RESTRICTED_HANDSHAKE_AND_POWER_DELTA_CARD_2026-10-27.md), not a new 20-item operator questionnaire. In the **restricted** machine workspace, a qualified reviewer needs only (1) exact AKAS label/manual edition and physical connection revision; (2) signed actual Pilz program and its wire 44/wire 402 dependency trace; (3) the independent source of speed/position and FUS/FUO/SGS/SGO/SP/OSSD mapping **if applicable**; (4) the selected overrun-test owner, criterion, frequency, inhibit-on-failure and retained historical evidence; (5) reset/setup/guard/fresh-start and final-element stop/hold witness map. Ask for existing records first. No guard defeat or hazardous machine operation to gather data.
+
+A safe, convenient maintenance design should make exact-device identity, diagnostic status, alignment after tool change, and automatic overrun-test failure *visible without bypassing* the safeguard. Repeated nuisance trips or difficult adjustments are engineering prompts for redesign and operator observation, not permission to force the mute signal.
+
+**Release disposition:** no qualified selected-machine evidence, no physical stop/hold/overrun proof, no external evaluator. **G0/G1 HOLD; G2 NOT RUN; G3/G4 NOT AUTHORIZED; G5 HOLD.** Do not operate with personnel exposed to unproved hazardous motion; isolated/remote experimental operation would require a separately qualified plan. No GitHub Actions, hosted/local compute or bench/physical test performed.

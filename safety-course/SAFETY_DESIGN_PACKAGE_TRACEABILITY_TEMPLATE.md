@@ -1635,3 +1635,16 @@ Two newly inspected, **different** OEM systems expose the same architectural mis
 - **E-stop diagnostic proxy** — Haas's 2026 **option-absent** service jumper permits an OEM maintenance configuration; an E-stop alarm clearing in that state **does not establish** the protective chain of an **installed** pallet pool. **DOC-CONFIRMED** existence and scope of service hardware; **UNKNOWN** selected machine and safety integrity.
 
 **Practical proof rule:** For every claimed safe state, write (1) the hazardous physical mechanism, (2) the ordinary command, (3) the proxy/sensor and its failure geometry, (4) the independent protective authority, and (5) the physical/qualified validation witness. If (4) or (5) is missing, report **UNKNOWN / HOLD** rather than turning a green I/O bit into safety approval. Do not copy the OEM's I/O table, service jumper, hydraulic truth or pressure threshold to another machine. No new lab, score or release.
+
+
+## 11JU. 4400-OPB-DRV-05 — ordinary driver fault, event-history and physical safety are different witnesses (2026-10-27)
+[Direct MAX22216 Rev. 2 source audit](../research/4400_OPB_MAX22216_FAULT_AUTORECOVERY_CRC_STALE_COMMAND_AND_ENABLE_EVIDENCE_AUDIT_2026-10-27.md) and [practical reviewer](4400_OPB_DRV_05_MAX22216_FAULT_RECOVERY_AND_INDEPENDENT_SAFETY_REVIEW_CARD_2026-10-27.md) refine the existing OpenPressBrake OPB-D04/D08 review; no new owner intake form.
+
+| Distinct witness | False-safe shortcut | Correct evidence allocation | State |
+|---|---|---|---|
+| Driver fault history | `N_FAULT` not asserted after ENABLE-low means no earlier fault | Separate normal diagnostic log/validity and explicit evidence of event capture; ENABLE-low can clear device registers; no log requirement may delay safety inhibit | SOURCE/DOC only; actual firmware UNKNOWN |
+| Actual coil command acceptance | SPI CRC rejected OFF/setpoint means zero current | CRC error leaves prior config; check next-transaction COMER, pipelined readback, and ordinary fresh-command/recovery logic | SOURCE/DOC only; runtime NOT RUN |
+| Driver fault effect | Every fault means output tri-stated and latched | Distinguish HHF (no tri-state), OVT (auto-recovery), OCP (channel tri-state/recovery), UVM (register persistence until digital POR) | DOC-CONFIRMED IC only |
+| Hardware permit | Both MAX22216 ENABLE LOW means full machine safety | Validate wire-75 conditioning and both ordinary sinks separately; independent Pilz/AKAS, 11K2, hydraulic final elements and actual Y1/Y2 stop/hold/pressure/guard/restart remain required | Machine G0/G1 HOLD |
+
+The ADI datasheet's IC-level enable/disable timing is **not** press-brake stopping time. A normal diagnostic fault or cleared register is never a physical ram/energy witness. This is a documentary source-depth improvement; no board, machine, hydraulic, evaluator or lab validation, no PL/SIL claim and no GitHub-hosted/local compute.

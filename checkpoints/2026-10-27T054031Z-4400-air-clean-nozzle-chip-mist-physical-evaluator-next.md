@@ -19,3 +19,6 @@ Rotated to direct pinned LinuxCNC M62/M63/M64/M65 source at 062dc7c097693bb68e76
 
 ## Final source-depth evidence addition
 Inspected nine pinned source stages in LinuxCNC revision 062dc7c097693bb68e76192516cd92878dd5ecdf: Interp convert_m, emccanon, Task, taskintf, motion command, TP pending queue, trajectory-component transfer/execution and HAL output. Verified now=0 versus now=1 path without runtime; source agrees with docs, so no question-driven lab justified. Physical output, program-end/abort and actual OpenPressBrake air-blast applicability UNKNOWN. See [full trace](../research/4400_AIR_CLEAN_01_LINUXCNC_PINNED_M62_M63_QUEUED_AIR_OUTPUT_SOURCE_TRACE_2026-10-27.md).
+
+
+**Abort-path follow-up:** direct pinned Task → motion abort → tpAbort/tpClearDIOs inspection shows clearing queued synchronized output commands, not an explicit HAL output reset in the inspected TP functions. Other cleanup/config paths remain UNKNOWN; no universal 'air stays on' assertion. No lab justified to prove a safety boundary already independent of normal output semantics. See same source trace.

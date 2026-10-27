@@ -1,0 +1,17 @@
+# 4400 safety continuation — session start 2026-10-27T09:34:34Z
+**Authority:** START_HERE read first; governance, active 08:32Z checkpoint, 4400 safety index/research, score/compute ledger and latest lab result inspected. 1000/2000/F02/3000 GRADUATED/CLOSED. 4400 safety priority. G0/G1 HOLD; G2 NOT RUN; G3/G4 NOT AUTHORIZED; G5 HOLD. 2520–25F0 independent evaluation NOT RUN.
+
+## New source/documentary evidence, not physical proof
+- [Exact STISO621/STISO620/IPS1025H and OpenPressBrake source audit](../research/4400_OPB_L7_L07_ISOLATOR_POWER_LOSS_FAULT_DIAGNOSTIC_POLARITY_SOURCE_AUDIT_2026-10-27.md) and [one-pass field reviewer card](../safety-course/4400_OPB_ISO_03_SWITCHED_FIELD_POWER_AND_DIAGNOSTIC_VALIDITY_REVIEW_CARD_2026-10-27.md). **DOC-CONFIRMED** STISO621 powered receiver after transmitter loss LOW only after tWD 2–6µs; unpowered receiver UNKNOWN. STISO620 process TX lost / logic RX alive LOW after tWD 2–8µs; unpowered RX TRI-STATE. IPS1025H VCC loss can continue driving until UVLO, GND loss disables output with small specified OUT current. **SOURCE-CONFIRMED** proposed L7/L07 switched supply and isolation topology.
+- **Concrete source conflict:** older Rev1 isolated-interface contract labels FLT1→OVERLOAD and FLT2→OVERTEMP, contrary to exact ST IPS1025H pin descriptions and newer Rev2/manifest FLT1→OVERTEMP and FLT2→OVERLOAD. Actual netlist/FPGA/HMI polarity and as-built implementation UNKNOWN. Board-design lane owns any circuit correction; curriculum records review blocker and precise physical/diagnostic witness.
+- Prior SNEAK-CUR/OUT-01/OPB-CUTOVER already cover generic leakage/backfeed and independent safety boundary. Incremental value is **exact OEM powered/unpowered logic semantics and real source conflict**, not a new generic safety mechanism. No new public case bank or documentary gates. Existing restricted Stage B OPB-D06/D08 subcheck only.
+
+## Compute and evidence
+No GitHub-hosted or local runner compute; no Actions, simulation, build, synthesis, benchmark, physical test or independent evaluator. `lab-results/LATEST.md` remains 2026-09-12 PB-BG-004. LAB_COMPUTE_LOG and FEEDBACK_SCORE_LOG unchanged. Manufacturer/device watchdog values are **not machine stop times**. Installed safety PLC program, AKAS variant, independent Y1/Y2 speed/stop/hold, hydraulic isolation, guarding and restart remain UNKNOWN.
+
+## Precise next
+1. Check for qualified restricted Stage A A–G, Stage B OPB-D02/D06/D08 and independent 2520–25F0 evaluator outcome; preserve private data outside public repository. Ask board-design lane to reconcile FLT1/FLT2 netlist/firmware/HMI and field-power-invalid diagnostics; no curriculum-owned board redesign.
+2. Qualified review of independent safety final elements and physical stop/hold/guard/energy/occupancy/restart, not ordinary FPGA output diagnostics. G0 documentary readiness precedes any isolated G1 physical plan. **G0/G1 HOLD; no personnel-exposed operation.**
+3. If no new qualified evidence, choose another truly distinct 4400 safety mechanism or source discrepancy only after full canonical-index, research-plan, PROGRESS, predecessor and exact source-path check. Avoid duplicate unscored scenarios.
+4. Do not dispatch hosted Actions. Only question-driven bounded self-hosted `[self-hosted, openpressbrake]` compute if genuinely needed. No compute question was justified here.
+5. Immediately before session end append actual UTC end/elapsed/overlap to **complete** LESSON_LOG with current blob SHA. Keep recurring curriculum enabled.

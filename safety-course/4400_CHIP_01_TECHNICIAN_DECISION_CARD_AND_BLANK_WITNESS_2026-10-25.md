@@ -33,3 +33,6 @@ For each case: identify the actual nip/auger/chute hazard, who can command motio
 | Qualified evaluator, owner and release decision | ____ | HOLD |
 
 These are learner-visible practice prompts, **not a sealed blind benchmark**. Independent fresh transfer must be separately conducted and scored.
+
+## 2026-10-27 OEM firmware discriminator — not an additional scored exercise
+[CHIP-03 original manufacturer-source delta](../research/4400_CHIP_03_HAAS_CONVEYOR_DOOR_OPEN_AUTO_START_SOFTWARE_REVISION_OEM_SOURCE_DELTA_2026-10-27.md) documents Haas service guidance: software **100.17.000.1016** is associated with conveyor/auger starting without operator action even with doors open; the manufacturer recommends **100.17.000.2030 or greater**. A separate pre-fix M31 timer-retrigger behavior is not the same as ordinary scheduled Settings 114/115 cycling. Classic Haas Control and NGC door rules differ. Before evaluating cases 5, 11 or 12, record exact controller family, installed version, option and relevant door/conveyor wiring; otherwise **UNKNOWN**. A software patch or door indication cannot substitute for lockable isolation during hazardous unjamming. No physical test or evaluator result; original 14 cases remain PAPER ONLY.

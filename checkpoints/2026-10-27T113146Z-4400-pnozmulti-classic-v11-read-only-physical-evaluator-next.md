@@ -15,3 +15,5 @@ Read START_HERE and required governance; 1000/2000/F02/3000 CLOSED. Latest prede
 3. If external gates remain blocked, choose a **distinct** high-consequence safety mechanism with direct authoritative evidence and semantic/source-path predecessor comparison; avoid duplicate paper banks. Reconcile any discovered installed device with its original manual before tool selection.
 
 **Compute:** no GitHub Actions or local runner jobs, simulation, synthesis, build, physical test or independent evaluation; hosted 0 min, local 0 min. LAB_COMPUTE_LOG unchanged. G0/G1 HOLD; no personnel-exposed hazardous operation.
+
+**Same-session OEM catalogue precision:** Pilz current download catalogue explicitly lists **10.14.5 LTS** and **11.7.0**; the FAQ warns legacy v10 licensing may be required even though v11 Basic is free. These version labels are not a substitute for installed-model/firmware/project compatibility. Source-depth appended to original research; no extra evaluation or compute.

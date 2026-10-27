@@ -1,0 +1,13 @@
+# 4400-WATERJET-01 — One-pass high-pressure waterjet safety review
+
+**NON-GRADUATED; documentary transfer only.** Read the [source/variant audit](../research/4400_WATERJET_01_HIGH_PRESSURE_BLEED_INTERLOCK_AND_INJECTION_SOURCE_AUDIT_2026-10-27.md).
+
+**Do not combine these four claims:** CNC jet OFF; pump OFF; all affected high-pressure volumes depressurized; safe human access/maintenance. Each has a different witness and authority. The ProtoMAX lid interlock is described as stopping motion and pump, **not** as a universal pressure-zero or service-isolation certificate. Flow's advertised one-second bleed is specific to HyperJet and is not transferable to other pumps, blocked segments or failed valves.
+
+**Review the physical energy path:** supply and drive → intensifier/direct-drive pump → attenuator/tubing/branch/valves → nozzle → catcher; separately identify isolation, bleed paths, trapped pockets, gauges/transducers and guarded access. A single sensor reading does not prove every isolated volume is at zero. Do not use a software pressure flag, G-code pause, LinuxCNC HAL, ordinary FPGA or watchdog as personnel-safety authority.
+
+**Human-factors check:** Does the design provide a guarded, convenient OEM service isolation/bleed arrangement; labeled boundaries; accessible evidence without hand probing; reinstalled guards; deliberate restart; and a waterjet medical-alert card? A complicated procedure that invites loosening a live fitting or bypassing a lid is a design defect. Only trained qualified personnel follow the **exact installed manufacturer's** depressurization and verification instructions.
+
+**Failure challenge (UNSCORED, no invented answer key):** An HMI says PUMP STOPPED; a technician wants to open a nozzle line. Name the missing independent evidence, the trapped-energy possibility, the authority that must approve maintenance, and what a small pinhole injury requires. The medical handoff is immediate professional care and identification as a high-pressure waterjet injury.
+
+**Evidence classification:** OEM/WJTA DOC-CONFIRMED for cited models/guidance; generic failures INFERENCE; selected machine/pressure-decay/stop time/PL/SIL UNKNOWN; physical validation and evaluator NOT RUN. No new scored paper bank. **G0/G1 HOLD** for OpenPressBrake; waterjet applicability UNKNOWN.

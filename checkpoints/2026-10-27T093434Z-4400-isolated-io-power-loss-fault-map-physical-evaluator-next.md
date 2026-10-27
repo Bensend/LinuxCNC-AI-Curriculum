@@ -27,3 +27,6 @@ No GitHub-hosted or local runner compute; no Actions, simulation, build, synthes
 
 
 **11K2 adversarial source matrix:** Public Rev1 maps 11K2 as two-pole L7/L07. Exact ST IPS1025H VCC-loss and GND-loss behaviors differ, so hypothetical single-pole weld/cross-feed paths cannot be collapsed into “two contacts open = safe.” Qualified restricted D06 must inspect real contactor model, contact feedback, alternate returns and independent hydraulic final elements. No fault injection, physical test, PL/SIL or machine-specific timing. [Original matrix](../research/4400_OPB_L7_L07_ISOLATOR_POWER_LOSS_FAULT_DIAGNOSTIC_POLARITY_SOURCE_AUDIT_2026-10-27.md).
+
+
+**TI reference transfer limitation:** TIDA-01509 Rev A original guide actually implements broken-wire discrimination by **temporarily opening the ISO121x field ground** with extra opto-emulator circuitry. This is **not** authority to interrupt the retained L07/Pilz return. Source audit and existing D06 field card explicitly prohibit copying this demonstration into shared safety wiring. No hardware changes or physical tests; board/safety lane owns any future design-specific solution.

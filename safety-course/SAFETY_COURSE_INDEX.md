@@ -1022,3 +1022,7 @@ Read [original WILA/Wilson/OSHA source audit](../research/4400_TOOL_RET_01_WILA_
 
 
 **CLEAN-COMPOSE-01:** [Air nozzle + solvent mist/ignition + hot machine + queued M63 OFF integration](4400_CLEAN_COMPOSE_01_AIR_SOLVENT_MIST_IGNITION_QUEUED_OUTPUT_AND_REARM_CROSSCUT_2026-10-27.md). Six unscored documentary transfer prompts, no additional formal cases/gates, physical selected-machine proof UNKNOWN. Ordinary output/E-stop cannot certify chemical or pneumatic safe state.
+
+
+### 4400-AKAS-M-01 — LC-II M is not LC-II F, and a CNC MUTE request is not a qualified safety mute (2026-10-27; NON-GRADUATED)
+[Original Fiessler LC-II M/F external-safety-PLC, safe speed/position and overrun manufacturer-source audit](../research/4400_AKAS_LCII_M_PILZ_MUTING_SLOW_SPEED_OVERTRAVEL_AUTHORITY_AUDIT_2026-10-27.md) → [restricted Stage A/OPB-D02 evidence delta](4400_AKAS_M_01_RESTRICTED_PILZ_MUTING_OVERRUN_EVIDENCE_DELTA_2026-10-27.md). The M example has safety-PLC-controlled FUS/FUO, SGS/SGO/SP, OSSD1/2 and monitored shorts; ordinary CNC wire 44 and AKAS wire 402 must be traced independently. The Pilz conveyor muting block and F-only integrated features are not automatically applicable. 2011/2014 manufacturer example numbers are not installed machine validation. No new public scenarios/gates or evaluator score. **G0/G1 HOLD**.

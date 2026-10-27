@@ -906,3 +906,7 @@ Full canonical index and research-plan synonym scan found no dedicated solvent/d
 
 
 **CLEAN-COMPOSE-01:** [Crosscut of AIR-CLEAN, SOLVENT-CLEAN, MWF and pinned M62/M63](safety-course/4400_CLEAN_COMPOSE_01_AIR_SOLVENT_MIST_IGNITION_QUEUED_OUTPUT_AND_REARM_CROSSCUT_2026-10-27.md), with OSHA shipyard fine-mist and HSE vapor-degreasing sources kept in exact jurisdiction/equipment scope. No universal flammable threshold, fan policy or physical proof. No new formal cases/gates, G0/G1 HOLD.
+
+
+### 2026-10-27 — AKAS-M-01 source/variant delta: LC-II M external safety PLC and actual muting authority
+[Exact Fiessler 2011/2014 LC-II M, Pilz conveyor-mut­ing non-equivalence, and OpenPressBrake wire-44/wire-402 source audit](research/4400_AKAS_LCII_M_PILZ_MUTING_SLOW_SPEED_OVERTRAVEL_AUTHORITY_AUDIT_2026-10-27.md); [one-pass existing OPB-D02 restricted review](safety-course/4400_AKAS_M_01_RESTRICTED_PILZ_MUTING_OVERRUN_EVIDENCE_DELTA_2026-10-27.md). Existing muting/AKAS/OPB-CUTOVER predecessors already teach the generic boundary; **incremental** is the actual LC-II M FUS/FUO/SGS/SGO/SP/OSSD1/2 safety-PLC allocation, short-circuit monitoring, qualified fast-to-slow transition and manufacturer-specific overrun responsibility. Distinguish M 30-h example from F-family 24-h example, and do not transfer any 10-mm/<10-mm/s manual example to the unverified installed machine. No new paper cases, documentary gates or physical proof; external evaluator NOT RUN, G0/G1 HOLD.

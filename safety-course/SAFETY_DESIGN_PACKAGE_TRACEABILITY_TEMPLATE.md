@@ -1428,3 +1428,19 @@ SICK p49 control switch outside zone/full view; Rockwell FSBM help requires hold
 **11IS pinned-source addendum:** [LinuxCNC M7/M8/M9 command-to-HAL trace](../research/4400_MWF_LINUXCNC_PINNED_M7_M8_M9_COOLANT_HAL_OUTPUT_VS_EXPOSURE_SOURCE_TRACE_2026-10-27.md) is **SOURCE-CONFIRMED** for `c9a5a0a5034177c8db64cb44abf14d4f2eb166f7` and shows Task sets ordinary HAL_OUT coolant pins without a physical pump or breathing-zone witness. This reinforces `AUTH` separation, not a new safety certification; `PHY/VAL/PT` remain UNKNOWN/NOT RUN.
 
 **11IS abort-path DEP/CCF:** [pinned `emcIoAbort`/E-stop source](../research/4400_MWF_LINUXCNC_PINNED_M7_M8_M9_COOLANT_HAL_OUTPUT_VS_EXPOSURE_SOURCE_TRACE_2026-10-27.md) confirms ordinary coolant HAL pins are cleared during Task abort/E-stop-related paths. If M8 is repurposed as LEV/circulation, the actual safety/exposure design must address residual aerosol and stagnation without inventing a universal fan stop sequence. As-built wiring and physical response UNKNOWN; G0/G1 HOLD.
+
+
+### 11IT — OpenPressBrake retained-Pilz handshake, mute and switched-return composition (2026-10-27)
+[Exact Rev 1 source/config audit](../research/4400_OPB_CUTOVER_02_PILZ_MUTE_GATE_POWER_DOMAIN_CROSS_REPOSITORY_SOURCE_AUDIT_2026-10-27.md) → [12-case technician desk review](4400_OPB_CUTOVER_02_PILZ_MUTE_GATE_POWER_DOMAIN_FIELD_REVIEW_2026-10-27.md) → [restricted Stage B delta](4400_OPB_CUTOVER_02_RESTRICTED_HANDSHAKE_AND_POWER_DELTA_CARD_2026-10-27.md). **This is a design-source crosswalk, not as-built validation.**
+
+| Package ID | Exact project interface / claim | Narrow evidence and disposition |
+|---|---|---|
+| `BND/HAZ-OPB-02` | Y1/Y2 press, X drive, guarding/muting, restart, maintenance | Machine hazard map and modes still UNKNOWN; G0 HOLD. |
+| `AUTH-OPB-02A` | Normal DNC replacement sends wires 42–47 into Pilz, including MUTE 44/CNC OK 45 | SOURCE-CONFIRMED *published Rev 1 endpoint map*; installed Pilz trust, polarity, freshness and qualification UNKNOWN. |
+| `AUTH-OPB-02B` | Pilz wire 75 proportional inhibit; wire 63 direct X-drive enable; Pilz-owned 11Y4/11Y6/11Y8 | Design-intended separation SOURCE-CONFIRMED; independent final-element effect and hydraulic safe state NOT PROVED. |
+| `DEP-OPB-02` | 11K2 two-pole L7/L07, possible L07–L06 bypass, PVR X2 high-current return, duplicated wire 111 | Source-map warnings confirmed; actual physical wiring, shared return and fault behavior UNKNOWN. |
+| `SRS/PHY-OPB-02` | Independently justified guard/mute, Y1/Y2 STOP/HOLD, X stop, pressure/energy, deliberate restart | Selected safety program, physical witnesses and acceptance criteria UNKNOWN; no generic truth table, timing, PL/SIL or pressure inferred. |
+| `VAL/PT-OPB-02` | Review stuck MUTE/CNC OK, wire 75 bypass, switched-return bridge, safety-valve migration and held restart | Twelve documentary gates NOT RUN; physical test NOT AUTHORIZED without G1 isolated/remote plan. |
+| `CHG/HF-OPB-02` | Connector substitution, guard bypass incentives, fault message clarity, service return/rewire | Any changed wire or program semantics makes dependent evidence STALE; safe, keyed, inspectable wiring is easier than bypass. |
+
+**Contradiction rule:** Pilz status/valve feedback healthy but physical STOP/HOLD/pressure/guard witness disagrees ⇒ `PHY NOT ESTABLISHED`, `VAL/DEP/CHG` reopen, G0/G1 HOLD, no rearm or personnel exposure. This crosswalk cannot promote source-design claims to TEST-CONFIRMED machine evidence.

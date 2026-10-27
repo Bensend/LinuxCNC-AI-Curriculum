@@ -17,3 +17,5 @@
 **GitHub-hosted compute 0 min; local [self-hosted, openpressbrake] compute 0 min.** No workflow, lab, simulation, physical test or authoritative runtime; LAB_COMPUTE_LOG unchanged. 1000/2000/F02/3000 remain GRADUATED/CLOSED. G0/G1 HOLD; G2 NOT RUN, G3/G4 NOT AUTHORIZED, G5 HOLD. No personnel-exposed hazardous operation authorized. End/elapsed/overlap to be recorded immediately before ending in LESSON_LOG using complete-file SHA-safe append.
 
 **Prior same-curriculum session end:** 2026-10-27T20:44:57Z; this start 21:31:25Z; 46m28s gap, no known same-curriculum overlap. Separate OpenPressBrake board automations may overlap; their exact concurrent execution is not independently established here.
+
+**Same-session provenance refinement:** the 2001 VR supplement is **manufacturer search-index excerpt only** (full PDF fetch failed); exact legacy “safety circuit” scope is not used to contradict modern Classic/NGC troubleshooting. The OSHA 2012 citation page 15 was visually checked; incident concerns non-CNC food-processing conveyor/auger. New source/checkpoint relative links checked: 8 occurrences, 6 unique targets, zero broken. No tests/compute.

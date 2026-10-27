@@ -21,7 +21,7 @@
 ## Durable integration and checks
 
 - Updated [CURRICULUM](../CURRICULUM.md), [PROGRESS](../PROGRESS.md), [SAFETY_COURSE_RESEARCH](../SAFETY_COURSE_RESEARCH.md), [canonical learner index](../safety-course/SAFETY_COURSE_INDEX.md), [cumulative safety design package](../safety-course/SAFETY_DESIGN_PACKAGE_TRACEABILITY_TEMPLATE.md) through **§§11IO–11IQ**.
-- Eight original artifacts re-fetched with nonempty blob SHAs; four original-file relative references resolve to three targets plus one MAGCHUCK link; **zero broken**. All five canonical integrations contain all seven original-artifact references. Full historical repository tree audit **not run**.
+- Eight original artifacts re-fetched with nonempty blob SHAs. **20 original-file relative links** (DUST-05 18, ABRASIVE-01 one, MAGCHUCK-01 one) and **15 checkpoint links** independently resolved, **zero broken**. All five canonical integrations contain all **eight** original-artifact references. Full historical repository tree audit **not run**.
 - GitHub-hosted Actions compute **0 min**, local runner compute **0 min**; **no Actions workflow dispatched**, no simulation, build, synthesis, benchmark, live dust ignition, wheel spin/burst, magnetic drop, machine test, authoritative new runtime or independent evaluation. Self-hosted `[self-hosted, openpressbrake]` dispatch/access **not tested because no justified compute question**. No fallback to hosted runners. `LAB_COMPUTE_LOG.md` and `evaluation/FEEDBACK_SCORE_LOG.md` intentionally unchanged.
 
 ## Precise next-work priority

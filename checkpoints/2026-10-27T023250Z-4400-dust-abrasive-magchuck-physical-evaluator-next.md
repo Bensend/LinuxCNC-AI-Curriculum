@@ -1,0 +1,35 @@
+# 4400 safety continuation checkpoint — 2026-10-27T02:32:50Z session
+
+**Recorded UTC start:** 2026-10-27T02:32:50Z in [durable start marker](2026-10-27T023250Z-session-start-safety.md), before substantive research. **End and actual elapsed:** see the safely appended `LESSON_LOG.md` entry for this session. **Priority:** selected OpenPressBrake safety course and 4000-series safety/design; **not** old 3300 manufacturing.
+
+## Governance and current durable state
+
+- `START_HERE.md` read first. `MASTER_MISSION.md`, `LEVEL_ORDER.md`, `CURRICULUM.md`, `WORK_SELECTION_POLICY.md`, `SOURCE_POLICY.md`, `PROGRESS.md`, active [01:38Z checkpoint](2026-10-27T013841Z-4400-machine-access-low-height-fall-physical-evaluator-next.md), safety index, evaluation/feedback and compute records reviewed.
+- 1000/2000 and F02 formally GRADUATED/CLOSED; 3000 specializations preserved and CLOSED. 4400 safety is active, 2520–25F0 independent competency evaluation **OPEN/NOT RUN**. No public paper cases promoted to scores.
+- Selected OpenPressBrake **G0/G1 HOLD, G2 NOT RUN, G3/G4 NOT AUTHORIZED, G5 HOLD**. Actual qualified private Stage A A–G independent Y1/Y2 stop/hold, gravity support, hydraulic isolation, guards, access, power-return/rearm and deliberate restart evidence still absent. No personnel-exposed hazardous operation.
+
+## Seven original source/engineering artifacts committed to main
+
+**DUST-01** — after direct full 978-line canonical index novelty scan, found no existing combustible-dust explosion/collector propagation branch. [Original OSHA/CSB/HSE/Fike/NFPA publisher audit](../research/4400_DUST_01_OSHA_CSB_FIKE_NFPA660_COMBUSTIBLE_PARTICULATE_AND_COLLECTOR_PROPAGATION_AUDIT_2026-10-27.md), [ten PUBLIC PAPER cases UNSCORED/twelve desk gates NOT RUN](../safety-course/4400_DUST_01_COLLECTOR_PRIMARY_SECONDARY_EXPLOSION_AND_MAINTENANCE_FIELD_MODULE_2026-10-27.md), [collector-vessel vs connected-duct protection, CCF/change review](../safety-course/4400_DUST_01_COLLECTOR_ISOLATION_CCF_AND_CHANGE_IMPACT_REVIEW_2026-10-27.md). **DOC-CONFIRMED direct:** HSE 2024-10-22 wood extraction fire, CSB Imperial Sugar 2009 primary/secondary and Hoeganaes 2012 iron powder incidents, Fike OEM vent/suppression vs duct isolation. **DOC-CONFIRMED indexed-only:** OSHA dust pentagon/2023 NEP and NFPA 660:2025 publisher metadata; no normative clauses inspected. Selected material/collector and OpenPressBrake applicability UNKNOWN.
+
+**ABRASIVE-01** — distinct index gap for wheel burst, guard type and spindle overspeed. [Original direct HSE 53-page HSG17/Norton 2023 OEM and OSHA indexed 1910.215 audit](../research/4400_ABRASIVE_01_HSE_NORTON_OSHA_WHEEL_BURST_OVERSPEED_GUARD_COMPATIBILITY_AUDIT_2026-10-27.md), [eight PUBLIC PAPER cases UNSCORED/ten desk gates NOT RUN](../safety-course/4400_ABRASIVE_01_WHEEL_BURST_SPEED_GUARD_EIGHT_CASE_FIELD_CARD_2026-10-27.md). **DOC-CONFIRMED direct:** burst from speed, mounting, imbalance and guard defects; actual spindle speed and correct fragment-containment guard/fasteners matter. OSHA offhand rest 1/8-inch and certain tongue 1/4-inch limits **not universal CNC dimensions**; exact OSHA official text indexed-only (direct 403). Selected abrasive machine UNKNOWN.
+
+**MAGCHUCK-01** — distinct index gap for magnetic pole coverage/contact-area workpiece retention. [Direct HSE HSG17 p16, Walker NEOMAX original 8-page manual, Walmag electro-permanent OEM audit](../research/4400_MAGCHUCK_01_HSE_WALKER_WALMAG_POWER_LOSS_CONTACT_AND_EJECTION_SOURCE_AUDIT_2026-10-27.md), [six PUBLIC PAPER cases UNSCORED/eight desk gates NOT RUN](../safety-course/4400_MAGCHUCK_01_POWER_LOSS_POLE_COVERAGE_AND_EJECTION_SIX_CASE_CARD_2026-10-27.md). **DOC-CONFIRMED direct:** permanent/electro-permanent magnetic force can persist without power, but actual part hold depends on material, poles, area/thickness, rust/air gap, force and fixtures; residual attraction can crush. OEM '100% safe' marketing not treated as certification. Selected chuck/part UNKNOWN.
+
+**Total this session:** seven originals, **24 PUBLIC PAPER cases UNSCORED**, **30 documentary gates NOT RUN**; all conditional physical `PHY/VAL/PT` UNKNOWN/NOT RUN. No new SOURCE-CONFIRMED LinuxCNC or TEST-CONFIRMED selected machine. No blind independent evaluator execution.
+
+## Durable integration and checks
+
+- Updated [CURRICULUM](../CURRICULUM.md), [PROGRESS](../PROGRESS.md), [SAFETY_COURSE_RESEARCH](../SAFETY_COURSE_RESEARCH.md), [canonical learner index](../safety-course/SAFETY_COURSE_INDEX.md), [cumulative safety design package](../safety-course/SAFETY_DESIGN_PACKAGE_TRACEABILITY_TEMPLATE.md) through **§§11IO–11IQ**.
+- Seven original artifacts re-fetched with nonempty blob SHAs; four original-file relative references resolve to three targets plus one MAGCHUCK link; **zero broken**. All five canonical integrations contain all seven original-artifact references. Full historical repository tree audit **not run**.
+- GitHub-hosted Actions compute **0 min**, local runner compute **0 min**; **no Actions workflow dispatched**, no simulation, build, synthesis, benchmark, live dust ignition, wheel spin/burst, magnetic drop, machine test, authoritative new runtime or independent evaluation. Self-hosted `[self-hosted, openpressbrake]` dispatch/access **not tested because no justified compute question**. No fallback to hosted runners. `LAB_COMPUTE_LOG.md` and `evaluation/FEEDBACK_SCORE_LOG.md` intentionally unchanged.
+
+## Precise next-work priority
+
+1. **Highest-value unblock:** qualified **private** OpenPressBrake Stage A A–G as-built independent Y1/Y2 stopping/holding, gravity-load and hydraulic isolation, guards/rear/backgauge access, mode/reset/restart, actual power-loss behavior and safe commissioning. Keep proprietary data private. Do not infer valve truth tables, stopping distance, PL/SIL, hydraulic pressure or structural capacity.
+2. **Independent 2520–25F0 evaluator:** fresh unseen assessment by information-separated qualified evaluator; current public cases are unscored teaching, not competency. Do not mark complete without real score/evidence.
+3. **If selected physical evidence unavailable:** first compare any proposed new mechanism with the complete canonical index, then pursue genuinely new high-value 4400 safety source/real implementation or adversarial architecture branch. Prefer strengthening the actual machine release gate over accumulating duplicate paper scenarios. DUST/ABRASIVE/MAGCHUCK branches are source-bounded until actual installations/materials are identified; do not invent hardware on OpenPressBrake.
+4. **Compute rule:** only when a concrete unresolved question cannot be answered by sources, freeze a bounded lab for `[self-hosted, openpressbrake]`; if dispatch unavailable, record blocker and continue source work. Never use hosted runners.
+5. Immediately before each run ends, capture UTC end/elapsed/overlap and safely append `LESSON_LOG.md` with the current complete blob SHA. Keep recurring curriculum enabled unless owner stops it or work genuinely completes.
+
+**Safety release:** **G0/G1 HOLD; no personnel-exposed hazardous operation authorized.**

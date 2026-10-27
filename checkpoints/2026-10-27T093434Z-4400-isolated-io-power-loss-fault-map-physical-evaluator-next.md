@@ -24,3 +24,6 @@ No GitHub-hosted or local runner compute; no Actions, simulation, build, synthes
 
 
 **Input-side OEM addition:** TI ISO1212 SLLSEY7 Rev G Table 7-2 says an **open field input** gives LOW while receiver logic is powered. TI TIDA-01509 broken-wire detection requires additional circuitry; public OpenPressBrake DI `INPUT_VALID` is optional and no installed rail-valid/wire-break source is proven. All-LOW Pilz status plus all-LOW FLT1/FLT2 is **not** a qualified safe-state witness. Source audit, field card and existing restricted OPB-D06 request updated; no test or compute. G0/G1 HOLD.
+
+
+**11K2 adversarial source matrix:** Public Rev1 maps 11K2 as two-pole L7/L07. Exact ST IPS1025H VCC-loss and GND-loss behaviors differ, so hypothetical single-pole weld/cross-feed paths cannot be collapsed into “two contacts open = safe.” Qualified restricted D06 must inspect real contactor model, contact feedback, alternate returns and independent hydraulic final elements. No fault injection, physical test, PL/SIL or machine-specific timing. [Original matrix](../research/4400_OPB_L7_L07_ISOLATOR_POWER_LOSS_FAULT_DIAGNOSTIC_POLARITY_SOURCE_AUDIT_2026-10-27.md).

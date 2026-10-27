@@ -15,3 +15,5 @@
 4. **Compute:** GitHub-hosted 0 min; local [self-hosted, openpressbrake] 0 min. No workflow dispatched, no lab question justified; LAB_COMPUTE_LOG and FEEDBACK_SCORE_LOG unchanged. 1000/2000/F02/3000 CLOSED. No evaluator result or physical safety credit.
 
 **Overlap:** previous same-curriculum session ended 2026-10-27T19:43:36Z, current start 20:39:09Z (55.55-minute gap), none known. Other automation overlap UNKNOWN. Actual UTC end/elapsed to be appended to complete LESSON_LOG.md immediately before end.
+
+**Same-session source-depth physical discriminator:** Firetrace DIOM 800095-A §3.7 end-of-line gauge reads pneumatic **detection-tube pressure**, not extinguishing-agent cylinder inventory or actual nozzle delivery. FS-2 now explicitly separates tube/coverage, cylinder charge and discharge-path witnesses; a single green gauge cannot prove fire suppression. Original audit, field card, PROGRESS and design §11JP updated; no selected-machine test or numeric threshold.

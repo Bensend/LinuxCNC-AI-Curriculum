@@ -1121,3 +1121,6 @@ UTC start durably recorded in [session marker](checkpoints/2026-10-27T033255Z-se
 
 
 **4400-CLEAN-COMPOSE-01 same-session integration:** [Air nozzle + solvent mist/vapor + hot machine + pinned M63 queued-OFF + restart failure-path crosscut](safety-course/4400_CLEAN_COMPOSE_01_AIR_SOLVENT_MIST_IGNITION_QUEUED_OUTPUT_AND_REARM_CROSSCUT_2026-10-27.md). Reuses prior AIR-CLEAN, SOLVENT-CLEAN, MWF and LinuxCNC source evidence without claiming new generic mechanisms. Six unscored adversarial prompts, **no additional formal cases/gates**; combined machine failure remains INFERENCE, actual chemical/air/guard/ignition UNKNOWN, no physical test/compute/evaluator. G0/G1 HOLD.
+
+
+**AIR-CLEAN source countercheck:** [Pinned M2/M30 documentation and convert_stop → PROGRAM_END → Task source trace](research/4400_AIR_CLEAN_01_LINUXCNC_PINNED_M62_M63_QUEUED_AIR_OUTPUT_SOURCE_TRACE_2026-10-27.md) found explicit spindle/coolant OFF but no explicit motion-DIO OFF in inspected program-end handlers. This strengthens the distinction between M63 queued OFF and M2/M30; physical HAL/PLC/remap and selected valve remain UNKNOWN. No simulation/test/compute or safety credit.

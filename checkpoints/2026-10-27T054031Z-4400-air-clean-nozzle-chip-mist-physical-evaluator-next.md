@@ -30,3 +30,6 @@ After completing the AIR-CLEAN-01 source/abort path, performed full canonical-in
 
 ## Final same-session cross-system safety integration
 [Air nozzle + solvent aerosol/vapor + hot machine + M63 queued OFF + guard/rearm crosscut](../safety-course/4400_CLEAN_COMPOSE_01_AIR_SOLVENT_MIST_IGNITION_QUEUED_OUTPUT_AND_REARM_CROSSCUT_2026-10-27.md) adds six unscored documentary adversarial prompts, no additional formal cases/gates, no actual machine or chemical assumed. OSHA shipyard/HSE vapor-degreasing sources used only within published scope; no universal LEL/fan/ventilation rule. Next session should prioritize qualified private G0 evidence and independent evaluator; rotate to new safety mechanism only after semantic audit.
+
+
+**End-of-program source countercheck:** M2/M30 pinned docs and interpreter/Task path explicitly stop spindle/coolant but do not explicitly clear motion DIO in inspected handlers. No actual machine air-ON inference or runtime claim; selected HAL/PLC/remap remains UNKNOWN. The source question is adequately answered without a lab; focus physical/evaluator evidence next.

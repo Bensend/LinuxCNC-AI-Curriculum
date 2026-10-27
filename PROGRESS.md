@@ -1124,3 +1124,6 @@ UTC start durably recorded in [session marker](checkpoints/2026-10-27T033255Z-se
 
 
 **AIR-CLEAN source countercheck:** [Pinned M2/M30 documentation and convert_stop → PROGRAM_END → Task source trace](research/4400_AIR_CLEAN_01_LINUXCNC_PINNED_M62_M63_QUEUED_AIR_OUTPUT_SOURCE_TRACE_2026-10-27.md) found explicit spindle/coolant OFF but no explicit motion-DIO OFF in inspected program-end handlers. This strengthens the distinction between M63 queued OFF and M2/M30; physical HAL/PLC/remap and selected valve remain UNKNOWN. No simulation/test/compute or safety credit.
+
+
+**4400 safety learning-method audit:** [Evidence debt and information-gain triage](research/4400_SAFETY_EVIDENCE_DEBT_AND_INFORMATION_GAIN_TRIAGE_AUDIT_2026-10-27.md) distinguishes this session's **20 new public UNSCORED paper scenarios and 22 NOT RUN documentary gates** from source-confirmed M62/M63 execution-path progress and from absent selected-machine/independent evaluator proof. Updated WORK_SELECTION_POLICY to prioritize any new qualified Stage A/B or evaluator evidence before further scenario proliferation. No new scores/physical proof/compute; G0/G1 HOLD.

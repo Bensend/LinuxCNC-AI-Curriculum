@@ -33,3 +33,7 @@ After completing the AIR-CLEAN-01 source/abort path, performed full canonical-in
 
 
 **End-of-program source countercheck:** M2/M30 pinned docs and interpreter/Task path explicitly stop spindle/coolant but do not explicitly clear motion DIO in inspected handlers. No actual machine air-ON inference or runtime claim; selected HAL/PLC/remap remains UNKNOWN. The source question is adequately answered without a lab; focus physical/evaluator evidence next.
+
+
+## Study-method checkpoint / validation-debt control
+[Evidence-debt audit](../research/4400_SAFETY_EVIDENCE_DEBT_AND_INFORMATION_GAIN_TRIAGE_AUDIT_2026-10-27.md) and WORK_SELECTION_POLICY refinement: prioritize genuinely new qualified OpenPressBrake G0 Stage A/B or independent evaluator results before additional documentary scenario banks; source work must close a concrete high-consequence uncertainty or new physical witness. This session's 20 new public cases remain UNSCORED and 22 desk gates NOT RUN, even though pinned LinuxCNC source semantics are confirmed. No G0 progress or safety release. Recurring curriculum remains enabled.

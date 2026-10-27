@@ -9,3 +9,5 @@
 2. If actual retrofit cable/drive changes are documented, attach EMC-1..6 to existing Stage A review; do not invent device-specific separation distances or safety levels. Only qualified safe/isolated commissioning, no deliberate live wire shorts or RF injection.
 3. If no physical/evaluator information, rotate to a **distinct** safety/4000 source question after full index/plan/progress/filenames/predecessor check. Prefer architecture/failure-path reconciliation over another public unscored exam.
 4. No GitHub-hosted runner compute; local [self-hosted, openpressbrake] 0 min; no compute question justified. LAB_COMPUTE_LOG and FEEDBACK_SCORE_LOG unchanged. Same-curriculum overlap from prior lesson: prior end 18:38:09.218Z, current start 19:39:35Z (61.43 min gap), **none known**; other automation overlap UNKNOWN. End/elapsed will be recorded in LESSON_LOG.md.
+
+**Same-session source-depth:** Pilz 1002265-EN-02 back page dated **2016-05** (not a new 2026 publication); §5.13.6 requires separate external multicore cables for CI+/CI- and CO+/CO- cascading pairs. Selected cascade presence UNKNOWN; no physical proof or additional lab justified.

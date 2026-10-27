@@ -899,3 +899,7 @@ Full-index and research-plan novelty review: no prior MWF-specific aerosol, micr
 
 
 **AIR-CLEAN-01 source continuation:** [Direct original pinned LinuxCNC M62/M63 queued OFF transfer](research/4400_AIR_CLEAN_01_LINUXCNC_PINNED_M62_M63_QUEUED_AIR_OUTPUT_SOURCE_TRACE_2026-10-27.md) and [OSHA 1994/2011/2015 field/source delta](research/4400_AIR_CLEAN_01_OSHA_FIELD_ENFORCEMENT_AND_BODY_CLEANING_DELTA_2026-10-27.md). Novelty: new application of pre-existing M-code source behavior to cleaning-air end-of-motion sequencing; no re-teaching as a new M-code discovery. No selected-machine test or compute.
+
+
+### 2026-10-27 — SOLVENT-CLEAN-01 cleaning vapor/ignition source delta
+Full canonical index and research-plan synonym scan found no dedicated solvent/degreasing/flammable cleaning vapor mechanism. [Original OSHA 1910.106/HSE/Massachusetts audit](research/4400_SOLVENT_CLEAN_01_OSHA_HSE_AQUEOUS_IGNITION_VAPOR_SOURCE_AUDIT_2026-10-27.md) → [8-case public technician module](safety-course/4400_SOLVENT_CLEAN_01_CHEMICAL_VAPOR_IGNITION_AND_RESTART_FIELD_MODULE_2026-10-27.md). Scope-limited official documentation, no universal ventilation/LEL/flashpoint or fan-stop sequence. All public cases UNSCORED, 10 desk gates NOT RUN, actual machine UNKNOWN; G0/G1 HOLD, no compute.

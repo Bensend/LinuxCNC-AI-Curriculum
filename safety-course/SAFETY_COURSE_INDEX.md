@@ -1015,3 +1015,7 @@ Read [original WILA/Wilson/OSHA source audit](../research/4400_TOOL_RET_01_WILA_
 
 
 **AIR-CLEAN-01 source and field follow-through:** [Original pinned LinuxCNC M62/M63 queued OFF trap](../research/4400_AIR_CLEAN_01_LINUXCNC_PINNED_M62_M63_QUEUED_AIR_OUTPUT_SOURCE_TRACE_2026-10-27.md) and [OSHA body-cleaning/taped-hose/drying citation delta](../research/4400_AIR_CLEAN_01_OSHA_FIELD_ENFORCEMENT_AND_BODY_CLEANING_DELTA_2026-10-27.md). Ordinary M63 OFF may wait for next motion; not a safety valve or proof of pressure zero. No new scored cases, physical validation or machine applicability.
+
+
+### 4400-SOLVENT-CLEAN-01 — cleaning solvent vapor, ignition, waste and rearm (2026-10-27)
+[Original OSHA/HSE/aqueous source audit](../research/4400_SOLVENT_CLEAN_01_OSHA_HSE_AQUEOUS_IGNITION_VAPOR_SOURCE_AUDIT_2026-10-27.md) → [8 public UNSCORED cases/10 documentary gates NOT RUN](4400_SOLVENT_CLEAN_01_CHEMICAL_VAPOR_IGNITION_AND_RESTART_FIELD_MODULE_2026-10-27.md). **DOC-CONFIRMED** covered flammable-liquid handling/ignition/housekeeping scope, HSE incident and safer substitution. **INFERENCE** M5/E-stop does not remove vapor/hot surfaces or make a non-rated fan safe. **UNKNOWN** selected machine and solvent. No physical validation/evaluator; G0/G1 HOLD.

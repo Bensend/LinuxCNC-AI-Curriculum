@@ -22,3 +22,7 @@ Inspected nine pinned source stages in LinuxCNC revision 062dc7c097693bb68e76192
 
 
 **Abort-path follow-up:** direct pinned Task → motion abort → tpAbort/tpClearDIOs inspection shows clearing queued synchronized output commands, not an explicit HAL output reset in the inspected TP functions. Other cleanup/config paths remain UNKNOWN; no universal 'air stays on' assertion. No lab justified to prove a safety boundary already independent of normal output semantics. See same source trace.
+
+
+## Second distinct 4400 safety branch: SOLVENT-CLEAN-01
+After completing the AIR-CLEAN-01 source/abort path, performed full canonical-index and research-plan semantic scan for solvent/degreasing/flammable cleaning vapor; no dedicated predecessor found. Published [original OSHA 1910.106, HSE degreasing/flammable vapor incident, Massachusetts aqueous alternatives audit](../research/4400_SOLVENT_CLEAN_01_OSHA_HSE_AQUEOUS_IGNITION_VAPOR_SOURCE_AUDIT_2026-10-27.md) and [8 PUBLIC UNSCORED scenarios/10 NOT RUN documentary gates](../safety-course/4400_SOLVENT_CLEAN_01_CHEMICAL_VAPOR_IGNITION_AND_RESTART_FIELD_MODULE_2026-10-27.md). Distinguishes motion stop from hot-surface/ignition, vapor/exposure, waste, hot work and rearm. **DOC-CONFIRMED scoped official source; INFERENCE hazard composition; UNKNOWN actual cleaner/machine, fan, vapor, ignition and physical proof.** No universal LEL, ventilation CFM, flashpoint or fan E-stop sequence; no lab/Actions/compute or evaluator. G0/G1 HOLD. Next priority remains private physical Stage A A–G and independent evaluator.

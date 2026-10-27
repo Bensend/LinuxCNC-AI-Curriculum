@@ -705,3 +705,7 @@ Distinct direct-index gap after ABRASIVE-01: no magnetic-chuck pole coverage, ma
 
 
 **AIR-CLEAN-01 source-depth continuation:** [Pinned LinuxCNC M62/M63 OFF-without-next-motion transfer](research/4400_AIR_CLEAN_01_LINUXCNC_PINNED_M62_M63_QUEUED_AIR_OUTPUT_SOURCE_TRACE_2026-10-27.md) and [OSHA 1994 body-cleaning + 2011/2015 field citation delta](research/4400_AIR_CLEAN_01_OSHA_FIELD_ENFORCEMENT_AND_BODY_CLEANING_DELTA_2026-10-27.md). **SOURCE-CONFIRMED** interpreter queued versus immediate output semantics at pinned revision; actual air valve/HAL/physical safe state UNKNOWN. OSHA citations are documentary allegations, not physical tests. Existing public cases/gates unscored/not run; no compute.
+
+
+### 2026-10-27 — 4400-SOLVENT-CLEAN-01 flammable solvent maintenance cleaning (NON-GRADUATED)
+[Original OSHA/HSE/aqueous-source audit](research/4400_SOLVENT_CLEAN_01_OSHA_HSE_AQUEOUS_IGNITION_VAPOR_SOURCE_AUDIT_2026-10-27.md) and [8 UNSCORED public scenarios/10 NOT RUN desk gates](safety-course/4400_SOLVENT_CLEAN_01_CHEMICAL_VAPOR_IGNITION_AND_RESTART_FIELD_MODULE_2026-10-27.md). Distinct chemical vapor, ignition, skin/inhalation, contaminated-waste and hot-work physical witnesses; normal CNC/FPGA OFF is not a chemical-safe-state proof. No selected-machine claims, physical tests, evaluator or compute; G0/G1 HOLD.

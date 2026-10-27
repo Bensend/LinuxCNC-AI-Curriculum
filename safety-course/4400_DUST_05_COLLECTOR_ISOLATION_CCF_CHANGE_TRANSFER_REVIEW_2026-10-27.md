@@ -1,6 +1,6 @@
 # 4400-DUST-05 — Collector protection composition, common-cause failures and change-impact review
 
-**Status:** documentary/adversarial engineering review, NON-GRADUATED. Use with [DUST-01 source audit](../research/4400_DUST_05_OSHA_CSB_FIKE_NFPA660_COLLECTOR_PROPAGATION_SOURCE_DELTA_2026-10-27.md) and [public field module](4400_DUST_05_PRIMARY_SECONDARY_COLLECTOR_TRANSFER_FIELD_CARD_2026-10-27.md). **No machine selected; no test performed.**
+**Status:** documentary/adversarial engineering review, NON-GRADUATED. Use with [DUST-05 source-delta audit](../research/4400_DUST_05_OSHA_CSB_FIKE_NFPA660_COLLECTOR_PROPAGATION_SOURCE_DELTA_2026-10-27.md) and [public field module](4400_DUST_05_PRIMARY_SECONDARY_COLLECTOR_TRANSFER_FIELD_CARD_2026-10-27.md). **No machine selected; no test performed.**
 
 **Predecessor correction:** DUST-01 through DUST-04 (2026-10-25) already cover collector fire/deflagration, shared ducts, venting, material swaps, maintenance and CNC authority. This DUST-05 is **additional UNSCORED transfer practice and source corroboration**, not a new generic safety mechanism. See [overlap reconciliation](../research/4400_DUST_05_PREDECESSOR_OVERLAP_RECONCILIATION_AND_SOURCE_DELTA_2026-10-27.md) and [original DUST-01 module](4400_DUST_01_WOOD_ROUTER_LEV_CAPTURE_FIRE_AND_CNC_COMMAND_BOUNDARY_MODULE_2026-10-25.md).
 

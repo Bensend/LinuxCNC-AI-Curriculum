@@ -23,3 +23,6 @@
 5. Immediately before ending, append actual UTC end/elapsed/overlap to complete LESSON_LOG via current blob SHA; never overwrite truncated log. Keep recurring curriculum enabled.
 
 **Safety release:** G0/G1 HOLD. No personnel-exposed hazardous operation; isolated/remote experimental operation only after qualified risk assessment with people outside the hazard zone and residual risks stated.
+
+
+**Source-depth addendum before session close:** [COMPOSE-02](../safety-course/4400_NORMAL_SEQUENCE_WAIT_PAUSE_JOG_FALSE_SAFE_ACCESS_COMPOSITION_REVIEW_2026-10-27.md) now includes direct Pilz movable-guard/E-stop guidance and original Rockwell Guardmaster DG June 2025 manufacturer manual warning that safety reset must not itself start/restart a machine. DOC-CONFIRMED product/manufacturer scope only; actual installed reset/occupancy and independent physical stop/hold remain UNKNOWN. This is corroboration, not new generic safety doctrine or a scored competency.

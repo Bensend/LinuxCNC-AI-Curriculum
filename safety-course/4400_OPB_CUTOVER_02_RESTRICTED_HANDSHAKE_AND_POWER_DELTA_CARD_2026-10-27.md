@@ -38,3 +38,6 @@ Use **only after** the [one-page Stage A A–G request](4400_OPENPRESSBRAKE_G0_E
 
 
 **D06 two-pole single-fault documentary check:** The public board map describes 11K2 switching both L7 and L07. Existing qualified drawings should show contactor identity, whether each pole actually opens, any monitoring/EDM, alternate feeds/returns, and independent safety final elements under either single-pole weld/cross-feed. IPS1025H VCC-disconnection and GND-disconnection have **different** OEM behaviors; do not infer physical hydraulic stop/hold from a two-pole label. [Original conditional fault matrix](../research/4400_OPB_L7_L07_ISOLATOR_POWER_LOSS_FAULT_DIAGNOSTIC_POLARITY_SOURCE_AUDIT_2026-10-27.md). No live contact fault injection; G0/G1 HOLD.
+
+
+**No diagnostic return-pulse retrofit by analogy:** TI TIDA-01509 wire-break reference **intentionally opens its isolated input field ground** with an extra opto-emulator to generate a diagnostic pulse. This is not approved for a shared L07/11K2/Pilz machine return. Only inspect qualified existing as-built wire-break/rail-valid records; any proposed physical change belongs to a separately reviewed board/safety design, not this intake. [Direct OEM source audit](../research/4400_OPB_L7_L07_ISOLATOR_POWER_LOSS_FAULT_DIAGNOSTIC_POLARITY_SOURCE_AUDIT_2026-10-27.md). No energized test, G0/G1 HOLD.

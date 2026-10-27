@@ -11,3 +11,7 @@ Full canonical-index/research-plan semantic scan found no prior OSHA 1910.242(b)
 4. Local compute only for frozen unresolved question on [self-hosted, openpressbrake]; no compute question arose. No GitHub-hosted/local Actions, simulation, build, synthesis, benchmark or machine tests. No new authoritative job runtime; LAB_COMPUTE_LOG and FEEDBACK_SCORE_LOG unchanged. Self-hosted runner dispatch not checked.
 
 G0/G1 HOLD, G2 NOT RUN, G3/G4 NOT AUTHORIZED, G5 HOLD. No personnel-exposed hazardous operation. Recurring curriculum remains enabled. Actual end/elapsed/overlap recorded separately in LESSON_LOG immediately before ending.
+
+
+## Same-session continuation after first commit
+Rotated to direct pinned LinuxCNC M62/M63/M64/M65 source at 062dc7c097693bb68e76192516cd92878dd5ecdf: OFF queued without subsequent motion can leave normal digital output state unchanged; actual air valve and Task end/abort remain UNKNOWN. Added original 1994 OSHA body/clothing interpretation, 2011 taped-hose/skin-cleaning citation and 2015 plating-drying record. These are SOURCE-/DOC-CONFIRMED within scope, not machine TEST-CONFIRMED; no new public scenarios or gates, no compute. Continue physical/evaluator priority next run.

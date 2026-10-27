@@ -33,3 +33,7 @@ Eliminate routine open-air blowing where a vacuum, chip brush used with machine 
 
 ## Uncertainty and reopening
 Machine applicability requires an as-built air diagram, selected nozzle OEM/revision, relief/regulator placement, actual service modes, physical chip/aerosol paths, competent non-exposure verification plan, and worker exposure evidence if warranted. A bounded local runner test cannot substitute for these physical facts; no compute question justified. 2520–25F0 external competency remains NOT RUN; G0/G1 HOLD.
+
+
+## Same-session independent source continuation
+[Original pinned M62/M63 delayed-OFF air-blast transfer](4400_AIR_CLEAN_01_LINUXCNC_PINNED_M62_M63_QUEUED_AIR_OUTPUT_SOURCE_TRACE_2026-10-27.md) directly re-inspects upstream LinuxCNC docs/source at 062dc7c097693bb68e76192516cd92878dd5ecdf. [OSHA body-cleaning/taped-hose/drying cases](4400_AIR_CLEAN_01_OSHA_FIELD_ENFORCEMENT_AND_BODY_CLEANING_DELTA_2026-10-27.md) distinguish original regulatory interpretations and actual citation allegations from manufacturer marketing. No new TEST-CONFIRMED or selected-machine evidence.

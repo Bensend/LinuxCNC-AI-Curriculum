@@ -50,3 +50,8 @@ For a novel air-gun cleanup setup, deliver a five-column hazard/authority/eviden
 
 ## Promotion
 Machine-specific nozzle pressure, chip trajectories, aerosol and worker noise measurements require qualified selected-machine evidence. This is not promotable to a blanket 'safe to operate' claim; G0/G1 HOLD, evaluator NOT RUN.
+
+
+## Two source-grounded adversarial discriminators (not additional scored scenarios)
+- In AIR-10, if the ordinary blast output is wired to LinuxCNC motion.digital-out and programmed M62 P0 → G1 → M63 P0 with **no later motion**, the pinned LinuxCNC docs say M63 OFF remains **queued**. This is a normal-control scheduling trap, not physical valve evidence; see [direct source trace](../research/4400_AIR_CLEAN_01_LINUXCNC_PINNED_M62_M63_QUEUED_AIR_OUTPUT_SOURCE_TRACE_2026-10-27.md). No learner response has been independently scored.
+- In AIR-03/AIR-09, original [OSHA 2011 taped-hose citation and 1994 body-cleaning interpretation](../research/4400_AIR_CLEAN_01_OSHA_FIELD_ENFORCEMENT_AND_BODY_CLEANING_DELTA_2026-10-27.md) provide real documentary examples of shortcuts. Re-engineer the cleaning task; do not interpret an OSHA citation as a machine physical test or injury report.

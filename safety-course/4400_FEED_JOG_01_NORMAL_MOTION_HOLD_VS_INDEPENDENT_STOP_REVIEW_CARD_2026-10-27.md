@@ -18,3 +18,6 @@
 
 
 **Source conflict and prior-art correction:** The [2026-10-24 SET-01 feed/jog audit](../research/4400_LINUXCNC_FEED_INHIBIT_JOG_DOCUMENTATION_VERSION_DRIFT_2026-10-24.md) **already** found the joint wheel-jog exception; this card is a version/source reinspection and adds M53/homing details, not a new feed/jog discovery. Current documentation says feed-inhibit is G-code-only, but [pinned joint wheel-jog source](https://github.com/LinuxCNC/linuxcnc/blob/c9a5a0a5034177c8db64cb44abf14d4f2eb166f7/src/emc/motion/control.c#L1169-L1180) checks `net_feed_scale` before accepting new wheel counts. New JOG_CONT requests instead check `jog_inhibit`. **Neither observation proves active jog stop or personnel safety.** [Detailed reconciliation](../research/4400_FEED_JOG_01_PREDECESSOR_AND_WHEEL_JOG_SOURCE_CORRECTION_2026-10-27.md).
+
+
+**Spindle-sync source discriminator:** [`tpGetFeedScale` pinned TP source](https://github.com/LinuxCNC/linuxcnc/blob/c9a5a0a5034177c8db64cb44abf14d4f2eb166f7/src/emc/tp/tp.c#L233-L257) returns a scale of 1.0 for position-synchronized segments unless a different trajectory abort path applies; ordinary feed-inhibit zeroing `net_feed_scale` is not a guaranteed immediate stop of that segment. This confirms the documented synchronized-move exception at source level, **not** a measured machine stop or permission for exposed operation.

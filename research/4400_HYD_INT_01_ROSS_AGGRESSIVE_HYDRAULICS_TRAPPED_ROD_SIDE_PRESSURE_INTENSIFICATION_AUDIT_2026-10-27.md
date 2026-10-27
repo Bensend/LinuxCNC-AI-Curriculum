@@ -1,0 +1,35 @@
+# 4400 HYD-INT-01 — Rod-side pressure intensification during stop/hold
+Status: DOCUMENTARY SOURCE AUDIT; NON-GRADUATED; 2026-10-27 UTC. No physical OpenPressBrake claim.
+
+## Question and novelty gate
+Can a hydraulically blocked cylinder develop a local pressure greater than the pump's pressure limit, even while the CNC indicates STOP and the supply gauge looks normal? Direct comparison against the full 963-line canonical `safety-course/SAFETY_COURSE_INDEX.md` found **zero** occurrences of `intensif`, `annulus`, `cylinder ratio`, `rod-side pressure` or `meter-out`. Existing HOLD-01, counterbalance/thermal-relief, hose-injection, hose-fuse, ACC-SEQ, valve-feedback and HYD-AIR lessons address adjacent hazards; this is a **new differential-area force and local-pressure mechanism**, not a new independent-safety-authority doctrine.
+
+## Directly inspected manufacturer evidence
+1. **ROSS Controls**, *Mitigating Hydraulic Stopping and Holding Load Risks*, original manufacturer article, accessed 2026-10-27: https://www.rosscontrols.com/en/blog/59-mitigating-hydraulic-stopping-and-holding-load-risks . **DOC-CONFIRMED** (article lines 24–41): blocking the rod-side volume while the cylinder experiences a driving force can create pressure intensification; assess cylinder, seals, hoses and fittings, and distinguish bleeding versus blocking for the *required* safe motion. ROSS describes rod-side block with piston-side bleed as an often-effective *example*, not an as-built press-brake prescription. Its linked white-paper PDF presented a viewer without extractable content in this session; **no uninspected white-paper clauses claimed**.
+2. **Aggressive Hydraulics**, Tony Casassa, *Hydraulic Cylinder Cushions Can Prevent Mechanical Shock*, dated January 11, 2022 (site also displays November 18, 2025), original cylinder-manufacturer engineering article, accessed 2026-10-27: https://www.aggressivehydraulics.com/hydraulic-cylinder-cushions-can-prevent-mechanical-shock/ . **DOC-CONFIRMED** (lines 106–114): full-bore cap area versus annular rod area, manufacturer example 2:1 area ratio and 3,000 psi cap pressure producing 6,000 psi rod-side pressure under its cushioning scenario; cylinder structural/seal/head design must consider this local pressure. This is a manufacturer **example**, not OpenPressBrake dimensions or ratings.
+3. **RHK Hydraulics**, *Hydraulic Cylinder Pressure Intensification*, manufacturer result indexed at https://rhkhydraulics.com/hydraulic-cylinder-pressure-intensification/ . Search index describes a disconnected quick coupling / blocked rod return example, but direct retrieval returned **403**. Treat details as **INDEXED-ONLY / NOT DOC-CONFIRMED by direct reading**; do not rely on it for the primary conclusion.
+
+## Engineering derivation (INFERENCE from elementary static force balance, not a safety rating)
+For a **single-rod, double-acting** cylinder, define bore area `A_cap = pi D²/4`, rod annular area `A_ann = pi(D²-d²)/4`, with `D>d>0`. Area ratio `R=A_cap/A_ann > 1`. Neglecting friction, inertia and external force **solely for an illustrative equilibrium**, `p_cap A_cap = p_rod A_ann`, so `p_rod = R p_cap`. With a resisting external load `F_resist` in the extension direction convention, `p_rod = (p_cap A_cap - F_resist)/A_ann`; an assisting load changes the sign. This is **not** a transient peak prediction: compressibility, valve transitions, inertia, cushions, external loads, leakage, pressure limits and hydraulic topology can change the result. No numerical selected-machine pressure, area ratio, stopping time or PL/SIL is known.
+
+## Fault chain / competing safety propositions
+- A rod-end blocking element or obstructed return isolates a smaller oil volume; a pump, opposing chamber, external gravity/load, or deceleration continues imposing force. **INFERENCE:** local pressure may exceed pump relief setting even if upstream transducer remains within range.
+- A rod-side block may restrain extension, but this does **not** establish both-direction stop, ram retention under gravity, rod/cylinder strength, safe hose/fitting rating, personnel access protection, or maintenance isolation. A cap-side bleed may reduce one intensification pathway yet could release needed load-holding energy in a different architecture. Do not prescribe a generic valve truth table.
+- Independent safety-related controller and qualified final elements own safety functions; ordinary LinuxCNC/HAL/FPGA may request stop, monitor and log but cannot prove local pressure or physical load retention. A hydraulic pressure switch is not automatically a safety-rated witness.
+- Potential common causes: reversed ports, changed cylinder bore/rod, stuck valve, obstructed return, cold/high-viscosity fluid, wrong quick coupling, failed relief, shared pilot, removed check, bypassed guard, hydraulic cushion. Record as **INFERENCE** until selected design evidence.
+
+## Evidence required before any machine decision
+As-built signed hydraulic diagram and physical port tracing; cylinder model/revision, bore/rod, pressure/force ratings for **each chamber and internal cushion**, seal/head/rod retention ratings, hoses/fittings and manifold ratings; exact de-energized valve and pilot behavior; relief paths on **each potentially isolated volume**; gravity/external-load directions; independent Y1/Y2 stop/hold and guarding; manufacturer-selected safe-service and pressure verification instructions; qualified analysis of worst credible forces and dynamic pressure; approved validation plan with personnel isolated. A supply-gauge value, CNC stop bit, EDM contact or theoretical `R` is insufficient.
+
+## Evidence ledger
+| Claim | Class | Boundary |
+|---|---|---|
+| Blocking rod-side oil can intensify pressure during load stop | DOC-CONFIRMED | ROSS manufacturer article; not OpenPressBrake |
+| Cylinder area ratio can amplify rod-side pressure | DOC-CONFIRMED + INFERENCE | Aggressive Hydraulics example; idealized balance only |
+| Exact OpenPressBrake cylinder, valve, pressures and protection | UNKNOWN | No qualified Stage A A–G |
+| LinuxCNC controller independently establishes physical safe state | **NOT ESTABLISHED** | Normal control/diagnostics only |
+| Physical pressure or stop/hold performance | UNKNOWN / NOT TESTED | No lab or machine test |
+No COMMUNITY-REPORTED or TEST-CONFIRMED evidence added. No compute justified; the governing mechanism is documentary/analytic. **G0/G1 HOLD; personnel-exposed hazardous operation prohibited.**
+
+## Next
+Use [HYD-INT-01 technician worksheet](../safety-course/4400_HYD_INT_01_TRAPPED_RETURN_PRESSURE_AND_SAFE_STOP_FIELD_MODULE_2026-10-27.md) and [HYD-INT/HYD-CUSH architecture review](../safety-course/4400_HYD_INT_CUSH_01_02_STOP_HOLD_LOCAL_PRESSURE_CHANGE_REVIEW_2026-10-27.md). Qualified private Stage A and independent evaluator still required.

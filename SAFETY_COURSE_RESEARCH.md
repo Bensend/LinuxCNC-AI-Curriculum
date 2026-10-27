@@ -926,3 +926,6 @@ Full canonical index and research-plan synonym scan found no dedicated solvent/d
 
 
 **FEED-JOG predecessor audit correction:** [Existing SET-01 source trace](research/4400_LINUXCNC_FEED_INHIBIT_JOG_DOCUMENTATION_VERSION_DRIFT_2026-10-24.md) already contains the wheel-jog `net_feed_scale` exception and version drift; [2026-10-27 correction](research/4400_FEED_JOG_01_PREDECESSOR_AND_WHEEL_JOG_SOURCE_CORRECTION_2026-10-27.md) records the overlap. New delta M53/homing/stable source only. No tests or machine safety credit.
+
+
+**COMPOSE-02 and TP source delta:** [M66 + M0/M1 + feed/jog integrated false-safe-access review](safety-course/4400_NORMAL_SEQUENCE_WAIT_PAUSE_JOG_FALSE_SAFE_ACCESS_COMPOSITION_REVIEW_2026-10-27.md) is a documentary adversarial **INFERENCE**, not selected-machine failure. [FEED-JOG exact TP source addendum](research/4400_LINUXCNC_FEED_HOLD_INHIBIT_JOG_STOP_SAFETY_AUTHORITY_SOURCE_AUDIT_2026-10-27.md) traces `tpGetFeedScale` TC_SYNC_POSITION exception to normal feed-inhibit, upgrading OEM/doc statement to SOURCE-CONFIRMED implementation at pinned development SHA. [M66 sample addendum](research/4400_LINUXCNC_M66_WAIT_TIMEOUT_AND_NONSAFETY_INPUT_AUTHORITY_AUDIT_2026-10-27.md) documents timeout-only upstream simulation checks and hypothetical post-wait value change. No test, score, extra paper bank, physical proof or compute; G0/G1 HOLD.

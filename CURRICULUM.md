@@ -709,3 +709,6 @@ Distinct direct-index gap after ABRASIVE-01: no magnetic-chuck pole coverage, ma
 
 ### 2026-10-27 — 4400-SOLVENT-CLEAN-01 flammable solvent maintenance cleaning (NON-GRADUATED)
 [Original OSHA/HSE/aqueous-source audit](research/4400_SOLVENT_CLEAN_01_OSHA_HSE_AQUEOUS_IGNITION_VAPOR_SOURCE_AUDIT_2026-10-27.md) and [8 UNSCORED public scenarios/10 NOT RUN desk gates](safety-course/4400_SOLVENT_CLEAN_01_CHEMICAL_VAPOR_IGNITION_AND_RESTART_FIELD_MODULE_2026-10-27.md). Distinct chemical vapor, ignition, skin/inhalation, contaminated-waste and hot-work physical witnesses; normal CNC/FPGA OFF is not a chemical-safe-state proof. No selected-machine claims, physical tests, evaluator or compute; G0/G1 HOLD.
+
+
+**CLEAN-COMPOSE-01 integration:** [Air-blast + solvent aerosol + hot machine + queued normal M63 OFF crosscut](safety-course/4400_CLEAN_COMPOSE_01_AIR_SOLVENT_MIST_IGNITION_QUEUED_OUTPUT_AND_REARM_CROSSCUT_2026-10-27.md). Distinguishes independent nozzle/chip, chemical/ignition, motion/guard and maintenance/restart witnesses. Source-based combined failure INFERENCE, no selected machine or new tests/cases/gates; G0/G1 HOLD.

@@ -903,3 +903,6 @@ Full-index and research-plan novelty review: no prior MWF-specific aerosol, micr
 
 ### 2026-10-27 — SOLVENT-CLEAN-01 cleaning vapor/ignition source delta
 Full canonical index and research-plan synonym scan found no dedicated solvent/degreasing/flammable cleaning vapor mechanism. [Original OSHA 1910.106/HSE/Massachusetts audit](research/4400_SOLVENT_CLEAN_01_OSHA_HSE_AQUEOUS_IGNITION_VAPOR_SOURCE_AUDIT_2026-10-27.md) → [8-case public technician module](safety-course/4400_SOLVENT_CLEAN_01_CHEMICAL_VAPOR_IGNITION_AND_RESTART_FIELD_MODULE_2026-10-27.md). Scope-limited official documentation, no universal ventilation/LEL/flashpoint or fan-stop sequence. All public cases UNSCORED, 10 desk gates NOT RUN, actual machine UNKNOWN; G0/G1 HOLD, no compute.
+
+
+**CLEAN-COMPOSE-01:** [Crosscut of AIR-CLEAN, SOLVENT-CLEAN, MWF and pinned M62/M63](safety-course/4400_CLEAN_COMPOSE_01_AIR_SOLVENT_MIST_IGNITION_QUEUED_OUTPUT_AND_REARM_CROSSCUT_2026-10-27.md), with OSHA shipyard fine-mist and HSE vapor-degreasing sources kept in exact jurisdiction/equipment scope. No universal flammable threshold, fan policy or physical proof. No new formal cases/gates, G0/G1 HOLD.

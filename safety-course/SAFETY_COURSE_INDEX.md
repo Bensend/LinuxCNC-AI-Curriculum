@@ -1019,3 +1019,6 @@ Read [original WILA/Wilson/OSHA source audit](../research/4400_TOOL_RET_01_WILA_
 
 ### 4400-SOLVENT-CLEAN-01 — cleaning solvent vapor, ignition, waste and rearm (2026-10-27)
 [Original OSHA/HSE/aqueous source audit](../research/4400_SOLVENT_CLEAN_01_OSHA_HSE_AQUEOUS_IGNITION_VAPOR_SOURCE_AUDIT_2026-10-27.md) → [8 public UNSCORED cases/10 documentary gates NOT RUN](4400_SOLVENT_CLEAN_01_CHEMICAL_VAPOR_IGNITION_AND_RESTART_FIELD_MODULE_2026-10-27.md). **DOC-CONFIRMED** covered flammable-liquid handling/ignition/housekeeping scope, HSE incident and safer substitution. **INFERENCE** M5/E-stop does not remove vapor/hot surfaces or make a non-rated fan safe. **UNKNOWN** selected machine and solvent. No physical validation/evaluator; G0/G1 HOLD.
+
+
+**CLEAN-COMPOSE-01:** [Air nozzle + solvent mist/ignition + hot machine + queued M63 OFF integration](4400_CLEAN_COMPOSE_01_AIR_SOLVENT_MIST_IGNITION_QUEUED_OUTPUT_AND_REARM_CROSSCUT_2026-10-27.md). Six unscored documentary transfer prompts, no additional formal cases/gates, physical selected-machine proof UNKNOWN. Ordinary output/E-stop cannot certify chemical or pneumatic safe state.

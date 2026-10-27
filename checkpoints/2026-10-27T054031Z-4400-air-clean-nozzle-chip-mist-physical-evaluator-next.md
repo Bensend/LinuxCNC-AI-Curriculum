@@ -15,3 +15,7 @@ G0/G1 HOLD, G2 NOT RUN, G3/G4 NOT AUTHORIZED, G5 HOLD. No personnel-exposed haza
 
 ## Same-session continuation after first commit
 Rotated to direct pinned LinuxCNC M62/M63/M64/M65 source at 062dc7c097693bb68e76192516cd92878dd5ecdf: OFF queued without subsequent motion can leave normal digital output state unchanged; actual air valve and Task end/abort remain UNKNOWN. Added original 1994 OSHA body/clothing interpretation, 2011 taped-hose/skin-cleaning citation and 2015 plating-drying record. These are SOURCE-/DOC-CONFIRMED within scope, not machine TEST-CONFIRMED; no new public scenarios or gates, no compute. Continue physical/evaluator priority next run.
+
+
+## Final source-depth evidence addition
+Inspected nine pinned source stages in LinuxCNC revision 062dc7c097693bb68e76192516cd92878dd5ecdf: Interp convert_m, emccanon, Task, taskintf, motion command, TP pending queue, trajectory-component transfer/execution and HAL output. Verified now=0 versus now=1 path without runtime; source agrees with docs, so no question-driven lab justified. Physical output, program-end/abort and actual OpenPressBrake air-blast applicability UNKNOWN. See [full trace](../research/4400_AIR_CLEAN_01_LINUXCNC_PINNED_M62_M63_QUEUED_AIR_OUTPUT_SOURCE_TRACE_2026-10-27.md).

@@ -26,3 +26,23 @@ For ordinary process sequencing, use an explicitly justified immediate OFF (M65)
 
 ## Verification plan and stop
 Document selected HAL pin/net/actuator, G-code/remap path and physical safe-state function before any selected-machine test. A software-only M62/M63 ordering lab would be redundant with directly documented/source-confirmed semantics unless a concrete version/config conflict appears. No GitHub-hosted or local runner compute used; no lab frozen. OpenPressBrake use of this output path UNKNOWN, G0/G1 HOLD.
+
+
+## Direct end-to-end implementation trace (same pinned revision; no execution)
+This continuation inspected the actual pinned source files, rather than stopping at interpreter/documentation:
+
+| Stage | Pinned file and line range | Observed behavior | Claim |
+|---|---|---|---|
+| Canonical command | [emccanon.cc L4161–4173](https://github.com/LinuxCNC/linuxcnc/blob/062dc7c097693bb68e76192516cd92878dd5ecdf/src/emc/task/emccanon.cc#L4161-L4173) | MOTION_OUTPUT_BIT_ creates EMC_MOTION_SET_DOUT with start/end/now and appends to interpreter list | SOURCE-CONFIRMED |
+| Synced vs immediate flag | [emccanon.cc L4177–4247](https://github.com/LinuxCNC/linuxcnc/blob/062dc7c097693bb68e76192516cd92878dd5ecdf/src/emc/task/emccanon.cc#L4177-L4247) | SET/CLEAR_MOTION_OUTPUT_BIT set now=0; AUX counterparts set now=1; start=end for each | SOURCE-CONFIRMED |
+| Task dispatch | [emctaskmain.cc L2071–2075](https://github.com/LinuxCNC/linuxcnc/blob/062dc7c097693bb68e76192516cd92878dd5ecdf/src/emc/task/emctaskmain.cc#L2071-L2075) | EMC_MOTION_SET_DOUT_TYPE forwards index/start/end/now to emcMotionSetDout | SOURCE-CONFIRMED |
+| Task interface | [taskintf.cc L1915–1934](https://github.com/LinuxCNC/linuxcnc/blob/062dc7c097693bb68e76192516cd92878dd5ecdf/src/emc/task/taskintf.cc#L1915-L1934) | Creates EMCMOT_SET_DOUT command with now/start/end/out | SOURCE-CONFIRMED |
+| Motion command | [command.c L1734–1750](https://github.com/LinuxCNC/linuxcnc/blob/062dc7c097693bb68e76192516cd92878dd5ecdf/src/emc/motion/command.c#L1734-L1750) | Invalid output index rejected; now=1 calls emcmotDioWrite immediately; now=0 calls tpSetDout to queue on trajectory planner | SOURCE-CONFIRMED |
+| Pending output | [tp.c L4517–4528](https://github.com/LinuxCNC/linuxcnc/blob/062dc7c097693bb68e76192516cd92878dd5ecdf/src/emc/tp/tp.c#L4517-L4528) | Sets syncdio.anychanged and output mask/value; does **not** itself write the HAL pin | SOURCE-CONFIRMED |
+| Next motion | [tp.c L1589–1597](https://github.com/LinuxCNC/linuxcnc/blob/062dc7c097693bb68e76192516cd92878dd5ecdf/src/emc/tp/tp.c#L1589-L1597) | tpSetupSyncedIO attaches pending changes to a trajectory component and clears pending list | SOURCE-CONFIRMED |
+| Motion execution | [tp.c L3101–3115](https://github.com/LinuxCNC/linuxcnc/blob/062dc7c097693bb68e76192516cd92878dd5ecdf/src/emc/tp/tp.c#L3101-L3115) | tpToggleDIOs invokes _DioWrite for that trajectory component and clears component flag | SOURCE-CONFIRMED |
+| HAL pin | [command.c L369–375](https://github.com/LinuxCNC/linuxcnc/blob/062dc7c097693bb68e76192516cd92878dd5ecdf/src/emc/motion/command.c#L369-L375) | emcmotDioWrite calls hal_set_bool on synch_do[index]; [motion.c L547–562](https://github.com/LinuxCNC/linuxcnc/blob/062dc7c097693bb68e76192516cd92878dd5ecdf/src/emc/motion/motion.c#L547-L562) exports motion.digital-out-NN or configured named pins | SOURCE-CONFIRMED |
+
+**Important refinement:** the queued-OFF problem is not just interpreter syntax; the inspected path places the change in the trajectory planner and only writes the HAL output on trajectory-component execution. The docs explicitly state no later motion means no queued change. The canonical comment warns that repeated changes to the same pending segment can overwrite prior settings. **Boundary:** no selected HAL net, valve, electrical power, physical air discharge, Task program-end/abort reset, or independent safety PLC was inspected. Therefore the scenario remains an **INFERENCE** about a hypothetical installed air-blast circuit, not a TEST-CONFIRMED output remaining ON in a real machine.
+
+**No lab decision:** source and official docs agree on the precise queued-output question, so a simulation would add little information. A new lab would be justified only for a material version-specific or Task end/abort behavior conflict with a frozen question and would run exclusively on [self-hosted, openpressbrake]; none was dispatched.

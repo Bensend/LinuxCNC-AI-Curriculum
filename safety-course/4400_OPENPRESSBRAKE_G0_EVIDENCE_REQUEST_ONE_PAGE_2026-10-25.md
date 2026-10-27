@@ -33,3 +33,8 @@ A **redacted status-only** record: artifact IDs and revision hashes (not secrets
 
 ## Conditional Stage B pointer — hydraulic only
 If qualified Stage A confirms hydraulic Y1/Y2 or another relevant hydraulic hazard, use the short [ten-field hydraulic Stage B restricted evidence card](4400_OPENPRESSBRAKE_G0_STAGE_B_HYDRAULIC_ONLY_RESTRICTED_EVIDENCE_CARD_2026-10-26.md). It requests **existing** as-built records only and separates hold, bleed, personal isolation and restart. If hydraulic equipment absent, require dated qualified N/A proof. This is not permission for live testing and does not relax G0/G1 HOLD.
+
+
+## 2026-10-27 Stage A F standards-edition correction (no new owner field)
+
+The 2026-05-29 publication of **ISO 6909:2026**, and 2026 EN adoption, means a current press-brake Type-C review cannot stop at legacy EN 12622 or incorrectly substitute hydraulic-press ISO 16092-3. Under existing **F — Stop/hold/rearm SRS**, the qualified reviewer should identify **selected machine manufacturing/commissioning/retrofit dates, jurisdiction, machine technology and applicable standard/edition rationale** (ANSI B11.3-2022, ISO/EN ISO 6909:2026, historical EN 12622 or other supported selection). ISO 6909's published abstract says it is **not applicable to press brakes manufactured before publication** and does not cover automatic workpiece loading/unloading safety; neither statement authorizes ignoring those hazards. Do not ask operators to interpret paid clauses; use qualified review and existing Stage A records. [Official-source edition/scope audit](../research/4400_PRESS_BRAKE_ISO6909_2026_TYPE_C_PUBLICATION_SCOPE_AND_LEGACY_RETROFIT_GATE_2026-10-27.md). This corrects document currentness only; no G0/G1 release or physical test.

@@ -26,3 +26,5 @@
 3. If these external gates remain blocked, rotate to an unworked/high-information-gain 4400 safety question **after full index, research plan, predecessor source and historical progress scan**. Prefer source-depth with a new physical/authority discriminator over additional paper cases. No physical/simulation lab without a concrete unresolved question and approved isolated plan; only [self-hosted, openpressbrake] if justified and dispatchable.
 
 **Decision:** safety course active, HYD-DYN-01 documentary/non-graduated; no selected-machine release.
+
+**Original-page cross-check:** Rendered and directly inspected Bucher RS PDF p. 2/7 and BBV housing PDF p. 3/9; verified 40% closing margin, P>Z reopening, very large deceleration warning, A/X neutral assumption and optional SV→X→B/A flow against the actual page images. Documentary integrity only; not an independent physical test.

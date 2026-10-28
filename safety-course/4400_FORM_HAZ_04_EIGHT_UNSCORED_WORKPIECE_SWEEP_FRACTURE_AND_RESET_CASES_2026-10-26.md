@@ -25,3 +25,6 @@ Read [TRUMPF/OSHA/WILA original-source audit](../research/4400_FORM_HAZ_04_TRUMP
 - **FORM-G08** selected OEM manual, qualified validation plan, independent review and CHG/revalidation.
 
 No paper case is a blind score, no gate has been executed, and no source provides OpenPressBrake's actual workpiece swept envelope. A qualified independent evaluator must use a **novel** unseen case if assessing competency. **G0/G1 HOLD**; no personnel-exposed operation while the minimum safe-to-operate threshold is unproved.
+
+## 2026-10-28 real incident discriminator (existing cases, UNSCORED)
+[Direct original NIOSH/OKFACE FACE 05-OK-005-01 audit](../research/4400_FORM_HAZ_04_NIOSH_FACE_05OK005_PRESS_BRAKE_WORKPIECE_EJECTION_INCIDENT_ADDENDUM_2026-10-28.md) documents a **920-lb** steel lug that slipped from the rear edge of a lower V-die while the operator was bending near the lug edge, ejecting into the operator/forklift support zone and causing a fatal injury. Existing workpiece-sweep and setup cases must explicitly distinguish **workpiece contact/retention and ejection path** from nominal tonnage, Y1/Y2 tracking, machine E-stop, tool fracture or generic sheet lifting. A forklift support can itself become part of the impact/pinch exposure. **No new case or score**; no safe distance, projectile velocity or OpenPressBrake machine claim.

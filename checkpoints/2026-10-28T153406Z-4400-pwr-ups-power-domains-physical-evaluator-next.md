@@ -1,0 +1,22 @@
+# 2026-10-28T15:34:06Z — 4400 PWR-UPS-01 buffered power domains; physical/evaluator next
+
+## Session governance and evidence state
+- [UTC session start](../sessions/2026-10-28T153406Z-4400-safety-session-start.md) recorded and committed before substantive research. START_HERE, MASTER_MISSION, LEVEL_ORDER, WORK_SELECTION_POLICY, CURRICULUM, SOURCE_POLICY, MODULE_TEMPLATE, PROGRESS, blind feedback protocol/ledger, lab compute ledger, safety entry/index/research, and latest 14:40Z PHASE-MON checkpoint read.
+- OpenPressBrake public main remains **92cf5424be90f45f664ba2652dc725b38e1895f9** (checked this session). No restricted installed-machine Stage A A–G evidence. No new external evaluator score; **2520–25F0 OPEN/NOT RUN**. 1000, 2000, F02 and completed 3000 tracks remain CLOSED.
+- **G0/G1 HOLD; G2 NOT RUN; G3/G4 NOT AUTHORIZED; G5 HOLD**. No personnel-exposed hazardous operation; only independently authorized isolated/remote experiments with people outside the hazard zone if later justified.
+
+## New durable work
+- [PWR-UPS-01 original manufacturer audit](../research/4400_PWR_UPS_01_PILZ_PHOENIX_ROCKWELL_SEPARATE_24V_DOMAINS_AND_BUFFERED_POWER_AUDIT_2026-10-28.md) and [short technician card](../safety-course/4400_PWR_UPS_01_CONTROL_ALIVE_IS_NOT_ENERGY_ISOLATED_TECHNICIAN_CARD_2026-10-28.md) separate UPS-buffered HMI/IPC, safety logic/input, mandatory safety-output supply, field actuator feed and independent physical hydraulic/gravity hold.
+- **DOC-CONFIRMED:** Pilz PNOZ m B0 original 1002660-EN-13 printed pp. 26–27, 39 and 44 distinguishes system versus semiconductor-output supplies and LOAD SUPPLY versus SUPPLY LOW/HIGH diagnostics; Phoenix Contact TRIO-UPS 2907160 can maintain 24 V battery-mode output; Rockwell 5069-TD001P-EN-P distinguishes MOD/SA/LA power and an already documented SA+ actuator-backfeed path.
+- **INFERENCE from exact OEM ranges:** Pilz B0 nominal 24 V −20%/+25% = **19.2–30 V**, Phoenix TRIO-UPS 2907160 battery range **18–30 V**. A hypothetical *direct pairing* has no published guarantee at the lowest 18 V. This is **not** evidence of installed hardware or actual fault. Pilz's 20 ms secondary-buffer statement is explicitly **furnace/EN 298-specific**; Phoenix's <75 ms switch-over number cannot be treated as an observed controller-input outage.
+- Reconciled predecessor RST-01/PANEL-01/PointMax audits; integrated PROGRESS, CURRICULUM, SAFETY_COURSE_RESEARCH, safety index, existing RST-01 module, existing selected-safety-block worksheet, cumulative Safety Design Package **§11KW**. No new owner questionnaire, unscored exam bank, numerical PL/pressure/stop-distance or machine truth table.
+
+## Source/compute discipline
+- **DOC-CONFIRMED** exact OEM statements; **SOURCE-CONFIRMED** repository predecessor contracts; **INFERENCE** conditional cross-domain failure analysis; **UNKNOWN** selected topology, actual Pilz/AKAS configuration, Y1/Y2 stop/hold, guards, isolation and fresh restart; **TEST-CONFIRMED none**, **COMMUNITY-REPORTED none used**.
+- **GitHub-hosted compute 0 min; self-hosted compute 0 min.** No workflow, build, synthesis, benchmark, simulation, physical test or evaluator execution. LAB_COMPUTE_LOG and FEEDBACK_SCORE_LOG intentionally unchanged.
+
+## Precise next work
+1. First priority remains **qualified restricted Stage A A–G** selected OpenPressBrake safety program, K1/K2/EDM, Y1/Y2 hydraulic final elements, independent stop and gravity-load holding, guarding, isolation and deliberate restart. If actual UPS/PSU is present, qualify exact rails, voltage/timing envelope, battery source, lockable isolation and power-return response **conditionally under existing Stage A**, not via an expanded owner form.
+2. Obtain **independent 2520–25F0 evaluation** with information separation, immutable learner precommitment and distinct /10 versus /28 scoring. 25E0 fixed public challenge has contamination risk; evaluator should use a novel scenario when exposed.
+3. If no new physical/evaluator evidence, rotate to a **genuinely new** 4400 safety causal mechanism after predecessor check. Prefer machine-relevant evidence and reusable human-factors architecture over repetitive OEM footnotes. Routine controller-board design belongs to OpenPressBrake board automation.
+4. At session end safely append **complete** LESSON_LOG using current verified blob SHA, UTC end, actual elapsed minutes and overlap. Commit and verify; do not overwrite a truncated log or disable recurring curriculum.

@@ -20,3 +20,5 @@
 **Current state:** local runner online/dispatch and physical isolation UNKNOWN; no compute. OpenPressBrake Stage A A–G UNKNOWN; G0/G1 HOLD; independent evaluator OPEN. The frozen G43.2 simulator remains NOT DISPATCHED.
 
 Read next: [G0 evidence request](4400_OPENPRESSBRAKE_G0_EVIDENCE_REQUEST_ONE_PAGE_2026-10-25.md) and [existing local-runner predecessor inventory](../research/4400_LOCAL_COMPUTE_RUNNER_TRIGGER_GUARD_AUDIT_2026-10-28.md). Do not expand the owner A–G request with a new form.
+
+**Lab token/evidence hardening:** the lab workflow now uses read-only repository permissions and serializes its own runs; it uploads artifacts but no longer commits from the panel PC. A separate reviewed commit is needed to preserve accepted raw evidence beyond artifact retention. This is software privilege reduction, **not** physical isolation; other self-hosted workflows remain separate security surfaces.

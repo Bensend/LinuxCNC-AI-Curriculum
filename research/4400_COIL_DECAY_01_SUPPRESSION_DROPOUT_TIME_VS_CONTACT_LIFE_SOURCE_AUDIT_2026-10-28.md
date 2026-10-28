@@ -39,6 +39,8 @@ The **same original Pilz PNOZ 1 manual** (printed p.23 table visually inspected 
 | CD-07 | Ordinary IPS1025H output turns OFF under FPGA reset | “Independent safety stop proven.” | Ordinary controller's **zero safety credit**; verify actual independent safety final elements and hydraulic hold. |
 | CD-08 | Controller power fails but a buffered 24 V domain remains | “All coils are de-energized.” | As-built power domains, exact switching/decay behavior, independent rearm and fresh normal start. |
 
+[Blank qualified stop-chain witness](../safety-course/4400_COIL_DECAY_01_QUALIFIED_STOP_CHAIN_WITNESS_BLANK_2026-10-28.md) keeps as-built timing, suppression and physical hold questions **UNKNOWN/NOT RUN** until a qualified reviewer obtains authorized evidence. It is not another owner intake form or a live test script.
+
 ## Minimal practical change-control pattern
 **Before** a coil, contactor, suppression, driver or control-supply change: capture exact installed model and manufacturer document revision, original suppression (including internal), approved wiring and contactor/valve function. Identify which stop-time/hold claims depend on it. Require a qualified engineering review and an approved, controlled validation plan **before** personnel exposure. Avoid hazardous live experiments solely to settle a documentation question.
 

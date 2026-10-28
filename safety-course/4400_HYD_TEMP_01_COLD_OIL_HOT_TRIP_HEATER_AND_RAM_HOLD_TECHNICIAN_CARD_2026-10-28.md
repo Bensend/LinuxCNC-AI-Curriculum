@@ -19,3 +19,8 @@ Read the [original OEM source audit](../research/4400_HYD_TEMP_01_CINCINNATI_PAR
 **Usability design:** labeled fluid grade, readable warm-up status, serviceable filters, visible fault reason, accessible lockable heater isolation and a deliberate fresh restart reduce incentives to bypass. An optional heater can improve pump startup without itself proving safe motion.
 
 **Evidence:** named OEM documents DOC-CONFIRMED; failure-path and review guidance INFERENCE; installed machine UNKNOWN; no physical test, simulation, score or compute. **G0/G1 HOLD.**
+
+## Same-session dry-heater cross-check — separate from hydraulic ram safety
+[Chromalox original TM-Series PD457-2 (August 2010)](https://assets.omega.com/manuals/M5622.pdf) explicitly says its integral thermostat is **not fail-safe** and warns that an insufficiently submerged heater can overheat and cause a fire. This is **another manufacturer's heater family**, not a claimed installed Cincinnati/OpenPressBrake component.
+
+**Conditional reviewer question:** if low reservoir level stops the main pump but an optional immersion heater can still run, **what independently prevents heater dry-fire?** Identify the exact heater, liquid-level geometry, power feed, level cutout, high-limit/backup protection and lockable isolation. Do not presume a common thermostat or pump-stop bit provides heater fire protection. A heater low-level trip is also **not** a proof that Y1/Y2 are held. Never test this by draining a live tank or intentionally running a heater dry. The correct low-cost fix is a properly engineered, accessible, labeled heater safety/isolator arrangement and clear maintenance instructions—not a bypass or a software-only warning.

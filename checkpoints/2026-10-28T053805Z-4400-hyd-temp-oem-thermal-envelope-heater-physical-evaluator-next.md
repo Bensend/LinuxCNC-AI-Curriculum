@@ -17,3 +17,6 @@
 4. Justified compute only on [self-hosted, openpressbrake] when repository dispatch supports it; no GitHub-hosted fallback, no compute merely for activity.
 
 **No personnel-exposed hazardous operation authorized.** Immediately before ending this session, append actual UTC end/elapsed/overlap to full LESSON_LOG with safe Git-tree/expected-head update; do not overwrite truncated content.
+
+## Same-session follow-through — heater dry-fire source and conditional Stage A
+Original [Chromalox TM-Series PD457-2 (August 2010)](https://assets.omega.com/manuals/M5622.pdf) was directly inspected, including cover and installation page images. Its thermostat is **not fail-safe** and exposed immersion elements can cause fire. This is an **exact OEM delta** extending Cincinnati's optional heater/low-oil main-drive trip; it does **not** prove any selected-machine heater wiring or unsafe condition. Added conditional level-cutoff/high-limit/isolator witness to existing Stage A A/D/G without a new questionnaire. Updated audit/card/canonical files and cumulative §11KF; no lab or evaluator. Physical G0/G1 HOLD unchanged.

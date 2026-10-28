@@ -1673,3 +1673,15 @@ The ADI datasheet's IC-level enable/disable timing is **not** press-brake stoppi
 | Physical safety and rearm | A matching signature, five-year upload log or harmonised standard proves Y1/Y2 stopped/held | Existing OPB-D08 / `AUTH/DEP/PHY/VAL/CHG`: independently validate safety final elements, pressure/energy zones, guard coverage, deliberate restart and changes. | G0/G1 HOLD, G2 NOT RUN |
 
 **DOC-CONFIRMED** direct Commission warning and official indexed EUR-Lex text; **not** purchased ISO clauses, machine legal determination, installed safety program, PL/SIL or TEST-CONFIRMED safe state. The Commission's Directive summary is informational; post-2027 Regulation citations require separate verification. Independent 2520–25F0 evaluation remains OPEN. No physical testing or hosted/local compute.
+
+
+## 11JX. 4400-GUARD-FAST-01 — Guard presence, physical retention, safe access and deliberate restart are separate witnesses (2026-10-28)
+[EU Annex III / OSHA / captive-fastener manufacturer source-depth](../research/4400_GUARD_FAST_01_EU_ANNEXIII_CAPTIVE_FIXINGS_FALSE_CLOSED_AND_MAINTENANCE_BYPASS_SOURCE_AUDIT_2026-10-28.md) and [one-pass field card](4400_GUARD_FAST_01_CAPTIVE_FASTENER_AND_ACCESS_ANTI_BYPASS_FIELD_CARD_2026-10-28.md) refine existing GUARD-01 without creating another unscored exam. EU Annex III 1.4.2.1/2.2 (official indexed; direct full-text fetch blocked) distinguishes tool-required fixed guards, fixing hardware retained on removal, avoiding panels that look in place without fasteners where possible, and appropriately interlocked movable guards. OSHA eTool directly confirms fixed-guard maintenance inconvenience and interlocked access tradeoffs. Clarendon/MW show real captive-hardware solutions, not certified guard performance.
+
+| Distinct physical proposition | Invalid proxy | Existing evidence route | State |
+|---|---|---|---|
+| Guard retention | Panel visually in opening, or a switch says closed | Stage A E: actual fixed fastener/hinge/geometry, securement and selected reach/projectile load path; check false-closed condition | UNKNOWN |
+| Hardware usability | Screws captive means guard fully tightened; removing it daily is acceptable | Stage A E/G: repeatable tool access, fastener retention, operator/maintainer task friction, redesign frequent access with qualified interlock where needed | UNKNOWN |
+| Hazardous motion and restart | Interlock closes, so machine can auto-restart; guard closure proves ram safe | `AUTH/PHY/VAL/CHG`: independent stopping/holding/guard-locking where needed, maintenance isolation and separate deliberate start | G0/G1 HOLD |
+
+**No EU law assumed for a U.S. machine**, no guard dimensions/impact strength, stopping time, PL/SIL, as-built evidence, test or compute. Do not allow ordinary LinuxCNC/FPGA guard status to substitute for independent safety final elements. Human-factor principle: the correctly installed guard must be easier to maintain than to defeat.

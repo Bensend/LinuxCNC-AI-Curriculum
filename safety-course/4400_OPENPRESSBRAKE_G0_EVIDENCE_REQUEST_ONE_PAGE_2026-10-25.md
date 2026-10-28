@@ -26,16 +26,8 @@ A **redacted status-only** record: artifact IDs and revision hashes (not secrets
 
 **Source/evidence status:** request design = **INFERENCE** based on OSHA 1910.212/1910.147 and the existing 4400 intake. No selected machine **DOC-CONFIRMED** evidence, **TEST-CONFIRMED** result, performance level, hydraulic truth table, stopping distance or pressure value is asserted. See [GUARD-01 source scope audit](../research/4400_OSHA_CPL_1997_PRESS_BRAKE_SAFE_DISTANCE_SUPERSESSION_AND_JOB_SHOP_SCOPE_AUDIT_2026-10-25.md) for why a historic “safe distance” shortcut does not close the front/rear/ram safety proof.
 
+## After the first contact (qualified review only)
 
-## 2026-10-26 first-contact clarification — progressive disclosure
-**This one-page A–G request is Stage A.** Do **not** ask the shop owner/operator to complete every conditional field in the ~99k-character technical intake before first contact. A qualified reviewer first maps installed components, hazard zones and independent physical safety propositions; only then opens applicable conditional sections as **Stage B**. Mark absent components **N/A only with dated as-built evidence**, not from assumption; missing/contradictory essential Y1/Y2 stop/hold, hydraulic isolation, guarding or restart evidence still means **G0 HOLD**. See [source-based intake usability audit](../research/4400_G0_SELECTED_MACHINE_INTAKE_PROGRESSIVE_DISCLOSURE_HUMAN_FACTORS_AUDIT_2026-10-26.md). This is a collection-sequence improvement, **not** a reduction in safety requirements or permission for live testing.
-
-
-## Conditional Stage B pointer — hydraulic only
-If qualified Stage A confirms hydraulic Y1/Y2 or another relevant hydraulic hazard, use the short [ten-field hydraulic Stage B restricted evidence card](4400_OPENPRESSBRAKE_G0_STAGE_B_HYDRAULIC_ONLY_RESTRICTED_EVIDENCE_CARD_2026-10-26.md). It requests **existing** as-built records only and separates hold, bleed, personal isolation and restart. If hydraulic equipment absent, require dated qualified N/A proof. This is not permission for live testing and does not relax G0/G1 HOLD.
-
-## Reviewer-only source annotations (not part of the owner request)
-
-For applicable, dated source-depth clarifications—**ISO 6909:2026 and EU transition, safety-program identity, guard fasteners, structural eccentric/stripping loads, workpiece ejection, optional crowning and hydraulic temperature/heater hazards**—use the [preserved Stage A dated source-delta archive](4400_G0_STAGE_A_DATED_SOURCE_DELTA_ARCHIVE_2026-10-28.md). This keeps the owner-facing A–G request short and avoids asking for irrelevant equipment. All optional equipment remains **UNKNOWN** unless identified from the selected as-built machine; N/A requires qualified dated evidence. This move changes **presentation only**, not the release criteria or any source claim.
+Use [the dated Stage A reviewer archive](4400_G0_STAGE_A_DATED_SOURCE_DELTA_ARCHIVE_2026-10-28.md) for progressive disclosure, the [conditional hydraulic Stage B card](4400_OPENPRESSBRAKE_G0_STAGE_B_HYDRAULIC_ONLY_RESTRICTED_EVIDENCE_CARD_2026-10-26.md), and exact OEM/standards changes. **No new owner questionnaire:** request only existing A–G records; review optional equipment only when present, with dated proof for N/A. Archive includes ISO 6909/EU edition, guard fastening, structural loading, workpiece ejection, crowning, temperature and heater hazards. All selected-machine evidence is still UNKNOWN.
 
 **Gate remains:** G0/G1 HOLD; G2 NOT RUN; G3/G4 NOT AUTHORIZED; G5 HOLD. No personnel-exposed operation.

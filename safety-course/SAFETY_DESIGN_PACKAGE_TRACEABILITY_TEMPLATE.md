@@ -1806,3 +1806,18 @@ This is a **cross-source reasoning synthesis**, not a new module, scored evaluat
 | **CHG-COORD-04** | Breaker/fuse/contactor/auxiliary/overload substitution or short-circuit damage triggers evidence review and affected validation STALE | CONDITIONAL / NOT RUN |
 
 **Human factors:** approved replacement kit and a short, clear post-fault workflow are safer than 'replace fuse/reset' pressure. Do not simulate or create a live short circuit with personnel exposed. No machine-specific SCCR, kA, PL/DC, stop time or hydraulic behavior inferred. G0/G1 HOLD; G2 NOT RUN; G3/G4 NOT AUTHORIZED; G5 HOLD.
+
+
+### 11KI — ISO 13849 edition, model/software/physical validation provenance (2026-10-28)
+[Original ISO/IFA audit](../research/4400_VAL_STD_01_ISO13849_PART2_2012_DIS2026_SISTEMA_SOFTEMA_VALIDATION_BOUNDARY_AUDIT_2026-10-28.md) corrects a specific **standards/tool-version** gap without rediscovering PHY stop/hold. ISO 13849-1:2023 and 13849-2:2012 are published; Part 2 DIS 2026 is **draft (40.99 on 2026-10-20)**. IFA SISTEMA 3.x maps to Part 1:2023 (2.x to 2015, 1.x to 2008); SOFTEMA supports safety application-software lifecycle. PL calculation, program validation and selected-machine physical proof are **different** propositions.
+
+| Package ID | Required selected evidence | State |
+|---|---|---|
+| **BND-VALSTD-01** | Machine identity/jurisdiction/retrofit, Type-C scope, applicable standard editions; draft not normative | UNKNOWN |
+| **SRS/ARC-VALSTD-02** | Exact safety function, controller program/signature, installed inputs/outputs/final elements and common-cause topology | UNKNOWN |
+| **VAL-PL-VALSTD-03** | Controlled PL/category model, selected hardware data, exclusions, tool/version/edition and independent review | NOT RUN |
+| **VAL-SW-VALSTD-04** | Safety-related application-program SRS trace, version, review and transition/fault test evidence | NOT RUN |
+| **PHY-VALSTD-05** | Independent Y1/Y2 stop, gravity holding, guard/access, residual energy and fresh restart under justified conditions | NOT RUN |
+| **CHG-VALSTD-06** | Re-review affected model, software and physical evidence after component, program, exclusion or guard change; mark STALE | CONDITIONAL / NOT RUN |
+
+**DOC-CONFIRMED** public publisher status/abstracts and IFA tool scope. **INFERENCE** selected validation workflow. **UNKNOWN** full controlled clauses, actual OpenPressBrake applicability, as-built hardware and independent evaluator. No PLr, DC, stop time, valve truth table, physical test or compute. **G0/G1 HOLD; G2 NOT RUN; G3/G4 NOT AUTHORIZED; G5 HOLD**.

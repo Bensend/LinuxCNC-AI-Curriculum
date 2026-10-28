@@ -9,10 +9,10 @@ jobs:
     runs-on: [self-hosted, openpressbrake]
     timeout-minutes: 5
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4 reviewed tag 2026-10-28
       - name: Execute frozen metadata fixture
         run: python3 lab-jobs/085-pb-dxf-001-metadata-import-fixture.py | tee pb-dxf-001-result.json
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4 reviewed tag 2026-10-28
         with:
           name: pb-dxf-001-evidence
           path: pb-dxf-001-result.json

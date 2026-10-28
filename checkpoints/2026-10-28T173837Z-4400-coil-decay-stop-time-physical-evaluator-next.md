@@ -13,6 +13,8 @@
 5. **DOC-CONFIRMED:** exact Pilz/Schneider/ST OEM; **SOURCE-CONFIRMED:** pinned public ordinary-driver contract; **INFERENCE:** a field diode/noise retrofit could invalidate an earlier stop-time envelope despite eventual EDM feedback; **UNKNOWN:** installed Pilz/AKAS/K1/K2/EDM, actual suppression/coil, Y1/Y2 final elements, stop/hold and fresh start; **TEST-CONFIRMED none; COMMUNITY-REPORTED none**.
 6. **GitHub-hosted compute 0 minutes; self-hosted compute 0 minutes.** No workflow, simulation, build, synthesis, benchmark, physical test, fault injection or independent evaluation. `LAB_COMPUTE_LOG.md` and `evaluation/FEEDBACK_SCORE_LOG.md` unchanged.
 
+Additional [blank qualified stop-chain witness](../safety-course/4400_COIL_DECAY_01_QUALIFIED_STOP_CHAIN_WITNESS_BLANK_2026-10-28.md) published for later *restricted* machine-specific review; all entries UNKNOWN/NOT RUN, no machine data or tests. This is not an expanded owner request.
+
 ## Precise next-work selection
 1. **Priority G0:** qualified restricted installed Stage A A–G evidence for selected Pilz/AKAS configuration/revision, K1/K2/EDM, independent Y1/Y2 hydraulic stopping and gravity-load holding, guarding/blanking, energy isolation and deliberate fresh restart. Conditional coil/suppressor/driver identity and actual release-time review **only if selected as a safety final element**. Do not expand the one-page owner request or infer physical behavior from public board contracts.
 2. **Priority evaluator:** independent 2520–25F0 challenge dispatch with immutable learner precommitment, information-separated oracle, distinct /10 and /28 scoring and novel 25E0 scenario if public challenge already seen. Do not self-score.

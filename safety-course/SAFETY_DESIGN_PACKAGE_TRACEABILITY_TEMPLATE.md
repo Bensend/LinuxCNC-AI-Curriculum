@@ -1824,3 +1824,17 @@ This is a **cross-source reasoning synthesis**, not a new module, scored evaluat
 
 
 **11KI IFA original-PDF refinement:** One-way SISTEMA 2.x→3.x conversion can change warnings and calculation premises; IFA explicitly permits **documented yellow→green** messages, not red. A green status can coexist with a documented fault-exclusion or maintenance note; inspect the full saved report and selected physical evidence. The IFA **3.0.4 build 5** release fixed earlier v3 unsaved-documentation defects. Extend VAL-PL-VALSTD-03/CHG-VALSTD-06 with **original model backup, tool build, migration message list, save/reopen evidence, documented warning rationale and independent signoff**. Source: [original IFA guide](https://www.dguv.de/medien/ifa/en/pra/softwa/sistema/innovations_sistema_3-0.pdf) and [IFA 2025 release](https://dguv.de/ifa/;/praxishilfen/practical-solutions-machine-safety/software-sistema/newsletter/2025/quartal_4/index.jsp). No physical/evaluator proof or computed PL.
+
+
+### 11KJ — IFA hydraulic valve type-test scope, excluded diagnostics and physical ram holding (2026-10-28)
+[Original independent IFA GS-IFA-M12/M13 10/2024 source audit](../research/4400_IFA_VALVE_01_GS_IFA_M12_M13_COMPONENT_TEST_VS_DIAGNOSTICS_AND_MACHINE_HOLD_AUDIT_2026-10-28.md) distinguishes a component's safety-related **type-test scope** from system **fault detection** and machine **physical** safe state. Both printed p.10 footnotes explicitly exclude fault-detection measures from their basic component testing. M12 is specific to contact-based interruption of a proportional/servo transducer supply or equivalent independent device, not ordinary driver enable. M13 addresses directional/blocking valve combinations. **Neither source certifies an installed OpenPressBrake component.**
+
+| Witness | Required selected evidence | State |
+|---|---|---|
+| **CERT-IFA-01** | Exact installed valve/combination variant, original certificate, covered test scope/edition, limits, manual and validity | UNKNOWN |
+| **ARC-IFA-02** | As-built contact-based safety interruption if claiming M12, separate normal driver, hydraulic/pilot power dependencies | UNKNOWN |
+| **DIAG-IFA-03** | Separate fault-detection architecture for stuck spool, leakage, feedback, short/backfeed and common cause | UNKNOWN |
+| **PHY-IFA-04** | Independent Y1/Y2 stop, gravity hold, pressure zones, guard/access and deliberate fresh restart | NOT RUN |
+| **CHG-IFA-05** | Approved replacement, manual override, port/pilot/connector and firmware changes trigger STALE and scoped requalification | CONDITIONAL / NOT RUN |
+
+**DOC-CONFIRMED** IFA test-guideline scope and exclusions; **INFERENCE** integration/replacement witness; **UNKNOWN** actual selected valve and physical response. No numeric pressure, leakage, diagnostic coverage, PL or stop-time inferred. G0/G1 HOLD; G2 NOT RUN; G3/G4 NOT AUTHORIZED; G5 HOLD. No live testing or compute.

@@ -1,0 +1,10 @@
+# 4400 SET-FLUID-01 — Slow jog is not safety-limited hydraulic speed
+**2026-10-28; non-executable SET-01 technician addendum; NON-GRADUATED.** [Original DGUV/IFA source audit](../research/4400_SET_FLUID_01_DGUV_FBH058_FIXED_ORIFICE_MONITORED_HYDRAULIC_REDUCED_SPEED_SOURCE_ADDENDUM_2026-10-28.md) and [existing SET-01 module](4400_SET_01_SETUP_MODE_ENABLING_SLS_AND_LOTO_BOUNDARY_MODULE_2026-10-24.md).
+
+**The trap:** setting LinuxCNC jog to a low percentage or commanding a proportional valve's low flow is an *ordinary control request*, not a proven independent physical speed limit. DGUV/IFA FBHM-058 (2019) shows example safety-related hydraulic arrangements using **fixed flow restrictions**, monitored high-speed bypass valves and a **higher-level stop** on fault. It warns that ordinary flow-control valves/controllable pumps normally do not fulfill the safety-reduced-speed function; vertical loads and cylinder geometry can change actual speed. The examples are not a mandatory circuit and their historical PL numbers are not OpenPressBrake ratings.
+
+**Guard-open setup still needs** correct independent mode selection, other modes inhibited, continuous enabling/hold-to-run, justified physical speed/stop/hold and guarded fresh restart. Even a correct flow restriction is not gravity-load holding or maintenance energy isolation.
+
+**Desk checks before any qualified physical plan:** which safety valve physically prevents high-speed bypass? What detects it stuck open? What independent higher-level stop operates? What happens with gravity load, changed pressure, heat and a stale foot command? Does the safety chain remain independent of normal LinuxCNC/FPGA? No machine-specific numeric answers can be guessed.
+
+Make safe setup practical: accessible approved controls, labeled service states, guards easy to reinstall, no incentive to bypass. If minimum physical safety cannot be demonstrated, **no personnel-exposed setup**; use isolated/remote work with people outside the hazard zone. No live fault, exposed jog or PL/stop-distance claim. **G0/G1 HOLD**.

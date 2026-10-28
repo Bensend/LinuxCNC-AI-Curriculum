@@ -1152,3 +1152,6 @@ Read [original Pilz/SICK/VACON safety-installation source audit](../research/440
 
 
 **TANDEM-02 OEM source-depth correction to TANDEM-01 (2026-10-28):** [Cincinnati EM-519 2019 original manual pp. 8-6–8-10](../research/4400_TANDEM_02_CINCINNATI_MASTER_ONLY_LIGHT_GUARD_SLAVE_FOOTSWITCH_AND_TONNAGE_DISPLAY_SOURCE_DELTA_2026-10-28.md) directly documents a **slave-connected light guard inactive in tandem**, a master-connected full-span guard requirement, **inactive slave foot/palm commands but active slave E-stop**, and a programmed/diagnostic tonnage display that is **not actual short-bend force**. This is a new exact OEM discriminator, not another generic tandem lesson or OpenPressBrake wiring assertion. Existing TAN-P03 clarified, no new case bank or score; no physical test or compute, G0/G1 HOLD, §11JZ.
+
+
+**BOND-01 exact OEM indicator correction (2026-10-28):** [Original Cincinnati EM-519 2019 p. 6-5 addendum](../research/4400_OSHA_SCHNEIDER_PROTECTIVE_BONDING_DOOR_HINGE_VARIANT_AND_EMC_BOUNDARY_AUDIT_2026-10-25.md) says its `GROUND CONNECTED` light is **internal chassis ground only** and **not proof that the machine is grounded**. Existing B11 false-green-lamp case clarified, not scored or multiplied. Qualified PE topology and fault-path witness remains UNKNOWN, no physical test or compute, G0/G1 HOLD.

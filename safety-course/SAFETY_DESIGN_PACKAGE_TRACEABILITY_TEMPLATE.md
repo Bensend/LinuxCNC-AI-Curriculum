@@ -1891,3 +1891,5 @@ This is a **cross-source reasoning synthesis**, not a new module, scored evaluat
 | **CHG-DRAIN-04** | Valve replacement, internal/external drain change, hose/return reroute and stale evidence | CONDITIONAL / NOT RUN |
 
 **DOC-CONFIRMED** Parker catalog scope, **INFERENCE** safety witness, **UNKNOWN** selected machine. No energized fault injection or physical release. G0/G1 HOLD.
+
+**Selected-machine public-source discriminator:** OpenPressBrake public Rev-0 phase extraction identifies a pre-fill/suction-related function, **not a proven regenerative cross-port**. Reuse the already documented [HAWE NSV normally-open/pilot-to-close and suffix scope](../research/4400_HAWE_SAKB_NSV_SEAL_SUFFIX_PORT_REVERSAL_SOURCE_AUDIT_2026-10-24.md) only as a product-family contrast. No HAWE NSV is asserted installed. Actual circuit identification remains **UNKNOWN**, no physical witness.

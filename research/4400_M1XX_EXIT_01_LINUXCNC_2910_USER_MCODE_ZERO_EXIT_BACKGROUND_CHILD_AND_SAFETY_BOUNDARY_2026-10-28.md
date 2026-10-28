@@ -1,0 +1,47 @@
+# 4400-M1XX-EXIT-01 — User M-code process exit is not physical completion or safety authorization
+**2026-10-28 | 4000 safety-course source trace | NON-GRADUATED | no runtime or selected-machine proof.**
+**Session start:** 2026-10-28T22:40:16.042Z. G0/G1 HOLD; no personnel-exposed operation.
+
+## Question and novelty
+What exactly does LinuxCNC wait for when an M100–M199 user script operates a collet, coolant, clamp, pump or external device? Does “M-code completed” establish that the requested physical action occurred or that any background work has stopped?
+
+Direct predecessor check against the full [canonical index](../safety-course/SAFETY_COURSE_INDEX.md), [research plan](../SAFETY_COURSE_RESEARCH.md), [progress](../PROGRESS.md), and cumulative [safety design](../safety-course/SAFETY_DESIGN_PACKAGE_TRACEABILITY_TEMPLATE.md): M62/M63/M67/M68 pending normal outputs, M70/M72/M73 modal re-command, M61 tool-number and M6 tool-changed acknowledgments already distinguish commands from physical proof. **Increment:** exact M1xx **external process/exit-code/child-process** completion semantics, including a documented unconditional `exit 0` example and a documented background process example. This is not another digital-output queue module or a new scored safety competency.
+
+## Pinned sources
+- LinuxCNC **v2.9.10**, peeled commit [`86cdca76fa2a36274c432caa21952b23c267989a`](https://github.com/LinuxCNC/linuxcnc/commit/86cdca76fa2a36274c432caa21952b23c267989a) (2026-07-02).
+- [Exact v2.9.10 M100–M199 documentation](https://github.com/LinuxCNC/linuxcnc/blob/86cdca76fa2a36274c432caa21952b23c267989a/docs/src/gcode/m-code.adoc#L702-L785), blob `bd388ccd0da40c9a2df2910037ce34de1e47c820`: executable named M1xx, optional P/Q arguments, G-code waits for **external program exit**, nonzero exit stops G-code. The original collet/HAL example executes `halcmd setp ...` and then **unconditionally `exit 0`**. The original display example deliberately starts a command with **`&`** then exits zero so G-code resumes while that separate process may still run. These are **DOC-CONFIRMED examples**, not instructions to wire a real collet without independent protection.
+- [`src/emc/task/emctask.cc` `user_defined_add_m_code`](https://github.com/LinuxCNC/linuxcnc/blob/86cdca76fa2a36274c432caa21952b23c267989a/src/emc/task/emctask.cc#L92-L120), blob `ef96ceb4de247a96a1ff64309850383864d05179`: calls `FINISH()` to flush linked motion before M1xx, formats `EMC_SYSTEM_CMD` with P/Q and appends to Task's interpreter list. The same file discovers executables via `[DISPLAY]PROGRAM_PREFIX` and `[RS274NGC]USER_M_PATH`; installed script identity and permissions are configuration-dependent.
+- [`src/emc/task/emctaskmain.cc` `emcSystemCmd`](https://github.com/LinuxCNC/linuxcnc/blob/86cdca76fa2a36274c432caa21952b23c267989a/src/emc/task/emctaskmain.cc#L280-L365), blob `7292a172023a5b42b023447c2458cb766c93fc9b`: `fork()` then `execvp(argv[0], argv)`; Task stores **direct child PID**, not a machine actuator or sensor state. `EMC_SYSTEM_CMD_TYPE` is issued through `emcTaskIssueCommand`, with a motion/IO precondition.
+- [Task `CheckPostconditions`](https://github.com/LinuxCNC/linuxcnc/blob/86cdca76fa2a36274c432caa21952b23c267989a/src/emc/task/emctaskmain.cc#L2437-L2449) enters `EMC_TASK_EXEC_WAITING_FOR_SYSTEM_CMD`. [Task execution-state handler](https://github.com/LinuxCNC/linuxcnc/blob/86cdca76fa2a36274c432caa21952b23c267989a/src/emc/task/emctaskmain.cc#L2793-L2875) polls `waitpid(child, ..., WNOHANG)`, sets DONE for **WIFEXITED && WEXITSTATUS==0**, ERROR for nonzero exit, signal or wait failure. It checks **process termination status**, not whether the clamp closed, pressure reached a safe value, spindle stopped or people are outside the danger zone.
+- [Task abandoned-command branch](https://github.com/LinuxCNC/linuxcnc/blob/86cdca76fa2a36274c432caa21952b23c267989a/src/emc/task/emctaskmain.cc#L2550-L2570) sends `SIGINT` to the tracked **direct PID** when the Task execution state no longer waits for it. No process-group kill, descendant tracking or physical-output verification is present in that branch. This is not proof that all descendants always survive; it is a **SOURCE-CONFIRMED absence of descendant-wide enforcement in the inspected path**.
+
+## Causal path and evidence classes
+1. Interpreter recognizes installed M1xx and calls the registered user-defined function. Task's `user_defined_add_m_code` flushes linked motion and appends an `EMC_SYSTEM_CMD` with numeric arguments. **SOURCE-CONFIRMED.**
+2. Task waits for prior motion/IO, forks a child and executes the configured external program. The parent monitors **that PID**. **SOURCE-CONFIRMED.**
+3. When the child exits with code zero, Task marks the M-code DONE and can continue subsequent G-code. If nonzero/signal/wait error, Task enters ERROR/abort handling. **SOURCE-CONFIRMED.**
+4. A shell script that ignores a failed `halcmd` and executes `exit 0` will still be seen as successful by Task; this follows ordinary shell exit semantics and the manufacturer's documented example, but **the failure path was NOT EXECUTED**. The documented `&` example allows child-process completion while a background descendant remains active; **DOC-CONFIRMED intent**, actual process tree and lifetime **UNKNOWN**.
+5. On abort, signaling the tracked direct PID is **not** an independent protective stop or a guarantee of descendant termination. Even if every process ends, no physical holding, stored-energy discharge or guard verification is implied. **INFERENCE safety consequence**, physical test **NOT RUN**.
+
+## Distinct failure modes / adversarial review
+| Case | Normal Task observation | Remaining unproved physical proposition |
+|---|---|---|
+| Script changes HAL output then `exit 0` | Child exit success | HAL write succeeded; actuator moved; tool/clamp held |
+| `halcmd` fails but script forces `exit 0` | Child exit success | Device command was accepted |
+| Script starts background helper and exits | Direct child exits; G-code can continue | Helper finished; no late actuation |
+| Script hangs waiting for a device | Task waits for child | Machine is safely stopped, restrained or isolated |
+| Task aborts and signals direct PID | Abort request issued to one process | Descendants/physical energy actually stopped |
+| Script returns nonzero | Normal program error path | Safety-related final element reached safe state |
+
+Do not overclaim a particular race, process survival, physical device action, stop category, stopping distance, hydraulic pressure, PL/PFH or diagnostic coverage. No selected OpenPressBrake M1xx script or control wiring was identified.
+
+## Practical architecture and human factors
+- **Never** use M100–M199 script completion, shell exit code, `halcmd` success, a HAL bit or a background helper as personnel-safety authority. They are **ordinary control/diagnostics**.
+- Where a custom M-code drives a non-safety actuator, ensure the script reports command failures rather than masking them with unconditional success; provide bounded timeout and separately measured/validated process feedback. This improves **normal process reliability** but does **not** upgrade the path to safety-related control.
+- Make the safer tool-change/clamp/service workflow easy: clearly show REQUESTED → OBSERVED → independent SAFETY-PERMITTED → PHYSICALLY VERIFIED, with visible missing/unknown evidence and easy guard reinstallation. Avoid reset controls that require reaching into a danger zone.
+- Safety-related control must independently remove/inhibit hazardous energy and verify necessary final-element/hold conditions. Physical energy isolation and gravity-load support remain independent of LinuxCNC, shell, user scripts and normal FPGA.
+- If basic guarding/stop/hold/restart cannot be proven, do not operate with personnel exposed; any later experimental operation requires separately qualified remote/isolated setup with people outside the danger zone and stated residual risk.
+
+## Test decision and unresolved
+No lab is justified merely to demonstrate that a shell can `exit 0` or fork a background process; authoritative documentation and source adequately resolve the **process completion semantics**. A machine-specific validation would require selected script, process topology, output device, independent safety architecture and qualified physical witness, all **UNKNOWN**. Do not dispatch any workflow or spend hosted/self-hosted compute for this paper finding. This branch is at a defensible information-gain stop until new selected-machine evidence or a genuine contradictory source arises.
+
+**Evidence:** SOURCE-CONFIRMED Task PID/exit-state path; DOC-CONFIRMED official examples; TEST-CONFIRMED none; COMMUNITY-REPORTED not used; INFERENCE physical failure consequence; UNKNOWN selected machine. **G0/G1 HOLD, independent 2520–25F0 evaluator OPEN.**

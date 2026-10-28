@@ -959,3 +959,6 @@ Distinct direct-index gap after ABRASIVE-01: no magnetic-chuck pole coverage, ma
 
 
 **4400 safety human-factors synthesis (2026-10-28):** cumulative design **§11LF** distinguishes REQUESTED process state, OBSERVED diagnostics, SAFETY-PERMITTED independent control and PHYSICALLY VERIFIED final-element evidence across M67/M68, M72/M73 and M61 source findings. Proposed HMI/data model only, not physical or operator validation. No new module, case bank, test or compute; G0/G1 HOLD.
+
+### 2026-10-28 4400 safety source-depth: planned rapid path and retained offset state
+[PATH-BLEND-01](research/4400_PATH_BLEND_01_LINUXCNC_2910_G64_G0_CLEARANCE_AND_STOP_MODE_SOURCE_AUDIT_2026-10-28.md) and [G92-PERSIST-01](research/4400_G92_PERSIST_01_LINUXCNC_2910_UNSPECIFIED_AXIS_OFFSET_AND_RESTART_SOURCE_AUDIT_2026-10-28.md) add two normal-control failure paths to the safety course: default G64 can round G0 clearance corners; shared G52/G92 registers can preserve a prior unmentioned axis and survive program end by default. [Technician card](safety-course/4400_PATH_BLEND_G92_01_CLEARANCE_AND_COORDINATE_TRUST_FIELD_CARD_2026-10-28.md) separates process geometry from independently validated personnel protection. G92 omitted-axis documentation conflict recorded; no runtime or physical test, external evaluation remains OPEN, G0/G1 HOLD.

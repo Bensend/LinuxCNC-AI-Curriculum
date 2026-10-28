@@ -17,3 +17,5 @@ First check for restricted qualified Stage A A–G and external evaluator result
 
 ## Same-session pinned documentation reconciliation
 Pinned v2.9.10 Code Notes (blob `75b7fe7135edcdbac3163f38a6f997d6c9d53a08`) retain outdated “all limits / broken until explicit override” prose despite v2.9.10 source mask+clear. Inspected master `command.c`/`control.c`/`taskintf.cc` retain the key code paths; master Code Notes (blob `e3b72e492a9a2eb54562afc6af40a3b4992a80cc`) describe tripped-only mask and completed-jog clearing. No runtime test; source is controlling evidence for pinned code claim. OpenPressBrake public main still `92cf5424be90f45f664ba2652dc725b38e1895f9`; external FEEDBACK_SCORE_LOG unchanged.
+
+**Additional pinned wiring proof:** v2.9.10 `docs/src/config/stepper.adoc` blob `588cca46281e8ad8da5aa2e6c3786214755ee112` shows shared Xlimits connected to both +/− pins and warns the faulted switch/axis cannot be identified. `HOME_IS_SHARED`, `HOME_IGNORE_LIMITS`, jog override are distinct. Its `iocontrol` E-stop loopback is a teaching example, not independent personnel protection.

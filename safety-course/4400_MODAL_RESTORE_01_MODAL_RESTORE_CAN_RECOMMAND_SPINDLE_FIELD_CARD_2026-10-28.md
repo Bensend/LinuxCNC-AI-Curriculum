@@ -3,12 +3,12 @@
 
 Read the [original pinned v2.9.10 interpreter source audit](../research/4400_MODAL_RESTORE_01_LINUXCNC_2910_M70_M72_M73_SPINDLE_RESTART_AND_COOLANT_RESTORE_SOURCE_AUDIT_2026-10-28.md) after the existing [M0/M1 pause versus safe access source audit](../research/4400_LINUXCNC_M0_M1_PAUSE_RESUME_VS_SAFE_ACCESS_SOURCE_AUDIT_2026-10-27.md).
 
-**Misconception:** “M5 stopped the spindle, so a later M72 just restores harmless settings.” In the inspected LinuxCNC interpreter, M70/M73 save spindle-0 M3/M4/M5 and coolant state; M72 or normal M73 subroutine return can **generate and execute new M3/M4/M7/M8/M9 commands** when saved and current states differ. This is normal program behavior, not a personnel-safety reset.
+**Misconception:** “M5 stopped the spindle, so a later M72 just restores harmless settings.” In the inspected LinuxCNC interpreter, M70/M73 save spindle-0 M3/M4/M5 and coolant state; M72 or normal M73-protected NGC O-word subroutine return can **generate and execute new M3/M4/M7/M8/M9 commands** when saved and current states differ. This is normal program behavior, not a personnel-safety reset.
 
 | Question before access | Required distinction |
 |---|---|
 | Was M5/M9 a normal process step? | Yes. It is not verified zero energy, safe standstill or LOTO. |
-| Is there an M70/M72 pair or M73 subroutine? | Inspect saved modes and later restore/return paths. M73 does **not** auto-restore on abort. |
+| Is there an M70/M72 pair or M73 subroutine? | Inspect saved modes and later restore/return paths. M73 does **not** auto-restore on abort; inspected Python/remap return paths also use a non-restoring leave-context call. |
 | Does a status screen show spindle stopped? | A status bit is not an independent guard, spindle brake, physical lock or proof of energy isolation. |
 | Can a restore command start a new cycle? | Ordinary program execution may reissue spindle/coolant commands; independent safety rearm and a separate deliberate start must remain authoritative. |
 | Does this apply to OpenPressBrake? | Only the general control-authority lesson transfers. No actual OpenPressBrake spindle or M72 usage is asserted. |

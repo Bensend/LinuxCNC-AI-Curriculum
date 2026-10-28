@@ -2094,3 +2094,5 @@ This crosscut reconciles [M67/M68 analog queue source](../research/4400_ANALOG_Q
 **§11LK content review:** four allowlisted script Git blob SHAs are now pinned in the workflow; a changed allowed path is rejected until separately reviewed. This is configuration provenance, not safety-related machine isolation.
 
 **§11LK supply-chain witness:** four workflow action dependencies now pin inspected official GitHub v4 refs to immutable commit SHAs. This is source provenance only, not an independent safety function or runner isolation proof.
+
+**§11LK branch-scope closure:** four historical A01 refs had hosted/push lab workflows; now inert `if: false` local stubs with original blobs preserved. Five current branches verified, zero hosted/push lab workflow paths in that inventory; no runtime/physical safety claim.

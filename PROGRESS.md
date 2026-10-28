@@ -1285,3 +1285,6 @@ UTC session start recorded before substantive work in [durable start marker](che
 
 
 **Same-session FORM-HAZ-04 direct NIOSH incident source-depth (2026-10-28):** [Original 2005 OKFACE/NIOSH FACE 05-OK-005-01 five-page report](research/4400_FORM_HAZ_04_NIOSH_FACE_05OK005_PRESS_BRAKE_WORKPIECE_EJECTION_INCIDENT_ADDENDUM_2026-10-28.md) directly inspected: **920-lb** lug bent 2–3 in from edge slipped off rear V-die and ejected, fatally striking operator near forklift support. Distinct **workpiece-to-die engagement/ejection** witness; not an eccentric-bolt failure or OpenPressBrake accident. Existing FORM-HAZ-04 audit and eight UNSCORED public cases updated without adding a bank; Stage A B/E/F/G reused. No physical test/compute/evaluator, G0/G1 HOLD, §11KA.
+
+
+**Same-session causal discriminator (2026-10-28):** Safety Design Package **§11KB** now explicitly distinguishes **machine structural bolt/bed overload (Cincinnati OEM)**, **tool/holder local overload (WILA)** and **workpiece-to-die slip/ejection (NIOSH FACE 05-OK-005)**. These require separate machine/tool/part/guard witnesses and cannot be merged into one nominal-tonnage or Y1/Y2 synchronization bit. Existing field card expanded, no new unscored bank, test, physical/evaluator score or compute; G0/G1 HOLD.

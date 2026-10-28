@@ -23,3 +23,5 @@ The v2.9.10 G-code manual says G43.2 offset changes do not cause motion. The ins
 5. If minimum stop/hold/guard/restart protection is absent, **do not operate with people exposed**. Any later experimental operation requires separately qualified isolation/remote execution with people outside the danger zone and residual risk stated.
 
 **Status:** DOC/SOURCE CONFLICT; TEST-CONFIRMED **none**; selected OpenPressBrake hardware **UNKNOWN**; independent evaluator **OPEN**; **G0/G1 HOLD**. No person-exposed operation.
+
+**Adversarial caveat:** G43.1's exemption from *inherited* modal motion does not prove that a line explicitly combining G43.1 axis words with G0/G1 is rejected. The manual calls such a combination an error; the pinned source's explicit-motion branch warrants a separate **disconnected-simulation** check. Do not use either unverified form as a physical clearance procedure.

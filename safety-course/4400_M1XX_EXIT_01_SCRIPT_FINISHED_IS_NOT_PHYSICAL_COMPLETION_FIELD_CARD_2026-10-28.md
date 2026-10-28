@@ -20,3 +20,5 @@ Read [pinned LinuxCNC M1xx process/Task audit](../research/4400_M1XX_EXIT_01_LIN
 **Status:** SOURCE/DOC-CONFIRMED process semantics, **TEST-CONFIRMED none**, selected OpenPressBrake M1xx implementation **UNKNOWN**; **G0/G1 HOLD**, external evaluator **OPEN**.
 
 **Wrong-script trap:** The tagged Task startup searches `PROGRAM_PREFIX` before `USER_M_PATH` and registers the **first executable M1xx name**. Confirm the actual resolved script path, revision and exit handling; a duplicate file in another directory is not necessarily the one running. This is process reliability/change control, **not** a safety interlock.
+
+**Specific check:** LinuxCNC's own HAL documentation prohibits `setp` on a pin already connected to a signal. Its M1xx collet example still ends with unconditional `exit 0`; a linked-pin command error can therefore be hidden behind a successful script exit. Check pin linkage, script exit propagation and independent actuator feedback—without trying the fault on a live machine.

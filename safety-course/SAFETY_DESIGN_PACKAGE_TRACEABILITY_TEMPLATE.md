@@ -1995,3 +1995,17 @@ Use the [12-case paper-only composition matrix](4400_LIM_POS_TRUST_01_RECOVERY_A
 | **RST/LIFE-06** | Can a maintenance/proof event rearm and replay a held normal command? | Independent area-clear/rearm and separate deliberate fresh cycle-start validation | HOLD |
 
 **SOURCE-CONFIRMED** predecessor; **DOC-CONFIRMED** exact manufacturer; **INFERENCE** conditional failure paths; **TEST-CONFIRMED none**. No numerical PL/stop time/pressure or installed-device inference. **G0/G1 HOLD; G2 NOT RUN; G3/G4 NOT AUTHORIZED; G5 HOLD.**
+
+### 11KY — Coil suppression can change the stop-time chain while improving contact life (2026-10-28)
+[Original Schneider/Pilz/ST and pinned OpenPressBrake source audit](../research/4400_COIL_DECAY_01_SUPPRESSION_DROPOUT_TIME_VS_CONTACT_LIFE_SOURCE_AUDIT_2026-10-28.md) → [technician card](4400_COIL_DECAY_01_QUIET_CONTACTOR_CAN_BE_SLOW_FIELD_CARD_2026-10-28.md). Extends CYCLE-LIFE-01 **contact wear** and CYCLE-01 **diagnostic cadence** with a separate **physical release-time** question. Schneider exact TeSys N diode accessory **6–10× normal drop-out** is a product-family relative figure, not a machine stop time. Pilz exact PNOZ 1 manual recommends flywheel diodes to protect relay contacts; neither authorizes arbitrary suppressor substitution. ST IPS1025H active clamp is an **ordinary** driver, not independent safety authority.
+
+| Trace | Conditional failure / review question | Qualified selected-machine evidence | State |
+|---|---|---|---|
+| **ELE/DECAY-01** | External diode slows K1/K2 or valve-coil release after safety output OFF | Exact installed coil, OEM-approved suppression including integrated modules, wiring, release-time data | UNKNOWN |
+| **CHG/DECAY-02** | Quiet/noise retrofit or replacement changes the prior stop envelope | Before/after BOM, exact accessory/coil electronics, independent change assessment and stop-time revalidation | UNKNOWN |
+| **DEP/DECAY-03** | EDM feedback eventually opens, masking an excessive physical stop delay | Qualified timing relationship of independent safety output, coil, main contacts, actual hazardous motion | NOT RUN |
+| **PHY/DECAY-04** | Contactor opens but gravity-loaded ram still moves or pressure persists | Independently validated selected Y1/Y2 stop, hold and energy-removal mechanism | NOT RUN |
+| **ENE/DECAY-05** | Removing suppression to gain speed damages upstream contacts or defeats OEM requirements | Exact OEM approved protection and service-life/EMC assessment; no ad-hoc field change | UNKNOWN |
+| **RST/DECAY-06** | Stop occurs late, then reset replays held normal motion demand | Independent area-clear/rearm and separate deliberate fresh normal start | HOLD |
+
+**DOC-CONFIRMED** exact manufacturer; **SOURCE-CONFIRMED** public ordinary driver no safety credit; **INFERENCE** conditional physical failure; **UNKNOWN** installed machine; **TEST-CONFIRMED none**. No numerical stop distance, hydraulic pressure, PL/PFH or actual coil dropout invented. No live test or compute. **G0/G1 HOLD; G2 NOT RUN; G3/G4 NOT AUTHORIZED; G5 HOLD.**

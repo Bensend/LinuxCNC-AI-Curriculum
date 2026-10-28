@@ -1308,3 +1308,5 @@ Read [exact workflow/official-source research](../research/4400_RUNNER_BOUNDARY_
 **Reviewed script identity:** four allowed local jobs 086–089 now have exact pinned Git blob SHA identities; changed content requires workflow review. No job executed or physical isolation proved.
 
 **RUNNER-BOUNDARY-01 source provenance:** all four local workflows now use exact pinned official checkout/upload-artifact action SHAs. This limits tag drift, not physical machine access; no runtime.
+
+**RUNNER-BOUNDARY-01 historical refs:** four A01 branches' hosted/push lab workflows are now disabled self-hosted manual stubs; original blobs remain in Git history. Five current branches inspected; no workflow dispatched, no physical safety proof.

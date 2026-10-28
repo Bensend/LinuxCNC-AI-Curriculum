@@ -1997,6 +1997,7 @@ Use the [12-case paper-only composition matrix](4400_LIM_POS_TRUST_01_RECOVERY_A
 **SOURCE-CONFIRMED** predecessor; **DOC-CONFIRMED** exact manufacturer; **INFERENCE** conditional failure paths; **TEST-CONFIRMED none**. No numerical PL/stop time/pressure or installed-device inference. **G0/G1 HOLD; G2 NOT RUN; G3/G4 NOT AUTHORIZED; G5 HOLD.**
 
 ### 11KY — Coil suppression can change the stop-time chain while improving contact life (2026-10-28)
+[Blank qualified stop-chain change witness](4400_COIL_DECAY_01_QUALIFIED_STOP_CHAIN_WITNESS_BLANK_2026-10-28.md) holds all selected-machine fields UNKNOWN/NOT RUN until authorized review; it is not an owner questionnaire or live-test procedure.
 [Original Schneider/Pilz/ST and pinned OpenPressBrake source audit](../research/4400_COIL_DECAY_01_SUPPRESSION_DROPOUT_TIME_VS_CONTACT_LIFE_SOURCE_AUDIT_2026-10-28.md) → [technician card](4400_COIL_DECAY_01_QUIET_CONTACTOR_CAN_BE_SLOW_FIELD_CARD_2026-10-28.md). Extends CYCLE-LIFE-01 **contact wear** and CYCLE-01 **diagnostic cadence** with a separate **physical release-time** question. Schneider exact TeSys N diode accessory **6–10× normal drop-out** is a product-family relative figure, not a machine stop time. Pilz exact PNOZ 1 manual recommends flywheel diodes to protect relay contacts; neither authorizes arbitrary suppressor substitution. ST IPS1025H active clamp is an **ordinary** driver, not independent safety authority.
 
 | Trace | Conditional failure / review question | Qualified selected-machine evidence | State |

@@ -1179,3 +1179,5 @@ Pinned LinuxCNC v2.9.10 [source trace](research/4400_LIM_01_LINUXCNC_2910_SHARED
 **RUNNER-BOUNDARY-01 adversarial guard:** exact reviewed Git blob SHA pinning added for 086–089; path-only allowlist could otherwise accept unreviewed edits with a newly entered hash. No machine or runtime proof.
 
 **RUNNER-BOUNDARY-01 source supply-chain refinement:** all four workflows now pin official checkout/upload-artifact v4 refs to inspected immutable commit SHAs; no job run and no physical isolation proof.
+
+**RUNNER-BOUNDARY-01 all-ref review:** all five current curriculum branches were inspected; four A01 historical hosted workflows were made inert manual-only self-hosted stubs, original blobs retained in Git history. Current branch state has no hosted/push lab triggers; no workflow executed, physical isolation/evaluator G0 remains HOLD.

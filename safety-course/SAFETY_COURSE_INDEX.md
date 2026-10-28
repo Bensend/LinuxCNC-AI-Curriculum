@@ -1231,3 +1231,5 @@ Read [pinned v2.9.10 source audit](../research/4400_LIM_01_LINUXCNC_2910_SHARED_
 
 ### 2026-10-28T11:39Z — 4400-POS-TRUST-01 E-stop, homed state and actual reference
 Study [pinned LinuxCNC v2.9.10 source audit](../research/4400_POS_TRUST_01_LINUXCNC_2910_VOLATILE_HOME_ESTOP_AND_PHYSICAL_REFERENCE_BOUNDARY_SOURCE_AUDIT_2026-10-28.md) and [technician card](4400_POS_TRUST_01_HOMED_SOFTWARE_STATUS_VS_PHYSICAL_POSITION_TRUST_FIELD_CARD_2026-10-28.md). `VOLATILE_HOME` conditional invalidation and absolute-encoder mapping are ordinary reference-management functions, not physical stop/hold/occupancy/guard evidence. G0/G1 HOLD; external 2520–25F0 evaluator OPEN.
+
+**LIM/POS-TRUST source-backed composition:** [12-case no-energy review matrix](4400_LIM_POS_TRUST_01_RECOVERY_AUTHORITY_COMPOSITION_MATRIX_2026-10-28.md) joins shared-limit direction ambiguity, `VOLATILE_HOME` state, absolute reference, independent stop/hold, guard and fresh restart. Paper-only, not an operator jog procedure or evaluator score.

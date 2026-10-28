@@ -1940,3 +1940,5 @@ Use the [12-case paper-only composition matrix](4400_LIM_POS_TRUST_01_RECOVERY_A
 | **HF/CHG-UVR-05** | Distinct trip/reset/ready/close/fresh-start status and easy fault recovery; requalify changed accessory/delay/control supply/remote-close wiring | UNKNOWN |
 
 **No personnel-exposed operation, new paper exam, physical test, numerical PL/SIL/stop-time or hosted/local compute.** Existing Stage A A–G and RST-01 blank witness remain the intake. **G0/G1 HOLD; G2 NOT RUN; G3/G4 NOT AUTHORIZED; G5 HOLD; external evaluator OPEN.**
+
+**§11KT original OEM closing-inhibit control-path addendum:** Schneider MTZ2/3 DOCA0101EN-09 and MicroLogic X documentation explicitly state software **inhibit close** does **not** inhibit local mechanical/BPFE/direct-XF pushbutton closing; only selected Auto-mode orders are inhibited. Expand **ARC/AUTH-UVR-02** and **SRS/DEP-UVR-03** to inventory *all* local and remote closing paths and reject HMI/SCADA inhibit as physical isolation. Do not infer that local control bypasses any actual physical padlock, independent safety circuit or guard; selected wiring UNKNOWN, G0/G1 HOLD.

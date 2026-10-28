@@ -20,3 +20,6 @@
 
 ## Same-session follow-through — heater dry-fire source and conditional Stage A
 Original [Chromalox TM-Series PD457-2 (August 2010)](https://assets.omega.com/manuals/M5622.pdf) was directly inspected, including cover and installation page images. Its thermostat is **not fail-safe** and exposed immersion elements can cause fire. This is an **exact OEM delta** extending Cincinnati's optional heater/low-oil main-drive trip; it does **not** prove any selected-machine heater wiring or unsafe condition. Added conditional level-cutoff/high-limit/isolator witness to existing Stage A A/D/G without a new questionnaire. Updated audit/card/canonical files and cumulative §11KF; no lab or evaluator. Physical G0/G1 HOLD unchanged.
+
+## Original OEM option-page correction
+Cincinnati EM-507 printed p. 8-2 (original page image directly inspected) explicitly says its optional heater maintains startup temperature **but is not for heating up cold oil**; the ~60°F thermostat is model-specific. Printed p. 9-6 says its cooler fan operates only with the motor/pump. No selected-machine warm-up, post-trip cooling or safety response may be inferred. The audit, technician card and cumulative §11KF were corrected. G0/G1 HOLD, zero compute.

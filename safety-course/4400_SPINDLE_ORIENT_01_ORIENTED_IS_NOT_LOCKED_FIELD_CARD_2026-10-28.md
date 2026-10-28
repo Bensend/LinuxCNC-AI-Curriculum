@@ -23,3 +23,5 @@ Give operators separate, legible **Orient for process**, **Stopped/guard-release
 
 ## What remains unproved
 Exact selected machine, HAL wiring, encoder fault detection, real spindle stop/coast/hold time, brake/lock capacity, tool capture, guarding, safety function and reset/restart: **UNKNOWN / NOT RUN**. No numeric thresholds, safety PL/SIL or measured stopping distance inferred. No hosted/local compute; no physical test; no independent competency score. OpenPressBrake G0/G1 HOLD; G3/G4 NOT AUTHORIZED.
+
+**Timing and cancellation caveat:** 101 is a count of qualifying `orient.comp` invocations, **not a specified number of milliseconds**. The output clears when orientation is disabled; Motion can nevertheless retain its ordinary `locked` completion latch until a subsequent command changes it. Tagged `emctaskmain.cc` also treats both `ORIENT_NONE` and `ORIENT_COMPLETE` as normal Task wait completion states; a successful Task wait is not a mechanical-restraint certificate. No observed timing or fault injection is claimed.

@@ -1153,3 +1153,6 @@ Pinned LinuxCNC v2.9.10 [source trace](research/4400_LIM_01_LINUXCNC_2910_SHARED
 
 
 **ATC-01 M61 source-depth (2026-10-28):** [Existing ATC module addendum](safety-course/4400_ATC_01_TOOL_RETENTION_DRAWBAR_PNEUMATIC_RELEASE_AND_SERVICE_MODULE_2026-10-25.md) shows SOURCE-CONFIRMED pinned v2.9.10 tool-number update without `EMC_TOOL_LOAD`; official M61 docs explicitly state no physical tool change or automatic tool-length offset update. Adds a narrow tool-identity trust boundary to existing physical drawbar/capture lesson, no new bank, test or selected machine claim. G0/G1 HOLD, evaluator OPEN, zero compute; §11LE.
+
+
+**2026-10-28 HMI authority synthesis:** cumulative Safety Design Package §11LF integrates analog queued setpoint, modal re-command and M61 identity examples into REQUESTED / OBSERVED / SAFETY-PERMITTED / PHYSICALLY VERIFIED operator labels. This is a practical **INFERENCE** to discourage shortcut/bypass and false green-bit trust; no selected-machine HMI, operator study, physical proof or evaluator. G0/G1 HOLD, zero compute.

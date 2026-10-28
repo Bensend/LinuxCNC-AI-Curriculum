@@ -981,3 +981,5 @@ Distinct direct-index gap after ABRASIVE-01: no magnetic-chuck pole coverage, ma
 **RUNNER-BOUNDARY-01 implementation follow-through:** lab workflow now read-only/serialized, artifact-only; physical isolation still unproved and no workflow executed. A successful artifact is not a machine-safety witness, and separate reviewed commit is required for durable lab evidence.
 
 **RUNNER-BOUNDARY-01 adversarial script review:** direct historical 056/079 source includes privileged LinuxCNC operations; the local workflow now rejects all except exact pure-software fixtures 086–089. A reviewed script SHA and checkbox are necessary process gates, **not** physical isolation; a new hardware-capable lab needs separate workflow review and qualified machine isolation. No test or compute.
+
+**RUNNER-BOUNDARY-01 content-identity correction:** exact Git blob SHA for each of four allowlisted scripts is now pinned in workflow; filename plus dispatcher-entered SHA-256 alone was not a sufficient review-authority guard. No physical isolation proof or runtime.

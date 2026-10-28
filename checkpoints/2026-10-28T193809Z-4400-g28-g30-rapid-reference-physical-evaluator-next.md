@@ -27,3 +27,7 @@ Published [PROBE-RETREAT-COMPOSE-01](../safety-course/4400_PROBE_RETREAT_COMPOSE
 
 ## Homing-prerequisite source scope
 Tagged Task `all_homed`, MDI/Auto checks and `NO_FORCE_HOMING` INI parsing inspected. Default MDI/Auto homed gate is real ordinary control; config can bypass it. G28/G30 do not themselves establish physical home. Cross-referenced existing POS-TRUST source lesson; no duplicate graded competency, no selected machine evidence.
+
+
+## G53 inspectability alternative
+Source checked tagged `Interp::find_ends` G53 branch and official G53 nonmodal machine-coordinate docs. A separately ordered, qualified machine-specific G53 normal retreat is easier to inspect than hidden mutable G28/G30 references, but is not collision-proof or independent safety; a combined G53 rapid is not Z-first. Integrated into G28 audit/card and cross-boundary review. No test, coordinates or machine claims.

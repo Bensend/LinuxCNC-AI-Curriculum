@@ -20,3 +20,6 @@
 
 
 **Homing gate is ordinary Task control:** v2.9.10 normally rejects MDI/Auto execution if a joint's normal HOMED flag is false; `[TRAJ] NO_FORCE_HOMING=1` bypasses that prerequisite. Neither a successful HOMED check nor a G28.1/G30.1 stored coordinate proves physical trust, collision-free route or independent safety. Do not assume an unhomed G28 always runs, or that Task's gate is a safety-rated permissive.
+
+
+**More inspectable normal-control pattern:** official G53 is nonmodal and explicitly addresses machine coordinates; a qualified machine-specific program can use **separately ordered** G53 G0 clearance legs rather than depending on hidden G28/G30 reference parameters. But `G53 G0 X0 Y0 Z0` is still a combined rapid, **not** automatically Z-first, and G53 does not prove physical position trust or independent personnel safety. Never copy illustrative coordinates into a machine without validating its real clearance envelope.

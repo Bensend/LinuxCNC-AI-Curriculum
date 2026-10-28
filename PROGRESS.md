@@ -1436,3 +1436,6 @@ Rotated from G38-PROBE-EDGE-01 after a genuine source information-gain stop. Dir
 
 
 **Homing-prerequisite source scope:** tagged `emctaskmain.cc` `all_homed`, MDI/Auto checks and `NO_FORCE_HOMING` parsing confirm default Task gate requires normal HOMED status, but `[TRAJ] NO_FORCE_HOMING=1` bypasses it. Neither path establishes independent physical position trust; G28/G30 are not switch/index homing. Reconciled existing POS-TRUST predecessor; no unhomed execution or machine failure invented.
+
+
+**Normal-control alternative source review:** tagged `Interp::find_ends` G53 branch plus official nonmodal G53 docs support explicit machine-coordinate waypoints as a more inspectable **normal-control** option than mutable G28/G30 references. Separate ordered legs may be needed; combined G53 rapid is not automatic Z-first, and no independent safety or selected coordinates are proven. No lab/compute.

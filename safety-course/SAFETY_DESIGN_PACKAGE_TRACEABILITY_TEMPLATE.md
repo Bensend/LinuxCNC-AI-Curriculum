@@ -2037,3 +2037,6 @@ Use the [12-case paper-only composition matrix](4400_LIM_POS_TRUST_01_RECOVERY_A
 
 
 **11LB Task prerequisite scope:** tagged `emctaskmain.cc` normally gates MDI/Auto on joint HOMED status; `NO_FORCE_HOMING=1` bypasses that ordinary prerequisite. Do not claim unconditional unhomed G28 execution or mistake HOMED for physical trust/independent safety. POS-TRUST-01 remains the predecessor for physical reference and E-stop behavior.
+
+
+**11LB practical mitigation scope:** source-confirmed nonmodal G53 can express explicit machine-coordinate waypoints and reduce dependence on hidden G28/G30 reference parameters in ordinary control. Separately order qualified clearance legs; combined G53 G0 XYZ is not Z-first. Still not physical home, safe access or independent protective stopping.

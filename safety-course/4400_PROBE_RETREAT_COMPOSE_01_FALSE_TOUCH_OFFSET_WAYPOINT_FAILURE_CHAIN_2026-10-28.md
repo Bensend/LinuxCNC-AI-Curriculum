@@ -32,3 +32,6 @@
 
 ## Evidence limits and next work
 **SOURCE-CONFIRMED** individual implementation and existing simulated example. **DOC-CONFIRMED** official G38/G10/G28/G30 descriptions. **INFERENCE** combined hypothetical failure chain and mitigation rationale. **UNKNOWN** whether any installed machine runs this combination, actual probe state, fixture, axis motion, safe stopping/holding or independent SRS. **TEST-CONFIRMED none; COMMUNITY-REPORTED none.** No lab is frozen because the source question is resolved and a generic simulation cannot prove physical safety. **G0/G1 HOLD; G2 NOT RUN; G3/G4 NOT AUTHORIZED; G5 HOLD; independent 2520–25F0 evaluator OPEN.** No new owner questionnaire, graded bank or hosted/self-hosted compute.
+
+
+**Possible ordinary-control containment, not a safety function:** explicit machine-coordinate G53 waypoints avoid the G28 axis-word intermediate target's dependence on a corrupted work offset for specified axes (tagged `Interp::find_ends` G53 branch and official G53 docs). A separately ordered, verified machine-specific G53 retreat can make normal motion easier to review, but cannot establish safe access, trustworthy physical home, fixture clearance or independent stop/hold. A single multi-axis G53 rapid is **not** an automatic Z-first retract. No machine-specific coordinates are supplied.

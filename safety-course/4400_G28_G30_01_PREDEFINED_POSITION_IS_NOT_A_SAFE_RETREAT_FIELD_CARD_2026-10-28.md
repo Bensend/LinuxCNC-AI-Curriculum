@@ -14,3 +14,6 @@
 **Human-factor fix:** make the approved tool-change/retreat route simpler than hand-editing G28/G30 parameters or bypassing a guard. Label the selected reference and fixture setup, show unexpected reference changes, provide a guarded service route and require intentional fresh start after a fault. Do not promote HMI “HOME” or “AT G30” to a green personnel-safety signal.
 
 **Authority boundary:** normal LinuxCNC/HAL/FPGA controls positioning; independently qualified safety logic owns protective stop/guard/rearm; actual final elements must physically stop and hold hazards. Selected OpenPressBrake Pilz/AKAS, K1/K2/EDM, Y1/Y2 hydraulic stop/hold, guard, isolation and restart remain **UNKNOWN/NOT RUN**. **G0/G1 HOLD; G3/G4 NOT AUTHORIZED.** No numeric stop-time, PL/SIL, machine motion or physical test claimed.
+
+
+**M6-specific correction:** in the tagged v2.9.10 interpreter, `TOOL_CHANGE_AT_G30=1` produces a **direct** traverse to the stored G30 reference, not the two-leg `G30 axes` command path. `TOOL_CHANGE_QUILL_UP=1` adds a **separate Z-first** traverse; `TOOL_CHANGE_WITH_SPINDLE_ON=1` can suppress the normal spindle-stop command. Even an emitted spindle-stop command is not measured standstill. Inspect all three INI options and independent physical guard/tool-retention evidence; do not conflate M6 with a G30 block.

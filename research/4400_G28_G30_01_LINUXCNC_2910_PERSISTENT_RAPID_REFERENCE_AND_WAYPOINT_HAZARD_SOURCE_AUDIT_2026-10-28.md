@@ -37,3 +37,13 @@ Can an operator, machine builder or G-code author safely equate `G28`, `G30`, `G
 
 ## Evidence and release
 **SOURCE-CONFIRMED:** exact v2.9.10 interpreter/storage and two-traverse path; newer pinned comparison limited to shared mechanism. **DOC-CONFIRMED:** G28/G30/INI behavior. **INFERENCE:** conditional collision or false-safe-home human factor. **UNKNOWN:** actual selected machine, stored reference values, fixture/tool geometry, motion envelope, stop/hold, guard/energy/restart and SRS/PL/SIL. **TEST-CONFIRMED:** none. **COMMUNITY-REPORTED:** none relied on. No lab freeze: authoritative code/docs resolve the concrete question, while a generic simulation cannot establish physical safety. **G0/G1 HOLD; G2 NOT RUN; G3/G4 NOT AUTHORIZED; G5 HOLD; 2520–25F0 independent evaluator OPEN.** Zero hosted/self-hosted compute.
+
+
+## M6 tool-change source continuation — direct G30 move is **not** the two-leg G30 command
+[Tagged `Interp::convert_tool_change` L5565–5659](https://github.com/LinuxCNC/linuxcnc/blob/86cdca76fa2a36274c432caa21952b23c267989a/src/emc/rs274ngc/interp_convert.cc#L5565-L5659), same blob `f01a359652d588d59c9e210fa441a99d2ee19598`, establishes the actual M6 sequence in the inspected normal interpreter:
+1. `START_CHANGE`; unless `tool_change_with_spindle_on` is set, emit `STOP_SPINDLE_TURNING` ordinary command. This is **not** proof of spindle standstill or safe tool access.
+2. If `tool_change_quill_up` is set, compute machine-coordinate Z zero and emit a separate Z `STRAIGHT_TRAVERSE`. Without that option, **do not assume a Z-first retract**.
+3. If `tool_change_at_g30` is set, read persistent 5181–5189 G30 coordinates, optionally index A/B/C one at a time, then emit **one direct** `STRAIGHT_TRAVERSE` to that reference. This M6 path **does not call `convert_home`** and does **not** use the G30 command's optional intermediate axis-word waypoint. The two-leg claim applies to **G28/G30 commands with axis words**, not automatically to M6.
+4. Then emit `CHANGE_TOOL` and update ordinary tool-change state. Physical spindle stop, guard locking, tool capture and safe restart are separate independent safety propositions.
+
+**Practical consequence:** two visually similar routes to a G30 reference can have different intermediate motion. A technician reviewing a machine must distinguish a program's explicit `G30 axes` from M6's `TOOL_CHANGE_AT_G30` option and inspect `TOOL_CHANGE_QUILL_UP` and `TOOL_CHANGE_WITH_SPINDLE_ON` independently. All SOURCE-CONFIRMED at tagged v2.9.10; no machine motion or fault was executed.

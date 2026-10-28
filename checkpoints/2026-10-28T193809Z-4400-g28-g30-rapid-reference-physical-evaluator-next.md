@@ -15,3 +15,7 @@
 2. Information-separated 2520–25F0 evaluator with precommitment; public 25E0 challenge contamination warning. Never self-score.
 3. If both gates unchanged, choose another genuinely nonduplicate 4400 safety mechanism from canonical index/research/progress/design. No speculative physical facts or generic lab merely for activity.
 4. Immediately before ending, safely append **complete** LESSON_LOG from verified SHA, UTC end, elapsed minutes and overlap relative to previous curriculum end `2026-10-28T18:48:52.128Z` (other automations UNKNOWN). Commit and independently verify. Keep recurring curriculum enabled.
+
+
+## Same-session M6 source follow-through
+Direct tagged `Interp::convert_tool_change` L5565–5659 distinguishes optional ordinary spindle-stop command, optional Z-first quill-up, optional **direct** G30 reference traverse, then CHANGE_TOOL. **M6's direct G30 move is not G30 command's two-leg waypoint path**; corrected source-scope in audit and field card. No installed machine or physical stop/hold claims. The branch is source-sufficient; avoid a generic simulation.

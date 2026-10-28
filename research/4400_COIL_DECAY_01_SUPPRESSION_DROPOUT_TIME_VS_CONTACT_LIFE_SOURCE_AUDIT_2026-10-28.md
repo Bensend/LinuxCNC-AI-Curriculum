@@ -1,0 +1,51 @@
+# 4400-COIL-DECAY-01 — Suppressing an inductive coil can delay physical contactor release
+**2026-10-28 | Original manufacturer-source audit | NON-GRADUATED | NO MACHINE TEST**
+
+## Engineering question and novelty
+Can a well-intentioned field change that quiets a relay/contactor coil extend the interval between a safety-output OFF command and physical opening of the final element? **Yes, for documented suppression arrangements.** This is a *response-time and change-control* question, not a repeat of [CYCLE-LIFE-01](4400_CYCLE_LIFE_01_PILZ_PZE_X4P_CONTACT_DUTY_AND_ROCKWELL_OPERATOR_B10D_SOURCE_DEPTH_2026-10-28.md) (contact wear) or [CYCLE-01](../safety-course/4400_CYCLE_01_ON_STATE_DIAGNOSTIC_GAPS_AND_SAFE_PROOF_WORKFLOW_MODULE_2026-10-26.md) (diagnostic cadence). A faster-looking electrical status or successful EDM check does **not** by itself prove timely physical stopping or gravity-load holding.
+
+## Primary source ledger (retrieved 2026-10-28)
+| Claim and exact scope | Classification | Original manufacturer evidence |
+|---|---|---|
+| For Schneider **TeSys N** accessories, RC suppression is catalogued as **1.2–2×** normal drop-out, varistor **1.1–1.5×**, and a polarized **diode 6–10×**. These are *catalogue product-family relative figures*, not universal machine times. TeSys N footnote also states certain 3-pole DC coils have **built-in bidirectional diode suppression**; do not assume a separate device is absent or required. | **DOC-CONFIRMED** | [Schneider Digest Plus, TeSys N Accessories, Coil Suppressors, rows and footnote 14](https://productinfo.se.com/nadigest/5c51d645347bdf0001f1f280/Master/17716_MAIN%20%28bookmap%29_0000062583.xml/%24/_17716145_Heading1_2), section “Coil Suppressors and Cabling Accessories.” |
+| Schneider **CA3DN/CA3DK/CA3DC** LA4DC1U DC diode accessory increases dropout **6–10×** normal; this is a *different exact relay/accessory family*, independently corroborating the mechanism but not transferring timing to another device. | **DOC-CONFIRMED** | [Schneider FAQ FA101684](https://www.se.com/us/en/faqs/FA101684/), originally published 2003-04-23, last modified 2026-05-12. |
+| Pilz **PNOZ 1** manual recommends adequate spark suppression on output contacts and flywheel diodes for DC contactors to improve relay-contact service life. The same original manual distinguishes **PNOZ 1 internal de-energization delays** by E-stop versus power loss and duty-cycle conditions. | **DOC-CONFIRMED** | [Pilz PNOZ 1 operating manual 21114-EN-06](https://www.pilz.com/download/open/PNOZ_1_Operating_Manual_21114-EN-06.pdf), printed 2023-06, pp. 22–23 (time tables) and 25–26 (safety characteristic data/service life/suppression). |
+| ST **IPS1025H DS13780 Rev 7** has an **active clamp / fast demagnetization** path for an inductive load when its high-side output turns OFF; this is a normal industrial output feature, not a certified safety function or a measured installed contactor release. | **DOC-CONFIRMED** | [ST original datasheet DS13780 Rev 7, August 2025](https://www.st.com/resource/en/datasheet/ips1025h.pdf), §§7.4–7.5 and §8 pp.15–18. |
+| The public OpenPressBrake **ordinary** `relay_contactor_driver` primitive uses IPS1025H, declares fast demagnetization and **explicitly assigns no personnel-safety credit** to FPGA coil command or diagnostics. The integration contract requires installed coil identity, suppression and polarity to be checked at the machine. | **SOURCE-CONFIRMED** at pinned public revision | [`engineering.yaml`](https://github.com/Bensend/OpenPressBrake/blob/92cf5424be90f45f664ba2652dc725b38e1895f9/hardware/blocks/relay_contactor_driver/engineering.yaml) (`block.scope`, `excludes`, `EDR-RCD-001`) and [`REV1_RESOURCE_CONTRACT.yaml`](https://github.com/Bensend/OpenPressBrake/blob/92cf5424be90f45f664ba2652dc725b38e1895f9/hardware/blocks/relay_contactor_driver/REV1_RESOURCE_CONTRACT.yaml) (`primitive.safety_credit`, `verify_at_machine`). |
+
+**No manufacturer contradiction is asserted.** Pilz addresses protecting the upstream relay contacts from inductive switching damage; Schneider describes a potential *downstream contactor release-time penalty*. Both effects can coexist. Which suppressor is appropriate depends on exact coil/driver/safety design and manufacturer approval; do not replace or remove protection by rule of thumb.
+
+## Causal path: distinguish five independent stages
+1. A protective device requests stop. The **independent safety controller** evaluates the input and removes the relevant safety-output permission. Normal LinuxCNC/FPGA may observe the request but must not own the personnel-safety decision.
+2. The safety-output contacts/semiconductors open. Their *own* reaction and release times depend on exact product, supply, mode and conditions. **A safety-output OFF bit is not the coil current waveform.**
+3. The external inductive coil releases stored magnetic energy. An added flywheel diode can extend decay and mechanical drop-out relative to a different approved suppressor. A varistor, Zener, bidirectional clamp, internal active clamp or integrated coil electronics may behave differently. **The exact wiring and built-in suppression are essential.**
+4. Contactor **main contacts** physically separate, subject to selected-device operating time and failure modes (including welding). Correctly wired mirror/EDM can help detect certain contact faults but an eventual feedback transition does not establish a stop-time limit without timing evidence.
+5. Motor/valve energy and the actual dangerous movement cease or reach the **independently qualified safe state**. Hydraulic pressure, stored energy and gravity-load holding require separate machine evidence. An electrical contactor opening alone is not proof of a held press-brake ram.
+
+**INFERENCE (conditional):** A maintenance technician adds a generic diode to quiet electrical noise; the contactor opens later than in the previous validated stop-time envelope. An operator may see a normal safety LED and eventual EDM feedback even though the physical stop margin changed. This is a *credible failure hypothesis*, not an observed OpenPressBrake fault.
+
+## Adversarial documentary cases (all PAPER ONLY / NOT RUN)
+| ID | Change or observation | Invalid shortcut | Required engineering discrimination |
+|---|---|---|---|
+| CD-01 | Field electrician adds diode to 24 VDC contactor coil | “It is only EMI suppression.” | Exact coil/driver compatibility; original/new release-time evidence; qualified stop-time revalidation. |
+| CD-02 | Existing coil has integrated bidirectional suppressor | “Add the same diode anyway.” | Confirm exact SKU, OEM internal protection, external wiring and approved accessories before any change. |
+| CD-03 | Safety output OFF LED goes dark immediately | “Main contacts opened instantly.” | Independent output timing, coil decay, main contact state, physical motion and gravity holding. |
+| CD-04 | EDM feedback eventually changes to OFF | “The stopping distance is unchanged.” | Feedback *time* and coverage, independently qualified physical stop/hold. |
+| CD-05 | Contactor replaced with a lower-noise electronic-coil variant | “Same current rating means same stop time.” | Exact coil electronics, built-in suppression, dropout specification and safety-function change review. |
+| CD-06 | Suppressor removed to speed release | “Faster is automatically safer.” | Upstream contact life/arcing/EMC, OEM-approved protection, diagnostic reliability and complete function review. |
+| CD-07 | Ordinary IPS1025H output turns OFF under FPGA reset | “Independent safety stop proven.” | Ordinary controller's **zero safety credit**; verify actual independent safety final elements and hydraulic hold. |
+| CD-08 | Controller power fails but a buffered 24 V domain remains | “All coils are de-energized.” | As-built power domains, exact switching/decay behavior, independent rearm and fresh normal start. |
+
+## Minimal practical change-control pattern
+**Before** a coil, contactor, suppression, driver or control-supply change: capture exact installed model and manufacturer document revision, original suppression (including internal), approved wiring and contactor/valve function. Identify which stop-time/hold claims depend on it. Require a qualified engineering review and an approved, controlled validation plan **before** personnel exposure. Avoid hazardous live experiments solely to settle a documentation question.
+
+**After** approved change: maintain traceable before/after records, independently verify the selected safety output and final element and revalidate physical stop/hold and fresh-start conditions where affected. No invented acceptance milliseconds or pressure threshold; derive from selected-machine risk assessment, approved design and actual measurement. A diode should not be silently removed to gain speed if that invalidates contact-life or manufacturer requirements. Prefer integrated, specified suppression and keyed replacement parts that make accidental substitution difficult.
+
+## Boundaries and open evidence
+- **SOURCE-CONFIRMED:** pinned OpenPressBrake public *ordinary* IPS1025H driver contract, no personnel-safety credit.
+- **DOC-CONFIRMED:** exact Schneider, Pilz and ST product-family mechanisms above.
+- **INFERENCE:** a suppressor substitution may erode machine stopping margin and a time-insensitive EDM check may miss that margin loss.
+- **UNKNOWN:** installed OpenPressBrake Pilz/AKAS, K1/K2/EDM wiring, exact coil/diode/driver, independent Y1/Y2 hydraulic final elements, measured stop/hold, selected guard geometry, safety performance and independent evaluation.
+- **TEST-CONFIRMED:** none. **COMMUNITY-REPORTED:** none relied upon. No simulation, bench/physical test, workflow, GitHub-hosted or self-hosted compute used.
+- **Gate:** G0/G1 HOLD, G2 NOT RUN, G3/G4 NOT AUTHORIZED, G5 HOLD. **Do not operate with people exposed to the hazard** absent independently qualified minimum safety threshold. Any later justified experimental operation requires isolation/remote control, people outside the danger zone and explicit residual risk.
+- **Next:** qualified restricted Stage A A–G installed evidence and independent 2520–25F0 evaluator. If unchanged, rotate to a genuinely distinct safety mechanism, not another generic diode or B10d lesson.

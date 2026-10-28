@@ -12,3 +12,5 @@ Read the [original Schneider Type I/II coordination audit](../research/4400_COOR
 **Practical repair design:** store the approved protective-device and contactor/auxiliary part numbers together, make the protected maintenance/isolation map easy to find, display fault source instead of a generic reset prompt, and require qualified post-fault inspection rather than inviting a jumper or substitution. Use existing Stage A A–G, RST-03/04/07/11/12 and PANEL-01 witness; **do not create a new owner form**.
 
 **OpenPressBrake installed protection and Pilz/AKAS/Y1/Y2 physical behavior are UNKNOWN. G0/G1 HOLD; no personnel-exposed hazardous operation authorized.**
+
+**Manufacturer counterexample (original Rockwell 2018 PDF, printed p. 31 visually inspected):** One 400 V Type II 140M table row specifies a 100-C12 minimum yet footnotes that 100-C16 is **Type I only** for that row. A nominally larger contactor is not automatically a qualified replacement. This is a historical exact-product example, **not** a proposed OpenPressBrake part or machine kA rating.

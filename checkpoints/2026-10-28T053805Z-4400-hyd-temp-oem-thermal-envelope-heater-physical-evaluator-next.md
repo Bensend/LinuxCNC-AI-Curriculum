@@ -23,3 +23,8 @@ Original [Chromalox TM-Series PD457-2 (August 2010)](https://assets.omega.com/ma
 
 ## Original OEM option-page correction
 Cincinnati EM-507 printed p. 8-2 (original page image directly inspected) explicitly says its optional heater maintains startup temperature **but is not for heating up cold oil**; the ~60°F thermostat is model-specific. Printed p. 9-6 says its cooler fan operates only with the motor/pump. No selected-machine warm-up, post-trip cooling or safety response may be inferred. The audit, technician card and cumulative §11KF were corrected. G0/G1 HOLD, zero compute.
+
+## Publication and compute-route audit
+At commit `80526570988b7f1a94f7b87ca0e5a0e381c9e919`, independently checked **62 relative Markdown links across nine affected files** (new research/card/checkpoint and canonical document tails); **zero missing** and full Git tree not truncated. The public OpenPressBrake main ref was independently checked at `92cf5424be90f45f664ba2652dc725b38e1895f9`.
+
+The curriculum repository has an older `.github/workflows/lab-runner.yml` whose dispatch job still specifies **`ubuntu-latest`**. **Do not dispatch it.** It also has a path-triggered `append-lab-compute.yml` on `ubuntu-latest`; no triggering file was modified. The `append-lesson-log.yml` and `pb-dxf-001.yml` workflows target `[self-hosted, openpressbrake]`. No workflow was invoked and no hosted/self-hosted compute occurred. If a justified future lab arises, use only a bounded self-hosted workflow, verifying no push path can trigger hosted compute. This is a source audit, not proof of runner online availability.

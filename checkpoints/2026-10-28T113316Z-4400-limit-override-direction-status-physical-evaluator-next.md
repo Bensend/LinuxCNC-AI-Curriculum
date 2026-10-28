@@ -14,3 +14,6 @@ No new restricted A–G as-built evidence or independent 2520–25F0 score was o
 
 ## Precise next work
 First check for restricted qualified Stage A A–G and external evaluator results. If absent, select a genuinely nonduplicate 4400 safety question, prioritizing source-level ordinary-control/independent-safety contradictions, physical final elements and human-factor defeat resistance. Preserve pinned versions, no invented safety performance numbers. No hosted compute; if a frozen question eventually needs runtime, only [self-hosted, openpressbrake] if dispatchable. Before end append UTC end/elapsed/overlap to **complete** LESSON_LOG using current SHA and expected-head Git commit; verify. Keep recurring curriculum enabled.
+
+## Same-session pinned documentation reconciliation
+Pinned v2.9.10 Code Notes (blob `75b7fe7135edcdbac3163f38a6f997d6c9d53a08`) retain outdated “all limits / broken until explicit override” prose despite v2.9.10 source mask+clear. Inspected master `command.c`/`control.c`/`taskintf.cc` retain the key code paths; master Code Notes (blob `e3b72e492a9a2eb54562afc6af40a3b4992a80cc`) describe tripped-only mask and completed-jog clearing. No runtime test; source is controlling evidence for pinned code claim. OpenPressBrake public main still `92cf5424be90f45f664ba2652dc725b38e1895f9`; external FEEDBACK_SCORE_LOG unchanged.

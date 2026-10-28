@@ -1,7 +1,7 @@
-# 4400-EDM-MIRROR-01 — Is this the *right* NC contact?
+# 4400-MIRROR-01 service addendum — Is this the *right* NC contact?
 **Technician field review | 2026-10-28 | PAPER / UNSCORED | NOT A LIVE TEST**
 
-Read the [original Schneider/Rockwell/Omron source audit](../research/4400_EDM_MIRROR_01_SCHNEIDER_ROCKWELL_OMRON_AUXILIARY_CONTACT_VARIANT_AND_REPLACEMENT_SOURCE_AUDIT_2026-10-28.md) and [existing RST-01](4400_RST_01_POWER_RETURN_RESET_EDM_AND_FRESH_START_MODULE_2026-10-24.md). Do not replace the existing 2540 or RST-01 curriculum or count this card as an independent exam.
+Read the [original Schneider/Rockwell/Omron source audit](../research/4400_MIRROR_01_ROCKWELL_SUVA_AND_SCHNEIDER_ACCESSORY_SOURCE_DEPTH_ADDENDUM_2026-10-28.md) and [existing RST-01](4400_RST_01_POWER_RETURN_RESET_EDM_AND_FRESH_START_MODULE_2026-10-24.md). This is an **addendum to existing 2026-10-25 MIRROR-01** (see [original manufacturer audit](../research/4400_SCHNEIDER_SIEMENS_MIRROR_NC_VS_GUIDED_AUX_EDM_VARIANT_SOURCE_AUDIT_2026-10-25.md) and [existing UNSCORED cases](4400_MIRROR_01_TWELVE_REPLACEMENT_AND_EDM_FAULT_CASES_2026-10-25.md)). It does not create a new competency. Do not replace the existing 2540 or RST-01 curriculum or count this card as an independent exam.
 
 ## One-minute fault review
 A maintenance replacement has the same contactor voltage, number of power poles and an NC terminal numbered 21–22. The safety relay sees the feedback close after a stop. **Is it an equivalent safety feedback path?** No: first identify the **exact base and auxiliary part numbers**, approved assembly/mounting, **manufacturer-declared mirror behavior for that exact NC**, terminal-to-contactor mapping, wiring and feedback monitoring. Normal continuity proves only that this circuit changes in the observed state.

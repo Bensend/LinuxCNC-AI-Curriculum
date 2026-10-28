@@ -2034,3 +2034,6 @@ Use the [12-case paper-only composition matrix](4400_LIM_POS_TRUST_01_RECOVERY_A
 
 
 **11LA/11LB integrated adversarial review:** [PROBE-RETREAT-COMPOSE-01](4400_PROBE_RETREAT_COMPOSE_01_FALSE_TOUCH_OFFSET_WAYPOINT_FAILURE_CHAIN_2026-10-28.md) traces an already-HIGH G38.3 input through normal `#5070` and actual simulated G10 L20 consumer into a *hypothetical* later G28 offset-sensitive intermediate rapid. **SOURCE-CONFIRMED individual links; INFERENCE combined chain; UNKNOWN physical hazard/fixture.** No soft-limit bypass or measured collision. Independent guard/stop/hold/restart proof unchanged.
+
+
+**11LB Task prerequisite scope:** tagged `emctaskmain.cc` normally gates MDI/Auto on joint HOMED status; `NO_FORCE_HOMING=1` bypasses that ordinary prerequisite. Do not claim unconditional unhomed G28 execution or mistake HOMED for physical trust/independent safety. POS-TRUST-01 remains the predecessor for physical reference and E-stop behavior.

@@ -1433,3 +1433,6 @@ Rotated from G38-PROBE-EDGE-01 after a genuine source information-gain stop. Dir
 
 
 **Same-session 4400-PROBE-RETREAT-COMPOSE-01:** published [cross-boundary failure-path review](safety-course/4400_PROBE_RETREAT_COMPOSE_01_FALSE_TOUCH_OFFSET_WAYPOINT_FAILURE_CHAIN_2026-10-28.md) of SOURCE-CONFIRMED G38.3 prestate→`#5070`→actual simulated `G10 L20` consumer and hypothetical later `G28 axes` offset-sensitive first rapid. Preserves **INFERENCE** for the combined unrun sequence, **UNKNOWN** actual fixture/collision, normal Motion limits still present, M6 direct G30 distinguished. No graded bank, live test, score or compute. G0/G1 HOLD.
+
+
+**Homing-prerequisite source scope:** tagged `emctaskmain.cc` `all_homed`, MDI/Auto checks and `NO_FORCE_HOMING` parsing confirm default Task gate requires normal HOMED status, but `[TRAJ] NO_FORCE_HOMING=1` bypasses it. Neither path establishes independent physical position trust; G28/G30 are not switch/index homing. Reconciled existing POS-TRUST predecessor; no unhomed execution or machine failure invented.

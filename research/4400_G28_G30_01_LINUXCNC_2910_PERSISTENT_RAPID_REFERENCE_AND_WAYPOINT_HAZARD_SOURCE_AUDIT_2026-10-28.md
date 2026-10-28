@@ -47,3 +47,9 @@ Can an operator, machine builder or G-code author safely equate `G28`, `G30`, `G
 4. Then emit `CHANGE_TOOL` and update ordinary tool-change state. Physical spindle stop, guard locking, tool capture and safe restart are separate independent safety propositions.
 
 **Practical consequence:** two visually similar routes to a G30 reference can have different intermediate motion. A technician reviewing a machine must distinguish a program's explicit `G30 axes` from M6's `TOOL_CHANGE_AT_G30` option and inspect `TOOL_CHANGE_QUILL_UP` and `TOOL_CHANGE_WITH_SPINDLE_ON` independently. All SOURCE-CONFIRMED at tagged v2.9.10; no machine motion or fault was executed.
+
+
+## Ordinary homing prerequisite is conditional, not physical position trust
+[Tagged `emctaskmain.cc` L147–153, 2204–2215, 2293–2301 and 3245–3261](https://github.com/LinuxCNC/linuxcnc/blob/86cdca76fa2a36274c432caa21952b23c267989a/src/emc/task/emctaskmain.cc#L2198-L2215), blob `7292a172023a5b42b023447c2458cb766c93fc9b`, establishes a **Task-level** ordinary prerequisite: by default `NO_FORCE_HOMING=0`, MDI execution and Auto program run are rejected if any joint's normal `homed` status is false. `[TRAJ] NO_FORCE_HOMING=1` disables that Task precondition. `convert_home` itself is **not** a switch/index homing routine and does not independently validate a physical home.
+
+This distinction matters in both directions: **do not claim** an ordinary unhomed G28 can always execute (Task may block it), and **do not claim** a passing Task homed-status gate or the `NO_FORCE_HOMING` option proves trustworthy physical position, a clear retreat route or independent safety. See the pre-existing [POS-TRUST source audit](4400_POS_TRUST_01_LINUXCNC_2910_VOLATILE_HOME_ESTOP_AND_PHYSICAL_REFERENCE_BOUNDARY_SOURCE_AUDIT_2026-10-28.md) for why HOMED and physical trust differ. No actual machine config was inspected.

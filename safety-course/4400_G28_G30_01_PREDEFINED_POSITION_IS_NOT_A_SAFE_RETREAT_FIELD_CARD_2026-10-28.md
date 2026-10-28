@@ -17,3 +17,6 @@
 
 
 **M6-specific correction:** in the tagged v2.9.10 interpreter, `TOOL_CHANGE_AT_G30=1` produces a **direct** traverse to the stored G30 reference, not the two-leg `G30 axes` command path. `TOOL_CHANGE_QUILL_UP=1` adds a **separate Z-first** traverse; `TOOL_CHANGE_WITH_SPINDLE_ON=1` can suppress the normal spindle-stop command. Even an emitted spindle-stop command is not measured standstill. Inspect all three INI options and independent physical guard/tool-retention evidence; do not conflate M6 with a G30 block.
+
+
+**Homing gate is ordinary Task control:** v2.9.10 normally rejects MDI/Auto execution if a joint's normal HOMED flag is false; `[TRAJ] NO_FORCE_HOMING=1` bypasses that prerequisite. Neither a successful HOMED check nor a G28.1/G30.1 stored coordinate proves physical trust, collision-free route or independent safety. Do not assume an unhomed G28 always runs, or that Task's gate is a safety-rated permissive.

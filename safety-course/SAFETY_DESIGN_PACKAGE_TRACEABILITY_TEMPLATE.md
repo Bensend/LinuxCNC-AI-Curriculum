@@ -2092,3 +2092,5 @@ This crosscut reconciles [M67/M68 analog queue source](../research/4400_ANALOG_Q
 **§11LK addendum:** local lab script allowlist is exact 086–089 (pure software); 056/079 historical privileged LinuxCNC paths are not authorized. No physical isolation witness exists; future hardware-capable lab requires a separate reviewed workflow and qualified isolation, not just a checkbox or SHA. No test/compute.
 
 **§11LK content review:** four allowlisted script Git blob SHAs are now pinned in the workflow; a changed allowed path is rejected until separately reviewed. This is configuration provenance, not safety-related machine isolation.
+
+**§11LK supply-chain witness:** four workflow action dependencies now pin inspected official GitHub v4 refs to immutable commit SHAs. This is source provenance only, not an independent safety function or runner isolation proof.

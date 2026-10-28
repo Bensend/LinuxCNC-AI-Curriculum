@@ -13,3 +13,7 @@ Immediately before end, append exact UTC end/elapsed/overlap to **complete** LES
 
 ## Same-session second safety branch — GUARD-REACH-01
 After correcting first-contact packet appendix creep, rotated to a distinct safety source gap rather than stopping. [Original ISO 13857:2019 / ISO 14120:2015 / ISO 13855:2024 publisher-scope comparison](../research/4400_GUARD_REACH_01_ISO13857_2019_ISO14120_2015_VS_ISO13855_2024_SCOPE_AND_ACCESS_PATH_AUDIT_2026-10-28.md) and [qualified field reviewer](../safety-course/4400_GUARD_REACH_01_REACH_VS_STOP_VS_EJECTION_FIELD_REVIEW_2026-10-28.md) add the missing **reach-through/under/around/over protective-structure physical witness** to existing 13855 stop-time, GUARD-FAST fasteners and FORM-HAZ ejection. No licensed table/number or selected machine data. Cumulative Safety Design Package §11KO. The owner-facing A–G packet remains short; only qualified Stage A B/E/F/G review archive is extended. G0/G1 HOLD, independent evaluator OPEN, zero hosted/local compute.
+
+
+## Same-session GUARD-REACH source-depth — ISO 13854
+Direct official ISO 13854:2017 scope adds **crushing-only minimum-gap** for conditional secondary pinch points, explicitly excluding impact, shear and drawing-in. Appended to existing GUARD-REACH audit/reviewer and cumulative §11KO, not a new module. No licensed numerical gaps or installed geometry. Qualified Stage A B/E/F reviewer only; A–G first-contact stays compact, G0/G1 HOLD, evaluator OPEN, no compute.

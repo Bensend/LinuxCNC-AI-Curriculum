@@ -1732,3 +1732,17 @@ This is a **cross-source reasoning synthesis**, not a new module, scored evaluat
 | `SRS/CHG` | Motor/switch/phase/clamp/guard replacement or recovery can stale previous evidence | Distinct fresh-reference and deliberate rearm, approved isolation/recovery, affected `DEP/PHY/VAL/PT` revalidation | HOLD |
 
 **DOC-CONFIRMED** exact Haas §7.3, §3.2, WILA product pages and eCFR 1910.147; **INFERENCE** cross-subsystem dependency and safer recovery architecture; **UNKNOWN** actual OpenPressBrake crown existence, circuit, physical proof, PL/SIL, stop time and evaluator. Do not infer that manually actuating an OEM contactor is safe or universally a bypass; it is an unresolved exceptional-service hazard requiring OEM/qualified review. **No** new owner questionnaire, new public bank, physical test, simulator, hosted/local compute or machine release. **G0/G1 HOLD; G2 NOT RUN; G3/G4 NOT AUTHORIZED; G5 HOLD.**
+
+
+## 11KD. 4400-HYD-DYN-01 — Flow-fuse trip versus dynamic arrest, holding and automatic hydraulic reopening (2026-10-28)
+[Original Bucher RS issue 12.2024 / CFS 10.2022 source audit](../research/4400_HYD_DYN_01_BUCHER_RS_ABRUPT_ARREST_AUTOREOPEN_AND_CFS_DIFFERENTIATION_SOURCE_AUDIT_2026-10-28.md) → [field card](4400_HYD_DYN_01_BURST_VALVE_FAST_STOP_AND_AUTOREOPEN_TECHNICIAN_CARD_2026-10-28.md). **Predecessors:** HYD-01/HYDAC and HAWE LB already teach rupture-flow detection, low-flow blind spots, nuisance trips and placement; STRUCT-01/FORM-HAZ-04 separately teach structure and part retention. This section adds an exact OEM **secondary dynamic-arrest** and **automatic reopening** witness, not a new generic hydraulic lesson.
+
+| Safety-package family | New exact discriminator | Selected-machine evidence needed | Status |
+|---|---|---|---|
+| `BND/ENE/HAZ` | Bucher RS high-flow trip rapidly closes Z→P; OEM warns of **very large deceleration** | As-built Y1/Y2 circuit and actual valve, load/workpiece, protected segment, pressure and structural dynamic envelope | UNKNOWN |
+| `PHY/VAL` | Stopping a fall is not automatically safe transient arrest, stable holding or tool/part retention | Independent physical motion, pressure/load and retention witnesses; no invented deceleration or pressure threshold | NOT RUN |
+| `AUTH/DEP` | RS automatically reopens when P pressure exceeds Z; ordinary LinuxCNC/FPGA indications cannot provide personnel-safety rearm | Qualified safety-program authority, pressure restoration path, final elements, fresh deliberate reset/start sequence | UNKNOWN |
+| `SRS/CHG` | RS closing-flow ≥40% above max normal is **OEM-specific**; datasheet says *nearly* leak-free, unlike webpage shorthand; CFS/DERV are different architectures | Exact suffix/setting/port/fluid, replacement provenance, dynamic/holding/restart revalidation and separate maintenance isolation | HOLD |
+| `HF/PT` | Nuisance trip or difficult service encourages defeating a passive valve | Convenient exact spares, labels, accessible qualified support/isolation and approved remote/contained test planning | UNKNOWN |
+
+**DOC-CONFIRMED** named Bucher families only; **INFERENCE** press-brake secondary transient and safe-workflow consequences; **UNKNOWN** selected OpenPressBrake hardware, physical response, safety PL/SIL and independent evaluator. No machine hydraulic truth table, acceptance distance, destructive test, simulation, hosted/local compute or release. **G0/G1 HOLD; G2 NOT RUN; G3/G4 NOT AUTHORIZED; G5 HOLD.**

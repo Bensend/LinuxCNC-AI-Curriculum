@@ -11,7 +11,7 @@
 | RST-01 | Exact independent safety relay/PLC model, firmware, configuration signature and OEM manual revision | — | UNKNOWN |
 | RST-02 | Exact E-stop/guard/ESPE wiring, reset circuit, manual/automatic mode, input fault detection | — | UNKNOWN |
 | RST-03 | Safety output terminal map and downstream contactor/valve/drive final-element identity | — | UNKNOWN |
-| RST-04 | EDM feedback contact type, polarity, physical mapping, freshness and fault/recovery behavior | — | UNKNOWN |
+| RST-04 | Exact K1/K2 base **and auxiliary** SKU, approved front/side mounting/retention, OEM-declared main-pole mirror NC, terminal numbering, any auxiliary overlap/timing, feedback polarity/mapping, freshness and fault/recovery behavior | — | UNKNOWN |
 | RST-05 | Power-loss/brownout return while pedal/normal motion request held: independent no-unexpected-start proof | — | NOT RUN |
 | RST-06 | Stuck/shorted reset input and safety fault acknowledgment: no unintended motion authority | — | NOT RUN |
 | RST-07 | Faulted/welded final-element detection and physical energy interruption (approved safe test method only) | — | NOT RUN |

@@ -16,3 +16,6 @@
 4. Use only justified local [self-hosted, openpressbrake] compute if dispatch is proven; no hosted fallback. Do not trigger hosted-runner legacy workflows. No lab merely for activity.
 
 Before session exit, append exact UTC end, elapsed and overlap to **complete** LESSON_LOG using safe tree/expected-head method, commit and verify. No personnel-exposed hazardous operation authorized.
+
+## Same-session additional source resolution
+Original Schneider **FA122251** (2026-05 update), **FA234029** (2026-08 update), **FA131010** (2026-01 update) and live catalog directly inspected. Exact LADN11/LADN11P terminal-marking difference, LADC22 auxiliary make-before-break pair and side-mounting/coil restrictions recorded. Distinguish four properties: terminal identity, auxiliary overlap, main-pole mirror qualification and mechanical mounting. Existing 2540/RST/SO/Stage A reused; no test or selected machine. This resolves a separate manufacturer part-number ambiguity without claiming the flattened FA142116 table's missing columns were reconstructed.

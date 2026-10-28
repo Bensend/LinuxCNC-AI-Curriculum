@@ -985,3 +985,5 @@ Distinct direct-index gap after ABRASIVE-01: no magnetic-chuck pole coverage, ma
 **RUNNER-BOUNDARY-01 content-identity correction:** exact Git blob SHA for each of four allowlisted scripts is now pinned in workflow; filename plus dispatcher-entered SHA-256 alone was not a sufficient review-authority guard. No physical isolation proof or runtime.
 
 **RUNNER-BOUNDARY-01 supply-chain refinement:** four local workflows now pin official GitHub checkout/upload-artifact to exact upstream commit SHAs rather than moving v4 tags; does not provide physical machine isolation or runtime proof.
+
+**RUNNER-BOUNDARY-01 historical-branch correction:** four dormant A01 branches still had hosted `ubuntu-latest` push/manual lab workflows; replaced with inert self-hosted manual stubs while preserving historical Git blobs. Main bounded local lab remains manual-only. Five current branches inspected; no workflow dispatched or machine safety proved.

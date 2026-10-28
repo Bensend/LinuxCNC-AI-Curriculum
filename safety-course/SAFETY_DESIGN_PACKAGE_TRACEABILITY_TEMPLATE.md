@@ -2021,3 +2021,6 @@ Use the [12-case paper-only composition matrix](4400_LIM_POS_TRUST_01_RECOVERY_A
 
 
 **11LA source-consumer addendum:** tagged upstream simulated GladeVCP probe `G38.3`→`#5070`→`G10 L20` and manual tool-change `G38.3`→`#5070`→`#5063/G43.1` illustrate how a normal false contact indication could propagate into work/tool offsets. This is source-confirmed example sequencing plus an inferred stuck-HIGH consequence, **not** a physical safety or tested failure claim.
+
+
+**11LA offset-chain scope:** G10 L20 redefines current work coordinates; G43.1 changes subsequent tool-compensated endpoints without immediate motion. Tagged Motion `inRange` retains ordinary axis/joint limit checking; an in-range but wrong offset may still threaten tooling/fixtures. Do not claim soft-limit bypass or safety-rated collision prevention. Independent physical safety proof remains UNKNOWN/NOT RUN.

@@ -23,3 +23,6 @@ On LinuxCNC v2.9.10, **G38.3 and G38.5 can accept a probe already in the desired
 
 
 **Concrete upstream examples:** the tagged LinuxCNC simulated GladeVCP `probe.ngc` checks `#5070` after `G38.3` before `G10 L20` coordinate-offset updates; the simulated manual tool-change subroutine checks `#5070` before calculating `G43.1` tool offset. These are legitimate ordinary-control patterns but **do not check that contact was newly made**. A stuck-HIGH probe can therefore make the returned status misleading; no actual machine failure was observed. See the audit's source-depth continuation for immutable links.
+
+
+**Offset consequence is delayed:** the tagged simulated `G38.3`/GladeVCP sequence then uses `G10 L20` to recalculate work coordinates; the manual-toolchange sequence uses `G43.1` to change the offset for later motion. Neither offset command alone proves immediate motion or soft-limit bypass. Normal axis/joint travel-limit checks remain in LinuxCNC Motion, but they do not prove fixture clearance or personnel safety. A plausible stuck-HIGH probe can corrupt process coordinates **inside** permitted travel; verify before applying offsets.

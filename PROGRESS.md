@@ -1420,3 +1420,6 @@ START_HERE first; UTC start recorded before substantive work. Pinned LinuxCNC v2
 
 
 **Same-session source-depth continuation:** inspected tagged upstream simulated `configs/sim/axis/gladevcp/probe.ngc` (blob `85e6afd49cd31ac23be82c9a80dfbf6271a13055`) and `configs/sim/axis/remap/manual-toolchange-with-tool-length-switch/nc_subroutines/manual_change.ngc` (blob `e055ed268590ac2230332b1b76d4722f6ae86c88`). Both use G38.3 and `#5070`; GladeVCP applies `G10 L20` offsets and tool-change applies `G43.1` from probe coordinates. These are **SOURCE-CONFIRMED consumers** of ordinary probe status; false offset from hypothetical stuck-HIGH remains **INFERENCE**, not a tested machine fault. No compute or additional exam.
+
+
+**Offset-source reconciliation:** v2.9.10 `Interp::convert_setup` G10 L20 recalculates coordinate offsets from current position; official G43.1 docs specify subsequent motion changes without immediate movement; Motion `inRange` retains axis/joint endpoint checks. False probe result can conditionally miscalibrate ordinary work/tool coordinates, **not** automatically bypass soft limits. No physical collision/stop claim or test. Same branch source-depth now at information-gain stop.

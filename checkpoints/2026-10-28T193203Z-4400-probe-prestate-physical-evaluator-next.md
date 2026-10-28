@@ -20,3 +20,7 @@
 
 ## Same-session source-depth continuation
 Inspected original v2.9.10 simulated GladeVCP `probe.ngc` and manual tool-change `manual_change.ngc` with exact blob SHAs. Both use G38.3 and `#5070`; the first then updates work offsets via `G10 L20`, the second computes tool length via `#5063`/`G43.1`. This demonstrates concrete upstream *consumer* paths for the static prestate issue, not a measured failure or safety function. No experiment needed; no new machine-specific facts. Confirm relative links and finish with safe log append.
+
+
+## Offset-source follow-through
+Tagged `Interp::convert_setup` confirms G10 L20 sets the coordinate system from current position, and official G43.1 documentation confirms offset changes affect later motion without causing immediate movement. Tagged Motion `inRange` still checks axis and joint endpoint limits; **no soft-limit bypass** is claimed. This source-depth closes the false-probe→wrong-offset chain without inventing collision/physical machine behavior. Further same-branch static work is at information-gain stop; rotate next time unless new evidence arrives.

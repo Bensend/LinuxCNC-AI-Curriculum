@@ -1,24 +1,27 @@
 name: LinuxCNC Lab Runner
 
+# MANUAL-ONLY local compute. Never use GitHub-hosted runners.
+# The self-hosted label is NOT proof of disconnected machinery.
 on:
   workflow_dispatch:
     inputs:
       job_file:
-        description: "Path to lab job script"
+        description: "Explicit reviewed lab-jobs/*.sh path (no default smoke)"
         required: true
-        default: "lab-jobs/000-smoke.sh"
-  push:
-    branches: [main]
-    paths:
-      - "lab-jobs/**"
-      - ".github/workflows/lab-runner.yml"
+        type: string
+      disconnected_simulation_verified:
+        description: "Qualified operator verified the local runner cannot actuate machinery"
+        required: true
+        type: boolean
+        default: false
 
 permissions:
   contents: write
 
 jobs:
   run-lab-job:
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, openpressbrake]
+    if: ${{ inputs.disconnected_simulation_verified }}
     timeout-minutes: 75
 
     steps:
@@ -27,29 +30,29 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Select lab job
+      - name: Validate explicit lab job and local isolation attestation
         id: select
         shell: bash
+        env:
+          JOB_FILE: ${{ inputs.job_file }}
+          ISOLATION_ATTESTED: ${{ inputs.disconnected_simulation_verified }}
         run: |
           set -euo pipefail
-          if [[ "${{ github.event_name }}" == "workflow_dispatch" ]]; then
-            JOB_FILE="${{ inputs.job_file }}"
-          else
-            BEFORE="${{ github.event.before }}"
-            ZERO_SHA="0000000000000000000000000000000000000000"
-            if [[ -n "$BEFORE" && "$BEFORE" != "$ZERO_SHA" ]]; then
-              mapfile -t JOB_FILES < <(git diff --name-only "$BEFORE" "$GITHUB_SHA" -- 'lab-jobs/*.sh')
-            else
-              mapfile -t JOB_FILES < <(git diff-tree --root --no-commit-id --name-only -r "$GITHUB_SHA" -- 'lab-jobs/*.sh')
-            fi
-            case "${#JOB_FILES[@]}" in
-              0) JOB_FILE="lab-jobs/000-smoke.sh" ;;
-              1) JOB_FILE="${JOB_FILES[0]}" ;;
-              *) echo "Multiple lab jobs changed in one push; refusing ambiguous auto-selection:" >&2; printf '  %s\n' "${JOB_FILES[@]}" >&2; exit 4 ;;
-            esac
+          if [[ "$ISOLATION_ATTESTED" != "true" ]]; then
+            echo "No qualified disconnected-simulation attestation; refusing." >&2
+            exit 10
           fi
-          if [[ -z "${JOB_FILE:-}" || ! -f "$JOB_FILE" ]]; then echo "No runnable lab job script was found." >&2; exit 2; fi
-          case "$JOB_FILE" in lab-jobs/*.sh) ;; *) echo "Refusing to run file outside lab-jobs/: $JOB_FILE" >&2; exit 3 ;; esac
+          case "$JOB_FILE" in
+            lab-jobs/*.sh) ;;
+            *) echo "Refusing non-lab job path." >&2; exit 3 ;;
+          esac
+          if [[ ! -f "$JOB_FILE" || -L "$JOB_FILE" ]]; then
+            echo "Job missing or symlink; refusing." >&2; exit 2
+          fi
+          # This is only a path check. It does NOT prove the PC is physically isolated.
+          root="$(realpath lab-jobs)"
+          target="$(realpath "$JOB_FILE")"
+          case "$target" in "$root"/*.sh) ;; *) echo "Path escapes lab-jobs." >&2; exit 4 ;; esac
           echo "job_file=$JOB_FILE" >> "$GITHUB_OUTPUT"
           echo "job_name=$(basename "$JOB_FILE" .sh)" >> "$GITHUB_OUTPUT"
 

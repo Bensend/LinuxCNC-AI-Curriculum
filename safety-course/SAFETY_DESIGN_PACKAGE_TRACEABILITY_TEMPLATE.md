@@ -1852,3 +1852,17 @@ This is a **cross-source reasoning synthesis**, not a new module, scored evaluat
 | **CHG/PHY-FIT-05** | Replacement identity, stale-dependency review and qualified independent physical energy/holding proof | NOT RUN |
 
 **DOC-CONFIRMED** DGUV historical mismatch hazard; **INFERENCE** machine-specific service design; **UNKNOWN** OpenPressBrake fittings, pressure and physical response. No pressure test, numeric rating, PL or compute; G0/G1 HOLD, G2 NOT RUN, G3/G4 NOT AUTHORIZED, G5 HOLD.
+
+
+### 11KL — Hydraulic safety-related reduced speed versus ordinary LinuxCNC jog (2026-10-28)
+[Original DGUV/IFA FBHM-058 2019 English source audit](../research/4400_SET_FLUID_01_DGUV_FBH058_FIXED_ORIFICE_MONITORED_HYDRAULIC_REDUCED_SPEED_SOURCE_ADDENDUM_2026-10-28.md) extends existing SET-01 mode/enabling/LOTO with **physical hydraulic flow restriction**: fixed orifice/throttle, monitored high-speed bypass and independent higher-level stop; gravity load/cylinder geometry/heat change actual speed. A low LinuxCNC jog override or ordinary proportional driver command is **not** a personnel-safety speed limit. Original examples are not mandatory designs or machine-specific ratings.
+
+| Witness | Required selected evidence | State |
+|---|---|---|
+| **SRS-SETFLUID-01** | Qualified mode, hazard, speed/stop/hold criteria, enabling and fresh restart | UNKNOWN |
+| **ARC-SETFLUID-02** | As-built independent hydraulic restriction/bypass, monitoring and higher-level stop outside normal FPGA | UNKNOWN |
+| **DEP-SETFLUID-03** | Load, cylinder, pilot/pressure, thermal and common-cause assumptions | UNKNOWN |
+| **PHY-SETFLUID-04** | Independent actual motion, stop, gravity holding and guard/access witness | NOT RUN |
+| **CHG-SETFLUID-05** | Changed valve/orifice/mode/firmware/guard triggers stale-dependency requalification | CONDITIONAL / NOT RUN |
+
+**DOC-CONFIRMED** historical DGUV examples, **INFERENCE** selected architecture/review, **UNKNOWN** actual OpenPressBrake. No numeric speed/PL, hydraulic truth table, live test or compute. G0/G1 HOLD; G2 NOT RUN; G3/G4 NOT AUTHORIZED; G5 HOLD.

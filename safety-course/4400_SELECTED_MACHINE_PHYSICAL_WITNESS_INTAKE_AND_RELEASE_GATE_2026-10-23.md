@@ -387,3 +387,7 @@ If the selected machine **actually has a counterweight**, obtain exact as-built 
 
 ## HYD-FIT-01 port/stud false-fit addendum — reuse IN-04/08/10 (2026-10-28)
 [Original DGUV FB HM-025 09/2017 source audit](../research/4400_HYD_FIT_01_DGUV_FBHM025_METRIC_INCH_THREAD_FALSE_FIT_PRESSURE_EJECTION_SOURCE_AUDIT_2026-10-28.md) adds exact **port/stud standard and seal identity** to **IN-04** as-built hydraulic mapping, pressure-zone/secondary restraint to **IN-08**, and approved replacement SKU/CHG provenance to **IN-10**. An inch G 1/2 stud may thread into metric M22×1.5 without visible stripping yet be unsafe under pressure; no live test or new owner questionnaire. Selected machine UNKNOWN, G0/G1 HOLD.
+
+
+## SET-FLUID-01 independent hydraulic reduced-speed addendum — reuse IN-03/04/06/07 (2026-10-28)
+[Original DGUV/IFA FBHM-058 2019 source audit](../research/4400_SET_FLUID_01_DGUV_FBH058_FIXED_ORIFICE_MONITORED_HYDRAULIC_REDUCED_SPEED_SOURCE_ADDENDUM_2026-10-28.md) requires any claimed guard-open hydraulic safety-reduced speed to be traced through **IN-03** independent safety authority and valve monitoring, **IN-04** physical fixed restriction/bypass and gravity-load dependencies, **IN-06** machine-specific applicable speed/stop/hold criteria, and **IN-07** independent physical measurement. Ordinary LinuxCNC jog override/proportional flow is not a safety proof. No new questionnaire, numeric setting, live test or compute; G0/G1 HOLD.

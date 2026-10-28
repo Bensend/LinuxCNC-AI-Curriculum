@@ -1079,3 +1079,7 @@ Full canonical index and research-plan synonym scan found no dedicated solvent/d
 
 ### 2026-10-28 — HYD-FIT-01 original DGUV metric/inch thread false-fit and repair ejection hazard
 [Original FB HM-025 09/2017 source audit](research/4400_HYD_FIT_01_DGUV_FBHM025_METRIC_INCH_THREAD_FALSE_FIT_PRESSURE_EJECTION_SOURCE_AUDIT_2026-10-28.md) → [field review](safety-course/4400_HYD_FIT_01_HAND_TIGHT_DOES_NOT_MEAN_PRESSURE_SAFE_TECHNICIAN_CARD_2026-10-28.md). G 1/2 into M22×1.5 can thread without stripping yet fail pressure retention. Distinct from existing hose routing, pressure surge and injection. Standardized marked parts, controlled replacement and independent safe hydraulic proof; no actual machine or pressure test. G0/G1 HOLD.
+
+
+### 2026-10-28 — SET-FLUID-01 DGUV/IFA 2019 hydraulic reduced-speed physical architecture source-depth
+[Original English FBHM-058 audit](research/4400_SET_FLUID_01_DGUV_FBH058_FIXED_ORIFICE_MONITORED_HYDRAULIC_REDUCED_SPEED_SOURCE_ADDENDUM_2026-10-28.md) → [technician review](safety-course/4400_SET_FLUID_01_HYDRAULIC_SLOW_JOG_IS_NOT_SAFETY_LIMITED_SPEED_TECHNICIAN_CARD_2026-10-28.md). Predecessor SET-01 already covers mode/enabling/LOTO; new source explicitly distinguishes fixed restriction plus monitored high-speed bypass/higher-level stop from ordinary proportional low-flow commands. Historical example PL/speed not transferable. No selected physical data or compute, G0/G1 HOLD.

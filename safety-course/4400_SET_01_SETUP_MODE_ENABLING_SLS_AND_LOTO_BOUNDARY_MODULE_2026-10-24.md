@@ -46,3 +46,7 @@ Trace LinuxCNC versioned jog/feed-inhibit behavior at exact commits only if sele
 
 
 **Source-depth caution:** Pinned master joint wheel-jog code in control.c lines 1125–1185 checks net_feed_scale, unlike keyboard/halui EMCMOT_JOG_CONT/INCR command.c checks of jog_inhibit. A universal "feed-inhibit never affects jogs" claim would overread the current manual. Which wheel state yields net_feed_scale zero requires further enables-mask tracing; no runtime evidence. See linked source audit.
+
+
+## 2026-10-28 SET-FLUID-01 original DGUV/IFA hydraulic implementation source-depth
+[Original DGUV/IFA FBHM-058 2019 reduced-speed audit](../research/4400_SET_FLUID_01_DGUV_FBH058_FIXED_ORIFICE_MONITORED_HYDRAULIC_REDUCED_SPEED_SOURCE_ADDENDUM_2026-10-28.md) and [one-page technician review](4400_SET_FLUID_01_HYDRAULIC_SLOW_JOG_IS_NOT_SAFETY_LIMITED_SPEED_TECHNICIAN_CARD_2026-10-28.md) add **fixed physical restriction, monitored high-speed bypass and higher-level stop** to this existing SET-01 mode/enabling/LOTO framework. The DGUV source warns that ordinary flow-control valves/controllable pumps normally do not meet the safety-reduced-speed function; vertical load and cylinder size affect physical speed, prolonged throttling can heat fluid. Its historical example PL/speed values are **not** machine-specific criteria or mandatory circuits. No OpenPressBrake as-built or physical test, G0/G1 HOLD; no new examination bank.

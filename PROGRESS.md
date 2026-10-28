@@ -1381,3 +1381,5 @@ Published [pinned v2.9.10 source audit](research/4400_POS_TRUST_01_LINUXCNC_2910
 **Same-session POS-TRUST final-move speed trap:** v2.9.10 `homing.c` lines 1273–1289 and homing manual lines 161–168 confirm final return uses joint maximum planner velocity unless positive `HOME_FINAL_VEL` is set. Search/latch speed is not final-move speed; neither is safety-rated SLS. No physical test or numeric machine speed inferred.
 
 **Same-session POS-TRUST paired-axis scope:** pinned `homing.c` `sync_ready` waits on negative `HOME_SEQUENCE` state alignment but skips `HOME_ABSOLUTE_ENCODER` members in the readiness comparison; this is ordinary homing coordination, **not** independent press-brake Y1/Y2 safety cross-monitoring. No runtime or physical validation.
+
+**POS-TRUST master cross-check:** immutable upstream `master` commit `5a3d2f7a9baa281f9beeca703305787a8138830b` retains Task `emcJointUnhome(-2)`, `homing.c` all-or-none prechecks, volatile-only flag clearing, absolute-encoder skip in `sync_ready` and final-move velocity selection. Source patterns corroborated across pinned v2.9.10 and this master snapshot, **not** runtime proof.

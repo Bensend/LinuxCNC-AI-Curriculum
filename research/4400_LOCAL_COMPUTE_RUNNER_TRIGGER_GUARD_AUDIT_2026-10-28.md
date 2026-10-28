@@ -24,3 +24,7 @@ This guard is an **information-architecture/risk-prevention finding** and must n
 
 ## Post-commit workflow-run cross-check (2026-10-28T19:43Z UTC)
 Read the repository's GitHub Actions runs collection (`GET /repos/Bensend/LinuxCNC-AI-Curriculum/actions/runs?per_page=10`) after the source/governance commits. The ten newest returned runs were historical `Append Lesson Log` cancellations; the newest was created **2026-10-23T07:49:58Z**, not during this session. **No new 2026-10-28 workflow run appeared in that authoritative newest-runs snapshot.** This is a check of visible workflow metadata, **not** an assertion about account billing outside this repository or proof that the local runner is online. No new compute ledger row is warranted.
+
+
+## Supersession note — 2026-10-28 23:39Z safety continuation
+The workflow inventory above is **historically correct for the 19:32Z session**, but its `ubuntu-latest`/push-trigger warning is **no longer current for main**. The [RUNNER-BOUNDARY-01 implementation/source audit](4400_RUNNER_BOUNDARY_01_LOCAL_PANEL_PC_WORKFLOW_ISOLATION_AND_HOSTED_COMPUTE_ELIMINATION_AUDIT_2026-10-28.md) records the later actual workflow changes: lab-runner manual-only on `[self-hosted, openpressbrake]` with reviewed job hash and isolation attestation, and lab-compute append on the same local runner. No workflows were dispatched; local runner availability and **physical machine isolation** remain UNKNOWN. Do not infer that changing a runner label or checking a box makes the panel PC safe for experiments.

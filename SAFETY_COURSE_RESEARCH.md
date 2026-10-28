@@ -1075,3 +1075,7 @@ Full canonical index and research-plan synonym scan found no dedicated solvent/d
 
 ### 2026-10-28 — IFA-VALVE-01 component type test does not cover installed valve diagnostics or ram hold
 [Original 10/2024 IFA GS-IFA-M12/M13 testing-body source audit](research/4400_IFA_VALVE_01_GS_IFA_M12_M13_COMPONENT_TEST_VS_DIAGNOSTICS_AND_MACHINE_HOLD_AUDIT_2026-10-28.md) → [one-page reviewer](safety-course/4400_IFA_VALVE_01_CERTIFIED_VALVE_NOT_CERTIFIED_RAM_STOP_REVIEW_CARD_2026-10-28.md). Both original printed p.10 footnotes exclude fault-detection measures from component testing; M12 specifically assumes contact-based transducer interruption or equivalent. Product test, diagnostics, safety architecture, physical gravity hold and service isolation require distinct evidence. No selected machine, live test or compute; G0/G1 HOLD.
+
+
+### 2026-10-28 — HYD-FIT-01 original DGUV metric/inch thread false-fit and repair ejection hazard
+[Original FB HM-025 09/2017 source audit](research/4400_HYD_FIT_01_DGUV_FBHM025_METRIC_INCH_THREAD_FALSE_FIT_PRESSURE_EJECTION_SOURCE_AUDIT_2026-10-28.md) → [field review](safety-course/4400_HYD_FIT_01_HAND_TIGHT_DOES_NOT_MEAN_PRESSURE_SAFE_TECHNICIAN_CARD_2026-10-28.md). G 1/2 into M22×1.5 can thread without stripping yet fail pressure retention. Distinct from existing hose routing, pressure surge and injection. Standardized marked parts, controlled replacement and independent safe hydraulic proof; no actual machine or pressure test. G0/G1 HOLD.

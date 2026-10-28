@@ -1838,3 +1838,17 @@ This is a **cross-source reasoning synthesis**, not a new module, scored evaluat
 | **CHG-IFA-05** | Approved replacement, manual override, port/pilot/connector and firmware changes trigger STALE and scoped requalification | CONDITIONAL / NOT RUN |
 
 **DOC-CONFIRMED** IFA test-guideline scope and exclusions; **INFERENCE** integration/replacement witness; **UNKNOWN** actual selected valve and physical response. No numeric pressure, leakage, diagnostic coverage, PL or stop-time inferred. G0/G1 HOLD; G2 NOT RUN; G3/G4 NOT AUTHORIZED; G5 HOLD. No live testing or compute.
+
+
+### 11KK — Metric/inch hydraulic fitting false-fit, pressure ejection and low-defeat service (2026-10-28)
+[Original DGUV FB HM-025 09/2017 source audit](../research/4400_HYD_FIT_01_DGUV_FBHM025_METRIC_INCH_THREAD_FALSE_FIT_PRESSURE_EJECTION_SOURCE_AUDIT_2026-10-28.md) documents a **G 1/2 stud into M22×1.5 port** that can screw in without obvious stripping yet cannot safely retain working pressure. A hand-fit, dry exterior or brief pump-on does not prove joint integrity. DGUV recommends reducing fitting standard families, identification/marking, controlled procurement and training. This is **not** a machine-specific incident or approved adapter.
+
+| Witness | Required selected evidence | State |
+|---|---|---|
+| **DEP-FIT-01** | Exact as-built port/stud standard, manufacturer drawing, approved SKU and seal | UNKNOWN |
+| **ENE-FIT-02** | Relevant pressure zones, stored energy, reaccumulation and gravity restraint | UNKNOWN |
+| **ARC-FIT-03** | Qualified compatible rated assembly, selected installation procedure and pressure envelope | UNKNOWN |
+| **HF-FIT-04** | Standardized/marked ports, segregated approved spares, accessible service chart and low-defeat replacement | UNKNOWN |
+| **CHG/PHY-FIT-05** | Replacement identity, stale-dependency review and qualified independent physical energy/holding proof | NOT RUN |
+
+**DOC-CONFIRMED** DGUV historical mismatch hazard; **INFERENCE** machine-specific service design; **UNKNOWN** OpenPressBrake fittings, pressure and physical response. No pressure test, numeric rating, PL or compute; G0/G1 HOLD, G2 NOT RUN, G3/G4 NOT AUTHORIZED, G5 HOLD.

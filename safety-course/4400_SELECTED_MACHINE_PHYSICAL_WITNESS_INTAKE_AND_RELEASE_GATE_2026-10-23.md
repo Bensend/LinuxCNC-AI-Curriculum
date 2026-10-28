@@ -383,3 +383,7 @@ If the selected machine **actually has a counterweight**, obtain exact as-built 
 
 ## IFA-VALVE-01 component-test scope addendum — reuse IN-03/04/06/10 (2026-10-28)
 [Original IFA GS-IFA-M12/M13 10/2024 source audit](../research/4400_IFA_VALVE_01_GS_IFA_M12_M13_COMPONENT_TEST_VS_DIAGNOSTICS_AND_MACHINE_HOLD_AUDIT_2026-10-28.md) clarifies **IN-03** exact safety output/driver contact-interruption authority, **IN-04** hydraulic valve/pilot/pressure topology, **IN-06** system diagnostics/PL/Type-C and **IN-10** exact certificate/version/replacement evidence. The independent IFA component testing principles explicitly exclude valve fault-detection measures from their basic scope. Do not infer a selected valve is certified or that its certification proves physical Y1/Y2 hold. No new questionnaire, physical test or compute; G0/G1 HOLD.
+
+
+## HYD-FIT-01 port/stud false-fit addendum — reuse IN-04/08/10 (2026-10-28)
+[Original DGUV FB HM-025 09/2017 source audit](../research/4400_HYD_FIT_01_DGUV_FBHM025_METRIC_INCH_THREAD_FALSE_FIT_PRESSURE_EJECTION_SOURCE_AUDIT_2026-10-28.md) adds exact **port/stud standard and seal identity** to **IN-04** as-built hydraulic mapping, pressure-zone/secondary restraint to **IN-08**, and approved replacement SKU/CHG provenance to **IN-10**. An inch G 1/2 stud may thread into metric M22×1.5 without visible stripping yet be unsafe under pressure; no live test or new owner questionnaire. Selected machine UNKNOWN, G0/G1 HOLD.

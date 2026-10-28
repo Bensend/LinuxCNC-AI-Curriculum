@@ -956,3 +956,6 @@ Distinct direct-index gap after ABRASIVE-01: no magnetic-chuck pole coverage, ma
 
 
 **ATC-01 source-depth continuation (2026-10-28):** [M61 tool identity versus physical tool retention addendum](safety-course/4400_ATC_01_TOOL_RETENTION_DRAWBAR_PNEUMATIC_RELEASE_AND_SERVICE_MODULE_2026-10-25.md) traces pinned interpreter/canonical/Task `EMC_TOOL_SET_NUMBER` (not `EMC_TOOL_LOAD`) and official no-toolchange/no-G43-offset semantics. No claim of actual tool presence, clamp force, clearance or machine-specific operation; no new exam/physical test; G0/G1 HOLD; design §11LE.
+
+
+**4400 safety human-factors synthesis (2026-10-28):** cumulative design **§11LF** distinguishes REQUESTED process state, OBSERVED diagnostics, SAFETY-PERMITTED independent control and PHYSICALLY VERIFIED final-element evidence across M67/M68, M72/M73 and M61 source findings. Proposed HMI/data model only, not physical or operator validation. No new module, case bank, test or compute; G0/G1 HOLD.

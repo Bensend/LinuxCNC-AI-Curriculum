@@ -1295,3 +1295,6 @@ Read the [v2.9.10 G43.2 axis-word versus inherited G0/G1 source audit](../resear
 
 ### 2026-10-28 — 4400-M1XX-EXIT-01 custom M-code process success is not a physical witness
 [Exact pinned LinuxCNC M100–M199 process/Task audit](../research/4400_M1XX_EXIT_01_LINUXCNC_2910_USER_MCODE_ZERO_EXIT_BACKGROUND_CHILD_AND_SAFETY_BOUNDARY_2026-10-28.md) → [technician field card](4400_M1XX_EXIT_01_SCRIPT_FINISHED_IS_NOT_PHYSICAL_COMPLETION_FIELD_CARD_2026-10-28.md). **SOURCE-CONFIRMED** `waitpid`/zero exit drives Task completion; **DOC-CONFIRMED** example unconditionally exits 0 after `halcmd` and example backgrounds work with `&`. No verified actuator state, independent stop/hold or guard access follows. **INFERENCE** late/failed actuation hazard; TEST-CONFIRMED none. G0/G1 HOLD; evaluator OPEN, zero compute.
+
+
+**4400-TLO-M1XX-COMPOSE-01 cross-boundary review (2026-10-28):** [Unverified script/tool action → ambiguous compensation/motion](4400_TLO_M1XX_COMPOSE_01_UNVERIFIED_TOOL_ACTION_TO_OFFSET_MOTION_FAILURE_PATH_2026-10-28.md) is a **paper-only causal integration**, not a new graded module. SOURCE-CONFIRMED component paths; composite physical event INFERENCE/NOT TESTED; G0/G1 HOLD, evaluator OPEN.

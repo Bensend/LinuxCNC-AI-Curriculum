@@ -1105,3 +1105,6 @@ Full canonical index and research-plan synonym scan found no dedicated solvent/d
 
 ### 2026-10-28 — 4400-LIM-01 ordinary limit recovery is not independent safety
 Pinned LinuxCNC v2.9.10 [source trace](research/4400_LIM_01_LINUXCNC_2910_SHARED_HARD_LIMIT_OVERRIDE_DIRECTION_AND_STATUS_SCOPE_SOURCE_AUDIT_2026-10-28.md) and [field card](safety-course/4400_LIM_01_SHARED_LIMIT_RECOVERY_DIRECTION_AND_STATUS_FIELD_CARD_2026-10-28.md) distinguish separate versus shared hard-limit direction, global override-mask status, `HOME_IGNORE_LIMITS` and independent physical safety. No as-built machine facts, no live tests, no operator permission to bypass a limit.
+
+### 2026-10-28 — 4400-POS-TRUST-01 software homing state versus physical reference
+[Pinned source trace](research/4400_POS_TRUST_01_LINUXCNC_2910_VOLATILE_HOME_ESTOP_AND_PHYSICAL_REFERENCE_BOUNDARY_SOURCE_AUDIT_2026-10-28.md) and [field card](safety-course/4400_POS_TRUST_01_HOMED_SOFTWARE_STATUS_VS_PHYSICAL_POSITION_TRUST_FIELD_CARD_2026-10-28.md) separate Task selective volatile unhome, conditional state invalidation, absolute encoder mapping, physical gravity holding and deliberate safe access. No physical witness or safety rating.

@@ -1,3 +1,4 @@
+# Local-only append. This workflow must never consume GitHub-hosted Actions minutes.
 name: Append Lab Compute
 
 on:
@@ -11,7 +12,7 @@ permissions:
 
 jobs:
   append:
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, openpressbrake]
     timeout-minutes: 5
     steps:
       - uses: actions/checkout@v4

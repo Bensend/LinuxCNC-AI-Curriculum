@@ -35,3 +35,6 @@ Source checked tagged `Interp::find_ends` G53 branch and official G53 nonmodal m
 
 ## Same-session local-compute workflow guard
 [Workflow trigger audit](../research/4400_LOCAL_COMPUTE_RUNNER_TRIGGER_GUARD_AUDIT_2026-10-28.md) directly identified two **legacy hosted** paths: `lab-runner.yml` (`ubuntu-latest`, manual + push on lab-jobs/workflow YAML) and `append-lab-compute.yml` (`ubuntu-latest`, push on append-request file). No trigger paths touched or jobs dispatched. `append-lesson-log.yml` and `pb-dxf-001.yml` use self-hosted label, but runner access UNKNOWN. Added WORK_SELECTION_POLICY guard against hosted dispatch/fallback; do not run a lab merely to check access. No LAB_COMPUTE_LOG change.
+
+
+**Actions runtime cross-check:** latest ten workflow runs returned by repository API as of 2026-10-28T19:43Z were historical; newest created 2026-10-23T07:49:58Z. No current-session run appeared. No hosted/self-hosted compute used; no LAB_COMPUTE_LOG row.

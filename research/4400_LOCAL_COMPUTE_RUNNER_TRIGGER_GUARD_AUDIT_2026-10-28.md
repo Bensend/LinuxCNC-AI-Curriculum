@@ -20,3 +20,7 @@ Directly inspected the four existing workflow YAML files on `main` during the 20
 4. Never fall back to `ubuntu-latest`, `ubuntu-24.04` or another hosted runner. Do not send a compute job merely to prove runner access. Append `LAB_COMPUTE_LOG.md` only when authoritative job runtime actually exists.
 
 This guard is an **information-architecture/risk-prevention finding** and must not be counted as machine safety validation, learning competency or laboratory result. The selected OpenPressBrake G0/G1 physical and independent evaluator gates remain unchanged.
+
+
+## Post-commit workflow-run cross-check (2026-10-28T19:43Z UTC)
+Read the repository's GitHub Actions runs collection (`GET /repos/Bensend/LinuxCNC-AI-Curriculum/actions/runs?per_page=10`) after the source/governance commits. The ten newest returned runs were historical `Append Lesson Log` cancellations; the newest was created **2026-10-23T07:49:58Z**, not during this session. **No new 2026-10-28 workflow run appeared in that authoritative newest-runs snapshot.** This is a check of visible workflow metadata, **not** an assertion about account billing outside this repository or proof that the local runner is online. No new compute ledger row is warranted.

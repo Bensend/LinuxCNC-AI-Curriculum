@@ -9,6 +9,10 @@ on:
         description: "Explicit reviewed lab-jobs/*.sh path (no default smoke)"
         required: true
         type: string
+      job_sha256:
+        description: "SHA-256 of the reviewed job script contents"
+        required: true
+        type: string
       disconnected_simulation_verified:
         description: "Qualified operator verified the local runner cannot actuate machinery"
         required: true
@@ -35,6 +39,7 @@ jobs:
         shell: bash
         env:
           JOB_FILE: ${{ inputs.job_file }}
+          EXPECTED_SHA256: ${{ inputs.job_sha256 }}
           ISOLATION_ATTESTED: ${{ inputs.disconnected_simulation_verified }}
         run: |
           set -euo pipefail
@@ -53,6 +58,15 @@ jobs:
           root="$(realpath lab-jobs)"
           target="$(realpath "$JOB_FILE")"
           case "$target" in "$root"/*.sh) ;; *) echo "Path escapes lab-jobs." >&2; exit 4 ;; esac
+          if [[ ! "$EXPECTED_SHA256" =~ ^[a-fA-F0-9]{64}$ ]]; then
+            echo "Missing or malformed reviewed SHA-256." >&2
+            exit 5
+          fi
+          actual="$(sha256sum "$JOB_FILE" | cut -d' ' -f1)"
+          if [[ "${actual,,}" != "${EXPECTED_SHA256,,}" ]]; then
+            echo "Job content differs from reviewed SHA-256; refusing." >&2
+            exit 6
+          fi
           echo "job_file=$JOB_FILE" >> "$GITHUB_OUTPUT"
           echo "job_name=$(basename "$JOB_FILE" .sh)" >> "$GITHUB_OUTPUT"
 

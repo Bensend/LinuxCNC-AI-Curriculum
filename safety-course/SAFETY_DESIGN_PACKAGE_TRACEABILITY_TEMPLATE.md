@@ -1762,3 +1762,16 @@ This is a **cross-source reasoning synthesis**, not a new module, scored evaluat
 | `HF` | Awkward hidden test ports invite fitting loosening and hand leak-search shortcuts | Labeled accessible approved witness ports, remote readout, inspected connector kit and easy guard restoration | UNKNOWN |
 
 **DOC-CONFIRMED** exact Parker 4400-B.1 (2024 compilation) and HSE GS4 (2012) only; **INFERENCE** cross-machine architecture; **UNKNOWN** OpenPressBrake peak/ratings/fixture/physical safety. No invented sampling threshold, pressure test method, safety rating or selected-machine acceptance. **G0/G1 HOLD; G2 NOT RUN; G3/G4 NOT AUTHORIZED; G5 HOLD.** No hosted/local compute.
+
+## 11KF. 4400-HYD-TEMP-01 — Fluid startup/running envelope, thermal trip versus physical stop, heater energy (2026-10-28)
+[Original Cincinnati/Parker manufacturer audit](../research/4400_HYD_TEMP_01_CINCINNATI_PARKER_COLD_OIL_THERMAL_TRIP_HEATER_AND_STOP_PROOF_AUDIT_2026-10-28.md) → [technician card](4400_HYD_TEMP_01_COLD_OIL_HOT_TRIP_HEATER_AND_RAM_HOLD_TECHNICIAN_CARD_2026-10-28.md). Predecessors FILT-01/HYD-AIR-01 already teach cold-viscosity filter/inlet failure; AKAS-5M prior source already teaches selected overrun-test freshness. **Increment:** exact OEM thermal operating states and separate auxiliary-heater isolation, with a different valve OEM's leakage/response-temperature warning.
+
+| Package family | Distinct proposition | Qualified selected-machine witness | Status |
+|---|---|---|---|
+| `BND/ENE` | Cincinnati 60 PROFORM startup 4000 SUS point is **not** its 250/70 SUS running window; room ambient is not measured oil temperature | Installed fluid grade/viscosity curve, actual oil temperature, pump/valve OEM envelope and selected cold-start protocol | UNKNOWN |
+| `SRS/PHY/VAL` | Cincinnati hot alarm precedes main-drive shutdown; motor/pump trip is not ram gravity holding | Installed temperature/level fault path, independent Y1/Y2 stop/hold/pressure physical witness and selected fault/restart conditions | NOT RUN |
+| `DEP/CHG` | Parker VA130 mobile valve OEM warns extreme temperature changes leakage/response time; **not** a press-brake valve rating | Exact selected valve family, fluid, thermal duty and SRS-relevant stop/hold validation boundaries; change-impact record | UNKNOWN |
+| `AUTH/ENE/PT` | Cincinnati optional immersion heater can operate independently of motor drive, **not necessarily** independently of main disconnect | Installed heater presence, feeder/isolation, retained heat and qualified point-of-work zero-energy verification | UNKNOWN |
+| `HF` | Cold alarm or nuisance warm-up can motivate bypass; hot alarm may invite an unsafe quick restart | Accessible fluid/temperature ID, safe warm-up and service instructions, explicit hold status and fresh deliberate restart | HOLD |
+
+**DOC-CONFIRMED** exact Cincinnati EM-507 (2003) and Parker MSG17-8580/UK original manufacturer pages; **SOURCE-CONFIRMED** public OpenPressBrake design only; **INFERENCE** SRS/thermal proof and human-factors transfer; **UNKNOWN** installed machine fluid, heater, thermal switch, hydraulic/guard/restart truth and external evaluator. No invented universal viscosity/temperature, stop time, PL/SIL, pressure, test protocol or machine release. **G0/G1 HOLD; G2 NOT RUN; G3/G4 NOT AUTHORIZED; G5 HOLD.** No hosted/local compute.

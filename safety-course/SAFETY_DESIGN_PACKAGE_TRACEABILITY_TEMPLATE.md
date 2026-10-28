@@ -1981,3 +1981,17 @@ Use the [12-case paper-only composition matrix](4400_LIM_POS_TRUST_01_RECOVERY_A
 | **CHG-UPS-06** | PSU/UPS substitution changes tolerance, buffer or separation | Exact SKU, OEM wiring, SELV/PELV, revalidation and configuration record | UNKNOWN |
 
 **INFERENCE** conditional cross-domain effects; **TEST-CONFIRMED none**; no selected power diagram, safety program, physical proof or evaluator. No numeric PL/pressure/stop-distance inferred. No live fuse pull, mains interruption, simulation or hosted/self-hosted compute. **G0/G1 HOLD; G2 NOT RUN; G3/G4 NOT AUTHORIZED; G5 HOLD.**
+
+### 11KX — Contact output service life and diagnostic demand are separate qualification records (2026-10-28)
+[Original PZE X4P/Rockwell exact-OEM audit](../research/4400_CYCLE_LIFE_01_PILZ_PZE_X4P_CONTACT_DUTY_AND_ROCKWELL_OPERATOR_B10D_SOURCE_DEPTH_2026-10-28.md) and [field card](4400_CYCLE_LIFE_01_CONTACT_DUTY_IS_NOT_A_PERPETUAL_PL_FIELD_CARD_2026-10-28.md) extend prior **CYCLE-01 §11** on-state check, **2550** B10d/nop use profile, and MIRROR/EDM without a new release gate. **DOC-CONFIRMED** Pilz PZE X4P output service-life curves and exact monthly/yearly opening-diagnostic context; contact reuse after high-current switching is restricted; **DOC-CONFIRMED** Rockwell 800G non-E-stop assembly lists different operator/contact-block B10d values. **UNKNOWN** selected hardware.
+
+| Trace | Conditional safety question | Required qualified selected-machine evidence | State |
+|---|---|---|---|
+| **ELE/LIFE-01** | Is a relay-output PFH/TM being treated as unlimited contact life? | Exact SKU/edition, switched current/load class, actual output cycles, OEM life curve and mission-time basis | UNKNOWN |
+| **CHG/LIFE-02** | Has production duty, load or output sharing changed? | Before/after function map, counted output operations and reassessed safety-model assumptions | UNKNOWN |
+| **CHG/LIFE-03** | Was a used high-current contact reassigned to low-current duty? | Contact/replacement provenance, exact OEM permitted duty, independent review | UNKNOWN |
+| **DEP/LIFE-04** | Does the expansion block's advertised PL/PFH get incorrectly transferred to the whole function? | Base-unit, input, diagnostic, output, physical final element and common-dependency architecture | UNKNOWN |
+| **VAL/LIFE-05** | Was relay opening actually checked and does the ram physically stop/hold? | Qualified OEM diagnostic schedule/results, independently witnessed actual Y1/Y2 stop/hold and guarding | NOT RUN |
+| **RST/LIFE-06** | Can a maintenance/proof event rearm and replay a held normal command? | Independent area-clear/rearm and separate deliberate fresh cycle-start validation | HOLD |
+
+**SOURCE-CONFIRMED** predecessor; **DOC-CONFIRMED** exact manufacturer; **INFERENCE** conditional failure paths; **TEST-CONFIRMED none**. No numerical PL/stop time/pressure or installed-device inference. **G0/G1 HOLD; G2 NOT RUN; G3/G4 NOT AUTHORIZED; G5 HOLD.**

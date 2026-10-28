@@ -1893,3 +1893,16 @@ This is a **cross-source reasoning synthesis**, not a new module, scored evaluat
 **DOC-CONFIRMED** Parker catalog scope, **INFERENCE** safety witness, **UNKNOWN** selected machine. No energized fault injection or physical release. G0/G1 HOLD.
 
 **Selected-machine public-source discriminator:** OpenPressBrake public Rev-0 phase extraction identifies a pre-fill/suction-related function, **not a proven regenerative cross-port**. Reuse the already documented [HAWE NSV normally-open/pilot-to-close and suffix scope](../research/4400_HAWE_SAKB_NSV_SEAL_SUFFIX_PORT_REVERSAL_SOURCE_AUDIT_2026-10-24.md) only as a product-family contrast. No HAWE NSV is asserted installed. Actual circuit identification remains **UNKNOWN**, no physical witness.
+
+
+### 11KO — Protective reach path, guard structure, approach stop and ejection are four different proofs (2026-10-28)
+[Official ISO 13857:2019 / ISO 14120:2015 / ISO 13855:2024 publisher-scope audit](../research/4400_GUARD_REACH_01_ISO13857_2019_ISO14120_2015_VS_ISO13855_2024_SCOPE_AND_ACCESS_PATH_AUDIT_2026-10-28.md) distinguishes **reach prevention**, **guard retention/construction**, **approach-based stop distance** and **gravity/ejecta containment**. Existing 13855, GUARD-FAST and FORM-HAZ already establish the latter distinctions; this addendum adds exact **ISO 13857 reach-through/under/around/over protective-structure scope**, including population and climbing limits. Not a new generic competency or machine-specific measurement.
+
+| Trace | Selected-machine qualified witness | State |
+|---|---|---|
+| **BND/HAZ-REACH-01** | Actual operator/helper/public tasks and every plausible front/rear/side/under/around access route, including sheet feed, jam clearance and maintenance-open conditions | UNKNOWN |
+| **DEP/ARC-REACH-02** | Selected fixed/movable guard geometry, openings/edges, construction/fastening, interlock separate from guard mechanical strength and independent stop | UNKNOWN |
+| **SRS/PHY-REACH-03** | Licensed applicable Type-C + ISO 13857 reach geometry and ISO 13855 response-based approach analysis as *separate* propositions; independent gravity hold and ejecta/fragment protection | UNKNOWN / NOT RUN |
+| **HF/CHG-REACH-04** | Changed gap, tooling, sheet support, guard relocation or bypass pressure triggers redesign, new access-path review and downstream stale evidence | CONDITIONAL / NOT RUN |
+
+**DOC-CONFIRMED** only publisher scope/edition, **INFERENCE** review architecture, **UNKNOWN** installed OpenPressBrake. No fabricated opening, height, separation distance, impact rating, PL or stop time; G0/G1 HOLD and independent physical evaluator OPEN. Do not ask an operator to reach into a live machine.

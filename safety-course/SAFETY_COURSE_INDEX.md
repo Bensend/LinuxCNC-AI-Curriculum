@@ -1155,3 +1155,6 @@ Read [original Pilz/SICK/VACON safety-installation source audit](../research/440
 
 
 **BOND-01 exact OEM indicator correction (2026-10-28):** [Original Cincinnati EM-519 2019 p. 6-5 addendum](../research/4400_OSHA_SCHNEIDER_PROTECTIVE_BONDING_DOOR_HINGE_VARIANT_AND_EMC_BOUNDARY_AUDIT_2026-10-25.md) says its `GROUND CONNECTED` light is **internal chassis ground only** and **not proof that the machine is grounded**. Existing B11 false-green-lamp case clarified, not scored or multiplied. Qualified PE topology and fault-path witness remains UNKNOWN, no physical test or compute, G0/G1 HOLD.
+
+
+**FORM-HAZ-04 direct NIOSH fatal ejection source upgrade (2026-10-28):** [Original 2005 OKFACE/NIOSH FACE 05-OK-005-01 five-page report audit](../research/4400_FORM_HAZ_04_NIOSH_FACE_05OK005_PRESS_BRAKE_WORKPIECE_EJECTION_INCIDENT_ADDENDUM_2026-10-28.md) documents a **920-lb** lug slipping from a lower V-die during near-edge bending and striking an operator beside a forklift support. **New physical witness** beyond general sheet sweep: workpiece-to-die engagement and actual ejection/support geometry; not an OEM bolt fracture or selected OpenPressBrake failure. Existing eight PAPER cases remain UNSCORED, no new bank, physical test or compute; G0/G1 HOLD, §11KA.

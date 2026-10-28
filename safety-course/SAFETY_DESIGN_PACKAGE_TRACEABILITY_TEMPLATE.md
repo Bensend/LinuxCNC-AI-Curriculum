@@ -1685,3 +1685,16 @@ The ADI datasheet's IC-level enable/disable timing is **not** press-brake stoppi
 | Hazardous motion and restart | Interlock closes, so machine can auto-restart; guard closure proves ram safe | `AUTH/PHY/VAL/CHG`: independent stopping/holding/guard-locking where needed, maintenance isolation and separate deliberate start | G0/G1 HOLD |
 
 **No EU law assumed for a U.S. machine**, no guard dimensions/impact strength, stopping time, PL/SIL, as-built evidence, test or compute. Do not allow ordinary LinuxCNC/FPGA guard status to substitute for independent safety final elements. Human-factor principle: the correctly installed guard must be easier to maintain than to defeat.
+
+
+## 11JY. 4400-STRUCT-01 — Press-brake frame/bed/ram load path is independent of tool capacity and Y1/Y2 synchronization (2026-10-28)
+[Original Cincinnati EM-519 2019 structural envelope source audit](../research/4400_STRUCT_01_CINCINNATI_PRESS_BRAKE_ECCENTRIC_OFFCENTER_STRIPPING_LOAD_SOURCE_AUDIT_2026-10-28.md) → [practical reviewer](4400_STRUCT_01_THREE_DIRECTION_MACHINE_LOAD_AND_REVERSE_STRIPPING_TECHNICIAN_CARD_2026-10-28.md). Predecessor §11HW TOOL-LOAD-03 already covers local punch/holder ratings. **New `BND/HAZ/PHY`**: machine structural force limit varies with lateral position; a separate front-back eccentric moment acts on bed/ram/bolts; upward stripping reverses force and may have no rating for a bolt-on nose. A correctly synchronized Y1/Y2 and nominal machine tonnage cannot prove these mechanical paths safe.
+
+| Distinct safety proposition | Invalid shortcut | Existing restricted evidence route | State |
+|---|---|---|---|
+| Actual **left-right** location and available machine force | Nameplate force or CNC bend prediction | Stage A A/B/D/F: exact press/bed/ram/nose identity and OEM location-dependent capacity with actual job load center; Stage B tooling as applicable | UNKNOWN |
+| **Front-back** eccentric moment within structure | Tool kN/m, Y1/Y2 encoder level, pressure setpoint | Actual offset and force, exact OEM eccentric envelope and nose/part-length condition; qualified structural reviewer | UNKNOWN |
+| **UP-stroke stripping** direction/rating | Downstroke force rating | Actual extraction/stripping mode and exact OEM upstroke capacity; cited Cincinnati bolt-on noses explicitly not rated | UNKNOWN |
+| Structural fasteners/guards and fresh start | No controller alarm, visually intact panel | Stage A D/E/G: qualified physical bed/nose/attachment inspection, fracture exposure/guard retention, independent stop/hold and deliberate restart | G0/G1 HOLD |
+
+**DOC-CONFIRMED** original OEM pages 4-7/4-8, **INFERENCE** cross-limit review, **UNKNOWN** selected machine. 400 PF OEM example numbers are **not** machine-specific OpenPressBrake values; metric column ambiguity not silently corrected. **No** new owner packet, force calculation, PL/SIL, physical test, external evaluator or compute. G0/G1 HOLD; G2 NOT RUN; G3/G4 NOT AUTHORIZED; G5 HOLD.

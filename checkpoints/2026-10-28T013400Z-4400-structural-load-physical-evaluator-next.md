@@ -1,0 +1,30 @@
+# 4400 safety continuation — structural-load paths, tandem guard ownership and physical/evaluator gates
+
+**Session start: 2026-10-28T01:34:00.881Z UTC | Source-only, NON-GRADUATED.**
+
+## Current precedence
+
+Read `START_HERE.md` first, then mission/level/work-selection/source/evaluation policy, `CURRICULUM.md`, `PROGRESS.md`, `SAFETY_COURSE_RESEARCH.md`, canonical safety index/design package, 00:36Z [prior checkpoint](2026-10-28T003657Z-4400-eu-transition-software-provenance-physical-evaluator-next.md), current selected evidence and lab/evaluation ledgers. **1000/2000/F02/3000 remain GRADUATED/CLOSED.** Primary active 4400 safety; separate board automation owns ordinary PCB work.
+
+**G0/G1 HOLD; G2 NOT RUN; G3/G4 NOT AUTHORIZED; G5 HOLD.** Actual installed Pilz/AKAS program, 11K2, Y1/Y2 physical stopping and load holding, hydraulic isolation, guarding/muting and deliberate restart not independently witnessed. Independent 2520–25F0 information-separated evaluator **NOT RUN**. No personnel-exposed hazardous operation.
+
+## Substantive source evidence added
+
+1. **[STRUCT-01 original Cincinnati EM-519 2019 structural load audit](../research/4400_STRUCT_01_CINCINNATI_PRESS_BRAKE_ECCENTRIC_OFFCENTER_STRIPPING_LOAD_SOURCE_AUDIT_2026-10-28.md)** → [one-pass field card](../safety-course/4400_STRUCT_01_THREE_DIRECTION_MACHINE_LOAD_AND_REVERSE_STRIPPING_TECHNICIAN_CARD_2026-10-28.md). Distinct from TOOL-LOAD-03 local punch kN/m: the machine structure has separate **left-right off-center derating**, **front-back eccentric moment** and **UP-stroke reverse stripping** capacity. OEM 400 PF illustration 400 nominal vs 200 US tons at housing, 230 inch-tons eccentric and 27 US tons stripping; **bolt-on noses not rated for stripping**. OEM warns bed/die-clamp/ram-nose bolt fracture and bed loosening. Direct PDF text **and printed pp. 4-7/4-8 renders** inspected. Numerical examples **Cincinnati-specific**, never OpenPressBrake limits. OEM eccentric metric column has ambiguous notation; no conversion imported. Cumulative design §11JY. Existing Stage A A/B/D/E/F/G refined, no new questionnaire or public unscored bank.
+2. **[TANDEM-02 Cincinnati exact master/slave source delta](../research/4400_TANDEM_02_CINCINNATI_MASTER_ONLY_LIGHT_GUARD_SLAVE_FOOTSWITCH_AND_TONNAGE_DISPLAY_SOURCE_DELTA_2026-10-28.md)** adds original manual pp. 8-6–8-10 beyond TANDEM-01 TRUMPF/Accurpress product statements. **Light guard connected to slave is inactive in tandem** on this OEM; master guard must span both. Slave foot/palm commands inactive, **slave E-stop listed active**. Programmed/diagnostic tonnage is not actual for short bends; short workpieces can cause off-center/out-of-level rams. Existing TAN-P03 clarified without scoring or new case. Cumulative §11JZ. **No tandem machine asserted to exist on OpenPressBrake**; conditional route only if Stage A proves one.
+3. **BOND-01 exact OEM ground-lamp correction:** Original Cincinnati printed p. 6-5 explicitly says `GROUND CONNECTED` light indicates internal chassis ground, **not that the machine is grounded**. Existing BOND-01 source and B11 field card amended; no new module. No PE continuity claim or energized test.
+
+All direct original Cincinnati findings are **DOC-CONFIRMED for its 2019 model family**. The selected OpenPressBrake structure, guard/PE wiring and physical results remain **UNKNOWN**. No SOURCE-CONFIRMED new LinuxCNC behavior, TEST-CONFIRMED physical result, or independent evaluation.
+
+## Next work priority (do not manufacture 3000 work)
+
+1. **Qualified restricted Stage A A–G:** actual press model/date/retrofit/jurisdiction, installed Pilz/AKAS program identity and version, safety I/O/final elements, 11K2 and Y1/Y2 physical stop/hold, gravity and accumulator pressure/isolation zones, front/rear/side guards/muting and rearm, safe no-person-exposure validation logistics. STRUCT-01 adds **machine-specific structural load geometry/nose/fastener condition and direction** to existing A/B/D/E/F/G, without requesting new owner packet. Any 2026 ISO 6909 / EU 2027 regime review is conditional on actual date/jurisdiction.
+2. **Independent 2520–25F0 blind evaluator:** receive truly unseen score and transfer/retention result, protect hidden answer separation. No self-scoring.
+3. If physical/evaluator evidence absent, choose a **distinct high-consequence safety source mechanism or exact predecessor source delta** only after full index/research/progress/design and research-filename comparison; preserve original OEM/standard revision and new physical witness. No duplicate paper cases. Review board-lane safety-interface source only when it changes the independent safety permit; routine board design remains separate.
+4. No compute unless an unresolved safety question survives authoritative documentary reasoning. If justified, only self-hosted `[self-hosted, openpressbrake]` local panel PC; if unavailable, record runner-access blocker and continue source work. **Never** use GitHub-hosted runner minutes.
+
+## Compute, evaluation and release
+
+**GitHub-hosted compute: 0 minutes. Local/self-hosted compute: 0 minutes.** No workflow, simulation, build, synthesis, benchmark, test suite, physical test or independent evaluation. No new authoritative runtime: `LAB_COMPUTE_LOG.md` unchanged. `evaluation/FEEDBACK_SCORE_LOG.md` unchanged. No numeric selected stopping distance, pressure threshold, PL/SIL, structural force limit, hydraulic truth table or safety release.
+
+**Log closure:** Append complete `LESSON_LOG.md` safely using current blob SHA after recording UTC end and actual elapsed minutes; never overwrite from truncated content. Previous same-curriculum session ended 2026-10-28T00:43:40Z, **50m20.881s** before current start, so no known same-curriculum overlap at start; other automation overlap UNKNOWN. End timestamp and final commit must be recorded before session completion.

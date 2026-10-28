@@ -18,3 +18,5 @@ Read [pinned LinuxCNC M1xx process/Task audit](../research/4400_M1XX_EXIT_01_LIN
 **Boundary:** LinuxCNC scripts, HAL and ordinary FPGA are not safety-rated merely because they wait, return an error or command OFF. Independent safety-related control and physical final elements must provide protection. If essential stop/hold/guard/restart proof is missing, **no personnel-exposed operation**; experimental operation, if later authorized, must be isolated/remote with people outside the hazard zone.
 
 **Status:** SOURCE/DOC-CONFIRMED process semantics, **TEST-CONFIRMED none**, selected OpenPressBrake M1xx implementation **UNKNOWN**; **G0/G1 HOLD**, external evaluator **OPEN**.
+
+**Wrong-script trap:** The tagged Task startup searches `PROGRAM_PREFIX` before `USER_M_PATH` and registers the **first executable M1xx name**. Confirm the actual resolved script path, revision and exit handling; a duplicate file in another directory is not necessarily the one running. This is process reliability/change control, **not** a safety interlock.

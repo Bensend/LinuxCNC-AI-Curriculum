@@ -1282,3 +1282,6 @@ UTC session start recorded before substantive work in [durable start marker](che
 
 
 **Same-session BOND-01 OEM source-depth (2026-10-28):** Direct Cincinnati EM-519 2019 printed p. 6-5 explicitly says its illuminated `GROUND CONNECTED` light indicates **internal chassis ground** and **does not indicate the machine is grounded**. [Existing BOND-01 source audit](research/4400_OSHA_SCHNEIDER_PROTECTIVE_BONDING_DOOR_HINGE_VARIANT_AND_EMC_BOUNDARY_AUDIT_2026-10-25.md) and B11 field case updated, no new module/bank. Distinguish lamp/0 V/EMC from actual protective-earth fault path; no selected-machine PE evidence, no test or compute, G0/G1 HOLD.
+
+
+**Same-session FORM-HAZ-04 direct NIOSH incident source-depth (2026-10-28):** [Original 2005 OKFACE/NIOSH FACE 05-OK-005-01 five-page report](research/4400_FORM_HAZ_04_NIOSH_FACE_05OK005_PRESS_BRAKE_WORKPIECE_EJECTION_INCIDENT_ADDENDUM_2026-10-28.md) directly inspected: **920-lb** lug bent 2–3 in from edge slipped off rear V-die and ejected, fatally striking operator near forklift support. Distinct **workpiece-to-die engagement/ejection** witness; not an eccentric-bolt failure or OpenPressBrake accident. Existing FORM-HAZ-04 audit and eight UNSCORED public cases updated without adding a bank; Stage A B/E/F/G reused. No physical test/compute/evaluator, G0/G1 HOLD, §11KA.

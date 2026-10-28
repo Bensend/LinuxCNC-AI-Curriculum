@@ -1142,3 +1142,7 @@ Pinned LinuxCNC v2.9.10 [source trace](research/4400_LIM_01_LINUXCNC_2910_SHARED
 
 
 **G38/G28 cross-boundary documentary integration:** [PROBE-RETREAT-COMPOSE-01](safety-course/4400_PROBE_RETREAT_COMPOSE_01_FALSE_TOUCH_OFFSET_WAYPOINT_FAILURE_CHAIN_2026-10-28.md) connects tagged ordinary probe status, actual simulated G10 offset consumer and hypothetical G28 offset-sensitive first rapid; separate from independent guarding and physical stop. No observed accident, test, score or machine authorization. G0/G1 HOLD.
+
+
+### 2026-10-28 — 4400-ANALOG-QUEUE-01 conditional analog reassertion (NON-GRADUATED)
+[Exact v2.9.10 M67/M68 source audit](research/4400_ANALOG_QUEUE_01_LINUXCNC_2910_M67_M68_PENDING_REASSERTION_AND_SAFETY_AUTHORITY_SOURCE_AUDIT_2026-10-28.md) and [field card](safety-course/4400_ANALOG_QUEUE_01_M68_OFF_CAN_BE_REASSERTED_BY_PENDING_M67_FIELD_CARD_2026-10-28.md) distinguish `now=0` pending M67 from `now=1` immediate M68. Unlike already-studied M62/M63 digital pending-output examples, the **increment** is a mixed analog immediate/pending same-channel ordering: M68 immediate does not clear earlier M67 pending state; next motion can reapply the queued value. Source-confirmed static paths, official documented scheduling; no executed waveform, physical OpenPressBrake valve, PL, stopping distance or new exam. G0/G1 HOLD; evaluator OPEN, zero compute. Selected-machine independent safety/stop/hold/guard/restart evidence remains the release gate; §11LC.

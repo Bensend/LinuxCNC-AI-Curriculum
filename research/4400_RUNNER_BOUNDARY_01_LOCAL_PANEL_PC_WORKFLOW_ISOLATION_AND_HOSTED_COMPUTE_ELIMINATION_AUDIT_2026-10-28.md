@@ -67,3 +67,15 @@ Read GitHub's original [secure-use guidance](https://docs.github.com/en/actions/
 
 ### Manual dispatch ref scope — do not assume main fixes every branch
 Original GitHub [manual workflow documentation](https://docs.github.com/en/actions/how-tos/manage-workflow-runs/manually-run-a-workflow) allows a dispatcher to select a branch/ref. The current main workflow therefore adds a job-level `github.ref == 'refs/heads/main'` condition in addition to isolation attestation. **SOURCE-CONFIRMED current main guard**; **UNKNOWN** whether old branches retain legacy hosted workflow YAML. A branch containing older workflow code may not inherit main's guard, so a true repository-wide zero-hosted guarantee requires auditing or restricting all dispatchable refs and repository Actions policy. **Do not dispatch older refs**; no branch-dispatch experiment was run. This is a source-configuration scope limit, not a reason to consume hosted minutes to test the guard.
+
+### All-branch legacy hosted-runner elimination (same session; no workflow execution)
+The earlier "unknown older refs" concern was resolved for the **five branches returned by the repository's branch-list endpoint**: `main` and four historical A01 branches. Each A01 branch contained one workflow `.github/workflows/lab-runner.yml` with **`ubuntu-latest`, automatic push and manual dispatch**. These were actual **SOURCE-CONFIRMED** remaining hosted-minute traps, not merely hypothetical. The original historical blobs were preserved in Git history:
+
+| Historical branch | Original workflow blob | Safety-disable commit |
+|---|---|---|
+| `a01-bounded-observation` | `5f8747d768fddee7efef60452b4e18c3390964fe` | `f3616e767d677d9ba426e6806dd29ef96920ab76` |
+| `a01-harness-audit-20260905T2015Z` | `091f2d7664e9f0426571be92625778b37a05f03c` | `ac070823d191cfa1a4f5b99c953e874b3f082d06` |
+| `a01-ready-next-budget-20260905T2211Z` | `9ee21f372fcd5bbba687af97655bcfe8534a7e8b` | `46f1bc64696b94452012d7aa5b58e5e03b68c6dc` |
+| `a01-reconciled-observation-20260905` | `2f5e0bf4fe1cadeac15ec6445326cadfc6ff1106` | `b9d84c23018acaefa7345b3dc4a0f62daaef3a91` |
+
+Each legacy branch now has an **inert manual-only workflow** with `if: ${{ false }}`, no push trigger, `runs-on: [self-hosted, openpressbrake]`, and no executable job on dispatch. Direct post-write reads verified the same disabled blob `b9b925267f08aa10150819c223697a0fa4b21ba0` on all four branches; `main` retains the reviewed bounded local lab. This preserves old commits/evidence while changing branch heads for future safety. **No workflow was dispatched**, and the workflow-file updates do not have a push trigger in the resulting YAML. This is a verified **current five-branch inventory**, not a promise that future branches or other repositories can never introduce hosted compute. Keep auditing new workflows and branch changes before any dispatch.

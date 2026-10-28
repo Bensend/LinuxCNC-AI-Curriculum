@@ -1,0 +1,23 @@
+# Safety course — two-minute entry card
+**2026-10-28 | navigation only.** This is a short front door, not a replacement for the authoritative [course/research plan](../SAFETY_COURSE_RESEARCH.md), [full learner index](SAFETY_COURSE_INDEX.md), [curriculum](../CURRICULUM.md), [work-selection policy](../WORK_SELECTION_POLICY.md), [progress](../PROGRESS.md) or [cumulative Safety Design Package](SAFETY_DESIGN_PACKAGE_TRACEABILITY_TEMPLATE.md).
+
+## Pick the correct route
+| Reader / task | Start here | What completion does **not** mean |
+|---|---|---|
+| **Fresh AI learner** | [2520 hazard → safety function entry](2520_ENTRY_MAP_AND_FRESH_AI_HANDOFF_2026-09-22.md), then 2530 E-stop, 2540 relays, 2550/2560 integrity, 2570 drives, 2580 fluid power, 2590 guards and 25A0–25F0 through the [full index](SAFETY_COURSE_INDEX.md). | A finished worksheet is not an independent blind competency score. |
+| **Safety architecture reviewer** | [Cumulative traceability package](SAFETY_DESIGN_PACKAGE_TRACEABILITY_TEMPLATE.md), [selected safety-block worksheet](../hardware/SELECTED_SAFETY_BLOCK_QUALIFICATION_WORKSHEET.md), and applicable 4400 original-source audits from the [index](SAFETY_COURSE_INDEX.md). | A schematic, PLC tag, calculation or certificate is not machine-level physical stop/hold proof. |
+| **OpenPressBrake evidence provider** | [Short seven-packet Stage A A–G request](4400_OPENPRESSBRAKE_G0_EVIDENCE_REQUEST_ONE_PAGE_2026-10-25.md) and [one-screen status board](4400_G0_BOARD_01_ONE_SCREEN_RESTRICTED_EVIDENCE_STATUS_TEMPLATE_2026-10-26.md). | Do not send an unrequested research appendix or operate the machine to obtain a photograph. |
+| **Qualified evidence reviewer** | [Stage A request](4400_OPENPRESSBRAKE_G0_EVIDENCE_REQUEST_ONE_PAGE_2026-10-25.md) → [dated source-delta archive](4400_G0_STAGE_A_DATED_SOURCE_DELTA_ARCHIVE_2026-10-28.md) only where a selected component/option makes a source applicable → [cumulative package](SAFETY_DESIGN_PACKAGE_TRACEABILITY_TEMPLATE.md). | An OEM example does not identify the installed safety program, valves, guard or machine performance. |
+| **Independent evaluator** | [Blind feedback protocol](../evaluation/BLIND_FEEDBACK_PROTOCOL.md) and existing information-separated 2520–25F0 handoffs. | Never reveal hidden answers to learner before precommitment or self-score an unrun challenge. |
+
+## Current machine-release boundary (not a recommendation to operate)
+- **G0/G1 HOLD; G2 NOT RUN; G3/G4 NOT AUTHORIZED; G5 HOLD.** No personnel-exposed hazardous operation. Experimental operation, if later justified and independently approved, requires isolation/remote execution with people outside the danger zone and residual risk stated.
+- **UNKNOWN:** actual installed Pilz/AKAS active configuration and revision, K1/K2/EDM, Y1/Y2 hydraulic final elements, independent stopping and gravity-load holding, guard coverage and mute/blanking state, energy isolation, deliberate restart, and qualified physical witness.
+- **Independent 2520–25F0 competency execution remains OPEN.** 1000, 2000, F02 and completed 3000 are CLOSED.
+- **Authority boundary:** ordinary LinuxCNC/HAL/FPGA is normal control and diagnostics; the selected independent safety system must own personnel-protective decisions; hydraulic/mechanical/electrical final elements must prove the physical safe state. Neither a green HMI bit nor a source audit proves the ram is held.
+
+## Work selection in one paragraph
+Read [START_HERE](../START_HERE.md) first, capture UTC start, read current governance, current [progress](../PROGRESS.md) and latest checkpoint, and check for qualified Stage A evidence or external evaluator results. If unchanged, select a **genuinely nonduplicate** safety question by comparing the [full index](SAFETY_COURSE_INDEX.md), [research plan](../SAFETY_COURSE_RESEARCH.md), historical progress and nearest predecessor. Source-trace before simulation; use no GitHub-hosted compute. If a frozen lab is justified, only use the self-hosted `[self-hosted, openpressbrake]` runner if accessible. Keep the owner A–G first-contact request short. Update durable source/progress/checkpoint and append the **complete** LESSON_LOG using its verified SHA immediately before end.
+
+## Why this card exists
+On 2026-10-28, the full learner index was **327,297 characters**, the cumulative design package **479,045**, and progress **491,953**. Those are valuable historical/engineering records but inefficient as a first screen. This card is a **SOURCE-CONFIRMED repository navigation intervention**, not proof of improved learning, reduced bypass behavior or physical safety. Keep detailed source additions in the full documents; keep this entry card stable and short.

@@ -20,7 +20,12 @@ on:
         default: false
 
 permissions:
-  contents: write
+  contents: read
+
+# Serialize this workflow's local jobs; does not serialize other runner workflows.
+concurrency:
+  group: linuxcnc-local-lab
+  cancel-in-progress: false
 
 jobs:
   run-lab-job:
@@ -141,20 +146,9 @@ jobs:
         run: |
           if [[ -f lab-results/LATEST.md ]]; then cat lab-results/LATEST.md >> "$GITHUB_STEP_SUMMARY"; else echo "Lab runner ended before producing a fresh LATEST result; checked-out LATEST files were removed before execution." >> "$GITHUB_STEP_SUMMARY"; fi
 
-      - name: Commit readable results back to repository
-        if: always()
-        shell: bash
-        run: |
-          set -euo pipefail
-          if [[ ! -f lab-results/LATEST.md ]]; then exit 0; fi
-          git config user.name "linuxcnc-lab-bot"
-          git config user.email "linuxcnc-lab-bot@users.noreply.github.com"
-          git add lab-results/
-          if git diff --cached --quiet; then exit 0; fi
-          git commit -m "lab: record ${{ steps.select.outputs.job_name }} result [skip ci]"
-          git fetch origin main
-          git rebase origin/main
-          git push origin HEAD:main
+      # Results remain in the workflow artifact. A separate reviewed GitHub
+      # commit is required for durable curriculum evidence; the physical
+      # panel-PC runner does not receive a repository write token.
 
       - name: Fail workflow if lab job failed
         if: always()

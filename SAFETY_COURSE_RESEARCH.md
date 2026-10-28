@@ -1139,3 +1139,6 @@ Pinned LinuxCNC v2.9.10 [source trace](research/4400_LIM_01_LINUXCNC_2910_SHARED
 
 ### 2026-10-28T19:38:09.919Z — 4400-G28-G30-01 persistent reference and two-rapid path
 [Tagged source audit](research/4400_G28_G30_01_LINUXCNC_2910_PERSISTENT_RAPID_REFERENCE_AND_WAYPOINT_HAZARD_SOURCE_AUDIT_2026-10-28.md) → [technician card](safety-course/4400_G28_G30_01_PREDEFINED_POSITION_IS_NOT_A_SAFE_RETREAT_FIELD_CARD_2026-10-28.md). New G28/G30 **SOURCE-CONFIRMED** mechanism distinct from G38 probe: optional rapid through work-coordinate waypoint then stored persistent machine reference (516x/518x), with no guaranteed safe Z-first retreat; G28.1/G30.1 store position, not switch/index home. G30 optional M6 positioning. Physical collision and guard claims UNKNOWN; no test/evaluator/compute, G0/G1 HOLD; cumulative design §11LB.
+
+
+**G38/G28 cross-boundary documentary integration:** [PROBE-RETREAT-COMPOSE-01](safety-course/4400_PROBE_RETREAT_COMPOSE_01_FALSE_TOUCH_OFFSET_WAYPOINT_FAILURE_CHAIN_2026-10-28.md) connects tagged ordinary probe status, actual simulated G10 offset consumer and hypothetical G28 offset-sensitive first rapid; separate from independent guarding and physical stop. No observed accident, test, score or machine authorization. G0/G1 HOLD.

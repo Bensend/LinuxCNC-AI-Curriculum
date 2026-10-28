@@ -1430,3 +1430,6 @@ Rotated from G38-PROBE-EDGE-01 after a genuine source information-gain stop. Dir
 
 
 **G28/G30 M6 source-depth continuation:** tagged `Interp::convert_tool_change` L5565–5659 explicitly sequences optional normal spindle stop, optional quill-up Z traverse, optional **single direct** traverse to persistent G30 reference, then tool-change command. This differs from the explicit `G30 axes` two-leg waypoint command. `TOOL_CHANGE_WITH_SPINDLE_ON` and `TOOL_CHANGE_QUILL_UP` are independent settings; neither physical spindle standstill nor tool capture is proven. Corrected documentary scope; no machine test/compute.
+
+
+**Same-session 4400-PROBE-RETREAT-COMPOSE-01:** published [cross-boundary failure-path review](safety-course/4400_PROBE_RETREAT_COMPOSE_01_FALSE_TOUCH_OFFSET_WAYPOINT_FAILURE_CHAIN_2026-10-28.md) of SOURCE-CONFIRMED G38.3 prestate→`#5070`→actual simulated `G10 L20` consumer and hypothetical later `G28 axes` offset-sensitive first rapid. Preserves **INFERENCE** for the combined unrun sequence, **UNKNOWN** actual fixture/collision, normal Motion limits still present, M6 direct G30 distinguished. No graded bank, live test, score or compute. G0/G1 HOLD.

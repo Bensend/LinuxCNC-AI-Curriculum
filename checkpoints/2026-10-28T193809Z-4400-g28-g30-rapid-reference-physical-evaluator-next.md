@@ -19,3 +19,7 @@
 
 ## Same-session M6 source follow-through
 Direct tagged `Interp::convert_tool_change` L5565–5659 distinguishes optional ordinary spindle-stop command, optional Z-first quill-up, optional **direct** G30 reference traverse, then CHANGE_TOOL. **M6's direct G30 move is not G30 command's two-leg waypoint path**; corrected source-scope in audit and field card. No installed machine or physical stop/hold claims. The branch is source-sufficient; avoid a generic simulation.
+
+
+## Cross-boundary adversarial review completion
+Published [PROBE-RETREAT-COMPOSE-01](../safety-course/4400_PROBE_RETREAT_COMPOSE_01_FALSE_TOUCH_OFFSET_WAYPOINT_FAILURE_CHAIN_2026-10-28.md) as a non-graded documentary integration: source-confirmed G38.3 already-HIGH status and actual simulated G10 L20 consumer, hypothetical later G28 offset-sensitive first rapid. Explicit variants exclude M6 direct G30 and distinguish G28 no-axis behavior; no soft-limit bypass or observed collision claimed. This closes a coherent failure-path review without new lab or evaluator. Continue only for real new evidence; otherwise log and checkpoint.

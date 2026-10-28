@@ -1267,3 +1267,6 @@ Read [original Pilz/Phoenix/Rockwell source audit](../research/4400_PWR_UPS_01_P
 
 ### 2026-10-28T19:38:09.919Z — 4400-G28-G30-01 predefined position is not safe retreat (NON-GRADUATED)
 [Exact LinuxCNC v2.9.10 G28/G30 source audit](../research/4400_G28_G30_01_LINUXCNC_2910_PERSISTENT_RAPID_REFERENCE_AND_WAYPOINT_HAZARD_SOURCE_AUDIT_2026-10-28.md) → [technician card](4400_G28_G30_01_PREDEFINED_POSITION_IS_NOT_A_SAFE_RETREAT_FIELD_CARD_2026-10-28.md). **SOURCE-CONFIRMED:** G28/G30 are ordinary rapid moves through optional active-coordinate waypoint to stored 516x/518x reference; axis-word subset versus all-axes behavior, and G28.1/G30.1 position storage rather than physical homing. No automatic Z-first collision clearance or independent protective stop. No test, score, selected-machine proof or compute; G0/G1 HOLD, evaluator OPEN; §11LB.
+
+
+**G38→G10→G28 composition review:** [PROBE-RETREAT-COMPOSE-01](4400_PROBE_RETREAT_COMPOSE_01_FALSE_TOUCH_OFFSET_WAYPOINT_FAILURE_CHAIN_2026-10-28.md) is a **paper-only integration** of two exact-source mechanisms, not a third graded module. Existing simulated G38.3/`#5070`→G10 offset path is SOURCE-CONFIRMED; subsequent G28 axis-word waypoint/collision is hypothetical. Distinguishes no-axis G28, M6 direct G30 and ordinary soft limits. G0/G1 HOLD; evaluator OPEN.

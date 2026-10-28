@@ -1,0 +1,34 @@
+# 4400-PROBE-RETREAT-COMPOSE-01 — False touch → changed work offset → unintended rapid waypoint
+**2026-10-28 | source-grounded cross-boundary adversarial design review | NON-GRADUATED, PAPER ONLY.** Read the [G38 probe prestate audit](../research/4400_PROBE_EDGE_01_LINUXCNC_2910_G38_PRESTATE_EDGE_AND_FALSE_SUCCESS_SOURCE_AUDIT_2026-10-28.md), [G28/G30 reference audit](../research/4400_G28_G30_01_LINUXCNC_2910_PERSISTENT_RAPID_REFERENCE_AND_WAYPOINT_HAZARD_SOURCE_AUDIT_2026-10-28.md), and [2520 hazard-to-validation map](2520_ENTRY_MAP_AND_FRESH_AI_HANDOFF_2026-09-22.md). This integrates **two independently traced normal-control mechanisms**, not a third new graded competence or a report of an observed accident.
+
+## Frozen causal chain and evidence type
+| Link | Inspected implementation/example | Classification | Critical distinction |
+|---|---|---|---|
+| A. Probe already HIGH before G38.3 | Tagged v2.9.10 `EMCMOT_PROBE` skips prestate check for `probe_type & 1`; servo `process_probe_inputs` checks level while probing | **SOURCE-CONFIRMED** code path | No newly observed touch edge required by this variant |
+| B. Normal probe result becomes `#5070=1` | `probeTripped` → `GET_EXTERNAL_PROBE_TRIPPED_VALUE` → interpreter `#5070` | **SOURCE-CONFIRMED** status path | A software completion status, not a fresh physical contact witness |
+| C. Example accepts result and updates offset | Tagged simulated GladeVCP `probe.ngc` uses G38.3, `if [#5070]`, then `G10 L20` | **SOURCE-CONFIRMED** example | The example does **not** demonstrate a stuck-HIGH fault |
+| D. G10 L20 changes work-coordinate interpretation | `Interp::convert_setup` calculates offset from current position | **SOURCE-CONFIRMED** | No immediate motion caused by G10 itself |
+| E. A later *hypothetical* `G28 X0 Y0` uses active-coordinate waypoint | `Interp::convert_home` `find_ends` then first `STRAIGHT_TRAVERSE` before stored machine-reference traverse | **SOURCE-CONFIRMED** general path + **INFERENCE** combination | Changed work offset can change first-leg physical waypoint; final stored reference need not change |
+| F. First rapid sweeps a fixture or occupied space | Depends on machine geometry, clearance, kinematics and safety functions | **UNKNOWN** | **No collision, injury, stop time or protective failure is claimed or tested** |
+
+**Source provenance:** tagged LinuxCNC `v2.9.10` peeled commit `86cdca76fa2a36274c432caa21952b23c267989a`: [Motion probe prestate](https://github.com/LinuxCNC/linuxcnc/blob/86cdca76fa2a36274c432caa21952b23c267989a/src/emc/motion/command.c#L1414-L1476), [servo probe status](https://github.com/LinuxCNC/linuxcnc/blob/86cdca76fa2a36274c432caa21952b23c267989a/src/emc/motion/control.c#L678-L778), [simulated probe consumer](https://github.com/LinuxCNC/linuxcnc/blob/86cdca76fa2a36274c432caa21952b23c267989a/configs/sim/axis/gladevcp/probe.ngc#L13-L52), [G10 L20 offset](https://github.com/LinuxCNC/linuxcnc/blob/86cdca76fa2a36274c432caa21952b23c267989a/src/emc/rs274ngc/interp_convert.cc#L4210-L4320), [G28 waypoint](https://github.com/LinuxCNC/linuxcnc/blob/86cdca76fa2a36274c432caa21952b23c267989a/src/emc/rs274ngc/interp_convert.cc#L2569-L2697). All exact blob SHAs are in the parent audits.
+
+## Discriminating variants — do not overgeneralize
+| Variant | Is this *specific* false-touch→waypoint chain present? | What still matters |
+|---|---|---|
+| G38.3 with already-HIGH probe → G10 L20 → later G28 **axes** | **Possible** in the traced ordinary source path; combination hypothetical | Prestate/polarity, offsets, first-leg geometry, actual independent safety |
+| G38.2 with already-HIGH probe | Its normal Motion prestate check **rejects** this initial state | Still not a safety-rated protective stop |
+| G38.3 with proper new contact and correct offsets | Initial false-success premise absent | Fixture clearance and independent safety still required |
+| G28 without axis words | First waypoint is not a user-specified offset-sensitive intermediate target; final stored machine reference dominates | All-axis rapid route can still be hazardous; no guaranteed Z-first retreat |
+| M6 with `TOOL_CHANGE_AT_G30=1` | **Not** the explicit G30 axis-word two-leg route; tagged M6 uses direct G30 reference move | Optional quill-up/spindle-stop settings and physical tool/guard proof remain necessary |
+| Wrong offset but ordinary software travel limits | Motion endpoint limits can reject out-of-range targets | In-range fixture/person collision is still possible; **no soft-limit bypass** claimed |
+
+## Human-factors and engineering acceptance review (no live tests)
+1. **Normal-control guardrail:** before ordinary tool-setting, show actual probe polarity/prestate; distinguish a fresh contact event from a level already asserted. Record the probe program variant, `#5070` and work-offset changes in an understandable operator diagnostic. Do not silently accept a bad prestate.
+2. **Tool/fixture identity:** identify the setup that owns G10 offsets and G28/G30 persistent references. Treat offset/reference changes as configuration changes requiring a clear verification route; make that route easier than bypassing a guard or hand-editing parameters.
+3. **Motion-path review:** for any planned G28/G30 axis-word retreat, inspect **both** rapid legs and the actual Z/indexer order. Do not assume an intermediate work-coordinate waypoint is safe because the final machine-reference point is clear.
+4. **Safety architecture:** independent guards/interlocks, safe stop/standstill and physical holding must remain effective if the probe is stuck, the offset is wrong, G-code is edited, the HMI is stale or LinuxCNC crashes. A probe input, `#5070`, soft limit or M6 completion cannot own personnel-safety authority.
+5. **Qualified physical validation:** only after selected-machine G0/G1 evidence and separate authorization, qualified personnel may validate the actual guard coverage, motion/stop/hold, fixture clearance and restart behavior. **Do not perform personnel-exposed tests or insert faults into a live machine** on the strength of this documentary case.
+
+## Evidence limits and next work
+**SOURCE-CONFIRMED** individual implementation and existing simulated example. **DOC-CONFIRMED** official G38/G10/G28/G30 descriptions. **INFERENCE** combined hypothetical failure chain and mitigation rationale. **UNKNOWN** whether any installed machine runs this combination, actual probe state, fixture, axis motion, safe stopping/holding or independent SRS. **TEST-CONFIRMED none; COMMUNITY-REPORTED none.** No lab is frozen because the source question is resolved and a generic simulation cannot prove physical safety. **G0/G1 HOLD; G2 NOT RUN; G3/G4 NOT AUTHORIZED; G5 HOLD; independent 2520–25F0 evaluator OPEN.** No new owner questionnaire, graded bank or hosted/self-hosted compute.

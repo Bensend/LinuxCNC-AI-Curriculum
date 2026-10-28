@@ -2031,3 +2031,6 @@ Use the [12-case paper-only composition matrix](4400_LIM_POS_TRUST_01_RECOVERY_A
 
 
 **11LB M6 exact-source refinement:** tagged `Interp::convert_tool_change` uses optional ordinary spindle-stop, optional Z quill-up, then **direct single G30 reference traverse** if enabled, followed by `CHANGE_TOOL`. This differs from explicit `G30 axes` with an intermediate waypoint. Review `TOOL_CHANGE_WITH_SPINDLE_ON`, `TOOL_CHANGE_QUILL_UP` and `TOOL_CHANGE_AT_G30` separately; command state is not physical spindle stop/tool retention or guard permission.
+
+
+**11LA/11LB integrated adversarial review:** [PROBE-RETREAT-COMPOSE-01](4400_PROBE_RETREAT_COMPOSE_01_FALSE_TOUCH_OFFSET_WAYPOINT_FAILURE_CHAIN_2026-10-28.md) traces an already-HIGH G38.3 input through normal `#5070` and actual simulated G10 L20 consumer into a *hypothetical* later G28 offset-sensitive intermediate rapid. **SOURCE-CONFIRMED individual links; INFERENCE combined chain; UNKNOWN physical hazard/fixture.** No soft-limit bypass or measured collision. Independent guard/stop/hold/restart proof unchanged.

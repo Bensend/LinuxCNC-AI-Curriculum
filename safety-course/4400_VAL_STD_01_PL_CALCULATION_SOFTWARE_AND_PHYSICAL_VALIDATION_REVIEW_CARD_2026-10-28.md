@@ -19,3 +19,10 @@
 | Draft standard cited | Has a final edition been published/adopted and selected for this machine? | Draft research only |
 
 Reuse existing Stage A IN-01..10 and cumulative BND/SRS/ARC/DEP/VAL/PHY/CHG. Do not invent PLr, stop times, valve truth tables or conduct hazardous tests. **G0/G1 HOLD** until qualified installed-machine and independent evaluator evidence exists.
+
+
+
+### SISTEMA migration: the green status trap (IFA original PDF and 2025 release note)
+A **2.x → 3.x** project conversion is **not backwards compatible**; preserve the old project and libraries. A migrated project can gain new red/yellow messages because the **2023 standard and IFA checks changed**. Inspect DC/CCF, fault exclusions, software/EMI, and alternative calculation method rather than forcing the old color. In SISTEMA 3.x a **yellow** note can be documented and then shown **green**; **red** cannot be downgraded this way. The documented note remains in the report: *green does not mean the physical assumption was proven*. The original IFA 3.0 guide also discusses fault exclusion and the limitation on relying solely on exclusion for PL e; this is not a selected-machine PL claim. [IFA original 3.0 migration guide](https://www.dguv.de/medien/ifa/en/pra/softwa/sistema/innovations_sistema_3-0.pdf).
+
+IFA's [02-Nov-2025 release notice](https://dguv.de/ifa/;/praxishilfen/practical-solutions-machine-safety/software-sistema/newsletter/2025/quartal_4/index.jsp) says 3.0.4 build 5 fixed earlier v3 issues including documentation edits not being saved. **Reviewer action:** record exact tool build, preserve original and converted model, inspect all messages, save/reopen and verify the report/documentation; then separately require actual hydraulic stop/hold and guard/restart evidence. No tool execution or PL credit claimed.

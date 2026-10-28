@@ -8,3 +8,8 @@
 **Exact next:** (1) check new restricted Stage A IN-01..10/A–G and independent evaluator; if present process with information separation and no private public disclosure; (2) if selected evidence arrives link BND/SRS/ARC/DEP/VAL/PHY/CHG and qualified physical proof; (3) otherwise novelty-scan the canonical safety index and research plan for a different high-information-gain 4400 safety source discrepancy; (4) revisit Part 2 only on **final publication**, not draft movement. No hosted-runner compute, no fallback; local [self-hosted, openpressbrake] only for justified frozen questions if dispatch proven.
 
 Before exit safely append actual UTC end/elapsed/overlap to complete LESSON_LOG with expected-head Git tree update, commit and verify. Automation stays enabled; no personnel-exposed hazardous operation.
+
+
+
+## Same-session exact IFA original-PDF tool migration source-depth
+Original 15-page IFA “SISTEMA 3.0 — main changes” directly inspected: one-way 2.x→3.x conversion, 1.x intermediate 2.x, changed DC/CCF/EMI/FE/alternative method checks, red/yellow messages, documented yellow→green override (red not), and IFA warning that tool does not replace assessment. IFA 2025-11-02 3.0.4 build 5 release note fixes an earlier documentation-not-saved defect. **DOC-CONFIRMED** IFA original, **INFERENCE** change/requalification gate; no actual model or compute. Preserve source-depth as VAL-STD-01, not another unscored module. Selected physical/evaluator gates unchanged.

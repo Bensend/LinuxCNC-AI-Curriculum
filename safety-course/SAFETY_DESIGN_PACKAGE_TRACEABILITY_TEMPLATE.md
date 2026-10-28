@@ -1660,3 +1660,16 @@ The ADI datasheet's IC-level enable/disable timing is **not** press-brake stoppi
 | Normative and physical validation | Title/abstract/harmonised citation proves safe Y1/Y2 stop/hold | Licensed applicable clauses + selected safety program + independent physical final-element and stop/hold/energy/guard/restart witnesses | NOT RUN |
 
 **No retroactive certification, legal adoption assumption, numeric safety requirement or machine release.** G0/G1 HOLD, independent evaluator OPEN, 0 hosted/local compute.
+
+
+## 11JW. 4400-STD-6909-02 — Standards citation regime, substantial change and active software identity are separate from machine safety proof (2026-10-28)
+[Official-source EU transition and safety-software provenance audit](../research/4400_STD_6909_02_EU2027_SUBSTANTIAL_MODIFICATION_SAFETY_SOFTWARE_PROVENANCE_SOURCE_AUDIT_2026-10-28.md) → [one-pass reviewer](4400_STD_6909_02_EU_REGIME_CHANGE_AND_SAFETY_SOFTWARE_REVIEW_CARD_2026-10-28.md). This extends §11JV's **edition** witness into **legal regime/date**, **retrofit change classification**, **active software provenance**, and **physical safety validation** without equating them.
+
+| Distinct gate | Invalid shortcut | Existing evidence route | State |
+|---|---|---|---|
+| Edition and citation regime | A `20.01.2027` Directive summary end date proves EN ISO 6909 technically withdrawn | Stage A A/F: exact machine date/jurisdiction, Directive vs Regulation OJ citation for relevant date, qualified applicable edition/clauses. Commission warns this date may reflect Directive repeal. | UNKNOWN selected machine |
+| Substantial modification | Every retrofit or safety improvement automatically becomes a new machine, or every old retrofit is exempt | Stage A A/F + `CHG`: if EU Regulation applies, Article 3(16) **cumulative** planned/change/hazard/protection analysis and Article 18 affected-machine scope, qualified determination. | UNKNOWN |
+| Safety software provenance | Offline project CRC or ordinary LinuxCNC build hash proves installed safety application | Existing OPB-D01: authorized read-only **active** Pilz model-specific identity, version/CRC category and change history; Annex III 1.1.9 / 1.2.1(f) only within applicable regime. | UNKNOWN |
+| Physical safety and rearm | A matching signature, five-year upload log or harmonised standard proves Y1/Y2 stopped/held | Existing OPB-D08 / `AUTH/DEP/PHY/VAL/CHG`: independently validate safety final elements, pressure/energy zones, guard coverage, deliberate restart and changes. | G0/G1 HOLD, G2 NOT RUN |
+
+**DOC-CONFIRMED** direct Commission warning and official indexed EUR-Lex text; **not** purchased ISO clauses, machine legal determination, installed safety program, PL/SIL or TEST-CONFIRMED safe state. The Commission's Directive summary is informational; post-2027 Regulation citations require separate verification. Independent 2520–25F0 evaluation remains OPEN. No physical testing or hosted/local compute.

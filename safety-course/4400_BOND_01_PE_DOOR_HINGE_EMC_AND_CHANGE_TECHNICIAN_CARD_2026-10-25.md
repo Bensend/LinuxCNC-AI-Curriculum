@@ -29,3 +29,7 @@ Read [original OSHA/Schneider source audit](../research/4400_OSHA_SCHNEIDER_PROT
 | BOND-06 independent electrical isolation and mechanical Y1/Y2 holding | UNKNOWN | — | HOLD |
 
 **STOP:** no deliberate earth-fault, PE disconnection, energized continuity test, or personnel-exposed operation. No numeric acceptance criterion is supplied. Evidence belongs in restricted as-built records; only status-only references enter the public course.
+
+
+## 2026-10-28 original OEM lamp discriminator (existing B11, no new case)
+[Cincinnati EM-519 2019 original manual, printed p. 6-5](https://wwwassets.e-ci.com/PDF/Manuals/em-519_n-08-19_proform__400-2000_hydraulic_press_brake_osmm.pdf) explicitly says its `GROUND CONNECTED` lamp shows **internal chassis ground** and **does not indicate the machine is grounded**. Extend existing B11's false-green-indicator reasoning: a lit lamp, Ethernet shield, continuity beep, hinge or LinuxCNC `ready` bit is not qualified proof of the protective fault-current path. Actual PE conductor, exposed-metal topology and verification remain BOND-01..06 UNKNOWN; do not perform an energized fault test. OEM-specific DOC-CONFIRMED source, not an OpenPressBrake installed indicator, no new score or release.

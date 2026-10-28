@@ -1,6 +1,6 @@
 # Practical Machine Safety Engineering — Learner Navigation
 
-This is the concise navigation surface for the 2500 safety course. `../SAFETY_COURSE_RESEARCH.md` remains the broad research/course plan; this index points learners to mature course artifacts without duplicating that plan.
+This is the full archival learner navigation surface for the 2500 safety course. For a fast role-based entry without losing this source history, start at [the two-minute safety-course entry card](SAFETY_COURSE_ENTRY_CARD_2026-10-28.md). `../SAFETY_COURSE_RESEARCH.md` remains the broad research/course plan; this index points learners to mature course artifacts without duplicating that plan.
 
 ## Current sequence
 

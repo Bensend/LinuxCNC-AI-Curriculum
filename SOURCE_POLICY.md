@@ -50,3 +50,7 @@ For each subsystem:
 ## Public Repository Boundary
 
 This repository contains generic/public LinuxCNC research. Do not copy proprietary machine drawings, private OpenPressBrake design material, credentials, private infrastructure details, or other confidential material into this public repository.
+
+## 2026-10-28 — PDF edition/provenance conflict in rendered original-OEM sources
+
+A manufacturer URL and search-result edition string are not a guarantee that every retrieved/rendered PDF page belongs to a single immutable revision. During [SAFE-RESTORE-01 SICK source inspection](research/4400_SAFE_RESTORE_01_SICK_ACR_PILZ_FACTORY_RESET_FORENSIC_AND_POSITION_RETEACH_SOURCE_AUDIT_2026-10-28.md), the original SICK Flexi Soft PDF web-rendered printed page footers displayed **different edition/date strings** (8012478/1T57/2025-07-30 and 8012478/1WLY/2026-05-05). The cause (source assembly, viewer cache or retrieval variation) is **UNKNOWN**. For edition-sensitive safety conclusions, record the exact manufacturer URL, document number, printed page/section, page-image observation, retrieval date, and a byte hash when a stable complete file can actually be retained. Do not silently assign a single edition or claim a firmware/functional delta from inconsistent page metadata. The cited functional sentences may remain **DOC-CONFIRMED at the observed page**, but the whole-document edition is unresolved until checked against one immutable file. This is a provenance method correction, not evidence of an installed-machine fault.

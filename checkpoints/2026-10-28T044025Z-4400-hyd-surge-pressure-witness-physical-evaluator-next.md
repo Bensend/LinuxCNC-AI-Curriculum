@@ -1,0 +1,18 @@
+# 2026-10-28T04:40:25.963Z — HYD-SURGE-01 safety curriculum continuation checkpoint
+**Session start marker:** [durably committed before research](2026-10-28T044025Z-session-start.md). **Active:** safety course / 4400. Supersedes 2026-10-28T03:31Z HYD-DYN-01 for next-work selection; preserve all earlier evidence.
+
+## Work and exact delta
+- [Original Parker/HSE source audit](../research/4400_HYD_SURGE_01_PARKER_GS4_PEAK_PRESSURE_GAUGE_BLIND_SPOT_AND_TEST_RIG_SAFETY_SOURCE_AUDIT_2026-10-28.md) and [technician card](../safety-course/4400_HYD_SURGE_01_PRESSURE_SPIKE_VS_GAUGE_AND_SAFE_TEST_ZONE_TECHNICIAN_CARD_2026-10-28.md) distinguish a **correctly located but time-insensitive pressure gauge** from a **wrong-port pressure witness** and a **correctly rated but unverified assembly**. Parker 4400-B.1 §2.2, original manufacturer PDF updated 2024-06-06, expressly says a mechanical gauge cannot establish surge peaks and burst rating is not allowable working pressure; lowest hose/fitting working rating governs. Original PDF pp. 3 and 5 visually inspected. HSE GS4 fourth edition 2012 establishes a separate pressure-test hazard: fitting missiles, hose whip, injection, remote/segregated testing and worn connector risk.
+- Predecessor scan: 2026-10-24 INJ-01 already covers pinhole injection/trapped pressure; 2026-10-26 HOSE-ROUTE-01 already covers routing and pressure surges as selection input; 2026-10-27 HYD-CUSH-02 already covers internal isolated pocket; 2026-10-28 HYD-DYN-01 covers abrupt burst-valve arrest. **No duplicate discovery, new unscored bank or generic numerical test acceptance invented.**
+- Integrated into CURRICULUM, PROGRESS, SAFETY_COURSE_RESEARCH, learner index and cumulative Safety Design Package §11KE. Document-only link checks, if performed, do not count as physical validation.
+- **DOC-CONFIRMED** scoped Parker and HSE documents. **INFERENCE** monitoring and test-station design. **UNKNOWN** OpenPressBrake installed hose, peak pressure, pressure sensor topology, safety program, Y1/Y2 stop/hold, guard/restart, pressure-test fixture and qualified independent evaluator. **TEST-CONFIRMED none.**
+- **1000/2000/F02/finished 3000 GRADUATED/CLOSED**. External 2520–25F0 evaluator remains OPEN/NOT RUN. **G0/G1 HOLD; G2 NOT RUN; G3/G4 NOT AUTHORIZED; G5 HOLD.**
+- **GitHub-hosted compute 0; self-hosted compute 0.** No workflow, lab, build, simulation, benchmark, physical test or independent evaluation. LAB_COMPUTE_LOG and FEEDBACK_SCORE_LOG unchanged.
+
+## Next-work order
+1. Check genuinely new **restricted qualified OpenPressBrake Stage A A–G** evidence for installed Pilz/AKAS active program/CRC, Y1/Y2 final hydraulic elements, pressure zones, actual independent stop/gravity hold, guard/muting and deliberate fresh restart. If hose/peak evidence exists, distinguish **static pressure**, **correct-volume dynamic peak**, **assembly working rating**, **safe pressure-test fixture**, and **physical holding**; no unqualified test.
+2. Preserve independent information-separated 2520–25F0 evaluator and sealed challenge answers; no self-score.
+3. If physical/evaluator gate remains blocked, rotate to the highest-value unworked 4400 safety source question after predecessor/index scan; prefer a new physical/authority discriminator, not another paper bank.
+4. Use only local self-hosted [self-hosted, openpressbrake] for **justified** bounded compute when dispatchable; no hosted fallback. Do not invent runtime in LAB_COMPUTE_LOG.
+
+**No personnel-exposed hazardous operation authorized.** Session UTC end and actual elapsed minutes belong in a safe append to the complete LESSON_LOG immediately before finishing.

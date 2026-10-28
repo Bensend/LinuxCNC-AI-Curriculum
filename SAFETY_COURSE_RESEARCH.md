@@ -1177,3 +1177,5 @@ Pinned LinuxCNC v2.9.10 [source trace](research/4400_LIM_01_LINUXCNC_2910_SHARED
 **RUNNER-BOUNDARY-01 direct-script discriminator:** historical 056/079 contain privileged LinuxCNC build/load operations; only directly inspected pure-software 086–089 are now on the local manual lab allowlist. Code-search zero was not evidence of script absence. No runtime/physical isolation proof; G43.2 simulation remains NOT DISPATCHED.
 
 **RUNNER-BOUNDARY-01 adversarial guard:** exact reviewed Git blob SHA pinning added for 086–089; path-only allowlist could otherwise accept unreviewed edits with a newly entered hash. No machine or runtime proof.
+
+**RUNNER-BOUNDARY-01 source supply-chain refinement:** all four workflows now pin official checkout/upload-artifact v4 refs to inspected immutable commit SHAs; no job run and no physical isolation proof.

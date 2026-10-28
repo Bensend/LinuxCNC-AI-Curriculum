@@ -20,3 +20,9 @@ Next: check qualified restricted Stage A A–G and external evaluator results; i
 **Paired-axis source delta:** negative `HOME_SEQUENCE` coordinates final homing readiness, but `sync_ready` skips absolute-encoder members in one comparison. Normal synchronization != independent Y1/Y2 physical safety or alignment witness; mixed-reference runtime UNKNOWN.
 
 **Master version check:** `5a3d2f7a9baa281f9beeca703305787a8138830b` `emctask.cc` blob `c9772a266db9a71a6073435003de5a6097877211`, `homing.c` blob `adec003afe19a0ea0eae3c565c9d4bb708a0a5e6` retain the relevant conditional volatile-home, sync and final-velocity source patterns. No runtime test.
+
+## End-of-work integrity and information-gain review (before LESSON_LOG final append)
+- Checked targeted internal links in both original research/field-card/checkpoint groups and the composition matrix: 4 + 7 + 3 relative-link occurrences; **zero missing**. Canonical append paths were constructed relative to their actual directories. This is document integrity, not machine validation.
+- Re-read evaluator-facing 2520 and 25F0 information-separated handoff contracts (not hidden answers) and unchanged FEEDBACK_SCORE_LOG SHA `0d35aaa626f99b6f753ddbb8b0c61f641802bbe1`; no external score/retention result. OpenPressBrake public main unchanged `92cf5424be90f45f664ba2652dc725b38e1895f9`.
+- Two distinct high-information source traces plus one combined safety-authority matrix are durable; source ambiguities (stale v2.9 Code Notes, asynchronous unhome timing, mixed absolute-encoder readiness) remain explicitly bounded. Further source exploration now risks expanding the same branch without new independent physical evidence; rotate next invocation to fresh selected-machine evidence/evaluator first, then a distinct safety branch. No need for a speculative lab.
+- Compute ledger unchanged: **hosted 0 / local 0** in this session. No workflow or physical test. Machine G0/G1 HOLD.

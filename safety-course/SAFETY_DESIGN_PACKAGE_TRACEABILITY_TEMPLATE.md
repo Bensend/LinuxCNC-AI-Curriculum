@@ -2040,3 +2040,6 @@ Use the [12-case paper-only composition matrix](4400_LIM_POS_TRUST_01_RECOVERY_A
 
 
 **11LB practical mitigation scope:** source-confirmed nonmodal G53 can express explicit machine-coordinate waypoints and reduce dependence on hidden G28/G30 reference parameters in ordinary control. Separately order qualified clearance legs; combined G53 G0 XYZ is not Z-first. Still not physical home, safe access or independent protective stopping.
+
+
+**11LB stored-reference witness scope:** tagged `Interp::convert_savehome` derives G28.1/G30.1 coordinates from interpreter `current_*` and offsets, not an independent physical sensor. A stored “current position” is not verified clearance or position trust. No claim of actual encoder error or selected-machine failure.

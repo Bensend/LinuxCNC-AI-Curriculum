@@ -38,3 +38,7 @@ Source checked tagged `Interp::find_ends` G53 branch and official G53 nonmodal m
 
 
 **Actions runtime cross-check:** latest ten workflow runs returned by repository API as of 2026-10-28T19:43Z were historical; newest created 2026-10-23T07:49:58Z. No current-session run appeared. No hosted/self-hosted compute used; no LAB_COMPUTE_LOG row.
+
+
+## Reference-save source precision
+Inspected tagged `Interp::convert_savehome`: G28.1/G30.1 persist coordinates calculated from interpreter `current_*` and offsets, with no independent physical sensor in that function. No universal claim that normal current position is wrong; physical trust still requires separate evidence. Added to G28 audit/card and design, linked POS-TRUST predecessor.

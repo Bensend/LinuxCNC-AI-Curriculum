@@ -23,3 +23,6 @@
 
 
 **More inspectable normal-control pattern:** official G53 is nonmodal and explicitly addresses machine coordinates; a qualified machine-specific program can use **separately ordered** G53 G0 clearance legs rather than depending on hidden G28/G30 reference parameters. But `G53 G0 X0 Y0 Z0` is still a combined rapid, **not** automatically Z-first, and G53 does not prove physical position trust or independent personnel safety. Never copy illustrative coordinates into a machine without validating its real clearance envelope.
+
+
+**G28.1/G30.1 do not physically measure a safe point:** tagged `convert_savehome` computes persistent reference values from interpreter `current_*` and offsets. It does not independently sample a safety encoder, verify a mechanical stop, or prove that a tool/fixture clearance pose is safe. Do not use “saved current position” as a physical witness.

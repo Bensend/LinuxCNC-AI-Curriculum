@@ -1443,3 +1443,6 @@ Rotated from G38-PROBE-EDGE-01 after a genuine source information-gain stop. Dir
 
 
 **Local-compute governance guard (same session):** [workflow trigger inventory](research/4400_LOCAL_COMPUTE_RUNNER_TRIGGER_GUARD_AUDIT_2026-10-28.md) found historical `lab-runner.yml` manual/push `ubuntu-latest` and `append-lab-compute.yml` push `ubuntu-latest`; existing lesson-log append and PB-DXF-001 workflows target `[self-hosted, openpressbrake]`. No hosted workflow trigger path was touched, no workflow dispatched, and local runner availability remains **UNKNOWN**. Updated WORK_SELECTION_POLICY to prevent accidental hosted dispatch/push and require question-driven bounded self-hosted conversion only when justified. **GitHub-hosted compute 0 min; self-hosted compute 0 min.**
+
+
+**Reference-save precision:** `Interp::convert_savehome` v2.9.10 computes G28.1/G30.1 persistent positions from interpreter `current_*` and offsets; no independent physical position/guard witness in that function. This does not prove the normal position is erroneous, only that saving it is not physical trust validation. Existing POS-TRUST-01 boundary preserved; no test.

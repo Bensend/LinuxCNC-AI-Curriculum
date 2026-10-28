@@ -15,6 +15,9 @@ Can a well-intentioned field change that quiets a relay/contactor coil extend th
 
 **No manufacturer contradiction is asserted.** Pilz addresses protecting the upstream relay contacts from inductive switching damage; Schneider describes a potential *downstream contactor release-time penalty*. Both effects can coexist. Which suppressor is appropriate depends on exact coil/driver/safety design and manufacturer approval; do not replace or remove protection by rule of thumb.
 
+## Additional OEM timing discriminator: safety relay internal release is not a fixed constant
+The **same original Pilz PNOZ 1 manual** has a separate `Delay-on de-energisation` table (printed p.23) for order numbers **775630, 775650 and 775695**. For these exact order numbers, the table gives **maximum 400 ms** with E-stop when duty cycle is **<6 s**, **maximum 30 ms** when duty cycle is **≥6 s**, and **maximum 400 ms** on power failure. These are *device/condition-specific published maxima*, not an OpenPressBrake stop-time claim. They must not be added blindly to Schneider's *relative* 6–10× suppressor ratio: the devices, conditions, measurement boundaries and any timing overlap differ. This illustrates why a safety response-time argument must name each installed device and event path, rather than assuming all OFF paths share one delay.
+
 ## Causal path: distinguish five independent stages
 1. A protective device requests stop. The **independent safety controller** evaluates the input and removes the relevant safety-output permission. Normal LinuxCNC/FPGA may observe the request but must not own the personnel-safety decision.
 2. The safety-output contacts/semiconductors open. Their *own* reaction and release times depend on exact product, supply, mode and conditions. **A safety-output OFF bit is not the coil current waveform.**

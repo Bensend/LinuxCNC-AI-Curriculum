@@ -16,3 +16,8 @@
 4. Use only local self-hosted [self-hosted, openpressbrake] for **justified** bounded compute when dispatchable; no hosted fallback. Do not invent runtime in LAB_COMPUTE_LOG.
 
 **No personnel-exposed hazardous operation authorized.** Session UTC end and actual elapsed minutes belong in a safe append to the complete LESSON_LOG immediately before finishing.
+
+## Same-session source/evidence integrity follow-through
+- Checked **10 relative links across 3 new artifacts / 7 unique existing targets; zero broken**. These are documentary integrity checks only, not physical or blind evaluation.
+- Rechecked published `Bensend/OpenPressBrake` main: `92cf5424be90f45f664ba2652dc725b38e1895f9`, authored **2026-09-24T13:23:20Z**, still the latest public head returned. No new qualified installed-machine Pilz/AKAS, Y1/Y2, hydraulic pressure, guard or restart evidence can be inferred from that public commit.
+- Short-session continuation: rotated from the blocked qualified physical/evaluator gate to exact Parker pressure-instrument/source depth, then original HSE GS4 pressure-test-fixture failure paths, repository predecessor reconciliation, link audit and current cross-repository head check. No simulation/lab was justified by an unresolved quantitative question; runner dispatch not attempted and no hosted fallback.

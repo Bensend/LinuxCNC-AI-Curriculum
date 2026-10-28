@@ -1926,3 +1926,17 @@ Use the [12-case paper-only composition matrix](4400_LIM_POS_TRUST_01_RECOVERY_A
 **§11KR/11KS final-homing-move addendum:** pinned v2.9.10 `homing.c` final move uses `HOME_FINAL_VEL` if positive (clamped) or joint `vel_limit` otherwise. The normal-control planner setting does not establish safety-limited speed or safe-to-access motion. Include final return in the qualified stop/hold/guard witness scope; selected physical evidence UNKNOWN/NOT RUN.
 
 **§11KR/11KS paired-joint source scope:** pinned v2.9.10 negative `HOME_SEQUENCE` final-move readiness is ordinary LinuxCNC synchronization; `sync_ready` excludes absolute-encoder members from its state comparison. It does not establish independent Y1/Y2 safe alignment, safe stop or load holding. Selected topology/validation UNKNOWN.
+
+
+## 11KT — RST-UVR-01 voltage-dip trip eligibility, anti-pumping and remote breaker close (2026-10-28)
+[Original Schneider NSXm/MTZ OEM source audit](../research/4400_RST_UVR_01_SCHNEIDER_MN_MX_DELAY_ANTIPUMP_REMOTE_RESET_SOURCE_ADDENDUM_2026-10-28.md) → [qualified technician card](4400_RST_UVR_01_BREAKER_ANTIPUMP_IS_NOT_SAFE_RESTART_TECHNICIAN_CARD_2026-10-28.md). This is an **exact accessory and electrical-close-state extension** to RST-01 §11CM and COORD-01 §11KH, not a new reset hazard. **DOC-CONFIRMED:** named NSXm MN voltage band and optional transient-dip delay, powered MX shunt trip, MTZ mechanical anti-pumping, RAR/RES fault reset, MCH spring charge, PF ready and XF close. **INFERENCE:** a subsequent electrical closing edge or control-power recovery could energize a circuit despite a mechanically anti-pumping breaker unless independent safety reset and new normal cycle start are assured. **UNKNOWN** selected OpenPressBrake breaker/options and actual response; no NSXm numerical threshold or delay transferred.
+
+| Trace | Qualified selected-machine proposition | Status |
+|---|---|---|
+| **BND/HAZ-UVR-01** | Exact control-power domains, hazardous load/ram/guard access and consequence of dip, trip, reclose and stored energy | UNKNOWN |
+| **ARC/AUTH-UVR-02** | Installed MN/MX/time delay/XF/RES/RAR/PF/MCH option identity and wiring; independent Pilz/AKAS/EDM owner distinct from ordinary LinuxCNC/FPGA | UNKNOWN |
+| **SRS/DEP-UVR-03** | Selected SRS stop/hold/rearm timing; no assumption that optional undervoltage delay is safe; actual breaker main contacts and physical hydraulic/structural final elements | UNKNOWN |
+| **PHY/VAL-UVR-04** | Qualified isolated/remote power-dip/return, held-close, fault-reset, new-close and independent Y1/Y2 stop/hold/guard witness against selected SRS | NOT RUN |
+| **HF/CHG-UVR-05** | Distinct trip/reset/ready/close/fresh-start status and easy fault recovery; requalify changed accessory/delay/control supply/remote-close wiring | UNKNOWN |
+
+**No personnel-exposed operation, new paper exam, physical test, numerical PL/SIL/stop-time or hosted/local compute.** Existing Stage A A–G and RST-01 blank witness remain the intake. **G0/G1 HOLD; G2 NOT RUN; G3/G4 NOT AUTHORIZED; G5 HOLD; external evaluator OPEN.**

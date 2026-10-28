@@ -1967,3 +1967,17 @@ Use the [12-case paper-only composition matrix](4400_LIM_POS_TRUST_01_RECOVERY_A
 | **CHG-PM-05** | Similar 3UG5 variant substituted, suffix changes safety claim | Exact -..R21 safety data, approved substitution and revalidation | UNKNOWN |
 
 **DOC-CONFIRMED** manufacturer-specific behavior, **INFERENCE** topology transfer, **UNKNOWN** installed OpenPressBrake relay/pump and independent physical witness. Siemens 2025 example's SIL 1/PL c is *not* a selected press-brake safety-function rating. **No live phase swap, jog, or test**, zero hosted/self-hosted compute; G0/G1 HOLD and evaluator NOT RUN.
+
+### 11KW — Buffered control 24 V does not establish isolated actuator or gravity-safe ram (2026-10-28)
+[Original Pilz/Phoenix/Rockwell power-domain audit](../research/4400_PWR_UPS_01_PILZ_PHOENIX_ROCKWELL_SEPARATE_24V_DOMAINS_AND_BUFFERED_POWER_AUDIT_2026-10-28.md) → [qualified technician card](4400_PWR_UPS_01_CONTROL_ALIVE_IS_NOT_ENERGY_ISOLATED_TECHNICIAN_CARD_2026-10-28.md). Extend **PWR/ENE/DEP/PHY/RST/CHG** without adding another G0 owner form. Pilz B0 control/input and semiconductor-output feeds have distinct documented conditions, Phoenix 24 V UPS can outlive mains, and Rockwell MOD/SA/LA power segregation can affect actual load behavior. **Exact manufacturer DOC-CONFIRMED; installed topology UNKNOWN.**
+
+| Trace | Safety proposition / credible conditional failure | Selected-machine proof required | Gate |
+|---|---|---|---|
+| **ELE/PWR-UPS-01** | IPC/HMI stays alive after mains or pump supply drops | All as-built AC/DC/UPS/battery sources, branches, fuses and isolation points; not HMI status | UNKNOWN |
+| **ELE/DEP-UPS-02** | Safety logic supply and semiconductor-output supply lose/return power separately | Exact selected controller manual, terminal map, supply monitoring and selected fault response | UNKNOWN |
+| **ENE/PHY-UPS-03** | A control/output OFF status does not prove load voltage, valve state or ram hold | Physical final-element voltage/feedback and independently qualified Y1/Y2 stop/gravity holding | NOT RUN |
+| **RST/SRS-UPS-04** | Buffered command or automatic reboot survives loss/return of other power | Independent safety rearm, area-clear and separate fresh normal-cycle start | HOLD |
+| **LOTO/CHG-UPS-05** | Main AC isolator open while UPS/battery circuit remains live | Label/lockable isolation of every source, stored energy, selected maintenance sequence | UNKNOWN |
+| **CHG-UPS-06** | PSU/UPS substitution changes tolerance, buffer or separation | Exact SKU, OEM wiring, SELV/PELV, revalidation and configuration record | UNKNOWN |
+
+**INFERENCE** conditional cross-domain effects; **TEST-CONFIRMED none**; no selected power diagram, safety program, physical proof or evaluator. No numeric PL/pressure/stop-distance inferred. No live fuse pull, mains interruption, simulation or hosted/self-hosted compute. **G0/G1 HOLD; G2 NOT RUN; G3/G4 NOT AUTHORIZED; G5 HOLD.**

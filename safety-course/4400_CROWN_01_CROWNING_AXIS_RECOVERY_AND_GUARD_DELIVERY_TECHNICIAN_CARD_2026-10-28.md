@@ -38,3 +38,15 @@ Read the [original Haas/WILA/eCFR source audit](../research/4400_CROWN_01_HAAS_W
 - Does “no crowning axis” close this hazard? **Only with dated as-built proof**, and it does not close ram, tooling or guarding hazards.
 
 **Source status:** DOC-CONFIRMED exact OEM and eCFR text; INFERENCE safe-design implications; UNKNOWN selected machine; no physical validation, TEST-CONFIRMED result or independent evaluator. **G0/G1 HOLD; G2 NOT RUN; G3/G4 NOT AUTHORIZED; G5 HOLD.** If minimum safe-to-operate protection cannot be demonstrated, do not operate with people exposed. Any experimental activity must be qualified, isolated/remote, with all personnel outside the danger zone and residual risk documented.
+
+
+## Non-executable recovery-state contract (engineering proposal, not OEM logic)
+| Review state | Entry evidence | Permitted *documentary* next step | What must NOT follow automatically |
+|---|---|---|---|
+| CROWN-NORMAL | Exact installed V/crown and tool-clamp type, guard/feedback/reference confirmed | Preserve normal-control/safety boundary and current change record | A normal V-position does not authorize personnel access |
+| CROWN-DISAGREE | Actual sensor, display, or commanded direction inconsistent | Mark feedback/reference **STALE**, identify qualified service owner and affected dependencies | No repeated jog, no auto-retry or assumption that ordinary limit protects |
+| CROWN-HARDSTOP-UNKNOWN | Secondary limit reached or position identity lost | **SERVICE HOLD**; obtain selected OEM safety circuit and approved isolation/recovery plan | No generic reset, cabinet contactor actuation, or bypass inferred from manual text |
+| CROWN-SERVICE-ISOLATED | Qualified team has separately documented physical isolation, gravity/tool support and personnel protection | Only qualified approved servicing; if a later energized positioning task is unavoidable, apply the actual jurisdiction/site controlled procedure | No release of G0/G1 or re-energization by this paper card |
+| CROWN-REQUALIFICATION-HOLD | Service has ended but sensors, guards, tools, drive phase or reference may have changed | Reconcile `CHG/DEP/PHY/VAL/PT`, independent protective function and deliberate fresh-start requirements | No automatic production rearm merely because the display changes or limit clears |
+
+**Source-integrity nuance:** Haas's 2026 troubleshooting chapter also gives broad startup/reset advice before troubleshooting, while the same manual's safety chapter prohibits operation with malfunctioning components. Read the general instruction in its qualified diagnostic context, **not** as an instruction to clear E-stops and restart whenever a protective device or physical position is uncertain. The manual's §7.1 hydraulic symptom table also contains wording about a material pusher/collet whose applicability to the cited press-brake models is **UNKNOWN**; do not transpose that row into a press-brake fault or maintenance procedure without OEM confirmation. These are documentation-scope cautions, **not** findings of a proven manufacturer hardware defect.

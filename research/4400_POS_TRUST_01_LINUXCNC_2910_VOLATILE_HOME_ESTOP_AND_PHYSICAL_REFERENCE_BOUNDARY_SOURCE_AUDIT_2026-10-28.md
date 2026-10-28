@@ -31,3 +31,6 @@ After an ordinary LinuxCNC Machine OFF or E-stop, does the UI's `homed` status p
 
 ## Evidence gate / no-compute decision
 **SOURCE-CONFIRMED:** exact v2.9.10 paths above. **DOC-CONFIRMED:** pinned homing/config descriptions. **INFERENCE:** safety allocation and operator workflow. **TEST-CONFIRMED:** none. **UNKNOWN:** selected machine's LinuxCNC revision, homing parameters, encoder retention, actual displacement, independent Pilz/AKAS program, Y1/Y2 final elements, physical holding, guarding and rearm. Source resolves the intended software behavior and exposes a conditional all-or-none branch; an unbounded runtime or physical test is not justified solely to turn a documentation lesson green. If later machine-specific behavior materially depends on asynchronous state timing, freeze a bounded **software-only** question and use the self-hosted [self-hosted, openpressbrake] runner if dispatchable; no hosted compute. **G0/G1 HOLD; G2 NOT RUN; G3/G4 NOT AUTHORIZED; G5 HOLD.** Independent 2520–25F0 competency evaluation OPEN.
+
+## Immutable upstream revision identity
+The pinned `v2.9.10` annotated tag `4e7abeab3e764a42ef9def932333a1d4004e547b` resolves to LinuxCNC **commit `86cdca76fa2a36274c432caa21952b23c267989a`** (tagged 2026-07-02 UTC). File blob hashes above were fetched at this tag. No physical or runtime test was performed.

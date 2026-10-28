@@ -16,3 +16,7 @@
 2. Information-separated independent 2520–25F0 evaluator dispatch under existing handoffs; public 25E0 scenario may be contaminated, require a novel unseen challenge where necessary. Do not self-score.
 3. If neither gate has new evidence, select a genuinely new high-consequence 4400 safety mechanism with canonical index/research/progress/design predecessor check. Do not repeat G38 or manufacture unscored exercises.
 4. Immediately before ending, append complete `LESSON_LOG.md` from verified blob SHA, record UTC end, actual elapsed, same-curriculum overlap relative to prior end `2026-10-28T18:48:52.128Z` and other-automation overlap UNKNOWN, commit and verify. Keep recurring curriculum enabled.
+
+
+## Same-session source-depth continuation
+Inspected original v2.9.10 simulated GladeVCP `probe.ngc` and manual tool-change `manual_change.ngc` with exact blob SHAs. Both use G38.3 and `#5070`; the first then updates work offsets via `G10 L20`, the second computes tool length via `#5063`/`G43.1`. This demonstrates concrete upstream *consumer* paths for the static prestate issue, not a measured failure or safety function. No experiment needed; no new machine-specific facts. Confirm relative links and finish with safe log append.

@@ -1298,3 +1298,7 @@ Read the [v2.9.10 G43.2 axis-word versus inherited G0/G1 source audit](../resear
 
 
 **4400-TLO-M1XX-COMPOSE-01 cross-boundary review (2026-10-28):** [Unverified script/tool action → ambiguous compensation/motion](4400_TLO_M1XX_COMPOSE_01_UNVERIFIED_TOOL_ACTION_TO_OFFSET_MOTION_FAILURE_PATH_2026-10-28.md) is a **paper-only causal integration**, not a new graded module. SOURCE-CONFIRMED component paths; composite physical event INFERENCE/NOT TESTED; G0/G1 HOLD, evaluator OPEN.
+
+
+### 2026-10-28 — 4400-RUNNER-BOUNDARY-01: local runner is not disconnected machinery
+Read [exact workflow/official-source research](../research/4400_RUNNER_BOUNDARY_01_LOCAL_PANEL_PC_WORKFLOW_ISOLATION_AND_HOSTED_COMPUTE_ELIMINATION_AUDIT_2026-10-28.md) and [technician field card](4400_RUNNER_BOUNDARY_01_SELF_HOSTED_DOES_NOT_MEAN_DISCONNECTED_FIELD_CARD_2026-10-28.md) after the [19:32Z legacy hosted-trigger audit](../research/4400_LOCAL_COMPUTE_RUNNER_TRIGGER_GUARD_AUDIT_2026-10-28.md). **Implemented:** manual-only local lab, reviewed script SHA and explicit disconnected-simulation attestation; lab-compute append moved off hosted. **Crucial authority boundary:** self-hosted label, checkbox and workflow success cannot prove physical machine isolation, independent safety stop/hold or guarding. No job dispatched, no compute, runner availability and isolation UNKNOWN. G0/G1 HOLD; independent 2520–25F0 evaluator OPEN.

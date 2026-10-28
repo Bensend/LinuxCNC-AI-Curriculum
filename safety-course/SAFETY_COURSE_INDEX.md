@@ -1281,3 +1281,6 @@ Read [original Pilz/Phoenix/Rockwell source audit](../research/4400_PWR_UPS_01_P
 
 
 **2026-10-28 ATC-01 M61 follow-through:** [Existing tool-retention module now includes exact pinned M61 source addendum](4400_ATC_01_TOOL_RETENTION_DRAWBAR_PNEUMATIC_RELEASE_AND_SERVICE_MODULE_2026-10-25.md): `EMC_TOOL_SET_NUMBER` changes ordinary current-tool identity without actual tool change, G43 tool-length update, clamp-force proof or independent guard. No new module or examination bank, no physical test, G0/G1 HOLD; §11LE.
+
+
+**2026-10-28 operator state wording synthesis (not a new module):** [Safety Design Package §11LF](SAFETY_DESIGN_PACKAGE_TRACEABILITY_TEMPLATE.md) combines the M67/M68, M70/M72/M73 and M61 source traces into explicit REQUESTED, OBSERVED, SAFETY-PERMITTED and PHYSICALLY VERIFIED labels. A normal setpoint, modal state or tool number is never a personnel-safety witness. Human-factors proposal **INFERENCE / NOT TESTED**, no new exam, owner questionnaire or compute. G0/G1 HOLD.

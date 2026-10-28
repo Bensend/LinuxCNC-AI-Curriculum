@@ -31,3 +31,7 @@ Tagged Task `all_homed`, MDI/Auto checks and `NO_FORCE_HOMING` INI parsing inspe
 
 ## G53 inspectability alternative
 Source checked tagged `Interp::find_ends` G53 branch and official G53 nonmodal machine-coordinate docs. A separately ordered, qualified machine-specific G53 normal retreat is easier to inspect than hidden mutable G28/G30 references, but is not collision-proof or independent safety; a combined G53 rapid is not Z-first. Integrated into G28 audit/card and cross-boundary review. No test, coordinates or machine claims.
+
+
+## Same-session local-compute workflow guard
+[Workflow trigger audit](../research/4400_LOCAL_COMPUTE_RUNNER_TRIGGER_GUARD_AUDIT_2026-10-28.md) directly identified two **legacy hosted** paths: `lab-runner.yml` (`ubuntu-latest`, manual + push on lab-jobs/workflow YAML) and `append-lab-compute.yml` (`ubuntu-latest`, push on append-request file). No trigger paths touched or jobs dispatched. `append-lesson-log.yml` and `pb-dxf-001.yml` use self-hosted label, but runner access UNKNOWN. Added WORK_SELECTION_POLICY guard against hosted dispatch/fallback; do not run a lab merely to check access. No LAB_COMPUTE_LOG change.

@@ -1439,3 +1439,7 @@ Rotated from G38-PROBE-EDGE-01 after a genuine source information-gain stop. Dir
 
 
 **Normal-control alternative source review:** tagged `Interp::find_ends` G53 branch plus official nonmodal G53 docs support explicit machine-coordinate waypoints as a more inspectable **normal-control** option than mutable G28/G30 references. Separate ordered legs may be needed; combined G53 rapid is not automatic Z-first, and no independent safety or selected coordinates are proven. No lab/compute.
+
+
+
+**Local-compute governance guard (same session):** [workflow trigger inventory](research/4400_LOCAL_COMPUTE_RUNNER_TRIGGER_GUARD_AUDIT_2026-10-28.md) found historical `lab-runner.yml` manual/push `ubuntu-latest` and `append-lab-compute.yml` push `ubuntu-latest`; existing lesson-log append and PB-DXF-001 workflows target `[self-hosted, openpressbrake]`. No hosted workflow trigger path was touched, no workflow dispatched, and local runner availability remains **UNKNOWN**. Updated WORK_SELECTION_POLICY to prevent accidental hosted dispatch/push and require question-driven bounded self-hosted conversion only when justified. **GitHub-hosted compute 0 min; self-hosted compute 0 min.**

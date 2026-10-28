@@ -57,14 +57,25 @@ jobs:
           # Any new hardware-capable job requires a separately reviewed workflow
           # change AND qualified physical isolation outside GitHub.
           case "$JOB_FILE" in
-            lab-jobs/086-pb-dxf-002-human-confirmation-recipe.sh|\
-            lab-jobs/087-pb-dxf-003-gaugeplan-provenance.sh|\
-            lab-jobs/088-pb-dxf-004-targetset-provenance.sh|\
-            lab-jobs/089-pb-bg-004-targetset-runtime-episode.sh) ;;
+            lab-jobs/086-pb-dxf-002-human-confirmation-recipe.sh)
+              REVIEWED_BLOB="d2e64a3d8986a155dd09954774abf93902627a71" ;;
+            lab-jobs/087-pb-dxf-003-gaugeplan-provenance.sh)
+              REVIEWED_BLOB="2b89eaf26f01169ebb813df5891ddca6825fea5d" ;;
+            lab-jobs/088-pb-dxf-004-targetset-provenance.sh)
+              REVIEWED_BLOB="c7485eec76eee76af5b75a7e3565e3fd7836aa21" ;;
+            lab-jobs/089-pb-bg-004-targetset-runtime-episode.sh)
+              REVIEWED_BLOB="d75abc7ced3bf7e52f10a232b4b1c9f19daaec6e" ;;
             *) echo "Job is not on the reviewed pure-software allowlist." >&2; exit 3 ;;
           esac
           if [[ ! -f "$JOB_FILE" || -L "$JOB_FILE" ]]; then
             echo "Job missing or symlink; refusing." >&2; exit 2
+          fi
+          # Pin the exact reviewed Git blob; an operator-supplied hash alone
+          # could otherwise authorize an unreviewed edit to an allowed path.
+          actual_blob="$(git hash-object -- "$JOB_FILE")"
+          if [[ "$actual_blob" != "$REVIEWED_BLOB" ]]; then
+            echo "Allowed path has unreviewed content; refusing." >&2
+            exit 7
           fi
           # This is only a path check. It does NOT prove the PC is physically isolated.
           root="$(realpath lab-jobs)"

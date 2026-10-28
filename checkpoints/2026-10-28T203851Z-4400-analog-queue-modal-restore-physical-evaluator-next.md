@@ -20,3 +20,5 @@
 4. Immediately before next session end, safely append **complete** LESSON_LOG with verified blob SHA, UTC end, actual elapsed minutes, overlap status; do not replace from a truncated fetch. Keep recurring automation enabled.
 
 **Same-curriculum overlap at start:** previous session ended 2026-10-28T19:45:10Z, current began 20:38:51Z (**53 min 41 sec gap**, no known overlap). Other automation overlap UNKNOWN.
+
+**Same-session M73 return-path precision:** direct LinuxCNC v2.9.10 `interp_o_word.cc` blob `0cff00ad7316411a55b58d1be4449d04cab79922` confirms normal NGC O-word/M98 returns call `leave_context(...,true)` and restore only when valid+autorestore flags are present; inspected Python/remap return paths call `leave_context(...,false)`. Do not generalize M73 autorestore to every subroutine mechanism or abort. Source audit and field card updated.

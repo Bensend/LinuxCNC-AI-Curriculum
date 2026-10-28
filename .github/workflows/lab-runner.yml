@@ -52,9 +52,16 @@ jobs:
             echo "No qualified disconnected-simulation attestation; refusing." >&2
             exit 10
           fi
+          # Fail closed: only reviewed pure-software state fixtures are permitted.
+          # Historical lab-jobs include sudo/build and LinuxCNC loadrt paths.
+          # Any new hardware-capable job requires a separately reviewed workflow
+          # change AND qualified physical isolation outside GitHub.
           case "$JOB_FILE" in
-            lab-jobs/*.sh) ;;
-            *) echo "Refusing non-lab job path." >&2; exit 3 ;;
+            lab-jobs/086-pb-dxf-002-human-confirmation-recipe.sh|\
+            lab-jobs/087-pb-dxf-003-gaugeplan-provenance.sh|\
+            lab-jobs/088-pb-dxf-004-targetset-provenance.sh|\
+            lab-jobs/089-pb-bg-004-targetset-runtime-episode.sh) ;;
+            *) echo "Job is not on the reviewed pure-software allowlist." >&2; exit 3 ;;
           esac
           if [[ ! -f "$JOB_FILE" || -L "$JOB_FILE" ]]; then
             echo "Job missing or symlink; refusing." >&2; exit 2

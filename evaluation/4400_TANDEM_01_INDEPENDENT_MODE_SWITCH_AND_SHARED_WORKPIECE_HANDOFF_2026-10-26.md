@@ -9,3 +9,7 @@
 **Score independently** for correctness, evidence precision, dangerous assumptions, diagnostic efficiency, and uncertainty handling. Record external result in `evaluation/FEEDBACK_SCORE_LOG.md` only after actual valid blind scoring. Perform novel transfer and delayed retention separately. A public TAN-P case, a self-score, or an unexecuted documentary gate cannot become TEST-CONFIRMED or a graduated safety competency.
 
 **Status:** evaluator PREPARED / NOT RUN; twelve paper cases UNSCORED; twelve documentary gates NOT RUN; G0/G1 HOLD. No hardware test or Actions compute.
+
+
+## 2026-10-28 evaluator source update — no pre-exposure to hidden answer
+An evaluator may additionally consult the [original Cincinnati EM-519 master/slave light-guard and diagnostic-tonnage source delta](../research/4400_TANDEM_02_CINCINNATI_MASTER_ONLY_LIGHT_GUARD_SLAVE_FOOTSWITCH_AND_TONNAGE_DISPLAY_SOURCE_DELTA_2026-10-28.md) **after** deciding an independently unseen scenario. The public OEM source says a slave-connected light guard is inactive in **its** tandem mode, while slave E-stop remains an active control and diagnostic tonnage may differ from actual short-bend force. This is public background, **not** a sealed answer or a universal truth table. The evaluator must choose a different, genuinely unseen mode/guard/physical-load configuration and withhold decisive facts/expected outcome until precommitment; do not self-score the existing TAN-P03. **Still PREPARED / NOT RUN.**

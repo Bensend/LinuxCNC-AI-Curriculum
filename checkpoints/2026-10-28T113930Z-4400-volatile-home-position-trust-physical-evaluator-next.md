@@ -16,3 +16,5 @@ Next: check qualified restricted Stage A A–G and external evaluator results; i
 **Reproducible upstream refs:** annotated `v2.9.10` tag object `4e7abeab3e764a42ef9def932333a1d4004e547b` → commit `86cdca76fa2a36274c432caa21952b23c267989a`; master comparison snapshot `5a3d2f7a9baa281f9beeca703305787a8138830b`.
 
 **Final homing move source delta:** pinned v2.9.10 `homing.c` lines 1273–1289 uses joint velocity limit by default for final return, unless positive `HOME_FINAL_VEL` is set/clamped. No safe-limited-speed or selected physical stopping claim; include this phase in later qualified SRS/VAL witness.
+
+**Paired-axis source delta:** negative `HOME_SEQUENCE` coordinates final homing readiness, but `sync_ready` skips absolute-encoder members in one comparison. Normal synchronization != independent Y1/Y2 physical safety or alignment witness; mixed-reference runtime UNKNOWN.

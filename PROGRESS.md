@@ -1379,3 +1379,5 @@ Published [pinned v2.9.10 source audit](research/4400_POS_TRUST_01_LINUXCNC_2910
 **Upstream source provenance frozen:** LinuxCNC annotated `v2.9.10` tag `4e7abeab3e764a42ef9def932333a1d4004e547b` dereferences to commit `86cdca76fa2a36274c432caa21952b23c267989a`; compared `master` snapshot `5a3d2f7a9baa281f9beeca703305787a8138830b`. Both LIM-01 and POS-TRUST-01 audits now record immutable upstream commit identities in addition to file blobs.
 
 **Same-session POS-TRUST final-move speed trap:** v2.9.10 `homing.c` lines 1273–1289 and homing manual lines 161–168 confirm final return uses joint maximum planner velocity unless positive `HOME_FINAL_VEL` is set. Search/latch speed is not final-move speed; neither is safety-rated SLS. No physical test or numeric machine speed inferred.
+
+**Same-session POS-TRUST paired-axis scope:** pinned `homing.c` `sync_ready` waits on negative `HOME_SEQUENCE` state alignment but skips `HOME_ABSOLUTE_ENCODER` members in the readiness comparison; this is ordinary homing coordination, **not** independent press-brake Y1/Y2 safety cross-monitoring. No runtime or physical validation.

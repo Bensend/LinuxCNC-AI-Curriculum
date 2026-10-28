@@ -16,7 +16,7 @@ Can a correctly synchronized Y1/Y2 press brake with a valid global tonnage setpo
 5. **Notation/units ambiguity:** Figure 4-6 uses `L` for **load force**; Figure 4-7 uses `L` for **housing span**. The metric parenthetical for the 230 inch-ton entry is printed `(51,973)` under a header resembling `m-kN`, not an unambiguous SI conversion. **Do not transfer the printed metric column into a calculation without manufacturer clarification**. The original inch-ton figure is recorded as printed, not applied.
 6. **Different physical failure path from TOOL-LOAD-03:** A tool may satisfy its **uniform per-length** rating while the **frame moment** is exceeded; conversely a frame may be within its envelope while a short punch/holder is overloaded. The upstroke stripping condition cannot be certified by a downstroke force rating. All limits must be checked for the actual job and exact machine.
 
-The earlier Cincinnati [EM-506 (R-02-13)](https://wwwassets.e-ci.com/PDF/Manuals/EM-506.pdf) and [EM-446](https://wwwassets.e-ci.com/PDF/Manuals/EM-446.pdf) manufacturer PDFs also contain off-center/eccentric warnings in search-indexed excerpts; their full originals were **not** inspected here (EM-506 fetch exceeded tool size), so they are corroborative **DOC-CONFIRMED (INDEXED-ONLY)** and their numeric charts are **not** imported.
+The earlier Cincinnati [EM-506 (R-02-13)](https://wwwassets.e-ci.com/PDF/Manuals/EM-506.pdf) and [EM-444](https://wwwassets.e-ci.com/PDF/Manuals/EM-444.pdf) manufacturer PDFs also contain off-center/eccentric warnings in search-indexed excerpts; their full originals were **not** inspected here (EM-506 fetch exceeded tool size), so they are corroborative **DOC-CONFIRMED (INDEXED-ONLY)** and their numeric charts are **not** imported.
 
 ## Hazard-to-physical-witness matrix (not an operator procedure)
 
@@ -40,7 +40,7 @@ The earlier Cincinnati [EM-506 (R-02-13)](https://wwwassets.e-ci.com/PDF/Manuals
 ## Provenance and validation status
 
 - **DOC-CONFIRMED:** Cincinnati EM-519 2019, pp. 4-7/4-8, distinct structural moment, off-center, reverse stripping and bolt-on nose conditions; original PDF text and page renders inspected.
-- **DOC-CONFIRMED (INDEXED-ONLY):** EM-506 and EM-446 excerpts only; no full-document claim.
+- **DOC-CONFIRMED (INDEXED-ONLY):** EM-506 and EM-444 excerpts only; no full-document claim.
 - **INFERENCE:** global-force/encoder proxy failure; multi-limit selected-job acceptance and human-factors integration.
 - **UNKNOWN:** actual OpenPressBrake press/ram/bed/nose model, centerline, structure, any rated curves, tool load, stripping operation, physical condition, applicable legal edition, actual independent safety controller and validation.
 - **TEST-CONFIRMED:** none. No experiment, machine operation, simulation, build, benchmark or evaluator. Hosted compute **0 min**; self-hosted **0 min**. No laboratory ledger update.

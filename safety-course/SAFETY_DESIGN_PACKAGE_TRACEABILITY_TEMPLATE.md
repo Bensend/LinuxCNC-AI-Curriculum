@@ -1906,3 +1906,6 @@ This is a **cross-source reasoning synthesis**, not a new module, scored evaluat
 | **HF/CHG-REACH-04** | Changed gap, tooling, sheet support, guard relocation or bypass pressure triggers redesign, new access-path review and downstream stale evidence | CONDITIONAL / NOT RUN |
 
 **DOC-CONFIRMED** only publisher scope/edition, **INFERENCE** review architecture, **UNKNOWN** installed OpenPressBrake. No fabricated opening, height, separation distance, impact rating, PL or stop time; G0/G1 HOLD and independent physical evaluator OPEN. Do not ask an operator to reach into a live machine.
+
+
+**§11KO same-session ISO 13854:2017 crushing-gap source-depth:** [Official ISO publisher](https://www.iso.org/standard/66459.html) confirms minimum gaps only when adequate safety is achievable by spacing and **excludes impact/shearing/drawing-in**. Add conditional **BND/HAZ-CRUSH-05** for actual secondary converging surfaces (backgauge/crown/support/transfer), **SRS/PHY-CRUSH-06** for qualified feasible-gap-or-independent-safeguard decision and physical witness, and **CHG-CRUSH-07** for tooling/mode/geometry changes. All UNKNOWN/NOT RUN; no numeric gap or installed mechanism claimed. Extends GUARD-REACH-01 without changing first-contact A–G or treating the working die closure as safe.

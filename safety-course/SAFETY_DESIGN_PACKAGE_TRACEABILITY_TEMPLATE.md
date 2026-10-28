@@ -1866,3 +1866,28 @@ This is a **cross-source reasoning synthesis**, not a new module, scored evaluat
 | **CHG-SETFLUID-05** | Changed valve/orifice/mode/firmware/guard triggers stale-dependency requalification | CONDITIONAL / NOT RUN |
 
 **DOC-CONFIRMED** historical DGUV examples, **INFERENCE** selected architecture/review, **UNKNOWN** actual OpenPressBrake. No numeric speed/PL, hydraulic truth table, live test or compute. G0/G1 HOLD; G2 NOT RUN; G3/G4 NOT AUTHORIZED; G5 HOLD.
+
+
+### 11KM — Regenerative hydraulic fast approach and load-holding valve compatibility (2026-10-28)
+[Original HAWE/Parker source audit](../research/4400_HYD_REGEN_01_HAWE_PARKER_DIFFERENTIAL_REGEN_LOAD_HOLD_COMPATIBILITY_SOURCE_AUDIT_2026-10-28.md) distinguishes cross-port oil regeneration (high speed/reduced net force) from normal mode command and independent safety-reduced speed/physical hold. HAWE LHDV D 7770 08/2024 printed p.17 restricts specific -21/-25 twin and rod-side -11/-15 symbols with differential spool paths; Parker's P-return arrangement can have local pressure intensification. No generic valve ban or machine pressure is inferred.
+
+| Trace | Selected machine witness | State |
+|---|---|---|
+| **DEP-REGEN-01** | Exact installed hydraulic schematic, cross-port regeneration path, cylinder/port geometry, valve symbol and SKU | UNKNOWN |
+| **ARC/FLT-REGEN-02** | Ordinary fast/standard selection, independent safety final elements, fault/transition and common-cause analysis | UNKNOWN |
+| **PHY-REGEN-03** | Qualified independent speed/stop/hold, local pressure, guarding and deliberate fresh rearm under isolated/remote plan | NOT RUN |
+| **CHG-REGEN-04** | Approved valve variant, pilot/T-port conditions, replacement/change-triggered requalification | CONDITIONAL / NOT RUN |
+
+**DOC-CONFIRMED** OEM examples; **INFERENCE** integration; **UNKNOWN** OpenPressBrake. No numeric PL/speed/pressure, test or compute. G0/G1 HOLD.
+
+### 11KN — Shared pilot/tank drain surge, detent persistence and unexpected hydraulic spool shift (2026-10-28)
+[Original Parker MSG14-2500/US A257 source audit](../research/4400_HYD_DRAIN_01_PARKER_D111VW_SHARED_DRAIN_SURGE_DETENT_POWER_LOSS_SOURCE_AUDIT_2026-10-28.md) warns common tank/drain surge can shift directional spool; detented examples may retain the last position on power/pilot loss while main flow remains. This is distinct from upstream electrical stop request and pressure-gauge peak observation.
+
+| Trace | Selected machine witness | State |
+|---|---|---|
+| **DEP-DRAIN-01** | As-built X/Y pilot/drain and tank return topology, shared returns, exact valve style and final elements | UNKNOWN |
+| **FLT/ARC-DRAIN-02** | Surge, pilot loss, detent/spring, spool stick and independent physical interruption fault paths | UNKNOWN |
+| **PHY-DRAIN-03** | Independent Y1/Y2 stop/hold and local pressure/flow, guard/access and fresh start physical proof | NOT RUN |
+| **CHG-DRAIN-04** | Valve replacement, internal/external drain change, hose/return reroute and stale evidence | CONDITIONAL / NOT RUN |
+
+**DOC-CONFIRMED** Parker catalog scope, **INFERENCE** safety witness, **UNKNOWN** selected machine. No energized fault injection or physical release. G0/G1 HOLD.

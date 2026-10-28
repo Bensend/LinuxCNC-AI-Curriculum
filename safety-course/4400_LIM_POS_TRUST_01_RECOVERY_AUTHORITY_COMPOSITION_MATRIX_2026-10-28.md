@@ -40,3 +40,5 @@ A qualified reviewer should identify the **actual** LinuxCNC version, INI/HAL li
 - If stop/hold/guard/access/restart evidence is missing, **do not operate with people exposed**. Any future experimental operation requires separate qualified isolated/remote containment with people outside the danger zone and residual risk recorded.
 
 **Evidence:** SOURCE-CONFIRMED and DOC-CONFIRMED for the pinned software/manual facts in the linked audits. **INFERENCE** for the general architecture and usability decisions. **TEST-CONFIRMED none; selected OpenPressBrake as-built UNKNOWN; G0/G1 HOLD, G2 NOT RUN, G3/G4 NOT AUTHORIZED, G5 HOLD.** No new test, simulation, physical operation, or external competency evaluation.
+
+**Additional final-move negative path:** after a safe reference search, a configured `HOME_FINAL_VEL` may be absent; pinned `homing.c` then sets the final-move planner `max_vel` to the joint's velocity limit. Do not infer that the final phase inherits slow search/latch velocity. The independent setup/guard/stop/hold architecture must cover the **whole** homing sequence. No physical velocity or stopping distance was measured.

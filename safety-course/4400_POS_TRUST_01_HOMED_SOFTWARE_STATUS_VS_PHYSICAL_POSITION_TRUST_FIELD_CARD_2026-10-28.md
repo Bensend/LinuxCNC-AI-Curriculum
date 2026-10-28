@@ -16,3 +16,5 @@ Pinned [LinuxCNC v2.9.10 source audit](../research/4400_POS_TRUST_01_LINUXCNC_29
 | Is the ram independently held during an E-stop? | Qualified Y1/Y2 hydraulic/mechanical final-element proof. | A LinuxCNC flag or E-stop screen cannot answer. |
 
 **Usability rule:** a repeatable, visible, no-bypass reference-check process is better than teaching operators to guess direction or disable guards. The source trace establishes ordinary LinuxCNC behavior only. No physical test, safety release, or evaluator score was obtained.
+
+**Final-move trap:** pinned LinuxCNC homing code sets the final move's planner velocity limit to the joint maximum when `HOME_FINAL_VEL` is absent/nonpositive. A slow home-search setting does **not** prove the final return is slow. Setting a lower ordinary `HOME_FINAL_VEL` still does **not** make the move a safety-rated SLS function. Review every homing phase under the independent safeguard/physical holding boundary; do not rehome with people exposed for this lesson.

@@ -1922,3 +1922,5 @@ This is a **cross-source reasoning synthesis**, not a new module, scored evaluat
 
 ## 11KS — 4400-LIM/POS-TRUST combined fault/recovery authority (2026-10-28)
 Use the [12-case paper-only composition matrix](4400_LIM_POS_TRUST_01_RECOVERY_AUTHORITY_COMPOSITION_MATRIX_2026-10-28.md) to check simultaneous shared-limit ambiguity, potentially stale `homed` status, conditional volatile unhome, separate independent stop/hold, guard/occupancy, maintenance isolation and fresh restart. **SOURCE/DOC-CONFIRMED** pinned LinuxCNC behavior, **INFERENCE** review architecture, **UNKNOWN/NOT RUN** selected machine. G0/G1 HOLD. No physical validation or unscored exam bank.
+
+**§11KR/11KS final-homing-move addendum:** pinned v2.9.10 `homing.c` final move uses `HOME_FINAL_VEL` if positive (clamped) or joint `vel_limit` otherwise. The normal-control planner setting does not establish safety-limited speed or safe-to-access motion. Include final return in the qualified stop/hold/guard witness scope; selected physical evidence UNKNOWN/NOT RUN.

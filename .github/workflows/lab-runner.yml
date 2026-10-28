@@ -30,7 +30,7 @@ concurrency:
 jobs:
   run-lab-job:
     runs-on: [self-hosted, openpressbrake]
-    if: ${{ inputs.disconnected_simulation_verified }}
+    if: ${{ github.ref == 'refs/heads/main' && inputs.disconnected_simulation_verified }}
     timeout-minutes: 75
 
     steps:

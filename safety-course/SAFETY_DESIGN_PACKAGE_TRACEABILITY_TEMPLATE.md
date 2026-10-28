@@ -1794,3 +1794,15 @@ This is a **cross-source reasoning synthesis**, not a new module, scored evaluat
 **INFERENCE:** Make approved preassembled labeled spare and mounting instructions readily available; design away pressure to jumper EDM. **UNKNOWN:** actual OpenPressBrake installed contactor/auxiliary, safety controller program, physical Y1/Y2 response and evaluator. EDM is **not** maintenance isolation, motor standstill, pressure removal or ram holding. G0/G1 HOLD; G2 NOT RUN; G3/G4 NOT AUTHORIZED; G5 HOLD. No personnel-exposed operation or live weld-fault test authorized; no compute or external score.
 
 **11KG second exact-OEM refinement:** [Schneider FA122251/FA234029/FA131010 and live catalog source-depth](../research/4400_MIRROR_01_ROCKWELL_SUVA_AND_SCHNEIDER_ACCESSORY_SOURCE_DEPTH_ADDENDUM_2026-10-28.md) adds **terminal-marking identity (LADN11 vs LADN11P)**, **auxiliary NO/NC overlap (LADC22)** and **mounting compatibility by exact coil/base variant** to AUTH/DEP-EDM-01 and ARC/DEP-EDM-02. Do not confuse auxiliary-to-auxiliary make-before-break timing with main-pole-to-auxiliary mirror qualification. A technician's terminal-number substitution is a foreseeable CHG-EDM-05 fault path; isolated validation and physical stop/hold still NOT RUN. G0/G1 HOLD.
+
+### 11KH — Type I/II coordinated starter and post-short-circuit safety requalification (2026-10-28)
+[Original Schneider manufacturer source audit](../research/4400_COORD_01_TYPE1_TYPE2_SHORT_CIRCUIT_COORDINATION_CONTACT_WELD_POST_FAULT_REARM_SOURCE_AUDIT_2026-10-28.md) extends PANEL-01 SCCR/LOTO and 2540/MIRROR-01 contactor EDM. **DOC-CONFIRMED:** Type I may require repair after short circuit; Type II allows continued suitability **under the tested combination** but may allow limited contact welding and manufacturer-directed maintenance. A replacement SCPD with a higher standalone kA rating is not proof of the same tested coordination; panel SCCR, breaker interrupt rating and functional-safety integrity are separate propositions.
+
+| Witness | Required selected evidence | State |
+|---|---|---|
+| **DEP/ARC-COORD-01** | Exact SCPD, contactor/starter, overload/drive, wiring/supply, OEM coordination table/conditions and fault-current context | UNKNOWN |
+| **PHY-COORD-02** | Actual post-fault main-contact, EDM, independent hazardous-energy and gravity/pressure stop/hold state | NOT RUN |
+| **VAL-COORD-03** | Qualified isolation, cause-of-fault investigation, manufacturer-directed post-fault inspection/validation and safe restart | NOT RUN |
+| **CHG-COORD-04** | Breaker/fuse/contactor/auxiliary/overload substitution or short-circuit damage triggers evidence review and affected validation STALE | CONDITIONAL / NOT RUN |
+
+**Human factors:** approved replacement kit and a short, clear post-fault workflow are safer than 'replace fuse/reset' pressure. Do not simulate or create a live short circuit with personnel exposed. No machine-specific SCCR, kA, PL/DC, stop time or hydraulic behavior inferred. G0/G1 HOLD; G2 NOT RUN; G3/G4 NOT AUTHORIZED; G5 HOLD.

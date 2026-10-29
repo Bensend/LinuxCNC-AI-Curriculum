@@ -29,3 +29,8 @@ Read the [UR SW10_15 SF18/19/20 source audit](../research/4400_ENABLE_02_UR_SW10
 Provide a comfortable enabling grip, independent task-specific start, a clearly visible mode indicator, accessible safe retreat and guards that reinstall easily. Never tape a grip, jumper a guard, or let a routine LinuxCNC/FPGA bit grant personnel-safety permission. A robot's Cat2 stopped state is **not** isolation or a guarantee that a suspended load cannot fall. Do not operate a machine with people exposed when selected protection and physical safe state are unproven. If a future experimental operation is independently justified, it must be isolated/remote with people outside the danger zone and residual risk stated.
 
 **Evidence:** UR SW10_15 and IDEC/440J manufacturer claims **DOC-CONFIRMED** in scope; cross-machine safety transfer **INFERENCE**; actual machine/evaluator **UNKNOWN**; **TEST-CONFIRMED none**. OpenPressBrake G0/G1 HOLD, G2 NOT RUN, G3/G4 NOT AUTHORIZED, G5 HOLD. No runtime or physical validation was performed.
+
+
+## Two adjacent source-depth checks (UNSCORED; not a new competency)
+9. The receiving safety controller samples a UR OSSD-configured output and sees brief LOW pulses during its otherwise HIGH state. What exact OEM timing/receiver compatibility and fault interpretation must be verified? Why is ordinary HAL debounce not an acceptable personnel-safety receiver?
+10. A robot's external E-stop is released, its System Stop output returns HIGH, and an external conveyor has a retained run request. What distinct **E-stop state reset**, **external deliberate restart** and **physical final-element** conditions prevent unintended motion? Identify the original UR Safety I/O warning.

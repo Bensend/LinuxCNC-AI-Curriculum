@@ -25,3 +25,5 @@
 5. Immediately before ending, append the **complete** LESSON_LOG with UTC end, actual elapsed, overlap and safe current blob SHA; commit and verify. Keep hourly curriculum enabled.
 
 **Short-session continuation:** after the Eaton/Pilz/OSHA integration, continued to the separate official OSHA applicability/cross-recognition question and then to current IEC/ISO publisher-edition provenance. No new lab/evaluator or physical release.
+
+**Same-session cross-repo source check:** Directly re-fetched OpenPressBrake main `docs/IO_MAP.md` blob `3b696947`, `hardware/REV1_MACHINE_CONFIG.yaml` blob `37119336` and `docs/ARCHITECTURE.md` blob `02ee7149`. The published I/O and power-domain intent does **not establish a distinct installed emergency switching-off function**; source silence does not prove absence on the physical machine. Actual independent Pilz/AKAS, Y1/Y2 and power isolation remain UNKNOWN. No OpenPressBrake files changed.

@@ -25,3 +25,8 @@
 
 ## Same-session third branch — original machine-checklist adversarial correction
 Directly re-read OpenPressBrake `docs/VERIFY_AT_MACHINE.md` after earlier 07:37Z safety hold and found residual point-of-use prompts for cabinet/coil/valve-block photos, wiring tracing, physical reroute and safety status. [OpenPressBrake `8872579`](https://github.com/Bensend/OpenPressBrake/commit/8872579c3fbaae1a4b9cd8fe7990aebf0c5e6891) implements 11 narrow wording fixes; one-file diff independently verified. Updated existing FIELD-VISIT-01 investigation/technician card and design §11LW; **no** new field evidence or permission to energize, open cabinets, enter danger zone or move the ram. Next priority unchanged: restricted qualified Stage A A–G and independent evaluator, both OPEN.
+
+## Source integrity and review result
+- LinuxCNC upstream annotated tag `v2.9.10` dereferenced through GitHub API to commit `86cdca76fa2a36274c432caa21952b23c267989a`; pinned G53 check, find, convert, parse, G-code docs and homing docs were read directly with blob identities recorded in the source audit. **No executable lab needed** for the source-only discrepancy.
+- New research/card/checkpoint relative-link audit: **16 occurrences, 11 unique existing targets, zero missing**. OpenPressBrake field-survey second-pass diff: **one file, 13 additions and nine deletions**, no wiring or software behavior change.
+- Source classification: **SOURCE-CONFIRMED** tagged interpreter and cross-repository documentation patch; **DOC-CONFIRMED** OEM sleeve and LinuxCNC homing/manual docs; **INFERENCE** conditional human failure paths; **UNKNOWN** selected physical machine; **TEST-CONFIRMED none**. No safety promotion.

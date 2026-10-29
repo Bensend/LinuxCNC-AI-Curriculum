@@ -20,3 +20,5 @@ A hydraulic hose near a person can have **four different safeguards** that are e
 
 
 **Electrical false friend:** A Gates sleeve described as “non-conductive” is **not** proof that its enclosed hose, fluid, fittings or end clamps are electrically isolated. Parker 4400-B.1 §2.1.1 requires exact selected/marked nonconductive hose and equipment approval for applications that depend on electrical nonconductivity. Do not replace qualified electrical isolation/verification with a plastic cover or conduct a live test to find out.
+
+**Provenance shorthand:** **SOURCE-CONFIRMED** existing curriculum predecessor identity; **DOC-CONFIRMED** directly inspected named OEM pages/PDF and separately flagged indexed catalog excerpt; **INFERENCE** selected-machine failure paths; **UNKNOWN** installed assembly; **TEST-CONFIRMED none; COMMUNITY-REPORTED not used**.

@@ -18,7 +18,7 @@
 - Lower-level `safety_interface/REFERENCE_REBASE.md` and `STATUS_CHECKLIST.md` directly inspected: seven/six **drawing composition is frozen**, but block **BEHAVIORAL ONLY / NOT SCHEMATIC-READY**; no physical no-bypass/backfeed witness. This prevents incorrectly saying *all* endpoint semantics are unknown while refusing installed safety proof.
 - Considered a separate ordinary CNC `MUTE COMMAND` (wire 44) failure-path branch. Full canonical index/research/progress and direct [AKAS-M-01 predecessor](../research/4400_AKAS_LCII_M_PILZ_MUTING_SLOW_SPEED_OVERTRAVEL_AUTHORITY_AUDIT_2026-10-27.md) plus OPB-CUTOVER-02 already cover this exact wire and the independent safety PLC muting gate. **Duplicate/no incremental information gain; no new module created.**
 - Official OSHA 1910.147(b) and 1910.333(b)(2)(ii)(B) rechecked 2026-10-29: control circuit devices/interlocks are not sole energy-isolating devices; task-specific exception/qualified procedures still apply. No standard-based PL/SIL or physical stop-time value inferred.
-- Five relative internal links across the new audit and checkpoint resolved to existing repository targets; zero missing. No workflow trigger paths edited and no hosted or local compute dispatched.
+- Initial five relative internal links across the new audit and checkpoint resolved. Expanded six-file targeted review (research, checkpoint, CURRICULUM, PROGRESS, research plan and learner index) checked **27 relative-link occurrences / 13 distinct existing targets / zero missing**. No workflow trigger paths edited and no hosted or local compute dispatched.
 
 ## Precise next work
 

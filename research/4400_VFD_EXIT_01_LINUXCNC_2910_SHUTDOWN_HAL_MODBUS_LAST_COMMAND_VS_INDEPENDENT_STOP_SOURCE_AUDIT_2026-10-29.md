@@ -1,0 +1,45 @@
+# 4400-VFD-EXIT-01 — Normal LinuxCNC exit and Modbus timeout are not independent spindle stopping
+**2026-10-29 | original LinuxCNC source/docs + dated upstream field report | NON-GRADUATED | no physical test or selected VFD**
+
+## Safety question and new delta
+A VFD receives a run command through ordinary Modbus/RS485. The LinuxCNC application exits or its communication disappears. Must the VFD stop? **No such guarantee follows from LinuxCNC process exit, `shutdown.hal`, or a Modbus client response timeout.** A September 2026 upstream issue reported a spindle continuing to rotate after LinuxCNC exit in a particular Modbus setup. Crucially, LinuxCNC's own pinned INI documentation explicitly warns that `[HAL]SHUTDOWN` is **not guaranteed to execute** and cannot replace a physical E-stop chain.
+
+**Novelty check:** direct full safety index/research/progress search found no `shutdown.hal`, `mb2hal`, process-exit or retained VFD run-command source branch. Existing HAL-THREAD-01, OT-SEC-01, DC-LINK-02 and spindle zero/override work already establish ordinary-control versus independent safety; this new delta is the **external drive's possible retained last command across LinuxCNC process death**, with a **client timeout versus drive-side comm-loss watchdog** distinction. No new graded competency is claimed.
+
+## Evidence/provenance
+1. **SOURCE-CONFIRMED v2.9.10 commit `86cdca76fa2a36274c432caa21952b23c267989a`:** [`scripts/linuxcnc.in` lines 652–705](https://github.com/LinuxCNC/linuxcnc/blob/86cdca76fa2a36274c432caa21952b23c267989a/scripts/linuxcnc.in#L652-L705) defines a normal `Cleanup()` path. It optionally reads `[HAL]SHUTDOWN` and executes `$HALCMD -f $SHUTDOWN`, then terminates user-space components and stops/unloads HAL. This is a **normal shell cleanup path**, not a hardwired final element.
+2. **DOC-CONFIRMED exact same pin:** [`docs/src/config/ini-config.adoc` lines 682–690](https://github.com/LinuxCNC/linuxcnc/blob/86cdca76fa2a36274c432caa21952b23c267989a/docs/src/config/ini-config.adoc#L682-L690) says `SHUTDOWN = shutdown.hal` may set outputs on **normal exit**, but is **not guaranteed** during a computer crash and is **not** a replacement for a physical E-stop chain or software-failure protection. This is a direct authoritative warning, not merely an engineering inference.
+3. **DOC-CONFIRMED exact same pin:** [`docs/src/drivers/mb2hal.adoc` lines 102–115](https://github.com/LinuxCNC/linuxcnc/blob/86cdca76fa2a36274c432caa21952b23c267989a/docs/src/drivers/mb2hal.adoc#L102-L115) defines `MB_RESPONSE_TIMEOUT_MS` as the time the **Modbus client waits for the first response byte** and `MB_BYTE_TIMEOUT_MS` as its interbyte wait. These are **not** evidence that the remote VFD autonomously drops a retained RUN command after communication loss.
+4. **COMMUNITY-REPORTED:** [LinuxCNC upstream issue #4529, opened 2026-09-13, closed 2026-09-15](https://github.com/LinuxCNC/linuxcnc/issues/4529), describes a user's v2.9.10 Modbus RTU/mb2hal spindle continuing to rotate after LinuxCNC exit; the user reported `shutdown.hal` as a clean-exit workaround and a similar symptom with another fieldbus interface. This is **one field report**, not a controlled test of all LinuxCNC versions/VFDs. The issue's closed status is **not** evidence of a general software or hardware safety fix.
+5. **COMMUNITY-REPORTED discussion in #4529:** contributors recommend separating non-safety fieldbus data from physical run permission, considering a selected drive's communication-loss reaction and hardwired protective path. Some comments mention ordinary `motion.spindle-on` or `machine-is-on` as control enables. **Important correction:** those normal HAL pins do **not** become a safety-rated E-stop, STO or protective stop merely because wired to a terminal. Any drive-specific watchdog period, action, STO wiring and safety integrity require the exact OEM manual, selected risk assessment and validation.
+6. **DOC-CONFIRMED** [LinuxCNC pinned spindle examples](https://github.com/LinuxCNC/linuxcnc/blob/86cdca76fa2a36274c432caa21952b23c267989a/docs/src/examples/spindle.adoc#L50-L78) show `spindle.0.on` as an ordinary enable source, confirming why a retrofit can mistakenly conflate normal command authority with personnel protection.
+7. **TEST-CONFIRMED none; SOURCE-CONFIRMED** cleanup and client-timeout scope; **INFERENCE** retained external run command when no stop message is delivered; **UNKNOWN** selected VFD control-word retention, timeout action, coast/deceleration, mechanical stop, load, wiring, independent safety, actual machine response.
+
+## Three separate failure boundaries
+| Boundary | What is documented | What is NOT established |
+|---|---|---|
+| Normal LinuxCNC process exit | shell `Cleanup()` may run optional HAL shutdown file | that the file always runs, succeeds or can reach a VFD after crash/power loss |
+| Modbus client communication | mb2hal response/byte timeouts govern waiting for replies | VFD's independent loss-of-comms watchdog, drive run-state decay, stop category or stopping distance |
+| Personnel-protective stopping | requires selected independent safety function and physical final element | achieved by `shutdown.hal`, ordinary `spindle.on`, fieldbus RUN=0, software E-stop status or a generic watchdog label |
+
+A drive may offer a **separately configured and validated** communication-loss fault action; do not invent a universal time limit, terminal name or response. A fieldbus disconnect can remove both the normal stop command and status feedback, leaving a stale HMI. Loss of communication must not silently be treated as proof that the drive stopped.
+
+## Adversarial source-based failure paths (not tested)
+1. **Clean GUI exit:** normal LinuxCNC cleanup executes a shutdown HAL file that writes RUN=0; a particular VFD may receive it. This can improve routine operation, but **does not prove the crash/power-loss case**.
+2. **Application crash/PC power loss:** the cleanup file may not execute. An independently powered drive may retain its last valid command if its selected control scheme permits it. The field report describes one such observed outcome; generality is UNKNOWN.
+3. **RS485 cable unplugged or USB adapter lost:** mb2hal's own response timeout can detect a missing reply in software, but if the software can no longer transmit, it cannot reliably command the drive OFF. A **drive-side** communication-loss reaction is a different mechanism requiring original OEM evidence.
+4. **Ordinary HAL RUN enable withdrawn:** a correctly wired normal enable may help stop the process in some failures, but ordinary LinuxCNC `motion.machine-is-on`/spindle-on cannot independently protect people from controller/FPGA/PC faults or unsafe restart. A selected safety-rated final element and appropriate guard/stop/hold logic must remain independent.
+5. **Recovery/rearm:** returning communications, power or a green HMI must not itself authorize a new hazardous cycle. Require deliberate reset and separate fresh start as specified by the selected safety architecture, plus qualified physical evidence.
+
+## Practical low-bypass integration
+- Keep fieldbus speed/direction/diagnostics as **ordinary control**, with clear stale-data indication.
+- Where a drive supports it, select and document its actual **loss-of-comms behavior** and fault/reset requirements from the exact OEM manual. Treat it as an additional layer, not automatic PL/SIL.
+- Provide a physically independent personnel-protective stop/energy-removal path suitable for the machine, with guard/interlock and restart authority assigned to selected safety equipment. Do not assume STO proves electrical isolation, gravity-load holding or standstill.
+- Design HMI labels as **RUN REQUESTED / COMMUNICATION LOST / DRIVE STATUS UNKNOWN / PROTECTIVE STOP / ISOLATED**, not "SPINDLE STOPPED" merely because LinuxCNC exited.
+- Make normal shutdown easy, but make proper isolation/guarding easier than unplugging a Modbus cable, forcing a HAL bit or bypassing the VFD enable.
+
+## What would justify a lab
+The **source question** "does LinuxCNC guarantee `shutdown.hal` on crash?" is answered by the original manual: **no**. No lab is justified to rediscover that. A specific selected-VFD communication-loss response or an isolated virtual drive fixture could require bounded testing **only after** exact OEM documentation and a frozen unresolved question. No physical VFD/machine testing is authorized by this lesson. No GitHub-hosted compute; local self-hosted runner access and panel-PC isolation remain unverified.
+
+## Current gates
+OpenPressBrake qualified Stage A A–G UNKNOWN; G0/G1 HOLD; G2 NOT RUN; G3/G4 NOT AUTHORIZED; G5 HOLD. Independent 2520–25F0 evaluation OPEN. No new graduate, no runtime, no machine operation, no hosted/local compute.

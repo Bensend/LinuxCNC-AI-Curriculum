@@ -52,3 +52,8 @@ These are **source-derived public project descriptions** of legacy drawings, not
 Stage A A–G existing records remain the first dependency: selected Pilz/AKAS and safety program, 11K2/63/75, actual drive model and protective final elements, guard/restart behavior, physical Y1/Y2 stop/hold, stored-energy control and independently witnessed no-exposure tests. Ask for existing dated records, not new energized measurements under a public checklist. If the exact X drive is later selected, reconcile its original manual with the B4 function and independent protective stop; do not invent a safety rating from the terminal name. Physical G1/G2 validation needs a separately approved qualified plan, not this paper matrix.
 
 **Evidence:** SOURCE-CONFIRMED public repository mappings; INFERENCE conditional failure cases/HMI guidance; UNKNOWN installed wiring, actual X-drive health, Pilz application, stop/hold and human adoption; TEST-CONFIRMED **none**. No workflow, build, simulation, machine operation or lab compute. **G0/G1 HOLD; no personnel-exposed hazardous operation.**
+
+
+## Same-session point-of-use source correction
+
+[OpenPressBrake `docs/IO_MAP.md` commit `e294676075fe4bfe5023aec9f655380615195a43`](https://github.com/Bensend/OpenPressBrake/commit/e294676075fe4bfe5023aec9f655380615195a43) changes **only the J16/4 explanatory table cell**, making the normal-HMI and rearm prohibition explicit at the source-map row. Previous blob `e73ef3f24888854eb70582c353f2b3b621a32eac` → updated blob `fd839a3c1cabc71436e2e59d0c121ed4d8a62792`. The electrical endpoint, signal population and safety wiring are unchanged. **SOURCE-CONFIRMED documentation correction, not measured physical behavior or human adoption.**

@@ -1484,3 +1484,6 @@ Read [existing Rockwell 440J ENABLE-01](../research/4400_ROCKWELL_440J_THREE_POS
 
 ### 2026-10-29 — 4400-ROBOT-PLANE-01 late safety-plane activation and unmonitored swept volume (NON-GRADUATED)
 [Original UR SW10_15 SF23/Safety Planes/Tool Position Restriction source audit](../research/4400_ROBOT_PLANE_01_UR_SW10_15_DYNAMIC_SAFETY_PLANE_LATE_TRIGGER_AND_UNMONITORED_GEOMETRY_OEM_AUDIT_2026-10-29.md) → [six UNSCORED field cases](4400_ROBOT_PLANE_01_LATE_INPUT_TOOL_SPHERE_AND_SWEPT_VOLUME_TECHNICIAN_CARD_2026-10-29.md). **DOC-CONFIRMED:** if a safety plane activates too late, monitored TCP may cross it while stopping; OEM expressly warns configured tool spheres/elbow do not bound every arm part. Selected frame direction, mode, tool/payload swept volume and physical witness UNKNOWN; no test, compute, evaluator or selected OpenPressBrake robot. G0/G1 HOLD.
+
+
+**Reusable 4400 point-of-use safety-output review:** [Eight-gate signal semantics card](4400_SIGNAL_SEMANTICS_01_MODE_POLARITY_TRANSITION_ENERGY_WITNESS_REVIEW_CARD_2026-10-29.md) derives identity/polarity/mode/transition/energy/geometry/integration/human factors from UR SW10_15 examples. It is a generic engineer worksheet, not an additional OpenPressBrake Stage A request or independent physical proof. No test/compute; G0/G1 HOLD.

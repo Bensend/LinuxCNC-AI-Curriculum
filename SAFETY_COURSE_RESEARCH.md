@@ -1294,3 +1294,8 @@ The [source/protocol audit](research/4400_EVAL_INTEGRITY_01_25E0_PUBLIC_CHALLENG
 
 
 **2026-10-29 4400-MAT-01 distinct original OEM branch:** [Banner SM-xA-5A Rev F 2025 original manual audit](research/4400_MAT_01_BANNER_2025_FOUR_WIRE_AUTO_RESET_STEP_OVER_FALSE_SAFE_ZONE_OEM_AUDIT_2026-10-29.md) → [paper field card](safety-course/4400_MAT_01_SAFETY_MAT_STEP_OVER_AUTO_RESET_FOUR_WIRE_TECHNICIAN_CARD_2026-10-29.md). Safety mat clear can mean person stepped off **into** the danger zone; auto-reset relays can energize without fresh human authorization; four-wire monitor is not compatible with arbitrary two-wire mats; internal controller Cat4 ≠ full safety system Cat4. ISO 13856-1:2013 official catalog explicitly leaves dimensions/selected application PL to risk assessment. DOC-CONFIRMED source, selected machine UNKNOWN, TEST-CONFIRMED none, no hosted/local compute or evaluator, G0/G1 HOLD.
+
+
+## 2026-10-29 — 4400 EDGE-CALC-01 arithmetic/provenance continuation (NON-GRADUATED)
+
+[Original narrow manufacturer-indexed Mayser SL NC II example audit](research/4400_EDGE_CALC_01_MAYSER_NCII_OVERTRAVEL_EXAMPLE_ARITHMETIC_AND_SYSTEM_RESPONSE_AUDIT_2026-10-29.md) detects a mismatch between printed `0.5×10×1.55=6.55 mm` and independent arithmetic `7.75 mm` (with `C=1.2`: `9.30` rather than `7.86 mm`). **Full 11-MB PDF not inspected; immutable-page verification UNKNOWN**; this is not a manufacturer erratum claim. The previous tactile-edge sensor-family, contact-before-stop and reset lesson is reused, with TE-11 paper check. Schmersal monitor 17-ms timing cannot replace Mayser profile response; model assumptions, physical force/stop and selected application remain UNKNOWN. No test, compute or external evaluation; G0/G1 HOLD.

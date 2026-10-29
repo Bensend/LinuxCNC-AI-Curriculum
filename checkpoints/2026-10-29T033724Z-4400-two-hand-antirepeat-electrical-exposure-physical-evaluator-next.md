@@ -1,6 +1,6 @@
 # 2026-10-29T03:37:24.384Z — 4400 two-hand anti-repeat and electrical-service exposure; physical/evaluator next
 
-**Session start:** 2026-10-29T03:37:24.384Z UTC, recorded in [pre-work marker](2026-10-29T033724Z-session-start-safety.md). Supersedes [02:32Z OPB-PWR-AGG checkpoint](2026-10-29T023232Z-4400-opb-child-power-aggregation-physical-evaluator-next.md). Final end/elapsed/overlap are in the complete LESSON_LOG entry appended immediately before ending.
+**Session start:** 2026-10-29T03:37:24.384Z UTC, captured before governance/source work and subsequently persisted in [start marker](2026-10-29T033724Z-session-start-safety.md). Supersedes [02:32Z OPB-PWR-AGG checkpoint](2026-10-29T023232Z-4400-opb-child-power-aggregation-physical-evaluator-next.md). Final end/elapsed/overlap are in the complete LESSON_LOG entry appended immediately before ending.
 
 ## Durable substantive evidence
 

@@ -1,0 +1,14 @@
+# 4400-DB-RESISTOR-01 — “The drive stopped, so the braking resistor is safe” is not a valid safety check
+**2026-10-29 | technician field card | no energized test or machine authorization**
+
+**The overlooked fault:** a braking chopper's power transistor can fail conducting. ABB's original 2011 application note explains why a drive STOP, ordinary interlock, or STO does **not** necessarily disconnect that resistor. The resistor can continue heating while the motor is stopped. [Original ABB two-page source](../research/4400_DB_RESISTOR_01_ABB_CHOPPER_SHORT_THERMAL_SWITCH_CONTACTOR_VARIANT_EXCEPTION_SOURCE_AUDIT_2026-10-29.md).
+
+**The easy-to-maintain architecture:** identify the *exact* drive/chopper/resistor; follow that OEM's approved thermal protection and supply-interruption design. On applicable ABB architectures, a resistor thermal switch operates a contactor-control circuit so an overheat fault interrupts input supply independently of a LinuxCNC alarm. **Exception:** ABB ACS800 R7/R8 **internal** chopper has a documented built-in input-bridge protection path under specified conditions; **external** chopper requires a contactor in that manual. Never assume the exception applies to another model. Schneider's ATV312 accessory list even includes resistor variants **without** thermal switches. An alarm bit is not a substitute for actual fault interruption.
+
+**Four separate checks:** (1) normal motor stop, (2) resistor overheat containment, (3) electrical isolation/verified discharge, (4) physical load stop/hold. Passing one never automatically passes the others. A contactor opening can also remove drive deceleration; a vertical axis needs its own validated load restraint. No ordinary LinuxCNC/FPGA logic becomes personnel safety-rated by monitoring the switch.
+
+**Do not bypass the thermal contact to clear a nuisance trip.** Inspect blocked cooling, hot surfaces, combustible dust, resistor duty/selection and damaged wiring through qualified, de-energized maintenance. Make the guard and thermal-trip repair easy to access and reinstall. Do not short a chopper, force a thermal trip, probe a live bus or operate with people in the danger zone as a class exercise.
+
+**What to ask the qualified reviewer:** Is there a resistor at all? Which exact model and frame? Does the selected resistor contain a thermal switch? What physically interrupts continued power if the chopper sticks ON? How does that trip affect safe stopping, gravity holding, and fresh restart? Record **UNKNOWN** until documentary and qualified physical evidence exist.
+
+**Status:** DOC-CONFIRMED original ABB/Schneider manuals for named products; INFERENCE transfer/fault tree; TEST-CONFIRMED none; OpenPressBrake installed parts and stop/hold UNKNOWN. **G0/G1 HOLD; no personnel-exposed hazardous operation.**

@@ -1,0 +1,17 @@
+# 2026-10-29T06:35:17Z — 4400 safety: braking-resistor chopper fault and model-specific thermal containment
+
+**UTC session start:** `2026-10-29T06:35:17.456Z` captured before substantive work and persisted in [start marker](2026-10-29T063517Z-session-start-safety.md). Supersedes [2026-10-29T05:32:52Z scanner checkpoint](2026-10-29T053252Z-4400-scanner-changeover-speed-diagnostics-physical-evaluator-next.md). End, actual elapsed and overlap are recorded by safe complete LESSON_LOG append at session end.
+
+## Durable increment
+- [DB-RESISTOR-01 exact manufacturer source audit](../research/4400_DB_RESISTOR_01_ABB_CHOPPER_SHORT_THERMAL_SWITCH_CONTACTOR_VARIANT_EXCEPTION_SOURCE_AUDIT_2026-10-29.md) and [short technician field card](../safety-course/4400_DB_RESISTOR_01_HOT_RESISTOR_STOPPED_DRIVE_IS_NOT_FIRE_CONTAINMENT_TECHNICIAN_CARD_2026-10-29.md). **New exact mechanism** relative to DC-LINK-02/common-bus/2570: shorted chopper IGBT may keep dissipating resistor power after normal stop/STO; OEM-approved thermal contact and actual input-power interruption are separate from drive enable, motor stopping and isolation.
+- **Important exact-product exception:** ABB 2011 application note recommends main contactor for the listed product categories; ABB ACS800-PC Rev C explicitly exempts R7/R8 **internal** chopper with correctly dimensioned resistor from a separate contactor for this specific overheat protection, while requiring one for external chopper. Do not merge the statements into a universal rule. Schneider ATV312 resistor suffixes vary in thermal-switch presence. Original ABB two-page PDF and ABB ACS800 original manual were directly inspected; Rockwell parameter excerpt only.
+- Updated CURRICULUM, PROGRESS, safety research plan, canonical index, 2570 source preparation and cumulative design §11LU. No new owner questionnaire, blind challenge or 3000 work.
+- **No compute, lab, physical test or independent evaluation.** Hosted 0 min, self-hosted 0 min; LAB_COMPUTE_LOG and FEEDBACK_SCORE_LOG unchanged. Runner dispatch and physical isolation remain UNKNOWN. No experiment justified: OEM documents resolve the generic circuit question, installed-machine facts are absent.
+
+## Exact next work
+1. Qualified **OpenPressBrake Stage A A–G** installed evidence: Pilz/AKAS active configuration, K1/K2/EDM, independent Y1/Y2 stopping and gravity-load hold, guard/blanking, isolation and fresh restart. The resistor branch is **conditional only if a braking chopper/resistor is actually installed**; do not expand first-contact owner packet. Proprietary drawings remain restricted.
+2. Independent **2520–25F0** information-separated evaluator remains OPEN/NOT RUN. Do not self-score or inspect hidden answers. [Dispatch map](../evaluation/2500_INDEPENDENT_EVALUATOR_DISPATCH_MAP_2026-10-28.md).
+3. If gates unchanged, rotate to genuinely new high-consequence safety architecture/validation work after checking the canonical index, progress and nearest predecessor. Do not generate more redundant 3000 or safety case banks. Exact selected-machine physical evidence is the reopening condition for this branch.
+4. Local compute only via physically isolated [self-hosted, openpressbrake] when justified and accessible; no GitHub-hosted fallback. G43.2 frozen lab remains blocked pending isolation/access.
+
+**Gate:** G0/G1 HOLD, G2 NOT RUN, G3/G4 NOT AUTHORIZED, G5 HOLD. No personnel-exposed hazardous operation. Ordinary LinuxCNC/FPGA remains normal control/diagnostics, not independent personnel safety.

@@ -79,3 +79,7 @@ A robust architecture can let normal control cooperate with a safety demand whil
 Map one current servo/VFD manual's safety functions into a machine-level architecture and trace each function to the physical proposition it does and does not establish. Then build the syllabus-required low-cost ordinary-drive fallback architecture with explicit limitations, without claiming certification or inventing stopping/brake data.
 
 No executable compute is justified for this source-tracing step.
+
+
+## 2026-10-29 addendum — dynamic-brake resistor overtemperature is a separate failure path
+The [ABB original chopper-short and exact-frame exception audit](../research/4400_DB_RESISTOR_01_ABB_CHOPPER_SHORT_THERMAL_SWITCH_CONTACTOR_VARIANT_EXCEPTION_SOURCE_AUDIT_2026-10-29.md) adds a distinct **electrical thermal-containment** requirement: STOP/STO can leave a failed-conductive braking chopper supplying its resistor; an OEM-approved thermal contact and physical supply-interruption path may be necessary, but ABB ACS800 R7/R8 internal chopper documents a specific built-in input-bridge exception. The protective action can remove braking/deceleration and is **not** itself a safe stop or gravity hold. [Technician card](4400_DB_RESISTOR_01_HOT_RESISTOR_STOPPED_DRIVE_IS_NOT_FIRE_CONTAINMENT_TECHNICIAN_CARD_2026-10-29.md). DOC-CONFIRMED named OEM only, no installed OpenPressBrake assertion or machine test.

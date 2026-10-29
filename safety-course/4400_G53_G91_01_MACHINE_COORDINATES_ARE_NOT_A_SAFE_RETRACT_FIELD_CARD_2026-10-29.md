@@ -10,3 +10,6 @@ A G53 G0 XYZ move is an **ordinary combined rapid**, not a guaranteed Z-first cl
 **Source trace:** [pinned v2.9.10 check/coordinate/straight-motion audit](../research/4400_G53_G91_01_LINUXCNC_2910_MACHINE_COORDINATE_INCREMENTAL_REJECTION_DOC_OMISSION_SOURCE_DELTA_2026-10-29.md), extending the [existing G28/G30 source audit](../research/4400_G28_G30_01_LINUXCNC_2910_PERSISTENT_RAPID_REFERENCE_AND_WAYPOINT_HAZARD_SOURCE_AUDIT_2026-10-28.md). **SOURCE-CONFIRMED** interpreter check; **DOC-CONFIRMED** G53 error-list omission; downstream physical consequence **INFERENCE**, machine state **UNKNOWN**, runtime **NOT RUN**.
 
 **Safety boundary:** LinuxCNC/FPGA motion, modal state and homing are normal control. Independent guard, safety controller, physical stop/hold, isolation and deliberate restart still require their own selected-machine proof. **G0/G1 HOLD; no personnel-exposed hazardous operation.**
+
+
+**Error-order detail:** Tagged `parse_line → check_items → check_g_codes` rejects the bad G53/G91 block before **that block's** motion conversion. This does **not** establish that earlier queued motions have stopped, nor that a person may enter the machine after an interpreter error. Independent physical stop/hold and clearance are still required.

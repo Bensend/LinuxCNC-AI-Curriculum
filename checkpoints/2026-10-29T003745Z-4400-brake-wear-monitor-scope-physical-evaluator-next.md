@@ -13,3 +13,6 @@ Read START_HERE and required governance, latest 2026-10-28T23:39:56Z safety chec
 
 
 **Same-session second-pass source gain:** Kendrion BFK468 §2.1/§3.1.4/§6.2 additionally documents friction torque loss from oil/grease contamination and model-E torque adjustment versus model-N. These can invalidate a reassuring switch without high wear. This is original exact-OEM DOC-CONFIRMED evidence, not selected-machine observation, new test, or numeric torque proof. New-artifact relative links verified: 11 occurrences, nine unique existing targets, zero missing.
+
+
+**Mayr variant-source follow-through:** original current manufacturer product pages distinguish ROBA brake-checker condition monitoring (including exact-variant B10d validation aid and special-S suffix caution) from ROBA SBCplus safety-related coil control advertised up to PL e/SIL CL3. The latter claim cannot be transferred to the former or to physical load holding. DOC-CONFIRMED product-page scope, no selected installation/PL calculation/test.

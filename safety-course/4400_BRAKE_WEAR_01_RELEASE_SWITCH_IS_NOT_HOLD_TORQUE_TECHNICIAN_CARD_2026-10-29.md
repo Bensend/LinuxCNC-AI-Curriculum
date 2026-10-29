@@ -22,3 +22,6 @@
 
 
 **Maintenance clocks are different:** contactor/relay electrical cycles, brake friction work/rotor wear, and elapsed time since the last qualified load-hold proof must not be collapsed into one “service due” lamp. The exact OEM/SRS determines each inspection/acceptance rule. Record actual service and load evidence in a form the maintainer can use without bypassing the switch.
+
+
+**Do not swap product-family labels:** Mayr's **ROBA brake-checker** describes sensorless brake condition monitoring (with a variant-specific validation aid), whereas **ROBA SBCplus** is a separate safety-related brake-control product advertised for use up to PL e/SIL CL3 under its conditions. Neither label, nor a copied PL number, establishes actual mechanical holding torque or the complete machine safety function. Confirm the exact article number and applicable validation documents.

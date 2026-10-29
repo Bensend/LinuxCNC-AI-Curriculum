@@ -2163,3 +2163,6 @@ This crosscut reconciles [M67/M68 analog queue source](../research/4400_ANALOG_Q
 
 
 **§11LY same-session machine-zero/home nuance:** Tagged v2.9.10 G53 manual's “home position” example must be reconciled with `ini-homing.adoc` `HOME_OFFSET` (switch/index machine-coordinate value) versus `[JOINT_N]HOME` (final homing destination), which may be nonzero. Do not assume G53 zero equals configured parked/home pose, especially with nontrivial kinematics. Selected config and clearance remain UNKNOWN; no personnel-safety credit.
+
+
+**§11LW same-day point-of-use closure:** Second-pass [OpenPressBrake checklist `8872579`](https://github.com/Bensend/OpenPressBrake/commit/8872579c3fbaae1a4b9cd8fe7990aebf0c5e6891) adds explicit existing-record-only/deferred-access wording beside 11 residual inventory tasks (terminal/coil/valve-block photos, switch tracing, drawing-versus-wiring, safety PLC status, cable distance). A top-level warning alone can be missed; local task wording now prevents an unchecked documentary field from silently authorizing cabinet/guard access. **SOURCE-CONFIRMED documentation change only; physical Stage A A–G and Y1/Y2 stop/hold still UNKNOWN, G0/G1 HOLD.**

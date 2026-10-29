@@ -1223,3 +1223,7 @@ The [source/protocol audit](research/4400_EVAL_INTEGRITY_01_25E0_PUBLIC_CHALLENG
 
 ### 2026-10-29 — 4400 AIR-RECEIVER-01: vessel relief and downstream exhaust are independent
 [Original OSHA 1910.169/SMC VBAT source audit](research/4400_AIR_RECEIVER_01_OSHA_1910_169_SMC_VBAT_RELIEF_DRAIN_AND_SAFE_EXHAUST_BOUNDARY_AUDIT_2026-10-29.md) identifies receiver overpressure relief, vessel corrosion/condensate inspection, and pressure-gauge/drain maintenance as distinct from existing safe-exhaust valve/actuator residual-pressure work. OSHA 1981/1978/2008 interpretation nuances prevent false universal “no side drain,” “annual hydrotest,” or “convenience relief shutoff” rules. Product- and jurisdiction-specific; no installed-machine or numerical pressure proof. G0/G1 HOLD.
+
+
+### 2026-10-29 — 4400 AIR-HOSE-01: tool retention, vented coupling and rupture protection
+[Original OSHA 1926.302/1983/2003 and CEJN source audit](research/4400_AIR_HOSE_01_OSHA_1926_302_CONSTRUCTION_SCOPE_CEJN_VENTED_COUPLING_RUPTURE_BOUNDARY_AUDIT_2026-10-29.md) separates positive tool retention, vent-before-disconnect and source rupture-responsive flow reduction. The construction >1/2-inch rule applies to pneumatic power tools under OSHA's own 1983 interpretation, not every CNC hose. No selected machine/physical test/pressure claim; G0/G1 HOLD.

@@ -45,3 +45,7 @@ The discrepancy was discovered by first comparing the full canonical index/resea
 
 ## Next evidence
 If an actual pallet-changing LinuxCNC machine becomes available, inspect its `REMAP=M60`, custom code, ordinary I/O/PLC and safety-related controller before any physical test. Freeze one exact question about remap sequencing or abort only if source/config cannot resolve it, and use the isolated self-hosted runner for offline compute if available. **No GitHub-hosted compute.** Existing OpenPressBrake G0/G1 HOLD and independent 2520–25F0 evaluation remain unaffected.
+
+
+## Version-matched documentation provenance
+The published HTML is corroborated by the **same pinned LinuxCNC v2.9.10 repository revision**: [`docs/src/gcode/m-code.adoc` lines 60–95](https://github.com/LinuxCNC/linuxcnc/blob/86cdca76fa2a36274c432caa21952b23c267989a/docs/src/gcode/m-code.adoc#L60-L95) states M30 and M60 exchange pallets, while the same commit's canonical `PALLET_SHUTTLE()` is empty. This is a **within-one-revision DOC/SOURCE discrepancy**, not an artifact of comparing an older manual to newer code. The configured-remap exception and physical UNKNOWN remain unchanged.

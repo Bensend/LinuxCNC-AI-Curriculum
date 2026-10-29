@@ -10,3 +10,6 @@ A vent-before-disconnect coupling can release trapped hose pressure **when delib
 **Make the safer setup convenient:** use rated fittings and easy one-hand vented couplings where suitable, proper routing/strain relief, reachable isolation and guards that reinstall without disturbing pressurized hoses. Do not repair a damaged hose with improvised clamps or disconnect it under pressure as a demonstration.
 
 [OSHA/CEJN source audit](../research/4400_AIR_HOSE_01_OSHA_1926_302_CONSTRUCTION_SCOPE_CEJN_VENTED_COUPLING_RUPTURE_BOUNDARY_AUDIT_2026-10-29.md). DOC-CONFIRMED named scope/product, INFERENCE transfer, physical selected-machine state UNKNOWN, TEST-CONFIRMED none. G0/G1 HOLD; no personnel-exposed hazardous operation.
+
+
+**General-industry distinction:** OSHA 1910.243(b)(2) requires pneumatic-tool hoses/connections suited to actual pressure and service. OSHA 1910.242(b)'s less-than-30-psi rule is for **compressed-air cleaning** with chip guarding/PPE, not every CNC air cylinder. Neither creates a universal >1/2-inch hose rupture-device trigger outside the construction pneumatic-power-tool scope.

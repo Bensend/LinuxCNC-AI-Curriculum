@@ -1565,3 +1565,6 @@ UTC start captured before governance work in [start marker](checkpoints/2026-10-
 
 
 **G53/G91 same-session source-order closure:** tagged `interp_internal.cc` blob `829591161dfd9bf444cce5ef9d2b9a0a903dedff` `parse_line` calls `check_items` before block execution; `interp_check.cc` `check_items` calls `check_g_codes`. Thus G53/G91 rejection is a **parse validation error before that line's motion conversion** (SOURCE-CONFIRMED), **not** proof that previously queued moves or the physical machine have stopped. No runtime or Task-level timing claim.
+
+
+**G53/G91 same-session homing-doc nuance:** tagged `ini-homing.adoc` blob `1793d78d3f450c2a66bd96f54923a1be61b0a937` lines 196–220 and `ini-config.adoc` blob `e3d691253f7ff94f235d9735a67f06730ece7a38` lines 1075–1082 distinguish `HOME_OFFSET` (switch/index location assigned in machine coordinates) from configurable final `[JOINT_N]HOME`. Thus the G53 manual's `G53 G0 X0 Y0 Z0` “home position” is an **example**, not proof machine zero equals selected final HOME or a safe pose. **DOC-CONFIRMED** within same pinned edition; actual kinematics, HOME values, tool envelope and physical hold UNKNOWN. No test/compute.

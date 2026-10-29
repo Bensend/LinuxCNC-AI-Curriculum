@@ -15,3 +15,5 @@
 4. **Compute:** no hosted runners/minutes. A justified local experiment requires verified `[self-hosted, openpressbrake]` dispatch plus independently established physical isolation of the panel PC from hazardous machine I/O; no current proof. Frozen G43.2 simulation remains undispatched.
 
 **1000/2000/F02 graduated/closed; completed 3000 preserved; 4400 safety active.** Keep recurring curriculum enabled.
+
+**Final source-reconciliation refinement:** Direct Rev1 endpoint/connector source says the entire J10 uses L7/L07 switched reference, but seven status wires are sourced by Pilz outputs; TI ISO1212 needs no dedicated field-side supply. Do not infer all seven statuses LOW or valid after 11K2 opens. A qualified **per-wire Pilz source/return/validity** trace is a restricted Stage B conditional review, not a new owner A–G questionnaire. Source audit and field card updated, no physical test.

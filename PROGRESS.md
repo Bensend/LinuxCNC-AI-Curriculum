@@ -1636,3 +1636,6 @@ UTC start captured before governance work in [start marker](checkpoints/2026-10-
 
 
 **15:31Z source/link QA and compute blocker:** 38 revision-pinned upstream source/docs line anchors across 18 source files validated against actual file lengths (0 invalid); new local research/card/checkpoint relative links checked (0 missing). GitHub connector lacks self-hosted runner inventory/dispatch action and panel-PC physical I/O isolation remains UNKNOWN, so frozen SPINDLE-STATE-02 offline test **NOT RUN**; no GitHub-hosted fallback. Precise blocker and next-work gate are in the latest [4400 safety checkpoint](checkpoints/2026-10-29T153130Z-4400-pallet-spindle-vfd-exit-source-and-physical-evaluator-next.md). G0/G1 HOLD.
+
+
+**15:31Z final source standards/reuse:** VFD-EXIT-01 original study now cites official ISO 14118:2017/IEC 61800-5-2:2016 catalog abstracts (not full normative text) and OSHA 1910.147 scope; existing [RST-01 reset/power-return module](safety-course/4400_RST_01_POWER_RETURN_RESET_EDM_AND_FRESH_START_MODULE_2026-10-24.md) crosslinked instead of creating another scored exercise. Selected VFD/press-brake safety and independent evaluation remain UNKNOWN/OPEN; G0/G1 HOLD.

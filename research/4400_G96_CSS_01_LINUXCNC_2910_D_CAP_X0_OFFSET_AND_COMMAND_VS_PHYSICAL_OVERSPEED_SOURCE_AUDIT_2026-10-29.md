@@ -1,0 +1,34 @@
+# 4400-G96-CSS-01 — LinuxCNC v2.9.10 CSS D cap, X0 datum and physical overspeed boundary
+**2026-10-29 | 4000 safety / lathe transfer | SOURCE-READING / NON-GRADUATED | no physical or executable test**
+
+## Why this is a separate mechanism
+The [G95 velocity-feedback audit](4400_G95_SPEED_01_LINUXCNC_2910_SPINDLE_SELECTION_RPS_FEEDBACK_AND_FALSE_FEED_SOURCE_AUDIT_2026-10-29.md) traced feed-per-revolution input provenance. This companion traces **G96 constant surface speed (CSS)**: a programmed speed limit, coordinate datum and ordinary spindle command must not be mistaken for a certified safe-speed limit, actual RPM or chuck containment. Direct full-index and research-plan checks on 2026-10-29 found no earlier G96/CSS source audit. No 3000 graduation reopened.
+
+**Pinned version:** LinuxCNC `v2.9.10`, annotated tag `4e7abeab3e764a42ef9def932333a1d4004e547b` → source commit `86cdca76fa2a36274c432caa21952b23c267989a`.
+
+## Intended behavior (DOC-CONFIRMED)
+[Tagged G-code manual, G96/G97](https://github.com/LinuxCNC/linuxcnc/blob/v2.9.10/docs/src/gcode/g-code.adoc): `G96 S... D...` selects constant surface speed; D is **optional** maximum RPM. X0, after relevant work/tool offsets, must be the actual center of rotation or desired surface speed will be wrong. G96 is unaffected by G7/G8 radius/diameter mode. The selected spindle can be designated by `$`; S and spindle modes are not proof of actual RPM or physical containment.
+
+## Source trace (SOURCE-CONFIRMED)
+1. **No D is not a conservative D:** `src/emc/rs274ngc/interp_convert.cc:4498–4514` sets CSS spindle mode. If `block->d_flag` is absent, it enqueues `SET_SPINDLE_MODE(s, 1e30)`; otherwise `fabs(D)`. This is an enormous *interpreter-level* default, not a safe chuck limit. `src/emc/task/emccanon.cc:1866–1868` stores `css_maximum=fabs(css_max)`.
+2. **Datum and conversion:** `emccanon.cc:1876–1886` or `1900–1910` computes CSS factor from programmed surface speed and records `xoffset = g5xOffset.x + g92Offset.x + toolOffset.tran.x`. The spindle-on/speed message carries CSS factor, D cap and offset through Task/motion. Incorrect work/tool datum can therefore change requested speed even if the G-code S and D text is unchanged.
+3. **Commanded X, not independent workpiece measurement:** `src/emc/motion/control.c:1891–1906` computes `denom=fabs(xoffset - carte_pos_cmd.tran.x)`; when positive, requested speed is `css_factor/denom`; when zero, it uses stored speed. It then applies net spindle scale and clamps to the `speed` cap associated with G96 D. The formula uses **commanded Cartesian X** and configured offsets, not an independently verified workpiece radius or physical RPM sensor.
+4. **Additional ordinary motion cap exists:** `control.c:1912–1925` clamps to configured positive/negative spindle velocity limits after the D cap; `src/emc/motion/command.c:177–185` and `1566–1570` maintain spindle limits. Therefore **do not claim that omitting D necessarily produces unlimited commanded RPM**: the motion-level limits may still cap it. Conversely, neither ordinary D nor configured motion max is a qualified independent safety-rated speed limit or a physical chuck-retention proof.
+5. **Output is a command:** `control.c:1927–1939` writes `spindle.N.speed-out` in RPM and `speed-out-rps` in RPS. These are command-side values, not measured `spindle.N.speed-in`. Ordinary `at-speed` and fault pins have separate HAL provenance; none proves actual safe stopping or guarding.
+
+## Fault/human-factor matrix (INFERENCE unless otherwise labeled)
+| Offline scenario | Source-grounded discriminator | What cannot be concluded |
+|---|---|---|
+| `G96 S...` without D | Interpreter passes 1e30; later motion spindle limits still apply | No blanket claim of physically unlimited RPM or safe max |
+| Work offset or tool X datum wrong | CSS denominator uses offset plus commanded X | No assertion of actual workpiece radius, cutting speed or spindle response |
+| Chuck/workpiece rated below configured motion maximum | Ordinary caps are configured commands | No claim of safe retention, jaw force, guarding or achieved PL/SIL |
+| Encoder stalls or commanded speed is displayed green | `speed-out` is output command, not `speed-in` physical feedback | No physical RPM, standstill or safety release |
+| Guard opened while CSS active | G96 has no independent guard/stop authority | No exposure permission; selected safety system/final elements must own protective action |
+
+## Practical safety engineering
+For a lathe, make the *safe* setup easy: an offline tool/work datum check; explicit D in programs/posts when justified by machine/process limits; clearly labeled commanded-versus-actual RPM; independently selected spindle overspeed/guard/containment protection when the risk assessment requires it; accessible, usable chuck guards and safe workholding procedures. If an operator habitually defeats guards to change stock or clear chips, redesign the workflow rather than treating the bypass as acceptable. A numeric RPM displayed by LinuxCNC is **not** a personnel-safety witness.
+
+Other machines: mills and grinders require their own tool/wheel ratings and guards; press-brake Y1/Y2 gravity holding is unrelated to CSS; robots/plasma have separate hazards. Do not transfer lathe spindle limits or test results to those machines.
+
+## Evidence and lab decision
+**SOURCE-CONFIRMED:** pinned G96 parser→canonical→motion command/caps and datum computation. **DOC-CONFIRMED:** official G96 D optional/X0-center requirement. **COMMUNITY-REPORTED:** none relied upon for this claim. **INFERENCE:** fault outcomes, usability mitigation and hazard consequences. **UNKNOWN:** actual machine spindle/chuck rating, physical RPM, configuration limits, sensor faults, guard/stop architecture and stopping time. **TEST-CONFIRMED none**. No lab: source resolves the code-path question; no local runner physical-isolation proof, no need to consume hosted minutes, and a software lab could not validate chuck containment. A qualified independent physical assessment is a separate machine-specific gate. OpenPressBrake Stage A A–G UNKNOWN; **G0/G1 HOLD; G2 NOT RUN; G3/G4 NOT AUTHORIZED; G5 HOLD**; 2520–25F0 independent evaluation OPEN.

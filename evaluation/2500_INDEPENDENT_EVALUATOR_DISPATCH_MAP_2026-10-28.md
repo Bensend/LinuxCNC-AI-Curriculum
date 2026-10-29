@@ -19,10 +19,14 @@ The canonical 2520–25F0 safety sequence has **14 existing information-separate
 | 25B0 | [faults, diagnostics, CCF and proof](25B0_INFORMATION_SEPARATED_COMPETENCY_HANDOFF.md) | Evaluator protocol; evaluator constructs a novel scenario | OPEN / NOT RUN |
 | 25C0 | [safeguard-defeat human factors](25C0_INFORMATION_SEPARATED_COMPETENCY_HANDOFF.md) | Evaluator protocol; evaluator constructs a novel scenario | OPEN / NOT RUN |
 | 25D0 | [cost-effective architecture selection](25D0_INFORMATION_SEPARATED_COMPETENCY_HANDOFF.md) | Evaluator protocol; evaluator constructs a novel scenario | OPEN / NOT RUN |
-| 25E0 | [commissioning/validation/change control](25E0_EXTERNAL_EVALUATOR_HANDOFF_2026-09-23.md) | **PUBLIC fixed challenge; exposure check required, prefer novel replacement for blind scoring** | OPEN / NOT RUN |
+| 25E0 | [novel commissioning/validation/change-control evaluator contract](25E0_INFORMATION_SEPARATED_COMPETENCY_HANDOFF.md) | **Protocol-only current dispatch; [historical public challenge](25E0_EXTERNAL_EVALUATOR_HANDOFF_2026-09-23.md) is practice / potential contamination** | OPEN / NOT RUN |
 | 25F0 | [cross-machine safety capstone](25F0_INFORMATION_SEPARATED_COMPETENCY_HANDOFF.md) | Evaluator protocol; evaluator constructs a novel scenario | OPEN / NOT RUN |
 
 **Specific contamination trap:** Unlike the other 13 primarily protocol/selection handoffs, [25E0](25E0_EXTERNAL_EVALUATOR_HANDOFF_2026-09-23.md) already publishes an explicit generic-machine **Challenge** in a learner-readable repository file. It contains no solution key, but a fresh learner may have seen or rehearsed the challenge. **Do not automatically count its exact public challenge as blind.** The evaluator must document learner exposure and select a materially novel commissioning/change scenario when the original is contaminated. This is an **inspection-confirmed public exposure risk**, not a claim that any actual learner was contaminated.
+
+## 2026-10-29 dispatch repair — 25E0 fixed-question exposure closed at selection boundary
+
+A [new protocol-only 25E0 handoff](25E0_INFORMATION_SEPARATED_COMPETENCY_HANDOFF.md) requires a **different, evaluator-selected novel machine/change**, SRS-derived physical witnesses, independent precommitment, and safe fault-case selection. The [original 2026-09-23 public challenge](25E0_EXTERNAL_EVALUATOR_HANDOFF_2026-09-23.md) remains unchanged as historical practice except for an explicit non-blind warning. This fixes the *dispatch-surface risk*, **not** the missing independent score. The original 14 protocols were directly read on 2026-10-29; no hidden key was accessed. All 14 external gates remain OPEN/NOT RUN; G0/G1 remains HOLD. No physical tests, hosted/local compute or evaluation occurred.
 
 ## Minimum evaluator dispatch transaction
 1. **Evaluator separate from learner:** evaluator chooses a genuinely unseen machine/variant, freezes the oracle and contamination check outside learner-readable Git; do not post hidden answers in this repository. Preserve the selected handoff ID, revision, versioned public sources, evaluator identity/role and challenge bank designation.

@@ -1,0 +1,17 @@
+# 2026-10-29T02:32:32.535Z — 4400 OPB-PWR-AGG-01 source-depth; physical/evaluator next
+
+**Session start:** 2026-10-29T02:32:32.535Z, recorded in [pre-work UTC marker](2026-10-29T023232Z-session-start-safety.md). Supersedes [EOFFSET/FSOE checkpoint](2026-10-29T013131Z-4400-eoffset-fsoe-black-channel-physical-evaluator-next.md). End/elapsed/overlap are in the complete LESSON_LOG appended immediately before ending.
+
+## Durable evidence gained
+- [Original cross-repository source audit](../research/4400_OPB_PWR_AGG_01_SAFETY_INTERFACE_CHILD_PACKAGE_FIELD_LOAD_AND_SWITCHED_DOMAIN_SOURCE_AUDIT_2026-10-29.md) and [short field card](../safety-course/4400_OPB_PWR_AGG_01_PACKAGE_RAIL_FIELD_LOAD_AND_INDEPENDENT_STOP_FIELD_CARD_2026-10-29.md) distinguish seven semantic ISO1212 status channels from populated dual-channel packages; six safety-interface ordinary outputs from whole-board eight; logic-side versus switched-side isolator current from **UNKNOWN** actual L7/L07 field load/contact/connector ratings. Exact current OpenPressBrake source blobs and 2026-09-24 publication dates recorded. This is not a new 2026-10-29 hardware revision.
+- **DOC-CONFIRMED** original TI ISO1212 product page distinguishes multichannel density from ISO1211 channel-to-channel isolation and labels functional safety capable as documentation support. Shared package/rail faults must not be mistaken for seven independent safety channels.
+- Predecessor comparison: OPB-CUTOVER-02 already teaches 11K2, wire75/wire63, mute and return; OPB-ISO-03 already teaches switched-domain fault-status invalidity. New contribution is resource accounting and common package/rail validity. **SOURCE-CONFIRMED** project design; **DOC-CONFIRMED** TI product scope; **INFERENCE** arithmetic and hypothetical common-cause failure; **UNKNOWN** as-built physical behavior; **TEST-CONFIRMED none**.
+- Updated curriculum, progress, safety research, canonical index and cumulative design **§11LP**. No new exam bank, owner questionnaire, simulation or physical test. GitHub-hosted compute **0 min**, self-hosted compute **0 min**; LAB_COMPUTE_LOG and FEEDBACK_SCORE_LOG unchanged.
+
+## Next work, strictly prioritized
+1. **Primary external gate:** qualified OpenPressBrake Stage A A–G as-built identity, Pilz/AKAS active configuration, K1/K2/EDM, wire75/63 independent final elements, Y1/Y2 hydraulic stop and gravity-load hold, guards, isolation, deliberate fresh restart, and independent qualified witness. Do not expand the owner-facing one-page request. **G0/G1 HOLD; G2 NOT RUN; G3/G4 NOT AUTHORIZED; G5 HOLD. No personnel-exposed hazardous operation.**
+2. **Independent competency gate:** 2520–25F0 blind external evaluator remains OPEN/NOT RUN. Do not inspect sealed answers or self-score.
+3. **If still no external evidence:** rotate to a *genuinely distinct* open 4400 safety question after full index/research/progress and nearest-source predecessor checks. Avoid duplicate source audits or more unscored paper banks. The OPB-PWR-AGG branch has reached a defensible documentary information-gain stop until actual board aggregation/netlist or qualified machine evidence changes.
+4. **Compute:** no hosted runners/minutes. A justified local experiment requires verified `[self-hosted, openpressbrake]` dispatch plus independently established physical isolation of the panel PC from hazardous machine I/O; no current proof. Frozen G43.2 simulation remains undispatched.
+
+**1000/2000/F02 graduated/closed; completed 3000 preserved; 4400 safety active.** Keep recurring curriculum enabled.

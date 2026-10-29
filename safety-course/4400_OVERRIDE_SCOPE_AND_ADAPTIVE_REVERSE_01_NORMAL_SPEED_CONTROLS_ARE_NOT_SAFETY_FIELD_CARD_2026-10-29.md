@@ -18,6 +18,11 @@ A process sensor is connected to `motion.adaptive-feed`. A technician assumes `-
 
 **Initialization nuance:** Pinned `motion.c` initializes `motion.adaptive-feed` to **1.0**. An unwired or not-yet-valid process signal is not automatically a feed hold; no runtime disconnect behavior is claimed. The inspected scaling branch also has no explicit finite-value validation before using the adaptive input; NaN downstream effects remain UNKNOWN, not a proven machine failure.\n\n**Safer-by-default ordinary design:** If reverse is not part of the process, constrain and validate the producer to nonnegative values, with explicit stale/fault behavior and independent process-stop handling. If reverse is intended, show the requested direction, current ordinary trajectory direction, and state freshness; do not label negative feed simply as slow. Never use this software state for personnel-protective access or a safety stop.
 
+
+## Review C — reversing across an M62/M63 output event
+
+[Exact source composition](../research/4400_REVERSE_DIO_01_LINUXCNC_2910_M52_REVERSE_DOES_NOT_INVERT_ONE_SHOT_M62_M63_OUTPUT_SOURCE_COMPOSITION_2026-10-29.md): M62/M63 output commands are copied into queued trajectory segments and consumed once by `tpToggleDIOs`; a reverse queue step does **not** automatically generate the inverse ON/OFF event. A technician must not assume reversing the toolpath also restores earlier torch/laser/coolant/valve requests. The exact physical output sequence depends on the actual queue and command history and was **NOT RUN**. Make ordinary process-output request/feedback and independently validated hazardous-energy isolation different functions. Do not run a live beam/torch reversal experiment with people exposed.
+
 ## Stop/hold authority worksheet (answer without operating a machine)
 For either review, fill in separately:
 

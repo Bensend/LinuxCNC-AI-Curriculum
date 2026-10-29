@@ -1571,3 +1571,6 @@ UTC start captured before governance work in [start marker](checkpoints/2026-10-
 
 
 **Same-session FIELD-VISIT-01 adversarial follow-through:** reviewed the exact current OpenPressBrake `docs/VERIFY_AT_MACHINE.md` after the 07:37Z initial safety-hold fix and found 11 remaining point-of-use access ambiguities (photos, switch tracing, wiring comparison, cable reroute, safety status). Corrected OpenPressBrake main in [`8872579`](https://github.com/Bensend/OpenPressBrake/commit/8872579c3fbaae1a4b9cd8fe7990aebf0c5e6891), verified one-file diff **13 additions/9 deletions** against `50fd515`. **SOURCE-CONFIRMED** checklist wording/human-factors correction; no selected-machine A–G evidence, energized work, physical stop/hold, machine operation or independent evaluator. No hosted/local compute; G0/G1 HOLD.
+
+
+**G53/G91 same-session homing implementation witness:** pinned LinuxCNC v2.9.10 `src/emc/motion/homing.c` blob `13f74f43a1169606e87c7bd8d48f44a2cad6fa74` sets joint coordinates from `H[joint_num].home_offset` then commands final `joint->free_tp.pos_cmd = H[joint_num].home` (lines 1118–1134, 1274–1287). **SOURCE-CONFIRMED** machine-coordinate reference and configured final HOME are separate, not necessarily both zero. Selected OpenPressBrake physical home/kinematics UNKNOWN; no runtime or physical test.

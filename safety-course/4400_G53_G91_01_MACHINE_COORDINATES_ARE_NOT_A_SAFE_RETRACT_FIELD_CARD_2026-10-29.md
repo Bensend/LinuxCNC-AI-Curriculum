@@ -13,3 +13,6 @@ A G53 G0 XYZ move is an **ordinary combined rapid**, not a guaranteed Z-first cl
 
 
 **Error-order detail:** Tagged `parse_line → check_items → check_g_codes` rejects the bad G53/G91 block before **that block's** motion conversion. This does **not** establish that earlier queued motions have stopped, nor that a person may enter the machine after an interpreter error. Independent physical stop/hold and clearance are still required.
+
+
+**“Home” is not automatically machine zero:** The tagged G53 manual labels `G53 G0 X0 Y0 Z0` a home move, but the tagged homing guide defines a configurable final **`[JOINT_N]HOME`** position distinct from **`HOME_OFFSET`** and G53 machine origin. On a particular machine these can differ. Inspect actual homing configuration and geometry; never use G53 zero as a universal parking, tool-change or access position.

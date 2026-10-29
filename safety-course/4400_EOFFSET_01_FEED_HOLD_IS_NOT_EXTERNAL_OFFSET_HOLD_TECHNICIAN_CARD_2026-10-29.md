@@ -26,3 +26,6 @@ Can the reviewer trace the normal G-code feed-scale path separately from the ext
 **Sources:** [exact pinned v2.9.10 audit](../research/4400_EOFFSET_01_LINUXCNC_2910_INDEPENDENT_OFFSET_MOTION_DISABLE_LATCH_AND_SILENT_WARNING_SOURCE_AUDIT_2026-10-29.md), [official LinuxCNC 2.9 external offsets](https://linuxcnc.org/docs/2.9/html/motion/external-offsets.html), [safety course entry](SAFETY_COURSE_ENTRY_CARD_2026-10-28.md), [Stage A evidence request](4400_OPENPRESSBRAKE_G0_EVIDENCE_REQUEST_ONE_PAGE_2026-10-25.md).
 
 **OpenPressBrake actual configuration UNKNOWN.** No runtime test, physical stop, hydraulic load hold, guard, isolation or fresh restart proved. **G0/G1 HOLD; G2 NOT RUN; G3/G4 NOT AUTHORIZED; G5 HOLD. No personnel-exposed hazardous operation.**
+
+
+**Upstream counterexample to “paused means safe”:** the original v2.9.10 [`jwp_z_panel.hal`](https://github.com/LinuxCNC/linuxcnc/blob/v2.9.10/configs/sim/axis/external_offsets/jwp_z_panel.hal) deliberately connects `halui.program.is-paused` to `axis.z.eoffset-enable`; its `M0` demo asks the operator to change Z offset while paused. This is **SOURCE-CONFIRMED demo wiring, NOT RUN**. Therefore display **PROGRAM PAUSED** separately from **EXTERNAL OFFSET APPLIED** and from independent safety permission. Never grant access to dies, tools or moving axes solely because the program is paused.

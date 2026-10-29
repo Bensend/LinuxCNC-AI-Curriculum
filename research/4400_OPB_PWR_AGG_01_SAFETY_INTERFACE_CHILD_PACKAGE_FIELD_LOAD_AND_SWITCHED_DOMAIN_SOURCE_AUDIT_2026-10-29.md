@@ -1,0 +1,61 @@
+# 4400-OPB-PWR-AGG-01 — Rev1 safety-interface composition: channel count is not package count, and logic current is not switched field-load current
+
+**2026-10-29 | cross-repository SOURCE-CONFIRMED design-contract audit | NON-GRADUATED | no selected-machine inspection, no electrical validation, no safety-function credit.**
+
+## Bounded question and novelty decision
+
+When the proposed OpenPressBrake replacement board preserves the retained 11K2-switched L7/L07 interface, can a green FPGA status or an apparently complete *seven-input/six-output* power tally establish that the field interface, Pilz handshakes and independent stopping/holding remain safe after power loss or return?
+
+**No.** The exact published design assigns ordinary control/monitoring only. The new, inspectable contribution here is the **unit-of-accounting and power-domain mismatch** that can arise when composing semantic I/O channels from shared semiconductor packages, plus an explicit release-blocking distinction between logic-side quiescent current, process-side isolator current and actual switched field-load current.
+
+**Predecessors directly compared:** [OPB-CUTOVER-02](4400_OPB_CUTOVER_02_PILZ_MUTE_GATE_POWER_DOMAIN_CROSS_REPOSITORY_SOURCE_AUDIT_2026-10-27.md) already identifies the six CNC→Pilz handshakes, seven Pilz→CNC statuses, L7/L07, wire 75 and wire 63. [OPB-ISO-03](4400_OPB_L7_L07_ISOLATOR_POWER_LOSS_FAULT_DIAGNOSTIC_POLARITY_SOURCE_AUDIT_2026-10-27.md) already establishes STISO620/621 power-off diagnostic invalidity and FLT1/FLT2 naming conflicts. This audit **does not claim** new independent safety authority, a newly discovered L07 backfeed hazard, or an installed machine defect. The increment is exact child-manifest **population arithmetic** and the **missing field-load/supply/connector acceptance witness** in the already published safety-interface composition. No new paper exam bank.
+
+## Immutable original project sources and publication dates
+
+The following are **SOURCE-CONFIRMED statements in public repository design files**, not as-built wiring or physical tests. Files inspected through the connected GitHub repository on 2026-10-29:
+
+| Source | Git blob | Exact bounded finding |
+|---|---|---|
+| [Safety-interface composition](https://github.com/Bensend/OpenPressBrake/blob/main/hardware/blocks/safety_interface/REV1_STRUCTURAL_COMPOSITION_CONTRACT.yaml) | `ae378263e5b0455da3acdd2483c0b8fa49a8b588` | Seven `digital_input_24v` semantic instances; six `digital_output_24v` instances; 11K2-switched L7/L07; no L07→L06 bridge; wire 75 Pilz hardware permission and wire 63 direct Pilz→drive; power must be aggregated from child contracts, not copied or replaced with zero. |
+| [Safety-interface status](https://github.com/Bensend/OpenPressBrake/blob/main/hardware/blocks/safety_interface/STATUS_CHECKLIST.md) | `2f12be48e4b82523dbb62f11894283f49b765679` | **BEHAVIORAL ONLY / NOT SCHEMATIC-READY**; independent-safety interface/protection, circuit, connector, board integration and machine witness unchecked. |
+| [Input child manifest](https://github.com/Bensend/OpenPressBrake/blob/main/hardware/blocks/digital_input_24v/manifest.yaml) | `f233bdd7779b0f47efe3f1f23c89343d5bb5e8d8` | ISO1212 **dual-channel package**; logic quiescent maximum **1.9 mA per populated dual package**, not per semantic input; field-input current is a different domain. |
+| [Output child manifest](https://github.com/Bensend/OpenPressBrake/blob/main/hardware/blocks/digital_output_24v/manifest.yaml) | `ddf518670efa2a856649230d43b914a69c9e1cc7` | One STISO621 per output, one STISO620 per paired outputs; specified logic-side and switched-process-side isolator current formulas. Field-load current, channel ampacity, inrush, simultaneous thermal envelope and connectors remain TBD. `machine_required_channels_rev1: 8` is the **whole-machine** output population, not a contradiction of the **six safety-interface handshakes**. |
+| [Safety-interface manifest](https://github.com/Bensend/OpenPressBrake/blob/main/hardware/blocks/safety_interface/manifest.yaml) | Retrieved 2026-10-29; inspect its current Git blob before design release | Explicit board ownership of dependent I/O package packing, rail aggregation and no-backfeed review; `safety_role` is non-safety monitoring/handshake only. |
+
+Publication-freshness check: [commit d5cdb411](https://github.com/Bensend/OpenPressBrake/commit/d5cdb411efafaa86fd415bd59f8e0638969ab8f5), which added the child-power delegation, is dated **2026-09-24T11:23:15Z**; [commit 6ff42eef](https://github.com/Bensend/OpenPressBrake/commit/6ff42eef0b8ec826a06705b787754fe481f0f1da) recorded the checkpoint **2026-09-24T11:23:29Z**. **First curriculum audit is 2026-10-29; this is not a newly published 2026-10-29 hardware change.**
+
+## Static package arithmetic — a design-review discriminator, not a measured rail budget
+
+For a **standalone seven-channel input group**, four dual-channel ISO1212 packages are required by channel capacity. At the manifest's maximum quiescent package value, the *input receiver portion* would contribute **4 × 1.9 = 7.6 mA on logic 3V3**. Multiplying 7 × 1.9 = 13.3 mA is the wrong unit (semantic channel versus package). Actual board-level marginal current depends on package sharing, placement and other populated inputs; this is **not** a final board supply value.
+
+For **six** ordinary output channels, the child manifest's per-package formulas give **six STISO621 and three STISO620**: switched-process isolator current **6 × 2.00 + 3 × 0.72 = 14.16 mA maximum** under its stated design assumptions; logic-side isolator current **6 × 2.00 + 3 × 2.80 = 20.40 mA maximum**. These are *isolator* terms, not six output-load currents. The whole-machine eight-output child manifest separately lists **18.88 mA switched-side and 27.20 mA logic-side** isolator terms; do not add both the six-channel subset and eight-channel total, which would double-count shared resources. The exact population and rail routing require board integration.
+
+**SOURCE-CONFIRMED ambiguity to resolve before release:** the composition YAML says to “multiply current child contract by seven/six.” That must be interpreted through each child's **resource-unit schema and packing rule**, not as a blind multiplication of a package-level current by semantic channels. This is a potential integration interpretation trap, **not proof that an actual calculation, PCB or BOM is wrong**. A proper aggregator records the source blob, unit, number of populated packages, rail, common return and inclusion/exclusion of each term.
+
+**Critical unresolved term:** actual field output load currents, inductive inrush/demagnetization, supply transients, connector ampacity, 11K2 switching/contact ratings, return-path integrity and worst-case simultaneous loads are **UNKNOWN/TBD** in the published child contract. An isolator power calculation cannot close them. A “fail-closed on missing child terms” design statement is not an executed integration gate or physical protection.
+
+## Causal safety-boundary analysis
+
+| Plane | Published authority | Credible failure or misleading observation | Independent witness required |
+|---|---|---|---|
+| **Ordinary control** | LinuxCNC/FPGA drives wires 42–47 via six protected outputs; wire 44 is a **mute request**, wire 45 is **CNC OK**, not safety decisions. | Stale command, power-restored output, undervoltage or unreviewed population changes ordinary handshake semantics. **INFERENCE**, not observed. | Frozen board netlist, exact machine harness, command/fault mapping, power-up/off behavior, qualified commissioning. |
+| **Diagnostics** | Seven Pilz→FPGA status inputs; output FLT1/FLT2 and optional INPUT_VALID are ordinary observations. | Logic-side status can remain powered while L7/L07 field domain is unavailable; a low fault/status bit may be **invalid**, not healthy. This state-dependent source mechanism was already established in OPB-ISO-03. | Separate field-power-valid indication and explicit INVALID/STALE state; inspect actual diagnostic polarity and signal validity. |
+| **Independent safety control** | Retained Pilz/AKAS/SICK application and hardwired wire-75 permission and wire-63 direct path must remain independently authoritative. | If a safety decision silently trusts an ordinary mute/OK level or a return bridge defeats switched power, normal I/O could affect a safety function. **INFERENCE; actual program/wiring UNKNOWN.** | Stage A **C/F**: selected safety program revision, safety function requirements, reset/mute qualification, exact final-element wiring, independent reviewer. |
+| **Physical energy removal/hold** | Actual contactors, valves, hydraulic zones, gravity restraint and guards; **not** the FPGA, isolator or rail-budget worksheet. | Even correct nominal power/current arithmetic cannot prove valve release, load retention, guard coverage or safe restart. | Stage A **D/G**: qualified physical Y1/Y2 stop/hold and no-backfeed witness, excluded personnel, independent acceptance. |
+
+### Adversarial design-review propositions (paper-only, not energized fault instructions)
+
+1. A seven-input composition uses four dual-channel receiver packages; a worksheet multiplies 1.9 mA by seven. **Reject** as unit mismatch, but do not assert a board failure without the real aggregation and BOM.
+2. The six-handshake isolator rail budget is known; six external loads are assigned zero because their connector currents are TBD. **Reject**: unresolved is not zero, and field load belongs to a separate domain.
+3. The eight-channel board capacity is treated as eight *additional* channels after the six safety-interface handshakes. **Reject** double counting until the actual machine population is reconciled.
+4. A green FPGA fault LED remains low after L7/L07 loss. **Reject** as independent safe-state evidence; field supply and diagnostic validity must be separated.
+5. Wire 75 is represented as a software permission because the FPGA can observe Pilz status. **Reject**: physical independent gate must be established in actual wiring and safety design.
+6. A qualified reviewer receives only a netlist and rail spreadsheet. **Still HOLD** for personnel exposure until independent stop, gravity hold, guarding, isolation and deliberate restart are proven.
+
+## Practical acceptance and human factors
+
+Keep the first-contact owner Stage A A–G packet **unchanged**. In restricted **Stage B only after an exact installed-component match**, reconcile the existing board integration's package-unit table, L7/L07 field-load and return-path budget, connector/contact ratings, and independent wire-75/wire-63 authority against the qualified as-built safety review. Use a single visible status for **POWER UNVERIFIED / DIAGNOSTICS INVALID** instead of displaying “healthy” when the field domain is absent. This reduces incentive to bypass an inconvenient status indication by providing a clear reason and a simple qualified recovery path; no operator usability testing has occurred.
+
+**Evidence classification:** source design statements **SOURCE-CONFIRMED**; cited ST/TI component ratings inherited from exact child manifests are **SOURCE-CONFIRMED as quoted manufacturer assumptions**, not independently remeasured in this session; arithmetic **INFERENCE (checkable)**; actual installed safety system, rail margins, output loads, physical stop/hold, field-power invalidation and reset behavior **UNKNOWN**; **TEST-CONFIRMED none**. No simulation, synthesis, Actions, bench or hazardous operation was performed. No PL/SIL/PFH, stop time, pressure or hydraulic valve truth table is assigned.
+
+**Status: G0/G1 HOLD; G2 NOT RUN; G3/G4 NOT AUTHORIZED; G5 HOLD.** 2520–25F0 independent evaluator remains OPEN. This is a cross-repository design-reconciliation artifact, not board-design ownership transfer or a machine release.

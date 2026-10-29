@@ -17,3 +17,7 @@
 4. No lab justified by HOSE-SHIELD-01: original manufacturer documentation resolves its conceptual distinction. For any future frozen lab, only a reviewed bounded `[self-hosted, openpressbrake]` workflow after independently proven physical isolation; no GitHub-hosted fallback or compute by default.
 
 **No personnel-exposed hazardous operation. Ordinary LinuxCNC/HAL/FPGA has no personnel-safety authority.**
+
+
+## Same-session second source branch — tagged G53/G91 normal-control retreat
+[Original v2.9.10 source/doc discrepancy](../research/4400_G53_G91_01_LINUXCNC_2910_MACHINE_COORDINATE_INCREMENTAL_REJECTION_DOC_OMISSION_SOURCE_DELTA_2026-10-29.md) → [field card](../safety-course/4400_G53_G91_01_MACHINE_COORDINATES_ARE_NOT_A_SAFE_RETRACT_FIELD_CARD_2026-10-29.md). Existing G28/G30 already documented nonmodal G53 and combined rapid; **new** tagged `interp_check.cc` check rejects explicit/inherited G91 with G53, while G53 manual's error list omits it. No machine simulation, physical test or independent safety claim. Updated canonical progress/curriculum/index/research/design §11LY and G28 predecessor. Stage A/evaluator next priority unchanged.

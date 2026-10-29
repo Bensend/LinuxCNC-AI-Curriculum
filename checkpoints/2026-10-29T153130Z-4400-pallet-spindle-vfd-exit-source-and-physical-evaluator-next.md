@@ -34,3 +34,7 @@ The currently exposed GitHub connector permits repository file/issue/commit read
 
 ## Final source-reference QA
 Validated **38 pinned LinuxCNC source/documentation line-range references across 18 distinct revision-qualified source files**: all fetched at their declared SHA, and every anchor range was within the actual file's line count; **zero invalid source targets/ranges**. Also verified **17 local relative-link occurrences / 11 targets** across the first six research/cards, **one** VFD local link, and **eight** checkpoint links, with **zero missing destinations**. This is documentary link integrity, **not** a build, simulation, runtime test, or safety validation.
+
+
+## Final source-standard and predecessor reconciliation
+VFD-EXIT-01 now includes official **ISO 14118:2017 catalog abstract** (unexpected start, no machine-specific PL/SIL), **IEC 61800-5-2:2016 catalog abstract** (safety-related drive integration/validation, not a generic Modbus watchdog rating), and **OSHA 29 CFR 1910.147** (servicing/maintenance energy isolation scope); complete ISO/IEC normative texts were **not** inspected. Existing [RST-01 power-return/reset module](../safety-course/4400_RST_01_POWER_RETURN_RESET_EDM_AND_FRESH_START_MODULE_2026-10-24.md) was extended with the exact VFD/Modbus exit transfer instead of manufacturing another independent evaluator or repeating prior reset cases. No additional tests, compute or machine evidence.

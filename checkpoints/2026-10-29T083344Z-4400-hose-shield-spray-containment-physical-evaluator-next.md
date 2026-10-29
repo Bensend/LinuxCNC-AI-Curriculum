@@ -21,3 +21,7 @@
 
 ## Same-session second source branch — tagged G53/G91 normal-control retreat
 [Original v2.9.10 source/doc discrepancy](../research/4400_G53_G91_01_LINUXCNC_2910_MACHINE_COORDINATE_INCREMENTAL_REJECTION_DOC_OMISSION_SOURCE_DELTA_2026-10-29.md) → [field card](../safety-course/4400_G53_G91_01_MACHINE_COORDINATES_ARE_NOT_A_SAFE_RETRACT_FIELD_CARD_2026-10-29.md). Existing G28/G30 already documented nonmodal G53 and combined rapid; **new** tagged `interp_check.cc` check rejects explicit/inherited G91 with G53, while G53 manual's error list omits it. No machine simulation, physical test or independent safety claim. Updated canonical progress/curriculum/index/research/design §11LY and G28 predecessor. Stage A/evaluator next priority unchanged.
+
+
+## Same-session third branch — original machine-checklist adversarial correction
+Directly re-read OpenPressBrake `docs/VERIFY_AT_MACHINE.md` after earlier 07:37Z safety hold and found residual point-of-use prompts for cabinet/coil/valve-block photos, wiring tracing, physical reroute and safety status. [OpenPressBrake `8872579`](https://github.com/Bensend/OpenPressBrake/commit/8872579c3fbaae1a4b9cd8fe7990aebf0c5e6891) implements 11 narrow wording fixes; one-file diff independently verified. Updated existing FIELD-VISIT-01 investigation/technician card and design §11LW; **no** new field evidence or permission to energize, open cabinets, enter danger zone or move the ram. Next priority unchanged: restricted qualified Stage A A–G and independent evaluator, both OPEN.

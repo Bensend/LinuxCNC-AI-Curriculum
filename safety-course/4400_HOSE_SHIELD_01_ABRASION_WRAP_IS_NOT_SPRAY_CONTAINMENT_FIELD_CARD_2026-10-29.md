@@ -17,3 +17,6 @@ A hydraulic hose near a person can have **four different safeguards** that are e
 **Human-factor fix:** Make the safe hose route, protective guard and end-clamp assembly simple to install and inspect; locate drain outlets and pressure-witness points away from operator/service positions; use a keyed replacement kit and easy guard reinstallation. A guard that must be routinely defeated to see a leak needs redesign.
 
 **Evidence:** Parker/Gates product statements **DOC-CONFIRMED**, cross-machine application **INFERENCE**, installed OpenPressBrake condition **UNKNOWN**, physical tests **NOT RUN**. Reuse existing restricted Stage A A–G intake, no extra owner form. **G0/G1 HOLD; G2 NOT RUN; G3/G4 NOT AUTHORIZED; G5 HOLD.**
+
+
+**Electrical false friend:** A Gates sleeve described as “non-conductive” is **not** proof that its enclosed hose, fluid, fittings or end clamps are electrically isolated. Parker 4400-B.1 §2.1.1 requires exact selected/marked nonconductive hose and equipment approval for applications that depend on electrical nonconductivity. Do not replace qualified electrical isolation/verification with a plastic cover or conduct a live test to find out.

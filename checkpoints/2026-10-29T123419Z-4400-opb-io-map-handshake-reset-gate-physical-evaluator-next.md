@@ -14,3 +14,7 @@ SOURCE-CONFIRMED published docs and correction; DOC-CONFIRMED generic Pilz 10023
 2. If absent, choose a genuinely new safety source conflict/failure path using full index and nearest predecessor; do not re-create muting, restart or false-ready generic lessons. Prioritize actual selected-component data, independent physical witness or source contradiction with an actionable point-of-use correction.
 3. No lab until frozen unresolved question plus verified local `[self-hosted, openpressbrake]` access and independently qualified panel-PC physical isolation. No hosted fallback. Maintain G0/G1 HOLD and independent safety/final-element boundary.
 4. Preserve exact UTC end, elapsed minutes and overlap in complete LESSON_LOG with safe append and commit before exit. Continue hourly automation.
+
+
+## Same-session source-of-truth follow-through
+[OpenPressBrake Rev1 machine YAML comment-only correction](https://github.com/Bensend/OpenPressBrake/commit/e9bf068940820a5d4ee3e4064d1c25e8060d991c) qualifies `safe_state: inactive` at both the digital-output definition and the aggregate safe-state block. Verified original `2272a4e` versus new `3711933`: **noncomment lines identical**. No config values, code, I/O or safety behavior changed. This closes the point-of-use wording inconsistency in both human-readable I/O map and machine YAML; G0/G1 still HOLD.

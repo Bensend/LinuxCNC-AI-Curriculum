@@ -33,3 +33,5 @@ Directly re-read OpenPressBrake `docs/VERIFY_AT_MACHINE.md` after earlier 07:37Z
 
 
 **G53 same-session deeper source:** pinned `homing.c` blob `13f74f43a1169606e87c7bd8d48f44a2cad6fa74` explicitly distinguishes `home_offset` coordinate assignment from final `home` move; source-confirmed machine zero is not universally final HOME. Upstream master still has G53/G91 rejection and G53 documentation omission as of this read. No new machine proof or test.
+
+**Final OpenPressBrake source verification:** main `8872579c3fbaae1a4b9cd8fe7990aebf0c5e6891`, `docs/VERIFY_AT_MACHINE.md` blob `40b727ad0c95dc6eb1bc37f1d30a60d12e092a11` (9,001 characters), direct re-fetch confirmed point-of-use `DOCUMENTARY CROSS-CHECK ONLY`, optional-photo safe-exterior restriction and 16 `DEFERRED` occurrences. This is document evidence only, not a machine safety inspection.

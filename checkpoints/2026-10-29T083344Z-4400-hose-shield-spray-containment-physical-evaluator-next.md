@@ -30,3 +30,6 @@ Directly re-read OpenPressBrake `docs/VERIFY_AT_MACHINE.md` after earlier 07:37Z
 - LinuxCNC upstream annotated tag `v2.9.10` dereferenced through GitHub API to commit `86cdca76fa2a36274c432caa21952b23c267989a`; pinned G53 check, find, convert, parse, G-code docs and homing docs were read directly with blob identities recorded in the source audit. **No executable lab needed** for the source-only discrepancy.
 - New research/card/checkpoint relative-link audit: **16 occurrences, 11 unique existing targets, zero missing**. OpenPressBrake field-survey second-pass diff: **one file, 13 additions and nine deletions**, no wiring or software behavior change.
 - Source classification: **SOURCE-CONFIRMED** tagged interpreter and cross-repository documentation patch; **DOC-CONFIRMED** OEM sleeve and LinuxCNC homing/manual docs; **INFERENCE** conditional human failure paths; **UNKNOWN** selected physical machine; **TEST-CONFIRMED none**. No safety promotion.
+
+
+**G53 same-session deeper source:** pinned `homing.c` blob `13f74f43a1169606e87c7bd8d48f44a2cad6fa74` explicitly distinguishes `home_offset` coordinate assignment from final `home` move; source-confirmed machine zero is not universally final HOME. Upstream master still has G53/G91 rejection and G53 documentation omission as of this read. No new machine proof or test.

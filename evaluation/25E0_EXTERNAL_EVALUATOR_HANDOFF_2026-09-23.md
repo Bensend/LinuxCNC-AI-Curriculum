@@ -1,4 +1,6 @@
 # 25E0 external evaluator handoff — no solution key
+> **Historical public practice example — NOT A BLIND DISPATCH.** The fixed `## Challenge` below is visible in the learner-readable repository and may already be rehearsed. Use the [2026-10-29 novel-scenario evaluator contract](25E0_INFORMATION_SEPARATED_COMPETENCY_HANDOFF.md) for future information-separated 25E0 scoring. Preserve this original example for provenance; do not count its reuse as blind without independently proving no prior exposure.
+
 
 ## Information-separation rule
 

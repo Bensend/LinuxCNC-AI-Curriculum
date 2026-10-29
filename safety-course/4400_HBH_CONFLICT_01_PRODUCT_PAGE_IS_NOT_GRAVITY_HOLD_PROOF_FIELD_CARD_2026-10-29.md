@@ -1,0 +1,14 @@
+# 4400-HBH-CONFLICT-01 — A product page is not a gravity-load holding certificate
+**Technician/learner field card | 2026-10-29 | documentary source conflict; UNSCORED; no machine test.**
+
+**STOP at the discrepancy:** ROSS's [HBH product page](https://www.rosscontrols.com/en/series/1312-hbh) describes poppet blocking and vertical-load holding, while its [HBH operating-instructions *landing-page text*](https://www.rosscontrols.com/en/documents/242/block-stop-hbh-series-valve-systems) describes spool leakage, momentary stopping and supplemental holding. The **original PDF was not retrieved and verified**. Neither web statement may be promoted to an accepted machine-level safety claim while this conflict remains open. [Full provenance and conflict matrix](../research/4400_HBH_CONFLICT_01_ROSS_HBH_PRODUCT_VS_OPERATING_INSTRUCTIONS_LANDING_PAGE_STOP_HOLD_LEAKAGE_AUDIT_2026-10-29.md).
+
+**Use four distinct operator-visible states:** (1) ordinary CNC stop requested; (2) independent hydraulic stop commanded and monitored; (3) **physical load held with independent evidence**; (4) maintenance energy isolated, pressure verified and load mechanically supported. A valve-position signal can support (2); it cannot alone prove (3) or (4). A supply gauge at zero cannot prove that a blocked cylinder chamber is depressurized.
+
+**If selecting or maintaining a valve:** match exact part suffix, body and revision to a complete immutable OEM operating manual, certified functional-safety data and actual port/pilot cross-section. Ask the manufacturer to resolve the HBH poppet-versus-spool and long-hold-versus-momentary-stop conflict **before** assigning any safety function or rating. Check downstream hoses, cylinder seals, local trapped-pressure relief and independent Y1/Y2 support. A product-family label is not enough.
+
+**Human-factors design:** label the machine's pressure zones and accessible independent support points. Provide a straightforward, visible and documented safe maintenance workflow; never make a technician choose between an awkward guard/lockout and a quick shortcut. Do not defeat checks, crack fittings, open a cabinet, pressurize, or move the ram to resolve a paperwork conflict.
+
+**Two unscored transfer prompts:** (A) an HMI says “safety valve closed” but the OEM variant's leakage data is unavailable; identify the missing physical witness and hold the gate. (B) a vendor page says “PL e” while its document landing page says “PL d”; distinguish component claims, system-level safety integrity and physical stop/hold proof. No answers or scores are precommitted here.
+
+**State:** DOC-CONFIRMED contradictory web assertions; actual product truth **UNKNOWN**; no TEST-CONFIRMED physical result, no independent evaluation, no compute. G0/G1 HOLD. No personnel-exposed hazardous operation.

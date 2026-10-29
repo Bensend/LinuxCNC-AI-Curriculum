@@ -1262,3 +1262,5 @@ The [source/protocol audit](research/4400_EVAL_INTEGRITY_01_25E0_PUBLIC_CHALLENG
 
 ### 2026-10-29 — 4400-G96-CSS-01: D omission is not proof of either unbounded or safe spindle RPM
 [Pinned v2.9.10 G96 CSS source audit](research/4400_G96_CSS_01_LINUXCNC_2910_D_CAP_X0_OFFSET_AND_COMMAND_VS_PHYSICAL_OVERSPEED_SOURCE_AUDIT_2026-10-29.md) → [unscored field card](safety-course/4400_G96_CSS_01_D_CAP_IS_NOT_SAFE_SPINDLE_SPEED_FIELD_CARD_2026-10-29.md). New normal-command versus physical-speed discriminator: interpreter uses `1e30` when D absent, motion retains configured max clamp, CSS computes from commanded X and work/tool offsets, and `speed-out` is not measured RPM. No numeric machine limit, physical chuck containment, safe-speed PL/SIL or test; G0/G1 HOLD.
+
+**G96 same-session default-max audit:** `inispindle.cc` sets `1e99` RPM if no INI MAX_FORWARD_VELOCITY; pinned docs describe ~2.147e9 RPM. Preserve DOC/SOURCE numeric conflict; both fail as a practical default safety limit. No D plus no configured INI maximum must not be called safely capped. No physical result.

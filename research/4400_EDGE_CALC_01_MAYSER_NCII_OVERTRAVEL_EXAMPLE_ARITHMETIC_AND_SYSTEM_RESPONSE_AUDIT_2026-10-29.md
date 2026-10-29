@@ -1,5 +1,7 @@
 # 4400-EDGE-CALC-01 — A safety-edge catalogue example is not an independently checked stopping/overtravel calculation
 
+> **2026-10-29 18:40Z source-status upgrade:** [EDGE-CALC-02 original 2025 manufacturer PDF audit](4400_EDGE_CALC_02_MAYSER_2025_ORIGINAL_PAGE_ARITHMETIC_ACTIVE_LENGTH_INSTALLATION_LIMITS_AUDIT_2026-10-29.md) directly opened Mayser **080925 v2.13-RiA**, printed p.17/28 and visually confirmed the same `6.55`/`7.86` mismatch. The *older 050320 v2.11-RiA catalogue* below remains **indexed-only**; its retrieval limits are historical, not the current limit for the 2025 edition. The 2025 source also establishes non-sensitive ends, effective angle, installation exclusions and inspection obligations. No PDF byte hash or manufacturer erratum; no physical machine verdict.
+
 **2026-10-29 | Original arithmetic/provenance audit | NON-GRADUATED | PAPER ONLY | NO MACHINE RELEASE**
 
 ## Why this is a distinct follow-on

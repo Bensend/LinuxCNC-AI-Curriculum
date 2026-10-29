@@ -43,3 +43,9 @@ The **source question** "does LinuxCNC guarantee `shutdown.hal` on crash?" is an
 
 ## Current gates
 OpenPressBrake qualified Stage A A–G UNKNOWN; G0/G1 HOLD; G2 NOT RUN; G3/G4 NOT AUTHORIZED; G5 HOLD. Independent 2520–25F0 evaluation OPEN. No new graduate, no runtime, no machine operation, no hosted/local compute.
+
+
+## Authoritative standards/regulatory boundary (official abstracts, not full standards)
+- **DOC-CONFIRMED official [ISO 14118:2017 catalog abstract](https://www.iso.org/standard/66460.html), current edition confirmed 2023:** addresses designed-in prevention of unexpected start-up for safe human intervention, including electrical, hydraulic, pneumatic and stored energy. The abstract explicitly **does not assign a PL/SIL or prescribe a selected machine solution**. A process-exit or fieldbus timeout is not by itself evidence of meeting that goal. Full normative text was **not** inspected.
+- **DOC-CONFIRMED official [IEC 61800-5-2:2016 product-standard abstract](https://webstore.iec.ch/en/publication/24556):** addresses functional safety design/integration/validation of safety-related power-drive systems. This establishes the appropriate *class of drive safety evidence*, not a claim that a particular VFD's Modbus watchdog is STO or that it meets a given SIL/PL. Full normative text was **not** inspected.
+- **DOC-CONFIRMED [OSHA 29 CFR 1910.147](https://www.osha.gov/laws-regs/regulations/standardnumber/1910/1910.147):** covers specified servicing/maintenance exposure to unexpected energization/start or stored-energy release; its definition of an energy-isolating device excludes ordinary control-circuit pushbuttons/selectors. Applicability/exceptions require the actual work context. Do not substitute LinuxCNC exit, normal VFD RUN=0 or `shutdown.hal` for a required qualified isolation procedure.

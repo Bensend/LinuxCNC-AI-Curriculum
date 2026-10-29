@@ -20,6 +20,10 @@ For each case, fill in `HAZ / SF / source edition / physical proposition / missi
 9. A foot-operated single control is present. The builder labels it a two-hand protective device and copies an older two-hand distance. Which source and device-class questions must be resolved?
 10. A machine has a verified measured stop and a well-placed guard, but the guard is painful to remove for routine tool change, so it is often bypassed. What human-factors design change is needed without abandoning the protective function?
 
+## 2026-10-29 source-depth reminder — moving danger point and 2024 distance terms
+
+The [existing research addendum](../research/4400_ISO13855_2024_SEPARATION_DISTANCE_SCOPE_STOP_TIME_AND_GRAVITY_EXCEPTION_2026-10-24.md) now quotes the *scope* of Pilz's 2024-edition **manufacturer explainer**, not an inspected normative clause. Ask whether the hazardous point moves **toward** the approaching person during the protective response; distinguish fixed approach distance, `D_DS` device reach supplement, `Z` application/measurement/wear allowance and `S_M` danger-point displacement in the manufacturer's dynamic example. Require an independently evidenced hazard trajectory, not just LinuxCNC commanded position or a green stop bit. The Pilz page's highest-of-ten measured-time example is not proof of all modes/loads or a universal pass criterion. **No numerical separation distance, physical stop/hold or selected OpenPressBrake release follows.**
+
 ## Record template (copy once per distinct movement and approach path)
 | Field | Entry |
 |---|---|

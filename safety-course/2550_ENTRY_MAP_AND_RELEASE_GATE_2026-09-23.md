@@ -60,3 +60,6 @@ Treat any of these as a material miss:
 ## Next branch
 
 Create the no-solution information-separated evaluator handoff, then move to 2560 IEC 62061/SIL source preparation. 2520–2540 external gates remain branch-local and uncontaminated.
+
+## 2026-10-29 source-quality transfer — units and vendor pages
+The [HBH-CONFLICT-01 original manufacturer-web audit](../research/4400_HBH_CONFLICT_01_ROSS_HBH_PRODUCT_VS_OPERATING_INSTRUCTIONS_LANDING_PAGE_STOP_HOLD_LEAKAGE_AUDIT_2026-10-29.md) found a ROSS integration-guide landing page describing PL d using **MTTFd in 100–1,000 hours**; original Festo and KEYENCE teaching instead gives the standard MTTFd qualitative channel bands in **years** and shows PL requires architecture, diagnostics and common-cause reasoning. This is a **documentary source-conflict example**, not a new 2550 graduation or a hidden evaluator solution. Require units, edition, exact component certificate and complete safety-function validation; do not transfer a vendor webpage's numeric claim to the installed machine. External 2550 evaluation remains OPEN.

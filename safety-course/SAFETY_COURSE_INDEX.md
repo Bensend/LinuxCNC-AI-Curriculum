@@ -1487,3 +1487,6 @@ Read [existing Rockwell 440J ENABLE-01](../research/4400_ROCKWELL_440J_THREE_POS
 
 
 **Reusable 4400 point-of-use safety-output review:** [Eight-gate signal semantics card](4400_SIGNAL_SEMANTICS_01_MODE_POLARITY_TRANSITION_ENERGY_WITNESS_REVIEW_CARD_2026-10-29.md) derives identity/polarity/mode/transition/energy/geometry/integration/human factors from UR SW10_15 examples. It is a generic engineer worksheet, not an additional OpenPressBrake Stage A request or independent physical proof. No test/compute; G0/G1 HOLD.
+
+
+**ENABLE-02 / ROBOT-STATUS-01 OEM source-depth:** [UR 3PE mode/Freedrive matrix](../research/4400_ENABLE_02_UR_SW10_15_THREE_POSITION_MODE_FREEDRIVE_SF19_SF20_OUTPUT_CONTRACT_OEM_AUDIT_2026-10-29.md) now explicitly preserves a general-Manual-versus-Freedrive **wording tension** (runtime meaning UNKNOWN), while [UR Safety I/O addendum](../research/4400_ROBOT_STATUS_01_UR_SW10_15_MOVING_NOT_STOPPING_TOOL_IO_AND_SAFEGUARD_STOP_SEMANTICS_AUDIT_2026-10-29.md) records optional 1-ms/32-ms OSSD LOW test pulses, all outputs LOW on fault and external E-stop release needing a fresh external start. Two adjacent UNSCORED cases added to the existing technician card; no selected hardware/receiver, physical test or evaluator. G0/G1 HOLD.

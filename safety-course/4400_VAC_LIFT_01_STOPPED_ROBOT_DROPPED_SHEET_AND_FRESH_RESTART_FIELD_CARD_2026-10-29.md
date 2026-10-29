@@ -31,3 +31,8 @@ A motion E-stop, vacuum pump command, retained payload, clear falling-object zon
 **Stop rule:** If credible load retention or exclusion of all people from the drop zone is not established, the machine is **not safe for personnel-exposed operation**. Do not perform a deliberate load-drop test, energize the machine, enter the hazard zone, or bypass a guard to complete this card. Any future experimental operation needs independent approval and remote/isolated execution with no exposed personnel.
 
 **Competency status:** public practice only, no answer key, no independent evaluator or machine evidence. 2520/2580/2590/25F0 external gates OPEN; OpenPressBrake G0/G1 HOLD.
+
+## Two adjacent material-handling transfer prompts (unscored)
+The [2026 Eclipse Optimag E/P magnetic-lifter original-source audit](../research/4400_MAG_LIFT_01_ECLIPSE_2026_POWER_LOSS_HOLD_WLL_CONFLICT_AND_RELEASE_INTERLOCK_OEM_AUDIT_2026-10-29.md) contrasts a **bistable permanent magnet** with vacuum adhesion. These are different physical mechanisms, not interchangeable parts.
+9. A magnet remains ON after power is isolated. The operator says LOTO has removed every hazard. Explain the retained magnetic field, suspended load and positive-support/release boundary.
+10. A vendor's 2026 Optimag E PDF headline says 600 kg, while its Performance box and listed standard models top out at 400 kg. A painted, thin sheet is proposed. What exact OEM and physical evidence must be obtained, and why is neither number a selected-machine safe load?

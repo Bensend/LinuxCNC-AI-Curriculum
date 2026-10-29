@@ -16,3 +16,6 @@ Read START_HERE and required governance, latest 2026-10-28T23:39:56Z safety chec
 
 
 **Mayr variant-source follow-through:** original current manufacturer product pages distinguish ROBA brake-checker condition monitoring (including exact-variant B10d validation aid and special-S suffix caution) from ROBA SBCplus safety-related coil control advertised up to PL e/SIL CL3. The latter claim cannot be transferred to the former or to physical load holding. DOC-CONFIRMED product-page scope, no selected installation/PL calculation/test.
+
+
+**Static test source-access boundary:** Mayr official download center lists distinct rotary/static and linear/static brake-test recommendation PDFs (2022-04-26 and 2022-10-13), but full documents are restricted and **NOT READ**. No procedure/acceptance criteria inferred or simulated. Qualified selected-device reviewer must obtain exact OEM method privately if applicable; no new owner questionnaire or lab.

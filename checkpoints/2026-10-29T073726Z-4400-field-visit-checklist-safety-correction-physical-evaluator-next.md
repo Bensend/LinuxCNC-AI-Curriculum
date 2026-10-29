@@ -15,3 +15,5 @@
 4. No justified lab. GitHub-hosted compute **0**, self-hosted compute **0**; local runner accessibility and physical isolation UNKNOWN; do not use hosted fallback. LAB_COMPUTE_LOG and FEEDBACK_SCORE_LOG unchanged.
 
 **G0/G1 HOLD; G2 NOT RUN; G3/G4 NOT AUTHORIZED; G5 HOLD. No personnel-exposed hazardous operation.**
+
+**Same-session point-of-use follow-through:** [OpenPressBrake 50fd515](https://github.com/Bensend/OpenPressBrake/commit/50fd51523f190736d87a45a1f93c97cfccbf8d2b) further marks eight potentially hazardous checkboxes DEFERRED where they appear, in addition to the header correction bb1b788. New blob `42be7527795f2fbd7a3bb7cd9c710f699235546b`. No safety test or release.

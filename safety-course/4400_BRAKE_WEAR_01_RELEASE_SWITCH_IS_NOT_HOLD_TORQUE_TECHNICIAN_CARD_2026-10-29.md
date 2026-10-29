@@ -16,3 +16,6 @@
 **Low-friction design:** give the maintainer a load-secured inspection position, legible exact brake/rectifier/switch IDs, clear wear-versus-release signal names, accessible OEM service points and a dated inspection record. A nuisance-trip bypass is a design/maintenance defect, not a solution.
 
 **Release gate:** qualified model/variant and safety allocation → independent mechanical/energy isolation → OEM-specified inspection and validated load holding → independent fresh restart. Do not credit LinuxCNC/HAL/FPGA status, a single microswitch, a contactor auxiliary, or a brake's marketing name as physical proof. **All selected OpenPressBrake evidence remains UNKNOWN; G0/G1 HOLD; no personnel-exposed operation.**
+
+
+**Additional exact-model service trap:** BFK468 §2.1 warns oil/grease on friction surfaces can reduce torque even when an electrical switch appears healthy. Its adjustable **E** version can have spring force/torque reduced; the **N** version differs. A recent lubrication, washdown, brake replacement or adjustment is a **revalidation trigger**, not evidence that holding improved. Keep the machine load supported and use the exact OEM qualified service process; do not “prove” holding by removing the support.

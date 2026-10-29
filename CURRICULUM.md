@@ -987,3 +987,7 @@ Distinct direct-index gap after ABRASIVE-01: no magnetic-chuck pole coverage, ma
 **RUNNER-BOUNDARY-01 supply-chain refinement:** four local workflows now pin official GitHub checkout/upload-artifact to exact upstream commit SHAs rather than moving v4 tags; does not provide physical machine isolation or runtime proof.
 
 **RUNNER-BOUNDARY-01 historical-branch correction:** four dormant A01 branches still had hosted `ubuntu-latest` push/manual lab workflows; replaced with inert self-hosted manual stubs while preserving historical Git blobs. Main bounded local lab remains manual-only. Five current branches inspected; no workflow dispatched or machine safety proved.
+
+
+### 2026-10-29 — 4400-BRAKE-WEAR-01 original OEM wear-switch/holding-torque distinction (NON-GRADUATED)
+[Exact Kendrion BFK468 / Mayr ROBA-stop-M source audit](research/4400_BRAKE_WEAR_01_KENDRION_BFK468_MAYR_ROBA_STOP_M_AIR_GAP_SWITCH_AND_HOLD_TORQUE_SOURCE_AUDIT_2026-10-29.md) and [one-page technician card](safety-course/4400_BRAKE_WEAR_01_RELEASE_SWITCH_IS_NOT_HOLD_TORQUE_TECHNICIAN_CARD_2026-10-29.md) extend existing SBC/SBT/HAS and coil-decay material with **de-energized wear-switch evaluation, transient armature false switch, air-gap/rotor/friction wear and holding-torque maintenance**. DOC-CONFIRMED product-specific; no OpenPressBrake installed-brake claim, no physical/evaluator test, no compute. First candidate (symmetric earth fault) rejected as IMD-01 duplicate after full index scan. G0/G1 HOLD; 2520–25F0 independent evaluator OPEN.

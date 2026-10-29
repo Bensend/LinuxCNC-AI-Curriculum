@@ -1310,3 +1310,7 @@ Read [exact workflow/official-source research](../research/4400_RUNNER_BOUNDARY_
 **RUNNER-BOUNDARY-01 source provenance:** all four local workflows now use exact pinned official checkout/upload-artifact action SHAs. This limits tag drift, not physical machine access; no runtime.
 
 **RUNNER-BOUNDARY-01 historical refs:** four A01 branches' hosted/push lab workflows are now disabled self-hosted manual stubs; original blobs remain in Git history. Five current branches inspected; no workflow dispatched, no physical safety proof.
+
+
+### 2026-10-29 — BRAKE-WEAR-01: a healthy release/wear switch does not establish load-holding torque
+[Exact Kendrion BFK468 and Mayr ROBA-stop-M original-source audit](../research/4400_BRAKE_WEAR_01_KENDRION_BFK468_MAYR_ROBA_STOP_M_AIR_GAP_SWITCH_AND_HOLD_TORQUE_SOURCE_AUDIT_2026-10-29.md) → [one-page technician card](4400_BRAKE_WEAR_01_RELEASE_SWITCH_IS_NOT_HOLD_TORQUE_TECHNICIAN_CARD_2026-10-29.md). Increment beyond existing SBC/SBT/HAS and coil-decay lessons: BFK468 wear-switch evaluation is de-energized because armature release transients can mimic excessive air gap; exact OEM maintenance requires wear/air-gap/friction/torque consideration. No selected brake, Y1/Y2 gravity-hold proof, physical test or evaluator score. G0/G1 HOLD.

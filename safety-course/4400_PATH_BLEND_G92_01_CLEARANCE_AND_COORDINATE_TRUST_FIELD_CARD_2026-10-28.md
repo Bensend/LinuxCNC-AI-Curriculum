@@ -17,3 +17,6 @@ Read [G64/G0 planner source audit](../research/4400_PATH_BLEND_01_LINUXCNC_2910_
 **Human-factors test to conduct only in a qualified, nonhazardous review:** can a new operator see the active offsets and planner mode before pressing Cycle Start, and can they select a verified clearance procedure more easily than bypassing it? **INFERENCE / NOT TESTED.** No machine-specific clearance, stop distance or safe operating threshold is asserted.
 
 **Status:** G0/G1 HOLD; physical validation NOT RUN; 2520–25F0 independent evaluation OPEN. No personnel-exposed hazardous operation.
+
+
+**2026-10-29 G53 source-depth for the ordinary alternative above:** [tagged G53/G91 error and machine-zero/HOME audit](../research/4400_G53_G91_01_LINUXCNC_2910_MACHINE_COORDINATE_INCREMENTAL_REJECTION_DOC_OMISSION_SOURCE_DELTA_2026-10-29.md) → [short field card](4400_G53_G91_01_MACHINE_COORDINATES_ARE_NOT_A_SAFE_RETRACT_FIELD_CARD_2026-10-29.md). G53 **rejects G91** even though accepted endpoints are machine-absolute; the G53 manual's error list omits that precondition. The tagged homing implementation distinguishes final `[JOINT_N]HOME` from machine zero. An interpreter error or G53-zero rapid is not verified clearance or a protective stop. SOURCE/DOC-CONFIRMED narrow mechanism; actual machine and Task queue UNKNOWN, no test.

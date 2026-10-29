@@ -1394,3 +1394,5 @@ Read the [14-handoff source/contamination audit](../research/4400_EVAL_INTEGRITY
 
 ### 2026-10-29 — 4400-G96-CSS-01: G96 D and X0 are ordinary commanded-speed constraints
 [Pinned G96 source audit](../research/4400_G96_CSS_01_LINUXCNC_2910_D_CAP_X0_OFFSET_AND_COMMAND_VS_PHYSICAL_OVERSPEED_SOURCE_AUDIT_2026-10-29.md) → [technician paper card](4400_G96_CSS_01_D_CAP_IS_NOT_SAFE_SPINDLE_SPEED_FIELD_CARD_2026-10-29.md). In v2.9.10 omitted D becomes `1e30` in the interpreter but configured motion spindle limits still apply; CSS uses commanded X plus G5x/G92/tool datum, not measured workpiece radius. Neither D nor `speed-out` proves physical RPM, chuck containment, safe-speed or independent stop. **SOURCE/DOC-CONFIRMED** code/manual; **TEST-CONFIRMED none**; no new graduated competency; G0/G1 HOLD.
+
+**G96 default limit caveat:** pinned `inispindle.cc` uses `1e99` RPM when INI max absent; pinned INI manual says ~2.147e9 RPM (numeric DOC/SOURCE conflict UNKNOWN). A downstream motion clamp exists but its default is not a practical protective limit. Do not claim G96 without D is safe merely because that clamp exists.

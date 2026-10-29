@@ -17,3 +17,5 @@ DOC-CONFIRMED original SMC PDF, ABB PDF, CEJN original HTML and exact OSHA index
 - Local compute only if a bounded question cannot be answered by source, local runner [self-hosted, openpressbrake] is accessible **and physically isolated**; no GitHub-hosted fallback.
 
 **G0/G1 HOLD; G2 NOT RUN; G3/G4 NOT AUTHORIZED; G5 HOLD. No personnel-exposed hazardous operation.** Ordinary LinuxCNC/FPGA is normal control/diagnostics, not independent personnel safety.
+
+**Cross-repository freshness witness (2026-10-29 UTC):** Direct GitHub ref/commit read of `Bensend/OpenPressBrake` `main` gives `92cf5424be90f45f664ba2652dc725b38e1895f9`, authored `2026-09-24T13:23:20Z` (“relay contactor: publish Rev1 board resource contract”). This is **published design evidence**, not newly published today, not a physical Pilz/AKAS/Y1/Y2 witness. Other OpenPressBrake branches exist but are not evidence of installed safety function without qualified as-built corroboration. The Stage A gate remains OPEN.

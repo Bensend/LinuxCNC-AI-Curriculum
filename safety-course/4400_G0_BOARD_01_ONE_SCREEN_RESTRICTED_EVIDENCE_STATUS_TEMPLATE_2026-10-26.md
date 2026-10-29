@@ -2,18 +2,18 @@
 **2026-10-26 | public status-only template | NOT a machine inspection, commissioning approval, or test**
 
 ## Why this exists
-The canonical [G0 physical witness intake](4400_SELECTED_MACHINE_PHYSICAL_WITNESS_INTAKE_AND_RELEASE_GATE_2026-10-23.md) is a deep technical reference; the [seven-packet Stage A request](4400_OPENPRESSBRAKE_G0_EVIDENCE_REQUEST_ONE_PAGE_2026-10-25.md) is the actual first-contact entry point. The [human-factors audit](../research/4400_G0_SELECTED_MACHINE_INTAKE_PROGRESSIVE_DISCLOSURE_HUMAN_FACTORS_AUDIT_2026-10-26.md) found that handing a shop technician the entire technical intake is an avoidable burden. This **single-screen board** tells a qualified owner what evidence is still missing without exposing confidential machine design or pretending that a green software status proves safety.
+The canonical [G0 physical witness intake](4400_SELECTED_MACHINE_PHYSICAL_WITNESS_INTAKE_AND_RELEASE_GATE_2026-10-23.md) is a deep technical reference; the [seven-packet Stage A request](4400_OPENPRESSBRAKE_G0_EVIDENCE_REQUEST_ONE_PAGE_2026-10-25.md) is the actual first-contact entry point. The [human-factors audit](../research/4400_G0_SELECTED_MACHINE_INTAKE_PROGRESSIVE_DISCLOSURE_HUMAN_FACTORS_AUDIT_2026-10-26.md) found that handing a shop technician the entire technical intake is an avoidable burden. This **single-screen board** tells a qualified owner what evidence is not yet verified in this public curriculum without exposing confidential machine design or pretending that a green software status proves safety.
 
-## Current public board — all UNKNOWN (no owner submission)
+## Current public board — all UNKNOWN (no qualified redacted public status; restricted receipt unknown)
 | Packet | Question for qualified reviewer | Evidence state | Next owner role | Public evidence pointer |
 |---|---|---|---|---|
-| A | Which actual machine/revision/modes/devices? | UNKNOWN | Machine owner | None received |
-| B | Who can enter each hazard and where? | UNKNOWN | Designer + operator | None received |
-| C | Which independent safety logic and final elements actually stop Y1/Y2? | UNKNOWN | Safety/controls engineer | None received |
-| D | What physically holds the gravity-loaded ram and isolates stored energy? | UNKNOWN | Hydraulic/mechanical engineer | None received |
-| E | Which guards, protective geometry, escape and reset sightlines exist? | UNKNOWN | Safety designer | None received |
-| F | Which hazard-specific stop/hold/access/restart criteria apply? | UNKNOWN | Independent reviewer | None received |
-| G | How could a qualified isolated/remote witness be performed without exposure? | UNKNOWN | Qualified tester + owner | None received |
+| A | Which actual machine/revision/modes/devices? | UNKNOWN | Machine owner | No public status |
+| B | Who can enter each hazard and where? | UNKNOWN | Designer + operator | No public status |
+| C | Which independent safety logic and final elements actually stop Y1/Y2? | UNKNOWN | Safety/controls engineer | No public status |
+| D | What physically holds the gravity-loaded ram and isolates stored energy? | UNKNOWN | Hydraulic/mechanical engineer | No public status |
+| E | Which guards, protective geometry, escape and reset sightlines exist? | UNKNOWN | Safety designer | No public status |
+| F | Which hazard-specific stop/hold/access/restart criteria apply? | UNKNOWN | Independent reviewer | No public status |
+| G | How could a qualified isolated/remote witness be performed without exposure? | UNKNOWN | Qualified tester + owner | No public status |
 
 **Gate display:** G0 **HOLD** · G1 **HOLD** · G2 **NOT RUN** · G3/G4 **NOT AUTHORIZED** · G5 **HOLD**. No personnel-exposed operation.
 
@@ -47,4 +47,6 @@ If a guard is frequently removed, a reset is unreachable without entering a haza
 
 
 ## 2026-10-28 source-provenance hygiene
-The [Stage A first-contact request](4400_OPENPRESSBRAKE_G0_EVIDENCE_REQUEST_ONE_PAGE_2026-10-25.md) was shortened after its accumulated OEM/standards appendices grew to 14,994 characters. All nine dated conditional source headings are now in the [qualified reviewer archive](4400_G0_STAGE_A_DATED_SOURCE_DELTA_ARCHIVE_2026-10-28.md); the [source-grounded audit](../research/4400_G0_STAGE_A_FIRST_CONTACT_APPENDIX_CREEP_AND_PROVENANCE_REFACTOR_AUDIT_2026-10-28.md) records before/after integrity. Continue using this one-screen board for **status only**, the seven-packet A–G request for **first contact**, and the archive/long intake only for **qualified conditional review**. No selected evidence received; G0/G1 HOLD.
+The [Stage A first-contact request](4400_OPENPRESSBRAKE_G0_EVIDENCE_REQUEST_ONE_PAGE_2026-10-25.md) was shortened after its accumulated OEM/standards appendices grew to 14,994 characters. All nine dated conditional source headings are now in the [qualified reviewer archive](4400_G0_STAGE_A_DATED_SOURCE_DELTA_ARCHIVE_2026-10-28.md); the [source-grounded audit](../research/4400_G0_STAGE_A_FIRST_CONTACT_APPENDIX_CREEP_AND_PROVENANCE_REFACTOR_AUDIT_2026-10-28.md) records before/after integrity. Continue using this one-screen board for **status only**, the seven-packet A–G request for **first contact**, and the archive/long intake only for **qualified conditional review**. No qualified public status established; restricted receipt UNKNOWN; G0/G1 HOLD.
+
+**2026-10-29 provenance clarification:** [G0-PROVENANCE-01](../research/4400_G0_PROVENANCE_01_PUBLIC_STATUS_ABSENCE_VS_RESTRICTED_EVIDENCE_UNKNOWN_POINT_OF_USE_CORRECTION_2026-10-29.md) distinguishes an absent **public** redacted status from an unknown **restricted** submission. A qualified reviewer, not this template, determines completeness and acceptance; G0/G1 HOLD until that evidence is independently established.

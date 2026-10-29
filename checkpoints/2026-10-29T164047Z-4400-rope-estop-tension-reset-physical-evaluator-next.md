@@ -21,3 +21,6 @@
 3. For any actual cable-pull installation, request exact model/edition, passive routing/reset-visibility evidence, selected independent safety circuit and final-element documents; qualified physical validation only under separately approved energy-controlled procedures. Do not imply the press brake uses a rope switch.
 4. Frozen two-spindle software-only discriminator from 15:31Z remains NOT RUN pending local runner access **and** independently verified physical I/O isolation.
 5. Append complete LESSON_LOG using current verified SHA immediately before end; preserve actual UTC end/elapsed/overlap, commit to main, keep automation enabled.
+
+## Same-session source QA and design-package integration
+Added [Safety Design Package §11MI](../safety-course/SAFETY_DESIGN_PACKAGE_TRACEABILITY_TEMPLATE.md) to preserve cable integrity, independent safety output/final-element authority, warning-state maintenance, full-span reset visibility and fresh start as separate requirements. Directly re-fetched both original new artifacts and this checkpoint by GitHub blob SHA; 2530, GUARD-01 and RST-01 predecessor targets all exist. This is link/source presence QA, not a simulation or machine validation.

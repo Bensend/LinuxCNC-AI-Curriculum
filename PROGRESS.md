@@ -1633,3 +1633,6 @@ UTC start captured before governance work in [start marker](checkpoints/2026-10-
 
 
 **Latest 15:31Z continuation:** [2026-10-29 pallet/M60, spindle S0/shared state, Modbus VFD exit and physical/evaluator next checkpoint](checkpoints/2026-10-29T153130Z-4400-pallet-spindle-vfd-exit-source-and-physical-evaluator-next.md). All four source branches NON-GRADUATED, no physical test/evaluator, no hosted/self-hosted compute; qualified Stage A and independent safety evaluation remain open. G0/G1 HOLD.
+
+
+**15:31Z source/link QA and compute blocker:** 38 revision-pinned upstream source/docs line anchors across 18 source files validated against actual file lengths (0 invalid); new local research/card/checkpoint relative links checked (0 missing). GitHub connector lacks self-hosted runner inventory/dispatch action and panel-PC physical I/O isolation remains UNKNOWN, so frozen SPINDLE-STATE-02 offline test **NOT RUN**; no GitHub-hosted fallback. Precise blocker and next-work gate are in the latest [4400 safety checkpoint](checkpoints/2026-10-29T153130Z-4400-pallet-spindle-vfd-exit-source-and-physical-evaluator-next.md). G0/G1 HOLD.

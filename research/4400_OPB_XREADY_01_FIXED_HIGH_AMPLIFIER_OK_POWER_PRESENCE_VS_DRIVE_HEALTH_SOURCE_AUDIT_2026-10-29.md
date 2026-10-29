@@ -41,7 +41,7 @@ These are **source-derived public project descriptions** of legacy drawings, not
 
 ## Predecessor comparison and incremental value
 
-- [OPB-CUTOVER-02](4400_OPENPRESSBRAKE_DNC_PILZ_SAFETY_GATE_POWER_DOMAIN_CROSS_REPOSITORY_SOURCE_AUDIT_2026-10-27.md) established the 11K2 switched-domain and independent Pilz/FPGA authority split.
+- [OPB-CUTOVER-02](4400_OPB_CUTOVER_02_PILZ_MUTE_GATE_POWER_DOMAIN_CROSS_REPOSITORY_SOURCE_AUDIT_2026-10-27.md) established the 11K2 switched-domain and independent Pilz/FPGA authority split.
 - [OPB-ISO-03](4400_OPB_L7_L07_ISOLATOR_POWER_LOSS_FAULT_DIAGNOSTIC_POLARITY_SOURCE_AUDIT_2026-10-27.md) established STISO/IPS driver fault validity and the two-pole 11K2 cases.
 - [OPB-ARCH-AUTH-01](4400_OPB_ARCH_AUTH_01_README_ARCHITECTURE_SAFETY_AUTHORITY_AND_BENCH_SERVICE_SOURCE_CORRECTION_2026-10-29.md) corrected top-level installed-authority and service-mode claims.
 

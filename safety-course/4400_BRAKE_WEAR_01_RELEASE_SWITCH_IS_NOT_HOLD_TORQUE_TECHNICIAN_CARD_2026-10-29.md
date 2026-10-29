@@ -19,3 +19,6 @@
 
 
 **Additional exact-model service trap:** BFK468 §2.1 warns oil/grease on friction surfaces can reduce torque even when an electrical switch appears healthy. Its adjustable **E** version can have spring force/torque reduced; the **N** version differs. A recent lubrication, washdown, brake replacement or adjustment is a **revalidation trigger**, not evidence that holding improved. Keep the machine load supported and use the exact OEM qualified service process; do not “prove” holding by removing the support.
+
+
+**Maintenance clocks are different:** contactor/relay electrical cycles, brake friction work/rotor wear, and elapsed time since the last qualified load-hold proof must not be collapsed into one “service due” lamp. The exact OEM/SRS determines each inspection/acceptance rule. Record actual service and load evidence in a form the maintainer can use without bypassing the switch.

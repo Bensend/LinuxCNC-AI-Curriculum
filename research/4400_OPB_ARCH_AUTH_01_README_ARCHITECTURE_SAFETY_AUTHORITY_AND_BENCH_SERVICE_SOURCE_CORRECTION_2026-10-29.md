@@ -28,6 +28,10 @@ Implemented OpenPressBrake commits: [README correction](https://github.com/Bense
 
 The unchanged `hardware/blocks/safety_interface/manifest.yaml` at blob `f5b483ca9b4244192131337f81f7c9ec834925ac` enumerates **7** Pilz-to-controller status inputs and **6** controller-to-Pilz ordinary handshake outputs. `hardware/REV1_MACHINE_CONFIG.yaml` additionally maps wire **75** to a Pilz valve-enable gate and wire **63** directly from Pilz to the X-drive enable terminal. **SOURCE-CONFIRMED drawing-derived allocation; UNKNOWN actual wiring, selected active Pilz logic, timing, and physical stop/hold.** A software `SAFETY_OK` aggregate could mask a stale/misinterpreted status; no safety integrity or electrical truth is inferred from its name. This is a precise interface clarification, not a new circuit design or board-development task.
 
+## Cross-check against lower-level release status
+
+Direct reads of OpenPressBrake `hardware/blocks/safety_interface/REFERENCE_REBASE.md` (blob `8e74e7cd11906c7ee6f0ed601034cd4e9c901b4`) and `STATUS_CHECKLIST.md` (blob `2f12be48e4b82523dbb62f11894283f49b765679`) confirm that **the seven/six Rev1 drawing composition is bounded, but the safety-interface block remains BEHAVIORAL ONLY / NOT SCHEMATIC-READY**. The reference rebase explicitly replaces a generic single status with seven named signals and reserves wire75/63 outside ordinary FPGA authority; the checklist still requires installed wiring/no-bypass/backfeed review. This prevents the opposite error of treating *every endpoint name* as unknown: the drawings establish an inspectable **source-derived electrical composition**, while installed active safety behavior and physical stop/hold remain UNKNOWN. **SOURCE-CONFIRMED**, no physical proof.
+
 ## Safety authority decomposition — do not collapse the four layers
 
 | Layer | Legitimate role | What it cannot prove |

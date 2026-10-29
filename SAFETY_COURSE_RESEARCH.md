@@ -1316,3 +1316,7 @@ The [source/protocol audit](research/4400_EVAL_INTEGRITY_01_25E0_PUBLIC_CHALLENG
 
 
 **Same-session EDGE-WIRE-01 source-depth:** [Mayser v2.13 original p.4/7/11 audit](research/4400_EDGE_WIRE_01_MAYSER_2025_NC_FEEDBACK_PROTECTED_CABLE_FAULT_EXCLUSION_AND_PL_TRANSFER_AUDIT_2026-10-29.md) separates NC-chain feedback monitoring from **conditional protected-conductor short-circuit fault exclusion** used in PL assessment. Unprotected routing/splice changes may invalidate the exclusion; actual short detection is topology-dependent UNKNOWN. Existing tactile lesson extended with TE-13, no independent evaluator, physical test or lab; G0/G1 HOLD.
+
+
+### 2026-10-29 — EOFF-01 original manufacturer source-depth, not another competency
+[Direct Eaton EN 60204-1 whitepaper printed p.4, Pilz, Schneider and OSHA 1910.333/1910.147 audit](research/4400_EOFF_01_EATON_PILZ_OSHA_EMERGENCY_SWITCHING_OFF_VS_ESTOP_VS_LOTO_SOURCE_AUDIT_2026-10-29.md) strengthens existing 2530 E-stop-versus-E-off and DC-LINK/ELEC-EXPOSE teaching. Mechanical E-stop, electrical-origin emergency switching-off and qualified maintenance isolation are separate physical propositions. Category 0 supply removal could worsen gravity holding (**INFERENCE**); selected OpenPressBrake stop/hold/electrical truth UNKNOWN. No full normative IEC text, machine test, scored evaluator or compute; G0/G1 HOLD.

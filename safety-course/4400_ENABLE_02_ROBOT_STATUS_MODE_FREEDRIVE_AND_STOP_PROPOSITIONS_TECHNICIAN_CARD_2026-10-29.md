@@ -34,3 +34,5 @@ Provide a comfortable enabling grip, independent task-specific start, a clearly 
 ## Two adjacent source-depth checks (UNSCORED; not a new competency)
 9. The receiving safety controller samples a UR OSSD-configured output and sees brief LOW pulses during its otherwise HIGH state. What exact OEM timing/receiver compatibility and fault interpretation must be verified? Why is ordinary HAL debounce not an acceptable personnel-safety receiver?
 10. A robot's external E-stop is released, its System Stop output returns HIGH, and an external conveyor has a retained run request. What distinct **E-stop state reset**, **external deliberate restart** and **physical final-element** conditions prevent unintended motion? Identify the original UR Safety I/O warning.
+
+11. A technician claims `Robot Moving` HIGH proves zero joint velocity. The UR SW5_25 manual uses **no joint faster than 0.1 rad/s**, while SW10_15's inspected text says "no movement" without the same numerical statement. What version/threshold proof is missing, and why would even a correctly evaluated low-speed status not prove safe guard release?

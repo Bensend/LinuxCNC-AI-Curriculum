@@ -32,4 +32,4 @@ Use [the dated Stage A reviewer archive](4400_G0_STAGE_A_DATED_SOURCE_DELTA_ARCH
 
 **Gate remains:** G0/G1 HOLD; G2 NOT RUN; G3/G4 NOT AUTHORIZED; G5 HOLD. No personnel-exposed operation.
 
-**Public/restricted provenance correction (2026-10-29):** [G0-PROVENANCE-01 source audit](../research/4400_G0_PROVENANCE_01_PUBLIC_STATUS_ABSENCE_VS_RESTRICTED_EVIDENCE_UNKNOWN_POINT_OF_USE_CORRECTION_2026-10-29.md). This public template cannot establish whether a qualified team has privately received A–G; it can only report that **no qualified redacted evidence status has been established here**. A private submission alone does not lift G0/G1. Do not upload proprietary records publicly. All safety holds remain.
+**Provenance:** [G0-PROVENANCE-01](../research/4400_G0_PROVENANCE_01_PUBLIC_STATUS_ABSENCE_VS_RESTRICTED_EVIDENCE_UNKNOWN_POINT_OF_USE_CORRECTION_2026-10-29.md): restricted receipt UNKNOWN; no qualified public status; G0/G1 HOLD.

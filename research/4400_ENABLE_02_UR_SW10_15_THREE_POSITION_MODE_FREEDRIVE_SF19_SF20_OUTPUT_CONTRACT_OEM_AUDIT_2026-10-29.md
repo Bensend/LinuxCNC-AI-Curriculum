@@ -51,3 +51,14 @@ These are manufacturer-hosted *online* pages; exact SW10_15 URL and retrieved te
 **Potential documentation ambiguity (not a confirmed firmware defect):** within the same SW10_15 SF19 table, the general Manual-mode sentence says an OFF enabling device triggers SF2 and drives SF19 LOW, while the **specific Manual+Freedrive** subcase says **all OFF → SF19 HIGH**. Those statements cannot safely be collapsed into "HIGH means no 3PE stop." The precise internal stop state during Freedrive, and whether the subcase is a deliberate exception to the general sentence, requires selected OEM clarification or an independently qualified isolated integration review. **UNKNOWN** until resolved; never resolve the ambiguity by assuming a convenient high-level permission. The source text itself is **DOC-CONFIRMED**; any inferred contradiction in runtime is **UNKNOWN**, not TEST-CONFIRMED.
 
 **Independent manufacturer version cross-check:** UR SW5_25 UR12e original PDF indexed table (https://www.universal-robots.com/manuals/EN/PDF/SW5_25/user-manual-UR12e-PDF_online/733-429-00_UR12e_User_Manual_en_Global.pdf) and UR SW10_14 UR3e online SF19/20 (https://www.universal-robots.com/manuals/EN/HTML/SW10_14/Content/prod-usr-man/complianceUR3e/safetyFunctionsAndinterfaces/safety_functions_table1.htm) repeat the documented SF19 Automatic-HIGH and Manual Freedrive inversion. These were **indexed/HTML evidence**, not full immutable-PDF visual inspection or a proof of universal cross-version behavior. Selected model/software and external receiver remain essential.
+
+## Compact OEM SF19/SF20 output-state table (source transcription, not a complete stop-state truth table)
+| Selected mode | Freedrive state | 3PE aggregation | SF19 | SF20 | What cannot be concluded |
+|---|---|---|---|---|---|
+| Automatic | not applicable | any grip state | HIGH | LOW | No inference that a grip is held or automatic guarding is valid. |
+| Manual | not active | **all** center ON | HIGH | LOW | Still requires separate start, guards/occupancy and physical safety. |
+| Manual | not active | **any** OFF | LOW | HIGH | Cannot infer drive torque removal (SF2 Cat2). |
+| Manual | active | **all** OFF | HIGH | LOW | **Not proof no stop:** generic Manual sentence conflicts in scope with this special-case output row. |
+| Manual | active | **any** ON | LOW | HIGH | Cannot infer hazardous motion is stopped or all entrants are protected. |
+
+The table records *manufacturer-described output levels only*; it does not reconstruct undocumented safety-state transitions, electrical test pulses, channel fault behavior, or a selected safety PLC program. The [Safety I/O source-depth](4400_ROBOT_STATUS_01_UR_SW10_15_MOVING_NOT_STOPPING_TOOL_IO_AND_SAFEGUARD_STOP_SEMANTICS_AUDIT_2026-10-29.md) further documents optional OSSD LOW test pulses while a logical output is HIGH.

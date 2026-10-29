@@ -2208,3 +2208,7 @@ This crosscut reconciles [M67/M68 analog queue source](../research/4400_ANALOG_Q
 
 
 **§11MG source-depth caution:** [Shared static Task motion-command state audit](../research/4400_SPINDLE_STATE_02_LINUXCNC_2910_SHARED_MOTION_COMMAND_STATE_CROSS_SPINDLE_ZERO_SPEED_REARM_SOURCE_AUDIT_2026-10-29.md) identifies a possible cross-spindle reassertion of ordinary ON/brake-release after M5 $0 → M3 $1 → S500 $0, while canonical stopped direction keeps speed zero. Source-only prediction, offline test NOT RUN; do not claim physical motion. For multi-spindle integrations, trace selected Task command state **per spindle**, ordinary HAL outputs, actual drive/brake feedback and independent protective authority. Never use `spindle.on` or zero RPM as a sole safety witness.
+
+
+### §11MH — CNC process exit and fieldbus timeout are not protective stop (2026-10-29)
+[Pinned LinuxCNC cleanup/INI/mb2hal source audit](../research/4400_VFD_EXIT_01_LINUXCNC_2910_SHUTDOWN_HAL_MODBUS_LAST_COMMAND_VS_INDEPENDENT_STOP_SOURCE_AUDIT_2026-10-29.md) shows `shutdown.hal` may execute on normal exit but cannot cover crash; mb2hal reply timeout does not establish selected VFD comm-loss reaction. Upstream September 2026 field report of retained RUN is COMMUNITY-REPORTED, not universal. Keep distinct evidence for **normal fieldbus command**, **fresh drive feedback**, **selected drive watchdog**, **independent safety stop/final element**, **physical energy isolation** and **deliberate restart**. A green disconnected HMI is not a safe-access witness. No physical test, G0/G1 HOLD.

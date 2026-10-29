@@ -16,3 +16,5 @@ A G53 G0 XYZ move is an **ordinary combined rapid**, not a guaranteed Z-first cl
 
 
 **“Home” is not automatically machine zero:** The tagged G53 manual labels `G53 G0 X0 Y0 Z0` a home move, but the tagged homing guide defines a configurable final **`[JOINT_N]HOME`** position distinct from **`HOME_OFFSET`** and G53 machine origin. On a particular machine these can differ. Inspect actual homing configuration and geometry; never use G53 zero as a universal parking, tool-change or access position.
+
+**Provenance shorthand:** **SOURCE-CONFIRMED** pinned v2.9.10 interpreter/homing implementation; **DOC-CONFIRMED** G53 manual error-list omission and separate HOME/HOME_OFFSET documentation; **INFERENCE** macro-recovery exposure; **UNKNOWN** selected machine; **TEST-CONFIRMED none; COMMUNITY-REPORTED not used**.

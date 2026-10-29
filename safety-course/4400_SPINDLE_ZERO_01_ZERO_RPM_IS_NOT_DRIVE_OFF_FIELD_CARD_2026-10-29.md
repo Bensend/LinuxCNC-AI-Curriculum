@@ -26,3 +26,7 @@ The HMI displays **0 RPM** immediately after `S0 M3`. Is the drive disabled, the
 **Safer default:** where RUN request remains active at zero setpoint, show **RUN REQUEST ACTIVE — 0 RPM SETPOINT**, not a green **SPINDLE OFF** badge. Make the correct stop/guard procedure easier than changing a speed slider and entering the danger zone.
 
 **Evidence:** SOURCE-CONFIRMED pinned normal-control behavior; DOC-CONFIRMED LinuxCNC 2.9 manual; TEST-CONFIRMED none; physical behavior and selected safety architecture UNKNOWN. No machine actuation, simulator, external scoring or new graduation. OpenPressBrake G0/G1 HOLD remains unchanged.
+
+
+## Source-depth multi-spindle caveat — SPINDLE-STATE-02
+[Exact shared-command-state audit](../research/4400_SPINDLE_STATE_02_LINUXCNC_2910_SHARED_MOTION_COMMAND_STATE_CROSS_SPINDLE_ZERO_SPEED_REARM_SOURCE_AUDIT_2026-10-29.md) identifies a second path: the Task interface reuses one static motion-command object, and a spindle speed update does not explicitly set its ON/OFF field. The source-derived **paper-only** sequence `M5 $0` → `M3 $1` → `S500 $0` can therefore reassert spindle 0's ordinary ON/brake-release state while its canonical direction keeps commanded RPM at **zero**. This is **SOURCE-COMPOSED / NOT TEST-CONFIRMED**; selected hardware and physical motion UNKNOWN. The exact offline discriminator is frozen in the research note, and may run only on a verified isolated self-hosted runner. Do not treat this as a physical machine test recipe or safety permission.

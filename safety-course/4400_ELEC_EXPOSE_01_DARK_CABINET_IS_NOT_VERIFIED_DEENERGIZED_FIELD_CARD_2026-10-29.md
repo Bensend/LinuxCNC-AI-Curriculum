@@ -15,3 +15,7 @@ The easiest safe design is a clearly labelled isolation map, convenient accessib
 | Electrical isolation verified | Hydraulic stored energy, elevated beam hold, restored guards and deliberate restart. |
 
 **No exposed-person operation or cabinet servicing on the basis of these indicators.** Qualified personnel must follow applicable electrical energy-control and risk-assessed work practices; experimental machine motion remains isolated/remote with people outside the hazard zone. OpenPressBrake as-built circuit, arc risk, stop/hold and validation **UNKNOWN / NOT RUN**. G0/G1 **HOLD**, independent evaluator **OPEN**.
+
+
+### EOFF-01 paper addendum — red button, red power switch, lockable disconnect
+[Direct Eaton/Pilz/OSHA source audit](../research/4400_EOFF_01_EATON_PILZ_OSHA_EMERGENCY_SWITCHING_OFF_VS_ESTOP_VS_LOTO_SOURCE_AUDIT_2026-10-29.md). **UNSCORED paper checks, not live procedures:** (1) E-stop stopped spindle but DC bus remains energized: stopping is not isolation. (2) Emergency switching-off interrupted one supply: check what it actually interrupts and whether gravity/controlled braking is lost; do not assume every feed isolated. (3) A padlocked disconnect with UPS/backfeed: identify other sources and require qualified verification. (4) Dark HMI and STO while ram suspended: neither electrical zero nor gravity hold is established. (5) Device reset with held Cycle Start: fresh separate start remains necessary. **No unqualified cabinet probing or energized demonstrations.**

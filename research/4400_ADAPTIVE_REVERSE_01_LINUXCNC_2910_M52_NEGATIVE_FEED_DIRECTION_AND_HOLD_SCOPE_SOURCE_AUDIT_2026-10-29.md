@@ -26,3 +26,13 @@ Use an **explicitly documented positive-only** adaptive-feed source when reverse
 
 ## Evidence ledger and no-compute decision
 **SOURCE-CONFIRMED:** pinned interpreter, canonical, HAL, motion and TP branches. **DOC-CONFIRMED:** pinned official M52 semantics and explicit caution. **INFERENCE:** operator/hardware sign-error and possible path re-entry. **UNKNOWN:** exact selected-machine trajectory, physical motion, controller HAL wiring, stop time, protective performance and independent evaluator outcome. **TEST-CONFIRMED none; COMMUNITY-REPORTED none.** No new lab question requiring compute; no workflow, build, simulation, physical test or machine operation. **G0/G1 HOLD, G2 NOT RUN, G3/G4 NOT AUTHORIZED, G5 HOLD; 2520–25F0 evaluator OPEN.**
+
+## Same-session source-depth: M52 P0 does not itself command forward direction
+
+A second inspection found an important distinct state-transition question: **does disabling adaptive feed automatically reset a previously selected reverse trajectory direction?**
+
+- [`command.c` lines 1279–1290](https://github.com/LinuxCNC/linuxcnc/blob/v2.9.10/src/emc/motion/command.c#L1279-L1290) handles the adaptive-enable command by setting or clearing `AF_ENABLED` in `enables_new`. It does **not** call `tpSetRunDir(..., FORWARD)`. Exact source blob `0b79061d39be915bbea548b2c33bb794d31ab302`.
+- [`control.c` lines 380–407](https://github.com/LinuxCNC/linuxcnc/blob/v2.9.10/src/emc/motion/control.c#L380-L407) calls `tpSetRunDir` **only inside the enabled adaptive-feed branch**. When adaptive feed is disabled, this branch is skipped; there is no unconditional forward-direction reset here.
+- [`tp.c` lines 456–472](https://github.com/LinuxCNC/linuxcnc/blob/v2.9.10/src/emc/tp/tp.c#L456-L472) explicitly resets `reverse_run=0` in `tpClear`, and [lines 2774–2783](https://github.com/LinuxCNC/linuxcnc/blob/v2.9.10/src/emc/tp/tp.c#L2774-L2783) do so in completed abort handling. **SOURCE-CONFIRMED:** these are actual reset paths, distinct from M52 P0's adaptive-enable flag change.
+
+**Narrow conclusion:** The M52 P0 implementation is **not by itself an explicit forward-direction command**. Whether a particular M52 P0 block can execute with a reverse-active queue, whether program completion invokes a queue clear first, and any subsequent physical movement depend on Task/queue state not fully traced here; **UNKNOWN / NOT RUN**. Do not claim that M52 P0 necessarily leaves a machine reversing, nor that it always returns it to forward. The practical review should record both `AF_ENABLED` and `tp-reverse` as **different normal-control state variables**, and require a source/qualified-runtime check before relying on a transition sequence for process correctness. Neither is personnel-safety authority.

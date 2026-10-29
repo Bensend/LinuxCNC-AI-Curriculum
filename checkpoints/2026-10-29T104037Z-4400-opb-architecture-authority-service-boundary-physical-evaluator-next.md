@@ -12,6 +12,14 @@
 - Stage A A–G no new qualified restricted machine evidence; G0/G1 **HOLD**, G2 **NOT RUN**, G3/G4 **NOT AUTHORIZED**, G5 **HOLD**. **No personnel-exposed hazardous operation.** Experimental operation, if independently justified later, requires approved isolated/remote qualified plan, exclusion, secondary restraint and explicit residual risk.
 - GitHub-hosted compute **0 min**, self-hosted **0 min**; no authoritative lab runtime, so `LAB_COMPUTE_LOG.md` and `evaluation/FEEDBACK_SCORE_LOG.md` unchanged. Runner dispatch availability and physical isolation UNKNOWN; no compute question justified.
 
+## Same-session adversarial source review
+
+- Verified the final OpenPressBrake README, architecture and Rev1 configuration blobs directly: `ab29a84075887b2b2c1c03549ce9ef113524daf9`, `92d6ccecfb2a98fb32bf5734e8902e9623c9f55b`, and `2272a4e1dfd50e467d702a69a11224333be59f2b`. The Rev1 configuration commit diff is **only six added YAML comments**, no electrical keys/values modified. Exact source provenance and final SHA recorded in OPB-ARCH-AUTH-01.
+- Lower-level `safety_interface/REFERENCE_REBASE.md` and `STATUS_CHECKLIST.md` directly inspected: seven/six **drawing composition is frozen**, but block **BEHAVIORAL ONLY / NOT SCHEMATIC-READY**; no physical no-bypass/backfeed witness. This prevents incorrectly saying *all* endpoint semantics are unknown while refusing installed safety proof.
+- Considered a separate ordinary CNC `MUTE COMMAND` (wire 44) failure-path branch. Full canonical index/research/progress and direct [AKAS-M-01 predecessor](../research/4400_AKAS_LCII_M_PILZ_MUTING_SLOW_SPEED_OVERTRAVEL_AUTHORITY_AUDIT_2026-10-27.md) plus OPB-CUTOVER-02 already cover this exact wire and the independent safety PLC muting gate. **Duplicate/no incremental information gain; no new module created.**
+- Official OSHA 1910.147(b) and 1910.333(b)(2)(ii)(B) rechecked 2026-10-29: control circuit devices/interlocks are not sole energy-isolating devices; task-specific exception/qualified procedures still apply. No standard-based PL/SIL or physical stop-time value inferred.
+- Five relative internal links across the new audit and checkpoint resolved to existing repository targets; zero missing. No workflow trigger paths edited and no hosted or local compute dispatched.
+
 ## Precise next work
 
 1. **First:** check for qualified restricted Stage A A–G as-built evidence: actual safety controller/program/revision, front/rear guards/AKAS, K1/K2/EDM, physical Y1/Y2 stop and gravity holding, stored hydraulic/electrical energy, restart/rearm and no-exposure physical witness. Request existing records only; no live machine test from public checklist.

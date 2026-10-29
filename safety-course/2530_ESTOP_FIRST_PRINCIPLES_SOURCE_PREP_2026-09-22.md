@@ -89,3 +89,7 @@ These must not be invented. Next 2530 work should compare at least three current
 - **DEVICE RELEASED != SAFETY FUNCTION RESET/REARMED != MACHINE START AUTHORIZED.**
 - **EDM HEALTHY != MACHINE PHYSICAL SAFE STATE PROVED.**
 - **ORDINARY LINUXCNC STOP/ESTOP STATE != INDEPENDENT PERSONNEL-SAFETY AUTHORITY.**
+
+
+### 2026-10-29 EOFF-01 exact OEM/regulatory source-depth (not a new competency)
+[Original Eaton printed-p.4, Pilz, Schneider and OSHA 1910.333/1910.147 audit](../research/4400_EOFF_01_EATON_PILZ_OSHA_EMERGENCY_SWITCHING_OFF_VS_ESTOP_VS_LOTO_SOURCE_AUDIT_2026-10-29.md) strengthens this module's already stated E-stop-versus-E-off distinction: motion E-stop, electrical-origin emergency switching-off and maintenance isolation/qualified absence-of-voltage verification are **three different propositions**. A selected breaker may serve multiple purposes only with exact hardware, installation and procedure evidence. A Category 0 supply cut could worsen an unrestrained gravity hazard (**INFERENCE**); selected Y1/Y2 hydraulic behavior UNKNOWN. No new evaluator, physical proof or graduation.

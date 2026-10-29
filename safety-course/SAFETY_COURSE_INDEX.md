@@ -1427,3 +1427,8 @@ Read the [14-handoff source/contamination audit](../research/4400_EVAL_INTEGRITY
 
 ### 2026-10-29 — 4400-MAT-01: safety mat step-over, automatic re-enable and false integrity transfer
 [Original Banner 2025 OEM audit](../research/4400_MAT_01_BANNER_2025_FOUR_WIRE_AUTO_RESET_STEP_OVER_FALSE_SAFE_ZONE_OEM_AUDIT_2026-10-29.md) → [unscored technician card](4400_MAT_01_SAFETY_MAT_STEP_OVER_AUTO_RESET_FOUR_WIRE_TECHNICIAN_CARD_2026-10-29.md). Read after 2590, 2530 and RST-01. A person can cross a mat and step off inside the hazard; Banner SM-xA-5A auto-reset can re-energize safety relays when clear; 4-wire mat monitoring and internal Cat4 claims cannot be generalized to arbitrary mat/installed machine. OEM DOC-CONFIRMED; physical release UNKNOWN, G0/G1 HOLD; no new graded competency.
+
+
+### 2026-10-29 — 4400-EDGE-CALC-01: source-indexed OEM arithmetic is not safety validation
+
+[Original Mayser SL NC II indexed worked-example arithmetic and response-time-mixing audit](../research/4400_EDGE_CALC_01_MAYSER_NCII_OVERTRAVEL_EXAMPLE_ARITHMETIC_AND_SYSTEM_RESPONSE_AUDIT_2026-10-29.md) extends the existing tactile-edge audit and adds **TE-11** to its [ten-case technician card](4400_TACTILE_EDGE_CONTACT_OVERRUN_AND_AUTORESET_TECHNICIAN_CARD_2026-10-24.md). The printed `0.5×10×1.55=6.55 mm` conflicts with arithmetic `7.75 mm`, and the `C=1.2` overtravel result changes from `7.86` to `9.30 mm`. **Indexed manufacturer PDF excerpt only; complete immutable OEM page unavailable; no OEM erratum or machine acceptance claimed.** Schmersal SE-304C monitor timing is not Mayser sensor timing. No new scored competency, physical test or safety release; G0/G1 HOLD.

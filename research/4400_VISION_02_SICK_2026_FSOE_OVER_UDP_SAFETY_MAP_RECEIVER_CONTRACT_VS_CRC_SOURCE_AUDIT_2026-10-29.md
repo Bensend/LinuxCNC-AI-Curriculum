@@ -1,0 +1,33 @@
+# 4400-VISION-02 — CRC-valid UDP is not a validated safety camera receiver
+**2026-10-29 | exact-OEM source-depth follow-on to [VISION-01](4400_VISION_01_SICK_SAFE_VISIONARY2_3D_DEPTH_TELEMETRY_VS_SAFETY_FIELD_AND_RESET_OEM_AUDIT_2026-10-29.md) | NON-GRADUATED**
+
+## Why this is not a duplicate
+VISION-01 established the *physical protective-field/ordinary image/OSSD boundary*. This follow-on traces a previously uninspected **receiver-side safety-oriented data contract**: FSoE over UDP, fragmentation and address/freshness checks, safety pixel validity, and the safe runtime requirement. It is a conditional expert-level design review, **not** a proposal to implement safety in LinuxCNC/FPGA.
+
+## Original source, exact observed passages and edition limits
+SICK AG, *safeVisionary2 — Data output via UDP*, technical information **8027550**, manufacturer-hosted original:
+https://www.sick.com/media/docs/7/97/297/technical_information_safevisionary2_safety_camera_sensor_en_im0104297.pdf
+Web text accessed 2026-10-29: observed footer **8027550/1XPC/2026-07-28** in §4.5, printed pp.12–23. **Important edition conflict:** rendered printed p.13 image at the same URL displayed **8027550/1ROW/2025-04-02**, so a stable full-PDF edition/byte hash is **UNKNOWN**; do not claim the whole PDF is uniformly 2026. 2024 manufacturer-hosted operating-instructions excerpt **8025919/1LQ0/2024-04-19** states ordinary data output must not be used for safety, while the observed 2026-09-09 operating-instructions text §7.14 explicitly offers an additional safety-oriented mode. These are **edition-scoped** observations, not proof that an old firmware can perform the new mode. The 2026 operating-instructions feature table states safe measurement data output is available from functional version **V1.2.0**; selected firmware and compatibility remain UNKNOWN.
+
+## Manufacturer requirements (DOC-CONFIRMED for the observed 2026-07-28 excerpt)
+1. **Protocol authority:** §4.5.1, printed p.13: sensor acts as **FSoE Master**, receiver as **FSoE Slave**, and FSoE frames are transported in UDP. The actual image data is not wrapped inside FSoE; it is in the same UDP datagram, with additional integrity checks tied to the FSoE segment. This is **not** equivalent to ordinary UDP or simply adding a CRC to a LinuxCNC packet.
+2. **Safety receiver must exist:** §4.5.1.2, pp.17–18: ordered checks for FSoE state, expected stream ID, telegram buffer, matching FSoE/data checksums and payload integrity. §4.5.3, pp.21–23, **SDO-1..8** requires unique stream, monitored errors/time windows, adequate buffer, a **safe runtime environment**, and prohibits use of IMU and universal I/O-derived data for the safety function. SICK-provided FSoE drivers are available on request, but using a driver alone does not validate the application.
+3. **Communication fault handling is explicit:** §4.5.1, pp.13–14: client must reset stream when more than **5% of initialized containers** are not in FSoE DATA; if fewer than 20 containers, reset on **one** non-DATA container. Incorrectly addressed packets are separately counted. These are OEM **protocol conditions**, not general safety-controller PL claims or machine fault thresholds.
+4. **Safety pixels are not ordinary depth pixels:** §4.5.2–4.5.3, pp.20–23: depth and safety map must be combined; data segment 7 marks pixel validity. **SMD-1..12** require only safety-valid pixels; strict monotonic safety counter (discard on repeat), normal device state, contamination/close-range error rejection, and robustness to shiny surfaces/scattered light. The documented minimum pixel-base constraints are **100 pixels evaluated**, groups of **10 valid contiguous pixels**, at least **2 adjacent rows and columns**, and tolerance of up to **10% faulty/misclassified pixels within the minimum base**. These are **conditions on a specific safety algorithm**, not evidence that any arbitrary classifier is certified or that 10% errors are safe in any machine.
+5. **Receiver failure modes:** a CRC-valid datagram can still be stale, wrongly addressed, from the wrong monitoring episode, incomplete, or have safety-invalid pixels. A plausible, colorful depth image can therefore be **unusable** for a safety function. The correct response must be determined in a qualified end-to-end SRS, not by an ordinary AI confidence threshold or a dashboard green status.
+
+## Adversarial failure-path matrix (INFERENCE applied to OEM rules)
+| Tempting shortcut | Failure that it misses | Required independent design proof |
+|---|---|---|
+| `CRC passed` → `SAFE` | Wrong stream/telegram, stale frame, missing fragment, invalid FSoE state | Qualified safe receiver and ordered OEM checks; loss/fault response within SRS |
+| `Pixel depth is nonzero` → `person absent` | Safety map invalid, stale safety counter, glare, contamination, insufficient valid pixel geometry | SMD-1..12 evidence and physical detection coverage for exact field |
+| `SICK driver linked` → `PL c machine` | Receiver application, scheduling, safe runtime, final elements and stopping/holding unvalidated | Full safety-function integrity analysis and independent physical stop/hold proof |
+| `LinuxCNC can decode FSoE` → `LinuxCNC can authorize motion` | Normal OS/HAL/FPGA fault or restart bypasses personnel-protective logic | Keep safety authority in separately qualified safety system; LinuxCNC gets status only |
+| `New firmware adds safe UDP` → `old installation equivalent` | Functional version / data-segment/protocol mismatch | Exact firmware, manual, configuration and version-specific acceptance evidence |
+
+## Practical engineering decision
+For typical small-machine safeguarding, **prefer fixed guards and proven safety relay/PLC with directly supported OSSD/guard interfaces**. The FSoE-over-UDP route is a specialized safety-controller integration project with nontrivial validation and likely higher cost; do not make it the easiest route to bypass physical guarding. The OEM's sophisticated feature does **not** justify implementing personnel safety in a normal LinuxCNC/FPGA process.
+
+**Evidence:** DOC-CONFIRMED OEM excerpts with page/section; INFERENCE failure transfer; SOURCE-CONFIRMED LinuxCNC none newly traced; TEST-CONFIRMED none; COMMUNITY-REPORTED none; UNKNOWN immutable PDF edition, selected firmware, qualified receiver, safety function, stopping time, coverage and machine as-built. No lab, build, workflow, physical test or external evaluator.
+
+**Release:** OpenPressBrake independent Pilz/AKAS and Y1/Y2 physical stop/hold remain separate. Restricted A–G receipt UNKNOWN; no qualified public G0 release or independent 2520–25F0 score. **G0/G1 HOLD; no personnel-exposed hazardous operation.** No self-hosted or hosted compute.

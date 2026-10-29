@@ -36,3 +36,7 @@ A machine integrator could wire `spindle.on` as a VFD run/enable signal or `spin
 
 ## Gate status
 No independent 2520–25F0 evaluator or qualified OpenPressBrake Stage A A–G physical evidence. G0/G1 HOLD; no personnel-exposed hazardous operation authorized. No new graded competency.
+
+
+## Corroboration and limitation — ordinary enable wiring (2026-10-29)
+The pinned [LinuxCNC spindle examples](https://github.com/LinuxCNC/linuxcnc/blob/86cdca76fa2a36274c432caa21952b23c267989a/docs/src/examples/spindle.adoc#L50-L78) show `spindle.0.on` used to enable PWM and a spindle output. **DOC-CONFIRMED**, not selected-machine evidence. [Upstream issue #2748](https://github.com/LinuxCNC/linuxcnc/issues/2748), opened 2023-11-15 and closed 2023-12-09, documents a *different* pncconf stepgen-enable/ramping interaction and a maintainer-reported 2.9 configuration change (**COMMUNITY-REPORTED**). Neither source verifies the predicted cross-spindle shared-state sequence; that remains **SOURCE-COMPOSED / TEST-CONFIRMED none**. Do not conflate a normal `machine-on` workaround with an independent safety function.

@@ -71,3 +71,6 @@ A reviewer should be able to ask these questions in order and receive defensible
 The learner-readable methodology is now coherent enough for a fresh-AI handoff, but formal competency should not be self-certified. A novel information-separated challenge should test the complete chain. Until that evidence exists, mark 2530 methodology **READY FOR EXTERNAL/FRESH EVALUATION**, not graduated.
 
 The external gate is branch-local. If it cannot execute immediately, continue to the next highest-value safety-course module without exposing a hidden 2530 answer key to the learner side.
+
+
+**2026-10-29 EOFF-01 integration:** After learner route item 1, review [direct OEM/OSHA emergency switching-off versus E-stop and LOTO source audit](../research/4400_EOFF_01_EATON_PILZ_OSHA_EMERGENCY_SWITCHING_OFF_VS_ESTOP_VS_LOTO_SOURCE_AUDIT_2026-10-29.md). The existing 2530 competency must reject E-off/STO as safe-to-service proof and reject uncontrolled power removal without physical gravity-hold analysis. Independent evaluator NOT RUN; no new competency.

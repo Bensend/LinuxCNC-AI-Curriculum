@@ -30,3 +30,7 @@ Updated `CURRICULUM.md`, `PROGRESS.md`, `SAFETY_COURSE_RESEARCH.md`, full safety
 
 ## Runner-access blocker — exact status
 The currently exposed GitHub connector permits repository file/issue/commit reads and writes but **does not expose a workflow-dispatch or self-hosted runner-inventory action**. Therefore the target repository's ability to dispatch `[self-hosted, openpressbrake]` could not be established from this session. The panel PC's disconnection/isolation from hazardous physical I/O is also **UNKNOWN**. Do not attempt a hosted fallback, do not assume that a workflow's `runs-on` label proves isolation, and do not run the frozen two-spindle discriminator until both conditions are independently verified. This is a **runner-access/isolation blocker**, not a claim that the local runner is absent or offline.
+
+
+## Final source-reference QA
+Validated **38 pinned LinuxCNC source/documentation line-range references across 18 distinct revision-qualified source files**: all fetched at their declared SHA, and every anchor range was within the actual file's line count; **zero invalid source targets/ranges**. Also verified **17 local relative-link occurrences / 11 targets** across the first six research/cards, **one** VFD local link, and **eight** checkpoint links, with **zero missing destinations**. This is documentary link integrity, **not** a build, simulation, runtime test, or safety validation.

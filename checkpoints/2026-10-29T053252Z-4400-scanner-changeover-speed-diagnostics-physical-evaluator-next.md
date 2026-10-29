@@ -17,3 +17,10 @@
 4. No hosted runner. A future bounded self-hosted `[self-hosted, openpressbrake]` job additionally requires verified runner access **and independent physical isolation** of the panel PC from hazardous machine I/O. Frozen G43.2 lab remains blocked. Keep hourly curriculum enabled.
 
 **Evidence:** DOC-CONFIRMED manufacturer-indexed excerpts, SOURCE-CONFIRMED repository predecessor comparison, INFERENCE arithmetic/architecture and failure paths, UNKNOWN full-PDF hashes, exact mode-boundary precedence, installed physical machine and evaluator; TEST-CONFIRMED none. Ordinary LinuxCNC/FPGA is not a personnel-safety controller.
+
+## Same-session provenance and gate verification
+
+- Added a [SOURCE_POLICY rule](../SOURCE_POLICY.md) that manufacturer-indexed PDF excerpts support **narrow DOC-CONFIRMED excerpt claims only**, not full-manual/hash/firmware proof or merged timing semantics. This is a study-method correction, not a new machine safety result.
+- Directly rechecked **OpenPressBrake main** via GitHub commit history on 2026-10-29: latest visible main commit `92cf5424be90` is dated **2026-09-24T13:23:20Z** and concerns a Rev1 board resource contract. No new qualified installed-machine A–G/physical witness is established by that history. Other branches/restricted physical evidence are not inferred absent.
+- GitHub connector denied `actions/runners` inventory as an unsupported endpoint. **Runner availability/physical isolation remain UNKNOWN**; no workflow dispatched and no hosted fallback. No lab runtime to add to LAB_COMPUTE_LOG.
+- Targeted relative-link check across five new primary documents found **17 occurrences to 12 existing repository targets**, zero missing. This verifies link destinations only, not source correctness or physical safety.

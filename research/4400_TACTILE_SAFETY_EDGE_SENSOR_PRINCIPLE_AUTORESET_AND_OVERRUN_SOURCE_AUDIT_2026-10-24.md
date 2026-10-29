@@ -72,3 +72,8 @@ A qualified safety system must independently own reset/rearm and stop. The Linux
 - **UNKNOWN:** exact installed parts, mechanical contact geometry, response chain, stopping distance, residual force, safety PL/SIL, pressure/load holding, reset/restart behavior.
 
 **Next:** for any selected safety edge collect exact profile/sensor/evaluator, sensing coverage, edge travel, full machine stop response and independent rearm/physical witness; store private as-built data outside this public repository. Until basic safe-to-operate protection is demonstrated, **no personnel-exposed hazardous operation**; any experimental operation must be isolated/remote with people outside the danger zone and residual risk documented. Do not use people as force/overtravel test objects.
+
+
+## 2026-10-29 original Mayser worked-example arithmetic follow-up
+
+The distinct [EDGE-CALC-01 manufacturer-indexed example audit](4400_EDGE_CALC_01_MAYSER_NCII_OVERTRAVEL_EXAMPLE_ARITHMETIC_AND_SYSTEM_RESPONSE_AUDIT_2026-10-29.md) found that the indexed Mayser SL NC II p.18/29 example prints `0.5 × 10 mm/s × 1.55 s = 6.55 mm`, whereas that expression equals **7.75 mm**; after its `C=1.2` factor, **9.30 mm**, not **7.86 mm**. The profile's stated 12.4-mm example travel still exceeds 9.30 mm, but the arithmetic margin shrinks. The complete 11-MB manufacturer PDF was not retrievable, so the mismatch is **arithmetic-confirmed for the indexed excerpt, immutable-page UNKNOWN**; not a manufacturer erratum or physical machine failure. Never mix Mayser sensor timing with Schmersal's 17-ms SE-304C evaluation-unit timing. The original qualitative contact/overtravel/independent-safety conclusions stand. No machine test or new scored competency.

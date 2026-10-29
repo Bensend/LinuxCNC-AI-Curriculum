@@ -19,3 +19,6 @@ Read START_HERE and required governance, latest 2026-10-28T23:39:56Z safety chec
 
 
 **Static test source-access boundary:** Mayr official download center lists distinct rotary/static and linear/static brake-test recommendation PDFs (2022-04-26 and 2022-10-13), but full documents are restricted and **NOT READ**. No procedure/acceptance criteria inferred or simulated. Qualified selected-device reviewer must obtain exact OEM method privately if applicable; no new owner questionnaire or lab.
+
+
+**Secondary branch after brake source information-gain stop:** original OSHA foot-control eTool and 1910.217(a)(5) reconciled in existing [PEDAL-01 source audit](../research/4400_PEDAL_01_LINEMASTER_ANTI_TRIP_SIGHTGUARD_OSHA_PRESS_BRAKE_SCOPE_AUDIT_2026-10-26.md) and [existing module](../safety-course/4400_PEDAL_01_ANTI_TRIP_FOOTWEAR_RELOCATION_AND_FRESH_START_FIELD_MODULE_2026-10-26.md). Anti-trip mechanical guarding and held-pedal anti-repeat are distinct engineering functions; mechanical-power-press single-stroke clause does **not** directly govern excluded press brakes. No installed pedal/fresh-start behavior is claimed, no new exam or test. The high-value next external blockers remain Stage A A–G and independent evaluator.

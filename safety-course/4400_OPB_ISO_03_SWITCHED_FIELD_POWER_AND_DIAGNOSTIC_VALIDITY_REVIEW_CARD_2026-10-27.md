@@ -49,3 +49,12 @@ This is a **proposed ergonomic information-state model (INFERENCE)** for the ord
 
 
 **Board-design handoff, not safety approval:** IPS1025H FLT current-source clamp spec (up to 8 V under a stated test) and STISO621 input absolute maximum (7 V) pose a **bounded worst-case interface-voltage question**, even though ST's own X-NUCLEO-ISO1A1 reference connects FLT1 to STISO621. Do not infer a real overvoltage from two standalone limits; request full final-netlist/current-path/input-protection qualification from the separate board-design lane. This does not change Pilz/AKAS safety authority or justify an energized fault injection. [Exact source audit](../research/4400_OPB_L7_L07_ISOLATOR_POWER_LOSS_FAULT_DIAGNOSTIC_POLARITY_SOURCE_AUDIT_2026-10-27.md).
+
+
+## OPB-XREADY-01 source-depth addendum — “AMPLIFIER OK” is not an X-drive witness (2026-10-29)
+
+The published OpenPressBrake Rev1 map assigns legacy **DNC J16/4 / wire 9 / L9** to controller **+24 V power presence**, despite its legacy `AMPLIFIER OK.` label. It explicitly says **no dynamic X-drive feedback is established**. J16/6→4K10→B5 and J16/7→5LS2→B6 are ordinary direction paths; Pilz wire **63→B4** is the separately intended drive-enable path. L9 can be present while 11K2-switched L7/L07 is absent or B4 is withdrawn. Therefore a green `AMPLIFIER OK` derived from J16/4 can be **false-ready**, even when its voltage reading is electrically correct.
+
+**Reviewer instruction:** relabel J16/4 as **“L9 POWER PRESENT — NOT DRIVE READY”** in the normal-control signal dictionary; require exact selected-drive/manual and verified independent fault/status wiring before adding a dynamic ready signal. Do not use J16/4 as a personnel-safety witness, standstill indication, or automatic rearm condition. A valid drive status, a valid field-power state, a protective stop command, and a physically stopped X axis are **four different propositions**. Source-derived mapping is not installed-machine proof; no live measurement or motion is authorized by this addendum.
+
+[Exact source and hypothetical fault matrix](../research/4400_OPB_XREADY_01_FIXED_HIGH_AMPLIFIER_OK_POWER_PRESENCE_VS_DRIVE_HEALTH_SOURCE_AUDIT_2026-10-29.md). **SOURCE-CONFIRMED published mappings; INFERENCE failure cases; actual as-built, selected drive and physical X stop UNKNOWN; TEST-CONFIRMED none. G0/G1 HOLD.**

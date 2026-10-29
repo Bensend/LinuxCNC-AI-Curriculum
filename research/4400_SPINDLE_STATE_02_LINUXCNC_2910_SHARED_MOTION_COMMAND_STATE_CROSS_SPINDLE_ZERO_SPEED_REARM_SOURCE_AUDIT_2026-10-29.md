@@ -44,3 +44,14 @@ The pinned [LinuxCNC spindle examples](https://github.com/LinuxCNC/linuxcnc/blob
 
 ## Newer-development persistence cross-check
 In development snapshot `c9a5a0a5034177c8db64cb44abf14d4f2eb166f7`, [`taskintf.cc` lines 80, 1983–2021](https://github.com/LinuxCNC/linuxcnc/blob/c9a5a0a5034177c8db64cb44abf14d4f2eb166f7/src/emc/task/taskintf.cc#L1983-L2021) still uses the same static command object, still omits a state assignment in `emcSpindleSpeed`, and still assigns state 1/0 in ON/OFF. [`emccanon.cc` lines 2927–2936](https://github.com/LinuxCNC/linuxcnc/blob/c9a5a0a5034177c8db64cb44abf14d4f2eb166f7/src/emc/task/emccanon.cc#L2927-L2936) still clears the stopped spindle's canonical direction. This strengthens **two-revision source persistence** but remains **not** an executed test or a verified physical behavior. `S500 $0` selector handling was also traced through pinned [`interp_execute.cc` lines 278–293](https://github.com/LinuxCNC/linuxcnc/blob/86cdca76fa2a36274c432caa21952b23c267989a/src/emc/rs274ngc/interp_execute.cc#L278-L293), which routes the S word to the selected spindle before M-code conversion.
+
+
+## Frozen expected-state matrix for future isolated reviewer (SOURCE PREDICTION, not result)
+| After paper command | Shared Task `emcmotCommand.state` | Spindle 0 canonical direction | Spindle 0 expected `on / speed-out / brake` | Spindle 1 expected ON | Evidence status |
+|---|---:|---:|---|---|---|
+| `M5 $0` | 0 | 0 | `0 / 0 / 1` | unchanged | source composition |
+| `M3 $1` | 1 | 0 | `0 / 0 / 1` | 1 | source composition |
+| `S500 $0` | **1** (not overwritten by speed update) | **0** | **`1 / 0 / 0`** predicted | 1 | **NOT TEST-CONFIRMED** |
+| single-spindle control: `M5 $0` then `S500 $0` with no other spindle ON | 0 | 0 | `0 / 0 / 1` predicted | N/A | **NOT TEST-CONFIRMED** |
+
+The matrix assumes default fixed-RPM G97, ordinary unremapped M/S words, two configured spindles, no intervening commands that change shared state, and no independent safety hardware asserted. These are **not** actual HAL captures. A bounded local offline run, if ever authorized, must record actual pins and command order and compare against the matrix; unexpected outcomes should prompt source/config reconciliation, not a physical experiment. No tests were run this session.

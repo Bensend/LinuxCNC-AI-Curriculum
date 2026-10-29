@@ -1,0 +1,37 @@
+# 4400-EOFF-01 — Electrical emergency switching-off is not emergency stopping or maintenance isolation
+
+**2026-10-29 | Original OEM/official regulation source audit | NON-GRADUATED | NO PHYSICAL TEST.**
+
+## Engineering question and predecessor control
+Which function protects against hazardous **motion**, which interrupts supply during an **electrical-origin emergency**, and which establishes a **safe-to-service** condition? Existing [2530 first-principles](../safety-course/2530_ESTOP_FIRST_PRINCIPLES_SOURCE_PREP_2026-09-22.md) already mentions E-stop versus emergency switching-off; [DC-LINK-02](4400_DC_LINK_02_STO_DARK_DISPLAY_VS_CAPACITOR_ISOLATION_AND_LOTO_OEM_AUDIT_2026-10-26.md) and [ELEC-EXPOSE-01](../safety-course/4400_ELEC_EXPOSE_01_DARK_CABINET_IS_NOT_VERIFIED_DEENERGIZED_FIELD_CARD_2026-10-29.md) already teach electrical isolation. Full index/progress synonym scans found no dedicated direct **Eaton original page** three-way integration. This is an **exact-source and cross-hazard extension**, not a new scored competency.
+
+## Sources inspected, date and evidence limits
+1. **Eaton, _Electrical equipment of machines: an overview of the updated European standard_, Dirk Meyer, first edition**, original eight-page OEM PDF: https://www.eaton.com/content/dam/eaton/markets/machinebuilding/service-and-support/documents/eaton-EN60204-1-whitepaper-wp800001-en.pdf . Opened and visually inspected **printed page 4 (PDF index 3)**, section 3.4, on 2026-10-29. The manufacturer distinguishes emergency stopping for mechanical hazards from emergency switching-off when electrical hazards are identified, with supply interruption and example switching devices. **DOC-CONFIRMED OEM interpretation of EN 60204-1**, not the full normative text; PDF byte hash not retained.
+2. **Pilz, _Emergency switching off circuit_**: https://www.pilz.com/en-AU/support/lexicon/articles/073304 , read 2026-10-29. Manufacturer distinguishes motion stop from removal of supply for shock hazards. Its referenced EN 60204-1:2010 edition is older; do not silently generalize clause numbering.
+3. **Schneider Electric, _What are the 3 stop categories according to EN60204-1?_**, FAQ FA122781, published 2008-01-24, modified **2026-08-24**: https://www.se.com/us/en/faqs/FA122781/ . DOC-CONFIRMED category 0 immediate actuator power removal, category 1 controlled stop then power removal, category 2 controlled stop with power retained. This vocabulary is **not** machine-specific stop selection.
+4. **OSHA 29 CFR 1910.333(b)(2)(ii)(B–D), (iv)(A–B)**: https://www.osha.gov/laws-regs/regulations/standardnumber/1910/1910.333 , read 2026-10-29. For applicable exposed electrical work, pushbuttons/interlocks cannot be the sole de-energization means; stored capacitor energy, backfeed and qualified voltage verification must be addressed.
+5. **OSHA 29 CFR 1910.147(b), (d)(5–6)**: https://www.osha.gov/laws-regs/regulations/standardnumber/1910/1910.147 , read 2026-10-29. For covered servicing, an energy-isolating device and stored-energy control/verification are required. **Scope distinction:** 1910.333 electrical exposure and 1910.147 general machine servicing are not interchangeable requirements.
+6. **Schneider Electric selected drive _Designated Safety Function_**: https://product-help.schneider-electric.com/Machine%20Expert/V2.0/en/ILM62HW/ILM62HW/D-SE-0062769.html . Manufacturer-indexed excerpt says selected STO implementation disables inverter torque while mains contactor stays on. **Indexed excerpt only; direct full page inaccessible**, so no universal drive claim.
+
+## Physical propositions and the three-way decision
+| Situation | Intended function | What it does NOT establish |
+|---|---|---|
+| Moving press ram/spindle/robot threatens a person | **Emergency stop**, with risk-assessed stopping sequence, independent safety-related control/final elements and physical stop/hold witness | That all electrical supplies are disconnected, capacitors discharged or work is safe to service |
+| Electrical-origin emergency such as exposed live conductor | **Emergency switching-off** of the *relevant* supply using appropriately selected switching apparatus | That all independent feeds/UPS/backfeed are absent, or a gravity-loaded machine is physically held |
+| Servicing in cabinet or beneath suspended load | **Maintenance isolation** of identified sources, locks and qualified verification as applicable, plus mechanical/hydraulic restraint | That E-stop, STO, dark HMI or a generic E-off button is sufficient |
+
+A correctly selected **lockable circuit breaker/disconnector** might serve both electrical emergency switching-off and maintenance isolation, but **only** with evidence for the actual hardware, installation, supply coverage and work procedure. A contactor opened by an E-off pushbutton is not automatically a lockable energy-isolating device.
+
+### Adversarial failure path (hypothetical press brake)
+Electrical emergency → supply switched off → ordinary drive/hydraulic control loses power → **INFERENCE:** if independent gravity restraint is absent, a suspended ram could descend even though supply interruption worked as intended. Exact Y1/Y2 valve positions, pressure, brake and holding response are **UNKNOWN**, not invented. Distinguish **electrical emergency response**, **mechanical safe stop/hold**, **stored energy**, **service isolation** and **fresh start**. Reset/release must not itself cause hazardous restart.
+
+### Human-factors implementation
+Label E-stop and electrical emergency switching-off by purpose and affected span; avoid one ambiguous “red button = safe to touch” mental model. Provide accessible lockable isolation and diagnostics so maintenance does not require guard defeat; ensure independent physical holding and fresh-start authorization are straightforward. Verify actual all-source and backfeed boundaries before a qualified electrical task.
+
+## Evidence and release
+**DOC-CONFIRMED:** OEM source distinction and OSHA electrical/service requirements within their scopes. **INFERENCE:** an indiscriminate power cut may worsen an unrestrained gravity hazard. **UNKNOWN:** applicable purchased IEC/EN edition/clauses, selected OpenPressBrake E-off existence, Pilz/AKAS program, electrical feeds, Y1/Y2 hydraulic holding, PL/SIL, physical stopping and restart. **TEST-CONFIRMED: none.** No simulation, lab, workflow, machine operation, energized fault injection or external evaluation.
+
+**G0/G1 HOLD; G2 NOT RUN; G3/G4 NOT AUTHORIZED; G5 HOLD. No personnel-exposed hazardous operation.** Any later experiment requires independent approval and isolated/remote operation with people outside the hazard zone and explicit residual risk. Independent 2520–25F0 evaluator still OPEN.
+
+## Next discriminators
+Qualified Stage A A–G reviewer: identify actual distinct electrical emergency function (if installed), supply it interrupts, independent stop/hold under power loss, and lockable isolators/verification procedure. Do not request energized testing to discover these. An independent evaluator may use a **novel unseen** cross-hazard scenario, keeping the hidden oracle outside learner-readable GitHub until precommitment.

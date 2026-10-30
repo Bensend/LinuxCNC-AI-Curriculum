@@ -1530,3 +1530,6 @@ Read [original UR SW5_23/SW10_15 OEM PFL/contact audit](../research/4400_PFL_01_
 
 ### 4400-PI500-OEM-COMM-02 — HAL heartbeat can freeze while VFD Modbus traffic continues (2026-10-30; NON-GRADUATED)
 [Source/OEM cross-layer audit](../research/4400_PI500_OEM_COMM_TIMEOUT_02_SOURCE_OEM_CROSS_LAYER_WATCHDOG_AUDIT_2026-10-30.md) extends the existing PI500-VFD-01 and VFD-EXIT-01 lessons. **SOURCE-CONFIRMED:** disabled/no-alarm driver path still polls the drive while skipping STOP/trip and HAL heartbeat toggle. **DOC-CONFIRMED at mirrored 2018 Powtran PI500 manual:** F9.04 timeout disabled by default, F8.18 Err.16 action can continue running, command 0x2000 supports free/decel stop and reset but not a documented 0x0002 coil trip. No full 2025 V5.1 manual, selected hardware, physical test or scored evaluation; G0/G1 HOLD. Practical lesson: distinguish host heartbeat freshness, actual Modbus traffic, drive communication-fault action and independent personnel-safety final element.
+
+
+**PI500 maintainer handoff (same source-depth, not a new course):** [source-level acceptance and upstream review packet](4400_PI500_UPSTREAM_MAINTAINER_REVIEW_PACKET_2026-10-30.md) covers disabled/alarm/held-run/reconnect cases and exact OEM command/timeout provenance. It was not submitted upstream and is not a test, patch, physical release or blind score.

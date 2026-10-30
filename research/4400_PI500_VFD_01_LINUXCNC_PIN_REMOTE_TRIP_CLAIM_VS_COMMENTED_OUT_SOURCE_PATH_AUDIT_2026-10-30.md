@@ -53,3 +53,16 @@ OpenPressBrake Stage A A–G qualified public status unestablished; restricted e
 
 ## Historical introduction cross-check (same session)
 **SOURCE-CONFIRMED:** [LinuxCNC merge PR #1172 commit `9b97642240b1f639a4d454f577536f4deb104323`](https://github.com/LinuxCNC/linuxcnc/commit/9b97642240b1f639a4d454f577536f4deb104323), titled *Support for PI500 and equivalent VFDs via Modbus RTU*, already contains **both** the `enable=0` remote-trip declaration and the commented-out `pi500_trip` plus no-alarm/`!enable` logging/continue branch in its original added `.comp` patch. This mismatch is **not a newly introduced regression** in the current branch; the exact historical publication date was not established in this session. The source-history check strengthens the provenance of the mismatch but does **not** establish a physical drive response, a released binary's behavior, or an upstream maintainer's intent.
+
+
+## Four-state adversarial static branch table (additional source reasoning; NOT EXECUTED)
+A second pass through lines 296–322 shows that `enable` is **not** an unconditional gate on the later `pi500_run` write:
+
+| Last polled `status.alarm` | `enable` | Source path | Consequence supported by code alone |
+|---|---|---|---|
+| false | false | First `if`, print, `continue` | No trip/STOP write; no heartbeat toggle |
+| false | true | Normal `else` | Can write frequency/RUN according to `run` and status |
+| true | true | Attempts `pi500_reset`; on successful reset call, proceeds into `else` | May also issue normal RUN write based on **stale polled status** and `run`; actual drive response UNKNOWN |
+| **true** | **false** | Both preceding conditions false; enters normal `else` | **May issue `pi500_run(ctx,true)` even though `enable=false`** when `run=true` and polled `status.running=false`; this is an attempted Modbus RUN write, **not** proof the faulted drive will execute it |
+
+This is a **source-level logical counterexample** to treating `enable=false` as a hard normal-control inhibit. It does not prove an actual spindle starts in an alarmed state, and it does not justify any energized fault injection. A qualified upstream maintainer should review the intended pin contract and all four branches together rather than only uncommenting `pi500_trip`.

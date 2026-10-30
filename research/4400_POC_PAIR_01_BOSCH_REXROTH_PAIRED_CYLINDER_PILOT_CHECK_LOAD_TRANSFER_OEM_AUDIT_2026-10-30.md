@@ -46,6 +46,13 @@ Ask only for already-existing restricted as-built evidence: (1) cylinder type/or
 
 These are practice questions, **not** an independent 2520–25F0 blind evaluation, machine validation, or permission for hazardous operation.
 
+## Adversarial counter-reading (do not turn a strong warning into a false universal rule)
+1. **Could a dual-Y machine still be engineered safely?** Yes, potentially, with an appropriate independently validated hydraulic/mechanical safety architecture; the Bosch statement addresses the described pilot-operated check approach, not every multi-cylinder valve or press-brake design. Selected circuit UNKNOWN.
+2. **Does a valve being called a "poppet" make it a pilot check?** No. `11Y4/11Y6 FAST_POPPET` are source-derived names, not manufacturer model/function identifications. Require the actual symbol and part number before applying this note.
+3. **Does intentional pilot-piston leakage mean the load seat is leaking?** Not necessarily. Sun's indexed 2023 excerpt describes an intentional **port 2-to-port 3 pilot-piston** leakage path in some products; do not confuse that with port 1-to-port 2 load-holding leakage, or assume all variants have it. Full PDF access blocked.
+4. **Can a pressure sensor alone detect the asymmetric transfer soon enough to protect people?** Unknown. No sensor placement, dynamics, diagnostic timing, relief behavior, safety-rated reaction or stopping/holding witness is established. Ordinary FPGA telemetry cannot become personnel-safety authority by adding an alarm.
+5. **Is a no-load bench opening test sufficient?** No. It does not establish coupled gravity-load redistribution, failure under specified faults or safe maintenance access. Do not deliberately create this dangerous failure without a qualified isolated validation plan.
+
 ## Claims, uncertainty and reopen rule
 - **DOC-CONFIRMED:** Bosch original one-page paired-cylinder, hunting, location and pilot-ratio warnings; Sun original manufacturer-indexed nonmodulating/modulating distinction with full-PDF retrieval limitation.
 - **SOURCE-CONFIRMED (repository only):** prior HOLD-01 and OpenPressBrake public Rev1 describe ordinary Y1/Y2 control separated from intended independent Pilz authority; no selected physical circuit verified.

@@ -1,0 +1,40 @@
+From: LinuxCNC AI Curriculum source-review draft (NOT upstream submitted)
+Subject: [PATCH DRAFT] xhc-whb04b-6: distinguish ordinary RESET/STOP and USB connection from protective safety
+Base: LinuxCNC/linuxcnc v2.9.10 (source-only, not runtime tested)
+---
+diff --git a/docs/src/man/man1/xhc-whb04b-6.1.adoc b/docs/src/man/man1/xhc-whb04b-6.1.adoc
+--- a/docs/src/man/man1/xhc-whb04b-6.1.adoc
++++ b/docs/src/man/man1/xhc-whb04b-6.1.adoc
+@@ -304,8 +304,9 @@
+ `whb.button.reset` (bit,out)::
+- see `whb.halui.estop.`{`activate`, `reset`}
+- True one Reset button down, false otherwise.
+- For toggling E-stop use whb.halui.estop .active and .reset.
++ True while the RESET button is held, false otherwise.
++ The built-in handler requests ordinary machine ON/OFF through `whb.halui.machine.on/off`.
++ This is not an independent personnel-protective E-stop or safety reset.
+ `whb.button.stop` (bit,out)::
+  see `whb.halui.program.stop`. True on Stop button down, false otherwise.
+- For stopping a program use `whb.halui.program.stop`.
++ The built-in handler requests ordinary Task abort through `whb.halui.program.stop`.
++ This does not establish a personnel-protective stop or physical standstill.
+ `whb.button.start-pause` (bit,out)::
+@@ -396,5 +397,5 @@
+ `whb.pendant.is-sleeping` (bit,out)::
+- True as long pendant is in sleep mode (usually a few seconds after turned off), false otherwise.
++ Reports sleep state inferred from received pendant packets; not a safety-rated link monitor.
+ `whb.pendant.is-connected` (bit,out)::
+- True as long pendant is not in sleep mode (turned on), false otherwise.
++ Set after USB receiver initialization succeeds; not proof of a live wireless link or safe machine state.
+ 
+diff --git a/src/hal/user_comps/xhc-whb04b-6/hal.h b/src/hal/user_comps/xhc-whb04b-6/hal.h
+--- a/src/hal/user_comps/xhc-whb04b-6/hal.h
++++ b/src/hal/user_comps/xhc-whb04b-6/hal.h
+@@ -386,5 +386,5 @@
+-    //! Sets the hal state of the respective pin (reset). Usually called in case the reset
+-    //! button is pressed or released. The pin should be connected to \\ref halui.estop.activate.
++    //! Sets the raw RESET button pin and requests ordinary machine ON/OFF through
++    //! the component's built-in handler. This is not a personnel-safety E-stop.
+     //! \\param enabled the new pin value, (true if the button was pressed, false otherwise)
+     //! \\ref Hal::halInit(const WhbSoftwareButton* , size_t , const WhbKeyCodes&)
+     //! \\sa setReset(bool)

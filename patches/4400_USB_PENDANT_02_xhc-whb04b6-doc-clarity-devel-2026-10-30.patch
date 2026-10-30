@@ -1,0 +1,45 @@
+From: LinuxCNC AI Curriculum source-review draft (NOT upstream submitted)
+Subject: [PATCH DRAFT] xhc-whb04b-6: clarify ordinary controls and feedback on current development source
+Base: LinuxCNC/linuxcnc inspected default-branch blobs (2026-10-30), also at 24e84c4506b41634240f7087f0295e361a954886
+---
+diff --git a/docs/src/man/man1/xhc-whb04b-6.1.adoc b/docs/src/man/man1/xhc-whb04b-6.1.adoc
+--- a/docs/src/man/man1/xhc-whb04b-6.1.adoc
++++ b/docs/src/man/man1/xhc-whb04b-6.1.adoc
+@@ -163,3 +163,3 @@
+ `whb.halui.spindle.is-on` (bool, in)::
+- Connect to `halui.spindle.0.on`. Pin to indicate spindle is on (either direction).
++ Connect to `halui.spindle.0.is-on`. Pin for ordinary reported spindle state, not physical standstill.
+ `whb.halui.spindle.stop` (bool, out)::
+@@ -290,8 +290,9 @@
+ `whb.button.reset` (bool, out)::
+- See `whb.halui.estop.`{`activate`, `reset`}
+- True one Reset button down, false otherwise.
+- For toggling E-stop use whb.halui.estop .active and .reset.
++ True while the RESET button is held, false otherwise.
++ The built-in handler requests ordinary machine ON/OFF through `whb.halui.machine.on/off`.
++ This is not an independent personnel-protective E-stop or safety reset.
+ `whb.button.stop` (bool, out)::
+  See `whb.halui.program.stop`. True on Stop button down, false otherwise.
+- For stopping a program use `whb.halui.program.stop`.
++ The built-in handler requests ordinary Task abort through `whb.halui.program.stop`.
++ This does not establish a personnel-protective stop or physical standstill.
+ `whb.button.start-pause` (bool, out)::
+@@ -382,5 +383,5 @@
+ `whb.pendant.is-sleeping` (bool, out)::
+- True as long pendant is in sleep mode (usually a few seconds after turned off), false otherwise.
++ Reports sleep state inferred from received pendant packets; not a safety-rated link monitor.
+ `whb.pendant.is-connected` (bool, out)::
+- True as long pendant is not in sleep mode (turned on), false otherwise.
++ Set after USB receiver initialization succeeds; not proof of a live wireless link or safe machine state.
+ 
+diff --git a/src/hal/user_comps/xhc-whb04b-6/hal.h b/src/hal/user_comps/xhc-whb04b-6/hal.h
+--- a/src/hal/user_comps/xhc-whb04b-6/hal.h
++++ b/src/hal/user_comps/xhc-whb04b-6/hal.h
+@@ -385,5 +385,5 @@
+-    //! Sets the hal state of the respective pin (reset). Usually called in case the reset
+-    //! button is pressed or released. The pin should be connected to \ref halui.estop.activate.
++    //! Sets the raw RESET button pin and requests ordinary machine ON/OFF through
++    //! the component's built-in handler. This is not a personnel-safety E-stop.
+     //! \param enabled the new pin value, (true if the button was pressed, false otherwise)
+     //! \ref Hal::halInit(const WhbSoftwareButton* , size_t , const WhbKeyCodes&)
+     //! \sa setReset(bool)

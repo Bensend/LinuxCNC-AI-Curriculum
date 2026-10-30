@@ -21,3 +21,5 @@ UTC start witness: [2026-10-30T13:33:22.635Z](2026-10-30T133322Z-session-start-s
 
 ## Same-session continuation (new mode-transition/recovery distinction)
 The original SICK 2026 hardware manual also confirms that FX3-ANA0 can select one of **up to 15 process areas during operation**. Whether a selected machine's mode/area selector is independently safety-authorized remains UNKNOWN. The indexed 2025 configuration manual distinguishes discrepancy-detection allowance from discrepancy-error **reset** time (including **0-ms discrepancy setting → 65,532-ms error reset**); this is **not** deliberate machine restart authorization. Research and field review extended. No new test, machine-specific settings, compute or evaluator.
+
+**Source-edition caution:** Later direct screenshot inspection found 2026-05-05 footer on printed p. 97 and 2026-10-01 footer on pp. 98–99 of the SICK PDF, despite extracted 2026-05-05 metadata. Do not treat all pages as a uniform pinned edition; see research provenance correction. Exact cause UNKNOWN. Future OEM evidence should use stable file hashes or individually captured edition pages where permitted.

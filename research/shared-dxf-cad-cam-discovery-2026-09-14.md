@@ -105,3 +105,6 @@ Permitted learning experiments include:
 - compare generated contour order, kerf/lead-in and material-selection semantics against QtPlasmaC expectations.
 
 Stop each prototype when its learning question is answered. Do not expand it into the production CAM/nesting application inside the curriculum.
+
+## 2026-10-30 source-grounded G64 Q integration boundary
+The [4000-LC-G64Q-01 pinned LinuxCNC audit](4400_LINUXCNC_G64_Q_NAIVECAM_MULTI_TURN_DXF_POST_SOURCE_AUDIT_2026-10-30.md) adds an implementation-level postprocessor hazard not established by this original discovery survey: `G64 Q` may collapse G1 XYZ segments and replace small projected G17 arcs **in userspace canonical processing before the realtime trajectory planner**. The Q shortcut's multi-turn arc test uses only rotation sign, despite the interpreter retaining P turns; upstream issue #222 reports a 15-turn helical bore turning into a plunge. See the [practical post handoff](../guides/4000-linuxcnc-g64-q-cam-post-validation-2026-10-30.md). Preserve DXF contour/helix feature identity and explicitly verify emitted canonical motion against original CAM intent; do not treat Q as a substitute for geometry cleanup or P as a complete original-geometry/physical error bound. No runtime test or machine release is claimed.

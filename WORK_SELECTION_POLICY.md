@@ -1,5 +1,9 @@
 # Curriculum Work-Selection Policy
 
+## 2026-10-30 owner priority update — LinuxCNC implementation first
+The owner explicitly changed the primary hourly curriculum queue to **LinuxCNC itself**, superseding older safety-first scheduling language in historical PROGRESS/checkpoints and the safety-specific selection refinements below. Select source-grounded LinuxCNC internals (motion, realtime, HAL/INI, HostMot2/Mesa, EtherCAT where relevant, interpreter, GUI, G-code, diagnostics, machine configurations), then meaningful 3000/4000 implementation and open-source CAD/CAM/DXF/nesting/ROS integration questions. Do **not** reopen graduated 1000/2000/F02/3000 or manufacture new modules solely for activity. Preserve all safety-course artifacts, qualified machine physical gates and blind evaluator separation; safety remains a cross-cutting design constraint, **not** the routine work queue. Keep compute only on a justified, isolated `[self-hosted, openpressbrake]` runner; no hosted fallback. This owner-directed update takes precedence over earlier safety-specific work-selection defaults; their evidence-integrity and physical-safety requirements still apply when relevant.
+
+
 This file is authoritative for choosing the next autonomous curriculum task when multiple course branches, evaluations, or specialization tracks are open.
 
 ## Core rule

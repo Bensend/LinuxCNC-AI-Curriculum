@@ -16,6 +16,12 @@ Do not routinely reopen closed levels without a genuinely new material defect.
 
 **4000 — hardware and AI-assisted implementation.**
 
+### 2026-10-30 owner priority override — LinuxCNC-first 4000 implementation
+The owner explicitly redirected this hourly curriculum from routine safety-course expansion to **LinuxCNC source-level implementation and practical cross-machine engineering**. Historical safety-first sections below are preserved for provenance, not current queue priority. Keep 1000/2000/F02 and completed 3000 GRADUATED/CLOSED. Keep independent 2520–25F0 evaluator OPEN and OpenPressBrake G0/G1 HOLD; neither is waived by the queue change. Routine board-design work belongs to the separate OpenPressBrake automation.
+
+**2026-10-30T18:36:50Z — 4000-LC-G64Q-01 (NON-GRADUATED):** [Pinned stable/development canonical naive-CAM source trace](research/4400_LINUXCNC_G64_Q_NAIVECAM_MULTI_TURN_DXF_POST_SOURCE_AUDIT_2026-10-30.md) distinguishes userspace Q geometry simplification from TP P blend tolerance. Stable v2.9.10 `linkable` merges G1 XYZ segments and `flush_segments` emits last line/tag; G0, changed feed and M62 flush. G17 `ARC_FEED` computes sagitta using only signed turn direction, so multi-turn magnitude from `arc_data_ijk` can be discarded when Q permits conversion to two linear points. Upstream issue #222 (2017, open on inspection) reports a 15-turn helix becoming a plunge; SOURCE-CONFIRMED conditional path, COMMUNITY-REPORTED observed outcome, **NOT TESTED** here. Development INI G64 defaults and optional R planner interface are version-specific. [Practical DXF/CAM post review](guides/4000-linuxcnc-g64-q-cam-post-validation-2026-10-30.md) preserves geometry/feature provenance and machine/safety boundaries. [Checkpoint](checkpoints/2026-10-30T183650Z-4000-linuxcnc-g64-q-naivecam-multiturn-next.md). No hosted or local compute, lab runtime, blind evaluation, physical machine operation or release claim; LAB_COMPUTE_LOG and FEEDBACK_SCORE_LOG unchanged. Next LinuxCNC-first source question: QtPlasmaC material/post process authority or DXF bulge/INSERT normalization, after predecessor check.
+
+
 ### Primary active priority — safety course / professional machine implementation
 
 Routine controller-board development remains a separate automation concern and must not displace safety work here.

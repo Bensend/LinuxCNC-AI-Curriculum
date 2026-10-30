@@ -17,3 +17,7 @@ UTC start witness: [2026-10-30T13:33:22.635Z](2026-10-30T133322Z-session-start-s
 4. If A–G and evaluator remain blocked, rotate to a **genuinely new** safety mechanism after full-index predecessor audit. Avoid another redundant pressure, PI500, guard or VFD source artifact solely for activity. Use source reasoning before any frozen lab.
 5. Any justified compute requires verified isolated local panel-PC `[self-hosted, openpressbrake]`; no GitHub-hosted minutes, no routine tests. Record actual job runtime only if it occurs.
 6. Immediately before ending, safely append full `LESSON_LOG.md` with actual UTC end/elapsed/overlap, verify and commit. Keep hourly automation enabled.
+
+
+## Same-session continuation (new mode-transition/recovery distinction)
+The original SICK 2026 hardware manual also confirms that FX3-ANA0 can select one of **up to 15 process areas during operation**. Whether a selected machine's mode/area selector is independently safety-authorized remains UNKNOWN. The indexed 2025 configuration manual distinguishes discrepancy-detection allowance from discrepancy-error **reset** time (including **0-ms discrepancy setting → 65,532-ms error reset**); this is **not** deliberate machine restart authorization. Research and field review extended. No new test, machine-specific settings, compute or evaluator.

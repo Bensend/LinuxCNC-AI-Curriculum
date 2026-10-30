@@ -5,6 +5,11 @@ Base: LinuxCNC/linuxcnc v2.9.10 (source-only, not runtime tested)
 diff --git a/docs/src/man/man1/xhc-whb04b-6.1.adoc b/docs/src/man/man1/xhc-whb04b-6.1.adoc
 --- a/docs/src/man/man1/xhc-whb04b-6.1.adoc
 +++ b/docs/src/man/man1/xhc-whb04b-6.1.adoc
+@@ -177,3 +177,3 @@
+ `whb.halui.spindle.is-on` (bit,in)::
+- connect to `halui.spindle.0.on`. Pin to indicate spindle is on (either direction).
++ connect to `halui.spindle.0.is-on`. Pin to indicate ordinary reported spindle state, not physical standstill.
+ `whb.halui.spindle.stop` (bit,out)::
 @@ -304,8 +304,9 @@
  `whb.button.reset` (bit,out)::
 - see `whb.halui.estop.`{`activate`, `reset`}

@@ -60,3 +60,20 @@ This is **additional exact-edition depth**, not an instruction to operate a mach
 - **DOC-CONFIRMED (§13.3.2, printed p.112):** PNOZ s30 provides monitoring outputs; the **reaction function** (for example, shutting down a drive or applying a brake) is explicitly outside the monitor and must be designed by the machine/plant developer. This makes the independent final-element boundary unusually clear.
 
 **Additional failure-path question:** A low-duty machine remains stationary for a week. A green standstill indication cannot establish that every TTL/HTL track has exercised within the OEM's 8-hour condition; review the qualified sensor/evaluator calculation and safe commissioning strategy. Never create hazardous motion just to satisfy a paper diagnostic requirement. **UNKNOWN:** actual sensors, version, operating schedule, safe proof strategy, calculated PFH, physical final elements. No test, lab or machine operation.
+
+## Qualified review worksheet — fill from existing as-built records, not by exposing personnel
+This is a **blank paper gate**, not a claim that the OpenPressBrake hardware uses this monitor. It prevents the tempting shortcut of choosing a low standstill threshold, accepting a green LED, and unlocking a guard without proving the sensor and physical load path.
+
+| Evidence needed | Record from selected hardware/configuration | Fail/hold criterion |
+|---|---|---|
+| Machine hazard and dangerous load | Hazard ID, axis/shaft, downstream load, maintenance access, modes | No defined physical proposition -> HOLD |
+| Monitor identity | Exact part, hardware/firmware, manual edition, approved configuration revision/CRC | Unidentified or mismatched configuration -> HOLD |
+| Sensor architecture | TTL/HTL/sin-cos/safe encoder; independent sensor location, mounting, coupling/gear paths, mechanical fault exclusions | Two signals sharing one unassessed failure path -> HOLD |
+| AB/Z plausibility | Enabled? selected mode, fAB/fZ ratio, vABZ, minimum speed and pulse-count activation | Disabled/unknown or below active diagnostic region -> cannot claim broken-shear-pin detection |
+| Signal plausibility timing | Track AB/Z/S tolerance settings; wiring/EMC assumptions; signal error reaction | Unbounded invalid-level detection -> HOLD timing claim |
+| Speed filtering/output timing | Slow/average/fast, switch-off delay, output mapping, selected mode and start type | Auxiliary output or unvalidated delay -> HOLD protective stop |
+| Forced dynamisation | Sensor type, documented track exercise, safe maintenance/operation strategy, OEM PFH assumption | Cannot justify assumed exercise/reliability -> reopen safety calculation, **not** force exposed movement |
+| Independent final elements | Safety relay/PLC path, drive STO/SS1 if applicable, gravity hold/brake/valve and feedback | Monitor-only/HAL-only output -> HOLD |
+| Validation and change control | Qualified reviewer, independent physical stop/hold witness under approved isolated/remote conditions, revalidation after coupling/sensor changes | No selected physical witness -> G0/G1 HOLD; no personnel exposure |
+
+**Adversarial acceptance check:** Ask the reviewer to point to the *physical* member that stops or holds the dangerous load if the encoder shaft decouples, and to explain what happens before the pulse-count plausibility detector becomes active. If the answer is only an HMI green bit, a second channel on the same failed shaft, or a filter setting, the safety proposition is not demonstrated. No generic stopping time or PL is assigned here.

@@ -1,0 +1,40 @@
+# 4400-USB-PENDANT-02 — source-pinned corrective documentation patch and reviewer gate
+**2026-10-30 | follow-through on USB-PENDANT-01 | NON-GRADUATED | no machine test or upstream submission**
+
+## Engineering question and predecessor check
+Can the documented mismatch between the XHC-WHB04B-6 pendant's ordinary RESET/STOP handling and the man page's E-stop language be corrected **without changing executable behavior or suggesting that a USB pendant is a personnel-safety device**?
+
+The [existing source audit](4400_USB_PENDANT_01_LINUXCNC_WHB04B6_RESET_STOP_LINK_FRESHNESS_AND_BLOCKING_SOURCE_AUDIT_2026-10-30.md), [upstream review packet](../safety-course/4400_USB_PENDANT_01_UPSTREAM_DOC_MAINTAINER_REVIEW_PACKET_2026-10-30.md), 2530 E-stop and RAD-01 wireless-pendant lessons already teach the underlying mechanism. This is **implementation-ready documentary correction**, not a new competency, new machine finding, or another unscored exercise. Full canonical learner index, safety research plan and current PROGRESS were checked for predecessors before work.
+
+## Deliverable and exact base
+[Reviewable unified diff against LinuxCNC v2.9.10](../patches/4400_USB_PENDANT_02_xhc-whb04b6-doc-clarity-v2.9.10.patch). It changes **only**:
+- `docs/src/man/man1/xhc-whb04b-6.1.adoc`: RESET/STOP descriptions and USB receiver/sleep status;
+- `src/hal/user_comps/xhc-whb04b-6/hal.h`: stale `halui.estop.activate` comment.
+
+The draft is **not applied to LinuxCNC upstream**, not merged, not compiled, not physically tested, and not a proposed safety-control modification. It is a review artifact. Exact pinned v2.9.10 Git blobs: man page `0ffb738990104ce511407fa7cabd0cede2df1d42`; `hal.h` `fef2ab16c0b7815b1ec0387d1bdc30bd7e7bf3a0`; `hal.cc` `f38ff778995148fac3da1a5b3d048134d1405d83`; `xhc-whb04b6.cc` `5cd64d2838267f9cb68aa68fd4327b9dfbeee0db`. [Official man page at tag](https://github.com/LinuxCNC/linuxcnc/blob/v2.9.10/docs/src/man/man1/xhc-whb04b-6.1.adoc); [RESET/STOP implementation](https://github.com/LinuxCNC/linuxcnc/blob/v2.9.10/src/hal/user_comps/xhc-whb04b-6/hal.cc#L721-L746); [USB receiver initialization](https://github.com/LinuxCNC/linuxcnc/blob/v2.9.10/src/hal/user_comps/xhc-whb04b-6/xhc-whb04b6.cc#L430-L463).
+
+## What is source-confirmed
+1. **SOURCE-CONFIRMED:** `Hal::setReset` sends ordinary `doMachineOn` or `doMachineOff` according to `isMachineOn`; `Hal::setStop` requests `doStopProgram`. HALUI/Task then route these to ordinary machine-state/abort commands. The raw RESET pin is also updated. Neither path establishes physical standstill or safety-rated E-stop.
+2. **SOURCE-CONFIRMED:** v2.9.10 man-page lines 304–307 refer to `whb.halui.estop.activate/reset` even though the inspected pendant component does not register those pins. `hal.h` lines 386–387 repeats the outdated advice. The patch removes this misleading connection advice and names the actual ordinary behavior.
+3. **SOURCE-CONFIRMED:** `whb.pendant.is-connected` is set after successful USB initialization, not by a separately validated RF freshness watchdog. `is-sleeping` derives from received packet interpretation. The patch says what these pins do **not** prove, without inventing a timeout or safety response.
+4. **SOURCE-CONFIRMED static patch check:** the complete draft's three unified hunks matched the exact v2.9.10 source contexts, each old/new hunk count matched its header, and all hunks were applied in-memory to the fetched original texts without mismatch. This checks patch construction only. **TEST-CONFIRMED runtime: none.**
+5. **DOC/SOURCE edition boundary:** the inspected development man page has blob `6cd5f625ab2e0d5ec0f731b013b6d4498cd4496e` and uses `(bool, out)` instead of v2.9.10 `(bit,out)`; development `hal.h` blob `b5c05324b9f20e49bf920c60c45a47fe3f599774` retains the stale comment. **Do not apply the v2.9.10 diff blindly to development**; port the wording with its exact syntax and re-review the branch.
+
+## Adversarial maintainer acceptance review
+| Question | Acceptance evidence | Stop/unknown boundary |
+|---|---|---|
+| Does the patch change behavior? | Diff contains only AsciiDoc and Doxygen comment text; no executable HAL implementation edits. | Runtime not exercised; source-only change classification. |
+| Does RESET imply E-stop? | New wording explicitly calls it ordinary machine ON/OFF, not personnel-safety E-stop. | Actual safety wiring/logic and installed pendant UNKNOWN. |
+| Does STOP imply safe standstill? | New wording identifies ordinary Task abort and disclaims physical standstill. | Physical stopping/holding never inferred. |
+| Does USB presence prove radio freshness? | New wording limits `is-connected` to successful USB initialization. | RF/receiver firmware, timing, actual wireless failure behavior UNKNOWN. |
+| Could existing users depend on old wording? | Reviewer should compare all supported man-page editions, HAL examples and user workflows. | No claim of backward compatibility without upstream review. |
+| Should source checksum handling be patched in the same change? | **No**: separate parser robustness question, not a documentation fix or safety-rated protocol. | Do not add an unvalidated acceptance gate to a documentation-only change. |
+
+## Safety and human-factors transfer
+A cheap pendant is convenient for jog/normal production commands, but a labeled RESET or STOP button is not evidence of protective stop. A builder copying the old man-page text might try to connect a raw pendant button to software E-stop while the built-in ordinary ON/OFF handler still acts. That configuration is a **conditional INFERENCE**, not a verified installed failure. Make the easy correct path explicit: keep ordinary pendant commands ordinary; give operators accessible independent protective stop, validated guard/access functions, deliberate rearm, and separately proven electrical/hydraulic/mechanical final elements. For a press brake, the gravity-loaded ram requires physical holding/stop evidence; for a spindle or mill, coast and stored energy remain separate.
+
+## Next action, without machine motion
+A LinuxCNC documentation maintainer should review the v2.9.10 patch and port the precise wording to the development documentation, then check for a duplicate upstream issue/PR before any external submission. If the maintainer prefers a smaller first change, RESET/E-stop wording is the highest-consequence correction; connection-status language can be reviewed separately. The curriculum does not assert maintainer acceptance. Selected OpenPressBrake pendant and actual G0 Stage A A–G evidence remain UNKNOWN. **G0/G1 HOLD; G2 NOT RUN; G3/G4 NOT AUTHORIZED; G5 HOLD; no personnel-exposed hazardous operation.**
+
+## Compute/evaluation
+Zero GitHub-hosted minutes, zero self-hosted minutes, no workflow/build/simulation/physical test or independent evaluator. No new authoritative runtime; do not change LAB_COMPUTE_LOG or blind-feedback score. Local panel-PC runner access and physical isolation remain UNKNOWN; no lab justified for a source/documentation correction.

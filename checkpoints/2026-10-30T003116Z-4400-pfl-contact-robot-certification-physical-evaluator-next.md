@@ -22,3 +22,6 @@
 3. Otherwise PFL/CERT branches are documentary information-gain stops. Rotate to a **genuinely new** 4400 safety mechanism after scanning full index and predecessors. Prefer high-value cross-machine safety evidence; do not add speculative numbers, extra Stage A owner questionnaires or routine controller-board work.
 4. No hosted compute. Local `[self-hosted, openpressbrake]` only if a specific unresolved source-resistant question, verified runner access, qualified physical isolation and frozen bounded safe protocol justify it.
 5. Before end append **complete** LESSON_LOG with actual UTC end, elapsed and overlap via verified current blob SHA, commit and re-fetch. Keep hourly curriculum enabled.
+
+## Same-session independent adversarial cross-check
+Original [OSHA Technical Manual IV.4](https://www.osha.gov/otm/section-4-safety-hazards/chapter-4), §§VI.6/VIII.2, independently confirms body-region-specific transient versus trapped contact, force **and** pressure assessment, competent measurement before acceptance, periodic change review and passive geometric protections. Its 2012/2016/2018 RIA references are historical source context, not the 2025 ISO publisher edition. PFL-01 research addendum committed; still **DOC-CONFIRMED guidance only**, **TEST-CONFIRMED none**, all physical witnesses NOT RUN. No added lab or compute.

@@ -1,5 +1,8 @@
-# 4400-TRAPPED-KEY-02 — Power-to-unlock, power-to-lock and escape/override are different safety propositions
+# 4400-TK-03 source-depth — Fortress commissioning, service interval and override custody
 **2026-10-30 | DIRECT ORIGINAL OEM OPERATING INSTRUCTIONS | NON-GRADUATED | NO MACHINE TEST**
+
+## Predecessor reconciliation — important correction
+**SOURCE-CONFIRMED:** [2026-10-25 Fortress TK-03 original manual audit](4400_FORTRESS_LOK_LOCK_MONITOR_VS_PROCESS_ONLY_AND_ESCAPE_CONTACT_VARIANTS_AUDIT_2026-10-25.md) already established PTU/PTL, monitored versus unmonitored contacts, SR/ZR/LR versus SE/LE escape contact changes, and OEM warning that LOK is not a mains isolator/E-stop/mechanical stop. **Those are NOT new findings here.** This addendum independently rechecks them and adds the original **printed p.15 commissioning sequence** and **p.16 5,000-cycle / at-least-twice-annually maintenance guidance**, plus override-key custody as a concrete technician maintenance check. Do not create another scored module.
 
 ## Exact source and product scope
 Fortress Safety, **amGardpro LOK "Operating Instructions: Interlocks with Locking"**, original OEM PDF hosted in 2025 path: https://fortress-safety.com/app/uploads/2025/04/Interlocks-with-Locking-Operating-Instructions.pdf . Directly inspected printed pp.1–5, 8–9, 15–16. This document covers **configurable amGardpro LOK** modules; its detailed behavior must not be transferred to all mGard mechanical key systems, all Fortress products, or an unknown installed OpenPressBrake guard.

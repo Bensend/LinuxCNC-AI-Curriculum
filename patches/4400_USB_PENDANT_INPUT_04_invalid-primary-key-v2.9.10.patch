@@ -1,0 +1,12 @@
+diff --git a/src/hal/user_comps/xhc-whb04b-6/pendant.cc b/src/hal/user_comps/xhc-whb04b-6/pendant.cc
+--- a/src/hal/user_comps/xhc-whb04b-6/pendant.cc
++++ b/src/hal/user_comps/xhc-whb04b-6/pendant.cc
+@@ -903,7 +903,7 @@
+     if (key == KeyCodes::Buttons.codeMap.end())
+     {
+         *mPendantCout << mPrefix << "failed to interpret key code keyCode={" << keyCode << "}" << endl;
+-        modifier = KeyCodes::Buttons.codeMap.find(0);
++        key = KeyCodes::Buttons.codeMap.find(0);
+     }
+     if (modifier == KeyCodes::Buttons.codeMap.end())
+     {

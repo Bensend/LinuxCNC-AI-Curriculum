@@ -1,0 +1,49 @@
+# 4400-IH04-01 — A type-examined press hydraulic module still requires an external safety PLC and machine validation
+**2026-10-30 | Original manufacturer-authored PDF source trace | NON-GRADUATED | No selected-machine proof**
+
+## Engineering question and predecessor novelty
+After [POC-PAIR-01](4400_POC_PAIR_01_BOSCH_REXROTH_PAIRED_CYLINDER_PILOT_CHECK_LOAD_TRANSFER_OEM_AUDIT_2026-10-30.md) established why casual paired-cylinder pilot checks can fail, what does a *purpose-designed press hydraulic safety module* actually require of the machine integrator? Does a catalog **Category 4 / PL e** heading by itself authorize machine operation? **No.**
+
+Canonical full-index/research/progress scan found no `IH04C`, `RE 63142`, `HSM20005`, or exact `position-monitored valves` predecessor. Existing 2580/HOLD-01, hydraulic fast-poppet, safety-PLC, EDM and G0 review material already teach general final-element separation. **New increment:** directly inspect a real manufacturer hydraulic-press module with its *conditional external PLC, valve-position monitoring, fault lockout, direction error and fall-protection proof* obligations. This is **exact OEM application evidence**, not a new scored course or a recommendation to retrofit the selected machine with this product.
+
+## Original source and retrieval limitation
+**Bosch Rexroth AG**, *Press module for hydraulic presses, Type IH04C*, **RE 63142, edition 2024-07, replaces 2020-05**, 44-page manufacturer-authored PDF, [reseller-hosted copy](https://www.kraemer24.shop/media/7d/c0/57/1754488661/RE%2063142_2024-07.pdf?ts=1754488661). **Directly inspected PDF text and page images on 2026-10-30**: printed pp. 1, 10 and 40, with targeted text inspection of printed pp. 6–7, 10–12. The host is a third-party distributor, **not Bosch's official site**; the document's title/edition/printed Bosch attribution are visible. No immutable byte hash or manufacturer-hosted matching copy established. Do not promote its catalog text into an installed-machine certificate.
+
+## Manufacturer claims at the correct scope (DOC-CONFIRMED for this edition and named configuration)
+| Exact location | Statement and significance | What it does **not** prove |
+|---|---|---|
+| Printed p. 1 | IH04C advertises hydraulic-press application under ISO 16092-3/EN 289 and an **EC type-examination certificate HSM20005**; basic module 100 is described with safety functions according to Category 4 of ISO 13849-1. | The actual OpenPressBrake hardware, achieved machine PL, or certificate applicability to an unknown variant. The certificate itself was **not** retrieved or independently authenticated. |
+| Printed p. 10, example `IH04CS-7X/...1-WE0N-WEH000E-NN-G24` | The safety-function description explicitly relies on **cyclic control and position monitoring**. A failed position-monitored valve must be detected by an **external safety PLC**, which must prevent the next dangerous movement after error; a direction error calls for an immediate stop. | That the manifold alone contains all safety logic, that ordinary LinuxCNC/FPGA can substitute for the external safety PLC, or that a position switch proves hydraulic pressure/holding. |
+| Printed p. 10, items 110/135/140/145/150 | Directional valve position feedback S11a/S11b checks center/direction; S13 monitors a pressure-build-up path; item 140 is a 2-way cartridge with a load-holding/check/isolation role, with S14 position feedback and seat valve 145 unlocking it; items 150/151 protect against pressure intensification. | An unmonitored ordinary check valve or a single `valve_ready` bit being equivalent to this **specific combination**. No permission to copy its electrical truth table to another manifold. |
+| Printed p. 10 | The manufacturer gives a **configuration-specific muting instruction** for Y13/Y14 during retraction. | That any OpenPressBrake ordinary CNC mute request, AKAS signal, or other manufacturer's program has identical meaning. |
+| Printed p. 40, specific `IH04CS-7X/...1-WE0P-WEH000E-NN-G24` option | The source separately describes safe reduced velocity **<10 mm/s** with hold-to-run and a fixed orifice, and a **braking-force test of the restraint device in a separate operating mode with active guarding**, with piston-chamber pressure checked. Its page heading identifies a **PL d** example. | A universal safe speed, a machine-specific stopping distance, a permission to conduct an unguarded test, or a guarantee that a physical fall-protection check exists on the selected machine. |
+
+## Four independent authorities and a practical fault path
+1. **Ordinary LinuxCNC/FPGA:** requests Y1/Y2 motion and may record position/valve feedback; it is not the safety evaluator.
+2. **External safety-related controller:** must implement selected protective demands, cyclic valve-position plausibility, direction-fault response and lockout/rearm according to the validated machine design. An OEM **example** is not the installed safety program.
+3. **Hydraulic final elements:** the selected manifold's actual valves, seat leakage, pilot/return/relief and load paths must stop and hold the gravity load as specified. A valve-position contact is **not** a pressure, standstill or holding-force sensor.
+4. **Mechanical/maintenance protection:** independently support the ram, isolate stored hydraulic energy, make recovery/inspection usable, and require deliberate restart after clearance. A successful software fault reset cannot substitute.
+
+**Example failure chain (INFERENCE, not a tested machine):** a valve sticks away from its expected basic position; ordinary CNC says "ready"; if external safety logic ignores S14 or resets without a fresh start, a later hazardous stroke may be enabled. The manufacturer specifically requires detection and prevention of the **next** dangerous movement; actual response and stop time remain machine-specific and UNKNOWN.
+
+## Cross-reading with POC-PAIR-01 (do not conflate valve families)
+Bosch Oil Control's separate [one-page pilot-operated check note](https://apps.boschrexroth.com/products/compact-hydraulics/CH-Catalog/pdf/Pilot_Operated_Check.pdf) warns about paired-cylinder asymmetric opening of **non-modulating** pilot checks. RE 63142 is a *different*, purpose-designed press module with position-monitored cartridge, directional, relief and external safety-PLC dependencies. Its p. 1 phrase "pilot-operated valves" is **not** proof that it uses the prohibited simple paired-cylinder pilot-check arrangement. The documents describe different applications and architectures; no safe substitution follows in either direction.
+
+## Practical technician/qualified reviewer discriminator — NO OPERATION
+Ask the selected-machine owner for **existing restricted as-built** manifold/valve identities, pilot/return/relief drawing, external Pilz program revision, valve-position switches, load restraint and fault/restart specifications. A qualified reviewer should ask: which position contact corresponds to which physical element; how does a detected failure prevent *the next dangerous stroke*; what happens on a direction mismatch; how is gravity-load holding proved; and what maintenance procedure makes proper support easier than bypass? A software diagnostic LED, catalog PL heading or generic manifold part name alone is not enough.
+
+**Do not copy the example's Y13/Y14 muting, pressures, fixed-orifice dimensions, <10-mm/s value, safety category or hydraulic truth table to OpenPressBrake.** No energized probing, deliberate valve fault, motion, test or exposed-person operation is justified by this documentary investigation.
+
+## Evidence and release ledger
+- **DOC-CONFIRMED:** directly inspected manufacturer-authored RE 63142/2024-07 PDF pages; distributor-hosted with explicit provenance limit. The certificate's actual text **not inspected**.
+- **SOURCE-CONFIRMED (repository):** public OpenPressBrake Rev1 source identifies intended Pilz-owned 11Y4/11Y6/11Y8 valves and ordinary hardware gate; it does not identify an IH04C or prove as-built physical response. See [POC-PAIR-01 pinned cross-check](4400_POC_PAIR_01_BOSCH_REXROTH_PAIRED_CYLINDER_PILOT_CHECK_LOAD_TRANSFER_OEM_AUDIT_2026-10-30.md).
+- **INFERENCE:** the example illustrates why component-level documentation, independent safety PLC, feedback and physical final-element evidence are distinct.
+- **UNKNOWN:** installed manifold and PLC, actual safety-function design, response/stop/hold, diagnostics, performance level, fault exclusion, personnel access and machine compliance.
+- **TEST-CONFIRMED:** none; independent 2520–25F0 evaluator OPEN; no workflow, lab, machine test or simulation.
+- **Gate:** G0/G1 HOLD, G2 NOT RUN, G3/G4 NOT AUTHORIZED, G5 HOLD. No personnel-exposed hazardous operation.
+
+## Two open-book review prompts — PUBLIC UNSCORED
+1. A vendor supplies an IH04C-like manifold and says "PL e means we can omit the external safety PLC." Use the exact printed p. 10 manufacturer statement to identify the missing dependency.
+2. An operator observes S14 in its expected position and assumes Y1/Y2 cannot drop. Identify at least three missing physical propositions before safe access or service.
+
+**Next:** qualified Stage A A–G as-built evidence and independent 2520–25F0 evaluation first; otherwise source-trace another genuinely new safety mechanism. Keep PI500 upstream maintainer packet open. No new scored competency or physical release.

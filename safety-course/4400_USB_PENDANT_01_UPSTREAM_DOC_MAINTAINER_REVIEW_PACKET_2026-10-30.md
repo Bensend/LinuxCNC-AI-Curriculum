@@ -33,6 +33,8 @@ Please correct the public descriptions to distinguish ordinary LinuxCNC machine-
 
 **Why correction matters:** `Hal::setReset` also drives the raw `whb.button.reset` pin. A hypothetical installer following the stale header comment could connect that raw pin to `halui.estop.activate` while retaining the example's `whb.halui.machine.on/off` connections, issuing both ordinary machine-state and software E-stop requests on one press. This is a **conditional source-derived configuration conflict**, not an observed machine fault, a certified stop or a suggested wiring pattern.
 
+**Separate normal-control robustness question (do not conflate with this documentation fix):** `XhcWhb04b6Component::printCrcDebug` emits warnings for some application checksum mismatches but does not gate `mPendant.processEvent`; pressed-button checksum code is marked experimental and the asserts are commented out. This is SOURCE-CONFIRMED for the userspace parser at both pinned revisions. It does **not** prove the USB receiver/RF firmware accepts corrupted radio traffic or that physical motion results. A maintainer can evaluate input integrity separately from correcting misleading safety language; no safety-rated protocol claim is proposed. [Pinned source](https://github.com/LinuxCNC/linuxcnc/blob/v2.9.10/src/hal/user_comps/xhc-whb04b-6/xhc-whb04b6.cc#L54-L219).
+
 ## Review acceptance, not a lab request
 1. Maintainer checks selected branch/source pins and man page; confirm no other supported variant intentionally exports `whb.halui.estop.*`.
 2. Update documentation and example references only where source-backed; no invented safety promise, stop-time guarantee or automatic-restart behavior.

@@ -40,3 +40,9 @@ Read the [original SICK FX3-ANA0 OEM investigation](../research/4400_ANALOG_SAFE
 **STOP/HOLD decision:** If the machine lacks a defensible independent safety architecture and verified physical safe state, **do not operate with people exposed to the hazard**. A later experimental run requires separate qualified authorization, isolation/remote execution with people outside the danger zone, and stated residual risk. Do not induce hydraulic motion, remove guards, bridge sensors or use a LinuxCNC test to claim personnel safety.
 
 **Provenance:** original SICK 8012478/1WLY/2026-05-05 directly inspected; SICK 8012480/T157/2025-07-30 configuration detail available as manufacturer-hosted indexed excerpt but entire PDF not opened. No selected-machine evidence, no external blind score, no lab compute.
+
+
+## Two extra questions before approving a configurable pressure threshold
+**Which entity selects the active process area?** The original SICK 2026 hardware manual supports selecting among up to 15 process areas while operating. The selected machine's safety project must establish whether that selector is independently safety-authorized; a LinuxCNC recipe/HMI request must not silently widen personnel-protective limits.
+
+**Why does a discrepancy remain faulted after values agree again?** The manufacturer-indexed 2025 configuration manual distinguishes **discrepancy detection time** from **discrepancy-error reset time** (its table even lists a 65,532-ms reset time when discrepancy time is zero). Do not bridge a sensor or enable automatic machine restart to bypass this diagnostic recovery; distinguish module recovery, safety fault acknowledgement and fresh motion authorization.

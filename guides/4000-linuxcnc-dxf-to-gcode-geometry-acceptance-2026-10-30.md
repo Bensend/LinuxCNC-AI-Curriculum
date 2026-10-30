@@ -31,3 +31,6 @@ Freeze one DXF with (a) closed final-vertex bulge, (b) clockwise bulge, (c) a di
 
 ## Version-sensitive LinuxCNC arc tolerance note
 The [stable/development INI-to-arc source trace](../research/4400_LINUXCNC_ARC_03_INI_DEFAULT_RADIUS_TOLERANCE_DOC_SOURCE_CONFLICT_2026-10-30.md) found that the compiled center-arc mismatch tolerance defaults differ from the same-version official INI prose. Read the active machine's `[RS274NGC]CENTER_ARC_RADIUS_TOLERANCE_INCH/MM` overrides and its exact LinuxCNC source; `arc_data_ijk` uses an absolute **and** relative rejection condition. Never increase tolerance to disguise nonuniformly transformed ellipse geometry. No runtime test was performed.
+
+## Current converter contrast — PathForge source-only
+[Pinned PathForge comparison](../research/4400_LINUXCNC_PATHFORGE_04_SUPPORTED_TYPES_G04_X_DWELL_POST_SOURCE_AUDIT_2026-10-30.md): using ezdxf does **not** guarantee LWPOLYLINE/INSERT/ELLIPSE support when the converter filters to LINE/ARC/CIRCLE/SPLINE. Require a nonempty rejected-entity manifest and fail a production export on unsupported manufacturing geometry. Its pinned post emits `G04 X...` for dwell, incompatible with LinuxCNC's required `G4 P...`; inspect exact machine-specific post templates and modal header/footer before any execution. No runtime or machine test was performed.

@@ -1,0 +1,26 @@
+# 4400-ROBOT-CERT-01 — Current robot certification, future standards and Freedrive are not interchangeable
+**2026-10-30 | direct manufacturer 2026 status page, pinned SW10_15 manual and official publisher metadata | NON-GRADUATED**
+
+## Distinct question
+Can a builder treat a 2025 edition of ISO 10218, an OEM's announced future certification, a new software feature, and a previously certified robot as one and the same verified safety claim? **No.** This is a **revision/assurance-boundary** audit, distinct from PFL-01's physical contact hazards and ENABLE-02's SF19/SF20 output logic.
+
+## Primary evidence (directly read)
+1. **[Universal Robots Safety FAQ, last modified 2026-05-06](https://www.universal-robots.com/articles/ur/safety/safety-faq/)**, sections Certification & Standards, Techniques, ISO 10218-1:2025, 3PE. **DOC-CONFIRMED OEM claim:** current product certification described there is to **EN ISO 10218-1:2011** and ISO 13849-1:2015 PL d/Cat 3 for listed robot safety functions; **ISO 10218-1:2025 TÜV Rheinland certification is a target for January 2027**, not an achieved 2026 certification. OEM explicitly says installing new software/features on a robot originally sold under 2011 certification **does not retroactively make it 2025-certified**. Treat the marketing FAQ as OEM statement, not independent access to the certificate/serial applicability.
+2. **[UR g-Series SW10_15 Operational Mode](https://www.universal-robots.com/manuals/EN/HTML/SW10_15/Content/prod-usr-man/complianceG7/PolyX_SW/psx_ops_mode.htm)**: **DOC-CONFIRMED** Manual Freedrive is a programming/manual-mode function; Automatic mode personnel entry needs guarding or **validated** PFL. 3PE has no effect in Automatic; reset of a held enabling switch after mode change is not the whole safety-function proof.
+3. **[UR SW5_23 UR10e Configurable Safety Functions](https://www.universal-robots.com/manuals/EN/HTML/SW5_23/Content/prod-usr-man/complianceUR10e/H_g5_sections/safetyFunctionsAndinterfaces/configurable_functions.htm)**: **DOC-CONFIRMED** per-function PL d/Cat 3 and model-specific tolerances; these do not establish cell-level safety.
+4. **[ISO 10218-2:2025 catalogue](https://www.iso.org/standard/73934.html)**: **DOC-CONFIRMED official metadata:** 2025-02 Edition 2 is published, 2011 edition withdrawn. It addresses integrated robot applications and cells, not proof of a selected installation. **[ISO/TS 15066:2016 catalogue](https://www.iso.org/standard/62996.html)** remains published with revision planned. **Full standards and OEM certificates NOT INSPECTED**.
+
+## Two critical transfer traps
+**Certificate transfer trap.** A manufacturer's product family marketing sentence does not identify the installed model/serial number, controller revision, software revision, exact safety functions/options, certificates, or complete robot cell. A 2025 edition being published does not establish a 2025-certified product. Equally, a component's PL d/Cat 3 cannot be summed into a complete machine claim without application-specific design, dependencies and validation.
+
+**Freedrive/HGC naming trap.** The OEM's May 2026 FAQ describes **Hand-Guided Control (HGC)** as a *new* 2025-edition capability being added as part of future certification. Do not treat existing manual-mode **Freedrive** as already equivalent to certified HGC for automatic collaborative operation. The 2025-standard clause text and the new feature's exact firmware/certificate were not independently examined; avoid asserting normative clause-by-clause compliance.
+
+## Practical review before changing a robot or safety program
+Record `machine/robot ID -> selected controller and software -> OEM manual edition -> installed safety configuration -> exact certificate/scope -> mode/function -> tool/payload/fixture -> risk assessment -> independent safety chain -> physical witnesses -> change/revalidation decision`. Mark any new firmware, tool, payload, guard, mode, contact path or output receiver as a **change event** until qualified impact review. Do not leave a green `certified` label visible on a status board without the exact scope and revision. Show the safe path to operators; do not require bypassing 3PE or guards for ordinary teaching or maintenance.
+
+## Evidence and holds
+- **DOC-CONFIRMED:** exact OEM 2026 claims and pinned manuals, ISO public edition/scope metadata.
+- **INFERENCE:** certification transfer failure and practical version-gated review design.
+- **TEST-CONFIRMED:** none; no robot or certificate verified physically.
+- **UNKNOWN:** actual certificate documents, selected installed robot/controller/firmware, 2025 certification achievement, robot cell validation, safety PLC and physical stop/hold.
+- **No new qualification/score:** 2520–25F0 external evaluation remains open; OpenPressBrake A–G public qualified status unestablished, restricted receipt UNKNOWN; G0/G1 HOLD. No personnel-exposed operation.

@@ -31,3 +31,19 @@ Use panels with **captive fasteners** and easy reinstallation, visible post/anch
 
 ## Next work
 If a real fence is selected, obtain exact product/revision, current full test report, anchors/substrate and installation instructions, physical hazard approach and clearances, inspection/replacement plan and qualified independent witness. Ask Troax to reconcile 2014 test/report dates with the ISO 14120:2015 citation and distinguish peak vs residual deflection; do not infer an erratum. No synthetic lab is justified; no workflow, physical test, machine operation or hosted/self-hosted compute.
+
+## Same-session original current-test-report follow-through — important evidence upgrade
+Directly opened the **original one-page manufacturer reports** linked from current Troax product pages; these are stronger than the marketing summaries, but still OEM-reported rather than independently reproduced curriculum tests:
+
+| OEM report / date | Exact configuration and floor fixture | Impact and reported total deflection | Original report |
+|---|---|---|---|
+| TR-14-003, test 2014-01-22, summary header 2014-10-01 | Smart Fix ST20 2050×700/1000/1500, 60×40 posts, **M10×80 expander anchors in concrete** | **1,600 J; 345–380 mm**, no penetration | [Original 2014 PDF](https://old.troax.com/sites/all/files/files/impact_test_report_-_smart_fix_1600j_st20.pdf) |
+| TR-22-030A, printed 2021-09-02 | Smart Fix ST20 2050×700 and 2050×1500, 60×40×2200 posts, **M10 bolts to test rig** | **2,100 J; 427 mm / 430 mm**, no penetration | [Original 2200-mm PDF](https://www.troax.com/app/uploads/14481.pdf) |
+| TR-24-022A, printed 2024-10-10 | Smart Fix ST20 2550×1000, 60×40×2700 posts, **M10 bolts to test rig** | **2,100 J; 430 mm**, no penetration | [Original 2700-mm PDF](https://www.troax.com/app/uploads/16831.pdf) |
+| TR-20-030A, printed 2021-04-20 | Strong Fix ST30 2050×1500, 80×80×2200 posts, **M10 bolted to test rig** | **3,000 J; 340 mm**, no penetration | [Original 3000-J PDF](https://www.troax.com/app/uploads/14477.pdf) |
+| TR-20-067A, printed 2020-12-01 | Strong Fix ST30 2050×1500, 80×80×2200 posts, **M12 expander bolts in concrete** | **6,000 J; 634 mm**, no penetration | [Original 6000-J PDF](https://www.troax.com/app/uploads/14474.pdf) |
+| TR-20-069A, printed 2020-12-01 | Strong Fix **double ST20** 2050×1500, 80×80×2200 posts, **M12 expander bolts in concrete** | **8,180 J; 656 mm**, no penetration | [Original 8180-J PDF](https://www.troax.com/app/uploads/14582.pdf) |
+
+**DOC-CONFIRMED OEM reported numbers, not transferable safety limits.** The 2,100-J reports were **bolted to a test rig**, unlike the old 1,600-J concrete anchors and Strong Fix high-energy concrete installations. The **634/656-mm** high-energy deflections make it especially unsafe to assume a higher joule rating implies less inward displacement. None of these one-page reports provides a qualified installed slab/edge-distance/embedment calculation or a clear time-resolved peak-vs-residual deflection curve. The 2014/ISO 14120:2015 provenance anomaly remains unresolved; later reports cite the 2015 standard without that particular chronological conflict.
+
+**Design implication (INFERENCE):** treat hazard-side impact, person-side clearance, and concrete/anchor load path as separate proofs. The exact tested barrier's deformation, allowable post-impact service condition, reach-through after deformation and dynamic person location must be assessed by a qualified designer. Do not use any tabulated number as a universal separation distance, machine projectile rating, or OpenPressBrake release criterion.

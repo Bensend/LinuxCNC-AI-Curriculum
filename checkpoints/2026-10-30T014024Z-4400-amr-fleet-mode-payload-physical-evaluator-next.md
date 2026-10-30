@@ -18,3 +18,7 @@ START_HERE read first. 1000, 2000, F02 and completed 3000 remain CLOSED; 4400 sa
 3. Otherwise AMR source branch is at documentary information-gain stop. Rotate to a genuinely new 4400 safety mechanism after canonical index synonym scan, or deepen a specific existing unresolved original-source contradiction that changes a practical hazard proposition.
 4. No GitHub-hosted compute. Local [self-hosted, openpressbrake] only after bounded unresolved question, verified dispatch access and independent physical isolation.
 5. Immediately before end append full LESSON_LOG with UTC end, elapsed, overlap using verified current blob SHA; commit/re-fetch. Recurring curriculum stays enabled. No personnel-exposed hazardous operation.
+
+
+## Same-session original conveyor/lift application source follow-through
+[AMR-TRANSFER-01](../research/4400_AMR_TRANSFER_01_OMRON_I680_CONVEYOR_LIFT_HANDSHAKE_VS_INDEPENDENT_STOP_SOURCE_AUDIT_2026-10-30.md) and [four UNSCORED paper cases](../safety-course/4400_AMR_TRANSFER_01_HANDSHAKE_IS_NOT_SAFE_TRANSFER_FOUR_CASE_FIELD_CARD_2026-10-30.md) add directly inspected I680 printed pp.3-2–3-6 OEM application power diagram, normal handshake I/O and independent transfer considerations. Manufacturer's safety relay plus optional safety PLC in example does not prove a selected safety function. Transfer jam, gravity load, fresh restart and independent energy removal all UNKNOWN/NOT RUN. Design package §11NC. No additional compute or machine operation.

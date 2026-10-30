@@ -13,6 +13,9 @@ START_HERE/governance/current progress, blind score, compute ledger, latest pred
 ## Source example extension
 [ECAT-12](../research/4400_LINUXCNC_ETHERCAT_12_SYNC_UNIT_FRESHNESS_LATE_OUTPUTS_SOURCE_AUDIT_2026-10-30.md#inspectable-example-configuration-not-an-installed-machine) now also maps the pinned upstream 8-kHz/2-kHz/1-kHz HAL and XML Sync Unit example, noting placeholder drive PDOs and LinuxCNC 2.9 versus 2.10+ `initf` compatibility. Not a validated installation.
 
+## Exact EtherCAT output-stall follow-up
+ECAT-12 source now resolves the nominal 10-miss wording: ten eligible missing-output sends are tolerated and suppression occurs on the **eleventh** eligible miss, not ten arbitrary bus cycles; a new output generation can resume queuing, but slave watchdog rearm is machine-specific UNKNOWN.
+
 ## Next highest-value unblocked
 **Preferred:** trace exact EtherCAT Sync Unit `fresh`/WKC semantics under incomplete domain exchanges and the output stall counter with one real LinuxCNC HAL/XML example, or inspect HostMot2 Ethernet read-counter deadline protocol history before proposing an upstream issue. Do not repeat already settled source branches. Use a no-hardware local experiment only if a consequential unresolved question survives source review and local runner isolation is proven.
 

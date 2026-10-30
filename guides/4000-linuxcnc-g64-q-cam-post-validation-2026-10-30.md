@@ -30,3 +30,6 @@ Freeze two **software-only, physically isolated** canonical-output cases at the 
 
 ## Next implementation study
 Trace an actual QtPlasmaC material/process post path (`M190`, `M3/M5`, THC inhibit) from official docs into the installed-style LinuxCNC configuration and source. Alternatively trace DXF bulge/INSERT normalization through an inspectable open-source parser. Pick only one unresolved, source-verifiable question; do not turn the curriculum into a compulsory CAM product.
+
+## Same-session QtPlasmaC material-post follow-through
+See [M190/M66 source audit](../research/4400_LINUXCNC_QTPLASMAC_M190_M66_MATERIAL_HANDOFF_SOURCE_AUDIT_2026-10-30.md). The documented post order is `M190 Pn`, `M66 P3 L3 Q1`, `F#<_hal[plasmac.cut-feed-rate]>`, `M3 $0 S1`, later `M5 $0`. M190 is a userspace `halcmd` script and M66 waits on ordinary `motion.digital-in-03`. **M66 timeout sets `#5399=-1`; returning from M66 is not success proof.** The script also suppresses exceptions inside its transaction. Retain material-file revision and part identity, inspect QtPlasmaC filter errors and actual machine/process authority separately; do not infer physical torch state from GUI or post success. This is static development-source evidence, not a tested post.

@@ -34,3 +34,7 @@ This is a **review proposal**, not a claim that the existing LinuxCNC contract g
 **Evidence:** SOURCE-CONFIRMED pinned code and VFS11 precedent (the latter uses its own drive-specific `enabled=false` semantics; not a generic enable contract); DOC-CONFIRMED mirrored OEM passages; INFERENCE cross-layer timing/stop implications; TEST-CONFIRMED none. No upstream issue or PR submitted. No selected OpenPressBrake PI500 drive known; G0/G1 HOLD, independent evaluator OPEN.
 
 **Companion audits:** [PI500-VFD-01](../research/4400_PI500_VFD_01_LINUXCNC_PIN_REMOTE_TRIP_CLAIM_VS_COMMENTED_OUT_SOURCE_PATH_AUDIT_2026-10-30.md) and [PI500-OEM-COMM-02](../research/4400_PI500_OEM_COMM_TIMEOUT_02_SOURCE_OEM_CROSS_LAYER_WATCHDOG_AUDIT_2026-10-30.md).
+
+
+## Same-revision cross-driver contract contrast (SOURCE-CONFIRMED; not a PI500 fix)
+At the same pinned LinuxCNC commit, [`vfs11_vfd.c`](https://github.com/LinuxCNC/linuxcnc/blob/e1c6a557c0e1c61961f17ee35a1ba188e7db275f/src/hal/user_comps/vfs11_vfd/vfs11_vfd.c) blob `8626218e28bd7302a59397eb8eb7870dadaa8215`, `write_data()`, explicitly sends `REG_COMMAND1=0` when its `enabled` HAL input is false and comments that this means **no bus control**. That is a different *drive-specific authority relinquishment* contract, not proof that Toshiba VFS11 or Powtran PI500 physically stops when the HAL enable goes low. It reinforces the review requirement: specify `enable` behavior for the **exact driver and OEM** instead of treating HAL pin names as universal safety semantics.

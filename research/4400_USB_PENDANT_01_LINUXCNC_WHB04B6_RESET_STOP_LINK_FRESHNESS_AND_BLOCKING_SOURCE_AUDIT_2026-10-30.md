@@ -59,6 +59,6 @@ Can a builder rely on the inexpensive XHC-WHB04B-6 wireless USB handwheel's **RE
 
 ## Next high-information steps
 1. When a real machine's actual HAL/INI and independent safety program become available, map `whb.*` outputs to their **actual** normal-control consumers and the independent safety circuit, without inferring physical wiring from the generic example.
-2. For upstream documentation, prepare a small source-pinned issue identifying the outdated `whb.halui.estop.*` reference and `is-connected` wording; avoid proposing an unsafe automatic machine-off substitute for certified safety.
+2. For upstream documentation, use the [source-pinned maintainer review packet](../safety-course/4400_USB_PENDANT_01_UPSTREAM_DOC_MAINTAINER_REVIEW_PACKET_2026-10-30.md) identifying the outdated `whb.halui.estop.*` reference and `is-connected` wording; avoid proposing an unsafe automatic machine-off substitute for certified safety.
 3. For a *specific* observed normal-control lost-radio fault, inspect `pendant.cc` event-state release behavior and `usb.cc` transfer handling; only then freeze a bounded local disconnected test if source alone cannot decide the question.
 4. Preserve the existing independent evaluator and physical-witness holds; do not duplicate RAD-01 or SIM-LOOP-01 scored competencies.

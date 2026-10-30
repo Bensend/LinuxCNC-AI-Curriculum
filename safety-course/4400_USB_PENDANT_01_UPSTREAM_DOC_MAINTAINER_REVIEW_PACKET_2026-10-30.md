@@ -31,6 +31,8 @@ Please correct the public descriptions to distinguish ordinary LinuxCNC machine-
 - `whb.pendant.is-connected`: “USB receiver/session connected as reported by this userspace component. This is not a validated wireless remote heartbeat or safety-rated link-loss output.”
 - `whb.pendant.is-sleeping`: “Status inferred from recognized pendant sleep/wake packets. Does not prove bounded RF-link fault detection or a safe machine state.”
 
+**Why correction matters:** `Hal::setReset` also drives the raw `whb.button.reset` pin. A hypothetical installer following the stale header comment could connect that raw pin to `halui.estop.activate` while retaining the example's `whb.halui.machine.on/off` connections, issuing both ordinary machine-state and software E-stop requests on one press. This is a **conditional source-derived configuration conflict**, not an observed machine fault, a certified stop or a suggested wiring pattern.
+
 ## Review acceptance, not a lab request
 1. Maintainer checks selected branch/source pins and man page; confirm no other supported variant intentionally exports `whb.halui.estop.*`.
 2. Update documentation and example references only where source-backed; no invented safety promise, stop-time guarantee or automatic-restart behavior.

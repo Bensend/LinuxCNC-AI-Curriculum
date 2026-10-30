@@ -1,8 +1,11 @@
-# 4400-TRAPPED-KEY-01 — A key-transfer sequence is not itself proof of zero hazardous energy
+# 4400-TK-01 source-delta cross-check — Fortress key sequence and 2021 OSHA group LOTO adjudication
 **2026-10-30 | ORIGINAL MANUFACTURER / REGULATOR SOURCE AUDIT | NON-GRADUATED | NO MACHINE TEST**
 
-## Question and nonduplicate scope
-Does a key released from a guard-access system establish that a LinuxCNC/press-brake/CNC cell is safe for whole-body entry, especially with multiple energy sources and multiple maintenance personnel? The canonical 4400 safety index was scanned for `trapped key`, `key exchange`, `personnel key` and `Type 5`; no prior mechanism-specific investigation was found. This extends existing 2520/2530/2580/2590/25F0 guard, isolation and restart work rather than regrading it.
+## Predecessor reconciliation — important correction
+**SOURCE-CONFIRMED:** An initial exact-string search for `trapped key` missed the hyphenated **4400-TK-01/02/03** predecessors already indexed on 2026-10-25. Read [original Castell X/DOLD/OSHA TK-01 audit](4400_CASTELL_X_DOLD_STS_TRAPPED_KEY_EXCHANGE_PERSONNEL_KEY_AND_LOTO_SOURCE_AUDIT_2026-10-25.md), [Castell BEMF TK-02](4400_CASTELL_BEMF_MOTOR_STANDSTILL_AUTO_RESET_VS_HYDRAULIC_LOAD_SOURCE_AUDIT_2026-10-25.md), [Fortress LOK TK-03](4400_FORTRESS_LOK_LOCK_MONITOR_VS_PROCESS_ONLY_AND_ESCAPE_CONTACT_VARIANTS_AUDIT_2026-10-25.md), existing [TK-01 module](../safety-course/4400_TK_01_TRAPPED_KEY_EXCHANGE_PERSONNEL_KEYS_MOTOR_SENSING_AND_LOTO_MODULE_2026-10-25.md) and 22-case technician card. **This document is NOT a novel competency or new trapped-key mechanism.** Its incremental value is an independently sourced Fortress 2024/2020 comparison and the **specific May 21, 2021 OSHA interpretation** rejecting supervisor-only group lockout while accepting individual satellite lockbox control. General key sequence, personnel-key/LOTO separation, BEMF and gravity boundaries were already taught.
+
+## Question
+Does the 2021 OSHA interpretation provide a concrete discriminating example for the already taught difference between an operational trapped-key access key and each covered servicing worker's personal lock?
 
 ## Primary evidence inspected
 1. **Fortress Safety, "Understanding Trapped Key Systems", 18 March 2024**, manufacturer original: https://fortress-safety.com/news/understanding-trapped-key-systems/ . The manufacturer describes isolation-key release, exchange requiring **all** source keys, access key trapped at the open guard, and optional **personnel key** removed and carried inside; all keys must be returned before the reverse sequence can complete.

@@ -32,9 +32,9 @@ diff --git a/src/hal/user_comps/xhc-whb04b-6/hal.h b/src/hal/user_comps/xhc-whb0
 +++ b/src/hal/user_comps/xhc-whb04b-6/hal.h
 @@ -386,5 +386,5 @@
 -    //! Sets the hal state of the respective pin (reset). Usually called in case the reset
--    //! button is pressed or released. The pin should be connected to \\ref halui.estop.activate.
+-    //! button is pressed or released. The pin should be connected to \ref halui.estop.activate.
 +    //! Sets the raw RESET button pin and requests ordinary machine ON/OFF through
 +    //! the component's built-in handler. This is not a personnel-safety E-stop.
-     //! \\param enabled the new pin value, (true if the button was pressed, false otherwise)
-     //! \\ref Hal::halInit(const WhbSoftwareButton* , size_t , const WhbKeyCodes&)
-     //! \\sa setReset(bool)
+     //! \param enabled the new pin value, (true if the button was pressed, false otherwise)
+     //! \ref Hal::halInit(const WhbSoftwareButton* , size_t , const WhbKeyCodes&)
+     //! \sa setReset(bool)

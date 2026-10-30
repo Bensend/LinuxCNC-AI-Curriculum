@@ -33,6 +33,16 @@ Can a builder rely on the inexpensive XHC-WHB04B-6 wireless USB handwheel's **RE
 4. The USB receiver may remain enumerated while the remote is asleep or radio traffic is absent. `is-connected` is set on successful USB initialization, while `is-sleeping` is updated from packets. A timeout merely resubmits USB transfer in the inspected branch. **Do not equate USB enumeration with remote safety link supervision.**
 5. If ordinary LinuxCNC/HAL, the pendant process, USB receiver or radio fails, the physical safety function must still be effective through an **independent** protective path. Whether any particular machine has that path is **UNKNOWN**.
 
+
+### Downstream HALUI/NML trace (additional pinned stable source)
+LinuxCNC v2.9.10 `src/emc/usr_intf/halui.cc` blob `6aa51870512c9d29919452aaec0377338e350a04` independently clarifies the **ordinary control command** produced after the pendant's HAL output is actually connected:
+- `halui.machine.on/off` inputs are registered around lines 761–767. `check_bit_changed` around 1591–1599 returns true on a **rising edge**, and the poller around 1652–1663 sends `sendMachineOn/Off` only on that edge. Those functions construct `EMC_TASK_SET_STATE` with `EMC_TASK_STATE_ON/OFF` around 953–966.
+- The *separate* `halui.estop.activate/reset` inputs trigger `EMC_TASK_STATE_ESTOP` / `EMC_TASK_STATE_ESTOP_RESET` around 969–982. The WHB04B-6 `setReset` method does **not** drive those pins.
+- `halui.program.stop` around 1722–1723 invokes `sendAbort`, which sends `EMC_TASK_ABORT` around 1266–1271. It is an ordinary Task program-abort command, **not** a physical safety final-element operation. The example HAL file explicitly connects the pendant's program-stop and machine-on/off outputs; other installations must be checked for actual connections.
+- **SOURCE-CONFIRMED command dispatch**, **UNKNOWN** whether Task accepts a given machine-ON request in the current E-stop/guard state or what selected machine hardware does. Do not infer that an ordinary machine-on request bypasses independent safety.
+
+[Pinned HALUI source](https://github.com/LinuxCNC/linuxcnc/blob/v2.9.10/src/emc/usr_intf/halui.cc). This closes the source-level command-type distinction without requiring a simulator or hazardous machine operation.
+
 ## Five adversarial reviewer questions (public, UNSCORED; no hidden evaluator answers)
 1. The wireless pendant shows **STOP**, but a lathe spindle continues coasting. Which source path did the button actually exercise, and what independent stop/standstill evidence is needed before guard release?
 2. The pendant's **RESET** key is pressed while `halui.machine.is-on` is false. Which HAL output does the inspected implementation assert, and why is this not a personnel-safety reset?

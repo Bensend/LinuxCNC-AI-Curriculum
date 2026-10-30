@@ -49,6 +49,9 @@ LinuxCNC v2.9.10 `src/emc/usr_intf/halui.cc` blob `6aa51870512c9d29919452aaec037
 
 [Pinned HALUI source](https://github.com/LinuxCNC/linuxcnc/blob/v2.9.10/src/emc/usr_intf/halui.cc). This closes the source-level command-type distinction without requiring a simulator or hazardous machine operation.
 
+### Conditional integration trap: raw RESET button wired to HALUI E-stop
+The component registers a separate raw `whb.button.reset` output and `Hal::setReset` sets that raw pin **in addition** to the ordinary `whb.halui.machine.on/off` command. **If** an integrator follows the stale `hal.h` comment and connects the raw button to `halui.estop.activate` while retaining the shipped example's machine-on/off connections, one button press can present **both** a normal machine-state request and a software E-stop request. The HALUI poller processes the rising-edge machine-on/off checks before the E-stop checks (stable `halui.cc` 1652–1663), but downstream Task acceptance and actual machine behavior are **UNKNOWN** and cannot be inferred from this static ordering. This hypothetical conflicting command wiring is a **SOURCE-CONFIRMED conditional integration hazard**, not an observed installation or a bypass of an independent physical safety circuit. **Do not recommend this wiring as a fix.** Preserve separate, deliberately designed normal controls and an independent physical E-stop/rearm path.
+
 ## Five adversarial reviewer questions (public, UNSCORED; no hidden evaluator answers)
 1. The wireless pendant shows **STOP**, but a lathe spindle continues coasting. Which source path did the button actually exercise, and what independent stop/standstill evidence is needed before guard release?
 2. The pendant's **RESET** key is pressed while `halui.machine.is-on` is false. Which HAL output does the inspected implementation assert, and why is this not a personnel-safety reset?

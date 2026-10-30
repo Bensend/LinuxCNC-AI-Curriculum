@@ -27,7 +27,7 @@ Please correct the public descriptions to distinguish ordinary LinuxCNC machine-
 
 ## Proposed minimal documentation wording (review before patch)
 - `whb.button.reset`: “Button event for RESET. The component's built-in handler requests ordinary LinuxCNC machine ON or OFF via `whb.halui.machine.on/off`, depending on `whb.halui.machine.is-on`. This is **not** an independent E-stop, safety reset, or guard-rearm signal.”
-- `whb.button.stop`: “Button event for STOP. The built-in handler requests ordinary program stop via `whb.halui.program.stop`; this does not establish physical standstill or isolation.”
+- `whb.button.stop`: “Button event for STOP. The built-in handler requests ordinary `EMC_TASK_ABORT` via `whb.halui.program.stop` (Task also calls motion/IO/spindle abort helpers); this does not establish physical standstill or isolation.”
 - `whb.pendant.is-connected`: “USB receiver/session connected as reported by this userspace component. This is not a validated wireless remote heartbeat or safety-rated link-loss output.”
 - `whb.pendant.is-sleeping`: “Status inferred from recognized pendant sleep/wake packets. Does not prove bounded RF-link fault detection or a safe machine state.”
 

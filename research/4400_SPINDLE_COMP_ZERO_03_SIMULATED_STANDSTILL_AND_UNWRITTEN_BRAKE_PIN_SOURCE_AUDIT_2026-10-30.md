@@ -54,3 +54,12 @@ To avoid a false cross-component conclusion, inspected the **separate** LinuxCNC
 
 ## Bounded history check — not a newly introduced regression
 GitHub's path history identifies `spindle.comp` changes at 2022-11-27 (`3492975a6919`), 2022-11-29 (`215e354340a7`), 2026-07-31 (`5c7855905aba`) and 2026-09-27 (`ff27543c25ab`). Directly fetched the file at those four revisions. Each has a declared `brake` output but no in-file assignment, and the reverse-stop expression references `forward`. **SOURCE-CONFIRMED across these four snapshots:** the anomalies predate the 2026 HAL getter/setter and 64-bit API migrations. This bounded history does **not** establish original intent, all intervening versions, runtime values or whether an external integration uses the optional component. A bounded upstream issue search for `spindle.comp brake` and `spindle.comp reverse` returned no matching issue in the examined results; do not claim exhaustive absence. No issue or patch was submitted.
+
+### Paper-only reverse-stop trace (not a physical test)
+| Phase | `cmdspeed` | `curspeed` sign | `forward` before stop branch | `reverse` result | What it proves |
+|---|---:|---|---|---|---|
+| Reverse-running branch | negative | negative | set FALSE by nonzero-command branch | TRUE | Ordinary reverse output is asserted while commanded reverse |
+| Command becomes zero; rotor/model still negative | zero | negative | FALSE from preceding reverse state | `(true && false)=false` | Ordinary reverse output drops **before** internal RPM necessarily reaches zero |
+| Internal RPM reaches tolerance band | zero | near zero | FALSE | FALSE | `zero-speed` may assert by tolerance/model, not independent physical proof |
+
+This conditional trace is **SOURCE-COMPOSED**, not TEST-CONFIRMED. A machine that maps this ordinary reverse output to a physical drive may have additional drive-side stop logic, independent power removal or different wiring; do not predict its motion without that evidence. The appropriate maintainer question is whether this output is intended to represent *direction request* or *direction during deceleration*, not to infer a personnel-safety defect from a Boolean expression alone.

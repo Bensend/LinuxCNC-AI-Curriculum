@@ -25,7 +25,7 @@ Full `PROGRESS.md` search before this investigation returned no prior `G93`, `in
 | G1 X10 from zero | 0 | 10 mm | **0 mm/min** | Undefined/infinite nominal duration; Task/motion response UNKNOWN |
 | G1 X0 from X0 | 100 | 0 mm | **0.1 mm/min** fallback | No actual travel; do not interpret fallback as commanded displacement |
 
-**Critical F0 distinction:** SOURCE-CONFIRMED that `G93 G1 X10 F0` passes the inspected interpreter's F-presence and nonnegative-F checks and enqueues zero rate; **NOT** proven that integrated Task accepts, executes or completes such a move. An invalid or zero-rate downstream motion path is an independent acceptance question. A CAM post must not generate nonpositive G93 F values.
+**Critical F0 correction from canonical source:** `G93 G1 X10 F0` passes interpreter F-presence/nonnegative checks and enqueues zero rate. In [stable `flush_segments`](https://github.com/LinuxCNC/linuxcnc/blob/v2.9.10/src/emc/task/emccanon.cc#L888) and [development `flush_segments`](https://github.com/LinuxCNC/linuxcnc/blob/537cf2d765c96b6e75ae1db44e1dc0b9dba906a1/src/emc/task/emccanon.cc#L944), velocity is capped by `canon.linearFeedRate` and the motion message is appended only if `(vel && acc) || spindle_synched`. For an ordinary nonsynchronized F0 feed, **no motion command is appended**, yet `canonUpdateEndPoint` advances the canonical endpoint to X10. Both [stable `ARC_FEED`](https://github.com/LinuxCNC/linuxcnc/blob/v2.9.10/src/emc/task/emccanon.cc#L1482) and [development `ARC_FEED`](https://github.com/LinuxCNC/linuxcnc/blob/537cf2d765c96b6e75ae1db44e1dc0b9dba906a1/src/emc/task/emccanon.cc#L2480) likewise gate zero-velocity arc emission while updating the endpoint. This is **SOURCE-CONFIRMED canonical command omission plus endpoint advance**, stronger than the initial 'downstream unknown' statement. Actual Task/motion/physical outcome remains **NOT TESTED**. A following positive-rate move may be calculated relative to an uncommanded canonical endpoint. A CAM post must reject nonpositive inverse-time F values.
 
 **Compensated arcs:** source notes that the original arc's length determines F even when G41/G42 creates extra/modified geometry. The real compensated path can therefore take a different duration. Arc + rotary motion similarly needs an independent axis-limit/time check.
 
@@ -37,6 +37,6 @@ Full `PROGRESS.md` search before this investigation returned no prior `G93`, `in
 5. If no qualified isolated runner, leave all as **NOT RUN**, not TEST-CONFIRMED.
 
 ## Open questions / next
-- Does integrated Task reject or stall a nonzero-length G93 F0 command? Require disconnected execution and independent motion-status oracle.
+- With a nonsynchronized zero-rate move omitted at the canonical layer, does integrated Task receive only the next positive-rate command, and how does it reconcile planned/actual position? Require disconnected command-list, Task and realtime status evidence; do not infer physical movement from endpoint advancement.
 - Does G93 F conversion interact with compensated-path timing and short-segment blending in a measurable way?
 - Exact physical motion and safety consequences are UNKNOWN; independent personnel-safety authority unchanged.

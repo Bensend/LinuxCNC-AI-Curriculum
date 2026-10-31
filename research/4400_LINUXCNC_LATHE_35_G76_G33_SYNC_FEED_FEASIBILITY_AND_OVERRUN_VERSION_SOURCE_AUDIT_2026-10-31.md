@@ -42,3 +42,9 @@ Stable and development convert `I,J,K` from diameter to radius internally in G7 
 | 100 ms speed surge | 0.25 s window does not guarantee detection | actual dynamics |
 
 **Transfer lesson:** “The G-code parsed” does not establish that a synchronized move can maintain pitch. Check per-axis feed feasibility, actual spindle encoder integrity and runtime synchronization. No build, simulation, machine, evaluator, workflow or Actions compute. Graduated levels and independent safety gates unchanged.
+
+## Same-session follow-up: canonical getter provenance and a test-oracle trap
+
+Pinned development [Task `src/emc/task/emccanon.cc`](https://github.com/LinuxCNC/linuxcnc/blob/24e84c4506b41634240f7087f0295e361a954886/src/emc/task/emccanon.cc), blob `5ad736c59e85495aa06573ebcad2d49d59145583`, implements `GET_EXTERNAL_AXIS_MAX_VELOCITY` by rejecting invalid/nonexistent axes, calling `emcAxisGetMaxVelocity(axis)`, converting external to program units and multiplying by 60 for units/min. `GET_EXTERNAL_SPINDLE_MAX_VELOCITY` reads `emcSpindleGetMaxVelocity(spindle)` and treats <=0 or >=1e30 as **unavailable**, returning zero. These checks explain why the development feasibility guard is conditional on effective Task/machine configuration.
+
+Pinned development [standalone interpreter `src/emc/sai/saicanon.cc`](https://github.com/LinuxCNC/linuxcnc/blob/24e84c4506b41634240f7087f0295e361a954886/src/emc/sai/saicanon.cc), blob `11ea4dfae7e68098d05136740542bd7e5621fb74`, returns **0.0 for both getters**. Therefore, a standalone `rs274` interpreter test that *accepts* an over-demand G76 program **does not falsify** the Task-integrated development preflight: it lacks the machine limit oracle and intentionally bypasses that part of the guard. The [lathe acceptance guide](../guides/4000-linuxcnc-lathe-g76-synchronized-feed-version-acceptance-2026-10-31.md) preserves this discriminator. This is SOURCE-CONFIRMED, not TEST-CONFIRMED.

@@ -1,0 +1,30 @@
+# 4000-LC-INIHAL-46 — Live INI HAL limits: Task sampling, delta shadow, error retry, external-offset split
+
+**2026-10-31 | LinuxCNC-first 4000 implementation | NON-GRADUATED | SOURCE/DOC-CONFIRMED only.** Extends KINS-43 and MILLTURN-44 with the missing producer-to-motion path; does **not** claim the stock Puma machine has different limits or that any motion failure was reproduced.
+
+## Reproducible source provenance
+- LinuxCNC stable **v2.9.10** [`src/emc/ini/inihal.cc`](https://github.com/LinuxCNC/linuxcnc/blob/v2.9.10/src/emc/ini/inihal.cc), blob `01ddc240e19b587e6aac3dfd0b6971226de7263c`; development [same path](https://github.com/LinuxCNC/linuxcnc/blob/537cf2d765c96b6e75ae1db44e1dc0b9dba906a1/src/emc/ini/inihal.cc), blob `e6a7d2ab1756bd9e81fd3ce894fb76a0ad23b046`.
+- Development [`src/emc/task/emctaskmain.cc`](https://github.com/LinuxCNC/linuxcnc/blob/537cf2d765c96b6e75ae1db44e1dc0b9dba906a1/src/emc/task/emctaskmain.cc), blob `049c640f1af1b21c18161d6c065ff6f3e35fd83b`, main loop ~3568–3586.
+- Development [`src/emc/ini/iniaxis.cc`](https://github.com/LinuxCNC/linuxcnc/blob/537cf2d765c96b6e75ae1db44e1dc0b9dba906a1/src/emc/ini/iniaxis.cc), blob `d6ddb8acff1d5c72181fbf215ce5f516a7a3b2ab`; stable blob `c664b73e104729e52f2d4bebc81176a5c5871972`.
+- Development [`src/emc/task/taskintf.cc`](https://github.com/LinuxCNC/linuxcnc/blob/537cf2d765c96b6e75ae1db44e1dc0b9dba906a1/src/emc/task/taskintf.cc), blob `2a429b0f66b2593cf669d6d25c5e54105390a696`, `emcAxisSetMaxVelocity` ~465–487.
+- Official development [`milltask(1)`](https://github.com/LinuxCNC/linuxcnc/blob/537cf2d765c96b6e75ae1db44e1dc0b9dba906a1/docs/src/man/man1/milltask.1.adoc), blob `70831d6361c53f070a73683e34d3958ad06347da`. Documents Task-cycle sampling, timing caveats and `ini.*` HAL pin creation **after** `[HAL]HALFILE`; use supported `[APPLICATION]APP` or `[HAL]POSTGUI_HALFILE` path.
+
+## Source trace: from HAL pin to motion
+1. `ini_hal_init()` creates `ini.N.max_velocity`, `ini.L.max_velocity` and related HAL_IN pins; **no `ini.L.min_velocity` pin** is created. `ini_hal_init_pins()` initializes them from the parsed INI state.
+2. Task main loop calls `check_ini_hal_items(joints)` **before** reading the next NML command and planning/executing it. The function copies current HAL pin values, compares them against `old_inihal_data`, and issues setter commands only when the difference exceeds `EPSILON=0.00001`. The stable macro compares signed differences; development uses `fabs`; both use the same threshold for ordinary finite values.
+3. For axis maximum velocity, the call is `emcAxisSetMaxVelocity(axis, (1-r)*V, r*V)`, where `r=OFFSET_AV_RATIO` was parsed at startup. For example `V=60` and `r=0.2` sends **48 normal-axis** and **12 external-offset** velocity units per second, not 60+12. The startup loader and runtime updater use the same split. `OFFSET_AV_RATIO` is not itself an exposed live `ini.*` pin in the inspected source.
+4. `emcAxisSetMaxVelocity` clamps a negative normal velocity to zero, updates Task's `AxisConfig[axis].MaxVel`, and sends `EMCMOT_SET_AXIS_VEL_LIMIT` via `usrmotWriteEmcmotCommand`. It returns zero without dispatch for an axis absent from `TrajConfig.AxisMask`. Therefore the existence or changed value of an `ini.L.*` pin alone is not evidence that a real active axis received the limit.
+5. The `UPDATE_IDX` shadow assignment occurs **before** checking the setter's return. When a motion-command dispatch returns nonzero, the code normally logs only under `EMC_DEBUG_CONFIG`, continues, and `check_ini_hal_items` returns zero. Unless the pin changes again by more than epsilon, the shadow comparison will not automatically retry the failed dispatch. This is a **conditional source mechanism**, not evidence that dispatch failed on any tested machine.
+
+## Puma560 and millturn transfer
+The prior [KINS-43](4400_LINUXCNC_KINS_43_PUMA560_M128_LIMIT_AND_DEVELOPMENT_PANEL_ROUTE_SOURCE_AUDIT_2026-10-31.md) and [MILLTURN-44](4400_LINUXCNC_MILLTURN_44_JOINT_AXIS_REMAP_LIMITS_OFFSETS_AND_KINS_SWITCH_SOURCE_AUDIT_2026-10-31.md) found that M128 writes `ini.$l.min_velocity`, whereas `inihal` creates `ini.$l.max_velocity`. This independent producer-side trace confirms **the wrong name cannot reach this live maximum-velocity update path**. It does not prove a stock speed mismatch: stock examples have equal mode values. A corrected script should write the actual `max_velocity` pin, report required write failures, and verify motion-side effect before proceeding. Task's per-cycle sampler makes script completion, pin update, NML dispatch and realtime application separate events; a GUI M-code return alone is not a synchronization oracle.
+
+## Minimal disconnected acceptance discriminators (NOT EXECUTED)
+- **D1:** `halcmd show pin ini.*max_velocity` after Task starts; confirm expected names and absence of `ini.x.min_velocity`.
+- **D2:** In a disconnected modified config, use unequal axis and joint max velocities; compare M128 wrong-name attempt with corrected `ini.x.max_velocity` write, actual Task log and motion state. Do not infer from script text.
+- **D3:** With a configured `OFFSET_AV_RATIO=0.2`, write axis max velocity 60 and check that the motion command carries 48/12. Record units and source revision.
+- **D4:** With a deliberately isolated failed motion-command dispatch, check whether an unchanged pin is retried; requires a controlled fault harness, not a real machine.
+- **D5:** Change a pin by less than 1e-5 relative to shadow, then accumulate a total change beyond the threshold; inspect when a setter is issued.
+- **D6:** Try a pin for an axis not in AxisMask; distinguish HAL acceptance from actual axis configuration.
+
+**Evidence:** pinned source + upstream manual, no executed tests. **Unknown:** exact Task/servo scheduling latency, hardware behavior, and any installed custom Task implementation. Personnel safety remains independent; this live setting mechanism is not a safety-rated limit. [Practical guide](../guides/4000-linuxcnc-inihal-live-limit-and-planner-acceptance-2026-10-31.md).

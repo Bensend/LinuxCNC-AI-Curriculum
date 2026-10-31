@@ -43,6 +43,12 @@ spindle.0.speed-out-rps -> spindle.0.speed-in  (command copied as "feedback")
 
 This is a **source-composed compatibility hazard**, not a reproduced GUI failure or a physical machine report. A stop command could be followed by a feed before the false propagates, because HAL functions execute after motion-controller. Thus the source permits two observable outcomes depending on command/servo phase: a later indefinite wait or a stale-high pass. Do **not** claim deterministic deadlock without a synchronized runtime trace.
 
+## Additional startup-code route: M5 is in the shipped INI
+
+The pinned development [`woodpecker.ini`](https://github.com/LinuxCNC/linuxcnc/blob/537cf2d765c96b6e75ae1db44e1dc0b9dba906a1/configs/sim/woodpecker/woodpecker.ini#L57), blob `fc6b389dc99423d3ea2233a686cdf5896f399e6a`, contains **`RS274NGC_STARTUP_CODE = ... M5 M9`**. The stable INI also includes M5 at line 59 (blob `dbcb9e416b8d25c48beeede3a2cc508670e2056b`). Development [`emctask.cc::emcTaskPlanInit`](https://github.com/LinuxCNC/linuxcnc/blob/537cf2d765c96b6e75ae1db44e1dc0b9dba906a1/src/emc/task/emctask.cc#L462-L489), blob `c9772a266db9a71a6073435003de5a6097877211`, executes that startup string; [`emctaskmain.cc`](https://github.com/LinuxCNC/linuxcnc/blob/537cf2d765c96b6e75ae1db44e1dc0b9dba906a1/src/emc/task/emctaskmain.cc#L3290-L3350), blob `049c640f1af1b21c18161d6c065ff6f3e35fd83b`, initializes motion before invoking the interpreter startup path and then initializes Task. The canonical M5 path queues a spindle-off command with default stop-wait request in development.
+
+**New conditional implication:** a *startup* M5 can prime a development next-feed barrier even when the user's loaded program contains no explicit M5. Since Woodpecker's postgui at-speed is FALSE whenever `spindle.0.forward` is FALSE, the **first G1 or G38 after initialization** is a meaningful acceptance case, especially when no intervening M3/M4 replaces the pending flag. Exact startup command dispatch, initialization/reset clearing, postgui timing and actual first-move outcome remain **NOT RUN/UNKNOWN**. Do not claim a confirmed boot deadlock solely from INI text. The stable source lacks the M5 stop barrier, so this is a version-sensitive integration discriminator.
+
 ## Realtime phase and observability
 
 The INI loads `core_sim.hal` first, scheduling `motion-controller`. The post-GUI file later schedules `and2.0` then `near.0`. At a servo iteration:

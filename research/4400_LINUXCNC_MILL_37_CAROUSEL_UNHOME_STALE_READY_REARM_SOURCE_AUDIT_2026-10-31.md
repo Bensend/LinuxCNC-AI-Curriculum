@@ -13,6 +13,10 @@ LinuxCNC v2.9.10 [`src/hal/components/carousel.comp`](https://github.com/LinuxCN
 
 **SOURCE-CONFIRMED:** the assignment/control-flow path and possible simultaneous stale ready + homing state. **INFERENCE:** a G-code `M66 L3` consumer could mistake that stale HIGH for new completion; exact timing and Task interleaving are **UNKNOWN**. The selected upstream `toolchange_index.hal` does **not wire `carousel.0.unhome`**; this is a component-level conditional/rearm test case, **not** a claim that the stock VMC example automatically enters this state.
 
+
+## Development cross-check (same conditional path)
+Also directly inspected current LinuxCNC development `master` [`carousel.comp`](https://github.com/LinuxCNC/linuxcnc/blob/5b8998dd8b353f4b4bfc24e9bcfb7c33e0533821/src/hal/components/carousel.comp), **blob `5b8998dd8b353f4b4bfc24e9bcfb7c33e0533821`** on 2026-10-31. Its enum names differ (`WAITING`, `WAIT_ENABLE_FALSE`, `HOME_START`), and the setters are `ready_set`/`homed_set`, but the same branch still enters `HOME_START` on `!homed` *before* the ordinary `ready_set(0)`, and `unhome` clears `homed` without clearing `ready`. This **static conditional finding is present in both inspected revisions**, not an assertion about all releases or any actual test. The development blob is pinned to its inspected SHA, not a floating master assumption.
+
 ## Why the interface contract matters
 A level-only `ready` acknowledgment without a transaction identifier cannot itself prove that it corresponds to the *current* request. An explicit rehome/invalidated-position operation should invalidate the old completion predicate before the next tool-change request is accepted. The source's `homed` and `homing` pins permit a stronger external check, but the stock VMC example routes only `ready` to `motion.digital-in-00`. Do not assume that a separate `homed` pin is connected or that software acknowledgment proves physical carousel lock.
 

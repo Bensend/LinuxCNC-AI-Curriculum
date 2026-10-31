@@ -45,6 +45,9 @@ Use a physically disconnected LinuxCNC RIP/simulator only after positive isolati
 
 Acceptance: (1) baseline exhibits x in (1,4) with released=0 and locked=0, and may advance; (2) candidate does not issue arm retraction while locked=0; (3) candidate fails with timeout on stuck locked=0; (4) normal simulated change still completes for both gray/index variants; (5) failures are visibly reported and software tool number is not incorrectly committed. Items (1)–(5) are **test specifications, not results**.
 
+## Additional carousel rearm discriminator
+A separate [MILL-37 source audit](../research/4400_LINUXCNC_MILL_37_CAROUSEL_UNHOME_STALE_READY_REARM_SOURCE_AUDIT_2026-10-31.md) found that the index-mode `carousel.comp` can retain `ready=1` when an externally asserted `unhome` clears `homed`, because the rehome branch bypasses the ordinary ready reset. The stock VMC index HAL **does not connect** `unhome`; this is a conditional component test, not an observed stock-machine fault. Add a disconnected rearm test: finish a move, lower enable, pulse unhome, re-enable without index, and observe `ready`, `homing`, `homed`, and `M66 P0 L3`. The test is not executed. A transaction-specific acknowledgment is preferable to treating a retained HIGH level as proof of the current move.
+
 ## Review questions for a fresh AI
 1. Why does `M66 P3 L4` not prove that `tool-locked` is true?
 2. Which two files require identical new HAL wiring, and why does `num_dio=6` matter?

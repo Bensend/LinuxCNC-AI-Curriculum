@@ -26,7 +26,7 @@ G0 Z5
 M2
 ```
 
-Variant A: `G64 P0.05 Q0.02`. Variant B: `G64 P0.05 Q0.001`. Variant C: `G64 P0.05`. Variant D: `G64 P0.05 Q0`. Variant E: `G61.1`. Check the **canonical motion messages**, not only preview or plotted joint feedback. The G1 trio can collapse into one straight move in A/C; B/D do not meet the same chain condition. E requests exact stops (not merely a smaller P).
+Variant A: `G64 P0.05 Q0.02`. Variant B: `G64 P0.05 Q0.001`. Variant C: `G64 P0.05`. Variant D: `G64 P0.05 Q0`. Variant E: `G61.1`. Check the **canonical motion messages**, not only preview or plotted joint feedback. The coalesced message takes the **last buffered point's line number/state tag**; do not interpret skipped intermediate motion-line IDs as missing G-code execution. The G1 trio can collapse into one straight move in A/C; B/D do not meet the same chain condition. E requests exact stops (not merely a smaller P).
 
 For an IO-boundary discriminator, insert `M62 P0` between the first and second X/Y feed lines, use an unconnected simulated DIO, and capture motion `motion.digital-out-00` and the active TP segment at servo resolution. Repeat with `M62 P0` followed immediately by `M63 P0` before the same next motion. Distinguish the **canonical flush**, **queued segment start**, **parabolic overlap/status selection**, and **actual HAL output transition**. Do not expect a pulse from two same-index commands without an intervening motion.
 
@@ -40,7 +40,7 @@ Record exact LinuxCNC commit/binary, selected INI/HAL, G-code, canonical command
 
 ## Real upstream plasma application
 
-The [QtPlasmaC overcut source trace](../research/4400_LINUXCNC_PLASMA_32_QTPLASMAC_OVERCUT_M62_P3_TP_TIMING_AND_FILTER_SOURCE_AUDIT_2026-10-31.md) maps `M62 P3` to `motion.digital-out-03 → plasmac.torch-off`, and `plasmac.comp` forces its `torch-on` output false when that input is observed. QtPlasmaC's G-code filter inserts `M62 P3` **before an overcut arc**, and may insert an immediate `M65 P3` reset at M5/end. Test the **filter output**, not only the original CAM file. A TP output change, a plasmac component output change and physical arc extinction are three different measurements.
+The [QtPlasmaC overcut source trace](../research/4400_LINUXCNC_PLASMA_32_QTPLASMAC_OVERCUT_M62_P3_TP_TIMING_AND_FILTER_SOURCE_AUDIT_2026-10-31.md) maps `M62 P3` to `motion.digital-out-03 → plasmac.torch-off`, and `plasmac.comp` forces its `torch-on` output false when that input is observed. In upstream QtPlasmaC simulation, `motion-controller` runs **before** `plasmac` in the servo thread, allowing a newly toggled DIO to reach the component in the same iteration; this does not prove physical arc timing or describe every real HAL. QtPlasmaC's G-code filter inserts `M62 P3` **before an overcut arc**, and may insert an immediate `M65 P3` reset at M5/end. Test the **filter output**, not only the original CAM file. A TP output change, a plasmac component output change and physical arc extinction are three different measurements.
 
 ## Machine-application boundary
 

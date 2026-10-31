@@ -15,6 +15,12 @@ Read `START_HERE.md`, master mission, level order, work selection, curriculum, s
 
 All source blobs and original local Markdown links were checked by GitHub readback. No LinuxCNC build, simulation, machine operation, independent evaluator, Actions workflow or authoritative job runtime. Hosted/self-hosted Actions **0/0 minutes**; LAB_COMPUTE_LOG and FEEDBACK_SCORE_LOG unchanged.
 
+## Same-session source-depth corrections after initial checkpoint
+
+- Development `EMCMOT_ABORT` checks a pending at-speed TP wait and reports the specific stopped spindle whose `at-speed` is still FALSE, then clears the pending barrier. Add acceptance **A13** as an abort-time diagnostic, not a timeout or automatic recovery claim.
+- Both Woodpecker INIs contain `RS274NGC_STARTUP_CODE = ... M5 M9`, and Task executes startup code. **Crucial countercheck:** a subsequent MDI/AUTO mode change calls `emcTaskAbort` → motion abort, clearing `atspeed_next_feed`. Therefore an unconditional startup first-feed stall claim is **rejected**. Acceptance **A14** must log the mode-change/abort path before interpreting first G1/G38 behavior.
+- Pinned development HostMot2 PWM retains zero/offset-mode arithmetic but changes negative-direction sign bit from stable `(1 << 31)` to `(1u << 31)`, avoiding signed left-shift UB. This is exact version source correction, **not** a reproduced wrong-direction output. Optional software-only register-level test if qualified.
+
 ## Highest-value next checkpoint
 
 1. **If and only if** a positively isolated, approved `[self-hosted, openpressbrake]` runner is available, run **one bounded original Woodpecker software-only acceptance**: first verify original HAL loads (A1/A2), then preserve `show thread`, exact HAL signal graph and TP at-speed flag for M3→G1, M4→G1, M5→G0→G1 and M5→G38.2, comparing stable v2.9.10 and development `537cf2d...`. Freeze source/config/fixture SHA and timestamps. Do not operate or connect physical Mesa/VFD/probe outputs. Do not use hosted Actions.

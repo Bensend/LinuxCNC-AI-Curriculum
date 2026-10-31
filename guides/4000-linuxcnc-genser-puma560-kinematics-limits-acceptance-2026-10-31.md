@@ -29,6 +29,9 @@ Record `genserkins.last-iterations`, `genserkins.max-iterations`, `motion.kins-t
 
 **Oracle:** a successful kinematics test requires correct active type, no relevant Task/motion error, stable joint state across the switch, valid joint limits, and a bounded independent forward-reprojection residual for inverse solutions. A successful MDI return, M66, low `last-iterations`, or pretty Vismach display alone is insufficient.
 
+### Cross-machine discriminator R9 — mill/turn coordinate remap
+Read [MILLTURN-44](../research/4400_LINUXCNC_MILLTURN_44_JOINT_AXIS_REMAP_LIMITS_OFFSETS_AND_KINS_SWITCH_SOURCE_AUDIT_2026-10-31.md) and inspect the upstream development `millturn.ini` and `millturn.comp`. With **fixed** joint feedback (100,20,-30,10), the calculated mill machine pose is (100,20,-30,10), while turn machine pose is (-30,-20,100,10). Compare actual kinematics type, joint feedback, raw machine pose, `ini.x/z.min_limit/max_limit`, selected G59.1/G59.2, and Task errors after M428/M429. Work-coordinate display includes fixture offsets and is not the raw-pose oracle. **NOT RUN**; do not enable hardware.
+
 ## 4. Evidence retention
 Preserve exact INI/HAL/NGC/Tcl snapshots, LinuxCNC revision, command sequence, status and error channel, HAL pin and signal dumps, joint/Cartesian poses, solver iterations, expected-versus-observed table, and actual run timestamps. Distinguish **SOURCE-CONFIRMED** predictions from **TEST-CONFIRMED** observations; do not mark a scenario passed without its output. Use only a positively isolated `[self-hosted, openpressbrake]` runner for any later qualified compute. No hosted Actions runner, no hardware enable, no real robot.
 

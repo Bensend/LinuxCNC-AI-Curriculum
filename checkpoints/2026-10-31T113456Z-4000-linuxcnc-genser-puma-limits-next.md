@@ -15,3 +15,8 @@ Pinned LinuxCNC stable tag `v2.9.10`; development `537cf2d765c96b6e75ae1db44e1dc
 2. If still source-only, trace the development INI-HAL pin-change-to-Task limit update and whether a switch in AUTO mode can consume stale limits, or rotate to a new 4000 topic such as EtherCAT HAL distributed-clock ordering, real router toolchange, or ROS 2 state interface. Do not duplicate KINS-09/10.
 3. For solver verification, retain seed, target, `last-iterations`, error, returned joint vector and **independent forward pose residual**. Do not treat a small joint update as a Cartesian-accuracy guarantee.
 4. Read back all new files, verify links, progress and complete lesson-log append. Keep hourly automation enabled; safety and independent evaluation gates unchanged.
+
+## Same-session mill/turn continuation
+5. [MILLTURN-44](../research/4400_LINUXCNC_MILLTURN_44_JOINT_AXIS_REMAP_LIMITS_OFFSETS_AND_KINS_SWITCH_SOURCE_AUDIT_2026-10-31.md) traces stable/development millturn type0 XYZ=(j0,j1,j2), type1 XYZ=(j2,-j1,j0) with Y sign inversion, development M428/M429 selecting G12.1 then mode-specific limit helpers and G59.1/G59.2 offsets, and inherited M128/M129 wrong min_velocity pin. Fixed-joint calculated pose discriminator and R9 added to guide. Source-only, no physical move or simulation; stock equal max velocity 60 masks a numeric mismatch. Development millturn panel correctly calls M428/M429 (contrast Puma560).
+
+**Updated next:** qualified isolated R2/R3 Puma panel and limit-pin tests first, then R9 millturn coordinate/offset/limit test if the runner becomes available; otherwise rotate to a genuinely distinct LinuxCNC implementation topic. No blind/evaluator/safety gates changed.

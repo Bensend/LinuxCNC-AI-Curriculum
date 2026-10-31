@@ -25,3 +25,5 @@ On a machine with separate touch probe and tool setter, distinguish both raw inp
 **Falsifiable offline question:** If the PID command is current but an SSR output lags one servo iteration, is Ethernet necessarily the cause? No: inspect whether the SSR's logic producer runs after `hm2.write`. If a DPLL timer is set to 1 but its offset is untouched, is pre-read sampling proven? No: source default is +100 µs.
 
 **Before any physical commissioning:** capture exact running HAL/INI and bitfile identity, machine-independent E-stop/protection architecture, and qualified physical isolation. No person-exposed machine test follows from this desk review.
+
+**Multi-card caution:** `hm2_dpll_write` uses one function-static 100-call startup phase-reset counter, not one per card. On multi-Mesa configurations, do not assume 100 reset writes per board; inspect actual phase-error traces before drawing a lock-time conclusion. This is a static code finding, not a demonstrated multi-board defect.

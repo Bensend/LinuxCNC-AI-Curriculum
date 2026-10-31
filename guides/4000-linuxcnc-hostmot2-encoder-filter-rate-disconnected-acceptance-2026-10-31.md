@@ -28,6 +28,9 @@ A [standalone source-derived Python arithmetic reference](../examples/4000_hm2_e
 5. For a candidate hardening patch, rerun F1–F7 plus a boundary sweep around q=1, q=2, q=2049, q=2050 and register 0xFFF; ensure documented divide-by-one behavior and low-frequency representability are explicit. Validate that muxed-skew high bits remain unchanged.
 6. Record PASS/FAIL/INVALID/NOT RUN per case, source and runtime evidence separately. All cases **NOT RUN** at publication.
 
+## Real-machine source walkthrough (NOT RUN; no hardware)
+Read pinned [Smithy 1240 HAL](https://github.com/LinuxCNC/linuxcnc/blob/v2.9.10/configs/by_machine/smithy/1240combined.hal#L1-L18): `enable_raw`, QFilterRate address 13312, data 8, strobe TRUE. Follow [`hostmot2.c::hm2_write`](https://github.com/LinuxCNC/linuxcnc/blob/v2.9.10/src/hal/drivers/mesa-hostmot2/hostmot2.c#L152-L173) from `hm2_encoder_write` to `hm2_raw_write`; [`raw.c`](https://github.com/LinuxCNC/linuxcnc/blob/v2.9.10/src/hal/drivers/mesa-hostmot2/raw.c#L127-L139) clears the raw strobe after one write. Predict the *last writer* to register 0x3400 in the same iteration, and predict what happens if the HAL sample-frequency is changed on a later iteration without rearming raw strobe. Keep the driver's HAL shadow distinct from the raw register contents. This is a static source exercise, **not** a new F-case, machine test or hardware acknowledgment.
+
 ## Engineering takeaway
 An input pin is not necessarily a truthful hardware readback when a driver writes its normalized value back into it. An FPGA special register code must be handled symmetrically in both encoding and reporting. This applies to future custom HostMot2-compatible FPGA modules as well as existing Mesa integration.
 

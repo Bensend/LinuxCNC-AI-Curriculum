@@ -16,3 +16,7 @@ Read START_HERE first, then mission, LEVEL_ORDER, WORK_SELECTION_POLICY (LinuxCN
 
 ## Boundaries
 Zero GitHub-hosted and self-hosted Actions compute, no workflow, build, simulation, machine operation or evaluator. No new authoritative job runtime; LAB_COMPUTE_LOG and FEEDBACK_SCORE_LOG unchanged. Runner dispatch/isolation UNKNOWN. OpenPressBrake G0/G1 HOLD; independent safety/evaluator gates unchanged. Hourly curriculum remains enabled.
+
+
+## Same-session continuation — ENCODER-17
+[Direct stable/development software encoder audit](../research/4400_LINUXCNC_ENCODER_17_SOFTWARE_LATCH_DOC_CONFLICT_AND_G38_METROLOGY_BOUNDARY_2026-10-31.md) found that `encoder.c` **does** implement fast-thread latch edge/count capture and slower `counts-latched`/`position-latched` publication. Official `rtcomps.adoc` calls the pins unused, conflicting with man9 and implementation. Multiple enabled edges before capture can overwrite the earlier buffered count. This is a **software HAL encoder**, not proven HostMot2/FPGA timestamp capture; G38 `#506x` remains a separate servo feedback snapshot. No lab or machine operation. Next: inspect HostMot2 index/latch source and one real HAL/INI if there is a concrete integration question; otherwise rotate to another LinuxCNC subsystem.

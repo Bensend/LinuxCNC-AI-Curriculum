@@ -38,6 +38,10 @@ On an isolated development simulator with explicit `[TRAJ]PLANNER_TYPE`, `SMOOTH
 
 Record exact LinuxCNC commit/binary, selected INI/HAL, G-code, canonical command trace, TP queue and active segment, DIO HAL trace, planner type/scale, operator errors, stdout/stderr, exit code, and authoritative runner job timestamps. State whether a result is source-only, simulation-tested or physically tested. Retain negative and failed runs. If any timing measurement uses a userspace poll, do not call it a same-servo-cycle measurement.
 
+## Real upstream plasma application
+
+The [QtPlasmaC overcut source trace](../research/4400_LINUXCNC_PLASMA_32_QTPLASMAC_OVERCUT_M62_P3_TP_TIMING_AND_FILTER_SOURCE_AUDIT_2026-10-31.md) maps `M62 P3` to `motion.digital-out-03 → plasmac.torch-off`, and `plasmac.comp` forces its `torch-on` output false when that input is observed. QtPlasmaC's G-code filter inserts `M62 P3` **before an overcut arc**, and may insert an immediate `M65 P3` reset at M5/end. Test the **filter output**, not only the original CAM file. A TP output change, a plasmac component output change and physical arc extinction are three different measurements.
+
 ## Machine-application boundary
 
 For a plasma torch, output timing must be characterized against the actual motion/HAL cycle and physical process delay; M62 is not an encoder latch. For a press brake, these are **ordinary motion/control** observations, not permission to use LinuxCNC as personnel-safety authority. Preserve independent safety gates and existing evidence. No required CAD/CAM product build is implied.

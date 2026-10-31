@@ -14,3 +14,8 @@
 4. Preserve existing QtPlasmaC/CAM and HM2-ETH test debt, blind evaluator separation, and independent personnel safety authority.
 
 **Evidence:** SOURCE/DOC-CONFIRMED conditional, no TEST-CONFIRMED. No build, simulation, network injection, hardware, evaluator or Actions. Hosted/self-hosted 0/0 min; LAB_COMPUTE_LOG/FEEDBACK_SCORE_LOG unchanged. Hourly task remains enabled.
+
+## Same-session second distinct LinuxCNC topic: MTConnect / ROS 2 read-only telemetry
+- [TELEM-86 pinned development source audit](../research/4400_LINUXCNC_TELEM_86_MTCONNECT_ACTUAL_SPINDLE_AND_POLL_FRESHNESS_SOURCE_AUDIT_2026-10-31.md): MTConnect `ROTARY_VELOCITY ACTUAL` derives from NML spindle speed × override, not a tachometer; Python G96 status speed can represent max RPM. `_live` checks poll success but not heartbeat progression; agent timestamps poll, not FPGA acquisition; only spindle 0 is sampled. Development-only inspected path, no stable v2.9.10 equivalent. SOURCE-CONFIRMED, no runtime.
+- [Read-only bridge provenance walkthrough](../guides/4000-linuxcnc-ros2-mtconnect-status-provenance-review-2026-10-31.md): separate measured RPM (UNAVAILABLE absent sensor), status speed, heartbeat age and bridge timestamp; R1–R6 all NOT RUN. No ROS product build.
+- **Next unblocked source task if no compute:** inspect actual upstream MTConnect model/agent consumers and test `ACTUAL` semantics with a fake stat in an isolated software fixture, or rotate to distinct LinuxCNC machine-specific work. Do not let unexecuted integration examples become claimed telemetry accuracy.

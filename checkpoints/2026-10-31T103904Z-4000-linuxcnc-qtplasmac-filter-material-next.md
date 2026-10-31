@@ -18,3 +18,7 @@ SOURCE-CONFIRMED static and DOC-CONFIRMED percentage/modes; INFERENCE for genera
 3. Before upstream patch proposal, review a minimal change for all four PLASMA-39 cases together; fixing only the duplicated X predicate can leave incremental double-update. For PLASMA-40, treat `jh` as dimensionless and check both unit directions, zero sentinel and GUI limits. Keep new work NON-GRADUATED until independent verification.
 
 **Publication checks:** read back new documents, verify internal links and append complete LESSON_LOG after preserving prior blob. Hourly task remains enabled.
+
+
+## Same-session continuation — filter failure/GUI trust boundary
+4. [PLASMA-41](../research/4400_LINUXCNC_PLASMA_41_QTPLASMAC_FILTER_EXIT_M02_MARKER_GUI_BOUNDARY_SOURCE_AUDIT_2026-10-31.md) traces QtVCP and Axis stable GUI file filters: uncaught Python failure returns nonzero and blocks opening the partial temp file; handled `codeError` prints first-line M02 and can return zero/load; already-filtered marker and `rfl.ngc` bypass normal parsing. Stable accepts marker substring anywhere, development requires exact line. This is **SOURCE-CONFIRMED static**; Task behavior and QtPlasmaC GUI overrides not runtime-tested. The [acceptance guide](../guides/4000-linuxcnc-qtplasmac-cam-filter-coordinate-material-acceptance-2026-10-31.md) now includes three exit/marker discriminators. Next: compare real filter exit, first-line M02, GUI load and previous program under isolated simulation, if qualified.

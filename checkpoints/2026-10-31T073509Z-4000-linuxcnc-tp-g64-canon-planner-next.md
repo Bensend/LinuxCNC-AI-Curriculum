@@ -1,0 +1,18 @@
+# 2026-10-31T07:35:09Z — LinuxCNC-first G64 geometry/IO and development planner-switch checkpoint
+
+**Active:** 4000 NON-GRADUATED. START_HERE, mission, level/work-selection, curriculum/source/template, progress, blind protocol/score, compute ledger and previous HOMING-27/GCODE-28/TOOLCHANGE-29 checkpoint read. 1000/2000/F02/3000 CLOSED. Independent evaluator OPEN; OpenPressBrake G0/G1 HOLD; safety remains a cross-cutting constraint. No newly scored evaluation or lab job.
+
+## New durable source evidence
+
+1. [TP-30](../research/4400_LINUXCNC_TP_30_G64_P_Q_NAIVECAM_CANONICAL_GEOMETRY_AND_IO_BOUNDARY_SOURCE_AUDIT_2026-10-31.md): pinned stable v2.9.10 and development canonical G64 P/Q flow. Q omitted inherits P; positive Q coalesces successive G1 into fewer TP segments; XY shallow G2/G3 may convert to line candidates. M62/M63 flush naive-CAM buffer but **do not impose an exact stop**. TP stages next-segment DIO; parabolic blend can select next-segment output during overlap. Same-index writes before next motion overwrite, distinct indices accumulate by mask. SOURCE-CONFIRMED, DOC-CONFIRMED; no execution.
+2. [TP-31](../research/4400_LINUXCNC_TP_31_DEVELOPMENT_G64_R_PLANNER_SWITCH_DEFER_AND_REJECTION_SOURCE_AUDIT_2026-10-31.md): pinned development-only G64 R planner intent; R0 trap, R>0 smooth with peak scale clamp; Task resolves machine smooth planner, realtime defers type change until TP queue idle. **A refused smooth request calls operator error but does not itself set the Task term-condition retval to failure; command acceptance is not planner activation.** Peak scale is sent independently and may update before deferred type switch. Stable v2.9.10 has no corresponding inspected R path. SOURCE-CONFIRMED conditional; no runtime.
+3. [Software-only acceptance guide](../guides/4000-linuxcnc-g64-pq-r-motion-output-acceptance-matrix-2026-10-31.md): stable geometry/DIO discriminator and development planner mode/status matrix. Reproducible but NOT EXECUTED.
+
+## Precise next highest-value unblocked topic
+
+1. **First:** check whether development Task `emcTrajSetTermCond` failure propagation or planner command write errors ever force a hard interpreter abort despite the `smooth<1` branch's nonfatal operator error. Examine NML status/error plumbing and any upstream G64 R tests. Stop if static path is exhausted.
+2. **Next:** if justified isolated `[self-hosted, openpressbrake]` runner is positively available, run the tiny G64 P/Q canonical and M62/M63 software-only matrix, preserving raw canonical/servo traces and authoritative job timestamps. **No GitHub-hosted runners.** Runner isolation/dispatch currently UNKNOWN, so no job was launched.
+3. **Otherwise rotate** to a genuinely new LinuxCNC machine-specific implementation: plasma `qtplasmac` THC/motion digital output timing, or a mill/lathe tool-table/remap/TP source integration. Avoid repeating G64 textbook explanations and do not reopen graduated 3000.
+4. Keep independent evaluator separation, G0/G1 HOLD and all prior safety-course evidence unchanged.
+
+**Evidence:** SOURCE-CONFIRMED pinned static and DOC-CONFIRMED; upstream g6164 interpreter expected trace inspected, not run. TEST-CONFIRMED none. No build, simulation, test, workflow, machine operation, evaluator, hosted/self-hosted Actions compute or new authoritative runtime; LAB_COMPUTE_LOG and FEEDBACK_SCORE_LOG unchanged. Final session timing/overlap is in LESSON_LOG.md. Hourly curriculum remains enabled.

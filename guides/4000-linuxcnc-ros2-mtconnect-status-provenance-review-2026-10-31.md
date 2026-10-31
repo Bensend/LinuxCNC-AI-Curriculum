@@ -52,3 +52,6 @@ A future isolated unit test may inject a fake Python status object and assert R1
 External dashboards and ROS 2 subscribers may aid diagnostics and planning but cannot replace LinuxCNC motion authority, drive feedback, independent personnel-safety logic, or qualified hardware verification. Any command-side bridge would be a separate, reviewed architecture decision. Do not publish false measured feedback to a controller.
 
 **Checkpoint:** [watchdog/telemetry next](../checkpoints/20261031T234000Z-4000-linuxcnc-hm2-watchdog-recovery-next.md).
+
+## Inspectable reference fixture
+[Pure Python source-semantics reference](../examples/4000_linuxcnc_mtconnect_spindle_semantics_reference.py) contains five standard-library `unittest` cases: enabled/disabled override, frozen/advancing heartbeat, and disconnect. **Written but NOT RUN.** It does not import LinuxCNC or ROS 2; a passing future test verifies the model contract, **not** a running spindle or actual MTConnect stream.

@@ -34,6 +34,16 @@ Deepnest `Jack000/Deepnest@2fb10513a30681971dcc991c528fa0738a2c0c76` (2018-08-26
 | C5 | Run reviewed upstream `tests/hpgl.cjs` only on a qualified isolated runner | Verify integer rounding, 1016 units/in, closed-path return, skipped short paths and 50-point PD chunking. Upstream expected outputs are inspected, **not executed** here. |
 | C6 | Source geometry with two endpoints 0.01 mm apart exported to PLT | 0.01 mm = 0.4 HPGL unit; the difference can round away. Compare emitted PU/PD coordinates and independently bound ±0.0125 mm/axis quantization, before any polygonization. |
 
+## LinuxCNC QtPlasmaC arc-versus-polyline handoff (NOT RUN)
+
+The source-grounded distinction is traced in [CAM-80](../research/4400_LINUXCNC_CAM_80_QTPLASMAC_G1_TESSELLATED_HOLES_VS_G2_G3_AUTO_PROCESS_SOURCE_AUDIT_2026-10-31.md). Do **not** infer that nesting always tessellates the exported SVG: SVGnest clones original SVG elements, but a later CAM post may emit G1 chords.
+
+| Case | Frozen input / stimulus | Predicted discriminator / independent evidence |
+|---|---|---|
+| A1 | QtPlasmaC filter, initialized material, `#<holes>=1`, `G21 G17 G90 G91.1`, known nonzero start (25,20), full circle `G3 I-5 J0` | Arc dispatch enters `do_arc`; check filter output for conditional `M67 E3` and compare to source preconditions. |
+| A2 | Same circle and material emitted as 64 G1 XY chords with closed endpoint | No G02/G03 dispatch; automatic hole M67/overcut not inferred from G1 contour. Check actual filtered file; manually programmed process changes remain possible. |
+| A3 | Export the same native SVG circle through selected nesting tool, then actual CAM post | Inspect whether output preserves SVG circle/arc identity or emits G1 chords; do not infer from internal nesting polygonization alone. Check G-code arc-center consistency and dimensional witness. |
+
 ## Minimal SVG geometry inputs (text fixtures, NOT RUN)
 
 A valid simple containment case:
@@ -64,4 +74,4 @@ A CAM engineer reports that a nested SVG looks correct, but the intended 100-mm 
 
 ## Execution gate and disposition
 
-ALL D1–D6, S1–S6, L1–L2 and C1–C6 = **NOT RUN** (20 cases). No browser/JS, DXF converter, LinuxCNC interpreter, simulation, Actions or physical operation was executed in this lesson. Before any software experiment, independently verify a **disconnected** `[self-hosted, openpressbrake]` runner is accessible and physically isolated; inspect its exact allowlist/script and use only a reviewed bounded job. **Never** use GitHub-hosted Actions or dispatch on an unverified panel PC. The remote Deepnest conversion step is *not* an offline runner test; replace it with a separately verified offline converter or mark D2–D4 BLOCKED. No independent evaluator or graduated level is changed. [Precise continuation checkpoint](../checkpoints/20261031T214200Z-4000-linuxcnc-nesting-cam-next.md).
+ALL D1–D6, S1–S6, L1–L2, C1–C6 and A1–A3 = **NOT RUN** (23 cases). No browser/JS, DXF converter, LinuxCNC interpreter, simulation, Actions or physical operation was executed in this lesson. Before any software experiment, independently verify a **disconnected** `[self-hosted, openpressbrake]` runner is accessible and physically isolated; inspect its exact allowlist/script and use only a reviewed bounded job. **Never** use GitHub-hosted Actions or dispatch on an unverified panel PC. The remote Deepnest conversion step is *not* an offline runner test; replace it with a separately verified offline converter or mark D2–D4 BLOCKED. No independent evaluator or graduated level is changed. [Precise continuation checkpoint](../checkpoints/20261031T214200Z-4000-linuxcnc-nesting-cam-next.md).

@@ -1,0 +1,12 @@
+diff --git a/src/hal/drivers/mesa-hostmot2/sserial.c b/src/hal/drivers/mesa-hostmot2/sserial.c
+--- a/src/hal/drivers/mesa-hostmot2/sserial.c
++++ b/src/hal/drivers/mesa-hostmot2/sserial.c
+@@ -2226,7 +2226,7 @@ int hm2_sserial_check_remote_errors(hostmot2_t *hm2, hm2_sserial_instance_t *inst) {
+     for (r = 0 ; r < inst->num_remotes ; r++){
+         hm2_sserial_remote_t *chan=&inst->remotes[r];
+
+-        if((chan->status & 0x100) == 0) return 0;
++        if((chan->status & 0x100) == 0) continue;
+         buff = chan->status & ~chan->seen_remote_errors & err_mask;
+         chan->seen_remote_errors |= chan->status;
+         for (i = 31 ; i >= 23 ; i--){

@@ -46,7 +46,7 @@ M2
 | A11 | Replace only near input2 with independent simulated feedback | Readiness should track simulated feedback when forward, not merely command | HAL signal trace, command/feedback contrast — **NOT RUN** |
 | A12 | Corrected zero-speed-capable readiness without forward-only AND | After stop, ready may become TRUE at measured zero, allowing development post-M5 feed | Source comparison and bounded runtime — **NOT RUN** |
 | A13 | Development operator abort while a simulated post-M5 feed is waiting | If TP has a waiting ID and stopped spindle at-speed FALSE, command.c emits targeted diagnostic and clears pending barrier | Exact motion error text, TP waiting ID, pending flag after abort — **NOT RUN** |
-| A14 | First G1 or G38.2 after **INI startup code** (no explicit program M5), stable vs development | Both Woodpecker INIs contain startup M5; development may carry a stop barrier to first eligible move if not reset/replaced | Freeze Task startup canonical queue, motion command and pending flag, HAL load phase, first TP segment — **NOT RUN** |
+| A14 | First G1 or G38.2 after **INI startup code** (no explicit program M5), stable vs development | Both INIs contain startup M5, **but MDI/AUTO mode switch calls Task/motion abort and clears pending barrier**; compare before/after transition rather than assuming boot stall | Freeze startup canonical queue, mode changes, abort, pending flag and first TP segment — **NOT RUN** |
 
 ## Measurement and failure discrimination
 

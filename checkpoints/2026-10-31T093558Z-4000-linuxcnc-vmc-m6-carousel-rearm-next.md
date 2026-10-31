@@ -8,6 +8,10 @@
 
 **Already known, not counted as new:** cumulative `orient.comp` is-oriented behavior was covered by 2026-10-28 SPINDLE-ORIENT-01. M19 is present in the VMC macro but not re-presented as a new discovery.
 
+## Same-session continuation — distinct CAD/CAM source transfer
+4. [CAM-38 OpenBuilds CAM DXF/G-code source audit](../research/4400_LINUXCNC_CAM_38_OPENBUILDS_DXF_NESTED_INSERT_UNITS_GCODE_SOURCE_AUDIT_2026-10-31.md): pinned public `OpenBuilds/OpenBuilds-CAM` commit `7369478adfe6ac9fe154cebfe7ff1945ef90c409` (2025-03-04). **SOURCE-CONFIRMED** nested INSERT recursion passes Three.js group rather than parsed DXF block dictionary; conditional second-level INSERT lookup can fail (runtime NOT TESTED). DXF draw path passes coordinates directly, final G-code generator prepends G21 unconditionally, curves become Three.js vertices, plasma M3S/M5 output is not a QtPlasmaC-specific post. **INFERENCE** unit-scale and post compatibility risks; other conversion settings UNKNOWN. This is separate from prior FreeCAD DXF/INSERT audits, not a duplicate. Six-case software-only acceptance matrix retained; no runtime or Actions compute.
+**Revised next highest-value work:** source-confirm the OpenBuilds nested INSERT behavior with an isolated fixture (if runner isolation qualifies), or inspect the precise LinuxCNC QtPlasmaC G-code interface/post contract and G21/geometry acceptance without invoking a machine. Avoid broadening into a mandatory CAM product.
+
 ## Evidence and compute
 SOURCE-CONFIRMED static behavior and DOC-CONFIRMED M66 HIGH/LOW semantics; INFERENCE for Task-level timing and physical outcome. TEST-CONFIRMED none. No LinuxCNC build, simulator, physical machine operation, workflow, Actions compute (GitHub-hosted 0 min; self-hosted 0 min), independent evaluator or authoritative runtime. LAB_COMPUTE_LOG and FEEDBACK_SCORE_LOG unchanged. Runner access/isolation UNKNOWN; do not dispatch to a connected controller. No change to graduated levels, safety course or personnel-safety authority.
 

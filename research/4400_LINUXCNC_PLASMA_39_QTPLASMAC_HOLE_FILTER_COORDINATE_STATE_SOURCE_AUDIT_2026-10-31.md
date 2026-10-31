@@ -1,0 +1,38 @@
+# 4000-LC-PLASMA-39 — QtPlasmaC G-code filter coordinate state: Y-only moves, incremental arcs, zero-axis holes and absolute arc centers
+
+**2026-10-31 · SOURCE-CONFIRMED conditional, NON-GRADUATED; no new runtime test.** LinuxCNC-first implementation research with 3300 plasma and CAD/CAM postprocessor transfer. This investigates the **G-code filter's own geometry state**, not the already documented PLASMA-32 M62 torch-off timing. Graduated 3000 remains closed.
+
+## Immutable provenance and contract
+- LinuxCNC stable tag **v2.9.10**, `src/emc/usr_intf/qtplasmac/qtplasmac_gcode.py`, blob `4cdae156b94b607bd2514b1573baabc83f396f23`.
+- LinuxCNC development commit **537cf2d765c96b6e75ae1db44e1dc0b9dba906a1** (committer 2026-10-31 00:10:38 UTC), same path, blob `aeff3b6103f8c17a1e845b0f835f9ec9f30210b5`. The four relevant predicates/calls are present in both inspected revisions; do not extrapolate to other versions.
+- [Stable filter source](https://github.com/LinuxCNC/linuxcnc/blob/v2.9.10/src/emc/usr_intf/qtplasmac/qtplasmac_gcode.py), [development filter source](https://github.com/LinuxCNC/linuxcnc/blob/537cf2d765c96b6e75ae1db44e1dc0b9dba906a1/src/emc/usr_intf/qtplasmac/qtplasmac_gcode.py), [official QtPlasmaC hole-sensing documentation](https://github.com/LinuxCNC/linuxcnc/blob/v2.9.10/docs/src/plasma/qtplasmac.adoc#L2167-L2205), [official G-code arc-distance modes](https://github.com/LinuxCNC/linuxcnc/blob/537cf2d765c96b6e75ae1db44e1dc0b9dba906a1/docs/src/gcode/g-code.adoc), [upstream metric simulation INI](https://github.com/LinuxCNC/linuxcnc/blob/v2.9.10/configs/sim/qtplasmac/qtplasmac_metric_ini.inc). The INI's `[FILTER]` maps `.ngc/.nc/.tap` to `qtplasmac_gcode`; these findings concern **filter preprocessing before Task/interpreter**, not raw LinuxCNC G-code acceptance.
+
+## Exact call path and state ownership
+`Filter.process_file` (stable ~169–255, dev ~217–311) calls `parse_code` (~257/~313), which tracks G90/G91 and G90.1/G91.1, and for G02/G03 calls `do_arc` (~789/~928) → `check_if_hole` (~830/~972) → `get_hole_diameter` (~855/~1000) → optionally `overburn` (~891/~1036). After `parse_code` returns, `process_file` **also** calls `set_last_coordinates` (~441/~518) when hole sensing is enabled and its line predicate matches. `lastX/lastY` are Python filter state, not feedback from motion.
+
+### A. Y-only moves do not advance the filter's Y position
+Stable line 253 and development line 308 both test `('X' in line or 'X' in line)` before calling `set_last_coordinates`. The duplicated X condition never selects a plain `G1 Y20`. The helper itself handles Y correctly **if called**. Thus a Y-only line after `G0 X10 Y10` leaves filter `lastY=10` while programmed motion ends at Y20. A following full-circle `G3 I5 J0` is interpreted by `check_if_hole` as centered on the stale Y10 start; an automatically inserted overburn arc uses this stale start. With radius 5 and default 4 mm overcut, source math gives nominal endpoint Y≈6.413 instead of Y≈16.413 for the real start. **SOURCE-CONFIRMED conditional computation; whether the interpreter rejects the resulting arc or how a machine responds is NOT TESTED.**
+
+### B. Incremental arcs with X/Y can advance position twice
+For a non-overburn G91 arc, `check_if_hole` computes `endX=lastX+X` and assigns `self.lastX=endX`. After return, `process_file` sees X and invokes `set_last_coordinates`, which **again** adds X when `distMode==91`. For a prior X10, `G91; G3 X2 Y0 I1 J0` yields filter X14 instead of the programmed X12. Subsequent hole/overburn calculations inherit the incorrect start. This is independent of A and occurs with an X word present. The exact downstream filter output depends on subsequent G-code and hole mode.
+
+### C. Full circles on an X=0 or Y=0 axis are excluded from the `isHole` test
+Both revisions use `if self.lastX and self.lastY and self.lastX == endX and self.lastY == endY:`. Python zero is falsy. A full-circle `G3 I5 J0` starting at X0 Y10 therefore fails `isHole` despite equal start/end, preventing the automatic overburn branch in modes 2/4. Velocity reduction may still occur through the separate arc-enable mode; **do not claim all arc processing is disabled**. This may be an intentional initial-state heuristic, but it excludes legitimate axis-aligned hole centers/starts.
+
+### D. G90.1 absolute-center arcs with J reach a missing-argument call
+`check_if_hole` tests `arcDistMode==90.1` and, for a J word, invokes `self.get_axis_value('J') - self.lastY` (stable ~840; dev ~984). The method is defined as `get_axis_value(self, data, axis)` (stable ~425; dev ~501). Passing only `'J'` omits `axis` and would raise Python `TypeError` **if this branch executes** (hole sensing enabled, not conversational-block bypass, G90.1 active, G2/G3 with J). The corresponding I branch correctly passes `(data,'I')`. The official interpreter supports G90.1 absolute arc centers; the filter can fail before the interpreter sees that otherwise valid mode. No live filter execution or exception trace was obtained.
+
+## Minimal discriminators (fixtures are defined, NOT EXECUTED)
+1. **Y-only stale state:** `G21; G90 G91.1; #<holes>=2; G0 X10 Y10; G1 Y20; G3 I5 J0; M2` on separate lines. Compare filtered overburn coordinates with analytic center at Y20; record whether an error is raised.
+2. **Incremental double count:** `G21; G90 G91.1; #<holes>=2; G0 X10 Y10; G91; G3 X2 Y0 I1 J0; G90; G3 I5 J0; M2`. Compare filter state/overburn start against programmed X12.
+3. **Zero-axis hole:** `G21; G90 G91.1; #<holes>=2; G0 X0 Y10; G3 I5 J0; M2` versus X0.001 Y10 control. Compare inserted M62/overburn; do not conflate with physical torch switching.
+4. **Absolute-center J:** `G21; G90 G90.1; #<holes>=2; G0 X10 Y10; G3 I15 J10; M2`. Record filter stderr/exit status, not just GUI warning.
+
+Use only a disconnected, qualified LinuxCNC simulation or a carefully isolated Python fixture with stubbed `linuxcnc`, HAL and GUI dependencies. Do not execute on a connected torch. The filter calls `halcmd`, reads material/preferences and can display a GUI, so directly invoking it without a prepared environment is **not** an authoritative test. Preserve input, filtered output, stdout/stderr, machine INI, exact commit and run log.
+
+## Claims, limits and candidate corrections
+**SOURCE-CONFIRMED** A–D as static control/data flow at both revisions. **DOC-CONFIRMED** G90.1/G91.1 and `#<holes>` semantics. **INFERENCE** Python exception, malformed overburn endpoint, potential interpreter rejection or incorrect path. **TEST-CONFIRMED none.** Candidate changes for independent review: `X or Y` predicate; one owner for coordinate updates (do not merely fix A while retaining B); explicit initialized-position state rather than nonzero-coordinate truthiness; pass `(data,'J')` to helper. No upstream patch, machine validation, build or workflow performed.
+
+**Adversarial handoff:** A CAM exports a hole on X=0, then a Y-only lead-in, then a G91 arc and G90.1 hole. Explain which of A–D applies at each stage, which source paths establish it, and which errors could be masked by an earlier filter failure. Never label a source prediction as an executed test.
+
+**Dependencies:** [PLASMA-32](4400_LINUXCNC_PLASMA_32_QTPLASMAC_OVERCUT_M62_P3_TP_TIMING_AND_FILTER_SOURCE_AUDIT_2026-10-31.md) covers torch timing; [CAM-38](4400_LINUXCNC_CAM_38_OPENBUILDS_DXF_NESTED_INSERT_UNITS_GCODE_SOURCE_AUDIT_2026-10-31.md) covers separate DXF post geometry. [Practical acceptance guide](../guides/4000-linuxcnc-qtplasmac-cam-filter-coordinate-material-acceptance-2026-10-31.md) contains complete fixtures. Unresolved physical timing and filter runtime are promoted within active 4000; no graduation decision.

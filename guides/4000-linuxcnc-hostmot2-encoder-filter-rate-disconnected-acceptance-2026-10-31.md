@@ -18,6 +18,8 @@ Only execute when a **positively verified disconnected** software fixture or FPG
 | F6 | request 33,000,001 | q=0, unsigned register underflows to 0xFFFFFFFE, `+2` wraps to 0, then division by zero | invalid above-clock request rejected safely in candidate fix |
 | F7 | inject low-level write failure in mock | `hm2_encoder_set_filter_rate_and_skew` does not check `llio->write` return, but updates shadow | distinguish software shadow from accepted hardware write |
 
+A [standalone source-derived Python arithmetic reference](../examples/4000_hm2_encoder_arithmetic_reference.py) freezes F1–F6 and T1–T3 as assertions. **It has not been executed or reviewed by a separate runtime oracle**; F7 still requires a mock low-level write interface. It uses no HAL/Mesa calls and is not an authorized workflow job by itself.
+
 ## Reproducibility / recording
 1. Pin exact LinuxCNC source and firmware regmap hashes above. Preserve exact `clock_frequency` rather than assuming every Mesa card runs at 33 MHz.
 2. For F1–F4, instrument the helper or implement a **pure isolated arithmetic model** that preserves unsigned 32-bit operations and truncating division. Verify output register, published HAL input and regmap interpretation independently.

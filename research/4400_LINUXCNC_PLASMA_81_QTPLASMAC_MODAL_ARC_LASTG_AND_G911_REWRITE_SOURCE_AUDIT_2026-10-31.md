@@ -6,6 +6,7 @@
 
 - LinuxCNC stable **v2.9.10**, [`src/emc/usr_intf/qtplasmac/qtplasmac_gcode.py`](https://github.com/LinuxCNC/linuxcnc/blob/v2.9.10/src/emc/usr_intf/qtplasmac/qtplasmac_gcode.py), blob `4cdae156b94b607bd2514b1573baabc83f396f23`: `process_file` ~169–255 → `parse_code` ~257–383 → `set_last_gcode` ~534–546; `do_arc` ~789–799.
 - LinuxCNC development commit **`537cf2d765c96b6e75ae1db44e1dc0b9dba906a1`**, [same file](https://github.com/LinuxCNC/linuxcnc/blob/537cf2d765c96b6e75ae1db44e1dc0b9dba906a1/src/emc/usr_intf/qtplasmac/qtplasmac_gcode.py), blob `aeff3b6103f8c17a1e845b0f835f9ec9f30210b5`: `parse_code` ~313–459 → `set_last_gcode` ~619–631; same mechanism.
+- Stable LinuxCNC [`src/emc/rs274ngc/interp_internal.cc::Interp::enhance_block`](https://github.com/LinuxCNC/linuxcnc/blob/v2.9.10/src/emc/rs274ngc/interp_internal.cc#L165-L215), blob `829591161dfd9bf444cce5ef9d2b9a0a903dedff`: **lines 212–214 explicitly set `motion_to_be=settings->motion_mode` for IJK-only blocks when modal motion is G2/G3**, and [`interp_check.cc`](https://github.com/LinuxCNC/linuxcnc/blob/v2.9.10/src/emc/rs274ngc/interp_check.cc#L286-L303), blob `ee5164c895dd6610826b8621f64660c90de70233`, permits I/J for arc motion. Pinned development `interp_internal.cc` blob `bcccebe27c2a1ee55073bf734b1a68d64e4bbf80` retains the branch ~218–220. This is an independent interpreter-side **source oracle**, not a runtime pass.
 - [Official LinuxCNC G-code modal groups](https://www.linuxcnc.org/docs/2.9/html/gcode/overview.html) distinguish motion G2/G3 from G90/G91 linear distance and G90.1/G91.1 arc-center modes; [QtPlasmaC docs](https://www.linuxcnc.org/docs/2.9/html/plasma/qtplasmac.html) describe automatic G2/G3 hole sensing. Do not assume a post's modal compression is transparent to the QtPlasmaC filter.
 
 ### P1 — An intervening G91.1 can cause an axis-only line to be prefixed with G91
@@ -27,7 +28,7 @@ Likewise, after `G3...`, then `G64 P0.05`, an axis-first line is rewritten to be
 
 ### P3 — Modal I/J-only full-circle lines are not expanded for the hole filter
 
-`parse_code` prefixes only lines whose first character is in the listed *axis* letters, **not** `I` or `J`. The auto-hole processing branch invokes `do_arc` only when the resulting text begins `G02` or `G03` (stable ~363–365, development ~439–441). Thus after a previous explicit G3, a subsequent **`I-5 J0`** line retains its I-leading text and does **not** enter QtPlasmaC's automatic hole branch. This is a **SOURCE-CONFIRMED filter recognition gap** for the specified input text; actual LinuxCNC interpreter acceptance of an I/J-only modal arc, if used, must be verified separately. A post emitting an explicit `G3 I-5 J0` takes the inspected filter branch, subject to the already known prior-position/hole-mode constraints.
+`parse_code` prefixes only lines whose first character is in the listed *axis* letters, **not** `I` or `J`. The auto-hole processing branch invokes `do_arc` only when the resulting text begins `G02` or `G03` (stable ~363–365, development ~439–441). Thus after a previous explicit G3, a subsequent **`I-5 J0`** line retains its I-leading text and does **not** enter QtPlasmaC's automatic hole branch. This is a **SOURCE-CONFIRMED filter recognition gap** for the specified input text; **the interpreter explicitly recognizes an IJK-only block as modal G2/G3 motion** in `Interp::enhance_block` when the previously active motion mode is G2/G3; full arc geometry validation and actual execution still require independent testing. A post emitting an explicit `G3 I-5 J0` takes the inspected filter branch, subject to the already known prior-position/hole-mode constraints.
 
 ## Why this matters to nesting/CAM
 
@@ -41,6 +42,6 @@ This is an **integration requirement for this pinned filter**, not a claim that 
 |---|---|---|---|
 | P1 | `G3` → `G91.1` → axis-first arc line | Filter injects G91 and switches its own linear distance mode | actual filtered output; interpreter canonical/status |
 | P2 | `G3` → `G64 P0.05` → axis-first arc line | Filter injects G64 instead of G3 | actual filtered output and interpreter acceptance |
-| P3 | `G3` → `I-5 J0` modal full circle | No `do_arc` invocation for I-leading text | filter M67 output; separate interpreter acceptance |
+| P3 | `G3` → `I-5 J0` modal full circle | No filter `do_arc`; interpreter `enhance_block` selects modal G3 | filter M67 output; independent complete arc/interpreter execution |
 
 All three **NOT RUN**. Do not use physical plasma, torch, machine I/O, or an unverified self-hosted panel PC. The [practical guide](../guides/4000-linuxcnc-nesting-dxf-svg-plasma-handoff-acceptance-2026-10-31.md) includes these as P1–P3, with a [precise checkpoint](../checkpoints/20261031T214200Z-4000-linuxcnc-nesting-cam-next.md). No independent evaluator, graduated level or personnel-safety gate changed.

@@ -33,7 +33,6 @@ This is **software-only** NC. Run each variant with a fresh interpreter/controll
 | S2 | repeat S1 with G5.1 X1 Y1 I0 J3 | same F-presence-only path | same independent oracle |
 | G9 | G93 G1 X10 F0 then G1 X20 F2 | first normal feed omitted, canonical endpoint advanced; next F based on 10 mm | canonical and Task motion-command trace |
 | S3 | fresh G93 G5/G5.1 F2 without preceding positive feed | F present but no new rate; zero-velocity spline segments may be omitted while endpoints advance | canonical events and endpoint; no physical inference |
-
 | T1 | G93 G1 Z0 A90 F5 (fresh) | pure rotary length 90 deg, rate 450 deg/min | canonical classification, measured duration |
 | T2 | G93 G1 Z0.00000005 A90 F5 (metric) | interpreter rotary-only at 1e-7 cutoff, canonical mixed at 1e-8 cutoff | interpreter feed, canonical metric, Task motion and time |
 | T3 | G93 G1 Z0.0000002 A90 F5 (metric) | both classify XYZ as moving; length 2e-7 mm in interpreter | rates, numerical preservation, runtime |
@@ -43,4 +42,4 @@ This is **software-only** NC. Run each variant with a fresh interpreter/controll
 **G7 geometry frozen:** Start X10,Y0; end X-10,Y0; center offset I-10,J0. G3 is a CCW semicircle of radius 10. Source-computed length is 10π mm, G93 F2 rate is 20π mm/min. Verify modal start state before scoring.
 
 ## Readiness, limits, next action
-Static arithmetic is SOURCE-CONFIRMED; upstream tests and demos were inspected but not executed here. Runtime, HAL, hardware and physical acceptance remain UNKNOWN. Start with G1–G4 and S1 only after runner qualification; they discriminate parser F acceptance versus canonical rate. Do not manufacture a new graduated level or count a GUI preview as independent motion proof.
+Static arithmetic is SOURCE-CONFIRMED; upstream tests and demos were inspected but not executed here. Runtime, HAL, hardware and physical acceptance remain UNKNOWN. Start with G1–G4, G9, S1/S3 and T1–T3 only after runner qualification; they discriminate parser F acceptance versus canonical rate. Do not manufacture a new graduated level or count a GUI preview as independent motion proof.

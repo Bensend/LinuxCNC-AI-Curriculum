@@ -1,0 +1,24 @@
+# 4000-LC-MILL-37 — Carousel index rehoming can retain a previous ready acknowledgment
+**2026-10-31 · SOURCE-CONFIRMED conditional, NON-GRADUATED; no runtime or machine test.** Distinct source-depth follow-up to [MILL-36 upstream VMC M6 remap](4400_LINUXCNC_MILL_36_VMC_M6_REMAP_DRAWBAR_ACK_GAP_SOURCE_AUDIT_2026-10-31.md).
+
+## Exact provenance
+LinuxCNC v2.9.10 [`src/hal/components/carousel.comp`](https://github.com/LinuxCNC/linuxcnc/blob/v2.9.10/src/hal/components/carousel.comp), blob **`0c8432acc93bda3c41c2686cb3a2f90bfecbca8f`**, `FUNCTION(_)` state machine and `pin in bit unhome`. Upstream [`toolchange_index.hal`](https://github.com/LinuxCNC/linuxcnc/blob/v2.9.10/configs/sim/axis/vismach/VMC_toolchange/toolchange_index.hal), blob `fe22f8d054c4a25fdf32390ab90ed596f6b2077e`, selects `encoding=index`, routes `carousel.0.ready` to `motion.digital-in-00`, and `carousel.0.enable` from `motion.digital-out-00`. Upstream [`toolchange.ngc`](https://github.com/LinuxCNC/linuxcnc/blob/v2.9.10/configs/sim/axis/vismach/VMC_toolchange/toolchange.ngc), blob `d5ddf536734932fb1b553852a6c46267fdd9af0b`, issues `M64 P0` and waits `M66 P0 L3 Q60`. Official [M66 documentation](https://github.com/LinuxCNC/linuxcnc/blob/v2.9.10/docs/src/gcode/m-code.adoc) defines `L3` as **level HIGH**, not a rising-edge request.
+
+## Conditional state trace
+1. After a completed indexed carousel movement, `case 8` (or another successful ready path) can set `ready=1`, then `case 9` waits for `enable=0`. When enable falls, `case 9` changes `state=0` **without clearing ready**.
+2. An external rising `unhome` event executes `if (unhome && !old_unhome) homed=0`. It also **does not clear ready**. The pin is documented in the source as mainly for testing.
+3. On the next `enable=1`, `case 0` sees index/edge/counts mode with `!homed`, sets `state=10` and **breaks before** the only `ready=0` assignment in the ordinary `case 0 → case 1` path.
+4. `case 10` starts the index search; `case 11` waits for index/pulse (or index-enable clear). Neither clears ready. Thus the old `ready=1` can coexist with `homing=1` and `homed=0` while index search is underway.
+5. `M66 P0 L3` checks a HIGH level, so if Task samples this retained HIGH during the homing interval, it can finish its wait **without a newly completed carousel selection**. Actual Task scheduling and machine outcome are not demonstrated.
+
+**SOURCE-CONFIRMED:** the assignment/control-flow path and possible simultaneous stale ready + homing state. **INFERENCE:** a G-code `M66 L3` consumer could mistake that stale HIGH for new completion; exact timing and Task interleaving are **UNKNOWN**. The selected upstream `toolchange_index.hal` does **not wire `carousel.0.unhome`**; this is a component-level conditional/rearm test case, **not** a claim that the stock VMC example automatically enters this state.
+
+## Why the interface contract matters
+A level-only `ready` acknowledgment without a transaction identifier cannot itself prove that it corresponds to the *current* request. An explicit rehome/invalidated-position operation should invalidate the old completion predicate before the next tool-change request is accepted. The source's `homed` and `homing` pins permit a stronger external check, but the stock VMC example routes only `ready` to `motion.digital-in-00`. Do not assume that a separate `homed` pin is connected or that software acknowledgment proves physical carousel lock.
+
+## Discriminating isolated software test (not executed)
+In a disconnected LinuxCNC simulator at v2.9.10: (A) home and complete an index carousel move, lower enable, observe `ready=1, state=0`; (B) pulse `carousel.0.unhome`, observe `homed=0` with `ready=1`; (C) enable again without generating index/pulse, observe `homing=1` while `ready` remains HIGH; (D) run a **separate, controlled** M66 level read and record `#5399` and elapsed time; (E) test a proposed gated acknowledgment `ready && homed && !homing` and repeat. Capture raw HAL pins `state,ready,homed,homing,enable,unhome,sense-0,sense-1`, motion digital input and Task state. The test requires qualified isolated compute, not a machine-connected runner.
+
+**Candidate engineering rule:** after any rehome/invalidation, explicitly clear or mask old completion and require a fresh transaction-specific completion; validate with a simulator before proposing a driver or HAL patch. No modification to upstream LinuxCNC, no independent evaluation, no personnel-safety certification, no physical operation. Keep graduated levels closed and existing independent safety gates unchanged.
+
+**Next:** inspect whether development `carousel.comp` changed the ready-rearm logic; if unchanged, prioritize a minimal isolated test and then rotate to source-grounded CAD/CAM/G-code handoff rather than repeating carousel source prose.

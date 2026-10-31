@@ -37,6 +37,9 @@ Development [`src/emc/task/emctaskmain.cc`](https://github.com/LinuxCNC/linuxcnc
 
 If later adding commands, serialize ownership through a single gateway, reject when status is stale/unknown, carry request ID and intended postcondition, capture the initial echo serial and error stream, and verify the **postcondition** after Task completion; do not map `wait_complete` directly to a successful ROS action result. For a robot, the active kinematics and units/fixture/tool-offset frame must be explicit; do not send joint targets through a Cartesian G-code interface by assumption. Never use ROS 2 QoS deadline/liveliness as independent personnel-safety authority.
 
+### Minimal inspectable probe, not a ROS product
+[Read-only status-heartbeat sampler](../examples/4000_linuxcnc_status_heartbeat_probe.py) uses only `linuxcnc.stat` and Python stdlib, emits JSON lines, never sends NML commands, and distinguishes stable's `UNKNOWN_NO_PRODUCER_COUNTERS` from development's two observed producer advances. It marks counter resets, independent stalls and poll errors instead of manufacturing fresh data. This source artifact is **UNTESTED** and requires the installed LinuxCNC Python module; it is deliberately not a ROS node, driver, servo loop or safety controller. Review the counters and run only in an isolated simulation if later justified.
+
 ## Version-sensitive acceptance matrix (NOT EXECUTED)
 | Test | Setup | Discriminator |
 |---|---|---|

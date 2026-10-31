@@ -17,3 +17,7 @@ START_HERE and required mission, level order, LinuxCNC-first work selection, cur
 
 ## Compute, evaluations, release
 Zero GitHub-hosted/self-hosted Actions minutes; no workflow, build, simulation, test suite, physical operation or new authoritative runtime. LAB_COMPUTE_LOG and FEEDBACK_SCORE_LOG unchanged. Local runner access/isolation UNKNOWN. No graduation/evaluator/release claims. Recurring curriculum remains enabled.
+
+## Same-session source-depth rotation — PROBE-15
+
+After the two network branches reached source-level information-gain stops, continued into [LinuxCNC G38 probing](../research/4400_LINUXCNC_PROBE_15_G383_G385_ALREADY_TARGET_STATE_RESULT_SOURCE_AUDIT_2026-10-31.md). Both pinned stable and development source skip the initial already-in-target-state rejection for no-error G38.3/G38.5, then use a level-based probe success condition. `#5070=1` therefore does not by itself prove a fresh contact edge or physical travel. No physical/runtime validation; next source question: exact unsuccessful probe Task→interpreter parameter synchronization or an inspectable upstream fixture. This supersedes the networking-only preference if it has higher information gain next session.

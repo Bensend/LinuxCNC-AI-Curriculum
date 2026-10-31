@@ -25,7 +25,7 @@ For bus period P=125 µs, divider N=4 and phase p=0, send on tick `t%4==0`, rece
 | EC1 | `lcec_su_due` N=4/p=0, N=8/p=2 | exact due ticks | phase grid vs app-time jitter |
 | EC2 | unit `read` called twice without new `rx_gen` | second `fresh=0`, `stale-count` grows after OP; callbacks may still run | fresh vs reused process image |
 | EC3 | bus sees a new RX image but WKC incomplete | `fresh` can be 1 while `wkc-state!=2` | generation vs valid exchange |
-| EC4 | ten-plus due sends without new TX | repeated old image, rising `late-count`, then domain queue suppressed until new output | stalled thread vs network drop |
+| EC4 | eleven consecutive due sends without new TX | repeated old image, rising `late-count`, first ten resend previous image; eleventh due miss suppresses domain until new output | stalled thread vs network drop |
 | EC5 | disable `dc-sync-monitor` after convergence | DC pins hold previous values | cached diagnostic vs live measurement |
 | EC6 | LinuxCNC 2.9 without `initf`, 2.10+ with it | inline versus clean activation path | version-dependent startup phase |
 | EC7 | thread `write` scheduled on another task | source reports error and skips publication | HAL thread placement |

@@ -12,14 +12,14 @@
 
 In both revisions, `set_last_gcode(data, previous)` takes `data.rfind('G')`, then reads **only the integer digits immediately after that last G**. It does **not** restrict itself to modal motion-group G words, and it discards a decimal suffix. `parse_code` then prefixes lines beginning `X/Y/Z/A/B` (development also C) with `G{self.lastG}` before processing distance modes.
 
-Source-only thought experiment (separate NC lines):
+Source-only thought experiment (assume initial XY=(0,0); the first arc's center/radius are consistent; separate NC lines):
 ```gcode
-G90
-G3 X10 Y10 I5 J0
+G90 G91.1
+G3 X10 Y10 I10 J0
 G91.1
-X20 Y10 I5 J0
+X0 Y0 I0 J-10
 ```
-The filter remembers `lastG=3` after the explicit arc, then **overwrites it with 91** after `G91.1`. The next axis-first line is rewritten to begin **`G91 X20 Y10 I5 J0`**, not `G3 ...`. Its own `distMode` changes to 91 because the rewritten line contains G91 without the decimal. This is a **SOURCE-CONFIRMED conditional rewrite**, not a captured filter run. The interpreter's eventual response, actual motion, and whether the source program's modal arc is otherwise legal remain **NOT TESTED**. The post should avoid relying on axis-only modal compression across G90.1/G91.1 boundaries.
+The filter remembers `lastG=3` after the explicit arc, then **overwrites it with 91** after `G91.1`. The next axis-first line is rewritten to begin **`G91 X0 Y0 I0 J-10`**, not `G3 ...`. Its own `distMode` changes to 91 because the rewritten line contains G91 without the decimal. This is a **SOURCE-CONFIRMED conditional rewrite**, not a captured filter run. The interpreter's eventual response, actual motion, and whether the source program's modal arc is otherwise legal remain **NOT TESTED**. The post should avoid relying on axis-only modal compression across G90.1/G91.1 boundaries.
 
 ### P2 — An intervening non-motion G64 can be remembered as the next line's motion prefix
 

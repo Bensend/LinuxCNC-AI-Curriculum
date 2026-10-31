@@ -1,6 +1,6 @@
 # Practical guide — LinuxCNC G70/G71/G72 lathe profile/CAM acceptance
 
-**Scope:** LinuxCNC v2.9.10 and development `537cf2d765c96b6e75ae1db44e1dc0b9dba906a1`. Software-only, disconnected, no physical axes/spindle/tool. **ALL CASES NOT RUN.** Evidence basis: [LATHE-61](../research/4400_LINUXCNC_LATHE_61_G7X_PROFILE_R_ARC_SIGN_AND_RADIUS_VALIDATION_SOURCE_AUDIT_2026-10-31.md), [LATHE-62](../research/4400_LINUXCNC_LATHE_62_G7X_PROFILE_SIDE_EFFECTS_PRELIMINARY_MOVE_AND_PASS_DRIFT_SOURCE_AUDIT_2026-10-31.md), official [G71/G72 docs](https://linuxcnc.org/docs/2.9/html/gcode/g-code.html#gcode:g71-g72).
+**Scope:** LinuxCNC v2.9.10 and development `537cf2d765c96b6e75ae1db44e1dc0b9dba906a1`. Software-only, disconnected, no physical axes/spindle/tool. **ALL CASES NOT RUN.** Evidence basis: [LATHE-61](../research/4400_LINUXCNC_LATHE_61_G7X_PROFILE_R_ARC_SIGN_AND_RADIUS_VALIDATION_SOURCE_AUDIT_2026-10-31.md), [LATHE-62](../research/4400_LINUXCNC_LATHE_62_G7X_PROFILE_SIDE_EFFECTS_PRELIMINARY_MOVE_AND_PASS_DRIFT_SOURCE_AUDIT_2026-10-31.md), [LATHE-63](../research/4400_LINUXCNC_LATHE_63_G70_FINISH_PASS_COUNT_ZERO_AND_FRACTIONAL_P_SOURCE_AUDIT_2026-10-31.md), official [G71/G72 docs](https://linuxcnc.org/docs/2.9/html/gcode/g-code.html#gcode:g71-g72).
 
 ## Reproducible starting fixture
 Start from the upstream pinned `nc_files/lathe_g70_71_demo.ngc` [v2.9.10 source](https://github.com/LinuxCNC/linuxcnc/blob/v2.9.10/nc_files/lathe_g70_71_demo.ngc) rather than inventing undocumented O-subroutine syntax. The minimal structure is:
@@ -32,6 +32,8 @@ This is a **proposed fixture**, not a verified executable or cutting program. A 
 | L62-P3 | Many small-I passes | stable repeated subtraction vs development top-minus-n-delta | generated pass-level CSV, max error |
 | L62-P4 | Upstream G71.1/G71.2/G70 fixture | distinguish first-pocket and finishing paths | full canonical path per cycle |
 | L62-P5 | Invalid contour after X/Z preliminary rapid | error ordering vs already-queued rapid | interpreter, Task, and realtime trace |
+| L63-F1 | G70 Q with P omitted, P1, P0, P-1 | zero/negative pass loop has no generated finishing passes if accepted | parser verdict, canonical pass count |
+| L63-F2 | G70 Q D1 E0 P2.9 | stable first offset 1/2.9; development first offset 1/2 **if** accepted | parser verdict and canonical offsets |
 
 **Important:** L61-A/B require a Q profile with at least two nonzero segments and geometry accepted by the G7x monotonicity checks. If either variant fails before a contour is emitted, that is an *acceptance result*, not proof that the signed-R source finding is false. Use an instrumented interpreter path to inspect the constructed center when necessary. Never interpret a GUI preview or a successful process exit alone as the full motion oracle.
 

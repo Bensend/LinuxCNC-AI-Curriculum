@@ -45,6 +45,7 @@ M2
 | A10 | M5 then M3 then G1, development | M3 may replace M5 pending barrier; wait is spin-up, not stop | Command sequence, pending flag, TP segment — **NOT RUN** |
 | A11 | Replace only near input2 with independent simulated feedback | Readiness should track simulated feedback when forward, not merely command | HAL signal trace, command/feedback contrast — **NOT RUN** |
 | A12 | Corrected zero-speed-capable readiness without forward-only AND | After stop, ready may become TRUE at measured zero, allowing development post-M5 feed | Source comparison and bounded runtime — **NOT RUN** |
+| A13 | Development operator abort while a simulated post-M5 feed is waiting | If TP has a waiting ID and stopped spindle at-speed FALSE, command.c emits targeted diagnostic and clears pending barrier | Exact motion error text, TP waiting ID, pending flag after abort — **NOT RUN** |
 
 ## Measurement and failure discrimination
 
@@ -56,4 +57,4 @@ Sample at a single known servo-phase boundary if possible, rather than correlati
 
 For a real router/VFD, separately verify actual speed-feedback provenance and units (RPM versus RPS), start/stop and reverse semantics, `M5` zero-speed reporting, HAL function order, VFD fault/ready handling, probe operation after stop, and timeout/error handling. Do not force `spindle.0.at-speed=TRUE` to bypass a machine stall. Ordinary HAL/TP sequencing is not independent STO, safe standstill, enclosure interlocking or any personnel-safety function.
 
-**Evidence classification:** SOURCE-CONFIRMED topology and versioned code; conditional runtime predictions; all A1–A12 **NOT RUN**; physical machine acceptance and independent evaluation **OPEN**. No Actions compute or lab runtime incurred by authoring this guide.
+**Evidence classification:** SOURCE-CONFIRMED topology and versioned code; conditional runtime predictions; all A1–A13 **NOT RUN**; physical machine acceptance and independent evaluation **OPEN**. No Actions compute or lab runtime incurred by authoring this guide.

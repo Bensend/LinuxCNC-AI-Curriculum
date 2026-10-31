@@ -1,6 +1,6 @@
 # Practical LinuxCNC homing review — absolute feedback, index handshake and bounded failures
 
-**Scope:** pinned stable v2.9.10 versus development commit `24e84c4506b41634240f7087f0295e361a954886`. [HOMING-24](../research/4400_LINUXCNC_HOMING_24_ABSOLUTE_ENCODER_REHOME_OFFSET_REGRESSION_SOURCE_TEST_AUDIT_2026-10-31.md) , [HOMING-25](../research/4400_LINUXCNC_HOMING_25_BOUNDED_SEARCH_RETURN_GANTRY_ABORT_SOURCE_TEST_AUDIT_2026-10-31.md), and [HOMING-26](../research/4400_LINUXCNC_HOMING_26_INDEX_ENABLE_HAL_IO_HOSTMOT2_ORDER_SOURCE_AUDIT_2026-10-31.md) are the source-backed rationale. **Review/diagnostic guide, not a physical commissioning authorization.**
+**Scope:** pinned stable v2.9.10 versus development commit `24e84c4506b41634240f7087f0295e361a954886`. [HOMING-24](../research/4400_LINUXCNC_HOMING_24_ABSOLUTE_ENCODER_REHOME_OFFSET_REGRESSION_SOURCE_TEST_AUDIT_2026-10-31.md), [HOMING-25](../research/4400_LINUXCNC_HOMING_25_BOUNDED_SEARCH_RETURN_GANTRY_ABORT_SOURCE_TEST_AUDIT_2026-10-31.md), and [HOMING-26](../research/4400_LINUXCNC_HOMING_26_INDEX_ENABLE_HAL_IO_HOSTMOT2_ORDER_SOURCE_AUDIT_2026-10-31.md) are the source-backed rationale. **Review/diagnostic guide, not a physical commissioning authorization.**
 
 ## Acceptance matrix for an inspectable config
 

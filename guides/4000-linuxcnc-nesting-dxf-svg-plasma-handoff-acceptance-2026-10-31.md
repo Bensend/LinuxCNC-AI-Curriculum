@@ -44,6 +44,16 @@ The source-grounded distinction is traced in [CAM-80](../research/4400_LINUXCNC_
 | A2 | Same circle and material emitted as 64 G1 XY chords with closed endpoint | No G02/G03 dispatch; automatic hole M67/overcut not inferred from G1 contour. Check actual filtered file; manually programmed process changes remain possible. |
 | A3 | Export the same native SVG circle through selected nesting tool, then actual CAM post | Inspect whether output preserves SVG circle/arc identity or emits G1 chords; do not infer from internal nesting polygonization alone. Check G-code arc-center consistency and dimensional witness. |
 
+## QtPlasmaC modal-arc filter state (NOT RUN)
+
+Source trace: [PLASMA-81](../research/4400_LINUXCNC_PLASMA_81_QTPLASMAC_MODAL_ARC_LASTG_AND_G911_REWRITE_SOURCE_AUDIT_2026-10-31.md). Keep filter rewrite, interpreter acceptance and realtime motion as separate oracles.
+
+| Case | Frozen input / stimulus | Source prediction / independent evidence |
+|---|---|---|
+| P1 | Initial XY=(0,0), `G90 G91.1`, `G3 X10 Y10 I10 J0`, then `G91.1`, then `X0 Y0 I0 J-10` | `set_last_gcode` remembers 91, and filter prefixes `G91` to axis-first line. Capture filtered text and interpreter response separately. |
+| P2 | `G3` arc, then `G64 P0.05`, then axis-first `X... Y... I... J...` | Filter prefixes `G64`, not retained motion G3. Do not assume the interpreter necessarily rejects it; test. |
+| P3 | Explicit `G3` followed by I/J-only modal `I-5 J0` | I-leading line is not expanded; filter does not enter `do_arc` for this line. Check interpreter legality separately. |
+
 ## Minimal SVG geometry inputs (text fixtures, NOT RUN)
 
 A valid simple containment case:
@@ -74,4 +84,4 @@ A CAM engineer reports that a nested SVG looks correct, but the intended 100-mm 
 
 ## Execution gate and disposition
 
-ALL D1–D6, S1–S6, L1–L2, C1–C6 and A1–A3 = **NOT RUN** (23 cases). No browser/JS, DXF converter, LinuxCNC interpreter, simulation, Actions or physical operation was executed in this lesson. Before any software experiment, independently verify a **disconnected** `[self-hosted, openpressbrake]` runner is accessible and physically isolated; inspect its exact allowlist/script and use only a reviewed bounded job. **Never** use GitHub-hosted Actions or dispatch on an unverified panel PC. The remote Deepnest conversion step is *not* an offline runner test; replace it with a separately verified offline converter or mark D2–D4 BLOCKED. No independent evaluator or graduated level is changed. [Precise continuation checkpoint](../checkpoints/20261031T214200Z-4000-linuxcnc-nesting-cam-next.md).
+ALL D1–D6, S1–S6, L1–L2, C1–C6, A1–A3 and P1–P3 = **NOT RUN** (26 cases). No browser/JS, DXF converter, LinuxCNC interpreter, simulation, Actions or physical operation was executed in this lesson. Before any software experiment, independently verify a **disconnected** `[self-hosted, openpressbrake]` runner is accessible and physically isolated; inspect its exact allowlist/script and use only a reviewed bounded job. **Never** use GitHub-hosted Actions or dispatch on an unverified panel PC. The remote Deepnest conversion step is *not* an offline runner test; replace it with a separately verified offline converter or mark D2–D4 BLOCKED. No independent evaluator or graduated level is changed. [Precise continuation checkpoint](../checkpoints/20261031T214200Z-4000-linuxcnc-nesting-cam-next.md).

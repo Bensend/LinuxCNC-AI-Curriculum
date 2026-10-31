@@ -1,0 +1,17 @@
+# 2026-10-31T113456Z — 4000 LinuxCNC genser numerical IK and Puma560 GUI/limit integration checkpoint
+
+**Active:** 4000 LinuxCNC-first, NON-GRADUATED; 1000/2000/F02/3000 CLOSED. No routine safety-course work. No independent evaluator access; blind score log unchanged. This session read START_HERE, governance, source/evidence rules, progress, evaluation protocol/score and compute ledger; selected 3500 robotics / 4000 kinematics because previous QtPlasmaC filter path is blocked on qualified isolated runtime and prior KINS-09/10 already covered generic switching.
+
+## New source findings
+1. [KINS-42](../research/4400_LINUXCNC_KINS_42_GENSER_JACOBIAN_SEED_CONVERGENCE_SINGULARITY_SOURCE_AUDIT_2026-10-31.md): stable v2.9.10 and development \`537cf2d765c96b6e75ae1db44e1dc0b9dba906a1\` \`genser\` inverse starts at incoming joint seed, iterates a direct Jacobian inverse, checks small **joint update** rather than independent Cartesian residual, and can fail on singular inversion/iteration cap. Development uses 1e-7-radian update threshold, LU singular epsilon 1e-15. Real upstream Puma560 sim uses \`genserkins\`, inch units and \`[JOINT_4] HOME=0.1\` workaround. Source-confirmed, no runtime.
+2. [KINS-43](../research/4400_LINUXCNC_KINS_43_PUMA560_M128_LIMIT_AND_DEVELOPMENT_PANEL_ROUTE_SOURCE_AUDIT_2026-10-31.md): stable/development Puma M128 writes \`ini.$l.min_velocity\` though actual pin is \`ini.$l.max_velocity\`; Tcl \`catch\` hides failure. Stock axis/joint MAX_VELOCITY both 30, so no stock numeric mismatch proven. Development Puma INI removed M68→motion.switchkins-type net and remaps M428/M429 to G12.1, but GUI buttons still bind M128/M129/M130 scripts that invoke M68; source-confirmed configuration mismatch, runtime effect conditional.
+3. [Practical disconnected acceptance guide](../guides/4000-linuxcnc-genser-puma560-kinematics-limits-acceptance-2026-10-31.md) freezes eight scenarios, output and reprojection oracles; **NOT RUN**.
+
+## Evidence and dependencies
+Pinned LinuxCNC stable tag \`v2.9.10\`; development \`537cf2d765c96b6e75ae1db44e1dc0b9dba906a1\`; exact blobs recorded in research. Predecessor KINS-09/10 explicitly linked; no novelty claimed for generic G12.1 Task acknowledgement or rollback. SOURCE/DOC-CONFIRMED only; TEST-CONFIRMED none. No Actions dispatch, build, simulation, physical machine operation, independent evaluation, or new authoritative compute runtime; hosted/self-hosted Actions 0/0 minutes. LAB_COMPUTE_LOG and FEEDBACK_SCORE_LOG unchanged. Runner isolation UNKNOWN.
+
+## Exact next
+1. If a positively isolated \`[self-hosted, openpressbrake]\` LinuxCNC environment becomes available, freeze/execute **R2 and R3 first** (development panel M129 versus M429; M128 wrong velocity pin) with actual pin/state/error evidence. No hosted Actions or physical outputs.
+2. If still source-only, trace the development INI-HAL pin-change-to-Task limit update and whether a switch in AUTO mode can consume stale limits, or rotate to a new 4000 topic such as EtherCAT HAL distributed-clock ordering, real router toolchange, or ROS 2 state interface. Do not duplicate KINS-09/10.
+3. For solver verification, retain seed, target, \`last-iterations\`, error, returned joint vector and **independent forward pose residual**. Do not treat a small joint update as a Cartesian-accuracy guarantee.
+4. Read back all new files, verify links, progress and complete lesson-log append. Keep hourly automation enabled; safety and independent evaluation gates unchanged.

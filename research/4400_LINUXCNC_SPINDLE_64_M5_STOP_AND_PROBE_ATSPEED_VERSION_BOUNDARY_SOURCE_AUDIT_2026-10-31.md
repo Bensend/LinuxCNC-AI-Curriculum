@@ -43,6 +43,10 @@ M5 [possibly with $N]
 
 **Timing caveat:** The pending flag and HAL feedback are updated by different functions/threads. A following segment can encounter a stale high before the HAL chain publishes the new low, or can encounter low and wait. Therefore a source-composed low after M5 is **not** sufficient to claim a reproduced deadlock or deterministic same-cycle result.
 
+## Development abort diagnostic (new source-depth)
+
+The pinned development [`command.c` EMCMOT_ABORT branch](https://github.com/LinuxCNC/linuxcnc/blob/537cf2d765c96b6e75ae1db44e1dc0b9dba906a1/src/emc/motion/command.c#L545-L590), lines 549–564, explicitly inspects a TP `waiting_for_atspeed` ID. If coordinated motion is waiting and a spindle is **commanded stopped** (`state==0`) but its at-speed flag is FALSE, abort emits a targeted diagnostic identifying that spindle and advising that the pin must become TRUE after stop. It then aborts TP and clears `atspeed_next_feed` (line 589). This confirms the development implementation *anticipates* a nonreleasing stop barrier; it does **not** prove the Woodpecker simulation reached that branch. The diagnostic is an **abort-time observation**, not a timeout or automatic recovery mechanism. A source-only acceptance check should include whether this message appears when an operator aborts a deliberately disconnected, simulated wait.
+
 ## Falsifiable, disconnected acceptance predictions (NOT RUN)
 
 - **S64-A:** Stable v2.9.10 M5 then G1, with no new spindle-on/speed command, does not attach an M5-specific `atspeed` flag. Development does, by canonical default. Oracle: TP segment flag plus pending flag, not merely Task success.

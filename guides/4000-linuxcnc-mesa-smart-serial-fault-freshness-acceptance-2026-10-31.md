@@ -5,6 +5,7 @@
 ## Source map and entry points
 - [SSERIAL-54](../research/4400_LINUXCNC_SSERIAL_54_MULTI_REMOTE_FAULT_SCAN_EARLY_RETURN_SOURCE_AUDIT_2026-10-31.md): per-remote fault scanner and [review-only one-line patch](../patches/4000_LINUXCNC_SSERIAL_54_REMOTE_FAULT_SCAN_v2.9.10_REVIEW_ONLY.patch).
 - [SSERIAL-55](../research/4400_LINUXCNC_SSERIAL_55_WAIT_MASK_PARAMETER_ACK_FAILURE_SOURCE_AUDIT_2026-10-31.md): version-sensitive DoIt mask, parameter acknowledgment and shadow.
+- [SSERIAL-57](../research/4400_LINUXCNC_SSERIAL_57_32BIT_UNSIGNED_REMOTE_SCALING_SOURCE_AUDIT_2026-10-31.md): conditional 32-bit unsigned remote process field scaling and undefined signed shift.
 - [SSERIAL-56](../research/4400_LINUXCNC_SSERIAL_56_REAL_8I20_7I77_HAL_ORDER_FRESHNESS_SOURCE_AUDIT_2026-10-31.md): Smithy 8I20 HAL, 7I77 architecture, read/write freshness and port counter.
 - Original source: [stable sserial.c](https://github.com/LinuxCNC/linuxcnc/blob/v2.9.10/src/hal/drivers/mesa-hostmot2/sserial.c), [development sserial.c](https://github.com/LinuxCNC/linuxcnc/blob/537cf2d765c96b6e75ae1db44e1dc0b9dba906a1/src/hal/drivers/mesa-hostmot2/sserial.c), [stable hostmot2.c](https://github.com/LinuxCNC/linuxcnc/blob/v2.9.10/src/hal/drivers/mesa-hostmot2/hostmot2.c), [real Smithy HAL](https://github.com/LinuxCNC/linuxcnc/blob/v2.9.10/configs/by_machine/smithy/1240combined.hal), [2.9 Smart Serial manual](https://linuxcnc.org/docs/2.9/html/man/man9/sserial.9.html).
 
@@ -36,6 +37,8 @@ A port `fault-count`, a remote fault bit, a HostMot2 board `io_error`, and a fre
 | F2 | remote fault bit set but no DoIt/transfer error | Fault scanner can log fault without incrementing port counter |
 | F3 | channel transfer error but board TRAM read succeeds | `process_tram_read` still calls channel reader; no per-channel freshness guard in inspected code |
 | O1 | Smithy BLDC current changes after `hm2.write` | New BLDC value not packed by that same iteration's write |
+| U1 | Custom remote unsigned 16-bit process input, raw 0x8000, fullscale 10 | Existing 16-bit path predicts approximately 5.0000763 (control) |
+| U2 | Custom remote unsigned 32-bit process input, raw 0x80000000, fullscale 10 | Original signed shift by 32 is undefined; corrected 64-bit denominator predicts ~5.000000001, not an original-output oracle |
 | D1 | Copy `.run_state` or `.error-count` from 2.9 prose | Inspected driver actually exports `.port_state` / `.fault-count`; installed HAL enumeration is oracle |
 
 **Do not mark any PASS** from this source prediction table. R/W/P require a fake-remote or fake-register harness with deterministic initialization, exact revision, raw return codes, and captured error log. F3 needs an explicit per-channel transfer-error image plus before/after HAL input snapshots; it must distinguish *stale retained value* from *invalid updated value* rather than assume either. O1 needs a timestamped software trace of BLDC output, packet packing and write calls; no live current command.
@@ -49,7 +52,7 @@ call hm2_sserial_check_remote_errors(port)
 assert the predicted message count and seen masks
 repeat after one-line change; keep all other inputs fixed
 ```
-Build stubs for `hostmot2_t`, `hm2_sserial_instance_t`, `hm2_sserial_remote_t`, and logging; do not assert the full `sserial.c` driver can compile standalone without its RTAPI/HAL dependencies. For W1–W3, stub command/data registers and `r_index` and isolate `hm2_sserial_wait` rather than guessing FPGA behavior. For P1, drive a controllable wait result through the parameter state machine; confirm shadow and state3 independently.
+Build stubs for `hostmot2_t`, `hm2_sserial_instance_t`, `hm2_sserial_remote_t`, and logging; do not assert the full `sserial.c` driver can compile standalone without its RTAPI/HAL dependencies. For U2, enable undefined-behavior sanitization in a disconnected compiler fixture and record the exact compiler/runtime; do not predict one particular original numeric result. For W1–W3, stub command/data registers and `r_index` and isolate `hm2_sserial_wait` rather than guessing FPGA behavior. For P1, drive a controllable wait result through the parameter state machine; confirm shadow and state3 independently.
 
 ## Practical machine-config inspection (read-only)
 On a *qualified, already installed, de-energized/disconnected* machine or software HAL, inspect (do not alter) `halcmd show pin hm2_*.sserial.*`, `halcmd show param hm2_*.sserial.*`, and `halcmd show pin hm2_*.8i20.*` or `hm2_*.7i77.*`. Record actual HAL names, `port_state`, `fault-count`, remote `fault`/status pins, firmware ID and port mode. Verify `addf` ordering from the actual HAL file; do not copy Smithy's PCI/8I20 wiring onto a 7I77 analog servo or a 7I76 stepgen machine. A 7I77 analog command is not a measured encoder position or verified drive enable.
@@ -68,5 +71,6 @@ A port has two remotes. Channel 0 has no bit-8 fault; channel 1 has bit-8 and bi
 |---|---|---|---|
 | Compile and run R1–R3 regression | No verified disconnected self-hosted runner | HIGH | No; blocks TEST-CONFIRMED claim |
 | Prove P1/P2 shadow vs remote state | Requires mock driver/RTAPI harness | HIGH | No; blocks runtime/remote assertion |
+| Verify U1/U2 16/32-bit unsigned scaling | Requires UBSan-enabled isolated fixture | HIGH | No; blocks runtime verdict |
 | Determine F3 exact remote register retention | Needs controlled hardware/FPGA fixture | HIGH | No; source finding is only missing gate |
 | Test physical output, watchdog and independent safety | Requires qualified machine evidence | CRITICAL for machine release | Not a software-research graduation claim; physical release remains HOLD |

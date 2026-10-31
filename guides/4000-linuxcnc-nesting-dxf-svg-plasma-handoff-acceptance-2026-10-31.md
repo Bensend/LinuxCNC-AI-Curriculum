@@ -52,7 +52,7 @@ Source trace: [PLASMA-81](../research/4400_LINUXCNC_PLASMA_81_QTPLASMAC_MODAL_AR
 |---|---|---|
 | P1 | Initial XY=(0,0), `G90 G91.1`, `G3 X10 Y10 I10 J0`, then `G91.1`, then `X0 Y0 I0 J-10` | `set_last_gcode` remembers 91, and filter prefixes `G91` to axis-first line. Capture filtered text and interpreter response separately. |
 | P2 | `G3` arc, then `G64 P0.05`, then axis-first `X... Y... I... J...` | Filter prefixes `G64`, not retained motion G3. Do not assume the interpreter necessarily rejects it; test. |
-| P3 | Explicit `G3` followed by I/J-only modal `I-5 J0` | I-leading line is not expanded; filter does not enter `do_arc` for this line. Check interpreter legality separately. |
+| P3 | Explicit `G3` followed by I/J-only modal `I-5 J0` | I-leading line is not expanded; filter does not enter `do_arc`. LinuxCNC `Interp::enhance_block` explicitly selects modal G2/G3 for IJK-only input; check full arc geometry and runtime independently. |
 
 ## Minimal SVG geometry inputs (text fixtures, NOT RUN)
 

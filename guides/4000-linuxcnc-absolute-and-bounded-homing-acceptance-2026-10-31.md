@@ -1,6 +1,6 @@
 # Practical LinuxCNC homing review — absolute feedback, index handshake and bounded failures
 
-**Scope:** pinned stable v2.9.10 versus development commit `24e84c4506b41634240f7087f0295e361a954886`. [HOMING-24](../research/4400_LINUXCNC_HOMING_24_ABSOLUTE_ENCODER_REHOME_OFFSET_REGRESSION_SOURCE_TEST_AUDIT_2026-10-31.md) and [HOMING-25](../research/4400_LINUXCNC_HOMING_25_BOUNDED_SEARCH_RETURN_GANTRY_ABORT_SOURCE_TEST_AUDIT_2026-10-31.md) are the source-backed rationale. **Review/diagnostic guide, not a physical commissioning authorization.**
+**Scope:** pinned stable v2.9.10 versus development commit `24e84c4506b41634240f7087f0295e361a954886`. [HOMING-24](../research/4400_LINUXCNC_HOMING_24_ABSOLUTE_ENCODER_REHOME_OFFSET_REGRESSION_SOURCE_TEST_AUDIT_2026-10-31.md) , [HOMING-25](../research/4400_LINUXCNC_HOMING_25_BOUNDED_SEARCH_RETURN_GANTRY_ABORT_SOURCE_TEST_AUDIT_2026-10-31.md), and [HOMING-26](../research/4400_LINUXCNC_HOMING_26_INDEX_ENABLE_HAL_IO_HOSTMOT2_ORDER_SOURCE_AUDIT_2026-10-31.md) are the source-backed rationale. **Review/diagnostic guide, not a physical commissioning authorization.**
 
 ## Acceptance matrix for an inspectable config
 
@@ -24,4 +24,4 @@ For an additional **new test, not part of upstream**, copy the absolute fixture 
 
 `joint.N.homed` says the controller completed its homing state machine, **not** that an absolute encoder has a valid multi-turn origin or that an independent reference agrees. `index-enable` is HAL IO: motion arms it, the encoder clears it on index, and scheduling can add a servo-cycle delay. If a failed latch moves back, the return is an ordinary software-planned motion, not a guaranteed stop or safe recovery. Avoid changing a production INI merely because a newer development option exists; first verify the running LinuxCNC version, firmware, HAL writer count, physical limits and independent safety chain.
 
-**Verification status:** two upstream executable fixtures inspected but not run; no new tests or machine operations. The original graduated levels, independent evaluator and OpenPressBrake G0/G1 HOLD are unchanged.
+**Verification status:** two upstream executable fixtures inspected but not run; no new tests or machine operations. For a Mesa encoder, compare `hm2.encoder.N.no-clear-on-index` with `HOME_INDEX_NO_ENCODER_RESET`, and inspect the exact `hm2.read → motion-controller → hm2.write` ordering. Development publishes the shared index-enable IO signal only on state changes, while v2.9.10 writes it every motion iteration; neither is a substitute for an actual index-event trace.\n\nThe original graduated levels, independent evaluator and OpenPressBrake G0/G1 HOLD are unchanged.

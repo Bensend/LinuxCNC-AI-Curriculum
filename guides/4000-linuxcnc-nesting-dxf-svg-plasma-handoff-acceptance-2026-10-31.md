@@ -50,8 +50,8 @@ Source trace: [PLASMA-81](../research/4400_LINUXCNC_PLASMA_81_QTPLASMAC_MODAL_AR
 
 | Case | Frozen input / stimulus | Source prediction / independent evidence |
 |---|---|---|
-| P1 | Initial XY=(0,0), `G90 G91.1`, `G3 X10 Y10 I10 J0`, then `G91.1`, then `X0 Y0 I0 J-10` | `set_last_gcode` remembers 91, and filter prefixes `G91` to axis-first line. Capture filtered text and interpreter response separately. |
-| P2 | `G3` arc, then `G64 P0.05`, then axis-first `X... Y... I... J...` | Filter prefixes `G64`, not retained motion G3. Do not assume the interpreter necessarily rejects it; test. |
+| P1 | Initial XY=(0,0), `G90 G91.1`, `G3 X10 Y10 I10 J0`, then `G91.1`, then `X0 Y0 I0 J-10` | `set_last_gcode` remembers 91, filter prefixes `G91`, and interpreter `convert_g` applies incremental distance mode **before** retained modal G3. Capture filtered text, canonical coordinates and mode separately. |
+| P2 | `G3` arc, then `G64 P0.05`, then axis-first `X... Y... I... J...` | Filter prefixes **bare** `G64`; interpreter can retain modal G3 but stable v2.9.10 reasserts path/naivecam tolerance 0, development restores configured defaults. Check filter output and effective tolerance, not only parser success. |
 | P3 | Explicit `G3` followed by I/J-only modal `I-5 J0` | I-leading line is not expanded; filter does not enter `do_arc`. LinuxCNC `Interp::enhance_block` explicitly selects modal G2/G3 for IJK-only input; check full arc geometry and runtime independently. |
 
 ## Minimal SVG geometry inputs (text fixtures, NOT RUN)

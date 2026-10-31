@@ -36,7 +36,7 @@ On an isolated development simulator with explicit `[TRAJ]PLANNER_TYPE`, `SMOOTH
 
 ## Required evidence package before promotion
 
-Record exact LinuxCNC commit/binary, selected INI/HAL, G-code, canonical command trace, TP queue and active segment, DIO HAL trace, planner type/scale, operator errors, stdout/stderr, exit code, and authoritative runner job timestamps. State whether a result is source-only, simulation-tested or physically tested. Retain negative and failed runs. If any timing measurement uses a userspace poll, do not call it a same-servo-cycle measurement.
+Record exact LinuxCNC commit/binary, selected INI/HAL, G-code, canonical command trace, TP queue and active segment, DIO HAL trace, QtPlasmaC `motion.analog-out-03`/`plasmac.feed-reduction` and `plasmac.torch-on` where relevant, planner type/scale, operator errors, stdout/stderr, exit code, and authoritative runner job timestamps. State whether a result is source-only, simulation-tested or physically tested. Retain negative and failed runs. If any timing measurement uses a userspace poll, do not call it a same-servo-cycle measurement.
 
 ## Real upstream plasma application
 

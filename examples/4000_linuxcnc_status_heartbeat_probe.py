@@ -43,12 +43,23 @@ def observe_producers(sample, state, now, stall_seconds):
         state["last"] = (motion, task)
         state["motion_advanced_at"] = now
         state["task_advanced_at"] = now
+        state["seen_motion_advance"] = False
+        state["seen_task_advance"] = False
         return "BASELINE_ONLY"
     prev_motion, prev_task = state["last"]
-    if motion != prev_motion:
+    if motion < prev_motion or task < prev_task:
+        state["last"] = (motion, task)
+        state["seen_motion_advance"] = False
+        state["seen_task_advance"] = False
         state["motion_advanced_at"] = now
-    if task != prev_task:
         state["task_advanced_at"] = now
+        return "COUNTER_RESET_OR_WRAP"
+    if motion > prev_motion:
+        state["motion_advanced_at"] = now
+        state["seen_motion_advance"] = True
+    if task > prev_task:
+        state["task_advanced_at"] = now
+        state["seen_task_advance"] = True
     state["last"] = (motion, task)
     motion_age = now - state["motion_advanced_at"]
     task_age = now - state["task_advanced_at"]
@@ -60,7 +71,9 @@ def observe_producers(sample, state, now, stall_seconds):
         return "MOTION_PRODUCER_STALLED"
     if task_age > stall_seconds:
         return "TASK_PRODUCER_STALLED"
-    return "BOTH_PRODUCERS_PROGRESSING"
+    if not (state["seen_motion_advance"] and state["seen_task_advance"]):
+        return "AWAITING_BOTH_ADVANCES"
+    return "BOTH_RECENTLY_ADVANCED"
 
 
 def main():

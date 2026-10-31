@@ -34,10 +34,17 @@ A separate early branch in both versions passes through files named exactly `rfl
 
 Do not run on connected hardware. A qualified `[self-hosted, openpressbrake]` **disconnected simulation** may provide independent evidence; capture original input, temporary filtered output, stderr, return code, GUI status, previous loaded program and exact job timestamps. Never use GitHub-hosted Actions runners.
 
+## QtPlasmaC-specific confirmation and an additional diagnostic distinction
+The inspected stable [`qtplasmac_handler.py`](https://github.com/LinuxCNC/linuxcnc/blob/v2.9.10/share/qtvcp/screens/qtplasmac/qtplasmac_handler.py#L460-L490), blob `bbfff1eaa906a496aad19f1602464e8ff2828695`, patches its file-manager `load` method with `new_load`. That calls **`ACTION.OPEN_PROGRAM(fname)`** after removing temporary materials, confirming the normal QtPlasmaC file-manager route reaches the QtVCP filter path described above. The editor save/reload and run-from-line code also invoke `ACTION.OPEN_PROGRAM` (~520, ~1902). Thus the nonzero-exit/no-new-load behavior is directly relevant to these inspected QtPlasmaC call sites, not merely generic QtVCP.
+
+**Additional source-confirmed UI-log caveat:** `new_load` immediately emits a machine-log line **`Loaded: <fname>`** after calling `ACTION.OPEN_PROGRAM`. The filtered path creates an asynchronous `FilterProgram` and only later calls `_load_filter_result` from a periodic callback if exit status is zero. Therefore that particular **log message is an attempt/dispatch indication, not evidence that filtering finished or Task accepted the file**. The code's `try/except` covers synchronous exceptions, not a later filter failure. The exact UI appearance and log timing are NOT TESTED.
+
+[QtPlasmaC editor error highlighting](https://github.com/LinuxCNC/linuxcnc/blob/v2.9.10/share/qtvcp/screens/qtplasmac/qtplasmac_handler.py#L2165-L2185) separately reads `gcode_errors.txt` to mark source lines when editing. It does not transform that file into a filter process exit code. The `rfl.ngc` bypass is used by QtPlasmaC's run-from-line generator (~1895–1903); it should not be treated as a general postprocessor escape hatch.
+
 ## Engineering conclusions and limits
 - **SOURCE-CONFIRMED** stable GUI nonzero exit prevents opening partial output; handled `codeError` prints M02 without explicit nonzero exit; stable/dev marker semantics differ.
 - **DOC-CONFIRMED** stdout filter contract; **INFERENCE** actual TypeError and M02 Task execution outcome; **TEST-CONFIRMED none**.
-- **UNKNOWN** QtPlasmaC-specific GUI override behavior, error dialog user interaction, and installed-machine state. No claim that a malformed post can physically cut, nor that all malformed posts are blocked.
+- **UNKNOWN** actual GUI/dialog user interaction and installed-machine state; inspected QtPlasmaC file-manager call sites do invoke the QtVCP Action path. No claim that a malformed post can physically cut, nor that all malformed posts are blocked.
 - **Practical rule:** audit **both** filter return code and generated first line, and treat an already-filtered marker as an artifact provenance claim requiring independent trust. Do not promote a filter's zero exit to G-code/machine acceptance.
 
 [Disconnected fixture guide](../guides/4000-linuxcnc-qtplasmac-cam-filter-coordinate-material-acceptance-2026-10-31.md) and [PLASMA-40 material contract](4400_LINUXCNC_PLASMA_40_QTPLASMAC_MAGIC_MATERIAL_JH_PERCENT_CROSS_UNIT_SOURCE_AUDIT_2026-10-31.md) are prerequisites. No new compute, build, simulation, physical operation, evaluator, or graduation change.

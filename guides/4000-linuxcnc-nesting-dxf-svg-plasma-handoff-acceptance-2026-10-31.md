@@ -31,6 +31,8 @@ Deepnest `Jack000/Deepnest@2fb10513a30681971dcc991c528fa0738a2c0c76` (2018-08-26
 | C2 | Same fork, local PLT export of a known 100-mm witness | Capture SVG `width`/`viewBox`, computed inches-per-SVG-unit, HPGL path coordinates and independent dimension check; PLT is not LinuxCNC G-code. |
 | C3 | Same geometry exported as SVG vs DXF vs PLT | SVG/PLT local; DXF export remote. Compare accepted contours, closure, physical units, and any tessellation before calling outputs equivalent. |
 | C4 | Attempt to identify a current-fork LinuxCNC QtPlasmaC G-code post | UI G-code export item is commented out; require a separately version-pinned post with M190/M66/torch/kerf/pierce semantics. |
+| C5 | Run reviewed upstream `tests/hpgl.cjs` only on a qualified isolated runner | Verify integer rounding, 1016 units/in, closed-path return, skipped short paths and 50-point PD chunking. Upstream expected outputs are inspected, **not executed** here. |
+| C6 | Source geometry with two endpoints 0.01 mm apart exported to PLT | 0.01 mm = 0.4 HPGL unit; the difference can round away. Compare emitted PU/PD coordinates and independently bound ±0.0125 mm/axis quantization, before any polygonization. |
 
 ## Minimal SVG geometry inputs (text fixtures, NOT RUN)
 
@@ -62,4 +64,4 @@ A CAM engineer reports that a nested SVG looks correct, but the intended 100-mm 
 
 ## Execution gate and disposition
 
-ALL D1–D6, S1–S6, L1–L2 and C1–C4 = **NOT RUN** (18 cases). No browser/JS, DXF converter, LinuxCNC interpreter, simulation, Actions or physical operation was executed in this lesson. Before any software experiment, independently verify a **disconnected** `[self-hosted, openpressbrake]` runner is accessible and physically isolated; inspect its exact allowlist/script and use only a reviewed bounded job. **Never** use GitHub-hosted Actions or dispatch on an unverified panel PC. The remote Deepnest conversion step is *not* an offline runner test; replace it with a separately verified offline converter or mark D2–D4 BLOCKED. No independent evaluator or graduated level is changed. [Precise continuation checkpoint](../checkpoints/20261031T214200Z-4000-linuxcnc-nesting-cam-next.md).
+ALL D1–D6, S1–S6, L1–L2 and C1–C6 = **NOT RUN** (20 cases). No browser/JS, DXF converter, LinuxCNC interpreter, simulation, Actions or physical operation was executed in this lesson. Before any software experiment, independently verify a **disconnected** `[self-hosted, openpressbrake]` runner is accessible and physically isolated; inspect its exact allowlist/script and use only a reviewed bounded job. **Never** use GitHub-hosted Actions or dispatch on an unverified panel PC. The remote Deepnest conversion step is *not* an offline runner test; replace it with a separately verified offline converter or mark D2–D4 BLOCKED. No independent evaluator or graduated level is changed. [Precise continuation checkpoint](../checkpoints/20261031T214200Z-4000-linuxcnc-nesting-cam-next.md).

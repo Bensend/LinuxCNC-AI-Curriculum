@@ -1,0 +1,15 @@
+# 2026-11-01 ~10:36Z — 4000 LinuxCNC G68.2 / CAM / kinematics checkpoint
+**Active:** 4000 LinuxCNC implementation, 3100/3500 transfer; NON-GRADUATED. Previous [NURBS checkpoint](20261101T093600Z-4000-linuxcnc-nurbs-control-point-next.md) remains open for qualified disconnected runtime; do not repeat its source work.
+
+## This session's durable evidence
+- [TWP-111](../research/4400_LINUXCNC_TWP_111_G682_FRAME_CHAIN_VS_KINEMATICS_SOURCE_AUDIT_2026-11-01.md): native G68.2 is present in pinned development `06864e23559e70463fc7112d5ce77138bcbc288c`, not inspected stable v2.9.10; G68.2 changes program XYZ frame through interpreter/canonical transform, not rotary physical orientation. G43.4 primary kinematics is a distinct path. Predeclared X90 numerical targets (10,15,30) and with plane-local G52 (12,11,33), **NOT RUN**.
+- [TWP-112](../research/4400_LINUXCNC_TWP_112_G68_RETAIN_STATUS_G52_PROVENANCE_SOURCE_AUDIT_2026-11-01.md): `g68_offset` is effective origin with plane-local G52 folded in; Task status is motion-ordered, not physical feedback. RETAIN_WORK_PLANE abort restore depends on Task-executed plane and matching underlying G5x/G92/XY frame; upstream workplane-retain test and expected results were inspected, **not executed**.
+- [Practical 3100/4000 walkthrough](../guides/3100-4000-linuxcnc-g682-tilted-work-plane-cam-and-status-2026-11-01.md) with minimal isolated G-code fixture and bounded existing-upstream-test ladder. No product build.
+
+## Governance/evidence
+START_HERE, mission, level/order, selection, curriculum, source/template, progress, lesson log, blind protocol/score and compute ledger consulted; prior NURBS checkpoint and novelty scan found no G68.2 exact prior module. **SOURCE/DOC-CONFIRMED** at `06864e23559e70463fc7112d5ce77138bcbc288c`, arithmetic **INFERENCE**, upstream expected fixture inspected, **TEST-CONFIRMED none**. No LinuxCNC build, parser, Python, simulation, physical machine, evaluator or Actions; hosted/self-hosted Actions 0/0 min. No authoritative new job runtime; LAB_COMPUTE_LOG and FEEDBACK_SCORE_LOG unchanged. Graduated 1000/2000/F02/3000 remain CLOSED, personnel-safety independent G0/G1 HOLD unchanged; hourly automation remains enabled.
+
+## Precise next checkpoint
+1. If an isolated positively qualified `[self-hosted, openpressbrake]` runner exists, **prefer executing existing upstream** `tests/interp/g68-frame` and `tests/workplane-retain` (not a new synthetic test bank). Pin source, binary, fixture and INI; capture exact command, output, errors, exit status, timestamp, job runtime and actual-vs-expected diff. Then check the two predeclared canonical XYZ targets and effective status origin in a disconnected sim.
+2. If qualified compute is unavailable, rotate to a **distinct** LinuxCNC realtime/HAL/EtherCAT or motion-implementation source question after predecessor scan; do not generate another unrun G68.2 test bank.
+3. Do not claim G68.2 automatically rotates machine joints, use plane status as tool-axis truth, or infer safety approval. Keep hourly task enabled and preserve blind/evaluator gates.

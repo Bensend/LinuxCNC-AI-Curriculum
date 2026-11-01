@@ -1,5 +1,7 @@
 # 4400-OVERRIDE-SCOPE-01 — M48/M49 spindle-selection documentation does not match pinned interpreter
 
+> **2026-11-01 SOURCE CORRECTION — do not teach interpreter selection as Task/motion selectivity.** The earlier table row claiming `M51 P0 $1` disables *only spindle 1* is true for the interpreter's selected canonical message, **not** for the full implementation. Both pinned revisions' Task `EMC_TRAJ_SET_SO_ENABLE` handler drops the `spindle` field, calls a mode-only `emcTrajSetSOEnable`, and motion changes one global `SS_ENABLED` flag. Task reports that global bit for all spindles. See [OVERRIDE-95](4400_LINUXCNC_OVERRIDE_95_M51_SELECTED_SPINDLE_DROPPED_AT_TASK_SOURCE_AUDIT_2026-11-01.md), [OVERRIDE-93](4400_LINUXCNC_OVERRIDE_93_FEED_INHIBIT_SS_BIT_COUPLING_SOURCE_AUDIT_2026-11-01.md), and [OVERRIDE-94](4400_LINUXCNC_OVERRIDE_94_SPINDLE_INHIBIT_SS_BIT_SPEED_ON_SOURCE_AUDIT_2026-11-01.md). All runtime consequences remain **NOT RUN**.
+
 **2026-10-29 | 4000 safety-course source-depth | NON-GRADUATED / NO RUNTIME TEST**
 
 ## Concrete question and predecessor check
@@ -23,7 +25,7 @@ Before claiming novelty, searched the full canonical safety index, full research
 | `M48` | Enable feed override and speed override for both. | It does not command a safe speed. |
 | `M49 $1` | `$` has no accepted consumer; reject before normal M49 conversion. | Do not rely on a successful per-spindle M49. |
 | `M48 $1` | Same standalone-dollar rejection. | No selective enable is established. |
-| `M51 P0 $1` | Disable spindle 1's speed override only (when spindle 1 exists). | Not a safety-rated speed limit; other paths remain. |
+| `M51 P0 $1` | Interpreter emits a spindle-1-specific command, **but Task drops the spindle field and motion uses a global SS bit** (2026-11-01 correction). | Do not assume per-spindle override isolation. |
 | `M51 P0 $0` | Reject at M51's `<=0` selector check. | Do not assume spindle-0 selective operation. |
 | `M51 P0` | Disable speed override for all configured spindles. | Feed override and adaptive feed are separate. |
 

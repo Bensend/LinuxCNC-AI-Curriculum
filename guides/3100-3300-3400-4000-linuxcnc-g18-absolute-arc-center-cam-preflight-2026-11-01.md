@@ -47,5 +47,8 @@ Capture LinuxCNC binary/commit, INI, units, exact input, command, stdout/stderr,
 ## Fresh-AI transfer exercise (unscored)
 A DXF-to-lathe post emits `G18 G90 G90.1 G2 X30 Z10 I25 K10` from X20 Z5. Is G90 enough to establish IJK interpretation? (No; G90.1 does.) Which center coordinates are intended? (X25 Z10.) If the same numeric I/K are emitted under G91.1, where is the actual center? (X45 Z15.) Compute start/end radii and decide whether the arc is valid before accepting preview. Record a diagnosis and a falsifying interpreter test; do not self-score a blind evaluation.
 
+## M2/M30 does not establish G91.1
+The [ARC-130 program-end source trace](../research/4400_LINUXCNC_ARC_130_M2_M30_ARC_CENTER_MODE_NONRESET_SOURCE_AUDIT_2026-11-01.md) shows that `convert_stop` resets G90 endpoint mode, G17 plane and G94 feed mode but **does not explicitly reset G90.1/G91.1**. A new interpreter `init()` sets G91.1; actual Task restart/reload lifecycle is not yet proven. Therefore, do not assume either that M2 preserves G90.1 across every program or that it clears it. A self-contained incremental-center post emits G91.1 explicitly. The lifecycle test is pending.
+
 ## Deferred work
 The source/doc conflict is established, but runtime outcomes and real CAM IJK output are NOT RUN. No graduation or machine commissioning claim. Preserve independent personnel-safety authority and the existing OpenPressBrake G0/G1 hold.

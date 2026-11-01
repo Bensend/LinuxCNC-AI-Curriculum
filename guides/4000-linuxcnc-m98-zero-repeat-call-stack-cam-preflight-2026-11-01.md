@@ -21,6 +21,18 @@ This is a **postprocessor workaround**, not a claim that LinuxCNC has been patch
 
 **Parser distinction:** LinuxCNC already rejects negative L in [`read_l`](https://github.com/LinuxCNC/linuxcnc/blob/86cdca76fa2a36274c432caa21952b23c267989a/src/emc/rs274ngc/interp_read.cc#L1007-L1021). The proposed post rule is an additional conservative zero-repeat handling rule, not a claim that negative L is accepted by LinuxCNC.
 
+## Fanuc-to-LinuxCNC post compatibility (pinned source)
+
+| Contract | Fanuc-style M98/M99 in LinuxCNC | Native O-word call |
+| --- | --- | --- |
+| Definition | `O100 ... M99` numbered program **after** the calling block | `o100 sub ... o100 endsub` |
+| Call | `M98 P100 Lcount` | `o100 call [arg1] ...` |
+| Parameters | `#1..#30` are **shared** with the caller and modifications persist | Positional parameters are saved/replaced/restored around the call |
+| Zero iterations | `L0` documented to skip body; call-frame path audited in M98-121 | No equivalent M98 L0 syntax |
+| Main-program M99 | Documented restart from the file beginning (endless program) | Not a native O-word main-program terminator |
+
+This is documented in the [upstream O-code manual](https://github.com/LinuxCNC/linuxcnc/blob/86cdca76fa2a36274c432caa21952b23c267989a/docs/src/gcode/o-code.adoc#L137-L211) and traced through [`execute_call`](https://github.com/LinuxCNC/linuxcnc/blob/86cdca76fa2a36274c432caa21952b23c267989a/src/emc/rs274ngc/interp_o_word.cc#L206-L283) and [`execute_return`](https://github.com/LinuxCNC/linuxcnc/blob/86cdca76fa2a36274c432caa21952b23c267989a/src/emc/rs274ngc/interp_o_word.cc#L440-L465). Do not automatically translate one style to the other without parameter-scope and return-flow review.
+
 ## Narrow disconnected verification
 
 Use the upstream [M98 loop fixture](https://github.com/LinuxCNC/linuxcnc/blob/86cdca76fa2a36274c432caa21952b23c267989a/tests/interp/m98m99/05-M98-loops/test.ngc) as a baseline: it contains L10, one L0, then L2. Its expected file checks that the L0 body does not execute, **not** whether L0 leaks a call frame.

@@ -28,6 +28,8 @@ Stable's post-increment bounds check leaves `call_level` incremented at the erro
 
 **Rejected alternative:** Negative L is **not** an additional M98 loophole in the inspected stable parser: [`read_l`](https://github.com/LinuxCNC/linuxcnc/blob/86cdca76fa2a36274c432caa21952b23c267989a/src/emc/rs274ngc/interp_read.cc#L1007-L1021) requires an integer and rejects `value < 0` with `NCE_NEGATIVE_L_WORD_USED`. The distinct L0 problem survives because zero is allowed and enters the call path. This source check avoids conflating negative-repeat validation with zero-repeat frame lifetime.
 
+**Cross-version test coverage check:** the stable and development `tests/interp/m98m99/05-M98-loops/test.ngc` blobs are **identical** (`ed3606c2dd7d27f142bb783f30b5508ebf003a27`), and their checked-in `expected` blobs are also identical (`592cb83b00d7986564fcbfa368b85e62e0dc50bc`). Both include one L0, so neither version's *existing fixture source* tests repeated zero-count stack exhaustion. These are checked-in expectations, not observed runs.
+
 ## CAM-post and implementation implications
 
 - For Fanuc-compatible postprocessors, avoid emitting `M98 L0` as a generic way to skip an optional operation until the actual installed interpreter has been checked. At post time, **omit the call entirely** when a calculated repeat count is zero; this preserves the documented no-execution semantics without relying on a potentially unbalanced call path.

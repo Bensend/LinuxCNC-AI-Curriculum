@@ -19,6 +19,8 @@ else:
 
 This is a **postprocessor workaround**, not a claim that LinuxCNC has been patched. It preserves the intended zero-iteration body semantics and avoids consuming a call frame in the source path.
 
+**Parser distinction:** LinuxCNC already rejects negative L in [`read_l`](https://github.com/LinuxCNC/linuxcnc/blob/86cdca76fa2a36274c432caa21952b23c267989a/src/emc/rs274ngc/interp_read.cc#L1007-L1021). The proposed post rule is an additional conservative zero-repeat handling rule, not a claim that negative L is accepted by LinuxCNC.
+
 ## Narrow disconnected verification
 
 Use the upstream [M98 loop fixture](https://github.com/LinuxCNC/linuxcnc/blob/86cdca76fa2a36274c432caa21952b23c267989a/tests/interp/m98m99/05-M98-loops/test.ngc) as a baseline: it contains L10, one L0, then L2. Its expected file checks that the L0 body does not execute, **not** whether L0 leaks a call frame.

@@ -1,0 +1,30 @@
+# STEPGEN-97 — Mesa stepgen feedback is pulse-generator state, not an axis encoder
+**4000 LinuxCNC implementation; 3100 mill transfer. NON-GRADUATED. 2026-11-01 UTC.**
+
+## Question and consequence
+When a Mesa step/dir machine routes `hm2_*.stepgen.N.position-fb` into `joint.N.motor-pos-fb`, what has actually been measured? A matching command/feedback trace can prove the FPGA step generator has advanced; **it does not by itself prove that the motor, ballscrew, or machine axis followed**. This matters for a lost-step, slipping coupling, disabled external drive, or unpowered actuator diagnosis.
+
+## Immutable source provenance
+- LinuxCNC stable v2.9.10 peeled commit `86cdca76fa2a36274c432caa21952b23c267989a`, [`src/hal/drivers/mesa-hostmot2/stepgen.c`](https://github.com/LinuxCNC/linuxcnc/blob/86cdca76fa2a36274c432caa21952b23c267989a/src/hal/drivers/mesa-hostmot2/stepgen.c), blob `8eb43d9a7d8e42573ef653cb82460609d2864ae4`, `hm2_stepgen_process_tram_read` lines 38–128; `hm2_stepgen_instance_prepare_tram_write` and `hm2_stepgen_prepare_tram_write` around lines 259–344.
+- LinuxCNC development commit `537cf2d765c96b6e75ae1db44e1dc0b9dba906a1`, [same path](https://github.com/LinuxCNC/linuxcnc/blob/537cf2d765c96b6e75ae1db44e1dc0b9dba906a1/src/hal/drivers/mesa-hostmot2/stepgen.c), blob `4daaa54f3fb63b6af2dc2d83a31ebfbb7b47ca23`, `hm2_stepgen_process_tram_read` lines 41–131, `hm2_stepgen_instance_prepare_tram_write` lines 258–354.
+- Real public configuration: [alexphredorg/mr1 `mr1.hal`](https://github.com/alexphredorg/mr1/blob/a41576f09a4ab597bfe64621c233e439ea8c5e52/mr1.hal), commit `a41576f09a4ab597bfe64621c233e439ea8c5e52`, blob `f94bd8f15c4ef40ef0192be5b476b3290bc491cb`, lines 13–34, 73–119 and 317–339.
+- Official public contract: [LinuxCNC HostMot2 manpage, stepgen](https://linuxcnc.org/docs/html/man/man9/hostmot2.9.html), `position-fb`, `counts`, `velocity-fb`, `control-type`, `enable`. Documentation is not a physical axis sensor specification.
+
+## Actual signal path
+1. HostMot2 firmware exposes an **accumulator register**. `hm2_stepgen_process_tram_read` reads its 32-bit 16.16 fixed-point value, differences against `prev_accumulator`, accumulates `subcounts`, and publishes `counts = subcounts >> 16` and `position-fb = (subcounts / 65536.0) / position_scale`. This is step-generator state; no external encoder HAL input enters this calculation. **SOURCE-CONFIRMED.**
+2. In velocity mode, `hm2_stepgen_instance_prepare_tram_write` reads `velocity-cmd`, optionally limits its acceleration, clamps it against `maxvel` and timing-derived physical pulse rate, writes **the selected `new_vel` directly to `velocity-fb`**, and converts `new_vel * position_scale` into the FPGA step-rate register. Thus `velocity-fb` is a driver command/ramp value in these pinned versions, **not** an independent tachometer measurement or a derivative of actual axis encoder position. **SOURCE-CONFIRMED.**
+3. If `enable` is false, `hm2_stepgen_prepare_tram_write` sets the step-rate register to zero and `velocity-fb` to zero while updating `old_position_cmd`; the separate read path still derives position feedback from the accumulator. The physical drive's enable and torque state are not established by that HAL pin alone. **SOURCE-CONFIRMED / physical UNKNOWN.**
+4. In the public MR-1 7i96S configuration, `joint.0.motor-pos-cmd → pid.x.command`, `pid.x.output → stepgen.00.velocity-cmd`, and `stepgen.00.position-fb → pid.x.feedback` **and** `joint.0.motor-pos-fb`. Its `addf` order is `hm2.read → motion-command-handler → motion-controller → pid.x.do-pid-calcs → hm2.write` (lines 22–34). The X/Y/Y2/Z feedback loops close around FPGA-generated step position, not around a distinct axis encoder. The same file uses `encoder.00` for **spindle** position/velocity (lines 317–339); do not confuse that with X-axis encoder feedback. **SOURCE-CONFIRMED real-config wiring.**
+
+## Failure discriminator, not an observed machine fault
+If a stepper drive is mechanically disconnected while FPGA step generation continues, `stepgen.position-fb` can follow `joint.motor-pos-cmd` and the joint following error can remain small even though physical axis displacement is wrong. This is a **conditional engineering INFERENCE**, not a measured failure on MR-1 or any installed machine. Independent axis feedback (appropriately scaled external encoder, linear scale, or equivalent measured displacement) is required to detect that class of mismatch; an encoder attached only to a motor shaft cannot independently prove ballscrew/table travel.
+
+**Do not mislabel** `stepgen.position-fb` as measured physical position in ROS/MTConnect, a dashboard, or an AI diagnostic. Name it `generated_step_position` or `stepgen_position_estimate`; reserve `measured_axis_position` for a separately sourced transducer. An actual machine may have additional drive-internal following-error diagnostics not visible in this HAL file: **UNKNOWN**.
+
+## Reproducible, disconnected inspection
+Use the pinned GitHub files above. Check X signal producer and both consumers; then compare the separately wired spindle encoder. On a **qualified isolated software-only** fixture, observe `joint.0.motor-pos-cmd`, `joint.0.motor-pos-fb`, `pid.x.output`, `stepgen.00.position-fb`, `stepgen.00.velocity-fb`, and a deliberately independent simulated axis state. Never treat a synthetic mismatch as physical evidence. No build, runtime, test, FPGA, drive, or machine operation was performed in this lesson.
+
+## Relationship to predecessors
+This is a **new feedback-provenance and real-MR-1 HAL wiring trace**, not a repeat of [DPLL-21](4400_LINUXCNC_DPLL_21_TIMER_DEFAULTS_ENCODER_STEPGEN_ASYMMETRY_SOURCE_AUDIT_2026-10-31.md) or [HM2-TIMESTAMP-76](4400_LINUXCNC_HM2_TIMESTAMP_76_ENCODER_16BIT_ROLLOVER_LATENCY_SOURCE_AUDIT_2026-10-31.md). Those concern latching/timestamps, not whether joint feedback is physically independent.
+
+**Status:** SOURCE-CONFIRMED for the named pinned revisions/config; DOC-CONFIRMED pin definitions; INFERENCE for missed mechanical motion; TEST-CONFIRMED none; installed hardware/firmware UNKNOWN. Personnel-safety authority remains independent.

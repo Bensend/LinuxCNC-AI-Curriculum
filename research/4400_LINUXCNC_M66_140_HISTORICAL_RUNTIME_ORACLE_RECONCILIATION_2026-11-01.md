@@ -58,6 +58,11 @@ Therefore, adding `emcAuxInputWaitIndex = -1` **inside the deadline branch befor
 
 **Additional discriminator for a future qualified run:** arrange an input satisfying M66 on the same Task poll as its Q expiry; record whether `#5399` is timeout (-1) or a sampled input value before and after any candidate fix. Keep this separate from the stale-G4 regression. The historical lab 079 **did not test this tie**, and its input transition occurred well after Q0.20.
 
+
+### Complete-file symbol inventory (not just excerpts)
+
+Directly fetched both complete `src/emc/task/emctaskmain.cc` files: stable v2.9.10 blob `7292a172023a5b42b023447c2458cb766c93fc9b` (107,299 UTF-8 characters) and development `06864e` blob `049c640f1af1b21c18161d6c065ff6f3e35fd83b` (124,514 characters). In **both**, the only assignments to `emcAuxInputWaitIndex` are file-static initialization to −1, M66 immediate-mode disarm, M66 non-immediate issue/arm, and the input-success cases inside `WAITING_FOR_DELAY`. The timeout branch has no assignment, G4 issue has no assignment, and no abort/reset assignment to this static was found in either full file. This strengthens the **SOURCE-CONFIRMED** same-process persistence argument; it does not turn the cross-program abort hypothesis into TEST-CONFIRMED behavior. Version-specific source anchors: [stable lines 421, 1923–1938, 2737–2792](https://github.com/LinuxCNC/linuxcnc/blob/v2.9.10/src/emc/task/emctaskmain.cc#L2737-L2792), [development lines 471, 2031–2044, 3051–3101](https://github.com/LinuxCNC/linuxcnc/blob/06864e23559e70463fc7112d5ce77138bcbc288c/src/emc/task/emctaskmain.cc#L3051-L3101).
+
 ## Evidence limits and next checkpoint
 
 **TEST-CONFIRMED:** 2026-09-11 historical LinuxCNC `8bf4605` control/experiment timing and program completion. **SOURCE-CONFIRMED:** source state-lifetime mechanism at v2.9.10 and `06864e`. **INFERENCE:** precise Task pass and G4 dwell duration in historical run. **NOT RUN:** newer A–E matrix, stable/development execution, cross-program abort, any proposed patch. **UNKNOWN:** field configurations and physical behavior. Graduated levels and independent personnel-safety G0/G1 HOLD unchanged. [Next checkpoint](../checkpoints/20261101T234000Z-4000-linuxcnc-m66-evidence-reconciliation-next.md).

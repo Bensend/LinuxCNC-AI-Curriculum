@@ -9,6 +9,10 @@
 3. [OVERRIDE-95](../research/4400_LINUXCNC_OVERRIDE_95_M51_SELECTED_SPINDLE_DROPPED_AT_TASK_SOURCE_AUDIT_2026-11-01.md): `M51 P0 $1` is selected in interpreter and NML but Task passes **only mode** to global motion SS bit. Status copies global SS bit to all spindles. **Corrected predecessor OVERRIDE-SCOPE-01**, which had incorrectly described interpreter selection as end-to-end per-spindle override control.
 4. [10-case disconnected acceptance](../guides/4000-linuxcnc-m51-inhibit-coupling-disconnected-acceptance-2026-11-01.md): O93-01..O95-10 ALL NOT RUN. Tests separate interpreter/canonical, Task/NML, motion queued masks, HAL speed/ON, and actual physical feedback (not tested).
 
+## Same-session distinct trajectory-planner continuation
+
+[OVERRIDE-96](../research/4400_LINUXCNC_OVERRIDE_96_M52_ADAPTIVE_FEED_CLAMP_REVERSE_VERSION_SOURCE_AUDIT_2026-11-01.md) traces stable v2.9.10 adaptive-feed clamp to ±1.0 versus development clamp to ±[DISPLAY]MAX_FEED_OVERRIDE, and both versions' `tpSetRunDir` rejection while moving, causing an intermediate zero-feed request before reversing. Upstream QtPlasmaC HAL consumes adaptive feed. **SOURCE/DOC-CONFIRMED only, NO EXECUTION.** After high-value O93/O94/O95 reproductions, a bounded software-only M52 +1.2/−0.5 version comparison is a distinct option if the qualified runner exists. Otherwise rotate; do not create a compulsory plasma product.
+
 ## Precise next action
 
 - Verify qualified isolated runner labels `[self-hosted, openpressbrake]` before any compute. Run O93-01/02 and O94-05/06 first (one-spindle software-only), then O95-08 (two-spindle selector loss), preserving actual job timestamps, source commit and raw HAL/Task traces. **Never GitHub-hosted Actions** and no physical actuator.

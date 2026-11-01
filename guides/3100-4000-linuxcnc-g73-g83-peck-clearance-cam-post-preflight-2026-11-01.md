@@ -15,6 +15,9 @@ A CAM post owns G-code units, Q peck depth, D clearance (if supported), R plane,
 
 **Geometry:** for G90 with R above bottom, first peck depth `R-Q`; intermediate rapid `R-Q+c`. If `c>Q`, that rapid rises above R. If `c<0`, it travels deeper than the previous feed bottom. G83 also visits R before the intermediate rapid. This logic is independent of spindle/fixture protection.
 
+## Unit-switch follow-through — CYCLE-117
+The [development G20/G21 peck-parameter source audit](../research/4400_LINUXCNC_CYCLE_117_G20_G21_PERSISTENT_INI_PECK_CLEARANCE_UNIT_MISMATCH_SOURCE_AUDIT_2026-11-01.md) found that the persistent G73/G83 INI/default clearance fields are **not rescaled** by `convert_length_units`. On a metric machine, the development default 1.0 mm becomes a **numeric 1.0 inch** after G20 if D is omitted, producing a potential 25.4× physical clearance change. Stable's fixed 0.010-inch constant is explicitly converted according to the current unit mode. Freeze units across the cycle; in development use a validated explicit D in the active unit mode when a unit switch is unavoidable. Source-derived only; no interpreter test executed.
+
 ## Conservative CAM-post contract
 1. Pin target LinuxCNC binary/version and actual INI. Reject unknown target rather than silently selecting a version; never infer development's default from the G73/G83 G-code prose.
 2. Require known G17/G18/G19 plane, G20/G21 units, G90/G91 distance mode, G98/G99 retract mode, positive feed, and known Z/R geometry. For a basic G17 metric drill, prefer explicit G17 G21 G90 G94 G40 G99, safe initial Z and explicit R/Q.

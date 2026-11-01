@@ -1,0 +1,8 @@
+(ARC-130 B: intentionally omits G91.1. Same Task after A, NO init: predicted invalid)
+(With explicit interp.init between A and B: predicted valid incremental arc)
+G21 G90 G94 G40 G49 G80
+F120
+G18
+G0 X10 Z0
+G2 X0 Z10 I-10 K0
+M2

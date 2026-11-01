@@ -1,0 +1,4 @@
+(ARC-130 A: select absolute IJK, end. Test only in disconnected Task interpreter)
+G21 G90 G94
+G90.1
+M2

@@ -47,3 +47,6 @@ For mill/router G17, plasma DXF posts, and lathe G18, enforce explicit plane, un
 
 ## Follow-up: program-end modal lifetime
 [ARC-130](4400_LINUXCNC_ARC_130_M2_M30_ARC_CENTER_MODE_NONRESET_SOURCE_AUDIT_2026-11-01.md) traces both pinned `convert_stop` M2/M30 paths: they reset ordinary G90 endpoint distance mode but do **not** write `ijk_distance_mode`. Fresh interpreter initialization explicitly sets incremental. Thus the precise cross-program persistence depends on Task/host reinitialization and is UNKNOWN without a runtime lifecycle test. This strengthens the recommendation to emit G91.1 for verified relative-center posts without claiming an installed FreeCAD failure.
+
+### Task lifecycle follow-through
+[ARC-130](4400_LINUXCNC_ARC_130_M2_M30_ARC_CENTER_MODE_NONRESET_SOURCE_AUDIT_2026-11-01.md) now additionally traces Task `emcTaskPlanOpen/Close` to interpreter `open/close/reset`: these operations do not call `init()` and do not reset IJK. Thus ordinary same-interpreter close/open without `EMC_TASK_PLAN_INIT` can preserve G90.1 after M2. Runtime and GUI-specific command sequences remain NOT RUN.

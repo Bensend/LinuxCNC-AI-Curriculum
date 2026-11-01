@@ -49,6 +49,12 @@ emit_explicit_cycle_R_depth_feed()
 
 Do not assume a generic three-axis mill can actually perform side drilling; the machine must have appropriate tool orientation and independently established clearances. These are interpreter semantics, not a recommendation to use G18 G81 on an ordinary vertical mill.
 
+## FreeCAD-specific producer boundary — CYCLE-120
+
+The [pinned FreeCAD producer audit](../research/4400_LINUXCNC_CYCLE_120_FREECAD_G80_TERMINATOR_OPAQUE_TEXT_BOUNDARY_SOURCE_AUDIT_2026-11-01.md) narrows this risk. At FreeCAD commit `24ea8589aa86`, ordinary drilling `Path.Command` sequences pass through `Processor._expand_canned_cycles` and `PostUtils.cannedCycleTerminator`, which **inserts G80 before a non-cycle command such as G18 and at cycle end**. Do **not** claim that stock FreeCAD's ordinary drill output necessarily reproduces the LinuxCNC cross-plane state issue.
+
+The limitation is **opaque text**: FreeCAD also supports `item_type="str"` postables with `path=None`, which bypass that Path.Command terminator and are copied as raw G-code. Therefore final NC-file inspection remains necessary for custom text, manually concatenated G-code or external postprocessor rewrites. FreeCAD's `DrillCycleExpander` explicitly does not support modal axis-only repeats or L repeats, so translating cycles into explicit G0/G1 is not a generic equivalence for handwritten modal drilling. These are source inspections, **not** observed FreeCAD exports or executed tests.
+
 ## Exact source and existing upstream baseline
 
 The stable [interpreter conversion order](https://github.com/LinuxCNC/linuxcnc/blob/86cdca76fa2a36274c432caa21952b23c267989a/src/emc/rs274ngc/interp_convert.cc#L2360-L2420) selects the plane before motion; [convert_motion](https://github.com/LinuxCNC/linuxcnc/blob/86cdca76fa2a36274c432caa21952b23c267989a/src/emc/rs274ngc/interp_convert.cc#L3812-L3838) clears `cycle_il_flag` only on non-cycle motion; [convert_cycle_zx](https://github.com/LinuxCNC/linuxcnc/blob/86cdca76fa2a36274c432caa21952b23c267989a/src/emc/rs274ngc/interp_cycles.cc#L1774-L1836) maps the old scalar to Y. Development equivalents are pinned in CYCLE-119. The official [G98/G99 manual](https://github.com/LinuxCNC/linuxcnc/blob/86cdca76fa2a36274c432caa21952b23c267989a/docs/src/gcode/g-code.adoc#L2851-L2888) states that abandoning the cycle resets the initial plane.

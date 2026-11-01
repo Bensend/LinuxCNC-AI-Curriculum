@@ -1,0 +1,16 @@
+# 2026-11-01 ~11:40Z — LinuxCNC G10 tool-table calibration checkpoint
+
+**Active:** 4000 LinuxCNC implementation; 3100/3200 transfer; NON-GRADUATED. Previous [TWP checkpoint](20261101T103600Z-4000-linuxcnc-twp-coordinate-kinematics-next.md) remains open for qualified disconnected upstream tests; do not redo G68 source reading.
+
+## Durable results
+- [TOOL-113](../research/4400_LINUXCNC_TOOL_113_G10_L10_L11_FIXTURE_G92_TLO_VERSION_SOURCE_AUDIT_2026-11-01.md): stable v2.9.10 `86cdca76fa2a36274c432caa21952b23c267989a` and development `06864e23559e70463fc7112d5ce77138bcbc288c` G10 L10 active G5x/G52/G92 versus L11 G59.3 without G52/G92, `find_current_in_system_without_tlo`, tool-table queue and explicit G43 reapplication. Source-derived isolated Z arithmetic L10=11 versus L11=4. Development forbids L10/L11 with active G68.2. NOT RUN.
+- [TOOL-114](../research/4400_LINUXCNC_TOOL_114_G10_Q_NEGATIVE_ORIENTATION_DUPLICATE_WORD_SOURCE_AUDIT_2026-11-01.md): stable and development `read_q` duplicate detector `q_number>-1`, converter `Q=-1` sentinel and missing negative-orientation guard. Source predicts Q-2 and first-negative-Q duplicate bypass; default stable IO and development Task tooldata put/save paths have no extra Q range guard; actual persistence/lathe effect UNKNOWN. NOT RUN.
+- [3100/3200/4000 practical guide](../guides/3100-3200-4000-linuxcnc-g10-tool-calibration-fixture-q-preflight-2026-11-01.md): source-to-tool-table-to-G43 walkthrough, disconnected fixtures, CAM Q-word contract and predeclared discriminators.
+
+## Governance/evidence
+START_HERE, mission/order/selection/curriculum/source/template, progress/lesson, blind protocol/score and lab compute ledger consulted. Full PROGRESS novelty scan rejected already-covered M66 Task waits and M67/M68 analog queue as duplicates before selecting G10 L10/L11 and Q validation. SOURCE/DOC-CONFIRMED static, numerical INFERENCE, TEST-CONFIRMED none. No build, parser execution, simulation, machine, evaluator or Actions compute; hosted/self-hosted 0/0 min. No new authoritative job runtime; LAB_COMPUTE_LOG/FEEDBACK_SCORE_LOG unchanged. 1000/2000/F02/3000 CLOSED; independent personnel safety G0/G1 HOLD. Keep hourly curriculum enabled.
+
+## Precise next checkpoint
+1. Prefer *existing upstream* interpreter/tool-table tests when a positively qualified disconnected `[self-hosted, openpressbrake]` runner is available; capture binary and fixture revision, exact command, stdout/stderr, exit status, tool table before/after, `#5403/#5083`, actual job runtime, and expected-vs-observed. Use fresh disposable state for L10 and L11. Verify source-derived Z11/Z4 only if the frozen numeric state is actually established.
+2. Verify development active G68.2 rejection of L10/L11 and G69 recovery. Independently verify the five negative/duplicate Q cases and distinguish parser, default IO put/save, actual file persistence and external database mode; do not run on a live lathe or tool table.
+3. If qualified compute remains unavailable, rotate to a **distinct** LinuxCNC HAL/realtime/Mesa/trajectory implementation issue after full predecessor scan. Do not accumulate another unrun G10 bank. Preserve independent evaluator separation, prior graduated levels, and hourly schedule.

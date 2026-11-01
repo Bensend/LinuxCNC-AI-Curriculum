@@ -52,3 +52,7 @@ A postprocessor should **validate before emitting G76** rather than assume the i
 - **L108-E:** Confirm H-2 fails at `read_h`, while H-1 reaches conversion; preserve exact diagnostic.
 
 No qualified isolated `[self-hosted, openpressbrake]` runner has been established for this session. No hosted Actions fallback, LinuxCNC build, simulation, machine operation, external evaluator or new authoritative job runtime. These findings do not reopen graduated levels or change independent personnel-safety authority.
+
+## Upstream ngcgui consumer — partial preflight, not a general validator
+
+Pinned development [nc_files/ngcgui_lib/lathe/g76base.ngc#L17-L46](https://github.com/LinuxCNC/linuxcnc/blob/24e84c4506b41634240f7087f0295e361a954886/nc_files/ngcgui_lib/lathe/g76base.ngc#L17-L46), blob `f07045f171ee32c4a5aa1d0543576f9c1ad89b15`, exposes H, R, E and L as user arguments. It explicitly rejects L values outside 0..3 (lines 41–46), but has **no corresponding H>=0, R>=1 or E<=half-length validation** before emitting the [G76 block at line 113](https://github.com/LinuxCNC/linuxcnc/blob/24e84c4506b41634240f7087f0295e361a954886/nc_files/ngcgui_lib/lathe/g76base.ngc#L107-L113). The same wrapper does not expose development D. This is a source-confirmed **partial consumer validation** pattern, not proof that any installed ngcgui actually ran H-1 or that its UI permits all typed values. A new CAM post should not copy this wrapper as a complete G76 input validator.

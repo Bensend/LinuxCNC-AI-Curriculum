@@ -1,0 +1,40 @@
+# 4400-LC-TAP-125 — G33.1 reversal is a signed-encoder trend, with a finite ten-revolution TP segment bound
+**2026-11-01 | 4000 realtime trajectory planner and spindle HAL; 3100/3200 transfer | NON-GRADUATED**
+
+## Question and novelty
+Does the LinuxCNC rigid-tap planner wait indefinitely for physical reversal, and what signal is its reversal witness? Prior [SPINDLE-101](4400_LINUXCNC_SPINDLE_101_EL8_SYNTHETIC_INDEX_WINDOW_AND_RIGID_TAPPING_SOURCE_AUDIT_2026-11-01.md) examined a synthetic index sampling window, not the **active TP reversal state machine, encoder trend and finite segment target**. [TAP-124](4400_LINUXCNC_TAP_124_G331_I_RETRACT_PREFLIGHT_CSS_RADIUS_VERSION_SOURCE_AUDIT_2026-11-01.md) covers upstream feed feasibility, not this realtime completion path. Full PROGRESS/research-filename scan found no equivalent mechanism.
+
+## Pinned source ledger
+| Evidence | Source and revision | Source-observed behavior |
+|---|---|---|
+| [Stable TP](https://github.com/LinuxCNC/linuxcnc/blob/86cdca76fa2a36274c432caa21952b23c267989a/src/emc/tp/tp.c) | v2.9.10 `86cdca76fa2a36274c432caa21952b23c267989a`, blob `5768d6e6880569f72156ed9a761b5eee531c9fcf`, `tpUpdateRigidTapState` ~2515–2587, `tpCheckEndCondition` ~3173, `tpCompleteSegment` ~2708 | Reversal detected by comparing signed successive spindle positions; no explicit zero-speed or multi-sample debounce. Segment completion depends on target progress, not on being in FINAL_PLACEMENT. |
+| [Development TP](https://github.com/LinuxCNC/linuxcnc/blob/06864e23559e70463fc7112d5ce77138bcbc288c/src/emc/tp/tp.c) | `06864e23559e70463fc7112d5ce77138bcbc288c`, blob `2b4024c9ab131f708cc22760300231878c9b0fdc`, `tpAddRigidTap` ~1606–1667, `tpUpdateRigidTapState` ~3125–3198, `tpCheckEndCondition` ~4030–4060, `tpCompleteSegment` ~3352–3401 | Adds TC_RIGIDTAP with exact-stop; reversal transitions based on `new_spindlepos < old_spindlepos` then `>`; completion removes a segment at target independent of state. |
+| [Stable and dev rigid-tap geometry](https://github.com/LinuxCNC/linuxcnc/blob/06864e23559e70463fc7112d5ce77138bcbc288c/src/emc/tp/tc.c) | stable blob `d314a13f365cda67e673382f5c537a2ea625b4d2`, `pmRigidTapTarget` ~853; development blob `25953a8e01c7d4f5673793288be370654daea1ce`, ~1032–1065 | `target = tap_distance + 10 * uu_per_rev` before the first reversal; comment describes ten spindle turns of overrun, not an unbounded wait. |
+| [HAL input sampling](https://github.com/LinuxCNC/linuxcnc/blob/06864e23559e70463fc7112d5ce77138bcbc288c/src/emc/motion/control.c) | development blob `7c9a35c237ba05326372294587c33d53aff1a6a9`, `process_inputs` ~411–424 | `spindleRevs` comes from `spindle.N.revs`; separate `spindleSpeedIn` and `at_speed` inputs are sampled, but the TP reversal branch uses **position comparison**, not an explicit `speed-in == 0` condition. |
+| [Motion command gate](https://github.com/LinuxCNC/linuxcnc/blob/06864e23559e70463fc7112d5ce77138bcbc288c/src/emc/motion/command.c) | blob `fd9760e59ac0e9801cbee90a379acd98d47ca6ea`, `EMCMOT_RIGID_TAP` ~1645–1693 | Validates coordinated/enabled mode, end position and limits before adding a TP segment; no additional reversal-complete proof in this command admission path. |
+| [Official G33.1 reference](https://github.com/LinuxCNC/linuxcnc/blob/06864e23559e70463fc7112d5ce77138bcbc288c/docs/src/gcode/g-code.adoc) | development blob `46386681cce284fa0cc43e27192bee0aca208766`, ~1335–1354 | Describes spindle reversing, synchronized travel beyond the target and eventual unsynchronized final placement. It does not describe the finite 10-rev target or trend-based reversal witness. |
+
+## Realtime call flow and conditional failure paths
+1. Task's `EMC_TRAJ_RIGID_TAP` becomes `EMCMOT_RIGID_TAP`, then `tpAddRigidTap`; `pmRigidTapTarget` sets the initial target to path length plus ten pitches (ten spindle turns). `tcSetTermCond` requests exact stop.
+2. At `TAPPING`, reaching the programmed bottom (`reversal_target`) multiplies commanded spindle speed by `-I` and enters `REVERSING`. The planner does **not** read an independent spindle-zero switch at this transition.
+3. In `REVERSING`, the first signed `spindleRevs` decrease relative to the previous observation changes to `RETRACTION` and constructs the reverse line. `RETRACTION` reaches the original position, commands a second reversal by multiplying speed by `-1/I`, then `FINAL_REVERSAL` detects the first signed position increase and switches to unsynchronized `FINAL_PLACEMENT`.
+4. Independently, `tpCheckEndCondition` marks the TC removable when `tcGetDistanceToGo <= TP_POS_EPSILON`; `tpCompleteSegment` pops it. The inspected code does not require `state == FINAL_PLACEMENT` for removal.
+
+**Conditional C1 — delayed/nonexistent reversal (INFERENCE):** If feedback continues advancing after the commanded reversal for **more than ten spindle turns** while the synchronized axis keeps up, `progress` can reach the finite TP target while the state is still `REVERSING`. The source contains no reversal-state guard in the ordinary target-completion path. A real controller may instead stop for following error, limits, drive faults or other reasons; **we have not demonstrated a physical or simulated premature completion**. A 2 mm pitch implies a nominal additional 20 mm of synchronized target travel beyond the commanded bottom *if the axis tracks those ten revolutions*; not a guarantee of 20 mm physical travel.
+
+**Conditional C2 — position glitch (INFERENCE):** A one-sample signed encoder decrease during `REVERSING` can satisfy the code’s `<` transition even if physical shaft direction has not changed. Conversely a one-sample increase during `FINAL_REVERSAL` can enter `FINAL_PLACEMENT`. The code has no trend-duration/zero-speed debounce in these branches. HAL scaling, counter wrap, transport freshness and servo filtering may alter whether such a sample reaches the planner; those remain UNKNOWN.
+
+**Important distinction:** The raw HAL spindle revolution count is a motion feedback input, but neither a command-sign flip nor a single position comparison independently proves physical zero speed, tap torque, drive reversal completion, or safe withdrawal. Index acquisition at the start is a separate mechanism.
+
+## Claims ledger and bounded verification
+| Claim | Class | Limits |
+|---|---|---|
+| Ten-turn overrun target, state transitions and state-independent removal | SOURCE-CONFIRMED stable + development | Only inspected revisions |
+| Reversal uses sampled signed encoder position, not explicit speed-zero acknowledgment | SOURCE-CONFIRMED | Does not mean physical feedback is absent |
+| Premature completion on sustained forward feedback or false state transition on glitch | INFERENCE conditional | No executed reproduction; limits and other faults may intervene |
+| G33.1 describes spindle-reversing down/up behavior | DOC-CONFIRMED | Docs do not guarantee infinite reversal wait |
+| Real spindle/axis fault, collision or machining outcome | UNKNOWN | No installed hardware or test |
+
+**Minimal isolated experiment (NOT RUN):** With a verified physically disconnected `[self-hosted, openpressbrake]` LinuxCNC simulation, feed a synthetic spindle-revs stream that (a) reverses normally, (b) continues forward beyond the ten-turn allowance, (c) contains one negative sample before actual reversal, and (d) lacks index. Record every TP state, TC progress/target, queue removal, commanded spindle speed, encoder sample, following error and motion error. A test must distinguish a TP premature pop from an earlier independent fault. Do not inject these conditions into a physical tapping spindle. No hosted Actions runner.
+
+**Disposition:** commissioning must verify encoder sign/freshness, index, actual spindle reversal time/turns, axis tracking and independent fault containment; a generic CAM post must not assume the controller waits indefinitely for reversal. [Practical commissioning guide](../guides/3100-3200-4000-linuxcnc-g331-rigid-tap-reversal-cam-commissioning-2026-11-01.md).

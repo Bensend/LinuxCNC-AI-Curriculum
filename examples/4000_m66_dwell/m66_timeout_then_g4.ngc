@@ -1,0 +1,8 @@
+(DISCONNECTED SIM ONLY: timed-out M66 then G4; DO NOT RUN ON MACHINE)
+G21 G90 G94
+M66 P0 L3 Q0.5
+#<saved_m66_result> = #5399
+(DEBUG, saved M66 result=#<saved_m66_result>)
+G4 P4
+(DEBUG, G4 returned)
+M2

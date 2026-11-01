@@ -18,6 +18,8 @@ Pinned stable v2.9.10 commit `86cdca76fa2a36274c432caa21952b23c267989a`, develop
 
 **Source conclusion:** each zero-repeat M98 call takes the *skip body* path while retaining an entered call frame in the inspected functions. This is not the same as a zero-effect operation. The later interpreter's reset/unwind behavior is not a substitute for restoring the call depth immediately after L0.
 
+**Invocation boundary:** This audit's ten-L0 prediction concerns **automatic file execution**. Stable [`Interp::_execute`](https://github.com/LinuxCNC/linuxcnc/blob/86cdca76fa2a36274c432caa21952b23c267989a/src/emc/rs274ngc/rs274ngc_pre.cc#L287-L341) also has a special MDI loop conditioned on `MDImode && _setup.call_level`; an L0 command that retains a frame could take a different read/execute path in MDI. No MDI behavior or error was reproduced, and the proposed test deliberately uses a standalone file rather than MDI.
+
 ## Frozen discriminator, not an executed test
 
 For a **fresh** interpreter at call level 0, nine consecutive `M98 P1 L0` lines source-predict levels 1 through 9; the tenth attempts level 10 against `INTERP_SUB_ROUTINE_LEVELS=10` and should encounter `NCE_TOO_MANY_SUBROUTINE_LEVELS`. The numbered `O1 ... M99` definition can follow `M30` as documented; none of the L0 calls should execute its body. This is a prediction, **not** a reproduced error or observed log.

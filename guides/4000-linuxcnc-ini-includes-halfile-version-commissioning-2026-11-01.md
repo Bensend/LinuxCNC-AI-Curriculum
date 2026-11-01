@@ -4,7 +4,7 @@
 
 ## Why this is worth testing
 
-[INI-104](../research/4400_LINUXCNC_INI_104_INCLUDE_EXPANSION_VERSION_SOURCE_AUDIT_2026-11-01.md) traces stable launcher `.expanded` textual inclusion versus development's native recursive parser. [INI-105](../research/4400_LINUXCNC_INI_105_DUPLICATE_SECTION_HALFILE_CACHE_SOURCE_AUDIT_2026-11-01.md) traces a *different* failure mode: stable `IniFile::Find` only sees the first `[HAL]` section, while development merges repeated sections. The consequence is that a syntactically present `HALFILE` can fail to reach the actual HAL loader. This is a **versioned source prediction**, not a reproduced missing output.
+[INI-104](../research/4400_LINUXCNC_INI_104_INCLUDE_EXPANSION_VERSION_SOURCE_AUDIT_2026-11-01.md) traces stable launcher `.expanded` textual inclusion versus development's native recursive parser. [INI-105](../research/4400_LINUXCNC_INI_105_DUPLICATE_SECTION_HALFILE_CACHE_SOURCE_AUDIT_2026-11-01.md) traces a *different* failure mode: stable `IniFile::Find` only sees the first `[HAL]` section, while development merges repeated sections. The consequence is that a syntactically present `HALFILE` can fail to reach the **ordinary** HAL loader. [INI-106](../research/4400_LINUXCNC_INI_106_TWOPASS_TCL_DUPLICATE_SECTION_CONSUMER_SOURCE_AUDIT_2026-11-01.md) confirms stable TWOPASS uses a *different Tcl INI reader* that merges repeated sections. This is a **versioned source prediction**, not a reproduced missing output.
 
 ## Inspectable fixture (no executable machine config)
 
@@ -50,7 +50,9 @@ inivar -ini parent.ini -sec HAL -var HALFILE -num 3
 | I104-3 | Missing include | capture parser/expander diagnostic and return; do not assume machine startup |
 | I104-4 | Include cycle/depth 14 versus 15 edges | development parser error and root-count; no recursion in stable shell |
 | I105-2 | Development same-process open→edit→reopen | use a **separate** bounded C++ harness, not two independent `inivar` processes |
-| I105-3 | Duplicate `[HAL]` in `TWOPASS` | trace Tcl consumer and capture loaded HAL list in a disconnected simulation only |
+| I105-3 | Duplicate `[HAL]` in `TWOPASS` | source trace now in INI-106; runtime loaded HAL list still NOT RUN |
+
+**TWOPASS source discriminator:** Stable `tcl/linuxcnc.tcl.in::parse_ini` uses `lappend` across all repeated `[HAL]` headers, and `tcl/twopass.tcl::tp::prep_the_files` consumes that list. The stable launcher *chooses* TWOPASS using ordinary `inivar`, however; put `TWOPASS` in the first `[HAL]` section if diagnosing a legacy configuration. Do not run the incomplete fixture through `haltcl` or start LinuxCNC; it names nonexistent HAL files. See [INI-106](../research/4400_LINUXCNC_INI_106_TWOPASS_TCL_DUPLICATE_SECTION_CONSUMER_SOURCE_AUDIT_2026-11-01.md).
 
 **Production configuration review:** Keep one `[HAL]` section; repeat `HALFILE =` keys there in desired order. Explicitly verify the loaded HAL thread order and actual I/O provenance. For EtherCAT/Mesa and press-brake dual-axis control, missing `HALFILE` may remove a required feedback or enable path, but this guide proves no installed-machine fault. Preserve separate physical interlocks and independent personnel-safety authority.
 

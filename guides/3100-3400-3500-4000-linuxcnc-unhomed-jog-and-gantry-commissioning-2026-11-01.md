@@ -45,6 +45,11 @@ The official configuration intentionally permits joint jogging for commissioning
 
 Do not run phase B on a physical gantry. It is a software-only flag discriminator; the upstream panel itself selects -1/-1 or +1/+1.
 
+## Exercise C — multi-axis MPG ordering and the `break` gate
+[JOG-137's pinned axis-wheel source audit](../research/4400_LINUXCNC_JOG_137_AXIS_MPG_LIMIT_BREAK_CROSS_AXIS_STARVATION_SOURCE_AUDIT_2026-11-01.md) establishes a separate issue: in `axis_handle_jogwheels`, exceeding the fixed axis min/max target uses `break` from the **whole axis loop**. An X-wheel limit rejection can defer processing of a simultaneous Y count change. If X keeps presenting a fresh rejected count on every callback, later axes can remain unvisited. This is a **source-derived conditional** result, not an observed stall.
+
+For a disconnected two-axis software test, record per-servo callback X/Y counts and targets. First issue both in-range count changes; then set X at its positive limit and send X+1/Y+1 simultaneously; finally keep incrementing X beyond its limit for several callbacks while Y changes. Freeze expected axis visit order before execution. Record whether Y's pending delta is processed on a later callback. Note that development keyboard unhomed axis jog uses a current-relative window, whereas **development MPG axis jog still uses literal INI axis limits**; never assume keyboard and MPG behave identically before homing.
+
 ## Implementation preflight and evidence capture
 1. Confirm source SHA, LinuxCNC binary version, `KINEMATICS`, `JOINTS`, `[TRAJ]COORDINATES`, every relevant `HOME_SEQUENCE`, axis/joint limits and HAL file order.
 2. Confirm whether a GUI is commanding a joint number or an axis letter. Do not assume an Axis GUI hotkey maps identically to another GUI, pendant or custom HAL interface.

@@ -34,6 +34,11 @@ Under a known simulated Z max 2500 mm/min, expected **source-derived** return ra
 6. **Inspect preview independently.** The Python `rigid_tap` callback carries XYZ but **not I**; a matching visual trace does not establish safe retract speed. Development's separate time estimator receives I but is not proof of physical reversal.
 7. **Separate protective authority.** HAL process signals, LinuxCNC commanded spindle speed and motion TP are not an independently validated personnel-safety system. Preserve the existing independent safety gates and do not run this curriculum specimen on an energized tap or exposed machine.
 
+## Existing upstream test coverage — source inspected, NOT RUN
+The stable and development [`tests/interp/g33.1/g33.1.ngc`](https://github.com/LinuxCNC/linuxcnc/blob/06864e23559e70463fc7112d5ce77138bcbc288c/tests/interp/g33.1/g33.1.ngc) files are byte-identical (blob `94ee477582afe8353dd48f53d1c1ae3e42565bf4`). They contain only `G33.1 Z-1.2 K0.1` after S1000/M3; **no I, G96 or reversal-feedback injection**. Their expected canonical logs are also identical (blob `48169548637713707a5a315c922bae5351b54921`) and record `RIGID_TAP(0,0,-1.2)` without I, as the standalone `saicanon` output does not expose scale. The `test.sh` scripts invoke `rs274 -g`, not a realtime spindle/axis plant.
+
+The [trajectory-planner `rigidtap_test.ngc`](https://github.com/LinuxCNC/linuxcnc/blob/06864e23559e70463fc7112d5ce77138bcbc288c/tests/trajectory-planner/circular-arcs/nc_files/spindle/rigidtap_test.ngc) is a sample with three default-I taps and changed S/K; it is not evidence that the specific ten-turn non-reversal and single-sample glitch cases were executed. **Do not confuse** `tests/tap.0` with G33.1: its `tap.0` is the unrelated HAL `tap` signal component exercised by a Python pin-toggle test. Reuse the existing interpreter test as a baseline; add only targeted I/reversal discriminators when isolated compute is qualified. No upstream tests were run in this session.
+
 ## Disconnected verification matrix (all NOT RUN)
 | Case | Input/condition | Expected discriminator, not observed |
 |---|---|---|

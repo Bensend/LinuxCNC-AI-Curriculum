@@ -46,6 +46,11 @@ The public HAL schedules `servospindle.0` **before** `mult2.0`, `conv-s32-float.
 
 The component's `derived-rpm` output is computed as `(pos_input - previous_pos) * 1` without converting from increments-per-servo-cycle to RPM. It is **not wired** in the inspected HAL and should not be interpreted as measured RPM. The actual spindle speed-in path instead uses 0x606C via CiA402, as traced in SPINDLE-100.
 
+
+## LinuxCNC motion-side handshake actually consumes the clear transition
+
+Pinned stable [`src/emc/motion/control.c`](https://github.com/LinuxCNC/linuxcnc/blob/86cdca76fa2a36274c432caa21952b23c267989a/src/emc/motion/control.c), blob `b6e45d590c7d11030654d8f7d13d118f581b6439`, lines ~1979–1995, shows the bidirectional mechanism: when Motion's `spindle_index_enable` rises, it sets the HAL index-enable pin; when the HAL pin subsequently falls and the prior HAL observation was high, Motion clears its own `spindle_index_enable`. The custom `servospindle` only lowers that HAL pin when its synthesized index window is sampled while a request is active. This establishes a concrete **producer → HAL IO → consumer** dependency, not merely an unused synthetic indicator. It does **not** establish whether an individual G-code command will time out or what the drive physically does.
+
 ## Rigid-tapping integration and falsifiers
 
 The same HAL connects `servospindle.0.pos-output → spindle.0.revs` and the bidirectional `index-enable` handshake. Those signals matter to spindle-synchronized LinuxCNC motion, but this inspection **does not establish** that the sample window produces an actual G33/G76/G84 failure, that LinuxCNC lacks an alternative timeout, or that the drive encoder is correctly calibrated. Do not call a virtual modulo index an independent reference or a safety device.

@@ -109,7 +109,9 @@ def main():
     parser.add_argument("--self-test", action="store_true")
     args = parser.parse_args()
     if args.self_test:
-        unittest.main(argv=["preflight"], exit=False)
+        program = unittest.main(argv=["preflight"], exit=False)
+        if not program.result.wasSuccessful():
+            raise SystemExit(1)
         return
     if args.file is None:
         parser.error("file is required unless --self-test is set")

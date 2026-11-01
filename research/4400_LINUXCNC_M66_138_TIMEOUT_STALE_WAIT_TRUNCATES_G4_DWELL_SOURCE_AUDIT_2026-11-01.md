@@ -1,10 +1,12 @@
 # 4000-LC-M66-138 — Timed-out input wait can remain armed across a later G4 dwell
 
-**Date audited:** 2026-11-01. **Status:** SOURCE-CONFIRMED conditional control-flow defect; **runtime NOT RUN**, NON-GRADUATED. **Transfer:** 3300 plasma/pierce timing, 3100 tool-change, 3400 process waits, 4000 Task/NML. No machine-release or personnel-safety claim.
+**Date audited:** 2026-11-01. **Status:** SOURCE-CONFIRMED at v2.9.10 / pinned development; **historical TEST-CONFIRMED at 8bf4605** (M66-140); **new A–E and current-version runtime NOT RUN**, NON-GRADUATED. **Transfer:** 3300 plasma/pierce timing, 3100 tool-change, 3400 process waits, 4000 Task/NML. No machine-release or personnel-safety claim.
 
-## Why this is incremental, not another M66 primer
+> **EVIDENCE CORRECTION (2026-11-01, M66-140):** This same stale-wait → premature-G4 mechanism was **already TEST-CONFIRMED in a historical disconnected LinuxCNC run on 2026-09-11**, on pinned commit `8bf4605ae81042248add031e94c77300406e0413`. The original claim of “TEST-CONFIRMED none” was incorrect at the repository level. [Read the executable-oracle reconciliation](4400_LINUXCNC_M66_140_HISTORICAL_RUNTIME_ORACLE_RECONCILIATION_2026-11-01.md) and [lab 079 retained stdout](../lab-results/run-34593401753-1/stdout.log). This document's *new* L3 A–E matrix and v2.9.10 / `06864e` runtime comparisons remain NOT RUN. Source/version trace and plasma transfer remain useful, but **not a first discovery of the defect**. The old hosted runner was historical; no new hosted compute is permitted.
 
-The existing [M66-01 source audit](4400_LINUXCNC_M66_WAIT_TIMEOUT_AND_NONSAFETY_INPUT_AUTHORITY_AUDIT_2026-10-27.md) already establishes L1/L3 semantics, timeout returning `#5399=-1`, normal HAL input provenance, and the need to reject timeouts. This investigation adds a **distinct Task-state lifetime problem**: a timed-out M66 leaves its input index armed; the later **G4 dwell uses the same Task execution state**, so a subsequent change on that old input can complete the dwell before its programmed duration. Prior M66-01 did not trace the M66→G4 state ownership. The [QtPlasmaC material M66 audit](4400_LINUXCNC_QTPLASMAC_M190_M66_MATERIAL_HANDOFF_SOURCE_AUDIT_2026-10-30.md) concerns a different M190/material handshake.
+## Incremental source/version analysis and plasma transfer (not first discovery)
+
+The existing [M66-01 source audit](4400_LINUXCNC_M66_WAIT_TIMEOUT_AND_NONSAFETY_INPUT_AUTHORITY_AUDIT_2026-10-27.md) already establishes L1/L3 semantics, timeout returning `#5399=-1`, normal HAL input provenance, and the need to reject timeouts. This source audit re-examines an **already historically reproduced Task-state lifetime problem** on two newer source revisions and applies it to plasma: a timed-out M66 leaves its input index armed; the later **G4 dwell uses the same Task execution state**, so a subsequent change on that old input can complete the dwell before its programmed duration. Prior M66-01 did not trace the M66→G4 state ownership. The [QtPlasmaC material M66 audit](4400_LINUXCNC_QTPLASMAC_M190_M66_MATERIAL_HANDOFF_SOURCE_AUDIT_2026-10-30.md) concerns a different M190/material handshake.
 
 ## Pinned source inventory
 
@@ -36,7 +38,7 @@ LinuxCNC's [`nc_files/touchoff.ngc` at v2.9.10](https://github.com/LinuxCNC/linu
 
 This is more consequential than a generic timeout reminder: the old wait can alter a **different** command's completion semantics, even when the G-code has already consumed the timeout result.
 
-## Falsifiable predictions and controls (all NOT RUN)
+## Falsifiable predictions and controls (new A–E matrix NOT RUN; historical L1 test confirmed)
 
 | Disconnected scenario | Predicted Task effect | Discriminator |
 |---|---|---|
@@ -54,7 +56,7 @@ The Task timeout path should disarm the input watcher when completing an M66, or
 
 ## Evidence and limitations
 
-**SOURCE-CONFIRMED:** static variable lifetime, timeout missing reset, shared postcondition, G4 deadline-only initialization, interpreter result read, and the upstream torch example. **DOC-CONFIRMED:** [M66 Q/#5399 and non-realtime warning](https://github.com/LinuxCNC/linuxcnc/blob/v2.9.10/docs/src/gcode/m-code.adoc#L385-L431). **INFERENCE:** actual premature G4 completion under the described timing. **TEST-CONFIRMED:** none. No LinuxCNC build, Task execution, simulation, physical machine, Actions runner, independent evaluator, or measured latency. Do not promote this to an observed plasma failure or independent safety-system claim. The existing graduated levels and personnel-safety G0/G1 HOLD are unchanged.
+**SOURCE-CONFIRMED:** static variable lifetime, timeout missing reset, shared postcondition, G4 deadline-only initialization, interpreter result read, and the upstream torch example. **DOC-CONFIRMED:** [M66 Q/#5399 and non-realtime warning](https://github.com/LinuxCNC/linuxcnc/blob/v2.9.10/docs/src/gcode/m-code.adoc#L385-L431). **TEST-CONFIRMED (historical 8bf4605 only):** prior lab 079 reproduced early total program completion with M66 L1 Q0.20 → G4 P0.50 (0.311439 s total vs 0.505165 s G4-only control). **INFERENCE / NOT RUN:** exact G4 start/end, v2.9.10 and 06864e runtime, and new L3 A–E controls. No LinuxCNC build, Task execution, simulation, physical machine, Actions runner, independent evaluator, or measured latency. Do not promote this to an observed plasma failure or independent safety-system claim. The existing graduated levels and personnel-safety G0/G1 HOLD are unchanged.
 
 ## Existing upstream test coverage: nearby, but not this failure path
 

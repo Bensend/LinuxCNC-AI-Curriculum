@@ -11,7 +11,7 @@
 
 ## Source-grounded servo-thread map
 
-`hm2_*.read` → transport receive → `hm2_ioport_gpio_process_tram_read` → `gpio.N.in/in_not` HAL updates. Then normal control logic reads those inputs. Later `hm2_*.write` → `hm2_ioport_gpio_prepare_tram_write` → data TRAM write → `hm2_ioport_write` updates changed open-drain/invert/DDR registers. Forced startup writes DDR last. This ordering must be checked against the actual HAL `addf` list; it is not guaranteed merely by a net connection.
+`hm2_*.read` → transport receive → `hm2_ioport_gpio_process_tram_read` → `gpio.N.in/in_not` HAL updates. Then normal control logic reads those inputs. Later `hm2_*.write` → `hm2_ioport_gpio_prepare_tram_write` → data TRAM **queue** via `llio->queue_write` → `hm2_ioport_write` calls changed open-drain/invert/DDR writes → `hm2_finish_write` flushes queued writes where supported. This is **software call order, not guaranteed physical register arrival order**. Forced startup writes DDR last. This ordering must be checked against the actual HAL `addf` list; it is not guaranteed merely by a net connection.
 
 ## Minimal review checklist for an existing HAL/INI
 
@@ -26,7 +26,7 @@
 
 ## Disconnected acceptance exercises
 
-**G132-A:** In a fake low-level IO environment, start with `is_output=0,out=1`; capture output data word and DDR. Then set `is_output=1`, capture the order of TRAM data and DDR write. Expected by source: data first, DDR last in the normal write path.
+**G132-A:** In a fake low-level IO environment, start with `is_output=0,out=1`; capture output data word and DDR. Then set `is_output=1`, capture the order of TRAM data and DDR write. Expected by source: TRAM **queue call** precedes DDR write **call**; the transport may defer queued data until `send_queued_writes`, so physical arrival order must be measured separately.
 
 **G132-B:** Simulate `llio->write` failing for a DDR change. Capture return, `written_ddr`, requested DDR, `io_error` and next-cycle writes. Expected by source: cache updated unconditionally in `hm2_ioport_force_write_ddr`; any actual recovery behavior depends on the broader transport path. Do not claim a physical FPGA fault from fake IO alone.
 

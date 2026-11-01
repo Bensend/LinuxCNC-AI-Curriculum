@@ -1,0 +1,20 @@
+# 2026-11-01 ~23:40Z — LinuxCNC M66/G4 historical runtime evidence recovered; next LinuxCNC implementation checkpoint
+
+**LINUXCNC FIRST | 4000-LC-M66-140 evidence reconciliation | 3300 plasma transfer | NON-GRADUATED.**
+
+## Corrected state
+- The November 1 M66-138/139 source trace and 3300/4000 guide remain useful, but **M66→G4 premature completion was already TEST-CONFIRMED on 2026-09-11**. See [M66-140 provenance and oracle audit](../research/4400_LINUXCNC_M66_140_HISTORICAL_RUNTIME_ORACLE_RECONCILIATION_2026-11-01.md), historical [lab 079 script](../lab-jobs/079-pb-m66-timeout-stale-dwell.sh), [stdout](../lab-results/run-34593401753-1/stdout.log), [metadata](../lab-results/run-34593401753-1/metadata.txt) and [compute ledger](../LAB_COMPUTE_LOG.md).
+- Pinned LinuxCNC **`8bf4605ae81042248add031e94c77300406e0413`**; control `G4 P0.50` AUTO_RUN-to-DONE 0.505165 s; experiment `M66 P0 L1 Q0.20` → `G4 P0.50` input HIGH at 0.301064 s, AUTO_RUN-to-DONE 0.311439 s; difference −0.193726 s passed the frozen <=−0.10 s oracle; `#5399` abort guard did not trip. The exact G4 start/end and Task state were **not** individually timestamped.
+- The 2026-11-01 stable v2.9.10 and development `06864e` source audit is **SOURCE-CONFIRMED**, but those binaries have **not** been executed for this issue. The newer five-case A–E matrix and cross-program abort/reopen extension remain **NOT RUN**. No physical plasma or other machine evidence.
+- This session **read historical GitHub-hosted evidence only**; it did not dispatch any Actions compute. Current policy prohibits *new* GitHub-hosted execution. Any new compute must be positively isolated `[self-hosted, openpressbrake]`, never assumed safe merely from labels.
+- The predecessor-search process failed to inspect `LAB_COMPUTE_LOG.md` and `lab-jobs/` for the mechanism. This checkpoint corrects the false “TEST-CONFIRMED none” / “new defect” description without overwriting the earlier historical entry.
+
+## Precise next unblocked work
+1. **Do not rerun lab 079 merely to re-prove the same L1/0.2/0.5 behavior.** If qualified disconnected compute becomes available, prioritize a version-discriminating test on v2.9.10 and `06864e`, with exact Task G4 issue/complete timestamps and `#5399` preservation, plus a control that explicitly disarms the watcher. Freeze revision, harness, fixture hashes and pass/fail oracle before execution.
+2. Source-review a minimal Task ownership correction: clear `emcAuxInputWaitIndex` on M66 completion/timeout and abort, or guard the watcher by active command type; retain the timeout sentinel for interpreter `#5399`. Inspect all completion paths, command read-ahead, and abort/reopen lifetime before proposing a patch. Existing source-only and historical executable evidence can guide review, not substitute for regression.
+3. If no qualified runner exists, **rotate to a distinct LinuxCNC implementation topic** (suggestion: HostMot2/Mesa stepgen velocity-mode update/feedback timing in a real HAL configuration, or interpreter toolchange Task barriers). Start with upstream source and real configs; avoid creating a second duplicate M66 exercise.
+4. Update evidence tables with correct version-specific labels. Historical hosted job runtime **3.12 minutes already recorded** in the ledger; do not double-count it as current session compute. No new authoritative job runtime; `LAB_COMPUTE_LOG.md` unchanged.
+5. Preserve 1000/2000/F02/3000 graduated levels and independent personnel-safety G0/G1 HOLD. Keep the existing hourly task enabled.
+
+## Verification
+New reconciliation is supported by direct readback of script, historical job output/metadata/exit code, workflow job summary/log, existing ledger, November 1 source audit and guide. No new build, HAL simulation, physical machine operation, independent evaluator, or Actions execution. External blind feedback unchanged.

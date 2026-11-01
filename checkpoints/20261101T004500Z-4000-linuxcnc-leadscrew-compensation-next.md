@@ -2,6 +2,8 @@
 
 **Active:** 4000 LinuxCNC-first implementation, NON-GRADUATED; practical 3100 mill/lathe/gantry calibration. Predecessor [HostMot2/MTConnect checkpoint](20261031T234000Z-4000-linuxcnc-hm2-watchdog-recovery-next.md). Mandatory governance, evidence, compute and evaluation state inspected. Graduated 1000/2000/F02/3000 remain CLOSED. Personnel-safety authority and OpenPressBrake physical G0/G1 HOLD unchanged.
 
+Stable v2.9.10 is the annotated tag `4e7abeab3e764a42ef9def932333a1d4004e547b`, peeled to LinuxCNC commit `86cdca76fa2a36274c432caa21952b23c267989a` (tagger 2026-07-02); development is commit `537cf2d765c96b6e75ae1db44e1dc0b9dba906a1`. Tag signature verification was not established by this audit.
+
 ## New verified source paths
 
 1. [COMP-88 loader/compensation](../research/4400_LINUXCNC_COMP_88_LEADSCREW_TABLE_PARSE_FALLBACK_SOURCE_AUDIT_2026-11-01.md): both stable v2.9.10 and pinned development stop reading on first malformed/blank/header line without returning parse failure. Zero accepted entries means runtime falls back to \`BACKLASH\`, contrary to a literal reading of docs' COMP_FILE precedence. Invalid order and >256 rows are logged by Motion but the command status can remain OK. Type 0/1 trims, direction selection, filtered motor command and compensated feedback traced. SOURCE/DOC-CONFIRMED, runtime NOT RUN.

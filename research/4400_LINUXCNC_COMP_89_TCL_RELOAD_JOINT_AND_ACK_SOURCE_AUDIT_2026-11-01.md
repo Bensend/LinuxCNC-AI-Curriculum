@@ -2,6 +2,8 @@
 
 **Status:** LinuxCNC-first 4000 source audit, NON-GRADUATED. Inspected 2026-11-01 UTC. **SOURCE-CONFIRMED** message construction and return paths; runtime behavior **NOT TESTED**.
 
+Stable v2.9.10 is the annotated tag `4e7abeab3e764a42ef9def932333a1d4004e547b`, peeled to LinuxCNC commit `86cdca76fa2a36274c432caa21952b23c267989a` (tagger 2026-07-02); development is commit `537cf2d765c96b6e75ae1db44e1dc0b9dba906a1`. Tag signature verification was not established by this audit.
+
 ## Pinned provenance
 
 - Stable **v2.9.10**: [emcsh.cc](https://github.com/LinuxCNC/linuxcnc/blob/v2.9.10/src/emc/usr_intf/emcsh.cc) \`emc_joint_load_comp\` lines 3097–3127 (blob \`672906e222a069b8262d1b2b74121a3e8147e045\`); [shcom.cc](https://github.com/LinuxCNC/linuxcnc/blob/v2.9.10/src/emc/usr_intf/shcom.cc) \`sendJointLoadComp\` lines 1192–1206 (blob \`28eb924291788f64effd4fd9376220d23dc3c1c2\`); [emc_nml.hh](https://github.com/LinuxCNC/linuxcnc/blob/v2.9.10/src/emc/nml_intf/emc_nml.hh) \`EMC_JOINT_CMD_MSG\` and \`EMC_JOINT_LOAD_COMP\` lines 179–188 and 482–494 (blob \`4e41b6eb61d6cac2f1d7035352fd776d84e5a0e0\`).

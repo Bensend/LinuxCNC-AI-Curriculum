@@ -2,6 +2,8 @@
 
 **Status:** 4000 LinuxCNC-first source investigation, NON-GRADUATED. Inspected 2026-11-01 UTC. **SOURCE-CONFIRMED** code paths, **DOC-CONFIRMED** format, **INFERENCE** consequences; **TEST-CONFIRMED none**. No installed-machine finding.
 
+Stable v2.9.10 is the annotated tag `4e7abeab3e764a42ef9def932333a1d4004e547b`, peeled to LinuxCNC commit `86cdca76fa2a36274c432caa21952b23c267989a` (tagger 2026-07-02); development is commit `537cf2d765c96b6e75ae1db44e1dc0b9dba906a1`. Tag signature verification was not established by this audit.
+
 ## Source pins and real upstream fixture
 
 - LinuxCNC stable **v2.9.10**: [INI docs](https://github.com/LinuxCNC/linuxcnc/blob/v2.9.10/docs/src/config/ini-config.adoc) lines 990–1029 (blob \`e3d691253f7ff94f235d9735a67f06730ece7a38\`); [inijoint.cc](https://github.com/LinuxCNC/linuxcnc/blob/v2.9.10/src/emc/ini/inijoint.cc) lines 122–128, 227–233 (blob \`8ed7ede9f0f3ee9a6baf64f7578a23d6ac293319\`); [usrmotintf.cc](https://github.com/LinuxCNC/linuxcnc/blob/v2.9.10/src/emc/motion/usrmotintf.cc) \`usrmotLoadComp\` lines 617–674 (blob \`248378247baaec64e0b8b477b7e7c22c110f8d1f\`).

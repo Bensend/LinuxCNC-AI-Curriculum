@@ -1,0 +1,9 @@
+(DISCONNECTED SIM ONLY: test control M66 L0 disarms stale input)
+G21 G90 G94
+M66 P0 L3 Q0.5
+#<saved_m66_result> = #5399
+(DEBUG, saved first M66 result=#<saved_m66_result>)
+M66 P0 L0 (TEST CONTROL ONLY; overwrites #5399)
+G4 P4
+(DEBUG, G4 returned after test-control L0)
+M2

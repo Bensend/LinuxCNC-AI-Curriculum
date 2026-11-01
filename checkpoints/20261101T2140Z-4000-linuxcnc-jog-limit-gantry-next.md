@@ -1,0 +1,18 @@
+# 2026-11-01 ~21:40Z — LinuxCNC unhomed jog and gantry MPG checkpoint
+**LINUXCNC FIRST | 4000 NON-GRADUATED / 3100, 3400, 3500 transfer | SOURCE-CONFIRMED, NOT RUN**
+
+## Durable completed artifacts
+- [JOG-135](../research/4400_LINUXCNC_JOG_135_UNHOMED_AXIS_JOG_LIMIT_VERSION_AND_RECENTER_SOURCE_AUDIT_2026-11-01.md): stable v2.9.10 joint unhomed jog uses feedback ± full INI travel span; stable axis TELEOP uses literal INI min/max. Pinned development `06864e23559e70463fc7112d5ce77138bcbc288c` axis TELEOP uses unhomed current position ± span and bypasses fixed soft-limit check while unhomed. Repeated commands recenter the window. All numbers source-derived, not achieved motion.
+- [JOG-136](../research/4400_LINUXCNC_JOG_136_GANTRY_MIXED_HOME_SEQUENCE_JOG_GATE_REAL_CONFIG_SOURCE_AUDIT_2026-11-01.md): `homing.c` sets synchronized-jog restriction for **all** joints sharing absolute HOME_SEQUENCE with a negative member, including positive-sign peers. Free joint jog refused even if previously homed. Real upstream `gantry_jjog.ini` and `gantry_panel.hal` show -1→+1 commissioning override, matching `motion.homing-inhibit`, joint1/3 shared MPG counts and version-specific converter names.
+- [JOG-137](../research/4400_LINUXCNC_JOG_137_AXIS_MPG_LIMIT_BREAK_CROSS_AXIS_STARVATION_SOURCE_AUDIT_2026-11-01.md): stable and development `axis_handle_jogwheels` use `break` (not `continue`) when one axis's MPG target exceeds a literal INI limit. Later-numbered axes are not processed in that callback; repeated earlier-axis rejection can conditionally starve them. Development wheel jog remains fixed-limit while keyboard axis jog uses unhomed relative limits.
+- [Practical source-grounded implementation guide](../guides/3100-3400-3500-4000-linuxcnc-unhomed-jog-and-gantry-commissioning-2026-11-01.md) with identity/gantry/MPG observation matrices.
+
+## Evidence and dependencies
+Pinned LinuxCNC v2.9.10 and development source and original real upstream gantry configuration inspected. Official homing docs corroborate basic negative HOME_SEQUENCE restrictions. **No build, simulator, HAL, GUI, physical machine, independent evaluator or Actions compute**; hosted/self-hosted 0/0 minutes; no new authoritative job runtime. Do not promote source-derived conditional movement to a reproduced failure. Prior graduated levels CLOSED; OpenPressBrake G0/G1 and independent personnel-safety authority unchanged; safety-course evidence and blind scoring untouched.
+
+## Precise next checkpoint
+1. First positively qualify **physically disconnected** `[self-hosted, openpressbrake]` compute. Runner labels or script SHA alone do not prove isolation; **never use hosted Actions**. If unavailable, rotate to a distinct LinuxCNC source implementation question.
+2. If qualified, freeze stable v2.9.10 and pinned development, exact INI/HAL, binary revision, predeclared table, job start/end and exit. Test identity unhomed FREE vs TELEOP jog targets and recenter after second command, without physical outputs.
+3. In original `gantry_jjog.ini` software sim, compare -1/-1, -1/+1, +1/+1 `home_is_synchronized`/jog acceptance, and verify homing-inhibit follows override; restore -1/-1 after each.
+4. Instrument `axis_handle_jogwheels` with simultaneous X/Y counts and X at positive limit. Distinguish one-callback Y deferral from persistent starvation, and compare unhomed development keyboard versus wheel. Capture raw per-axis visit/order and feedback, not just a green workflow result.
+5. Review upstream tests and GUI/NML path before proposing a `break`→`continue` patch. No hardware commissioning, no graduated-level reopening or independent-safety gate relaxation.

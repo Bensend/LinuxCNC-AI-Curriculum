@@ -1,0 +1,12 @@
+(ARC-129 positive A/B: disconnected interpreter only, not machine-safe)
+G21 G90 G94 G40 G49 G80
+F120
+G18 G90.1
+G0 X10 Z0
+G2 X0 Z10 I0 K0
+(absolute center X0 Z0, radius 10)
+G18 G91.1
+G0 X10 Z0
+G2 X0 Z10 I-10 K0
+(incremental center -10,0 relative to start, radius 10)
+M2

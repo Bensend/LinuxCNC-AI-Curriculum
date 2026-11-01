@@ -1,0 +1,7 @@
+(ARC-129 negative: expected G18 out-of-plane J rejection; NOT RUN)
+G21 G90 G94 G40 G49 G80
+F120
+G18 G90.1
+G0 X10 Z0
+G2 X0 Z10 J0 K0
+M2

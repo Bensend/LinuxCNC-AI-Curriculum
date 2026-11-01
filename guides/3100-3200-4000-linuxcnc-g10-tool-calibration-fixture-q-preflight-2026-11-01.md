@@ -54,7 +54,11 @@ Predeclared numeric oracle for a *synthetic interpreter state*, not the two G-co
 - Lathe Q orientation is documented as integer 0–9. Both inspected parser versions can accept negative Q values, and a first Q<=−1 can bypass the duplicate-Q detector. The inspected G18 lathe `latheorigin_x/z` source only adjusts for orientations 1–8, so Q-2 would skip those origin-shift branches if it reaches cutter compensation; physical geometry is not tested. **Postprocessor contract: exactly one Q if present; integer 0..9; otherwise omit.**
 - For automated tool setters, do not rely solely on a G-code wait, successful G10, or a GUI coordinate display as a physical contact or tool clamp witness. Personnel safety and qualified machine permissives remain independent.
 
-## 5. Focused verification ladder
+## 5. Prefer the existing upstream tests
+
+At pinned development revision `06864e23559e70463fc7112d5ce77138bcbc288c`, run the existing [L1/L10 test](https://github.com/LinuxCNC/linuxcnc/blob/06864e23559e70463fc7112d5ce77138bcbc288c/tests/interp/g10/g10-l1-l10/test.ngc) and [L11/G92 test](https://github.com/LinuxCNC/linuxcnc/blob/06864e23559e70463fc7112d5ce77138bcbc288c/tests/interp/g10/g10-l11/test.ngc) in their original `tests/interp/g10/` directories with their original `test.tbl`, `test.sh` and `expected`. Do not treat an expected file as an observed test run. L11's upstream expected result repeats Z=-3/-4 after G92; L10's expected results include -0.707107/-0.707107 under 45-degree rotation and show why G43 reload matters. The test input blobs are identical between stable and development, but full expected logs differ in surrounding tool-change commands, so use the **matching revision's expected file**; both preserve the L11 -3/-4 results. These upstream cases use G20 inches, unlike our separate synthetic mm arithmetic. The additional Q-negative cases are **not** covered by those two fixtures.
+
+## 6. Focused verification ladder
 
 1. **Read-only provenance:** record `linuxcnc --version`, interpreter commit, current units, active G5x/G52/G92, G59.3 fixture, G43/G49 state, tool P and table backup; read the official `g-code.adoc`, `interp_convert.cc`, `interp_find.cc`.
 2. **Disconnected arithmetic:** with identical frozen initial states, compare L10/L11 stored offset and applied `#5083` before/after G43. Capture actual outputs, stderr, exit status, timestamp and authoritative job runtime.
@@ -64,7 +68,7 @@ Predeclared numeric oracle for a *synthetic interpreter state*, not the two G-co
 
 All cases **NOT RUN**. Qualified execution only on isolated `[self-hosted, openpressbrake]` compute; never a GitHub-hosted Actions runner. If qualified compute is unavailable, rotate to a distinct LinuxCNC source topic.
 
-## 6. Fresh-AI transfer check (unscored)
+## 7. Fresh-AI transfer check (unscored)
 
 A lathe post emits `G10 L11 P7 Z0 Q-2 Q3` while G52 is active and the operator believes tool 7 is being measured against G54. Explain which fixture L11 uses, why the post should reject the Q sequence even if LinuxCNC accepts it, which two parameters distinguish stored versus applied TLO, and what must be independently verified before a tool is used. Do not reveal a sealed evaluator answer or score this exercise as blind evidence.
 

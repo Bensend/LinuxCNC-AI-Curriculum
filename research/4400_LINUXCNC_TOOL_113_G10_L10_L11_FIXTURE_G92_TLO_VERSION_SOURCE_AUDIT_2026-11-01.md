@@ -34,6 +34,15 @@ These are **alternative** runs from identical initial state, not sequential comm
 
 The inspected [development `convert_setup_tool`](https://github.com/LinuxCNC/linuxcnc/blob/06864e23559e70463fc7112d5ce77138bcbc288c/src/emc/rs274ngc/interp_convert.cc) adds `CHKS(settings->g68_active && !direct)`: while G68.2 is active, **L10/L11 are rejected**; L1 is not blocked by this particular guard. Stable v2.9.10 has no native G68.2 (see [TWP-111](4400_LINUXCNC_TWP_111_G682_FRAME_CHAIN_VS_KINEMATICS_SOURCE_AUDIT_2026-11-01.md)). This is a versioned parser rule, not proof of all possible remapped G68 behavior.
 
+## Existing upstream executable oracles — INSPECTED, NOT RUN
+
+The pinned development tree already contains real `rs274` tests, so do **not** manufacture a replacement test suite:
+- [`tests/interp/g10/g10-l1-l10/test.ngc`](https://github.com/LinuxCNC/linuxcnc/blob/06864e23559e70463fc7112d5ce77138bcbc288c/tests/interp/g10/g10-l1-l10/test.ngc) and its [expected canonical output](https://github.com/LinuxCNC/linuxcnc/blob/06864e23559e70463fc7112d5ce77138bcbc288c/tests/interp/g10/g10-l1-l10/expected) show L10 calculated offsets of -0.9/-1.8/-2.7 in a simple position fixture and rotation-sensitive results -0.707107/-0.707107 and 0/-1.414214. The expected log also distinguishes **stored offset changed** from **current relative position unchanged until G43 reload**.
+- [`tests/interp/g10/g10-l11/test.ngc`](https://github.com/LinuxCNC/linuxcnc/blob/06864e23559e70463fc7112d5ce77138bcbc288c/tests/interp/g10/g10-l11/test.ngc) and [expected output](https://github.com/LinuxCNC/linuxcnc/blob/06864e23559e70463fc7112d5ce77138bcbc288c/tests/interp/g10/g10-l11/expected) predeclare tool Z=-3 and -4 when the active G5x changes; after G92 is introduced, the expected Z values remain -3 and -4. The test includes eight nontrivial G5x fixtures and fixed G59.3 touch-off.
+- Both tests invoke `rs274 -g test.ngc -t test.tbl` through `test.sh`, postprocess with awk/sed and preserve the `rs274` exit status via `PIPESTATUS[0]`. These are **upstream test-source/expected-fixture evidence**, **not TEST-CONFIRMED execution in this curriculum**.
+
+The stable and development test **G-code inputs have identical Git blob SHAs**, but their full expected canonical logs differ around tool-change commands (stable includes `START_CHANGE()` and `CHANGE_TOOL(1)`; development emits a changed `CHANGE_TOOL()` sequence). The L11 -3/-4 numeric predictions remain the same. Compare each version with **its own** expected file rather than treating full-log differences as a G10 regression. Upstream fixtures use `G20` inch units; do not mix them with our separate synthetic mm fixture. The upstream L11 case covers G92, not an independently executed G52 case. Our synthetic Z11/Z4 example remains a distinct source-derived prediction; do not pretend it was covered by upstream's -3/-4 expected file.
+
 ## Failure paths and uncertainties
 
 - Invalid/missing P, absent tool-table entry, active cutter compensation, and G68.2+L10/L11 in development are distinct rejection points; identify which layer rejects the command.

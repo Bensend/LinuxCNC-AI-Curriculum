@@ -1,0 +1,19 @@
+# 2026-11-01 ~05:33Z — QtPlasmaC units and kerf-compensation source checkpoint
+
+**Active:** 4000 LinuxCNC implementation, 3300 plasma CAM transfer (NON-GRADUATED). Mandatory `START_HERE.md`, mission, level/order, selection, curriculum, source/template, progress, blind protocol/score, lab ledger and prior [SPINDLE-100/101 checkpoint](20261101T044100Z-4000-linuxcnc-spindle-readiness-index-next.md) inspected. Existing 1000/2000/F02/3000 CLOSED; independent safety G0/G1 HOLD, evaluation separation unchanged. No qualified isolated runner established; no Actions or hardware operations.
+
+## Durable new evidence
+
+1. [PLASMA-102](../research/4400_LINUXCNC_PLASMA_102_QTPLASMAC_G20_G21_STICKY_UNIT_STATE_SOURCE_AUDIT_2026-11-01.md) — pinned stable v2.9.10 and development `qtplasmac_gcode.py::set_default_units` have no reset to native `unitMultiplier=1` or native hole threshold/overcut length on return from G20/G21. Metric INI G20→G21 leaves multiplier .03937 and threshold 1.26; with 10 mm G3 hole and 1.2 mm kerf, predicted no M67 despite nominal 32 mm threshold. Source arithmetic only.
+2. [PLASMA-103](../research/4400_LINUXCNC_PLASMA_103_G411_KERF_HAL_LEADIN_OVERCUT_SOURCE_DOC_AUDIT_2026-11-01.md) — G41.1 D is diameter (`D/2` radius), first comp move must be **strictly longer** than radius (`<=` rejected), in contrast to official “at least” text. QtPlasmaC with comp active comments out auto M67 and M62 but still emits overburn G2/G3, leaving a possible torch-on extra path (physical behavior unknown). Official documented HAL `plasmac.kerf-width` is wired to `qtplasmac.kerf_width-f`, but only legacy text receives mixed-unit multiplier rewrite, creating a conditional 25.4× D discrepancy in a metric machine's G20 program.
+3. [Practical 3300/4000 guide](../guides/3300-linuxcnc-plasma-kerf-compensation-units-cam-post-handoff-2026-11-01.md) — DXF/nesting → G-code → filter → interpreter handoff; G40 CAM-offset versus G41.1 dynamic compensation contracts, 10 independent software discriminators **ALL NOT RUN**.
+
+**Novelty:** full PROGRESS keyword scan found no prior G41.1, G42.1, kerf-width, cutter compensation, or G20/G21 unit-state findings. PLASMA-39 (coordinate state), PLASMA-81 (modal rewrite), PLASMA-32 (M62 timing) and CAM-80 (arc recognition) were read/reconciled; these are new mechanisms, not reclassified predecessors.
+
+## Next highest-value unblocked work
+
+- **If independently qualified disconnected `[self-hosted, openpressbrake]` compute exists:** run U102-1/2 and C103-2/3 with frozen metric INI, known material kerf and original/filtered file capture; compare G40 vs G41.1, exact emitted M67/M62 and overburn. Then test C103-4 strict lead-in equality through a pinned interpreter. Record raw output/exit and actual job timestamps. No physical machine I/O; never hosted Actions.
+- **Otherwise:** rotate to a distinct LinuxCNC-first topic with concrete source gain, e.g. real 3100 mill tool-change feedback provenance or 3600 press-brake HAL/INI architecture grounded in inspectable LinuxCNC configs. Avoid accumulating more unrun variants of this same QtPlasmaC filter mechanism.
+- Do not confuse QtPlasmaC filter warnings with machine-safe suppression, interpreter acceptance with physical cutting, or an upstream source observation with a test PASS. Do not change closed levels, independent evaluator or personnel-safety gates.
+
+**Evidence:** SOURCE/DOC-CONFIRMED static, arithmetic INFERENCE, TEST-CONFIRMED none; all 10 acceptance cases NOT RUN. No Python, LinuxCNC build, simulator, physical operation, independent evaluation, workflow or authoritative job runtime. Hosted/self-hosted Actions 0/0 min this session; `LAB_COMPUTE_LOG.md` and `evaluation/FEEDBACK_SCORE_LOG.md` unchanged. Existing hourly curriculum task stays enabled.

@@ -1,0 +1,41 @@
+# 4000-LC-PLASMA-103 — QtPlasmaC dynamic kerf compensation, lead-in and overcut interaction
+
+**2026-11-01 | LinuxCNC interpreter + QtPlasmaC + 3300 CAM post | NON-GRADUATED, SOURCE/DOC-CONFIRMED, NOT RUN.** A distinct **compensation/process-feature contract** from [PLASMA-32](4400_LINUXCNC_PLASMA_32_QTPLASMAC_OVERCUT_M62_P3_TP_TIMING_AND_FILTER_SOURCE_AUDIT_2026-10-31.md) (synchronized M62 timing) and [CAM-80](4400_LINUXCNC_CAM_80_QTPLASMAC_G1_TESSELLATED_HOLES_VS_G2_G3_AUTO_PROCESS_SOURCE_AUDIT_2026-10-31.md) (arc recognition).
+
+## Source and documentation provenance
+
+- Stable **v2.9.10**, [`qtplasmac_gcode.py`](https://github.com/LinuxCNC/linuxcnc/blob/v2.9.10/src/emc/usr_intf/qtplasmac/qtplasmac_gcode.py) blob `4cdae156b94b607bd2514b1573baabc83f396f23`: `parse_code` **285–293, 339–365**; `set_g4x_offsets` **564–572**; `get_hole_diameter` **855–889**; `overburn` **891–930**; `material_change_wait` **988–992**.
+- Pinned development **537cf2d765c96b6e75ae1db44e1dc0b9dba906a1**, [same filter](https://github.com/LinuxCNC/linuxcnc/blob/537cf2d765c96b6e75ae1db44e1dc0b9dba906a1/src/emc/usr_intf/qtplasmac/qtplasmac_gcode.py), blob `aeff3b6103f8c17a1e845b0f835f9ec9f30210b5`: `set_g4x_offsets` **649–657**; `get_hole_diameter` **1000–1034**; `overburn` **1036–1075**; `material_change_wait` **1133–1137**.
+- Stable [`src/emc/rs274ngc/interp_convert.cc`](https://github.com/LinuxCNC/linuxcnc/blob/v2.9.10/src/emc/rs274ngc/interp_convert.cc) blob `f01a359652d588d59c9e210fa441a99d2ee19598`: `convert_cutter_compensation` **1872–1891**, `convert_cutter_compensation_on` **1991–2040**, `convert_straight_comp1` **5201–5248**, `convert_arc_comp1` **647–687**. Development same path blob `379b21eaba65840ce4160e7ea70df60c12fad9ff` retains the dynamic-D and entry-distance branches (~2619, ~6152).
+- Stable [QtPlasmaC GUI HAL wiring](https://github.com/LinuxCNC/linuxcnc/blob/v2.9.10/share/qtvcp/screens/qtplasmac/qtplasmac_handler.py) blob `bbfff1eaa906a496aad19f1602464e8ff2828695`, **line 881**, nets `qtplasmac.kerf_width-f` and `plasmac.kerf-width` to the same `plasmac:kerf-width` signal.
+- Official [QtPlasmaC cutter compensation / hole-processing documentation](https://www.linuxcnc.org/docs/2.9/html/plasma/qtplasmac.html) and pinned [source AsciiDoc](https://github.com/LinuxCNC/linuxcnc/blob/v2.9.10/docs/src/plasma/qtplasmac.adoc#L1932-L1945) say G41.1/G42.1 can use `D#<_hal[plasmac.kerf-width]>`, but G-code THC, velocity THC and overcut cannot be combined with cutter compensation. The [G-code documentation](https://www.linuxcnc.org/docs/2.9/html/gcode/g-code.html) says the entry move must be at least the tool radius.
+
+## Source-traced implementation and discriminators
+
+**A. D is a diameter, not a radius.** `convert_cutter_compensation_on` uses `radius = block->d_number_float / 2` for G41.1/G42.1; D must be supplied. Interpreter compensation is applied before canonical motion, not by a physical torch-width sensor. G41/G42 without .1 instead derive diameter from the tool table. Source distinguishes XY/XZ planes and rejects activation when already on.
+
+**B. The interpreter entry check is strictly greater than radius.** Stable `convert_straight_comp1` line 5224 rejects `distance <= radius` (and first compensated arc similarly rejects chord length `<= radius` at ~675). Therefore a lead-in of *exactly* D/2 is source-rejected, notwithstanding the official documentation's more permissive **“at least”** wording. A CAM post must leave margin; do not target the equality boundary. The real first compensated move and any geometry errors must still be checked in LinuxCNC, not inferred from a geometric sketch.
+
+**C. QtPlasmaC still emits an overburn arc while suppressing the generated torch-off under compensation.** `get_hole_diameter` detects a qualifying hole and `check_if_hole` calls `overburn` even with `offsetG4x=True`. In that branch, `overburn` inserts **commented** `;M62 P3 (inactive due to G41)` instead of active torch-off **but still appends the G02/G03 overburn arc**. It also flags a warning. Likewise, the automatic small-hole feed M67 becomes a comment under G41/G42. **SOURCE-CONFIRMED filtered-code construction**: the intended “torch off before overcut” sequence is absent, while the extra arc remains. Whether the interpreter accepts that arc with compensation and whether an installed torch continues cutting are **UNKNOWN**. This explains why the official documentation forbids the feature combination; do not treat the warning as a safe automatic fallback.
+
+**D. Documented kerf HAL expression is not the filter's special mixed-unit rewrite target.** The documented `D#<_hal[plasmac.kerf-width]>` references the same signal as `qtplasmac.kerf_width-f` (handler line 881). Yet `set_g4x_offsets` multiplies by `unitMultiplier` only if the text contains the *specific* older spelling `#<_hal[qtplasmac.kerf_width-f]>`; it does **not** rewrite the documented `plasmac.kerf-width` expression. For a **metric machine running G20** with a 1.2 mm kerf pin, unconverted D=1.2 is read by the interpreter as **1.2 inches = 30.48 mm**, rather than the desired 0.047244 inches (1.2 mm). This is a **source-derived conditional unit mismatch** when using that exact documented expression in a mixed-unit program, **not a reproduced cut**. The converse inch-machine/G21 case has the inverse scale problem. A post should not assume HAL numeric parameters automatically change units when G20/G21 changes.
+
+**E. Material synchronization under compensation is a separate rejection path.** `parse_code` sees `M66` and calls `material_change_wait`; with `offsetG4x` true the filter records `errorCompMat`. The source is a filter validation mechanism, not an independent drive or personnel-safety interlock.
+
+## Practical decision table
+
+| Post mode | Geometry owner | QtPlasmaC hole velocity / overcut | Material changes | What must be verified |
+|---|---|---|---|---|
+| **G40 + CAM-preoffset** | CAM applies kerf in machine/program units | Available in documented intended mode, subject to prior filter limitations | Material select/wait outside compensation | DXF units, arc preservation, contour offset, M67/M62 filtered output |
+| **G41.1/G42.1 dynamic** | LinuxCNC interpreter applies D/2 | **Not compatible** with automatic velocity/overcut; generated commands can be suppressed | Do not use M66 while comp active | Exact HAL pin units, lead-in > D/2, G40 cancellation, no process-feature reliance |
+| **G40 + nominal geometry** | No kerf offset | May be available | Normal | Dimensional error due to missing kerf must be explicit |
+
+For a nested DXF plasma post that needs QtPlasmaC small-hole reduction and overcut, the **preferred integration design is CAM-side kerf offset + G40**, retaining explicit G2/G3 arcs. This is an engineering recommendation, not a mandatory build. OpenPressBrake bend-line DXF handling must remain separate from plasma kerf/tool-radius semantics; do not reuse torch offset logic for press-brake gauge targets.
+
+## Evidence / next checkpoint
+
+**SOURCE-CONFIRMED** A–E on pinned revisions; **DOC-CONFIRMED** stated QtPlasmaC limitations and lead-in text; **INFERENCE** mixed-unit numerical consequence and possible overburn cut if an active torch remains on; **TEST-CONFIRMED none**. No simulator, filter invocation, interpreter execution, hardware, Actions or independent evaluation.
+
+**NOT RUN discriminators:** C103-1 G40 with hole modes 1/2; C103-2 G41.1 + hole mode 1 (M67 suppressed); C103-3 G41.1 + hole mode 2 (M62 commented, extra arc remains); C103-4 D/2 equality vs >D/2 lead-in; C103-5 documented HAL D expression vs legacy alias in mismatched units; C103-6 M66 while compensation active. Capture raw and filtered G-code separately from interpreter/canonical verdicts. Use only independently qualified disconnected `[self-hosted, openpressbrake]` compute.
+
+See [practical CAM handoff](../guides/3300-linuxcnc-plasma-kerf-compensation-units-cam-post-handoff-2026-11-01.md), [PLASMA-102](4400_LINUXCNC_PLASMA_102_QTPLASMAC_G20_G21_STICKY_UNIT_STATE_SOURCE_AUDIT_2026-11-01.md), and [checkpoint](../checkpoints/20261101T053300Z-4000-linuxcnc-plasma-kerf-units-next.md). Existing graduated levels and independent safety/evaluator gates unchanged.

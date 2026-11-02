@@ -41,6 +41,12 @@ Because **D < Q=0.5**, the source predicts one canonical feed segment A→C, byp
 
 Both inspected `ARC_FEED` implementations calculate `chord_deviation` and compare it to `canon.naivecamTolerance` (the Q value). If the deviation is below Q, the G17 arc is emitted as two linear segments via `see_segment`; those may subsequently be chained. Both inspected G64 docs instead say the initial arc conversion threshold is P. When Q is omitted, Q defaults to P and the discrepancy is hidden. `G64 P0.01 Q0` disables this arc simplification in the inspected code even if a G17 arc's deviation is below P. Development disables this path under active G68 tilted work plane. Note that `chord_deviation` is a 2D XY test, not a certified 3D toolpath-error bound for all helical/multiturn cases.
 
+## Same-session follow-through — source-line attribution and real plasma CAM provenance (164B)
+
+The stable `flush_segments` implementation takes `pos = chained_points.back()`, then assigns both `line_no = pos.line_no` and `tag_and_send(linearMoveMsg, pos.tag)` from **the final retained endpoint**. Intermediate buffered vertices do not become individual canonical move messages. **SOURCE-CONFIRMED:** when a chain merges, the resulting canonical motion's line/tag attribution comes from the final buffered segment. **INFERENCE:** downstream diagnostics keyed only to canonical move line numbers can omit earlier G-code vertex line numbers; no Task or GUI runtime trace was collected. This is another reason to preserve original CAM line provenance separately from Task motion traces.
+
+An actual upstream LinuxCNC plasma fixture, [`tests/trajectory-planner/circular-arcs/nc_files/XYtests/51MeanderAve.ngc`](https://github.com/LinuxCNC/linuxcnc/blob/86cdca76fa2a36274c432caa21952b23c267989a/tests/trajectory-planner/circular-arcs/nc_files/XYtests/51MeanderAve.ngc), identifies a LinuxCNC plasma.scpost and includes `G64 P0.01 q00.01`, mixed G0/G1/G3, M3/M5 and dwell commands. This is **SOURCE-CONFIRMED real example of CAM-specified P and Q**, not proof of any Q>P failure in that fixture and not permission to run it on a machine. It supports a practical workflow: audit emitted G64 settings at the **postprocessor output**, not only CAD geometry or the controller's default. The sample's 2014 embedded date is file text, not independently verified Git publication time. No additional lab compute.
+
 ## Claims and limits
 
 | Claim | Classification | Scope | Independent verification |

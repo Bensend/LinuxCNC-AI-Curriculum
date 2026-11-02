@@ -22,3 +22,10 @@
 ## Compute and overlap
 
 No new GitHub Actions dispatch, hosted/self-hosted compute **0/0 min**, LinuxCNC build, HAL session, EtherCAT simulator, physical machine or independent evaluator. This is source-only work. Previous THREAD-142 checkpoint was ~01:37Z; this session began ~02:34Z; no known same-curriculum overlap. Other automations unknown.
+
+
+## Same-session LinuxCNC core continuation — MOTION-144
+
+A second distinct source trace, [MOTION-144 joint amp-fault re-enable state](../research/4400_LINUXCNC_MOTION_144_AMP_FAULT_REENABLE_ONE_SERVO_ENABLE_PULSE_SOURCE_AUDIT_2026-11-02.md), inspected stable v2.9.10 and pinned development `control.c` / `command.c` / `motion.c`. **SOURCE-CONFIRMED:** `process_inputs` samples `joint.N.amp-fault-in`; `check_for_faults` checks fault only for **active+already enabled** joints; `set_operating_mode` publishes a new enable state later in the same controller pass. `EMCMOT_ENABLE` checks global `motion.enable` HAL input but not persistent joint amp fault. **CONDITIONAL INFERENCE:** an enable command while disabled and fault remains asserted can publish `joint.N.amp-enable-out=TRUE` for one controller callback before the next callback trips it. No physical drive energization, output-transport timing or safety verdict is inferred. Six fake-drive tests **NOT RUN**.
+
+**Updated next priority:** when qualified isolated compute exists, prefer a bounded **MOTION-144 fake-drive fault/re-enable trace** first because it tests a potentially consequential core LinuxCNC state transition; capture actual per-servo `amp-fault-in`, `amp-enable-out`, internal enable flags and HAL `addf` order, compare stable/development, and do not connect actuators. Then run ECAT-ENC-143 fake-PDO arithmetic/reconnect cases if feasible. If no qualified compute, rotate to a distinct LinuxCNC topic after predecessor/evidence checks, rather than producing more unexecuted fixtures. All evidence/safety/graduation/compute restrictions above remain unchanged.

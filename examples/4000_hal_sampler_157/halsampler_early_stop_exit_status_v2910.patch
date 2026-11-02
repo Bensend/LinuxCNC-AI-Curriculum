@@ -1,0 +1,10 @@
+diff --git a/src/hal/components/sampler_usr.c b/src/hal/components/sampler_usr.c
+--- a/src/hal/components/sampler_usr.c
++++ b/src/hal/components/sampler_usr.c
+@@ -235,6 +235,7 @@ int main(int argc, char **argv)
+ 	    samples--;
+ 	}
+     }
++    if (stop && samples != 0) goto out;
+     /* run was successful */
+     exitval = 0;

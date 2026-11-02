@@ -26,3 +26,8 @@ Predeclare exact expected tool numbers/geometry and error classes for each revis
 
 ## Implementation change review
 The [review-only patch](../examples/4000_tool_reload_172/development_failed_open_and_status_review_only.patch) is a two-part minimal candidate: check return in development Task; open file before clearing tooldata. It is **not** sufficient for malformed-line atomicity or database recovery. Before applying upstream, run A–F against unchanged and patched builds, check `tooldata_load` callers, and verify status behavior through Task/IO and GUI. No code is applied to LinuxCNC by this guide.
+
+## DB protocol subcases added by 172B/C (NOT RUN)
+E1. Simulated backend rejects the initial `g` request (before any tool rows). **Prediction:** no `tooldata_db_getall` reset yet. Capture table snapshot and DB mode.
+E2. Simulated backend acknowledges `g`, emits one valid tool, then times out or emits an invalid line. **Prediction:** reset already occurred; partial table remains on error; stable IO flags failure, development Task does not check the return. Record table and status separately.
+E3. Backend emits three separately flushed replies: `T1 P1 Z0 ; FINISHED_SETUP`, `T2 P2 Z2 ; NORMAL`, `FINI`. **Prediction:** source substring `strstr(reply,"FINI")` can terminate on the first comment and return success without either tool. Confirm actual read framing and output, not only string arithmetic. Review-only [exact FINI patch](../examples/4000_tool_reload_172/development_db_fini_exact_review_only.patch) is a discriminator, not a tested fix. Official protocol calls for a final **response** `FINI`, not a substring embedded in a tool comment.

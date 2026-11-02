@@ -8,9 +8,9 @@ diff --git a/docs/src/gcode/g-code.adoc b/docs/src/gcode/g-code.adoc
 -  The P- tolerance means that the actual path will be no more than P-
 +  The P- tolerance applies to trajectory blending of canonical moves;
 -  away from the programmed endpoint. The velocity will be reduced if
-+  if Q is larger than P, the Naive CAM Detector can simplify the
++  the Naive CAM Detector may first simplify programmed geometry
 -  needed to maintain the path.
-+  programmed path by more than P before trajectory blending.
++  according to Q, so P alone is not a total contour-error bound.
    If you set Q to a non-zero value it turns on the 'Naive CAM
    Detector': when there are a series of linear XYZ feed moves at the
    same <<sec:set-feed-rate,feed rate>> that are less than Q- away from

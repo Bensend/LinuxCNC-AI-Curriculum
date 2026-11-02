@@ -1,6 +1,6 @@
 --- a/src/hal/components/lincurve.comp
 +++ b/src/hal/components/lincurve.comp
-@@ -11,6 +11,12 @@
+@@ -13,6 +13,14 @@
  The (x,y) points are defined by the x-val-NN and y-val-NN parameters which need
  to be set in the HAL file using "setp" commands.
  

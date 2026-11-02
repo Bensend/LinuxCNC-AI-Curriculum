@@ -51,6 +51,10 @@ An actual upstream LinuxCNC plasma fixture, [`tests/trajectory-planner/circular-
 
 A second bounded fixture makes the P-versus-Q arc documentation discrepancy visible without relying on a long CAM program. In G17/G91.1, start A=(0,0), execute clockwise `G2 X0.5 Y0 I0.25 J0` (center (0.25,0), radius 0.25 mm). The included angle is π; `chord_deviation` computes `r*(1-cos(π/2))=0.25 mm`. Under `G64 P0.01 Q0.5`, source condition `0.25 < Q` is TRUE, so `ARC_FEED` submits midpoint (0.25,0.25) and endpoint (0.5,0) to `see_segment`. `linkable` then checks midpoint distance 0.25 mm to the A→end chord, also <=Q, and can reduce the **entire semicircle to one straight feed move**. Under `G64 P0.01 Q0`, the arc conversion condition is false and the canonical circular move is retained. This is **SOURCE-DERIVED / ARITHMETIC**, **NOT A LINUXCNC RUNTIME OBSERVATION**. Fixtures: [Q0.5](../examples/4000_g64_q_164/arc_q05.ngc) and [Q0](../examples/4000_g64_q_164/arc_q0.ngc), both disconnected simulation only. The example is intentionally tiny to isolate the logic, not a proposed plasma hole size.
 
+## Review-only upstream documentation correction (164D)
+
+[Stable v2.9.10 documentation patch](../examples/4000_g64_q_164/stable_2910_g64_pq_doc_clarification.patch) clarifies that P applies to trajectory blending of canonical moves, while a larger Q may alter programmed geometry upstream, and corrects the G17 arc-threshold reference from P to Q. The exact old lines were fetched from the pinned `docs/src/gcode/g-code.adoc` at lines 1737–1751. This is **a proposal**, not an applied upstream change, and has not been compiled, rendered or evaluated by upstream maintainers.
+
 ## Claims and limits
 
 | Claim | Classification | Scope | Independent verification |

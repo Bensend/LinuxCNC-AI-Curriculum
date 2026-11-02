@@ -1,0 +1,52 @@
+# 4000-LC-TOOL-RELOAD-172 — G10 L0 reload failure, non-atomic tooldata state, and Task status (2026-11-02)
+
+**Status:** SOURCE/DOC-CONFIRMED branches, runtime consequences INFERENCE; **NOT RUN**, NON-GRADUATED. **Owner priority:** LinuxCNC implementation; 3100 mills/ATC, 3200 lathe/turret, 3400 router ATC, 4000 tool database integration. No machine or personnel-safety authorization.
+
+## Question, novelty and source selection
+When a G10 L0 tool-table reload fails because the tool file is unavailable, does LinuxCNC preserve the previous in-memory tool table and report failure to Task? How did this change between stable 2.9 and development? This is **not** another G10 L11 fixture-offset or M61 identity investigation: the distinct boundary is a failed **reload** crossing interpreter -> canonical -> Task/IO -> shared tooldata -> interpreter resynchronization. Predecessor scan: PROGRESS, LESSON_LOG, LAB_COMPUTE_LOG, G10L11-168, M61-165, TOOLDB-72; no prior recorded G10 L0 failed-open/partial-state study. GitHub code-search negative is not proof of absence.
+
+Pinned public source: [LinuxCNC v2.9.10](https://github.com/LinuxCNC/linuxcnc/tree/v2.9.10), [development 67437d8865e431a9a33f74cee912dbf891d3b4c5](https://github.com/LinuxCNC/linuxcnc/tree/67437d8865e431a9a33f74cee912dbf891d3b4c5). Read directly through GitHub file contents 2026-11-02, with stable/development blob IDs below. Official [2.9 G10 L0](https://linuxcnc.org/docs/2.9/html/gcode/g-code.html) and development `docs/src/gcode/g-code.adoc` both require no tool loaded and explain that #5401–#5413 refresh, whereas existing G43 offsets remain until a new G43. No executable result was collected.
+
+## Exact source trace
+
+1. **Interpreter gate.** `src/emc/rs274ngc/interp_convert.cc::convert_modal_0` v2.9.10 blob `f01a359652d588d59c9e210fa441a99d2ee19598` ~3733–3742; development blob `379b21eaba65840ce4160e7ea70df60c12fad9ff` ~4503–4513: G10 L0 rejects `settings->tool_table[0].toolno > 0`, otherwise sets `toolchange_flag=true` and calls `RELOAD_TOOLDATA()`. This checks interpreter **tool identity**, not a physical tool sensor; do not use M61 Q0 as a physical unload substitute.
+2. **Canonical queue.** `src/emc/task/emccanon.cc::RELOAD_TOOLDATA` development blob `5ad736c59e85495aa06573ebcad2d49d59145583` ~3135: appends `EMC_TOOL_LOAD_TOOL_TABLE` to `interp_list`, not a synchronous file read in the interpreter. `src/emc/rs274ngc/interp_execute.cc` blob `46eb9e1a873011d783dc9b5b861c128055156a17` ~324 returns `INTERP_EXECUTE_FINISH` when `toolchange_flag` is set.
+3. **Task queue and resync.** Development `src/emc/task/emctaskmain.cc` blob `049c640f1af1b21c18161d6c065ff6f3e35fd83b` ~900–910 queues the load command, sets a read-ahead wait, then queues Task-plan synchronization; ~2174 calls `emcToolLoadToolTable`. `src/emc/rs274ngc/rs274ngc_pre.cc` blob `f420af7b336ec359b93cb761930c77da55f99a10` ~1488–1500 checks the external queue empty, refreshes position, calls `load_tool_table()`, and clears `toolchange_flag`. `load_tool_table` ~1371 reads each pocket via `GET_EXTERNAL_TOOL_TABLE` then `set_tool_parameters`.
+4. **Stable 2.9.10 IO failure reporting.** `src/emc/task/taskclass.cc` blob `31043d7e2aad68f2ffabc02408e7b13085d126bc` ~719 merely sends an IO command and returns 0. `src/emc/iotask/ioControl.cc` blob `09cbd6ff4e5e119df04e61ffb8916b283a2f2014` ~974–986 calls `tooldata_load(filename, ttcomments)`; on nonzero result it sets `emcioStatus.status=RCS_ERROR`, otherwise calls `reload_tool_number`. This is an **explicit IO error path**, although whether a particular UI/interpreter displays it and blocks subsequent execution is NOT RUN.
+5. **Development Task regression candidate.** `src/emc/task/taskclass.cc` blob `2de1c714641330d77fa5eea4dcfcdd1c82e7c2f7` ~539–545 directly calls `tooldata_load(file)` and **discards its int return**, unconditionally calls `reload_tool_number`, and returns 0. Other methods in this class explicitly set `emcioStatus.status=RCS_STATUS::ERROR` on tooldata-save failure; this load method does not. **SOURCE-CONFIRMED loss of the local reload error**; Task-level success and user-visible behavior require runtime discrimination.
+6. **Both versions reset before open.** `src/emc/tooldata/tooldata_common.cc::tooldata_load` stable blob `7b5a3e4ffdd8e9591ed382551bcd57a12a1af904` ~273; development blob `9f194abb12837847cfd6ece884d58621b9462529` ~281: in ordinary file mode, `tooldata_reset()` precedes `fopen(filename, "r")`; a failed `fopen` returns -1 **after the reset**. The NML and mmap implementations `tooldata_nml.cc::tooldata_reset` and `tooldata_mmap.cc::tooldata_reset` iterate through all `CANON_POCKETS_MAX` entries, assigning the initialized empty entry. **SOURCE-CONFIRMED transient table clear on failed open**, not a measured tool-table display or physical behavior. Database mode takes a different early branch: `tooldata_db_getall()` failure sets `db_mode=DB_NOTUSED` and returns -1 without entering the file reset branch.
+7. **Malformed file is a separate non-atomicity.** Once open succeeds, the loop calls `tooldata_read_entry`; negative results print an unrecognized-line message, `continue`, and the overall function returns 0. Thus a partially invalid file may produce a **partially populated table with success return**. The review patch below addresses failed-open rollback and ignored return only, **not** all-or-nothing parsing/DB protocol validation.
+
+## Failure-state matrix (source-derived predictions; NOT RUN)
+
+| Scenario | v2.9.10 | development 67437d8 | Evidence |
+|---|---|---|---|
+| Valid file, no loaded tool | reset then parse, IO DONE expected | reset then parse, Task returns 0 | source; actual GUI outcome UNKNOWN |
+| Missing/unreadable TOOL_TABLE, no loaded tool | table reset, `tooldata_load=-1`, IO sets RCS_ERROR | table reset, `tooldata_load=-1` discarded, reload method returns 0 | source; end-to-end status UNKNOWN |
+| Mixed valid and malformed lines | skipped malformed entries, return 0 | same | source; completeness not guaranteed |
+| DB_PROGRAM backend fails | DB error and DB mode demotion; IO error path | DB error and DB mode demotion; ignored return | source; DB recovery UNKNOWN |
+| Tool loaded (`tool_table[0].toolno>0`) | interpreter error before reload | same | source; no physical sensor proof |
+| New tool geometry with G43 already applied | existing applied offset retained until G43 again | same documented contract | DOC-CONFIRMED; no measured motion |
+
+**Why this matters:** a tool database is an input to future cutter compensation, tool selection, and tool length compensation; a successful Task command acknowledgment is not evidence that the external file/database was loaded completely. The exact operational effect is configuration- and revision-dependent. Do not equate this with a personnel-safety function.
+
+## Existing upstream executable example
+`configs/sim/axis/db_demo/base.ngc` stable blob `64d2b29f7cedd40c6d9577e1347379dab454e71b`: `G49`, repeated `T10 M6 G43`, `T0 M6`, `G10 L0`; `db_nonran.ini` uses `[EMCIO] DB_PROGRAM=./db_nonran.py`, `RANDOM_TOOLCHANGER=0`; the backend `db.py::user_get_tool` applies database rules on reload. This is a **source fixture**, not an observed PASS. It exercises valid DB reload, not missing-file status, partial parse, or retained G43 offsets. Reuse it instead of manufacturing a parallel simulator.
+
+## Review-only minimal correction (not applied or tested)
+[Patch](../examples/4000_tool_reload_172/development_failed_open_and_status_review_only.patch) moves the file open **ahead of** the reset in development file mode, and propagates `tooldata_load` failure to `RCS_STATUS::ERROR` in development Task. This is a **candidate**, not a verified upstream fix; the second patch hunk cannot guarantee atomic parse, correct recovery after a failed DB load, or a particular Task/GUI error propagation. Stable already sets IO RCS_ERROR but still needs the open-before-reset part. No submission upstream.
+
+## Independent executable discriminator (deferred)
+Use the [no-motion simulation commissioning guide](../guides/3100-3200-3400-4000-linuxcnc-g10-l0-tool-reload-failure-commissioning-2026-11-02.md), after independently qualified isolated self-hosted runner: baseline table snapshot; no-tool G10 L0 with valid file; temporarily rename **copied** tool table while simulator is idle; G10 L0 again; capture IO/Task status and tool table entries **before/after**; restore file and reload; repeat with one malformed line and optional DB failure in the official demo. Freeze assertions before execution; retain version, INI, logs and exact run timestamps. Do not run on a physical machine.
+
+## Adversarial / fresh-AI transfer checks (UNSCORED)
+1. Why can a G10 L0 interpreter FINISH be followed by stale or empty tool parameters? Locate both the Task barrier and tooldata reset.
+2. A stable 2.9.10 IO status reports ERROR after a missing file. Does that prove the prior table is intact? **No**: reset occurs first.
+3. Does `M61 Q0` guarantee the spindle is physically empty? **No**: tool identity only.
+4. A patch checks `tooldata_load` return but leaves `fopen` after reset. What failure remains? Prior table loss on failed open.
+5. A patch moves `fopen` before reset but skips malformed lines. Is reload atomic? **No**.
+6. Would the same missing-file result follow from a DB_PROGRAM outage? **Not necessarily**: DB mode has an earlier branch.
+7. What source/runtime evidence would distinguish command acknowledgment from validated new tool geometry? Trace Task-plan synch and read back table/parameters.
+
+## Dependencies, boundaries and next
+Depends on TOOLDB-72, M61-165, G10L11-168, Task/NML fundamentals; no graduation reopened. **First executable priority** remains frozen MOTION-144 only when physically disconnected runner isolation is independently verified; then TOOL-RELOAD-172 A–F or another genuinely unblocked LinuxCNC topic. No LinuxCNC build, runtime, IO/HAL, machine, independent evaluation or Actions; hosted/self-hosted compute **0/0 min**; LAB_COMPUTE_LOG and blind feedback unchanged. Independent personnel-safety authority and OpenPressBrake G0/G1 HOLD preserved.

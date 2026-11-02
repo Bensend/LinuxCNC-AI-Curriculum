@@ -1,0 +1,9 @@
+# 2026-11-02 ~10:36Z — LIMIT3-158 continuation checkpoint
+
+**Active 4000 LinuxCNC-first, NON-GRADUATED.** [LIMIT3-158 source audit](../research/4400_LINUXCNC_LIMIT3_158_LOAD_ONE_CYCLE_DERIVATIVE_STATE_SOURCE_AUDIT_2026-11-02.md) identifies a distinct `limit3` load-initialization state problem: `SET_NEXT_STATE` records the *previous* output, and a one-cycle load jump becomes synthetic velocity on the next callback. Hand oracle with 1 ms, maxv=1, maxa=10, out 0→10 under load predicts next normal output 19.99999. Both pinned stable v2.9.10 and development have the same macro structure, though development uses `out_set`.
+
+**Artifacts:** [stable-only patch](../examples/4000_limit3_158/limit3_load_derivative_reset_v2910.patch), [disconnected eight-case guide](../guides/3100-3400-3600-3800-4000-linuxcnc-limit3-load-derivative-commissioning-2026-11-02.md), [HAL/streamer fixture](../examples/4000_limit3_158/limit3_load_trace.hal) with one- and two-cycle inputs. ALL NOT RUN. First check fixture parsing and timing, then exact output and control. Do not conflate a one-cycle `load` bypass with ordinary constrained motion. No installed-machine conclusion.
+
+**Next highest-value executable:** qualified, physically disconnected `[self-hosted, openpressbrake]` MOTION-144 amplifier-fault/re-enable A–F remains first. If independently qualified compute exists, the existing PID-152, EL7041-150, HAL-STREAM-156 and LIMIT3-158 fixtures can be ranked by distinct information gain; never GitHub-hosted Actions. If qualification remains UNKNOWN, rotate to a distinct source-grounded LinuxCNC topic, not another unexecuted variation of this same issue.
+
+Preserve 1000/2000/F02/3000 graduation, independent personnel-safety authority, OpenPressBrake G0/G1 HOLD, blind evaluator separation and the enabled hourly curriculum. No new lab runtime or external score.

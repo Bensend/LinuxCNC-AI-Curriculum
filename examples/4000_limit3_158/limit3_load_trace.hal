@@ -1,0 +1,24 @@
+# LIMIT3-158 stable v2.9.10 disconnected software-only HAL regression
+# Run from examples/4000_limit3_158; edit the input filename for two-cycle control.
+# NOTE: NOT RUN. Source-derived oracle is in the research document.
+loadrt threads name1=t period1=1000000 fp1=1
+loadrt streamer cfg=fb depth=64
+loadrt limit3
+loadrt sampler cfg=ffb depth=2048
+
+setp limit3.0.min -100
+setp limit3.0.max 100
+setp limit3.0.maxv 1
+setp limit3.0.maxa 10
+
+net command streamer.0.pin.0 => limit3.0.in => sampler.0.pin.0
+net load-request streamer.0.pin.1 => limit3.0.load => sampler.0.pin.2
+net limited-output limit3.0.out => sampler.0.pin.1
+
+addf streamer.0 t
+addf limit3.0 t
+addf sampler.0 t
+start
+
+loadusr halstreamer load_one_cycle.txt
+loadusr -w halsampler -t -n 100

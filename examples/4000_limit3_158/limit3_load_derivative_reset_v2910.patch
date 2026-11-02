@@ -1,0 +1,12 @@
+--- a/src/hal/components/limit3.comp
++++ b/src/hal/components/limit3.comp
+@@ -71,7 +71,9 @@ FUNCTION(_) {
+     if (load) {
+ 	// Apply first order limit
+ 	in_pos_lim = fmin(max_, fmax(min_, invalue));
+-	SET_NEXT_STATE(in_pos_lim, in_pos_lim);
++	out = in_pos_lim;
++	out_old = in_pos_lim;
++	in_pos_old = in_pos_lim;
+ 	return;
+     }

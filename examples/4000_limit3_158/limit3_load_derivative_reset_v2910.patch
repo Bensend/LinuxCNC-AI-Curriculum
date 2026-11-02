@@ -7,6 +7,6 @@
 -	SET_NEXT_STATE(in_pos_lim, in_pos_lim);
 +	out = in_pos_lim;
 +	out_old = in_pos_lim;
-+	in_pos_old = in_pos_lim;
++	in_pos_old = invalue;
  	return;
      }

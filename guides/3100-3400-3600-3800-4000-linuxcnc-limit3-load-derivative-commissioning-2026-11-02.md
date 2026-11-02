@@ -35,7 +35,7 @@ For the two-cycle control, copy the fixture to a temporary file and change the s
 A/B/C/D are the essential proof. A successful `halrun` exit without matching sample rows is not a pass. For C, identify the exact row where `load` falls to zero and use the **next** `limit3` output sampled in that same callback; do not mistake sample sequence or stale FIFO state for a source result. For E/G/H, freeze numeric inputs and acceptance tolerances before any additional execution.
 
 ## Implementation review
-The [stable patch](../examples/4000_limit3_158/limit3_load_derivative_reset_v2910.patch) touches only the load branch. Review the state meaning of `out_old` and `in_pos_old` and verify ordinary `SET_NEXT_STATE` behavior remains unchanged. Compare the actual output delta with `maxv*dt=0.001`; the load callback itself is intentionally exempt, the *next* callback is not.
+The [stable patch](../examples/4000_limit3_158/limit3_load_derivative_reset_v2910.patch) touches only the load branch. Review the state meaning of `out_old` (clamped output position) and `in_pos_old` (the **raw effective input**). When the raw input exceeds `min/max`, storing the clamped value as input history creates a second artificial input velocity on the next callback. Verify ordinary `SET_NEXT_STATE` behavior remains unchanged. Compare the actual output delta with `maxv*dt=0.001`; the load callback itself is intentionally exempt, the *next* callback is not.
 
 ## Scope boundaries
 - Do not connect to a drive, motor, press brake, plasma torch, real Mesa outputs, EtherCAT hardware, or a machine configuration.

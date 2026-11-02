@@ -36,7 +36,7 @@ def build_fixture(function):
 #include <stdio.h>
 #include <stdlib.h>
 typedef struct { const char *name; } lcec_master_t;
-typedef union { uint32_t u32; float flt; unsigned char bit; } mod_value_t;
+typedef union { uint32_t u32; double flt; unsigned char bit; } mod_value_t;
 typedef struct { int id; mod_value_t value; } lcec_slave_modparam_t;
 typedef struct {
     lcec_master_t *master;
@@ -66,7 +66,7 @@ int main(int argc, char **argv) {
     lcec_slave_modparam_t params[2] = {{0}, {0}};
     params[0].id = atoi(argv[1]);
     params[1].id = -1;
-    if (argv[2][0] == 'f') params[0].value.flt = (float)strtod(argv[3], NULL);
+    if (argv[2][0] == 'f') params[0].value.flt = strtod(argv[3], NULL);
     else params[0].value.u32 = (uint32_t)strtoul(argv[3], NULL, 10);
     fail_at = atoi(argv[4]);
     lcec_slave_t slave = {&master, params, "fake"};

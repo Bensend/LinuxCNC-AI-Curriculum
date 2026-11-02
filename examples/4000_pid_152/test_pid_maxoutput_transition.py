@@ -67,7 +67,7 @@ def source_file(body, expect_stale):
     main = """
 static void near(const char *name, double actual, double expected) {
     if (fabs(actual - expected) > 1e-8) {
-        fprintf(stderr, "%s: got %.12g, expected %.12g\\n",
+        fprintf(stderr, "%%s: got %%.12g, expected %%.12g\\n",
                 name, actual, expected);
         exit(3);
     }

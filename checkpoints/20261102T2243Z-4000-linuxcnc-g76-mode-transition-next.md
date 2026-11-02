@@ -1,0 +1,9 @@
+# 2026-11-02 22:43Z — G76-MODE-173 next checkpoint
+
+**Active:** LinuxCNC-first, 4000 NON-GRADUATED. Closed 1000/2000/F02/3000 unchanged. Independent personnel-safety authority and OpenPressBrake G0/G1 HOLD unchanged; hourly enabled.
+
+**New evidence:** [G76-MODE-173 source audit](../research/4400_LINUXCNC_LATHE_173_G76_G7_G8_SAME_BLOCK_DOUBLE_SCALING_SOURCE_AUDIT_2026-11-02.md) establishes two I/J/K normalization sites in stable v2.9.10 and pinned development 67437d8: `convert_lathe_diameter_mode` rescales when the G7/G8 change shares a block with G76; `convert_threading_cycle` then scales again based on new mode. Frozen A/B/C/D source-derived first cutting X: 8.8/8.8/9.4/7.6 mm from radial start 10 mm. Official G76 docs specify diameter vs radius semantics. Upstream `tests/interp/g76` covers ordinary G8, **not** same-block changes. [Four NGC controls and review-only patch](../examples/4000_g76_mode_173/README.md) and [offline reproduction guide](../guides/3200-4000-linuxcnc-g76-g7-g8-same-block-reproduction-2026-11-02.md) prepared; **NOT RUN, PATCH NOT APPLIED**. This is distinct from G76-35/107/108 and ordinary 3200 pass-generation.
+
+**First executable priority remains MOTION-144** only after independent verification of physically disconnected `[self-hosted, openpressbrake]` runner isolation. Then G76-MODE-173: run upstream G76 oracle, four original cases, patched four cases on disposable stable and development interpreters; capture canonical outputs and exit status. Never dispatch GitHub-hosted Actions. If isolation unavailable, select a different unblocked LinuxCNC core question after predecessor/upstream-test scan, not a safety-course task.
+
+**Evidence:** SOURCE/DOC-CONFIRMED static; NUMERIC INFERENCE; TEST-CONFIRMED none; zero LinuxCNC builds/runs, zero machine/evaluator/Actions. LAB_COMPUTE_LOG and FEEDBACK_SCORE_LOG unchanged. Preserve graduated levels and all physical/evaluation gates.

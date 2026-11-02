@@ -1,0 +1,27 @@
+# REVIEW ONLY: source-context checked against LinuxCNC v2.9.10; NOT APPLIED/BUILT/TESTED.
+--- a/src/emc/rs274ngc/interp_convert.cc
++++ b/src/emc/rs274ngc/interp_convert.cc
+@@ -2170,11 +2170,6 @@ int Interp::convert_lathe_diameter_mode(int g_code,
+       {
+         block->x_number /= 2; //Apply scaling now
+       }
+-      if(block->motion_to_be == G_76) {
+-          block->i_number /= 2;
+-          block->j_number /= 2;
+-          block->k_number /= 2;
+-      }
+ #ifdef DEBUG_EMC
+       COMMENT("interpreter: Lathe diameter mode changed to diameter");
+ #endif
+@@ -2186,11 +2181,6 @@ int Interp::convert_lathe_diameter_mode(int g_code,
+       {
+         block->x_number *= 2; //Remove any existing scaling
+       }
+-      if(block->motion_to_be == G_76) {
+-          block->i_number *= 2;
+-          block->j_number *= 2;
+-          block->k_number *= 2;
+-      }
+ #ifdef DEBUG_EMC
+       COMMENT("interpreter: Lathe diameter mode changed to radius");
+ #endif

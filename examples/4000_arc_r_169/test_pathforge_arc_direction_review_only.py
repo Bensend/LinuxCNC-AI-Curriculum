@@ -47,3 +47,31 @@ def test_arc_direction_preserves_reversed_major_sweep(
     )
     assert output.startswith(expected_g + " "), output
     assert expected_r in output, output
+
+
+def test_builder_connected_line_reverses_major_arc_without_changing_sweep():
+    """Full DXF -> component -> greedy arrangement -> R-post witness; NOT RUN.
+
+    The leftmost LINE starts the component and ends at the ARC's natural end.
+    The ARC must therefore be traversed backward (CW 270 degrees).
+    """
+    import ezdxf
+
+    from pathforge.codegen.builder import GcodeBuilder
+    from pathforge.models import ConversionParams
+
+    doc = ezdxf.new("R2010")
+    msp = doc.modelspace()
+    msp.add_line((-1.0, -1.0), (0.0, -1.0))
+    msp.add_arc(center=(0.0, 0.0), radius=1.0, start_angle=0, end_angle=270)
+
+    result = GcodeBuilder(ConversionParams()).build(doc)
+    arcs = [
+        line.strip()
+        for line in result.gcode.splitlines()
+        if line.startswith(("G2 ", "G3 "))
+    ]
+    assert result.entity_count == 2
+    assert result.component_count == 1
+    assert len(arcs) == 1, arcs
+    assert arcs[0].startswith("G2 X1.000 Y0.000 R-1.000 "), arcs

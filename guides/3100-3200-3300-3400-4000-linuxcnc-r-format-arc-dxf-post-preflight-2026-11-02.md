@@ -27,3 +27,6 @@
 
 ## Release gates
 **No source-only pass is a production-post pass.** Before trusting any generated NC, require full DXF entity coverage, source→NC geometry manifest, modal-state and arc-center comparison, process-specific post validation, independent motion/limit simulation, and machine-specific qualified commissioning. Independent personnel safety retains authority. Runner isolation for `[self-hosted, openpressbrake]` remains unverified, so all executable cases are pending.
+
+## Integration fixture extension
+The review-only pytest also includes a **builder-level DXF fixture**, not merely a direct writer call. It creates an in-memory R2010 LINE+270° ARC, invokes `GcodeBuilder.build`, checks that both entities are present in one connected component, and freezes the reversed-major-arc NC command. This catches a future change in optimizer ordering as well as writer direction. **NOT RUN.** A separate small-feature preflight should reject cases where two-decimal endpoint normalization collapses a genuine ARC to identical start/end, even when output precision is three decimals.

@@ -1,0 +1,7 @@
+# 4000 LinuxCNC — Non-finite arc propagation review: interpreter → canonical → Task
+
+**2026-11-02 | SOURCE-ONLY | NOT RUN.** Companion to [TASK-NAN-171](../research/4400_LINUXCNC_TASK_NAN_171_ARC_NONFINITE_CANON_TASK_DROP_STATUS_SOURCE_AUDIT_2026-11-02.md) and [ARC-R-169](../research/4400_LINUXCNC_ARC_R_169_NEAR_SEMICIRCLE_ZERO_RADIUS_AND_REVERSED_MAJOR_DXF_POST_SOURCE_AUDIT_2026-11-02.md).
+
+Trace a deliberately invalid R0/tiny-chord arc on paper through four boundaries: `arc_data_r` (zero radius division), `convert_arc2` (canonical arc call), `emccanon.cc::ARC_FEED` (potential non-finite center and `canonUpdateEndPoint`), `taskintf.cc::emcTrajCircularMove` (compiled `ISNAN_TRAP` returns 0 and **does not send motion** for a NaN center). Task's issue path treats zero as non-error. Mark the distinction between a **source-confirmed conditional branch** and an **observed runtime path**. Do not infer actual motor movement, machine safety, or a successful interpreter run from these sources.
+
+A regression must independently assert: (a) malformed arc rejected before canonical motion, (b) non-finite center/vel/acc never sent to realtime, (c) Task returns a nonzero error on rejected motion, and (d) accepted canonical position cannot advance past an unaccepted motion. Run only in a qualified disconnected/sanitizer environment after MOTION-144 runner-isolation gate. **No physical machine, no GitHub-hosted runners, no production change.**

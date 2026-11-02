@@ -17,3 +17,7 @@
 3. Before any upstream documentation proposal, validate patch application and the table-order explanation on an isolated build, confirm developer conventions and seek maintainer review; the current candidate is static only.
 
 Preserve 1000/2000/F02/3000 graduation, independent personnel-safety authority, OpenPressBrake G0/G1 HOLD, evaluator separation and the enabled hourly curriculum. No workflow or scheduling change.
+
+## Same-session second source-depth continuation: BIQUAD-160
+
+[BIQUAD-160 pinned stable/development audit](../research/4400_LINUXCNC_BIQUAD_160_NEGATIVE_CUTOFF_VALID_NONFINITE_COEFFICIENT_SOURCE_AUDIT_2026-11-02.md) finds a **distinct** `biquad.comp` generated-filter validity gap: with 1 ms period, `type=1, f0=-250 Hz, Q=0.5`, the rejection predicate accepts the negative cutoff; `alpha≈-1`, `a0≈0`, and coefficients are divided by `a0` before `valid=1`. This is a source-derived potential nonfinite filter state, **NOT an observed HAL output**. The official manpage incorrectly describes `f0>sampleRate/2` as required while the source rejects that range; `enable` only recalculates on a FALSE→TRUE edge. [A–H commissioning guide](../guides/4000-linuxcnc-biquad-filter-coefficient-validity-commissioning-2026-11-02.md) reuses upstream `tests/biquad/test.hal`, which covers direct default identity but not the new invalid-cutoff case. No new runtime/evaluator/compute evidence; all cases NOT RUN. Preserve LINC-159 as the primary session topic and both artifacts as non-graduated.

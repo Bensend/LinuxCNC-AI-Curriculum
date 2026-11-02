@@ -1,7 +1,7 @@
 diff --git a/src/hal/components/pid.c b/src/hal/components/pid.c
 --- a/src/hal/components/pid.c
 +++ b/src/hal/components/pid.c
-@@ -658,7 +658,9 @@ static void calc_pid(void *arg, long period)
+@@ -659,7 +659,9 @@ static void calc_pid(void *arg, long period)
  	    } else {
  		pid->limit_state = 0.0;
  	    }

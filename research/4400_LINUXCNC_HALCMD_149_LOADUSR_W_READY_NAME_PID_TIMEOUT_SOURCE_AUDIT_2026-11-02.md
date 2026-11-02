@@ -26,6 +26,10 @@ Actual upstream simulation: [`configs/sim/axis/halui_pyvcp/pyvcp.hal`](https://g
 - **Readiness is not continuous:** after `-W` returns, the process may later exit or lose its upstream device. The function does not establish an ongoing health/freshness contract.
 - **Fork failure corner:** `hal_systemv_nowait` returns -1 on fork failure; `do_loadusr_cmd` does not explicitly check negative PID before entering the wait path. With `-W`, `waitpid(-1,...)` semantics and status handling need a separate bounded test. Do not conflate this source concern with observed startup failure.
 
+## Python HAL implementation witness and retained fixture
+
+Pinned stable [`src/hal/halmodule.cc`](https://github.com/LinuxCNC/linuxcnc/blob/86cdca76fa2a36274c432caa21952b23c267989a/src/hal/halmodule.cc), blob `b37a3c940705f8c4df0a7cf03b4d1a8470c91bdc`, lines 181–207 (`hal.component(name)` calls `hal_init`), 456–479 (`ready()` calls `hal_ready`; `exit()` calls `hal_exit`) and 541–560 (Python methods) confirms the exact userspace readiness producer. A [minimal, unexecuted Python fixture](../examples/4000_halcmd_149/hal_ready_fixture.py) and [bounded A–D run card](../examples/4000_halcmd_149/README.md) now preserve the actual call sequence without requiring a physical machine. They are **NOT RUN**, not test evidence.
+
 ## Reproducible software-only acceptance matrix
 
 | Case | Test component behavior | Expected source-level observation |

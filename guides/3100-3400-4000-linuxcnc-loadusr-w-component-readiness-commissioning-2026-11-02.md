@@ -14,6 +14,10 @@ Stable [`configs/sim/axis/halui_pyvcp/pyvcp.hal`](https://github.com/LinuxCNC/li
 4. For normal machine configuration, explicitly name nondefault components with `loadusr -Wn component-name executable ...`; ensure `loadusr` appears before `net` commands referencing its pins. After startup, use a separate heartbeat/freshness/status contract if the device must remain available.
 5. For a real machine, keep independent personnel-safety authority separate from userspace HAL process health. A ready GUI does not establish drive, actuator, sensor or safety readiness.
 
+## Retained reproducible fixture
+
+The [minimal Python component](../examples/4000_halcmd_149/hal_ready_fixture.py) and [A–D run card](../examples/4000_halcmd_149/README.md) use the actual `hal.component` / `newpin` / `ready` / `exit` binding from pinned `halmodule.cc`. This is a static **NOT RUN** artifact; all negative tests require a supervising external timeout. It does not simulate a real GUI, motion, hardware, or personnel-safety function.
+
 ## Evidence ledger and acceptance
 
 Record pinned LinuxCNC commit, source blob, sim config identity, exact HAL command, component name, process ID, `halcmd` exit, HAL ready state, external timeout and raw logs. A passing `-W` case is **startup registration evidence only**. The upstream getopt-reset test is an unrelated control and was inspected, NOT RUN. No local or hosted compute was consumed in this session.

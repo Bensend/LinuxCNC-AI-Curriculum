@@ -40,3 +40,9 @@ Do not wire `iocontrol.0.tool-number`, `tool-from-pocket`, `linuxcnc.stat().tool
 ## Evidence acceptance
 
 Pass a case only with pinned source/config/tool table, full ordered MDI and Task logs, expected-versus-actual HAL/status/parameter snapshots, LinuxCNC exit status, and isolation witness. A single value changing is insufficient. A missing pin, remapped M61, custom IO implementation, or RETAIN_G43 enabled invalidates the stock upstream oracle unless separately accounted for. Record actual self-hosted job start/end in LAB_COMPUTE_LOG only after an authoritative execution. No hosted fallback.
+
+## K — QtVCP restart-tool GUI handoff (source-only, NOT RUN)
+
+The upstream stable QtLathe **test screen** `share/qtvcp/screens/qtlathe/qtlathe_handler.py` calls `M61 Qn` alone on its first `all_homed` reload path and its tool-selection button. Stable QtDragon and development QtDragon Lathe issue `M61 Qn G43` on comparable paths. Therefore **do not infer tool-length reapplication from a GUI's “Reload Tool” label**. Inspect the actual handler, `[RS274NGC]RETAIN_G43`, active G43 state, remap configuration and tool table. Capture a before/after `linuxcnc.stat().tool_offset` and coordinate snapshot in an isolated simulation.
+
+The inspected stable/development QtLathe handler files also *use* `self.first_turnon`, `self.reload_tool`, and `self.last_loaded_program` without **file-local initialization**, unlike QtDragon. This is a conditional source-review flag, **not** a proven runtime failure: trace framework injection and execute the homing callback in a disconnected GUI before asserting an exception. An absent or failed callback cannot be treated as evidence that the tool was reidentified. See research addendum 165D for pinned source.

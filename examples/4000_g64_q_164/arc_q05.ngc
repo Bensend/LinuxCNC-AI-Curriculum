@@ -1,0 +1,7 @@
+(G64-Q-164: SIMULATION ONLY. Contains arc motion. Never run on machine.)
+G21 G90 G17 G91.1 G94 G40 G49 G80
+G64 P0.01 Q0.5
+G0 X0 Y0
+F600
+G2 X0.5 Y0 I0.25 J0
+M2

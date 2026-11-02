@@ -24,7 +24,7 @@ CAM postprocessors may emit thousands of small line segments from DXF/SVG/nestin
 | D | `G61` before the same contour | no naive-CAM chaining | compare with A; exact-path planner is a separate issue |
 | E | change F between B and C | `SET_FEED_RATE` flushes pending chain | feed-change control, count feed moves |
 | F | insert G0 between segments | `STRAIGHT_TRAVERSE` flushes chain | trace and start-state control |
-| G | G17 shallow arc with chord deviation between P and Q | source predicts arc→two lines for Q high; Q0 preserves circular move | Task canonical message types; version, units, geometry |
+| G | [G17 semicircle Q0.5](../examples/4000_g64_q_164/arc_q05.ngc) versus [Q0](../examples/4000_g64_q_164/arc_q0.ngc), r=0.25 mm | Q0.5 source predicts two chord vertices chained to one straight feed; Q0 preserves circular move | Task canonical message types; version, units, geometry |
 | H | development G68 active, G17 shallow arc | arc simplification branch disabled under G68 | dev-only control; do not use on stable |
 
 **Oracle integrity:** Predictions are declared before running. Mark `PASS`, `FAIL`, or `HARNESS INVALID` only from retained evidence. An unconfigured simulator or a GUI screenshot is not an authoritative canonical trace. Tests A–H remain NOT RUN; no grader or blind-evaluation result exists.

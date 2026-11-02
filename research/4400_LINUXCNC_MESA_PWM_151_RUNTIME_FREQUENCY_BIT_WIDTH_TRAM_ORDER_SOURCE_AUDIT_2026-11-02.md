@@ -28,15 +28,22 @@ The stable `hostmot2.c::hm2_write` executes:
 ```text
 hm2_pwmgen_prepare_tram_write(hm2)  // uses OLD pwm_bits
 ...
-hm2_tram_write(hm2)                 // writes OLD-width-encoded value
+hm2_tram_write(hm2)                 // queues OLD-width value; PCI fallback writes immediately
 ...
 hm2_pwmgen_write(hm2)               // notices new pwm_frequency
   -> hm2_pwmgen_force_write(hm2)
      -> hm2_pwmgen_handle_pwm_frequency(hm2)  // changes pwm_bits
      -> write PWM mode/master-rate registers
+hm2_finish_write(hm2)               // flushes queued writes where LLIO supports batching
 // next servo callback:
 hm2_pwmgen_prepare_tram_write(hm2)  // now uses NEW pwm_bits
 ```
+### Low-level transport qualification: PCI is not Ethernet
+
+Follow-up inspection corrected an overly broad description of `hm2_tram_write` as an immediate transmission. Stable [`tram.c`](https://github.com/LinuxCNC/linuxcnc/blob/v2.9.10/src/hal/drivers/mesa-hostmot2/tram.c), blob **`d060f6cbb448b98f8d42bb54ccb76037e07f765e`**, lines 189–213, calls `llio->queue_write` for each TRAM entry and leaves the flush to `hm2_finish_write`. In [`hostmot2.c`](https://github.com/LinuxCNC/linuxcnc/blob/v2.9.10/src/hal/drivers/mesa-hostmot2/hostmot2.c#L1187-L1190), `dummy_queue_write` falls back to an immediate `llio->write` for low-level drivers without a queue. The [`hm2_pci.c`](https://github.com/LinuxCNC/linuxcnc/blob/v2.9.10/src/hal/drivers/mesa-hostmot2/hm2_pci.c) source, blob **`a2082286e8cdd61b72da1e9fc41b11ba449e51da`**, exports `llio.write` but does not assign a queue writer; thus the PCI fallback writes the old-width value immediately before later mode writes.
+
+By contrast, stable [`hm2_eth.c`](https://github.com/LinuxCNC/linuxcnc/blob/v2.9.10/src/hal/drivers/mesa-hostmot2/hm2_eth.c), blob **`1c338be89cb9620a0b6f23c8c21c5e137afaabdc`**, lines 994–1061, assigns `queue_write` and `send_queued_writes`. In realtime context its `llio.write` **also enqueues** (`rtapi_task_self() >= 0`), and `hm2_finish_write` transmits the queued register operations in one packet. Therefore **PCI and Ethernet share the stale-width value calculation, but not the same packet/send timing**. Whether the FPGA applies the batched writes atomically is **UNKNOWN**. Do not call the Ethernet case two separate network transmissions or claim that PCI behavior proves Ethernet waveform timing.
+
 **SOURCE-CONFIRMED:** At a parameter change that selects a different `pwm_bits`, one `hm2.write` invocation can submit a value encoded for the previous width, followed by mode/frequency registers encoded for the new width. This is a **cross-register temporal mismatch**; it is not proof of an external waveform glitch, because bus ordering, FPGA buffering, register interpretation and external hardware are unmeasured. At a same-width frequency change the width mismatch does not occur, although rate-register changes still have device-specific timing.
 
 ## Quantitative discriminator (hypothetical ClockHigh = 100 MHz)
@@ -58,7 +65,7 @@ The same code allows very low requested frequencies with coarse DDS resolution. 
 
 ## Evidence ledger and bounded follow-up
 
-- **SOURCE-CONFIRMED:** exact stable/development call order, frequency-to-bit-width selection, truncation, DDS clamp, width-dependent PWM value conversion, real Smithy HAL PWM startup topology.
+- **SOURCE-CONFIRMED:** exact stable/development call order, PCI immediate-write fallback versus Ethernet queued batch, frequency-to-bit-width selection, truncation, DDS clamp, width-dependent PWM value conversion, real Smithy HAL PWM startup topology.
 - **DOC-CONFIRMED:** shared, runtime-writable PWM frequency and board-dependent limits.
 - **INFERENCE:** a dynamic crossing of a width threshold can produce a transient externally visible PWM waveform/duty change; conditional on firmware and transport timing.
 - **UNKNOWN:** whether real hardware buffers mode/value atomically, the resulting duty or pulse count, measured carrier, drive/VFD response, and whether any application changes this parameter while enabled.

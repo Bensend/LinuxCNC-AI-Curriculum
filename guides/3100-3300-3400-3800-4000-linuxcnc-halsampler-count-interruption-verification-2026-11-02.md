@@ -21,8 +21,8 @@ This produces one signed value per callback. Use `halrun <file.hal>` as in upstr
 | E. Finite natural completion with proposed patch | remains exit 0 | exact row count |
 | F. Indefinite `halsampler` stopped by SIGTERM | original exit 0; patch nonzero, consistent with development man page | child status |
 | G. Broken stdout pipe / SIGPIPE | stop handler is registered; output/stdio buffering may affect timing | actual child status, row count, stdout error; **do not assume** deterministic signal timing |
-| I. Compare `sampler.0.sample-num` with `halsampler -t` tags | docs promise automatic HAL pin increment; source exports/initializes but does not update pin; stream tags use `fifo->this_sample` | HAL pin snapshots and tagged output, compare counters separately |
 | H. Missing output file | unchecked `open/dup2` in both revisions; behavior requires execution | syscall trace and child status, no confident predicted exit code |
+| I. Compare `sampler.0.sample-num` with `halsampler -t` tags | docs promise automatic HAL pin increment; source exports/initializes but does not update pin; stream tags use `fifo->this_sample` | HAL pin snapshots and tagged output, compare counters separately |
 
 For B/C, wait until the userspace component has initialized and at least one row is recorded; signal during `ignore_sig` is explicitly excluded. If using GNU `timeout`, `--preserve-status` is necessary to avoid confusing wrapper timeout code 124 with the child process status. Better still launch the process and `kill -TERM <child-pid>` after confirming startup, then `wait` for its status. Avoid using `head` to provoke SIGPIPE as the primary oracle because buffering and pipe closure complicate interpretation.
 

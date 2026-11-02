@@ -1,0 +1,6 @@
+(M1XX-162 no-motion precision and sequential completion probe)
+M150 P1 Q0
+M150 P0.0000004 Q0
+M150 P0.0000006 Q0
+M150 P12.3456789 Q0
+M2

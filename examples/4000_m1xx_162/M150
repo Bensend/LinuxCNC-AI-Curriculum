@@ -1,0 +1,33 @@
+#!/usr/bin/env python3
+"""No-motion LinuxCNC M150 Task/argv/exit fixture. No hardware access."""
+import os
+import signal
+import sys
+import time
+
+
+def on_sigint(signum, frame):
+    print("M150 received SIGINT pid=%d" % os.getpid(), flush=True)
+    raise SystemExit(130)
+
+
+signal.signal(signal.SIGINT, on_sigint)
+print("M150 pid=%d raw_argv=%r" % (os.getpid(), sys.argv[1:]), flush=True)
+if len(sys.argv) != 3:
+    print("M150 expected exactly P and Q arguments", file=sys.stderr, flush=True)
+    raise SystemExit(64)
+try:
+    p = float(sys.argv[1])
+    q = float(sys.argv[2])
+except ValueError:
+    print("M150 invalid numeric arguments", file=sys.stderr, flush=True)
+    raise SystemExit(65)
+print("M150 parsed P=%r Q=%r" % (p, q), flush=True)
+if q == 2:
+    time.sleep(3)
+elif q == 7:
+    raise SystemExit(7)
+elif q == 9:
+    time.sleep(8)
+print("M150 completed", flush=True)
+raise SystemExit(0)

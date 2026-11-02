@@ -3,7 +3,7 @@
 
 Use alongside [STEPGEN-153 pinned source investigation](../research/4400_LINUXCNC_STEPGEN_153_MESA_NS_TO_TICKS_TRUNCATION_AND_MAXVEL_LATCH_SOURCE_AUDIT_2026-11-02.md). This guide is a **disconnected design review**, not a machine startup authorization. Do not change live pulse timing on an energized drive.
 
-> **Firmware contract correction:** [STEPGEN-154](../research/4400_LINUXCNC_STEPGEN_154_FIRMWARE_NPLUS1_PULSE_AND_HOST_MAXRATE_RECONCILIATION_2026-11-02.md) inspected pinned HostMot2 firmware `src/regmap` and found pulse active/idle registers encode **N+1 clock periods**. At hypothetical 100 MHz, HAL 15 ns → host register 1 → **nominal 20 ns**, not 10 ns. This is register-map evidence, **not an actual bitfile waveform measurement**. Host `physical_maxvel` still uses the original requested ns and can exceed the rate inferred from N+1 pulse periods.
+> **Firmware contract correction:** [STEPGEN-154](../research/4400_LINUXCNC_STEPGEN_154_FIRMWARE_NPLUS1_PULSE_AND_HOST_MAXRATE_RECONCILIATION_2026-11-02.md) inspected pinned HostMot2 firmware `src/regmap` and found pulse active/idle registers encode **N+1 clock periods**. At hypothetical 100 MHz, HAL 15 ns → host register 1 → **nominal 20 ns**, not 10 ns. This is an **archived (2021) firmware register-map** contract, **not an actual modern bitfile waveform measurement**. The regmap also says **do not use register 0** for pulse width; 9 ns is a negative/test-only case. Host `physical_maxvel` still uses the original requested ns and can exceed the rate inferred from N+1 pulse periods.
 
 ## Architecture and parameter ownership
 `joint.N.motor-pos-cmd` (motion) → optional PID/position control HAL → `hm2_<board>.0.stepgen.NN.position-cmd` → HostMot2 velocity planning/limit → step-rate DDS TRAM → Mesa FPGA → STEP/DIR output → external stepper/servo drive. The HAL `stepgen.NN.position-fb` and `velocity-fb` do **not** independently confirm actual motor travel. For a real wiring example, follow the existing [MR-1 7i96S source/config audit](../research/4400_LINUXCNC_HAL_20_MR1_7I96S_PID_PROBE_SSR_POSTGUI_ORDER_SOURCE_AUDIT_2026-10-31.md); do not assume its timing values or pin assignments match another board.
@@ -29,7 +29,7 @@ Only after verifying an actually isolated `[self-hosted, openpressbrake]` runner
 |---|---|---|---|
 | A | 100 MHz, `steplen=15` | pulse-width register = 1 | fractional truncation |
 | B | `steplen=10` | register = 1 | exact boundary |
-| C | `steplen=9` | register = 0 | zero-count firmware interpretation remains UNKNOWN |
+| C | `steplen=9` | register = 0 | regmap warns not to use 0 for pulse width; **test-only** |
 | D | `dirsetup=25`, `dirhold=25`, `stepspace=25` | each corresponding register = 2 | all four conversions |
 | E | `maxvel=600`, 1000/1000 ns, scale 1000 | HAL cap rewritten 500 | persistent explicit cap |
 | F | after E, relax to 500/500 ns | HAL cap still 500 | no automatic restoration |

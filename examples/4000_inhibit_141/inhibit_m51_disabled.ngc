@@ -1,0 +1,9 @@
+(INHIBIT-141 B: DISCONNECTED SIMULATION ONLY - M51 disabled)
+(Assert motion.feed-inhibit TRUE via simulated HAL writer BEFORE running)
+(Keep motion.feed-hold FALSE and machine state ready)
+G21 G90 G94 G17 G40 G49 G80
+M51 P0
+M53 P1
+F60
+G1 X1
+M2

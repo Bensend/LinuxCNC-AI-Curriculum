@@ -1,0 +1,11 @@
+diff --git a/src/hal/hal_lib.c b/src/hal/hal_lib.c
+--- a/src/hal/hal_lib.c
++++ b/src/hal/hal_lib.c
+@@ -4034,7 +4034,7 @@ int hal_stream_depth(hal_stream_t *stream) {
+     int out = stream->fifo->out;
+     int in = stream->fifo->in;
+     int result = in - out;
+-    if(result < 0) result += stream->fifo->depth - 1;
++    if(result < 0) result += stream->fifo->depth;
+     return result;
+ }

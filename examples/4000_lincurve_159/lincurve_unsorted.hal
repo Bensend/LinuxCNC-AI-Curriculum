@@ -1,0 +1,14 @@
+# LINC-159: intentionally INVALID breakpoint order. Disconnected test only.
+# LinuxCNC v2.9.10 or pinned development. Do not attach to machine HAL.
+loadrt threads name1=servo-thread period1=1000000 fp1=1
+loadrt lincurve count=1 personality=4
+setp lincurve.0.x-val-00 0
+setp lincurve.0.y-val-00 0
+setp lincurve.0.x-val-01 5
+setp lincurve.0.y-val-01 50
+setp lincurve.0.x-val-02 3
+setp lincurve.0.y-val-02 300
+setp lincurve.0.x-val-03 10
+setp lincurve.0.y-val-03 100
+addf lincurve.0 servo-thread
+start

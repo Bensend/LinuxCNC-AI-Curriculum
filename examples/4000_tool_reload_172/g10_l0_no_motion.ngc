@@ -1,0 +1,9 @@
+%
+(G10 L0 no-motion tooldata reload diagnostic; simulation ONLY)
+(Precondition: no tool loaded; TOOL_TABLE points to disposable test file)
+G21 G90 G40 G49
+(debug, BEFORE tool=#5400 ztool=#5403)
+G10 L0
+(debug, AFTER tool=#5400 ztool=#5403)
+M2
+%

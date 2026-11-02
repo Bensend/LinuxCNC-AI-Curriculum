@@ -1,7 +1,7 @@
 diff --git a/src/emc/task/taskclass.cc b/src/emc/task/taskclass.cc
 --- a/src/emc/task/taskclass.cc
 +++ b/src/emc/task/taskclass.cc
-@@ -539,7 +539,10 @@ int Task::emcToolLoadToolTable(const char *file)//EMC_TOOL_LOAD_TOOL_TABLE_TYPE
+@@ -540,6 +540,9 @@ int Task::emcToolLoadToolTable(const char *file)//EMC_TOOL_LOAD_TOOL_TABLE_TYPE
  {
      if(!strlen(file)) file = tooltable_filename;//use filename from ini if none is provided
 -    tooldata_load(file);
@@ -15,7 +15,7 @@ diff --git a/src/emc/task/taskclass.cc b/src/emc/task/taskclass.cc
 diff --git a/src/emc/tooldata/tooldata_common.cc b/src/emc/tooldata/tooldata_common.cc
 --- a/src/emc/tooldata/tooldata_common.cc
 +++ b/src/emc/tooldata/tooldata_common.cc
-@@ -295,6 +295,13 @@ int tooldata_load(const char *filename)
+@@ -296,6 +296,13 @@ int tooldata_load(const char *filename)
  
      if(!filename) return -1;
  
@@ -29,7 +29,7 @@ diff --git a/src/emc/tooldata/tooldata_common.cc b/src/emc/tooldata/tooldata_com
      // clear out tool table
      // (Set vars to indicate no tool in pocket):
      tooldata_reset();
-@@ -302,13 +309,6 @@ int tooldata_load(const char *filename)
+@@ -303,10 +310,4 @@ int tooldata_load(const char *filename)
 -    // open tool table file
 -    if (NULL == (fp = fopen(filename, "r"))) {
 -        fprintf(stderr, "%s, %d: Failed to open tool table file '%s': %s\n",

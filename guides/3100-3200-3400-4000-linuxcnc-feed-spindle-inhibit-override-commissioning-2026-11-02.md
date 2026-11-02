@@ -1,5 +1,7 @@
 # 3100/3200/3400/4000 — LinuxCNC feed/spindle inhibit versus override commissioning
 
+> **2026-11-02 DUPLICATE EVIDENCE NOTICE:** This guide repeats preexisting [OVERRIDE-93/94/95 acceptance](4000-linuxcnc-m51-inhibit-coupling-disconnected-acceptance-2026-11-01.md). It is retained for provenance but its A–G cases must not be counted as independent validation or dispatched redundantly. The distinct G33/G33.1/G76 continuation is [THREAD-142](3200-4000-linuxcnc-threading-spindle-override-version-and-global-scope-2026-11-02.md).
+
 **Source-linked companion to [INHIBIT-141](../research/4400_LINUXCNC_INHIBIT_141_FEED_SPINDLE_INHIBIT_SS_OVERRIDE_BITMASK_SOURCE_AUDIT_2026-11-02.md).** This is a *disconnected normal-control* exercise, **NOT RUN**, not a personnel-safety acceptance procedure.
 
 ## The machine-control question

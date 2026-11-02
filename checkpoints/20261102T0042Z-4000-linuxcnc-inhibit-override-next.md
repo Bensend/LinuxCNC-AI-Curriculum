@@ -1,5 +1,7 @@
 # 2026-11-02 ~00:42Z — LinuxCNC inhibit/override bitmask next checkpoint
 
+> **SUPERSEDED 2026-11-02:** INHIBIT-141 duplicates earlier OVERRIDE-93/94/95. Continue from [THREAD-142 checkpoint](20261102T0137Z-4000-linuxcnc-thread-override-next.md); do not dispatch duplicate O93/O94/O95 tests.
+
 **LINUXCNC FIRST | 4000-LC-INHIBIT-141 | 3100/3200/3400 transfer | NON-GRADUATED.** [Source audit](../research/4400_LINUXCNC_INHIBIT_141_FEED_SPINDLE_INHIBIT_SS_OVERRIDE_BITMASK_SOURCE_AUDIT_2026-11-02.md), [disconnected guide](../guides/3100-3200-3400-4000-linuxcnc-feed-spindle-inhibit-override-commissioning-2026-11-02.md), [A](../examples/4000_inhibit_141/inhibit_m51_enabled.ngc) and [B](../examples/4000_inhibit_141/inhibit_m51_disabled.ngc) fixtures.
 
 ## Established this session

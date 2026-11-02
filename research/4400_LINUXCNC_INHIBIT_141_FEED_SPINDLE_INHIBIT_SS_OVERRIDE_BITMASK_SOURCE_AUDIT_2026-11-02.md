@@ -1,5 +1,7 @@
 # 4000-LC-INHIBIT-141 — Feed/spindle inhibit accidentally coupled to spindle-override bit
 
+> **2026-11-02 EVIDENCE CORRECTION — DUPLICATE, NOT NEW:** The exact feed/spindle inhibit mask mechanism and selected-spindle Task loss were already published as [OVERRIDE-93](4400_LINUXCNC_OVERRIDE_93_FEED_INHIBIT_SS_BIT_COUPLING_SOURCE_AUDIT_2026-11-01.md), [OVERRIDE-94](4400_LINUXCNC_OVERRIDE_94_SPINDLE_INHIBIT_SS_BIT_SPEED_ON_SOURCE_AUDIT_2026-11-01.md), and [OVERRIDE-95](4400_LINUXCNC_OVERRIDE_95_M51_SELECTED_SPINDLE_DROPPED_AT_TASK_SOURCE_AUDIT_2026-11-01.md). This document is a later **source reinspection** at development 06864e, not a first discovery, independent confirmation, or additional competency. Its A–G runtime tests overlap preexisting [O93–O95 cases](../guides/4000-linuxcnc-m51-inhibit-coupling-disconnected-acceptance-2026-11-01.md); do not rerun duplicates. [THREAD-142](4400_LINUXCNC_THREAD_OVERRIDE_142_G33_G331_G76_GLOBAL_LOCK_VERSION_SOURCE_AUDIT_2026-11-02.md) covers the distinct synchronized-operation follow-through.
+
 **2026-11-02 UTC | LinuxCNC-first, non-graduated | 3100 mills, 3200 lathes, 3400 routers, 4000 motion/HAL.** Static source comparison only. **SOURCE-CONFIRMED expression and flag semantics; INFERENCE for controller outcome; runtime NOT RUN; physical machine UNKNOWN.** No GitHub Actions, machine, simulation or independent evaluation.
 
 ## Provenance and predecessor audit

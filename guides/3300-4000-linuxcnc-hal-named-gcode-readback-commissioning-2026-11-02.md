@@ -29,7 +29,7 @@ Then load [read_hal_signal.ngc](../examples/4000_hal_named_163/read_hal_signal.n
 | E | Set signal between blocks, with and without documented `M66 E0 L0` synchronization | A state synchronization should move the HAL read nearer the execution boundary | Existing M66-138/140 findings mean this is not a universal freshness guarantee |
 | F | Isolated ASan build of **actual stable** `fetch_hal_param`, lengths 42,43,47,48 | N=42 in-bounds; N>=43 enters OOB write mechanism | Build/harness must isolate interpreter/HAL, not a live machine |
 | G | Same exact inputs after applying review-only patch | <=47 accepted by length guard, >47 rejected without stack write | Success of HAL lookup depends on actual named object |
-| H | Development embedding without HAL attach | `hal_is_init` guard reports missing HAL initialization | Test only an isolated caller; standard Task may already attach |
+| H | Development embedding without HAL attach | `hal_is_init` guard reports missing HAL initialization | Test only an isolated caller; native Python `_hal` module initialization calls `hal_lib_init` and registers `hal_lib_exit` at process exit, but standard Task/GUI attachment must be checked in the actual process |
 | I | Pin, signal, parameter of unique names | Value conversion and lookup path match pinned source | Do not assume identical names can coexist |
 | J | QtPlasmaC feed from real sample | Post uses `F#<_hal[plasmac.cut-feed-rate]>` before M3 | Material/unit/torch correctness remains separately unproved |
 

@@ -1,4 +1,4 @@
-# 2026-11-02 ~23:45Z — CYCLE-174 next checkpoint
+# 2026-11-02 23:40Z — CYCLE-174 next checkpoint
 
 **Priority:** LinuxCNC implementation first; active 4000 NON-GRADUATED, 3100/3400 transfer. 1000/2000/F02/3000 remain GRADUATED/CLOSED. Preserve independent personnel-safety authority and OpenPressBrake G0/G1 HOLD. Recurring hourly curriculum stays enabled.
 
@@ -9,3 +9,5 @@
 **If runner remains unqualified:** rotate to a distinct, nonduplicative LinuxCNC core source question (prefer HAL realtime / real Mesa configs or interpreter Task consistency after checking prior research and historical lab ledger). Do not manufacture safety-course work or reopen graduated levels.
 
 **Evidence:** SOURCE/DOC-CONFIRMED, standalone mode/velocity INFERENCE, TEST-CONFIRMED none; no LinuxCNC build, simulation, machine, evaluator or Actions. LAB_COMPUTE_LOG and FEEDBACK_SCORE_LOG unchanged; hosted/self-hosted 0/0 min this session.
+
+**174B same-session follow-through:** `emcTaskAbort` queues `EMC_TASK_PLAN_SYNCH`; `on_abort/reset→ON_RESET` drops segments but does not reset `canon.motionMode`; `interp.synch` imports that canonical mode into `_setup.control_mode`. A failed G82 can thus plausibly carry canonical EXACT across abort into interpreter status despite Task having discarded the EXACT planner message. [174B audit addendum](../research/4400_LINUXCNC_CYCLE_TERM_174_G611_G81_G82_CANONICAL_MODE_RESTORE_ERROR_SOURCE_AUDIT_2026-11-02.md) freezes disconnected **G** MDI abort/synch mode comparison, not yet run. Next runtime oracle must separately inspect canonical, interpreter and TP modes; never claim physical motion from one of them alone.

@@ -14,7 +14,7 @@ The implementation-level invariant for glitch-free width transitions would requi
 
 Use the **hypothetical** `ClockHigh=100000000` Hz, not an asserted 5I20 hardware descriptor. For each frequency `f`, select the first `bits` in 12,11,10,9 for which `floor(f*65536*2^bits/100000000)<65536`. If none fits, use 9 bits and DDS=65535. Compute `actual=100000000*DDS/(65536*2^bits)`.
 
-For `value=0.5`, `scale=1`, `enable=TRUE`, `offset_mode=0`, `dither=FALSE`, compute `encoded=floor(0.5*(2^bits-1)*65536)`. Expected source-derived values: 20 kHz → **12 bits**, DDS **53687**, encoded **134184960**; 60 kHz → **10 bits**, DDS **40265**, encoded **33521664**. A frequency change across this boundary will cause the first `hm2.write` to prepare the old-width encoded value and only then program the new mode. The **next** `hm2.write` prepares the new-width value. Do not infer a 4× measured duty; register interpretation is unverified.
+For `value=0.5`, `scale=1`, `enable=TRUE`, `offset_mode=0`, `dither=FALSE`, compute `encoded=floor(0.5*(2^bits-1)*65536)`. Expected source-derived values: 20 kHz → **12 bits**, DDS **53687**, encoded **134184960**; 60 kHz → **10 bits**, DDS **40265**, encoded **33521664**. A frequency change across this boundary will cause the first `hm2.write` to prepare the old-width encoded value and only then program the new mode. On PCI the TRAM queue fallback writes immediately; on hm2_eth the old-width value and new mode writes are queued for a single packet flush. The **next** `hm2.write` prepares the new-width value. The batching difference does not prove atomic FPGA application. Do not infer a 4× measured duty; register interpretation is unverified.
 
 ## Bounded disconnected acceptance (qualified self-hosted only)
 
@@ -22,14 +22,14 @@ For `value=0.5`, `scale=1`, `enable=TRUE`, `offset_mode=0`, `dither=FALSE`, comp
 | --- | --- | --- | --- |
 | A | Static 20 kHz, 100 MHz descriptor | 12-bit mode, DDS 53687, half-scale value register 134184960 | C source version/blob, register log |
 | B | Static 60 kHz, same descriptor | 10-bit mode, DDS 40265, half-scale value register 33521664 | Register log |
-| C | Runtime 20→60 kHz between servo callbacks | Old-width value register is prepared/sent **before** new mode/rate register writes | Timestamped LLIO call-order trace; no waveform verdict |
+| C | Runtime 20→60 kHz between servo callbacks | Old-width value prepared **before** new mode/rate; PCI immediate versus Ethernet batched write paths differ | Timestamped LLIO enqueue/send/flush trace; no waveform verdict |
 | D | Next callback after C | Value register uses new 10-bit scaling | Trace with callback/sequence numbers |
 | E | Runtime change without width change, e.g. 10→20 kHz | Same 12-bit value scaling; master rate changes | Negative control |
 | F | Disabled PWM, normal vs offset mode | Driver zeros scaled value; normal mode yields zero-width command, offset mode yields midpoint command; separate /Enable output still matters | Mode/value/enable register traces; **not** safety test |
 | G | Request above supported maximum, e.g. 200 kHz at 100 MHz | 9-bit mode, DDS 65535, nominal 195309.52 Hz and HAL frequency clipped | Source/parameter readback and register trace |
 | H | Stable v2.9.10 versus pinned development | Same ordering; note HAL accessor and signed-bit literal differences from MESA-66 | Exact commit/blob and diff |
 
-**Harness validity gates:** (1) no physical IO or drives attached; (2) fake-LLIO records **each** write and address with a servo callback identifier; (3) record both value TRAM and mode/master-rate writes; (4) do not call a standalone reimplementation of the formulas a LinuxCNC execution test; (5) test a no-width-change negative control; (6) log actual source commit and firmware descriptor clock; (7) preserve unmodified raw traces; (8) compare with source oracle before making any FPGA claim. A simulated register trace alone cannot prove FPGA output behavior.
+**Harness validity gates:** (1) no physical IO or drives attached; (2) fake-LLIO records **each** write, queue operation, flush and address with a servo callback identifier; (3) record both value TRAM and mode/master-rate writes; (4) do not call a standalone reimplementation of the formulas a LinuxCNC execution test; (5) test a no-width-change negative control; (6) log actual source commit and firmware descriptor clock; (7) preserve unmodified raw traces; (8) compare with source oracle before making any FPGA claim; (9) discriminate PCI's `dummy_queue_write` immediate fallback from `hm2_eth`'s realtime batching in `tram.c`/`hm2_finish_write`. A simulated register trace alone cannot prove FPGA output behavior.
 
 ## Practical machine configuration review
 

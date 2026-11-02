@@ -1,6 +1,8 @@
 # STEPGEN-154 — HostMot2 firmware N+1 pulse semantics reconcile host ns-to-tick conversion
 **2026-11-02 | 4000 LinuxCNC + FPGA implementation | NON-GRADUATED**
 
+> **2026-11-02 STEPGEN-155 HDL refinement:** [Actual archived `kubstepgenz.vhd` control-flow audit](4400_LINUXCNC_STEPGEN_155_ARCHIVED_VHDL_ZERO_PULSE_DDS_HOLD_AND_FEEDBACK_SOURCE_AUDIT_2026-11-02.md) supports N+1 high periods for **nonzero** pulse-active register N, but shows **register 0 is not guaranteed to emit a valid one-clock pulse**. From settled idle, the `pulsewait/dpulsewait` falling-edge condition may never arm, potentially leaving STEP high. The 9ns→register 0→10ns table row below is **only an algebraic regmap extrapolation, not an HDL pulse prediction**. No HDL simulation or installed bitfile verification.
+
 ## Why this continuation matters
 The immediately preceding [STEPGEN-153 host-C audit](4400_LINUXCNC_STEPGEN_153_MESA_NS_TO_TICKS_TRUNCATION_AND_MAXVEL_LATCH_SOURCE_AUDIT_2026-11-02.md) proved integer register truncation but correctly left FPGA pulse interpretation UNKNOWN. The first source-only hazard hypothesis (a 15 ns request encoding register 1 could imply 10 ns output) is **not supported by the newly inspected firmware register contract**. This document supplies the missing firmware-side evidence and corrects that inference; do not repeat the old hypothesis as a machine fault.
 

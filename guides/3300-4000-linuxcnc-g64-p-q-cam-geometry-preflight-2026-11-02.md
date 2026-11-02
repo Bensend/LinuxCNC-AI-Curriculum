@@ -4,7 +4,7 @@
 
 ## Practical purpose
 
-CAM postprocessors may emit thousands of small line segments from DXF/SVG/nesting geometry. G64 P controls trajectory blending of canonical moves; Q can remove vertices *before* those moves reach the planner. These are different error sources. For a sharp plasma contour or precision mill/laser/router feature, `P0.01 Q0.5` does not mean the original programmed polyline is held within 0.01 mm. DXF topology, lead-ins, pierce delays, cutter compensation, kerf and nesting remain separate contracts.
+CAM postprocessors may emit thousands of small line segments from DXF/SVG/nesting geometry. G64 P controls trajectory blending of canonical moves; Q can remove vertices *before* those moves reach the planner. These are different error sources; even when Q is omitted and inherits P, the P-only number is not independently established as an overall contour-error bound. For a sharp plasma contour or precision mill/laser/router feature, `P0.01 Q0.5` does not mean the original programmed polyline is held within 0.01 mm. DXF topology, lead-ins, pierce delays, cutter compensation, kerf and nesting remain separate contracts.
 
 ## Preflight procedure (no LinuxCNC required)
 

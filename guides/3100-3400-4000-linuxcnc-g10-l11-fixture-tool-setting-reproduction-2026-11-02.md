@@ -30,3 +30,7 @@
 If a tool's measured length changes with active G54/G55 or G92, first inspect whether the macro used L10 instead of L11, and verify G59.3 fixture origin and its rotation. If the stored offset changed but the machine still uses an older value, compare `#5403` with `#5083` and G43 state. Confirm units, loaded-tool identity and table persistence. Do not apply a real probe or motion until machine-specific commissioning and independent personnel safety are established.
 
 **Status:** A/B/C NOT RUN; upstream source/expected inspected, no local LinuxCNC execution, no Actions, no compute. Previously graduated course levels and external safety/evaluator gates unchanged.
+
+
+## QtVCP help-label sanity check (168B)
+Both pinned LinuxCNC versions have a **three-entry mismatch** in `lib/python/qtvcp/lib/mdi_text.py::gcode_titles()`: the short titles for G10 L2, L10 and L11 are assigned to the wrong commands. `lib/python/qtvcp/lib/gcodes.py::GCodes.setup_list` displays those short titles; its selection handler retrieves the separate, correctly mapped long descriptions. Review [source audit](../research/4400_LINUXCNC_G10L11_168_FIXTURE_TOOL_CALIBRATION_AND_UPSTREAM_ORACLE_SOURCE_AUDIT_2026-11-02.md#same-session-168b--qtvcp-g-code-help-list-contradicts-its-own-detailed-descriptions) and [review-only patch](../examples/4000_g10_l11_168/qtvcp_gcode_titles_review_only.patch). A technician must not use the QtVCP short G-code list labels as authority for choosing a tool-offset command until corrected/verified. Patch **NOT APPLIED or GUI-TESTED**.

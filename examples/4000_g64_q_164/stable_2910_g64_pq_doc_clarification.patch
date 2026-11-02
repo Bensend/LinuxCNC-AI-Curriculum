@@ -1,0 +1,23 @@
+diff --git a/docs/src/gcode/g-code.adoc b/docs/src/gcode/g-code.adoc
+--- a/docs/src/gcode/g-code.adoc
++++ b/docs/src/gcode/g-code.adoc
+@@ -1737,15 +1737,15 @@
+ * 'G64 P- <Q- >' blending with tolerance.
+   It is a way to fine tune your system for best compromise between speed
+   and accuracy.
+-  The P- tolerance means that the actual path will be no more than P-
++  The P- tolerance applies to trajectory blending of canonical moves;
+-  away from the programmed endpoint. The velocity will be reduced if
++  if Q is larger than P, the Naive CAM Detector can simplify the
+-  needed to maintain the path.
++  programmed path by more than P before trajectory blending.
+   If you set Q to a non-zero value it turns on the 'Naive CAM
+   Detector': when there are a series of linear XYZ feed moves at the
+   same <<sec:set-feed-rate,feed rate>> that are less than Q- away from
+   being collinear, they are collapsed into a single linear move.
+   On G2/G3 moves in the G17 (XY) plane when the maximum
+-  deviation of an arc from a straight line is less than the G64 P-
++  deviation of an arc from a straight line is less than the G64 Q-
+   tolerance the arc is broken into two lines (from start of arc to
+   midpoint, and from midpoint to end). those lines are then subject to
+   the naive cam algorithm for lines. Thus, line-arc, arc-arc, and

@@ -1,0 +1,42 @@
+diff --git a/src/emc/task/taskclass.cc b/src/emc/task/taskclass.cc
+--- a/src/emc/task/taskclass.cc
++++ b/src/emc/task/taskclass.cc
+@@ -539,7 +539,10 @@ int Task::emcToolLoadToolTable(const char *file)//EMC_TOOL_LOAD_TOOL_TABLE_TYPE
+ {
+     if(!strlen(file)) file = tooltable_filename;//use filename from ini if none is provided
+-    tooldata_load(file);
++    if (tooldata_load(file) != 0) {
++        emcioStatus.status = RCS_STATUS::ERROR;
++        return -1;
++    }
+     reload_tool_number(emcioStatus.tool.toolInSpindle);
+     return 0;
+ }
+diff --git a/src/emc/tooldata/tooldata_common.cc b/src/emc/tooldata/tooldata_common.cc
+--- a/src/emc/tooldata/tooldata_common.cc
++++ b/src/emc/tooldata/tooldata_common.cc
+@@ -295,6 +295,13 @@ int tooldata_load(const char *filename)
+ 
+     if(!filename) return -1;
+ 
++    // Do not discard the in-memory tool table if the file cannot be opened.
++    if (NULL == (fp = fopen(filename, "r"))) {
++        fprintf(stderr, "%s, %d: Failed to open tool table file '%s': %s\n",
++                __FILE__, __LINE__, filename, strerror(errno));
++        return -1;
++    }
++
+     // clear out tool table
+     // (Set vars to indicate no tool in pocket):
+     tooldata_reset();
+@@ -302,13 +309,6 @@ int tooldata_load(const char *filename)
+-    // open tool table file
+-    if (NULL == (fp = fopen(filename, "r"))) {
+-        fprintf(stderr, "%s, %d: Failed to open tool table file '%s': %s\n",
+-                __FILE__, __LINE__, filename, strerror(errno));
+-        return -1;
+-    }
+-
+     // after initializing all available pockets,
+     // subsequent read from filename will update the last_index
+     // which becomes available by tooldata_last_index_get()

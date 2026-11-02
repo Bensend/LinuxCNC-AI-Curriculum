@@ -1,0 +1,11 @@
+(HAL-NAMED-163 no-motion read-only HAL signal fixture)
+(Requires a disconnected LinuxCNC simulation with HAL_PIN_VARS=1)
+(halcmd newsig curriculum-feed float)
+(halcmd sets curriculum-feed 1234.5)
+G21 G90
+o100 if [EXISTS[#<_hal[curriculum-feed]>]]
+  (debug, curriculum-feed = #<_hal[curriculum-feed]>)
+o100 else
+  (debug, curriculum-feed signal not found)
+o100 endif
+M2

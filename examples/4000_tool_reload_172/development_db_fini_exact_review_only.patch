@@ -1,7 +1,7 @@
 diff --git a/src/emc/tooldata/tooldata_db.cc b/src/emc/tooldata/tooldata_db.cc
 --- a/src/emc/tooldata/tooldata_db.cc
 +++ b/src/emc/tooldata/tooldata_db.cc
-@@ -220,7 +220,7 @@ int tooldata_db_getall() {
+@@ -220,4 +220,4 @@ int tooldata_db_getall() {
 -        if (strstr(reply,"FINI")) {
 +        if (strcmp(reply,"FINI") == 0) {
              //fprintf(stderr,"=====<ct=%3d>%s\n",ct,reply);

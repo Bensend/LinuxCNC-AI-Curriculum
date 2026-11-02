@@ -47,3 +47,14 @@ A CAM/probing macro that writes `G10 L10` when it intends fixture-relative `L11`
 4. Novel transfer question for a fresh learner: G59.3 R30, current G54 R0, existing tool X/Y nonzero, command `G10 L11 P1 X0`. Which tool-offset basis must be preserved? **Expected reasoning:** preserve component along fixture's rotated Y basis, not current G54 Y; inspect the X-only branch and `rotate` calls. **NOT independently evaluated**.
 
 **Uncertainty queue:** G59.3 rotated-XY partial-axis oracle and G43 applied-state test are 4000 implementation extensions, MEDIUM, **non-graduated**; neither licenses physical-machine testing. Existing source and upstream oracle reduce duplication; no new lab justified until qualified disconnected runner. No evaluator exposed/graded; existing graduated levels remain closed.
+
+
+## Same-session 168B — QtVCP G-code help list contradicts its own detailed descriptions
+A distinct **GUI source** follow-through found a concrete, source-visible user-facing mismatch in **both** v2.9.10 and pinned development 67437d8:
+
+- `lib/python/qtvcp/lib/mdi_text.py::gcode_titles()` lines 15–17: `G10L2` is titled **Set Tool Table, Calculated, Workpiece** (actually L10), `G10L10` is titled **Set Tool Table, Calculated, Fixture** (actually L11), and `G10L11` is titled **Coordinate System Origin Setting** (actually L2). The three descriptions are cyclically assigned to the wrong codes.
+- Same file's `G10L10` and `G10L11` *long descriptions* ~372–400 correctly distinguish workpiece and G59.3 fixture; `gcode_descriptions` maps them correctly. Thus the error is specifically the **short list labels**, not proven wrong command execution or all help text.
+- `lib/python/qtvcp/lib/gcodes.py::GCodes.setup_list` lines 12–18 constructs visible `gcode_list` rows directly from `mdiText.gcode_titles()`. `list_row_changed` retrieves the correct long description for the selected code. This source path establishes a real displayed-label inconsistency in the widget when it is instantiated, **not** that every QtVCP screen contains this widget.
+- Exact inspected blobs: stable `mdi_text.py` `9dc7b5d7f77e82883f397650b909e6d76d62f622`, development `3b397c26c4b79ba5af791cdbf23ce236c53fc27e`; `gcodes.py` `1c8fc7d765ba4989f8b8134f5621de94d1457352` in both. [Review-only 3-line patch](../examples/4000_g10_l11_168/qtvcp_gcode_titles_review_only.patch) matches inspected stable source lines 12–18; **NOT APPLIED, IMPORTED, COMPILED, GUI-RUN or submitted upstream**.
+
+**Proposed lightweight verification:** In a non-hardware QtVCP widget or unit-level fake `gcode_list`, check that `G10L2` displays Coordinate System Origin Setting, `G10L10` displays Calculated Workpiece, and `G10L11` displays Calculated Fixture; ensure long descriptions still map correctly. This does not require machine motion or a new hardware test. **Source-confirmed labeling defect; GUI runtime untested.**

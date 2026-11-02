@@ -59,6 +59,10 @@ A second bounded fixture makes the P-versus-Q arc documentation discrepancy visi
 
 The development `ARC_FEED` fast path explicitly requires `!canon.g68Active`, preventing **arc-to-line conversion** while a G68 tilted work plane is active. But development `STRAIGHT_FEED` still calls `see_segment`, and `linkable` does **not** test `g68Active`; its world-frame intermediate-vertex distance calculation can still merge **G1** segments under an active tilted frame when Q permits. **SOURCE-CONFIRMED conditional distinction, NOT RUN.** Therefore, disabling G17 arc simplification under G68 does *not* imply that Q no longer changes all programmed contours. This matters for five-axis CAM posts using linearized surface paths; retain an explicit Q policy independent of tilted-plane state. It is not a claim about deployed kinematics or actual machine orientation.
 
+## Optional bounded offline postprocessor preflight (164F)
+
+[Stdlib-only literal G64 P/Q scanner](../examples/4000_g64_q_164/g64_pq_scan.py) is an inspectable prototype for reviewing CAM output, not a new required product. It strips comments, recognizes a literal standalone G64 P/Q block, rejects ambiguous/unsupported expressions or extra words, warns when Q>P, and reports that Q=P still involves two stages. A `--selftest` covers ten parser cases. **SCRIPT NOT RUN; no LinuxCNC or runner compute.** It does not resolve INI defaults, macros, modal execution, exact geometry, or safety, and must not be treated as a certified G-code parser.
+
 ## Claims and limits
 
 | Claim | Classification | Scope | Independent verification |

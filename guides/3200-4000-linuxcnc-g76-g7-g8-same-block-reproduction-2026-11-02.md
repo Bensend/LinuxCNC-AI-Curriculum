@@ -43,3 +43,6 @@ The [review-only stable patch](../examples/4000_g76_mode_173/stable_2910_g76_sam
 - **Not established by any case:** physical tool engagement, thread profile, spindle-index integrity, machine safety, or qualified cutting procedure.
 
 No new compute is justified while runner physical isolation is unverified. Existing 1000/2000/F02/3000 graduations and independent personnel-safety/OpenPressBrake G0/G1 holds remain intact.
+## Practical CAM/postprocessor integration rule (pending runtime confirmation)
+
+For a lathe post that emits G76, output **G7 or G8 on a preceding standalone block** and program G76 I/J/K in the corresponding diameter/radius units. This avoids the identified same-block double-scaling path in the inspected source. Do not rewrite the values to compensate for the defect: doing so would make the NC file version-dependent and wrong if the interpreter is fixed. Include a static postprocessor regression that rejects a combined `G7 G76` or `G8 G76` block and a canonical geometry comparison when an isolated interpreter becomes available. This is a conservative source-grounded compatibility recommendation, not a tested machine process.

@@ -1,7 +1,7 @@
 diff --git a/src/emc/rs274ngc/interp_convert.cc b/src/emc/rs274ngc/interp_convert.cc
 --- a/src/emc/rs274ngc/interp_convert.cc
 +++ b/src/emc/rs274ngc/interp_convert.cc
-@@ -3419,9 +3419,10 @@
+@@ -3419,8 +3419,9 @@
  				   block->m_modes[6]);
  	  } else {
  	      CONTROLLING_BLOCK(*settings).builtin_used = !remapped_in_block;

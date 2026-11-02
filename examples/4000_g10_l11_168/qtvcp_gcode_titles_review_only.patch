@@ -1,0 +1,14 @@
+diff --git a/lib/python/qtvcp/lib/mdi_text.py b/lib/python/qtvcp/lib/mdi_text.py
+--- a/lib/python/qtvcp/lib/mdi_text.py
++++ b/lib/python/qtvcp/lib/mdi_text.py
+@@ -12,7 +12,7 @@ def gcode_titles():
+               'G8': 'Radius Mode (lathe)',
+               'G10': 'Offsets L1, L2, L10, L11, L20',
+               'G10L1': 'Set Tool Table Entry',
+-              'G10L2': 'Set Tool Table, Calculated, Workpiece',
+-              'G10L10': 'Set Tool Table, Calculated, Fixture',
+-              'G10L11': 'Coordinate System Origin Setting',
++              'G10L2': 'Coordinate System Origin Setting',
++              'G10L10': 'Set Tool Table, Calculated, Workpiece',
++              'G10L11': 'Set Tool Table, Calculated, Fixture',
+               'G10L20': 'Coordinate System Origin Setting Calculated',

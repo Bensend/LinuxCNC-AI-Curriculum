@@ -23,7 +23,7 @@ Development `67437d8865e431a9a33f74cee912dbf891d3b4c5`:
 
 ## Execution path: two different geometry operations
 
-`G64 P0.01 Q0.5` → interpreter `convert_control_mode` → canonical `SET_MOTION_CONTROL_MODE(CANON_CONTINUOUS, 0.01)` (flushes pending chain, queues terminal-condition message) → `SET_NAIVECAM_TOLERANCE(0.5)` (sets canonical prefilter) → subsequent `STRAIGHT_FEED` endpoints → `see_segment`/`linkable` may discard intermediate vertices → `flush_segments` queues a **new straight move** to final endpoint → Task/motion trajectory planner receives that simplified move and its P blending condition. Thus **P is not an overall maximum deviation from the original CAD contour when Q > P**. Q changes geometry before planner interpolation.
+`G64 P0.01 Q0.5` → interpreter `convert_control_mode` → canonical `SET_MOTION_CONTROL_MODE(CANON_CONTINUOUS, 0.01)` (flushes pending chain, queues terminal-condition message) → `SET_NAIVECAM_TOLERANCE(0.5)` (sets canonical prefilter) → subsequent `STRAIGHT_FEED` endpoints → `see_segment`/`linkable` may discard intermediate vertices → `flush_segments` queues a **new straight move** to final endpoint → Task/motion trajectory planner receives that simplified move and its P blending condition. Thus **P is not an overall maximum deviation from the original CAD contour when Q > P**. Q changes geometry before planner interpolation. Even when Q is omitted and inherits P, there are still two distinct stages; no single P-only *overall* contour-error guarantee follows merely from the source. The example with Q>P makes the difference unambiguous, but is not the only configuration requiring review.
 
 In `linkable`, candidate segment is `M=(new_end - canon.endPoint)`, `B=canon.endPoint`; each buffered `P_i` is projected onto that segment with clamped `t` and distance `D=|P_i-(B+tM)|`. The link is allowed when every D <= Q (code rejects only D > Q), subject to continuous mode, nonzero Q, chain length and unchanged ABCUVW; no direct check against P appears here. The next `flush_segments` uses only `chained_points.back()` as destination. A change of feed rate or G0 flushes, so the example intentionally uses one feed and no intermediate modal barrier.
 
@@ -53,7 +53,7 @@ A second bounded fixture makes the P-versus-Q arc documentation discrepancy visi
 
 ## Review-only upstream documentation correction (164D)
 
-[Stable v2.9.10 documentation patch](../examples/4000_g64_q_164/stable_2910_g64_pq_doc_clarification.patch) clarifies that P applies to trajectory blending of canonical moves, while a larger Q may alter programmed geometry upstream, and corrects the G17 arc-threshold reference from P to Q. The exact old lines were fetched from the pinned `docs/src/gcode/g-code.adoc` at lines 1737–1751. This is **a proposal**, not an applied upstream change, and has not been compiled, rendered or evaluated by upstream maintainers.
+[Stable v2.9.10 documentation patch](../examples/4000_g64_q_164/stable_2910_g64_pq_doc_clarification.patch) clarifies that P applies to trajectory blending of canonical moves, while Q may alter programmed geometry upstream **even when omitted Q inherits P**, and corrects the G17 arc-threshold reference from P to Q. The exact old lines were fetched from the pinned `docs/src/gcode/g-code.adoc` at lines 1737–1751. This is **a proposal**, not an applied upstream change, and has not been compiled, rendered or evaluated by upstream maintainers.
 
 ## Development tilted-work-plane qualification (164E)
 

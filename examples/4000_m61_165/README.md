@@ -1,0 +1,7 @@
+# 4000-LC-M61-165 — upstream-test reuse and review-only Q validation
+
+No executable LinuxCNC fixture was copied into this curriculum: the authoritative minimal example already exists upstream at LinuxCNC v2.9.10 `tests/toolchanger/m61/test-ui.py`, `m61-test.ini`, `test.sh`, `mod_core_sim.hal`, and `postgui.hal`. Reuse its original test on a **qualified, physically disconnected** simulation. It checks `M61 Q10` after T1 M6/G43: tool identity 10, no new tool-change handshake, last pocket still 1, table Z=3 inch while active coordinate still reflects the old 1-inch G43 until a separate G43.
+
+`stable_2910_m61_q_validation_review.patch` is an **unapplied, uncompiled, untested** proposed source change for the distinct Q-word validation issue. It checks negative Q before rounding and rejects nonintegral Q outside a 0.0001 tolerance. That tolerance is a review choice, not an official M61 standard. Compare source and run isolated original-vs-patched cases `M61 Q-0.4`, `M61 Q-0.6`, and `M61 Q1.6` (with T2 present) before accepting the patch. Development also contains the round-before-check path; this candidate targets stable only.
+
+See [research](../../research/4400_LINUXCNC_M61_165_TOOL_IDENTITY_POCKET_TLO_Q_ROUNDING_SOURCE_TEST_AUDIT_2026-11-02.md) and [A–J commissioning guide](../../guides/3100-3200-3400-4000-linuxcnc-m61-tool-identity-and-tlo-commissioning-2026-11-02.md). **NOT RUN**, no machine authorization.

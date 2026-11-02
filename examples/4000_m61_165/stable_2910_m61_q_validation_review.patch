@@ -1,0 +1,15 @@
+diff --git a/src/emc/rs274ngc/interp_convert.cc b/src/emc/rs274ngc/interp_convert.cc
+--- a/src/emc/rs274ngc/interp_convert.cc
++++ b/src/emc/rs274ngc/interp_convert.cc
+@@ -3419,9 +3419,10 @@
+ 				   block->m_modes[6]);
+ 	  } else {
+ 	      CONTROLLING_BLOCK(*settings).builtin_used = !remapped_in_block;
+-	      toolno = round_to_int(block->q_number);
+ 	      // now also accept M61 Q0 - unload tool
+-	      CHKS((toolno < 0), (_("Need non-negative Q-word to specify tool number with M61")));
++	      CHKS((block->q_number < 0.0), (_("Need non-negative Q-word to specify tool number with M61")));
++	      toolno = round_to_int(block->q_number);
++	      CHKS((fabs(block->q_number - toolno) > 0.0001), (_("M61 Q word must be an integer")));
+ 
+ 	      int idx;

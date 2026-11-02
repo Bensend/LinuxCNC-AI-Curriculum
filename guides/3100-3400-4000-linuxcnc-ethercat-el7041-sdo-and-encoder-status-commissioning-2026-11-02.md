@@ -26,6 +26,10 @@ The compact encoder TxPDO [source](https://github.com/linuxcnc-ethercat/linuxcnc
 
 The driver exports `lcec.0.X.srv-enable`, `srv-cmd`, `srv-fault`, `srv-error`, `srv-ready`, `enc-count`, `enc-pos`, `enc-count-overflow`, `enc-count-underflow` and `enc-sync-error` (prefix depends on actual master/slave names). Capture commanded position, command enable, raw drive PDO, WKC and slave-operational state separately in any later qualified disconnected simulation. A HAL command or published status is not physical actuator confirmation. `srv-fault` is temporarily masked during the driver's fault-reset retry (lines 683–702); investigate that separately before trusting it as an amp-fault source. Do not energize a motor for this exercise.
 
+## Frozen test C: drive error versus synthetic fault and reset
+
+[ECAT-EL7041-148](../research/4400_LINUXCNC_ECAT_EL7041_148_FAULT_RESET_GATE_AND_STICKY_RESET_SOURCE_AUDIT_2026-11-02.md) adds a **separate** fake-PDO/driver-state exercise. With persistent raw `0x6010:04=1` and rising `srv-enable`, the source predicts four operational read callbacks with `srv-fault=0` while `srv-error=1`; `srv-reset` remains asserted even when the internal reset-state flag toggles FALSE, until retry ends. With retry=0, a manual `srv-fault-reset` request while enabled is cleared in the same write before PDO publication; while disabled the reset PDO can remain TRUE after the request self-clears. Capture raw and synthetic signals independently; no physical-drive claim. **NOT RUN.**
+
 ## Acceptance and evidence
 
 Accept only reproducible pinned fake-SDO traces, one-hot PDO tests, error-injection results, and exact driver variant scope. Record source SHA, compiler/harness, raw output, pass/fail, job timestamps and compute. No test was run this session; every predicted result is **NOT RUN**, not hardware-confirmed. Independent personnel safety and OpenPressBrake G0/G1 restrictions remain unchanged.

@@ -1,9 +1,15 @@
 --- a/src/emc/rs274ngc/interp_namedparams.cc
 +++ b/src/emc/rs274ngc/interp_namedparams.cc
-@@ -178,7 +178,7 @@
+@@ -249,7 +249,7 @@
+     hal_type_t type = HAL_TYPE_UNINITIALIZED;
+     hal_data_u* ptr;
+     bool conn;
 -    char hal_name[HAL_NAME_LEN];
 +    char hal_name[HAL_NAME_LEN + 1];
-@@ -191,8 +191,10 @@
+ 
+     *status = 0;
+     if (!comp_id) {
+@@ -267,8 +267,11 @@
  	int closeBracket = s - nameBuf;
  
 -	strncpy(hal_name, &nameBuf[5], closeBracket);
@@ -14,3 +20,6 @@
 +	memcpy(hal_name, &nameBuf[5], hal_name_length);
 +	hal_name[hal_name_length] = '\0';
  	if (nameBuf[closeBracket + 1]) {
+ 	    logOword("%s: trailing garbage after closing bracket", hal_name);
+ 	    *status = 0;
+ 	    ERS("%s: trailing garbage after closing bracket", nameBuf);

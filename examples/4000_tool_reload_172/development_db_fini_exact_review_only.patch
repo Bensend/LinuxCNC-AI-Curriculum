@@ -1,9 +1,10 @@
 diff --git a/src/emc/tooldata/tooldata_db.cc b/src/emc/tooldata/tooldata_db.cc
 --- a/src/emc/tooldata/tooldata_db.cc
 +++ b/src/emc/tooldata/tooldata_db.cc
-@@ -220,4 +220,4 @@ int tooldata_db_getall() {
+@@ -220,4 +220,5 @@ int tooldata_db_getall() {
 -        if (strstr(reply,"FINI")) {
-+        if (strcmp(reply,"FINI") == 0) {
++        if (strncmp(reply,"FINI",4) == 0 &&
++            (reply[4] == '\0' || reply[4] == ' ' || reply[4] == '\t' || reply[4] == '\r')) {
              //fprintf(stderr,"=====<ct=%3d>%s\n",ct,reply);
              break;
          }

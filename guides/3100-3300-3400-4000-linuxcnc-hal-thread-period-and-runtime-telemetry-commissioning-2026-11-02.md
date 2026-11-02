@@ -34,3 +34,12 @@ For plasma, record torch-voltage timestamp/freshness independently. For Mesa/FPG
 ## Evidence discipline / next
 
 Capture raw `halcmd show thread`, `show pin`, `show param`, version, backend, source/fixture hashes and exact run timestamps before asserting TEST-CONFIRMED. A–H remain NOT RUN. No Actions dispatch in this lesson; do not use GitHub-hosted runners. If no qualified disconnected compute exists, continue distinct LinuxCNC source work rather than adding repetitive unexecuted timing tests.
+
+## Additional controller-interval discriminator (I–J; NOT RUN)
+
+**Important:** the `threads`+siggen fixture above **does not export any `motion.*` pins**. For a separately qualified, disconnected `motmod` simulation, inspect `motion.servo.last-period` only after checking the installed LinuxCNC revision:
+
+- **Stable v2.9.10:** `motion.servo.last-period` is u32 **CPU-clock counts** from `rtapi_get_clocks`; `motion.servo.last-period-ns` is a float pin **only if built with `HAVE_CPU_KHZ`**. Never assume that optional pin exists.
+- **Development 67437d8:** `motion.servo.last-period` remains uint but is **nanoseconds** from `rtapi_get_time`; inspected source no longer exports the stable conditional `last-period-ns` pin. The development motion(9) page's additional instruction to divide this ns value by CPU speed is inconsistent with its own unit label and the implementation.
+
+**I:** stable source/type/unit and optional-pin existence. **J:** development source/type/unit, no double conversion. These are **NOT RUN**; don't substitute the no-motion fixture for a motmod experiment. The pin measures time between motion-controller callback entries, not independently verified scheduler wakeup jitter, EtherCAT/Mesa transport timing, or physical position feedback. See [cross-layer source addendum](../research/4400_LINUXCNC_HAL_TIMING_161_THREAD_PERIOD_QUANTIZATION_AND_TELEMETRY_VERSION_SOURCE_AUDIT_2026-11-02.md#same-session-cross-layer-continuation--motion-servo-interval-units-161b).

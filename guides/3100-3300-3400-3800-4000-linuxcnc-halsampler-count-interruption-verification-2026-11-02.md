@@ -21,6 +21,7 @@ This produces one signed value per callback. Use `halrun <file.hal>` as in upstr
 | E. Finite natural completion with proposed patch | remains exit 0 | exact row count |
 | F. Indefinite `halsampler` stopped by SIGTERM | original exit 0; patch nonzero, consistent with development man page | child status |
 | G. Broken stdout pipe / SIGPIPE | stop handler is registered; output/stdio buffering may affect timing | actual child status, row count, stdout error; **do not assume** deterministic signal timing |
+| I. Compare `sampler.0.sample-num` with `halsampler -t` tags | docs promise automatic HAL pin increment; source exports/initializes but does not update pin; stream tags use `fifo->this_sample` | HAL pin snapshots and tagged output, compare counters separately |
 | H. Missing output file | unchecked `open/dup2` in both revisions; behavior requires execution | syscall trace and child status, no confident predicted exit code |
 
 For B/C, wait until the userspace component has initialized and at least one row is recorded; signal during `ignore_sig` is explicitly excluded. If using GNU `timeout`, `--preserve-status` is necessary to avoid confusing wrapper timeout code 124 with the child process status. Better still launch the process and `kill -TERM <child-pid>` after confirming startup, then `wait` for its status. Avoid using `head` to provoke SIGPIPE as the primary oracle because buffering and pipe closure complicate interpretation.
@@ -30,3 +31,5 @@ Inspect `sampler_usr.c::quit`, `main`'s `samples` decrement, `hal_stream_wait_re
 
 ## Diagnostic integration guidance
 For mill/lathe/plasma/router/feeder HAL trace capture, record LinuxCNC revision, HAL thread period, actual sample count, sampler overruns, process status, any `overrun` markers and file byte count. A successful userspace process is not proof of complete realtime telemetry, especially if the capture was interrupted or the FIFO overflowed. Do not use sampler data to substitute for independent personnel-safety channels.
+
+**Counter provenance:** development `sampler(9)` says `sampler.N.sample-num` automatically increments, but stable/development `sampler.c::sample` does not write it. The `-t` number is `hal_stream_write`'s internal `fifo->this_sample` conveyed through `hal_stream_read`. Do not equate the HAL_IO pin and the FIFO tag without a runtime witness; do not infer that setting the HAL pin resets FIFO numbering.

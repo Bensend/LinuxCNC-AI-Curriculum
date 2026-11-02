@@ -7,3 +7,5 @@
 **Next priority:** qualified, physically disconnected `[self-hosted, openpressbrake]` MOTION-144 A–F remains first executable task. If qualified compute exists, HAL-STREAM-156 wrap A–F and HAL-SAMPLER-157 early-signal B/E are strong low-cost distinct follow-ons; no GitHub-hosted fallback. If compute unavailable, rotate to a distinct high-value LinuxCNC source/configuration question after canonical predecessor scan, rather than multiplying unexecuted test banks.
 
 1000/2000/F02/3000 CLOSED; safety-course evidence and independent personnel-safety authority preserved; OpenPressBrake G0/G1 HOLD unchanged; blind-evaluator separation maintained; no new compute or blind score; hourly schedule enabled.
+
+**Additional diagnostic source/doc discrepancy:** official development `sampler(9)` promises auto-incremented `sampler.N.sample-num`, but stable/development `sampler.c` never updates that HAL_IO pin. `halsampler -t` instead prints FIFO `this_sample` from `hal_stream_write/read`. Case I added to disconnected run card. NOT RUN; no physical claims.

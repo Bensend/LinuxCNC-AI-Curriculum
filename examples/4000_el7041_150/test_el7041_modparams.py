@@ -50,12 +50,12 @@ static int calls = 0;
 static int fail_at = 0;
 static int lcec_write_sdo16(lcec_slave_t *s, uint16_t index, uint8_t sub, uint16_t value) {
     (void)s;
-    printf("W,%04x,%02x,%u\n", index, sub, value);
+    printf("W,%04x,%02x,%u\n", (unsigned)index, (unsigned)sub, (unsigned)value);
     return (++calls == fail_at) ? -1 : 0;
 }
 static int lcec_write_sdo8(lcec_slave_t *s, uint16_t index, uint8_t sub, uint8_t value) {
     (void)s;
-    printf("W,%04x,%02x,%u\n", index, sub, value);
+    printf("W,%04x,%02x,%u\n", (unsigned)index, (unsigned)sub, (unsigned)value);
     return (++calls == fail_at) ? -1 : 0;
 }
 """

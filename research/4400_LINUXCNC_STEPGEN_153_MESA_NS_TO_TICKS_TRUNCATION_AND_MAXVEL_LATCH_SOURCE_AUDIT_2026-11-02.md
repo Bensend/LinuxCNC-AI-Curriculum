@@ -1,6 +1,8 @@
 # STEPGEN-153 — HostMot2 nanosecond timing quantization and persistent maxvel clipping
 **2026-11-02 | 4000 LinuxCNC implementation | 3100/3300/3400/3600 machine transfer | NON-GRADUATED**
 
+> **Same-session firmware correction (STEPGEN-154):** The [HostMot2 firmware regmap](https://github.com/LinuxCNC/hostmot2-firmware/blob/master/src/regmap) blob `b3a2a77c27de0c71278dc910992efeddd7deb577` explicitly specifies **N+1 clocks** for StepGen pulse active and idle registers. Therefore host register truncation does **not** imply an N-clock-short pulse for that firmware contract. At hypothetical 100 MHz, 15 ns → register 1 → **nominal 20 ns**, not 10 ns. See [STEPGEN-154 firmware reconciliation](4400_LINUXCNC_STEPGEN_154_FIRMWARE_NPLUS1_PULSE_AND_HOST_MAXRATE_RECONCILIATION_2026-11-02.md) for the cross-layer max-rate mismatch. Selected bitfile/waveform still NOT VERIFIED.
+
 ## Question and predecessor check
 How does a HostMot2 step generator convert HAL nanosecond minimum pulse/setup/hold requests to FPGA clock registers, and does changing the timing restore a previously clipped `maxvel`? This is **not** STEPGEN-97/98 (feedback provenance/scale/accumulator), STEPGEN-99 (watchdog forced replay), MESA-PWM-151 (PWM resolution change), or PLASMA-33 (Mesa 7i96S scheduling). Inspected canonical `PROGRESS.md`/lesson history by `stepgen`, `steplen`, `stepspace`, `dirsetup`, `dirhold`, `maxvel`, `maxaccel`, `watchdog`; the four timing words and their quantization were not already an identified mechanism. GitHub code search is not proof of absence.
 
@@ -28,19 +30,19 @@ For a **hypothetical** 100 MHz stepgen module clock (10 ns per tick), the C regi
 | 100 | 10.0 | 10 | 0 ns |
 | 500 | 50.0 | 50 | 0 ns |
 
-The fourth column is a **clock-count arithmetic difference**, not a measured pulse-width deficit. If firmware implements a duration of exactly N clock periods, 15 ns requests would encode 10 ns; this conditional physical interpretation requires the exact FPGA revision/register semantics and an output trace.
+The fourth column is only **host count×tick arithmetic**, not a measured pulse deficit. **Superseded firmware interpretation:** the pinned HostMot2 `src/regmap` specifies **N+1 clocks** for pulse active and idle. For this regmap, 15 ns → N=1 → nominal **20 ns**, and 100 ns → N=10 → nominal **110 ns**. See STEPGEN-154 for the full corrected table and host max-rate mismatch. The actual selected bitfile and waveform remain unverified.
 
 **Persistent clamp example:** at 1000 steps/mm and requested `steplen=1000 ns`, `stepspace=1000 ns`, `physical_maxvel=500 mm/s`. Writing `maxvel=600` is clamped **in place** to 500. If the timing is later relaxed to 500 ns + 500 ns, the new calculated maximum becomes 1000 mm/s, but the HAL `maxvel` stays 500 and still limits commanded speed until explicitly changed. By contrast `maxvel=0` tracks the new calculated maximum. No motor performance or machine feasibility is inferred from these illustrative numbers.
 
 ## Consequence and interpretation
 - **SOURCE-CONFIRMED:** integer truncation can encode fewer whole clock periods than the fractional ns request, without an upward-rounding check; and an oversized explicit `maxvel` is permanently rewritten, so later timing relaxation does not restore the old request.
 - **DOC-CONFIRMED:** parameters are in ns and `maxvel=0` means the timing-derived maximum; documentation does not itself prove waveform-level minimum timing.
-- **INFERENCE:** a drive whose minimum STEP high/low or DIR setup/hold time lies between encoded clock boundaries may see an insufficient waveform **if** the FPGA uses the straightforward N-cycle duration. Do not assert this as observed electrical behavior.
-- **UNKNOWN:** FPGA off-by-one/count semantics, 0-tick behavior, board-specific clock, minimum permitted timing, pulse-edge measurements, effect of write batching at runtime, and drive response.
+- **SOURCE-CONFIRMED regmap continuation:** the firmware register map specifies **N+1 clocks** for STEP active/idle, so the earlier N-clock-short-pulse hypothesis is **superseded**. The host timing-derived max-rate formula does not include these extra clocks (STEPGEN-154). DIR setup/hold counter semantics beyond the regmap's stated prohibition on zero remain to be checked.
+- **UNKNOWN:** installed bitfile/HDL versus regmap compatibility, DIR counter semantics, board-specific clock, physical pulse-edge measurements, effect of write batching at runtime, and drive response.
 - **TEST-CONFIRMED:** none; no LinuxCNC, HAL, FPGA, compiler, runner or machine executed.
 
 ## Implementation decision
-For a real Mesa configuration, obtain the actual stepgen clock and drive datasheet, choose conservative **whole-tick** values with margin, and verify the resulting register and pulse waveform before acceptance. Do not silently patch the conversion to `ceil`: changes to maximum-step-rate calculation, 14-bit saturation, zero-time semantics, and FPGA count interpretation must be reconciled first. Prefer `maxvel=0` when an intentional automatic timing-derived cap is desired; otherwise explicitly reapply a chosen cap after timing edits and keep trajectory/joint limits independently configured.
+For a real Mesa configuration, obtain the actual stepgen clock and drive datasheet, choose conservative **whole-tick** values with margin, and verify the resulting register and pulse waveform before acceptance. The regmap's N+1 count is crucial: do not silently patch conversion to `ceil` or claim under-width without confirming the selected bitfile; reconcile maximum-step-rate calculation, 14-bit saturation and zero-time semantics first. Prefer `maxvel=0` when an intentional automatic timing-derived cap is desired; otherwise explicitly reapply a chosen cap after timing edits and keep trajectory/joint limits independently configured.
 
 ## Next verification and falsifiers
 1. With a qualified, physically disconnected `[self-hosted, openpressbrake]` simulation/fake-LLIO, capture actual register writes for 9/10/15/25/100 ns at the selected module clock. Distinguish C calculation from backend and FPGA behavior.

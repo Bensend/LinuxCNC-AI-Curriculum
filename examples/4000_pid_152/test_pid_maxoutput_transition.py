@@ -50,19 +50,19 @@ def patched(body):
 
 
 def source_file(body, expect_stale):
-    fields = ("typedef struct {\\n" +
-              "  double *" + ", *".join(FLOATS) + ";\\n" +
-              "  int *" + ", *".join(BITS) + ";\\n" +
-              "  double prev_cmd, prev_fb, prev_error, limit_state;\\n" +
-              "  int prev_ie;\\n} hal_pid_t;\\n")
-    declarations = "\\n".join(
+    fields = ("typedef struct {\n" +
+              "  double *" + ", *".join(FLOATS) + ";\n" +
+              "  int *" + ", *".join(BITS) + ";\n" +
+              "  double prev_cmd, prev_fb, prev_error, limit_state;\n" +
+              "  int prev_ie;\n} hal_pid_t;\n")
+    declarations = "\n".join(
         "double v_%s = %s;" % (name, {"command": "1", "pgain": "2",
                                      "maxoutput": "1"}.get(name, "0"))
         for name in FLOATS)
-    declarations += "\\n" + "\\n".join(
+    declarations += "\n" + "\n".join(
         "int v_%s = %s;" % (name, "1" if name == "enable" else "0")
         for name in BITS)
-    assigns = ",\\n".join("    .%s = &v_%s" % (name, name)
+    assigns = ",\n".join("    .%s = &v_%s" % (name, name)
                             for name in FLOATS + BITS)
     main = """
 static void near(const char *name, double actual, double expected) {
@@ -113,9 +113,9 @@ int main(void) {
     return 0;
 }
 """ % (declarations, assigns, expect_stale, expect_stale, expect_stale)
-    return ("#include <stdio.h>\\n#include <stdlib.h>\\n"
-            "#include <math.h>\\n" + fields + "\\n" + body +
-            "\\n" + main).replace("\\n", "\n")
+    return ("#include <stdio.h>\n#include <stdlib.h>\n"
+            "#include <math.h>\n" + fields + "\n" + body +
+            "\n" + main)
 
 
 def main():
@@ -124,7 +124,7 @@ def main():
     parser.add_argument("--cc", default="cc")
     args = parser.parse_args()
     raw = args.source.read_bytes()
-    blob = hashlib.sha1(b"blob " + str(len(raw)).encode() + b"\\0" + raw).hexdigest()
+    blob = hashlib.sha1(b"blob " + str(len(raw)).encode() + b"\0" + raw).hexdigest()
     if blob != PINNED_BLOB:
         raise SystemExit("Refusing unpinned source blob: " + blob)
     original = extract(raw.decode("utf-8"))

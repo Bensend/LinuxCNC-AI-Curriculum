@@ -55,6 +55,10 @@ A second bounded fixture makes the P-versus-Q arc documentation discrepancy visi
 
 [Stable v2.9.10 documentation patch](../examples/4000_g64_q_164/stable_2910_g64_pq_doc_clarification.patch) clarifies that P applies to trajectory blending of canonical moves, while a larger Q may alter programmed geometry upstream, and corrects the G17 arc-threshold reference from P to Q. The exact old lines were fetched from the pinned `docs/src/gcode/g-code.adoc` at lines 1737–1751. This is **a proposal**, not an applied upstream change, and has not been compiled, rendered or evaluated by upstream maintainers.
 
+## Development tilted-work-plane qualification (164E)
+
+The development `ARC_FEED` fast path explicitly requires `!canon.g68Active`, preventing **arc-to-line conversion** while a G68 tilted work plane is active. But development `STRAIGHT_FEED` still calls `see_segment`, and `linkable` does **not** test `g68Active`; its world-frame intermediate-vertex distance calculation can still merge **G1** segments under an active tilted frame when Q permits. **SOURCE-CONFIRMED conditional distinction, NOT RUN.** Therefore, disabling G17 arc simplification under G68 does *not* imply that Q no longer changes all programmed contours. This matters for five-axis CAM posts using linearized surface paths; retain an explicit Q policy independent of tilted-plane state. It is not a claim about deployed kinematics or actual machine orientation.
+
 ## Claims and limits
 
 | Claim | Classification | Scope | Independent verification |

@@ -1,0 +1,6 @@
+(REVIEW ONLY: reverse 270 degree source ARC; expected center X0 Y0)
+G21 G17 G90 G94 G40 G91.1
+F100
+G0 X0 Y-1
+G2 X1 Y0 R-1
+M2

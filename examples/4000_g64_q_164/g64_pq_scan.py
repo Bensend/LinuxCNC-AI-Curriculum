@@ -45,6 +45,8 @@ def inspect(line):
     words = PQ.findall(suffix)
     if len(words) != len(set(key for key, _ in words)):
         return "UNKNOWN", "duplicate P or Q word"
+    if PQ.sub("", suffix).strip():
+        return "UNKNOWN", "extra/unsupported word or nonliteral numeric suffix"
     values = {key: float(val) for key, val in words}
     if any(value < 0 for value in values.values()):
         return "UNKNOWN", "negative tolerance"
@@ -73,6 +75,8 @@ def selftest():
         "G64 P0.01 (Q0.5)": "TWO_STAGE",
         "G64 P0.01; Q0.5": "TWO_STAGE",
         "G64 P0.01 Q0.01": "TWO_STAGE",
+        "G64 P1e-3": "UNKNOWN",
+        "G64 P0.01 Q0.5 R0.5": "UNKNOWN",
     }
     for code, expected in cases.items():
         got = inspect(code)

@@ -11,8 +11,8 @@ setp limit3.0.max 100
 setp limit3.0.maxv 1
 setp limit3.0.maxa 10
 
-net command streamer.0.pin.0 => limit3.0.in => sampler.0.pin.0
-net load-request streamer.0.pin.1 => limit3.0.load => sampler.0.pin.2
+net command streamer.0.pin.0 => limit3.0.in sampler.0.pin.0
+net load-request streamer.0.pin.1 => limit3.0.load sampler.0.pin.2
 net limited-output limit3.0.out => sampler.0.pin.1
 
 addf streamer.0 t

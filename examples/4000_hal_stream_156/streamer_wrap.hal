@@ -1,0 +1,24 @@
+# HAL-STREAM-156 software-only FIFO wrap oracle; run from curriculum repo root.
+# Requires a physically disconnected LinuxCNC environment. NOT RUN.
+loadrt threads name1=slow period1=1000000
+loadrt streamer depth=4 cfg=s
+loadrt sampler depth=512 cfg=sbs
+
+addf streamer.0 slow
+addf sampler.0 slow
+
+net replay-value streamer.0.pin.0 sampler.0.pin.0
+net replay-empty streamer.0.empty sampler.0.pin.1
+net replay-depth streamer.0.curr-depth sampler.0.pin.2
+
+setp streamer.0.clock-mode 0
+setp streamer.0.enable 1
+
+# With depth=4 stable permits 3 entries; fill before starting thread.
+loadusr -w halstreamer examples/4000_hal_stream_156/first3.txt
+start
+# Drain three entries and capture pre-dequeue status.
+loadusr -w halsampler -n 20
+# Stable: out=3, in=3; one new write wraps in to zero.
+loadusr -w halstreamer examples/4000_hal_stream_156/last1.txt
+loadusr -w halsampler -n 20

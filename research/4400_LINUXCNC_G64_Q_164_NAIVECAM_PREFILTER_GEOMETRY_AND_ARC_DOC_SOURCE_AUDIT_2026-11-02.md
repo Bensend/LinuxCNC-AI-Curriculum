@@ -47,6 +47,10 @@ The stable `flush_segments` implementation takes `pos = chained_points.back()`, 
 
 An actual upstream LinuxCNC plasma fixture, [`tests/trajectory-planner/circular-arcs/nc_files/XYtests/51MeanderAve.ngc`](https://github.com/LinuxCNC/linuxcnc/blob/86cdca76fa2a36274c432caa21952b23c267989a/tests/trajectory-planner/circular-arcs/nc_files/XYtests/51MeanderAve.ngc), identifies a LinuxCNC plasma.scpost and includes `G64 P0.01 q00.01`, mixed G0/G1/G3, M3/M5 and dwell commands. This is **SOURCE-CONFIRMED real example of CAM-specified P and Q**, not proof of any Q>P failure in that fixture and not permission to run it on a machine. It supports a practical workflow: audit emitted G64 settings at the **postprocessor output**, not only CAD geometry or the controller's default. The sample's 2014 embedded date is file text, not independently verified Git publication time. No additional lab compute.
 
+## Same-session G17 numerical discriminator (164C)
+
+A second bounded fixture makes the P-versus-Q arc documentation discrepancy visible without relying on a long CAM program. In G17/G91.1, start A=(0,0), execute clockwise `G2 X0.5 Y0 I0.25 J0` (center (0.25,0), radius 0.25 mm). The included angle is π; `chord_deviation` computes `r*(1-cos(π/2))=0.25 mm`. Under `G64 P0.01 Q0.5`, source condition `0.25 < Q` is TRUE, so `ARC_FEED` submits midpoint (0.25,0.25) and endpoint (0.5,0) to `see_segment`. `linkable` then checks midpoint distance 0.25 mm to the A→end chord, also <=Q, and can reduce the **entire semicircle to one straight feed move**. Under `G64 P0.01 Q0`, the arc conversion condition is false and the canonical circular move is retained. This is **SOURCE-DERIVED / ARITHMETIC**, **NOT A LINUXCNC RUNTIME OBSERVATION**. Fixtures: [Q0.5](../examples/4000_g64_q_164/arc_q05.ngc) and [Q0](../examples/4000_g64_q_164/arc_q0.ngc), both disconnected simulation only. The example is intentionally tiny to isolate the logic, not a proposed plasma hole size.
+
 ## Claims and limits
 
 | Claim | Classification | Scope | Independent verification |

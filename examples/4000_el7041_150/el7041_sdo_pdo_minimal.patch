@@ -1,0 +1,52 @@
+diff --git a/src/devices/lcec_el7041.c b/src/devices/lcec_el7041.c
+--- a/src/devices/lcec_el7041.c
++++ b/src/devices/lcec_el7041.c
+@@ -398,33 +398,38 @@
+       case MODPARAM_MOTOR_EMF:
+         value = p->value.flt * 1000;
+         if (lcec_write_sdo16(slave, 0x8010, 0x05, value) != 0) {
+           rtapi_print_msg(RTAPI_MSG_ERR, LCEC_MSG_PFX "fail to configure slave %s.%s sdo motorEMF\n", master->name, slave->name);
+           return -1;
+         }
++        break;
+       case MODPARAM_MOTOR_FULLSTEPS:
+         if (lcec_write_sdo16(slave, 0x8010, 0x06, p->value.u32) != 0) {
+           rtapi_print_msg(RTAPI_MSG_ERR, LCEC_MSG_PFX "fail to configure slave %s.%s sdo motorFullsteps\n", master->name, slave->name);
+           return -1;
+         }
++        break;
+       case MODPARAM_ENCODER_INCREMENTS:
+         if (lcec_write_sdo16(slave, 0x8010, 0x07, p->value.u32) != 0) {
+           rtapi_print_msg(RTAPI_MSG_ERR, LCEC_MSG_PFX "fail to configure slave %s.%s sdo encoderIncrements\n", master->name, slave->name);
+           return -1;
+         }
++        break;
+       case MODPARAM_START_VELOCITY:
+         if (lcec_write_sdo16(slave, 0x8010, 0x09, p->value.u32) != 0) {
+           rtapi_print_msg(RTAPI_MSG_ERR, LCEC_MSG_PFX "fail to configure slave %s.%s sdo startVelocity\n", master->name, slave->name);
+           return -1;
+         }
++        break;
+       case MODPARAM_DRIVE_ON_DELAY:
+         if (lcec_write_sdo16(slave, 0x8010, 0x10, p->value.u32) != 0) {
+           rtapi_print_msg(RTAPI_MSG_ERR, LCEC_MSG_PFX "fail to configure slave %s.%s sdo driveOnDelay\n", master->name, slave->name);
+           return -1;
+         }
++        break;
+       case MODPARAM_DRIVE_OFF_DELAY:
+         if (lcec_write_sdo16(slave, 0x8010, 0x11, p->value.u32) != 0) {
+           rtapi_print_msg(RTAPI_MSG_ERR, LCEC_MSG_PFX "fail to configure slave %s.%s sdo driveOffDelay\n", master->name, slave->name);
+           return -1;
+         }
+         // Kp, Ki, innerWindow, outerWindow, Ka, Kd
+         break;
+@@ -544,7 +549,7 @@
+   lcec_pdo_init(s, 0x6000, 0x01, &hd->latch_c_valid_pdo_os, &hd->latch_c_valid_pdo_bp);
+   lcec_pdo_init(s, 0x6000, 0x02, &hd->latch_ext_valid_pdo_os, &hd->latch_ext_valid_pdo_bp);
+   lcec_pdo_init(s, 0x6000, 0x03, &hd->set_count_done_pdo_os, &hd->set_count_done_pdo_bp);
+-  lcec_pdo_init(s, 0x6000, 0x04, &hd->count_underflow_pdo_os, &hd->count_overflow_pdo_bp);
++  lcec_pdo_init(s, 0x6000, 0x04, &hd->count_underflow_pdo_os, &hd->count_underflow_pdo_bp);
+-  lcec_pdo_init(s, 0x6000, 0x05, &hd->count_overflow_pdo_os, &hd->count_underflow_pdo_bp);
++  lcec_pdo_init(s, 0x6000, 0x05, &hd->count_overflow_pdo_os, &hd->count_overflow_pdo_bp);
+   lcec_pdo_init(s, 0x6000, 0x08, &hd->expol_stall_pdo_os, &hd->expol_stall_pdo_bp);
+   lcec_pdo_init(s, 0x6000, 0x09, &hd->ina_pdo_os, &hd->ina_pdo_bp);

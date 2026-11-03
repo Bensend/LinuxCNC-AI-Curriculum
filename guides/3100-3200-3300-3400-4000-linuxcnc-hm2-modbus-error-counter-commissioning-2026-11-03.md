@@ -68,3 +68,7 @@ For a plasma power source, lathe spindle, router VFD or press-brake auxiliary, t
 ## 8. Fresh-AI challenge (unscored, answers not hidden)
 
 Given a valid-CRC register reply with the wrong byte count repeated six times, explain exactly why the current source may never set disabled. Then explain why a CRC failure produces a different result. Finally identify two HAL pins that can contradict a naive "everything healthy" conclusion after an error. Score this only as a source-comprehension exercise; it is not a blind evaluation and does not change graduation.
+
+## 9. 175B timing follow-through: reset is not always followed by 25 ms wait
+
+Inspect hm2_modbus.c queue_reset, do_timeout, set_state, STATE_FETCH_DATA and STATE_RESET_WAIT in the pinned version. A timeout queues a PktUART reset and enters RESET_WAIT but immediately overwrites it with START; a framing/parity error can likewise enter RESET_WAIT then continue into HANDLE_DATA. An oversize receive frame instead breaks after reset and retains RESET_WAIT. The configured 25 ms wait is therefore **path-dependent** in the source. The FPGA may process the queued reset during the following hm2.write, so neither the exact on-wire restart delay nor any physical machine effect is established. Freeze G/H timing controls before considering a change, and distinguish HAL servo ticks from actual serial transactions. No timing test was run.

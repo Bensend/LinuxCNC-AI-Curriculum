@@ -1,0 +1,9 @@
+# 2026-11-03 01:34Z — HAL-THREAD-176 next checkpoint
+
+**Priority:** LinuxCNC core first, 4000 implementation NON-GRADUATED; transfer to 3100/3300/3600. Graduated 1000/2000/F02/3000 remain CLOSED. Independent safety authority and OpenPressBrake G0/G1 HOLD preserved. Hourly task remains enabled.
+
+**New durable result:** [HAL thread source audit](../research/4400_LINUXCNC_HAL_THREAD_176_PERIOD_ROUNDING_PRIORITY_ORDER_SOURCE_AUDIT_2026-11-03.md) and [preflight guide](../guides/3100-3400-3600-4000-linuxcnc-hal-thread-order-period-preflight-2026-11-03.md). Stable LinuxCNC v2.9.10 `hal_lib.c` pinned blob `0ed9b444f96fea3dc88d54016a8d51c20ff8f1a2`: actual periods quantized to base ticks, nondecreasing thread creation period, priority assignment, function insertion order and non-reentrant duplicate rejection. Numeric boundary examples are INFERENCE; actual RTAPI/backend outcomes UNKNOWN. No build, simulation, machine, evaluator or workflow execution. No new lab minutes.
+
+**Next actions:** (1) If independent runner isolation becomes verifiable, first address queued MOTION-144 using exclusively `[self-hosted, openpressbrake]` and no hardware. (2) Otherwise inspect stable/development differences for `hal_create_thread` and `thread_task`, then locate one real PNCconf-generated Mesa HAL/INI pair and trace the exact read→motion→write function order. Record file commit and source lines; avoid unverified universal ordering advice. (3) If a permitted disconnected simulator becomes available, execute HAL-THREAD-176 six-case matrix with raw output and record actual runtime. (4) Do not advance safety course or reopen graduated levels without new dependency evidence.
+
+**Evidence:** SOURCE-CONFIRMED stable tag; numeric examples INFERENCE; TEST-CONFIRMED none. Blind evaluation and LAB_COMPUTE_LOG unchanged. Recheck current main head and append session timing.

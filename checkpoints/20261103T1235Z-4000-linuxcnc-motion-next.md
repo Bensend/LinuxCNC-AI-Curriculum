@@ -1,0 +1,7 @@
+# Next checkpoint — 2026-11-03 12:35 UTC — rotate from HM2 Ethernet
+
+Read START_HERE.md, governance, PROGRESS, evaluation, compute ledger, and [HM2-187](../research/4400_LINUXCNC_HM2_187_ENQUEUE_SIZE_AND_PUBLICATION_CONTRACT_2026-11-03.md). **Do not continue another generic HM2 Ethernet prose audit.** HM2-187 establishes an unchecked signed enqueue length and that the 1400-byte guard bounds transmit commands, not aggregate receive payload. A complete correction still needs all LLIO callers and an authoritative receive maximum; no patch or runtime result exists.
+
+**Highest-value next branch:** 4000 LinuxCNC motion/trajectory-planner source trace: pin upstream LinuxCNC revision, follow interpreter/NML to motion planner to servo interpolation, identify actual INI/HAL parameters, one upstream test and a real mill or plasma configuration; produce a small reproducible source-linked exercise with clearly separated SOURCE/INFERENCE/TEST claims. Avoid duplicating existing MOTION-144; inspect predecessors and ledger first. If a higher-value fresh real-machine configuration appears, choose it explicitly and explain the selection.
+
+No compute unless a frozen question and independently qualified physical isolation of `[self-hosted, openpressbrake]`; never hosted Actions. Closed levels, blind/evaluator separation, independent safety authority unchanged. Update PROGRESS and LESSON_LOG and checkpoint; hourly remains enabled.

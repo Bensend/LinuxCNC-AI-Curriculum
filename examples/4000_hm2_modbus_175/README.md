@@ -26,3 +26,6 @@ This command is a future **pure-Python illustrative state-machine model**, not a
 Use a mock PktUART implementation or an independently verified physically disconnected self-hosted runner, after a frozen plan. Supply deterministic Modbus RTU frames with correct slave/function and recomputed CRC for wrong-byte-count cases; capture per-servo-cycle state. A CRC mismatch and a CRC-valid byte-count mismatch **must not be conflated**. Test original and patched builds separately and compare error-count/disabled/instance-fault transitions. Do not use an actual machine spindle, press-brake hydraulic valve, torch, router, or lathe for injection.
 
 The existing MOTION-144 isolation prerequisite remains the first executable priority; this is a subsequent optional test once qualified. No GitHub-hosted Actions runners.
+
+G. Timeout: source queues reset/enters RESET_WAIT but immediately switches to START; measure the next send cycle rather than assuming 25 ms.
+H. RX framing/parity flag with in-range size versus oversize frame: source overwrites RESET_WAIT with HANDLE_DATA in the former path but preserves it with break in the latter. Both remain NOT RUN and require a disconnected PktUART oracle.

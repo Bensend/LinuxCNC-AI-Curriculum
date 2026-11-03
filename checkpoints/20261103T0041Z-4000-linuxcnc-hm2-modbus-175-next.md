@@ -16,3 +16,7 @@
 4. Maintain source provenance, real config constraints, independent evaluator separation, and current file readiness. Do not reopen graduated levels.
 
 **Evidence:** SOURCE/DOC-CONFIRMED conditional, predicted counters INFERENCE, TEST-CONFIRMED none; no compute runtime this session. Current repository branch main; verify final head and lesson log before closing.
+
+## Same-session 175B source continuation
+
+Timeout do_timeout calls queue_reset -> STATE_RESET_WAIT (25 ms) then immediately set_state(START), bypassing that wait; RX framing/parity error with in-range size can similarly overwrite RESET_WAIT with HANDLE_DATA, whereas oversize RX branch preserves it. Both stable v2.9.10 and pinned development show the timeout overwrite. Actual PktUART reset application, wire timing and physical effects UNKNOWN. Add G/H state-transition controls to the disconnected oracle; do not patch timing without runtime evidence. Three A/B patch hunks passed exact source-context and hunk-length static checks, still NOT APPLIED/RUN.

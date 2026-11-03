@@ -1,7 +1,3 @@
-# REVIEW ONLY — NOT APPLIED, BUILT OR TESTED
-# Source: LinuxCNC development 67437d8865e431a9a33f74cee912dbf891d3b4c5
-# Scope: fix false parser success for two malformed-byte-count paths and publish cleared per-command errors.
-# Does not change instance fault semantics or exhaustively audit all parse branches.
 diff --git a/src/hal/drivers/mesa-hostmot2/hm2_modbus.c b/src/hal/drivers/mesa-hostmot2/hm2_modbus.c
 --- a/src/hal/drivers/mesa-hostmot2/hm2_modbus.c
 +++ b/src/hal/drivers/mesa-hostmot2/hm2_modbus.c

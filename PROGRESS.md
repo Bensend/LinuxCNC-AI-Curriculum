@@ -1,4 +1,6 @@
 # Curriculum Progress
+**2026-11-03T04:34Z — 4000-LC-HM2-179 Ethernet queued-read deadline and reply-counter source trace (NON-GRADUATED):** [Stable v2.9.10 and provisional moving-master comparison](research/4400_LINUXCNC_HM2_179_ETHERNET_READ_DEADLINE_RETRY_AND_RETURN_SOURCE_TRACE_2026-11-03.md) shows deadline derived from read_time plus configured/percentage timeout; missing/short UDP replies reset queue and return -EAGAIN until error limit, then LLIO zero maps to -EIO; matching-size packets are copied into TRAM before read-counter confirmation, but module decode is skipped on -EAGAIN. Separate write acknowledgment does not establish physical motion. **SOURCE-CONFIRMED conditional; TEST-CONFIRMED none.** Development SHA not pinned; no tests, Actions, machine or blind scoring. [Next checkpoint](checkpoints/20261103T0434Z-4000-linuxcnc-hm2-179-next.md). MOTION-144 executable gate and closed levels unchanged; hourly enabled.
+
 
 Status values: `PLANNED`, `RESEARCH`, `SOURCE`, `EXPERIMENT`, `EXAM`, `CORRECTIONS`, `GRADUATED`.
 

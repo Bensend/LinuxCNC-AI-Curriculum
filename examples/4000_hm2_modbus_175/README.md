@@ -29,3 +29,5 @@ The existing MOTION-144 isolation prerequisite remains the first executable prio
 
 G. Timeout: source queues reset/enters RESET_WAIT but immediately switches to START; measure the next send cycle rather than assuming 25 ms.
 H. RX framing/parity flag with in-range size versus oversize frame: source overwrites RESET_WAIT with HANDLE_DATA in the former path but preserves it with break in the latter. Both remain NOT RUN and require a disconnected PktUART oracle.
+
+I. Expected-slave/wrong-function replies versus wrong-slave/correct-function replies: only the former calls set_error in the inspected parser. The wrong-slave branch intentionally leaves its treatment unresolved in a FIXME comment; count semantics and any real bus consequence remain SOURCE/INFERENCE, NOT RUN.

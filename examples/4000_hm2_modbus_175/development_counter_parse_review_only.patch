@@ -1,0 +1,38 @@
+# REVIEW ONLY — NOT APPLIED, BUILT OR TESTED
+# Source: LinuxCNC development 67437d8865e431a9a33f74cee912dbf891d3b4c5
+# Scope: fix false parser success for two malformed-byte-count paths and publish cleared per-command errors.
+# Does not change instance fault semantics or exhaustively audit all parse branches.
+diff --git a/src/hal/drivers/mesa-hostmot2/hm2_modbus.c b/src/hal/drivers/mesa-hostmot2/hm2_modbus.c
+--- a/src/hal/drivers/mesa-hostmot2/hm2_modbus.c
++++ b/src/hal/drivers/mesa-hostmot2/hm2_modbus.c
+@@ -1081,7 +1081,11 @@
+ #endif
+ 		if(!inst->ignoredata) {
+ 			if(parse_data_frame(inst) >= 0) {
+-				current_cmd(inst)->errors = 0;
++				current_cmd(inst)->errors = 0;
++				// Publish the successful reset of the consecutive-error counter.
++				if (!handling_inits(inst)) {
++					hal_set_uint(inst->hal->cmds[inst->cmdidx].error, 0);
++				}
+ 			}
+ 		}
+ 		if(inst->frameidx < 16-1 && HM2_PKTUART_RCR_NBYTES_VAL(inst->fsizes[++(inst->frameidx)]) > 0) {
+@@ -1773,7 +1777,7 @@
+ 		if(test_bytecount(inst, bytes, rxcount, 1, 125) < 0) {
+ 			set_error(inst, ERANGE);
+ 			force_resend(inst);
+-			break;
++			return -1;
+ 		}
+ 		w = 3;	// First data return byte {mbid, func, bytecount, ...}
+ 		b = 0;
+@@ -1791,7 +1795,7 @@
+ 					inst->name, (unsigned)bytes[2], cc->cmd.cregcnt * 2);
+ 			set_error(inst, ERANGE);
+ 			force_resend(inst);
+-			break;
++			return -1;
+ 		}
+ 
+ 		for(int i = 0; i < cc->cmd.cpincnt; i++) {

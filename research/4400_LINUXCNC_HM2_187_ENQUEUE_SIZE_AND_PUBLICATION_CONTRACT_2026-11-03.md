@@ -1,0 +1,31 @@
+# HM2-187 — queued Ethernet read-length contract and publication gate (2026-11-03)
+
+**4000 / SOURCE / NON-GRADUATED.** Bounded follow-up to HM2-186. Source inspection only; no compile, simulator, packet injection, hardware, or runner execution.
+
+## Provenance and inspected scope
+LinuxCNC development commit `cdf957bd00bbcc4c569f01e7eed5b154422b816c`, [hm2_eth.c](https://github.com/LinuxCNC/linuxcnc/blob/cdf957bd00bbcc4c569f01e7eed5b154422b816c/src/hal/drivers/mesa-hostmot2/hm2_eth.c#L930-L1116), [hm2_eth.h](https://github.com/LinuxCNC/linuxcnc/blob/cdf957bd00bbcc4c569f01e7eed5b154422b816c/src/hal/drivers/mesa-hostmot2/hm2_eth.h). These are immutable upstream source references, not proof of the installed driver. Follow HM2-184 through HM2-186 for predecessor and counter layout. No claim that all external LLIO callers were enumerated.
+
+## New concrete findings
+
+1. `hm2_eth_enqueue_read` (1092–1115) returns success for `size == 0`, but does **not** reject `size < 0`, non-word-aligned lengths, a null destination, or integer overflow in `queue_buff_size += size`. The command encodes `size/4` into `CMD_READ_HOSTMOT2_ADDR32_INCR`; this is a command-word count, not a byte-length validation. The transmit-side capacity test (1097–1102) only checks the additional command header against the 1400-byte `read_packet`. It does not constrain the aggregate response length.
+2. `hm2_eth_send_queued_reads` (930–981) adds 2 bytes of `rxudpcount` and 8 bytes of `confirm_rw_cnt` to the queued receive length. Its 1400-byte check again concerns **transmit** packet bytes. The +10 response bytes do not establish a bound for previous reads. It also increments the expected read counter before sending.
+3. `hm2_eth_receive_queued_reads` (1012–1078) creates `rtapi_u8 tmp_buffer[board->queue_buff_size]` before any queue-size or entry check. Thus negative/overflowed/large aggregate lengths can reach a VLA declaration if the enqueue contract is violated. **This is a source-visible missing precondition, not a demonstrated exploit or runtime fault**; actual callers and valid command-size limits remain to be verified.
+4. After a full-length response, the loop at 1059–1061 copies *all* queued destinations before comparing `confirm_rw_cnt.read_cnt` to `board->read_cnt`. A mismatched counter retries only when `t2 < read_deadline` (1063). At the deadline, the current path can accept a mismatched full-size response, as established by HM2-180–186. During a pre-deadline retry, the earlier copy may have already altered destination memory; whether downstream HAL decoding sees it depends on the eventual return path and concurrency.
+5. The existing write-ack branch (1068–1077) uses `has_written_cnt` to distinguish the first cycle. A correction must not equate a valid read counter with a valid write acknowledgment, or equate either with actual actuator movement.
+
+## Exact implementation contract to verify before patch
+
+- Validate enqueue inputs **before** packet-command construction: non-null buffer for positive length; strictly positive, word-multiple size; bounded command word count; aggregate addition checked without signed overflow. Determine permitted zero-length semantics separately, because current zero-length requests return success without enqueue.
+- Derive a maximum **receive** payload from actual Mesa LBP16/protocol, driver, and transport constraints; do not borrow 1400 from transmit. Enforce a bounded aggregate *before* allocating the receive scratch buffer. Also validate `queue_reads_count` in [1,64] and all signed offsets/lengths before indexing or copying.
+- Ensure exactly one correctly sized and bounded counter entry, then compare the local decoded `read_cnt` for **every** full-length packet. Publish all destinations only after successful validation; mismatches before deadline may retry, and mismatches at/after deadline must fail without publishing.
+- Review LLIO/TRAM enqueue call sites and their destination allocations before claiming end-to-end memory safety. The queue's `void *buffer` and `int size` metadata alone cannot prove the destination capacity. Check that packet counter layout and write acknowledgment behavior are preserved on both stable and development; this trace is development-only.
+
+## Minimal disconnected verification exercise (design only)
+
+Construct a fake queue with sentinel destination bytes and a synthetic full-length packet whose 8-byte counter entry is at a **nonfixed** offset. Freeze expected read/write counters and a synthetic clock; no sockets or HAL hardware are needed. Exercise: (A) valid read echo publishes once; (B) stale read echo before deadline leaves sentinels untouched and retries; (C) stale read echo at deadline leaves sentinels untouched and reports failure; (D) negative, zero, unaligned and overflow-causing enqueue sizes are rejected before packet construction; (E) 64/65 entry boundary; (F) truncated/oversized packet; (G) duplicate/missing counter entry; (H) valid read echo but stale write echo preserves the independent write-ack error path; (I) read-counter wrap; (J) invalid destination-capacity caller remains explicitly outside the queue-only proof. A test that merely asserts `return != 1` without checking destination sentinels is insufficient.
+
+## Evidence and decision
+
+**SOURCE-CONFIRMED:** specific source lines, transmit-vs-receive capacity distinction, unchecked signed enqueue size, VLA placement, copy-before-validation ordering. **INFERENCE:** possible malformed-caller failure effects and proposed repair contract. **UNKNOWN:** valid caller size domain, maximum legitimate receive payload, packet-injection behavior, compiler and runtime acceptance, actual machine outcomes. **TEST-CONFIRMED:** none.
+
+**Information-gain stop for this Ethernet subbranch:** repeated review prose is no longer justified without (1) verified all-callers and protocol receive limits, (2) a source-context-correct compilable patch, or (3) disconnected test evidence on qualified isolated compute. Rotate the next session to trajectory planning / motion internals or a real machine configuration. Do not schedule hosted Actions. MOTION-144 remains blocked until independent isolation of `[self-hosted, openpressbrake]` is verified. Preserve independent personnel-safety and blind-evaluation gates.

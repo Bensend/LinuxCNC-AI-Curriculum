@@ -64,3 +64,13 @@ Freeze the exact frame bytes/CRC, timeouts, HAL snapshots per servo cycle and ra
 ## Evidence decision
 
 A/B/C are **source-confirmed control-flow findings**, not measured runtime or physical-machine outcomes. Docs and real example source were inspected. No LinuxCNC build, PktUART simulation, Mesa board, MBCCB compilation, Actions, independent evaluator, or physical test ran. LAB_COMPUTE_LOG and FEEDBACK_SCORE_LOG remain unchanged. 1000/2000/F02/3000 remain graduated/closed; 4000 non-graduated. Qualified isolated [self-hosted, openpressbrake] runner remains prerequisite for any justified executable oracle; MOTION-144 remains the earlier first executable priority.
+
+## 175B — reset-wait state is bypassed on two recovery paths (same-session source continuation)
+
+**SOURCE-CONFIRMED, stable and development; runtime packet timing UNKNOWN.** In development hm2_modbus.c lines 699–703, entering STATE_RESET_WAIT installs a 25,000,000 ns timeout. queue_reset (720–724) queues the PktUART reset and calls set_state(STATE_RESET_WAIT). But do_timeout (726–743), reached from send-complete or reply-wait states, immediately calls set_state(STATE_START) **after** queue_reset and set_error. set_state(STATE_START) advances to the next command; STATE_RESET_WAIT never gets a process tick on that path. Stable v2.9.10 lines 713–729 have the same overwrite.
+
+There is a second conditional path: STATE_FETCH_DATA with RX overrun/start-bit/parity flag (development 1045–1054) calls queue_reset, but if the frame size does not separately exceed MAX_PKT_LEN, execution continues to queue a read and set_state(STATE_HANDLE_DATA) (1064–1077). By contrast, the distinct oversize branch (1055–1063) calls queue_reset and then **breaks**, preserving STATE_RESET_WAIT. This is a state-transition inconsistency, not proof of physical serial corruption. A PktUART reset may be applied in hm2.write later that same servo cycle; the actual required delay and downstream slave response remain UNKNOWN.
+
+**Frozen G/H oracle:** For a 1 ms disconnected servo cycle, inject a timeout and record the state immediately after do_timeout and on the next process invocation (G). Separately inject RX framing/parity flags with in-range frame size versus an oversize frame and compare state, queued reset, next PktUART send, and elapsed cycles (H). Do not claim a 25 ms hold unless observed. Do not change state flow by review patch until producer/consumer reset semantics and real PktUART behavior are reconciled.
+
+**Patch verification:** Three unified hunks of the A/B review-only development patch were checked against the exact pinned source context and old/new hunk lengths; no application or compile. A separate model file exists but is not executed or a LinuxCNC runtime oracle.

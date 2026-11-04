@@ -1,3 +1,5 @@
+> **CORRECTION (PLASMA-202, 2026-11-04):** This lesson correctly describes *M66 L1* rising-edge Task behavior, but incorrectly applies it to QtPlasmaC's `M66 P3 L3 Q1`. **L3 is HIGH-level wait, not RISE**; an already-high input can satisfy L3. All QtPlasmaC held-high timeout implications in this document are superseded by [PLASMA-202](3300_LINUXCNC_PLASMA_202_M66_L3_HIGH_AND_5399_RESULT_CORRECTION_2026-11-04.md). No runtime test performed.
+
 # PLASMA-201 — M66 rising-edge and Task timeout semantics (LinuxCNC 2.9.10)
 
 Status: **SOURCE-CONFIRMED narrowly; NOT TEST-CONFIRMED**. Non-graduated 3300 plasma / interpreter implementation research. No machine or workflow execution.

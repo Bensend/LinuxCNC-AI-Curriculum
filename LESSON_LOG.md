@@ -1,3 +1,4 @@
+| 2026-11-06 | PLASMA-250 external-offset realtime source | 2026-11-06T03:40Z (automation context approximate) | not instrumented | not measured | SOURCE-CONFIRMED bounded / NON-GRADUATED; NO EXECUTION | checkpoints/20261106T0340Z-3300-plasma-250-next.md | Four pinned motion blobs, count delta gates, planner ramp, soft-limit and scheduling; no compute/Actions/machine. |
 | 2026-11-06 | PLASMA-249 QtPlasmaC simulator INI/HAL external-offset trace | 2026-11-06T02:35Z (automation context approximate) | not instrumented | not measured | CONFIG/SOURCE-CONFIRMED bounded / NON-GRADUATED; NO EXECUTION | checkpoints/20261106T0236Z-3300-plasma-249-next.md | Pinned simulator includes, z eoffset nets and servo order; no Mesa, runtime, compute, Actions or machine. |
 # LinuxCNC Curriculum Lesson Log
 

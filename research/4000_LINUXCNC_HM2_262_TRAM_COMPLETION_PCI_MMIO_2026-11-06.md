@@ -4,7 +4,7 @@
 
 ## Reproducible source provenance
 
-- [tram.c](https://github.com/LinuxCNC/linuxcnc/blob/v2.9.10/src/hal/drivers/mesa-hostmot2/tram.c), `hm2_tram_read` lines 149–163, `hm2_queue_read` 165–174, `hm2_finish_read` 176–185, `hm2_finish_write` 207–216; pin exact blob with `git rev-parse v2.9.10:src/hal/drivers/mesa-hostmot2/tram.c`.
+- [tram.c](https://github.com/LinuxCNC/linuxcnc/blob/v2.9.10/src/hal/drivers/mesa-hostmot2/tram.c), `hm2_tram_read` lines 149–163, `hm2_queue_read` 165–174, `hm2_finish_read` 176–185, `hm2_finish_write` 207–216; Git blob `d060f6cbb448b98f8d42bb54ccb76037e07f765e`.
 - [hostmot2.c](https://github.com/LinuxCNC/linuxcnc/blob/v2.9.10/src/hal/drivers/mesa-hostmot2/hostmot2.c), blob `75619ae3f6925087a6693c5421bbf629f4459d94`, `hm2_read` ~98–126 and `dummy_queue_read` ~1195.
 - [hm2_eth.c](https://github.com/LinuxCNC/linuxcnc/blob/v2.9.10/src/hal/drivers/mesa-hostmot2/hm2_eth.c), blob `1c338be89cb9620a0b6f23c8c21c5e137afaabdc`, `hm2_eth_receive_queued_reads` ~900–961.
 - [hm2_pci.c](https://github.com/LinuxCNC/linuxcnc/blob/v2.9.10/src/hal/drivers/mesa-hostmot2/hm2_pci.c), blob `a2082286e8cdd61b72da1e9fc41b11ba449e51da`, `hm2_pci_read` ~214 and `hm2_pci_write` ~228, callback registration ~734–738.
